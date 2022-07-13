@@ -1,0 +1,32 @@
+PHILOSOPHY
+==========
+
+Software for the client, not the other way around.
+
+Respectful and polite whenever possible.
+
+Present a working, functioning, and reliable system.
+
+Use redundancy for degraded service instead of downtime.
+
+Avoid unreliable ways.
+
+User-readable source code and logging for clarity and transparency.
+
+Make reasonable effort to support every browser and known scenario.
+
+Do what the client wants.
+
+Avoid asking or demanding anything.
+
+Make up for software deficiencies by adding accomodations.
+
+Try to make user comfortable.
+
+Avoid distracting with trivia.
+
+Tell the truth, the whole truth, and nothing but the truth.
+
+Whenever you find yourself on the side of majority, pause and reflect.
+
+You become responsible, forever, for what you have tamed.

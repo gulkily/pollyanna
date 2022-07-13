@@ -1,0 +1,9 @@
+The Scunthorpe problem is the unintentional blocking of websites, e-mails, forum posts or search results by a spam filter or search engine because their text contains a string (or substring) of letters that appear to have an obscene or otherwise unacceptable meaning. Names, abbreviations, and technical terms are most often cited as being affected by the issue.
+
+The problem arises since computers can easily identify strings of text within a document, but interpreting words of this kind requires considerable ability to interpret a wide range of contexts, possibly across many cultures, which is an extremely difficult task. As a result, broad blocking rules may result in false positives affecting innocent phrases.
+
+The problem was named after an incident in 1996 in which AOL's profanity filter prevented residents of the town of Scunthorpe, Lincolnshire, England, from creating accounts with AOL, because the town's name contains the substring "cunt".[1] In the early 2000s, Google's opt-in SafeSearch filters apparently made the same mistake, preventing people from searching for local businesses or URLs that included Scunthorpe in their names.[2]
+
+(c) Wikipedia
+
+

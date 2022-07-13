@@ -1,0 +1,20 @@
+<video width="320" height="240" controls>
+  <source src="image/IMG_1183.mp4" type="video/mp4">
+  <source src="image/IMG_1183.ogg" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
+
+
+
+ffmpeg -i image/IMG_1183.mp4 -codec:v libtheora -qscale:v 3 -codec:a libvorbis -qscale:a 3 -f ogv image/IMG_1183.ogv
+# https://superuser.com/questions/108237/convert-mp4-to-ogg-video
+
+ffmpeg -i my-video.mov -vcodec h264 -acodec mp2 my-video.mp4
+# https://mrcoles.com/convert-mov-mp4-ffmpeg/
+
+ffmpeg -i {in-video}.mov -vcodec h264 -acodec aac {out-video}.mp4
+# https://superuser.com/questions/1155186/convert-mov-video-to-mp4-with-ffmpeg
+
+ffmpeg -r 30 -i test.mov -s 640x320 -vcodec libtheora -acodec libvorbis out.ogv
+# https://stackoverflow.com/questions/13359043/ffmpeg-convert-mov-to-ogv
+

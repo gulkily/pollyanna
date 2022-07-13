@@ -1,0 +1,68 @@
+===
+
+#shred
+
+---
+
+vote0 = 1.9
+vote1 = 1.09
+vote2 = 1.009
+
+---
+
+oldest untagged view
+
+===
+
+
+group by title
+
+invitation
+
+lobby
+leave a calling card
+
+the war is already over
+rejoice
+
+eto istoria o zabivchivosti
+
+log client id
+browserfp
+
+===
+
+
+because lazy_page_generation is on, it just removes the .html files and lets them be re-generated next time they are needed
+
+===
+
+cautionary tale
+
+paperless
+
+bk src
+
+serv policy
+
+===
+
+warning: skilled operators only beyond this point
+
+hash of client
+((useragent)(ip))
+
+key image
+(generate image with key encoded reliably)
+
+===
+
+myths i've heard
+
+LEO Friendly client hash
+
+Game Manual Proof
+
+cal'd'r
+
+

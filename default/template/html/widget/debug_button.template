@@ -1,0 +1,51 @@
+<!-- debug_button.template -->
+
+<span
+	id=jsdebug
+	class=dialog
+	style="border: 3pt; padding: 3pt; float:right;"
+>
+
+<button
+	href=#
+	onclick="
+		window.dbgoff = !window.dbgoff;
+		this.innerHTML = 'js-debug: ' + (!window.dbgoff);
+		return false;
+	"
+	title="toggle javascript debug output and breakpoints"
+>js-debug: true</button>
+
+<button
+	href=#
+	onclick="
+		window.eventLoopEnabled = !window.eventLoopEnabled;
+		if (window.EventLoop && window.eventLoopEnabled) {
+			EventLoop();
+		} else {
+			if (window.timeoutEventLoop) {
+				clearTimeout(window.timeoutEventLoop);
+			}
+		}
+		this.innerHTML = 'event-loop: ' + (!!window.eventLoopEnabled);
+		return false;
+	"
+	title="toggle event loop"
+>event-loop: true</button>
+
+<button
+	href=#
+	onclick="
+		var freshReload = GetPrefs('fresh_reload') ? 0 : 1; /* TOGGLE */
+		SetPrefs('fresh_reload', freshReload);
+		this.innerHTML = 'auto-reload: ' + (!!freshReload);
+		return false;
+	"
+	title="toggle auto reloading"
+>auto-reload: true</button>
+
+<noscript>*</noscript>
+
+</span>
+
+<!-- / debug_button.template -->

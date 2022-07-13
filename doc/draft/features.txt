@@ -1,0 +1,63 @@
+Features borrowed from other places
+===================================
+
+4chan
+=====
+">>" replies
+disposable identifiers
+unrestricted commenting
+encouragement of freeform discussion and trollishness
+
+slashdot
+========
+meta-moderation
+community article submission
+polls
+nested/threaded discussion
+labeled moderation/voting
+limited moderation
+
+digg/reddit
+===========
+float highest scoring to the top of a list
+placement of reply boxes
+timestamp formats
+stream user profiles
+
+change management
+=================
+important actions require a visible approval chain
+
+crm
+===
+
+facebook
+========
+own your social network
+see the entire social graph
+leverage social connections
+share who you are
+participate in group activities with friends
+
+twitter
+=======
+easily publish short thoughts and have a chat over them
+
+irc
+===
+decentralized and open-protocol
+easily accessible by humans with minimal software assistance
+plaintext as much as possible
+client-agnostic
+loosely configured
+allowing operator control of their resource
+
+hn
+==
+encourage positive and productive discussion
+transparently nojs-compatible
+obscure site mechanics
+
+fuzzy pink memories
+===================
+thoughtful, graceful, polished javascript and design

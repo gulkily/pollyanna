@@ -1,0 +1,28 @@
+Creating a new page
+
+template/html/page/example.template
+
+template/perl/page/example.pl
+
+makepage.pl: add to valid pages
+
+route.php: add to valid routes
+
+
+===
+
+log of moving accessibility mode setting from settings page to its own page ;
+=============================================================================
+
+Added to MakeSummaryPages()
+
+# Access page
+my $accessPage = GetAccessPage();
+PutHtmlFile("access.html", $accessPage);
+
+
+Added access.template
+
+Added GetAccessPage() 
+
+Add default/string/en/page_intro/access

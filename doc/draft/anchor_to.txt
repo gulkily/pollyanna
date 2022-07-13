@@ -1,0 +1,13 @@
+anchor_to allows you to "anchor" a server response to a particular element on the page.
+
+(otherwise, the server's response is displayed at the top of the page.)
+
+for example, if a reply item is posted on a thread page, the server's response would be anchored to the new reply item in the page
+
+this works together with RedirectWithResponse, which attaches the apporpriate #anchor suffix to the url, so the user's browser jumps to the anchor upon navigation.
+
+It is not feature-flagged yet, and is commented in the code. It's an early feature which I found inconvenient, and did not feature-flag it, because it was before I had gotten into the habit of doing that.
+
+
+
+

@@ -1,0 +1,11 @@
+<!-- event_item2.template -->
+<tr bgcolor="$rowBgColor">
+	<td class=content valign=top>
+		<p>
+			<b>$eventTitle</b><br>
+			Begins: $eventTime<br>
+			$voteButtons<br>
+			$eventItemAuthor
+	</td>
+</tr>
+<!-- / event_item2.template -->

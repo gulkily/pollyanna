@@ -1,0 +1,58 @@
+<!-- reply.template -->
+<a name=reply></a>
+<form class=reply action="/post.html" id=compose name=compose>
+	<textarea
+		wrap=soft
+		rows=7
+		cols=32
+		style="min-width: 360px; height: 80px;"
+		id=comment
+		name=comment
+	></textarea>
+	<br>
+	<input id=btnSendReply type=submit value="Send Reply">
+	<span id=spanSignAs></span>
+	<span class=advanced>
+		<hr>
+		<span class=beginner>
+			<label for=replyto>In reply to:</label>
+			<br>
+		</span>
+		<input type=text name=replyto id=replyto value="$replyTo" size=45>
+		<span class=beginner>
+			<br>
+			Clear this field to post a new thread.
+		</span>
+	</span>
+<fieldset>
+<details>
+    <summary>Add Tags:<br></summary>
+    <br><br>Components:<br>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#mobo</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#storage</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#hdd</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#ssd</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#ram</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#cpu</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#intel</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#amd</a>
+    <br><br>Systems:<br>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#laptop</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#tower</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#desktop</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#display</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#phone</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#tablet</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#OtherDevice</a>
+    <br><br>Accessories:<br>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#cable</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#adapter</a>
+    <br><br>Descriptions:<br>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#weird</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#broken</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#working</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#free</a>
+    <a href="#" onclick="writeAddTag(this.innerHTML);">#ForSale</a>
+</details>
+</form>
+<!-- / reply.template -->

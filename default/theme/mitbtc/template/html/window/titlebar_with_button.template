@@ -1,0 +1,9 @@
+<!-- titlebar_with_button.template -->
+<tr bgcolor="$colorTitlebar" class=titlebar>
+	<td valign=middle colspan=$contentColumnCount>
+		<img alt="[-]" title="Window Icon" logo src="/logo.gif" height=16 width=16>
+		<font color="$colorTitlebarText"><b>$windowTitle</b></font>
+		<br>
+	</td>
+</tr>
+<!-- / titlebar_with_button.template -->

@@ -1,0 +1,70 @@
+Architecture Overview (Perl)
+============ ========
+
+  _____
+ (;;;;(o)  access.log
+ |;;;;;`   ==========
+ |:::::    "standard" access log format
+ |;;;;;    any old webserver
+  '.,;;
+
+    __
+   |  |    access_log_read.pl (Perl)
+  _|  |_   =========
+  \Perl/   scan access.log for new items
+   \  /    parse requests, store text files
+    \/
+
+    _____
+   /    /|   html/txt/*.txt          /|____________
+  /____/ |   ==============         / other inputs |
+ |readm| |   text files             \  ____________|
+ |e.txt| |   git repo                \| such as server-side scripts
+ |_____|/                               and direct text file writing
+
+    __
+   |  |    index.pl (Perl, SQLite, Git, GPG, sha1sum)
+  _|  |_   =========
+  \Perl/   read html/txt/*.txt
+   \  /    generate sqlite database with items
+    \/     use PGP for reproducible user IDs
+
+  ______
+ (______)  index.sqlite3
+ |      |  =============
+ |SQLite|  normalized-ished, indexed data from text files
+ (______)  aggregate views, e.g. item_flat, author_flat
+
+    __
+   |  |    pages.pl (Perl, SQLite, Git)
+  _|  |_   =========
+  \Perl/   read sqlite index database and text files
+   \  /    generate static html ahead of time
+    \/     or called by web server for on-demand "printing"
+
+  _______
+ | __ = ||   html/*.html, css, js
+ | __ o ||   ====================
+ | ____ ||   static website, categorized pages
+ |______||       -or-
+             additional ssi or php shims allow on-demand html
+    __
+   | h|    web server
+  _| t|_   =====
+  \  t /   serves web pages to browser or http client
+   \ p/                                            ______
+    \d                  ==> writes to access.log  (;;;;(o)
+                                      ==========  |;;;;;`
+  _________                           see above   |:::::
+ |< > ==== |:  browser                            '.,;;
+ | |'\,;/; |:  =======
+ | /;|_,_: |:  typical web browser
+ |_________|:  most configurations supported
+  ```````````
+
+
+
+
+
+
+

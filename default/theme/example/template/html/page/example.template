@@ -1,0 +1,11 @@
+<!-- example.template -->
+
+<h1>example</h1>
+
+<p>thank you</p>
+
+<p><a href="/">Home</a></p>
+
+<div id=itemlist></div>
+
+<!-- / example.template -->

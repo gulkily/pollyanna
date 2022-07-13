@@ -1,0 +1,11 @@
+<!-- stats-horizontal.template -->
+<p>
+	<span class=advanced>
+		<span class=beginner>Items: </span> $itemsIndexed |
+		<span class=beginner>Files: </span>$filesTotal |
+		<span class=beginner>Authors: </span>$authorCount |
+		<span class=beginner>Version: </span> $versionSuccinct |
+	</span>
+	<span class=beginner>Updated: </span>$lastUpdateTime
+</p>
+<!-- / stats-horizontal.template -->

@@ -1,0 +1,6 @@
+@media only screen and (min-width : 30em) {
+	.dialog {
+		max-width: 30em;
+	}
+}
+

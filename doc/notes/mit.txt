@@ -1,0 +1,62 @@
+
+found during mitbtc {
+	#bug deleted.log is not working
+	#bug #remove is not working
+	#bug already generated html is not removed when items deindexed
+	#bug html files are not re-generated after _clean_html
+	#problem no easy way to switch from edit mode to {
+		export mode {
+			php
+			js
+			expo_mode_edit
+			clean up  existing files
+			rebuild pages (into separate export directory)
+		}
+	}
+	#bug
+		welcome page is not build from theme template
+		links
+		
+	#bug #minor gallery boxes don't stay square when zoomed out
+}
+
+
+===
+
+mit bitcoin expo
+================
+iframes on welcome page need error handling
+	when offline
+#academic partners
+#	main page
+#	item pages
+
+#new sponsors
+#	graphics
+
+===
+
+
+#sponsor bios
+#ensure sponsor, partner pages all have the same design
+#top banner should have logo title
+#statusbar for partner pages should go to their site
+#committee should be in correct order
+
+
+
+
+index images under image/speaker ahead of others
+	assign #speaker tag to these images
+		change speakers page to query by this tag
+do the same thing for sponsors:
+	image/sponsor
+		assign #sponsor tag
+			set #sponsor page to query by this tag
+
+
+
+
+===
+
+

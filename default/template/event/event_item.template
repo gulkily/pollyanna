@@ -1,0 +1,9 @@
+<p>
+	<b>$eventTitle</b><br>
+	Begins: $eventTime<br>
+	<span class=advanced>Ends: $eventTimeUntil<br></span>
+	<span class=advanced>Duration: $eventDuration<br></span>
+	$eventItemAuthor
+	<span class=advanced>Link: $eventItemLink<br></span>
+	$voteButtons<br>
+</p>

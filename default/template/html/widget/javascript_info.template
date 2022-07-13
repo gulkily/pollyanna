@@ -1,0 +1,4 @@
+<!-- javascript_info.template -->
+<noscript>js is off</noscript>
+<script>document.write('<font color=green>js is on</font>')</script>
+<!-- / javascript_info.template -->

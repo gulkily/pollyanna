@@ -1,0 +1,79 @@
+How I do local dev on this thing:
+
+===
+
+I develop on GNU/POSIX environment.
+
+I've had success running it as a VM on a Mac for an isolated dev enviro.
+
+Recently, I have used the following distros:
+
+Fedora LXDE
+Linux Mint XFCE
+
+I have also installed IntelliJ IDEA, with most of the install
+options disabled, except for Git support.
+On faster machine, I let it install the Perl support plugin (many thanks to Alexandr Evstigneev).
+	Lately, this plugin has caused me some issues
+
+I have found it wise to exclude html/ config/ log/ cache/ from my project.
+Otherwise I get many unwanted results in global search.
+
+===
+
+After editing templates, I run ./clean.sh, and then ./build.pl
+
+To re-import existing data into the newly-built site, I run "./update.pl --all"
+
+To test the non-realtime update features (update.pl), I run ./loop.pl, which just runs update.pl in a loop.
+
+===
+
+Other than Perl, most of the other code lives under default/template.
+
+This is the place to edit code, not config/ and not html/
+
+Both config/ and html/ are cleaned up by clean.sh.
+	This also makes new templates take effect on the next build.
+
+===
+
+Debugging
+=========
+
+I exclude html/ config/ log/ cache/ from my project.
+Otherwise I accidentally change a cached file which gets overwritten later.
+
+Perl
+====
+config/admin/debug
+==================
+Unlike other settings, the value of the file is not checked, its mere presence enables debug mode.
+In debug mode any calls to WriteLog() are output to log/log.log
+
+PHP
+===
+config/admin/php/debug=1
+========================
+Will dump all WriteLog() output at the bottom of every page.
+Marked as class=advanced, click More to see it.
+config/admin/php/debug_server_response=1
+========================================
+Change redirect behavior, providing a link at the top instead of redirecting
+
+JavaScript
+==========
+config/admin/js/debug=1
+======================
+Any JS injected into pages will have debug output enabled by InjectJS() function.
+Works by uncommenting any statements beginning with "alert('DEBUG:"
+	Each statement only spans one line
+Each JS template has header and footer comments which name the template file
+There is also a "debug" button injected into the top right corner of pages to re-enable debug mode.
+Besides "1", there are a couple of other settings supported:
+config/admin/js/debug=document.title -- the text will be output to the document's title
+config/admin/js/debug=console.log -- console.log() will be used instead (not all browsers support it)
+
+HTML, CSS
+=========
+Same as JS, each template has a header and footer comment, which facilitates finding where the code is stored.

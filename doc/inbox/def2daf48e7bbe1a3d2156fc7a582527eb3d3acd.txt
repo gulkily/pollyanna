@@ -1,0 +1,13 @@
+"show all items in this page" button
+
+#todo #meta
+
+1) make button
+
+2) make call which returns all dialogs in one request
+
+3) php first
+
+4) go through each item's html file, if it does not exist, create it with pages.pl call
+
+5) combine them all and return as one request

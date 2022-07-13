@@ -1,0 +1,11 @@
+SELECT
+	file_hash,
+	item_title,
+	child_count,
+	add_timestamp
+FROM
+	item_flat
+WHERE
+	item_score >= 0
+ORDER BY
+	add_timestamp DESC

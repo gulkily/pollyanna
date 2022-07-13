@@ -1,0 +1,46 @@
+/* theme/friday29/additional.css */
+body {
+	font-family: helvetica;
+	font-size: 14pt;
+	background-color: $colorBackground;
+}
+.dialog {
+	box-shadow: 5pt 5pt 5pt #aabbcc;
+}
+@media only screen and (min-width : 30em) {
+	.item-textart {
+		max-width: 90%;
+		background-color: #808080;
+	}
+	.dialog .txt {
+		max-width: 30em;
+	}
+}
+#txtClock {
+	border: 0;
+	background-color: $colorWindow;
+}
+.statusbar td {
+	border: 0;
+    padding: 2pt;
+}
+a:focus, a:active {
+    background-color: orange;
+}
+input[type=text], input[type=password], select, option, textarea {
+	background-color: $colorInputBackground;
+	color: $colorInputText;
+}
+textarea:focus {
+	background-color: $colorInputBackground;
+}
+#serverResponse {
+/* responses from server */
+    background-color: $colorHighlightAlert;
+    color: $colorText;
+    padding: 5pt;
+}
+#aBackToTop {
+	background-color: $colorHighlightBeginner;
+}
+/* theme/friday29/additional.css */

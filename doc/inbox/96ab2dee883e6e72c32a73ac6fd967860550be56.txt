@@ -1,0 +1,13 @@
+Crawler Bot Remediation
+
+1. Log source IP address of each item
+
+2. If too much is detected, add IP to deny list
+
+3. Ignore everything from denied IPs
+
+4. Eventually clean up
+
+5. Done?
+
+#meta #todo #brainstorm

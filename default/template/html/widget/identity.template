@@ -1,0 +1,11 @@
+<!-- identity.template -->
+<p>
+	<span id=spanUsernameProfileLink><a href="/profile.html">Profile</a></span>
+</p>
+<p>
+	<span><a href="/profile.html">Register</a></span>
+</p>
+<p>
+	<span><a href="/profile.html">Sign In</a></span>
+</p>
+<!-- / identity.template -->

@@ -1,0 +1,9 @@
+puzzle solver
+
+index_text_file.pl does the work right now
+
+the config is 
+
+puzzle/accept
+(accepted prefixes for hash)
+

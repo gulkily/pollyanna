@@ -1,0 +1,3 @@
+<!-- timestamp_textarea.template -->
+<form><textarea cols=15 rows=1 epoch=$timestamp title="$timeDate" class=timestamp>$timeDate</textarea></form>
+<!-- / timestamp_textarea.template -->

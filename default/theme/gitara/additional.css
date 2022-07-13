@@ -1,0 +1,10 @@
+/* theme/gitara/additional.css */ .titlebar, input[type=submit], button {
+	background-image: url(/amber.png);
+	background-color: $colorTitlebar;
+	font-weight: bold;
+}
+.content, .menubar, .statusbar, .heading, .txt {
+	background-image: url(/vintage.jpg);
+	background-color: $colorWindow;
+}
+/* / theme/gitara/additional.css */

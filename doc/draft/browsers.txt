@@ -1,0 +1,205 @@
+BROWSER SUPPORT NOTES
+=====================
+
+General advice if early browsers like Mosaic, IE2, NN1 etc. are your priority:
+	Mosaic and IE2 are fussy about headers
+		Disable php and ssi for more basic headers
+		Consider setting light mode default
+	They also don't like very large pages
+		Disable javascript to reduce file size
+	They don't understand Unicode or weird characters
+		Enable ascii_only mode
+
+In Opera 12.x, registration fails
+	This is due to OpenPGP.js throwing an error
+		Fix 1: polyfill getRandomValues()
+		Fix 2: handle exeptions thrown by openpgp with fallback
+
+Crashes sometimes experienced
+	Mosaic
+	IE4
+	Opera 3
+	Opera 4.0
+
+In IE 5.5. item pages return a JavaScript error
+	Seems to be related to either whitespace or comments
+	Exact cause unknown
+	Workarounds
+		Press OK on the javascript error message, rest of the site works
+		Disable JS on browser
+		Use Light Mode to strip JS
+
+In Opera 4.0, the body onclick causes links to not work.
+	Workaround: set config/admin/js/enable to 0
+
+
+What "Basics" means
+===================
+Load every page
+Write new topic
+Reply to existing topic
+Vote on item
+Update button on Stats page
+
+What the symbols mean
+=====================
+[1] Working
+[ ] Untested
+[0] Not working, not expected to work
+[?] Not working, fix possible
+[~] Works partially
+
+Opera 12.14
+===========
+[1] Basics
+[1] Cookie auth
+[1] JS voting buttons
+[1] JS modular UI
+[-] OpenPGP and signing
+[1] JS clock
+[ ] JS fresh.js
+
+Netscape 4.80
+=============
+[1] Basics
+[1] Cookie auth
+[ ] JS voting buttons
+[ ] JS modular UI
+[ ] OpenPGP and signing
+[1] JS clock
+[ ] JS fresh.js
+
+SeaMonkey 2.49.5
+================
+[x] Basics
+[x] Cookie auth
+[x] JS voting buttons
+[x] JS modular UI
+[x] OpenPGP and signing
+[x] JS clock
+[x] JS fresh.js
+
+Midori 9.0
+==========
+[x] Basics
+[x] Cookie auth
+[x] JS voting buttons
+[x] JS modular UI
+[x] OpenPGP and signing
+[x] JS clock
+[x] JS fresh.js
+
+Opera 3.62
+==========
+[x] Basics
+[x] Cookie auth
+[ ] JS voting buttons
+[ ] JS modular UI
+[ ] OpenPGP and signing
+[x] JS clock
+[ ] JS fresh.js
+
+Netscape 3.04 Gold
+==================
+[x] Basics
+[x] Cookie auth
+[ ] JS voting buttons
+[ ] JS modular UI
+[ ] OpenPGP and signing
+[x] JS clock
+[ ] JS fresh.js
+
+Lynx 2.8.9rel.1 (08 Jul 2018)
+=============================
+[x] Basics
+[x] Cookie auth
+[ ] JS voting buttons
+[ ] JS modular UI
+[ ] OpenPGP and signing
+[ ] JS clock
+[ ] JS fresh.js
+
+Links 2.20.2 (text mode)
+========================
+[x] Basics
+[x] Cookie auth
+[ ] JS voting buttons
+[ ] JS modular UI
+[ ] OpenPGP and signing
+[ ] JS clock
+[ ] JS fresh.js
+
+w3m/0.5.3+git20180125
+=====================
+[x] Basics
+[x] Cookie auth
+[ ] JS voting buttons
+[ ] JS modular UI
+[ ] OpenPGP and signing
+[ ] JS clock
+[ ] JS fresh.js
+
+OffByOne 3.5.d
+==============
+[x] Basics
+[x] Cookie auth
+[ ] JS voting buttons
+[ ] JS modular UI
+[ ] OpenPGP and signing
+[ ] JS clock
+[ ] JS fresh.js
+
+Wine IE 8.0
+===========
+[x]Load every page
+[-] Write new topic
+[-] Reply to existing topic
+[x] Vote on item
+[-] Update button on Stats page
+[x] Cookie auth
+[-] Submit forms
+[ ] JS voting buttons
+[?] JS modular UI
+[ ] OpenPGP and signing
+[x] JS clock (only on post.html)
+[ ] JS fresh.js
+
+Mosaic 3.0 for Windows
+======================
+[-] Load every page
+[-] write, profile, post crash browser
+[x] oher pages load
+[-] Write new topic
+[x] Reply to existing topic (with crash)
+[x] Vote on item (with crash)
+[-] Update button on Stats page (crash)
+[?] Cookie auth
+[-] Submit forms
+[o] JS voting buttons
+[o] JS modular UI
+[o] OpenPGP and signing
+[o] JS clock (only on post.html)
+[o] JS fresh.js
+
+Netscape 2.0
+============
+[x] Basics
+[~] Cookie auth (bugs, but works)
+[o] JS voting buttons
+[o] JS modular UI
+[o] OpenPGP and signing
+[x] JS clock
+[ ] JS fresh.js
+
+Internet Explorer 5.5
+=====================
+[x] Basics
+[x] Cookie auth
+[x] JS clock
+
+Internet Explorer 6.0
+=====================
+[x] Basics
+[x] Cookie auth
+[x] JS clock
+

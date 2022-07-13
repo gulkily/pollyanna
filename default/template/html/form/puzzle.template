@@ -1,0 +1,12 @@
+<!-- puzzle.template -->
+<fieldset>
+	<input name=comment id=comment type=hidden>
+
+	<p>
+		<span id=spanSignAs></span>
+	</p>
+	<p>
+		<p id=spanSolvePuzzle></p>
+	</p>
+</fieldset>
+<!--/ puzzle.template -->

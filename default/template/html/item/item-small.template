@@ -1,0 +1,22 @@
+<!-- item-small.template -->
+<a name=$itemAnchor>
+<table cellspacing=0 cellpadding=6 border=0 bgcolor="$colorWindow" class=dialog>
+	<tr>
+		<td>
+			<p>$itemText</p>
+			<p>
+				<a href="$permalinkHtml">$addedTime</a>;
+				$authorLink;
+				<span class=advanced>
+					<a href="$permalinkHtml#reply"><b>reply</b></a>;
+					$itemFlagButton
+				</span>
+				<span class=more></span>
+			</p>
+
+			<replies></replies>
+		</td>
+	</tr>
+</table>
+</a>
+<!-- / item-small.template -->

@@ -1,0 +1,15 @@
+<!-- no_items.template -->
+<fieldset>
+	<legend>Hello, World!</legend>
+	<p class=beginner>
+		We're fresh out of content.<br><br>
+		Use this opportunity as you see fit.<br><br>
+		<span class=advanced>
+			<a href=/compost.html>Compost</a>
+		</span>
+	</p>
+	<p class=advanced>
+		No matches.
+	</p>
+</fieldset>
+<!-- / no_items.template -->

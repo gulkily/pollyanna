@@ -1,0 +1,16 @@
+<!-- welcome.template -->
+
+<p>
+	Welcome to RocketScience, made with
+	<a href="https://wikiless.org/wiki/Hash_function?lang=en">hashes</a>,
+	<a href="https://wikiless.org/wiki/Public-key_cryptography?lang=en">keys</a>,
+	and <a href="https://wikiless.org/wiki/Digital_signature?lang=en">signatures.</a> <br>
+</p>
+
+<p>
+	Feel free to write something.
+</p>
+
+<!-- / welcome.template -->
+
+

@@ -1,0 +1,30 @@
+#!/usr/bin/perl -T
+
+#welcome to build script
+print "Welcome!\n";
+#
+#if lighttpd already available, run it right away
+
+#
+#if lighttpd is not available, see if it is possible to install it
+#	either with package manager
+#	or build from source?
+#
+#other webserver options (later)
+#
+#create html dir
+#
+#write welcome page
+#
+#open browser to welcome page
+#	it should redirect to localhost
+#	or open localhost directly
+#
+#placeholder welcome page should tell user what's happening
+#	update the page as things are done
+#
+#then start writing system pages
+#
+#indexing can happen simultaneously if it is needed
+#
+#copy doc/welcome/* to html/txt

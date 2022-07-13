@@ -1,0 +1,250 @@
+OPERATOR'S MANUAL
+=================
+Introduction:
+
+Designed for easy maintainance from console.
+
+Content is stored in ./html/txt/ and ./html/image/
+
+Cache is stored in ./cache/
+    Including the SQLite index-database index.sqlite3
+
+HTML root is ./html/
+    Can be symlinked TO, but shouldn't be a symlink itself
+
+Basic flow diagram:
+    text files -> sqlite database -> html
+    html -> webserver -> reader
+    author -> webserver -> access.log -> textfiles
+    author -> webserver -> php -> textfiles
+    author -> filesystem -> textfiles
+
+   * * *
+DEPENDENCIES
+============
+# apt install liburi-encode-perl libany-uri-escape-perl libhtml-parser-perl libdbd-sqlite3-perl libdigest-sha-perl sqlite3 gnupg gnupg2 imagemagick zip php-cgi
+
+# sudo yum install perl-Digest-MD5 perl-Digest-SHA perl-HTML-Parser perl-DBD-SQLite perl-URI-Encode perl-Digest-SHA1 sqlite gnupg gnupg2 perl-Devel-StackTrace perl-Digest-SHA perl-HTML-Parser perl-DBD-SQLite lighttpd-fastcgi ImageMagick php-cgi zip
+
+# helpful for dev
+# IntelliJ IDEA Community 2019.3
+# apt install sqlitebrowser time lighttpd
+# yum install sqlitebrowser time lighttpd
+
+# WORKS ON FREEBSD with lighttpd and without php (./config/admin/php/enable=0)
+# 	I don't know how to install php on freebsd yet
+
+# imagemagick package can be excluded if image module will not be used
+
+# php can be excluded if php module will not be used
+
+BUILD
+=====
+$ git clone https://www.github.com/gulkily/RocketScience hike
+$ cd hike
+$ ./build.pl
+
+APACHE
+======
+$ echo 1 > config/admin/htaccess/enable
+$ ln -s /var/log/apache/access.log log/access.log
+$ ln -s /var/www/html ./html
+-OR-
+# ln -s ./html /var/www/html
+
+LIGHTTPD (DEV)
+==============
+$ echo 1 > config/admin/lighttpd/enable
+$ ./build.pl
+$ ./lighttpd.pl
+$ lynx http://admin:admin@localhost:2784/
+
+(see also: install.pl, README)
+
+   * * *
+
+ADMINISTERING THROUGH WEB INTERFACE
+===================================
+In order to do this, you first need to give yourself #admin tag.
+
+$ ./_dev_sqlite3.sh
+sqlite> INSERT INTO vote(file_hash, vote_value) VALUES('02985c8b2452789a12f5ec8f14235a067f14f78c', 'admin');
+
+(Substitute of the hash of your public key for mine.)
+(To get yours, go to your profile, and look in Item Attributes.)
+
+If you are in a low-security setting, you can also allow self-adminning, 
+either when no existing admin is present, or just whenever.
+
+
+   * * *
+COMMON TASKS
+============
+Scripts:
+./_dev_clean_ALL.sh
+./_dev_clean_ALL_no_delay.sh
+#Rebuild entire site and reimport data
+#Useful during dev
+
+./_dev_clean_html.sh
+#Remove all html files ... use with lazy mode
+
+./_dev_clean_template.sh
+#Use after modifying anything under default/template
+
+./_dev_refresh.sh
+#Checksums various parts of the code and refreshes queues which are affected
+#For example, checks "default/template/" and cleans "config/template/" on change
+#Also useful during dev
+
+./generate_frontend.pl
+#Regenerate entire frontend including listing pages
+
+./index.pl --all
+#Index all unindexed files in ./html/txt and ./html/image
+#It skips files it has already indexed
+#If you want to re-index a particular file, remove the tag in cache/indexed/...
+
+./pages.pl --queue
+./pages.pl -Q
+#Build pages which have a task with a priority
+
+./pages.pl --all
+#Build all pages which have a task (even when priority is 0)
+
+./query/update_increment_all_page_touch.sh
+#Touch all pages in index
+
+   * * *
+CONFIGURATION
+=============
+Each configuration setting is stored in an individual text file.
+
+Defaults are stored in ./default/
+	Examples: ./default/admin/html/ascii_only
+	This includes things like template/, and string/
+
+Config is stored in ./config/
+Under the same structure as defaults above
+This allows defaults to change between versions without affecting already prior-set setting
+	Example: ./config/admin/html/ascii_only
+	Copied from default/ the first time it is accessed
+		#todo This can be toggled, but there's no toggle yet
+	This allows preserving settings even when defaults change
+	Config can be specified in posted items
+		Publicly visible
+		Indexed into index.sqlite3
+		Then written into ./config/
+
+Some popular places on the config tree:
+config/
+	template/
+		js/
+		php/
+		css/
+	theme/
+		chicago/
+			color/
+			template/
+Note: There are several lookups when it comes to templates.
+   * * *
+UNMANAGED MODE
+==============
+It is possible for users to share responsibility being Root Operator.
+Very convenient for non-critical, localized, or secured instances.
+All of these settings are off by default.
+
+./config/admin/allow_self_admin_when_adminless=1
+# if no admins are in database, allows user to self-assign #admin tag
+
+./config/admin/allow_self_admin_whenever=1
+# allows user to self-assign #admin tag WHENEVER
+
+./config/admin/allow_admin_permissions_tag_lookup=1
+# enables the #admin tag to be working at all
+
+./config/admin/anyone_can_config=1
+# allows anyone at all to change server config
+
+./config/admin/cookied_can_config=1
+# allows anyone with a cookie to change server config
+
+./config/admin/signed_can_config=1
+# allows anyone to configure as long as message is signed. useful for testing
+
+   * * *
+TROUBLESHOOTING
+===============
+
+If you can't upgrade with git
+=============================
+$ cd ~/hike
+$ git stash
+$ git pull --all
+$ ./build.pl
+
+If site is taking too long to update
+====================================
+The following will archive content to make room for new content.
+	*** Archived files go into ./archive/ ***
+$ cd ~/hike
+$ ./_dev_archive.pl
+
+If config is messed up
+======================
+If you are using manual configuration, use this to back up your
+existing configuration and reset it:
+$ cd ~/hike
+$ mv config config.`date +%s`
+$ ./build.pl
+
+If using signed configuration, do this first:
+$ cd ~/hike
+$ grep config html/txt
+(Move these files into ./archive/)
+
+If having trouble accessing public instance
+===========================================
+Try using http, it is more compatible
+
+Disable extra features:
+./config/admin/php/enable=0
+./config/admin/js/enable=0
+
+Alternatively, with PHP enabled, you can use Light Mode:
+./config/admin/php/enable=1
+./config/admin/php/light_mode_always_on=1
+
+If browser is acting strange
+============================
+Disable JS in browser (separate guide #todo)
+Disable js module on server to stop JS output
+Enable Light Mode on browser side (#todo method without cookies? alt domain?)
+Enable Light Mode on server
+Older browsers may have problems with PHP-added headers. Disable php. #todo fix it
+   * * *
+DEBUG LOGGING
+=============
+# ./config/admin/debug
+Controls Perl (top-level) debugging.
+Set its contents to 1 to enable debug output to ./log/log.log
+!!! TO TURN OFF PERL DEBUGGING TO log/log.log, DELETE THE FILE !!!
+DIFFERS FROM OTHER CONFIG KEYS IN THAT ITS PRESENCE IS WHAT TURNS ON DEBUGGING.
+NOTE: DELETE THE FILE TO DISABLE PERL DEBUG LOGGING.
+SETTING IT TO 0 WILL NOT DISABLE DEBUGGING.
+
+# ./config/admin/php/debug
+Controls debugging in PHP module. Set to 1 to enable.
+Debug output is dumped at the bottom of HTML.
+You must have advanced UI layer visible enabled to see. (Accesskey = O)
+
+# ./config/admin/js/debug
+Controls debugging in JS module.
+Set to 1 to display messages as confirm() dialogs
+	When dialog appars, choose Yes/OK to continue seeing messages
+	Choose No/Cancel to ignore all debug messages
+	Press "js-debug" button on page to re-enable
+"console.log" to display messages there
+	Note: Not all browsers support this
+	Press "event-loop" button on page to pause/resume event loop
+"document.title" to display messages in document title

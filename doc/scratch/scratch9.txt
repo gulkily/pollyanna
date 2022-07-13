@@ -1,0 +1,3852 @@
+		if (GetConfig('admin/token/cookie') && $detokenedMessage) {
+			# look for cookies
+			my @cookieLines = ($message =~ m/^(Cookie:\s)(.+)/mg);
+			if (@cookieLines) {
+				while (@cookieLines) {
+					my $cookieToken = shift @cookieLines;
+					my $cookieValue = shift @cookieLines;
+					my $reconLine = $cookieToken . $cookieValue;
+
+					if ($cookieToken && $cookieValue) {
+						my %newTokenFound;
+						$newTokenFound{'token'} = 'cookie';
+						$newTokenFound{'cookie'} = $cookieValue;
+						$newTokenFound{'recon'} = $reconLine;
+						$newTokenFound{'message'} = "Cookie: $cookieValue";
+						push(@tokensFound, \%newTokenFound);
+
+						$detokenedMessage =~ s/$reconLine//;
+					}
+				}
+			}
+		}
+
+
+
+
+
+		# SHA512: AccessLogHash
+		if ($message && GetConfig('admin/token/sha512_hash')) {
+			# #title token is enabled
+
+			# looks for lines beginning with AccessLogHash: and text after
+			# only these characters are currently allowed: a-z, A-Z, 0-9, _, and space.
+			my @lines = ($message =~ m/^(SHA512)(\W+)(.+)$/mig); #todo format instead of .+
+			# /s = single-line (changes behavior of . metacharacter to match newlines)
+			# /m = multi-line (changes behavior of ^ and $ to work on lines instead of entire file)
+			# /g = global (all instances)
+			# /i = case-insensitive
+
+			WriteLog('@lines = ' . scalar(@lines));
+
+			if (@lines) { # means we found at least one line
+				WriteLog('#SHA512 token found for ' . $fileHash);
+				WriteLog('$message = ' . $message);
+
+				#my $lineCount = @setTitleToLines / 3;
+				while (@lines) {
+					# loop through all found title: token lines
+					my $token = shift @lines;
+					my $space = shift @lines;
+					my $value = shift @lines;
+
+					chomp $token;
+					chomp $space;
+					chomp $value;
+					$value = trim($value);
+
+					my $reconLine; # reconciliation
+					$reconLine = $token . $space . $value;
+
+					WriteLog('IndexTextFile: SHA512 $reconLine = ' . $reconLine);
+
+					if ($value) {
+						$hasToken{'SHA512'} = 1;
+
+						chomp $value;
+						if ($hasParent) {
+							# has parent(s), so add title to each parent
+							foreach my $itemParent (@itemParents) {
+								DBAddItemAttribute($itemParent, 'sha512_hash', $value, $addedTime, $fileHash);
+								DBAddPageTouch('item', $itemParent);
+							} # @itemParents
+						} else {
+							# no parents, ignore
+							WriteLog('IndexTextFile: SHA512: Item has no parent, ignoring');
+						}
+					}
+
+					$message =~ s/$reconLine/[SHA512]/;
+					$detokenedMessage =~ s/$reconLine//;
+				}
+			}
+		} # SHA512 token
+
+
+
+							chomp $titleGiven;
+							if ($hasParent) {
+								# has parent(s), so add title to each parent
+								foreach my $itemParent (@itemParents) {
+									DBAddItemAttribute($itemParent, 'title', $titleGiven, $addedTime, $fileHash);
+
+									DBAddVoteRecord($itemParent, $addedTime, 'hastitle');
+
+									DBAddPageTouch('item', $itemParent);
+
+									if (GetConfig('admin/index/make_primary_pages')) {
+										#todo this may not be the right place for this?
+										MakePage('item', $itemParent, 1);
+									}
+								}
+							} else {
+								# no parents, so set title to self
+
+								WriteLog('Item has no parent, adding title to itself');
+
+								DBAddVoteRecord($fileHash, $addedTime, 'hastitle');
+								DBAddItemAttribute($fileHash, 'title', $titleGiven, $addedTime);
+							}
+
+							$message = str_replace($reconLine, '[Title: ' . $titleGiven . ']', $message);
+						} else {
+							$message = str_replace($reconLine, '[Title not applied, insufficient privileges]', $message);
+						}
+							chomp $titleGiven;
+							if ($hasParent) {
+								# has parent(s), so add title to each parent
+								foreach my $itemParent (@itemParents) {
+									DBAddItemAttribute($itemParent, 'title', $titleGiven, $addedTime, $fileHash);
+
+									DBAddVoteRecord($itemParent, $addedTime, 'hastitle');
+
+									DBAddPageTouch('item', $itemParent);
+
+									if (GetConfig('admin/index/make_primary_pages')) {
+										#todo this may not be the right place for this?
+										MakePage('item', $itemParent, 1);
+									}
+								}
+							} else {
+								# no parents, so set title to self
+
+								WriteLog('Item has no parent, adding title to itself');
+
+								DBAddVoteRecord($fileHash, $addedTime, 'hastitle');
+								DBAddItemAttribute($fileHash, 'title', $titleGiven, $addedTime);
+							}
+
+							$message = str_replace($reconLine, '[Title: ' . $titleGiven . ']', $message);
+						} else {
+							$message = str_replace($reconLine, '[Title not applied, insufficient privileges]', $message);
+						}
+
+
+
+		# title:
+		if ($message && GetConfig('admin/token/title')) {
+			# #title token is enabled
+
+			# looks for lines beginning with title: and text after
+			# only these characters are currently allowed: a-z, A-Z, 0-9, _, and space.
+			my @setTitleToLines = ($message =~ m/^(title)(\W+)(.+)$/mig);
+			# /s = single-line (changes behavior of . metacharacter to match newlines)
+			# /m = multi-line (changes behavior of ^ and $ to work on lines instead of entire file)
+			# /g = global (all instances)
+			# /i = case-insensitive
+
+			WriteLog('@setTitleToLines = ' . scalar(@setTitleToLines));
+
+			if (@setTitleToLines) { # means we found at least one title: token;
+				WriteLog('#title token found for ' . $fileHash);
+				WriteLog('$message = ' . $message);
+
+				#my $lineCount = @setTitleToLines / 3;
+				while (@setTitleToLines) {
+					# loop through all found title: token lines
+					my $setTitleToToken = shift @setTitleToLines;
+					my $titleSpace = shift @setTitleToLines;
+					my $titleGiven = shift @setTitleToLines;
+
+					chomp $setTitleToToken;
+					chomp $titleSpace;
+					chomp $titleGiven;
+					$titleGiven = trim($titleGiven);
+
+					my $reconLine;
+					$reconLine = $setTitleToToken . $titleSpace . $titleGiven;
+					WriteLog('title $reconLine = ' . $reconLine);
+
+					if ($titleGiven) {
+						$hasToken{'title'} = 1;
+
+						# if (($authorHasTag{'admin'} == 1 || $authorHasTag{'title'} == 1)) {
+						if (1) {
+							chomp $titleGiven;
+							if ($hasParent) {
+								# has parent(s), so add title to each parent
+								foreach my $itemParent (@itemParents) {
+									DBAddItemAttribute($itemParent, 'title', $titleGiven, $addedTime, $fileHash);
+
+									DBAddVoteRecord($itemParent, $addedTime, 'hastitle');
+
+									DBAddPageTouch('item', $itemParent);
+
+									if (GetConfig('admin/index/make_primary_pages')) {
+										#todo this may not be the right place for this?
+										MakePage('item', $itemParent, 1);
+									}
+								}
+							} else {
+								# no parents, so set title to self
+
+								WriteLog('Item has no parent, adding title to itself');
+
+								DBAddVoteRecord($fileHash, $addedTime, 'hastitle');
+								DBAddItemAttribute($fileHash, 'title', $titleGiven, $addedTime);
+							}
+
+							$message = str_replace($reconLine, '[Title: ' . $titleGiven . ']', $message);
+						} else {
+							$message = str_replace($reconLine, '[Title not applied, insufficient privileges]', $message);
+						}
+					}
+				}
+			}
+		} # title: token
+
+
+
+
+
+
+		# title:
+		if ($message && GetConfig('admin/token/title')) {
+			# #title token is enabled
+
+			# looks for lines beginning with title: and text after
+			# only these characters are currently allowed: a-z, A-Z, 0-9, _, and space.
+			my @setTitleToLines = ($message =~ m/^(title)(\W+)(.+)$/mig);
+			# /s = single-line (changes behavior of . metacharacter to match newlines)
+			# /m = multi-line (changes behavior of ^ and $ to work on lines instead of entire file)
+			# /g = global (all instances)
+			# /i = case-insensitive
+
+			WriteLog('@setTitleToLines = ' . scalar(@setTitleToLines));
+
+			if (@setTitleToLines) { # means we found at least one title: token;
+				WriteLog('#title token found for ' . $fileHash);
+				WriteLog('$message = ' . $message);
+
+				#my $lineCount = @setTitleToLines / 3;
+				while (@setTitleToLines) {
+					# loop through all found title: token lines
+					my $setTitleToToken = shift @setTitleToLines;
+					my $titleSpace = shift @setTitleToLines;
+					my $titleGiven = shift @setTitleToLines;
+
+					chomp $setTitleToToken;
+					chomp $titleSpace;
+					chomp $titleGiven;
+					$titleGiven = trim($titleGiven);
+
+					my $reconLine;
+					$reconLine = $setTitleToToken . $titleSpace . $titleGiven;
+					WriteLog('title $reconLine = ' . $reconLine);
+
+					if ($titleGiven) {
+						$hasToken{'title'} = 1;
+
+						# if (($authorHasTag{'admin'} == 1 || $authorHasTag{'title'} == 1)) {
+						if (1) {
+							chomp $titleGiven;
+							if ($hasParent) {
+								# has parent(s), so add title to each parent
+								foreach my $itemParent (@itemParents) {
+									DBAddItemAttribute($itemParent, 'title', $titleGiven, $addedTime, $fileHash);
+
+									DBAddVoteRecord($itemParent, $addedTime, 'hastitle');
+
+									DBAddPageTouch('item', $itemParent);
+
+									if (GetConfig('admin/index/make_primary_pages')) {
+										#todo this may not be the right place for this?
+										MakePage('item', $itemParent, 1);
+									}
+								}
+							} else {
+								# no parents, so set title to self
+
+								WriteLog('Item has no parent, adding title to itself');
+
+								DBAddVoteRecord($fileHash, $addedTime, 'hastitle');
+								DBAddItemAttribute($fileHash, 'title', $titleGiven, $addedTime);
+							}
+
+							$message = str_replace($reconLine, '[Title: ' . $titleGiven . ']', $message);
+						} else {
+							$message = str_replace($reconLine, '[Title not applied, insufficient privileges]', $message);
+						}
+					}
+				}
+			}
+		} # title: token
+
+
+
+
+
+
+
+
+
+
+		# SHA512: AccessLogHash
+		if ($message && GetConfig('admin/token/sha512_hash')) {
+			# #title token is enabled
+
+			# looks for lines beginning with AccessLogHash: and text after
+			# only these characters are currently allowed: a-z, A-Z, 0-9, _, and space.
+			my @lines = ($message =~ m/^(SHA512)(\W+)(.+)$/mig); #todo format instead of .+
+			# /s = single-line (changes behavior of . metacharacter to match newlines)
+			# /m = multi-line (changes behavior of ^ and $ to work on lines instead of entire file)
+			# /g = global (all instances)
+			# /i = case-insensitive
+
+			WriteLog('@lines = ' . scalar(@lines));
+
+			if (@lines) { # means we found at least one line
+				WriteLog('#SHA512 token found for ' . $fileHash);
+				WriteLog('$message = ' . $message);
+
+				#my $lineCount = @setTitleToLines / 3;
+				while (@lines) {
+					# loop through all found title: token lines
+					my $token = shift @lines;
+					my $space = shift @lines;
+					my $value = shift @lines;
+
+					chomp $token;
+					chomp $space;
+					chomp $value;
+					$value = trim($value);
+
+					my $reconLine; # reconciliation
+					$reconLine = $token . $space . $value;
+
+					WriteLog('IndexTextFile: SHA512 $reconLine = ' . $reconLine);
+
+					if ($value) {
+						$hasToken{'SHA512'} = 1;
+
+						chomp $value;
+						if ($hasParent) {
+							# has parent(s), so add title to each parent
+							foreach my $itemParent (@itemParents) {
+								DBAddItemAttribute($itemParent, 'sha512_hash', $value, $addedTime, $fileHash);
+								DBAddPageTouch('item', $itemParent);
+							} # @itemParents
+						} else {
+							# no parents, ignore
+							WriteLog('IndexTextFile: SHA512: Item has no parent, ignoring');
+						}
+					}
+
+					$message =~ s/$reconLine/[SHA512]/;
+					$detokenedMessage =~ s/$reconLine//;
+				}
+			}
+		} # SHA512 token
+		# title:
+		if ($message && GetConfig('admin/token/title')) {
+			# #title token is enabled
+
+			# looks for lines beginning with title: and text after
+			# only these characters are currently allowed: a-z, A-Z, 0-9, _, and space.
+			my @setTitleToLines = ($message =~ m/^(title)(\W+)(.+)$/mig);
+			# /s = single-line (changes behavior of . metacharacter to match newlines)
+			# /m = multi-line (changes behavior of ^ and $ to work on lines instead of entire file)
+			# /g = global (all instances)
+			# /i = case-insensitive
+
+			WriteLog('@setTitleToLines = ' . scalar(@setTitleToLines));
+
+			if (@setTitleToLines) { # means we found at least one title: token;
+				WriteLog('#title token found for ' . $fileHash);
+				WriteLog('$message = ' . $message);
+
+				#my $lineCount = @setTitleToLines / 3;
+				while (@setTitleToLines) {
+					# loop through all found title: token lines
+					my $setTitleToToken = shift @setTitleToLines;
+					my $titleSpace = shift @setTitleToLines;
+					my $titleGiven = shift @setTitleToLines;
+
+					chomp $setTitleToToken;
+					chomp $titleSpace;
+					chomp $titleGiven;
+					$titleGiven = trim($titleGiven);
+
+					my $reconLine;
+					$reconLine = $setTitleToToken . $titleSpace . $titleGiven;
+					WriteLog('title $reconLine = ' . $reconLine);
+
+					if ($titleGiven) {
+						$hasToken{'title'} = 1;
+
+						# if (($authorHasTag{'admin'} == 1 || $authorHasTag{'title'} == 1)) {
+						if (1) {
+							chomp $titleGiven;
+							if ($hasParent) {
+								# has parent(s), so add title to each parent
+								foreach my $itemParent (@itemParents) {
+									DBAddItemAttribute($itemParent, 'title', $titleGiven, $addedTime, $fileHash);
+
+									DBAddVoteRecord($itemParent, $addedTime, 'hastitle');
+
+									DBAddPageTouch('item', $itemParent);
+
+									if (GetConfig('admin/index/make_primary_pages')) {
+										#todo this may not be the right place for this?
+										MakePage('item', $itemParent, 1);
+									}
+								}
+							} else {
+								# no parents, so set title to self
+
+								WriteLog('Item has no parent, adding title to itself');
+
+								DBAddVoteRecord($fileHash, $addedTime, 'hastitle');
+								DBAddItemAttribute($fileHash, 'title', $titleGiven, $addedTime);
+							}
+
+							$message = str_replace($reconLine, '[Title: ' . $titleGiven . ']', $message);
+						} else {
+							$message = str_replace($reconLine, '[Title not applied, insufficient privileges]', $message);
+						}
+					}
+				}
+			}
+		} # title: token
+
+
+
+
+
+
+
+
+
+
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="alternate" title="RSS Feed" href="/rss.xml" type="application/rss+xml">
+<title>Upload</title>
+<style type="text/css">
+<!--
+/* begin css/default.css */
+.tag-flag,
+.tag-troll,
+.tag-spam,
+.tag-remove,
+.tag-abuse {
+/* negative (red) tags */
+        color: #c00000;
+}
+
+.tag-remove {
+/* remove tag */
+        font-weight: bold;
+}
+
+.tag-approve,
+.tag-accept,
+.tag-friend,
+.tag-attend {
+/* positive (green) tags */
+        color: #00c000;
+}
+
+div.reply {
+/* creates indented effect for sub-replies */
+        margin-left: 2%;
+        padding-left: 3em;
+}
+
+.item-textart {
+/* textart items get monospace font */
+        font-family: monospace;
+        font-size: 12pt;
+}
+
+.tag-aolart {
+/* aol art in 10-point arial font */
+    font-family: Arial;
+    font-size: 10pt;
+}
+
+div.txt {
+        padding-left: 1em;
+}
+
+.byadmin {
+/* text by admin, displayed in red for users' sake */
+        color: red;
+}
+
+.signed {
+/* signed things are displayed in gold */
+    border-color: gold;
+}
+
+
+#eventLocation, #eventBrcLocation {
+/* event form */
+        background-color: #ffffff;
+        padding: 5pt;
+}
+
+#eventDate {
+/* event form */
+        background-color: #c0ffff;
+        padding: 5pt;
+}
+
+#loadingIndicator, #spanLoadingIndicator, #ariaAlert {
+        color: #000000;
+        background-color: #ffffee;
+        padding: 3pt;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        font-family: tahoma, arial, sans-serif;
+        font-size: smaller;
+        font-weight: bold;
+}
+#loadingIndicator a {
+        /* style for links in loading indicator */
+}
+.notification {
+        color: #000000;
+        background-color: #ffffee;
+        padding: 3pt;
+        font-size: smaller;
+        font-weight: bold;
+}
+noscript {
+        color: red;
+}
+.menubar a, .titlebar a {
+        text-decoration: none;
+        color: #000000;
+}
+/* end css/default.css */
+
+/* avatar.css */
+.avatar .icon {
+        font-weight: bold;
+        font-size: smaller;
+}
+/* / avatar.css */
+
+/* dragging.css */
+
+table.dialog {
+        display: inline-block;
+        vertical-align: top;
+}
+form {
+        display: inline;
+}
+
+/* / dragging.css */
+
+/* begin theme/friday29/additional.css */
+body {
+        font-family: helvetica;
+        font-size: 14pt;
+        background-color: #ccddee;
+}
+.dialog {
+        box-shadow: 5pt 5pt 5pt #aabbcc;
+}
+#txtClock {
+        border: 0;
+        background-color: #c0c0c0;
+}
+.statusbar td {
+        border: 0;
+    padding: 2pt;
+}
+a:focus, a:active {
+    background-color: orange;
+}
+input[type=text], input[type=password], select, option, textarea {
+        background-color: #ffffff;
+        color: #000000;
+}
+textarea:focus {
+        background-color: #ffffff;
+}
+#serverResponse {
+/* responses from server */
+    background-color: #ffc080;
+    color: #000000;
+    padding: 5pt;
+    spacing: 5pt;
+}
+#aBackToTop {
+        background-color: #ffffee;
+}
+/* end theme/friday29/additional.css */
+-->
+</style>
+</head>
+<body link="#0000cc" vlink="#800080" text="#000000" bgcolor="#ccddee" onbeforeunload="if (window.ShowPreNavigateNotification){ ShowPreNavigateNotification();}" onclick="if (event.target && (event.target.tagName == 'A') && !(event.target.onclick)) { ShowPreNavigateNotification(); }" onload="if (window.OnLoadEverything) { OnLoadEverything(); }" ><!-- InjectJs2: loading_begin clock fresh -->
+
+<!-- html/utils/scriptinject.template -->
+<script language=javascript>
+
+<!--
+// begin loading_begin.js
+
+//var loadingIndicatorWaitToShowMin = 1500;
+//var loadingIndicatorWaitToHideMin = 500;
+
+function addLoadingIndicator (strMessage) { // adds loading indicator bar (to top of page, depending on style)
+        //alert('DEBUG: addLoadingIndicator(' + strMessage + ')');
+        if (strMessage == undefined || !strMessage) {
+                //alert('DEBUG: strMessage = ' + strMessage);
+                strMessage = 'Meditate...';
+        }
+        //alert('DEBUG: addLoadingIndicator: strMessage = ' + strMessage);
+
+        if (!document.createElement) {
+                //alert('DEBUG: addLoadingIndicator: warning: no document.createElement');
+                return '';
+                // #todo improve compatibility here
+        }
+
+        //alert('DEBUG: addLoadingIndicator: sanity checks passed!');
+        var spanLoadingIndicator = document.createElement('span');
+        spanLoadingIndicator.setAttribute('id', 'loadingIndicator');
+        spanLoadingIndicator.innerHTML = strMessage;
+        spanLoadingIndicator.zIndex = 1337;
+        document.body.appendChild(spanLoadingIndicator);
+
+        return '';
+
+} // addLoadingIndicator()
+
+if (document.createElement) {
+        //alert('DEBUG: loading_begin.js: createElement feature check PASSED!');
+        var d = new Date();
+        var loadingIndicatorStart = d.getTime() * 1;
+        var gt = unescape('%3E');
+
+        //var loadingIndicatorloadCounter = 0;
+        addLoadingIndicator('Meditate...');
+} else {
+        //alert('DEBUG: loading_begin.js: createElement feature check FAILED!');
+}
+// end loading_begin.js
+
+
+// == begin clock/24hour.js
+
+function setClock() {
+        if (document.frmTopMenu) {
+                if (document.frmTopMenu.txtClock) {
+                        if (document.frmTopMenu.txtClock.value) {
+                var now = new Date();
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var seconds = now.getSeconds();
+
+                if (hours < 10) {
+                    hours = '0' + '' + hours;
+                }
+                if (minutes < 10) {
+                    minutes = '0' + '' + minutes;
+                }
+                if (seconds < 10) {
+                    seconds = '0' + '' + seconds;
+                }
+
+                if (!window.clockLastSec || window.clockLastSec != seconds) {
+                        window.clockLastSec = seconds;
+
+                                        if (window.clockColonState) {
+                                                timeValue = hours + ':' + minutes;
+                                                window.clockColonState = 0;
+                                        } else {
+                                                timeValue = hours + ' ' + minutes;
+                                                window.clockColonState = 1;
+                                        }
+
+                                        if (document.frmTopMenu.txtClock.value != timeValue) {
+                                                document.frmTopMenu.txtClock.value = timeValue;
+                                        }
+                                }
+            }
+                }
+        }
+}
+
+// == end clock/24hour.js
+
+
+// == begin fresh.js
+var freshClient;
+//
+//function ReplacePageWithNewContent () {
+//      window.location.replace(window.newPageLocation);
+//      document.open();
+//      document.write(window.newPageContent);
+//      document.close();
+//
+//      return 0;
+//}
+//
+//function StoreNewPageContent () {
+//      var xmlhttp = window.xmlhttp2;
+//
+//      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+//              //alert('DEBUG: PingUrlCallbackReplaceCurrentPage() found status 200');
+//              window.newPageContent = xmlhttp.responseText;
+//              window.newPageLocation = xmlhttp.responseURL;
+//
+//              //window.location.replace(xmlhttp.responseURL);
+////            document.open();
+////            document.write(xmlhttp.responseText);
+////            document.close();
+//      }
+//}
+//
+//function FetchNewPageContent (url) {
+//      if (window.XMLHttpRequest) {
+//              //alert('DEBUG: PingUrl: window.XMLHttpRequest was true');
+//
+//              var xmlhttp;
+//              if (window.xmlhttp2) {
+//                      xmlhttp = window.xmlhttp2;
+//              } else {
+//                      window.xmlhttp2 = new XMLHttpRequest();
+//                      xmlhttp = window.xmlhttp2;
+//              }
+//        xmlhttp.onreadystatechange = window.StoreNewPageContent;
+//        xmlhttp.open("GET", url, true);
+//              xmlhttp.setRequestHeader('Cache-Control', 'no-cache');
+//        xmlhttp.send();
+//
+//        return false;
+//      }
+//}
+
+
+function freshCallback() { // callback for requesting HEAD for current page
+//alert('DEBUG: freshCallback() this.readyState = ' + this.readyState);
+
+//      if (1 || this.readyState == this.HEADERS_RECEIVED) { // headers received -- what we've been waiting for
+        if (
+                this.readyState == this.HEADERS_RECEIVED ||
+                this.status == 200
+        ) { // headers received -- what we've been waiting for
+                // document.title = 'DEBUG: callback received 200';
+            //alert('DEBUG: freshCallback() this.readyState == this.HEADERS_RECEIVED');
+
+                var eTag = freshClient.getResponseHeader("ETag"); // etag header contains page 'fingerprint'
+
+                //alert('DEBUG: eTag = ' + eTag);
+
+                if (eTag) { // if ETag header has a value
+                        if (window.myOwnETag) {
+                                if (eTag != window.myOwnETag) {
+                                        if (eTag == window.lastEtag) { // if it's equal to the one we saved last time
+                                                // no new change change
+                                        } else {
+                                                var freshUserWantsReload = 0;  // templated
+                                                if (freshUserWantsReload) {
+                                                        // user wants reload
+                                                        //alert('DEBUG: user wants automatic page reload');
+                                                        location.reload();
+                                                } else {
+                                                        // user doesn't want reload, just show notification
+                                                        //alert('DEBUG: user does not want automatic page reload, notify');
+                                                        window.lastEtag = eTag;
+
+                                                        var ariaAlert;
+                                                        ariaAlert = document.getElementById('ariaAlert');
+
+                                                        if (!ariaAlert) {
+                                                                //alert('DEBUG: ariaAlert created successfully');
+                                                                ariaAlert = document.createElement('p');
+                                                                ariaAlert.setAttribute('role', 'alert');
+                                                                ariaAlert.setAttribute('id', 'ariaAlert');
+                                                                ariaAlert.style.zIndex = '1337'; //#todo
+
+                                                                var txtUpdated = document.createTextNode('Page updated ');
+                                                                ariaAlert.appendChild(txtUpdated);
+
+                                                                //document.body.appendChild(ariaAlert);
+                                                                document.body.insertBefore(ariaAlert, document.body.firstChild);
+                                                                //window.newPageContent =
+                                                                //FetchNewPageContent(window.mypath + '?' + new Date().getTime());
+
+                                                                //ariaAlert.innerHTML = ariaAlert.innerHTML + '+';
+                                                                var d = new Date();
+                                                                var n = d.getTime();
+                                                                n = Math.ceil(n / 1000);
+
+                                                                var space = document.createElement('span');
+                                                                space.innerHTML = ' ';
+                                                                ariaAlert.appendChild(space);
+
+                                                                var a = document.createElement('a');
+                                                                a.setAttribute('id', 'freshAria');
+                                                                a.setAttribute('href', '#');
+                                                                a.setAttribute('onclick', 'location.reload()');
+                                                                ariaAlert.appendChild(a);
+
+                                                                var newTs = document.createElement('span');
+                                                                newTs.setAttribute('class', 'timestamp');
+                                                                newTs.setAttribute('epoch', n);
+                                                                newTs.setAttribute('id', 'freshTimestamp');
+                                                                newTs.innerHTML = 'just now!';
+                                                                a.appendChild(newTs);
+                                                        } // !ariaAlert
+
+                                                        if (window.freshTimeoutId) {
+                                                                clearTimeout(window.freshTimeoutId);
+                                                        }
+                                                        window.eventLoopFresh = 0;
+
+                                                        if (document.title.substring(0, 2) != '! ') {
+                                                                document.title = '! ' + document.title;
+                                                        }
+                                                } // NOT freshUserWantsReload
+                                        } // lastEtag also didn't match
+                                } // eTag != window.myOwnETag
+                                else {
+                                        //document.title = 'freshCallback: x ' + window.myOwnETag + ';' + new Date().getTime();
+                                        if (window.freshTimeoutId) {
+                                                clearTimeout(window.freshTimeoutId);
+                                        }
+                                        window.freshTimeoutId = setTimeout('CheckIfFresh()', 15000);
+                                }
+                        } // if (window.myOwnETag)
+                        else {
+                                window.myOwnETag = eTag;
+                        }
+                } // if (eTag) // ETag header has value
+        } // status == 200
+        if (status == 404) {
+                //alert('DEBUG: page has gone away on server (404)');
+                var ariaAlert;
+                ariaAlert = document.getElementById('ariaAlert');
+                if (!ariaAlert) {
+                        ariaAlert = document.createElement('p');
+                        ariaAlert.setAttribute('role', 'alert');
+                        ariaAlert.setAttribute('id', 'ariaAlert');
+                        ariaAlert.style.zIndex = '1337'; //#todo
+                        ariaAlert.innerHTML = 'Page has gone away on server.';
+
+                        //document.body.appendChild(ariaAlert);
+                        document.body.insertBefore(ariaAlert, document.body.firstChild);
+                }
+                window.eventLoopFresh = 0;
+        }
+
+        return true;
+} //freshCallback()
+
+function CheckIfFresh () {
+        var d = new Date();
+        //alert('debug: CheckIfFresh: ' + d.getTime());
+
+        var freshCheckRecent = window.freshCheckRecent;
+        if (freshCheckRecent) {
+                //alert('debug: CheckIfFresh: freshCheckRecent = ' + freshCheckRecent);
+                var d = new Date();
+                var curTime = d.getTime();
+                if (curTime < freshCheckRecent + 3000) {
+                        return true;
+                }
+        }
+        //alert('debug: CheckIfFresh: checkpoint passed');
+
+        var d = new Date();
+        window.freshCheckRecent = d.getTime();
+
+        var xhr = null;
+        if (window.XMLHttpRequest){
+        xhr = new XMLHttpRequest();
+    }
+    else {
+        if (window.ActiveXObject) {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+    }
+
+        if (xhr) {
+                var mypath = window.mypath;
+
+                if (!mypath) {
+                        mypath = window.location;
+                        window.mypath = mypath;
+                }
+
+                freshClient = xhr;
+
+                if (0 && mypath.toString().indexOf('?') == -1) {
+                        // this ensures no caching, but may cause other problems
+                        freshClient.open("HEAD", mypath + '?' + d.getTime(), true);
+                } else {
+                        freshClient.open("HEAD", mypath, true);
+                }
+
+        //freshClient.timeout = 5000; //#xhr.timeout
+                freshClient.setRequestHeader('Cache-Control', 'no-cache');
+                freshClient.onreadystatechange = freshCallback;
+
+                freshClient.send();
+        }
+
+        return true;
+} // CheckIfFresh()
+
+//if (window.GetPrefs) {
+//      var needNotify = (GetPrefs('notify_on_change') ? 1 : 0);
+//      if (needNotify == 1) { // check value of notify_on_change preference
+//              if (window.EventLoop) {
+//                      EventLoop();
+//              } else {
+//                      CheckIfFresh();
+//              }
+//      }
+//}
+
+//alert('DEBUG: fresh.js');
+
+// == end fresh.js
+
+// -->
+
+</script>
+<!-- / html/utils/scriptinject.template -->
+
+<b><form action="/stats.html" name=frmTopMenu><!-- topmenu2.template -->
+<table cellspacing=0 cellpadding=3 border=0 bgcolor="#c0c0c0" class=dialog>
+        <tr bgcolor="#aaaacc" class=titlebar>
+                <td colspan=2>
+                        <small>
+                        <a tabindex=2 href="#maincontent" name=top><font color="#444466">Skip to main content</font></a>;
+                        <a href="/access.html?light=1" tabindex=3><font color="#444466">Accessibility mode</font></a>;
+                        <br>
+                        </small>
+                </td>
+        </tr>
+        <tr bgcolor="#c0c0c0" class=menubar>
+                <td>
+                        <big><big><!-- menuitem.template -->
+<a accesskey="r" href="/read.html"><u>R</u>ead</a>;
+<!-- / menuitem.template -->
+<!-- menuitem.template -->
+<a accesskey="w" href="/write.html"><u>W</u>rite</a>;
+<!-- / menuitem.template -->
+<!-- menuitem.template -->
+<a accesskey="u" href="/upload.html"><u>U</u>pload</a>;
+<!-- / menuitem.template -->
+<!-- menuitem.template -->
+<a accesskey="h" href="/help.html"><u>H</u>elp</a>;
+<!-- / menuitem.template -->
+<span class=advanced> <!-- menuitem.template -->
+<a accesskey="p" href="/profile.html"><u>P</u>rofile</a>;
+<!-- / menuitem.template -->
+<!-- menuitem.template -->
+<a accesskey="s" href="/stats.html"><u>S</u>tats</a>;
+<!-- / menuitem.template -->
+<!-- menuitem.template -->
+<a accesskey="a" href="/authors.html"><u>A</u>uthors</a>;
+<!-- / menuitem.template -->
+<!-- menuitem.template -->
+<a accesskey="t" href="/tags.html"><u>T</u>ags</a>;
+<!-- / menuitem.template -->
+<!-- menuitem.template -->
+<a accesskey="e" href="/settings.html">S<u>e</u>ttings</a>;
+<!-- / menuitem.template -->
+<!-- menuitem.template -->
+<a accesskey="c" href="/compost.html"><u>C</u>ompost</a>;
+<!-- / menuitem.template -->
+<!-- menuitem.template -->
+<a accesskey="m" href="/manual.html"><u>M</u>anual</a>;
+<!-- / menuitem.template -->
+<!-- menuitem.template -->
+<a accesskey="d" href="/desktop.html"><u>D</u>esktop</a>;
+<!-- / menuitem.template -->
+</span></big> </big>
+                        <a href="/etc.html" onclick="if (window.ShowAll) { ShowAll(this); } if (window.DraggingInit) { DraggingInit(0); } return false;" accesskey=o>M<u>o</u>re</a>
+                        <!-- clock.template -->
+<span>
+        <input
+                style="text-align: center; float: right;"
+                type=text
+                size=6
+                name=txtClock
+                id=txtClock value="00:35"
+                title=clock
+        >
+</span>
+<!-- / clock.template -->
+
+                </td>
+        </tr>
+</table>
+<!-- / topmenu2.template -->
+<input type=hidden name=timestamp value=1613194535><input type=hidden name=origin value="/upload.html"></form></b>
+<p><MAIN ID=maincontent><A NAME=maincontent></A>
+<!-- window/standard.template -->
+<font face=arial>
+        <table cellspacing=0 cellpadding=6 border=0 bgcolor="#c0c0c0" class=dialog>
+                <!-- titlebar_with_button.template -->
+<tr bgcolor="#aaaacc" class=titlebar>
+        <td>
+                <span>
+                        <a href="#e3dc6c0d" style="color: #444466;" class=btnSkip title=skip onclick="if (window.CollapseWindowFromButton) { return CollapseWindowFromButton(this); } return false;">{-}</a>
+                </span>
+                <font color="#444466"><b>Upload</b></font>
+                <br>
+        </td>
+</tr>
+<!-- / titlebar_with_button.template -->
+
+
+
+
+
+
+                <tr class=content><td><!-- form/upload.template ; file upload form -->
+<form enctype="multipart/form-data" action="/upload.php" method="POST" name=upload id=upload>
+        <p>Upload one picture.</p>
+        <p class=beginner>
+                Remember to press Upload button.
+        </p>
+        <p><input name=uploaded_file onchange="if (window.UploadedFileOnChange) { UploadedFileOnChange(this); }" type=file id=uploaded_file></p>
+        <p><input name=submit onclick="this.value='Meditate...';" type=submit value=Upload id=submit></p>
+        <span id=spanImagePreview></span>
+        <p>Allowed files: jpg
+jpeg
+gif
+png
+bmp
+svg
+jfif
+webp</p>
+        <p>Only images supported, video support later</p>
+        <span id=spanStripMetaData class=advanced>
+                <label for=chkStripMetaData>
+                        <input type=checkbox name=chkStripMetaData id=chkStripMetaData checked>
+                        Strip image metadata (doesn't work yet)
+                </label>
+        </span>
+<input type=hidden name=timestamp value=1613194535><input type=hidden name=origin value="/upload.html"></form>
+<!-- / form/upload.template -->
+</td></tr>
+
+
+        </table>
+</font>
+<!-- / window/standard.template -->
+<a name=e3dc6c0d></a></main>
+<hr>
+<img src="/p.gif" alt="" height=1 width=1>
+<!-- back_to_top_button.template -->
+<a
+    href="#"
+    onclick="if (window.scrollTo) { window.scrollTo(0, 0); return false; }"
+    title="Back to top"
+    id=aBackToTop
+    style="
+        position: fixed;
+        right: 5pt;
+        bottom: 5pt;
+        background-color: #ffffee;
+        border: 5pt;
+        padding: 5pt;
+        border-radius: 5pt;
+        text-decoration: none;
+    "
+>^^</span></a>
+<!-- / back_to_top_button.template --><!-- InjectJs: utils settings avatar profile upload fresh dragging -->
+
+<!-- html/utils/scriptinject.template -->
+<script language=javascript>
+
+<!--
+// == begin utils.js
+
+// begin html escape hack (credit stacko)
+// only works with createElement #backlog
+if (document.createElement) {
+        var escapeTA = document.createElement('textarea');
+}
+function escapeHTML(html) {
+        if (window.escapeTA) {
+                escapeTA.textContent = html;
+                return escapeTA.innerHTML;
+        }
+}
+function unescapeHTML(html) {
+        if (window.escapeTA) {
+                escapeTA.innerHTML = html;
+                return escapeTA.textContent;
+        }
+}
+// end html escape hack
+
+function OnLoadEverything () { // checks for each onLoad function and calls it
+// keywords: OnLoadAll BodyOnLoad body onload body.onload
+// typically called from body.onload
+        //alert('DEBUG: OnLoadEverything() begins');
+
+        if (window.setClock) {
+                //alert('DEBUG: OnLoadEverything: setClock()');
+                window.eventLoopSetClock = 1;
+                setClock();
+        }
+        if (window.ItsYou) {
+                //alert('DEBUG: OnLoadEverything: ItsYou()');
+                ItsYou();
+        }
+        if (window.ShowTimestamps) {
+                //alert('DEBUG: OnLoadEverything: ShowTimestamps()');
+                window.eventLoopShowTimestamps = 1;
+        }
+        if (window.SettingsOnload) {
+                //alert('DEBUG: OnLoadEverything: SettingsOnload()');
+                SettingsOnload();
+        }
+        if (window.ProfileOnLoad) {
+                //alert('DEBUG: OnLoadEverything: ProfileOnLoad()');
+                ProfileOnLoad();
+        }
+        if (window.WriteOnload) {
+                //alert('DEBUG: OnLoadEverything: WriteOnload()');
+                WriteOnload();
+        }
+        if (window.ShowAdvanced) {
+                //alert('DEBUG: OnLoadEverything: ShowAdvanced()');
+                window.eventLoopShowAdvanced = 1;
+                ShowAdvanced(0);
+        }
+        if (window.SearchOnload) {
+                //alert('DEBUG: OnLoadEverything: SearchOnload()');
+                SearchOnload();
+        }
+        if (window.UploadAddImagePreviewElement) {
+                //alert('DEBUG: OnLoadEverything: UploadAddImagePreviewElement()');
+                UploadAddImagePreviewElement();
+        }
+        if (
+                (
+                        window.location.href &&
+                        window.location.href.indexOf('write') != -1 ||
+                        window.location.hash.indexOf('reply') != -1
+                ) &&
+                document.compose &&
+                document.compose.comment &&
+                document.compose.comment.focus
+        ) {
+                //alert('DEBUG: OnLoadEverything: document.compose.comment.focus()()');
+                document.compose.comment.focus();
+        }
+        if (window.location.href && (window.location.href.indexOf('search') != -1) && document.search.q) {
+                //alert('DEBUG: OnLoadEverything: document.search.q.focus()');
+                document.search.q.focus();
+        }
+        if (window.DraggingInit && GetPrefs('draggable')) {
+                //alert('DEBUG: OnLoadEverything: DraggingInit()');
+                if (window.location.href.indexOf('desktop') != -1) {
+                        DraggingInit(1);
+                } else {
+                        DraggingInit(0);
+                }
+        }
+        if (window.EventLoop) {
+                //alert('DEBUG: OnLoadEverything: EventLoop()');
+                if (window.CheckIfFresh) {
+                        window.eventLoopFresh = 1;
+                }
+                window.eventLoopEnabled = 1
+                EventLoop();
+        }
+        if (window.HideLoadingIndicator) {
+                //alert('DEBUG: OnLoadEverything: HideLoadingIndicator()');
+                HideLoadingIndicator();
+        }
+        if (document.getElementsByClassName) {
+        	//todo factor out of here
+        	var clicks = document.getElementsByClassName('fileHashShort');
+        	if (clicks) {
+				clicks.setAttribute('onclick', 'SelectMe(this);');
+        	}
+        }
+
+        // everything is set now, start event loop
+        //
+} // OnLoadEverything()
+
+function ShowPreNavigateNotification () {
+        document.title = 'Meditate...';
+        //document.body.style.opacity="0.8";
+
+        if (document.getElementById) {
+                var ariaAlert;
+                ariaAlert = document.getElementById('ariaAlert');
+
+                if (!ariaAlert) {
+                        ariaAlert = document.createElement('p');
+                        ariaAlert.setAttribute('role', 'alert');
+                        ariaAlert.setAttribute('id', 'ariaAlert');
+                        ariaAlert.innerHTML = 'Meditate...';
+                        ariaAlert.style.opacity = '1';
+                        ariaAlert.style.zIndex = '1337';
+                        //document.body.appendChild(ariaAlert);
+                        document.body.insertBefore(ariaAlert, document.body.firstChild);
+                }
+        }
+
+        return ''; // true would show a confirmation
+}
+
+function EventLoop () { // for calling things which need to happen on a regular basis
+// sets another timeout for itself when done
+// replaces several independent timeouts
+// #backlog add secondary EventLoopWatcher timer which ensures this one runs when needed
+
+        var d = new Date();
+        var eventLoopBegin = d.getTime();
+
+        //alert('DEBUG: EventLoop: eventLoopBegin = ' + eventLoopBegin + ' - window.eventLoopPrevious = ' + window.eventLoopPrevious + ' = ' + (eventLoopBegin - window.eventLoopPrevious));
+
+        if (!window.eventLoopPrevious) {
+                window.eventLoopPrevious = 1;
+        }
+
+        if (window.eventLoopSetClock && window.setClock) {
+                setClock();
+        }
+
+        if (10000 < (eventLoopBegin - window.eventLoopPrevious)) {
+                window.eventLoopPrevious = eventLoopBegin;
+
+                if (window.flagUnloaded) {
+                        if (window.ShowPreNavigateNotification) {
+                                ShowPreNavigateNotification();
+                        }
+                }
+
+                //return;
+                // uncomment to disable event loop
+                // makes js debugging easier
+
+                if (window.eventLoopShowTimestamps && window.ShowTimestamps) {
+                        if (13000 < (eventLoopBegin - window.eventLoopShowTimestamps)) {
+                                ShowTimestamps();
+                                window.eventLoopShowTimestamps = eventLoopBegin;
+                        } else {
+                                // do nothing
+                        }
+                }
+
+                if (window.eventLoopDoAutoSave && window.DoAutoSave) {
+                        if (5000 < (eventLoopBegin - window.eventLoopDoAutoSave)) { // autosave interval
+                                DoAutoSave();
+                                window.eventLoopDoAutoSave = eventLoopBegin;
+                        } else {
+                                // do nothing
+                        }
+                }
+
+                if (window.eventLoopShowAdvanced && window.ShowAdvanced) {
+                        ShowAdvanced();
+                }
+
+                if (window.eventLoopFresh && window.CheckIfFresh) {
+                        if (10000 < (eventLoopBegin - window.eventLoopFresh)) {
+                                //window.eventLoopFresh = eventLoopBegin;
+                                if (GetPrefs('notify_on_change')) {
+                                        CheckIfFresh();
+                                }
+                                window.eventLoopFresh = eventLoopBegin;
+                        }
+                }
+        } // 10000 < (eventLoopBegin - window.eventLoopPrevious)
+
+        if (window.eventLoopEnabled) {
+                var d = new Date();
+                var eventLoopEnd = d.getTime();
+                var eventLoopDuration = eventLoopEnd - eventLoopBegin;
+                //document.title = eventLoopDuration; // for debugging performance
+
+                if (window.timeoutEventLoop) {
+                        clearTimeout(window.timeoutEventLoop);
+                }
+
+                if (100 < eventLoopDuration) {
+                        // if loop went longer than 100ms, run every 3 seconds or more
+                        eventLoopDuration = eventLoopDuration * 30;
+                } else {
+                        // otherwise run every 1 second
+                        eventLoopDuration = 1000;
+                }
+                //document.title = eventLoopDuration; // for debugging performance
+
+                window.timeoutEventLoop = setTimeout('EventLoop()', eventLoopDuration);
+        } // window.eventLoopEnabled
+
+} // EventLoop()
+
+function UrlExists(url) { // checks if url exists
+// todo use async
+// todo how to do pre-xhr browsers?
+    //alert('DEBUG: UrlExists(' + url + ')');
+
+        if (window.XMLHttpRequest) {
+            //alert('DEBUG: UrlExists: window.XMLHttpRequest check passed');
+
+                var http = new XMLHttpRequest();
+                http.open('HEAD', url, false);
+                //http.timeout = 5000; //#xhr.timeout
+                http.send();
+                var httpStatusReturned = http.status;
+
+                //alert('DEBUG: UrlExists: httpStatusReturned = ' + httpStatusReturned);
+
+                return (httpStatusReturned == 200);
+        }
+}
+//
+//function UrlExists2(url, callback) { // checks if url exists
+//// todo use async and callback
+//// todo how to do pre-xhr browsers?
+//    //alert('DEBUG: UrlExists(' + url + ')');
+//
+//      if (window.XMLHttpRequest) {
+//          //alert('DEBUG: UrlExists: window.XMLHttpRequest check passed');
+//
+//        var xhttp = new XMLHttpRequest();
+//        xhttp.onreadystatechange = function() {
+//    if (this.readyState == 4 && this.status == 200) {
+//       // Typical action to be performed when the document is ready:
+//       document.getElementById("demo").innerHTML = xhttp.responseText;
+//    }
+//};
+//xhttp.open("GET", "filename", true);
+//xhttp.send();
+//
+//
+//
+//              var http = new XMLHttpRequest();
+//              http.open('HEAD', url, false);
+//              http.send();
+//              var httpStatusReturned = http.status;
+//
+//              //alert('DEBUG: UrlExists: httpStatusReturned = ' + httpStatusReturned);
+//
+//              return (httpStatusReturned == 200);
+//      }
+//}
+
+function DisplayStatus(status) {
+        if (document.getElementById) {
+                var statusBar = document.getElementById('status');
+
+        }
+}
+
+function DownloadAsTxt(filename, text) {
+    var element = document.createElement('a');
+
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
+
+
+function displayNotification (strMessage, thisButton) { // adds notification to page
+// used for loading indicator bar (to top of page, depending on style)
+// also used for "creating profile" and "already voted" notifications
+        var spanNotification = document.createElement('span');
+        spanNotification.setAttribute('class', 'notification');
+        spanNotification.setAttribute('role', 'alert');
+        spanNotification.setAttribute('onclick', 'if (this.remove) { this.remove() } return false;');
+        spanNotification.innerHTML = strMessage;
+
+        if (thisButton) {
+                thisButton.parentNode.appendChild(spanNotification);
+                thisButton.after(spanNotification);
+        } else {
+                document.body.appendChild(spanNotification);
+        }
+} // displayNotification()
+
+function newA (href, target, innerHTML, parent) { // makes new a element and appends to parent
+        var newLink = document.createElement('a');
+        if (href) { newLink.setAttribute('href', href); }
+        if (target) { newLink.setAttribute('target', target); }
+        if (innerHTML) { innernewLink.setAttribute('innerHTML', innerHTML); }
+        parent.appendChild(newLink);
+        return newLink;
+}
+
+function CollapseWindowFromButton (t) { // collapses or expands window based on t's caption
+// t is presumed to be clicked element's this, but can be any other element
+// if t's caption is 'v', window is re-expanded
+// if 'x' (or anything else) collapses window
+// this is done by navigating up until a table is reached
+// and then hiding the first class=content element within
+// presumably a TR but doesn't matter really because SetElementVisible() is used
+// pretty basic, but it works.
+        if (t.innerHTML) {
+                if (t.firstChild.nodeName == 'FONT') {
+                        // small hack in case link has a font tag inside
+                        // the font tag is typically used to style the link a different color for older browsers
+                        t = t.firstChild;
+                }
+                var newVisible = 'initial';
+                if (t.innerHTML == '}-{') { //#collapseButton
+                        t.innerHTML = '{-}'; // //#collapseButton
+                } else {
+                        t.innerHTML = '}-{'; //#collapseButton
+                        newVisible = 'none';
+                }
+                if (t.parentElement) {
+                        var p = t;
+                        while (p.nodeName != 'TABLE') {
+                                p = p.parentElement;
+                                if (p.getElementsByClassName) {
+                                        var content = p.getElementsByClassName('content');
+                                        if (content.length) {
+                                                SetElementVisible(content[0], newVisible);
+                                                return false;
+                                        }
+                                }
+                        }
+                }
+        }
+        return true;
+} // CollapseWindowFromButton()
+
+//function ChangeInputToTextarea (input) { // called by onpaste
+////#input_expand_into_textarea
+//      //#todo more sanity
+//      if (!input) {
+//              return '';
+//      }
+//
+//      if (document.createElement) {
+//              var parent = input.parentElement;
+//              var textarea = document.createElement('textarea');
+//              var cols = input.getAttribute('cols');
+//              var name = input.getAttribute('name');
+//              var id = input.getAttribute('id');
+//              var rows = 5;
+//              var width = cols + 'em';
+//
+//              textarea.setAttribute('name', name);
+//              textarea.setAttribute('id', id);
+//              textarea.setAttribute('cols', cols);
+//              textarea.setAttribute('rows', rows);
+//              //textarea.style.width = width;
+//              textarea.innerHTML = input.value;
+//
+//              //parent.appendChild(t);
+//              parent.insertBefore(textarea, input.nextSibling);
+//              input.style.display = 'none';
+//
+//              textarea.focus();
+//              textarea.selectionStart = textarea.innerHTML.length;
+//              textarea.selectionEnd = textarea.innerHTML.length;
+//
+//              if (window.inputToChange) {
+//                      window.inputToChange = '';
+//              }
+//      }
+//
+//      return true;
+//}
+
+//
+//function ConvertSubmitsToButtonsWithAccessKey (parent) {
+//      if (!parent) {
+//              //alert('DEBUG: ConvertSubmitsToButtons: warning: sanity check failed');
+//              return '';
+//      }
+//
+//      if (parent.getElementsByClassName) {
+//              var buttons = parent.getElementsByClassName('btnSubmit');
+//              // convert each submit to button with accesskey
+//      } else {
+//              //todo
+//      }
+//      return ''
+//} // ConvertSubmitsToButtonsWithAccessKey()
+
+// == end utils.js
+
+
+// == begin settings.js
+
+var showAdvancedLastAction = '';
+var showBeginnerLastAction = '';
+var showMeaniesLastAction = '';
+var showAdminLastAction = '';
+var showTimestampsLastAction = '';
+
+var timerShowAdvanced;
+
+function SetElementVisible (element, displayValue, bgColor, borderStyle) { // sets element's visible status based on tag type
+// displayValue = 'none' or 'initial'
+//      when 'initial', will try to substitute appropriate default for tag type
+// also sets background color
+// used for hiding/showing and highlighting beginner, advanced element classes on page.
+
+    //alert('DEBUG: \nelement:' + element + "\ndisplayValue:" + displayValue + "\nbgColor:" + bgColor + "\nborderStyle:" + borderStyle + "\n");
+
+        if (bgColor) {
+                // background color
+                if (bgColor == 'initial') {
+                        bgColor = '#c0c0c0';
+                }
+                element.style.backgroundColor = bgColor;
+                // this may cause issues in some themes
+        }
+
+        // depending on element type, we set different display style
+        // block, table-row, table-cell, or default of 'initial'
+        if (displayValue == 'initial' && (element.nodeName == 'P' || element.nodeName == 'H3' || element.nodeName == 'FIELDSET' || element.nodeName == 'HR')) {
+                element.style.display = 'block';
+        } else if (displayValue == 'initial' && element.nodeName == 'TR') {
+                element.style.display = 'table-row';
+        } else if (displayValue == 'initial' && (element.nodeName == 'TH' || element.nodeName == 'TD')) {
+                if (element.innerHTML != '') {
+                        element.style.display = 'table-cell';
+                } else {
+                        element.style.display = 'none'; // empty table cells display = none #why?
+                }
+        } else {
+                if (displayValue == 'initial') {
+                        displayValue = 'inline';
+                }
+                element.style.display = displayValue;
+                if (borderStyle) {
+                        // border style
+                        element.style.border = borderStyle;
+                        element.style.borderRadius = '3pt';
+                }
+        }
+
+        return 1;
+} // SetElementVisible()
+
+function ShowAll (t, container) { // t = clicked link ; container = document by default ; shows all elements, overriding settings
+// admin elements are excluded. only beginner, advanced class elements are shown
+        var gt = unescape('%3E');
+
+        if (!container) {
+                container = document;
+        }
+
+        var isMore = 1;
+        if (t.innerHTML == 'Less') {
+                // when without accesskey
+                t.innerHTML = 'More';
+                isMore = 0;
+        }
+        if (t.innerHTML == 'Less (<u' + gt + 'O</u' + gt + ')') {
+                // when with accesskey
+                t.innerHTML = 'M<u' + gt + 'o</u' + gt + 're';
+                isMore = 0;
+        }
+
+    if (isMore && container.getElementsByClassName) {
+                if (t.innerHTML == 'More') {
+                        // without accesskey
+                        t.innerHTML = 'Less';
+                }
+                if (t.innerHTML == 'M<u' + gt + 'o</u' + gt + 're') {
+                        // with accesskey
+                        t.innerHTML = 'Less (<u' + gt + 'O</u' + gt + ')';
+                }
+
+        var display;
+        display = 'initial';
+
+        var elements = container.getElementsByClassName('advanced');
+        for (var i = 0; i < elements.length; i++) {
+            SetElementVisible(elements[i], display, '#ffeeee', 0);
+        }
+        elements = container.getElementsByClassName('beginner');
+        for (var i = 0; i < elements.length; i++) {
+            SetElementVisible(elements[i], display, '#ffffee', 0);
+        }
+        elements = container.getElementsByClassName('expand');
+        for (var i = 0; i < elements.length; i++) {
+            SetElementVisible(elements[i], 'none', '', 0);
+        }
+
+        if (timerShowAdvanced) {
+            clearTimeout(timerShowAdvanced);
+        }
+                //timerShowAdvanced = setTimeout('ShowAdvanced(1);', 10000);
+                //
+                //if (t && t.getAttribute('onclick')) {
+                //t.setAttribute('onclick', '');
+                //}
+                //if (window.ArrangeAll) {
+                //      ArrangeAll();
+                //}
+
+        return false;
+    } else {
+        ShowAdvanced(1);
+
+        return false;
+        }
+
+    return true;
+} // ShowAll()
+
+function ShowAdvanced (force, container) { // show or hide controls based on preferences
+//handles class=advanced based on 'show_advanced' preference
+//handles class=beginner based on 'beginner' preference
+//force parameter
+// 1 = does not re-do setTimeout (called this way from checkboxes)
+// 0 = previous preference values are remembered, and are not re-done (called by timer)
+
+        //alert('DEBUG: ShowAdvanced(' + force + ')');
+
+        if (!container) {
+                container = document;
+        }
+
+        if (window.localStorage && container.getElementsByClassName) {
+                //alert('DEBUG: ShowAdvanced: feature check passed!');
+                ///////////
+
+                var displayTimestamps = '0';
+                if (GetPrefs('expert_timestamps')) {
+                        displayTimestamps = 1;
+                }
+                if (force || window.showTimestampsLastAction != displayTimestamps) {
+                        //ShowTimestamps();
+                        window.showTimestampsLastAction = displayTimestamps;
+                }
+
+                var displayAdmin = 'none'; // not voting by default
+                if (GetPrefs('show_admin') == 1) { // check value of show_admin preference
+                        displayAdmin = 'initial'; // display
+                }
+                if (force || showAdminLastAction != displayAdmin) {
+                        var elemAdmin = container.getElementsByClassName('admin');
+
+                        for (var i = 0; i < elemAdmin.length; i++) {
+                                SetElementVisible(elemAdmin[i], displayAdmin, 0, 0);
+                        }
+                }
+
+                var displayValue = 'none'; // hide by default
+                if (GetPrefs('show_advanced') == 1) { // check value of show_advanced preference
+                        displayValue = 'initial'; // display
+                }
+
+                var bgColor = 'initial';
+                if (GetPrefs('advanced_highlight') == 1) { // check value of advanced_highlight preference
+                        bgColor = '#ffeeee'; // advanced_highlight
+                }
+
+                if (force || showAdvancedLastAction != (displayValue + bgColor)) {
+                        // thank you stackoverflow
+                        var divsToHide = container.getElementsByClassName("advanced"); //divsToHide is an array #todo nn3 compat
+                        for (var i = 0; i < divsToHide.length; i++) {
+                                //divsToHide[i].style.visibility = "hidden"; // or
+                                SetElementVisible(divsToHide[i], displayValue, bgColor, 0);
+                        }
+//                      var clock = document.getElementById('txtClock');
+//                      if (clock) {
+//                          SetElementVisible(clock, displayValue, bgColor, 0);
+//                      }
+                        showAdvancedLastAction = displayValue + bgColor;
+                }
+
+                displayValue = 'initial'; // show by default
+                if (GetPrefs('beginner') == 0) { // check value of beginner preference
+                        displayValue = 'none';
+                }
+
+                bgColor = 'initial';
+                if (GetPrefs('beginner_highlight') == 1) { // check value of beginner preference
+                        bgColor = '#ffffee'; // beginner_highlight
+                }
+
+                if (force || showBeginnerLastAction != displayValue + bgColor) {
+                        var divsToShow = container.getElementsByClassName('beginner');//#todo nn3 compat
+
+                        for (var i = 0; i < divsToShow.length; i++) {
+                                SetElementVisible(divsToShow[i], displayValue, bgColor, 0);
+                        }
+                        showBeginnerLastAction = displayValue + bgColor;
+                }
+//
+//              if (window.freshTimeoutId) {
+//                      // reset the page change notifier state
+//                      clearTimeout(window.freshTimeoutId);
+//
+//                      if (GetPrefs('notify_on_change')) {
+//                              // check if page has changed, notify user if so
+//                              if (window.EventLoop) {
+//                                      EventLoop();
+//                              }
+//                      }
+//              }
+
+                if (window.setAva) {
+                        setAva(); // #todo caching similar to above
+                }
+
+                //if (!force) {
+                        //if (timerShowAdvanced) {
+                        //      clearTimeout(timerShowAdvanced);
+                        //}
+                        //timerShowAdvanced = setTimeout('ShowAdvanced()', 3000);
+                //}
+
+                //SettingsOnload();
+
+        } else {
+                //alert('DEBUG: ShowAdvanced: feature check FAILED!');
+                //alert('DEBUG: window.localStorage: ' + window.localStorage + '; document.getElementsByClassName: ' + document.getElementsByClassName);
+        }
+
+        //alert('DEBUG: ShowAdvanced: returning false');
+        return false;
+} // ShowAdvanced()
+
+function GetPrefs (prefKey) { // get prefs value from localstorage
+        // GetConfig {
+        // GetSetting {
+        //alert('debug: GetPrefs(' + prefKey + ')');
+        if (window.localStorage) {
+                var nameContainer = 'settings';
+                { // settings beginning with gtgt go into separate container
+                        var gt = unescape('%3E');
+                        if (prefKey.substr(0, 2) == gt+gt) {
+                                nameContainer = 'voted';
+                        }
+                }
+                var currentPrefs = localStorage.getItem(nameContainer);
+
+                var prefsObj;
+                if (currentPrefs) {
+                        prefsObj = JSON.parse(currentPrefs);
+                } else {
+                        prefsObj = Object();
+                }
+                var prefValue = prefsObj[prefKey];
+
+                if (!prefValue && prefValue != 0) {
+                        // these settings default to 1/true:
+                        if (
+                                prefKey == 'beginner' ||
+                                prefKey == 'beginner_highlight' ||
+                                prefKey == 'notify_on_change'
+                        ) {
+                                prefValue = 1;
+                        }
+                        if (
+                                prefKey == 'show_advanced' ||
+                                prefKey == 'show_admin' ||
+                                prefKey == 'draggable'
+                        ) {
+                                prefValue = 0;
+                        }
+                }
+
+                SetPrefs(prefKey, prefValue);
+
+                return prefValue;
+        }
+
+        //alert('debug: GetPrefs: fallthrough, returning false');
+        return false;
+} // GetPrefs()
+
+function SetPrefs (prefKey, prefValue) { // set prefs key prefKey to value prefValue
+    //alert('DEBUG: SetPrefs(' + prefKey + ', ' + prefValue + ')');
+
+        if (prefKey == 'show_advanced' || prefKey == 'beginner' || prefKey == 'show_admin') {
+                //alert('DEBUG: SetPrefs: setting cookie to match LocalStorage');
+                if (window.SetCookie) {
+                        SetCookie(prefKey, (prefValue ? 1 : 0));
+                }
+        }
+
+        if (window.localStorage) {
+                var nameContainer = 'settings';
+                var gt = unescape('%3E');
+                if (prefKey.substr(0, 2) == gt+gt) {
+                        nameContainer = 'voted';
+                }
+
+                var currentPrefs = localStorage.getItem(nameContainer);
+                var prefsObj;
+                if (currentPrefs) {
+                        prefsObj = JSON.parse(currentPrefs);
+                } else {
+                        prefsObj = Object();
+                }
+                prefsObj[prefKey] = prefValue;
+
+                var newPrefsString = JSON.stringify(prefsObj);
+                localStorage.setItem(nameContainer, newPrefsString);
+                return 0;
+        }
+
+        return 1;
+}
+
+function SaveCheckbox (ths, prefKey) { // saves value of checkbox, toggles affected elements
+// id = id of pane to hide or show; not required
+// ths = "this" of calling checkbox)
+// prefKey = key of preference value to set with checkbox
+//
+// this function is a bit of a mess, could use a refactor #todo
+
+        //alert('DEBUG: SaveCheckbox(' + ths + ',' + prefKey);
+
+        var checkboxState = (ths.checked ? 1 : 0);
+        //alert('DEBUG: checkboxState = ' + checkboxState);
+
+        // saves checkbox's value as 0/1 value to prefs(prefKey)
+        SetPrefs(prefKey, (ths.checked ? 1 : 0));
+
+
+        if (prefKey == 'draggable') {
+                if (ths.checked) {
+                        DraggingInit(0);
+                } else {
+                        //#todo
+                }
+        }
+
+        //alert('DEBUG: after SetPrefs, GetPrefs(' + prefKey + ') returns: ' + GetPrefs(prefKey));
+
+        // call ShowAdvanced(1) to update ui appearance
+        // ShowAdvanced(1);
+
+        return 1;
+}
+
+function SetInterfaceMode (ab) { // updates several settings to change to "ui mode" (beginner, advanced, etc.)
+    //alert('DEBUG: SetInterfaceMode(' + ab + ')');
+
+        if (window.localStorage && window.SetPrefs) {
+                if (ab == 'beginner') {
+                        SetPrefs('show_advanced', 0);
+                        SetPrefs('advanced_highlight', 0);
+                        SetPrefs('beginner', 1);
+                        SetPrefs('beginner_highlight', 1);
+                        SetPrefs('notify_on_change', 1);
+                        SetPrefs('show_admin', 0);
+                        SetPrefs('write_enhance', 0);
+                        SetPrefs('write_autosave', 0);
+                        SetPrefs('expert_timestamps', 0);
+                        SetPrefs('draggable', 0);
+//                      SetPrefs('sign_by_default', 1);
+                } else if (ab == 'intermediate') {
+                        SetPrefs('show_advanced', 1);
+                        SetPrefs('advanced_highlight', 1);
+                        SetPrefs('beginner', 1);
+                        SetPrefs('beginner_highlight', 1);
+                        SetPrefs('notify_on_change', 1);
+//            SetPrefs('show_admin', 0);
+                } else if (ab == 'expert') {
+                        SetPrefs('show_advanced', 1);
+                        SetPrefs('advanced_highlight', 0);
+                        SetPrefs('beginner', 0);
+                        SetPrefs('beginner_highlight', 0);
+                        SetPrefs('notify_on_change', 1);
+//            SetPrefs('show_admin', 0);
+//              } else if (ab == 'minimal') {
+//                      SetPrefs('show_advanced', 0);
+//                      SetPrefs('advanced_highlight', 0);
+//                      SetPrefs('beginner', 0);
+//                      SetPrefs('beginner_highlight', 0);
+//                      SetPrefs('notify_on_change', 0);
+// //            SetPrefs('show_admin', 0);
+//              } else if (ab == 'operator') {
+//             SetPrefs('show_admin', 1);
+                }
+
+                ShowAdvanced(1);
+
+        //alert('DEBUG: window.SetPrefs was found, and ShowAdvanced(1) was called');
+
+                return false;
+        }
+
+        //alert('DEBUG: returning true');
+
+        return true;
+}
+
+
+function LoadCheckbox (c, prefKey) { // updates checkbox state to reflect settings
+// c = checkbox
+// prefKey = key of preference value
+//
+        //alert('DEBUG: LoadCheckbox(' + c + ',' + prefKey);
+        var checkboxState = GetPrefs(prefKey);
+        //alert('DEBUG: checkboxState = ' + checkboxState);
+
+        if (c && c.checked != (checkboxState ? 1 : 0)) {
+                c.checked = (checkboxState ? 1 : 0);
+        }
+
+        return 1;
+}
+
+
+function SettingsOnload () { // onload function for settings page
+        //alert('debug: SettingsOnload() begin');
+
+        if (document.getElementById) {
+        // below is code which sets the checked state of settings checkboxes
+        // based on settings state
+                var pane;
+
+                //LoadCheckbox(document.getElementById('chkSignByDefault'), 'sign_by_default');
+                LoadCheckbox(document.getElementById('chkDraggable'), 'draggable');
+                LoadCheckbox(document.getElementById('chkShowAdmin'), 'show_admin');
+                LoadCheckbox(document.getElementById('chkShowAdvanced'), 'show_advanced');
+                LoadCheckbox(document.getElementById('chkWriteEnhance'), 'write_enhance');
+                LoadCheckbox(document.getElementById('chkWriteEnhance'), 'write_enhance');
+                LoadCheckbox(document.getElementById('chkExpertTimestamps'), 'expert_timestamps');
+
+                //if (GetPrefs('sign_by_default') == 1) {
+                //      var cbM = document.getElementById('chkSignByDefault');
+                //      if (cbM) {
+                //              cbM.checked = 1;
+                //      }
+                //}
+
+        }
+
+        //alert('debug: SettingsOnload: returning false');
+        return false;
+} // SettingsOnload()
+
+if (window.EventLoop) {
+        window.eventLoopShowAdvanced = 1;
+} else {
+        ShowAdvanced();
+}
+
+// == end settings.js
+
+
+// == begin avatar.js
+
+function setAva () { // sets avatar widgets (and italicizes Profile link)
+        //alert('DEBUG: setAva() begins');
+
+        if (document.getElementById && String.fromCharCode) {
+                var myidBox = document.getElementById('myid'); // displays username (if preference is set)
+                var signinBox = document.getElementById('signin'); // Profile link
+
+                var gt = String.fromCharCode(62);
+
+                if (myidBox && signinBox && window.localStorage) { // check for elements and features
+                        var myAvatar = localStorage.getItem('avatar');
+
+                        if (!myAvatar) { // less error prone than checking for ==n ull, i think
+                                signinBox.innerHTML = '<a href="/profile.html"' + gt + 'Profile</a' + gt + '';
+                        } else {
+                                signinBox.innerHTML = '';
+                                var myFp = localStorage.getItem('fingerprint');
+
+                                if (window.location.pathname == '/author/' + myFp + '/' || window.location.pathname == '/author/' + myFp + '/index.html') {
+                                        var itsYou = document.getElementById('itsyou');
+                                        itsYou.innerHTML = 'This is your profile!';
+                                }
+
+                                if (window.GetPrefs) {
+                                        if (GetPrefs('display_username')) {
+                                                myidBox.innerHTML = '<a href="/profile.html" class=avatar' + gt + myAvatar + '</a' + gt;
+                                                signinBox.innerHTML = '';
+                                        } else {
+                                                myidBox.innerHTML = '';
+                                                signinBox.innerHTML = '<a href="/profile.html"' + gt + '<i' + gt + 'Profile</i' + gt + '</a' + gt + '';
+                                        }
+                                } else {
+                                        myidBox.innerHTML = '';
+                                        signinBox.innerHTML = '<a href="/profile.html"' + gt + '<i' + gt + 'Profile</i' + gt + '</a' + gt + '';
+                                }
+
+                                if (!window.openpgp && document.head && document.getElementById && window.localStorage) {
+                                        //alert('DEBUG: setAva: loading openpgp.js');
+                                        window.openPgpJsLoadBegin = 1;
+
+                                        var script = document.createElement('script');
+                                        script.src = '/openpgp.js';
+                                        script.async = false; // This is required for synchronous execution
+                                        document.head.appendChild(script);
+                                }
+
+                                if (!window.setAvatar && document.head && document.head.appendChild && document.getElementById && window.localStorage) {
+                                        //alert('DEBUG: setAva: loading crypto2.js');
+
+                                        var script2 = document.createElement('script');
+                                        script2.src = '/crypto2.js';
+                                        script2.async = false; // This is required for synchronous execution
+                                        document.head.appendChild(script2);
+                                }
+                        }
+                }
+        }
+
+        return true;
+} // setAva()
+if (window.localStorage && document.getElementById) {
+        setAva();
+}
+
+function getAvatar () { // retrieve previously built avatar from localStorage (already in html form)
+        if (window.localStorage) {
+                var myAvatar = localStorage.getItem("avatar");
+                if (!myAvatar || myAvatar.length == 0) {
+                        return '';
+                } else {
+                        return myAvatar;
+                }
+        } else {
+                return 'Anonymous*';
+        }
+
+        return false;
+} // getAvatar()
+
+// == end avatar.js
+
+
+// begin profile.js
+
+if (!window.openpgp && document.head && document.head.appendChild && document.getElementById && window.localStorage) {
+        //alert('DEBUG: loading openpgp.js');
+        window.openPgpJsLoadBegin = 1;
+
+        var script = document.createElement('script');
+        script.src = '/openpgp.js';
+        script.async = false; // This is required for synchronous execution
+        document.head.appendChild(script);
+        //alert('DEBUG: finished loading openpgp.js; window.openpgp: ' + !!window.openpgp);
+} else {
+        //alert('DEBUG: not loading openpgp.js; window.openpgp: ' + !!window.openpgp + ' document.getElementById: ' + !!document.getElementById + ' window.localStorage: ' + !!window.localStorage + ' window.Promise: ' + !!window.Promise);
+}
+
+if (!(window.MakeKey) && document.head && document.head.appendChild && document.getElementById && window.localStorage) {
+        //alert('DEBUG: loading crypto2.js');
+
+        var script2 = document.createElement('script');
+        script2.src = '/crypto2.js';
+        script2.async = false; // This is required for synchronous execution
+        document.head.appendChild(script2);
+
+        //alert('DEBUG: finished loading crypto2.js; window.cryptoJs: ' + !!window.cryptoJs + '; document.getPrivateKey: ' + !!document.getPrivateKey + '; window.openpgp: ' + !!window.openpgp);
+} else {
+        //alert('DEBUG: not loading crypto2.js; ' + ' window.MakeKey = ' + window.MakeKey + '; document.getElementById = ' + document.getElementById + ' window.localStorage = ' + window.localStorage );
+}
+
+function btnSignOut_Click(t) { // event for 'Sign Out' button's click
+        //alert('DEBUG: btnSignOut_Click begin');
+
+        if (window.localStorage) {
+                //alert('DEBUG: localStorage is true');
+
+                var ls = window.localStorage;
+                ls.removeItem('privatekey');
+                ls.removeItem('publickey');
+                ls.removeItem('fingerprint');
+                ls.removeItem('avatar');
+                ls.removeItem('settings');
+                ls.removeItem('voted');
+
+                SetPrefs('latest_pubkey_ping', 0);
+        }
+
+        return true;
+}
+
+function btnRegister_Click (t) { // event for 'Register' button's click
+// t is clicked button's "this" object
+        //alert('DEBUG: btnRegister_Click() begin');
+        if (t) {
+                if (t.value) {
+                        t.value = 'Meditate...';
+                }
+        }
+
+        //if (window.localStorage && window.Promise) { // this extra check is disabled for some reason, I think IE?
+        if (window.localStorage) {
+                //alert('DEBUG: btnRegister_Click: localStorage and Promise feature check pass');
+                if (window.MakeKey) {
+                        //alert('DEBUG: btnRegister_Click: window.MakeKey exists, calling MakeKey()');
+
+                        var chkEnablePGP = document.getElementById('chkEnablePGP');
+                        if (chkEnablePGP && chkEnablePGP.checked) {
+                                //alert('DEBUG: chkEnablePGP is present and checked');
+                                var intKeyGenResult = MakeKey(t);
+                                //alert('DEBUG: btnRegister_Click: intKeyGenResult = ' + intKeyGenResult);
+                                SetPrefs('latest_pubkey_ping', 1);
+                                //alert('DEBUG: returning intKeyGenResult = ' + intKeyGenResult);
+                                return intKeyGenResult;
+                        }
+                }
+        } else {
+                return true;
+        }
+
+        return true;
+}
+
+function getUserFp () { // retrieve stored user fingerprint from LocalStorage
+        //alert('DEBUG: getUserFp() begin');
+
+        if (window.localStorage) {
+                // LocalStorage mode
+                var fingerprint = localStorage.getItem('fingerprint');
+                if (fingerprint) {
+                        return fingerprint;
+                }
+        } else {
+                // fallback to cookie mode
+                var fingerprint = GetCookie('cookie');
+
+                if (fingerprint) {
+                        return fingerprint;
+                }
+        }
+
+        // nothing found, we looked everywhere
+        return '';
+}
+
+function sharePubKey (t) { // shares current user's public key via injected form and iframe
+        //alert('DEBUG: profile.js: sharePubKey() begins');
+
+        if (window.getPublicKey) {
+                var pubKey = getPublicKey();
+
+                //alert('DEBUG: sharePubKey: pubKey = ' + (pubKey ? pubKey : '(false)'));
+
+                if (pubKey) {
+                        if (window.displayNotification) {
+                                if (t) {
+                                        displayNotification('Creating profile...', t);
+                                } else {
+                                        // #todo this appears at the bottom of the page
+                                        // probably not visible to most users
+                                        // so the redirect is a surprise
+                                        displayNotification('Creating profile...');
+                                }
+                        }
+
+                        //alert('DEBUG: sharePubKey: creating form');
+
+                        var form = document.createElement('form');
+                        form.setAttribute("action", "/post.html");
+                        form.setAttribute("method", "get");
+                        //form.setAttribute("target", "ifrSharePubKey");
+
+                        //alert('DEBUG: sharePubKey: creating input');
+
+                        var txtComment = document.createElement('input');
+                        txtComment.setAttribute("type", "hidden");
+                        txtComment.setAttribute("value", pubKey);
+                        txtComment.setAttribute("name", "comment");
+
+                        //alert('DEBUG: sharePubKey: adding txtComment to form');
+
+                        form.appendChild(txtComment);
+
+                        //alert('DEBUG: sharePubKey: adding form to body');
+
+                        //document.getElementsByTagName('body')[0].appendChild(form);
+
+                        document.body.appendChild(form);
+
+                        //alert('DEBUG: submitting form');
+
+                        form.submit();
+
+                        return false;
+                } else {
+                        //alert('DEBUG: pubKey was FALSE');
+
+                        return true;
+                }
+        }
+
+///// alternative method 1
+//      window.open('/write.html#inspubkey', '_self');
+
+///// alternative method 2
+//      var iframe = document.createElement("iframe");
+//      iframe.src = '/write.html#inspubkey';
+//      iframe.name = "inspubkey"
+//      iframe.style.display = 'none';
+//      document.body.appendChild(iframe);
+
+        return true;
+}
+
+function AddPrivateKeyLinks () { // adds save/load links to profile page if features are available
+// #todo make it so that this can be called repeatedly and hide/show appropriate links
+// this will allow to avoid having to reload profile page on status change
+
+        //alert('DEBUG: AddPrivateKeyLinks() begin');
+        if (document.getElementById && window.getPrivateKey) {
+                //alert('DEBUG: AddPrivateKeyLinks: document.getElementById && window.getPrivateKey');
+                var privateKey = getPrivateKey();
+                var fieldset = document.getElementById('fldRegistration');
+
+                if (fieldset && document.createElement) {
+                        //alert('DEBUG: AddPrivateKeyLinks: fieldset && document.createElement');
+
+                        if (privateKey) {
+                                //alert('DEBUG: AddPrivateKeyLinks: privateKey: true');
+
+                                // hr
+                                var hrDivider = document.createElement('hr');
+                                fieldset.appendChild(hrDivider);
+
+                                // [go to profile]
+                                var pProfileLink = document.getElementById('spanProfileLink');
+                                if (pProfileLink && pProfileLink.innerHTML) {
+                                        // profile link already there, and contains profile link
+                                        // #todo bind js event to profile create
+                                } else {
+                                        // profile link not there or the p is empty
+                                        if (!pProfileLink) {
+                                                pProfileLink = document.createElement('p');
+                                        }
+
+                                        // ATTENTION!
+                                        // THERE IS A GOTCHA HERE: THIS LINK MAY ALSO BE
+                                        // ADDED BY PHP; THEN THIS CODE WILL NOT EXECUTE!
+                                        // BECAUSE pProfileLink WILL ALREADY BE TRUE ABOVE
+
+                                        // "Go to profile" link
+                                        var aProfile = document.createElement('a');
+                                        aProfile.setAttribute('href', '/author/' + getUserFp() + '/index.html');
+                                        aProfile.setAttribute('onclick', 'if (window.sharePubKey) { return sharePubKey(this); }');
+                                        aProfile.setAttribute('id', 'linkGoToProfile');
+                                        aProfile.innerHTML = 'Go to profile';
+
+                                        // Append both to fieldset
+                                        pProfileLink.appendChild(aProfile);
+                                        fieldset.appendChild(pProfileLink);
+
+                                        // add horizontal rule
+                                        var hrDivider = document.createElement('hr');
+                                        fieldset.appendChild(hrDivider);
+                                }
+
+                                // [save as file]
+                                var pSaveKeyAsTxt = document.createElement('p');
+                                var aSaveKeyAsTxt = document.createElement('a');
+                                aSaveKeyAsTxt.setAttribute('href', '#');
+                                aSaveKeyAsTxt.setAttribute('id', 'linkSavePrivateKey');
+                                aSaveKeyAsTxt.setAttribute('onclick', 'if (window.SavePrivateKeyAsTxt) { return SavePrivateKeyAsTxt(); }');
+                                aSaveKeyAsTxt.innerHTML = 'Save as file';
+
+                                // hint for [save as file]
+                                var hintSaveKeyAsTxt = document.createElement('span');
+                                hintSaveKeyAsTxt.setAttribute('class', 'beginner');
+                                hintSaveKeyAsTxt.innerHTML = 'Save key to use again later';
+
+                                // insert [save as file] link into dom
+                                pSaveKeyAsTxt.appendChild(aSaveKeyAsTxt);
+                                var brSaveKeyAs = document.createElement('br');
+                                pSaveKeyAsTxt.appendChild(brSaveKeyAs);
+                                pSaveKeyAsTxt.appendChild(hintSaveKeyAsTxt);
+                                fieldset.appendChild(pSaveKeyAsTxt);
+
+                                // [show private key]
+                                var pShowPrivateKey = document.createElement('p');
+                                var aShowPrivateKey = document.createElement('a');
+                                pShowPrivateKey.setAttribute('class', 'advanced');
+
+                                aShowPrivateKey.setAttribute('href', '#');
+                                aShowPrivateKey.setAttribute('id', 'linkShowPrivateKey');
+                                aShowPrivateKey.setAttribute('onclick', 'if (window.ShowPrivateKey) { return ShowPrivateKey(); }');
+                                aShowPrivateKey.innerHTML = 'Show private key';
+
+                                // hint for [show private key]
+                                var hintShowPrivateKey = document.createElement('span');
+                                hintShowPrivateKey.setAttribute('class', 'beginner');
+                                hintShowPrivateKey.innerHTML = 'Display as text you can copy';
+
+                                pShowPrivateKey.appendChild(aShowPrivateKey);
+                                brElement = document.createElement('br');
+                                pShowPrivateKey.appendChild(brElement);
+                                pShowPrivateKey.appendChild(hintShowPrivateKey);
+                                fieldset.appendChild(pShowPrivateKey);
+                        } // privateKey is true
+                        else {
+                                //alert('DEBUG: AddPrivateKeyLinks: privateKey: false');
+
+                                // add horizontal rule
+                                var hrDivider = document.createElement('hr');
+                                fieldset.appendChild(hrDivider);
+
+                                var pLoadKeyFromTxt = document.createElement('p');
+
+                                //alert('DEBUG: AddPrivateKeyLinks: creating file input...');
+
+                                // label for "load from file" button
+                                var labelLoadFromFile = document.createElement('label');
+                                labelLoadFromFile.setAttribute('for', 'fileLoadKeyFromText');
+                                labelLoadFromFile.innerHTML = 'Load from file:';
+
+                                // br after label
+                                var brLoadFromFile = document.createElement('br');
+                                labelLoadFromFile.appendChild(brLoadFromFile);
+
+                                // [load from file] file selector
+                                var fileLoadKeyFromText = document.createElement('input');
+                                fileLoadKeyFromText.setAttribute('type', 'file');
+                                fileLoadKeyFromText.setAttribute('accept', 'text/plain');
+                                fileLoadKeyFromText.setAttribute(
+                                        'onchange',
+                                         'if (window.openFile) { openFile(event) } else { alert("i am so sorry, openFile() function was missing!"); }'
+                                );
+                                fileLoadKeyFromText.setAttribute('id', 'fileLoadKeyFromText');
+                                // fileLoadKeyFromText.setAttribute('style', 'display: none');
+                                // i tried hiding file selector and using a button instead.
+                                // it looked nicer, but sometimes didn't work as expected
+
+                                // hint for [load from file]
+                                var hintLoadFromFile = document.createElement('span');
+                                hintLoadFromFile.setAttribute('class', 'beginner');
+                                hintLoadFromFile.innerHTML = 'Use this if you have a saved key';
+
+
+                                // pLoadKeyFromTxt.appendChild(aLoadKeyFromText);
+                                labelLoadFromFile.appendChild(fileLoadKeyFromText);
+                                var brLoadFromFile2 = document.createElement('br');
+                                pLoadKeyFromTxt.appendChild(labelLoadFromFile);
+                                pLoadKeyFromTxt.appendChild(brLoadFromFile2);
+                                pLoadKeyFromTxt.appendChild(hintLoadFromFile);
+
+
+                                fieldset.appendChild(pLoadKeyFromTxt);
+                        } // privateKey is FALSE
+
+                        if (window.ShowAdvanced) {
+                                ShowAdvanced(1);
+                        }
+                } // if (fieldset && document.createElement)
+                else {
+                        //alert('DEBUG: AddPrivateKeyLinks: checks FAILED (fieldset && document.createElement)');
+                }
+        } else {
+                //alert('DEBUG: AddPrivateKeyLinks: checks FAILED (document.getElementById && window.getPrivateKey)');
+        }
+
+        return true;
+} // AddPrivateKeyLinks()
+
+function ShowPrivateKey() { // displays private key in textarea
+        //alert('DEBUG: ShowPrivateKey() begin');
+        if (document.getElementById) {
+                //alert('DEBUG: ShowPrivateKey: document.getElementById is true');
+
+                var txtPrivateKey = document.getElementById('txtPrivateKey');
+                if (txtPrivateKey) {
+                        //alert('DEBUG: ShowPrivateKey: txtPrivateKey is true');
+
+                        if (txtPrivateKey.style.display == 'none') {
+                                //alert('DEBUG: style is none, set to block');
+                                txtPrivateKey.style.display = 'block';
+                        } else {
+                                //alert('DEBUG: style is block, set to none');
+                                txtPrivateKey.style.display = 'none';
+                        }
+
+                        var linkShowPrivateKey = document.getElementById('linkShowPrivateKey');
+                        if (linkShowPrivateKey) {
+                                if (txtPrivateKey.style.display == 'none') {
+                                        linkShowPrivateKey.innerHTML = 'Show private key';
+                                } else {
+                                        linkShowPrivateKey.innerHTML = 'Hide private key';
+                                }
+                        }
+
+                        return false;
+                }
+        }
+
+        if (window.getPrivateKey) {
+                var privateKey = getPrivateKey();
+                if (privateKey && document.createElement) {
+                        var txtPrivKey = document.createElement('textarea');
+                        txtPrivKey.setAttribute('cols', 80);
+                        txtPrivKey.setAttribute('rows', 24);
+                        txtPrivKey.setAttribute('id', 'txtPrivateKey');
+                        txtPrivKey.innerHTML = privateKey;
+
+                        var fldRegistration = document.getElementById('fldRegistration');
+                        if (fldRegistration) {
+                                fldRegistration.appendChild(txtPrivKey);
+                        } else {
+                                document.body.appendChild(txtPrivKey);
+                        }
+
+                        var linkShowPrivateKey = document.getElementById('linkShowPrivateKey');
+                        if (linkShowPrivateKey) {
+                                linkShowPrivateKey.innerHTML = 'Hide private key';
+                        }
+
+                        txtPrivKey.focus();
+
+                        return false;
+                }
+        }
+
+        return true;
+}
+
+function openFile (event) {
+        //alert('DEBUG: openFile() begin');
+
+        var input = event.target;
+
+        if (window.FileReader) {
+                reader = new FileReader();
+
+                // this eval is for hiding the "=function(){}" syntax from incompatible browsers
+                // they shouldn't try to execute it because they don't make it here due to other tests
+                eval('reader.onload = function() { var text = reader.result; LoadPrivateKeyFromTxt(text); }');
+                reader.readAsText(input.files[0]);
+        }
+
+        return true;
+}
+
+function LoadPrivateKeyFromTxt (text) {
+        if (window.setPrivateKeyFromTxt) {
+                setPrivateKeyFromTxt(text);
+        }
+
+        return true;
+}
+
+function StripToFilename (text) { // strips provided text to only filename-valid characters
+        if (!text) return '';
+
+        text = text.trim();
+
+        if (!text) return '';
+
+        var charsAllowed = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_';
+
+        for (var i = 0; i < text.length; i++) {
+                if (-1 < charsAllowed.indexOf(text.substr(i, 1))) {
+                        // ok
+                } else {
+                        text = text.substr(0, i) + '' + text.substr(i + 1);
+                        i = i - 1;
+                }
+        }
+
+        return text;
+}
+
+function getUsername2 () { // returns pgp username
+// can be optimized with caching, but would also need to be
+// un-cached when it changes. at this time, caching seems
+// like over-optimization here
+    var openpgp = window.openpgp;
+    if (openpgp) {
+                // read it into pgp object
+                var privKeyObj = openpgp.key.readArmored(getPrivateKey());
+                // get the public key out of it
+                var pubKeyObj = privKeyObj.keys[0].toPublic();
+                var myUsername = pubKeyObj.users[0].userId.userid;
+                return myUsername;
+        }
+        return '';
+} // getUsername2()
+
+function SavePrivateKeyAsTxt() { // initiates "download" of private key as text file
+        var myFp = getUserFp();
+        var myUsername = getUsername2();
+        var text = getPrivateKey();
+
+        myUsername = StripToFilename(myUsername);
+
+        return DownloadAsTxt(myUsername + '_' + myFp + '.txt', text);
+}
+
+// override cookie if we have a profile in LocalStorage
+if (document.cookie) {
+        //alert('DEBUG: cookie=' + document.cookie);
+} else {
+        //alert('DEBUG: document.cookie missing');
+        if (window.localStorage) {
+                //alert('DEBUG: window.localStorage exists');
+                var fp = localStorage.getItem('fingerprint');
+                if (fp) {
+                        //alert('DEBUG: fp exists, setting cookie via js');
+                        document.cookie = 'test=' + fp;
+                }
+        }
+}
+
+function PubkeyCheckProfileExists(fp) { // PLACEHOLDER checks if profile exists
+// PLACEHOLDER, ALWAYS RETURNS TRUE
+        //alert('DEBUG: PubkeyCheckProfileExists() begin');
+
+        //alert('DEBUG: PubkeyCheckProfileExists: fp = ' + fp);
+
+        var profileUrl = '/author/' + fp + '/';
+
+        //alert('DEBUG: profileUrl = ' + profileUrl);
+
+        if (UrlExists(profileUrl)) {
+                //alert('DEBUG: lastPubKeyPing: profile exists');
+                return true;
+        } else {
+                //alert('DEBUG: lastPubKeyPing: profile NOT FOUND');
+                return false;
+        }
+
+        return true;
+}
+
+function PubKeyPing () { // checks if user's public key is on server
+// uploads it to server if it is missing
+//
+        //alert('DEBUG: PubKeyPing() begin');
+
+        var latestPing = GetPrefs('latest_pubkey_ping');
+
+        if (latestPing && (time() < (latestPing + 3600))) {
+                //alert('DEBUG: PubKeyPing: latestPing+10 = ' + (latestPing+10) + ' < time() = ' + time());
+        } else {
+                //alert('DEBUG: PubKeyPing: latestPing was false or stale, doing a check at ' + time());
+
+                if (window.location.href.indexOf('profile') != -1 && window.getUserFp) {
+                        //alert('DEBUG; PubKeyPing: window.getUserFp check passed');
+
+                        var myFingerprint = getUserFp();
+
+                        //alert('DEBUG: PubKeyPing: myFingerprint = ' + myFingerprint);
+
+                        if (myFingerprint) {
+                                if (PubkeyCheckProfileExists(myFingerprint)) {
+                                        //alert('DEBUG: PubKeyPing: profile already exists');
+                                } else {
+                                        if (window.sharePubKey) {
+                                                //alert('DEBUG: PubKeyPing: latestPing: window.sharePubKey check passed, doing it...');
+                                                sharePubKey();
+
+                                                latestPing = time();
+                                                SetPrefs('latest_pubkey_ping', latestPing);
+                                        } else {
+                                                //alert('DEBUG: PubKeyPing: latestPing: window.sharePubKey check FAILED');
+                                        }
+                                }
+                        } else {
+                                //alert('DEBUG: PubKeyPing: myFingerprint: false');
+                        }
+
+                        //alert('DEBUG: PubKeyPing: latestPing check complete, saving time');
+                } else {
+                        //alert('DEBUG: PubKeyPing: window.getUserFp check FAILED');
+                }
+        }
+
+        return true;
+} // PubKeyPing()
+
+function ProfileOnLoad () { // onload event for profile page
+        //alert('DEBUG: ProfileOnLoad() begin');
+
+        if (document.getElementById) {
+                //alert('DEBUG: ProfileOnLoad: document.getElementById check passed');
+
+	        	//var lblSigningIndicator = document.getElementById('lblSigningIndicator');
+	        	//if (lblSigningIndicator && lblSigningIndicator.innerHTML) {
+	        	//	lblSigningIndicator.innerHTML = 'Loading...';
+				//}
+
+                if (window.getPrivateKey) {
+                        //alert('DEBUG: ProfileOnLoad: window.getPrivateKey check passed');
+
+                        if (window.localStorage) {
+                                //alert('DEBUG: ProfileOnLoad: window.localStorage check passed, calling getPrivateKey()...');
+
+                                var pk = getPrivateKey();
+                                if (pk) {
+                                        //alert('DEBUG: ProfileOnLoad: pk = GetPrivateKey() = ' + !!pk);
+
+                                        if (lblSigningIndicator) {
+                                        		// span used to indicate whether openpgp signing is available
+                                                //alert('DEBUG: lblSigningIndicator TRUE');
+
+                                                // display value of "algorithm" which openpgp gives us
+                                                // in reality, this only give us rsa/not-rsa, and formatted poorly
+                                                // there's the bit count and the actual algo for non-rsa which needs
+                                                // to be displayed more nicely here #todo
+
+                                                var privKeyObj = openpgp.key.readArmored(pk);
+                                                var pubKeyObj = privKeyObj.keys[0].toPublic();
+
+                                                var myAlgo = pubKeyObj.primaryKey.algorithm.toString();
+                                                if (myAlgo) {
+                                                        lblSigningIndicator.innerHTML = myAlgo;
+                                                } else {
+                                                        lblSigningIndicator.innerHTML = 'Yes';
+                                                }
+                                                AddPrivateKeyLinks();
+                                        } else {
+                                                //alert('DEBUG: lblSigningIndicator FALSE');
+                                        }
+
+
+                                        lblHandle = document.getElementById('lblHandle');
+                                        if (lblHandle) {
+                                                var strHandle = localStorage.getItem('avatar');
+                                                if (strHandle) {
+                                                        lblHandle.innerHTML = strHandle;
+                                                }
+                                        }
+
+                                        lblFingerprint = document.getElementById('lblFingerprint');
+                                        if (lblFingerprint) {
+                                                var strFingerprint = localStorage.getItem('fingerprint');
+                                                if (strFingerprint) {
+                                                        lblFingerprint.innerHTML = strFingerprint;
+                                                }
+                                        }
+
+                                        //alert('DEBUG: ProfileOnLoad: calling PubKeyPing()');
+                                        PubKeyPing();
+                                } // pk is true
+                                else {
+                                        //alert('DEBUG: pk = false')
+                                        if (lblSigningIndicator) {
+                                                //alert('DEBUG: lblSigningIndicator check passed');
+                                                if (window.openpgp) {
+                                                        // #todo why is window.openpgp false here??
+                                                        //alert('DEBUG: window.openpgp check passed, setting no (available)');
+
+                                                        lblSigningIndicator.innerHTML = '';
+
+                                                        var lblEnablePGP = document.createElement('label');
+                                                        var chkEnablePGP = document.createElement('input');
+                                                        var txtEnablePGP = document.createTextNode('PGP');
+
+                                                        chkEnablePGP.setAttribute('type', 'checkbox');
+                                                        chkEnablePGP.setAttribute('name', 'chkEnablePGP');
+                                                        chkEnablePGP.setAttribute('id', 'chkEnablePGP');
+
+                                                        lblEnablePGP.setAttribute('for', 'chkEnablePGP');
+
+                                                        lblEnablePGP.appendChild(chkEnablePGP);
+                                                        lblEnablePGP.appendChild(txtEnablePGP);
+                                                        lblSigningIndicator.appendChild(lblEnablePGP);
+
+                                                        AddPrivateKeyLinks();
+                                                } else {
+                                                        alert('DEBUG: warning: window.openpgp check FAILED');
+                                                        lblSigningIndicator.innerHTML = 'Nope';
+                                                }
+                                        } else {
+                                                //alert('DEBUG: lblSigningIndicator check FAILED');
+                                        }
+                                        AddPrivateKeyLinks();
+                                }
+                        } else {
+                                //alert('DEBUG: ProfileOnLoad: window.localStorage check FAILED');
+                        }
+                } else {
+                        //alert('debug: ProfileOnLoad: window.getPrivateKey check FAILED');
+                }
+        } else {
+                //alert('DEBUG: ProfileOnLoad: document.getElementById check FAILED');
+        }
+
+        return true;
+}
+
+function SetCookie (cname, cvalue, exdays) { // set cookie
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        var testSetCookie = GetCookie(cname);
+        if (cvalue == testSetCookie) {
+                return 1;
+        } else {
+                return 0;
+        }
+} // SetCookie()
+
+function GetCookie (cname) { // get cookie value
+        // in js, cookies are accessed via one long string of the form
+        // key1=value1; key2=value2;
+        // so we make an array, splitting the string using the ; separator
+        var ca = document.cookie.split(';');
+
+        // the value we are looking for will be prefixed with cname=
+        var name = cname + "=";
+
+        for(var i = 0; i < ca.length; i++) {
+                // loop through ca array until we find prefix we are looking for
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                        // remove any spaces at beginning of string
+                        c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                        // if prefix matches, return value
+                        return c.substring(name.length, c.length);
+                }
+        }
+
+        // at this point, nothing left to do but return empty string
+        return "";
+}
+
+// end profile.js
+
+
+// begin upload.js
+
+function FileReaderCallback (event) { // sets image to visible once ready
+        //alert('debug: FileReaderCallback()');
+        var imgImagePreview = document.getElementById('imgImagePreview');
+        if (imgImagePreview) {
+                imgImagePreview.style.display = 'inline';
+                imgImagePreview.setAttribute('src', event.target.result);
+        }
+}
+
+function UploadedFileOnChange (t) { // t=this; called when file selector is changed
+        //alert('debug: UploadedFileOnChange()');
+        if (t && window.FileReader) {
+                var reader = new FileReader();
+                reader.onload = window.FileReaderCallback;
+
+                if (t.files && t.files[0]) {
+                        reader.readAsDataURL(t.files[0]);
+                }
+
+                var submit = document.getElementById('submit');
+                if (submit && submit.style) {
+                        //submit.setAttribute('value', 'Upload');
+                        submit.style.border = "5pt solid orange";
+                }
+        }
+}
+
+function UploadAddImagePreviewElement () { // add image preview element, hidden until needed
+        if (document.getElementById && document.createElement) {
+                var spanImagePreview = document.getElementById('spanImagePreview');
+                if (spanImagePreview) {
+                        var imgImagePreview = document.createElement('img');
+                        imgImagePreview.setAttribute('src', '');
+                        imgImagePreview.setAttribute('id', 'imgImagePreview');
+                        imgImagePreview.setAttribute('alt', 'Preview of image to upload');
+                        imgImagePreview.setAttribute('width', '50%');
+                        imgImagePreview.style.display = 'none';
+                        spanImagePreview.appendChild(imgImagePreview);
+                }
+        }
+}
+
+// end upload.js
+
+
+// == begin fresh.js
+var freshClient;
+//
+//function ReplacePageWithNewContent () {
+//      window.location.replace(window.newPageLocation);
+//      document.open();
+//      document.write(window.newPageContent);
+//      document.close();
+//
+//      return 0;
+//}
+//
+//function StoreNewPageContent () {
+//      var xmlhttp = window.xmlhttp2;
+//
+//      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+//              //alert('DEBUG: PingUrlCallbackReplaceCurrentPage() found status 200');
+//              window.newPageContent = xmlhttp.responseText;
+//              window.newPageLocation = xmlhttp.responseURL;
+//
+//              //window.location.replace(xmlhttp.responseURL);
+////            document.open();
+////            document.write(xmlhttp.responseText);
+////            document.close();
+//      }
+//}
+//
+//function FetchNewPageContent (url) {
+//      if (window.XMLHttpRequest) {
+//              //alert('DEBUG: PingUrl: window.XMLHttpRequest was true');
+//
+//              var xmlhttp;
+//              if (window.xmlhttp2) {
+//                      xmlhttp = window.xmlhttp2;
+//              } else {
+//                      window.xmlhttp2 = new XMLHttpRequest();
+//                      xmlhttp = window.xmlhttp2;
+//              }
+//        xmlhttp.onreadystatechange = window.StoreNewPageContent;
+//        xmlhttp.open("GET", url, true);
+//              xmlhttp.setRequestHeader('Cache-Control', 'no-cache');
+//        xmlhttp.send();
+//
+//        return false;
+//      }
+//}
+
+
+function freshCallback() { // callback for requesting HEAD for current page
+//alert('DEBUG: freshCallback() this.readyState = ' + this.readyState);
+
+//      if (1 || this.readyState == this.HEADERS_RECEIVED) { // headers received -- what we've been waiting for
+        if (
+                this.readyState == this.HEADERS_RECEIVED ||
+                this.status == 200
+        ) { // headers received -- what we've been waiting for
+                // document.title = 'DEBUG: callback received 200';
+            //alert('DEBUG: freshCallback() this.readyState == this.HEADERS_RECEIVED');
+
+                var eTag = freshClient.getResponseHeader("ETag"); // etag header contains page 'fingerprint'
+
+                //alert('DEBUG: eTag = ' + eTag);
+
+                if (eTag) { // if ETag header has a value
+                        if (window.myOwnETag) {
+                                if (eTag != window.myOwnETag) {
+                                        if (eTag == window.lastEtag) { // if it's equal to the one we saved last time
+                                                // no new change change
+                                        } else {
+                                                var freshUserWantsReload = 0;  // templated
+                                                if (freshUserWantsReload) {
+                                                        // user wants reload
+                                                        //alert('DEBUG: user wants automatic page reload');
+                                                        location.reload();
+                                                } else {
+                                                        // user doesn't want reload, just show notification
+                                                        //alert('DEBUG: user does not want automatic page reload, notify');
+                                                        window.lastEtag = eTag;
+
+                                                        var ariaAlert;
+                                                        ariaAlert = document.getElementById('ariaAlert');
+
+                                                        if (!ariaAlert) {
+                                                                //alert('DEBUG: ariaAlert created successfully');
+                                                                ariaAlert = document.createElement('p');
+                                                                ariaAlert.setAttribute('role', 'alert');
+                                                                ariaAlert.setAttribute('id', 'ariaAlert');
+                                                                ariaAlert.style.zIndex = '1337'; //#todo
+
+                                                                var txtUpdated = document.createTextNode('Page updated ');
+                                                                ariaAlert.appendChild(txtUpdated);
+
+                                                                //document.body.appendChild(ariaAlert);
+                                                                document.body.insertBefore(ariaAlert, document.body.firstChild);
+                                                                //window.newPageContent =
+                                                                //FetchNewPageContent(window.mypath + '?' + new Date().getTime());
+
+                                                                //ariaAlert.innerHTML = ariaAlert.innerHTML + '+';
+                                                                var d = new Date();
+                                                                var n = d.getTime();
+                                                                n = Math.ceil(n / 1000);
+
+                                                                var space = document.createElement('span');
+                                                                space.innerHTML = ' ';
+                                                                ariaAlert.appendChild(space);
+
+                                                                var a = document.createElement('a');
+                                                                a.setAttribute('id', 'freshAria');
+                                                                a.setAttribute('href', '#');
+                                                                a.setAttribute('onclick', 'location.reload()');
+                                                                ariaAlert.appendChild(a);
+
+                                                                var newTs = document.createElement('span');
+                                                                newTs.setAttribute('class', 'timestamp');
+                                                                newTs.setAttribute('epoch', n);
+                                                                newTs.setAttribute('id', 'freshTimestamp');
+                                                                newTs.innerHTML = 'just now!';
+                                                                a.appendChild(newTs);
+                                                        } // !ariaAlert
+
+                                                        if (window.freshTimeoutId) {
+                                                                clearTimeout(window.freshTimeoutId);
+                                                        }
+                                                        window.eventLoopFresh = 0;
+
+                                                        if (document.title.substring(0, 2) != '! ') {
+                                                                document.title = '! ' + document.title;
+                                                        }
+                                                } // NOT freshUserWantsReload
+                                        } // lastEtag also didn't match
+                                } // eTag != window.myOwnETag
+                                else {
+                                        //document.title = 'freshCallback: x ' + window.myOwnETag + ';' + new Date().getTime();
+                                        if (window.freshTimeoutId) {
+                                                clearTimeout(window.freshTimeoutId);
+                                        }
+                                        window.freshTimeoutId = setTimeout('CheckIfFresh()', 15000);
+                                }
+                        } // if (window.myOwnETag)
+                        else {
+                                window.myOwnETag = eTag;
+                        }
+                } // if (eTag) // ETag header has value
+        } // status == 200
+        if (status == 404) {
+                //alert('DEBUG: page has gone away on server (404)');
+                var ariaAlert;
+                ariaAlert = document.getElementById('ariaAlert');
+                if (!ariaAlert) {
+                        ariaAlert = document.createElement('p');
+                        ariaAlert.setAttribute('role', 'alert');
+                        ariaAlert.setAttribute('id', 'ariaAlert');
+                        ariaAlert.style.zIndex = '1337'; //#todo
+                        ariaAlert.innerHTML = 'Page has gone away on server.';
+
+                        //document.body.appendChild(ariaAlert);
+                        document.body.insertBefore(ariaAlert, document.body.firstChild);
+                }
+                window.eventLoopFresh = 0;
+        }
+
+        return true;
+} //freshCallback()
+
+function CheckIfFresh () {
+        var d = new Date();
+        //alert('debug: CheckIfFresh: ' + d.getTime());
+
+        var freshCheckRecent = window.freshCheckRecent;
+        if (freshCheckRecent) {
+                //alert('debug: CheckIfFresh: freshCheckRecent = ' + freshCheckRecent);
+                var d = new Date();
+                var curTime = d.getTime();
+                if (curTime < freshCheckRecent + 3000) {
+                        return true;
+                }
+        }
+        //alert('debug: CheckIfFresh: checkpoint passed');
+
+        var d = new Date();
+        window.freshCheckRecent = d.getTime();
+
+        var xhr = null;
+        if (window.XMLHttpRequest){
+        xhr = new XMLHttpRequest();
+    }
+    else {
+        if (window.ActiveXObject) {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+    }
+
+        if (xhr) {
+                var mypath = window.mypath;
+
+                if (!mypath) {
+                        mypath = window.location;
+                        window.mypath = mypath;
+                }
+
+                freshClient = xhr;
+
+                if (0 && mypath.toString().indexOf('?') == -1) {
+                        // this ensures no caching, but may cause other problems
+                        freshClient.open("HEAD", mypath + '?' + d.getTime(), true);
+                } else {
+                        freshClient.open("HEAD", mypath, true);
+                }
+
+        //freshClient.timeout = 5000; //#xhr.timeout
+                freshClient.setRequestHeader('Cache-Control', 'no-cache');
+                freshClient.onreadystatechange = freshCallback;
+
+                freshClient.send();
+        }
+
+        return true;
+} // CheckIfFresh()
+
+//if (window.GetPrefs) {
+//      var needNotify = (GetPrefs('notify_on_change') ? 1 : 0);
+//      if (needNotify == 1) { // check value of notify_on_change preference
+//              if (window.EventLoop) {
+//                      EventLoop();
+//              } else {
+//                      CheckIfFresh();
+//              }
+//      }
+//}
+
+//alert('DEBUG: fresh.js');
+
+// == end fresh.js
+
+
+/* dragging.js */
+// props https://www.w3schools.com/howto/howto_js_draggable.asp
+
+/*
+                #mydiv {
+                position: absolute;
+                z-index: 9;
+        }
+
+        #mydivheader {
+                this is just the titlebar
+        }
+*/
+
+window.draggingZ = 0;
+
+function dragElement (elmnt, header) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+        if (header) {
+                // if present, the header is where you move the DIV from:
+                header.onmousedown = dragMouseDown;
+        } else {
+                // otherwise, move the DIV from anywhere inside the DIV:
+                elmnt.onmousedown = dragMouseDown;
+        }
+
+        var rect = elmnt.getBoundingClientRect();
+
+        elmnt.style.position = 'absolute';
+        elmnt.style.top = (rect.top) + "px";
+        elmnt.style.left = (rect.left) + "px";
+
+    //console.log(rect.top, rect.right, rect.bottom, rect.left);
+        //elmnt.style.position = 'absolute';
+        //elmnt.style.z-index = '9';
+
+        function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                // get the mouse cursor position at startup:
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+
+                document.onmouseup = closeDragElement;
+                // call a function whenever the cursor moves:
+                document.onmousemove = elementDrag;
+
+                elmnt.style.zIndex = ++window.draggingZ;
+        }
+
+        function elementDrag(e) {
+                //document.title = pos1 + ',' + pos2 + ',' + pos3 + ',' + pos4;
+                //document.title = e.clientX + ',' + e.clientY;
+                //document.title = elmnt.offsetTop + ',' + elmnt.offsetLeft;
+                e = e || window.event;
+                e.preventDefault();
+                // calculate the new cursor position:
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                // set the element's new position:
+
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        }
+
+        function closeDragElement() {
+                // stop moving when mouse button is released:
+                document.onmouseup = null;
+                document.onmousemove = null;
+
+                if (elmnt) {
+                        SaveWindowState(elmnt);
+                        elmnt.style.zIndex = ++window.draggingZ;
+                        // keep incrementing the global zindex counter
+                }
+//
+//              if (elmnt.id) {
+//                      if (window.SetPrefs) {
+//                              SetPrefs(elmnt.id + '.style.top', elmnt.style.top);
+//                              SetPrefs(elmnt.id + '.style.left', elmnt.style.left);
+//                      }
+//              }
+        }
+}
+
+function SaveWindowState (elmnt) {
+        var allTitlebar = elmnt.getElementsByClassName('titlebar');
+        var firstTitlebar = allTitlebar[0];
+
+        if (firstTitlebar && firstTitlebar.getElementsByTagName) {
+                var elId = firstTitlebar.getElementsByTagName('b');
+                if (elId && elId[0]) {
+                        elId = elId[0];
+
+                        if (elId && elId.innerHTML.length < 31) {
+                                SetPrefs(elId.innerHTML + '.style.top', elmnt.style.top);
+                                SetPrefs(elId.innerHTML + '.style.left', elmnt.style.left);
+//                              elements[i].style.top = GetPrefs(elId.innerHTML + '.style.top') || elId.style.top;
+//                              elements[i].style.left = GetPrefs(elId.innerHTML + '.style.left') || elId.style.left;
+                        } else {
+                                //alert('DEBUG: SaveWindowState: elId is false');
+                        }
+                }
+        }
+}
+
+function ArrangeAll () {
+        //alert('DEBUG: DraggingInit: doPosition = ' + doPosition);
+        var elements = document.getElementsByClassName('dialog');
+        //for (var i = 0; i < elements.length; i++) {
+        for (var i = elements.length - 1; 0 <= i; i--) { // walk backwards for positioning reasons
+                elements[i].setAttribute('style', '');
+//
+//              var btnSkip = elements[i].getElementsByClassName('btnSkip');
+//              if (btnSkip && btnSkip[0]) {
+//                      btnSkip[0].click();
+//              }
+        }
+}
+
+function DraggingInit (doPosition) {
+// initializes all class=dialog elements on the page to be draggable
+        if (!document.getElementsByClassName) {
+                //alert('DEBUG: DraggingInit: sanity check failed, document.getElementsByClassName was FALSE');
+                return '';
+        }
+
+        if (doPosition) {
+                doPosition = 1;
+        } else {
+                doPosition = 0;
+        }
+
+        //alert('DEBUG: DraggingInit: doPosition = ' + doPosition);
+        var elements = document.getElementsByClassName('dialog');
+        //for (var i = 0; i < elements.length; i++) {
+        for (var i = elements.length - 1; 0 <= i; i--) { // walk backwards for positioning reasons
+                var allTitlebar = elements[i].getElementsByClassName('titlebar');
+                var firstTitlebar = allTitlebar[0];
+
+                if (firstTitlebar && firstTitlebar.getElementsByTagName) {
+                        dragElement(elements[i], firstTitlebar);
+                        var elId = firstTitlebar.getElementsByTagName('b');
+                        elId = elId[0];
+                        if (doPosition && elId && elId.innerHTML.length < 31) {
+                                elements[i].style.top = GetPrefs(elId.innerHTML + '.style.top') || elements[i].style.top;
+                                elements[i].style.left = GetPrefs(elId.innerHTML + '.style.left') || elements[i].style.left;
+                        } else {
+                                //alert('DEBUG: DraggingInit: elId is false');
+                        }
+                }
+        }
+} // DraggingInit()
+
+/* / dragging.js */
+
+// -->
+
+</script>
+<!-- / html/utils/scriptinject.template -->
+</body></html><!-- InjectJs2: back_to_top_button clock fresh -->
+
+<!-- html/utils/scriptinject.template -->
+<script language=javascript>
+
+<!--
+// begin back_to_top_button.js
+function showBackToTop () { // show or hide "back to top" button depending on vertical scroll state
+    var pageOffset = document.body.scrollTop;
+
+    if (100 < pageOffset) {
+        if (window.showBackToTopLastAction != 1) {
+//                      var colorBody = document.body.style.backgroundColor || document.body.getAttribute('bgcolor'));
+//                      var colorButton = document.getElementById('aBackToTop').style.backgroundColor;
+//
+//                      setTimeout("document.getElementById('aBackToTop').style.backgroundColor = '#002000'", 250);
+//                      setTimeout("document.getElementById('aBackToTop').style.backgroundColor = '#004000'", 500);
+//                      setTimeout("document.getElementById('aBackToTop').style.backgroundColor = '#006000'", 750);
+//                      setTimeout("document.getElementById('aBackToTop').style.backgroundColor = '#008000'", 1000);
+
+                        document.getElementById('aBackToTop').style.visibility = 'visible';
+                        window.showBackToTopLastAction = 1;
+                }
+    } else {
+        if (window.showBackToTopLastAction != 0) {
+                document.getElementById('aBackToTop').style.visibility = 'hidden';
+                window.showBackToTopLastAction = 0;
+                }
+    }
+
+    return true;
+} // showBackToTop()
+
+if (document.getElementById) { // enable window.onscroll if getElementById exists
+    window.onscroll = window.showBackToTop;
+    showBackToTop();
+}
+// end back_to_top_button.js
+
+
+// == begin clock/24hour.js
+
+function setClock() {
+        if (document.frmTopMenu) {
+                if (document.frmTopMenu.txtClock) {
+                        if (document.frmTopMenu.txtClock.value) {
+                var now = new Date();
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var seconds = now.getSeconds();
+
+                if (hours < 10) {
+                    hours = '0' + '' + hours;
+                }
+                if (minutes < 10) {
+                    minutes = '0' + '' + minutes;
+                }
+                if (seconds < 10) {
+                    seconds = '0' + '' + seconds;
+                }
+
+                if (!window.clockLastSec || window.clockLastSec != seconds) {
+                        window.clockLastSec = seconds;
+
+                                        if (window.clockColonState) {
+                                                timeValue = hours + ':' + minutes;
+                                                window.clockColonState = 0;
+                                        } else {
+                                                timeValue = hours + ' ' + minutes;
+                                                window.clockColonState = 1;
+                                        }
+
+                                        if (document.frmTopMenu.txtClock.value != timeValue) {
+                                                document.frmTopMenu.txtClock.value = timeValue;
+                                        }
+                                }
+            }
+                }
+        }
+}
+
+// == end clock/24hour.js
+
+
+// == begin fresh.js
+var freshClient;
+//
+//function ReplacePageWithNewContent () {
+//      window.location.replace(window.newPageLocation);
+//      document.open();
+//      document.write(window.newPageContent);
+//      document.close();
+//
+//      return 0;
+//}
+//
+//function StoreNewPageContent () {
+//      var xmlhttp = window.xmlhttp2;
+//
+//      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+//              //alert('DEBUG: PingUrlCallbackReplaceCurrentPage() found status 200');
+//              window.newPageContent = xmlhttp.responseText;
+//              window.newPageLocation = xmlhttp.responseURL;
+//
+//              //window.location.replace(xmlhttp.responseURL);
+////            document.open();
+////            document.write(xmlhttp.responseText);
+////            document.close();
+//      }
+//}
+//
+//function FetchNewPageContent (url) {
+//      if (window.XMLHttpRequest) {
+//              //alert('DEBUG: PingUrl: window.XMLHttpRequest was true');
+//
+//              var xmlhttp;
+//              if (window.xmlhttp2) {
+//                      xmlhttp = window.xmlhttp2;
+//              } else {
+//                      window.xmlhttp2 = new XMLHttpRequest();
+//                      xmlhttp = window.xmlhttp2;
+//              }
+//        xmlhttp.onreadystatechange = window.StoreNewPageContent;
+//        xmlhttp.open("GET", url, true);
+//              xmlhttp.setRequestHeader('Cache-Control', 'no-cache');
+//        xmlhttp.send();
+//
+//        return false;
+//      }
+//}
+
+
+function freshCallback() { // callback for requesting HEAD for current page
+//alert('DEBUG: freshCallback() this.readyState = ' + this.readyState);
+
+//      if (1 || this.readyState == this.HEADERS_RECEIVED) { // headers received -- what we've been waiting for
+        if (
+                this.readyState == this.HEADERS_RECEIVED ||
+                this.status == 200
+        ) { // headers received -- what we've been waiting for
+                // document.title = 'DEBUG: callback received 200';
+            //alert('DEBUG: freshCallback() this.readyState == this.HEADERS_RECEIVED');
+
+                var eTag = freshClient.getResponseHeader("ETag"); // etag header contains page 'fingerprint'
+
+                //alert('DEBUG: eTag = ' + eTag);
+
+                if (eTag) { // if ETag header has a value
+                        if (window.myOwnETag) {
+                                if (eTag != window.myOwnETag) {
+                                        if (eTag == window.lastEtag) { // if it's equal to the one we saved last time
+                                                // no new change change
+                                        } else {
+                                                var freshUserWantsReload = 0;  // templated
+                                                if (freshUserWantsReload) {
+                                                        // user wants reload
+                                                        //alert('DEBUG: user wants automatic page reload');
+                                                        location.reload();
+                                                } else {
+                                                        // user doesn't want reload, just show notification
+                                                        //alert('DEBUG: user does not want automatic page reload, notify');
+                                                        window.lastEtag = eTag;
+
+                                                        var ariaAlert;
+                                                        ariaAlert = document.getElementById('ariaAlert');
+
+                                                        if (!ariaAlert) {
+                                                                //alert('DEBUG: ariaAlert created successfully');
+                                                                ariaAlert = document.createElement('p');
+                                                                ariaAlert.setAttribute('role', 'alert');
+                                                                ariaAlert.setAttribute('id', 'ariaAlert');
+                                                                ariaAlert.style.zIndex = '1337'; //#todo
+
+                                                                var txtUpdated = document.createTextNode('Page updated ');
+                                                                ariaAlert.appendChild(txtUpdated);
+
+                                                                //document.body.appendChild(ariaAlert);
+                                                                document.body.insertBefore(ariaAlert, document.body.firstChild);
+                                                                //window.newPageContent =
+                                                                //FetchNewPageContent(window.mypath + '?' + new Date().getTime());
+
+                                                                //ariaAlert.innerHTML = ariaAlert.innerHTML + '+';
+                                                                var d = new Date();
+                                                                var n = d.getTime();
+                                                                n = Math.ceil(n / 1000);
+
+                                                                var space = document.createElement('span');
+                                                                space.innerHTML = ' ';
+                                                                ariaAlert.appendChild(space);
+
+                                                                var a = document.createElement('a');
+                                                                a.setAttribute('id', 'freshAria');
+                                                                a.setAttribute('href', '#');
+                                                                a.setAttribute('onclick', 'location.reload()');
+                                                                ariaAlert.appendChild(a);
+
+                                                                var newTs = document.createElement('span');
+                                                                newTs.setAttribute('class', 'timestamp');
+                                                                newTs.setAttribute('epoch', n);
+                                                                newTs.setAttribute('id', 'freshTimestamp');
+                                                                newTs.innerHTML = 'just now!';
+                                                                a.appendChild(newTs);
+                                                        } // !ariaAlert
+
+                                                        if (window.freshTimeoutId) {
+                                                                clearTimeout(window.freshTimeoutId);
+                                                        }
+                                                        window.eventLoopFresh = 0;
+
+                                                        if (document.title.substring(0, 2) != '! ') {
+                                                                document.title = '! ' + document.title;
+                                                        }
+                                                } // NOT freshUserWantsReload
+                                        } // lastEtag also didn't match
+                                } // eTag != window.myOwnETag
+                                else {
+                                        //document.title = 'freshCallback: x ' + window.myOwnETag + ';' + new Date().getTime();
+                                        if (window.freshTimeoutId) {
+                                                clearTimeout(window.freshTimeoutId);
+                                        }
+                                        window.freshTimeoutId = setTimeout('CheckIfFresh()', 15000);
+                                }
+                        } // if (window.myOwnETag)
+                        else {
+                                window.myOwnETag = eTag;
+                        }
+                } // if (eTag) // ETag header has value
+        } // status == 200
+        if (status == 404) {
+                //alert('DEBUG: page has gone away on server (404)');
+                var ariaAlert;
+                ariaAlert = document.getElementById('ariaAlert');
+                if (!ariaAlert) {
+                        ariaAlert = document.createElement('p');
+                        ariaAlert.setAttribute('role', 'alert');
+                        ariaAlert.setAttribute('id', 'ariaAlert');
+                        ariaAlert.style.zIndex = '1337'; //#todo
+                        ariaAlert.innerHTML = 'Page has gone away on server.';
+
+                        //document.body.appendChild(ariaAlert);
+                        document.body.insertBefore(ariaAlert, document.body.firstChild);
+                }
+                window.eventLoopFresh = 0;
+        }
+
+        return true;
+} //freshCallback()
+
+function CheckIfFresh () {
+        var d = new Date();
+        //alert('debug: CheckIfFresh: ' + d.getTime());
+
+        var freshCheckRecent = window.freshCheckRecent;
+        if (freshCheckRecent) {
+                //alert('debug: CheckIfFresh: freshCheckRecent = ' + freshCheckRecent);
+                var d = new Date();
+                var curTime = d.getTime();
+                if (curTime < freshCheckRecent + 3000) {
+                        return true;
+                }
+        }
+        //alert('debug: CheckIfFresh: checkpoint passed');
+
+        var d = new Date();
+        window.freshCheckRecent = d.getTime();
+
+        var xhr = null;
+        if (window.XMLHttpRequest){
+        xhr = new XMLHttpRequest();
+    }
+    else {
+        if (window.ActiveXObject) {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+    }
+
+        if (xhr) {
+                var mypath = window.mypath;
+
+                if (!mypath) {
+                        mypath = window.location;
+                        window.mypath = mypath;
+                }
+
+                freshClient = xhr;
+
+                if (0 && mypath.toString().indexOf('?') == -1) {
+                        // this ensures no caching, but may cause other problems
+                        freshClient.open("HEAD", mypath + '?' + d.getTime(), true);
+                } else {
+                        freshClient.open("HEAD", mypath, true);
+                }
+
+        //freshClient.timeout = 5000; //#xhr.timeout
+                freshClient.setRequestHeader('Cache-Control', 'no-cache');
+                freshClient.onreadystatechange = freshCallback;
+
+                freshClient.send();
+        }
+
+        return true;
+} // CheckIfFresh()
+
+//if (window.GetPrefs) {
+//      var needNotify = (GetPrefs('notify_on_change') ? 1 : 0);
+//      if (needNotify == 1) { // check value of notify_on_change preference
+//              if (window.EventLoop) {
+//                      EventLoop();
+//              } else {
+//                      CheckIfFresh();
+//              }
+//      }
+//}
+
+//alert('DEBUG: fresh.js');
+
+// == end fresh.js
+
+// -->
+
+</script>
+<!-- / html/utils/scriptinject.template -->
+<!-- InjectJs2: loading_end clock fresh -->
+
+<!-- html/utils/scriptinject.template -->
+<script language=javascript>
+
+<!--
+// begin loading_end.js
+
+function HideLoadingIndicator () {
+        if (!document.getElementById) {
+                return '';
+        }
+
+        var loadingIndicator = window.loadingIndicator;
+
+        if (!loadingIndicator) {
+                if (document.getElementById) {
+                        loadingIndicator = document.getElementById('loadingIndicator');
+                }
+        }
+
+        if (window.loadingIndicatorShowTimeout) {
+                clearTimeout(loadingIndicatorShowTimeout);
+        }
+
+        loadingIndicator.innerHTML = 'Ready.';
+//      loadingIndicator.style.backgroundColor = '$colorHighlightAdvanced';
+
+        window.loadingIndicator = loadingIndicator;
+
+        setTimeout('if (window.loadingIndicator) { window.loadingIndicator.style.display = "none"; }', 3000); //#todo
+        // } else {
+        //      if (loadingIndicator) { loadingIndicator.style.display = 'none' }
+        // }
+        return '';
+} // HideLoadingIndicator()
+
+function WaitForOpenPgp () {
+        //alert('debug: WaitForOpenPgp()');
+        var d = new Date();
+        if (window.openPgpJsLoadBegin && window.openpgp) {
+                HideLoadingIndicator();
+        } else {
+                setTimeout('if (window.WaitForOpenPgp) { WaitForOpenPgp() }', 500);
+        }
+} // WaitForOpenPgp()
+
+if (!window.OnLoadEverything && window.HideLoadingIndicator) {
+        HideLoadingIndicator();
+}
+
+// end loading_end.js
+
+
+// == begin clock/24hour.js
+
+function setClock() {
+        if (document.frmTopMenu) {
+                if (document.frmTopMenu.txtClock) {
+                        if (document.frmTopMenu.txtClock.value) {
+                var now = new Date();
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var seconds = now.getSeconds();
+
+                if (hours < 10) {
+                    hours = '0' + '' + hours;
+                }
+                if (minutes < 10) {
+                    minutes = '0' + '' + minutes;
+                }
+                if (seconds < 10) {
+                    seconds = '0' + '' + seconds;
+                }
+
+                if (!window.clockLastSec || window.clockLastSec != seconds) {
+                        window.clockLastSec = seconds;
+
+                                        if (window.clockColonState) {
+                                                timeValue = hours + ':' + minutes;
+                                                window.clockColonState = 0;
+                                        } else {
+                                                timeValue = hours + ' ' + minutes;
+                                                window.clockColonState = 1;
+                                        }
+
+                                        if (document.frmTopMenu.txtClock.value != timeValue) {
+                                                document.frmTopMenu.txtClock.value = timeValue;
+                                        }
+                                }
+            }
+                }
+        }
+}
+
+// == end clock/24hour.js
+
+
+// == begin fresh.js
+var freshClient;
+//
+//function ReplacePageWithNewContent () {
+//      window.location.replace(window.newPageLocation);
+//      document.open();
+//      document.write(window.newPageContent);
+//      document.close();
+//
+//      return 0;
+//}
+//
+//function StoreNewPageContent () {
+//      var xmlhttp = window.xmlhttp2;
+//
+//      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+//              //alert('DEBUG: PingUrlCallbackReplaceCurrentPage() found status 200');
+//              window.newPageContent = xmlhttp.responseText;
+//              window.newPageLocation = xmlhttp.responseURL;
+//
+//              //window.location.replace(xmlhttp.responseURL);
+////            document.open();
+////            document.write(xmlhttp.responseText);
+////            document.close();
+//      }
+//}
+//
+//function FetchNewPageContent (url) {
+//      if (window.XMLHttpRequest) {
+//              //alert('DEBUG: PingUrl: window.XMLHttpRequest was true');
+//
+//              var xmlhttp;
+//              if (window.xmlhttp2) {
+//                      xmlhttp = window.xmlhttp2;
+//              } else {
+//                      window.xmlhttp2 = new XMLHttpRequest();
+//                      xmlhttp = window.xmlhttp2;
+//              }
+//        xmlhttp.onreadystatechange = window.StoreNewPageContent;
+//        xmlhttp.open("GET", url, true);
+//              xmlhttp.setRequestHeader('Cache-Control', 'no-cache');
+//        xmlhttp.send();
+//
+//        return false;
+//      }
+//}
+
+
+function freshCallback() { // callback for requesting HEAD for current page
+//alert('DEBUG: freshCallback() this.readyState = ' + this.readyState);
+
+//      if (1 || this.readyState == this.HEADERS_RECEIVED) { // headers received -- what we've been waiting for
+        if (
+                this.readyState == this.HEADERS_RECEIVED ||
+                this.status == 200
+        ) { // headers received -- what we've been waiting for
+                // document.title = 'DEBUG: callback received 200';
+            //alert('DEBUG: freshCallback() this.readyState == this.HEADERS_RECEIVED');
+
+                var eTag = freshClient.getResponseHeader("ETag"); // etag header contains page 'fingerprint'
+
+                //alert('DEBUG: eTag = ' + eTag);
+
+                if (eTag) { // if ETag header has a value
+                        if (window.myOwnETag) {
+                                if (eTag != window.myOwnETag) {
+                                        if (eTag == window.lastEtag) { // if it's equal to the one we saved last time
+                                                // no new change change
+                                        } else {
+                                                var freshUserWantsReload = 0;  // templated
+                                                if (freshUserWantsReload) {
+                                                        // user wants reload
+                                                        //alert('DEBUG: user wants automatic page reload');
+                                                        location.reload();
+                                                } else {
+                                                        // user doesn't want reload, just show notification
+                                                        //alert('DEBUG: user does not want automatic page reload, notify');
+                                                        window.lastEtag = eTag;
+
+                                                        var ariaAlert;
+                                                        ariaAlert = document.getElementById('ariaAlert');
+
+                                                        if (!ariaAlert) {
+                                                                //alert('DEBUG: ariaAlert created successfully');
+                                                                ariaAlert = document.createElement('p');
+                                                                ariaAlert.setAttribute('role', 'alert');
+                                                                ariaAlert.setAttribute('id', 'ariaAlert');
+                                                                ariaAlert.style.zIndex = '1337'; //#todo
+
+                                                                var txtUpdated = document.createTextNode('Page updated ');
+                                                                ariaAlert.appendChild(txtUpdated);
+
+                                                                //document.body.appendChild(ariaAlert);
+                                                                document.body.insertBefore(ariaAlert, document.body.firstChild);
+                                                                //window.newPageContent =
+                                                                //FetchNewPageContent(window.mypath + '?' + new Date().getTime());
+
+                                                                //ariaAlert.innerHTML = ariaAlert.innerHTML + '+';
+                                                                var d = new Date();
+                                                                var n = d.getTime();
+                                                                n = Math.ceil(n / 1000);
+
+                                                                var space = document.createElement('span');
+                                                                space.innerHTML = ' ';
+                                                                ariaAlert.appendChild(space);
+
+                                                                var a = document.createElement('a');
+                                                                a.setAttribute('id', 'freshAria');
+                                                                a.setAttribute('href', '#');
+                                                                a.setAttribute('onclick', 'location.reload()');
+                                                                ariaAlert.appendChild(a);
+
+                                                                var newTs = document.createElement('span');
+                                                                newTs.setAttribute('class', 'timestamp');
+                                                                newTs.setAttribute('epoch', n);
+                                                                newTs.setAttribute('id', 'freshTimestamp');
+                                                                newTs.innerHTML = 'just now!';
+                                                                a.appendChild(newTs);
+                                                        } // !ariaAlert
+
+                                                        if (window.freshTimeoutId) {
+                                                                clearTimeout(window.freshTimeoutId);
+                                                        }
+                                                        window.eventLoopFresh = 0;
+
+                                                        if (document.title.substring(0, 2) != '! ') {
+                                                                document.title = '! ' + document.title;
+                                                        }
+                                                } // NOT freshUserWantsReload
+                                        } // lastEtag also didn't match
+                                } // eTag != window.myOwnETag
+                                else {
+                                        //document.title = 'freshCallback: x ' + window.myOwnETag + ';' + new Date().getTime();
+                                        if (window.freshTimeoutId) {
+                                                clearTimeout(window.freshTimeoutId);
+                                        }
+                                        window.freshTimeoutId = setTimeout('CheckIfFresh()', 15000);
+                                }
+                        } // if (window.myOwnETag)
+                        else {
+                                window.myOwnETag = eTag;
+                        }
+                } // if (eTag) // ETag header has value
+        } // status == 200
+        if (status == 404) {
+                //alert('DEBUG: page has gone away on server (404)');
+                var ariaAlert;
+                ariaAlert = document.getElementById('ariaAlert');
+                if (!ariaAlert) {
+                        ariaAlert = document.createElement('p');
+                        ariaAlert.setAttribute('role', 'alert');
+                        ariaAlert.setAttribute('id', 'ariaAlert');
+                        ariaAlert.style.zIndex = '1337'; //#todo
+                        ariaAlert.innerHTML = 'Page has gone away on server.';
+
+                        //document.body.appendChild(ariaAlert);
+                        document.body.insertBefore(ariaAlert, document.body.firstChild);
+                }
+                window.eventLoopFresh = 0;
+        }
+
+        return true;
+} //freshCallback()
+
+function CheckIfFresh () {
+        var d = new Date();
+        //alert('debug: CheckIfFresh: ' + d.getTime());
+
+        var freshCheckRecent = window.freshCheckRecent;
+        if (freshCheckRecent) {
+                //alert('debug: CheckIfFresh: freshCheckRecent = ' + freshCheckRecent);
+                var d = new Date();
+                var curTime = d.getTime();
+                if (curTime < freshCheckRecent + 3000) {
+                        return true;
+                }
+        }
+        //alert('debug: CheckIfFresh: checkpoint passed');
+
+        var d = new Date();
+        window.freshCheckRecent = d.getTime();
+
+        var xhr = null;
+        if (window.XMLHttpRequest){
+        xhr = new XMLHttpRequest();
+    }
+    else {
+        if (window.ActiveXObject) {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+    }
+
+        if (xhr) {
+                var mypath = window.mypath;
+
+                if (!mypath) {
+                        mypath = window.location;
+                        window.mypath = mypath;
+                }
+
+                freshClient = xhr;
+
+                if (0 && mypath.toString().indexOf('?') == -1) {
+                        // this ensures no caching, but may cause other problems
+                        freshClient.open("HEAD", mypath + '?' + d.getTime(), true);
+                } else {
+                        freshClient.open("HEAD", mypath, true);
+                }
+
+        //freshClient.timeout = 5000; //#xhr.timeout
+                freshClient.setRequestHeader('Cache-Control', 'no-cache');
+                freshClient.onreadystatechange = freshCallback;
+
+                freshClient.send();
+        }
+
+        return true;
+} // CheckIfFresh()
+
+//if (window.GetPrefs) {
+//      var needNotify = (GetPrefs('notify_on_change') ? 1 : 0);
+//      if (needNotify == 1) { // check value of notify_on_change preference
+//              if (window.EventLoop) {
+//                      EventLoop();
+//              } else {
+//                      CheckIfFresh();
+//              }
+//      }
+//}
+
+//alert('DEBUG: fresh.js');
+
+// == end fresh.js
+
+// -->
+
+</script>
+<!-- / html/utils/scriptinject.template -->
+<script><!-- window.myOwnETag = 'a265861880bd8d31b6c30e4df6c6863a'; // --></script>

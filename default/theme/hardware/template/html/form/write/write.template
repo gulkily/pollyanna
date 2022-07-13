@@ -1,0 +1,59 @@
+<!-- write.template -->
+<details>
+	<summary>Add Tags:<br></summary>
+	<!-- #todo this needs to be fixed up for netscape -->
+	<!-- #todo this needs to be dynamic and db-driven (using tagset) -->
+    <br><br>Components:<br>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#mobo</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#storage</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#hdd</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#ssd</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#ram</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#cpu</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#intel</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#amd</a>
+	<br><br>Systems:<br>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#laptop</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#tower</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#desktop</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#display</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#phone</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#tablet</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#OtherDevice</a>
+	<br><br>Accessories:<br>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#cable</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#adapter</a>
+	<br><br>Descriptions:<br>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#weird</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#broken</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#working</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#free</a>
+	<a href="#" onclick="writeAddTag(this.innerHTML);">#ForSale</a>
+</details>
+<fieldset>
+	<span id=writeintro></span>
+	<span class=beginner><label for="comment" class=beginner>Describe Your Hardware:</label><br></span>
+	<textarea
+		class=txtarea
+		id=comment
+		title="Enter some text to share."
+		rows=9
+		cols=32
+		name=comment
+		autofocus
+		wrap=soft
+	>$initText</textarea><br>
+	<p>
+		<input type=submit value="Send Now" name=addtext id=addtext>
+		<span id=spanSignAs></span>
+		<p id=spanWriteAdvanced class=advanced></p>
+		<span class=advanced>
+			<label for=recfing>
+				<input name=recfing id=recfing type=checkbox>
+				Record device fingerprint as signature
+			</label>
+		</span>
+	</p>
+	<span id=writefooter></span>
+</fieldset>
+<!--/ write.template -->

@@ -1,0 +1,17 @@
+<html>
+	<head>
+	<script>
+		<!--
+		function PrintCart () {
+			var cart = document.getElementById('cart');
+			if (cart) {
+				cart.innerHTML = 'hi';
+			}
+		}
+		// -->
+	</script>
+	<body onload=PrintCart()>
+		<span id=cart>
+		</span>
+	</body>
+</html>

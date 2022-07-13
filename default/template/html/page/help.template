@@ -1,0 +1,43 @@
+<!-- help.template -->
+
+<fieldset>
+
+<p>
+    <a href="/read.html">Read</a> 
+</p>
+
+<p>
+	<a href="/write.html">Write</a>
+</p>
+
+<p>
+	<a href="/settings.html">Settings</a>
+</p>
+
+<p>
+	<a href="/profile.html">Profile</a>
+</p>
+
+<p>
+	<a href="/welcome.html">Welcome page</a>
+</p>
+
+<p>
+	<a href="/upload.html">Upload picture or file</a>
+</p>
+
+<p>
+	<a href="/calendar.html">Calendar</a>
+</p>
+
+<p>
+	<a href="/search.html">Search</a>
+</p>
+
+<p>
+	<a href="/stats.html">Stats</a>
+</p>
+
+</fieldset>
+
+<!-- / help.template -->

@@ -1,0 +1,7 @@
+<form>
+
+I want to create an account
+
+I want to participate as a guest
+
+I want to browse without participating

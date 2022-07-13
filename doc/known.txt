@@ -1,0 +1,144 @@
+Known Issues
+============
+
+config/admin/js/translit is incompatible with config/admin/php/ascii_only
+
+In w3m browser, when press Enter key
+	Redirection loop detected
+	Workaround: press Ctrl+R to reload page
+		Logging in works this way
+
+When try to resubmit deleted item (exact text) get 404 page
+	Feature-bug
+		The 404 is good, but could use additional messaging
+
+Lighttpd + PHP
+	Changing ./config/admin/php/enable requires rebuild and lighttpd restart
+
+Just a basic prototype, not optimized to scale, and still a work in progress
+
+Sometimes new entries stop being picked up from access.log and/or written to the access log by web server
+	The solution is to rm or trim the access log and restart the web server
+	The cause is still unknown to me, probably file is too big
+
+Timestamp in the page footer (when inserted by php) is, for some reason, not updated on the first ShowTimestamps(), but is on the second
+	As a result, the "x units ago" text is not displayed for the first 5-15 seconds after page load
+
+For the "my name is" token
+	Must be the first item published by cookied author in order for the avatar to appear
+		Workaround: rm cache/avatar*
+
+Browsers which do not support Unicode display gibberish when faced with non-Ascii characters
+    This can be remediated in the future by down-converting to one particular encoding based on which non-ascii characters are used
+        e.g. if there are Cyrillic Unicode characters present, down-convert into koi8-r or
+
+When rebuilding site, user-submitted config settings are re-applied one by one as the items are indexed
+    This means, for example, theme values set with "#config theme"
+    	will change, and you may see different themes applied on some pages
+    Partially remediated by loading items containing "#config" ahead of everything else except pubkeys
+
+Content returned via PHP shims has different headers
+    gzip is not used, so filesize is bigger
+
+Voting on author fingerprints does not work, even though the buttons on the authors list page try.
+	Removed buttons
+
+Lighttpd directory listings cause JS error in NN3
+	Partially remediated by forbidding directory listings, showing 404 page instead
+
+Cookie-based id is not applied to many actions
+	Fix to come
+
+Cookie-based auth and localstorage+OpenPGP-based auth are not perfectly synced up
+    In particular if LocalStorage is used, then JS is disabled and logged out
+    	then JS is re-enabled, there's weirdness.
+
+When Cookie: and/or Host: footer is added to a message, this may cause the message
+to be duplicated when competing processes write different files.
+    post.php (which adds files immediately when server receives request) supports adding both headers
+    access.pl (which adds files by reading them from the web server's access.log) only supports Host:, but not Cookie:
+        The solution is to probably hash the file without its signature and use that as an id, or just the primary id
+    Update: This is partially fixed with the "-- " footer separator. However, some issues remain.
+
+Sever-signed confirmation mesages is completely broken at this time
+
+Public key upload doesn't update html profile page
+	Sometimes
+	for unknown reasons
+	Workaround: clean-build
+
+Long messages without JS may cause URI too long error
+	With JS, the form is automatically switched to POST
+	The Write page contains a warning and a link to POST-based form.
+
+All 40-character-long hex-looking strings are assumed to be existing items
+	Linked in the html-ized posts, even if they do not exist
+
+config/puzzle/accept
+	Must be in "reverse substring precedence"
+	That is, aaa before aa (because aa is substring of aaa)
+
+Logging out does not clear client-side settings
+	These settings include list of items user has voted on
+
+There's a piece missing from the PGP-to-cookie auth transition
+	See #knownCookieAuth
+	Server needs to pass encrypted cookie checksum to client
+		and client needs to decrypt it and set it into the checksum cookie
+
+trying to set xhr.timeout causes error in chrome
+	//#xhr.timeout
+
+Hashtags are stripped out of default title
+
+config/reply
+default/html/reply_form_before_reply_list
+default/html/reply_form_after_reply_list
+	two reply forms on one page may cause issues with js.
+	this would happen if all of those are enabled at once.
+	the second reply form would probably not have js enhancements, but would still work.
+		because of this, before will take precedence over after
+		after will not be shown if before is enabled
+
+Sometimes generated keys have the header/comment field
+
+Code Issues
+===========
+In js, there is inconsistent capitalization, some camel, some capitalized
+
+Quite a few #to\dos throughout the code
+
+I am aware that there are many "un-DRY" areas in the code #DRY
+	This is a case of avoiding premature opitmization and "YAGNI"
+	I do not consider it a huge problem if the same type of code is repeated 10 times in a row
+		Because it is all in one place, and fixing it is not difficult
+		Huge benefit of writing it this way first:
+			I'm rewriting the same code several times, making it better each time
+			Once I've written it enough times, I know exactly how to write the DRY version
+			Refactoring this code into DRY is much easier
+				Because I can see exactly what repeats and what doesn't
+				And I don't have to think about how to structure the repetition
+					at the same time as writing the functionality itself
+
+
+Browser Issues
+==============
+See browsers.txt
+
+
+Puzzle
+======
+Client solve time measuring is not enforced in any way,
+	client can set current timestamp on every new hash generation
+The value of the #puzzle token is hard-coded in the sql schema definitions
+	Changing accepted prefixes requires reindexing
+
+
+-M write instead of --write pages.pl
+	it is --write instead of -M write because
+		there is some extra stuff related to php which needs to happen
+			if php is enabled
+
+require profile mode is janky and locks out links and any non-cookie users
+
+quirks mode and php debug are in conflict

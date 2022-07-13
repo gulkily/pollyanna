@@ -1,0 +1,18 @@
+<!-- profile_no.template -->
+<p>Profiles are not available on this server.</p>
+<p class=advanced>
+	<span class=beginner>Administrator: To enable profiles, consider the following settings:<br></span>
+	<code>
+		<br>
+		config/setting/admin/php/enable
+		<br>
+		config/setting/admin/js/enable
+		<br>
+		config/setting/admin/gpg/enable
+		<br>
+		config/setting/admin/profile/enable
+		<br>
+		config/setting/admin/http_auth/*
+	</code>
+</p>
+<!-- / profile_no.template -->

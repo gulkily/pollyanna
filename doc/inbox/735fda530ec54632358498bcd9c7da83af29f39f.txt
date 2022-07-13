@@ -1,0 +1,5 @@
+#meta #brainstorm
+
+if page's preloaded prefs do not match javascript-detected page,
+
+reload the page in the background, without cache somehow

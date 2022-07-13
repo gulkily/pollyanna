@@ -1,0 +1,16 @@
+server.modules += (
+	"mod_auth",       # basic auth
+	"mod_authn_file", # needed for basic auth file
+	"mod_access"      # not sure what this does? #todo
+)
+
+auth.backend = "plain"
+auth.backend.plain.userfile = "config/lighttpd/lighttpd_password.conf"
+auth.require = (
+	"/" => (
+		"method"  => "basic",
+		"realm" => "it_will_show_as_stars",
+		"require" => "valid-user"
+	)
+)
+

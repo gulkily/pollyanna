@@ -1,0 +1,40 @@
+Demo Script
+
+1. Go to Profile page
+2. Delete private key
+3. Log out completely
+6. Create public profile (Go to profile)
+7. Self-tag person
+8. Solve a puzzle under the self-tag item
+
+4. Welcome page
+5. Write page
+5.3 Write something
+5.5 Choose to sign with key
+5.6 Send
+6. Like
+6.5 Flag
+7. Settings page, advanced mode
+
+7.8 Return to Settings page
+8. Notarized page
+9. Open the #like
+10. Highlight hash in item attributes
+11. Display text file
+12. Back to item page
+
+13. Reset interface
+14. Help page, upload
+15 Upload a screenshot
+16. Profile page
+17. Exit
+
+
+
+Questions:
+
+1. Where is the private key stored?
+
+2. What does the notarization chain hash represent?
+
+3. How much of this website would you expect to work without JavaScript?

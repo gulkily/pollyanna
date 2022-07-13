@@ -1,0 +1,7 @@
+#bug
+
+after my_name_is token, not all avatars are updated
+
+not updated:
+profile page
+at the top of the user's info box on the profile page

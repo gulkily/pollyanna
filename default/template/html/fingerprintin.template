@@ -1,0 +1,19 @@
+<!-- fingerprinting.template -->
+
+<h3>What does it mean to fingerprint my device?</h3>
+
+<p>Identifying features, such as your device model, Chrome version, fonts installed, screen size, and network address are added together, scrambled up irreversibly, and stored for a limited time.</p>
+
+<h3>Why would I want to do that?</h3>
+
+<p>Not having to type a password, email, captcha, code, or name.</p>
+
+<h3>How does it work?</h3>
+
+<p>The type of device you are using, screen size, font size, cookie are added together, scrambled irreversibly, and stored for a limited time.</p>
+
+<p>In pseudocode, this is something like: MD5(CONCAT(width, '-', height, '-', fontsize, '-', cookie, ...)).</p>
+
+<p>Or if you think MD5 is too easy to break, you can substitute another hash like SHA256 or ROT13.</p> 
+
+<!-- / fingerprinting.template -->

@@ -1,0 +1,54 @@
+cryptography basics lesson plan
+
+hashes
+
+hashes are a mathematical "summary" of the file
+simple hash: add all the letters and multiply by 100
+common hashes are more optimized than this
+the whole hash changes, and there are the 
+	three types of hash security
+md5 and before, sha1, sha512, etc.
+
+
+ledger using hashes
+
+hash of first item is integrated into the second
+like a russian matroshka doll
+this is called a DAG -- direct acyclic graph
+
+
+private keys
+
+private key is a very large number which you keep secret
+using this number, you can "sign" things using hashing
+	in a way that makes it possible to verify that it was you
+	without knowing your private key
+
+
+public keys	
+
+a public key is like a private key, but known to everyone
+it is generated using the private key provably
+the public key can be "combined" with signed messages into an identity
+
+
+signatures
+
+a signature is a way of mathematically "signing" a message
+this signature can be verified if you have the public key
+very difficult (almost impossible today) to forge
+
+
+web of trust
+
+web of trust is like a DAG of signatures and public keys
+
+
+
+proof of work
+
+the result of a hash function is not predictable
+in order to find a certain prefix, you have to make a lot of tries
+finding the prefix is proof that you've done the work to find it
+
+

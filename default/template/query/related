@@ -1,0 +1,26 @@
+SELECT
+	COALESCE(NULLIF(item_title,''), 'Untitled') AS item_title,
+	add_timestamp,
+	(file_hash = ?) this_row,
+	file_hash
+FROM
+	item_flat
+WHERE
+	tags_list NOT LIKE '%notext%' AND
+	file_hash IN (
+		SELECT
+			DISTINCT file_hash
+		FROM
+			item_attribute
+		WHERE (
+			attribute||'='||value IN (
+				SELECT
+					attribute||'='||value
+				FROM
+					item_attribute
+				WHERE
+					file_hash IN(?) AND
+					attribute IN('url', 'normalized_hash', 'url_domain', 'title', 'cookie_id', 'url_domain')
+			)
+		)
+	)

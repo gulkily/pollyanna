@@ -1,0 +1,8 @@
+netscape doesn't like these settings if js is enabled
+(tested with 2.x, 3.x, 4.x)
+
+config/admin/js/debug=console.log
+(0, 1/alert, and document.title work ok)
+
+config/admin/js/dragging=1
+this is the "quirky enhancements" and does some newjs syntax things like nested functions... for now

@@ -1,0 +1,384 @@
+<meta http-equiv="refresh" content="5">
+
+
+Settings: <span title="`find config/setting -type f | sort | xargs md5sum | md5sum | cut -d ' ' -f 1 > config/hash_setting`">$hashSettingSuccinct</span>
+
+
+
+<span class=beginner>
+				<br>Log out and reset all settings.<br>
+			</span>
+
+
+
+
+
+
+
+
+<a id=btnCollapseMost href=# onclick="
+		if (window.CollapseMost) {
+			if (CollapseMost() < 10) {
+				ExpandAll(document);
+			}
+			return false;
+		}
+	" title="CollapseMost">Summary</a>;
+
+
+
+
+
+
+<form>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1><pre>
+ sH
+ iT
+  My
+seLf
+   .com
+</pre></h1>
+
+<p>
+	<label for=chkWriteAutoSave>
+		<input type=checkbox id=chkWriteAutoSave name=chkWriteAutoSave onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'write_autosave'); }">
+		Save drafts on device<noscript><b>*</b></noscript>
+	</label>
+</p>
+
+
+
+<!-- reputation.template -->
+
+<Agree to terms of service>
+
+
+</Agree>
+
+
+<Solve puzzle>
+
+
+</Solve>
+
+
+<Submit device fingerprint>
+
+
+</Submit>
+
+
+<Create signing key>
+
+
+</Create>
+
+
+<Publish profile>
+
+
+</Publish>
+
+
+<Do something useful>
+
+	Share your opinion about existing content
+
+</Do>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<a id=replyCartClear href=#>Clear</a>
+<br>
+<a id=replyCartAddAll title="Add all items on page to cart" href=#>AddAll</a>
+
+
+
+<a href=# onclick="if (window.SetInterfaceMode) { return SetInterfaceMode('beginner', this); }">Beginner</a>;
+<a href=# onclick="if (window.SetInterfaceMode) { return SetInterfaceMode('intermediate', this); }">Intermediate</a>;
+<a href=# onclick="if (window.SetInterfaceMode) { return SetInterfaceMode('expert', this); }">Advanced</a>
+|
+<a href=#>Light</a>;
+<a href=#>Modern</a>;
+|
+
+
+<a href="#ExpandMore" onclick="
+		if (window.ShowAll) {
+			return ShowAll(this);
+		}
+	" title=ExpandMore accesskey=o>M<u>o</u>re</a>;
+
+|
+
+<a href="/settings.html" onclick="
+		if (document.getElementById && !document.getElementById('settings')) {
+			return FetchDialog('settings');
+		}
+	">Settings</a>;
+
+<a href="/stats.html" onclick="
+		if (document.getElementById && !document.getElementById('stats')) {
+			return FetchDialog('stats');
+		}
+	">Stats</a>
+
+
+<label for=tos3 id=tos3label>
+	<input type=checkbox name=tos3 id=tos3 onclick="
+			if (window.displayNotification) {
+				displayNotification('No', this);
+			} else {
+				alert('No');
+			};
+			if (document.getElementById) {
+				var tos3 = document.getElementById('tos3label');
+				if (tos3 && tos.style) {
+					tos3.style.textDecoration = 'line-through';
+				}
+			}
+			this.checked=false
+		"> <br>
+	"I agree <br>
+	to invalidate all previous agreements, <br>
+	including this one, <br>
+	as necessary, <br>
+	determined by me." <br>
+</label>
+
+
+
+<!-- create_briefcase.template -->
+<form>
+	<label for=name>
+		Title:
+		<input name=name id=name type=text size=16>
+	</label>
+	<input name=agree value=Agree>
+</form>
+<!-- / create_briefcase.template -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>Profile allows you extra features.</p>
+
+<p>To create profile, press Enter button.</p>
+
+<p>To share your profile, press "Go to profile".</p>
+
+<p>Advanced: To choose a name, use "my name is ..." command.</p>
+
+<p>To sign out, use the Exit button.</p>
+
+<p>Advanced: To save profile, use "Save as file" button. (uses JavaScript)</p>
+
+<p>Privacy Help: The top of the page will not show your signed in status.</p>
+
+
+<p>
+		<label for=chkShowPageInfo>
+			<input type=checkbox id=chkShowPageInfo name=chkShowPageInfo onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'show_page_info'); }">
+			Show page information<noscript><b>*</b></noscript>
+		</label>
+	</p>
+
+
+	<p>
+	Cache: $cachedHtmlBytes<br>
+	Generated: $generatedHtmlBytes<br>
+	Added by processing: $addedByProcessingBytes<br>
+	Total: $totalBytes<br>
+</p>
+
+
+
+<a href=# onclick="
+			if (window.DraggingInit) {
+				SetPrefs('draggable', 1);
+				SetPrefs('draggable_activate', 1);
+				DraggingInit(0);
+				DraggingSaveAllDialogPositions();
+				return false;
+			}
+		" title=Store>Store</a>;
+
+
+<a href=# id=btnCascadeArrange onclick="
+			if (this.getAttribute && window.DraggingCascade) {
+				SetPrefs('draggable', 1);
+				SetPrefs('draggable_activate', 1);
+				DraggingInit(0);
+				switch (this.getAttribute('title')) {
+					case 'Cascade':
+						this.innerHTML = 'Arrange';
+						this.title = 'Arrange';
+						DraggingCascade();
+						break;
+					case 'Arrange':
+						this.innerHTML = 'Cascade';
+						this.title = 'Cascade';
+						DraggingMakeFit(0);
+						DraggingRetile();
+						DraggingInit(0);
+						break;
+				}
+			}
+		" title=Arrange>Arrange</a>;
+
+
+
+
+
+
+
+If you're new here, please <br>
+introduce yourself using <br>
+using field and button:<br>
+
+
+Welcome! Please read this.
+All your interactions with this website may become public.
+We will do our best to keep your IP address private by not letting logs sit around...
+But you know how the Internet works, don't you?
+If you're here to cause trouble, please leave immediately.
+That said...
+What is your dream?
+What are you searching for?
+
+
+<a href="/settings.html"
+   onclick="if (!document.getElementById('settings')) { FetchDialog('settings'); FetchDialog('access'); }">Settings</a>
+
+
+<br>
+				<label for=bits title="Algorithm">:
+					<select name=bits id=bits>
+						<option value=0>simple (cookie)</option>
+						<option value=512>fast toy crypto (RSA-512)</option>
+						<option value=1024>slow toy crypto (RSA-1024)</option>
+						<option value=2048>decent (RSA-2048)</option>
+						<option value=4096>stronger (RSA4096)</option>
+						$gpg2Algochoices
+					</select>
+				</label>
+
+
+
+
+
+				<p class=advanced>
+					<code><pre>
+javascript:
+    window.location =
+        'http://localhost:2784/post.html' +
+            '?comment=' +
+                encodeURIComponent(
+                    window.getSelection()
+                ) +
+            '&s=' +
+                encodeURIComponent(document.location)
+            </pre></code>
+				</p>

@@ -1,0 +1,11 @@
+
+hr,
+.dialog,
+fieldset,
+#txtClock
+{
+	border: 1pt dotted #808080;
+	border-radius: 1pt;
+}
+
+

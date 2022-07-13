@@ -1,0 +1,75 @@
+When declaring a function or subprocedure, I try to put a space after its name.
+	This makes it easy to find the definition when doing a global search.
+	Otherwise, please do not put a space after the subprocedure/function name.
+	I also put the argument names, if they're not in the function definition already.
+	After that, I follow with a very short description of the function.
+		Examples:
+
+Netscape 4 has bug with borders on textareas
+	Don't use those
+
+sub SomePerlFunction { # $firstArgument, $argumentTheSecond ; function demonstrates code style in perl
+ 	my $firstArgument = shift;
+	my $argumentTheSecond = shift;
+ 	WriteLog("SomePerlFunction($firstArgument, $argumentTheSecond)");
+
+ 	print('Hello, World!');
+} # SomePerlFunction()
+
+
+function SomePhpFunction ($firstArgument, $argumentTheSecond) { // demonstrates code style in php
+	WriteLog("SomePhpFunction($firstArgument, $argumentTheSecond)");
+
+	print('Hello, World!');
+} // SomePhpFunction()
+
+
+function SomeJavaScriptFunction (firstArgument, argumentTheSecond) { // demonstrates code style in javascript
+	//alert('DEBUG: SomeJavaScriptFunction('+firstArgument+', '+argumentTheSecond+')');
+	// see localdev.txt for information on how JavaScript debugging works
+
+	document.write('Hello, World!');
+} // SomeJavaScriptFunction()
+
+
+#someCssClass { // demonstrates code style in css
+	font-weight: bold;
+}
+
+
+def SomePythonFunction (firstArgument, argumentTheSecond): #{
+	WriteLog("SomePythonFunction(", firstArgument, argumentTheSecond, ")")#;
+	print("Hello, World!")#;
+#}
+
+
+This is tuned for global search, so that one can press Ctrl+Shift+F, type in "SomeFunction ", and immediately see this information.
+The same function may be written in multiple languages, and you'll see all of them in one search.
+Of course, in order for this to work well, when *calling* a function, I must avoid putting a space after the function name.
+
+Examples of calling a function:
+
+SomePerlFunction('foo', 'bar'); # perl
+SomePhpFunction('foo', 'bar'); // php
+SomeJavaScriptFunction('foo', 'bar'); // javascript
+
+This also applies to writing debug messages. I avoid putting a space after the function name there, too.
+
+Examples, also seen above:
+
+WriteLog("SomePerlFunction($firstArgument, $argumentTheSecond)");
+WriteLog("SomePhpFunction($firstArgument, $argumentTheSecond)");
+//alert('DEBUG: SomeJavaScriptFunction('+firstArgument+', '+argumentTheSecond+')');
+
+JavaScript and > symbols
+	There are several browsers which consider > symbol to be HTML comment closing tag
+		Mosaic
+		IE2
+	For this reason, > symbol in JS is to be avoided
+		I've come up with the following pretty short method
+			var gt = unescape('%3E');
+			var someTag = '<p' + gt;
+			var someHtmlString = '<p' + gt + 'hello, world</p' + gt;
+	It's kind of a pain in the ass, but also happens to discourage html strings in JS which is a plus
+
+

@@ -1,0 +1,9 @@
+<!-- status_bar.template -->
+<a href="$permalinkHtml">$addedTime</a>;
+$authorLink;
+<span class=advanced>
+	<span class=fileHashShort></span>;
+	<a href="$permalinkHtml#reply">reply($replyCount)</a>;
+</span>
+$itemFlagButton
+<!-- status_bar.template -->

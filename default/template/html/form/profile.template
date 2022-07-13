@@ -1,0 +1,51 @@
+<!-- form/profile.template -->
+<form action="/profile.html" name=frmProfile class=frmProfile>
+	<fieldset id=fldRegistration>
+		<p id=pRegButton>
+			<input id=btnRegister
+				type=submit
+				name=btnRegister
+				value="Register"
+			>
+			<span class=beginner>
+				<br>Register; Sign In; Create Profile.<br>
+			</span>
+		</p>
+
+		<p id=pSigningIndicator>
+			<span id=lblSigningIndicator>
+				<noscript>*</noscript>
+				<script>
+				<!--
+				document.write('...'); // #todo this should be filled in
+				// -->
+				</script>
+			</span>
+		</p>
+
+		<hr>
+
+		<span>
+
+			<p id=pCurrentProfileIndicator>
+				<b><span id=lblHandle></span></b><br>
+				<span id=lblFingerprint></span><br>
+			</p>
+
+			<p id=spanProfileLink></p>
+
+			<hr id=pCurrentProfileIndicatorSeparator>
+		</span>
+
+		<p id=pExitButton>
+			<input
+				type=submit
+				name=btnSignOut
+				onclick="if (window.btnSignOut_Click) { return btnSignOut_Click(this); }"
+				id=btnSignOut
+				value="Exit"
+			>
+		</p>
+	</fieldset>
+</form>
+<!-- / form/profile.template -->

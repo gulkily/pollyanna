@@ -1,0 +1,23 @@
+<!-- theme/mitbtc/template/topmenu2.template -->
+<table cellspacing=0 cellpadding=3 border=0 bgcolor="$colorWindow" class=dialog>
+	<tr bgcolor="$colorTopMenuTitlebar">
+		<td>
+			<img alt="MIT Bitcoin Club Logo" title="MIT Bitcoin Club Logo" src="/logo.gif" height=16 width=16>
+			<font color="$colorTitlebarText"><b>Welcome</b></font>
+			<a href="/etc.html">.</a>
+			<br>
+		</td>
+		<td align=right>
+			<span id=spanDialogControls></span>
+		</td>
+	</tr>
+	<tr bgcolor="$colorWindow" class=menubar>
+		<td colspan=2>
+			<big>
+				<big>$menuItems</big>
+			</big>
+		</td>
+	</tr>
+</table>
+<!-- / mitbtc/template/topmenu2.template -->
+

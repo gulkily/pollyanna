@@ -1,0 +1,9 @@
+<!-- write_zalgo_button.template -->
+<p>
+	<a onclick="if (window.zalgo_textarea) { zalgo_textarea('comment'); return false; }" href=#>ZALGO</a>
+	<noscript>*</noscript>
+	<br>
+	He comes, he goes.<br>
+	(Click again to undo.)
+</p>
+<!-- / write_zalgo_button.template -->

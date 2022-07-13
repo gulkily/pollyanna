@@ -1,0 +1,9 @@
+SELECT
+	item_title,
+	file_hash,
+FROM item_flat
+WHERE
+	parent_count = 0 AND
+	item_type = 'image'
+ORDER BY add_timestamp DESC
+

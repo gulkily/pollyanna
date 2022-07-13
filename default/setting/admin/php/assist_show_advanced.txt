@@ -1,0 +1,27 @@
+Summary: This reduces page jitter (moving around) after page load.
+
+The downside is that when user changes settings, page must be reloaded.
+This should be fixed in the future. #todo
+
+This is to assist the modular UI, which consists of three layers (specified as class):
+beginner
+advanced
+admin
+
+(Not all elements have a class, and all elements are visible by default.
+
+Each of these groups may be hidden depending on user settings. In order to prevent page elements from jumping around, we can pre-set their visibility with an injected style.
+
+This setting enables such injection. Based on the following three cookies, the respective element groups will be hidden when the cookie is set to 0.
+
+beginner
+show_advanced
+show_admin
+
+Styles like this will be inserted into the page when cookie is set to 0:
+
+.beginner { display: none; }
+.advanced { display: none; }
+.admin { display: none; }
+
+It helps remediate UI jumping around after page load.

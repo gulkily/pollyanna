@@ -1,0 +1,10 @@
+config/*
+cache/*
+html/*
+log/*
+once/*
+temp/*
+archive/*
+html/*
+.idea/*
+*.swp

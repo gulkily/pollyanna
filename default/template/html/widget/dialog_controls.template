@@ -1,0 +1,89 @@
+<!-- dialog_controls.template 'Interface Controls' -->
+<noscript>*</noscript>
+	<span class=beginner>
+		<a id=btnAdvanced
+			accesskey=o
+			href=#
+			onclick="
+				SetPrefs('show_advanced', 1);
+				SetPrefs('advanced_highlight', 0);
+				SetPrefs('beginner', 0);
+				SetPrefs('beginner_highlight', 0);
+				SetPrefs('notify_on_change', 1);
+
+				ShowAdvanced(0, 0);
+			"
+		>Advanced</a>;
+	</span>
+
+	<span class=advanced>
+
+		<a id=btnMinimal href=# onclick="
+			if (window.SetPrefs) {
+				SetPrefs('show_advanced', 0);
+				ShowAdvanced(0, 0);
+			}
+		" title=Minimal>Minimal</a>;
+
+		<a id=btnCascade href=# onclick="
+			if (window.DraggingCascade) {
+				SetPrefs('draggable', 1);
+				DraggingInit(0);
+				DraggingMakeFit(0);
+				DraggingCascade();
+				DraggingInit(0);
+			}
+		" title=Cascade>Cascade</a>;
+
+		<a id=btnArrange href=# onclick="
+			if (window.DraggingRetile) {
+				SetPrefs('draggable', 1);
+				DraggingInit(0);
+				DraggingMakeFit(0);
+				DraggingRetile();
+				DraggingInit(0);
+			}
+		" title=Arrange>Arrange</a>;
+
+		<a id=btnAnnoy href=# onclick="
+			if (window.DraggingRetile) {
+				SetPrefs('draggable', 1);
+				SetPrefs('draggable_activate', 1);
+				SetPrefs('draggable_spawn', 1);
+				SetPrefs('draggable', 1);
+				SetPrefs('draggable_restore', 1);
+				SetPrefs('draggable_restore_collapsed', 1);
+				SetActiveDialog(GetParentDialog(this));
+				DraggingInit(0);
+				DraggingMakeFit(0);
+				DraggingRetile2(1);
+				DraggingInit(0);
+				FetchDialog('annoyances');
+			}
+		" title=Annoy>Annoy</a>;
+	</span>
+
+	<a id=btnDraggingReset href=# onclick="
+		if (window.DraggingReset && window.SetPrefs) {
+			SetPrefs('beginner', 1);
+			SetPrefs('show_advanced', 0);
+			SetPrefs('show_admin', 0);
+			SetPrefs('draggable_activate', 0);
+			SetPrefs('draggable_spawn', 0);
+			SetPrefs('draggable', 0);
+			SetPrefs('draggable_restore', 0);
+			SetPrefs('draggable_restore_collapsed', 0);
+			DraggingReset();
+			//window.location.reload();
+
+			var winLoc = window.location.href;
+			if (winLoc.indexOf('?')) {
+				winLoc = winLoc.substr(0, winLoc.indexOf('?'));
+			}
+			winLoc = winLoc + '?time=9999999999';
+			window.location = winLoc;
+		}
+	" title="Reset">Reset</a>
+
+<!-- #todo redo this whole template -->
+<!-- / dialog_controls.template -->

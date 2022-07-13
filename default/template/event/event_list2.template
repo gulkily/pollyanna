@@ -1,0 +1,25 @@
+
+<font face=arial>
+	<table cellspacing=0 cellpadding=6 border=0 bgcolor="$colorWindow" class=dialog>
+		<tr bgcolor="$colorTitlebar" class=titlebar>
+			<td>
+				<font color="$colorTitlebarText"><b>Events</b></font>
+			</td>
+		</tr>
+
+		<tr class=menubar>
+			<td>
+				<p><a href="/event.html">Add New Event</b></a></p>
+			</td>
+		</tr>
+
+		$eventsList
+
+		<tr class=statusbar>
+			<td>
+				Ready
+			</td>
+		</tr>
+	</table>
+</font>
+

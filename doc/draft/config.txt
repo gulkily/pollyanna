@@ -1,0 +1,230 @@
+The configuration is designed to be self-explanatory
+Under the config/ directory, there are sub-directories and files
+One file is used per configuration setting
+Most of the files have a 0 or 1 inside, sometimes a one-line string.
+Each feature is in a sub-directory, for example, replying:
+
+Examples:
+config/reply/enable turns the reply feature on or off (1 or 0)
+
+Commands to try:
+cd ~/hike
+ls config
+find config | grep js
+find config | grep php
+find config | less
+
+Information for Developer:
+
+If a value is not found in config/, it is looked up in default/, and copied to config/
+
+Commands to try:
+cd ~/hike
+ls default
+
+If you're improving the software and you want to commit to repo,
+ edit the files in default/ and let them propagate to config/
+
+The _dev_clean_ALL script will remove most things under config/
+
+
+SUMMARY
+=======
+
+config is stored in individual files per key
+
+default/ directory has all the defaults
+
+config/ directory overrides the defaults
+
+===
+
+most config is 0/1 or one-line string
+
+config/admin/debug is a special one, file must be absent for debug to be off
+
+===
+
+example:
+
+echo 1 > config/admin/js/enable
+# enable javascript module
+
+echo 0 > config/admin/php/enable
+# disable php module
+
+===
+
+admin/access_log/path_glob_list
+this is where access.pl will look for the access log from the web server.
+it's a list of file globs (paths, but with option for wildcards like *), separated by \n
+default: log/access.log
+
+admin/allow_self_admin_when_adminless
+if not 0, user can self-assign #admin tag when no other admins are in database
+default: 0
+
+admin/allow_broken_signatures #todo
+If an item contains a signed message header, but the signature checks fail. The item will be tagged type:error
+0
+	Do not display item's contents, do not process any tokens, nor add any other tags.
+	Item will only be visible on the type:error listing page
+1
+	Item will be displayed in its entirety on listings.
+	Item will have type:hastext tag
+	Any other tokens in the item will still be processed
+default: 0
+
+admin/clean_house_window #todo
+I suppose this would determine how frequently the house is cleaned
+
+admin/html/ascii_only
+if not 0, only ascii characters will be output to html
+default: 0
+
+admin/debug
+if 1, debug messages will be written to log/log.log
+ATTENTION: this is a special one. you must delete config/admin/debug to turn off debug mode
+default: (no file)
+
+tagset/emotion
+list of emotions to include on voting pages
+
+tagset/flag
+values provided to users as reasons to flag a post
+one on each line
+
+home_title
+title of home page
+default: Welcome!
+
+item_long_threshold
+how many characters an item can be before it is considered "long" and is cut off when displayed in some listings
+default: 1024
+
+logo_text
+text logo, displayed next to title on pages
+default: *
+
+html/page_limit
+number of items to display per page in listings
+default: 100
+
+prefill_username
+username to pre-fill for people who are not signed in
+leave blank to not pre-fill anything
+default: Anonymous
+
+theme/color_primary
+list of \n-separated hex colors (012bcd format) to be used randomly for ui colors
+
+admin/access_log_path_glob_list
+this is where access.pl will look for the access log from the web server.
+\n-separated list of globs (so wildcards allowed, e.g. log/access.log.*)
+default: log/access.log
+
+admin/allow_self_admin_when_adminless
+if not 0, user can self-assign #admin tag when no other admins are in database
+default: 0
+
+admin/html/ascii_only
+if not 0, only ascii characters will be output to html portions of website
+all other characters will be stripped
+#todo some conversion if possible, from e.g. cyrillic unicode chars to koi8-r, but it is some work...
+default: 0
+
+admin/debug
+if present, debug messages will be written to log/log.log
+default: 0
+
+tagset/flag
+values provided to users as reasons to flag a post
+one on each line
+
+admin/server_sign_anon_votes #todo
+not built, but would turn this off even if server key is set
+default: 1
+
+admin/sha_length #todo
+length to which sha hashes are shortened
+#todo maybe think of a better name for this
+
+html/home_page
+sets the home page, uses the file path from PutHtmlFile()
+default: html/write.html
+
+home_title
+title of home page
+default: Welcome!
+
+item_long_threshold
+how many characters an item can be before it is considered "long" and is cut off when displayed in listings
+default: 1024
+
+logo_text
+text logo, displayed next to title on pages
+default: *
+
+prefill_username
+username to pre-fill for people who are not signed in
+leave blank to not pre-fill anything
+default: Anonymous
+
+theme/color_primary
+list of \n-separated hex colors (012bcd format) to be used randomly for ui color
+default: (see repo)
+
+theme/color_secondary
+list of \n-separated hex colors (012bcd format) to be used randomly for ui secondary color
+default: (see repo)
+
+background_colors
+list of \n-separated hex colors (012bcd format) to be used randomly for ui background color
+default: (see repo)
+
+admin/pull_item_limit
+how many items to pull via http at a time when pulling from other nodes
+#todo work in progress, may not be necessary thanks to git
+default: 10
+
+admin/push_item_limit
+how many items to push to other nodes via http at a time
+#todo work in progress, may not be necessary thanks to git
+default: 5
+
+replies
+whether or not to enable replying functionality
+#todo verify this works at 0, may not disable everything currently
+default: 1
+
+tags
+list of tags to provide user as voting options
+default: (see repo)
+
+theme/color_text
+list of colors to use randomly for page text, \n-separated
+default: (see repo)
+
+admin/gpg/use_gpg2
+if not 0, gpg2 command is used in place of gpg when performing GPG-related tasks
+default: 0
+
+admin/gpg/capture_stderr_output
+when gpg parses a message, stderr output is produced (signature date, etc.)
+when admin/gpg/capture_stderr_output is set to 1, this output is captured and appended to the displayed message text
+default: 0
+
+admin/vote_limit
+This is how long anonymous (unsigned) votes are counted for. Default is 365 days.
+Age of vote is calculated based on timestamp in vote token.
+default: 31536000
+
+zip_interval
+how frequentlly the zip archive of the entire site is updated, in seconds
+default: 3600
+
+html/avatar_icons
+1 or 0
+if 1, generates pretty multicolor avatars for aliases/fingerprints
+if 0, leaves avatars as just alias
+default: 1

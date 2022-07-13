@@ -1,0 +1,23 @@
+sana
+====
+sections
+	magia
+		tarot
+		runes
+		energic cleansing
+		amulets / protection
+			with bioparts
+			charging of amulets
+	poetry
+	store
+		paypal
+	photos
+materials
+	photo
+		facebook
+	poetry
+	magia text
+	design
+
+
+

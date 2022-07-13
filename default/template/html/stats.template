@@ -1,0 +1,59 @@
+<!-- stats.template -->
+
+<fieldset>
+	<p>Updated: $lastUpdateTime
+	<p>Version: $versionSequence
+	<p></p>
+	<p id=diagnostics></p>
+</fieldset>
+<fieldset>
+	<p>Built: $lastBuildTime
+	<p>
+		<a href="/tags.html">
+			<b>$tagsTotal tags</b>
+			<span class=advanced><span class=beginner><br>applied to make content more findable</span></span>
+		</a>
+	</p>
+	<p>
+		<a href="/authors.html">
+			<b>$authorCount authors</b>
+			<span class=advanced><span class=beginner><br>shared their names or public keys</span></span>
+		</a>
+	</p>
+	<p>
+		<a href="/threads.html">
+			<b>$threadsCount threads</b>
+			<span class=advanced><span class=beginner><br>items with replies</span></span>
+		</a>
+	</p>
+	<p>
+		<a href="/chain.html">
+			<b>$chainLogLength notarized</b>
+			<span class=advanced><span class=beginner><br>time was recorded into server's chain log</span></span>
+		</a>
+	</p>
+	<p class=advanced>
+		<a href="/compost.html">
+			<b>$itemsIndexed items</b>
+			<span class=beginner><br>pieces of content published on this service</span>
+		</a>
+	</p>
+	<p class=advanced>
+		<a href="/deleted.html">
+			<b>$itemsDeleted archived</b>
+			<span class=beginner></span>
+		</a>
+	</p>
+	<p class=advanced>
+		<a href="/data.html">
+			<b>$filesTotal files</b>
+			<span class=beginner><br>found under /html/txt (click to download)</span>
+		</a>
+	</p>
+	<p class=advanced>
+		<span class=beginner>version: </span>
+		<span title="`git rev-parse HEAD`">$versionSuccinct</span>
+	</p>
+</fieldset>
+
+<!-- / stats.template -->

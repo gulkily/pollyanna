@@ -1,0 +1,17 @@
+<!-- pagination.template -->
+<font face=arial><p>
+	<table cellspacing=0 cellpadding=5 border=0 bgcolor="$colorWindow" class=dialog>
+		<tr bgcolor="$colorTitlebar" class=titlebar>
+			<td>
+				<font color="$colorTitlebarText"><small><b>Pages</b></small></font>
+			</td>
+		</tr>
+
+		<tr class=body>
+			<td class=content>
+				<p class=pagination>$paginationLinks</p>
+			</td>
+		</tr>
+	</table>
+</p></font>
+<!-- / pagination.template -->

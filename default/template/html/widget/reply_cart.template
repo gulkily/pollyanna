@@ -1,0 +1,9 @@
+<!-- reply_cart.template -->
+<fieldset>
+	<span id=replyCartCount></span>
+	<noscript><b>*</b></noscript>
+</fieldset>
+<fieldset>
+	<a id=replyCartInsert href=#>Paste</a>
+</fieldset>
+<!-- / reply_cart.template -->

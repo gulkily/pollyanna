@@ -1,0 +1,5 @@
+Bill of rights for users
+
+1. Users can download their data in a useful format.
+2. Users can review the full vote record.
+3. Voting is a right, not a privilege. All clients will be accommodated.

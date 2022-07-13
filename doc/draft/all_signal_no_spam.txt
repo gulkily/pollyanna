@@ -1,0 +1,22 @@
+How RocketScience attempts to "solve" the spam problem.
+
+A multi-layer approach is used:
+
+Most accounts are vouched by a web of trust system.
+This vouching process only happens once per device (ideally)
+Or when the user clears browser storage.
+
+New users coming into the system are reviewed by moderators
+who take it upon themselves to review incoming information.
+
+The choices made by these sentinenls are fully transparent,
+and any non-unanimous agreement can be detected immediately
+by any interested reviewing party.
+
+Reviewers are self-selected and perform this duty for those
+who do not have the capacity: the guests.
+
+Guests are welcome with their existing hardware and clients,
+and compatibility and accessibility are continously improved.
+
+

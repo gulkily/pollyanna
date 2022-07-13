@@ -1,0 +1,13 @@
+<!-- write-quick.template -->
+<label for="comment" title="Quick-Write">
+	<input
+		type=text
+		size=17
+		name=comment
+		id=comment
+		accesskey=q
+		title="Quick-Write"
+	>
+</label>
+<input type=submit value=Send>
+<!--/ write-quick.template -->

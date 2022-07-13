@@ -1,0 +1,15 @@
+SELECT
+	item_flat.item_title item_title,
+	item_flat.child_count child_count,
+	item_flat.item_score item_score,
+	item_flat.file_hash file_hash,
+	item_flat.add_timestamp add_timestamp
+FROM
+	item_flat
+WHERE
+	item_flat.parent_count = 0 AND
+	item_flat.child_count > 0 AND
+	item_flat.item_score >= 0
+ORDER BY
+	item_flat.child_count DESC,
+	item_flat.item_score DESC

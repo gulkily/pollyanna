@@ -1,0 +1,61 @@
+Each use case dictates its own security needs...
+
+
+LOWEST SECURITY MODEL
+=====================
+
+SCENARIOS:
+Limited-access, low-risk, access-restricted "intimate" network.
+Example: Household shopping lists and calendar.
+Example: LAN party board.
+
+GENERAL VIBE:
+Locally accessible, NAT to the outside world.
+Access and registration are unrestricted.
+Cryptographic signing is not used.
+All information is stored as plaintext.
+Optional JavaScript enhancements provide snappy response.
+
+BENEFITS:
+Easy to access and contribute.
+No special training or setup required.
+Easy to archive and share.
+
+
+MEDIUM SECURITY MODEL
+=====================
+
+SCENARIOS:
+Low-traffic online message lists, community boards, fan clubs, etc.
+Dance class, yoga class, potluck, or reading club.
+Schedule, notes, calendar.
+
+GENERAL VIBE:
+Global entry password, occasionally rotated.
+Account credentials are stored in-browser.
+New accounts are approved by moderator.
+Information can be encrypted and/or archived off-site.
+JavaScript for content signing in addition to convenience.
+
+BENEFITS:
+Easy to use with reasonable security.
+Account portability, board can be moved between hosts.
+
+
+HACKER SECURITY MODEL
+=====================
+
+SCENARIOS:
+Security-conscious, technically-literate operator and user base.
+
+GENERAL VIBE:
+Air-gapped hardware, occasional data transfer in safe formats.
+Web of trust for community-authenticating new clients.
+Users perform their own key generation and signing.
+Account credentials self-managed by each user.
+JavaScript is never served to clients.
+
+BENEFITS:
+Reasonable chance of security and verifiability.
+Privacy can be achieved with skilled use of GnuPG or OpenPGP.
+Compatible with most plaforms, toolchains, and workflows.

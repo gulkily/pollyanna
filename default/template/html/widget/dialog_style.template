@@ -1,0 +1,17 @@
+<!-- dialog_style.template -->
+
+<fieldset>
+	<code>
+		top: <span id=propTop></span>;<br>
+		left: <span id=propLeft></span>;<br>
+		width: <span id=propWidth></span>;<br>
+		height: <span id=propHeight></span>;<br>
+		right: <span id=propRight></span>;<br>
+		bottom: <span id=propBottom></span>;<br>
+		position: <span id=propPosition></span>;<br>
+		display: <span id=propDisplay></span>;<br>
+		z-index: <span id=propZindex></span>;<br>
+	</code>
+</fieldset>
+
+<!-- / dialog_style.template -->

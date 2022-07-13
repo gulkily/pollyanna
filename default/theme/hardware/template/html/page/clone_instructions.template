@@ -1,0 +1,37 @@
+<h3>How to Clone and Rehost This Site</h3>
+
+<h4>Download the Data</h4>
+
+<p>
+	Download the posts, replies, images, votes, and public profiles as a zip file.
+</p>
+
+<p>
+	The data format allows for re-validation of the data integrity
+	(similar to a blockchain) as well as rebuilding a complete copy
+	of the site, either locally or online.
+</p>
+
+<p>
+	The user accounts are owned and controlled by the users themselves
+	using a private key, so the same account can be used across different
+	clones. They are not included.
+</p>
+
+<h4>How to Create a Clone</h4>
+
+<p>
+	To create a clone, you will need to know how to do these things:
+</p>
+
+<pre>
+1. Extract files to server or local computer
+
+2. Run import script 
+
+3. Run web server
+
+4. Test it out to ensure it works
+
+5. Keep an eye on the server to keep everything is OK.
+</pre>

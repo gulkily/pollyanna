@@ -1,0 +1,61 @@
+The permissions system is designed to be simple.
+================================================
+
+There is the top user, Operator.
+	This user is defined with ./admin.key
+		admin.key is in the format of -----BEGIN PGP PUBLIC KEY BLOCK-----
+	This user has the #admin tag.
+
+This tag, #admin, allows assigning any other tags.
+
+Anyone with "admin" tag can assign any other tag.
+	For any other tag, you must have the tag assigned to you in order to assign the same tag.
+		There are also "tagsets", which have a list of tags under them, which can also be assigned
+			For example, tagset/moderator would have 'remove' under it
+			Tagsets are also tags themselves, so they would be able to assign #moderator
+
+For example, here is the process of changing the Admin user
+	First, change admin.key  to the new admin's public key.
+	Then new admin adds #admin key to the previous root admin
+		This enables the effects of all their previous actions and vouches.
+
+
+
+
+
+NewAdmin
+========
+#admin ==> OldAdmin
+
+
+OldAdmin
+========
+#moderator ==> John, Mary, Suzy, George, Jon
+
+tagset/moderator
+================
+#remove
+#approve
+
+
+So, anyone who has #moderator tag can also assign #remove and #approve tags.
+
+These would probably be specially-bound tags which perform actions.
+
+For example, the #approve tag may allow a post to appear on the front/top page.
+
+While the #remove tag may cause a post to disappear from the board.
+
+OldAdmin assigned the #moderator tag to five people.
+
+NewAdmin allowed all of OldAdmin's actions to persist by assigning #admin to them as well.
+
+What if NewAdmin wanted to remove the #moderator tag from George and Jon, but not John, Mary or Suzy?
+
+At this time, this depends on whether the tags were assigned together in one item.
+
+If they were assigned separately, you can remove that item.
+
+If they were assigned together, you have to remove the assignment and then re-add the people you want to remain moderators.
+
+In the future, there may be a way to negate existing tags, in case you want to preserve the previous relationships. I have not yet decided if this is necessary.

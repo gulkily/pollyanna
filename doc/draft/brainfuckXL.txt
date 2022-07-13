@@ -1,0 +1,12 @@
+brainfuckXL
+===========
+
+brainfuckXL is a language using the following characters for syntax:
+
+.;]\-,<">'+[:`_|+
+
+the purpose of this is to expand brainfuck's original 8 character set 
+to 16 characters, in order to print snow for debug output of various scripts.
+
+these characters are used for outputting the "debug snow" when scripts are
+run in debug mode. no known brainfuckXL parser, syntax, or logic exists.

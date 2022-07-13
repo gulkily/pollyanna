@@ -1,0 +1,15 @@
+RewriteEngine On
+RewriteRule ^post\.html??(.+)? /post.php [QSA]
+RewriteRule ^chat\.html??(.+)? /quick.php [QSA]
+
+# config/setting/php/rewrite=query
+# ========================
+# more accessible static failover
+# BUT php not supported on all urls
+
+# purposely exclude urls without query
+# this improves accessibility when php has an issue
+# giving users direct access to static html files
+
+RewriteRule ^(.+\.html)\?(.+)$ /route.php?path=/$1&$2 [QSA]
+RewriteRule ^(.*)\/\?(.+)$ /route.php?path=$1/index.html&$2 [QSA]

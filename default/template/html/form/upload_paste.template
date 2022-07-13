@@ -1,0 +1,16 @@
+<!-- upload_paste.template -->
+
+<form action="/upload.php">
+	<input type=submit value=Paste>
+</form>
+
+handleCut = (e) => {
+  document.querySelector('#a').select();
+  document.execCommand('cut');
+}
+
+handlePaste = () => {
+  navigator.clipboard.readText().then(text => document.querySelector('#a').value = text);
+}
+
+<!-- / upload_paste.template -->

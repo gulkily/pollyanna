@@ -1,0 +1,166 @@
+
+#bug in ie4, the mouse cursor blinks every time the clock is updated
+   or maybe something else is causing it, but either way, not great...
+
+
+===
+
+#bug in ie4, the mouse cursor blinks every time the clock is updated
+   or maybe something else is causing it, but either way, not great...
+addtext=Meditate...
+
+
+
+===
+
+#bug in ie4, the mouse cursor blinks every time the clock is updated
+   or maybe something else is causing it, but either way, not great...
+-- 
+Authorization: admin
+
+
+===
+
+on netscape 4, the font sizes are inconsistent on index0 page
+
+on the plus side, unicode seems to be supported, at least for cyrillic!
+
+very nice
+
+#meta #bug #testing
+-- 
+Authorization: admin
+Cookie: 35BF609DF8BFF1E0
+
+
+===
+
+on netscape 4, the font sizes are inconsistent on index0 page
+
+on the plus side, unicode seems to be supported, at least for cyrillic!
+
+very nice
+
+#meta #bug #testing
+addtext=Meditate...
+
+
+
+===
+
+#bug when accessibility mode is enabled and then disabled, old pages are still in the previous mode sometimes
+#canwefixit #yeswecan #probablyinmostbrowsers
+
+
+
+manual oage is now our of date #meta #bug
+-- 
+Host: www.shitmyself.com
+
+
+===
+
+#meta #bug
+
+sorry about that, netscape.
+
+
+
+>>67e488486efc1830df7ebec4a12a4a63f6c10833
+timestamp=1601841263
+
+-- 
+Host: localhost:2784
+
+
+===
+
+#meta #bug
+
+sorry about that, netscape.
+
+
+
+>>67e488486efc1830df7ebec4a12a4a63f6c10833
+-- 
+Cookie: 1B326915D959F366
+Host: localhost:2784
+
+
+===
+
+#meta #bug netscape keyboard is broken on nn 2.01 with js enabled
+
+
+
+===
+
+#meta #bug
+
+>>5253d140799bc8f215257caba831d7fa44bc0747
+-- 
+Cookie: 4EA1957B064467C3
+Host: 10.0.2.2:2784
+
+
+===
+
+#meta #bug on opera 4.0 (js enabled) the reply links don't do anything
+-- 
+Cookie: E1D82AC8B0951B6D
+Host: 10.0.2.2:2784
+
+
+===
+
+#meta #bug on opera 4.0 (js enabled) the reply links don't do anything
+addtext=Meditate...
+
+-- 
+Host: 10.0.2.2:2784
+
+
+===
+
+#meta #bug strange behavior after git init: 
+
+`"--"--"+-++""+-+"++-++DBD::SQLite::db prepare failed: no such table: item_attribute at ./sqlite.pl line 1950.
+Can't call method "execute" on an undefined value at ./sqlite.pl line 1951.
+"+++++""--fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+.--`+'+"+"--recognized --all
+DBD::SQLite::db prepare failed: no such table: task at ./sqlite.pl line 441.
+Can't call method "execute" on an undefined value at ./sqlite.pl line 442.
+,`--'+,,--all
+"--fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+.--`+'+"+,"-,.------"---.++,"-,.------`--+`--+--',.-,.------+---+
+
+1606626458 update.pl: Calling ProcessAllAccessLogsInConfig...
+
+
+
+===
+
+#meta #bug
+
+child admin's avatar does not turn red.
+
+
+===
+
+cookie auth doesn't work without php, but still pretends to work
+
+
+
+===
+
+#bug netscape 6, the loading indicator causes page jump after "ready" goes away
+
+perhaps it makes sense to not make it go away and just leave it there, unless it is clicked?
+
+#brainstorm
+
+#meta

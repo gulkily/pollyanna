@@ -1,0 +1,9 @@
+needed to change:
+
+processor paths at top of file in:
+
+perl files 
+
+shell files (to /bin/sh)
+
+tested without php, did install

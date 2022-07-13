@@ -1,0 +1,30 @@
+<!-- post.template -->
+<font face=arial>
+    <table cellspacing=0 cellpadding=6 border=0 bgcolor="$colorWindow" class=dialog>
+        <tr bgcolor="$colorTitlebar" class=titlebar>
+            <td>
+				<font color="$colorTitlebarText"><b>Submission Received!</b></font>
+            </td>
+        </tr>
+
+        <tr class=body>
+            <td class=content>
+                <p>Thank you!
+                <p>Your submission has been received.
+                <p>You may not see it appear on the site immediately.
+				<p><a href="/">You're welcome.</a>
+				<p><b><span id=retRef></span></b>
+				<p><span><!-- submitted_text --></span>
+				<p><br>
+			</td>
+		</tr>
+
+		<tr class=statusbar>
+			<td>
+				<p>Ready
+			</td>
+		</tr>
+	</table>
+</font>
+
+<!-- / post.template -->

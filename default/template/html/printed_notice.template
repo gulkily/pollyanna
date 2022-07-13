@@ -1,0 +1,17 @@
+<!-- printed_notice.template -->
+<p>
+	Q: When was this page printed?<br>
+	A: <span class=timestamp epoch=$printedEpoch>$printedHuman</span>
+</p>
+<p>
+	Q: How old was the page when downloaded?<br>
+	A: $printedAgeSeconds
+</p>
+<p>
+	Q: How can I get a fresher copy?<br>
+	A: Ask the server for a <a href="$selfPath">[reprint]</a>
+</p>
+<p>
+	RocketScience <span title="`git rev-parse HEAD`">$versionSuccinct</span></a>
+</p>
+<!-- / printed_notice.template -->

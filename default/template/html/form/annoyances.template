@@ -1,0 +1,50 @@
+<!-- annoyances.template -->
+<fieldset class=advanced>
+	<p class=warning>
+		<b>Proper equipment required.</b><br>
+		These features work best with a mouse.
+	</p>
+
+	<p>
+		<label for=chkDraggable>
+			<input id=chkDraggable name=chkDraggable type=checkbox onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'draggable'); }">
+			Allow dialog reposition<noscript><b>*</b></noscript>
+		</label>
+	</p>
+
+	<p>
+		<label for=chkDraggableSpawn>
+			<input id=chkDraggableSpawn name=chkDraggableSpawn type=checkbox onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'draggable_spawn'); }">
+			Spawn dialogs in-page<noscript><b>*</b></noscript>
+		</label>
+	</p>
+
+	<p>
+		<label for=chkDraggableRestore>
+			<input id=chkDraggableRestore name=chkDraggableRestore type=checkbox onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'draggable_restore'); }">
+			Restore dialog positions<noscript><b>*</b></noscript>
+		</label>
+	</p>
+
+	<p>
+		<label for=chkDraggableRestoreCollapsed>
+			<input id=chkDraggableRestoreCollapsed name=chkDraggableRestoreCollapsed type=checkbox onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'draggable_restore_collapsed'); }">
+			Restore dialog collapsed state<noscript><b>*</b></noscript>
+		</label>
+	</p>
+
+	<p>
+		<label for=chkDraggableScale>
+			<input id=chkDraggableScale name=chkDraggableScale type=checkbox onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'draggable_scale'); }">
+			Rescale active dialog<noscript><b>*</b></noscript>
+		</label>
+	</p>
+
+	<p>
+		<label for=chkDraggableActivate>
+			<input id=chkDraggableActivate name=chkDraggableActivate type=checkbox onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'draggable_activate'); }">
+			Activate with pointer<noscript><b>*</b></noscript>
+		</label>
+	</p>
+</fieldset>
+<!-- / annoyances.template -->

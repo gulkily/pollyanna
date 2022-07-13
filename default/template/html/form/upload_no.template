@@ -1,0 +1,16 @@
+<!-- upload_no.template -->
+<p>Upload feature is not available. Apologies.</p>
+<p class=advanced>
+	<span class=beginner>Administrator: To enable upload feature, consider the following settings:<br></span>
+	<code>
+		<br>
+		config/setting/admin/php/enable
+		<br>
+		config/setting/admin/php/upload
+		<br>
+		config/setting/admin/js/enable
+		<br>
+		config/setting/admin/convert/enable
+	</code>
+</p>
+<!-- / upload_no.template -->

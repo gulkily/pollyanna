@@ -1,0 +1,26 @@
+demo checklist
+==============
+
+git clone
+
+build
+
+launch server
+
+enable self-admin
+
+open browser and create account
+
+self-admin
+
+post something
+
+open hn and find something interesting
+
+clip comments
+
+view database in cli
+
+view database in gui
+
+save zip file of all site contents

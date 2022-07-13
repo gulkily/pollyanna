@@ -1,0 +1,15 @@
+<!-- welcome.template -->
+
+<p>
+Welcome to the MIT Hardware Exchange Forum.<br><br>
+
+Do you want a piece of hardware? Go to <a href="/top/free.html">#free</a>.<br><br>
+
+Do you want to offer something? Go to the <a href="/upload.html">Upload</a> page if you have a picture,<br><br>
+
+or to the <a href="/write.html">Write</a> page if you just want to describe it with text.<br><br>
+
+Thanks!<br>
+</p>
+
+<!-- / welcome.template -->

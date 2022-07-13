@@ -1,0 +1,10 @@
+<!-- votequick2.template -->
+<tr bgcolor="$colorWindow" class=advanced>
+	<td style="border:0">
+		<p>
+			<span class=beginner>Please use these buttons to moderate:<br></span>
+			$quickVotesButtons
+		</p>
+	</td>
+</tr>
+<!-- / votequick2.template -->

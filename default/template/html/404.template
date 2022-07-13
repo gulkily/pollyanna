@@ -1,0 +1,25 @@
+<title>404 Message Received</title>
+
+<h1>Welcome to Area 404</h1>
+
+<p>This page does not exist. It may still be in preparation.</p>
+
+<span id=mittens></span>
+
+<noscript><p>Please use your browser's Back button to return to the previous page.</p></noscript>
+
+<h2><a href="#" onclick="if (window.history && window.history.back) { window.history.back(); return false; }">Back</a></h2>
+
+<h2><a href="/">Home Page</a></h2>
+
+<h2><a href="/help.html">Help</a></h2>
+
+<h2><a href="/stats.html">Status</a></h2>
+
+<h3>Latest Developments:</h3>
+
+<ul>
+	<li><a href="/write.html">Writer's Block Cured With New Technology!</a><br><br></li>
+	<li><a href="/compost.html">Study: Can Voting Really Change Things? Results Unclear</a><br><br></li>
+	<li><a href="/manual.html">9 out of 10 Users Found This Manual Confusing</a><br><br></li>
+</ul>
