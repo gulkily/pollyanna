@@ -41,11 +41,7 @@ sub GetTagLink { # $tag ; returns html for a tag link
 			$tagLink,
 			'a ',
 			'onclick',
-<<<<<<< HEAD
 			"if (window.GetPrefs && GetPrefs('draggable_spawn') && window.FetchDialog) { return FetchDialog('$dialogName'); }"
-=======
-			"if (window.GetPrefs && GetPrefs('draggable_spawn') && window.FetchDialog) { return FetchDialog('top/" . $dialogName . "'); }"
->>>>>>> 08ff823f66c14ff4f17157ba383793fa65f7f278
 		);
 	} else {
 		WriteLog('GetItemTemplate: warning: $tag sanity check failed, @tagsList $tag = ' . $tag);
