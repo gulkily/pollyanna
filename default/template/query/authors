@@ -1,4 +1,5 @@
 SELECT
+	author_key,
 	author_key author_id,
 	last_seen,
 	item_count,
