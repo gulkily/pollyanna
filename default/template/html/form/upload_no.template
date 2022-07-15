@@ -6,6 +6,8 @@
 		<br>
 		config/setting/admin/php/enable
 		<br>
+		config/setting/admin/upload/enable
+		<br>
 		config/setting/admin/php/upload
 		<br>
 		config/setting/admin/js/enable
