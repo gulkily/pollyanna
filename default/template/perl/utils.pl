@@ -2504,10 +2504,10 @@ sub EnsureDirsThatShouldExist { # creates directories expected later
 		"$HTMLDIR/top", #top items for tags
 		"$CONFIGDIR",
 		"$CONFIGDIR/template",
-		"$CONFIGDIR/admin",
-		"$CONFIGDIR/admin/php",
-		"$CONFIGDIR/admin/php/post",
-		"$CONFIGDIR/admin/php/upload",
+		"$CONFIGDIR/setting/admin",
+		"$CONFIGDIR/setting/admin/php",
+		"$CONFIGDIR/setting/admin/php/post",
+		"$CONFIGDIR/setting/admin/php/upload",
 		"$HTMLDIR/upload", #uploaded files go here
 		"$HTMLDIR/error", #error pages
 		"$SCRIPTDIR/once" #used for registering things which should only happen once e.g. scraping
