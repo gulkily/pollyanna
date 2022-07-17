@@ -534,6 +534,8 @@ if (GetConfig('admin/php/route_enable')) {
 						file_exists($pathRel) &&
 						($fileCacheTime < $cacheTimeLimit)
 					) {
+					    # ok to use cache
+
 						WriteLog('route.php: $fileCacheTime = ' . $fileCacheTime . '; $cacheTimeLimit = ' . $cacheTimeLimit);
 						WriteLog('route.php: time() = ' . time() . '; time() - $fileCacheTime = ' . (time() - $fileCacheTime));
 
@@ -733,6 +735,7 @@ if (GetConfig('admin/php/route_enable')) {
 								$html = '';
 							}
 						}
+                        $fileCacheTime = time() - filemtime($pathRel); # file was made again, refresh this time
 					}
 
 					//if ($path == '/settings.html') {
