@@ -1234,16 +1234,7 @@ rate limiting
 	by ip
 	by action type
 
-xhash tags should not count towards #hastext
-	xif an item is only hash tags (and other tokens) then it shouldn't get #hastext tag
-	done
-
 for one-liner items, create new template which displays larger text
-
-x#wtf figure out where the <script> tags are going in the test avatar
-	x1. create profile with the following username: <script>alert()</script>
-	(seems to be fixed now)
-
 
 
 no-js php server-side profiles
