@@ -8,6 +8,10 @@ sub MakeSimplePage { # given page name, makes page
 # sub WriteSimplePage {
 # sub PutSimplePage {
 
+# i think it is better to
+# make a "sub GetFooPage"
+# than to use this sub
+
 # help.html
 	my $pageName = shift;
 	if (!$pageName) {

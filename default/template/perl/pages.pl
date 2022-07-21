@@ -125,6 +125,7 @@ require_once('render_field.pl');
 sub GetQueryAsDialog { # $query, $title, $columns, \%param
 # runs specified query and returns it as a dialog using GetResultSetAsDialog()
 # this has some special conditions for GetAttributesDialog()
+#todo this should report query error
 
 # sub GetQueryDialog {
 	my $query = shift;
@@ -1847,7 +1848,7 @@ sub MakeListingPages {
 
 
 	MakeSimplePage('manual'); # manual.html manual.template
-	MakeSimplePage('help'); # 'help.html' 'help.template'
+	MakeSimplePage('help'); # 'help.html' 'help.template' GetHelpPage {
 	MakeSimplePage('bookmark'); # welcome.html welcome.template
 	# MakeSimplePage('desktop'); # desktop.html desktop.template
 	MakeSimplePage('manual_advanced'); # manual_advanced.html manual_advanced.template
