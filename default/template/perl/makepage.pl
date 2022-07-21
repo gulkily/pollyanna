@@ -88,15 +88,23 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	elsif ($pageType eq 'random') {
 		WriteLog("MakePage: random");
 
-		my $targetPath = "random.html";
-		my $randomPage =
-			GetPageHeader('random') .
-			GetQueryAsDialog('select file_hash, item_title from item_flat order by random() limit 25') .
-			GetPageFooter('random');
-		;
+		my @itemsRandom = SqliteQueryHashRef('select file_hash, item_title from item_flat order by random() limit 25');
+		shift @itemsRandom;
 
-		#my $randomPage = GetReadPage('random');
-		PutHtmlFile($targetPath, $randomPage);
+		if (@itemsRandom) {
+			my $targetPath = "random.html";
+			my $randomPage =
+				GetPageHeader('random') .
+				GetQueryAsDialog('select file_hash, item_title from item_flat order by random() limit 25') .
+				GetItemListAsGallery(\@itemsRandom) .
+				GetPageFooter('random');
+			;
+
+			#my $randomPage = GetReadPage('random');
+			PutHtmlFile($targetPath, $randomPage);
+		} else {
+			PutHtmlFile($targetPath, GetPageHeader('random') . GetWindowTemplate('Nothing to display on the random page yet.') . GetPageFooter('random'));
+		}
 	} #random
 
 	# tag page, get the tag name from $pageParam
