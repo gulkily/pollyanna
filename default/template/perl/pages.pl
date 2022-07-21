@@ -792,6 +792,12 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 		$txtFooter = InjectJs2($txtFooter, 'after', '</html>', qw(back_to_top_button));
 	}
 
+	if (0) {
+		my $resetButton = GetTemplate('html/widget/reset_button.template');
+		$resetButton = FillThemeColors($resetButton);
+		$txtFooter =~ s/\<\/body>/$resetButton<\/body>/i;
+	}
+
 	if (GetConfig('admin/ssi/enable') && GetConfig('admin/ssi/footer_stats')) {
 		#footer stats inserted by ssi
 		WriteLog('GetPageFooter: ssi footer conditions met!');
