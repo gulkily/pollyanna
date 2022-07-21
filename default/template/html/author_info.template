@@ -20,5 +20,5 @@
 <tr class=advanced><td>items:</td><td>$itemCount</td></tr>
 <tr class=advanced><td>description:</td><td>$authorDescription</td></tr>
 <tr class=advanced><td>registration:</td><td><b><tt>$publicKeyHash</tt></b></td></tr>
-<tr class=advanced><td>write:</td><td><b><tt>$authorMessageLink</tt></b></td></tr>
+<tr><td>write:</td><td><b><tt>$authorMessageLink</tt></b></td></tr>
 <!-- / author_info.template -->
