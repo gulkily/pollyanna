@@ -30,6 +30,8 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 		$threadsCount = SqliteGetValue('SELECT COUNT(file_hash) FROM item_flat WHERE parent_count = 0 AND child_count > 0 AND item_score >= 0');
 	}
 
+	my $imagesCount = SqliteGetValue("select count(*) from item_flat where tags_list like '%image%'");
+
 	my $authorCount = DBGetAuthorCount();
 
 	state $itemsDeleted;
@@ -162,6 +164,7 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 	$statsTable =~ s/\$versionSequence/$versionSequence/;
 	$statsTable =~ s/\$itemsIndexed/$itemsIndexed/;
 	$statsTable =~ s/\$threadsCount/$threadsCount/;
+	$statsTable =~ s/\$imagesCount/$imagesCount/;
 	$statsTable =~ s/\$itemsDeleted/$itemsDeleted/;
 	$statsTable =~ s/\$authorCount/$authorCount/;
 	$statsTable =~ s/\$filesTotal/$filesTotal/;

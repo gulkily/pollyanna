@@ -27,6 +27,11 @@
 		</a>
 	</p>
 	<p>
+		<a href="/image.html">
+			<b>$imagesCount images</b>
+		</a>
+	</p>
+	<p>
 		<a href="/chain.html">
 			<b>$chainLogLength notarized</b>
 			<span class=advanced><span class=beginner><br>time was recorded into server's chain log</span></span>
