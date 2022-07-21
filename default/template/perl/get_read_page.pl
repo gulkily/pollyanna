@@ -140,6 +140,12 @@ sub GetReadPage { # generates page with item listing based on parameters
 
 			$pageParam = shift;
 			my $tagName = $pageParam;
+
+			if (!$tagName) {
+				WriteLog('GetReadPage: warning: $tagName is FALSE; caller = ' . join(',', caller));
+				return '';
+			}
+
 			chomp($tagName);
 
 			$title = 'Random';
