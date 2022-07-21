@@ -89,7 +89,13 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		WriteLog("MakePage: random");
 
 		my $targetPath = "random.html";
-		my $randomPage = GetReadPage('random');
+		my $randomPage =
+			GetPageHeader('random') .
+			GetQueryAsDialog('select file_hash, item_title from item_flat order by random() limit 25') .
+			GetPageFooter('random');
+		;
+
+		#my $randomPage = GetReadPage('random');
 		PutHtmlFile($targetPath, $randomPage);
 	} #random
 
