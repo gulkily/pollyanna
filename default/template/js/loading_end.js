@@ -36,8 +36,8 @@ function HideLoadingIndicator () {
 
 	window.loadingIndicator = loadingIndicator;
 	//loadingIndicator.setAttribute('onclick', 'this.remove()');
-	//setTimeout('if (window.loadingIndicator && window.loadingIndicator.remove) { window.loadingIndicator.remove(); } else { if (window.loadingIndicator.style) { window.loadingIndicator.style.display = "none"; } }', 5000); //#todo fix this long line
-	//setTimeout('if (window.loadingIndicator && window.loadingIndicator.remove) { window.loadingIndicator.remove(); } else { if (window.loadingIndicator.style) { window.loadingIndicator.style.display = "none"; } }', 5000); //#todo fix this long line
+	setTimeout('if (window.loadingIndicator && window.loadingIndicator.remove) { window.loadingIndicator.remove(); } else { if (window.loadingIndicator.style) { window.loadingIndicator.style.display = "none"; } }', 5000); //#todo fix this long line
+	// #todo this causes a page shift in ie4 and ie6
 
 	// } else {
 	// 	if (loadingIndicator) { loadingIndicator.style.display = 'none' }
