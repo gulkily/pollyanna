@@ -1,3 +1,5 @@
+rebuild.sh should not exit if there's no sqlite file, even when more than 100 text files
+
 there should be a command which checks all references to a hash
 	paths in html/txt
 	any items in database
