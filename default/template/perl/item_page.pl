@@ -571,7 +571,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			if ($relatedListing) {
 				$txtIndex .= GetRelatedListing($file{'file_hash'});
 			} else {
-				$txtIndex .= GetWindowTemplate('No related items found for this item.', 'Debug');
+				#$txtIndex .= GetWindowTemplate('No related items found for this item.', 'Debug');
 			}
 		} else {
 			if (GetConfig('debug')) {
