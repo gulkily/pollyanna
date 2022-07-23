@@ -237,7 +237,7 @@ sub GetMenuTemplate { # returns menubar
 
 	if (GetConfig('admin/js/enable') || GetConfig('admin/php/enable')) { #todo there should be a config called profile_enabled
 		if ($pageType ne 'profile' && $pageType ne 'identity') {
-			$topMenuTemplate .= GetWindowTemplate(GetTemplate('html/widget/identity.template'), 'Identity');
+			#$topMenuTemplate .= GetWindowTemplate(GetTemplate('html/widget/identity.template'), 'Identity');
 		}
 	}
 
