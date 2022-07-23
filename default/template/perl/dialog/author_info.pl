@@ -47,11 +47,6 @@ sub GetAuthorInfoBox {
 
 	my $authorMessageLink = GetItemHtmlLink($publicKeyHash, 'Message', '#reply');
 
-	# not sure what the reasoning behind this was
-	#if (GetConfig('reply/enable') || GetConfig('admin/expo_site_mode')) { #todo unhack
-	#	$authorMessageLink = '';
-	#}
-
 	if (IsAdmin($authorKey)) {
 		if ($authorDescription) {
 			$authorDescription .= '<br>';
