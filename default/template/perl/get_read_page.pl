@@ -316,8 +316,10 @@ sub GetReadPage { # generates page with item listing based on parameters
 
 	my $itemComma = '';
 
-	$txtIndex .= GetWindowTemplate('Items on page: ' . scalar(@files), 'Count');
-	WriteLog('GetReadPage: scalar(@files) = ' . scalar(@files), 'Count');
+	if (scalar(@files) > 0) {
+		$txtIndex .= GetWindowTemplate('Items on page: ' . scalar(@files), 'Count');
+	}
+	WriteLog('GetReadPage: scalar(@files) = ' . scalar(@files));
 
 	# LISTING ITEMS BEGINS HERE
 
