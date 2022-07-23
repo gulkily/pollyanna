@@ -103,6 +103,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 			#my $randomPage = GetReadPage('random');
 			PutHtmlFile($targetPath, $randomPage);
 		} else {
+			my $targetPath = "random.html";
 			PutHtmlFile($targetPath, GetPageHeader('random') . GetWindowTemplate('Nothing to display on the random page yet.') . GetPageFooter('random'));
 		}
 	} #random
