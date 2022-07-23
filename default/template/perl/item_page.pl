@@ -716,7 +716,7 @@ sub GetRelatedListing { # $fileHash
 		}
 	}
 
-	WriteLog('GetRelatedListing: warning: unreachable reached');
+	WriteLog('GetReplyListing: warning: unreachable reached');
 	return '';
 } # GetReplyListing()
 
