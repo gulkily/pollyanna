@@ -296,7 +296,10 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 		my $queryDisplayName = $pageQuery . '.sql';
 		$pageNoContent .= GetPageHeader($pageQuery);
 		$pageNoContent .= GetWindowTemplate('This page reserved for future content.');
-		$pageNoContent .= '<span class=advanced>' . GetWindowTemplate($queryItemList, $queryDisplayName) . '</span>';
+
+		my $displayQuery = '<pre>'.HtmlEscape(SqliteGetQueryTemplate($pageQuery)).'<br></pre>'; #todo templatify
+		$pageNoContent .= '<span class=advanced>' . GetWindowTemplate($displayQuery, $queryDisplayName) . '</span>'; #todo should have <pre> like in GetItemListingPage()
+
 		$pageNoContent .= GetPageFooter($pageQuery);
 		$pageNoContent = InjectJs($pageNoContent, qw(utils settings avatar voting table_sort profile timestamp));
 		my $pageFilename = GetPageFileName($pageQuery, 0);
