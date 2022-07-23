@@ -566,6 +566,9 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		if (index(',' . $file{'tags_list'} . ',', ',pubkey,') != -1) {
 			$showRelated = 0;
 		}
+		if (GetConfig('reply/enable')) {
+			$txtIndex .= GetReplyForm($file{'file_hash'});
+		}
 		if ($showRelated) {
 			my $relatedListing = GetRelatedListing($file{'file_hash'});
 			if ($relatedListing) {
@@ -577,10 +580,6 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			if (GetConfig('debug')) {
 				$txtIndex .= GetWindowTemplate('No related items for a pubkey.', 'Debug');
 			}
-		}
-
-		if (GetConfig('reply/enable')) {
-			$txtIndex .= GetReplyForm($file{'file_hash'});
 		}
 	}
 
