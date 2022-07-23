@@ -204,6 +204,12 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 	my $displayQuery = '<pre>'.HtmlEscape(SqliteGetQueryTemplate($pageQuery)).'<br></pre>'; #todo templatify
 
 	$html .= '<span class=advanced>' . GetWindowTemplate($displayQuery, $queryDisplayName) . '</span>';
+
+	if ($pageQuery eq 'chain') {
+		#special case hack for chain page
+		$html .= '<span class=advanced>' . GetWindowTemplate('<a href="/chain.log">chain.log</a>', 'PSV') . '</span>'; #should be called GetDialog? #todo
+	}
+
 	$html .= GetPageFooter($pageQuery);
 	my @js = qw(utils settings avatar voting table_sort profile timestamp);
 	if (GetConfig('setting/html/reply_cart')) {
