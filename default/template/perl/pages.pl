@@ -792,7 +792,7 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 		$txtFooter = InjectJs2($txtFooter, 'after', '</html>', qw(back_to_top_button));
 	}
 
-	if (0) {
+	if (GetConfig('setting/html/reset_button')) {
 		my $resetButton = GetTemplate('html/widget/reset_button.template');
 		$resetButton = FillThemeColors($resetButton);
 		$txtFooter =~ s/\<\/body>/$resetButton<\/body>/i;
