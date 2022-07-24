@@ -682,7 +682,8 @@ sub GetImageContainer { # $fileHash, $imageAlt, $boolLinkToItemPage = 1
 	if ($boolLinkToItemPage) {
 		$imageContainer = GetTemplate('html/item/container/image_with_link.template');
 	} else {
-		$imageContainer = GetTemplate('html/item/container/image.template');
+		$imageContainer = GetTemplate('html/item/container/image_with_link.template');
+		#$imageContainer = GetTemplate('html/item/container/image.template');
 	}
 
 	my $imageUrl = "/thumb/thumb_800_$fileHash.gif"; #todo hardcoding no
