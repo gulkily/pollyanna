@@ -1,3 +1,6 @@
+IndexImageFile() should also use cache/indexed/... to keep track of what's already been indexed
+	the same way as IndexTextFile()
+
 rebuild.sh should not exit if there's no sqlite file, even when more than 100 text files
 
 there should be a command which checks all references to a hash
