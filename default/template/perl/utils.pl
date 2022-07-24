@@ -1039,6 +1039,8 @@ sub PutFile { # Writes content to a file; $file, $content, $binMode
 	#WriteLog($content);
 	#WriteLog("====");
 
+	#todo use temp file and rename (see php version)
+
 	if ($file =~ m/^([^\s]+)$/) { #todo this is overly permissive #security #taint
 		$file = $1;
 		if (open (my $fileHandle, ">", $file)) {
