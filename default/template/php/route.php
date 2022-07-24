@@ -1295,6 +1295,13 @@ if (GetConfig('admin/php/route_enable')) {
 			$html = str_ireplace('post.html', 'cookie.html', $html);
 		}
 
+		if (!$html) {
+			$html = GetFile('help.html');
+			if ($path != '/help.html') {
+				#RedirectWithResponse('/help.html', 'Redirected to Help page because of missing page template.');
+			}
+		}
+
 		////////////////////////////
 		if (!$html) {
 			// MISSING HTML ERROR PAGE
