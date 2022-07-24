@@ -564,7 +564,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		#$txtIndex .= GetReplyListing($file{'file_hash'});
 
 		# RELATED LIST
-		my $showRelated = 1;
+		my $showRelated = GetConfig('setting/html/item_page/toolbox_related');
 		if (index(',' . $file{'tags_list'} . ',', ',pubkey,') != -1) {
 			$showRelated = 0;
 		}
