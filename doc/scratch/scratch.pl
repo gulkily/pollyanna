@@ -1,3 +1,51 @@
+#			if (!-e "$HTMLDIR/thumb/squared_42_$fileHash.gif") {
+#				my $convertCommand = "convert \"$fileShellEscaped\" -crop 42x42 -strip $HTMLDIR/thumb/squared_42_$fileHash.gif";
+#				WriteLog('IndexImageFile: ' . $convertCommand);
+#
+#				my $convertCommandResult = `$convertCommand`;
+#				WriteLog('IndexImageFile: convert result: ' . $convertCommandResult);
+#			}
+
+	# # make 48x48 thumbnail
+	# if (!-e "$HTMLDIR/thumb/thumb_48_$fileHash.gif") {
+	# 	my $convertCommand = "convert \"$file\" -thumbnail 48x48 -strip $HTMLDIR/thumb/thumb_48_$fileHash.gif";
+	# 	WriteLog('IndexImageFile: ' . $convertCommand);
+	#
+	# 	my $convertCommandResult = `$convertCommand`;
+	# 	WriteLog('IndexImageFile: convert result: ' . $convertCommandResult);
+	# }
+
+#			if (!-e "$HTMLDIR/thumb/squared_512_$fileHash.gif") {
+#				my $convertCommand = "convert \"$fileShellEscaped\" -crop 512x512 -strip $HTMLDIR/thumb/squared_512_$fileHash.gif";
+#				WriteLog('IndexImageFile: ' . $convertCommand);
+#
+#				my $convertCommandResult = `$convertCommand`;
+#				WriteLog('IndexImageFile: convert result: ' . $convertCommandResult);
+#			}
+
+		#my $convertCommand = "convert \"$fileShellEscaped\" -scale 5% -blur 0x25 -resize 5000% -colorspace Gray -blur 0x8 -thumbnail 512x512 -strip $HTMLDIR/thumb/thumb_512_$fileHash.gif";
+
+#			if (!-e "$HTMLDIR/thumb/squared_800_$fileHash.gif") {
+#				my $convertCommand = "convert \"$fileShellEscaped\" -crop 800x800 -strip $HTMLDIR/thumb/squared_800_$fileHash.gif";
+#				WriteLog('IndexImageFile: ' . $convertCommand);
+#
+#				my $convertCommandResult = `$convertCommand`;
+#				WriteLog('IndexImageFile: convert result: ' . $convertCommandResult);
+#			}
+
+
+	# # make 1024x1024 thumbnail
+	# if (!-e "$HTMLDIR/thumb/thumb_1024_$fileHash.gif") {
+	# 	my $convertCommand = "convert \"$file\" -thumbnail 1024x1024 -strip $HTMLDIR/thumb/thumb_1024_$fileHash.gif";
+	# 	WriteLog('IndexImageFile: ' . $convertCommand);
+	#
+	# 	my $convertCommandResult = `$convertCommand`;
+	# 	WriteLog('IndexImageFile: convert result: ' . $convertCommandResult);
+	# }
+
+
+
+
 if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
 	#todo add more things to this template and make it not hard-coded
 	$htmlStart = str_replace('</head>', '<script src="/dragging.js"></script></head>', $htmlStart);
