@@ -266,6 +266,8 @@ sub GetItemIndexLog {
 		WriteLog('GetItemIndexLog: warning: not an item: $itemHash = ' . $itemHash);
 		return '';
 	}
+
+	my $shortHash = substr($itemHash, 0, 8);
 	
 	my $logPath = 'index_log/' . $itemHash;
 	my $log = GetCache($logPath);
@@ -273,7 +275,7 @@ sub GetItemIndexLog {
 		$log = HtmlEscape($log);
 		$log = str_replace("\n", "<br>\n", $log);
 		
-		my $logWindow = GetWindowTemplate($log, 'Log');
+		my $logWindow = GetWindowTemplate($log, 'IndexFile(' . $shortHash . ')');
 		$logWindow = '<span class=advanced>' . $logWindow . '</span>';
 		return $logWindow;
 	}
