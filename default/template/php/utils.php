@@ -603,10 +603,15 @@ function PutFile ($file, $content) { // puts file contents
 	$putFileResult = file_put_contents($fileTemp, $content);
 	WriteLog('PutFile: $putFileResult = ' . $putFileResult);
 
-	$renameResult = rename($fileTemp, $file);
-	WriteLog('PutFile: $renameResult = ' . $renameResult);
+	if (file_exists($fileTemp)) {
+		$renameResult = rename($fileTemp, $file);
+		WriteLog('PutFile: $renameResult = ' . $renameResult);
+	} else {
+		WriteLog('PutFile: warning: file_exists($fileTemp) is FALSE');
+		return '';
+	}
 
-	return $putFileResult;
+	return $putFileResult; #todo && $renameResult ?
 } # PutFile()
 
 function GetCache ($cacheName) { // get cache contents by key/name
