@@ -715,9 +715,9 @@ sub GetRelatedListing { # $fileHash
 		}
 	}
 
-	WriteLog('GetReplyListing: warning: unreachable reached');
+	WriteLog('GetRelatedListing: warning: unreachable reached');
 	return '';
-} # GetReplyListing()
+} # GetRelatedListing()
 
 sub GetItemAttributesDialog { # %file
 # sub GetAttributesDialog {
