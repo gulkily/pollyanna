@@ -174,6 +174,9 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 #sub GetItemDialog {
 	WriteLog("GetItemTemplate() begin");
 
+	# returns HTML for outputting one item WITH DIALOG FRAME
+	# uses GetWindowTemplate()
+
 	# %file(hash for each file)
 	# file_path = file path including filename
 	# file_hash = git's hash of the file's contents
