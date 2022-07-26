@@ -259,7 +259,7 @@ sub GetMenuTemplate { # returns menubar
 	return $topMenuTemplate;
 } # GetMenuTemplate()
 
-sub GetMenuItem { # $address, $caption; returns html snippet for a menu item (used for both top and footer menus)
+sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for a menu item (used for both top and footer menus)
 	my $address = shift;
 	my $caption = shift;
 
