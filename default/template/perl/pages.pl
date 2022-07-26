@@ -242,7 +242,7 @@ sub GetStylesheet { # $styleSheet ; returns stylesheet template based on config
 	}
 
 	if (GetThemeAttribute('additional.css')) {
-		$style .= "\n" . GetThemeAttribute('additional.css');
+		$style .= "\n" . GetThemeAttribute('additional.css'); # may concatenate styles from all applied themes!
 	}
 
 	$styleSheet = $style;
