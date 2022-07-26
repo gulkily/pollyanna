@@ -1,3 +1,9 @@
 .dialog {
-	border-radius: 5pt;
+	border-radius: 1pt;
+}
+body {
+	background: url('/amber.png');
+}
+.dialog .txt {
+	max-width: 30em;
 }
