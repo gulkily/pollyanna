@@ -426,6 +426,7 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 				$returnValue .= "\n";
 				if (GetConfig('html/css_theme_concat')) {
 					# nothing
+					# concatenate all the selected themes' css together
 				} else {
 					last;
 				}
