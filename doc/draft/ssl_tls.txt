@@ -1,0 +1,17 @@
+Some reasons TLS/SSL can break and cause accessibility problems
+
+Server's clock is inaccurate
+
+Client's clock is inaccurate
+
+Server's and client's clock is inaccurate
+
+Client is accessing server via different hostname
+
+www/no-www mismatch in hostname
+
+No matching supported version for client and server
+
+Certificate is expired
+
+Actual mitm attack
