@@ -1429,9 +1429,11 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 		# html
 		$content =~ s/src="\//src="$subDir/ig;
 		$content =~ s/href="\//href="$subDir/ig;
+		$content =~ s/background="\//background="$subDir/ig;
 		$content =~ s/action="\//action="$subDir/ig;
 		$content =~ s/src=\//src=$subDir/ig;
 		$content =~ s/href=\//href=$subDir/ig;
+		$content =~ s/background=\//background=$subDir/ig;
 		$content =~ s/action=\//action=$subDir/ig;
 
 		# javascript
