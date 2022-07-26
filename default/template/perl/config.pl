@@ -424,6 +424,11 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 			} else {
 				$returnValue .= $attributeValue || '';
 				$returnValue .= "\n";
+				if (GetConfig('html/css_theme_concat')) {
+					# nothing
+				} else {
+					last;
+				}
 			}
 		} # if ($attributeValue)
 	} # foreach $themeName (@activeThemes)
