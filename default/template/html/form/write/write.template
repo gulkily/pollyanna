@@ -1,7 +1,7 @@
 <!-- write.template -->
 <fieldset>
 	<span id=writeintro></span>
-	<span class=beginner><label for="comment" class=beginner>Share with Everyone:</label><br></span>
+	<span class=beginner><label for="comment" class=beginner>Write something here:</label><br></span>
 	<textarea
 		class=txtarea
 		id=comment
