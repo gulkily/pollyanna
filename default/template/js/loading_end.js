@@ -29,10 +29,10 @@ function HideLoadingIndicator () {
 	loadingIndicator.innerHTML = 'Ready.';
 	loadingIndicator.style.backgroundColor = '$colorHighlightReady';
 
-	//setTimeout('window.loadingIndicator.style.backgroundColor = "#00ffa0"', 500);
-	//setTimeout('window.loadingIndicator.style.backgroundColor = "#e0ffa0"', 800);
-	//setTimeout('window.loadingIndicator.style.backgroundColor = "#00ffa0"', 1100);
-	//setTimeout('window.loadingIndicator.style.backgroundColor = "#e0ffa0"', 1400);
+	setTimeout('window.loadingIndicator.style.opacity = "0.9"', 500);
+	setTimeout('window.loadingIndicator.style.opacity = "0.7"', 2000);
+	setTimeout('window.loadingIndicator.style.opacity = "0.6"', 3000);
+	setTimeout('window.loadingIndicator.style.opacity = "0.5"', 4000);
 
 	window.loadingIndicator = loadingIndicator;
 	//loadingIndicator.setAttribute('onclick', 'this.remove()');
