@@ -4,11 +4,9 @@ use strict;
 use warnings;
 
 sub GetWelcomePage {
-	my $html =
-		GetPageHeader('welcome') .
-		GetPageFooter('welcome')
-	;
-	$html = InjectJs($html, qw(utils clock));
+	my $html = GetTemplate('html/page/welcome.template');
+
+	#$html = InjectJs($html, qw(utils clock));
 }
 
 1;
