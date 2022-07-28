@@ -1,3 +1,8 @@
+							if (GetConfig('setting/admin/index/multiple_parent_means_no_parent') && scalar(@itemParents) > 1) {
+
+
+
+
 #			if (!-e "$HTMLDIR/thumb/squared_42_$fileHash.gif") {
 #				my $convertCommand = "convert \"$fileShellEscaped\" -crop 42x42 -strip $HTMLDIR/thumb/squared_42_$fileHash.gif";
 #				WriteLog('IndexImageFile: ' . $convertCommand);
