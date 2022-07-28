@@ -4,7 +4,8 @@ use strict;
 use warnings;
 
 sub GetWindowTemplate { # $body, $title, $headings, $status, $menu ; returns html with window/dialog
-# #todo should be called GetDialog { ?
+# sub GetDialog {
+# sub GetDialogPage {
 	# calls GetWindowTemplate2()
 	my %param = ();
 
