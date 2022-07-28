@@ -462,6 +462,22 @@ if (GetConfig('admin/php/route_enable')) {
 			WriteLog('route.php: $pathFull = ' . $pathFull . ';');
 			WriteLog('route.php: substr($pathFull, 0, strlen($pathValidRoot)) = ' . substr($pathFull, 0, strlen($pathValidRoot)) . ';');
 
+
+			########################################################
+			########################################################
+			########################################################
+			########################################################
+			########################################################
+
+// 			if ( $path == '/a.gif' || $path == '/p.gif' ) {
+// 				if (time() % 2) {
+// 					$html = file_get_contents('404.html');
+// 					header("HTTP/1.0 404 Not Found");
+// 					exit;
+// 				}
+// 			}
+
+
 			if (
 				$path == '/404.html' ||
 				(
