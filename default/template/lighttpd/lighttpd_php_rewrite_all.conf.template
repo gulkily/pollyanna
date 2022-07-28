@@ -26,5 +26,7 @@ url.rewrite = (
 	# this line is uncommented by templater #hack
 	#"(.+)" => "/route.php?path=$1" # admin/php/url_alias_friendly
 	#
+
+	#"^(.+\.gif)$" => "/route.php?path=$1",
 )
 
