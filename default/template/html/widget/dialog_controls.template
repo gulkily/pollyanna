@@ -1,6 +1,6 @@
 <!-- dialog_controls.template 'Interface Controls' -->
 <noscript>*</noscript>
-	<span class=beginner>
+	<span>
 		<a id=btnAdvanced
 			accesskey=o
 			href=#

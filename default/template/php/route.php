@@ -399,11 +399,13 @@ if (GetConfig('admin/php/route_enable')) {
 				WriteLog('route.php: cool: did NOT find question mark in $path');
 			}
 
-			if (preg_match('/^\/([a-f0-9]+)$/', $path, $matches) && GetConfig('setting/admin/php/url_alias_friendly')) {
-				$matchedItem = $matches[1];
-				$path = '/' . substr($matchedItem, 0, 2) . '/' . substr($matchedItem, 2, 2) . '/' . $matchedItem . '.html';
-			} else {
-				//
+			if (GetConfig('setting/admin/php/url_alias_friendly')) {
+				if (preg_match('/^\/([a-f0-9]+)$/', $path, $matches)) {
+					$matchedItem = $matches[1];
+					$path = '/' . substr($matchedItem, 0, 2) . '/' . substr($matchedItem, 2, 2) . '/' . $matchedItem . '.html';
+				} else {
+					//
+				}
 			}
 
 			WriteLog('route.php: $path = ' . $path); // e.g. ab/cd/abcdef01.html
@@ -459,6 +461,22 @@ if (GetConfig('admin/php/route_enable')) {
 			WriteLog('route.php: $pathValidRoot = ' . $pathValidRoot);
 			WriteLog('route.php: $pathFull = ' . $pathFull . ';');
 			WriteLog('route.php: substr($pathFull, 0, strlen($pathValidRoot)) = ' . substr($pathFull, 0, strlen($pathValidRoot)) . ';');
+
+
+			########################################################
+			########################################################
+			########################################################
+			########################################################
+			########################################################
+
+// 			if ( $path == '/a.gif' || $path == '/p.gif' ) {
+// 				if (time() % 2) {
+// 					$html = file_get_contents('404.html');
+// 					header("HTTP/1.0 404 Not Found");
+// 					exit;
+// 				}
+// 			}
+
 
 			if (
 				$path == '/404.html' ||

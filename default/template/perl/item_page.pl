@@ -619,7 +619,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	}
 
 	if ($addMavo) {
-		$txtIndex = str_replace('</head>', '<script src="https://get.mavo.io/stable/mavo.es5.js"></script><link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css"></head>', $txtIndex);
+		$txtIndex = str_replace('</head>', '<script src="https://get.mavo.io/stable/mavo.es5.js"></script><link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css"></link></head>', $txtIndex);
 	}
 
 	if ($addMermaid) {

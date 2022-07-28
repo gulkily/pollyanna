@@ -1,0 +1,48 @@
+<html>
+<head>
+	<style>
+		<!--
+			td table td {
+				border: 3pt solid #808080;
+				height: 3em;
+				width: 3em;
+			}
+		-->
+	</style>
+</head>
+<body>
+<br><br><br><br><br>
+<center>
+<table border=0>
+<tr>
+<td>
+<a href="/abc">
+<table border=0 cellpadding=5 cellspacing=25>
+<tr>
+	<td>&nbsp;</td>
+</tr>
+</table>
+</a>
+</td>
+<td>
+<a href="/abc">
+<table border=0 cellpadding=5 cellspacing=25>
+<tr>
+	<td>&nbsp;</td>
+</tr>
+</table>
+</a>
+</td>
+<td>
+<a href="/abc">
+<table border=0 cellpadding=5 cellspacing=25>
+<tr>
+	<td>&nbsp;</td>
+</tr>
+</table>
+</a>
+</td>
+</tr></table>
+</center>
+</body>
+</html>
