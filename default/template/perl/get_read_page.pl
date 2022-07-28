@@ -240,11 +240,16 @@ sub GetReadPage { # generates page with item listing based on parameters
 
 		$txtIndex .= GetQueryAsDialog(
 			"
-				select
-					item_title, add_timestamp, file_hash, item_score, author_score
-					from item_flat
+				SELECT
+					item_title,
+					add_timestamp,
+					file_hash,
+					item_score
+				FROM
+					item_flat
 					LEFT JOIN author_score ON (item_flat.author_key = author_score.author_key)
-					where item_flat.author_key = '$authorKey'
+				WHERE
+					item_flat.author_key = '$authorKey'
 			",
 			'Items by Author'
 		);
