@@ -16,7 +16,7 @@
 		>Advanced</a>;
 	</span>
 
-	<span class=advanced>
+	<span>
 
 		<a id=btnMinimal href=# onclick="
 			if (window.SetPrefs) {
