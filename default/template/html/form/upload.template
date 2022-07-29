@@ -3,7 +3,7 @@
 	<p>Upload one picture.</p>
 	<p>
 		Use file selector below, or paste here:<br>
-		<input type=text name=iospaste>
+		<input type=text name=iospaste value="Paste here">
 	</p>
 	<p class=beginner>
 		Remember to press Upload button.
