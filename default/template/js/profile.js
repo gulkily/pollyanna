@@ -556,12 +556,40 @@ function PubKeyPing () { // checks if user's public key is on server
 	return true;
 } // PubKeyPing()
 
+function selectKeyPopulate () {
+	if (document.formSelectKey && document.formSelectKey.selectKey) {
+		if (window.SetPrefs && window.GetPrefs) {
+			var iPrivKey = 0;
+			while (GetPrefs('pk' + iPrivKey, 'PrivateKey1')) {
+				//if (GetPrefs('pk' + iPrivKey, 'PrivateKey1') == keyArmored) {
+				//	return 1; // already stored
+				//}
+				var o = new Option('pk' + iPrivKey, 'pk' + iPrivKey);
+				document.formSelectKey.selectKey.add(o);
+				iPrivKey++;
+			}
+			//SetPrefs('pk' + iPrivKey, keyArmored, 'PrivateKey1');
+		}
+	}
+
+	//alert(document.formSelectKey.selectKey.value);
+}
+
+function selectLoadKey (keyName) {
+	var newKey = GetPrefs(keyName, 'PrivateKey1');
+	if (newKey) {
+		 setPrivateKeyFromTxt(newKey);
+	}
+}
+
 function ProfileOnLoad () { // onload event for profile page
 	//alert('DEBUG: ProfileOnLoad() begin');
 	if (document.getElementById) {
 		//alert('DEBUG: ProfileOnLoad: document.getElementById check passed');
 
 		var lblSigningIndicator = document.getElementById('lblSigningIndicator');
+
+		selectKeyPopulate();
 
 		if (window.getPrivateKey) {
 			//alert('DEBUG: ProfileOnLoad: window.getPrivateKey check passed');
