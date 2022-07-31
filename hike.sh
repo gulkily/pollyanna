@@ -85,7 +85,7 @@ fi
 
 if [ $1 = alog ]
 	then
-		time ./default/template/perl/access_log_read.pl --all
+		time ./default/template/perl/script/access_log_read.pl --all
 fi
 
 if [ $1 = db ]
