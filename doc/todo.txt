@@ -1,3 +1,6 @@
+organizing files and indexing files should be separate processes
+
+
 loading indicator can be implemented without js #idea
 	float it at the top of the page with css
 	at the bottom of the page, hide it with !important
