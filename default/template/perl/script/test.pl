@@ -12,6 +12,7 @@ my $number = 17860593;
 ############################################ change this number
 ########################################### when changing string
 #while (substr(md5_hex($stringHash . $number), 0, 7) ne 'b00b135') {
+
 while (1) {
 	while (index(md5_hex($stringHash . $number), '8008135') < 0) {
 		$number++;
