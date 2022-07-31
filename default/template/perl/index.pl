@@ -301,6 +301,11 @@ sub IndexFile { # $file ; calls IndexTextFile() or IndexImageFile() based on ext
 		%flags = %{$flagsReference};
 	}
 
+	if (!$file) {
+		WriteLog('IndexFile: warning: $file was FALSE; caller = ' . join(',', caller));
+		return '';
+	}
+
 	if ($file eq 'flush') {
 		WriteLog('IndexFile: flush was requested');
 		IndexImageFile('flush');
