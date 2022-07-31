@@ -124,7 +124,7 @@ fi
 
 if [ $1 = archive ]
 	then
-		time ./default/template/perl/_dev_archive.pl
+		time ./default/template/perl/script/_dev_archive.pl
 		sleep 1
 		time ./index.pl --sweep
 fi
