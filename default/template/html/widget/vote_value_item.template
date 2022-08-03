@@ -1,0 +1,10 @@
+<!-- vote_value_item.template -->
+<fieldset>
+<label for=foo value=foo>
+foo
+<input type=radio id=fooLow name=foo value=1>
+<input type=radio id=fooMedium name=foo value=10>
+<input type=radio id=fooLow name=foo value=11>
+</label>
+</fieldset>
+<!-- / vote_value_item.template -->
