@@ -579,10 +579,6 @@ function selectLoadKey (keyName) {
 	var newKey = GetPrefs(keyName, 'PrivateKey1');
 	if (newKey) {
 		 setPrivateKeyFromTxt(newKey);
-		 if (0 && document.compose.comment) {
-		 	document.compose.comment.value = newKey;
-		 	document.compose.submit();
-		 }
 	}
 }
 
