@@ -1479,7 +1479,7 @@ sub MakePhpPages {
 		# 'cookietest.php'
 		# 'route.php'
 		# 'quick.php'
-		my @templatePhpSimple = qw(post test2 config test write upload search cookie cookietest utils route handle_not_found process_new_comment);
+		my @templatePhpSimple = qw(post test2 config test write upload search cookie cookietest utils route handle_not_found process_new_comment store_new_comment);
 		if (GetConfig('admin/php/quickchat')) {
 			push @templatePhpSimple, 'quick';
 		}
