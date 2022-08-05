@@ -1,4 +1,5 @@
 <!-- select_key.template -->
+<!-- keychain.template -->
 <label for=selectKey>
 	Restore stored key:<br>
 	<select name=selectKey id=selectKey onchange="selectLoadKey(this.value)">

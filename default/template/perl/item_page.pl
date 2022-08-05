@@ -338,6 +338,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		WriteLog('GetItemPage: ' . $debugOut);
 	}
 
+	# SET PAGE TITLE #####################
 	if (defined($file{'item_name'}) && $file{'item_name'}) {
 		WriteLog("GetItemPage: defined(item_name) = true!");
 		$title = HtmlEscape($file{'item_name'});
@@ -351,7 +352,9 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		WriteLog("GetItemPage: defined(item_title) = false!");
 		$title = 'Untitled (' . $fileHashShort . ')'; #todo shouldn't be hard-coded here
 	}
+	# / SET PAGE TITLE #####################
 
+	# AUTHOR ALIAS?
 	if (defined($file{'author_key'}) && $file{'author_key'}) {
 		my $alias = GetAlias($file{'author_key'});
 		if ($alias) {
@@ -365,7 +368,9 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			$title .= ' by Guest';
 		}
 	}
+	# / AUTHOR ALIAS
 
+	# FEATURE FLAGS
 	$file{'display_full_hash'} = 1;
 	$file{'show_vote_summary'} = 1;
 	# $file{'show_quick_vote'} = 1;
@@ -375,7 +380,9 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$file{'item_title'} = 'Untitled';
 	}
 	$file{'image_large'} = 1;
+	# / FEATURE FLAGS
 
+	# MOURN MODE = SHOW FEWER BUTTONS
 	if (GetConfig('html/mourn')) { # GetItemPage() -- votes summary
 		$file{'show_vote_summary'} = 0;	
 		$file{'vote_buttons'} = 0;
@@ -442,6 +449,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 
 		my $threadListing = GetThreadListing($topLevelItem, $currentItem, 0, \@itemsInThreadListing);
 		if ($threadListing) {
+			# sub GetThreadDialog {
 			$txtIndex .= GetWindowTemplate($threadListing, 'Thread', 'item_title,add_timestamp');
 		}
 		#}
@@ -600,6 +608,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	# end page with footer
 	$txtIndex .= GetPageFooter('item');
 
+	# INJECT JS ######
 	if (GetConfig('reply/enable')) {
 		# if replies is on, include write.js and write_buttons.js
 		my @js = qw(settings avatar voting utils profile translit write write_buttons timestamp itsyou);
@@ -613,10 +622,10 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			push @js, 'write_php'; # reply form
 		}
 		$txtIndex = InjectJs($txtIndex, @js);
-
 	} else {
 		$txtIndex = InjectJs($txtIndex, qw(settings avatar voting utils profile translit timestamp itsyou));
 	}
+	# FINISH INJECT JS ######
 
 	if ($addMavo) {
 		$txtIndex = str_replace('</head>', '<script src="https://get.mavo.io/stable/mavo.es5.js"></script><link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css"></link></head>', $txtIndex);

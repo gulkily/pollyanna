@@ -6,12 +6,14 @@ use warnings;
 #todo this is the first version, and is sub-optimal
 
 sub GetThreadListing { # $topLevel, $selectedItem, $indentLevel, $itemsListReference
+# sub GetThreadDialog {
 	my $topLevel = shift; #todo sanity
 	my $selectedItem = shift || '';
 	my $indentLevel = shift || 0;
 	my $itemsListReference = shift; # reference to array of all items included in thread listing
 
 	my @itemInfo = SqliteQueryHashRef("SELECT * FROM item_flat WHERE file_hash = '$topLevel' LIMIT 1");
+	#todo config/template/query/...
 	shift @itemInfo; # headers
 
 	if (@itemInfo) {
@@ -34,6 +36,7 @@ sub GetThreadListing { # $topLevel, $selectedItem, $indentLevel, $itemsListRefer
 	my $listing = '';
 
 	my @itemChildren = SqliteQueryHashRef("SELECT item_hash FROM item_parent WHERE parent_hash = '$topLevel'");
+	#my @itemChildren = SqliteQueryHashRef("SELECT item_hash FROM item_parent WHERE parent_hash = '$topLevel' AND item_hash NOT IN (SELECT file_hash FROM item_flat WHERE tags_list LIKE '%,notext,%')");
 	shift @itemChildren;
 
 	# if (@itemChildren) {

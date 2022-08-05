@@ -22,7 +22,7 @@
 		<span class=advanced>
 			<label for=recfing>
 				<input name=recfing id=recfing type=checkbox>
-				Use my device fingerprint to identify me
+				Identify with device
 			</label>
 		</span>
 	</p>

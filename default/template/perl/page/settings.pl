@@ -9,6 +9,8 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 	$txtIndex = GetPageHeader('settings');
 	$txtIndex .= GetTemplate('html/maincontent.template');
 
+	require_once('dialog/content_filter.pl');
+
 	$txtIndex .= GetAccessDialog();
 
 	$txtIndex .= GetStatsTable();  # GetSettingsPage()
@@ -56,6 +58,7 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 
 	$txtIndex .= GetServerConfigDialog('Frontend', @settingsVisible1); # >frontend< #for searches
 	$txtIndex .= GetServerConfigDialog('Backend', @settingsVisible2); # >backend< #for searches
+	$txtIndex .= GetContentFilterDialog();
 
 	if (GetConfig('admin/js/enable')) {
 		$txtIndex .= GetWindowTemplate(GetTemplate('html/form/writing.template'), 'Writing');
