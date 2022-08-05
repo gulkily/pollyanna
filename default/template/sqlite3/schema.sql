@@ -230,6 +230,37 @@ LEFT JOIN item_tags_list ON ( item.file_hash = item_tags_list.file_hash )
 LEFT JOIN item_sequence ON ( item.file_hash = item_sequence.file_hash )
 ;
 
+CREATE VIEW item_flat_filtered
+AS
+SELECT
+item.file_path AS file_path,
+IFNULL(item_name.name, item.file_name) AS item_name,
+item.file_hash AS file_hash,
+IFNULL(item_author.author_key, '') AS author_key,
+IFNULL(child_count.child_count, 0) AS child_count,
+IFNULL(parent_count.parent_count, 0) AS parent_count,
+added_time.add_timestamp AS add_timestamp,
+IFNULL(item_sequence.item_sequence, '') AS item_sequence,
+IFNULL(item_title.title, '') AS item_title,
+IFNULL(item_score.item_score, 0) AS item_score,
+item.item_type AS item_type,
+','||tags_list||',' AS tags_list,
+item.file_name AS file_name,
+CAST(item_order.item_order AS INTEGER) AS item_order
+FROM
+item
+LEFT JOIN child_count ON ( item.file_hash = child_count.parent_hash )
+LEFT JOIN parent_count ON ( item.file_hash = parent_count.item_hash )
+LEFT JOIN added_time ON ( item.file_hash = added_time.file_hash )
+LEFT JOIN item_title ON ( item.file_hash = item_title.file_hash )
+LEFT JOIN item_name ON ( item.file_hash = item_name.file_hash )
+LEFT JOIN item_order ON ( item.file_hash = item_order.file_hash )
+LEFT JOIN item_author ON ( item.file_hash = item_author.file_hash )
+LEFT JOIN item_score ON ( item.file_hash = item_score.file_hash)
+LEFT JOIN item_tags_list ON ( item.file_hash = item_tags_list.file_hash )
+LEFT JOIN item_sequence ON ( item.file_hash = item_sequence.file_hash )
+;
+
 CREATE VIEW author_score
 AS
 SELECT
