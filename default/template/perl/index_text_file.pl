@@ -416,6 +416,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						alt 
 						access_log_hash
 						self_timestamp
+						received
 						begin
 						duration
 						track

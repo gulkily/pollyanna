@@ -26,6 +26,12 @@ sub GetTokenDefs {
 			'mask_params'    => 'mgi',
 			'message' => '[Cookie]'
 		},
+		{ # server receipt time of message
+			'token'   => 'received',
+			'mask'    => '^(received)(\W+)([0-9]{10})',
+			'mask_params'    => 'mgi',
+			'message' => '[Received]'
+		},
 		{ # date in yyyy-mm-dd format
 			'token'   => 'date',
 			'mask'    => '^(date)(\W+)([0-9]{4}\-[0-9]{2}\-[0-9]{2})',
