@@ -142,4 +142,3 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 	WriteLog('StoreNewComment: warning: returning without filename');
 	return '';
 } # StoreNewComment()
-p
