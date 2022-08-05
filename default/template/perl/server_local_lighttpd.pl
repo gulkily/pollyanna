@@ -126,6 +126,7 @@ sub StartLighttpd { # run command to start local lighttpd instance
 #			#system("screen -m -S hike$port $pathLighttpd -D -f config/lighttpd/lighttpd.conf");
 #			system("screen -m -S hike$port $pathLighttpd -f config/lighttpd/lighttpd.conf &");
 		} else {
+			print "\n";
 			system("$pathLighttpd -D -f config/lighttpd/lighttpd.conf");
 		}
 		#todo background it if opening browser
