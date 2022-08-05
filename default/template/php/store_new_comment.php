@@ -54,8 +54,9 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 				// #todo sanity check on $_SERVER['PHP_AUTH_USER']
 
 				$comment .= $signatureSeparator;
-				$signatureSeparator = "\n";
+				$signatureSeparator = "";
 				$comment .= 'Authorization: ' . $_SERVER['PHP_AUTH_USER'];
+				$comment .= "\n";
 			}
 		} else {
 			WriteLog('StoreNewComment: NOT recording http auth username...');
@@ -77,13 +78,29 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 					WriteLog('StoreNewComment: cookie: adding cookie to $comment!');
 
 					$comment .= $signatureSeparator;
-					$signatureSeparator = "\n";
+					$signatureSeparator = "";
 
 					$comment .= 'Cookie: ' . $_COOKIE['cookie'];
 					$comment .= "\n";
 				}
 			} else {
 				WriteLog('StoreNewComment: cookie: cookie was NOT found');
+			}
+		}
+
+		if (GetConfig('admin/logging/record_server_time')) {
+			WriteLog('StoreNewComment: record_server_time is TRUE');
+			$serverTime = time(); #my
+
+			if (isset($serverTime) && $serverTime) {
+				WriteLog('StoreNewComment: record_server_time: $serverTime $serverTime = ' . $serverTime);
+				#WriteLog('StoreNewComment: cookie: adding server time to $comment!');
+
+				$comment .= $signatureSeparator;
+				$signatureSeparator = "";
+
+				$comment .= 'Received: ' . $serverTime;
+				$comment .= "\n";
 			}
 		}
 
@@ -99,9 +116,13 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 
 				$clientFingerprint = uc(substr(md5($clientHostname . $userAgent), 0, 16));
 				#$comment .= 'Client: ' . $clientFingerprint;
-				$comment .= "\n";
-				#$addedMessage .= 'Client: ' . $clientFingerprint;
+				$comment .= $signatureSeparator;
+				$signatureSeparator = "";
+
+				$addedMessage .= 'Client: ' . $clientFingerprint;
 				#$addedMessage .= "\n";
+				$comment .= $addedMessage;
+				$comment .= "\n";
 
 				WriteLog('StoreNewComment: $recordFingerprint: $clientFingerprint = ' . $clientFingerprint);
 			} else {
