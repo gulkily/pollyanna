@@ -2198,6 +2198,7 @@ while (my $arg1 = shift @foundArgs) {
 			GetConfig('theme', 'override', $themeArg);
 		}
 		elsif (IsItem($arg1)) {
+			WriteLog('pages.pl; recognized item identifier; $arg1 = ' . $arg1 . '; caller = ' . join(',', caller));
 			print ("recognized item identifier\n");
 			MakePage('item', $arg1, 1);
 		}
