@@ -3,7 +3,6 @@ exit;
 
 require('./utils.pl');
 require_once('index.pl');
-print IndexFile();
 
 # if ( condition ) { # probably newest item is newer than todo.txt ? or manually activated
 	# put items back into todo.txt
