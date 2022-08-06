@@ -29,7 +29,7 @@ sub IndexScunthorpe {
 		if (@cussWord) {
 			for my $word (@cussWord) {
 				$word = trim($word);
-                #WriteLog('IndexScunthorpe: $word = ' . $word);
+				#WriteLog('IndexScunthorpe: $word = ' . $word);
 				# if ($word && (index($message, $word) != -1)) {
 				if (
 					$word &&
@@ -47,9 +47,9 @@ sub IndexScunthorpe {
 			}
 
 			if ($cussWordCount) {
-                WriteLog('IndexScunthorpe: $cussWordCount = ' . $cussWordCount);
+				WriteLog('IndexScunthorpe: $cussWordCount = ' . $cussWordCount);
 
-                push @indexMessageLog, '#scunthorpe matches found: ' . $cussWordCount;
+				push @indexMessageLog, '#scunthorpe matches found: ' . $cussWordCount;
 				DBAddVoteRecord($fileHash, 0, 'scunthorpe');
 			}
 		} # @cussWord

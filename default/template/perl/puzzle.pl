@@ -9,7 +9,7 @@ sub IndexPuzzle {
 	my %text = %{$textRef};
 
 	my $message = $text{'message'};
-    my $detokenedMessage = $text{'detokenedMessage'};
+	my $detokenedMessage = $text{'detokenedMessage'};
 	my @indexMessageLog = @{$text{'messageLog'}};
 	my $fileHash = $text{'fileHash'};
 	my $authorKey = $text{'authorKey'};
@@ -20,10 +20,10 @@ sub IndexPuzzle {
 	my $mintedAt = '';
 	my $checksum = '';
 	if ($message =~ m/^([0-9A-F]{16}) ([0-9]{10}) (0\.[0-9]+)/mg) {
-        $puzzleAuthorKey = $1;
-        $mintedAt = $2;
-        $checksum = $3;
-    }
+		$puzzleAuthorKey = $1;
+		$mintedAt = $2;
+		$checksum = $3;
+	}
 
 	if ($puzzleAuthorKey && $mintedAt && $checksum) {
 		WriteLog("IndexPuzzle: token: puzzle: $puzzleAuthorKey, $mintedAt, $checksum");

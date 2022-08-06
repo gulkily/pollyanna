@@ -216,7 +216,7 @@ sub IndexFile { # $file ; calls IndexTextFile() or IndexImageFile() based on ext
 
 	if ($indexSuccess) {
 		PutCache('indexed/' . $indexSuccess, $file);
-        WriteLog('IndexFile: returning $fileHash = ' . $fileHash);
+		WriteLog('IndexFile: returning $fileHash = ' . $fileHash);
 		return $fileHash;
 	} else {
 		WriteLog('IndexFile: warning: $indexSuccess is FALSE; $file = ' . $file);
