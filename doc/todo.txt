@@ -1,5 +1,9 @@
-organizing files and indexing files should be separate processes
+before cleaning db, dump the file to hash mapping in item table
+	restore it when rebuilding
+		but do not set cache/b/indexed, so that file gets indexed again
+			this will allow OrganizeFile() to work properly with RenameFile()
 
+organizing files and indexing files should be separate processes
 
 loading indicator can be implemented without js #idea
 	float it at the top of the page with css
