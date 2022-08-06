@@ -119,9 +119,7 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 				$comment .= $signatureSeparator;
 				$signatureSeparator = "";
 
-				$addedMessage .= 'Client: ' . $clientFingerprint;
-				#$addedMessage .= "\n";
-				$comment .= $addedMessage;
+				$comment .= 'Client: ' . $clientFingerprint;
 				$comment .= "\n";
 
 				WriteLog('StoreNewComment: $recordFingerprint: $clientFingerprint = ' . $clientFingerprint);
