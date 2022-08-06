@@ -1323,14 +1323,14 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 	my $fileProvided = $file;
 	$file = "$HTMLDIR/$file";
 
-	if (GetConfig('admin/post/post_url')) {
+	my $postUrl = GetConfig('admin/post/post_url');
+	if ($postUrl) {
 		# replace target for form submissions from current site to somewhere else
-		if (GetConfig('admin/post/post_url') ne '/post.html') {
+		if ($postUrl ne '/post.html') {
+			#todo sanity
 			if (index($content, '/post.html') != -1) {
-				my $postUrl = 'https://www.opxenioctibtim.org/post.html';
 				str_replace('/post.html', $postUrl, $content);
 				$content =~ s/\/post.html/$postUrl/g;
-				#die 1;
 			}
 		}
 	}

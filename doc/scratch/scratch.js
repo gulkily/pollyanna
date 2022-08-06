@@ -1,3 +1,17 @@
+
+function selectLoadKey (keyName) {
+	var newKey = GetPrefs(keyName, 'PrivateKey1');
+	if (newKey) {
+		 setPrivateKeyFromTxt(newKey);
+		 if (document.compose.comment) {
+		 	document.compose.comment.value = newKey;
+		 	document.compose.submit();
+		 }
+	}
+}
+
+
+
 	if (document.getElementById) {
 		var topmenu = document.getElementById('topmenu');
 		if (topmenu && (window.GetConfig) && GetConfig('draggable')) {

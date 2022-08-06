@@ -1781,6 +1781,12 @@ sub DBAddItemAttribute { # $fileHash, $attribute, $value, $epoch, $source # add 
 	chomp $attribute;
 	chomp $value;
 
+	if ($attribute eq 'received') {
+		#this is a hack to record "received" token as received_timestamp attribute
+		#so that timestamp fields automatically appear formatted properly
+		$attribute = 'received_timestamp';
+	}
+
 	if (!$epoch) {
 		$epoch = '';
 	}

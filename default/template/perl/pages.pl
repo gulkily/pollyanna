@@ -1479,7 +1479,7 @@ sub MakePhpPages {
 		# 'cookietest.php'
 		# 'route.php'
 		# 'quick.php'
-		my @templatePhpSimple = qw(post test2 config test write upload search cookie cookietest utils route handle_not_found process_new_comment);
+		my @templatePhpSimple = qw(post test2 config test write upload search cookie cookietest utils route handle_not_found process_new_comment store_new_comment);
 		if (GetConfig('admin/php/quickchat')) {
 			push @templatePhpSimple, 'quick';
 		}
@@ -2198,6 +2198,7 @@ while (my $arg1 = shift @foundArgs) {
 			GetConfig('theme', 'override', $themeArg);
 		}
 		elsif (IsItem($arg1)) {
+			WriteLog('pages.pl; recognized item identifier; $arg1 = ' . $arg1 . '; caller = ' . join(',', caller));
 			print ("recognized item identifier\n");
 			MakePage('item', $arg1, 1);
 		}

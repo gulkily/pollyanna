@@ -558,17 +558,21 @@ function PubKeyPing () { // checks if user's public key is on server
 
 function selectKeyPopulate () {
 	if (document.formSelectKey && document.formSelectKey.selectKey) {
-		if (window.SetPrefs && window.GetPrefs) {
-			var iPrivKey = 0;
-			while (GetPrefs('pk' + iPrivKey, 'PrivateKey1')) {
-				//if (GetPrefs('pk' + iPrivKey, 'PrivateKey1') == keyArmored) {
-				//	return 1; // already stored
-				//}
-				var o = new Option('pk' + iPrivKey, 'pk' + iPrivKey);
-				document.formSelectKey.selectKey.add(o);
-				iPrivKey++;
+		if (document.formSelectKey.selectKey.length > 1) {
+			// already populated
+		} else { // #todo put this in event loop?
+			if (window.SetPrefs && window.GetPrefs) {
+				var iPrivKey = 0;
+				while (GetPrefs('pk' + iPrivKey, 'PrivateKey1')) {
+					//if (GetPrefs('pk' + iPrivKey, 'PrivateKey1') == keyArmored) {
+					//	return 1; // already stored
+					//}
+					var o = new Option('pk' + iPrivKey, 'pk' + iPrivKey);
+					document.formSelectKey.selectKey.add(o);
+					iPrivKey++;
+				}
+				//SetPrefs('pk' + iPrivKey, keyArmored, 'PrivateKey1');
 			}
-			//SetPrefs('pk' + iPrivKey, keyArmored, 'PrivateKey1');
 		}
 	}
 

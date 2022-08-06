@@ -323,7 +323,7 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 		}
 	}
 
-	if (0 && GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
+	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
 		#todo ??
 		$menuItem = AddAttributeToTag(
 			$menuItem,
