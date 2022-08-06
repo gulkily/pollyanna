@@ -1712,7 +1712,7 @@ sub MakeSystemPages {
 	}
 
 	if (GetConfig('admin/offline/enable')) {
-		PutHtmlFile("cache.manifest", GetTemplate('js/cache.manifest.template') . "#" . time()); # config/admin/offline/enable
+		PutHtmlFile("cache.manifest", GetTemplate('js/cache.manifest.template') . "#" . time()); # setting/admin/offline/enable
 	}
 
 	if (GetConfig('admin/dev/make_js_test_pages')) {
@@ -2037,7 +2037,7 @@ sub BuildTouchedPages { # $timeLimit, $startTime ; builds pages returned by DBGe
 
 #	my $pagesLimit = GetConfig('admin/update/limit_page');
 #	if (!$pagesLimit) {
-#		WriteLog("WARNING: config/admin/update/limit_page missing!");
+#		WriteLog("WARNING: setting/admin/update/limit_page missing!");
 #		$pagesLimit = 1000;
 #	}
 
