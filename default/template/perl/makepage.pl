@@ -301,7 +301,16 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 				WriteLog('MakePage: item: warning: sanity check failed: $file ($files[0]) is missing!');
 			}
 		} else {
-			WriteLog('MakePage: warning: Item not in database; $fileHash = ' . $fileHash);
+			WriteLog('MakePage: warning: Item not in database; $fileHash = ' . $fileHash . '; caller = ' . join(',', caller));
+			# my $query = GetTemplate('query/new') . " LIMIT 12";
+			# my $queryDialog = GetQueryAsDialog($query, 'Newest');
+			# my $page =
+			# 	GetPageHeader('help') .
+			# 	GetWindowTemplate('Could not find item. It may have been renamed?', 'Error') .
+			# 	$queryDialog .
+			# 	GetPageFooter('help')
+			# ;
+			# PutHtmlFile($targetPath, $page);
 			return '';
 		}
 	} #item page
