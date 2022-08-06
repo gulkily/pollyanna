@@ -399,23 +399,23 @@ while (my $arg1 = shift @argsFound) {
 		if ($arg1 eq '--chain') {
 			# html/chain.log
 			print "index.pl: --chain\n";
-			if (GetConfig('admin/read_chain_log')) {
+			if (GetConfig('setting/admin/index/read_chain_log')) {
 				MakeChainIndex(); # index.pl --chain
 			} else {
-				print "index.pl: MakeChainIndex() SKIPPED because of config/admin/read_chain_log = FALSE\n";
-				print "index.pl: MakeChainIndex() SKIPPED because of config/admin/read_chain_log = FALSE\n";
-				print "index.pl: MakeChainIndex() SKIPPED because of config/admin/read_chain_log = FALSE\n";
+				print "index.pl: MakeChainIndex() SKIPPED because of setting/admin/index/read_chain_log = FALSE\n";
+				print "index.pl: MakeChainIndex() SKIPPED because of setting/admin/index/read_chain_log = FALSE\n";
+				print "index.pl: MakeChainIndex() SKIPPED because of setting/admin/index/read_chain_log = FALSE\n";
 			}
 		}
 		if ($arg1 eq '--squash-chain' || $arg1 eq '-S') {
 			# html/chain.log
 			print "index.pl: --squash-chain -S\n";
-			if (GetConfig('admin/read_chain_log')) {
+			if (GetConfig('setting/admin/index/read_chain_log')) {
 				SquashChain(); # index.pl --squash-chain
 			} else {
-				print "index.pl: SquashChain() SKIPPED because of config/admin/read_chain_log = FALSE\n";
-				print "index.pl: SquashChain() SKIPPED because of config/admin/read_chain_log = FALSE\n";
-				print "index.pl: SquashChain() SKIPPED because of config/admin/read_chain_log = FALSE\n";
+				print "index.pl: SquashChain() SKIPPED because of setting/admin/index/read_chain_log = FALSE\n";
+				print "index.pl: SquashChain() SKIPPED because of setting/admin/index/read_chain_log = FALSE\n";
+				print "index.pl: SquashChain() SKIPPED because of setting/admin/index/read_chain_log = FALSE\n";
 			}
 		}
 #		if ($arg1 eq '--write-indexed-config' || $arg1 eq '-C') {

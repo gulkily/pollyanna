@@ -19,8 +19,8 @@ sub MakeChainIndex { # $import = 1; reads from log/chain.log and puts it into it
 
 	my $newLog = '';
 
-	if (GetConfig('admin/read_chain_log')) {
-		WriteLog('MakeChainIndex: admin/read_chain_log was TRUE');
+	if (GetConfig('setting/admin/index/read_chain_log')) {
+		WriteLog('MakeChainIndex: setting/admin/index/read_chain_log was TRUE');
 		my $chainLog = GetFile('html/chain.log');
 
 		if (defined($chainLog) && $chainLog) {
@@ -85,9 +85,9 @@ sub MakeChainIndex { # $import = 1; reads from log/chain.log and puts it into it
 			WriteLog('MakeChainIndex: warning: $chainLog was NOT defined');
 			return 0;
 		}
-	} # GetConfig('admin/read_chain_log')
+	} # GetConfig('setting/admin/index/read_chain_log')
 	else {
-		WriteLog('MakeChainIndex: admin/read_chain_log was FALSE');
+		WriteLog('MakeChainIndex: setting/admin/index/read_chain_log was FALSE');
 		return 0;
 	}
 
