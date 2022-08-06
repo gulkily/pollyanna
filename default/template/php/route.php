@@ -524,7 +524,7 @@ if (GetConfig('admin/php/route_enable')) {
 					}
 
 					if (isset($_GET['message'])) {
-						WriteLog('$_GET[message] exists');
+						WriteLog('route.php: $_GET[message] exists');
 						$messageId = $_GET['message'];
 
 						if ($messageId == 'test') {
@@ -552,7 +552,7 @@ if (GetConfig('admin/php/route_enable')) {
 						file_exists($pathRel) &&
 						($fileCacheTime < $cacheTimeLimit)
 					) {
-					    # ok to use cache
+						# ok to use cache
 
 						WriteLog('route.php: $fileCacheTime = ' . $fileCacheTime . '; $cacheTimeLimit = ' . $cacheTimeLimit);
 						WriteLog('route.php: time() = ' . time() . '; time() - $fileCacheTime = ' . (time() - $fileCacheTime));
@@ -568,7 +568,7 @@ if (GetConfig('admin/php/route_enable')) {
 						}
 
 						if (isset($_GET['message'])) {
-							WriteLog('$_GET[message] exists');
+							WriteLog('route.php: $_GET[message] exists');
 							$messageId = $_GET['message'];
 
 							if (preg_match('/^[a-f0-9]{8}$/', $messageId)) {
@@ -686,7 +686,7 @@ if (GetConfig('admin/php/route_enable')) {
 
 						// user asked for a particular file, and that's what we'll give them
 						if (file_exists($pathRel) && is_file($pathRel)) {
-							WriteLog('$html = file_get_contents($pathRel)');
+							WriteLog('route.php: $html = file_get_contents($pathRel)');
 							$html = file_get_contents($pathRel);
 
 							if ($hashSetting) {
@@ -701,7 +701,7 @@ if (GetConfig('admin/php/route_enable')) {
 								// $html = 'no configChecksumHash?';
 							}
 						} else {
-							WriteLog('file_exists($pathRel) was false, trying alternative');
+							WriteLog('route.php: file_exists($pathRel) was false, trying alternative');
 							$html = '';
 						}
 
@@ -746,14 +746,19 @@ if (GetConfig('admin/php/route_enable')) {
 						} else {
 							if (file_exists($pathRel) && is_file($pathRel)) {
 								// cache is stale, but we have nothing better, so use stale cache
-								WriteLog('$html = file_get_contents($pathRel)');
+								WriteLog('route.php $html = file_get_contents($pathRel)');
 								$html = file_get_contents($pathRel);
 							} else {
-								WriteLog('sorry, something went wrong!');
+								WriteLog('route.php: sorry, something went wrong!');
 								$html = '';
 							}
 						}
-                        $fileCacheTime = time() - filemtime($pathRel); # file was made again, refresh this time
+						if (file_exists($fileCacheTime)) {
+							$fileCacheTime = time() - filemtime($pathRel); # file was made again, refresh this time
+						} else {
+							WriteLog('route.php: warning: no file at $pathRel = ' . $pathRel);
+							$fileCacheTime = 0;
+						}
 					}
 
 					//if ($path == '/settings.html') {
@@ -858,12 +863,12 @@ if (GetConfig('admin/php/route_enable')) {
 				$html = HandleNotFound($path, ''); // not sure
 			}
 		} else {
-			WriteLog('no $path specified in GET');
+			WriteLog('route.php: no $path specified in GET');
 			$html = HandleNotFound($path, $pathRel); // no $path specified in GET
 		}
 
 		if (GetConfig('html/clock')) {
-			WriteLog('calling SetHtmlClock()');
+			WriteLog('route.php: calling SetHtmlClock()');
 			$html = SetHtmlClock($html);
 		}
 
@@ -937,7 +942,7 @@ if (GetConfig('admin/php/route_enable')) {
 		}
 
 		if ($serverResponse) {
-			WriteLog('$serverResponse set');
+			WriteLog('route.php: $serverResponse set');
 		}
 
 		if ($serverResponse) {
@@ -998,7 +1003,7 @@ if (GetConfig('admin/php/route_enable')) {
 					);
 
 					if (!$lightMode && GetConfig('admin/php/server_response_attach_to_anchor')) {
-						WriteLog('server_response_attach_to_anchor');
+						WriteLog('route.php: server_response_attach_to_anchor');
 						// if server_response_attach_to_anchor, we will put the server message next to the anchor
 						// unless we are in light mode, because then we want the message at the top of the page
 
@@ -1232,7 +1237,7 @@ if (GetConfig('admin/php/route_enable')) {
 		} // light mode
 
 		if (GetConfig('admin/php/assist_show_advanced')) {
-			WriteLog('admin/php/assist_show_advanced is true');
+			WriteLog('route.php: admin/php/assist_show_advanced is true');
 
 			#todo the defaults are hard-coded
 
@@ -1255,7 +1260,7 @@ if (GetConfig('admin/php/route_enable')) {
 				
 				WriteLog('route.php: $_COOKIE[show_advanced] = ' . ( isset( $_COOKIE['show_advanced']) ? $_COOKIE['show_advanced'] : 'UNDEFINED' ) ) ;
 
- 				$assistCss .= ".advanced, .admin { display:none }\n";
+				$assistCss .= ".advanced, .admin { display:none }\n";
 // 				$assistCss .= ".advanced, .admin, .heading, .menubar { display:none }\n";
 				#$assistCss .= ".advanced, .admin{ display: none; background-color: $colorHighlightAdvanced }\n";
 				// #todo templatify
@@ -1367,7 +1372,7 @@ if (GetConfig('admin/php/route_enable')) {
 	}
 } # if (GetConfig('admin/php/route_enable'))
 else {
-	WriteLog('config/setting/admin/php/route_enable = false');
+	WriteLog('route.php: config/setting/admin/php/route_enable = false');
 
 	// this is a fallback, and shouldn't really be here
 	// but it helps compensate for another bug
