@@ -896,7 +896,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 			WriteLog('IndexTextFile: has $detokenedMessage $fileHash = ' . $fileHash);
 			{ #title:
 				my $firstEol = index($detokenedMessage, "\n");
-				my $titleLength = GetConfig('title_length'); #default = 255
+				my $titleLength = GetConfig('admin/index/title_length'); #default = 63
 				if (!$titleLength) {
 					$titleLength = 255;
 					WriteLog('#todo: warning: $titleLength was false');
