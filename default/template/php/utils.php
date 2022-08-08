@@ -419,8 +419,7 @@ function FixConfigName ($configName) { # prepend 'setting/' to config paths as a
 } # FixConfigName()
 
 function PutConfig ($configKey, $configValue) { # writes config value to config storage
-# SetConfig {
-# PutConfig {
+# sub SetConfig {
 	$configName = FixConfigName($configName);
 	WriteLog("PutConfig($configKey, $configValue)");
 	$configDir = GetDir('config'); // config is stored here #todo unhardcode

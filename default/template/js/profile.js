@@ -558,7 +558,7 @@ function PubKeyPing () { // checks if user's public key is on server
 
 function selectKeyPopulate () {
 	if (document.formSelectKey && document.formSelectKey.selectKey) {
-		if (document.formSelectKey.selectKey.length > 1) {
+		if (1 < document.formSelectKey.selectKey.length) {
 			// already populated
 		} else { // #todo put this in event loop?
 			if (window.SetPrefs && window.GetPrefs) {

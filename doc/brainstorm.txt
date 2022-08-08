@@ -3743,3 +3743,5 @@ output in log/log.log could look more identifiable with the snow output
 ===
 
 if page is getting replies, user should have a choice to auto-display new comments
+===
+should setting/ be renamed to set/ ? to match the set command?
