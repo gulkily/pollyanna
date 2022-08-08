@@ -17,7 +17,7 @@ my $argumentKey = shift;
 
 if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 	my $argumentKeySanitized = $1;
-	my $setting = `find config | grep $argumentKeySanitized`;
+	my $setting = `find config/setting | grep $argumentKeySanitized`;
 	#print "$argumentKeySanitized\n";
 	my @settingArray = split("\n", $setting);
 	#print "$setting\n";
@@ -39,7 +39,18 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 			#print "uncool\n";
 		}
 	} else {
-		print $setting;
+		foreach my $settingKey (@settingArray) {
+			if ($settingKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
+				my $settingKeySanitized = $1;
+				if (-f $settingKeySanitized) {
+					print "$settingKey = ";
+					my $settingValue = `cat $settingKeySanitized`;
+					chomp $settingValue;
+					print $settingValue;
+					print "\n";
+				}
+			}
+		}
 	}
 } else {
 	#print "ay\n";

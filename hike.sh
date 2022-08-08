@@ -6,11 +6,20 @@ echo ===============================
 echo "Rejoice! RocketScience" `git rev-parse HEAD | cut -c 1-8`
 echo ===============================
 
+#Matthew 5:37
+#Let what you say be simply ‘Yes’ or ‘No’; anything more than this comes from evil.
+
 alias hike='./hike.sh'
 
 if [ ! $1 ]
 	then
 		set 1=help
+fi
+
+if [ $1 = set ]
+	then
+		default/template/perl/script/set.pl $2 $3
+		exit
 fi
 
 if [ $1 = test ]
@@ -38,11 +47,6 @@ fi
 if [ $1 = build ]
 	then
 		time ./build.sh
-fi
-
-if [ $1 = set ]
-	then
-		time default/template/perl/script/set.pl $2 $3
 fi
 
 if [ $1 = clean ]
