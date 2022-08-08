@@ -238,21 +238,21 @@ sub GetReadPage { # generates page with item listing based on parameters
 			\%queryFlags
 		);
 
-		$txtIndex .= GetQueryAsDialog(
-			"
-				SELECT
-					item_title,
-					add_timestamp,
-					file_hash,
-					item_score
-				FROM
-					item_flat
-					LEFT JOIN author_score ON (item_flat.author_key = author_score.author_key)
-				WHERE
-					item_flat.author_key = '$authorKey'
-			",
-			'Items by Author'
-		);
+		# $txtIndex .= GetQueryAsDialog(
+		# 	"
+		# 		SELECT
+		# 			item_title,
+		# 			add_timestamp,
+		# 			file_hash,
+		# 			item_score
+		# 		FROM
+		# 			item_flat
+		# 			LEFT JOIN author_score ON (item_flat.author_key = author_score.author_key)
+		# 		WHERE
+		# 			item_flat.author_key = '$authorKey'
+		# 	",
+		# 	'Items by Author'
+		# );
 
 		{
 			#todo templatize and improve
