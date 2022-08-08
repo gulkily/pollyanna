@@ -38,6 +38,8 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 		} else {
 			#print "uncool\n";
 		}
+	} else {
+		print $setting;
 	}
 } else {
 	#print "ay\n";
