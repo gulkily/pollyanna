@@ -40,6 +40,11 @@ if [ $1 = build ]
 		time ./build.sh
 fi
 
+if [ $1 = set ]
+	then
+		time default/template/perl/script/set.pl $2 $3
+fi
+
 if [ $1 = clean ]
 	then
 		time ./clean.sh
