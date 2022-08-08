@@ -1833,6 +1833,7 @@ sub IsTextFile { # $file ; returns 1 if txt file, 0 if not
 } # IsTextFile()
 
 sub IsItem { # $string ; returns untained string, 0 if not item
+#sub IsHash {
 # should be called IsValidItemHash {
 # todo more validation
 	my $string = shift;
