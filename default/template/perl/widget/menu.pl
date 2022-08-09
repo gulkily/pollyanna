@@ -48,7 +48,7 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template'; ret
 		if (!GetConfig('admin/js/enable') || !GetConfig('admin/php/enable')) { #todo profile/enable
 			push @menuSkip, 'profile';
 		}
-		if (1 || !GetConfig('admin/php/enable') || !GetConfig('admin/php/upload')) { # todo ... make this one auto turn off if underlying features are not available? dunno
+		if (!GetConfig('admin/upload/enable')) { # todo ... make this one auto turn off if underlying features are not available? dunno
 			push @menuSkip, 'upload';
 		}
 	} else {
