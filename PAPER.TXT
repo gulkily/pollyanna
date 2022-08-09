@@ -41,7 +41,17 @@ config/setting/
 		example: config/setting/theme and config/setting/theme.list
 
 
-user interface
+USER INTERFACE
+==============
+this user interface prioritizes accessibility by several classes of user
+the finished configured product aims to help goal-oriented users with a task to accomplish
+	the first type of task is a "basic" task, including registration, writing content, voting, and finding content
+	the second type of task is more technical, and involves validating of information integrity
+		for this purpose, site data is provided in transparent and convenient formats easy to validate and verify
+			simple scripts to aid in validation are also provided (or should be)
+	the third type of task is operation, such as transparently and effectively moderating the site
+		a very common set of operation task is upgrades and configuration
+		installation is also an operator task, and where the least third-party testing has taken place
 
 protocol
 
