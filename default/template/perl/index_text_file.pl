@@ -349,6 +349,32 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						}
 					} # cookie
 
+
+
+					if ($tokenFound{'token'} eq 'client') {
+						if ($tokenFound{'recon'} && $tokenFound{'message'} && $tokenFound{'param'}) {
+							DBAddItemAttribute($fileHash, 'client_id', $tokenFound{'param'}, 0, $fileHash);
+							$message = str_replace($tokenFound{'recon'}, $tokenFound{'message'}, $message);
+							$detokenedMessage = str_replace($tokenFound{'recon'}, '', $detokenedMessage);
+							if (!$authorKey) {
+								$authorKey = $tokenFound{'param'};
+								push @indexMessageLog, 'found client: ' . $authorKey;
+							} else {
+								if ($authorKey eq $tokenFound{'param'}) {
+									push @indexMessageLog, 'found client: ' . $authorKey . ' (matches signature)';
+								} else {
+									push @indexMessageLog, 'found client: ' . $authorKey . ' (overruled by signature)';
+								}
+							}
+						} else {
+							WriteLog('IndexTextFile: warning: client: sanity check failed');
+						}
+					} # client
+
+
+
+
+
 					if ($tokenFound{'token'} eq 'parent') { # >>
 						if ($tokenFound{'recon'} && $tokenFound{'message'} && $tokenFound{'param'}) {
 							WriteLog('IndexTextFile: DBAddItemParent(' . $fileHash . ',' . $tokenFound{'param'} . ')');
