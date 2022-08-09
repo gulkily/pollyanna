@@ -1,3 +1,5 @@
+when a dialog is brought into focus with InjectDialog() it should also get keyboard focusk
+
 organizing files and indexing files should be separate processes
 
 
