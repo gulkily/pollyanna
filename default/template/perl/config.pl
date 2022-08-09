@@ -250,9 +250,18 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 				# the same value will remain for current instance
 				# this also saves much time not having to run ./clean_dev when developing
 				WriteLog('GetConfig: calling PutConfig($configName = ' . $configName . ', $configValue = ' . length($configValue) .'b);');
-				PutConfig($configName, $configValue);
+
+				#PutConfig($configName, $configValue);
+				if (GetConfig('setting/admin/config_add_newline') && index($configValue, "\n") == -1) {
+					PutConfig($configName, $configValue . "\n");
+					# this is done to make the configs look nicer in the term
+					# #todo add a feature flag for this
+				}
+				else {
+					PutConfig($configName, $configValue);
+				}
 			} else {
-				WriteLog('GetConfig: skip_putconfig=TRUE, not calling PutConfig()');
+				WriteLog('GetConfig: skip_putconfig= TRUE, not calling PutConfig()');
 			}
 
 			return $configValue;
@@ -356,7 +365,7 @@ sub PutConfig { # $configName, $configValue ; writes config value to config stor
 		return '';
 	}
 
-	chomp $configValue;
+	#chomp $configValue;
 
 	WriteLog('PutConfig: $configName = ' . $configName . ', $configValue = ' . length($configValue) . 'b)');
 
