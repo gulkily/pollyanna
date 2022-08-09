@@ -1,3 +1,46 @@
+
+
+DIRECTORY STRUCTURE
+===================
+default/
+	contains defaults for everything, including settings, templates, and themes
+	is in the source tree
+config/
+	contains current configuration
+	has the same file structure as default/
+	is NOT in the source tree
+
+when the value is looked up with GetConfig(),
+	if it is not in config/, it copies from default/
+
+html/
+	contains the web root, including html, js, and php
+	is NOT in the source tree
+	can be generated with "hike build" and "hike frontend" (calls pages.pl)
+
+html/txt/
+html/image/
+html/video/ (planned)
+html/audio/ (planned)
+	contain site content in its raw original form
+	downloadable by anyone with access to website
+
+default/theme/
+config/theme/
+	contain default and currently used theme overlays
+	each theme has its own template/ directory, which overrides defaults
+	multiple templates can be selected in the config/setting/theme file
+		the template overlays are applied in the order that themes are specified
+		this can be a little confusing, but only a little bit
+
+default/setting/
+config/setting/
+	contains settings for various site features
+	mostly boolean feature flags, 0 or 1
+	those with different options, they're provided with a .list file
+		example: config/setting/theme and config/setting/theme.list
+
+
 user interface
 
 protocol
