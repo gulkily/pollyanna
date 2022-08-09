@@ -26,6 +26,12 @@ sub GetTokenDefs {
 			'mask_params'    => 'mgi',
 			'message' => '[Cookie]'
 		},
+		{ # client id of user who posted the message
+			'token'   => 'client',
+			'mask'    => '^(client)(\W+)([0-9A-F]{16})',
+			'mask_params'    => 'mgi',
+			'message' => '[Client]'
+		},
 		{ # server receipt time of message
 			'token'   => 'received',
 			'mask'    => '^(received)(\W+)([0-9]{10})',
