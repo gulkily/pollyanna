@@ -43,9 +43,21 @@ config/setting/
 
 USER INTERFACE
 ==============
-this user interface prioritizes accessibility by several classes of user
-the finished configured product aims to help goal-oriented users with a task to accomplish
-	the first type of task is a "basic" task, including registration, writing content, voting, and finding content
+this user interface prioritizes accessibility by several classes of users and tasks.
+
+by prioritizing goal accomplishment, the interfaces aims to be accessible and usable over being engaging.
+we think the best type of engagement comes from facilitating publishing of content and making it accessible.
+
+BASIC TASKS
+	registration
+	publishing profile
+	posting new topic
+	finding existing topic
+	voting on topic or comment
+
+VALIDATION TASKS
+	
+
 	the second type of task is more technical, and involves validating of information integrity
 		for this purpose, site data is provided in transparent and convenient formats easy to validate and verify
 			simple scripts to aid in validation are also provided (or should be)
@@ -56,5 +68,34 @@ the finished configured product aims to help goal-oriented users with a task to 
 protocol
 
 browser compatibility
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
