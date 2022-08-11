@@ -36,8 +36,8 @@ rm -rf config/string/*
 echo "rm -rf config/theme/*"
 rm -rf config/theme/*
 
-echo "rm -rf config/admin/my_version"
-rm -rf config/admin/my_version
+echo "rm -rf config/setting/admin/my_version"
+rm -rf config/setting/admin/my_version
 
 echo "find html -type d -empty -delete"
 find html -type d -empty -delete

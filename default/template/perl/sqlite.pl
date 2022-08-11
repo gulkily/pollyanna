@@ -1331,7 +1331,7 @@ sub DBAddKeyAlias { # adds new author-alias record $key, $alias, $pubkeyFileHash
 	DBAddPageTouch('author', $key);
 } # DBAddKeyAlias()
 
-sub DBAddItemParent { # Add item parent record. $itemHash, $parentItemHash ;
+sub DBAddItemParent { # $itemHash, $parentItemHash ; Add item parent record.
 # Usually this is when item references parent item, by being a reply or a vote, etc.
 #todo replace with item_attribute
 	state $query;
@@ -1455,6 +1455,11 @@ sub DBAddItem { # $filePath, $fileName, $authorKey, $fileHash, $itemType, $verif
 	my $itemType = shift;
 	my $verifyError = shift; #todo remove this and move it somewhere else
 
+	if (!$itemType) {
+		WriteLog('DBAddItem: warning: $itemType was FALSE');
+		return ''; #todo
+	}
+
 	if (!$verifyError) {
 		$verifyError = '';
 	}
@@ -1503,12 +1508,16 @@ sub DBAddItem { # $filePath, $fileName, $authorKey, $fileHash, $itemType, $verif
 		#todo this should be somewhere else and feature-checked first
 		my $filePathSafe = $1;
 
-		my $sha1sum = `sha1sum $filePathSafe | cut -d ' ' -f 1`;
-		DBAddItemAttribute($fileHash, 'sha1sum', $sha1sum);
+		if (-f $filePathSafe) {
+			my $sha1sum = `sha1sum $filePathSafe | cut -d ' ' -f 1`;
+			DBAddItemAttribute($fileHash, 'sha1sum', $sha1sum);
 
-		if (GetConfig('setting/admin/index/extra_hashes')) {
-			my $sha256sum = `sha256sum $filePathSafe | cut -d ' ' -f 1`;
-			DBAddItemAttribute($fileHash, 'sha256sum', $sha256sum);
+			if (GetConfig('setting/admin/index/extra_hashes')) {
+				my $sha256sum = `sha256sum $filePathSafe | cut -d ' ' -f 1`;
+				DBAddItemAttribute($fileHash, 'sha256sum', $sha256sum);
+			}
+		} else {
+			#todo warning
 		}
 	}
 

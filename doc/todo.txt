@@ -1,3 +1,16 @@
+dialog palette
+	pre-populate with dialogs on page
+	in the event loop, check for new ones just in case
+	put new dialogs into palette when they are injected into page
+	checkboxes in palette should hide/show dialogs
+	palette should also contain advanced/beginner toggle button
+	palette should not be affected by advanced/beginner
+
+before cleaning db, dump the file to hash mapping in item table
+	restore it when rebuilding
+		but do not set cache/b/indexed, so that file gets indexed again
+			this will allow OrganizeFile() to work properly with RenameFile()
+
 when a dialog is brought into focus with InjectDialog() it should also get keyboard focusk
 
 organizing files and indexing files should be separate processes

@@ -170,6 +170,11 @@ sub OrganizeFile { # $file ; renames file based on hash of its contents
 	my $file = shift;
 	chomp $file;
 
+	if (!$file) {
+		WriteLog('OrganizeFile: warning: $file is FALSE');
+		return '';
+	}
+
 	my $TXTDIR = './html/txt'; #todo
 
 	if (!-e $file) {

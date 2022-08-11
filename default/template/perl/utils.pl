@@ -725,6 +725,46 @@ sub GetList { # $listName ; returns array from template
 	return @arrayReturn;
 } # GetList()
 
+sub RenameFile {
+	WriteLog('RenameFile: warning: not finished yet');
+	return '';
+
+# sub FileRename {
+	my $filePrevious = shift;
+	my $fileNew = shift;
+	my $hashNew = shift;
+	#todo sanity
+
+	chomp $filePrevious;
+	chomp $fileNew;
+
+	if ($hashNew) {
+		# ok
+		chomp $hashNew;
+	} else {
+		$hashNew = GetFileHash($filePrevious);
+	}
+
+	WriteLog("RenameFile: $filePrevious, $fileNew); caller = " . join(',', caller));
+	my $hashPrevious = SqliteGetValue("SELECT file_hash FROM item WHERE file_path = '$filePrevious'"); #todo safety
+
+	if ($hashPrevious) {
+		WriteLog('RenameFile: $hashPrevious = ' . $hashPrevious . '; $hashNew = ' . $hashNew);
+
+		#todo sanity check on $hashPrevious
+
+		DBAddItemParent($hashNew, $hashPrevious);
+		AppendFile("log/rename.log", $hashNew . "|" . $hashPrevious); #todo proper path
+		my $renameResult = rename($filePrevious, $fileNew);
+
+		return $renameResult;
+		#todo log and sanity check on $renameResult
+	} else {
+		WriteLog('RenameFile: warning: $hashPrevious was FALSE');
+		return '';
+	}
+} # RenameFile()
+
 sub encode_entities2 { # returns $string with html entities <>"& encoded
 	my $string = shift;
 	if (!$string) {
@@ -1793,6 +1833,7 @@ sub IsTextFile { # $file ; returns 1 if txt file, 0 if not
 } # IsTextFile()
 
 sub IsItem { # $string ; returns untained string, 0 if not item
+#sub IsHash {
 # should be called IsValidItemHash {
 # todo more validation
 	my $string = shift;
