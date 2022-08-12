@@ -174,12 +174,12 @@ function MakeKey (t) { //makes key using default settings
 					window.location = '/profile.html?' + myFingerprint;
 
 					//	if (window.sharePubKey) {
-					//		//alert('DEBUG: MakeKey: window.sharePubKey exists. calling');
+					//		//alert('DEBUG: MakeKey: (window.sharePubKey) exists. calling');
 					//		//sharePubKey();
 					//
 					//		return true;
 					//	} else {
-					//		//alert('DEBUG: MakeKey: window.sharePubKey does NOT exist, using widow.location');
+					//		//alert('DEBUG: MakeKey: (window.sharePubKey) does NOT exist, using window.location');
 					//
 					//		window.location = '/write.html#inspubkey';
 					//		return true;

@@ -186,7 +186,7 @@ function sharePubKey (t) { // shares current user's public key via injected form
 
 			return false;
 		} else {
-			//alert('DEBUG: pubKey was FALSE');
+			//alert('DEBUG: sharePubKey: pubKey was FALSE');
 
 			return true;
 		}
@@ -534,13 +534,13 @@ function PubKeyPing () { // checks if user's public key is on server
 					//alert('DEBUG: PubKeyPing: profile already exists');
 				} else {
 					if (window.sharePubKey) {
-						//alert('DEBUG: PubKeyPing: latestPing: window.sharePubKey check passed, doing it...');
+						//alert('DEBUG: PubKeyPing: latestPing: (window.sharePubKey) check passed, doing it...');
 						sharePubKey();
 
 						latestPing = GetTime();
 						SetPrefs('latest_pubkey_ping', latestPing);
 					} else {
-						//alert('DEBUG: PubKeyPing: latestPing: window.sharePubKey check FAILED');
+						//alert('DEBUG: PubKeyPing: latestPing: (window.sharePubKey) check FAILED');
 					}
 				}
 			} else {
