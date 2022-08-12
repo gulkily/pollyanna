@@ -1393,7 +1393,7 @@ else {
 			if ($pageHelp) {
 				print($pageHelp);
 			} else {
-				$defaultBanner = '<a href="/">Continue to home page</a>'';
+				$defaultBanner = '<a href="/">Continue to home page</a>';
 				print('<h1>' . $defaultBanner . '</h1>');
 			}	
 		}
