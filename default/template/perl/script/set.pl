@@ -24,11 +24,15 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 	#print scalar(@settingArray) . "\n";
 	if (scalar(@settingArray) == 1) {
 		my $settingKey = $settingArray[0];
-		#only one found
+		#ONLY ONE FOUND
+		#ONLY ONE FOUND
+		#ONLY ONE FOUND
 
 		my $argumentValue = shift;
 		if (defined($argumentValue) && ($argumentValue || ($argumentValue == 0))) {
-			# value specified
+			# VALUE SPECIFIED
+			# VALUE SPECIFIED
+			# VALUE SPECIFIED
 
 			#print $argumentValue . "\n";
 			chomp $argumentValue;
@@ -44,11 +48,22 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 				}
 			}
 		} else {
+			# VALUE NOT SPECIFIED
+			# VALUE NOT SPECIFIED
+			# VALUE NOT SPECIFIED
+
 			chomp $settingKey;
-			print "$argumentKeySanitized=$settingKey\n";
+			print "$argumentKeySanitized=$settingKey";
+			# if ($settingKey =~ m/^([.+])$/) {
+			# 	$settingKey = $1;
+			# 	print `cat $settingKey`;
+			# }
+			print "\n";
 		}
 	} else {
-		# search results
+		# SEARCH RESULTS
+		# SEARCH RESULTS
+		# SEARCH RESULTS
 		foreach my $settingKey (@settingArray) {
 			if ($settingKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 				my $settingKeySanitized = $1;
