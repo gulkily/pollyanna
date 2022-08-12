@@ -4,6 +4,24 @@ use strict;
 use 5.010;
 use utf8;
 
+sub UriEscape {
+# sub UrlEncode {
+# sub EscapeUrl {
+
+	my $string = shift;
+
+	#todo sanity
+
+	my $escapedString = $string;
+
+	$escapedString = uri_escape($escapedString);
+	$escapedString = str_replace(' ', '+', $escapedString);
+	$escapedString = str_replace('+', '%2b', $escapedString);
+	$escapedString = str_replace('#', '%23', $escapedString);
+
+	return $escapedString;
+} # UriEscape()
+
 sub GetHtmlAvatar { # Returns HTML avatar from cache
 	state %avatarMemo;
 
