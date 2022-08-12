@@ -28,9 +28,11 @@ sub GetItemTemplateBody {
 		WriteLog('GetItemTemplateBody: item_type = txt');
 
 		my $isTextart = 0;
-		if (-1 != index(','.$file{'tags_list'}.',', ',textart,')) {
-			WriteLog('GetItemTemplateBody: $isTextart = 1');
-			$isTextart = 1;
+		if (GetConfig('html/format_item/textart')) {
+			if (-1 != index(','.$file{'tags_list'}.',', ',textart,')) {
+				WriteLog('GetItemTemplateBody: $isTextart = 1');
+				$isTextart = 1;
+			}
 		}
 
 		my $isPubKey = 0;
@@ -46,10 +48,38 @@ sub GetItemTemplateBody {
 			$isTooLong = 1;
 		}
 
+		my $isPhone = 0;
+		if (GetConfig('html/format_item/phone')) {
+			if (-1 != index(','.$file{'tags_list'}.',', ',phone,')) {
+				WriteLog('GetItemTemplateBody: $isPhone = 1');
+				$isPhone = 1;
+			}
+		}
+
+		my $isAdress = 0;
+		if (GetConfig('html/format_item/address')) {
+			if (-1 != index(','.$file{'tags_list'}.',', ',address,')) {
+				$isAdress = 1;
+				WriteLog('GetItemTemplateBody: $isAdress = 1');
+			}
+		}
+
+		#todo allow textart and address together
+
 		if ($isTextart) {
 			$itemText = TextartForWeb(GetCache('message/' . $file{'file_hash'} . '_gpg'));
 			if (!$itemText) {
 				$itemText = TextartForWeb(GetFile($file{'file_path'}));
+			}
+		} elsif ($isPhone) {
+			$itemText = PhoneForWeb(GetCache('message/' . $file{'file_hash'} . '_gpg'));
+			if (!$itemText) {
+				$itemText = PhoneForWeb(GetFile($file{'file_path'}));
+			}
+		} elsif ($isAdress) {
+			$itemText = AddressForWeb(GetCache('message/' . $file{'file_hash'} . '_gpg'));
+			if (!$itemText) {
+				$itemText = AddressForWeb(GetFile($file{'file_path'}));
 			}
 		} elsif ($isPubKey) {
 			$itemText = '[This item is a public key.]';
