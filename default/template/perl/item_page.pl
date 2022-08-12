@@ -52,6 +52,8 @@ sub GetHtmlToolboxes {
 	}
 
 	if (GetConfig('html/item_page/toolbox_search') && $urlParam && $urlParam ne 'Untitled') {
+		#sub SearchToolbox {
+		#sub SearchDialog {
 		my $htmlToolbox = '';
 		
 		#$htmlToolbox .= '<b>Search:</b><br>';
@@ -275,7 +277,8 @@ sub GetItemIndexLog {
 		$log = HtmlEscape($log);
 		$log = str_replace("\n", "<br>\n", $log);
 		
-		my $logWindow = GetWindowTemplate($log, 'IndexFile(' . $shortHash . ')');
+		my $logWindow = GetWindowTemplate($log, 'Log');
+		# my $logWindow = GetWindowTemplate($log, 'IndexFile(' . $shortHash . ')');
 		$logWindow = '<span class=advanced>' . $logWindow . '</span>';
 		return $logWindow;
 	}
