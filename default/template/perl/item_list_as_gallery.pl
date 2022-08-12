@@ -3,8 +3,7 @@
 use strict;
 use warnings;
 
-sub GetItemListAsGallery { # \@items
-# returns gallery as series of dialogs without <body>
+sub GetItemListAsGallery { # \@items ; returns gallery as series of dialogs without <body>
 #
 	my $itemsRef = shift;
 	my @items = @{$itemsRef};
