@@ -143,6 +143,10 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template'; ret
 } # GetMenuFromList()
 
 sub GetMenuTemplate { # returns menubar
+# sub GetMenubarTemplate {
+# sub GetMenubar {
+# sub GetMenuBar {
+# sub GetTopMenu {
 	my $topMenuTemplate = GetTemplate('html/topmenu2.template');
 
 	if (GetConfig('setting/admin/js/dragging')) {
@@ -151,6 +155,7 @@ sub GetMenuTemplate { # returns menubar
 	} else {
 		# remove extra menu placeholder from template
 		$topMenuTemplate = str_replace('<span id=spanDialogControls></span>', '', $topMenuTemplate);
+		#todo it should remove table cell as well
 	}
 
 	my $pageType = shift;
