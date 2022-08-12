@@ -38,7 +38,7 @@ sub GetImageContainer { # $fileHash, $imageAlt, $boolLinkToItemPage = 1
 	my $imageSmallUrl = "/thumb/thumb_42_$fileHash.gif"; #todo hardcoding no
 	#my $imageAlt = $itemTitle;
 
-	if (file_exists($imageUrl) && file_exists($imageSmallUrl)) {
+	if (file_exists($imageUrl) || file_exists($imageSmallUrl)) {
 		WriteLog('GetImageContainer: $fileHash = ' . $fileHash . '; $imageAlt = ' . $imageAlt . '; $permalinkHtml = ' . $permalinkHtml);
 
 		$imageContainer =~ s/\$imageUrl/$imageUrl/g;
