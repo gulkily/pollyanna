@@ -97,11 +97,11 @@ sub MakeSimplePage { # given page name, makes page
 			$title
 		);
 		if ($pageName eq 'help') {
-				my $pageContent =  GetTemplate("html/page/help_diagnostics.template");
-				$contentWindow .= GetWindowTemplate(
-						$pageContent,
-						'Toys'
-				);
+			my $pageContent =  GetTemplate("html/page/help_diagnostics.template");
+			$contentWindow .= GetWindowTemplate(
+					$pageContent,
+					'Toys'
+			); # sub GetToysDialog {
 			$contentWindow .= GetStatsTable();
 		}
 
