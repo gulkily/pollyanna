@@ -1389,7 +1389,13 @@ else {
 		if ($html) {
 			print($html);
 		} else {
-			print('Technical issue encountered. Please contact maintainer.');
+			$pageHelp = get_file_contents('help.html');
+			if ($pageHelp) {
+				print($pageHelp);
+			} else {
+				$defaultBanner = '<a href="/">Continue to home page</a>'';
+				print('<h1>' . $defaultBanner . '</h1>');
+			}	
 		}
 	}
 } # NOT GetConfig('admin/php/route_enable')
