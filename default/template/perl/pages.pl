@@ -657,53 +657,7 @@ sub GetQuickVoteButtonGroup {
 
 require_once('format_message.pl');
 
-sub GetImageContainer { # $fileHash, $imageAlt, $boolLinkToItemPage = 1
-	my $fileHash = shift;
-	my $imageAlt = shift;
-	my $boolLinkToItemPage = shift;
-
-	if (!defined($boolLinkToItemPage)) {
-		$boolLinkToItemPage = 1;
-	}
-
-	#todo sanity
-
-	#$fileHash = SqliteGetValue("SELECT file_hash FROM item_flat WHERE file_hash LIKE '$fileHash%'");
-	#todo this is a hack
-
-	WriteLog('GetImageContainer: $fileHash = ' . $fileHash);
-
-	my $permalinkHtml = '';
-	if (!$permalinkHtml) {
-		$permalinkHtml = '/' . GetHtmlFilename($fileHash);
-	}
-
-	my $imageContainer = '';
-	if ($boolLinkToItemPage) {
-		$imageContainer = GetTemplate('html/item/container/image_with_link.template');
-	} else {
-		$imageContainer = GetTemplate('html/item/container/image_with_link.template');
-		#$imageContainer = GetTemplate('html/item/container/image.template');
-	}
-
-	my $imageUrl = "/thumb/thumb_800_$fileHash.gif"; #todo hardcoding no
-	# my $imageUrl = "/thumb/thumb_420_$fileHash.gif"; #todo hardcoding no
-	my $imageSmallUrl = "/thumb/thumb_42_$fileHash.gif"; #todo hardcoding no
-	#my $imageAlt = $itemTitle;
-
-	WriteLog('GetImageContainer: $fileHash = ' . $fileHash . '; $imageAlt = ' . $imageAlt . '; $permalinkHtml = ' . $permalinkHtml);
-
-	$imageContainer =~ s/\$imageUrl/$imageUrl/g;
-	$imageContainer =~ s/\$imageSmallUrl/$imageSmallUrl/g;
-	$imageContainer =~ s/\$imageAlt/$imageAlt/g;
-	if ($boolLinkToItemPage) {
-		$imageContainer =~ s/\$permalinkHtml/$permalinkHtml/g;
-	}
-
-	WriteLog('GetImageContainer: returning, length($imageContainer) = ' . length($imageContainer));
-
-	return $imageContainer;
-} # GetImageContainer()
+require_once('image_container.pl');
 
 sub GetTagsListAsHtmlWithLinks { # $tagsListParam ; prints up to 7 tags
 	my $tagsListParam = shift;
