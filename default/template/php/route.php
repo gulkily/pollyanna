@@ -1395,7 +1395,7 @@ else {
 			} else {
 				$defaultBanner = '<a href="/">Continue to home page</a>';
 				print('<h1>' . $defaultBanner . '</h1>');
-			}	
+			}
 		}
 	}
 } # NOT GetConfig('admin/php/route_enable')
