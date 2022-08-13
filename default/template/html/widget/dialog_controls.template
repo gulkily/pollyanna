@@ -63,6 +63,21 @@
 		" title=Annoy>Annoy</a>;
 	</span>
 
+	<a id=btnReprint href=# onclick="
+		var winLoc = window.location.href;
+		if (winLoc.indexOf('?')) {
+			winLoc = winLoc.substr(0, winLoc.indexOf('?'));
+		}
+
+		var d = new Date();
+		var n = d.getTime();
+		n = Math.ceil(n / 1000);
+		n = n + 86400;
+
+		winLoc = winLoc + '?time=' + n;
+		window.location = winLoc;
+	" title="Reprint">Reprint</a>;
+
 	<a id=btnDraggingReset href=# onclick="
 		if (window.DraggingReset && window.SetPrefs) {
 			SetPrefs('beginner', 1);
@@ -74,20 +89,7 @@
 			SetPrefs('draggable_restore', 0);
 			SetPrefs('draggable_restore_collapsed', 0);
 			DraggingReset();
-			//window.location.reload();
-
-			var winLoc = window.location.href;
-			if (winLoc.indexOf('?')) {
-				winLoc = winLoc.substr(0, winLoc.indexOf('?'));
-			}
-
-			var d = new Date();
-			var n = d.getTime();
-			n = Math.ceil(n / 1000);
-			n = n + 86400;
-
-			winLoc = winLoc + '?time=' + n;
-			window.location = winLoc;
+			window.location.reload(false);
 		}
 	" title="Reset">Reset</a>
 
