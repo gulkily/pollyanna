@@ -1,3 +1,6 @@
+do a bit of refactoring in set.pl
+	so that even if there is only one match, value is printed
+
 dialog palette
 	pre-populate with dialogs on page
 	in the event loop, check for new ones just in case
