@@ -68,12 +68,10 @@
 		if (winLoc.indexOf('?')) {
 			winLoc = winLoc.substr(0, winLoc.indexOf('?'));
 		}
-
 		var d = new Date();
 		var n = d.getTime();
 		n = Math.ceil(n / 1000);
 		n = n + 86400;
-
 		winLoc = winLoc + '?time=' + n;
 		window.location = winLoc;
 	" title="Reprint">Reprint</a>;
