@@ -25,7 +25,6 @@ use Cwd qw(cwd);
 require './utils.pl';
 require_once('sqlite.pl');
 require_once('makepage.pl');
-#require_once('compare_page.pl');
 
 sub GetDialogPage { # $pageName, $pageTitle, $windowContents ; returns html page with dialog
 # this is for getting one page with one dialog, not a /dialog/... page

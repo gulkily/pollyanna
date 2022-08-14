@@ -54,7 +54,6 @@ my @modules = qw(
 	makepage
 	token_defs
 	calendar
-	compare_page
 	render_field
 	resultset_as_dialog
 	item_page
@@ -63,6 +62,7 @@ my @modules = qw(
 	widget
 	index_text_file
 );
+# 	compare_page
 
 for my $module (@modules) {
 	require_once("$module.pl");

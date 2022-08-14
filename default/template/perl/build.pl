@@ -106,7 +106,6 @@ my @modules = qw(
 	gpgpg.pl
 	makepage.pl
 	token_defs.pl
-	compare_page.pl
 	render_field.pl
 	resultset_as_dialog.pl
 	item_page.pl
@@ -118,6 +117,7 @@ my @modules = qw(
 	pages.pl
 	item_listing_page.pl
 );
+# compare_page.pl
 
 for my $module (@modules) {
 	ensure_module("$module");
