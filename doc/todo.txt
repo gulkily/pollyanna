@@ -1,3 +1,9 @@
+handle ^M line breaks as early as possible
+
+when a pubkey fails a sanity check, the item template is just blank
+	there is also no parse log
+		may be nice to give some kind of feedback
+
 do a bit of refactoring in set.pl
 	so that even if there is only one match, value is printed
 
@@ -609,9 +615,6 @@ If user signs out with cookie and later tries to sign in with localstorage,
 
 Add sub to fill template with hash of variables
 
-Compatible Mode
-	Rename from Accessibility Mode
-
 Being all caps makes html tags stand out more in a sea of text
 
 Instrument panel
@@ -645,8 +648,6 @@ which is however better than nothing.
 Store current config
 	Compare current config to last stored config
 		Publish config if changes
-
-#bug handle404 clashes with server response message
 
 need to make more button sticky via same prefs as settings page
 
