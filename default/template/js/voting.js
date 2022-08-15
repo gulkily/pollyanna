@@ -41,6 +41,14 @@ function PingUrl (url, ele) { // loads arbitrary url via image or xhr
 		ele = 0;
 	}
 
+	if (!url) {
+		// #todo more sanity here
+		//alert('DEBUG: PingUrl: warning: url was FALSE');
+		return '';
+	}
+
+	//alert('DEBUG: PingUrl: url = ' + url);
+
 	if (window.XMLHttpRequest) {
 		//alert('DEBUG: PingUrl: window.XMLHttpRequest was true');
 
