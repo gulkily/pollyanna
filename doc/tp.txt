@@ -11,3 +11,10 @@ Agree?
 ===
 
 Welcome to this HTML experiment.
+
+===
+
+dialog and window are currently synonymous...
+	i would like more consistency, with a preference for dialog
+		but it's not super important right now
+			in fact, topmenu2.template doesn't bother me much either
