@@ -1,0 +1,13 @@
+Welcome!
+Click this button to create a private key, guest profile, and allow participation.
+Agree?
+{
+	generate new private key
+	post public key
+	post signed announcement of arrival
+	solve puzzle
+}
+
+===
+
+Welcome to this HTML experiment.
