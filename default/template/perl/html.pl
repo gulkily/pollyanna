@@ -67,7 +67,7 @@ sub GetHtmlFilename { # get the HTML filename for specified item hash
 	WriteLog("GetHtmlFilename()");
 
 	if (!defined($hash) || !$hash) {
-		if (WriteLog("GetHtmlFilename: warning: called without parameter")) {
+		if (WriteLog("GetHtmlFilename: warning: called without parameter; caller = " . join(',', caller))) {
 
 			#my $trace = Devel::StackTrace->new;
 			#print $trace->as_string; # like carp

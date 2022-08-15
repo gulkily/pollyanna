@@ -69,7 +69,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 		if ($fileSize && $fileModTime) {
 			push @indexMessageLog, 'file stat: size = ' . $fileSize . '; mod time = ' . $fileModTime;
 		} else {
-			WriteLog('IndexTextFile: warning: stat_file $fileSize or $fileModTime is FALSE');
+			WriteLog('IndexTextFile: warning: stat_file $fileSize or $fileModTime is FALSE; $file = ' . $file . '; caller = ' . join(',', caller));
 		}
 	}
 

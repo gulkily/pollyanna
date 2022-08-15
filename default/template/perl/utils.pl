@@ -86,6 +86,8 @@ sub ensure_module { # $path ; ensures module is available under config/
 	if (!-e $path) {
 		if ($moduleContent) {
 			PutConfig("template/perl/$path", $moduleContent);
+		} else {
+			WriteLog('ensure_module: warning: $moduleContent is FALSE; caller = ' . join(',', caller));
 		}
 	}
 
