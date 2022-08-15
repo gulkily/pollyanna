@@ -6,7 +6,7 @@ echo javascript
 echo draggable interface
 echo openpgp.js
 echo loading indicator
-echo php
+echo php connectors
 echo uploading of files
 echo permissioned hashtags
 echo self-admin
