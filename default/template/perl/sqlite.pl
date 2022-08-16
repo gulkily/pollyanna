@@ -611,10 +611,28 @@ sub SqliteEscape { # Escapes supplied text for use in sqlite query
 	return $text;
 } # SqliteEscape()
 
+sub SqliteGetCount {
+# sub GetCount {
+# sub GetQueryCount {
+
+	my $query = shift;
+	#todo sanity;
+	#todo params
+
+	my $queryText = SqliteGetNormalizedQueryString($query);
+	WriteLog('SqliteGetCount: $queryText = ' . $queryText);
+
+	my $queryItemCount = "SELECT COUNT(*) AS item_count FROM ($queryText) LIMIT 1";
+	my $rowCount = SqliteGetValue($queryItemCount);
+
+	return $rowCount;
+} # SqliteGetCount()
+
 sub SqliteGetValue {
 # sub SqliteQueryGetValue {
 # sub SqliteQueryValue {
 # sub GetSqliteValue {
+# sub GetQueryValue {
 	my $query = shift;
 	my @queryParams = @_;
 
