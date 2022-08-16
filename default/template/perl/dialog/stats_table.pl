@@ -6,6 +6,7 @@ use 5.010;
 
 
 sub GetStatsTable { # returns Stats dialog (without dialog frame)
+# sub GetStatsDialog {
 #note this can take a while to warm up first time, because lots of sql count() and group by such
 	my $templateName = shift;
 	if (!$templateName) {
@@ -152,6 +153,11 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 		$tagsTotal = 0;
 	}
 
+	my $newLength = SqliteGetValue('SELECT COUNT(file_hash) FROM item_flat WHERE item_score >= 0');
+	if (!$newLength) {
+		$newLength = 0;
+	}
+
 	#todo optimize
 	#todo config/setting/admin/upload/allow_files
 
@@ -162,6 +168,7 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 	$statsTable =~ s/\$versionFull/$versionFull/;
 	$statsTable =~ s/\$versionSuccinct/$versionSuccinct/;
 	$statsTable =~ s/\$versionSequence/$versionSequence/;
+	$statsTable =~ s/\$newLength/$newLength/;
 	$statsTable =~ s/\$itemsIndexed/$itemsIndexed/;
 	$statsTable =~ s/\$threadsCount/$threadsCount/;
 	$statsTable =~ s/\$imagesCount/$imagesCount/;
