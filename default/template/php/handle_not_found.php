@@ -133,18 +133,20 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		}
 
 		$validViews = array(
-			'deleted',
-			'compost',
-			'new',
-			'raw',
-			'picture',
-			'image',
-			'read',
-			'chain',
-			'url',
-			'authors',
-			'threads'
+			'deleted', # deleted.html
+			'compost', # compost.html
+			'new', # new.html
+			'raw', # raw.html
+			'picture', # picture.html
+			'image', # image.html
+			'read', # read.html
+			'chain', # chain.html
+			'url', # url.html
+			'authors', # authors.html
+			'threads', # threads.html
+			'boxes' #banana #todo
 		);
+		#todo make this nicer and configurable etc
 
 		if (preg_match('/^\/([a-z]+)([0-9]+)?\.html$/', $path, $pathMatches)) {
 			WriteLog('HandleNotFound: $pathMatches = ' . print_r($pathMatches, 1));

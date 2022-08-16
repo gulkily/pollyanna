@@ -1,0 +1,7 @@
+SELECT
+	file_hash,
+	value AS boxes,
+	epoch AS add_timestamp
+FROM item_attribute
+WHERE attribute = 'boxes'
+ORDER BY add_timestamp DESC

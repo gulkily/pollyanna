@@ -450,6 +450,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						date
 						https
 						http
+						boxes
 						surpass
 						time
 						hashtag

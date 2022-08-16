@@ -4,10 +4,10 @@ txtCount=$(find html/txt -type f | wc -l) #Count files and store in a variable
 #if ((txtCount -ge 10000));
 if [ "$txtCount" -ge 100 ];
 	then
-		echo ===
+		echo =======================================================
 		echo Refusing to rebuild because more than 100 files of data
 		echo Use --override or -O to override NOT IMPLEMENTED YET
-		echo ===
+		echo =======================================================
 		exit
 fi
 

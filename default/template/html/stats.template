@@ -32,6 +32,12 @@
 		</a>
 	</p>
 	<p>
+		<a href="/new.html">
+			<b>$newLength items</b>
+			<span class=advanced><span class=beginner><br>new public items on site</span></span>
+		</a>
+	</p>
+	<p class=advanced>
 		<a href="/chain.html">
 			<b>$chainLogLength notarized</b>
 			<span class=advanced><span class=beginner><br>time was recorded into server's chain log</span></span>
@@ -39,8 +45,8 @@
 	</p>
 	<p class=advanced>
 		<a href="/compost.html">
-			<b>$itemsIndexed items</b>
-			<span class=beginner><br>pieces of content published on this service</span>
+			<b>$itemsIndexed composting</b>
+			<span class=beginner><br>pieces of content available for moderation</span>
 		</a>
 	</p>
 	<p class=advanced>

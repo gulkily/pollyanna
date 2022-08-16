@@ -1,3 +1,13 @@
+daily 1m
+	banana
+	shitmyself
+	lilatom
+	papers
+	phoenix
+	carlos
+	dp
+
+
 handle ^M line breaks as early as possible
 
 when a pubkey fails a sanity check, the item template is just blank

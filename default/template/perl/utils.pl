@@ -2412,6 +2412,8 @@ sub in_array { # $needle, @haystack ; emulates php's in_array()
 #	} else {
 #		return 0;
 #	}
+	WriteLog('in_array: caller = ' . join(',', caller));
+
 	my %params = map { $_ => 1 } @haystack;
 	if(exists($params{$needle})) {
 		WriteLog('in_array: $needle = ' . $needle . '; @haystack = ' . join(',', @haystack) . ' = 1');
