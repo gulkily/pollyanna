@@ -1,0 +1,16 @@
+<!-- default/template/html/window/standard.template -->
+<font face=arial>
+	<table cellspacing=0 cellpadding=6 border=0 class=dialog>
+		$windowTitlebar
+
+		$windowMenubar
+
+		$windowHeader
+
+		$windowBody
+
+		$windowStatus
+	</table>
+</font>
+<!-- / default/template/html/window/standard.template -->
+
