@@ -595,7 +595,7 @@ function SetInterfaceMode (ab, thisButton) { // updates several settings to chan
 			SetPrefs('show_admin', 0);
 			SetPrefs('write_enhance', 0);
 			SetPrefs('write_autosave', 0);
-			SetPrefs('timestamps_format', 'adjusted');
+			SetPrefs('timestamps_format', 'adjusted'); // reset to beginner
 			SetPrefs('performance_optimization', 'faster');
 			SetPrefs('draggable', 0);
 			SetPrefs('draggable_scale', 0);
