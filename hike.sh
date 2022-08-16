@@ -72,6 +72,11 @@ if [ $1 = frontend ]
 		time ./pages.pl --system
 fi
 
+if [ $1 = page ]
+	then
+		time ./pages.pl -M $2
+fi
+
 if [ $1 = restart ]
 	then
 		killall lighttpd
