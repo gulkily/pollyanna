@@ -341,6 +341,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fieldName eq 'vote_count' || # RenderField() not to be confused with field_advanced
 		$fieldName eq 'author_score' || # RenderField() not to be confused with field_advanced
 		$fieldName eq 'chain_checksum_good' || # RenderField() not to be confused with field_advanced
+		$fieldName eq 'boxes' || # RenderField() not to be confused with field_advanced (this is for banana theme)
 		0 # this is here to make above more consistent
 	) {
 		#cool
