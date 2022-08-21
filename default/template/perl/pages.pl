@@ -1739,8 +1739,11 @@ sub MakeListingPages {
 		$dialog = GetQueryAsDialog('read', 'Top Threads');
 		PutHtmlFile('dialog/read.html', $dialog);
 
+		require_once('page/upload.pl');
+		$dialog = GetUploadDialog();
+		PutHtmlFile('dialog/upload.html', $dialog);
+
 		$dialog = GetWriteForm();
-		#PutHtmlFile('dialog/write.html', $dialog);
 		PutHtmlFile('dialog/write.html', '<form action="/post.html" method=GET id=compose name=compose target=_top>' . $dialog . '</form>');
 
 		$dialog = GetSettingsDialog();
@@ -2314,6 +2317,12 @@ while (my $arg1 = shift @foundArgs) {
 					my $dialog = GetWriteForm();
 					print ("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/write.html', '<form action="/post.html" method=GET id=compose name=compose target=_top>' . $dialog . '</form>');
+				}
+				if ($makeDialogArg eq 'upload') {
+					require_once('page/upload.pl');
+					my $dialog = GetUploadDialog();
+					print ("-D $makeDialogArg\n");
+					PutHtmlFile('dialog/upload.html', $dialog);
 				}
 				if ($makeDialogArg eq 'read') {
 					my $dialog = GetQueryAsDialog('read', 'Top Threads');

@@ -228,6 +228,13 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		}
 
 		if (
+			$path == '/dialog/upload.html'
+		) {
+			WriteLog('HandleNotFound: found upload dialog');
+			$pagesPlArgument = '-D upload';
+		}
+
+		if (
 			$path == '/dialog/read.html'
 		) {
 			WriteLog('HandleNotFound: found read dialog');
