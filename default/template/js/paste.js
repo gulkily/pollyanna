@@ -30,7 +30,7 @@ function PasteEvent (e) {
 			}
 		}
 	}
-}
+} // PasteEvent()
 
 if (window.addEventListener && window.PasteEvent) {
 	window.addEventListener('paste', window.PasteEvent);

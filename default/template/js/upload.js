@@ -9,7 +9,7 @@ function FileReaderCallback (event) { // sets image to visible once ready
 			imgImagePreview.setAttribute('src', event.target.result);
 		}
 	}
-}
+} // FileReaderCallback()
 
 function UploadedFileOnChange (t) { // t=this; called when file selector is changed
 	//alert('debug: UploadedFileOnChange()');
@@ -27,7 +27,7 @@ function UploadedFileOnChange (t) { // t=this; called when file selector is chan
 			submit.style.border = "5pt solid orange";
 		}
 	}
-}
+} // UploadedFileOnChange()
 
 function UploadAddImagePreviewElement () { // add image preview element, hidden until needed
 	if (document.getElementById && document.createElement) {
@@ -42,6 +42,6 @@ function UploadAddImagePreviewElement () { // add image preview element, hidden 
 			spanImagePreview.appendChild(imgImagePreview);
 		}
 	}
-}
+} // UploadAddImagePreviewElement()
 
 // end upload.js
