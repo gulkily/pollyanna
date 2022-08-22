@@ -8,6 +8,8 @@ daily 1m
 	dp
 
 
+upload dialog should be separated from paste dialog?
+
 handle ^M line breaks as early as possible
 
 when a pubkey fails a sanity check, the item template is just blank
