@@ -13,6 +13,8 @@ sub GetEtcPage { # returns html for etc page (/etc.html)
 
 	$txtIndex .= GetTemplate('html/maincontent.template');
 
+	require_once('widget/menu.pl');
+
 	my $menuItems = GetMenuFromList('menu', 'html/menuitem-p.template'); # GetEtcPage()
 	$menuItems .= GetMenuFromList('menu_advanced', 'html/menuitem-p.template'); # GetEtcPage()
 	$menuItems .= GetMenuFromList('menu_admin', 'html/menuitem-p.template'); # GetEtcPage()
