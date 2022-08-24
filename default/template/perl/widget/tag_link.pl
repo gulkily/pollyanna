@@ -37,12 +37,14 @@ sub GetTagLink { # $tag ; returns html for a tag link
 			$tagCaption .
 			'</a>';
 
-		$tagLink = AddAttributeToTag(
-			$tagLink,
-			'a ',
-			'onclick',
-			"if (window.GetPrefs && GetPrefs('draggable_spawn') && window.FetchDialog) { return FetchDialog('$dialogName'); }"
-		);
+		if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
+			$tagLink = AddAttributeToTag(
+				$tagLink,
+				'a ',
+				'onclick',
+				"if (window.GetPrefs && GetPrefs('draggable_spawn') && window.FetchDialog) { return FetchDialog('$dialogName'); }"
+			);
+		}
 	} else {
 		WriteLog('GetItemTemplate: warning: $tag sanity check failed, @tagsList $tag = ' . $tag);
 		return '';
