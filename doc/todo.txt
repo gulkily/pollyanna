@@ -1,3 +1,5 @@
+reply(#) link should not appear if reply/enable is false
+
 daily 1m
 	banana
 	shitmyself
