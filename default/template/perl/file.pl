@@ -295,7 +295,7 @@ sub OrganizeFile { # $file ; renames file based on hash of its contents
 } # OrganizeFile()
 
 
-sub GetFileMessage {
+sub GetFileMessage { # $fileHash ; get file message based on hash
 	my $fileHash = shift;
 	if (!$fileHash) {
 		return ''; #todo
@@ -331,7 +331,7 @@ sub GetFileMessage {
 		WriteLog('GetFileMessage: return GetPathFromHash(' . $fileHash . ')');
 		my $filePath = GetPathFromHash($fileHash);
 
-		if (!(-e $filePath)) {
+		if (!(-e $filePath)) { # file_exists()
 			WriteLog('GetFileMessage: warning: !-e $filePath = ' . $filePath);
 			return '';
 		} else {
