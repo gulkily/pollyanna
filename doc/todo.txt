@@ -1,3 +1,5 @@
+#bug GetFileMessage() relies on organize_files being on
+
 reply(#) link should not appear if reply/enable is false
 
 daily 1m
