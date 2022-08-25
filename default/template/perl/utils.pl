@@ -53,7 +53,7 @@ my @modules = qw(
 	gpgpg
 	makepage
 	token_defs
-	calendar
+	page/calendar
 	render_field
 	resultset_as_dialog
 	item_page
