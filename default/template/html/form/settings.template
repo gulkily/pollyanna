@@ -28,14 +28,14 @@
 <fieldset class=advanced>
 	<legend><b>Timestamp Format<noscript>*</noscript></b></legend>
 	<p>
+		<label for=optTimestampsAdjusted>
+			<input type=radio id=optTimestampsAdjusted name=optTimestampsFormat value=adjusted onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'timestamps_format'); }">
+			Readable: 1 day ago
+		</label>
+		<br>
 		<label for=optTimestampsSeconds>
 			<input type=radio id=optTimestampsSeconds name=optTimestampsFormat value=seconds onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'timestamps_format'); }">
 			Relative seconds: -86400
-		</label>
-		<br>
-		<label for=optTimestampsAdjusted>
-			<input type=radio id=optTimestampsAdjusted name=optTimestampsFormat value=adjusted onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'timestamps_format'); }">
-			Relative adjusted: 1 day ago
 		</label>
 		<br>
 		<label for=optTimestampsEpoch>
