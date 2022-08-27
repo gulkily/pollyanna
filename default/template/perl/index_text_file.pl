@@ -454,6 +454,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						surpass
 						time
 						hashtag
+						s_replace
 					); #tokenSanityCheck
 
 					if (in_array($tokenFound{'token'}, @validTokens)) {
