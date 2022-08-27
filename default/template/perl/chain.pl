@@ -200,6 +200,7 @@ sub AddToChainLog { # $fileHash ; add line to log/chain.log
 		# add to index database
 		DBAddItemAttribute($fileHash, 'chain_timestamp', $newAddedTime);
 		DBAddItemAttribute($fileHash, 'chain_sequence', $chainSequenceNumber, $newAddedTime); #
+		DBAddItemAttribute('flush');
 	}
 
 	return $newAddedTime;
