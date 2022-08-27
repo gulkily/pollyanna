@@ -161,19 +161,19 @@ sub GetTokenDefs {
 			'mask_params' => 'mgi',
 			'message' => ''
 		},
-		{ # anything beginning with http and up to next space character (or eof)
-			'token' => 'http',
-			'mask' => '()()(http:[\S]+)',
-			'mask_params' => 'mg',
-			'message' => '[http]',
-			'apply_to_parent' => 1
-		},
 		{
 			# s/// regex basic
 			'token'       => 's_replace',
 			'mask'        => 's\/([^\/]+)\/([^\/]+)\/?',
 			'mask_params' => 'ig',
 			'message'    => '[$1]',
+			'apply_to_parent' => 1
+		},
+		{ # anything beginning with http and up to next space character (or eof)
+			'token' => 'http',
+			'mask' => '()()(http:[\S]+)',
+			'mask_params' => 'mg',
+			'message' => '[http]',
 			'apply_to_parent' => 1
 		},
 		{ # anything beginning with https and up to next space character (or eof)
