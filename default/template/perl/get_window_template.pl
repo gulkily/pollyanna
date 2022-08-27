@@ -210,14 +210,18 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 	}
 
 	#if ($columnHeadings && int($columnHeadings) > 0 && int($columnHeadings) eq $columnHeadings) {
-	if ($columnHeadings && ($columnHeadings =~ m/^[0-9]+/)) {
+	if ($columnHeadings && ($columnHeadings =~ m/^[0-9]+$/)) {
 		# typically, column headings are specified as a comma-separated list
 		# but sometimes we just want the dialog to have columns without headings
 		# (for example, the author information dialog)
 		# in this case, we specify the number of columns as an integer
 		# this allows the title bar and status bar to have the proper value for colspan=
+		WriteLog('GetWindowTemplate: $columnHeadings is NUMERIC');
 		$contentColumnCount = int($columnHeadings);
 		$columnHeadings = '';
+	} else {
+		WriteLog('GetWindowTemplate: $columnHeadings is not numeric');
+		#$columnHeadings = '';
 	}
 
 	# column headings
