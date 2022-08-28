@@ -598,7 +598,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 								my $nameGiven = $tokenFound{'param'};
 								$message =~ s/$tokenFound{'recon'}/[my name is: $nameGiven]/g;
 
-								DBAddKeyAlias($authorKey, $tokenFound{'param'}, $fileHash);
+								DBAddKeyAlias($authorKey, $tokenFound{'param'}, $fileHash); #bug here cd145d82
 								DBAddKeyAlias('flush');
 
 								if (!$titleCandidate) {
