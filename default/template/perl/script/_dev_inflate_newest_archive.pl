@@ -10,6 +10,7 @@ use 5.010;
 require './utils.pl';
 
 my @files = `ls -1 archive/*.tar.gz | sort | tail -n 1`;
+#my @files = `ls -1 archive/*.tar.gz | sort`;
 
 # my $filesNeededCount = 0;
 #
