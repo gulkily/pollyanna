@@ -29,8 +29,10 @@ sub GetTagLink { # $tag ; returns html for a tag link
 		if ($voteCount) {
 			$tagCaption .= '(' . $voteCount . ')';
 		}
-
-		#todo template this
+		#
+		# #todo template this
+		# my $tagLinkTemplate = GetTemplate('html/widget/tag_link.template');
+		# my $tagLink = $tagLinkTemplate; #todo
 		my $tagLink =
 			'<a href="' . $voteItemLink . '">' .
 			'<font color="' . $tagColor . '">#</font>' .
@@ -45,8 +47,10 @@ sub GetTagLink { # $tag ; returns html for a tag link
 				"if (window.GetPrefs && GetPrefs('draggable_spawn') && window.FetchDialog) { return FetchDialog('$dialogName'); }"
 			);
 		}
+
+		return $tagLink;
 	} else {
-		WriteLog('GetItemTemplate: warning: $tag sanity check failed, @tagsList $tag = ' . $tag);
+		WriteLog('GetTagLink: warning: $tag sanity check failed, @tagsList $tag = ' . $tag);
 		return '';
 	}
 } # GetTaglink()
