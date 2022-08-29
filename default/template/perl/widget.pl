@@ -90,9 +90,9 @@ sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons f
 		}
 
 		# all items will have a 'flag' button
-		push @quickVotesList, 'flag';
+		push @quickVotesList, 'flag'; #todo this should probably still be a tagset
 
-		# remove duplicates
+		# remove duplicates #todo make it a sub
 		my %dedupe = map {$_, 1} @quickVotesList;
 		@quickVotesList = keys %dedupe;
 	}
@@ -126,7 +126,7 @@ sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons f
 						}
 					")
 				);
-			}
+			} #todo this should only be added when openpgp.js is enabled
 
 			if ($doVoteButtonStyles) {
 				# this is a hack, think about replace with config/tag_color
