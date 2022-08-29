@@ -314,7 +314,46 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 			# @tokensFound now has all the found tokens
 			WriteLog('IndexTextFile: scalar(@tokensFound) = ' . scalar(@tokensFound));
 			###################################################
-			
+
+			if (GetConfig('setting/admin/token/http')) {
+				my @httpMatches = ($detokenedMessage =~ m/(http\S+)/mg);
+
+				while (@httpMatches) {
+					my $httpMatch = shift @httpMatches;
+					#$detokenedMessage = str_replace($httpMatch, '[http]', $detokenedMessage);
+					#DBAddItemAttribute($fileHash, 'http', $httpMatch);
+
+					my %newTokenFound;
+					$newTokenFound{'token'} = 'http';
+					#$newTokenFound{'spacer'} = '';
+					$newTokenFound{'param'} = $httpMatch;
+					$newTokenFound{'recon'} = $httpMatch;
+					$newTokenFound{'message'} = '[http]';
+					$newTokenFound{'target_attribute'} = 'http';
+					push(@tokensFound, \%newTokenFound);
+					push @indexMessageLog, 'found http address';
+				}
+			} # http token
+			if (GetConfig('setting/admin/token/https')) {
+				my @httpMatches = ($detokenedMessage =~ m/(https\S+)/mg);
+
+				while (@httpMatches) {
+					my $httpMatch = shift @httpMatches;
+					#$detokenedMessage = str_replace($httpMatch, '[http]', $detokenedMessage);
+					#DBAddItemAttribute($fileHash, 'http', $httpMatch);
+
+					my %newTokenFound;
+					$newTokenFound{'token'} = 'https';
+					#$newTokenFound{'spacer'} = '';
+					$newTokenFound{'param'} = $httpMatch;
+					$newTokenFound{'recon'} = $httpMatch;
+					$newTokenFound{'message'} = '[https]';
+					$newTokenFound{'target_attribute'} = 'https';
+					push(@tokensFound, \%newTokenFound);
+					push @indexMessageLog, 'found https address';
+				}
+			} # http token
+
 			push @indexMessageLog, 'finished finding tokens';
 		} #tokenize into @tokensFound
 
