@@ -365,7 +365,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 			foreach my $tokenFoundRef (@tokensFound) {
 				my %tokenFound = %$tokenFoundRef;
 
-				push @indexMessageLog, 'token: ' . $tokenFound{'token'} . '; spacer: ' . $tokenFound{'spacer'} . '; param = ' . $tokenFound{'param'};
+				push @indexMessageLog, 'token: ' . ($tokenFound{'token'}?$tokenFound{'token'}:'')  . '; spacer: ' . ($tokenFound{'spacer'}?$tokenFound{'spacer'}:'') . '; param = ' . ($tokenFound{'param'}?$tokenFound{'param'}:''); #todo fix bug when param or spacer is "0" #edgecase
 
 				if ($tokenFound{'token'} && $tokenFound{'param'}) {
 					if ($tokenFound{'token'} eq 'cookie') {
