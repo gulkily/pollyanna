@@ -210,7 +210,7 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 	}
 
 	#if ($columnHeadings && int($columnHeadings) > 0 && int($columnHeadings) eq $columnHeadings) {
-	if ($columnHeadings && ($columnHeadings =~ m/^[0-9]+$/)) {
+	if ($columnHeadings && ($columnHeadings =~ m/^[0-9]+/)) { #todo improve on this
 		# typically, column headings are specified as a comma-separated list
 		# but sometimes we just want the dialog to have columns without headings
 		# (for example, the author information dialog)
