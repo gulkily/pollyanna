@@ -3,7 +3,11 @@
 <fieldset>
 
 <p>
-    <a href="/read.html">Read</a> 
+    <a href="/new.html">New</a>
+</p>
+
+<p>
+    <a href="/read.html">Read</a>
 </p>
 
 <p>
