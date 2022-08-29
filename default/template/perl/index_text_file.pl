@@ -316,7 +316,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 			###################################################
 
 			if (GetConfig('setting/admin/token/http')) {
-				my @httpMatches = ($detokenedMessage =~ m/(http\S+)/mg);
+				my @httpMatches = ($detokenedMessage =~ m/(http:\S+)/mg);
 
 				while (@httpMatches) {
 					my $httpMatch = shift @httpMatches;
@@ -335,7 +335,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 				}
 			} # http token
 			if (GetConfig('setting/admin/token/https')) {
-				my @httpMatches = ($detokenedMessage =~ m/(https\S+)/mg);
+				my @httpMatches = ($detokenedMessage =~ m/(https:\S+)/mg);
 
 				while (@httpMatches) {
 					my $httpMatch = shift @httpMatches;
