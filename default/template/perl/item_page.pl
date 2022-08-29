@@ -526,6 +526,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 					'<span id=itemTagsList>' . (GetTagsListAsHtmlWithLinks($file{'tags_list'}) || '(none)') . '</span>',
 					$classifyForm
 				);
+				WriteLog('GetItemPage: toolbox_classify: $file{\'tags_list\'} = ' . $file{'tags_list'});
 
 				$classifyForm = str_replace(
 					'<span id=itemAddTagButtons></span>',
