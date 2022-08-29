@@ -158,6 +158,8 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 		$newLength = 0;
 	}
 
+	my $urlLength = SqliteGetCount('url');
+
 	#todo optimize
 	#todo config/setting/admin/upload/allow_files
 
@@ -169,6 +171,7 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 	$statsTable =~ s/\$versionSuccinct/$versionSuccinct/;
 	$statsTable =~ s/\$versionSequence/$versionSequence/;
 	$statsTable =~ s/\$newLength/$newLength/;
+	$statsTable =~ s/\$urlLength/$urlLength/;
 	$statsTable =~ s/\$itemsIndexed/$itemsIndexed/;
 	$statsTable =~ s/\$threadsCount/$threadsCount/;
 	$statsTable =~ s/\$imagesCount/$imagesCount/;

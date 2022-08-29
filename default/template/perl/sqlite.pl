@@ -164,6 +164,7 @@ sub SqliteQueryHashRef { # $query, @queryParams; calls sqlite with query, and re
 #sub SqliteGetHashRef {
 #sub SqliteGetQueryHashRef {
 #sub SqliteGetQuery {
+#sub GetQuery {
 
 #	WriteLog('SqliteQueryGetArrayOfHashRef: begin');
 	WriteLog('SqliteQueryHashRef: begin; caller = ' . join(',', caller));
@@ -343,6 +344,8 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 } # SqliteQuery()
 
 sub SqliteGetQueryTemplate { # $query ; look up query in templates if necessary or just return $query
+# sub SqliteGetQuery {
+# sub GetQuery {
 	my $query = shift;
 	if (!$query) {
 		WriteLog('SqliteGetQueryTemplate: warning: called without $query');

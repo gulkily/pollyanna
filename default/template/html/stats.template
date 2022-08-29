@@ -37,6 +37,12 @@
 			<span class=advanced><span class=beginner><br>new public items on site</span></span>
 		</a>
 	</p>
+	<p>
+		<a href="/url.html">
+			<b>$urlLength links</b>
+			<span class=advanced><span class=beginner><br>links to pages and sites</span></span>
+		</a>
+	</p>
 	<p class=advanced>
 		<a href="/chain.html">
 			<b>$chainLogLength notarized</b>
