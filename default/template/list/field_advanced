@@ -8,3 +8,5 @@ tagset_author
 chain_checksum_good
 author_score
 chain_order
+url
+tagset_url
