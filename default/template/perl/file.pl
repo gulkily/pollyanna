@@ -256,7 +256,7 @@ sub OrganizeFile { # $file ; renames file based on hash of its contents
 					return '';
 				}
 				
-				rename($mergedName, $fileHashPath);
+				RenameFile($mergedName, $fileHashPath);
 			} # -e $fileHashPath
 			else {
 				# new file does not exist, safe to rename
@@ -267,7 +267,7 @@ sub OrganizeFile { # $file ; renames file based on hash of its contents
 					if ($fileHashPath && $fileHashPath =~ m/^([0-9a-zA-Z.\-_\/]+)$/) {
 						$fileHashPath = $1;
 
-						rename ($file, $fileHashPath);
+						RenameFile($file, $fileHashPath);
 					} else {
 						WriteLog('OrganizeFile: warning: $fileHashPath sanity check failed on rename: ' . $fileHashPath);
 					}
