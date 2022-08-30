@@ -537,6 +537,8 @@ if (!$redirectUrl && $fileUrlPath) {
 }
 
 if (GetConfig('admin/php/debug')) {
+	# in php debug mode, append everything stored by WriteLog() to the page
+	# WriteLog('') returns this stored internally as a memo
 	$html = str_replace('</body>', WriteLog('') . '</body>', $html);
 }
 
