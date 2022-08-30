@@ -1,6 +1,15 @@
 <!-- new_box_count.template -->
 <form action=/post.html>
-<input type=text value=box_count size=5>
+<label for=boxes>
+    Boxes:
+    <input type=text id=boxes name=boxes size=5>
+</label>
+<br>
+<label for=comment>
+    Comment:
+    <input type=text id=comment name=comment size=20>
+</label>
+<br>
 <input type=submit value=Send>
 </form>
 <p>Instructions for counting to here</p>
