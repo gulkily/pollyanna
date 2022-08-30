@@ -92,6 +92,8 @@ sub GetAbsolutePath { # $file
 sub MergeFiles { # $file1, $file2, ... ; merge files which have same body but different footer
 	my @files = @_;
 
+	#todo need to alias the two previous file hashes to the new file's hash
+
 	WriteLog('MergeFiles: scalar(@files) = ' . scalar(@files));
 
 	my $fileBody = '';
