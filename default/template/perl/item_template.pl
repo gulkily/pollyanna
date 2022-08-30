@@ -334,7 +334,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			# TAGS LIST AKA HEADING
 			# TAGS LIST AKA HEADING
 			# TAGS LIST AKA HEADING
-			if ($file{'tags_list'} && !GetConfig('html/mourn')) { # GetItemTemplate() -- tags list
+			if ($file{'tags_list'} && (1||!GetConfig('html/mourn'))) { # GetItemTemplate() -- tags list
 				my $headings = GetTagsListAsHtmlWithLinks($file{'tags_list'});
 				$windowParams{'headings'} = $headings;
 			} # $file{'tags_list'}
@@ -344,7 +344,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			# STATUS BAR
 			my $statusBar = '';
 			{
-				if (!GetConfig('html/mourn')) { # GetItemTemplate() -- status bar
+				if (1 || !GetConfig('html/mourn')) { # GetItemTemplate() -- status bar
 					$statusBar = GetTemplate('html/item/status_bar.template');
 
 					my $fileHashShort = substr($fileHash, 0, 8);
