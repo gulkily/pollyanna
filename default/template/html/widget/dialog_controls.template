@@ -1,30 +1,6 @@
 <!-- dialog_controls.template 'Interface Controls' -->
 <noscript>*</noscript>
 	<span>
-		<a id=btnAdvanced
-			accesskey=o
-			href=#
-			onclick="
-				SetPrefs('show_advanced', 1);
-				SetPrefs('advanced_highlight', 0);
-				SetPrefs('beginner', 0);
-				SetPrefs('beginner_highlight', 0);
-				SetPrefs('notify_on_change', 1);
-
-				ShowAdvanced(0, 0);
-			"
-		>Expand</a>;
-	</span>
-
-	<span>
-
-		<a id=btnMinimal href=# onclick="
-			if (window.SetPrefs) {
-				SetPrefs('show_advanced', 0);
-				ShowAdvanced(0, 0);
-			}
-		" title=Minimal>Minimal</a>;
-
 		<a id=btnCascade href=# onclick="
 			if (window.DraggingCascade) {
 				SetPrefs('draggable', 1);

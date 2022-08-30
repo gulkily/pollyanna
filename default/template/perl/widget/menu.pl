@@ -149,14 +149,15 @@ sub GetMenuTemplate { # returns menubar
 # sub GetTopMenu {
 	my $topMenuTemplate = GetTemplate('html/topmenu2.template');
 
+	my $dialogControls = GetTemplate('html/widget/layer_controls.template');
 	if (GetConfig('setting/admin/js/dragging')) {
-		my $dialogControls = GetTemplate('html/widget/dialog_controls.template');
-		$topMenuTemplate = str_replace('<span id=spanDialogControls></span>', '<span id=spanDialogControls>' . $dialogControls . '</span>', $topMenuTemplate);
+		$dialogControls .= GetTemplate('html/widget/dialog_controls.template');
 	} else {
 		# remove extra menu placeholder from template
-		$topMenuTemplate = str_replace('<span id=spanDialogControls></span>', '', $topMenuTemplate);
+		#$topMenuTemplate = str_replace('<span id=spanDialogControls></span>', '', $topMenuTemplate);
 		#todo it should remove table cell as well
 	}
+	$topMenuTemplate = str_replace('<span id=spanDialogControls></span>', '<span id=spanDialogControls>' . $dialogControls . '</span>', $topMenuTemplate);
 
 	my $pageType = shift;
 	if (!$pageType) {
