@@ -4,7 +4,6 @@ body {
 	font-size: 14pt;
 	background-color: $colorBackground;
 }
-
 fieldset {
 	border-color: $colorSecondary;
 }
@@ -77,5 +76,4 @@ button.close, button.skip {
 	border: 0;
 	margin: 0;
 }
-
 /* / theme/dark/additional.css */
