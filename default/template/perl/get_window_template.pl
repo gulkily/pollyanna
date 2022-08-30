@@ -112,8 +112,10 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 		WriteLog('GetWindowTemplate2: warning: $windowAnchor is FALSE');
 		if ($windowTitle) {
 			$windowAnchor = str_replace(' ', '', $windowTitle);
+			$windowAnchor =~ s/[^a-zA-Z0-9]//g;
 			#todo
-		} else {
+		}
+		if (!$windowAnchor) {
 			$windowAnchor = substr(md5_hex($windowBody), 0, 8);
 		}
 	}
