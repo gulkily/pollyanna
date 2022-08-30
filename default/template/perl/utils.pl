@@ -727,11 +727,9 @@ sub GetList { # $listName ; returns array from template
 	return @arrayReturn;
 } # GetList()
 
-sub RenameFile {
-	WriteLog('RenameFile: warning: not finished yet');
-	return '';
-
+sub RenameFile { # $filePrevious, $fileNew, $hashNew ; renames file with a bit of sanity checking and logging
 # sub FileRename {
+
 	my $filePrevious = shift;
 	my $fileNew = shift;
 	my $hashNew = shift;
@@ -744,6 +742,7 @@ sub RenameFile {
 		# ok
 		chomp $hashNew;
 	} else {
+		# hash not specified, get it
 		$hashNew = GetFileHash($filePrevious);
 	}
 
@@ -752,19 +751,17 @@ sub RenameFile {
 
 	if ($hashPrevious) {
 		WriteLog('RenameFile: $hashPrevious = ' . $hashPrevious . '; $hashNew = ' . $hashNew);
-
 		#todo sanity check on $hashPrevious
-
 		DBAddItemParent($hashNew, $hashPrevious);
 		AppendFile("log/rename.log", $hashNew . "|" . $hashPrevious); #todo proper path
-		my $renameResult = rename($filePrevious, $fileNew);
-
-		return $renameResult;
 		#todo log and sanity check on $renameResult
 	} else {
 		WriteLog('RenameFile: warning: $hashPrevious was FALSE');
-		return '';
+		#return '';
 	}
+
+	my $renameResult = rename($filePrevious, $fileNew);
+	return $renameResult;
 } # RenameFile()
 
 sub encode_entities2 { # returns $string with html entities <>"& encoded
