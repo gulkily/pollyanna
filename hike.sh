@@ -10,6 +10,8 @@ echo ===============================
 #Let what you say be simply ‘Yes’ or ‘No’; anything more than this comes from evil.
 
 alias hike='./hike.sh'
+alias clean='hike clean'
+alias build='hike build'
 
 if [ ! $1 ]
 	then

@@ -31,13 +31,18 @@ sub GetTagLink { # $tag ; returns html for a tag link
 		}
 		#
 		# #todo template this
-		# my $tagLinkTemplate = GetTemplate('html/widget/tag_link.template');
-		# my $tagLink = $tagLinkTemplate; #todo
-		my $tagLink =
-			'<a href="' . $voteItemLink . '">' .
-			'<font color="' . $tagColor . '">#</font>' .
-			$tagCaption .
-			'</a>';
+		my $tagLinkTemplate = GetTemplate('html/widget/tag_link.template');
+		my $tagLink = $tagLinkTemplate; #todo
+
+		$tagLink = str_replace('$voteItemLink', $voteItemLink, $tagLink);
+		$tagLink = str_replace('$tagCaption', $tagCaption, $tagLink);
+		$tagLink = str_replace('$tagColor', $tagColor, $tagLink);
+
+		# my $tagLink =
+		# 	'<a href="' . $voteItemLink . '">' .
+		# 	'<font color="' . $tagColor . '">#</font>' .
+		# 	$tagCaption .
+		# 	'</a>';
 
 		if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
 			$tagLink = AddAttributeToTag(
