@@ -210,6 +210,10 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 		$html .= '<span class=advanced>' . GetWindowTemplate('<a href="/chain.log">chain.log</a>', 'PSV') . '</span>'; #should be called GetDialog? #todo
 	}
 
+	if ($pageQuery eq 'boxes') { #banana theme
+		$html .= GetWindowTemplate(GetTemplate('html/dialog/new_box_count.template'), 'Add');
+	}
+
 	$html .= GetPageFooter($pageQuery);
 	my @js = qw(utils settings avatar voting table_sort profile timestamp);
 	if (GetConfig('setting/html/reply_cart')) {
@@ -278,6 +282,7 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 	my $totalItemCount = SqliteGetValue($queryItemCount);
 
 	if ($totalItemCount) {
+		# there is more than one item
 		my $pageCount = ceil($totalItemCount / $perPage);
 
 		for (my $page = 0; $page < $pageCount; $page++) {
@@ -292,6 +297,7 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 			PutHtmlFile($pageFilename, $pageContent);
 		}
 	} else {
+		# no items returned by database
 		my $pageNoContent = '';
 		my $queryDisplayName = $pageQuery . '.sql';
 		$pageNoContent .= GetPageHeader($pageQuery);
