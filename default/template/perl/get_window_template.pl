@@ -100,13 +100,23 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 
 	my $windowBody = $param{'body'};
 	my $windowTitle = $param{'title'};
-	my $windowAnchor = '';# = $param{'anchor'};
+	my $windowAnchor = $param{'anchor'};
 	my $columnHeadings = $param{'headings'};
 	my $columnHeadingsLookup = $param{'columns_lookup'};
 	my $windowStatus =  $param{'status'};
 	my $windowMenubarContent = $param{'menu'};
 	my $formAction = $param{'form_action'};
 	my $windowId = $param{'id'};
+
+	if (!$windowAnchor) {
+		WriteLog('GetWindowTemplate2: warning: $windowAnchor is FALSE');
+		if ($windowTitle) {
+			$windowAnchor = str_replace(' ', '', $windowTitle);
+			#todo
+		} else {
+			$windowAnchor = substr(md5_hex($windowBody), 0, 8);
+		}
+	}
 
 	my $tableSort; # it is on by default, contingent on settings
 	if (exists $param{'table_sort'}) {
