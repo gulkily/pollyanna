@@ -387,8 +387,8 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 
 	# MOURN MODE = SHOW FEWER BUTTONS
 	if (GetConfig('html/mourn')) { # GetItemPage() -- votes summary
-		$file{'show_vote_summary'} = 0;	
-		$file{'vote_buttons'} = 0;
+		#$file{'show_vote_summary'} = 0;	
+		#$file{'vote_buttons'} = 0;
 	}
 
 	##########################
