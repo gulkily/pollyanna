@@ -32,6 +32,8 @@ sub GetTagLink { # $tag ; returns html for a tag link
 		#
 		# #todo template this
 		my $tagLinkTemplate = GetTemplate('html/widget/tag_link.template');
+		$tagLinkTemplate = trim(str_replace("\n", '', $tagLinkTemplate)); # remove extra whitespace
+		#$tagLinkTemplate =~ s/<!--[^<]+-->//g;
 		my $tagLink = $tagLinkTemplate; #todo
 
 		$tagLink = str_replace('$voteItemLink', $voteItemLink, $tagLink);
