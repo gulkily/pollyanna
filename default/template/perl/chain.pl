@@ -55,6 +55,8 @@ sub MakeChainIndex { # $import = 1; reads from log/chain.log and puts it into it
 				DBAddItemAttribute($fileHash, 'chain_previous', $previousLine);
 				DBAddItemAttribute($fileHash, 'chain_checksum_good', $isChecksumGood);
 				DBAddItemAttribute($fileHash, 'chain_hash', $fileHash);
+				#DBAddItemAttribute('flush'); #this happens below, so isn't necessary here
+
 				WriteLog('MakeChainIndex: $sequenceNumber = ' . $sequenceNumber);
 				WriteLog('MakeChainIndex: (next item stub/aka checksum) $previousLine = ' . $previousLine);
 
