@@ -58,13 +58,13 @@ fieldset {
     border: 2pt $colorPrimary double;
     display: block
 }
-@media only screen and (min-width : 30em) {
+@media only screen and (min-width : 40em) {
 	.item-textart {
 		max-width: 90%;
 		background-color: #808080;
 	}
 	.dialog .txt {
-		max-width: 30em;
+		max-width: 40em;
 	}
 }
 .fileHashShort {
