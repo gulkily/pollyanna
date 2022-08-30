@@ -81,6 +81,9 @@ if ($_POST) { // if POST request, populate variables from $_POST
 		$replyTo = $_POST['replyto'];
 		$replyToToken = '>>' . $replyTo;
 	}
+	if (isset($_POST['boxes']) && $_POST['boxes']) {
+		$boxesCount = $_POST['boxes'];
+	}
 
 	if (isset($_POST['s']) && $_POST['s']) { // s=
 		$strSourceUrl = $_POST['s'];
@@ -139,6 +142,9 @@ elseif ($_GET) { // if GET request, populate variables from $_GET
 		$replyTo = $_GET['replyto'];
 		$replyToToken = '>>' . $replyTo;
 	}
+	if (isset($_GET['boxes']) && $_GET['boxes']) {
+		$boxesCount = $_GET['boxes'];
+	}
 
 	if (isset($_GET['returnto']) && $_GET['returnto']) {
 		$returnTo = $_GET['returnto'];
@@ -179,6 +185,10 @@ elseif ($_REQUEST) { // if HEAD request, populate variables from $_REQUEST
 	if (isset($_REQUEST['replyto']) && $_REQUEST['replyto']) {
 		$replyTo = $_REQUEST['replyto'];
 		$replyToToken = '>>' . $replyTo;
+	}
+
+	if (isset($_REQUEST['boxes']) && $_REQUEST['boxes']) {
+		$boxesCount = $_REQUEST['boxes'];
 	}
 
 	if (isset($_REQUEST['returnto']) && $_REQUEST['returnto']) {
@@ -375,6 +385,10 @@ if (isset($comment) && $comment) {
 			// add >> token to comment if $replyTo is provided, but comment does not have token
 			// note that the regex does have a / at the end, it's after $replyTo
 			$comment = $replyToToken . "\n\n" . $comment;
+		}
+
+		if (isset($boxesCount) && $boxesCount) { #boxes #banana
+			$comment = 'boxes: ' . $boxesCount . "\n" . $comment;
 		}
 
 		$newFileHash = ProcessNewComment($comment, $replyTo); // post.php // PutFile()
