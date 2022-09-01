@@ -1,7 +1,9 @@
 SELECT
-	file_hash,
-	value AS boxes,
-	epoch AS add_timestamp
-FROM item_attribute
+	item_attribute.file_hash AS file_hash,
+	item_attribute.value AS boxes,
+	item_flat.add_timestamp AS add_timestamp
+FROM
+	item_attribute
+	JOIN item_flat ON (item_attribute.file_hash = item_flat.file_hash)
 WHERE attribute = 'boxes'
 ORDER BY add_timestamp DESC
