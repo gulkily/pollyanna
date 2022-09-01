@@ -779,7 +779,7 @@ if (GetConfig('admin/php/route_enable')) {
 						$skipPrintedNotice = 1;
 					}
 
-					if (!GetConfig('html/mourn') && GetConfig('admin/php/notify_printed_time') && !$skipPrintedNotice) { # route.php -- page printed time notice
+					if (GetConfig('admin/php/notify_printed_time') && !$skipPrintedNotice) { # route.php -- page printed time notice
 						# this should be in a template,
 						# but it would be very awkward to make at this time
 						# why is it awkward?
