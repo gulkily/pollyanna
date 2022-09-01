@@ -456,6 +456,14 @@ sub ProcessAccessLog { # reads an access log and writes .txt files as needed
 							}
 						}
 
+						if ($paramName eq 'boxes') { #banana #boxes
+							if ($urlParam) {
+								my $boxCount = $paramValue;
+								$message = "boxes: $boxCount" . "\n" . $message;
+								WriteLog('ProcessAccessLog: found $boxCount = ' . $boxCount);
+							}
+						}
+
 						elsif ($paramName eq 'rectime') {
 							if ($paramValue eq 'on') {
 								$recordTimestamp = 1;
