@@ -109,14 +109,20 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 	my $windowId = $param{'id'};
 
 	if (!$windowAnchor) {
-		WriteLog('GetWindowTemplate2: warning: $windowAnchor is FALSE');
-		if ($windowTitle) {
+		WriteLog('GetWindowTemplate2: warning: $windowAnchor is FALSE, activating fallback; caller = ' . join(',', caller));
+		if (!$windowAnchor && $windowId) {
+			$windowAnchor = $windowId);
+		}
+		if (!$windowAnchor && $windowTitle) {
 			$windowAnchor = str_replace(' ', '', $windowTitle);
 			$windowAnchor =~ s/[^a-zA-Z0-9]//g;
 			#todo
 		}
-		if (!$windowAnchor) {
+		if (!$windowAnchor && $windowBody) {
 			$windowAnchor = substr(md5_hex($windowBody), 0, 8);
+		}
+		if (!$windowAnchor) {
+			WriteLog('GetWindowTemplate2: warning: $windowAnchor is FALSE after fallbacks; caller = ' . join(',', caller));
 		}
 	}
 
