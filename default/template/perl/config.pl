@@ -288,7 +288,7 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 				WriteLog('GetConfig: no default; $configName = ' . $configName);
 				return '';
 			} else {
-				if ($configName =~ m/\.list$/) {
+				if ($configName =~ m/\.list$/ || $configName =~ m/debug/) {
 					# cool
 					return '';
 				} else {
