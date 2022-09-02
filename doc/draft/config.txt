@@ -1,4 +1,11 @@
-The configuration is designed to be self-explanatory
+Configuration uses a file-based configuration layout.
+	For most things, it is one file per setting.
+		This allows for easy editing from a shell, even using cat or echo commands
+
+The configuration is stored in a directory called config/
+	If a setting is not found in config/, it is looked up in default/ and then copied to config/
+		This allows for current config to not be changed when defaults change.
+
 Under the config/ directory, there are sub-directories and files
 One file is used per configuration setting
 Most of the files have a 0 or 1 inside, sometimes a one-line string.
@@ -14,16 +21,39 @@ find config | grep js
 find config | grep php
 find config | less
 
-Information for Developer:
+There is also a theme/ tree under both default/ and config/
+	Themes are also sets of overlays for settings and templates
+		Themes are activated using the config/setting/theme file.
+			This file allows multiple lines, and lookups are performed in order.
+While confusing at first, this allows for a lot of flexibility in the system.
 
-If a value is not found in config/, it is looked up in default/, and copied to config/
+Here is an example if how a lookup of a template may happen.
+	Let's say there are two themes activated, phoenix and chicago.
+		So config/setting/theme would look like this:
+			phoenix
+			chicago
+	Now, we are going to try to find a template called html/travel.template
+		This is done using the GetTemplate() procedure
+			GetTemplate will first look up the currently set themes, and then begin checking in the following order:
+				config/theme/phoenix/template/html/travel.template
+				default/theme/phoenix/template/html/travel.template
+				config/theme/chicago/template/html/travel.template
+				default/theme/chicago/template/html/travel.template
+				config/template/html/travel.template
+				default/template/html/travel.template
+			At any point if it is found, the lookup process will stop and return that value
+				If it is found in default/ it is copied to its corresponding config/ location
+
+=======
+
+Information for Developer:
 
 Commands to try:
 cd ~/hike
 ls default
 
 If you're improving the software and you want to commit to repo,
- edit the files in default/ and let them propagate to config/
+	Edit the files in default/ and let them propagate to config/
 
 The _dev_clean_ALL script will remove most things under config/
 
