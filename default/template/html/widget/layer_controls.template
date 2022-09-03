@@ -21,7 +21,7 @@
 		}
 	" title=Minimal>Minimal</a>;
 
-	<a id=btnReprint href=# onclick="
+	<a id=btnReprint href=# accesskey=r onclick="
 		var winLoc = window.location.href;
 		if (winLoc.indexOf('?')) {
 			winLoc = winLoc.substr(0, winLoc.indexOf('?'));
