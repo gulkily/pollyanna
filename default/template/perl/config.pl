@@ -444,7 +444,7 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 	} # foreach $themeName (@activeThemes)
 
 	if (trim($returnValue) eq '') {
-		if ($attributeName =~ m/^template/) {
+		if ($attributeName =~ m/^template/ || $attributeName =~ m/^string/) {
 			# this is ok
 		} else {
 			# not ok
