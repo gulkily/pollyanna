@@ -111,7 +111,7 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 	if (!$windowAnchor) {
 		WriteLog('GetWindowTemplate2: warning: $windowAnchor is FALSE, activating fallback; caller = ' . join(',', caller));
 		if (!$windowAnchor && $windowId) {
-			$windowAnchor = $windowId);
+			$windowAnchor = $windowId;
 		}
 		if (!$windowAnchor && $windowTitle) {
 			$windowAnchor = str_replace(' ', '', $windowTitle);
