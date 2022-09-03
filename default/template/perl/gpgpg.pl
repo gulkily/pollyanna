@@ -28,9 +28,6 @@ while (my $argFound = shift) {
 	push @argsFound, $argFound;
 }
 
-#require('./utils.pl');
-#require('./index.pl');
-
 sub GpgParse { # $filePath ; parses file and stores gpg response in cache
 	# PgpParse {
 	# $filePath = path to file containing the text

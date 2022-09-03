@@ -8,8 +8,6 @@ use Data::Dumper;
 use Carp;
 use 5.010;
 
-#require './utils.pl';
-
 my @foundArgs;
 while (my $argFound = shift) {
 	push @foundArgs, $argFound;

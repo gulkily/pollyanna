@@ -7,9 +7,6 @@ use 5.010;
 use POSIX;
 
 require './utils.pl';
-#require_once('sqlite.pl');
-#require_once('pages.pl');
-#require_once('resultset_as_dialog.pl');
 
 my @argsFound;
 while (my $argFound = shift) {

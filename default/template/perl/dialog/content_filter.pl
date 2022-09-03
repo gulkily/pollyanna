@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use 5.010;
 
-sub GetContentFilterDialog () { # ; returns thermostat / content filter dialog
+sub GetContentFilterDialog { # ; returns thermostat / content filter dialog
 	my @list = split("\n", trim(GetTemplate('list/content_filter_ui_tags')));
 
 	my $list = '';

@@ -2,10 +2,6 @@
 
 use strict;
 use warnings;
-#require('./utils.pl');
-
-#require_once('sqlite.pl');
-#require_once('pages.pl');
 
 sub GetTagCategoriesDialog { # $rootTag ; traverses all tagsets under a tag and generates links with item counts
 	my $rootTag = shift;

@@ -15,17 +15,13 @@ sub BuildMessage { # prints timestamped message to output
 } # BuildMessage()
 
 BuildMessage "Require ./utils.pl...";
-#require './gpgpg.pl';
 require './utils.pl';
-#require './sqlite.pl';
 
 #EnsureDirsThatShouldExist();
 
 #CheckForInstalledVersionChange();
 
 #CheckForRootAdminChange();
-
-#require './index.pl';
 
 
 #{ # build the sqlite db if not available
@@ -71,15 +67,6 @@ DBAddPageTouch('system');
 
 BuildMessage("UpdateUpdateTime()...");
 UpdateUpdateTime();
-
-#BuildMessage "require('./pages.pl')...";
-#require './pages.pl';
-
-#BuildMessage "Calling MakeSystemPages()...";
-
-#PutHtmlFile("/index.html", '<a href="/write.html">write.html</a>');
-#MakeSystemPages();
-#PutHtmlFile("/index.html", GetFile('html/help.html'));
 
 PutFile('config/setting/admin/build_end', GetTime());
 

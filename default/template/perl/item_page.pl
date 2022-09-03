@@ -29,9 +29,6 @@ use File::Copy;
 # use File::Copy qw(copy);
 use Cwd qw(cwd);
 
-#require './utils.pl';
-#require './makepage.pl';
-
 sub GetHtmlToolboxes {
 # 'toolbox' >toolbox<
 	my $fileHashRef = shift;
