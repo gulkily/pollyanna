@@ -28,6 +28,11 @@ sub GetContentFilterDialog { # ; returns thermostat / content filter dialog
 		$list .= "<br>\n";
 	}
 
+	my $saveButton = '
+		<input type=submit value=Save name=btnSaveThermostat>
+		<br>
+	';
+
 	my $information = '
 		<span class=beginner><p>
 			This changes the weight of the given tags.<br>
@@ -36,7 +41,7 @@ sub GetContentFilterDialog { # ; returns thermostat / content filter dialog
 		</p></span>
 	'; #todo more explanation or documentation
 
-	my $dialog = GetWindowTemplate($list . $information, 'Thermostat');
+	my $dialog = GetWindowTemplate($list . $saveButton . $information, 'Thermostat');
 
 	#my $form = '<form class=advanced
 	my $form = '<form name=frmContentFilter id=frmContentFilter class=advanced action="/post.html">' . $dialog . '</form>';
