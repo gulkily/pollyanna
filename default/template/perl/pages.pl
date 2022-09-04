@@ -125,6 +125,7 @@ sub GetQueryAsDialog { # $query, $title, $columns, \%param
 # runs specified query and returns it as a dialog using GetResultSetAsDialog()
 # this has some special conditions for GetAttributesDialog()
 #todo this should report query error
+#todo this should take @queryArgs
 
 # sub GetQueryDialog {
 	my $query = shift;
