@@ -589,7 +589,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			}
 		} else {
 			if (GetConfig('debug')) {
-				$txtIndex .= GetWindowTemplate('No related items for a pubkey.', 'Debug');
+				$txtIndex .= GetWindowTemplate('No related items for $file{\'file_hash\'} =  ' . $file{'file_hash'}, 'Debug');
 			}
 		}
 	}
@@ -743,7 +743,9 @@ sub GetItemAttributesDialog { # %file
 
 	my $fileHash = trim($file{'file_hash'});
 	if ($fileHash = IsItem($fileHash)) {
-		my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE file_hash LIKE '$fileHash%'";
+		my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE file_hash LIKE ?";
+		#my @queryArguments; #todo
+		#push @queryArguments, $fileHash;
 		$itemInfoTemplate = GetQueryAsDialog($query, 'Item Attributes'); # GetResultSetAsDialog() --> RenderField()
 		$itemInfoTemplate = '<span class=advanced>' . $itemInfoTemplate . '</span>';
 		return $itemInfoTemplate;
