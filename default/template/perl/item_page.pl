@@ -744,10 +744,14 @@ sub GetItemAttributesDialog { # %file
 #	my %file = %{shift @_};
 
 	my $fileHash = trim($file{'file_hash'});
-	if ($fileHash = IsItem($fileHash)) {
-		my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE file_hash LIKE ?";
+	if (IsItem($fileHash)) { #sanity
+		$fileHash = IsItem($fileHash);
+		#todo ===
+		#my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE file_hash LIKE '$fileHash'";
 		#my @queryArguments; #todo
 		#push @queryArguments, $fileHash;
+		#===
+		my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE file_hash LIKE '$fileHash%' ORDER BY value";
 		$itemInfoTemplate = GetQueryAsDialog($query, 'Item Attributes'); # GetResultSetAsDialog() --> RenderField()
 		$itemInfoTemplate = '<span class=advanced>' . $itemInfoTemplate . '</span>';
 		return $itemInfoTemplate;
