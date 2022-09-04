@@ -273,7 +273,9 @@ sub GetItemIndexLog {
 	if ($log) {
 		$log = HtmlEscape($log);
 		$log = str_replace("\n", "<br>\n", $log);
-		
+		$log = str_replace('declined:', '<font color=red>declined:</font>', $log);
+		$log = str_replace('allowed:', '<font color=green>allowed:</font>', $log);
+
 		my $logWindow = GetWindowTemplate($log, 'Log');
 		# my $logWindow = GetWindowTemplate($log, 'IndexFile(' . $shortHash . ')');
 		$logWindow = '<span class=advanced>' . $logWindow . '</span>';
