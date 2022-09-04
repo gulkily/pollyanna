@@ -2534,7 +2534,7 @@ Prefill reply box with >>
 setcontent/abcde/abcd2
 setcontent/{hash of 404 url}/{hash of content}
 
-Figure out how to fix hasvote dupes in vote table
+Figure out how to fix HasVote dupes in vote table
 	Probably need to differentiate votes and system tags
 
 split lighttpd.conf into templates?
