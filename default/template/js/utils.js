@@ -318,7 +318,7 @@ function EventLoop () { // for calling things which need to happen on a regular 
 		if (
 			window.UpdateDialogList &&
 			document.getElementById &&
-			document.getElementsByClassName &&
+			document.getElementsByClassName
 		) {
 			// update list of dialogs on page
 			UpdateDialogList();
