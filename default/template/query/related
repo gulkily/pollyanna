@@ -6,7 +6,7 @@ SELECT
 FROM
 	item_flat
 WHERE
-	tags_list NOT LIKE '%notext%' AND
+	tags_list NOT LIKE '%NoText%' AND
 	file_hash IN (
 		SELECT
 			DISTINCT file_hash

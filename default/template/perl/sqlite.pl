@@ -590,11 +590,11 @@ sub DBGetItemReplies { # Returns replies for item (actually returns all child it
 
 	my %queryParams;
 	if (GetConfig('admin/expo_site_mode') && !GetConfig('admin/expo_site_edit')) {
-		$queryParams{'where_clause'} = "WHERE ','||tags_list||',' NOT LIKE '%,notext,%' AND file_hash IN(SELECT item_hash FROM item_parent WHERE parent_hash = '$itemHash')";
+		$queryParams{'where_clause'} = "WHERE ','||tags_list||',' NOT LIKE '%,NoText,%' AND file_hash IN(SELECT item_hash FROM item_parent WHERE parent_hash = '$itemHash')";
 	} else {
 		$queryParams{'where_clause'} = "WHERE file_hash IN (SELECT item_hash FROM item_parent WHERE parent_hash = '$itemHash')";
 	}
-	$queryParams{'order_clause'} = "ORDER BY (tags_list NOT LIKE '%hastext%'), add_timestamp DESC";
+	$queryParams{'order_clause'} = "ORDER BY (tags_list NOT LIKE '%HasText%'), add_timestamp DESC";
 
 	return DBGetItemList(\%queryParams);
 } # DBGetItemReplies()
