@@ -205,7 +205,7 @@ elseif ($_REQUEST) { // if HEAD request, populate variables from $_REQUEST
 # END OF LOOKING FOR ARGUMENTS
 #################################################################
 
-if ($boxesCount && !$comment) {
+if (isset($boxesCount) && $boxesCount && !$comment) {
 	$comment = 'Box count at ' . time();
 }
 
@@ -556,7 +556,7 @@ if (!$redirectUrl && $fileUrlPath) {
 	$itemPostedServerResponse = $redirectMessage;
 	//$itemPostedServerResponse .= ' <a href=/write.html>Another</a>'; // has bugs, doesn't always work
 
-	if ($boxesCount) {
+	if (isset($boxesCount) && $boxesCount) {
 		// 		MakePage('boxes');
 		require_once('handle_not_found.php');
 		$html = HandleNotFound('/boxes.html', './boxes.html'); # cacheOverrideFlag
