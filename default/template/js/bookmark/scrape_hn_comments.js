@@ -9,7 +9,7 @@ if (ct && ct.length) {
 
 		document.body.appendChild(frm);
 
-		for (i=0; i<ct.length; i++) {
+		for (i = 0; i < ct.length; i++) {
 			var ctext = ct[i].innerHTML;
 			//var ctext = ct[i].textContent;
 
