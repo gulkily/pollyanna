@@ -36,7 +36,7 @@ sub GetThreadListing { # $topLevel, $selectedItem, $indentLevel, $itemsListRefer
 	my $listing = '';
 
 	my @itemChildren = SqliteQueryHashRef("SELECT item_hash FROM item_parent WHERE parent_hash = '$topLevel'");
-	#my @itemChildren = SqliteQueryHashRef("SELECT item_hash FROM item_parent WHERE parent_hash = '$topLevel' AND item_hash NOT IN (SELECT file_hash FROM item_flat WHERE tags_list LIKE '%,notext,%')");
+	#my @itemChildren = SqliteQueryHashRef("SELECT item_hash FROM item_parent WHERE parent_hash = '$topLevel' AND item_hash NOT IN (SELECT file_hash FROM item_flat WHERE tags_list LIKE '%,NoText,%')");
 	shift @itemChildren;
 
 	# if (@itemChildren) {
