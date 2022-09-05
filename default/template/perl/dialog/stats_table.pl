@@ -49,8 +49,12 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 	#my $adminId = '';#GetRootAdminKey();
 	my $adminId = DBGetAdminKey(); # returns highest scoring
 
-	my $adminUsername = GetAlias($adminId);
-	my $adminLink = GetAuthorLink($adminId);
+	my $adminUsername = '';
+	my $adminLink = '';
+	if ($adminId) {
+		$adminUsername = GetAlias($adminId);
+		$adminLink = GetAuthorLink($adminId);
+	}
 
 	my $serverId = '';#GetServerKey();
 	my $serverLink = GetAuthorLink($serverId);
