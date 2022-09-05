@@ -15,9 +15,6 @@ while (my $argFound = shift) {
 	push @argsFound, $argFound;
 }
 
-#require('./utils.pl');
-#require('./pages.pl');
-
 require_once('item_list_as_gallery.pl');
 
 sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it into $HTMLDIR directory; $pageType, $pageParam

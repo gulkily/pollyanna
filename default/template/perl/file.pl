@@ -335,9 +335,20 @@ sub GetFileMessage { # $fileHash ; get file message based on hash
 
 		if (!(-e $filePath)) { # file_exists()
 			WriteLog('GetFileMessage: warning: !-e $filePath = ' . $filePath);
+
+			$filePath = SqliteGetValue("SELECT file_name FROM item WHERE file_hash = '$fileHash'");
+
+			if (!(-e $filePath)) { # file_exists()
+				WriteLog('GetFileMessage: warning: #2 !-e $filePath = ' . $filePath);
+				return '';
+			} else {
+				WriteLog('GetFileMessage: return GetFile(' . $filePath . ')');
+				return GetFile($filePath);
+			}
+
 			return '';
 		} else {
-			WriteLog('GetFileMessage: return GetFile(' . $filePath . ');');
+			WriteLog('GetFileMessage: return GetFile(' . $filePath . ')');
 			return GetFile($filePath);
 		}
 	}

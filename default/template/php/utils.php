@@ -37,6 +37,11 @@ function GetDir ($dirName) {
 	// should not be here ever
 }
 
+function RenameFile ($fileOld, $fileNew) {
+	#todo sanity
+	return rename($fileOld, $fileNew);
+}
+
 function GetDir2 ($dirName) { # returns path to special directory specified
 # 'html' = html root
 # 'script'

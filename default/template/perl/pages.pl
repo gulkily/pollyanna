@@ -125,6 +125,7 @@ sub GetQueryAsDialog { # $query, $title, $columns, \%param
 # runs specified query and returns it as a dialog using GetResultSetAsDialog()
 # this has some special conditions for GetAttributesDialog()
 #todo this should report query error
+#todo this should take @queryArgs
 
 # sub GetQueryDialog {
 	my $query = shift;
@@ -1359,6 +1360,7 @@ sub GetItemListHtml { # @files(array of hashes) ; takes @files, returns html lis
 } # GetItemListHtml()
 
 sub GetAccessKey { # $caption ; returns access key to use for menu item
+#sub AddAccessKey {
 	# tries to find non-conflicting one
 	WriteLog('GetAccessKey()');
 
@@ -1379,7 +1381,7 @@ sub GetAccessKey { # $caption ; returns access key to use for menu item
 	my $newKey = '';
 	for (my $i = 0; $i < length($caption) - 1; $i++) {
 		my $newKeyPotential = lc(substr($caption, $i, 1));
-		if ($newKeyPotential =~ m/^[a-z]$/) {
+		if ($newKeyPotential =~ m/^[a-z]$/ && $newKeyPotential ne 'o' && $newKeyPotential ne 'r') { # more/expand and reprint
 			if (!$keyCaption{$newKeyPotential}) {
 				$newKey = $newKeyPotential;
 				last;

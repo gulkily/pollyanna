@@ -7,9 +7,6 @@ use 5.010;
 use POSIX;
 
 require './utils.pl';
-#require_once('sqlite.pl');
-#require_once('pages.pl');
-#require_once('resultset_as_dialog.pl');
 
 my @argsFound;
 while (my $argFound = shift) {
@@ -305,6 +302,10 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 
 		my $displayQuery = '<pre>'.HtmlEscape(SqliteGetQueryTemplate($pageQuery)).'<br></pre>'; #todo templatify
 		$pageNoContent .= '<span class=advanced>' . GetWindowTemplate($displayQuery, $queryDisplayName) . '</span>'; #todo should have <pre> like in GetItemListingPage()
+
+		if ($pageQuery eq 'boxes') { #banana theme
+			$pageNoContent .= GetWindowTemplate(GetTemplate('html/dialog/new_box_count.template'), 'Add');
+		}
 
 		$pageNoContent .= GetPageFooter($pageQuery);
 		$pageNoContent = InjectJs($pageNoContent, qw(utils settings avatar voting table_sort profile timestamp));

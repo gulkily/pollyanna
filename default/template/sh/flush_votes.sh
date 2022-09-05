@@ -11,15 +11,15 @@ sqlite3 cache/b/index.sqlite3 "
 	WHERE
 	(
 		(
-				tags_list LIKE '%,hasvote,%' AND
-				tags_list LIKE '%,notext,%'
+				tags_list LIKE '%,HasVote,%' AND
+				tags_list LIKE '%,NoText,%'
 			) AND (
 				tags_list not LIKE '%,signed,%' AND
 				tags_list not LIKE '%,pubkey,%' AND
 				tags_list not LIKE '%,approve,%'
 			)
 		) OR (
-			tags_list LIKE '%,hasdecline,%' AND
-			tags_list LIKE '%,notext,%'
+			tags_list LIKE '%,HasDecline,%' AND
+			tags_list LIKE '%,NoText,%'
 		)
 " >>log/deleted.log

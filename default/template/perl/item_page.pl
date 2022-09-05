@@ -29,9 +29,6 @@ use File::Copy;
 # use File::Copy qw(copy);
 use Cwd qw(cwd);
 
-#require './utils.pl';
-#require './makepage.pl';
-
 sub GetHtmlToolboxes {
 # 'toolbox' >toolbox<
 	my $fileHashRef = shift;
@@ -276,7 +273,9 @@ sub GetItemIndexLog {
 	if ($log) {
 		$log = HtmlEscape($log);
 		$log = str_replace("\n", "<br>\n", $log);
-		
+		$log = str_replace('declined:', '<font color=red>declined:</font>', $log);
+		$log = str_replace('allowed:', '<font color=green>allowed:</font>', $log);
+
 		my $logWindow = GetWindowTemplate($log, 'Log');
 		# my $logWindow = GetWindowTemplate($log, 'IndexFile(' . $shortHash . ')');
 		$logWindow = '<span class=advanced>' . $logWindow . '</span>';
@@ -562,11 +561,12 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		WriteLog('GetItemPage: scalar(@itemReplies) = ' . scalar(@itemReplies));
 		foreach my $itemReply (@itemReplies) {
 			WriteLog('GetItemPage: $itemReply = ' . $itemReply);
-			if ($itemReply->{'tags_list'} && index($itemReply->{'tags_list'}, 'hastitle') != -1) {
-				my $itemReplyTemplate = GetItemTemplate($itemReply); # GetItemPage() reply #hastext
+			if ($itemReply->{'tags_list'} && index($itemReply->{'tags_list'}, 'HasText') != -1) {
+				my $itemReplyTemplate = GetItemTemplate($itemReply); # GetItemPage() reply #HasText
 				$txtIndex .= $itemReplyTemplate;
 			} else {
-				my $itemReplyTemplate = GetItemTemplate($itemReply); # GetItemPage() reply not #hastext
+				# does not #HasText
+				my $itemReplyTemplate = GetItemTemplate($itemReply); # GetItemPage() reply not #HasText
 				#$itemReplyTemplate = '<span class=advanced>' . $itemReplyTemplate . '</span>';
 				$txtIndex .= $itemReplyTemplate;
 			}
@@ -592,7 +592,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			}
 		} else {
 			if (GetConfig('debug')) {
-				$txtIndex .= GetWindowTemplate('No related items for a pubkey.', 'Debug');
+				$txtIndex .= GetWindowTemplate('No related items for $file{\'file_hash\'} =  ' . $file{'file_hash'}, 'Debug');
 			}
 		}
 	}
@@ -745,8 +745,14 @@ sub GetItemAttributesDialog { # %file
 #	my %file = %{shift @_};
 
 	my $fileHash = trim($file{'file_hash'});
-	if ($fileHash = IsItem($fileHash)) {
-		my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE file_hash LIKE '$fileHash%'";
+	if (IsItem($fileHash)) { #sanity
+		$fileHash = IsItem($fileHash);
+		#todo ===
+		#my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE file_hash LIKE '$fileHash'";
+		#my @queryArguments; #todo
+		#push @queryArguments, $fileHash;
+		#===
+		my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE file_hash LIKE '$fileHash%' ORDER BY value";
 		$itemInfoTemplate = GetQueryAsDialog($query, 'Item Attributes'); # GetResultSetAsDialog() --> RenderField()
 		$itemInfoTemplate = '<span class=advanced>' . $itemInfoTemplate . '</span>';
 		return $itemInfoTemplate;

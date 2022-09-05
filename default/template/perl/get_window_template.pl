@@ -3,6 +3,35 @@
 use strict;
 use warnings;
 
+# GetWindowTemplate()
+#	 $body = what's inside the dialog
+# 	$title = title
+# 	$headings
+# 		comma-separated list of headings
+# 		-or-
+# 		number of columns (integer)
+# 	$status = what goes in the status bar
+# 	$menu = goes at the top of the window, below the title
+# 	calls GetWindowTemplate2()
+
+# GetWindowTemplate2()
+# 	\%paramHash (reference to a hash of parameters
+# 		body
+# 		title
+# 		anchor
+# 		headings
+# 		columns_lookup
+# 		status
+# 		menu
+# 		form_action
+# 		id
+
+# GetWindowTemplate3()
+#	$body
+#	$title
+#	\%paramHash (see above)
+
+
 sub GetWindowTemplate { # $body, $title, $headings, $status, $menu ; returns html with window/dialog
 # sub GetDialog {
 # sub GetDialogPage {
@@ -30,7 +59,8 @@ sub GetWindowTemplate { # $body, $title, $headings, $status, $menu ; returns htm
 			$id eq 'write' ||
 			$id eq 'settings' ||
 			$id eq 'help' ||
-			$id eq 'profile'
+			$id eq 'profile' ||
+			$id eq 'upload'
 	) {
 		$param{'id'} = $id;
 	} else {
@@ -109,14 +139,20 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 	my $windowId = $param{'id'};
 
 	if (!$windowAnchor) {
-		WriteLog('GetWindowTemplate2: warning: $windowAnchor is FALSE');
-		if ($windowTitle) {
+		WriteLog('GetWindowTemplate2: warning: $windowAnchor is FALSE, activating fallback; caller = ' . join(',', caller));
+		if (!$windowAnchor && $windowId) {
+			$windowAnchor = $windowId;
+		}
+		if (!$windowAnchor && $windowTitle) {
 			$windowAnchor = str_replace(' ', '', $windowTitle);
 			$windowAnchor =~ s/[^a-zA-Z0-9]//g;
 			#todo
 		}
-		if (!$windowAnchor) {
+		if (!$windowAnchor && $windowBody) {
 			$windowAnchor = substr(md5_hex($windowBody), 0, 8);
+		}
+		if (!$windowAnchor) {
+			WriteLog('GetWindowTemplate2: warning: $windowAnchor is FALSE after fallbacks; caller = ' . join(',', caller));
 		}
 	}
 

@@ -12,5 +12,11 @@
 <br>
 <input type=submit value=Send>
 </form>
-<p>Instructions for counting to here</p>
+<p>
+	Please count the number of boxes with bananas.<br>
+	Unopened boxes and ones still having the top layer count as <b>1</b>.<br>
+	Boxes without the top layer of bananas should be counted as half, or <b>0.5</b>.<br>
+	Add them up, and put the number into this form.<br>
+	Thank you!
+</p>
 <!-- / new_box_count.template -->

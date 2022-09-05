@@ -511,18 +511,18 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						
 						if ($tokenFound{'recon'} && $tokenFound{'message'} && $tokenFound{'param'}) {
 							my $newMessage = $tokenFound{'message'};
-							if ($tokenFound{'token'} eq 'http' || $tokenFound{'token'} eq 'https') {
-								# this hack is so that i can stay with the 3-item regex
-								# eventually it will probably have to be changed
-
-								my $newTitle = $tokenFound{'recon'}; # set title to entire line
-								if (length($newTitle) > 63) {
-									$newTitle = substr($newTitle, 0, 60) . '...';
-								}
-								
-								#todo sanity/escape
-								$newMessage = '<a href="' . $tokenFound{'recon'} . '">' . $newTitle . '</a>';
-							}
+							# if ($tokenFound{'token'} eq 'http' || $tokenFound{'token'} eq 'https') {
+							# 	# this hack is so that i can stay with the 3-item regex
+							# 	# eventually it will probably have to be changed
+							#
+							# 	my $newTitle = $tokenFound{'recon'}; # set title to entire line
+							# 	if (length($newTitle) > 63) {
+							# 		$newTitle = substr($newTitle, 0, 60) . '...';
+							# 	}
+							#
+							# 	#todo sanity/escape
+							# 	$newMessage = '<a href="' . $tokenFound{'recon'} . '">' . $newTitle . '</a>';
+							# }
 
 							#$message = str_replace($tokenFound{'recon'}, $newMessage, $message);
 							$message = str_replace($tokenFound{'recon'}, $tokenFound{'message'}, $message);
@@ -856,7 +856,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										$approveReason = 'lacking permissions to apply this hashtag';
 										push @indexMessageLog, 'declined: #' . $tokenFound{'param'} . '; reason: ' . $approveReason;
 										if (GetConfig('admin/index/create_system_tags')) {
-											DBAddVoteRecord($fileHash, 0, 'hasdecline');
+											DBAddVoteRecord($fileHash, 0, 'HasDecline');
 										}
 									}
 								} # foreach my $itemParent (@itemParents)
@@ -900,7 +900,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							} # valid hashtag
 
 							if (GetConfig('admin/index/create_system_tags')) {
-								DBAddVoteRecord($fileHash, 0, 'hasvote');
+								DBAddVoteRecord($fileHash, 0, 'HasVote');
 							}
 						} # non-permissioned hashtags
 
@@ -947,10 +947,10 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 #		}
 
 		if ($detokenedMessage eq '') {
-			# add #notext label/tag
-			WriteLog('IndexTextFile: no $detokenedMessage, setting #notext; $fileHash = ' . $fileHash);
+			# add #NoText label/tag
+			WriteLog('IndexTextFile: no $detokenedMessage, setting #NoText; $fileHash = ' . $fileHash);
 			if (GetConfig('admin/index/create_system_tags')) {
-				DBAddVoteRecord($fileHash, 0, 'notext');
+				DBAddVoteRecord($fileHash, 0, 'NoText');
 			}
 			#DBAddItemAttribute($fileHash, 'all_tokens_no_text', 1);
 
@@ -986,15 +986,17 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 					DBAddItemAttribute($fileHash, 'title', $title, 0);
 
 					if (GetConfig('admin/index/create_system_tags')) {
-						DBAddVoteRecord($fileHash, 0, 'hastitle');
+						#DBAddVoteRecord($fileHash, 0, GetString('HasTitle'));
+						#DBAddVoteRecord($fileHash, 0, GetString('HasTitle'));
+						DBAddVoteRecord($fileHash, 0, 'HasTitle');
 					}
 				}
 			}
 
 			if (GetConfig('admin/index/create_system_tags')) {
-				DBAddVoteRecord($fileHash, 0, 'hastext');
+				DBAddVoteRecord($fileHash, 0, 'HasText');
 			}
-			#DBAddPageTouch('tag', 'hastext');
+			#DBAddPageTouch('tag', 'HasText');
 
 			my $normalizedHash = sha1_hex(trim($detokenedMessage));
 			#v1

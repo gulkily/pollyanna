@@ -1,6 +1,9 @@
 admin
+NoText
+HasVote
+HasText
 notext
-vote
+hasvote
 hastext
 device
 timestamp

@@ -77,6 +77,11 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 		# 	#$dialogControls = '<span class=advanced>' . $dialogControls . '</span>';
 		# 	$topMenuTemplate .= $dialogControls;
 		# }
+
+		if (GetConfig('html/dialog_list_dialog')) {
+			require_once('dialog/dialog_list.pl');
+			$topMenuTemplate .= GetDialogListDialog();
+		}
 	}
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/dialog_properties')) {

@@ -233,7 +233,7 @@ sub GetReadPage { # generates page with item listing based on parameters
 		$queryFlags{'no_no_results'} = 1;
 		$txtIndex .= GetQueryAsDialog(
 			$queryAuthorThreads,
-			'Topics by Author',
+			'Topics by Author ' . GetAlias($authorKey),
 			'',
 			\%queryFlags
 		);

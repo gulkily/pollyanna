@@ -2518,13 +2518,6 @@ sub ProcessTextFile { # $file ; add new text file to index
 
 } # ProcessTextFile()
 
-#require './string.pl';
-#require './cache.pl';
-#require './config.pl';
-#require './html.pl';
-#require './file.pl';
-#require './access.pl';
-
 sub EnsureDirsThatShouldExist { # creates directories expected later
 	WriteLog('EnsureDirsThatShouldExist() begin');
 	# make a list of some directories that need to exist
@@ -2633,7 +2626,5 @@ EnsureDirsThatShouldExist();
 CheckForInstalledVersionChange();
 
 my $utilsPl = 1;
-#
-#require './sqlite.pl';
 
 1;

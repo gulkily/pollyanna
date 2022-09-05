@@ -200,6 +200,15 @@ elseif ($_REQUEST) { // if HEAD request, populate variables from $_REQUEST
 	}
 } # $_REQUEST
 
+
+#################################################################
+# END OF LOOKING FOR ARGUMENTS
+#################################################################
+
+if (isset($boxesCount) && $boxesCount && !$comment) {
+	$comment = 'Box count at ' . time();
+}
+
 {
 	if (isset($comment) && $comment && GetConfig('setting/admin/php/post/require_cookie')) {
 		if ((!isset($_COOKIE['cookie']) || !isset($_COOKIE['checksum'])) && index($comment, 'SIGNED') == -1 && index($comment, 'PUBLIC') == -1) {
@@ -547,7 +556,15 @@ if (!$redirectUrl && $fileUrlPath) {
 	$itemPostedServerResponse = $redirectMessage;
 	//$itemPostedServerResponse .= ' <a href=/write.html>Another</a>'; // has bugs, doesn't always work
 
-	RedirectWithResponse($fileUrlPath, $itemPostedServerResponse);
+	if (isset($boxesCount) && $boxesCount) {
+		// 		MakePage('boxes');
+		require_once('handle_not_found.php');
+		$html = HandleNotFound('/boxes.html', './boxes.html'); # cacheOverrideFlag
+		RedirectWithResponse('/boxes.html', 'Thank you for counting boxes.');
+		#RedirectWithResponse('/boxes.html?time=' . (time()+100), 'Thank you for counting boxes.');
+	} else {
+		RedirectWithResponse($fileUrlPath, $itemPostedServerResponse);
+	}
 }
 
 if (GetConfig('admin/php/debug')) {

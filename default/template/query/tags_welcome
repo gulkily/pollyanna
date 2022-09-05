@@ -13,10 +13,10 @@ FROM
 	)
 WHERE
 	vote_value NOT IN (
-		'hastext',
-		'notext',
-		'hastitle',
-		'hasvote',
+		'HasText',
+		'NoText',
+		'HasTitle',
+		'HasVote',
 		'changelog'
 	) AND
 	vote_count >= 2

@@ -288,7 +288,7 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 				WriteLog('GetConfig: no default; $configName = ' . $configName);
 				return '';
 			} else {
-				if ($configName =~ m/\.list$/) {
+				if ($configName =~ m/\.list$/ || $configName =~ m/debug/) {
 					# cool
 					return '';
 				} else {
@@ -444,7 +444,7 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 	} # foreach $themeName (@activeThemes)
 
 	if (trim($returnValue) eq '') {
-		if ($attributeName =~ m/^template/) {
+		if ($attributeName =~ m/^template/ || $attributeName =~ m/^string/) {
 			# this is ok
 		} else {
 			# not ok
