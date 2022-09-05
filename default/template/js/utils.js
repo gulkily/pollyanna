@@ -185,6 +185,7 @@ function EventLoop () { // for calling things which need to happen on a regular 
 	window.eventLoopBegin = eventLoopBegin;
 
 	if (window.GetPrefs && GetPrefs('draggable') && window.innerWidth && window.innerHeight) {
+		// if viewport size has changed, retile dialogs
 		if (!window.rememberInnerWidth) {
 			window.rememberInnerWidth = window.innerWidth;
 		}
@@ -202,6 +203,7 @@ function EventLoop () { // for calling things which need to happen on a regular 
 	}
 
 	if (window.FetchDialog) {
+		// #todo this may not be the best place for this code
 		var welcomeSeen = GetPrefs('welcome_seen');
 		// try to show this only once
 		if (welcomeSeen) {
@@ -222,6 +224,7 @@ function EventLoop () { // for calling things which need to happen on a regular 
 	}
 
 	if (window.eventLoopSetClock && window.setClock) {
+		// update time displayed in clock
 		setClock();
 	}
 
@@ -240,9 +243,15 @@ function EventLoop () { // for calling things which need to happen on a regular 
 	//alert('DEBUG: EventLoop: eventLoopBegin = ' + eventLoopBegin + ' - window.eventLoopPrevious = ' + window.eventLoopPrevious + ' = ' + (eventLoopBegin - window.eventLoopPrevious));
 
 	if (10*m < (eventLoopBegin - window.eventLoopPrevious)) {
-		window.eventLoopPrevious = eventLoopBegin;
+		// ACTUAL EVENT LOOP WORK BEGINS
+		// ACTUAL EVENT LOOP WORK BEGINS
+		// ACTUAL EVENT LOOP WORK BEGINS
+
+		window.eventLoopPrevious = eventLoopBegin; // store begin time
 
 		if (window.flagUnloaded) {
+			// show loading indicator if user has started navigating away from page
+			// window.flagUnloaded is set by OnUnload event
 			if (window.ShowPreNavigateNotification) {
 				ShowPreNavigateNotification();
 			}
@@ -253,7 +262,9 @@ function EventLoop () { // for calling things which need to happen on a regular 
 		// makes js debugging easier
 
 		if (window.eventLoopShowTimestamps && window.ShowTimestamps) {
+			// update timestamp widgets on page
 			if (13*m < (eventLoopBegin - window.eventLoopShowTimestamps)) {
+				// only every 13 seconds in regular performance mode
 				ShowTimestamps();
 				window.eventLoopShowTimestamps = eventLoopBegin;
 			} else {
@@ -262,7 +273,9 @@ function EventLoop () { // for calling things which need to happen on a regular 
 		}
 
 		if (window.eventLoopDoAutoSave && window.DoAutoSave) {
+			// autosave
 			if (5*m < (eventLoopBegin - window.eventLoopDoAutoSave)) { // autosave interval
+				// autosave every 5 seconds in normal performance mode
 				DoAutoSave();
 				window.eventLoopDoAutoSave = eventLoopBegin;
 			} else {
@@ -271,6 +284,7 @@ function EventLoop () { // for calling things which need to happen on a regular 
 		}
 
 		if (window.localStorage && document.getElementById) {
+			// update reply cart dialog displayed count
 			// #todo move this to separate module
 			if (window.ReplyCartUpdateCount) {
 				ReplyCartUpdateCount();
@@ -278,10 +292,13 @@ function EventLoop () { // for calling things which need to happen on a regular 
 		}
 
 		if (window.eventLoopShowAdvanced && window.ShowAdvanced) {
+			// update visibility of advanced/beginner layers
+			// but only if necessary
 			ShowAdvanced(0, 0);
 		}
 
 		if (window.eventLoopFresh && window.CheckIfFresh) {
+			// check for page changes by sending a HEAD request for current url
 			if (10000 < (eventLoopBegin - window.eventLoopFresh)) {
 			//if (10*m < (eventLoopBegin - window.eventLoopFresh)) {
 			// this is commented because it may hammer the server. uncomment if using localhost
@@ -291,6 +308,7 @@ function EventLoop () { // for calling things which need to happen on a regular 
 					window.eventLoopFresh &&
 					(!window.GetPrefs || GetPrefs('notify_on_change'))
 				) {
+					// notify_on_change client-side setting needs to be on
 					CheckIfFresh();
 					window.eventLoopFresh = eventLoopBegin;
 				}
@@ -298,12 +316,13 @@ function EventLoop () { // for calling things which need to happen on a regular 
 		}
 
 		if (window.GetPrefs) {
+			// if performance setting has changed in another window, update it here too
 			window.performanceOptimization = GetPrefs('performance_optimization'); // EventLoop()
 		}
 	} // 10000 < (eventLoopBegin - window.eventLoopPrevious)
 
 	if (window.eventLoopEnabled) {
-		// this sets the next setTimeout for the next "loop" iteration
+		// set the next setTimeout for the next "loop" iteration
 
 		// see how long this last iteration took
 		var d = new Date();
