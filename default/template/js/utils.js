@@ -315,6 +315,15 @@ function EventLoop () { // for calling things which need to happen on a regular 
 			}
 		}
 
+		if (
+			window.UpdateDialogList &&
+			document.getElementById &&
+			document.getElementsByClassName &&
+		) {
+			// update list of dialogs on page
+			UpdateDialogList();
+		}
+
 		if (window.GetPrefs) {
 			// if performance setting has changed in another window, update it here too
 			window.performanceOptimization = GetPrefs('performance_optimization'); // EventLoop()

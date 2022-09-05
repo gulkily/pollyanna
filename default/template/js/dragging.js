@@ -784,6 +784,59 @@ function GetDialogId (win) { // returns dialog id (based on id= or title bar cap
 	return '';
 } // GetDialogId()
 
+function SpotlightDialog (dialogId) {
+
+}
+
+function UpdateDialogList () {
+	var lstDialog = document.getElementById('lstDialog');
+	if (lstDialog) {
+		var allOpenDialogs = document.getElementsByClassName('dialog');
+		if (allOpenDialogs.length) {
+			var listContent = '';
+			for (var iDialog = 0; iDialog < allOpenDialogs.length; iDialog++) {
+				var dialogTitle = GetDialogTitle(allOpenDialogs[iDialog]);
+				var dialogId = GetDialogId(allOpenDialogs[iDialog]);
+				listContent = listContent + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { SpotlightDialog(' + dialogId + '); }">' + dialogTitle + '</a><br>';
+				//listContent = listContent + '<a href="#' + dialogId + '">' + dialogTitle + '</a><br>';
+				//document.title = (iDialog);
+				//lstDialog.innerHTML = lstDialog.innerHTML + iDialog;
+				//document.title = iDialog;
+			}
+
+			if (lstDialog.innerHTML != listContent) {
+				lstDialog.innerHTML = listContent;
+			}
+		}
+	}
+} // UpdateDialogList()
+
+function GetDialogTitle (win) { // returns dialog title (based on title bar caption)
+	//alert('DEBUG: GetDialogTitle()');
+	//document.title = 0;
+	if (win && win.getElementsByClassName) {
+		//document.title = 1;
+		var allTitlebar = win.getElementsByClassName('titlebar');
+		var firstTitlebar = allTitlebar[0];
+
+		if (firstTitlebar && firstTitlebar.getElementsByTagName) {
+			//document.title = 2;
+			var elId = firstTitlebar.getElementsByTagName('b');
+			if (elId && elId[0]) {
+				elId = elId[0];
+
+				if (elId && elId.innerHTML) {
+					//alert('DEBUG: GetDialogTitle: returning elId.innerHTML = ' + elId.innerHTML);
+					return elId.innerHTML;
+				}
+			}
+		}
+	} else {
+		//alert('GetDialogTitle: warning: fallback');
+	}
+	return '';
+} // GetDialogId()
+
 function CollapseWindow (p, newVisible) { // p = dialog element ; newVisible = 'none'/0 or anything else
 // should be called CollapseExpandDialog ?
 // collapses or expands specified window/dialog
