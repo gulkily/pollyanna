@@ -59,7 +59,8 @@ sub GetWindowTemplate { # $body, $title, $headings, $status, $menu ; returns htm
 			$id eq 'write' ||
 			$id eq 'settings' ||
 			$id eq 'help' ||
-			$id eq 'profile'
+			$id eq 'profile' ||
+			$id eq 'upload'
 	) {
 		$param{'id'} = $id;
 	} else {
