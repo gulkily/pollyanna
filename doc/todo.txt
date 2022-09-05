@@ -1,3 +1,9 @@
+should all-lowercase and/or lowercase hashtags be in the advanced layer?
+
+problems with hashtag links
+	a) dialogs have a hash-based id rather than exact id
+	b) FetchDialogFromUrl() doesn't know how to check for existing dialog
+
 system tags string lookup?
 
 debug snow should re-print the most recently reported progress percentage on every line so that it can be read
