@@ -511,18 +511,18 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						
 						if ($tokenFound{'recon'} && $tokenFound{'message'} && $tokenFound{'param'}) {
 							my $newMessage = $tokenFound{'message'};
-							if ($tokenFound{'token'} eq 'http' || $tokenFound{'token'} eq 'https') {
-								# this hack is so that i can stay with the 3-item regex
-								# eventually it will probably have to be changed
-
-								my $newTitle = $tokenFound{'recon'}; # set title to entire line
-								if (length($newTitle) > 63) {
-									$newTitle = substr($newTitle, 0, 60) . '...';
-								}
-								
-								#todo sanity/escape
-								$newMessage = '<a href="' . $tokenFound{'recon'} . '">' . $newTitle . '</a>';
-							}
+							# if ($tokenFound{'token'} eq 'http' || $tokenFound{'token'} eq 'https') {
+							# 	# this hack is so that i can stay with the 3-item regex
+							# 	# eventually it will probably have to be changed
+							#
+							# 	my $newTitle = $tokenFound{'recon'}; # set title to entire line
+							# 	if (length($newTitle) > 63) {
+							# 		$newTitle = substr($newTitle, 0, 60) . '...';
+							# 	}
+							#
+							# 	#todo sanity/escape
+							# 	$newMessage = '<a href="' . $tokenFound{'recon'} . '">' . $newTitle . '</a>';
+							# }
 
 							#$message = str_replace($tokenFound{'recon'}, $newMessage, $message);
 							$message = str_replace($tokenFound{'recon'}, $tokenFound{'message'}, $message);
