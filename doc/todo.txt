@@ -2,7 +2,10 @@ should all-lowercase and/or lowercase hashtags be in the advanced layer?
 
 problems with hashtag links
 	a) dialogs have a hash-based id rather than exact id
+		#todo give unique prefix to hashtag-matching items listing dialogs
+			it is top_
 	b) FetchDialogFromUrl() doesn't know how to check for existing dialog
+		should not be called directly, only by FetchDialog()
 
 system tags string lookup?
 
