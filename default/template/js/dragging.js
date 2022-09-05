@@ -1115,8 +1115,9 @@ function FetchDialog (dialogName) {
 } // FetchDialog()
 
 function FetchDialogFromUrl (url) {
-// InjectDialog () { // FetchDialogFromUrl
-// SpawnDialog () {
+// function InjectDialog () {
+// function FetchDialogFromUrl () {
+// function SpawnDialog () {
 	if (window.GetPrefs && !window.GetPrefs('draggable_spawn')) {
 		// #should be one layer above #todo
 		// not cool
