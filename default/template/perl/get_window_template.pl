@@ -3,6 +3,35 @@
 use strict;
 use warnings;
 
+# GetWindowTemplate()
+#	 $body = what's inside the dialog
+# 	$title = title
+# 	$headings
+# 		comma-separated list of headings
+# 		-or-
+# 		number of columns (integer)
+# 	$status = what goes in the status bar
+# 	$menu = goes at the top of the window, below the title
+# 	calls GetWindowTemplate2()
+
+# GetWindowTemplate2()
+# 	\%paramHash (reference to a hash of parameters
+# 		body
+# 		title
+# 		anchor
+# 		headings
+# 		columns_lookup
+# 		status
+# 		menu
+# 		form_action
+# 		id
+
+# GetWindowTemplate3()
+#	$body
+#	$title
+#	\%paramHash (see above)
+
+
 sub GetWindowTemplate { # $body, $title, $headings, $status, $menu ; returns html with window/dialog
 # sub GetDialog {
 # sub GetDialogPage {
