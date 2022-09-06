@@ -52,7 +52,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 		my $newFile = OrganizeFile($file);
 
 		if ($file ne $newFile) {
-		    push @indexMessageLog, 'file was organized (moved location, changed filename)';
+			push @indexMessageLog, 'file was organized (moved location, changed filename)';
 		}
 	}
 
@@ -103,7 +103,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 		$addedTime = AddToChainLog($fileHash); # IndexTextFile();
 		WriteLog('IndexTextFile: $addedTime from AddToChainLog($fileHash) = ' . $addedTime);
 	} else {
-	    $addedTime = GetTime(); #todo make nicer
+		$addedTime = GetTime(); #todo make nicer
 		WriteLog('IndexTextFile: $addedTime from GetTime() = ' . $addedTime);
 	}
 
@@ -914,7 +914,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 					# there's no title yet
 
 					@hashTagsAppliedToParent = array_unique(@hashTagsAppliedToParent);
-					 
+
 					my $titleCandidateComma = '';
 					foreach my $hashTagApplied (@hashTagsAppliedToParent) {
 						$titleCandidate .= ' #' . $hashTagApplied;

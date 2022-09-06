@@ -32,7 +32,7 @@ sub GetString { # $stringKey, $language, $noSubstitutions ; Returns string from 
 	my $memoKey = $stringKey . '/' . $language . '/' . ($noSubstitute ? 1 : 0);
 
 	if (defined($strings{$memoKey})) {
-	    #memo match
+		#memo match
 		return $strings{$memoKey};
 	}
 
@@ -48,12 +48,12 @@ sub GetString { # $stringKey, $language, $noSubstitutions ; Returns string from 
 	}
 
 	if ($string) {
-	    # exact match
+		# exact match
 		chomp ($string);
 
 		$strings{$memoKey} = $string;
 	} else {
-	    # no match, dig deeper...
+		# no match, dig deeper...
 		if ($noSubstitute) {
 			$strings{$memoKey} = '';
 			return '';

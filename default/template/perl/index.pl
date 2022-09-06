@@ -60,7 +60,7 @@ sub IndexHtmlFile { # $file | 'flush' ; indexes one text file into database
 	sleep 3;
 
 	while ($html =~/(?<=<span>)(.*?)(?=<\/span>)/g) {
-	  push @matches, $1;
+		push @matches, $1;
 	}
 
 	foreach my $m (@matches) {

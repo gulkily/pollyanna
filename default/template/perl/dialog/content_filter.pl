@@ -19,7 +19,7 @@ sub GetContentFilterDialog { # ; returns thermostat / content filter dialog
 		elsif ($currentValue eq 10) {
 			$itemTemplate = str_replace('title=Medium', 'title=Medium checked', $itemTemplate);
 		}
-		 elsif ($currentValue eq 11) {
+		elsif ($currentValue eq 11) {
 			$itemTemplate = str_replace('title=High', 'title=High checked', $itemTemplate);
 		}
 		#$itemTemplate .= $currentValue;

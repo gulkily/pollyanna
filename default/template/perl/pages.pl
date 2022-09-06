@@ -1474,7 +1474,7 @@ sub MakeJsPages {
 		GetConfig('admin/js/openpgp')
 		&&
 			(!-e "$HTMLDIR/openpgp.js")
-			 ||
+				||
 			(!-e "$HTMLDIR/openpgp.worker.js")
 	)
 	{

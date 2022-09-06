@@ -28,7 +28,7 @@ sub GetTagCategoriesDialog { # $rootTag ; traverses all tagsets under a tag and 
 				vote_value IN(
 					SELECT tag FROM tag_parent WHERE tag_parent = ?
 				)
-			 GROUP BY
+			GROUP BY
 				file_hash
 		";
 

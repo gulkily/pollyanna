@@ -14,13 +14,13 @@ sub GetAuthorInfoBox {
 	}
 
 	if (!IsFingerprint($authorKey) && IsItem($authorKey)) {
-	    #todo refactor this nonsense
-	    my @queryParams;
-	    push @queryParams, $authorKey;
-	    my $newAuthorKey = SqliteGetValue('select author_key from author_flat where file_hash = ?', @queryParams);
-	    if ($newAuthorKey) {
-	        $authorKey = $newAuthorKey;
-	    }
+		#todo refactor this nonsense
+		my @queryParams;
+		push @queryParams, $authorKey;
+		my $newAuthorKey = SqliteGetValue('select author_key from author_flat where file_hash = ?', @queryParams);
+		if ($newAuthorKey) {
+			$authorKey = $newAuthorKey;
+		}
 	}
 
 	my $authorInfoTemplate = GetTemplate('html/author_info.template');

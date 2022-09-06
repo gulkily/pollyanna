@@ -211,7 +211,7 @@ sub RemoveHtmlFile { # $file ; removes existing html file
 	) {
 		# sanity check passed
 		WriteLog('RemoveHtmlFile: sanity check passed for $file = ' . $file);
-	 	$file = $1;
+		$file = $1;
 		if (-e $file) {
 			unlink($file);
 		}

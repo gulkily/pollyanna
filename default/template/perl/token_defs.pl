@@ -14,11 +14,11 @@ sub GetTokenDefs {
 
 	#todo memo
 	my @tokenDefs = (
-	    # ATTENTION #tokenSanityCheck
-	    # Whenever adding a new definition here
-	    # Also add it to the sanity check below
-	    # Look for this tag: #tokenSanityCheck
-	    # ATTENTION #tokenSanityCheck
+		# ATTENTION #tokenSanityCheck
+		# Whenever adding a new definition here
+		# Also add it to the sanity check below
+		# Look for this tag: #tokenSanityCheck
+		# ATTENTION #tokenSanityCheck
 
 		{ # cookie of user who posted the message
 			'token'   => 'cookie',
