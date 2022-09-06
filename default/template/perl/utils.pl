@@ -395,8 +395,8 @@ sub WriteMessage { # Writes timestamped message to console (stdout)
 		}
 
 		if (length($snowPrinted) >= 60) {
-		    ## this starts a new line in the snow
-		    ## this is NOT the part that prints a text message
+			## this starts a new line in the snow
+			## this is NOT the part that prints a text message
 			print "\n$timestamp ";
 			WriteLog('WriteMessage: ' . $snowPrinted);
 			$snowPrinted = '';
@@ -567,49 +567,55 @@ sub GetFileHash { # $fileName ; returns hash of file contents
 	return '';
 } # GetFileHash()
 
-#sub GetFileHash { # $fileName ; returns hash of file contents
-## // GetItemHash GetHash
-#	WriteLog("GetFileHash()");
-#
-#	my $fileName = shift;
-#
-#	if (!$fileName) {
-#		WriteLog('GetFileHash: warning: $fileName is FALSE; caller = ' . join(',', caller));
-#		return '';
-#	}
-#
-#	chomp $fileName;
-#	WriteLog("GetFileHash($fileName)");
-#	#todo normalize path (static vs full)
-#	state %memoFileHash;
-#	if ($memoFileHash{$fileName}) {
-#		WriteLog('GetFileHash: memo hit ' . $memoFileHash{$fileName});
-#		return $memoFileHash{$fileName};
-#	}
-#	WriteLog('GetFileHash: memo miss for $fileName = ' . $fileName);
-#
-#	if (-e $fileName) {
-#		if ((lc(substr($fileName, length($fileName) - 4, 4)) eq '.txt')) {
-#			my $fileContent = GetFile($fileName);
-#			while (index($fileContent, "\n-- \n") > -1) { #\n--
-#				# exclude footer content from hashing
-#				$fileContent = substr($fileContent, 0, index($fileContent, "\n-- \n")); #\n--
-#			}
-#			$fileContent = trim($fileContent);
-#			$memoFileHash{$fileName} = sha1_hex($fileContent);
-#			return $memoFileHash{$fileName};
-#		} else {
-#		    $memoFileHash{$fileName} = sha1_hex(GetFile($fileName));
-#
-#			return $memoFileHash{$fileName};
-#		}
-#	} else {
-#		return '';
-#	}
-#
-#	WriteLog('GetFileHash: warning: unreachable reached');
-#	return '';
-#} # GetFileHash()
+sub GetFileMessageHash { # $fileName ; returns hash of file contents
+# sub GetItemHash {
+# sub GetHash {
+# sub GetMessageHash {
+	WriteLog("GetFileMessageHash()");
+
+	my $fileName = shift;
+
+	if (!$fileName) {
+		WriteLog('GetFileMessageHash: warning: $fileName is FALSE; caller = ' . join(',', caller));
+		return '';
+	}
+
+	chomp $fileName;
+	WriteLog("GetFileMessageHash($fileName)");
+	#todo normalize path (static vs full)
+	state %memoFileHash;
+	if ($memoFileHash{$fileName}) {
+		WriteLog('GetFileMessageHash: memo hit on $fileName = ' . $fileName);
+		WriteLog('GetFileMessageHash: returning ' . $memoFileHash{$fileName});
+		return $memoFileHash{$fileName};
+	}
+	WriteLog('GetFileMessageHash: memo miss for $fileName = ' . $fileName);
+
+	if (-e $fileName) {
+		if ((lc(substr($fileName, length($fileName) - 4, 4)) eq '.txt')) {
+			my $fileContent = GetFile($fileName);
+			WriteLog('GetFileMessageHash: text file detected; length = ' . length($fileContent));
+			while (index($fileContent, "\n-- \n") > -1) { #\n--
+				# exclude footer content from hashing
+				$fileContent = substr($fileContent, 0, index($fileContent, "\n-- \n")); #\n--
+			}
+			$fileContent = trim($fileContent);
+			WriteLog('GetFileMessageHash: length after removing signature and trim = ' . length($fileContent));
+			WriteLog('GetFileMessageHash: $fileContent = ' . $fileContent);
+			$memoFileHash{$fileName} = sha1_hex($fileContent);
+			WriteLog('GetFileMessageHash: returning ' . $memoFileHash{$fileName});
+			return $memoFileHash{$fileName};
+		} else {
+			$memoFileHash{$fileName} = sha1_hex(GetFile($fileName));
+			return $memoFileHash{$fileName};
+		}
+	} else {
+		return '';
+	}
+
+	WriteLog('GetFileMessageHash: warning: unreachable reached');
+	return '';
+} # GetFileMessageHash()
 
 sub GetRandomHash { # returns a random sha1-looking hash, lowercase
 	my @chars=('a'..'f','0'..'9');
@@ -932,7 +938,7 @@ sub GetClockFormattedTime() { # returns current time in appropriate format from 
 	chomp $clockFormat;
 
 	if ($clockFormat eq '24hour') {
-	    my $time = GetTime();
+		my $time = GetTime();
 		my $hours = strftime('%H', localtime $time);
 		my $minutes = strftime('%M', localtime $time);
 		my $clockFormattedTime = $hours . ':' . $minutes;
@@ -1149,8 +1155,8 @@ sub str_replace { # $replaceWhat, $replaceWith, $string ; emulates some of str_r
 	my $stringLength = length($string);
 
 	if (!defined($string) || !$string) {
-	    #todo edge cases like '0', 0, ''
-	    #what to do for ''??
+		#todo edge cases like '0', 0, ''
+		#what to do for ''??
 		WriteLog('str_replace: warning: $string not supplied; caller = ' . join(',', caller));
 		return "";
 	}
@@ -2122,7 +2128,7 @@ sub IsFileDeleted { # $file, $fileHash ; checks for file's hash in deleted.log a
 
 
 	if ($fileHash && -e 'log/deleted.log' && GetFile('log/deleted.log') =~ $fileHash) {
-	    # if the file is present in deleted.log, get rid of it and its page, return
+		# if the file is present in deleted.log, get rid of it and its page, return
 		# write to log
 		WriteLog("IsFileDeleted: MATCHED! $fileHash exists in deleted.log, removing $file");
 
