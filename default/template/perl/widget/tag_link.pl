@@ -7,6 +7,12 @@ use warnings;
 sub GetTagLink { # $tag ; returns html for a tag link
 # sub GetHashTagLink {
 
+# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
+# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
+# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
+# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
+# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
+
 	my $tag = shift;
 	my $voteCount = shift;
 
