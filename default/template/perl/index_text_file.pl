@@ -998,29 +998,31 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 			}
 			#DBAddPageTouch('tag', 'HasText');
 
-			my $normalizedHash = sha1_hex(trim($detokenedMessage));
+			my $messageHash = GetFileMessageHash($file);
+			#my $normalizedHash = sha1_hex(trim($detokenedMessage));
 			#v1
-
-			{#v2
-				my $hash = sha1_hex('');
-				#draft better normalized hash
-				my @lines = split("\n", $detokenedMessage);
-				my @lines2;
-				for my $line (@lines) {
-					$line = trim($line);
-					if ($line ne '') {
-						push @lines2, lc($line);
-					}
-				}
-				my @lines3 = uniq(sort(@lines2));
-				for my $line (@lines3) {
-					$hash = sha1_hex($hash . $line);
-				}
-				$normalizedHash = $hash;
-			}
+			#
+			# {#v2
+			# 	my $hash = sha1_hex('');
+			# 	#draft better normalized hash
+			# 	my @lines = split("\n", $detokenedMessage);
+			# 	my @lines2;
+			# 	for my $line (@lines) {
+			# 		$line = trim($line);
+			# 		if ($line ne '') {
+			# 			push @lines2, lc($line);
+			# 		}
+			# 	}
+			# 	my @lines3 = uniq(sort(@lines2));
+			# 	for my $line (@lines3) {
+			# 		$hash = sha1_hex($hash . $line);
+			# 	}
+			# 	$normalizedHash = $hash;
+			# }
 
 			if (GetConfig('setting/admin/index/extra_hashes')) {
-				DBAddItemAttribute($fileHash, 'normalized_hash', $normalizedHash, 0);
+				DBAddItemAttribute($fileHash, 'message_hash', $messageHash, 0);
+				#	DBAddItemAttribute($fileHash, 'normalized_hash', $normalizedHash, 0);
 			}
 
 			#todo reparent item if another with the same normhash already exists

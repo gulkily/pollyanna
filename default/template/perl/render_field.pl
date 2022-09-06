@@ -116,7 +116,8 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fieldName eq 'sha1sum' ||
 		$fieldName eq 'sha256sum' ||
 		$fieldName eq 'md5' ||
-		$fieldName eq 'chain_hash'
+		$fieldName eq 'chain_hash' ||
+		$fieldName eq 'message_hash'
 	) { #todo make it match on _hash and use _hash on the names
 		$fieldValue = '<tt>' . $fieldValue . '</tt>';
 	}
