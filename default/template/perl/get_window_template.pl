@@ -56,16 +56,20 @@ sub GetWindowTemplate { # $body, $title, $headings, $status, $menu ; returns htm
 	my $id = lc($param{'title'});
 	if (
 		$id eq 'read' ||
-			$id eq 'write' ||
-			$id eq 'settings' ||
-			$id eq 'help' ||
-			$id eq 'profile' ||
-			$id eq 'upload'
+		$id eq 'write' ||
+		$id eq 'settings' ||
+		$id eq 'help' ||
+		$id eq 'profile' ||
+		$id eq 'upload'
 	) {
 		$param{'id'} = $id;
 	} else {
+		if ($param{'title'}) {
+			$param{'id'} = $param{'title'};
+			$param{'id'} =~ s/[^a-zA-Z0-9]//g;
+		}
 		# default window's id to hash of title
-		$param{'id'} = substr(md5_hex($param{'title'}), 0, 8);
+		#$param{'id'} = substr(md5_hex($param{'title'}), 0, 8);
 	}
 
 	WriteLog('GetWindowTemplate: $id = ' . $param{'id'});
