@@ -388,8 +388,6 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						}
 					} # cookie
 
-
-
 					if ($tokenFound{'token'} eq 'client') {
 						if ($tokenFound{'recon'} && $tokenFound{'message'} && $tokenFound{'param'}) {
 							DBAddItemAttribute($fileHash, 'client_id', $tokenFound{'param'}, 0, $fileHash);
@@ -409,10 +407,6 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							WriteLog('IndexTextFile: warning: client: sanity check failed');
 						}
 					} # client
-
-
-
-
 
 					if ($tokenFound{'token'} eq 'parent') { # >>
 						if ($tokenFound{'recon'} && $tokenFound{'message'} && $tokenFound{'param'}) {
