@@ -695,7 +695,7 @@ sub GetRelatedListing { # $fileHash
 	if ($fileHash) {
 		chomp $fileHash;
 
-		my $query = SqliteGetQueryTemplate("related");
+		my $query = SqliteGetQueryTemplate('related');
 		$query =~ s/\?/'$fileHash'/;
 		$query =~ s/\?/'$fileHash'/;
 		$query =~ s/\?/'$fileHash'/;
@@ -752,7 +752,7 @@ sub GetItemAttributesDialog { # %file
 		#my @queryArguments; #todo
 		#push @queryArguments, $fileHash;
 		#===
-		my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE file_hash LIKE '$fileHash%' ORDER BY value";
+		my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE file_hash LIKE '$fileHash%' ORDER BY attribute";
 		$itemInfoTemplate = GetQueryAsDialog($query, 'Item Attributes'); # GetResultSetAsDialog() --> RenderField()
 		$itemInfoTemplate = '<span class=advanced>' . $itemInfoTemplate . '</span>';
 		return $itemInfoTemplate;
