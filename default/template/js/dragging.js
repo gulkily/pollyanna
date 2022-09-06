@@ -1097,9 +1097,10 @@ function FetchDialog (dialogName) {
 	//alert('DEBUG: FetchDialog(' + dialogName + ')');
 
 	var url = '/dialog/' + dialogName + '.html';
+	var dialogId = dialogName.replace('/', '_');
 
 	if (document.getElementById) {
-		var dialogExists = document.getElementById(dialogName);
+		var dialogExists = document.getElementById(dialogId);
 		if (dialogExists) {
 			//alert('DEBUG: FetchDialog: dialogExists');
 			if (GetPrefs('draggable_spawn')) {
