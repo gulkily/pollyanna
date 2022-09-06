@@ -1,4 +1,7 @@
 <!-- layer_controls.template -->
+
+<noscript>*</noscript>
+
 <span>
 	<a id=btnAdvanced
 		accesskey=o
