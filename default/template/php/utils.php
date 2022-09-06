@@ -1553,7 +1553,7 @@ function GetItemHtmlLink ($hash, $linkCaption, $hashAnchor) { # $hash, [link cap
 				"
 					if (
 						(!window.GetPrefs || GetPrefs('draggable_spawn')) &&
-						window.FetchDialogFromUrl &&
+						(window.FetchDialogFromUrl) &&
 						document.getElementById
 					) {
 						if (document.getElementById('$shortHash')) {

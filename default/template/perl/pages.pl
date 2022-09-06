@@ -594,7 +594,7 @@ sub GetItemHtmlLink { # $hash, [link caption], [#anchor] ; returns <a href=...
 				"
 					if (
 						(!window.GetPrefs || GetPrefs('draggable_spawn')) &&
-						window.FetchDialogFromUrl &&
+						(window.FetchDialogFromUrl) &&
 						document.getElementById
 					) {
 						if (document.getElementById('$shortHash')) {
