@@ -1,3 +1,27 @@
+# if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
+# 	$tagLink = AddAttributeToTag(
+# 		$tagLink,
+# 		'a ',
+# 		'onclick',
+# 		"
+# 			if (
+# 				(!window.GetPrefs || GetPrefs('draggable_spawn')) &&
+# 				(window.FetchDialogFromUrl) &&
+# 				document.getElementById
+# 			) {
+# 				if (document.getElementById('top_$tag')) {
+# 					SetActiveDialog(document.getElementById('top_$tag'));
+# 					return false;
+# 				} else {
+# 					return FetchDialogFromUrl('/dialog/top/$tag');
+# 				}
+# 			}
+# 		"
+# 	);
+# }
+#
+
+
 
 #sub FormatMessage { # $message, \%file
 #	my $message = shift;
