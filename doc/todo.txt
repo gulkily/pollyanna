@@ -1,3 +1,70 @@
+
+
+
+
+if uploaded file is cpp
+	run gcc
+	output to new textfile
+		log compile time
+	run and log output
+		also log run time
+	display as item page
+
+
+
+
+
+
+
+#bug cannot apply #run tag when author has #run tag
+	workaround: give author #admin tag
+
+
+if chain is in use, during rebuild items should be indexed in chain order
+	how?
+		either defer indexing if previous items are not done yet
+			index_queue
+			add to queue if parent item is missing, then rerun queue once first pass of indexing is done?
+				recursively
+		or build list of files based on chain?
+			would require organize_files to be on
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+detect when default has changed and warn user, especially in debug mode
+	should cut down on mysteries of "it's not working"
+		look for files in default that are newer than config
+
 should all-lowercase and/or lowercase hashtags be in the advanced layer?
 
 problems with hashtag links
@@ -668,10 +735,7 @@ improve clean process
 		clean out a bit at a time, so as to not stall flow
 		e.g. find first 1000 files and delete them
 
-
-
 create "imprint" of shortcut keys so they don't keep changing
-
 
 attributes should be rewritten back into header-footer
 
