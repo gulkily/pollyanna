@@ -26,4 +26,4 @@ sleep 1
 ./index.pl --all
 echo Making frontend essentials...
 sleep 1
-./pages.pl --system -M chain --listing
+./pages.pl --php -M chain --listing
