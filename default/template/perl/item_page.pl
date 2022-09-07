@@ -259,8 +259,14 @@ sub GetHtmlToolboxes {
 	}
 } # GetHtmlToolboxes()
 
-sub GetItemIndexLog {
+sub GetItemIndexLog { # $itemHash, $logType = index_log
 	my $itemHash = shift;
+
+	my $logType = shift;
+	if (!$logType) {
+		$logType = 'index_log'
+	}
+
 	if (!IsItem($itemHash)) {
 		WriteLog('GetItemIndexLog: warning: not an item: $itemHash = ' . $itemHash);
 		return '';
@@ -268,20 +274,24 @@ sub GetItemIndexLog {
 
 	my $shortHash = substr($itemHash, 0, 8);
 	
-	my $logPath = 'index_log/' . $itemHash;
+	my $logPath = $logType . '/' . $itemHash;
 	my $log = GetCache($logPath);
 	if ($log) {
 		$log = HtmlEscape($log);
-		$log = str_replace("\n", "<br>\n", $log);
-		$log = str_replace('declined:', '<font color=red>declined:</font>', $log);
-		$log = str_replace('allowed:', '<font color=green>allowed:</font>', $log);
 
-		my $logWindow = GetWindowTemplate($log, 'Log');
+		$log = str_replace("\n", "<br>\n", $log);
+		if ($logType eq 'index_log') {
+			$log = str_replace('declined:', '<font color=red>declined:</font>', $log);
+			$log = str_replace('allowed:', '<font color=green>allowed:</font>', $log);
+		}
+
+		#my $logWindow = GetWindowTemplate($log, 'Log');
+		my $logWindow = GetWindowTemplate($log, $logType);
 		# my $logWindow = GetWindowTemplate($log, 'IndexFile(' . $shortHash . ')');
 		$logWindow = '<span class=advanced>' . $logWindow . '</span>';
 		return $logWindow;
 	}
-	
+
 	return '';
 } # GetItemIndexLog()
 
@@ -607,6 +617,11 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 
 	if (GetConfig('html/item_page/parse_log')) {
 		$txtIndex .= GetItemIndexLog($file{'file_hash'});
+		if (index($file{'tags_list'}, ',cpp,') != -1 && GetConfig('setting/admin/cpp/enable')) {
+			#cpp file
+			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'compile_log');
+			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'run_log');
+		}
 	}
 
 	# end page with footer

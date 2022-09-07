@@ -146,17 +146,27 @@ sub IndexFile { # $file ; calls IndexTextFile() or IndexImageFile() based on ext
 		}
 	}
 
+	if ($ext eq 'cpp') {
+		WriteLog('IndexFile: calling IndexCppFile()');
+		$indexSuccess = IndexCppFile($file);
+
+		if (!$indexSuccess) {
+			WriteLog('IndexFile: warning: IndexCppFile() returned FALSE; $indexSuccess was FALSE');
+			$indexSuccess = 0;
+		}
+	}
+
 	if (
 		$ext eq 'png' ||
-			$ext eq 'gif' ||
-			$ext eq 'jpg' ||
-			$ext eq 'jpeg' ||
-			$ext eq 'bmp' ||
-			$ext eq 'svg' ||
-			$ext eq 'webp' ||
-			$ext eq 'jfif' ||
-			$ext eq 'tiff' ||
-			$ext eq 'tff'
+		$ext eq 'gif' ||
+		$ext eq 'jpg' ||
+		$ext eq 'jpeg' ||
+		$ext eq 'bmp' ||
+		$ext eq 'svg' ||
+		$ext eq 'webp' ||
+		$ext eq 'jfif' ||
+		$ext eq 'tiff' ||
+		$ext eq 'tff'
 	) {
 		WriteLog('IndexFile: calling IndexImageFile()');
 		$indexSuccess = IndexImageFile($file);

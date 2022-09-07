@@ -150,7 +150,14 @@ sub GetItemTemplateBody {
 		$itemTemplateBody = str_replace('$itemText', $itemText, $itemTemplateBody);
 	} # 'txt'
 
-	#$windowBody =~ s/\$itemName/$itemName/g;
+	if ($file{'item_type'} eq 'cpp') {
+		WriteLog('GetItemTemplateBody: item_type = cpp');
+
+		$itemText = CppForWeb(GetFile($file{'file_path'}));
+
+		$itemTemplateBody = GetTemplate('html/item/item.template'); # GetItemTemplate()
+		$itemTemplateBody = str_replace('$itemText', $itemText, $itemTemplateBody);
+	} # 'cpp'
 
 	if (!$itemTemplateBody) {
 		WriteLog('GetItemTemplateBody: warning: $itemTemplateBody is FALSE; caller = ' . join(',', caller));

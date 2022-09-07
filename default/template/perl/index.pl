@@ -84,6 +84,8 @@ sub IndexHtmlFile { # $file | 'flush' ; indexes one text file into database
 	sleep 3;
 } # IndexHtmlFile()
 
+require_once('index_cpp_file.pl');
+
 sub uniq { # @array ; return array without duplicate elements
 # copied from somewhere like perlmonks
 	my %seen;
@@ -252,6 +254,24 @@ sub MakeIndex { # indexes all available text files, and outputs any config found
 
 		IndexImageFile('flush');
 	} # admin/image/enable
+
+	if (GetConfig('admin/cpp/enable')) {
+		state $HTMLDIR = GetDir('html');
+
+		my @cppFiles = split("\n", `find $HTMLDIR/cpp -type f -name *.cpp`);
+		my $cppFilesCount = scalar(@cppFiles);
+		my $currentCppFile = 0;
+		WriteLog('MakeIndex: $cppFilesCount = ' . $cppFilesCount);
+
+		foreach my $cppFile (@cppFiles) {
+			$currentCppFile++;
+			my $percentCppFiles = floor($currentCppFile / $cppFilesCount * 100);
+			WriteMessage("[$percentCppFiles%] $currentCppFile/$cppFilesCount  $cppFile");
+			IndexCppFile($cppFile);
+		}
+
+		IndexCppFile('flush');
+	} # admin/cpp/enable
 } # MakeIndex()
 
 sub DeindexMissingFiles { # remove from index data for files which have been removed
