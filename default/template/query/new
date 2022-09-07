@@ -1,6 +1,7 @@
 SELECT
 	file_hash,
 	item_title,
+	item_type,
 	child_count,
 	add_timestamp
 FROM

@@ -707,6 +707,8 @@ sub DBGetItemTitle { # get title for item ($itemhash)
 } # DBGetItemTitle()
 
 sub DBGetItemFilePath { # get path for item's source file
+# sub GetItemFileName {
+# sub GetItemFile {
 	my $itemHash = shift;
 
 	if (!$itemHash || !IsItem($itemHash)) {
@@ -1489,11 +1491,9 @@ sub DBAddItem { # $filePath, $fileName, $authorKey, $fileHash, $itemType, $verif
 		$authorKey = '';
 	}
 
-	if (GetConfig('admin/expo_site_mode')) {
-		if (!$fileName) {
-			$fileName = 'Information';
-			WriteLog('DBAddItem: warning: $fileName missing; $filePath = ' . $filePath);
-		}
+	if (!$fileName) {
+		$fileName = 'Untitled';
+		WriteLog('DBAddItem: warning: $fileName missing; $filePath = ' . $filePath);
 	}
 #
 #	if ($authorKey) {
@@ -1619,6 +1619,7 @@ sub DBAddLocationRecord { # $itemHash, $latitude, $longitude, $signedBy ; Adds n
 
 sub DBAddVoteRecord { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; Adds a new vote (tag) record to an item based on vote/ token
 # sub DBAddVote {
+# sub DBAddItemVote {
 	state $query;
 	state @queryParams;
 

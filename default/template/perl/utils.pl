@@ -1757,6 +1757,10 @@ sub IsAdmin { # $key ; returns 1 if user is admin, otherwise 0
 #} # GetServerKey()
 
 sub TrimPath { # $string ; Trims the directories AND THE FILE EXTENSION from a file path
+# sub GetFileName {
+# sub RemovePath {
+# sub StripPath {
+
 	my $string = shift;
 	while (index($string, "/") >= 0) {
 		$string = substr($string, index($string, "/") + 1);

@@ -212,6 +212,8 @@ sub IndexImageFile { # $file ; indexes one image file into database
 } # IndexImageFile()
 
 sub MakeIndex { # indexes all available text files, and outputs any config found
+# sub IndexFiles {
+# sub IndexAllFiles
 	WriteLog( "MakeIndex()...\n");
 
 	state $TXTDIR = GetDir('txt');
@@ -219,7 +221,7 @@ sub MakeIndex { # indexes all available text files, and outputs any config found
 
 	#my @filesToInclude = split("\n", `grep txt\$ ~/index/home.txt`); #homedir #~
 	#my @filesToInclude = split("\n", `find $TXTDIR -name \\\*.txt -o -name \\\*.html`); #includes html files #indevelopment
-	my @filesToInclude = split("\n", `find $TXTDIR -name \\\*.txt`);
+	my @filesToInclude = split("\n", `find $TXTDIR -type f -name \\\*.txt`);
 
 	my $filesCount = scalar(@filesToInclude);
 	my $currentFile = 0;

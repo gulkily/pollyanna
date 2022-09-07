@@ -737,8 +737,9 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							$tokenFound{'param'} eq 'witness' || #witness token needs permission
 							$tokenFound{'param'} eq 'vouch' || #vouch token needs permission
 							$tokenFound{'param'} eq 'mavo' || #mavo token needs permission
+							$tokenFound{'param'} eq 'run' || #run token needs permission
 							0
-						) { # #admin #approve tokens which need permissions
+						) { # permissioned token
 							my $hashTag = $tokenFound{'param'};
 							if (scalar(@itemParents)) {
 								WriteLog('IndexTextFile: Found permissioned token ' . $tokenFound{'param'} . ', and item has parents');
@@ -842,7 +843,12 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										push @indexMessageLog, 'allowed: #' . $tokenFound{'param'} . '; reason: ' . $approveReason;
 
 										if (GetConfig('admin/index/create_system_tags')) {
-											DBAddVoteRecord($fileHash, 0, 'hastag');
+											DBAddVoteRecord($fileHash, 0, 'HasTag');
+										}
+
+										if ($hashTag eq 'run') {
+											push @indexMessageLog, 'calling run on parent item';
+											#RunItem($itemParent);
 										}
 									} # $approveStatus is true
 									else {
@@ -1037,7 +1043,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 	if (scalar(@indexMessageLog)) {
 		my $indexLog = join("\n", @indexMessageLog);
-		PutCache('index_log/' . $fileHash, $indexLog);
+		PutCache('index_log/' . $fileHash, $indexLog); # parse_log parse.log ParseLog
 	}
 
 	if (GetConfig('admin/index/expire_html_when_indexing')) {
