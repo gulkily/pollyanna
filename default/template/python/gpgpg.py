@@ -103,31 +103,31 @@ def GpgParse(filePath): # { # $filePath ; parses file and stores gpg response in
 
 		# basic message classification covering only three cases, exclusively
 		if fileContents.index(gpgPubkey) > -1:
-		    #gpg_pubkey
-		    WriteLog('GpgParse: found $gpgPubkey')
-		    gpgCommand += '--import --ignore-time-conflict --ignore-valid-from '
-		    pubKeyFlag = 1
+			#gpg_pubkey
+			WriteLog('GpgParse: found $gpgPubkey')
+			gpgCommand += '--import --ignore-time-conflict --ignore-valid-from '
+			pubKeyFlag = 1
 		elif fileContents.index(gpgSigned) > -1:
-		    #gpg_signed
-		    WriteLog('GpgParse: found $gpgSigned')
-		    gpgCommand += '--verify -o - '
-		    signedFlag = 1
+			#gpg_signed
+			WriteLog('GpgParse: found $gpgSigned')
+			gpgCommand += '--verify -o - '
+			signedFlag = 1
 		elif fileContents.index(gpgEncrypted) > -1:
-		    #gpg_encrypted
-		    WriteLog('GpgParse: found $gpgEncrypted')
-		    gpgCommand += '-o - --decrypt '
-		    encryptedFlag = 1
+			#gpg_encrypted
+			WriteLog('GpgParse: found $gpgEncrypted')
+			gpgCommand += '-o - --decrypt '
+			encryptedFlag = 1
 		else:
-		    WriteLog('GpgParse: did not find any relevant strings, returning')
-		    return ''
+			WriteLog('GpgParse: did not find any relevant strings, returning')
+			return ''
 		
 		match = re.search('^([0-9a-f]+)$', fileHash)
 		if match:
-		    #todo not sure if this is needed, since $fileHash is checked above
-		    fileHash = match[0];
+			#todo not sure if this is needed, since $fileHash is checked above
+			fileHash = match[0];
 		else:
-		    WriteLog('GpgParse: sanity check failed, $fileHash = ' + fileHash)
-		    return ''
+			WriteLog('GpgParse: sanity check failed, $fileHash = ' + fileHash)
+			return ''
 		
 
 		#gpg_command_pipe
@@ -150,10 +150,10 @@ def GpgParse(filePath): # { # $filePath ; parses file and stores gpg response in
 		WriteLog('GpgParse: ' + fileHash + '; $pubKeyFlag = ' + pubKeyFlag)
 
 		if pubKeyFlag: # {
-		    gpgKeyPub = ''
+			gpgKeyPub = ''
 
-		    match = re.search('([0-9A-F]{16})', gpgStderrOutput)
-		    if match: # { # username allowed characters chars filter is here
+			match = re.search('([0-9A-F]{16})', gpgStderrOutput)
+			if match: # { # username allowed characters chars filter is here
 				gpgKeyPub = match[0];
 				DBAddItemAttribute(fileHash, 'gpg_id', gpgKeyPub)
 
@@ -201,16 +201,16 @@ def GpgParse(filePath): # { # $filePath ; parses file and stores gpg response in
 			# } if match
 		# } if pubKeyFlag
 		elif signedFlag: # {
-		    gpgKeySigned = ''
-		    #gpg_naive_regex_signed
-		    match = re.search('([0-9A-F]{16})', gpgStderrOutput)
-		    if match: # {
+			gpgKeySigned = ''
+			#gpg_naive_regex_signed
+			match = re.search('([0-9A-F]{16})', gpgStderrOutput)
+			if match: # {
 				gpgKeySigned = match[0];
 				DBAddItemAttribute(fileHash, 'gpg_id', gpgKeySigned)
 			# } if match
 
-		    match = re.findall('Signature made (.+)', gpgStderrOutput)
-		    if match: # {
+			match = re.findall('Signature made (.+)', gpgStderrOutput)
+			if match: # {
 				# gpgDateEpoch = #todo convert to epoch time
 				WriteLog('GpgParse: ' + fileHash + '; found signature made token from gpg')
 				signTimestamp = match[0]
@@ -224,20 +224,20 @@ def GpgParse(filePath): # { # $filePath ; parses file and stores gpg response in
 				DBAddItemAttribute(fileHash, 'gpg_timestamp', signTimestampEpoch)
 			# } if match
 
-		    return gpgKeySigned
+			return gpgKeySigned
 		# } elif signedFlag
 
 		elif encryptedFlag: # {
-		    #gpg_naive_regex_encrypted
-		    DBAddItemAttribute(fileHash, 'gpg_encrypted', 1)
-		    PutFileMessage(fileHash, '(Encrypted message)')
-		    WriteLog('GpgParse: $encryptedFlag was true, setting message accordingly')
-		    return 1
+			#gpg_naive_regex_encrypted
+			DBAddItemAttribute(fileHash, 'gpg_encrypted', 1)
+			PutFileMessage(fileHash, '(Encrypted message)')
+			WriteLog('GpgParse: $encryptedFlag was true, setting message accordingly')
+			return 1
 		# } elif encryptedFlag
 		else: # {
-		    # not a pubkey, just take whatever pgp output for us
-		    WriteLog('GpgParse: fallthrough, nothing gpg-worthy found...')
-		    return ''
+			# not a pubkey, just take whatever pgp output for us
+			WriteLog('GpgParse: fallthrough, nothing gpg-worthy found...')
+			return ''
 		# }
 
 	# } $gpgStderrOutput
@@ -251,7 +251,7 @@ def GpgParse(filePath): # { # $filePath ; parses file and stores gpg response in
 	return ''
 # } def GpgParse(filePath)
 
-for arg in sys.argv[1:]: { #
+for arg in sys.argv[1:]: # {
 	WriteLog('index.pl: $arg1 = ' + arg)
 	if arg and os.path.isfile(arg): # {
 		print(GpgParse(arg))
