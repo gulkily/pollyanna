@@ -1351,12 +1351,12 @@ sub SqliteMakeTables { # creates sqlite schema
 				tags_list AS tags_list
 			FROM
 				item
-				LEFT JOIN child_count ON ( item.file_hash = child_count.parent_hash)
-				LEFT JOIN parent_count ON ( item.file_hash = parent_count.item_hash)
-				LEFT JOIN added_time ON ( item.file_hash = added_time.file_hash)
-				LEFT JOIN item_title ON ( item.file_hash = item_title.file_hash)
-				LEFT JOIN item_author ON ( item.file_hash = item_author.file_hash)
-				LEFT JOIN item_score ON ( item.file_hash = item_score.file_hash)
+				LEFT JOIN child_count ON ( item.file_hash = child_count.parent_hash )
+				LEFT JOIN parent_count ON ( item.file_hash = parent_count.item_hash )
+				LEFT JOIN added_time ON ( item.file_hash = added_time.file_hash )
+				LEFT JOIN item_title ON ( item.file_hash = item_title.file_hash )
+				LEFT JOIN item_author ON ( item.file_hash = item_author.file_hash )
+				LEFT JOIN item_score ON ( item.file_hash = item_score.file_hash )
 				LEFT JOIN item_tags_list ON ( item.file_hash = item_tags_list.file_hash )
 	");
 	SqliteQuery("
