@@ -797,8 +797,8 @@ function UpdateDialogList () {
 			for (var iDialog = 0; iDialog < allOpenDialogs.length; iDialog++) {
 				var dialogTitle = GetDialogTitle(allOpenDialogs[iDialog]);
 				var dialogId = GetDialogId(allOpenDialogs[iDialog]);
-				listContent = listContent + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { SpotlightDialog(' + dialogId + '); }">' + dialogTitle + '</a><br>';
-				//listContent = listContent + '<a href="#' + dialogId + '">' + dialogTitle + '</a><br>';
+				var gt = unescape('%3E');
+				listContent = listContent + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { SpotlightDialog(' + dialogId + '); }"' + gt + dialogTitle + '</a' + gt + '<br' + gt;
 				//document.title = (iDialog);
 				//lstDialog.innerHTML = lstDialog.innerHTML + iDialog;
 				//document.title = iDialog;
