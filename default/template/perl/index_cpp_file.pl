@@ -15,10 +15,16 @@ sub RunItem {
 	my $fileBinaryPath = $filePath . '.out';
 
 	if (-e $fileBinaryPath) {
-		`chmod +x $fileBinaryPath`;
-		my $result = `$fileBinaryPath`;
-		PutCache($runLog, $result);
-		return 1;
+		if ($fileBinaryPath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
+			$fileBinaryPath = $1;
+			`chmod +x $fileBinaryPath`;
+			my $result = `$fileBinaryPath`;
+			PutCache($runLog, $result);
+			return 1;
+		} else {
+			WriteLog('RunItem: warning: $fileBinaryPath failed sanity check');
+			return '';
+		}
 	} else {
 		PutCache($runLog, 'error: run failed, file not found: ' . $fileBinaryPath);
 		return 1;
@@ -67,7 +73,11 @@ sub IndexCppFile { # $file | 'flush' ; indexes one text file into database
 	DBAddVoteRecord($fileHash, 0, 'cpp');
 
 	# my $compileLog = `gcc -v $file -o $file.out 2>&1`;
-	my $compileLog = `g++ -v $file -o $file.out 2>&1`;
+	my $compileCommand = "g++ -v $file -o $file.out 2>&1";
+	WriteLog('IndexCppFile: $compileCommand = ' . $compileCommand);
+
+	my $compileLog = `$compileCommand`;
+	# my $compileLog = `g++ -v $file -o $file.out 2>&1`;
 	if ($compileLog) {
 		PutCache('compile_log/' . $fileHash, $compileLog); # parse_log parse.log ParseLog
 	}
