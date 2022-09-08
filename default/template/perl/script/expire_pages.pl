@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 sub ExpirePages { # $fileHash ; expire html pages affected by a change in item
+	# doesn't do anything yet #todo
 	#todo sanity
 	my $fileHash = shift;
 
