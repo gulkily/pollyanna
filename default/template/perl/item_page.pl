@@ -619,8 +619,8 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$txtIndex .= GetItemIndexLog($file{'file_hash'});
 		if (index($file{'tags_list'}, ',cpp,') != -1 && GetConfig('setting/admin/cpp/enable')) {
 			#cpp file
-			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'compile_log');
 			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'run_log');
+			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'compile_log');
 		}
 	}
 
