@@ -187,6 +187,7 @@ sub AddAttributeToTag { # $html, $tag, $attributeName, $attributeValue; adds att
 } # AddAttributeToTag()
 
 sub RemoveHtmlFile { # $file ; removes existing html file
+# sub RemoveHtmlPage {
 # returns 1 if file was removed
 	my $file = shift;
 	if (!$file) {
@@ -199,7 +200,7 @@ sub RemoveHtmlFile { # $file ; removes existing html file
 		return 0;
 	}
 
-	my $HTMLDIR = './html'; #todo
+	my $HTMLDIR = GetDir('html');
 
 	my $fileProvided = $file;
 	$file = "$HTMLDIR/$file";
@@ -215,11 +216,11 @@ sub RemoveHtmlFile { # $file ; removes existing html file
 		if (-e $file) {
 			unlink($file);
 		}
+		return 1;
 	} else {
 		WriteLog('RemoveHtmlFile: warning: sanity check failed, $file = ' . $file);
 		return '';
 	}
 } # RemoveHtmlFile()
-
 
 1;
