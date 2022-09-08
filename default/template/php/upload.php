@@ -35,21 +35,26 @@ if (!empty($_FILES['uploaded_file'])) {
 				#}
 			}
 		}
-	}
-
+	} # $_FILES['uploaded_file']['error']
 
 	if (1) {
 		if ($_FILES['uploaded_file']) {
 			if (is_array($_FILES['uploaded_file']['name'])) {
-			#multi
+				# MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI
+				# MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI
+				# MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI
+				# MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI
+				# MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI MULTI
+
 				for ($iUploadedFile = 0; $iUploadedFile < count($_FILES['uploaded_file']['name']); $iUploadedFile++) {
 					WriteLog('$iUploadedFile = ' . $iUploadedFile);
-// 					WriteLog($_FILES['uploaded_file']['name'][$iUploadedFile] . '<br>');
-// 					WriteLog($_FILES['uploaded_file']['type'][$iUploadedFile] . '<br>');
-// 					WriteLog($_FILES['uploaded_file']['tmp_name'][$iUploadedFile] . '<br>');
-// 					WriteLog($_FILES['uploaded_file']['error'][$iUploadedFile] . '<br>');
-// 					print $_FILES['uploaded_file']['size'][$iUploadedFile] . '<br>';
-// 					print '<hr>';
+
+					# WriteLog($_FILES['uploaded_file']['name'][$iUploadedFile] . '<br>');
+					# WriteLog($_FILES['uploaded_file']['type'][$iUploadedFile] . '<br>');
+					# WriteLog($_FILES['uploaded_file']['tmp_name'][$iUploadedFile] . '<br>');
+					# WriteLog($_FILES['uploaded_file']['error'][$iUploadedFile] . '<br>');
+					# print $_FILES['uploaded_file']['size'][$iUploadedFile] . '<br>';
+					# print '<hr>';
 
 					$path = $basePath . basename($_FILES['uploaded_file']['name'][$iUploadedFile]);
 					$tempName = $_FILES['uploaded_file']['tmp_name'][$iUploadedFile];
@@ -80,8 +85,14 @@ if (!empty($_FILES['uploaded_file'])) {
 					}
 				}
 			}
+
 			else if (isset($_FILES['uploaded_file']['name'])) {
-			#single
+				# SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE
+				# SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE
+				# SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE
+				# SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE
+				# SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE
+
 				$path = $basePath . basename($_FILES['uploaded_file']['name']);
 				$path = str_replace(' ', '_', $path);
 				WriteLog('Trying to move_uploaded_file(' . $_FILES['uploaded_file']['tmp_name'] . ',' . $path . ')');
@@ -179,12 +190,12 @@ if (!empty($_FILES['uploaded_file'])) {
 			} else {
 				print 'no uploaded_file #1';
 			}
-		} else {
+		} # if ($_FILES['uploaded_file'])
+		else {
 			print 'no uploaded_file #2';
 		}
-	}
+	} # if (1)
 } # if (!empty($_FILES['uploaded_file']))
-
 
 if (!isset($html) || !$html || !trim($html)) {
 	WriteLog('upload.php: warning: $html missing');
