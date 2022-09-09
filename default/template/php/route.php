@@ -791,11 +791,15 @@ if (GetConfig('admin/php/route_enable')) {
 						#my
 						$printedEpoch = file_exists($pathRel) ? filemtime($pathRel) : '';
 						$printedHuman = file_exists($pathRel) ? date("F d Y H:i:s.", filemtime($pathRel)) : ''; #todo it's sometimes blank
-						$printedAgeSeconds = $fileCacheTime . ($fileCacheTime == 1 ? ' second' : ' seconds');
 
-						if (!$printedEpoch || !$printedHuman || !$printedAgeSeconds) {
-							#sanity check
-							WriteLog('route.php: warning: tried to make printed notice with missing timestamp value');
+						if ($fileCacheTime == 0) {
+							$printedAgeSeconds = 'This page was freshly printed, just for you!';
+						} else {
+							$printedAgeSeconds = $fileCacheTime . ($fileCacheTime == 1 ? ' second' : ' seconds');
+							if (!$printedEpoch || !$printedHuman || !$printedAgeSeconds) {
+								#sanity check
+								WriteLog('route.php: warning: tried to make printed notice with missing timestamp value');
+							}
 						}
 						$selfPath = $path . '?time=' . (time() + 10);
 						#todo refactor above
