@@ -288,7 +288,9 @@ sub GetItemIndexLog { # $itemHash, $logType = index_log
 		#my $logWindow = GetWindowTemplate($log, 'Log');
 		my $logWindow = GetWindowTemplate($log, $logType);
 		# my $logWindow = GetWindowTemplate($log, 'IndexFile(' . $shortHash . ')');
-		$logWindow = '<span class=advanced>' . $logWindow . '</span>';
+		if ($logType ne 'run_log') {
+			$logWindow = '<span class=advanced>' . $logWindow . '</span>';
+		}
 		return $logWindow;
 	}
 
