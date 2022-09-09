@@ -5,6 +5,8 @@ use warnings;
 use 5.010;
 
 sub RunItem {
+# sub RunFile {
+# sub RunCppFile {
 	my $item = shift;
 
 	WriteLog("RunItem($item)");
@@ -18,7 +20,13 @@ sub RunItem {
 		if ($fileBinaryPath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
 			$fileBinaryPath = $1;
 			`chmod +x $fileBinaryPath`;
+			my $runStart = time();
 			my $result = `$fileBinaryPath`;
+			my $runFinish = time();
+
+			DBAddItemAttribute($item, 'run_start', $runStart);
+			DBAddItemAttribute($item, 'run_finish', $runFinish);
+
 			PutCache($runLog, $result);
 			return 1;
 		} else {
@@ -76,7 +84,13 @@ sub IndexCppFile { # $file | 'flush' ; indexes one text file into database
 	my $compileCommand = "g++ -v $file -o $file.out 2>&1";
 	WriteLog('IndexCppFile: $compileCommand = ' . $compileCommand);
 
+	my $compileStart = time();
 	my $compileLog = `$compileCommand`;
+	my $compileFinish = time();
+
+	DBAddItemAttribute($fileHash, 'compile_start', $compileStart);
+	DBAddItemAttribute($fileHash, 'compile_finish', $compileFinish);
+
 	# my $compileLog = `g++ -v $file -o $file.out 2>&1`;
 	if ($compileLog) {
 		PutCache('compile_log/' . $fileHash, $compileLog); # parse_log parse.log ParseLog
