@@ -1,4 +1,16 @@
-
+what needs to be uncached when a new item is indexed?
+	new
+	chain
+	authors
+	tags
+	entire parent tree
+	author of item
+	affected authors if in parent tree
+	top/ pages for all affected hash tags
+	all dialog versions of above
+lower priority
+	compost
+	threads
 
 
 
