@@ -617,6 +617,11 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$txtIndex .= GetItemAttributesDialog(\%file);
 	}
 
+	if (GetConfig('setting/html/item_page/toolbox_next_previous')) {
+		#todo optimize by joining with above
+		$txtIndex .= GetNextPreviousDialog($file{'file_hash'});
+	}
+
 	if (GetConfig('html/item_page/parse_log')) {
 		$txtIndex .= GetItemIndexLog($file{'file_hash'});
 		if (index($file{'tags_list'}, ',cpp,') != -1 && GetConfig('setting/admin/cpp/enable')) {
@@ -750,6 +755,15 @@ sub GetRelatedListing { # $fileHash
 	WriteLog('GetRelatedListing: warning: unreachable reached');
 	return '';
 } # GetRelatedListing()
+
+sub GetNextPreviousDialog {
+	my $fileHash = shift;
+	#todo sanity
+
+	my $query = "SELECT attribute, value FROM item_attribute WHERE file_hash = '$fileHash' AND attribute IN ('chain_next', 'chain_previous')";
+
+	return GetQueryAsDialog($query, 'Chain');
+}
 
 sub GetItemAttributesDialog { # %file
 # sub GetAttributesDialog {
