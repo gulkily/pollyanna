@@ -1,9 +1,6 @@
 hastext
-HasText
 vote
-HasVote
 notext
-NoText
 admin
 pubkey
 reply
@@ -14,5 +11,4 @@ meta
 device
 timestamp
 hastitle
-HasTitle
 accept

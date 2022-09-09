@@ -843,7 +843,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										push @indexMessageLog, 'allowed: #' . $tokenFound{'param'} . '; reason: ' . $approveReason;
 
 										if (GetConfig('admin/index/create_system_tags')) {
-											DBAddVoteRecord($fileHash, 0, 'HasTag');
+											DBAddVoteRecord($fileHash, 0, 'hastag');
 										}
 
 										if ($hashTag eq 'run') {
@@ -856,7 +856,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										$approveReason = 'lacking permissions to apply this hashtag';
 										push @indexMessageLog, 'declined: #' . $tokenFound{'param'} . '; reason: ' . $approveReason;
 										if (GetConfig('admin/index/create_system_tags')) {
-											DBAddVoteRecord($fileHash, 0, 'HasDecline');
+											DBAddVoteRecord($fileHash, 0, 'declined');
 										}
 									}
 								} # foreach my $itemParent (@itemParents)
@@ -900,7 +900,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							} # valid hashtag
 
 							if (GetConfig('admin/index/create_system_tags')) {
-								DBAddVoteRecord($fileHash, 0, 'HasVote');
+								DBAddVoteRecord($fileHash, 0, 'hasvote');
 							}
 						} # non-permissioned hashtags
 
@@ -947,10 +947,10 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 #		}
 
 		if ($detokenedMessage eq '') {
-			# add #NoText label/tag
-			WriteLog('IndexTextFile: no $detokenedMessage, setting #NoText; $fileHash = ' . $fileHash);
+			# add #notext label/tag
+			WriteLog('IndexTextFile: no $detokenedMessage, setting #notext; $fileHash = ' . $fileHash);
 			if (GetConfig('admin/index/create_system_tags')) {
-				DBAddVoteRecord($fileHash, 0, 'NoText');
+				DBAddVoteRecord($fileHash, 0, 'notext');
 			}
 			#DBAddItemAttribute($fileHash, 'all_tokens_no_text', 1);
 
@@ -986,17 +986,17 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 					DBAddItemAttribute($fileHash, 'title', $title, 0);
 
 					if (GetConfig('admin/index/create_system_tags')) {
-						#DBAddVoteRecord($fileHash, 0, GetString('HasTitle'));
-						#DBAddVoteRecord($fileHash, 0, GetString('HasTitle'));
-						DBAddVoteRecord($fileHash, 0, 'HasTitle');
+						#DBAddVoteRecord($fileHash, 0, GetString('hastitle'));
+						#DBAddVoteRecord($fileHash, 0, GetString('hastitle'));
+						DBAddVoteRecord($fileHash, 0, 'hastitle');
 					}
 				}
 			}
 
 			if (GetConfig('admin/index/create_system_tags')) {
-				DBAddVoteRecord($fileHash, 0, 'HasText');
+				DBAddVoteRecord($fileHash, 0, 'hastext');
 			}
-			#DBAddPageTouch('tag', 'HasText');
+			#DBAddPageTouch('tag', 'hastext');
 
 			my $messageHash = GetFileMessageHash($file);
 			#my $normalizedHash = sha1_hex(trim($detokenedMessage));
