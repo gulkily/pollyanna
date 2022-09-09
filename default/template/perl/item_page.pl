@@ -859,6 +859,9 @@ sub GetItemAttributesDialog2 {
 					if ($iaName eq 'chain_previous') {
 						$iaValue = GetItemHtmlLink($iaValue, DBGetItemTitle($iaValue, 32));
 					}
+					if ($iaName eq 'chain_next') {
+						$iaValue = GetItemHtmlLink($iaValue, DBGetItemTitle($iaValue, 32));
+					}
 					if ($iaName eq 'url') {
 						my $displayValue = '';
 						if (length($iaValue) > 127) {

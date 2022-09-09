@@ -50,6 +50,9 @@ sub MakeChainIndex { # $import = 1; reads from log/chain.log and puts it into it
 					$isChecksumGood = 1;
 				}
 
+				my @arrayPreviousLine = split('-', $previousLine);
+				my $previousHash = $arrayPreviousLine[0];
+				DBAddItemAttribute($previousHash, 'chain_next', $fileHash);
 				DBAddItemAttribute($fileHash, 'chain_timestamp', $addedTime);#todo may not need
 				DBAddItemAttribute($fileHash, 'chain_sequence', $sequenceNumber, $addedTime);
 				DBAddItemAttribute($fileHash, 'chain_previous', $previousLine);
@@ -61,7 +64,7 @@ sub MakeChainIndex { # $import = 1; reads from log/chain.log and puts it into it
 				WriteLog('MakeChainIndex: (next item stub/aka checksum) $previousLine = ' . $previousLine);
 
 				$return{'chain_sequence'} = $sequenceNumber;
-				$return{'chain_previous'} = $previousLine;
+				$return{'chain_previous'} = $previousLine; # no next here yet, no chain_next
 				$return{'chain_timestamp'} = $addedTime;
 
 				$sequenceNumber = $sequenceNumber + 1;
@@ -200,9 +203,10 @@ sub AddToChainLog { # $fileHash ; add line to log/chain.log
 		}
 
 		# add to index database
+		DBAddItemAttribute($lastLineAddedLog, 'chain_next', $fileHash);
 		DBAddItemAttribute($fileHash, 'chain_timestamp', $newAddedTime);
 		DBAddItemAttribute($fileHash, 'chain_sequence', $chainSequenceNumber, $newAddedTime); #
-		DBAddItemAttribute($fileHash, 'chain_previous', $lastLineAddedLog);
+		DBAddItemAttribute($fileHash, 'chain_previous', $lastLineAddedLog); #no need for chain_next here yet because we don't have it
 		DBAddItemAttribute($fileHash, 'chain_checksum_good', 1);
 		DBAddItemAttribute($fileHash, 'chain_hash', $fileHash);
 		DBAddItemAttribute('flush');

@@ -185,6 +185,15 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		}
 	}
 
+	elsif ($fieldName eq 'chain_next') {
+		if ($fieldValue) {
+			my $itemHash = substr($fieldValue, 0, 40); #todo unhack
+			$fieldValue = GetItemHtmlLink($itemHash, DBGetItemTitle($itemHash, 16));
+		} else {
+			$fieldValue = '';
+		}
+	}
+
 	elsif ($fieldName eq 'local_path') {
 		#todo templatize
 		$fieldValue = '<a href="file://' . HtmlEscape($fieldValue) . '">' . HtmlEscape($fieldValue) . '</a>';
