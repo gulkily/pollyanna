@@ -17,7 +17,10 @@ my $argumentKey = shift;
 
 if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 	my $argumentKeySanitized = $1;
-	my $setting = `find config/setting | grep $argumentKeySanitized`;
+	my $setting = `find config/setting | grep $argumentKeySanitized\$`;
+	if (!$setting) {
+		$setting = `find config/setting | grep $argumentKeySanitized`;
+	}
 	#print "$argumentKeySanitized\n";
 	my @settingArray = split("\n", $setting);
 	#print "$setting\n";
@@ -53,7 +56,31 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 			# VALUE NOT SPECIFIED
 
 			chomp $settingKey;
-			print "$argumentKeySanitized=$settingKey";
+			#print "$argumentKeySanitized=$settingKey";
+
+			if ($settingKey =~ m/^([0-9a-zA-Z.\/_\-:]+)$/) { #todo bug here?
+				$settingKey = $1;
+				my $settingValue = `cat $settingKey`;
+				print "$settingKey=$settingValue";
+
+				print "New value: ";
+
+				my $input = <STDIN>;
+				chomp $input;
+
+				if ($input =~ m/(.+)/) { #todo
+					$input = $1;
+					`echo $input > $settingKey`;
+
+					$settingValue = `cat $settingKey`;
+					print "$settingKey=$settingValue";
+				} else {
+					print 'warning';
+				}
+			} else {
+				print 'warning';
+			}
+
 			# if ($settingKey =~ m/^([.+])$/) {
 			# 	$settingKey = $1;
 			# 	print `cat $settingKey`;
