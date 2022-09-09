@@ -79,7 +79,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 		WriteLog('IndexTextFile: warning: $file or $fileHash missing; returning');
 		WriteLog('IndexTextFile: warning: $file = ' . ($file ? $file : 'FALSE'));
 		WriteLog('IndexTextFile: warning: $fileHash = ' . ($fileHash ? $fileHash : 'FALSE'));
-		return 0; # failed sanity check
+		return ''; # failed sanity check
 	}
 
 	# if the file is present in deleted.log, get rid of it and its page, return
@@ -825,7 +825,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 										if ($authorGpgFingerprint) {
 											WriteLog('IndexTextFile: permissioned: found $authorGpgFingerprint');
-											ExpireAvatarCache($authorGpgFingerprint);
+											ExpireAvatarCache($authorGpgFingerprint); #uncache
 										} else {
 											WriteLog('IndexTextFile: permissioned: did NOT find $authorGpgFingerprint');
 										}
@@ -838,7 +838,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 											$titleCandidate = '[#' . $hashTag . ']';
 										}
 
-										ExpireAvatarCache($authorKey);
+										ExpireAvatarCache($authorKey); #uncache
 										
 										push @indexMessageLog, 'allowed: #' . $tokenFound{'param'} . '; reason: ' . $approveReason;
 
@@ -1047,6 +1047,10 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 	}
 
 	if (GetConfig('admin/index/expire_html_when_indexing')) {
+		#uncache
+		if ($authorKey) {
+			RemoveHtmlFile('author/' . $authorKey . '/index.html');
+		}
 		require_once('expire_pages.pl');
 		ExpirePages($fileHash);
 	}
