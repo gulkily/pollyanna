@@ -848,7 +848,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 										if ($hashTag eq 'run') {
 											push @indexMessageLog, 'calling run on parent item';
-											#RunItem($itemParent);
+											RunItem($itemParent);
 										}
 									} # $approveStatus is true
 									else {
