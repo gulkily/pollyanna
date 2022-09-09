@@ -263,6 +263,13 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		}
 
 		if (
+			$path == '/dialog/tags.html'
+		) {
+			WriteLog('HandleNotFound: found tags dialog');
+			$pagesPlArgument = '-D tags';
+		}
+
+		if (
 			$path == '/dialog/help.html'
 		) {
 			WriteLog('HandleNotFound: found help dialog');

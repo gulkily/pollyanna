@@ -2359,6 +2359,11 @@ while (my $arg1 = shift @foundArgs) {
 					print ("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/authors.html', $dialog);
 				}
+				if ($makeDialogArg eq 'tags') {
+					my $dialog = GetQueryAsDialog('tags', 'Tags');
+					print ("-D $makeDialogArg\n");
+					PutHtmlFile('dialog/tags.html', $dialog);
+				}
 
 				#				elsif (IsItem($arg1)) {
 #					print ("recognized item identifier\n");
