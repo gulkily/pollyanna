@@ -1523,20 +1523,28 @@ sub DBAddItem { # $filePath, $fileName, $authorKey, $fileHash, $itemType, $verif
 		DBAddItemAttribute($fileHash, 'md5', md5_hex(GetFile($filePath)));
 	}
 
-	if ($filePath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
-		#todo this should be somewhere else and feature-checked first
-		my $filePathSafe = $1;
+	if (GetConfig('setting/admin/index/sha1sum')) {
+		state $pathSha1sum = `which sha1sum`;
+		if ($pathSha1sum) {
+			if ($filePath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
+				#todo this should be somewhere else
+				my $filePathSafe = $1;
 
-		if (-f $filePathSafe) {
-			my $sha1sum = `sha1sum $filePathSafe | cut -d ' ' -f 1`;
-			DBAddItemAttribute($fileHash, 'sha1sum', $sha1sum);
+				if (-f $filePathSafe) {
+					#my $sha1sum = '';
+					my $sha1sum = `sha1sum $filePathSafe | cut -d ' ' -f 1`;
+					DBAddItemAttribute($fileHash, 'sha1sum', $sha1sum);
 
-			if (GetConfig('setting/admin/index/extra_hashes')) {
-				my $sha256sum = `sha256sum $filePathSafe | cut -d ' ' -f 1`;
-				DBAddItemAttribute($fileHash, 'sha256sum', $sha256sum);
+					if (GetConfig('setting/admin/index/extra_hashes')) {
+						my $sha256sum = `sha256sum $filePathSafe | cut -d ' ' -f 1`;
+						DBAddItemAttribute($fileHash, 'sha256sum', $sha256sum);
+					}
+				} else {
+					#todo warning
+				}
+			} else {
+				WriteLog('DBAddItem: warning: setting/admin/index/sha1sum is on, but command not found, skipping');
 			}
-		} else {
-			#todo warning
 		}
 	}
 
