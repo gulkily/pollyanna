@@ -1,3 +1,6 @@
+reset button should be under php because it depends on it
+
+
 what needs to be uncached when a new item is indexed?
 	new
 	chain
