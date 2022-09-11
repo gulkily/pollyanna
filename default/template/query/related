@@ -19,8 +19,17 @@ WHERE
 				FROM
 					item_attribute
 				WHERE
-					file_hash IN(?) AND
-					attribute IN('url', 'normalized_hash', 'url_domain', 'title', 'cookie_id', 'url_domain')
+					file_hash IN (?) AND
+					attribute IN(
+						'http',
+						'https',
+						'normalized_hash',
+						'url_domain',
+						'title',
+						'cookie_id',
+						'client_id',
+						'url_domain'
+					)
 			)
 		)
 	)
