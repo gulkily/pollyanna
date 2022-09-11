@@ -188,6 +188,10 @@ sub AddAttributeToTag { # $html, $tag, $attributeName, $attributeValue; adds att
 
 sub RemoveHtmlFile { # $file ; removes existing html file
 # sub RemoveHtmlPage {
+# sub DeleteHtml {
+# sub DeleteHtmlFile {
+# sub DeleteItemPage {
+
 # returns 1 if file was removed
 	my $file = shift;
 	if (!$file) {
