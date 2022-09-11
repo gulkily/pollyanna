@@ -53,6 +53,10 @@ sub GetReadPage { # generates page with item listing based on parameters
 				$title = "Admin's Blog (Posts by or for $authorAliasHtml)";
 				$titleHtml = "Admin's Blog ($authorAvatarHtml)";
 			} else {
+				if (!$authorAliasHtml) {
+					WriteLog('GetReadPage: warning: $authorAliasHtml is FALSE, substituting Guest');
+					$authorAliasHtml = 'Guest';
+				}
 				$title = "Posts by or for $authorAliasHtml";
 				$titleHtml = "$authorAvatarHtml";
 			}
