@@ -1,8 +1,8 @@
 <!-- upload_no.template -->
 <p>Upload feature is not available. Apologies.</p>
 <p class=advanced>
-	<span class=beginner>Administrator: To enable upload feature, consider the following settings:<br></span>
 	<code>
+		<b>Operator: Here are some settings to take a look at:</b><br>
 		<br>
 		config/setting/admin/php/enable
 		<br>
