@@ -4,7 +4,11 @@ use strict;
 use warnings;
 use 5.010;
 
-sub IndexFile { # $file ; calls IndexTextFile() or IndexImageFile() based on extension
+sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFile() based on extension
+# sub IndexItem {
+
+# $file can be 'flush' as a special directive to flush all query queues
+
 	my $file = shift;
 
 	my $flagsReference = shift;

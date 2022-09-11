@@ -89,8 +89,13 @@ sub PutCache { # $cacheName, $content; stores value in cache
 } # PutCache()
 
 sub UnlinkCache { # removes cache by unlinking file it's stored in
-# DeleteCache {
-# RemoveCache {
+# sub DeleteCache {
+# sub RemoveCache {
+# sub ClearCache {
+# sub DeleteItemCache {
+# sub RemoveItem {
+# sub RemoveItemCache {
+
 	my $cacheName = shift;
 	chomp($cacheName);
 
