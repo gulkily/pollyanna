@@ -1,1 +1,1 @@
-SHA1 (Perl, sha1_hex())
+SHA1 (Perl, Digest::SHA)
