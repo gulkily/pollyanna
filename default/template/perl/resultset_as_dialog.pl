@@ -197,17 +197,16 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 
 		my $statusText = $resultCount . ' item(s)';
 
-		if ($flags{'no_headers'}) {
-			return GetWindowTemplate($content, $title, '', $statusText);
-		} else {
-			return GetWindowTemplate($content, $title, $columnsDisplay, $statusText);
-			# my %params;
-			# $params{'columns'} = $columnsDisplay;
-			# $params{'status'} = $statusText;
-			# $params{'columns_lookup'} = 1;
-			#
-			# return GetWindowTemplate3($content, $title, \%params);
-		}
+		#return GetWindowTemplate($content, $title, $columnsDisplay, $statusText);
+
+		my %param;
+		$param{'headings'} = $columnsDisplay;
+		$param{'status'} = $statusText;
+
+		$param{'no_heading'} = $flags{'no_heading'}; # doing it this way so that the column count is still correct
+		$param{'no_status'} = $flags{'no_status'}; # meh
+
+		return GetWindowTemplate3($content, $title, \%param);
 	} else {
 		# empty results
 		if ($flags{'no_no_results'}) {
