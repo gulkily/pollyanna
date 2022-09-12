@@ -342,7 +342,11 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 			$windowHeaderColumns .= $columnHeaderTemplate;
 		}
 		$windowHeaderTemplate =~ s/\$windowHeadings/$windowHeaderColumns/;
-		$windowTemplate =~ s/\$windowHeader/$windowHeaderTemplate/;
+		if ($param{'no_heading'}) {
+			$windowTemplate =~ s/\$windowHeader//g;
+		} else {
+			$windowTemplate =~ s/\$windowHeader/$windowHeaderTemplate/;
+		}
 		$contentColumnCount = scalar(@columnsArray);
 	} # / column headings
 	else {
@@ -390,7 +394,12 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 		my $windowStatusTemplate = GetTemplate('html/window/status.template');
 		$windowBody = str_replace('$contentColumnCount', $contentColumnCount, $windowBody);
 		$windowStatusTemplate =~ s/\$windowStatus/$windowStatus/g;
-		$windowTemplate =~ s/\$windowStatus/$windowStatusTemplate/g;
+
+		if ($param{'no_status'}) {
+			$windowTemplate =~ s/\$windowStatus//g;
+		} else {
+			$windowTemplate =~ s/\$windowStatus/$windowStatusTemplate/g;
+		}
 	} else {
 		$windowTemplate =~ s/\$windowStatus//g;
 	}
