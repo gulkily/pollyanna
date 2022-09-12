@@ -748,7 +748,7 @@ sub GetRelatedListing { # $fileHash
 		# }
 
 		if (scalar(@result) > 2) { # first row is column headers; related
-			my $listing = GetResultSetAsDialog(\@result, 'Related', 'item_title, add_timestamp, file_hash');
+			my $listing = GetResultSetAsDialog(\@result, 'Related', 'item_title, add_timestamp, file_hash, attribute_list, attribute_count');
 			return $listing;
 		} else {
 			return '';
