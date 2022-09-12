@@ -485,7 +485,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	#todo move to default/query
 	if (scalar(@result) > 1) { # urls
 		my %flags;
-		$flags{'no_headers'} = 1;
+		$flags{'no_heading'} = 1;
 		$txtIndex .= GetResultSetAsDialog(\@result, 'Links', 'value', \%flags);
 	}
 
@@ -622,6 +622,14 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$txtIndex .= GetNextPreviousDialog($file{'file_hash'});
 	}
 
+	if (GetConfig('setting/html/item_page/toolbox_timestamps')) {
+		$txtIndex .= GetTimestampsDialog($file{'file_hash'});
+	}
+
+	if (GetConfig('setting/html/item_page/toolbox_hashes')) {
+		$txtIndex .= GetHashComparisonDialog($file{'file_hash'});
+	}
+
 	if (GetConfig('html/item_page/parse_log')) {
 		$txtIndex .= GetItemIndexLog($file{'file_hash'});
 		if (index($file{'tags_list'}, ',cpp,') != -1 && GetConfig('setting/admin/cpp/enable')) {
@@ -756,13 +764,43 @@ sub GetRelatedListing { # $fileHash
 	return '';
 } # GetRelatedListing()
 
+sub GetHashComparisonDialog {
+	my $fileHash = shift;
+	#todo sanity
+
+	my $query = "SELECT attribute, value FROM item_attribute WHERE file_hash = '$fileHash' AND attribute IN('sha1', 'sha1sum', 'chain_hash')";
+
+	my %params;
+	$params{'no_heading'} = 1;
+	$params{'no_status'} = 1;
+
+	return GetQueryAsDialog($query, 'Hashes', '', \%params);
+}
+
+sub GetTimestampsDialog {
+	my $fileHash = shift;
+	#todo sanity
+
+	my $query = "SELECT attribute, value FROM item_attribute WHERE file_hash = '$fileHash' AND attribute LIKE '%_timestamp'";
+
+	my %params;
+	$params{'no_heading'} = 1;
+	$params{'no_status'} = 1;
+
+	return GetQueryAsDialog($query, 'Timestamps', '', \%params);
+}
+
 sub GetNextPreviousDialog {
 	my $fileHash = shift;
 	#todo sanity
 
 	my $query = "SELECT attribute, value FROM item_attribute WHERE file_hash = '$fileHash' AND attribute IN ('chain_next', 'chain_previous')";
 
-	return GetQueryAsDialog($query, 'Chain');
+	my %params;
+	$params{'no_heading'} = 1;
+	$params{'no_status'} = 1;
+
+	return GetQueryAsDialog($query, 'Chain', '', \%params);
 }
 
 sub GetItemAttributesDialog { # %file
