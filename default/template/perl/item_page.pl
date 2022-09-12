@@ -710,10 +710,6 @@ sub GetRelatedListing { # $fileHash
 	# REPLIES #replies #reply GetItemPage()
 	######################################
 
-	if (GetConfig('html/mourn')) { # GetRelatedListing()
-		return '';
-	}
-
 	my $fileHash = shift;
 	if (!$fileHash) {
 		WriteLog('GetRelatedListing: warning: $fileHash was FALSE');
