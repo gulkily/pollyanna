@@ -205,6 +205,10 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 
 		$param{'no_heading'} = $flags{'no_heading'}; # doing it this way so that the column count is still correct
 		$param{'no_status'} = $flags{'no_status'}; # meh
+		if ($flags{'id'}) {
+			# pass id on to the window id
+			$param{'id'} = $flags{'id'};
+		}
 
 		return GetWindowTemplate3($content, $title, \%param);
 	} else {

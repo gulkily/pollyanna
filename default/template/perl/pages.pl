@@ -140,6 +140,8 @@ sub GetQueryAsDialog { # $query, $title, $columns, \%param
 		%flags = %{$paramHashRef};
 	}
 
+	WriteLog('GetQueryAsDialog(' . $query . '); caller = ' . join(',', caller));
+
 	if (!$query) {
 		WriteLog('GetQueryAsDialog: warning: $query is FALSE; caller = ' . join(',', caller));
 		return '';
@@ -152,6 +154,13 @@ sub GetQueryAsDialog { # $query, $title, $columns, \%param
 	# 	$query = SqliteGetQueryTemplate("$query");
 
 	$flags{'query'} = $query;
+
+	if (index($query, ' ') == -1) {
+		WriteLog('GetQueryAsDialog: adding $flags{id}');
+		$flags{'id'} = $query;
+	} else {
+		WriteLog('GetQueryAsDialog: $query contains space, skipping addition of $flags{id}');
+	}
 
 	my @result  = SqliteQueryHashRef($query);
 
