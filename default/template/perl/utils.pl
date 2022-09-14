@@ -2021,7 +2021,10 @@ sub CheckForInstalledVersionChange {
 		state $TXTDIR = GetDir('txt');
 
 		PutFile("$TXTDIR/$changeLogFilename", $changeLogMessage);
-		IndexFile("$TXTDIR/$changeLogFilename");
+		my $changelogIndexResult = IndexFile("$TXTDIR/$changeLogFilename");
+		if (!$changelogIndexResult) {
+			WriteLog('CheckForInstalledVersionChange: warning: $changelogIndexResult was FALSE');
+		}
 		#ServerSign("$TXTDIR/$changeLogFilename");
 		PutConfig('current_version', $currVersion);
 
