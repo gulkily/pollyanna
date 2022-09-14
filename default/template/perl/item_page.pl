@@ -597,8 +597,9 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		}
 		if ($showRelated) {
 			my $relatedListing = GetRelatedListing($file{'file_hash'});
+			$relatedListing = '<span class=advanced>' . $relatedListing . '</span>';
 			if ($relatedListing) {
-				$txtIndex .= GetRelatedListing($file{'file_hash'});
+				$txtIndex .= $relatedListing;
 			} else {
 				#$txtIndex .= GetWindowTemplate('No related items found for this item.', 'Debug');
 			}
