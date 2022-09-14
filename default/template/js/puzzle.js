@@ -50,7 +50,7 @@ function doSolvePuzzle () { // solves puzzle
 		i = i + 1; // counter
 		r = Math.random() + '';
 
-		puzzle = fp + ' ' + epoch + ' ' + r;
+		puzzle = fp + ' ' + epochStart + ' ' + r;
 		hash = hex_sha512(puzzle);
 
 		if (hash.substring(0, lookingForLength) == lookingFor) {
