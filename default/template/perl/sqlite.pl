@@ -1774,6 +1774,10 @@ sub DBAddItemAttribute { # $fileHash, $attribute, $value, $epoch, $source # add 
 
 	my $fileHash = shift;#
 
+	if (!$fileHash) {
+		WriteLog('DBAddItemAttribute: warning: $fileHash is FALSE; caller = ' . join(',', caller));
+	}
+
 	if ($fileHash eq 'flush') {
 		WriteLog("DBAddItemAttribute(flush)");
 
@@ -1791,10 +1795,6 @@ sub DBAddItemAttribute { # $fileHash, $attribute, $value, $epoch, $source # add 
 		return;
 	}
 
-	if (!$fileHash) {
-		WriteLog('DBAddItemAttribute() called without $fileHash! Returning.');
-	}
-
 	if ($query && (length($query) > DBMaxQueryLength() || scalar(@queryParams) > DBMaxQueryParams())) {
 		DBAddItemAttribute('flush');
 		$query = '';
@@ -1809,6 +1809,7 @@ sub DBAddItemAttribute { # $fileHash, $attribute, $value, $epoch, $source # add 
 		WriteLog('DBAddItemAttribute: warning: called without $attribute');
 		return '';
 	}
+
 	if (!defined($value)) {
 		WriteLog('DBAddItemAttribute: warning: called without $value, $attribute = ' . $attribute);
 		return '';
