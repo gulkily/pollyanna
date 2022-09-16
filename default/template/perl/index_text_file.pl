@@ -725,7 +725,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									else {
 										WriteLog('IndexTextFile: Request to remove file was not found to be valid');
 
-										push @indexMessageLog, 'remove request declined, insufficient privileges.';
+										push @indexMessageLog, 'declined: #remove, insufficient privileges.';
 									}
 								} # foreach my $itemParent (@itemParents)
 							} # has parents
