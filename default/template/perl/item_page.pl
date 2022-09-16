@@ -771,7 +771,10 @@ sub GetHashComparisonDialog {
 	$params{'no_heading'} = 1;
 	$params{'no_status'} = 1;
 
-	return GetQueryAsDialog($query, 'Hashes', '', \%params);
+	my $dialog = GetQueryAsDialog($query, 'Hashes', '', \%params);
+	$dialog = '<span class=advanced>' . $dialog . '</span>';
+
+	return $dialog;
 }
 
 sub GetTimestampsDialog {
@@ -784,7 +787,10 @@ sub GetTimestampsDialog {
 	$params{'no_heading'} = 1;
 	$params{'no_status'} = 1;
 
-	return GetQueryAsDialog($query, 'Timestamps', '', \%params);
+	my $dialog = GetQueryAsDialog($query, 'Timestamps', '', \%params);
+	$dialog = '<span class=advanced>' . $dialog . '</span>';
+
+	return $dialog;
 }
 
 sub GetNextPreviousDialog {
@@ -820,7 +826,7 @@ sub GetItemAttributesDialog { # %file
 		#===
 		my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE file_hash LIKE '$fileHash%' ORDER BY attribute";
 		$itemInfoTemplate = GetQueryAsDialog($query, 'Item Attributes'); # GetResultSetAsDialog() --> RenderField()
-		$itemInfoTemplate = '<span class=advanced>' . $itemInfoTemplate . '</span>';
+		$itemInfoTemplate = '<span class=admin>' . $itemInfoTemplate . '</span>';
 		return $itemInfoTemplate;
 		#for debug/compare
 		#return $itemInfoTemplate . GetItemAttributesDialog2($fileRef);
@@ -953,7 +959,7 @@ sub GetItemAttributesDialog2 {
 
 		$itemAttributesTable = '<tbody class=content>' . $itemAttributesTable . '</tbody>';
 
-		my $itemAttributesWindow = GetWindowTemplate($itemAttributesTable, 'Item Attributes', 'attribute,value');
+		my $itemAttributesWindow = GetWindowTemplate($itemAttributesTable, 'Item Attributes', 'attribute,value'); #deprecated
 		$itemAttributesWindow = '<span class=advanced>' . $itemAttributesWindow . '</span>';
 
 		my $accessKey = GetAccessKey('Item Attributes');
