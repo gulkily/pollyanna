@@ -9,9 +9,16 @@ use strict;
 use 5.010;
 use utf8;
 
-sub FormatDate { # $epoch ; formats date depending on how long ago it was
+sub FormatDate { # $epoch, $showSeconds = 1 ; formats date depending on how long ago it was
 	# FormatDateForDisplay()
 	my $epoch = shift;
+
+	my $showSeconds = shift;
+	if ($showSeconds) {
+		$showSeconds = 1;
+	} else {
+		$showSeconds = 0;
+	}
 
 	WriteLog('FormatDate: $epoch = ' . $epoch);
 
@@ -38,7 +45,11 @@ sub FormatDate { # $epoch ; formats date depending on how long ago it was
 
 	if ($difference < 86400) {
 		# less than a day, return 24-hour time
-		$formattedDate = strftime '%H:%M', localtime $epoch;
+		if ($showSeconds) {
+			$formattedDate = strftime '%H:%M:%S', localtime $epoch;
+		} else {
+			$formattedDate = strftime '%H:%M', localtime $epoch;
+		}
 	} elsif ($difference < 86400 * 30) {
 		# less than a month, return short date
 		$formattedDate = strftime '%m/%d', localtime $epoch;
@@ -272,8 +283,12 @@ sub GetTimestampWidget { # $time ; returns timestamp widget
 		# my $timeDate = strftime '%c', localtime $time;
 		# my $timeDate = strftime '%Y/%m/%d %H:%M:%S', localtime $time;
 
+		my $timeDateTitle = time;
+		$timeDateTitle = FormatDate($time, 1);
+
 		# replace into template
 		$widget =~ s/\$timestamp/$time/g;
+		$widget =~ s/\$timeDateTitle/$timeDateTitle/g;
 		$widget =~ s/\$timeDate/$timeDate/g;
 	}
 
