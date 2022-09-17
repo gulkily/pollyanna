@@ -20,13 +20,6 @@ lower priority
 	threads
 
 
-
-
-
-
-
-
-
 #bug cannot apply #run tag when author has #run tag
 	workaround: give author #admin tag
 
