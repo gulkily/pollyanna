@@ -197,7 +197,7 @@ sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 						#					'if (window.OnUnloadEverything) { OnUnloadEverything(); }'
 					);
 				} else {
-					WriteLog('InjectJs(): warning: $html does not contain <body');
+					WriteLog('InjectJs: warning: $html does not contain <body; caller = ' . join(',', caller));
 				}
 			}
 		}
