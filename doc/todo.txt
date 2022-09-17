@@ -21,14 +21,6 @@ lower priority
 
 
 
-if uploaded file is cpp
-	run gcc
-	output to new textfile
-		log compile time
-	run and log output
-		also log run time
-	display as item page
-
 
 
 
