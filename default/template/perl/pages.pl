@@ -759,9 +759,13 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 	}
 
 	if (GetConfig('setting/html/reset_button')) {
-		my $resetButton = GetTemplate('html/widget/reset_button.template');
-		$resetButton = FillThemeColors($resetButton);
-		$txtFooter =~ s/\<\/body>/$resetButton<\/body>/i;
+		if (GetConfig('setting/admin/php/enable') && GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
+			my $resetButton = GetTemplate('html/widget/reset_button.template');
+			$resetButton = FillThemeColors($resetButton);
+			$txtFooter =~ s/\<\/body>/$resetButton<\/body>/i;
+		} else {
+			WriteLog('GetPageFooter: warning: reset_button requires php, js, and draggable. not adding reset button.');
+		}
 	}
 
 	if (GetConfig('admin/ssi/enable') && GetConfig('admin/ssi/footer_stats')) {
