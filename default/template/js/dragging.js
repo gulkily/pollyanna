@@ -798,6 +798,11 @@ function UpdateDialogList () {
 				var dialogTitle = GetDialogTitle(allOpenDialogs[iDialog]);
 				var dialogId = GetDialogId(allOpenDialogs[iDialog]);
 				var gt = unescape('%3E');
+
+				if (dialogTitle.length > 24) {
+					dialogTitle = dialogTitle.substr(0, 24);
+				}
+
 				listContent = listContent + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { SpotlightDialog(' + dialogId + '); }"' + gt + dialogTitle + '</a' + gt + '<br' + gt;
 				//document.title = (iDialog);
 				//lstDialog.innerHTML = lstDialog.innerHTML + iDialog;
