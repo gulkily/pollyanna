@@ -1,3 +1,9 @@
+write form can be submitted using js
+	then inject dialog into page
+
+
+how to jump up and down the outline to change reply-to item?
+
 fresh.js
 	needs to recover when page goes away (404) and subsequently recovers
 
