@@ -803,6 +803,8 @@ function UpdateDialogList () {
 					dialogTitle = dialogTitle.substr(0, 24);
 				}
 
+				// #todo use dom things instead of innerHTML
+
 				listContent = listContent + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { SpotlightDialog(' + dialogId + '); }"' + gt + dialogTitle + '</a' + gt + '<br' + gt;
 				//document.title = (iDialog);
 				//lstDialog.innerHTML = lstDialog.innerHTML + iDialog;
