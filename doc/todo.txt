@@ -1452,8 +1452,8 @@ Make a chart comparing to other systems
 Move css from default.css into theme
     Except for certain things
 
-Facilitate removal of votes by ip address of voter
-	Record IP address (obfuscated) when voting happens
+Facilitate removal of votes by ip address of voterx
+	Record IP address (obfuscated) when voting happensx
 	Add functionality to remove all votes by IP address
 
 When returning to a form with a button which turns to "please wait" when clicked
