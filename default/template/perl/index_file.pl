@@ -125,6 +125,9 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 			$fileLocalPath = str_replace(GetDir('txt'), '', $file);
 			$fileLocalPath = substr($fileLocalPath, 0, rindex($fileLocalPath, '/')); #just the path
 			my @dirTags = split('/', $fileLocalPath);
+
+			WriteLog('IndexFile: add_dir_as_hashtag: $fileLocalPath = ' . $fileLocalPath . '; @dirTags: ' . join(',', @dirTags));
+
 			if (@dirTags) {
 				foreach my $dirTag (@dirTags) {
 					$dirTag = trim($dirTag);
@@ -136,8 +139,6 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 					}
 				}
 			}
-
-			WriteLog('IndexFile: add_dir_as_hashtag: $fileLocalPath = ' . $fileLocalPath);
 		} # add_dir_as_hashtag
 	} # ($ext eq 'txt')
 
