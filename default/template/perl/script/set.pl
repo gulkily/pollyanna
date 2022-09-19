@@ -63,6 +63,12 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 				my $settingValue = `cat $settingKey`;
 				print "$settingKey=$settingValue";
 
+				if (-e "$settingKey.list") {
+					my $settingList = `cat $settingKey.list`;
+					print $settingList;
+					print "\n";
+				}
+
 				print "New value: ";
 
 				my $input = <STDIN>;
