@@ -87,7 +87,7 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 			WriteLog('IndexFile: already indexed, but from different path. continuing. $fileHash = ' . $fileHash);
 			if (GetConfig('admin/organize_files') && !$flags{'skip_organize'}) {
 				WriteLog('IndexFile: calling OrganizeFile() with $fileHash = ' . $fileHash);
-				$file = OrganizeFile($file);
+				$file = OrganizeFile($file); # IndexFile()
 			}
 		}
 	}

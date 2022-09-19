@@ -2489,7 +2489,7 @@ sub ProcessTextFile { # $file ; add new text file to index
 	}
 
 	if (GetConfig('admin/organize_files')) {
-		my $fileNew = OrganizeFile($file);
+		my $fileNew = OrganizeFile($file); # ProcessTextFile()
 		if ($fileNew eq $file) {
 			WriteLog('ProcessTextFile: $fileNew eq $file');
 		} else {

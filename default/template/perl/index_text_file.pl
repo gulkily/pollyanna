@@ -49,7 +49,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 	if (GetConfig('admin/organize_files') && !$flags{'skip_organize'}) {
 		# renames files to their hashes
-		my $newFile = OrganizeFile($file);
+		my $newFile = OrganizeFile($file); # IndexTextFile()
 
 		if ($file ne $newFile) {
 			push @indexMessageLog, 'file was organized (moved location, changed filename)';
