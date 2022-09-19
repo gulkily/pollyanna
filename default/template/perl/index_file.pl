@@ -119,6 +119,8 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 		}
 
 		if (GetConfig('setting/admin/index/add_dir_as_hashtag')) {
+			# add each subdirectory as an extra hashtag to item
+			# for example txt/foo/bar/abc.txt will add #foo and #bar tags
 			my $fileLocalPath = $file;
 			$fileLocalPath = str_replace(GetDir('txt'), '', $file);
 			$fileLocalPath = substr($fileLocalPath, 0, rindex($fileLocalPath, '/')); #just the path
@@ -136,10 +138,8 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 			}
 
 			WriteLog('IndexFile: add_dir_as_hashtag: $fileLocalPath = ' . $fileLocalPath);
-
-		}
-
-	}
+		} # add_dir_as_hashtag
+	} # ($ext eq 'txt')
 
 	if (0 && $ext eq 'html') { #todo enable once IndexHtmlFile() is better
 		WriteLog('IndexFile: calling IndexHtmlFile()');
