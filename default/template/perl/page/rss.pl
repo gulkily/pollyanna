@@ -84,7 +84,7 @@ sub GetRssFile { # returns rss feed for current site
 		my $fileName = $file->{'file_path'};
 		my $itemPubDate = FeedDateFormat($file->{'add_timestamp'});
 		my $itemTitle = $file->{'item_title'};
-		my $itemLink = $urlProtocol . '://' . $myHost . '/' . GetHtmlFilename($fileHash);
+		my $itemLink = $urlProtocol . '://' . $myHost . '/' . GetHtmlFilename($fileHash); # GetRssFile()
 		my $itemAbout = $itemLink;
 		my $itemGuid = $itemLink;
 		my $itemDescription = GetItemDetokenedMessage($fileHash, $file->{'file_path'});

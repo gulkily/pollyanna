@@ -755,7 +755,7 @@ function GetHtmlFilename ($hash) { // gets html filename based on hash
 	;
 
 	return $fileHtmlPath;
-}
+} # GetHtmlFilename()
 
 function RedirectWithResponse ($url, $message) { // redirects to page with server message parameter added to url
 // calls StoreServerResponse($message)

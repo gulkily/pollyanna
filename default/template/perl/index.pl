@@ -459,7 +459,7 @@ while (my $arg1 = shift @argsFound) {
 
 			WriteMessage("IndexFile($arg1) result: $indexFileResult");
 
-			my $htmlFilename = GetHtmlFilename($indexFileResult);
+			#my $htmlFilename = GetHtmlFilename($indexFileResult); # IndexFile()
 
 			#WriteMessage("IndexFile($arg1) returned: http://localhost:2784/" . $htmlFilename);
 			IndexFile('flush');

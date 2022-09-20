@@ -574,7 +574,9 @@ sub GetItemHtmlLink { # $hash, [link caption], [#anchor] ; returns <a href=...
 
 		$linkCaption = HtmlEscape($linkCaption);
 
-		my $htmlFilename = GetHtmlFilename($hash);
+		#my $htmlFilename = GetHtmlFilename($hash); # GetItemHtmlLink()
+		my $htmlFilename = GetItemUrl($hash); # GetItemHtmlLink()
+
 		my $linkPath = $htmlFilename;
 		if (GetConfig('admin/php/enable') && GetConfig('admin/php/url_alias_friendly')) {
 			$linkPath = substr($hash, 0, 8);
@@ -1059,7 +1061,8 @@ sub GetItemListing { # returns listing of items based on topic
 			}
 			$itemTitle = HtmlEscape($itemTitle);
 
-			my $itemLink = '/'.GetHtmlFilename($itemKey); #todo this is a bandaid
+			# my $itemLink = '/' . GetHtmlFilename($itemKey); # GetItemListing() #todo this is a bandaid
+			my $itemLink = '/' . GetItemUrl($itemKey); # GetItemListing() #todo this is a bandaid
 
 			my $authorAvatar;
 			if ($authorKey) {
@@ -1214,7 +1217,8 @@ sub GetItemPrefixPage { # $prefix ; returns page with items matching specified p
 			}
 			$itemTitle = HtmlEscape($itemTitle);
 
-			my $itemLink = GetHtmlFilename($itemKey);
+			# my $itemLink = GetHtmlFilename($itemKey); # GetItemPrefixPage()
+			my $itemLink = GetItemUrl($itemKey); # GetItemPrefixPage()
 
 			my $authorAvatar;
 			if ($authorKey) {
@@ -2389,12 +2393,12 @@ while (my $arg1 = shift @foundArgs) {
 				elsif ($makeDialogArg =~ m/([0-9a-f]{8})/) {
 					print ("-D (item_prefix)\n");
 					my $dialog = GetItemTemplateFromHash($makeDialogArg);
-					my $dialogPath = GetHtmlFilename($makeDialogArg);
+					my $dialogPath = GetHtmlFilename($makeDialogArg); # pages.pl #todo
 
 					if ($dialog && $dialogPath) {
 						PutHtmlFile('dialog/' . $dialogPath, $dialog);
 					} else {
-						WriteLog('warning');
+						WriteLog('pages.pl: warning: $dialog or $dialogPath is FALSE');
 					}
 				}
 				#				elsif (IsFingerprint($arg1)) {

@@ -2158,7 +2158,7 @@ sub IsFileDeleted { # $file, $fileHash ; checks for file's hash in deleted.log a
 		WriteLog("IsFileDeleted($file, $fileHash) = YES (via deleted.log)");
 		WriteLog('IsFileDeleted: $fileHash = ' . $fileHash);
 
-		my $htmlFilename = GetHtmlFilename($fileHash);
+		my $htmlFilename = GetHtmlFilename($fileHash); # IsFileDeleted()
 
 		if ($htmlFilename) {
 			if ($htmlFilename =~ m/^([a-zA-Z0-9._\/]+\.html)/) {

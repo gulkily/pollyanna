@@ -673,7 +673,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										AppendFile('log/deleted.log', $itemParent);
 										DBDeleteItemReferences($itemParent);
 
-										my $htmlFilename = $HTMLDIR . '/' . GetHtmlFilename($itemParent);
+										my $htmlFilename = $HTMLDIR . '/' . GetHtmlFilename($itemParent); # IndexTextFile()
 										if (-e $htmlFilename) {
 											WriteLog('IndexTextFile: #remove: ' . $htmlFilename . ' exists, calling unlink()');
 											unlink($htmlFilename);

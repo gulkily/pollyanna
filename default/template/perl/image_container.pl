@@ -22,7 +22,7 @@ sub GetImageContainer { # $fileHash, $imageAlt, $boolLinkToItemPage = 1
 
 	my $permalinkHtml = '';
 	if (!$permalinkHtml) {
-		$permalinkHtml = '/' . GetHtmlFilename($fileHash);
+		$permalinkHtml = '/' . GetHtmlFilename($fileHash); # GetImageContainer()
 	}
 
 	my $imageContainer = '';

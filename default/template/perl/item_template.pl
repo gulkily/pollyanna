@@ -465,7 +465,8 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 		# set up $permalinkHtml, which links to the html page for the item
 		#my $permalinkHtml = '/' . GetHtmlFilename($itemHash);
 
-		my $permalinkHtml = '/' . GetHtmlFilename($itemHash);
+		#my $permalinkHtml = '/' . GetHtmlFilename($itemHash); # ItemTemplate()
+		my $permalinkHtml = '/' . GetItemUrl($itemHash); # ItemTemplate()
 
 		my $linkPath = $permalinkHtml;
 		if (GetConfig('admin/php/enable') && GetConfig('admin/php/url_alias_friendly')) {

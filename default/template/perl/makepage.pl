@@ -267,7 +267,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 
 		# get item page's path #todo refactor this into a function
 		#my $targetPath = $HTMLDIR . '/' . substr($fileHash, 0, 2) . '/' . substr($fileHash, 2) . '.html';
-		my $targetPath = GetHtmlFilename($fileHash);
+		my $targetPath = GetHtmlFilename($fileHash); # MakePage()
 
 		# get item list using DBGetItemList()
 		# #todo clean this up a little, perhaps crete DBGetItem()

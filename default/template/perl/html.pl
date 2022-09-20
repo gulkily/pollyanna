@@ -56,9 +56,18 @@ sub GetHtmlAvatar { # Returns HTML avatar from cache
 	#	return 'unregistered';
 }
 
+sub GetItemUrl {
+	#todo
+	my $hash = shift;
+	#todo sanity
+	return GetHtmlFilename($hash);
+}
+
 sub GetHtmlFilename { # get the HTML filename for specified item hash
-	# GetItemUrl GetItemHtmlLink { GetHtmlFilePath { #keywords
-	# GetItemHtmlFilePath {
+# sub GetItemUrl {
+# sub GetItemHtmlLink {
+# sub GetHtmlFilePath {
+# sub GetItemHtmlFilePath {
 	# Returns 'ab/cd/abcdef01234567890[...].html'
 	# -or- Slug-From-Item-Name.html
 	#
