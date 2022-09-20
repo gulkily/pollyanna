@@ -402,9 +402,12 @@ if (GetConfig('admin/php/route_enable')) {
 			if (GetConfig('setting/admin/php/url_alias_friendly')) {
 				if (preg_match('/^\/([a-f0-9]+)$/', $path, $matches)) {
 					$matchedItem = $matches[1];
-					$path = '/' . substr($matchedItem, 0, 2) . '/' . substr($matchedItem, 2, 2) . '/' . $matchedItem . '.html';
+					$path = '/' . GetHtmlFilename($matchedItem);
+
+					WriteLog('route.php: url_alias_friendly MATCH! $matchedItem = ' . $matchedItem . '; $path = ' . $path);
+					//$path = '/' . substr($matchedItem, 0, 2) . '/' . substr($matchedItem, 2, 2) . '/' . $matchedItem . '.html'; #todo GetHtmlFilename()
 				} else {
-					//
+					WriteLog('route.php: url_alias_friendly NO match; $path = ' . $path);
 				}
 			}
 
