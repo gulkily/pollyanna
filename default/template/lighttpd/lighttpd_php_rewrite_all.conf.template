@@ -22,11 +22,11 @@ url.rewrite = (
 	#"^([0-9a-f]{40})$" => "/route.php?path=$1",
 	#"^([0-9a-f]{8})$" => "/route.php?path=$1",
 
+	#"^(.+\.gif)$" => "/route.php?path=$1",
+
 	#
 	# this line is uncommented by templater #hack
 	#"(.+)" => "/route.php?path=$1" # admin/php/url_alias_friendly
 	#
-
-	#"^(.+\.gif)$" => "/route.php?path=$1",
 )
 
