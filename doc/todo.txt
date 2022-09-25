@@ -7,7 +7,7 @@ how to jump up and down the outline to change reply-to item?
 fresh.js
 	needs to recover when page goes away (404) and subsequently recovers
 
-reset button should be under php because it depends on it
+reset button setting should be under php because it depends on it?
 
 
 what needs to be uncached when a new item is indexed?
