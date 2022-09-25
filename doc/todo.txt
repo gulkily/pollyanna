@@ -1,3 +1,26 @@
+clients view
+
+orphaned clients
+
+
+
+hike.sh
+	if being run with "source hike.sh"
+	and newst line in .bash_history begins with "hike
+		run that command again
+
+to invite someone you take on that person's tech support 
+
+color-coded hash output
+	color each digit in one of 16 pallette colors?
+		need 16-color pallette
+			lazy way: hash-randomize
+
+clients page
+	tag likely bots
+		tag associated profiles
+			(or none)
+
 write form can be submitted using js
 	then inject dialog into page
 
