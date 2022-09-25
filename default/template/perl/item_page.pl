@@ -633,8 +633,12 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 
 	if (GetConfig('html/item_page/parse_log')) {
 		$txtIndex .= GetItemIndexLog($file{'file_hash'});
-		if (index($file{'tags_list'}, ',cpp,') != -1 && GetConfig('setting/admin/cpp/enable')) {
-			#cpp file
+		if (
+			(index($file{'tags_list'}, ',cpp,') != -1 && GetConfig('setting/admin/cpp/enable'))
+			||
+			(index($file{'tags_list'}, ',py,') != -1 && GetConfig('setting/admin/py/enable'))
+		) {
+			#cpp or py file
 			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'run_log');
 			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'compile_log');
 		}

@@ -159,6 +159,15 @@ sub GetItemTemplateBody {
 		$itemTemplateBody = str_replace('$itemText', $itemText, $itemTemplateBody);
 	} # 'cpp'
 
+	if ($file{'item_type'} eq 'py') {
+		WriteLog('GetItemTemplateBody: item_type = py');
+
+		$itemText = PyForWeb(GetFile($file{'file_path'}));
+
+		$itemTemplateBody = GetTemplate('html/item/item.template'); # GetItemTemplate()
+		$itemTemplateBody = str_replace('$itemText', $itemText, $itemTemplateBody);
+	} # 'py'
+
 	if (!$itemTemplateBody) {
 		WriteLog('GetItemTemplateBody: warning: $itemTemplateBody is FALSE; caller = ' . join(',', caller));
 	}
