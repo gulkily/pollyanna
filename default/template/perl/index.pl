@@ -85,6 +85,7 @@ sub IndexHtmlFile { # $file | 'flush' ; indexes one text file into database
 } # IndexHtmlFile()
 
 require_once('index_cpp_file.pl');
+require_once('index_py_file.pl');
 
 sub uniq { # @array ; return array without duplicate elements
 # copied from somewhere like perlmonks
@@ -274,6 +275,23 @@ sub MakeIndex { # indexes all available text files, and outputs any config found
 
 		IndexCppFile('flush');
 	} # admin/cpp/enable
+	if (GetConfig('admin/py/enable')) {
+		state $HTMLDIR = GetDir('html');
+
+		my @pyFiles = split("\n", `find $HTMLDIR/py -type f -name *.py`);
+		my $pyFilesCount = scalar(@pyFiles);
+		my $currentPyFile = 0;
+		WriteLog('MakeIndex: $pyFilesCount = ' . $pyFilesCount);
+
+		foreach my $pyFile (@pyFiles) {
+			$currentPyFile++;
+			my $percentPyFiles = floor($currentPyFile / $pyFilesCount * 100);
+			WriteMessage("[$percentPyFiles%] $currentPyFile/$pyFilesCount  $pyFile");
+			IndexPyFile($pyFile);
+		}
+
+		IndexPyFile('flush');
+	} # admin/py/enable
 } # MakeIndex()
 
 sub DeindexMissingFiles { # remove from index data for files which have been removed

@@ -161,6 +161,15 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 			$indexSuccess = 0;
 		}
 	}
+	if ($ext eq 'py') {
+		WriteLog('IndexFile: calling IndexPyFile()');
+		$indexSuccess = IndexPyFile($file);
+
+		if (!$indexSuccess) {
+			WriteLog('IndexFile: warning: IndexPyFile() returned FALSE; $indexSuccess was FALSE');
+			$indexSuccess = 0;
+		}
+	}
 
 	if (
 		$ext eq 'png' ||
