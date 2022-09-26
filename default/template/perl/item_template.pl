@@ -3,6 +3,9 @@ use 5.010;
 
 sub GetItemTemplateBody {
 #sub GetItemText {
+#sub FormatMessage {
+#sub GetContainer {
+#sub GetItemContainer {
 	my %file = %{shift @_};
 	my $itemTemplateBody = '';
 	my $itemText = '';
