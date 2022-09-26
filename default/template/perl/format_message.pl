@@ -99,6 +99,33 @@ sub CppForWeb { # replaces some spaces with &nbsp; to preserve text-based layout
 	return $container;
 } # CppForWeb()
 
+sub PyForWeb { # replaces some spaces with &nbsp; to preserve text-based layout for html display; $text
+	my $text = shift;
+
+	if (!$text) {
+		return '';
+	}
+
+	$text = HtmlEscape($text);
+	#$text =~ s/\n /<br>&nbsp;/g;
+	#$text =~ s/^ /&nbsp;/g;
+	#$text =~ s/  / &nbsp;/g;
+	#$text =~ s/\n/<br>\n/g;
+
+	#htmlspecialchars(
+	## nl2br(
+	## str_replace(
+	## '  ', ' &nbsp;',
+	# htmlspecialchars(
+	## $quote->quote))))?><? if ($quote->comment) echo(htmlspecialchars('<br><i>Comment:</i> '.htmlspecialchars($quote->comment)
+	#));?><?=$tt_c?></description>
+
+	my $container = GetTemplate('html/item/container/py.template');
+	$container = str_replace('$text', $text, $container);
+
+	return $container;
+} # PyForWeb()
+
 sub TextartForWeb { # replaces some spaces with &nbsp; to preserve text-based layout for html display; $text
 	my $text = shift;
 
