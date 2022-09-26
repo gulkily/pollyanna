@@ -22,7 +22,7 @@ sub UriEscape {
 	return $escapedString;
 } # UriEscape()
 
-sub GetHtmlAvatar { # Returns HTML avatar from cache
+sub GetHtmlAvatar { # $key ; Returns HTML avatar from cache
 	state %avatarMemo;
 
 	# returns avatar suitable for comments
@@ -54,7 +54,7 @@ sub GetHtmlAvatar { # Returns HTML avatar from cache
 
 	return $key;
 	#	return 'unregistered';
-}
+} # GetHtmlAvatar()
 
 sub GetItemUrl {
 	#todo
