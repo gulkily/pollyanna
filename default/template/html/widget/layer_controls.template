@@ -20,6 +20,7 @@
 	<a id=btnMinimal href=# onclick="
 		if (window.SetPrefs) {
 			SetPrefs('show_advanced', 0);
+			SetPrefs('admin', 0);
 			ShowAdvanced(0, 0);
 		}
 	" title=Minimal>Minimal</a>;
