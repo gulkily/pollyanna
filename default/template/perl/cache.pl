@@ -153,7 +153,7 @@ sub GetMessageCacheName { # $itemHash ;
 	my $messageCacheName = $cacheDir . '/' . $myVersion . '/message/' . $itemHash;
 
 	if (!-e $messageCacheName) {
-		WriteLog('GetMessageCacheName: warning: NO FILE: $messageCacheName = ' . $messageCacheName);
+		WriteLog('GetMessageCacheName: warning: NO FILE: $messageCacheName = ' . $messageCacheName . '; caller = ' . join(',', caller));
 	}
 
 	return $messageCacheName;
