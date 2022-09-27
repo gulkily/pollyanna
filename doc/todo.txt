@@ -1,3 +1,9 @@
+test results on macos monterey 12.6
+	zsh does not have a "source" command
+	no php-cgi installed
+	no lighttpd, no apache, no web server
+		needs python server?
+
 clients view
 
 orphaned clients

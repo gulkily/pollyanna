@@ -1,3 +1,19 @@
+CREATE VIEW item_attribute_latest
+AS
+SELECT
+file_hash,
+attribute,
+value,
+source,
+MAX(epoch) AS epoch
+FROM item_attribute
+GROUP BY file_hash, attribute
+ORDER BY epoch DESC
+;
+
+
+
+
 select
 	key||','||date 
 from
