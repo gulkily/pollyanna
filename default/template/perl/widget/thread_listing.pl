@@ -5,6 +5,26 @@ use warnings;
 
 #todo this is the first version, and is sub-optimal
 
+sub GetThreadListingDialog {
+	my $fileHash = shift;
+	#todo sanity
+
+	my $topLevelItem = DBGetTopLevelItem($fileHash);
+	#if ($topLevelItem ne $file{'file_hash'}) {
+	my $currentItem = $fileHash;
+
+	my @itemsInThreadListing;
+
+	my $threadListing = GetThreadListing($topLevelItem, $currentItem, 0, \@itemsInThreadListing);
+	if ($threadListing) {
+		# sub GetThreadDialog {
+		my $threadListingDialog .= GetWindowTemplate($threadListing, 'Thread', 'item_title,add_timestamp');
+		return $threadListingDialog;
+	}
+
+	return '';
+} # GetThreadListingDialog()
+
 sub GetThreadListing { # $topLevel, $selectedItem, $indentLevel, $itemsListReference
 # sub GetThreadDialog {
 	my $topLevel = shift; #todo sanity
@@ -24,7 +44,7 @@ sub GetThreadListing { # $topLevel, $selectedItem, $indentLevel, $itemsListRefer
 		return '';
 	}
 
-	my %topLevelItem = %{$itemInfo[0]}; # first row
+	my %topLevelItem = %{$itemInfo[0]}; # top level item, parent of all other items in this thread, also the first row
 
 	if ($itemsListReference) {
 		push @{$itemsListReference}, $topLevel;

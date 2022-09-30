@@ -454,22 +454,14 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	#	$txtIndex .= GetReplyCartDialog(); # GetItemPage()
 	#}
 
-	my @itemsInThreadListing;
 	if (GetConfig('html/item_page/thread_listing')) {
-		my $topLevelItem = DBGetTopLevelItem($file{'file_hash'});
-		#if ($topLevelItem ne $file{'file_hash'}) {
 		require_once('widget/thread_listing.pl');
-		my $currentItem = $file{'file_hash'};
-
-		my $threadListing = GetThreadListing($topLevelItem, $currentItem, 0, \@itemsInThreadListing);
-		if ($threadListing) {
-			# sub GetThreadDialog {
-			$txtIndex .= GetWindowTemplate($threadListing, 'Thread', 'item_title,add_timestamp');
+		my $threadListingDialog = GetThreadListingDialog($file{'file_hash'});
+		if ($threadListingDialog) {
+			$txtIndex .= $threadListingDialog;
+		} else {
+			#todo warning
 		}
-		#}
-
-		#@itemsInThreadListing = array_unique(@itemsInThreadListing);
-		#$txtIndex .= GetWindowTemplate(join(',', @itemsInThreadListing));
 	}
 
 	if (index($file{'tags_list'}, 'pubkey') != -1) {
