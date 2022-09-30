@@ -15,14 +15,19 @@ function LongAgo (seconds) { // returns string with time units
 // takes seconds as parameter
 // returns a string like "3 days ago" or "3 days from now"
 
-	var flip = 0;
+	var flip = 0; // default is '... ago'
 	if (seconds < 0) {
-		flip = 1;
+		flip = 1; // '... from now' instead of '... ago'
 		seconds = 0 - seconds;
 	}
 
 	var unit = '';
 	var number = seconds;
+
+	if (seconds < 5) { // seconds should always be positive because of flip above
+		returnValue = 'just now!'
+		return returnValue;
+	}
 
 	if (number < 60) {
 		number = number;
