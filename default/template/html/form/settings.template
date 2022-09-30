@@ -18,7 +18,7 @@
 	</p>
 
 	<p>
-		<label for=chkShowAdmin class=advanced>
+		<label for=chkShowAdmin>
 			<input id=chkShowAdmin type=checkbox name=chkShowAdmin onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'show_admin'); }">
 			Assume operator role<noscript><b>*</b></noscript>
 		</label>
