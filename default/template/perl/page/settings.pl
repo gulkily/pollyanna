@@ -13,8 +13,6 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 
 	$txtIndex .= GetAccessDialog();
 
-	$txtIndex .= GetStatsTable();  # GetSettingsPage()
-
 	#if (GetConfig('admin/logging/write_chain_log')) {
 	#	$txtIndex .= GetChainLogAsDialog();
 	#}
@@ -27,6 +25,8 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 	if (GetConfig('admin/js/enable')) {
 		$txtIndex .= GetSettingsDialog();
 	}
+
+	$txtIndex .= GetStatsTable();  # GetSettingsPage()
 
 	my @settingsVisible1 = qw(
 		theme
