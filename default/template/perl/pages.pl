@@ -1665,6 +1665,8 @@ sub MakeMenuPages {
 sub MakeSystemPages {
 	state $HTMLDIR = GetDir('html');
 
+	WriteLog('MakeSystemPages: $HTMLDIR = ' . $HTMLDIR . '; caller = ' . join(',', caller));
+
 	#MakeSimplePage('calculator'); # calculator.html calculator.template
 	MakeSimplePage('welcome'); # welcome.html welcome.template index.html
 
