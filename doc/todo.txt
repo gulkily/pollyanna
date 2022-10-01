@@ -1,3 +1,12 @@
+history list
+
+#bug
+
+#bug when searching for item's hash in project dir, original file is not found
+	because uploaded image name is not changed
+		workaround: look up filename in sqlite index
+		or: sqlite3 cache/b/index.sqlite3 "select file_hash, file_name from item_flat"
+
 when fresh.js detects a change
 	it should force-cachebust all pages #basic
 		always #mvp
