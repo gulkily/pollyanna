@@ -54,6 +54,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	}
 
 	WriteMessage('MakePage(' . $pageType . ', ' . $pageParam . ')');
+	WriteLog('MakePage(' . $pageType . ', ' . $pageParam . ')');
 
 	my @listingPages = qw(child chain url deleted compost new raw picture image read authors tags threads boxes);
 	#chain.html #new.html #boxes.html
