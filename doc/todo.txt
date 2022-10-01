@@ -1,3 +1,10 @@
+when fresh.js detects a change
+	it should force-cachebust all pages #basic
+		always #mvp
+			later: for 5 minutes
+
+GetMenu() doesn't work
+
 test results on macos monterey 12.6
 	zsh does not have a "source" command
 	no php-cgi installed
