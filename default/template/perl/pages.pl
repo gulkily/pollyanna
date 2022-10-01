@@ -1654,6 +1654,14 @@ sub MakeHtAccessPages {
 	} #.htaccess
 } # MakeHtAccessPages()
 
+sub MakeMenuPages {
+	my @menuPages = split("\n", GetTemplate('list/menu'));
+	foreach my $menu (@menuPages) {
+		WriteLog('MakeSystemPages: $menu = ' . $menu);
+		MakePage($menu);
+	}
+}
+
 sub MakeSystemPages {
 	state $HTMLDIR = GetDir('html');
 
