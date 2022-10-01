@@ -19,6 +19,9 @@ use 5.010;
 use utf8;
 
 sub filemtime { # $file ; returns mod time of file, mimics php's filemtime()
+# sub mtime {
+# sub filetime {
+# sub file_time {
 	my $file = shift;
 	#todo sanity
 
