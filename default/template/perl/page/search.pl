@@ -13,7 +13,7 @@ sub GetSearchPage {# returns html for search page
 	$html .= GetPageFooter('search');
 
 	if (GetConfig('admin/js/enable')) {
-		$html = InjectJs($html, qw(settings avatar profile puzzle));
+		$html = InjectJs($html, qw(utils settings avatar profile puzzle));
 	}
 	return $html;
 } # GetSearchPage()
