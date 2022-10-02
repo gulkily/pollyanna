@@ -465,9 +465,21 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	}
 
 	if (index($file{'tags_list'}, 'pubkey') != -1) {
+		my $pubKeyFingerprint = $file{'author_id'};
+		my $pubKeyHash = $file{'file_hash'};
+
+		my $pubKeyMessage = "
+			This is a public key, <br>
+			which creates a profile placeholder, <br>
+			and allows verifying other posts. <br>
+			<br>
+			Name: $pubKeyFingerprint <br>
+			Hash: $pubKeyHash <br>
+		";#todo templatify and make a table with a caption above?
+
 		$txtIndex .= GetWindowTemplate(
 			#'Public key allows verifiable signatures.',
-			'This is a public key, which creates profile.',
+			$pubKeyMessage,
 			'Information'
 		);
 		#todo templatify + use GetString()
