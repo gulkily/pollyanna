@@ -70,6 +70,7 @@ fi
 
 if [ $1 = frontend ]
 	then
+		perl -T default/template/perl/script/template_refresh.pl
 		default/template/sh/_dev_clean_html.sh
 		time ./pages.pl --system
 fi
