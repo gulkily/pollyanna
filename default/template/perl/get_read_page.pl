@@ -29,6 +29,7 @@ sub GetReadPage { # generates page with item listing based on parameters
 	# #todo figure out why this is needed here
 
 	my $zipName = '';
+	my $queryDisplay = '';
 
 	if (defined($pageType)) {
 		#$pageType can be 'author', 'tag', 'date'
@@ -131,9 +132,28 @@ sub GetReadPage { # generates page with item listing based on parameters
 			# 	#$queryParams{'where_clause'} = "WHERE ','||tags_list||',' LIKE '%,$tagName,%' AND item_score >= 0";
 			# 	$queryParams{'where_clause'} = "WHERE ','||tags_list||',' LIKE '%,$tagName,%' AND item_score >= $scoreThreshold";
 			# }
-			$queryParams{'where_clause'} = "WHERE file_hash IN ( SELECT file_hash FROM vote WHERE vote_value = '$tagName' OR vote_value IN (SELECT tag FROM tag_parent WHERE tag_parent = '$tagName' ))";
+
+			#weird indentation here because we want it to look nice in the query dialog on the page
+			$queryParams{'where_clause'} = "
+	WHERE
+		file_hash IN (
+			SELECT
+				file_hash
+			FROM
+				vote
+			WHERE
+				vote_value = '$tagName' OR
+				vote_value IN (
+					SELECT tag
+					FROM tag_parent
+					WHERE tag_parent = '$tagName'
+			)
+		)
+			";
 			$queryParams{'order_clause'} = "ORDER BY item_score DESC, item_flat.add_timestamp DESC";
 			$queryParams{'limit_clause'} = "LIMIT 1000"; #todo fix hardcoded limit #todo pagination
+
+			$queryDisplay = DBGetItemListQuery(\%queryParams);
 
 			@files = DBGetItemList(\%queryParams);
 
@@ -331,6 +351,10 @@ sub GetReadPage { # generates page with item listing based on parameters
 	WriteLog('GetReadPage: scalar(@files) = ' . scalar(@files));
 
 	# LISTING ITEMS BEGINS HERE
+	# LISTING ITEMS BEGINS HERE
+	# LISTING ITEMS BEGINS HERE
+	# LISTING ITEMS BEGINS HERE
+	# LISTING ITEMS BEGINS HERE
 
 	foreach my $row (@files) {
 		my $file = $row->{'file_path'};
@@ -417,10 +441,21 @@ sub GetReadPage { # generates page with item listing based on parameters
 	}
 
 	# LISTING ITEMS ENDS HERE
+	# LISTING ITEMS ENDS HERE
+	# LISTING ITEMS ENDS HERE
+	# LISTING ITEMS ENDS HERE
+	# LISTING ITEMS ENDS HERE
 
 	if ($pageType eq 'tag' && $pageParam eq 'image') { # GetReadPage()
 		require_once('page/upload.pl');
 		$txtIndex .= GetUploadDialog();
+	}
+
+	if ($queryDisplay) {
+		my $queryWindowContents .= '<pre>' . HtmlEscape($queryDisplay) . '<br></pre>'; #todo templatify
+		my $queryDisplayDialog = GetWindowTemplate($queryWindowContents, 'Query');
+		$queryDisplayDialog = '<span class=advanced>' . $queryDisplayDialog . '</span>';
+		$txtIndex .= $queryDisplayDialog;
 	}
 
 	# Close html
