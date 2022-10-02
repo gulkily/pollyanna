@@ -1953,6 +1953,9 @@ sub DBGetItemListQuery {
 	my %params = %{$paramHashRef};
 
 	my $itemFields = DBGetItemFields();
+	$itemFields = str_replace("\n", "\n\t\t\t", $itemFields);
+	$itemFields = trim($itemFields);
+	# indenting it for display on item listing page, kind of a hack
 
 	my $query = '';
 
