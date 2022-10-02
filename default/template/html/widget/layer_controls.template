@@ -20,13 +20,16 @@
 		"
 	>Expand</a>;
 
-	<a id=btnMinimal href=# onclick="
-		if (window.SetPrefs) {
-			SetPrefs('show_advanced', 0);
-			SetPrefs('admin', 0);
-			ShowAdvanced(0, 0);
-		}
-	" title=Minimal>Minimal</a>;
+	<a id=btnMinimal href=#
+		accesskey=n
+		onclick="
+			if (window.SetPrefs) {
+				SetPrefs('show_advanced', 0);
+				SetPrefs('admin', 0);
+				ShowAdvanced(0, 0);
+			}
+		"
+	title=Minimal>Minimal</a>;
 
 	<a id=btnReprint href=# accesskey=r onclick="
 		var winLoc = window.location.href;
