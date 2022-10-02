@@ -465,8 +465,10 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	}
 
 	if (index($file{'tags_list'}, 'pubkey') != -1) {
-		my $pubKeyFingerprint = $file{'author_id'};
+		my $pubKeyFingerprint = $file{'author_key'};
 		my $pubKeyHash = $file{'file_hash'};
+
+		#todo sanity check on vars above
 
 		my $pubKeyMessage = "
 			This is a public key, <br>
