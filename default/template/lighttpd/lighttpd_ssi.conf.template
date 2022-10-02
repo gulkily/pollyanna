@@ -1,1 +1,6 @@
+# template/lighttpd/lighttpd_ssi.conf.template
+server.modules += (
+	"mod_ssi",       # for ssi
+)
 ssi.extension = ( ".html" )
+# / template/lighttpd/lighttpd_ssi.conf.template

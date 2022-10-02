@@ -1,4 +1,5 @@
 # php fastcgi connector
+# template/lighttpd/lighttpd_php.conf.template
 fastcgi.server = (
 	".php" => (
 		(
@@ -7,3 +8,4 @@ fastcgi.server = (
 		)
 	)
 )
+# / template/lighttpd/lighttpd_php.conf.template

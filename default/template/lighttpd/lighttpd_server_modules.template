@@ -1,3 +1,5 @@
+# template/lighttpd/lighttpd_server_modules.template
 server.modules = (
-$serverModulesList
+	$serverModulesList
 )
+# / template/lighttpd/lighttpd_server_modules.template

@@ -1,3 +1,5 @@
+# template/lighttpd/lighttpd_php_rewrite_all.conf.template
+
 # php rewrites
 
 # this template is used when:
@@ -30,3 +32,4 @@ url.rewrite = (
 	#
 )
 
+# / template/lighttpd/lighttpd_php_rewrite_all.conf.template

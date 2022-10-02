@@ -1,3 +1,4 @@
+# template/lighttpd/lighttpd_php_rewrite_query.conf.template
 
 # php rewrites
 url.rewrite = (
@@ -16,4 +17,5 @@ url.rewrite = (
 	# profile.html should always be routed...?
 	"^profile\.html" => "/route.php?path=/profile.html"
 )
+# / template/lighttpd/lighttpd_php_rewrite_query.conf.template
 
