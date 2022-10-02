@@ -1,4 +1,19 @@
+layers dialog
+	on settings page
+	with checkboxes for layers
+	should not be anything which is affected by layers changes before it
+
+calculate hash of text live in js and display below textbox
+
+
+
+page should update when logged in user changes
+
+
+
 history list
+	log pages into cookie or localstorage
+		display on page with links
 
 #bug
 
