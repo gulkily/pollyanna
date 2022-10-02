@@ -2342,6 +2342,5 @@ make sure everything under default/ has a trailing \n
 
 ===
 how to rechain / multiple chain?
-	store chain origin as a column? :\
+	store chain as item
 =======
-need to remove sha1sum dependency because on mac it's not available by default
