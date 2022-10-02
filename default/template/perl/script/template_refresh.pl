@@ -31,19 +31,19 @@ for my $c (@config) {
 		$c = trim($c);
 		my $key = $1;
 		if ($key && -f "config/$key" && -f "default/$key") {
-			print "-";
+			#print "-";
 			my $configTime = filemtime("config/$key");
 			my $defaultTime = filemtime("default/$key");
 
 			if ($defaultTime && $configTime) {
-				print "+";
+				#print "+";
 				if ($defaultTime > $configTime) {
-					print ('"');
+					#print ('"');
 					if (-f $c) {
 						WriteLog('template_refresh.pl: change found: $c = ' . $c);
 
 						push @changed, $key;
-						print "$key\n";
+						#print "$key\n";
 
 						my $changedCategory = substr($key, 0, index($key, '/'));
 						$changedTopLevel{$changedCategory} = 1;
@@ -90,10 +90,10 @@ if ($changeCount) {
 		print "\n";
 	}
 	print "=====================\n";
-	print "Refreshing in 5s ... \n";
+	print "Refreshing in 2s ... \n";
 	print "=====================\n";
 
-	sleep 7;
+	sleep 2;
 
 	for my $key (@changed) {
 		if (-f "config/$key") {
