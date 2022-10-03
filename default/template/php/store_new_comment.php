@@ -46,6 +46,7 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 
 		// standard signature separator
 		$signatureSeparator = "\n-- \n"; #\n--
+		$signatureContent = '';
 
 		if (GetConfig('admin/logging/record_http_auth_username')) {
 			if (isset($_SERVER['PHP_AUTH_USER']) && $_SERVER['PHP_AUTH_USER']) {
@@ -53,10 +54,8 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 				// record user's http-auth username if we're doing that and it exists
 				// #todo sanity check on $_SERVER['PHP_AUTH_USER']
 
-				$comment .= $signatureSeparator;
-				$signatureSeparator = "";
-				$comment .= 'Authorization: ' . $_SERVER['PHP_AUTH_USER'];
-				$comment .= "\n";
+				$signatureContent .= 'Authorization: ' . $_SERVER['PHP_AUTH_USER'];
+				$signatureContent .= "\n";
 			}
 		} else {
 			WriteLog('StoreNewComment: NOT recording http auth username...');
@@ -77,11 +76,8 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 
 					WriteLog('StoreNewComment: cookie: adding cookie to $comment!');
 
-					$comment .= $signatureSeparator;
-					$signatureSeparator = "";
-
-					$comment .= 'Cookie: ' . $_COOKIE['cookie'];
-					$comment .= "\n";
+					$signatureContent .= 'Cookie: ' . $_COOKIE['cookie'];
+					$signatureContent .= "\n";
 				}
 			} else {
 				WriteLog('StoreNewComment: cookie: cookie was NOT found');
@@ -96,15 +92,10 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 				WriteLog('StoreNewComment: record_server_time: $serverTime $serverTime = ' . $serverTime);
 				#WriteLog('StoreNewComment: cookie: adding server time to $comment!');
 
-				$comment .= $signatureSeparator;
-				$signatureSeparator = "";
-
-				$comment .= 'Received: ' . $serverTime;
-				$comment .= "\n";
+				$signatureContent .= 'Received: ' . $serverTime;
+				$signatureContent .= "\n";
 			}
 		}
-
-		WriteLog('StoreNewComment: $comment after cookie check: ' . $comment);
 
 		if ($recordFingerprint) {
 			if (GetConfig('admin/logging/record_client')) {
@@ -115,12 +106,10 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 				$userAgent = $_SERVER['HTTP_USER_AGENT'];
 
 				$clientFingerprint = uc(substr(md5($clientHostname . $userAgent), 0, 16));
-				#$comment .= 'Client: ' . $clientFingerprint;
-				$comment .= $signatureSeparator;
-				$signatureSeparator = "";
 
-				$comment .= 'Client: ' . $clientFingerprint;
-				$comment .= "\n";
+				#$signatureContent .= 'Client: ' . $clientFingerprint;
+				$signatureContent .= 'Client: ' . $clientFingerprint;
+				$signatureContent .= "\n";
 
 				WriteLog('StoreNewComment: $recordFingerprint: $clientFingerprint = ' . $clientFingerprint);
 			} else {
@@ -131,16 +120,15 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 		if (GetConfig('admin/logging/record_http_host')) {
 			if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST']) {
 				// record host if it's enabled
-				$comment .= $signatureSeparator;
-				$signatureSeparator = "\n";
 
-				$comment .= 'Host: ' . $_SERVER['HTTP_HOST'];
+				$signatureContent .= 'Host: ' . $_SERVER['HTTP_HOST'];
+				$signatureContent .= "\n";
 			}
 		}
 
 		WriteLog('StoreNewComment: $comment = ' . htmlspecialchars($comment));
 
-		WriteLog('StoreNewComment: PutFile(' . $fileName . ', ' . $comment . ') 1373');
+		WriteLog('StoreNewComment: PutFile(' . $fileName . ', $comment)');
 		// save the file as ".tmp" and then rename
 		PutFile($fileName, $comment); # PutFile()
 
@@ -156,7 +144,7 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 		// #todo more sanity
 
 		return $fileName;
-	}
+	} # if (isset($comment) && $comment)
 
 	WriteLog('StoreNewComment: warning: returning without filename');
 	return '';
