@@ -126,6 +126,13 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 			}
 		}
 
+		if (strpos($comment, 'PUBLIC KEY BLOCK') && GetConfig('setting/admin/php/post/skip_footer_when_pubkey')) {
+			// skip adding footer
+		} else {
+			$comment .= $signatureSeparator;
+			$comment .= $signatureContent;
+		}
+
 		WriteLog('StoreNewComment: $comment = ' . htmlspecialchars($comment));
 
 		WriteLog('StoreNewComment: PutFile(' . $fileName . ', $comment)');
