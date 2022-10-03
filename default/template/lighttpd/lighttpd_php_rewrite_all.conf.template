@@ -10,6 +10,8 @@
 url.rewrite = (
 	# always for post.html
 	"^/post.html\??(.+)?" => "/post.php?$1",
+	#"^/upload.html\??(.+)?" => "/upload.php?$1",
+	#"^/write.html\??(.+)?" => "/write.php?$1",
 	# "^/chat.html\??(.+)?" => "/quick.php?$1",
 
 	########################
