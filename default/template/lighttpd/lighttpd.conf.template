@@ -24,6 +24,8 @@ mimetype.assign = (
 	".log" => "text/plain",
 	".css" => "text/css",
 	".js" => "text/javascript",
+	".cpp" => "text/x-c",
+	".py" => "text/x-python",
 
 	".jpg"  => "image/jpeg",
 	".jpeg"  => "image/jpeg",
