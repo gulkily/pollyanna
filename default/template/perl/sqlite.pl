@@ -1776,6 +1776,7 @@ sub DBAddItemAttribute { # $fileHash, $attribute, $value, $epoch, $source # add 
 
 	if (!$fileHash) {
 		WriteLog('DBAddItemAttribute: warning: $fileHash is FALSE; caller = ' . join(',', caller));
+		return '';
 	}
 
 	if ($fileHash eq 'flush') {
