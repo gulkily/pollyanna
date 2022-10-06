@@ -4,23 +4,18 @@
 		Q: When was this page printed?<br>
 	</span>
 	Printed: <span class=timestamp epoch=$printedEpoch>$printedHuman</span>
-</p>
-<p>
-	<span class=beginner>
+	<br>
+	<span class=beginner><br>
 		Q: How old was the page when downloaded?<br>
 	</span>
-	Age: $printedAgeSeconds
-</p>
-<p>
-	<span class=beginner>
+	Page Age: $printedAgeSeconds
+	<br>
+	RocketScience <span title="`git rev-parse HEAD`">$versionSuccinct</span></a><br>
+	<br>
+	<span class=beginner><br>
 		Q: How can I get a fresher copy?<br>
-	</span>
-	<span class=beginner>
 		A: Ask the server to
 	</span>
-	<a href="$selfPath">[reprint]</a>
-</p>
-<p>
-	RocketScience <span title="`git rev-parse HEAD`">$versionSuccinct</span></a>
+	<a href="$selfPath"><button>Reprint</button></a>
 </p>
 <!-- / printed_notice.template -->
