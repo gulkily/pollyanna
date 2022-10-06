@@ -88,7 +88,7 @@ sub MakeChainIndex { # $import = 1; reads from log/chain.log and puts it into it
 			DBAddItemAttribute('flush');
 
 			return %return;
-		} # $chainLog
+		} # if (defined($chainLog) && $chainLog)
 		else {
 			WriteLog('MakeChainIndex: warning: $chainLog was NOT defined');
 			return 0;
