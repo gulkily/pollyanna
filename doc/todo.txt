@@ -1,3 +1,16 @@
+zip error: Nothing to do! (try: zip -qr /afs/athena.mit.edu/user/t/h/thankyou/hike/html/image.tmp.zip . -i /afs/athena.mit.edu/user/t/h/thankyou/hike/html/image/)
+
+zip error: Nothing to do! (try: zip -qr /afs/athena.mit.edu/user/t/h/thankyou/hike/html/index.sqlite3.zip.tmp . -i cache/b/index.sqlite3)
+Argument "" isn't numeric in numeric ne (!=) at /afs/athena.mit.edu/user/t/h/thankyou/hike/config/template/perl/dialog/stats_table.pl line 29.
+tail: cannot open 'html/chain.log' for reading: No such file or directory
+
+
+=====
+
+light/modern buttons shouldn't appear if php is off
+
+=====
+
 layers dialog
 	on settings page
 	with checkboxes for layers
