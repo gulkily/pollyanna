@@ -1,12 +1,6 @@
 <!-- form/upload.template ; file upload form -->
 <form enctype="multipart/form-data" action="/upload.php" method="POST" name=upload id=upload>
 	<p>Upload one picture.</p>
-	<p>
-		Use file selector below, or paste here:<br>
-		<input type=text name=iospaste value="Paste here"><br>
-		Paste may not work on all platforms.<br>
-		Use file selector below as an alternative.
-	</p>
 	<p class=beginner>
 		Remember to press Upload button.
 	</p>

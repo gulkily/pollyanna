@@ -1,0 +1,11 @@
+<!-- form/paste.template ; file paste form -->
+<form enctype="multipart/form-data" action="/upload.php" method="POST" name=upload id=upload>
+	<p>
+		Paste one picture:<br>
+		<input type=text name=iospaste value="Paste here"><br>
+		Paste may not work on all platforms.
+	</p>
+
+	<span id=spanImagePreview></span>
+</form>
+<!-- / form/paste.template -->
