@@ -1,3 +1,7 @@
+refresh templates:
+	if file is a perl template, build after removing config
+
+
 zip error: Nothing to do! (try: zip -qr /afs/athena.mit.edu/user/t/h/thankyou/hike/html/image.tmp.zip . -i /afs/athena.mit.edu/user/t/h/thankyou/hike/html/image/)
 
 zip error: Nothing to do! (try: zip -qr /afs/athena.mit.edu/user/t/h/thankyou/hike/html/index.sqlite3.zip.tmp . -i cache/b/index.sqlite3)
