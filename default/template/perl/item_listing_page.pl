@@ -109,7 +109,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 # sub GetListingPage {
 # sub MakeListingPage {
 	my $pageQuery = shift;
-	my $pageMode = shift;
+	my $pageMode = shift; # example: dialog_list, 'full_items', 'image_gallery'
 	my $pageNumber = shift;
 	my $refParams = shift;
 
@@ -239,9 +239,14 @@ sub MakeFeed { # writes a bare-bones txt file with items list
 }
 
 sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
-	my $pageQuery = shift;
-	my $pageMode = shift;
-	my $refParams = shift;
+	my $pageQuery = shift; # example: 'chain', 'select ...'
+	# if it has no spaces, a template lookup is attmpted in e.g. template/query/chain
+	my $pageMode = shift; # example: dialog_list, 'full_items', 'image_gallery'
+	my $refParams = shift; # reference to %params hash
+	# example: $params{'query'} (overrides $pageQuery, but not the page name)
+	# example: $params{'query_params'} reference to query's params
+	# example: $params{'target_path'} where to write files if not under web root
+	#
 
 	if ($pageQuery eq 'new') {
 		MakeFeed('new');
