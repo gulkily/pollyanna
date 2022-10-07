@@ -54,7 +54,7 @@ sub IsLeapYear { # $year ; returns 1 if leap year, 0 if not
 	}
 } # IsLeapYear()
 
-sub GetNumberOfDaysInMonth {
+sub GetNumberOfDaysInMonth { # $year, $month ; return number of days in given year's given month
 	my $year = shift;
 	my $month = shift;
 
@@ -83,7 +83,9 @@ use Time::Local;
 #$time = timelocal($sec,$min,$hours,$mday,$mon,$year);
 #$time = timegm($sec,$min,$hours,$mday,$mon,$year);
 
-sub GetMonthTable {
+sub GetMonthTable { # $year, $month, \%fillDates ; return html table with links for dates in %fillDates
+# dates should be in format 'yyyy-mm-dd'
+# SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 11) AS date,
 	my $year = shift;
 	my $month = shift;
 		
