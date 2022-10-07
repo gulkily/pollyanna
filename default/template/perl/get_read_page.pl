@@ -93,7 +93,16 @@ sub GetReadPage { # generates page with item listing based on parameters
 
 			my %queryParams;
 
-			$queryParams{'where_clause'} = "WHERE file_hash IN (SELECT file_hash FROM item_flat WHERE SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 11) = '$pageDate')";
+			$queryParams{'where_clause'} = "
+				WHERE
+					file_hash IN (
+						SELECT file_hash
+						FROM item_flat
+						WHERE
+							item_score >= 0 AND
+							SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 11) = '$pageDate'
+						)
+			";
 			#todo optimize this query
 			@files = DBGetItemList(\%queryParams);
 
