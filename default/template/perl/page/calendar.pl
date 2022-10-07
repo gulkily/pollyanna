@@ -63,6 +63,11 @@ sub GetNumberOfDaysInMonth { # $year, $month ; return number of days in given ye
 
 	# january = 1
 
+	if (!defined($month)) {
+		WriteLog('GetNumberOfDaysInMonth: warning: $month not defined; caller = ' . join(',', caller));
+		return '';
+	}
+
 	if ($month == 1 || $month == 3 || $month == 5 || $month == 7 || $month == 8 || $month == 10 || $month == 12) {
 		$numberOfDays = 31;
 	} elsif ($month == 4 || $month == 6 || $month == 7 || $month == 9 || $month == 11) {
@@ -84,7 +89,8 @@ use Time::Local;
 #$time = timegm($sec,$min,$hours,$mday,$mon,$year);
 
 sub GetMonthTable { # $year, $month, \%fillDates ; return html table with links for dates in %fillDates
-# dates should be in format 'yyyy-mm-dd'
+# dates in %fillDates should be in format 'yyyy-mm-dd' => integer
+# example: '2022-10-07' => 1
 # SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 11) AS date,
 	my $year = shift;
 	my $month = shift;
@@ -102,6 +108,11 @@ sub GetMonthTable { # $year, $month, \%fillDates ; return html table with links 
 
 	my @months = qw(January February March April May June July August September October November December);
 	my $daysInMonth = GetNumberOfDaysInMonth($year, $month);
+
+	if (!$daysInMonth) {
+		WriteLog('GetMonthTable: warning: $daysInMonth is FALSE; caller = ' . join(',', caller));
+		return '';
+	}
 
 	my $dialogTitle = $months[$month-1] . ' ' . $year;
 	
@@ -305,10 +316,15 @@ sub GetCalendarPage {
 	shift @yearMonths;
 
 	for my $yearMonthRef (@yearMonths) {
-		my $yearMonth = %{$yearMonthRef}{'year_month'};
-		my $year = substr($yearMonth, 0, 4);
-		my $month = substr($yearMonth, 5, 2);
-		$html .= GetMonthTable($year, $month, \%fillDates);
+		my %yearMonthRow = %{$yearMonthRef};
+		my $yearMonth = $yearMonthRow{'year_month'};
+		if ($yearMonth) {
+			my $year = substr($yearMonth, 0, 4);
+			my $month = substr($yearMonth, 5, 2);
+			$html .= GetMonthTable($year, $month, \%fillDates);
+		} else {
+			WriteLog('GetCalendarPage: warning: $yearMonth failed sanity check');
+		}
 	}
 
 	if (0) {
