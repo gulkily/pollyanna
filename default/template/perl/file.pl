@@ -74,6 +74,8 @@ sub GetFileMessageCachePath { # $fileHash/$filePath ;  returns path to file's me
 } # GetFileMessageCachePath()
 
 sub GetAbsolutePath { # $file
+# sub GetFilePath {
+# sub GetFullPath {
 	use File::Spec;
 
 	my $filePath = shift;
