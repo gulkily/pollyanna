@@ -430,7 +430,8 @@ function displayNotificationWithTimeout (strMessage, thisButton) {
 }
 
 function displayNotification (strMessage, thisButton) { // adds notification to page
-// showNotification (
+// function progressIndicator () { // progress indicator
+// function showNotification () (
 // used for loading indicator bar (to top of page, depending on style)
 // also used for "creating profile" and "already voted" notifications
 	var spanNotification = document.createElement('span');
