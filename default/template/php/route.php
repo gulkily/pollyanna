@@ -796,7 +796,7 @@ if (GetConfig('admin/php/route_enable')) {
 						$printedHuman = file_exists($pathRel) ? date("F d Y H:i:s.", filemtime($pathRel)) : ''; #todo it's sometimes blank
 
 						if ($fileCacheTime == 0) {
-							$printedAgeSeconds = 'This page was freshly printed, just for you!';
+							$printedAgeSeconds = 'Fresh!';
 						} else {
 							$printedAgeSeconds = $fileCacheTime . ($fileCacheTime == 1 ? ' second' : ' seconds');
 							if (!$printedEpoch || !$printedHuman || !$printedAgeSeconds) {
