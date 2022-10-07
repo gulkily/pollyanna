@@ -68,6 +68,7 @@ sub GetHtmlFilename { # get the HTML filename for specified item hash
 # sub GetItemHtmlLink {
 # sub GetHtmlFilePath {
 # sub GetItemHtmlFilePath {
+# sub GetHtmlFile {
 	# Returns 'ab/cd/abcdef01234567890[...].html'
 	# -or- Slug-From-Item-Name.html
 	#
