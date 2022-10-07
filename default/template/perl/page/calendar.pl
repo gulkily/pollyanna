@@ -293,24 +293,47 @@ sub GetCalendarPage {
 
 	#$html .= GetWindowTemplate("$curYear $curMonth $curDay", 'As Of');
 
-	if ($curDay < 7) {
-		if ($curMonth == 1) {
-			$html .= GetMonthTable($curYear - 1, 12, \%fillDates);
-		} else {
-			$html .= GetMonthTable($curYear, $curMonth - 1, \%fillDates);
+	my @yearMonths = SqliteQueryHashRef(
+		"
+			SELECT
+				SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 8) AS year_month
+			FROM item_flat
+			WHERE item_score >= 0
+			GROUP BY year_month
+		"
+	);
+	shift @yearMonths;
+
+	for my $yearMonthRef (@yearMonths) {
+		my $yearMonth = %{$yearMonthRef}{'year_month'};
+		my $year = substr($yearMonth, 0, 4);
+		my $month = substr($yearMonth, 5, 2);
+		$html .= GetMonthTable($year, $month, \%fillDates);
+	}
+
+	if (0) {
+
+		if ($curDay < 7) {
+			if ($curMonth == 1) {
+				$html .= GetMonthTable($curYear - 1, 12, \%fillDates);
+			} else {
+				$html .= GetMonthTable($curYear, $curMonth - 1, \%fillDates);
+			}
+		}
+
+		$html .= GetMonthTable($curYear, $curMonth, \%fillDates);
+
+		if ($curDay > 21) {
+			if ($curMonth == 12) {
+				$html .= GetMonthTable($curYear + 1, 1, \%fillDates);
+			} else {
+				$html .= GetMonthTable($curYear, $curMonth + 1, \%fillDates);
+			}
 		}
 	}
 
-	$html .= GetMonthTable($curYear, $curMonth, \%fillDates);
 
-	if ($curDay > 21) {
-		if ($curMonth == 12) {
-			$html .= GetMonthTable($curYear + 1, 1, \%fillDates);
-		} else {
-			$html .= GetMonthTable($curYear, $curMonth + 1, \%fillDates);
-		}
-	}
-	
+
 	$html .= GetPageFooter('calendar');
 	
 	$html = InjectJs($html, qw(settings voting timestamp utils profile));
