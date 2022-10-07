@@ -4,11 +4,6 @@
 # this script checks for defaults which have been updated after their config values
 # primarily used during development
 #
-print "template_refresh exiting because it's not well tested yet";
-print "\n";
-sleep 1;
-exit;
-# script has not been tested well yet
 
 require('./utils.pl');
 
@@ -100,7 +95,7 @@ if ($changeCount) {
 
 	for my $key (@changed) {
 		if (-f "config/$key") {
-			`rm -v config/$key`;
+			`rm -vf config/$key`;
 			print "\n";
 		}
 		print "$key";
