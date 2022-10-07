@@ -1655,6 +1655,7 @@ sub MakeHtAccessPages {
 } # MakeHtAccessPages()
 
 sub MakeMenuPages {
+# sub MenuPages {
 	my @menuPages = split("\n", GetTemplate('list/menu'));
 	foreach my $menu (@menuPages) {
 		WriteLog('MakeSystemPages: $menu = ' . $menu);
