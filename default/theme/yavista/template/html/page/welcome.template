@@ -1,0 +1,8 @@
+<form>
+	<input type=submit value="Only Bots Press This Button">
+	<br>
+	<a href=/>Only Bots Click This Link</a>
+	<p>
+	Humans, please click this button and wait:<br>
+	<input type=button value="Solve Puzzle" class=btnSolvePuzzle>
+</form>
