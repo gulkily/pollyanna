@@ -4,8 +4,7 @@ use strict;
 use warnings;
 
 sub ExpirePages { # $fileHash ; expire html pages affected by a change in item
-	# doesn't do anything yet #todo
-	#todo sanity
+# sub DeletePages {
 	my $fileHash = shift;
 
 	if (!$fileHash) {
@@ -19,6 +18,12 @@ sub ExpirePages { # $fileHash ; expire html pages affected by a change in item
 	}
 
 	WriteLog("ExpirePages($fileHash)");
+
+	my $previousInChain = DBGetItemAttribute($fileHash, 'chain_previous');
+	if ($previousInChain && IsItem($previousInChain)) {
+		my $prevPage = GetHtmlFilename($previousInChain);
+		RemoveHtmlFile($prevPage);
+	}
 }
 
 1;
