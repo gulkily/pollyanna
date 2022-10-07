@@ -84,15 +84,17 @@ sub GetReadPage { # generates page with item listing based on parameters
 
 		if ($pageType eq 'date') {
 			$pageParam = shift;
-			my $pageDate = $pageParam;
+			my $pageDate = $pageParam; # example: '2022-10-07'
 			chomp($pageDate);
 
-			$title = 'hi';
-			$titleHtml = 'hi';
+			#todo make a prettier title
+			$title = $pageDate;
+			$titleHtml = $pageDate;
 
 			my %queryParams;
 
-			$queryParams{'where_clause'} = "WHERE file_hash IN (SELECT file_hash FROM item_attribute WHERE attribute = 'date' AND value = '$pageDate')";
+			$queryParams{'where_clause'} = "WHERE file_hash IN (SELECT file_hash FROM item_flat WHERE SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 11) = '$pageDate')";
+			#todo optimize this query
 			@files = DBGetItemList(\%queryParams);
 
 			$zipName = "$pageDate.zip";

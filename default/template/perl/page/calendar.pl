@@ -271,13 +271,11 @@ sub GetCalendarPage {
 	my @dates = SqliteQueryHashRef(
 		"
 			SELECT
-				value AS date,
-				COUNT(value) AS item_count
-			FROM
-				item_attribute 
-			WHERE
-				attribute = 'date'
-			GROUP BY value
+				SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 11) AS date,
+				COUNT(file_hash) AS item_count
+			FROM item_flat
+			WHERE item_score >= 0
+			GROUP BY date
 		"
 	);
 	shift @dates;
