@@ -771,38 +771,29 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 											$approveReason = 'self-admin whenever is allowed';
 										}
 										else {
-											my $publicKeyHash = DBGetAuthorPublicKeyHash($authorKey);
-											my $voteTotalsRef = DBGetItemVoteTotals2($publicKeyHash);
+											WriteLog('IndexTextFile: permissioned: $authorKey = ' . $authorKey);
+											push @indexMessageLog, 'author: ' . $authorKey;
 
-											my %voteTotals;
-											if ($voteTotalsRef) {
-												%voteTotals = %{$voteTotalsRef};
-											}
-
-											WriteLog('IndexTextFile: permissioned: $publicKeyHash = ' . $publicKeyHash);
-											push @indexMessageLog, 'author pubkey hash: ' . $publicKeyHash;
-
-											if ($voteTotals{$tokenFound{'param'}}) {
+											if (AuthorHasTag($authorKey, $tokenFound{'param'})) {
 												$approveStatus = 4;
 												$approveReason = 'author possesses tag (4)';
 											} else {
 												if (GetConfig('setting/admin/allow_admin_permissions_tag_lookup_via_tagset')) { #todo
-
-													my @authorTags = keys(%voteTotals);
-													foreach my $authorTag (@authorTags) {
-														my @tagset = split("\n", GetTemplate("tagset/$authorTag"));
-														if (scalar(@tagset)) {
-															if (in_array($tokenFound{'param'}, @tagset)) {
-																$approveStatus = 5;
-																$approveReason = 'found tag in tagset/' . $authorTag;
-															}
-														}
-													}
-
-													if (!$approveStatus) {
-														$approveStatus = 0;
-														$approveReason = 'found no reason to allow';
-													}
+													# my @authorTags = keys(%voteTotals);
+													# foreach my $authorTag (@authorTags) {
+													# 	my @tagset = split("\n", GetTemplate("tagset/$authorTag"));
+													# 	if (scalar(@tagset)) {
+													# 		if (in_array($tokenFound{'param'}, @tagset)) {
+													# 			$approveStatus = 5;
+													# 			$approveReason = 'found tag in tagset/' . $authorTag;
+													# 		}
+													# 	}
+													# }
+													#
+													# if (!$approveStatus) {
+													# 	$approveStatus = 0;
+													# 	$approveReason = 'found no reason to allow';
+													# }
 												} # default/setting/admin/allow_admin_permissions_tag_lookup_via_tagset=0
 											}
 										}
