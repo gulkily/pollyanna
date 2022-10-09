@@ -1,7 +1,7 @@
 #!/bin/sh
 
 txtCount=$(find html/txt -type f | wc -l) #Count files and store in a variable
-if [ "$txtCount" -ge 100 ];
+if [ "$txtCount" -ge 200 ];
 	then
 		echo =======================================================
 		echo ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION!
