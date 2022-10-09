@@ -610,8 +610,14 @@ function PutFile ($file, $content) { // puts file contents
 	if (file_exists($fileTemp)) {
 		#bug sometimes the file goes away between the if statement check and the rename
 		# should try/catch the error or something?
-		$renameResult = rename($fileTemp, $file);
-		WriteLog('PutFile: $renameResult = ' . $renameResult);
+
+		try {
+			$renameResult = rename($fileTemp, $file);
+		} catch (Exception $e) {
+			WriteLog('PutFile: rename fail: $e->getMessage() = ' . $e->getMessage());
+		} finally {
+			WriteLog('PutFile: rename success: $renameResult = ' . $renameResult);
+		}
 	} else {
 		WriteLog('PutFile: warning: file_exists($fileTemp) is FALSE');
 		return '';
