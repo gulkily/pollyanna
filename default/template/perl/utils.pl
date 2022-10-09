@@ -370,6 +370,7 @@ sub WriteMessage { # Writes timestamped message to console (stdout)
 	state $previousText = '';
 
 	state $snowPrinted;
+	state $snowPrintedBefore = 0;
 
 	if ($text eq '.' || length($text) == 1) {
 		$previousText = $text;
@@ -399,12 +400,13 @@ sub WriteMessage { # Writes timestamped message to console (stdout)
 			$snowPrinted .= $text;
 		}
 
-		if (length($snowPrinted) >= 60) {
+		if (!$snowPrintedBefore || length($snowPrinted) >= 60) {
 			## this starts a new line in the snow
 			## this is NOT the part that prints a text message
 			print "\n$timestamp ";
 			WriteLog('WriteMessage: ' . $snowPrinted);
 			$snowPrinted = '';
+			$snowPrintedBefore = 1;
 		}
 
 		return;
