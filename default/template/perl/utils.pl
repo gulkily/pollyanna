@@ -578,10 +578,10 @@ sub GetFileMessageHash { # $fileName ; returns hash of file contents
 # sub GetItemHash {
 # sub GetHash {
 # sub GetMessageHash {
-	WriteLog("GetFileMessageHash()");
+# tries to hash the text rather than the exact bytes
+# meaning that similar messages with minor differences would get the same hash
 
 	my $fileName = shift;
-
 	if (!$fileName) {
 		WriteLog('GetFileMessageHash: warning: $fileName is FALSE; caller = ' . join(',', caller));
 		return '';
@@ -589,9 +589,11 @@ sub GetFileMessageHash { # $fileName ; returns hash of file contents
 
 	chomp $fileName;
 	WriteLog("GetFileMessageHash($fileName)");
-	#todo normalize path (static vs full)
+
+	my $memoPath = GetAbsolutePath($fileName);
+
 	state %memoFileHash;
-	if ($memoFileHash{$fileName}) {
+	if ($memoFileHash{$memoPath}) {
 		WriteLog('GetFileMessageHash: memo hit on $fileName = ' . $fileName);
 		WriteLog('GetFileMessageHash: returning ' . $memoFileHash{$fileName});
 		return $memoFileHash{$fileName};
