@@ -8,7 +8,7 @@
 	<span class=beginner><br>
 		Q: How old was the page when downloaded?<br>
 	</span>
-	Page Age: $printedAgeSeconds
+	Age: $printedAgeSeconds
 	<br>
 	RocketScience: <span title="`git rev-parse HEAD`">$versionSuccinct</span></a><br>
 	<br>
