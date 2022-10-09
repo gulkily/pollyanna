@@ -162,8 +162,13 @@ sub GetDir { # $dirName ; returns path to special directory specified
 	}
 	WriteLog('GetDir: $dirName = ' . $dirName);
 
-	my $scriptDir = cwd();
-	if ($scriptDir =~ m/^([0-9a-zA-Z_\/]+)$/) {
+	#my $scriptDir = cwd();
+	#my $scriptDir = `pwd`;
+	#$scriptDir = trim($scriptDir);
+
+	state $scriptDir = trim(`pwd`);
+
+	if ($scriptDir =~ m/^([\.0-9a-zA-Z_\/]+)$/) {
 		$scriptDir = $1;
 		WriteLog('GetDir: $scriptDir sanity check passed');
 	} else {
