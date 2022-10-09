@@ -2365,8 +2365,9 @@ sub GetFileHashPath { # $file ; Returns text file's standardized path given its 
 } # GetFileHashPath()
 
 sub GetPathFromHash { # guesses path of text file based on hash
-#GetFilePath {
-#GetHashPath {
+# sub GetFilePath {
+# sub GetHashPath {
+
 	# relies on config/admin/organize_files = 1
 	#todo fix
 	my $fileHash = shift;
