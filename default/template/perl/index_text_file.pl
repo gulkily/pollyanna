@@ -819,6 +819,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 										if (GetConfig('admin/index/create_system_tags')) {
 											DBAddVoteRecord($fileHash, 0, 'hastag');
+											DBAddVoteRecord('flush');
 										}
 
 										if ($hashTag eq 'run') {
@@ -832,6 +833,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										push @indexMessageLog, 'declined: #' . $tokenFound{'param'} . '; reason: ' . $approveReason;
 										if (GetConfig('admin/index/create_system_tags')) {
 											DBAddVoteRecord($fileHash, 0, 'declined');
+											DBAddVoteRecord('flush');
 										}
 									}
 								} # foreach my $itemParent (@itemParents)
