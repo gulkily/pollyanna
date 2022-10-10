@@ -31,7 +31,7 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 		$threadsCount = SqliteGetValue('SELECT COUNT(file_hash) FROM item_flat WHERE parent_count = 0 AND child_count > 0 AND item_score >= 0');
 	}
 
-	my $imagesCount = SqliteGetValue("select count(*) from item_flat where tags_list like '%image%'");
+	my $imagesCount = SqliteGetValue("SELECT COUNT(*) FROM item_flat WHERE tags_list LIKE '%,image,%'");
 
 	my $authorCount = DBGetAuthorCount();
 

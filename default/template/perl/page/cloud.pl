@@ -48,8 +48,8 @@ sub GetCloudPage { # print list of tag pairs
 				SELECT COUNT(file_hash) AS count
 				FROM item_flat
 				WHERE
-					tags_list LIKE '%$tag1%' AND
-					tags_list LIKE '%$tag2%'
+					tags_list LIKE '%,$tag1,%' AND
+					tags_list LIKE '%,$tag2,%'
 			");
 			$dialogContent .= "<tr><td>$tag1</td><td>$tag2</td><td>$count</td></tr>\n";
 		}
