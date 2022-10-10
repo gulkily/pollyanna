@@ -275,8 +275,15 @@ function GpgParsePubkey ($filePath) { // #todo parse file with gpg public key
 } # GpgParsePubkey()
 
 function GetFileHash ($fileName) { // returns hash of file contents
-// GetItemHash GetHash
+// function GetItemHash ($fileName) {
+// function GetHash ($fileName) {
 	WriteLog("GetFileHash($fileName)");
+
+	if (!$fileName || !file_exists($fileName)) {
+		WriteLog('GetFileHash: warning: $fileName failed sanity check');
+		return '';
+	}
+
 	return sha1_file($fileName);
 } # GetFileHash()
 
