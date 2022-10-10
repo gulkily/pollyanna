@@ -776,7 +776,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 											if (AuthorHasTag($authorKey, $tokenFound{'param'})) {
 												$approveStatus = 4;
-												$approveReason = 'author possesses tag (4)';
+												$approveReason = 'author possesses tag';
 											} else {
 												# todo tagset lookup
 											}
