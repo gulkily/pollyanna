@@ -1,9 +1,9 @@
 SELECT
-	item_flat.item_title item_title,
-	item_flat.child_count child_count,
-	item_flat.item_score item_score,
-	item_flat.file_hash file_hash,
-	item_flat.add_timestamp add_timestamp
+	item_flat.item_title AS item_title,
+	item_flat.child_count AS child_count,
+	item_flat.item_score AS item_score,
+	item_flat.file_hash AS file_hash,
+	item_flat.add_timestamp AS add_timestamp
 FROM
 	item_flat
 WHERE
