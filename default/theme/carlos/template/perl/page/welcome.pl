@@ -17,6 +17,6 @@ sub GetWelcomePage {
 	;
 
 	return $html;
-}
+} # GetWelcomePage()
 
 1;
