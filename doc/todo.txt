@@ -1,3 +1,8 @@
+#bug hike set image should shortcut to image/enable
+	actually finds directory, which is totally wrong
+
+#bug hike.sh / tcsh / hike command doesn't work right
+
 refresh templates:
 	if file is a perl template, build after removing config
 
@@ -1106,22 +1111,6 @@ xde-emoji for accessibility mode x
 
 #BUG #security image filenames are not shell-escaped before update.pl (?) is called
 	reproduce: try an image with an ` in the name
-
-Less Important Things Which Need Fixing
-=======================================
-xChanging the current git commit breaks the site
-	xThis is *kind of* by design, because the commit ID is part of the cache path
-	xThat way there is no incompatible cache
-	xNeed: A way to recover
-Emoji menu breaks older browsers
-	Need: ???
-	It's disabled by default, but makes navigation much nicer
-xWhen a user creates a new account, they are taken to profile.html, and then 20s later to profile page
-	xNeed: Message that public profile will be created shortly
-	xNeed: Background profile create request
-	xNeed: Server-side profile create trigger
-	xBug: Loading indicator, if it shows up, is auto-hidden, even though now we are waiting for profile to be created.
-
 
 wherever file counts are done with find
 	cache it so that not recounting every time
