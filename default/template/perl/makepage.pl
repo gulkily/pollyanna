@@ -18,7 +18,11 @@ while (my $argFound = shift) {
 require_once('item_list_as_gallery.pl');
 
 sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it into $HTMLDIR directory; $pageType, $pageParam
-# supported page types so far:
+# sub makepage {
+# sub getpage {
+# sub GetTagsPage {
+# sub GetPage {
+			# supported page types so far:
 # tag, #hashtag
 # author, ABCDEF01234567890
 # item, 0123456789abcdef0123456789abcdef01234567
