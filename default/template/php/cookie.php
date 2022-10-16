@@ -97,7 +97,7 @@ else {
 			unsetcookie2('checksum');
 			unsetcookie2('test');
 
-			RedirectWithResponse('/profile.html', 'Checksum mismatch detected. Please notify operator.');
+			RedirectWithResponse('/profile.html', 'You have been logged out! Press Register button to log in again. <span class=advanced>Technical: Checksum mismatch detected. Please notify operator.</span>');
 		}
 
 		if ($responseSignedIn) {
