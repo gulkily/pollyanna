@@ -288,7 +288,7 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 	}
 	
 	if ($shCommand =~ m/^(.+)$/s) {
-#	if ($shCommand =~ m/^([[:print:]\n\r\s]+)$/s) {
+	# if ($shCommand =~ m/^([[:print:]\n\r\s]+)$/s) {
 		# this is only a basic sanity check, but it's better than nothing
 		WriteLog('SqliteQuery: $query passed sanity check');
 		$shCommand = $1;
