@@ -436,7 +436,7 @@ sub WriteMessage { # Writes timestamped message to console (stdout)
 	# THIS is the part that prints the message
 	# this code is not approved for public viewing
 	#todo print "\n================================================================================\n";
-	print "\n$timestamp $output\n$timestamp =======================================================\n$timestamp";
+	print "\n$timestamp $output\n$timestamp =======================================================\n$timestamp ";
 
 	$previousText = $text;
 } # WriteMessage()
