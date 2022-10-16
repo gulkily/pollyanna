@@ -582,6 +582,7 @@ function DraggingInitDialog (el, doPosition) {
 //}
 
 function DraggingMakeFit (doPosition) { // initialize all class=dialog elements on the page to be draggable
+// function DraggableMakeFit () {
 // function ArrangeAll () {
 // function DraggingArrange {
 
