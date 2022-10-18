@@ -1,3 +1,5 @@
+needs to be a separate tagset for item template and classify dialog
+
 strip script directory from caller display in debug log to make easier to read
 
 #bug hike set image should shortcut to image/enable
