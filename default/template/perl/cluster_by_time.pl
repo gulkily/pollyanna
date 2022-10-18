@@ -65,3 +65,4 @@ print "\n";
 print "=====";
 print "\n";
 print "Groups created: " . $groupsCreatedCount;
+print "\n";
