@@ -315,7 +315,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 			WriteLog('IndexTextFile: scalar(@tokensFound) = ' . scalar(@tokensFound));
 			###################################################
 
-			if (GetConfig('setting/admin/token/http')) {
+			if (GetConfig('setting/admin/token/http')) { # 'http:// |http:// index_link indexlink
 				my @httpMatches = ($detokenedMessage =~ m/(http:\S+)/mg);
 
 				while (@httpMatches) {
