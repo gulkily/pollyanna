@@ -1,0 +1,36 @@
+<!-- help_views.template -->
+
+<fieldset>
+
+<p>
+	<a href="/calendar.html">Calendar</a>
+</p>
+
+
+<p>
+	<a href="/new.html">New</a>
+</p>
+
+<p>
+	<a href="/read.html">Read</a>
+</p>
+
+<p>
+	<a href="/chain.html">Chain</a>
+</p>
+
+<p>
+	<a href="/raw.html">Tags</a>
+</p>
+
+<p>
+	<a href="/compost.html">Compost</a>
+</p>
+
+<p>
+	<a href="/raw.html">Raw</a>
+</p>
+
+</fieldset>
+
+<!-- / help_views.template -->

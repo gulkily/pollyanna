@@ -3,14 +3,6 @@
 <fieldset>
 
 <p>
-    <a href="/new.html">New</a>
-</p>
-
-<p>
-    <a href="/read.html">Read</a>
-</p>
-
-<p>
 	<a href="/write.html">Write</a>
 </p>
 
@@ -28,10 +20,6 @@
 
 <p>
 	<a href="/upload.html">Upload picture or file</a>
-</p>
-
-<p>
-	<a href="/calendar.html">Calendar</a>
 </p>
 
 <p>
