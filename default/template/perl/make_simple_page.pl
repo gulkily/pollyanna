@@ -5,6 +5,7 @@ use strict;
 use warnings;
 
 sub MakeSimplePage { # given page name, makes page
+# sub GetSimplePage {
 # sub WriteSimplePage {
 # sub PutSimplePage {
 
