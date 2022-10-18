@@ -272,6 +272,7 @@ sub GetTimestampWidget { # $time ; returns timestamp widget
 	} else {
 		WriteLog('GetTimestampWidget: $epoch = false');
 		$widget = GetTemplate('html/widget/timestamp_time.template'); #timestampTagFormat
+		#$widget = GetTemplate('html/widget/timestamp_textarea.template'); #timestampTagFormat
 		#$widget = GetTemplate('html/widget/timestamp.template'); #timestampTagFormat
 
 		$widget = str_replace("\n", '', $widget);
