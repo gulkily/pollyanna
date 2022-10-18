@@ -1,3 +1,11 @@
+	if (GetPrefs('draggable_restore_collapsed') && !GetPrefs('draggable_restore')) {
+		// if we restore closed state, but NOT restore position, reflow the dialogs again
+		DraggingMakeFit(1)
+	}
+
+
+
+
 
 function selectLoadKey (keyName) {
 	var newKey = GetPrefs(keyName, 'PrivateKey1');
