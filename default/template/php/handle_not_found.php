@@ -32,8 +32,8 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			$authorFingerprint = $itemHashMatch[1];
 			$pagesPlArgument = $authorFingerprint;
 		}
-		if (preg_match('/^\/top\/([a-zA-Z0-9_]+)\.html/', $path, $hashTagMatch)) { #tagName
-		# Item URL in the form: /top/nice.html
+		if (preg_match('/^\/tag\/([a-zA-Z0-9_]+)\.html/', $path, $hashTagMatch)) { #tagName
+		# Item URL in the form: /tag/nice.html
 			WriteLog('HandleNotFound: found hashtag');
 			$hashTag = $hashTagMatch[1];
 			$pagesPlArgument = '\#' . $hashTag;
@@ -283,8 +283,8 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			$pagesPlArgument = '-D ' . $itemHash;
 		}
 
-		if (preg_match('/^\/dialog\/top\/([a-zA-Z0-9_-]+)\.html/', $path, $itemTagMatch)) {
-			# Item URL in the form: /top/nice.html
+		if (preg_match('/^\/dialog\/tag\/([a-zA-Z0-9_-]+)\.html/', $path, $itemTagMatch)) {
+			# Item URL in the form: /tag/nice.html
 			WriteLog('HandleNotFound: found dialog / tag');
 			$tagName = $itemTagMatch[1];
 			$pagesPlArgument = '-D \#' . $tagName;

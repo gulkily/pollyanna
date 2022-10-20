@@ -28,8 +28,8 @@ sub GetTagLink { # $tag ; returns html for a tag link
 		} else {
 			$tagColor = GetThemeColor('tag_text');
 		}
-		my $voteItemLink = "/top/" . $tag . ".html";
-		my $dialogName = '/top/' . $tag;
+		my $voteItemLink = "/tag/" . $tag . ".html";
+		my $dialogName = '/tag/' . $tag;
 
 		my $tagCaption = $tag;
 		if ($voteCount) {

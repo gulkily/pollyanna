@@ -784,7 +784,7 @@ frontend_dev_loop.pl
 split gpg from openpgp stuff
 	and add enable flags for both
 
-/top/... pages should be sorted by number of that tag applied
+/tag/... pages should be sorted by number of that tag applied
 
 #bug same js template gets injected more than once
 
@@ -1220,7 +1220,7 @@ auto urls from title
 
 move some config/default settings to system/ tree
 
-/admin ==> /top/admin.html (if exists)
+/admin ==> /tag/admin.html (if exists)
 
 hide/disable with note unavailable features
 	e.g. gui registration with js=0 and php=0
@@ -1283,7 +1283,7 @@ Profile page
 	
 
 Provide cookieless sessions via url prefix
-	example.com/abcdefghi/top/agree.html
+	example.com/abcdefghi/tag/agree.html
 
 .nfo support for non-txt files, which cannot have ""\n-- \n" footer-signature
 

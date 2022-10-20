@@ -73,7 +73,7 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template'; ret
 			my $menuItemCaption = uc(substr($menuItemName, 0, 1)) . substr($menuItemName, 1);
 
 			if ($listName eq 'menu_tag') {
-				$menuItemUrl = '/top/' . $menuItemName . '.html';
+				$menuItemUrl = '/tag/' . $menuItemName . '.html';
 				$menuItemCaption = '#' . $menuItemName;
 			}
 

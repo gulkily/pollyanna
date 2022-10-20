@@ -2564,7 +2564,7 @@ sub EnsureDirsThatShouldExist { # creates directories expected later
 		"$CACHEDIR/$cacheVersion", #ephemeral data
 		"$HTMLDIR/author",
 		"$HTMLDIR/action",
-		"$HTMLDIR/top", #top items for tags
+		"$HTMLDIR/tag", #tag items for tags
 		"$CONFIGDIR",
 		"$CONFIGDIR/template",
 		"$CONFIGDIR/setting/admin",

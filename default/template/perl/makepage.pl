@@ -113,7 +113,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	# tag page, get the tag name from $pageParam
 	elsif ($pageType eq 'tag') {
 		my $tagName = $pageParam;
-		my $targetPath = "top/$tagName.html";
+		my $targetPath = "tag/$tagName.html";
 		WriteLog("MakePage: tag: $tagName");
 
 		if (0) {
@@ -128,7 +128,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 
 			$params{'query'} = DBGetItemListQuery(\%queryParams);
 			$params{'query_params'} = \%queryParams;
-			$params{'target_path'} = 'top/' . $tagName;
+			$params{'target_path'} = 'tag/' . $tagName;
 
 			WriteItemListingPages($pageType, 'dialog_list', \%params);
 		}

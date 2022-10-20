@@ -109,7 +109,7 @@ sub GetReadPage { # generates page with item listing based on parameters
 			$zipName = "$pageDate.zip";
 		} # $pageType eq 'date'
 
-		if ($pageType eq 'tag') { #'/top/tag.html' #'/tag/tag.html' '/top/'
+		if ($pageType eq 'tag') { #'/tag/tag.html' #'/tag/tag.html' '/tag/'
 			# TAG PAGE ##############################################################
 			#todo tell user how many items we found
 
@@ -371,7 +371,7 @@ sub GetReadPage { # generates page with item listing based on parameters
 		my $file = $row->{'file_path'};
 
 		if ($pageType eq 'tag' && $pageParam) {
-			$row->{'vote_return_to'} = '/top/' . $pageParam . '.html'; #todo unhardcode
+			$row->{'vote_return_to'} = '/tag/' . $pageParam . '.html'; #todo unhardcode
 		}
 
 		WriteLog('GetReadPage: calling DBAddItemPage (1)'); #GetReadPage()

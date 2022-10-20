@@ -111,7 +111,7 @@ sub RenderLink {
 	$link = AddAttributeToTag($link, 'a', 'href', $url);
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
-		if ($url =~ m/\/top\//) {
+		if ($url =~ m/\/tag\//) {
 			$link = AddAttributeToTag($link, 'a ', 'onclick', "if (window.GetPrefs && GetPrefs('draggable_spawn') && window.FetchDialogFromUrl) { return FetchDialogFromUrl('/dialog" . $url . "'); }");
 			#bughere #todo this is where needs fix for duplicate hashtag listing dialogs #duplicatedialogs
 			#todo this may not be the right place for this at all
@@ -429,7 +429,7 @@ sub GetTagPageHeaderLinks { # $tagSelected ; returns html-formatted links to exi
 		my $tagCount = $tagHash{'vote_count'};
 
 		if ($tagCount > $minimumTagCount || $tagName eq $tagSelected) {
-			my $voteItemLink = "/top/" . $tagName . ".html";
+			my $voteItemLink = "/tag/" . $tagName . ".html";
 
 			if ($tagName eq $tagSelected) {
 				#todo template this
@@ -2416,7 +2416,7 @@ while (my $arg1 = shift @foundArgs) {
 				#					print ("recognized author fingerprint\n");
 				#					MakePage('author', $arg1, 1);
 				#				}
-				elsif (substr($makeDialogArg, 0, 1) eq '#') { #hashtag top/like.html
+				elsif (substr($makeDialogArg, 0, 1) eq '#') { #hashtag tag/like.html
 					#todo sanity checks here
 					print ("-D hash tag $makeDialogArg\n");
 
@@ -2435,7 +2435,7 @@ while (my $arg1 = shift @foundArgs) {
 						$query,
 						'#' . $hashTag
 					); #todo sanity
-					my $dialogPath = 'top/' . $hashTag . '.html';
+					my $dialogPath = 'tag/' . $hashTag . '.html';
 
 					$dialog = AddAttributeToTag($dialog, 'table', 'id', 'top_' . $hashTag);
 

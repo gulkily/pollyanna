@@ -13,7 +13,7 @@
 # 					SetActiveDialog(document.getElementById('top_$tag'));
 # 					return false;
 # 				} else {
-# 					return FetchDialogFromUrl('/dialog/top/$tag');
+# 					return FetchDialogFromUrl('/dialog/tag/$tag');
 # 				}
 # 			}
 # 		"
