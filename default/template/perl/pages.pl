@@ -1983,18 +1983,11 @@ sub GetPagePath { # $pageType, $pageParam ; returns path to item's html path
 		# /author/ABCDEF1234567890/index.html
 		$htmlPath = $pageType . '/' . $pageParam . '/index.html';
 	}
-	elsif ($pageType eq 'tag') {
-		# /top/approve.html
-		$htmlPath = 'top/' . $pageParam . '.html';
-	}
 	elsif ($pageType eq 'rss') {
 		# /rss.xml
 		$htmlPath = 'rss.xml';
 	}
-	elsif ($pageType eq 'authors') {
-		# /authors.html
-		$htmlPath = 'authors.html';
-	} else {
+	else {
 		if ($pageParam) {
 			# e.g. /tag/approve.html
 			$htmlPath = $pageType . '/' . $pageParam . '.html';
