@@ -807,6 +807,8 @@ sub GetTimestampsDialog {
 }
 
 sub GetNextPreviousDialog {
+# sub GetChainDialog {
+# sub get_chain {
 	my $fileHash = shift;
 	#todo sanity
 
