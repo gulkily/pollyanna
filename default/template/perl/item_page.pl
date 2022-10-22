@@ -338,7 +338,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		return '';
 	}
 
-	WriteLog("GetItemPage(file_hash = " . $file{'file_hash'} . ', file_path = ' . $file{'file_path'} . ")");
+	WriteLog("GetItemPage($fileHash, $filePath); caller = " . join(',', caller));
 
 	# initialize variable which will contain page html
 	my $txtIndex = "";
