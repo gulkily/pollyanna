@@ -648,6 +648,9 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'run_log');
 			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'compile_log');
 		}
+		if (index($file{'tags_list'}, ',py,') != -1 && !GetConfig('setting/admin/py/enable')) {
+			$txtIndex .= GetWindowTemplate('Note: Python module is off, this file was not parsed.', 'Notice');
+		}
 	}
 
 	# end page with footer
