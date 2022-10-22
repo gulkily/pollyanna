@@ -298,11 +298,15 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 				my $filePage = GetItemPage($file);
 				WriteLog('PutHtmlFile($targetPath = ' . $targetPath . ', $filePage = ' . length($filePage) . ' bytes)');
 				PutHtmlFile($targetPath, $filePage);
-			} else {
+			} # if ($file)
+			else { # no $file
+				#PutHtmlFile($targetPath, 'I looked for that, but could not find it (1)');
 				WriteMessage('MakePage: item: warning: $file missing, sanity check failed!');
 				WriteLog('MakePage: item: warning: sanity check failed: $file ($files[0]) is missing!');
-			}
-		} else {
+			} # no $file
+		} # if (scalar(@files))
+		else { # no @files
+			#PutHtmlFile($targetPath, 'I looked for that, but could not find it (2)');
 			WriteLog('MakePage: warning: Item not in database; $fileHash = ' . $fileHash . '; caller = ' . join(',', caller));
 			# my $query = GetTemplate('query/new') . " LIMIT 12";
 			# my $queryDialog = GetQueryAsDialog($query, 'Newest');
@@ -314,8 +318,8 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 			# ;
 			# PutHtmlFile($targetPath, $page);
 			return '';
-		}
-	} #item page
+		} # nothing in scalar(@files)
+	} # $pageType eq 'item' # item page
 	#
 	# topitems page
 	elsif ($pageType eq 'image') {
