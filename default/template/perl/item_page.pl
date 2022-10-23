@@ -841,7 +841,7 @@ sub GetItemAttributesDialog { # %file
 		#===
 		my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE file_hash LIKE '$fileHash%' ORDER BY attribute";
 		$itemInfoTemplate = GetQueryAsDialog($query, 'Item Attributes'); # GetResultSetAsDialog() --> RenderField()
-		$itemInfoTemplate = '<span class=admin>' . $itemInfoTemplate . '</span>';
+		$itemInfoTemplate = '<span class=advanced>' . $itemInfoTemplate . '</span>';
 		return $itemInfoTemplate;
 		#for debug/compare
 		#return $itemInfoTemplate . GetItemAttributesDialog2($fileRef);
