@@ -2425,6 +2425,7 @@ sub array_unique { # @array ; returns array of unique items from @array
 } # array_unique()
 
 sub in_array { # $needle, @haystack ; emulates php's in_array()
+# sub array_contains {
 	my $needle = shift;
 	my @haystack = @_;
 
