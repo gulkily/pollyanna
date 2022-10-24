@@ -3,7 +3,8 @@ SELECT
 	item_title,
 	item_type,
 	child_count,
-	add_timestamp
+	add_timestamp,
+	tags_list
 FROM
 	item_flat
 WHERE
