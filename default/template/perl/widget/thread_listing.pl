@@ -74,6 +74,12 @@ sub GetThreadListing { # $topLevel, $selectedItem, $indentLevel, $itemsListRefer
 
 	$listing .= GetItemHtmlLink($topLevel, $itemTitle);
 
+	if ($topLevel eq $selectedItem) {
+		$listing .= ' (selected)';
+	} else {
+		$listing .= '';
+	}
+
 	$listing .= '</td>';
 
 	$listing .= '<td>';
@@ -101,6 +107,7 @@ sub GetThreadListing { # $topLevel, $selectedItem, $indentLevel, $itemsListRefer
 				push @{$itemsListReference}, $itemHash;
 			}
 
+			# recursion
 			$listing .= GetThreadListing($itemHash, $selectedItem, $indentLevel + 1, $itemsListReference);
 			#$listing .= $itemHash;
 		}
