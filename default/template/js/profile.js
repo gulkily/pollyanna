@@ -42,6 +42,7 @@ function btnSignOut_Click (t) { // event for 'Sign Out' button's click
 		ls.removeItem('settings');
 		ls.removeItem('dialogPosition');
 		ls.removeItem('voted');
+		ls.removeItem('replyCart');
 
 		SetPrefs('latest_pubkey_ping', 0);
 	}
