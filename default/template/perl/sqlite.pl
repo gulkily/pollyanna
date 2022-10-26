@@ -1775,7 +1775,8 @@ sub DBGetItemAttributes { # $fileHash ; returns reference to hash of attributes
 	return $memo{$fileHash};
 } # DBGetItemAttributes()
 
-sub DBGetItemAttribute { # $fileHash, [$attribute] ; returns all if attribute not specified
+sub DBGetItemAttribute { # $fileHash, $attribute ; returns one attribute for item
+# for getting multiple (all) attributes, use DBGetItemAttributes()
 	my $fileHash = shift;
 	my $attribute = shift;
 
