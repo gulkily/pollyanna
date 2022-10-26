@@ -15,7 +15,6 @@ sub RunPyItem {
 
 	my $filePath = DBGetItemFilePath($item);
 	my $fileBinaryPath = $filePath;
-	#my $fileBinaryPath = $filePath . '.out';
 
 	if (-e $fileBinaryPath) {
 		if ($fileBinaryPath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
@@ -81,21 +80,23 @@ sub IndexPyFile { # $file | 'flush' ; indexes one text file into database
 	DBAddItem($file, $itemName, '', $fileHash, 'py', 0);
 	DBAddVoteRecord($fileHash, 0, 'py');
 
-	# my $compileLog = `gcc -v $file -o $file.out 2>&1`;
-	my $compileCommand = "python $file";
-	# my $compileCommand = "g++ -v $file -o $file.out 2>&1";
-	WriteLog('IndexPyFile: $compileCommand = ' . $compileCommand);
+	if (0) {
+		# python files do not need compiling
+		# this may be useful later
+		# e.g. if file was uploaded by someone with admin cookie, run right away and call it compiling?
+		# my $compileCommand = "python $file";
+		# WriteLog('IndexPyFile: $compileCommand = ' . $compileCommand);
 
-	my $compileStart = time();
-	my $compileLog = `$compileCommand`;
-	my $compileFinish = time();
+		# my $compileStart = time();
+		# my $compileLog = `$compileCommand`;
+		# my $compileFinish = time();
 
-	DBAddItemAttribute($fileHash, 'compile_start', $compileStart);
-	DBAddItemAttribute($fileHash, 'compile_finish', $compileFinish);
+		# DBAddItemAttribute($fileHash, 'compile_start', $compileStart);
+		#DBAddItemAttribute($fileHash, 'compile_finish', $compileFinish);
 
-	# my $compileLog = `g++ -v $file -o $file.out 2>&1`;
-	if ($compileLog) {
-		PutCache('compile_log/' . $fileHash, $compileLog); # parse_log parse.log ParseLog
+		# if ($compileLog) {
+		# 	PutCache('compile_log/' . $fileHash, $compileLog); # parse_log parse.log ParseLog
+		# }
 	}
 
 	my $addedTime = DBGetAddedTime($fileHash);

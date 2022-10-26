@@ -500,7 +500,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	my $htmlToolbox = GetHtmlToolboxes(\%file);
 	$txtIndex .= $htmlToolbox;
 
-#	$txtIndex .= '<hr>';
+	# $txtIndex .= '<hr>';
 
 
 	##
