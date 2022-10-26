@@ -175,6 +175,19 @@ sub GetItemTemplateBody {
 		WriteLog('GetItemTemplateBody: warning: $itemTemplateBody is FALSE; caller = ' . join(',', caller));
 	}
 
+	if ($file{'item_type'} eq 'perl') {
+		WriteLog('GetItemTemplateBody: item_type = perl');
+
+		$itemText = PerlForWeb(GetFile($file{'file_path'}));
+
+		$itemTemplateBody = GetTemplate('html/item/item.template'); # GetItemTemplate()
+		$itemTemplateBody = str_replace('$itemText', $itemText, $itemTemplateBody);
+	} # 'perl'
+
+	if (!$itemTemplateBody) {
+		WriteLog('GetItemTemplateBody: warning: $itemTemplateBody is FALSE; caller = ' . join(',', caller));
+	}
+
 	return $itemTemplateBody;
 } # GetItemTemplateBody()
 

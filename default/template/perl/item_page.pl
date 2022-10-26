@@ -643,13 +643,18 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			(index($file{'tags_list'}, ',cpp,') != -1 && GetConfig('setting/admin/cpp/enable'))
 			||
 			(index($file{'tags_list'}, ',py,') != -1 && GetConfig('setting/admin/py/enable'))
+			||
+			(index($file{'tags_list'}, ',perl,') != -1 && GetConfig('setting/admin/perl/enable'))
 		) {
-			#cpp or py file
+			# cpp / py / perl file
 			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'run_log');
 			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'compile_log');
 		}
 		if (index($file{'tags_list'}, ',py,') != -1 && !GetConfig('setting/admin/py/enable')) {
 			$txtIndex .= GetWindowTemplate('Note: Python module is off, this file was not parsed.', 'Notice');
+		}
+		if (index($file{'tags_list'}, ',perl,') != -1 && !GetConfig('setting/admin/perl/enable')) {
+			$txtIndex .= GetWindowTemplate('Note: Perl module is off, this file was not parsed.', 'Notice');
 		}
 	}
 

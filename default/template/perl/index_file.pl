@@ -170,6 +170,15 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 			$indexSuccess = 0;
 		}
 	}
+	if ($ext eq 'pl') {
+		WriteLog('IndexFile: calling IndexPerlFile()');
+		$indexSuccess = IndexPerlFile($file);
+
+		if (!$indexSuccess) {
+			WriteLog('IndexFile: warning: IndexPerlFile() returned FALSE; $indexSuccess was FALSE');
+			$indexSuccess = 0;
+		}
+	} # if ($ext eq 'pl')
 
 	if (
 		$ext eq 'png' ||

@@ -86,6 +86,8 @@ sub IndexHtmlFile { # $file | 'flush' ; indexes one text file into database
 
 require_once('index_cpp_file.pl');
 require_once('index_py_file.pl');
+require_once('index_pl_file.pl');
+require_once('run_item.pl');
 
 sub uniq { # @array ; return array without duplicate elements
 # copied from somewhere like perlmonks
