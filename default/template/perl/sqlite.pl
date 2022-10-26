@@ -741,6 +741,30 @@ sub DBGetItemFilePath { # get path for item's source file
 	}
 } # DBGetItemTitle()
 
+sub DBGetItemType { # get type of item
+# sub GetItemFileType {
+# sub GetItemFile {
+	my $itemHash = shift;
+
+	if (!$itemHash || !IsItem($itemHash)) {
+		return;
+		#todo more sanity
+	}
+
+	my $query = 'SELECT item_type FROM item WHERE file_hash = ?';
+	my @queryParams = ();
+
+	push @queryParams, $itemHash;
+
+	my $itemType = SqliteGetValue($query, @queryParams);
+
+	if ($itemType) {
+		return $itemType;
+	} else {
+		return '';
+	}
+} # DBGetItemType()
+
 sub DBGetItemAuthor { # get author for item ($itemhash)
 	my $itemHash = shift;
 
