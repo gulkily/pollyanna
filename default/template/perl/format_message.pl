@@ -126,6 +126,21 @@ sub PyForWeb { # replaces some spaces with &nbsp; to preserve text-based layout 
 	return $container;
 } # PyForWeb()
 
+sub PerlForWeb { # replaces some spaces with &nbsp; to preserve text-based layout for html display; $text
+	my $text = shift;
+
+	if (!$text) {
+		return '';
+	}
+
+	$text = HtmlEscape($text);
+
+	my $container = GetTemplate('html/item/container/perl.template');
+	$container = str_replace('$text', $text, $container);
+
+	return $container;
+} # PerlForWeb()
+
 sub TextartForWeb { # replaces some spaces with &nbsp; to preserve text-based layout for html display; $text
 	my $text = shift;
 
