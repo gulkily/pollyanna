@@ -5,81 +5,83 @@ use warnings;
 use 5.010;
 
 sub RunItem {
-    # sub RunFile {
-    # sub RunCppFile {
-    # sub RunPyFile {
-    # sub RunPerlFile {
-    my $item = shift;
-    WriteLog("RunItem($item)");
+	# sub RunFile {
+	# sub RunCppFile {
+	# sub RunPyFile {
+	# sub RunPerlFile {
+	my $item = shift;
+	WriteLog("RunItem($item)");
 
-    my $runLog = 'run_log/' . $item;
+	my $runLog = 'run_log/' . $item;
 
-    my $filePath = DBGetItemFilePath($item);
-    my $itemType = DBGetItemType($item);
-    #todo optimize this to reduce database queries
+	my $filePath = DBGetItemFilePath($item);
+	my $itemType = DBGetItemType($item);
+	#todo optimize this to reduce database queries
 
-    WriteLog('RunItem: $filePath = ' . $filePath . '; $itemType = ' . $itemType);
+	WriteLog('RunItem: $filePath = ' . $filePath . '; $itemType = ' . $itemType);
 
-    if ($itemType eq 'perl') {
-        if (-e $filePath) {
-            if ($filePath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
-                $filePath = $1;
-                `chmod +x $filePath`;
-                my $runStart = time();
-                my $result = `perl $filePath`;
-                my $runFinish = time();
+	if ($itemType eq 'perl') {
+		if (-e $filePath) {
+			if ($filePath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
+				$filePath = $1;
+				`chmod +x $filePath`;
+				my $runStart = time();
+				my $result = `perl $filePath`;
+				my $runFinish = time();
 
-                DBAddItemAttribute($item, 'run_start', $runStart);
-                DBAddItemAttribute($item, 'run_finish', $runFinish);
+				DBAddItemAttribute($item, 'run_start', $runStart);
+				DBAddItemAttribute($item, 'run_finish', $runFinish);
 
-                PutCache($runLog, $result);
-                return 1;
-            }
-        }
-    }
+				PutCache($runLog, $result);
+				return 1;
+			}
+		}
+	}
 
-    if ($itemType eq 'py') {
-        if (-e $filePath) {
-            if ($filePath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
-                $filePath = $1;
-                `chmod +x $filePath`;
-                my $runStart = time();
-                my $result = `python $filePath`;
-                my $runFinish = time();
+	if ($itemType eq 'py') {
+		if (-e $filePath) {
+			if ($filePath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
+				$filePath = $1;
+				`chmod +x $filePath`;
+				my $runStart = time();
+				my $result = `python $filePath`;
+				my $runFinish = time();
 
-                DBAddItemAttribute($item, 'run_start', $runStart);
-                DBAddItemAttribute($item, 'run_finish', $runFinish);
+				DBAddItemAttribute($item, 'run_start', $runStart);
+				DBAddItemAttribute($item, 'run_finish', $runFinish);
 
-                PutCache($runLog, $result);
-                return 1;
-            }
-        }
-    }
+				PutCache($runLog, $result);
+				return 1;
+			}
+		}
+	}
 
-    if ($itemType eq 'cpp') {
-        my $fileBinaryPath = $filePath . '.out';
+	if ($itemType eq 'cpp') {
+		my $fileBinaryPath = $filePath . '.out';
 
-        if (-e $fileBinaryPath) {
-            if ($fileBinaryPath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
-                $fileBinaryPath = $1;
-                `chmod +x $fileBinaryPath`;
-                my $runStart = time();
-                my $result = `$fileBinaryPath`;
-                my $runFinish = time();
+		if (-e $fileBinaryPath) {
+			if ($fileBinaryPath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
+				$fileBinaryPath = $1;
+				`chmod +x $fileBinaryPath`;
+				my $runStart = time();
+				my $result = `$fileBinaryPath`;
+				my $runFinish = time();
 
-                DBAddItemAttribute($item, 'run_start', $runStart);
-                DBAddItemAttribute($item, 'run_finish', $runFinish);
+				DBAddItemAttribute($item, 'run_start', $runStart);
+				DBAddItemAttribute($item, 'run_finish', $runFinish);
 
-                PutCache($runLog, $result);
-                return 1;
-            } else {
-                WriteLog('RunItem: cpp: warning: $fileBinaryPath failed sanity check');
-                return '';
-            }
-        } # if (-e $fileBinaryPath)
-        else {
-            PutCache($runLog, 'error: run failed, file not found: ' . $fileBinaryPath);
-            return 1;
-        }
-    } # if ($itemType eq 'cpp')
+				PutCache($runLog, $result);
+				return 1;
+			} else {
+				WriteLog('RunItem: cpp: warning: $fileBinaryPath failed sanity check');
+				return '';
+			}
+		} # if (-e $fileBinaryPath)
+		else {
+			PutCache($runLog, 'error: run failed, file not found: ' . $fileBinaryPath);
+			return 1;
+		}
+	} # if ($itemType eq 'cpp')
 } # RunItem()
+
+1;
