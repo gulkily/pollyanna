@@ -14,7 +14,7 @@ sub GetHelpPage { # returns html for help page (/help.html)
 		GetWindowTemplate(GetTemplate('html/page/help_diagnostics.template'), 'Toys') .
 		GetWindowTemplate(GetTemplate('html/page/help_views.template'), 'Views') .
 		GetStatsTable() .
-        GetPageFooter('help')
+		GetPageFooter('help')
 	;
 
 	if (GetConfig('admin/js/enable')) {
