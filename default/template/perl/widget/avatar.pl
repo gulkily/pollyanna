@@ -23,7 +23,12 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 		{
 			#todo this is not entirely correct ... should be based on entire theme value, not just the first line
 			# it's a hack to map theme value onto path
-			my $themeName = GetFirstLine(GetConfig('theme')); #todo #bug
+
+			my $themesValue = GetConfig('theme');
+			$themesValue =~ s/[\s]+/ /g;
+			my @activeThemes = split(' ', $themesValue);
+
+			my $themeName = $activeThemes[0];
 			$avatarCachePrefix .= '/' . $themeName;
 		}
 	}

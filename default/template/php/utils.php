@@ -549,18 +549,18 @@ function GetConfig ($configKey, $token = 0) { // get value for config value $con
 
 function GetTemplate ($templateKey) { // get template from config tree
 // looks in theme directory first, so config/theme/ > default/theme/ > config/ > default/
-	$themeName = GetConfig('theme');
-	$themePath = 'theme/' . $themeName . '/template/' . $templateKey;
 
 	WriteLog("GetTemplate($templateKey)");
+	$templateContent = GetThemeAttribute("template/$templateKey");
 
-	if (GetConfig($themePath)) {
-		WriteLog("GetTemplate: GetConfig($themePath) was true, returning GetConfig($themePath)");
-		return GetConfig($themePath);
+	if (!$templateContent) {
+		$templateContent = GetConfig("template/$templateKey");
+	}
+
+	if ($templateContent) {
+		return $templateContent;
 	} else {
-		WriteLog("GetTemplate: GetConfig($themePath) was FALSE, returning GetConfig(template/$templateKey)");
-
-		return GetConfig("template/$templateKey");
+		WriteLog('GetTemplate: warning: $templateContent was FALSE for $templateKey = ' . $templateKey);
 	}
 }
 
@@ -1021,7 +1021,12 @@ function GetWindowTemplate ( # body, title, headings, status, menu
 function GetThemeAttribute ($attributeName) { // returns a config overlay value from config/theme/...
 // uses GetConfig(), which means look first in config/ and then in default/
 
-	$activeThemes = explode("\n", GetConfig('theme'));
+	WriteLog('GetThemeAttribute(' . $attributeName . ')');
+
+	$themesValue = GetConfig('theme');
+	$themesValue = preg_replace('/[\s]+/', ' ', $themesValue);
+
+	$activeThemes = explode(' ', $themesValue);
 	foreach ($activeThemes as $themeName) {
 		$attributePath = 'theme/' . $themeName . '/' . $attributeName;
 
@@ -1345,7 +1350,11 @@ function GetItemPlaceholderPage ($comment, $hash, $fileUrlPath, $filePath) { # g
 	}
 
 	// get theme name from config and associated background and foreground colors
-	$themeName = trim(GetConfig('theme'));
+
+	$themesValue = GetConfig('theme');
+	$themesValue = preg_replace('/[\s]+/', ' ', $themesValue);
+	$activeThemes = explode(' ', $themesValue);
+	$themeName = $activeThemes[0];
 	WriteLog('$themeName = ' . $themeName);
 
 	{ // color values

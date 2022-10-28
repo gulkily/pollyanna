@@ -416,7 +416,9 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 
 	my $returnValue = '';
 
-	my @activeThemes = split("\n", GetConfig('theme'));
+	my $themesValue = GetConfig('theme');
+	$themesValue =~ s/[\s]+/ /g;
+	my @activeThemes = split(' ', $themesValue);
 	foreach my $themeName (@activeThemes) {
 		my $attributePath = 'theme/' . $themeName . '/' . $attributeName;
 

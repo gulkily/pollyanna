@@ -2614,7 +2614,11 @@ sub EnsureDirsThatShouldExist { # creates directories expected later
 sub PopulateResource { # populate resources needed by all active themes
 # this is a rather naive way of doing it, but it works for now
 # searches for each resource in active themes and copies to html root if found
-	my @activeThemes = split("\n", GetConfig('theme'));
+	my $themesValue = GetConfig('theme');
+	$themesValue =~ s/[\s]+/ /g;
+	my @activeThemes = split(' ', $themesValue);
+
+	#my @activeThemes = split("\n", GetConfig('theme'));
 	my @resources = split("\n", `find default/res`);
 
 	use File::Basename;

@@ -173,7 +173,11 @@ sub ExpireAvatarCache { # $fingerprint ; removes all caches for alias
 		return 0;
 	}
 
-	my $themeName = GetFirstLine(GetConfig('theme'));
+	my $themesValue = GetConfig('theme');
+	$themesValue =~ s/[\s]+/ /g;
+	my @activeThemes = split(' ', $themesValue);
+
+	my $themeName = $activeThemes[0];
 
 	WriteLog('ExpireAvatarCache: $themeName = ' . $themeName);
 
