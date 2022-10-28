@@ -2241,7 +2241,7 @@ sub DBGetAuthorLastSeen { # return timestamp of last item attributed to author
 	$key = SqliteEscape($key);
 
 	if ($key) { #todo fix non-param sql
-		my $query = "SELECT MAX(item_flat.add_timestamp) AS last_seen FROM item_flat WHERE author_key = '$key'";
+		my $query = "SELECT MAX(item_flat.add_timestamp) AS last_seen FROM item_flat WHERE tags_list NOT LIKE '%,pubkey,%' AND author_key = '$key'";
 		$lastSeenCache{$key} = SqliteGetValue($query);
 		return $lastSeenCache{$key};
 	} else {
