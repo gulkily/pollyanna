@@ -168,6 +168,9 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 				WriteLog('GetResultSetAsDialog: calling RenderField($column = ' . ($column ? $column : 'N/A') . ', $row->{$column} = ' . ($row->{$column} ? $row->{$column} : 'N/A') . ', $row = ' . ($row ? $row : 'N/A') . ')');
 
 				my $renderedField = RenderField($column, $row->{$column}, $row);
+
+				#todo if $renderedField is only one <a href=></a>, add display:block to it
+
 				if ($renderedField) {
 					$content .= $renderedField;
 				} else {
