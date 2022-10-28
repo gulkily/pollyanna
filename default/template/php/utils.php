@@ -35,12 +35,12 @@ function GetDir ($dirName) {
 	}
 
 	// should not be here ever
-}
+} # GetDir()
 
 function RenameFile ($fileOld, $fileNew) {
 	#todo sanity
 	return rename($fileOld, $fileNew);
-}
+} # RenameFile()
 
 function GetDir2 ($dirName) { # returns path to special directory specified
 # 'html' = html root
@@ -147,7 +147,7 @@ function SqliteEscape ($text) { # Escapes supplied text for use in sqlite query
 	WriteLog('SqliteEscape: return ' . $text);
 
 	return $text;
-}
+} # SqliteEscape()
 
 function SqliteGetValue ($query) { # Returns the first column from the first row returned by sqlite $query
 	WriteLog("SqliteGetValue($query)");
@@ -442,7 +442,7 @@ function PutConfig ($configKey, $configValue) { # writes config value to config 
 
 function split2 ($separator, $array) {
 	return explode($separator, $array);
-}
+} # split2()
 
 function GetConfig ($configKey, $token = 0) { // get value for config value $configKey
 	WriteLog('GetConfig(' . $configKey . ', $token = ' . $token . ')');
@@ -562,7 +562,7 @@ function GetTemplate ($templateKey) { // get template from config tree
 	} else {
 		WriteLog('GetTemplate: warning: $templateContent was FALSE for $templateKey = ' . $templateKey);
 	}
-}
+} # GetTemplate()
 
 function GetFile ($file) { // gets file contents
 	$file = trim($file);
@@ -577,7 +577,7 @@ function GetFile ($file) { // gets file contents
 	}
 
 	return file_get_contents($file);
-}
+} # GetFile()
 
 function PutFile ($file, $content) { // puts file contents
 	WriteLog("PutFile($file, (\$content)");
@@ -906,32 +906,32 @@ function GetWindowTemplate ( # body, title, headings, status, menu
 
 	// titlebar, if there's a title
 	if ($windowTitle) {
-//
-// 		if ($showButtons && GetConfig('admin/js/dragging')) {
-// 			WriteLog('GetWindowTemplate: $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle . '; dragging = ' . GetConfig('admin/js/dragging'));
-//
-// 			$btnCloseCaption = '{-}'; # needs to match one other place in dragging.js #collapseButton
-// 			$windowTitlebar = GetTemplate('html/window/titlebar_with_button.template'); #window_titlebar_buttons
-//
-// 			$windowTitlebar = InjectJs($windowTitlebar, array('titlebar_with_button'));
-//
-// 			$windowTitlebar = str_replace('$windowTitle', $windowTitle, $windowTitlebar);
-// 			#$windowTitlebar = str_replace('$windowAnchor', $windowAnchor, $windowTitlebar);
-// 			$windowTemplate = str_replace('$windowTitlebar', $windowTitlebar, $windowTitlebar);
-// 			$windowTemplate = str_replace('$btnCloseCaption', $btnCloseCaption, $windowTitlebar);
-// 			#$contentColumnCount = 2;
-// 		} else {
-// 			$windowTitlebar = GetTemplate('html/window/titlebar.template');
-// 			#
-// 			#			if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
-// 			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$windowAnchor', 'onfocus', 'document.title=this.innerHTML;');
-// 			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$windowAnchor', 'onclick', 'document.title=this.innerHTML;');
-// 			#			}
-// 			#
-// 			$windowTitlebar = str_replace('$windowTitle', $windowTitle, $windowTitlebar);
-// 			$windowTitlebar = str_replace('$windowAnchor', $windowAnchor, $windowTitlebar);
-// 			$windowTemplate = str_replace('$windowTitlebar', $windowTitlebar, $windowTitlebar);
-// 		}
+		//
+		// 		if ($showButtons && GetConfig('admin/js/dragging')) {
+		// 			WriteLog('GetWindowTemplate: $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle . '; dragging = ' . GetConfig('admin/js/dragging'));
+		//
+		// 			$btnCloseCaption = '{-}'; # needs to match one other place in dragging.js #collapseButton
+		// 			$windowTitlebar = GetTemplate('html/window/titlebar_with_button.template'); #window_titlebar_buttons
+		//
+		// 			$windowTitlebar = InjectJs($windowTitlebar, array('titlebar_with_button'));
+		//
+		// 			$windowTitlebar = str_replace('$windowTitle', $windowTitle, $windowTitlebar);
+		// 			#$windowTitlebar = str_replace('$windowAnchor', $windowAnchor, $windowTitlebar);
+		// 			$windowTemplate = str_replace('$windowTitlebar', $windowTitlebar, $windowTitlebar);
+		// 			$windowTemplate = str_replace('$btnCloseCaption', $btnCloseCaption, $windowTitlebar);
+		// 			#$contentColumnCount = 2;
+		// 		} else {
+		// 			$windowTitlebar = GetTemplate('html/window/titlebar.template');
+		// 			#
+		// 			#			if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
+		// 			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$windowAnchor', 'onfocus', 'document.title=this.innerHTML;');
+		// 			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$windowAnchor', 'onclick', 'document.title=this.innerHTML;');
+		// 			#			}
+		// 			#
+		// 			$windowTitlebar = str_replace('$windowTitle', $windowTitle, $windowTitlebar);
+		// 			$windowTitlebar = str_replace('$windowAnchor', $windowAnchor, $windowTitlebar);
+		// 			$windowTemplate = str_replace('$windowTitlebar', $windowTitlebar, $windowTitlebar);
+		// 		}
 		if (1 || $showButtons && GetConfig('admin/js/dragging')) {
 			$windowTitlebar = GetTemplate('html/window/titlebar.template');
 			$windowTitlebar = str_replace('$windowTitle', $windowTitle, $windowTitlebar);
@@ -1292,7 +1292,7 @@ function IndexTextFile ($filePath) {
 //
 // 	WriteLog("IndexTextFile: cd $scriptDir ; ./pages.pl \"$hash\"");
 // 	WriteLog(`cd $scriptDir ; ./pages.pl "$hash"`);
-} // IndexTextFile()
+} # IndexTextFile()
 
 function MakePage ($pageName) {
 	#todo sanity checks
@@ -1309,7 +1309,7 @@ function MakePage ($pageName) {
 //
 // 	WriteLog("cd $scriptDir ; ./pages.pl \"$hash\"");
 // 	WriteLog(`cd $scriptDir ; ./pages.pl "$hash"`);
-} // IndexNewFile()
+} # IndexNewFile()
 
 require_once('store_new_comment.php');
 
@@ -1514,7 +1514,7 @@ function ProcessNewCommentReturnItemUrl ($comment, $replyTo) { // saves new comm
 	WriteLog('ProcessNewCommentReturnItemUrl: return $hash = ' . $hash);
 
 	return $hash;
-} // ProcessNewCommentReturnItemUrl()
+} # ProcessNewCommentReturnItemUrl()
 
 function GetItemHtmlLink ($hash, $linkCaption, $hashAnchor) { # $hash, [link caption], [#anchor] ; returns <a href=...
 # sub GetItemLink {
