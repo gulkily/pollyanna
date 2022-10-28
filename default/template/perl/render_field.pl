@@ -33,11 +33,11 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 	#todo more sanity
 
 	my $itemRowRef = shift;
-
-#	if (!$itemRowRef) {
-#		WriteLog('RenderField: warning: missing $itemRowRef; caller = ' . join(',', caller));
-#		return '';
-#	}
+	#
+	# if (!$itemRowRef) {
+	# 	WriteLog('RenderField: warning: missing $itemRowRef; caller = ' . join(',', caller));
+	# 	return '';
+	# }
 
 	my %itemRow;
 	if ($itemRowRef) {
