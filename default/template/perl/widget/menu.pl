@@ -340,7 +340,7 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 		#todo this also needs relativize support
 	}
 
-	if (in_array($menuName, qw(threads tags authors))) {
+	if (in_array($menuName, qw(threads tags authors new image))) {
 		my $threadCount = SqliteGetCount($menuName);
 		# my $threadCount = SqliteGetValue('thread_count');
 		if ($threadCount) {
