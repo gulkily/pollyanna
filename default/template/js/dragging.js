@@ -285,12 +285,15 @@ function SetActiveDialog (ths) {
 		return '';
 	}
 
-	if (ths && ths.getAttribute('imactive') == '1' || window.dialogDragInProgress) {
-		//alert('DEBUG: SetActiveDialog: imactive found');
+	if (ths && ths.getAttribute('imactive') == '1') {
+		//alert('DEBUG: SetActiveDialog: cancelled due to imactive');
 		return true;
-	} else {
-		//alert('DEBUG: SetActiveDialog: imactive NOT found');
+	} else if (window.dialogDragInProgress) {
+		//alert('DEBUG: SetActiveDialog: cancelled due to window.dialogDragInProgress');
+		return true;
 	}
+
+	//alert('DEBUG: SetActiveDialog: conditions met!');
 
 	window.nextWindowToFocusTo = ths;
 	// window.nextWindowToFocusTo stores the next window to focus to for mouseover
