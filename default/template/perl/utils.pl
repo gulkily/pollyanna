@@ -1774,12 +1774,11 @@ sub TrimPath { # $string ; Trims the directories AND THE FILE EXTENSION from a f
 	while (index($string, "/") >= 0) {
 		$string = substr($string, index($string, "/") + 1);
 	}
-	if (index($string, ".") != -1) {
-		$string = substr($string, 0, index($string, ".") + 0);
+	if (rindex($string, ".") != -1) {
+		$string = substr($string, 0, rindex($string, ".") + 0);
 	}
 	return $string;
-}
-
+} # TrimPath()
 
 sub IsSha1 { # returns 1 if parameter is in sha1 hash format, 0 otherwise
 	my $string = shift;
