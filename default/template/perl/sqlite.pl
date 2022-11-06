@@ -1803,6 +1803,10 @@ sub DBGetItemAttribute { # $fileHash, $attribute ; returns one attribute for ite
 } # DBGetItemAttribute()
 
 sub DBAddItemAttribute { # $fileHash, $attribute, $value, $epoch, $source # add attribute to item
+# sub DBAddItemTitle {
+# sub AddTitle {
+# sub DBAddTitle {
+
 # currently no constraints
 	state $query;
 	state @queryParams;
