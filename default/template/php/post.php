@@ -212,7 +212,7 @@ if (isset($boxesCount) && $boxesCount && !$comment) {
 {
 	if (isset($comment) && $comment && GetConfig('setting/admin/php/post/require_cookie')) {
 		if ((!isset($_COOKIE['cookie']) || !isset($_COOKIE['checksum'])) && index($comment, 'SIGNED') == -1 && index($comment, 'PUBLIC') == -1) {
-			print GetWindowTemplate("Sorry, you must have a cookie to do that.", 'No Cookie?');
+			print GetWindowTemplate("Please forgive me, friend, <br>but you must register first, <br>before you do that", 'No Cookie Haiku');
 			return '';
 		} else {
 		}
