@@ -191,7 +191,13 @@ sub IndexImageFile { # $file ; indexes one image file into database
 		DBAddItem($file, $itemName, '', $fileHash, 'image', 0);
 		DBAddItem('flush');
 		#DBAddItemAttribute($fileHash, 'title', $itemName, $addedTime);
-		#DBAddItemAttribute($fileHash, 'title', $itemName, time()); #todo time should come from actual file time #todo re-add this
+
+		my $imageTitle = $itemName;
+		while (length($imageTitle) > 0 && $imageTitle =~ m/[0-9]$/) {
+			$imageTitle = substr($imageTitle, 0, length($imageTitle) - 1);
+		}
+		DBAddItemAttribute($fileHash, 'title', $imageTitle, time()); #todo time should come from actual file time #todo re-add this
+
 		DBAddVoteRecord($fileHash, $addedTime, 'image'); # add image tag
 
 		if (@tagFromPath) {
