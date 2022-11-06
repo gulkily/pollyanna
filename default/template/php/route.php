@@ -585,7 +585,7 @@ if (GetConfig('admin/php/route_enable')) {
 							}
 
 							if (!$serverResponse && !$redirectUrl) {
-								if (GetConfig('admin/php/route_redirect_when_missing_message')) {
+								if ($messageId != 'test' && GetConfig('admin/php/route_redirect_when_missing_message')) {
 									# if there is a message ticket provided,
 									# but nothing under that ticket,
 									# remove it from the url
