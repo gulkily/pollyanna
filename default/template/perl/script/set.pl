@@ -72,14 +72,18 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 				print "New value: ";
 
 				my $input = <STDIN>;
-				chomp $input;
+				if (defined($input)) {
+					chomp $input;
 
-				if ($input =~ m/(.+)/) { #todo
-					$input = $1;
-					`echo $input > $settingKey`;
+					if ($input =~ m/(.+)/) { #todo
+						$input = $1;
+						`echo $input > $settingKey`;
 
-					$settingValue = `cat $settingKey`;
-					print "$settingKey=$settingValue";
+						$settingValue = `cat $settingKey`;
+						print "$settingKey=$settingValue";
+					} else {
+						print 'warning';
+					}
 				} else {
 					print 'warning';
 				}
