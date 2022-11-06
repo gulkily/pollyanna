@@ -193,7 +193,7 @@ sub IndexImageFile { # $file ; indexes one image file into database
 		#DBAddItemAttribute($fileHash, 'title', $itemName, $addedTime);
 
 		my $imageTitle = $itemName;
-		while (length($imageTitle) > 0 && $imageTitle =~ m/[0-9]$/) {
+		while (length($imageTitle) > 0 && $imageTitle =~ m/[0-9\.]+$/) {
 			$imageTitle = substr($imageTitle, 0, length($imageTitle) - 1);
 		}
 		DBAddItemAttribute($fileHash, 'title', $imageTitle, time()); #todo time should come from actual file time #todo re-add this
