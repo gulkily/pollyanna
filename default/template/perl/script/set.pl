@@ -17,9 +17,13 @@ my $argumentKey = shift;
 
 if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 	my $argumentKeySanitized = $1;
-	my $setting = `find config/setting | grep $argumentKeySanitized\$`;
+
+	my $setting = `find config/setting | grep \/$argumentKeySanitized\$`; # look for one which matches at both beginning and end
 	if (!$setting) {
-		$setting = `find config/setting | grep $argumentKeySanitized`;
+		$setting = `find config/setting | grep $argumentKeySanitized\$`; # look for one which matches at the end
+	}
+	if (!$setting) {
+		$setting = `find config/setting | grep $argumentKeySanitized`; # if not, do general search
 	}
 	#print "$argumentKeySanitized\n";
 	my @settingArray = split("\n", $setting);
