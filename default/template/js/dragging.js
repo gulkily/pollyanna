@@ -1012,6 +1012,9 @@ function InsertFetchedDialog () {
 					}
 				}
 			}
+			if (window.UpdateDialogList) {
+				UpdateDialogList();
+			}
 		} else {
 			//debug document.title += 2;
 			document.body.appendChild(inject);
