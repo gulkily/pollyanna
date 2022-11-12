@@ -35,6 +35,9 @@ function RunTest() {
 	//alert('DEBUG: Looking for document.createElement...');
 	document.frmTest.txtDocumentCreateElement.value = !!document.createElement;
 
+	//alert('DEBUG: Looking for document.createTextNode...');
+	document.frmTest.txtDocumentCreateTextNode.value = !!document.createTextNode;
+
 	//alert('DEBUG: Looking for document.getElementsByClassName...');
 	document.frmTest.txtDocumentGetElementsByClassName.value = !!document.getElementsByClassName;
 
