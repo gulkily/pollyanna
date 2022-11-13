@@ -807,12 +807,21 @@ function UpdateDialogList () {
 					dialogTitle = dialogTitle.substr(0, 24);
 				}
 
-				// #todo use dom things instead of innerHTML
-
 				listContent = listContent + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { SpotlightDialog(' + dialogId + '); }"' + gt + dialogTitle + '</a' + gt + '<br' + gt;
-				//document.title = (iDialog);
-				//lstDialog.innerHTML = lstDialog.innerHTML + iDialog;
-				//document.title = iDialog;
+				lstDialog.innerHTML = lstDialog.innerHTML + iDialog;
+
+				/* #todo
+				var newLink = document.createElement('a');
+				newLink.setAttribute('href', '#');
+				newLink.setAttribute('onclick', "if (window.SpotlightDialog) { SpotlightDialog(' + dialogId + '); }");
+				//newLink.innerHTML = dialogTitle;
+				var newText = document.createTextNode(dialogTitle);
+				var newBr = document.createElement('br');
+
+				newLink.appendChild(newText);
+				lstDialog.appendChild(newLink);
+				lstDialog.appendChild(newBr);
+				*/
 			}
 
 			if (lstDialog.innerHTML != listContent) {
