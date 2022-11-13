@@ -637,31 +637,33 @@ if (GetConfig('admin/php/route_enable')) {
 							RedirectWithResponse('/stats.html', "Config dump finished! <small>in $updateDuration"."s</small>");
 						}
 
-						if (
-							isset($_GET['chkReindex']) &&
-							isset($_GET['btnReindex'])
-						) {
-							$reindexStartTime = time();
-							$reindexLog = DoReindex();
-							$reindexFinishTime = time();
-							$reindexDuration = $reindexFinishTime - $reindexStartTime;
+						if ( isset($_GET['btnReindex']) ) {
+							if ( isset($_GET['chkReindex']) ) {
+								$reindexStartTime = time();
+								$reindexLog = DoReindex();
+								$reindexFinishTime = time();
+								$reindexDuration = $reindexFinishTime - $reindexStartTime;
 
-							WriteLog('route.php: reindexLog = ' . $reindexLog);
+								WriteLog('route.php: reindexLog = ' . $reindexLog);
 
-							$reindexLogSaved = ProcessNewComment($reindexLog, ''); # my
-							ProcessNewComment("Reindex log metadata\n-- \n>>$reindexLogSaved\n#textart\ntitle: Reindex log finished at $reindexFinishTime", '');
-							RedirectWithResponse(GetHtmlFilename($reindexLogSaved), "Reindex finished! <small>in $reindexDuration"."s</small>");
+								$reindexLogSaved = ProcessNewComment($reindexLog, ''); # my
+								ProcessNewComment("Reindex log metadata\n-- \n>>$reindexLogSaved\n#textart\ntitle: Reindex log finished at $reindexFinishTime", '');
+								RedirectWithResponse(GetHtmlFilename($reindexLogSaved), "Reindex finished! <small>in $reindexDuration"."s</small>");
+							} else {
+								RedirectWithResponse('/settings.html', 'You pressed the Reindex button, but did not check the checkbox. Please try again!');
+							}
 						}
 
-						if (
-							isset($_GET['chkFlush']) &&
-							isset($_GET['btnFlush'])
-						) {
-							WriteLog('route.php: Flush requested (chkFlush && btnFlush)');
-							# can't let this happen yet #todo #improve
-							//DoFlush();
-							//DoUpdate();
-							RedirectWithResponse('/settings.html', 'Previous content has been archived.');
+						if ( isset($_GET['btnFlush']) ) {
+							if (isset($_GET['chkFlush'])) {
+								WriteLog('route.php: Flush requested (chkFlush && btnFlush)');
+								# can't let this happen yet #todo #improve
+								//DoFlush();
+								//DoUpdate();
+								RedirectWithResponse('/settings.html', 'Previous content has been archived.');
+							} else {
+								RedirectWithResponse('/settings.html', 'You pressed the Flush button, but did not check the checkbox. Please try again!');
+							}
 						}
 
 						if ( isset($_GET['ui']) ) {
