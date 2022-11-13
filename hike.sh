@@ -68,6 +68,12 @@ if [ $1 = index ]
 		time ./index.pl --all
 fi
 
+if [ $1 = update ]
+	then
+		perl -T default/template/perl/script/template_refresh.pl
+		./build.sh
+fi
+
 if [ $1 = frontend ]
 	then
 		perl -T default/template/perl/script/template_refresh.pl
