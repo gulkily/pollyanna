@@ -93,6 +93,7 @@ sub GetReadPage { # generates page with item listing based on parameters
 
 			my %queryParams;
 
+			#todo parametrize
 			$queryParams{'where_clause'} = "
 				WHERE
 					file_hash IN (
@@ -100,7 +101,13 @@ sub GetReadPage { # generates page with item listing based on parameters
 						FROM item_flat
 						WHERE
 							item_score >= 0 AND
-							SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 11) = '$pageDate'
+							(
+								SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 11) = '$pageDate'
+								OR
+								file_hash IN (
+									SELECT file_hash FROM item_attribute where attribute = 'date' AND value = '$pageDate'
+								)
+							)
 						)
 			";
 			#todo optimize this query
