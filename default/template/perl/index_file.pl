@@ -150,7 +150,7 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 			WriteLog('IndexFile: warning: IndexHtmlFile $indexSuccess was FALSE');
 			$indexSuccess = 0;
 		}
-	}
+	} # if ($ext eq 'html')
 
 	if ($ext eq 'cpp') {
 		WriteLog('IndexFile: calling IndexCppFile()');
@@ -160,7 +160,7 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 			WriteLog('IndexFile: warning: IndexCppFile() returned FALSE; $indexSuccess was FALSE');
 			$indexSuccess = 0;
 		}
-	}
+	} # if ($ext eq 'cpp')
 	if ($ext eq 'py') {
 		WriteLog('IndexFile: calling IndexPyFile()');
 		$indexSuccess = IndexPyFile($file);
@@ -169,7 +169,7 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 			WriteLog('IndexFile: warning: IndexPyFile() returned FALSE; $indexSuccess was FALSE');
 			$indexSuccess = 0;
 		}
-	}
+	} # if ($ext eq 'py')
 	if ($ext eq 'pl') {
 		WriteLog('IndexFile: calling IndexPerlFile()');
 		$indexSuccess = IndexPerlFile($file);
