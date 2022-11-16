@@ -8,6 +8,7 @@ rm -vrf cache/
 rm -vrf html/*.html html/*/*.html html/*/*/*.html html/*/*/*/*.html
 rm -vrf html/*.php html/*.js
 rm -vrf log/log.log
+find html -type d -empty -delete
 
 echo ===
 echo Verify:
