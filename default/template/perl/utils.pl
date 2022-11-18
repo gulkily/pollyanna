@@ -2560,6 +2560,9 @@ sub EnsureDirsThatShouldExist { # creates directories expected later
 		"$HTMLDIR/utils",
 		"$HTMLDIR/txt",
 		"$HTMLDIR/image",
+		"$HTMLDIR/cpp",
+		"$HTMLDIR/py",
+		"$HTMLDIR/perl",
 		"$HTMLDIR/thumb", #thumbnails
 		"$CACHEDIR/$cacheVersion", #ephemeral data
 		"$HTMLDIR/author",
