@@ -26,6 +26,7 @@ mimetype.assign = (
 	".js" => "text/javascript",
 	".cpp" => "text/x-c",
 	".py" => "text/x-python",
+	".pl" => "text/x-script.perl",
 
 	".jpg"  => "image/jpeg",
 	".jpeg"  => "image/jpeg",
