@@ -9,3 +9,5 @@ FROM
 	item_flat
 WHERE
 	tags_list like '%,image,%'
+ORDER BY
+	add_timestamp DESC
