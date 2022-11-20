@@ -40,7 +40,7 @@ sub trim { # trims whitespace from beginning and end of $string
 	}
 
 	return;
-}
+} # trim()
 
 require './config.pl';
 
@@ -66,7 +66,7 @@ my @modules = qw(
 
 for my $module (@modules) {
 	require_once("$module.pl");
-}
+} # for my $module (@modules)
 
 sub ensure_module { # $path ; ensures module is available under config/
 	my $module = shift;
@@ -229,7 +229,7 @@ sub GetDir { # $dirName ; returns path to special directory specified
 my $SCRIPTDIR = cwd();
 if (!$SCRIPTDIR) {
 	die ('Sanity check failed: $SCRIPTDIR is false!');
-}
+} # (!$SCRIPTDIR)
 
 #my $HTMLDIR = $SCRIPTDIR . '/html';
 #my $TXTDIR = $HTMLDIR . '/txt';
@@ -636,7 +636,7 @@ sub GetRandomHash { # returns a random sha1-looking hash, lowercase
 } # GetRandomHash()
 
 sub GetTemplateFilePath { # $templateName
-}
+} # GetTemplateFilePath()
 
 sub GetTemplate { # $templateName ; returns specified template from template directory
 # returns empty string if template not found
@@ -794,7 +794,7 @@ sub encode_entities2 { # returns $string with html entities <>"& encoded
 	$string =~ s/"/&quot;/g;
 
 	return $string;
-}
+} # encode_entities2()
 
 sub GetHtmlAvatar { # Returns HTML avatar from cache 
 	state %avatarCache;
@@ -828,7 +828,7 @@ sub GetHtmlAvatar { # Returns HTML avatar from cache
 
 	return $key;
 	#	return 'unregistered';
-}
+} # GetHtmlAvatar
 
 sub GetAlias { # $fingerprint, $noCache ; Returns alias for an author
 	my $fingerprint = shift;
@@ -937,7 +937,7 @@ sub GetTime () { # Returns time in epoch format.
 
 	#	return (time() + 2207520000);
 	return (time());
-}
+} # GetTime()
 
 sub GetClockFormattedTime() { # returns current time in appropriate format from config
 	# this formats the user-facing time, like the clock on the pages (if enabled)
@@ -1115,13 +1115,13 @@ sub PutFile { # Writes content to a file; $file, $content, $binMode
 	} else {
 		WriteLog('PutFile: warning: sanity check failed: $file contains space');
 	}
-}
+} # PutFile()
 
 sub EpochToHuman { # returns epoch time as human readable time
 	my $time = shift;
 
 	return strftime('%F %T', localtime($time));
-}
+} # EpochToHuman()
 
 sub EpochToHuman2 { # not sure what this is supposed to do, and it's unused 
 	my $time = shift;
@@ -1130,7 +1130,7 @@ sub EpochToHuman2 { # not sure what this is supposed to do, and it's unused
 	$year = $year + 1900;
 	$month = $month + 1;
 
-}
+} # EpochToHuman2()
 
 sub GetPaddedEpochTimestamp { # returns zero-padded formatted epoch time
 	# this is used to get log timestamps to line up nicely when float/millisecond is used
@@ -1649,7 +1649,7 @@ sub GetFileAsHashKeys { # returns file as hash of lines
 		$hash{$line} = 0;
 	}
 	return %hash;
-}
+} # GetFileAsHashKeys()
 
 sub AppendFile { # appends something to a file; $file, $content to append
 	# mainly used for writing to log files
@@ -1665,7 +1665,7 @@ sub AppendFile { # appends something to a file; $file, $content to append
 		say $fileHandle $content; #note that this appends \n automatically
 		close $fileHandle;
 	}
-}
+} # AppendFile()
 
 sub AuthorHasTag { # $key ; returns 1 if user is admin, otherwise 0
 	# will probably be redesigned in the future
@@ -1799,7 +1799,7 @@ sub IsSha1 { # returns 1 if parameter is in sha1 hash format, 0 otherwise
 	} else {
 		return 0;
 	}
-}
+} # IsSha1()
 
 sub IsImageFile { # $file ; returns 1 if image file, 0 if not
 	my $file = shift;
@@ -1912,7 +1912,7 @@ sub IsMd5 { # returns 1 if parameter is md5 hash, 0 otherwise
 	} else {
 		return 0;
 	}
-}
+} # IsMd5()
 
 sub IsDate {
 	my $string = shift;
@@ -1926,7 +1926,7 @@ sub IsDate {
 	} else {
 		return 0;
 	}
-}
+} # IsDate()
 
 sub IsFingerprint { # returns 1 if parameter is a user fingerprint, 0 otherwise
 # sub IsAuthor {
@@ -1942,7 +1942,7 @@ sub IsFingerprint { # returns 1 if parameter is a user fingerprint, 0 otherwise
 	} else {
 		return 0;
 	}
-}
+} # IsFingerprint()
 
 sub AddItemToConfigList { # Adds a line to a list stored in config
 	# $configPath = reference to setting stored in config
@@ -2211,7 +2211,7 @@ sub file_exists { # $file ; port of php file_exists()
 		return 0;
 	}
 	return 0; #unreachable code
-}
+} # file_exists()
 
 sub GetItemDetokenedMessage { # $itemHash, $filePath ; retrieves item's message using cache or file path
 	WriteLog('GetItemDetokenedMessage()');
@@ -2328,18 +2328,18 @@ sub GetItemMeta { # retrieves item's metadata
 	} else {
 		return; # file doesn't exist
 	}
-} # GetItemMeta
+} # GetItemMeta()
 
 sub GetPrefixedUrl { # returns url with relative prefix 
 	my $url = shift;
 	chomp $url;
 	return $url;
-}
+} # GetPrefixedUrl()
 
 sub UpdateUpdateTime { # updates cache/system/last_update_time, which is used by the stats page
 	my $lastUpdateTime = GetTime();
 	PutCache("system/last_update_time", $lastUpdateTime);
-}
+} # UpdateUpdateTime()
 
 sub RemoveEmptyDirectories { #looks for empty directories under $path and removes them
 	my $path = shift;
@@ -2349,7 +2349,7 @@ sub RemoveEmptyDirectories { #looks for empty directories under $path and remove
 		return;
 	}
 	#system('find $path -type d -empty -delete'); #todo uncomment when bugs fixed
-}
+} # RemoveEmptyDirectories()
 
 sub GetFileHashPath { # $file ; Returns text file's standardized path given its filename
 # GetFilename {
@@ -2418,7 +2418,7 @@ sub GetPathFromHash { # guesses path of text file based on hash
 		WriteLog('GetPathFromHash: $fileHashPath = ' . $fileHashPath);
 		return $fileHashPath;
 	}
-}
+} # GetPathFromHash()
 
 sub array_unique { # @array ; returns array of unique items from @array
 # modeled after php's array_unique()
@@ -2450,7 +2450,7 @@ sub in_array { # $needle, @haystack ; emulates php's in_array()
 		WriteLog('in_array: $needle = ' . $needle . '; @haystack = ' . join(',', @haystack) . ' = 0');
 		return 0;
 	}
-}
+} # in_array()
 
 sub Sha1Test {
 	print "\n";
@@ -2460,7 +2460,7 @@ sub Sha1Test {
 	# print "\n";
 	print(`php -r "print(sha1_file('utils.pl'));"`);
 	print "\n";
-}
+} # Sha1Test()
 
 sub GetPasswordLine { # $username, $password ; returns line for .htpasswd file
 	my $username = shift;
