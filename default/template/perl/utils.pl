@@ -1327,11 +1327,16 @@ sub IsUrl { # add basic isurl()
 
 sub PutHtmlFile { # $file, $content ; writes content to html file, with special rules; parameters: $file, $content
 # sub WriteHtmlFile {
-	# the special rules are:
+
 	# * if config/admin/html/ascii_only is set, all non-ascii characters are stripped from output to file
 	# * if $file matches config/html/home_page, the output is also written to index.html
+	# * if config/html/relativize_urls is true, rewrites links to be relative, e.g. /foo.html to ./foo.html
+	#
 	#   also keeps track of whether home page has been written, and returns the status of it
 	#   if $file is 'check_homepage'
+	#
+	#   also keeps track of all files written and returns the list as an array
+	#   if $file is 'report_files_written'
 
 	my $file = shift;
 	my $content = shift;
@@ -1392,6 +1397,7 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 	# controls whether linked urls are converted to relative format
 	# meaning they go from e.g. /write.html to ./write.html
 	# this breaks the 404 page links so disable that for now
+
 	my $relativizeUrls = (GetConfig('html/relativize_urls') ? 1 : 0);
 	if (TrimPath($file) eq '404') {
 		$relativizeUrls = 0;
@@ -1496,29 +1502,30 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 
 		# css
 		$content =~ s/url\(\/\//url=$subDir/ig;
+	} # if ($relativizeUrls)
+
+	# fill in colors
+	{
+		my $colorTopMenuTitlebarText = GetThemeColor('top_menu_titlebar_text') || GetThemeColor('titlebar_text');
+		$content =~ s/\$colorTopMenuTitlebarText/$colorTopMenuTitlebarText/g;#
+
+		my $colorTopMenuTitlebar = GetThemeColor('top_menu_titlebar') || GetThemeColor('titlebar');
+		$content =~ s/\$colorTopMenuTitlebar/$colorTopMenuTitlebar/g;
+
+		my $colorTitlebarText = GetThemeColor('titlebar_text');#
+		$content =~ s/\$colorTitlebarText/$colorTitlebarText/g;#
+
+		my $colorTitlebar = GetThemeColor('titlebar');#
+		$content =~ s/\$colorTitlebar/$colorTitlebar/g;#
+
+		my $borderDialog = GetThemeAttribute('color/border_dialog');
+		#todo rename it in all themes and then here
+		# not actually a color, but the entire border definition
+		$content =~ s/\$borderDialog/$borderDialog/g;
+
+		my $colorWindow = GetThemeColor('window');
+		$content =~ s/\$colorWindow/$colorWindow/g;
 	}
-
-	# fill in colors
-	my $colorTopMenuTitlebarText = GetThemeColor('top_menu_titlebar_text') || GetThemeColor('titlebar_text');
-	$content =~ s/\$colorTopMenuTitlebarText/$colorTopMenuTitlebarText/g;#
-
-	my $colorTopMenuTitlebar = GetThemeColor('top_menu_titlebar') || GetThemeColor('titlebar');
-	$content =~ s/\$colorTopMenuTitlebar/$colorTopMenuTitlebar/g;
-
-	# fill in colors
-	my $colorTitlebarText = GetThemeColor('titlebar_text');#
-	$content =~ s/\$colorTitlebarText/$colorTitlebarText/g;#
-
-	my $colorTitlebar = GetThemeColor('titlebar');#
-	$content =~ s/\$colorTitlebar/$colorTitlebar/g;#
-
-	my $borderDialog = GetThemeAttribute('color/border_dialog');
-	#todo rename it in all themes and then here
-	# not actually a color, but the entire border definition
-	$content =~ s/\$borderDialog/$borderDialog/g;
-
-	my $colorWindow = GetThemeColor('window');
-	$content =~ s/\$colorWindow/$colorWindow/g;
 
 	# #internationalization #i18n
 	if (GetConfig('language') ne 'en') {
@@ -1544,7 +1551,6 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 	# 		$content .= '' . $hashSetting . '';
 	# 	}
 	# }
-
 
 	{ # tests and warnings
 		if (index($content, '$') > -1) {
@@ -1577,11 +1583,11 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 			# test for duplicate <html> tag
 			WriteLog('PutHtmlFile: warning: $content contains duplicate <html> tags');
 		}
-	}
+	} # tests and warnings
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/debug')) {
 		if ($file =~ m/dialog/) {
-			# do not inject
+			# do not inject js debug button
 		} else {
 			# add "jsdebug" button if js debugging is enabled
 			if (index(lc($content), '<script') != -1 && index($content, 'debug_button') == -1) {
@@ -1589,11 +1595,12 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 			} else {
 				WriteLog('InjectJs: warning: wanted to inject debug_button, but it is already in $html');
 			}
-			#todo make nice
+			#todo make nicer
 		}
-	}
+	} # jsdebug button
 
 	if (GetConfig('html/generator_meta')) {
+		# add generator meta tag to head
 		if (index(lc($content), '</head>')) {
 			#die;
 			my $progName = 'RocketScience';
@@ -1605,7 +1612,7 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 			#$content = str_ireplace('</head>', $generatorMeta . "\n" . '</head>', $content); #todo retain capitalization of head tag
 			$content =~ s|(</head>)|$generatorMeta\n$1|;
 		}
-	}
+	} # html/generator_meta
 
 	#############################################
 	## WRITE TO FILE ############################
@@ -1628,7 +1635,7 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 			my $putIndexFileName = PutHtmlFile("$HTMLDIR/index.html", $content);
 			WriteLog('PutHtmlFile: $putIndexFileName = ' . $putIndexFileName);
 		}
-	}
+	} # missing /index.html
 
 	return $putFileResult;
 } # PutHtmlFile()
