@@ -1898,11 +1898,17 @@ sub GetEventAddPage { # get html for /event.html
 }
 
 sub PutStatsPages { # stores template for footer stats dialog
+	WriteLog('PutStatsPage()');
+
 	MakeSimplePage('stats');
 
 	if (GetConfig('debug')) {
+		WriteLog('PutStatsPage: debug mode is ON');
+
 		#my $statsPage = GetStatsPage();
 		if (-e 'log/log.log') {
+			WriteLog('PutStatsPage: log/log.log EXISTS');
+
 			my $warningsLog = `grep -i warning log/log.log > html/warning.txt`;
 			my $warningsSummary = `cat html/warning.txt | cut -d ' ' -f 3 | cut -d ':' -f 1 | cut -d '(' -f 1 | sort | uniq -c | sort -bnr > html/warnsumm.txt`;
 			$warningsSummary = "\n" . GetFile('html/warnsumm.txt') . "\n";
@@ -1955,6 +1961,9 @@ sub PutStatsPages { # stores template for footer stats dialog
 			PutHtmlFile("engine.html", $warningsHtml); # engine.html
 		} # if (-e 'log/log.log')
 	} # if (GetConfig('debug'))
+	else {
+		WriteLog('PutStatsPage: debug mode is OFF');
+	}
 
 	my $statsFooter = GetWindowTemplate(
 		GetStatsTable('stats-horizontal.template'),
