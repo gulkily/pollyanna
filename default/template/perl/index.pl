@@ -300,6 +300,23 @@ sub MakeIndex { # indexes all available text files, and outputs any config found
 
 		IndexPyFile('flush');
 	} # admin/py/enable
+	if (GetConfig('admin/perl/enable')) {
+		state $HTMLDIR = GetDir('html');
+
+		my @perlFiles = split("\n", `find $HTMLDIR/perl -type f -name *.pl`);
+		my $perlFilesCount = scalar(@perlFiles);
+		my $currentPerlFile = 0;
+		WriteLog('MakeIndex: $perlFilesCount = ' . $perlFilesCount);
+
+		foreach my $perlFile (@perlFiles) {
+			$currentPerlFile++;
+			my $percentPerlFiles = floor($currentPerlFile / $perlFilesCount * 100);
+			WriteMessage("[$percentPerlFiles%] $currentPerlFile/$perlFilesCount  $perlFile");
+			IndexPerlFile($perlFile);
+		}
+
+		IndexPerlFile('flush');
+	} # admin/perl/enable
 } # MakeIndex()
 
 sub DeindexMissingFiles { # remove from index data for files which have been removed
