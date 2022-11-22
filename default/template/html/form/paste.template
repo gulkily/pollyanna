@@ -2,7 +2,7 @@
 <form enctype="multipart/form-data" action="/upload.php" method="POST" name=upload id=upload>
 	<p>
 		Paste one picture:<br>
-		<input type=text name=iospaste value="Paste here"><br>
+		<input name=iospaste id=iospaste type=text value="Paste here"><br>
 		Paste may not work on all platforms.
 	</p>
 
