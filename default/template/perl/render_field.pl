@@ -3,6 +3,10 @@ use warnings;
 use 5.010;
 
 sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data cell
+# sub fieldformat {
+# sub formatfield {
+# sub FieldFormat {
+# sub FormatField {
 # outputs $fieldValue after formatting it as needed
 # formatting is based on value of $fieldName
 # if additional datapoint is needed for output, it's read from %rowData
