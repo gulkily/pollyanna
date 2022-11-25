@@ -3,9 +3,9 @@
 // translitKeyState
 // 0 = off
 // 2 = off/passthrough (touched)
-// 3 = russian phonetic
+// 3 = russian/cyrillic/ukrainian phonetic
 // 4 = dvorak
-// 1 = russian phonetic optimized
+// 1 = russian phonetic optimized #???
 
 function GetDvorakKey (ekey) {
 	// lookup lists, each char in keysEn
@@ -189,7 +189,7 @@ function setTranslitState (theState) {
 	window.translitKeyState = theState;
 }
 
-function translitKey(e, t) { // replaces pressed qwerty key with russian letter
+function translitKey(e, t) { // replaces pressed qwerty key with russian or cyrillic or ukrainian letter
 // called via textarea or input's onkeydown event
 // e is event object passed by onkeydown event
 // t is the text field's "this"
@@ -267,7 +267,7 @@ function translitKey(e, t) { // replaces pressed qwerty key with russian letter
 		}
 
 		if (e.key == '`' || e.key == 'r' || e.key == 'R') {
-			// ctrl+r or ctrl+` for russian
+			// ctrl+r or ctrl+` for russian/ukrainian/cyrillic
 			if (window.translitKeyState == 1) {
 				// 2 is off
 				window.translitKeyState = 2;
