@@ -1,4 +1,5 @@
 <!-- dialog_list.template -->
+<noscript>*</noscript>
 <span id=lstDialog>
 </span>
 <!-- / dialog_list.template -->
