@@ -1246,7 +1246,11 @@ sub str_ireplace { # $replaceWhat, $replaceWith, $string ; emulates some of str_
 		return "";
 	}
 
-	WriteLog('str_ireplace(' . length($replace_this) . 'b, ' . length($with_this) . 'b, ($string)' . length($string));
+	if (length($replace_this) < 32 && length($replace_with) < 32) {
+		WriteLog("str_ireplace($replace_this, $with_this, ($stringLength))");
+	} else {
+		WriteLog('str_ireplace($replace_this = ' . length($replace_this) . 'b, $with_this = ' . length($with_this) . 'b , ($stringLength = ' . $stringLength . ')); caller = ' . join (',', caller));
+	}
 
 	if ($replace_this eq $with_this) {
 		WriteLog('str_ireplace: warning: $replace_this eq $with_this');
