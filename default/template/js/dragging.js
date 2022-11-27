@@ -792,7 +792,7 @@ function SpotlightDialog (dialogId) {
 
 }
 
-function UpdateDialogList () {
+function UpdateDialogList () { // DialogListDialog () dialog_list.template
 	var lstDialog = document.getElementById('lstDialog');
 	if (lstDialog) {
 		var allOpenDialogs = document.getElementsByClassName('dialog');
@@ -829,6 +829,7 @@ function UpdateDialogList () {
 			}
 		}
 	}
+	//#todo this should go into a sep module
 } // UpdateDialogList()
 
 function GetDialogTitle (win) { // returns dialog title (based on title bar caption)
