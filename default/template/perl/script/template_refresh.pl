@@ -83,15 +83,21 @@ if ($changeCount) {
 	print "\n";
 	print "=====================\n";
 	print "DEFAULTS CHANGED: $changeCount \n";
+	print "===================================\n";
+	print "ATTENTION:\n";
+	print "Some default settings have changed \n";
+	print "If you are developing or upgrading \n";
+	print "something could be wrong. \n";
+	print ".\n";
 	for my $change (@changed) {
 		print $change;
 		print "\n";
 	}
-	print "=====================\n";
-	print "Refreshing in 2s ... \n";
-	print "=====================\n";
+	print ".\n";
+	print "To remeditate this condition, meditate for 5 seconds... \n";
+	print "===================================\n";
 
-	sleep 2;
+	sleep 5;
 
 	for my $key (@changed) {
 		if (-f "config/$key") {
