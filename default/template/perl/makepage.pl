@@ -60,8 +60,8 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	WriteMessage('MakePage(' . $pageType . ', ' . $pageParam . ')');
 	WriteLog('MakePage(' . $pageType . ', ' . $pageParam . ')');
 
-	my @listingPages = qw(child chain url deleted compost new raw picture image read authors tags threads boxes);
-	#chain.html #new.html #boxes.html
+	my @listingPages = qw(child chain url deleted compost new raw picture image read authors tags threads boxes tasks);
+	#chain.html #new.html #boxes.html #tasks.html
 	my @simplePages = qw(help example access welcome calendar profile upload links post cookie chat);
 
 	if (0) { } # this is to make all the elsifs below have consistent formatting
