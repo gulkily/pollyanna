@@ -1,18 +1,19 @@
 <!-- post.template -->
 <font face=arial>
-    <table cellspacing=0 cellpadding=6 border=0 bgcolor="$colorWindow" class=dialog>
-        <tr bgcolor="$colorTitlebar" class=titlebar>
-            <td>
+	<table cellspacing=0 cellpadding=6 border=0 bgcolor="$colorWindow" class=dialog>
+		<tr bgcolor="$colorTitlebar" class=titlebar>
+			<td>
 				<font color="$colorTitlebarText"><b>Submission Received!</b></font>
-            </td>
-        </tr>
+			</td>
+		</tr>
 
-        <tr class=body>
-            <td class=content>
-                <p>Thank you!
-                <p>Your submission has been received.
-                <p>You may not see it appear on the site immediately.
-				<p><a href="/">You're welcome.</a>
+		<tr class=body>
+			<td class=content>
+				<p>Thank you!
+				<p>Your submission has been received.
+				<p>You may not see it appear on the site immediately.
+				<p>Once the server has caught up, you should see it on the <br>
+				<a href="/new.html">New Items Page.</a>
 				<p><b><span id=retRef></span></b>
 				<p><span><!-- submitted_text --></span>
 				<p><br>
