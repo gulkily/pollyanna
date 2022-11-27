@@ -1170,8 +1170,11 @@ sub str_replace { # $replaceWhat, $replaceWith, $string ; emulates some of str_r
 		return "";
 	}
 
-	WriteLog('str_replace($replace_this = ' . length($replace_this) . 'b, $with_this = ' . length($with_this) . 'b , ($stringLength = ' . $stringLength . ')); caller = ' . join (',', caller));
-	#WriteLog("str_replace($replace_this, $with_this, ($stringLength))");
+	if (length($replace_this) < 32 && length($replace_with) < 32) {
+		WriteLog("str_replace($replace_this, $with_this, ($stringLength))");
+	} else {
+		WriteLog('str_replace($replace_this = ' . length($replace_this) . 'b, $with_this = ' . length($with_this) . 'b , ($stringLength = ' . $stringLength . ')); caller = ' . join (',', caller));
+	}
 
 	if (!defined($replace_this) || !defined($with_this)) {
 		WriteLog('str_replace: warning: sanity check failed, missing $replace_this or $with_this');
@@ -1183,7 +1186,7 @@ sub str_replace { # $replaceWhat, $replaceWith, $string ; emulates some of str_r
 		return $string;
 	}
 
-	WriteLog("str_replace: sanity check passed, proceeding");
+	#WriteLog("str_replace: sanity check passed, proceeding");
 
 	WriteLog('str_replace: sanity check passed, proceeding');
 	$string =~ s/\Q$replace_this/$with_this/g;
