@@ -2165,7 +2165,7 @@ sub PrintBanner {
 } # PrintBanner()
 
 while (my $arg1 = shift @foundArgs) {
-	# evaluate each argument, fuzzy-matching it, and generate requested pages
+	# evaluate each argument, fuzzy matching it, and generate requested pages
 
 	# go through all the arguments one at a time
 	if ($arg1) {
