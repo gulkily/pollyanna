@@ -409,6 +409,8 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 # may be CONFUSING:
 # additional.css special case:
 # values will be concatenated instead of returning first one
+# template/list/menu special case:
+# values will be concatenated instead of returning first one
 	my $attributeName = shift;
 	chomp $attributeName;
 
