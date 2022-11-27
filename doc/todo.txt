@@ -1,3 +1,18 @@
+perl templating feature:
+    save stack
+    inject line number into every WriteLog() statement
+
+
+rewrite plan for mac
+    since regex does not work in lighttpd
+    need to rewrite all urls to php handler
+        /route.php for regular urls
+            /route.php?path=/write.html
+        /post.php for write pages
+    add setting default/setting/admin/lighttpd/without_rewrite_mac ??
+
+most requested 404 pages
+
 needs to be a separate tagset for item template and classify dialog
 
 strip script directory from caller display in debug log to make easier to read
