@@ -1170,7 +1170,7 @@ sub str_replace { # $replaceWhat, $replaceWith, $string ; emulates some of str_r
 		return "";
 	}
 
-	if (length($replace_this) < 32 && length($replace_with) < 32) {
+	if (length($replace_this) < 32 && length($with_this) < 32) {
 		WriteLog("str_replace($replace_this, $with_this, ($stringLength))");
 	} else {
 		WriteLog('str_replace($replace_this = ' . length($replace_this) . 'b, $with_this = ' . length($with_this) . 'b , ($stringLength = ' . $stringLength . ')); caller = ' . join (',', caller));
@@ -1246,7 +1246,7 @@ sub str_ireplace { # $replaceWhat, $replaceWith, $string ; emulates some of str_
 		return "";
 	}
 
-	if (length($replace_this) < 32 && length($replace_with) < 32) {
+	if (length($replace_this) < 32 && length($with_this) < 32) {
 		WriteLog("str_ireplace($replace_this, $with_this, ($stringLength))");
 	} else {
 		WriteLog('str_ireplace($replace_this = ' . length($replace_this) . 'b, $with_this = ' . length($with_this) . 'b , ($stringLength = ' . $stringLength . ')); caller = ' . join (',', caller));
