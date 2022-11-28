@@ -1246,6 +1246,8 @@ sub str_ireplace { # $replaceWhat, $replaceWith, $string ; emulates some of str_
 		return "";
 	}
 
+	my $stringLength = length($string);
+
 	if (length($replace_this) < 32 && length($with_this) < 32) {
 		WriteLog("str_ireplace($replace_this, $with_this, ($stringLength))");
 	} else {
