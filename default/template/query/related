@@ -41,3 +41,4 @@ GROUP BY
 	item_title, add_timestamp, this_row, item_flat.file_hash
 ORDER BY
 	attribute_count DESC, add_timestamp DESC
+LIMIT 5
