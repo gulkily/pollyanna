@@ -28,6 +28,7 @@ sub GetWriteForm { # returns write form (for composing text message)
 	WriteLog('GetWriteForm()');
 
 	if (GetConfig('admin/php/enable')) {
+		WriteLog('GetWriteForm: php is ON');
 		my $writeLongMessage = GetTemplate('html/form/write/long_message.template');
 		if ($writeLongMessage) {
 			my $targetElement = '<span id=writefooter>';
@@ -37,12 +38,18 @@ sub GetWriteForm { # returns write form (for composing text message)
 		if (GetConfig('admin/php/enable') && !GetConfig('admin/php/rewrite')) {
 			# if php is enabled but rewrite is disabled
 			# change submit target to post.php
-			my $postHtml = 'post\\.html'; # post.html
-			$writeForm =~ s/$postHtml/post.php/;
+			#my $postHtml = 'post.html'; # post.html
+			WriteLog('GetWriteForm: replacing post.html post.php');
+			$writeForm = str_replace('post.html', 'post.php', $writeForm);
+			#$writeForm =~ s/$postHtml/post.php/;
+		} else {
+			WriteLog('GetWriteForm: NOT replacing post.html post.php');
 		}
 
-		# this is how auto-save to server would work (with privacy implications) #autosave
+			# this is how auto-save to server would work (with privacy implications) #autosave
 		# $submitForm =~ s/\<textarea/<textarea onkeyup="if (this.length > 2) { document.forms['compose'].action='\/post2.php'; }" /;
+	} else {
+		WriteLog('GetWriteForm: php is OFF');
 	}
 
 	my $initText = '';
