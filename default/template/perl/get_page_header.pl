@@ -82,6 +82,11 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 			require_once('dialog/dialog_list.pl');
 			$topMenuTemplate .= GetDialogListDialog();
 		}
+
+		if (GetConfig('html/dialog_history')) {
+			require_once('dialog/history.pl');
+			$topMenuTemplate .= GetHistoryDialog();
+		}
 	}
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/dialog_properties')) {
