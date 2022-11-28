@@ -917,7 +917,7 @@ sub GetItemAttributesDialog2 {
 						#currently we assume html dir is 'html'
 
 						WriteLog('GetItemAttributesDialog2: $iaValue = ' . $iaValue); #todo
-						if (GetConfig('html/relativize_urls')) {
+						if (GetConfig('html/relativize_urls')) { #todo add version for php without rewrite
 							$iaValue =~ s/^html\//.\//;
 						} else {
 							$iaValue =~ s/^html\//\//;
