@@ -9,6 +9,7 @@
 # #todo first move to trash, then rm. reason: rm takes longer than mv
 #echo this script is currently disabled because we are now parsing html files as data, and there is test data i want to keep
 #exit;
+#todo below does not work on mac. cause: does not support touch -d @0
 echo "touch -d @0 html/*.html html/*/*.html html/*/*/*.html"
 touch -d @0 html/*.html html/*/*.html html/*/*/*.html
 
