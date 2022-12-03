@@ -31,8 +31,8 @@ use warnings;
 #	$title
 #	\%paramHash (see above)
 
-
 sub GetWindowTemplate { # $body, $title, $headings, $status, $menu ; returns html with window/dialog
+#todo this should be renamed to GetDialog()
 # sub GetDialog {
 # sub GetDialogPage {
 	# calls GetWindowTemplate2()
