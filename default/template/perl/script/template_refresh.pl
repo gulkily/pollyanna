@@ -75,14 +75,16 @@ for my $key (@changed) {
 	} # if (-f "config/$key" && !-f "default/$key")
 } # for my $key (@changed)
 
-my $changeCount = scalar(@changed); # like 5
+my $changesDetectedCount = scalar(@changed); # like 5
 
 WriteLog('template_refresh.pl: scalar(@changed) = ' . scalar(@changed));
 
-if ($changeCount) {
+my $filesRemovedCount = 0;
+
+if ($changesDetectedCount) {
 	print "\n";
 	print "=====================\n";
-	print "DEFAULTS CHANGED: $changeCount \n";
+	print "DEFAULTS CHANGED: $changesDetectedCount \n";
 	print "===================================\n";
 	print "ATTENTION:\n";
 	print "Some default settings have changed \n";
@@ -94,13 +96,14 @@ if ($changeCount) {
 		print "\n";
 	}
 	print ".\n";
-	print "To remeditate this condition, meditate for 5 seconds... \n";
+	print "To remeditate this condition, meditate for 3 seconds... \n";
 	print "===================================\n";
 
-	sleep 5;
+	sleep 3;
 
 	for my $key (@changed) {
 		if (-f "config/$key") {
+			$filesRemovedCount++;
 			`rm -vf config/$key`;
 			print "\n";
 		}
@@ -110,7 +113,12 @@ if ($changeCount) {
 			print `grep \"$jsFile\" html -irl`;
 		}
 	}
-} # if ($changeCount)
+} # if ($changesDetectedCount)
+
+if ($filesRemovedCount) {
+	print "Some files were removed from config, building...\n";
+	print `sh hike.sh build`;
+}
 
 print "\n";
 
