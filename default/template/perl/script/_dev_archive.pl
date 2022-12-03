@@ -183,8 +183,8 @@ my $IMAGEDIR = $HTMLDIR . '/image';
 	print("rm -rf $ARCHIVE_DATE_DIR\n");
 	system("rm -rf $ARCHIVE_DATE_DIR");
 
-	print("echo \"Forum content was archived at $date\" > $TXTDIR/archived_$date\.txt\n");
-	system("echo \"Forum content was archived at $date\" > $TXTDIR/archived_$date\.txt");
+	print("echo \"Notice: Content was archived by the operator at $date\" > $TXTDIR/archived_$date\.txt\n");
+	system("echo \"Notice: Content was archived by the operator at $date\" > $TXTDIR/archived_$date\.txt");
 
 	print("=================\n");
 	print("Archive finished!\n");
