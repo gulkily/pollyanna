@@ -200,9 +200,8 @@ column headers should feedback sort order and click
 
 reply(#) link should not appear if reply/enable is false
 
-daily 1m
+daily 1 minute of work
 	banana
-	shitmyself
 	lilatom
 	papers
 	phoenix

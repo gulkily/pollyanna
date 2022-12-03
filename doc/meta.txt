@@ -231,8 +231,6 @@ this would avoid the jump after pageload which currently happens
 #meta
 
 >>ad7c8a33326e47cda9e28ec18118af91d4a93cd5
--- 
-Host: shitmyself.com
 
 
 ===
@@ -299,8 +297,6 @@ There was no admin, and 570C25FB446E20E8 came passing through, so I made them ad
 #meta
 
 >>799a2f913ba6bd44208e3db5ca29f15dae514630
--- 
-Host: www.shitmyself.com
 
 
 ===
@@ -334,8 +330,6 @@ There was no admin, and 1273BAA3B3B1CF9C came passing through, so I made them ad
 todo disable fresh.js if 4xx response #meta #todo
 
 >>8b63e10cf06028ff34a8e9e421fdc9d804bcc253
--- 
-Host: shitmyself.com
 
 
 ===
@@ -387,5 +381,3 @@ Host: sm.chg.pw
 #meta
 
 >>8e28a656e3a31807291b17531531803fb5dc9859
--- 
-Host: www.shitmyself.com

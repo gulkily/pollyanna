@@ -54,8 +54,6 @@ addtext=Meditate...
 
 
 manual oage is now our of date #meta #bug
--- 
-Host: www.shitmyself.com
 
 
 ===
