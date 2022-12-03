@@ -405,12 +405,35 @@ sub GetConfigListAsArray { # $listName
 	#	return @listClean;
 } # GetConfigListAsArray()
 
+sub GetActiveThemes { # return list of active themes (config/setting/theme)
+# sub GetThemes {
+# sub ListThemes {
+# sub GetThemeList {
+# sub GetThemesList {
+# sub GetActiveThemesList {
+	WriteLog('GetActiveThemes()');
+	my $themesValue = GetConfig('theme');
+	if ($themesValue) {
+		$themesValue =~ s/[\s]+/ /g; # strip extra whitespace and convert to spaces
+		my @activeThemes = split(' ', $themesValue); # split by spaces
+		foreach my $themeName (@activeThemes) {
+			#todo some validation
+		}
+		return @activeThemes;
+	} else {
+		WriteLog('GetActiveThemes: warning: $themesValue is FALSE; caller = ' . join(',', caller));
+		return '';
+	}
+} # GetActiveThemes()
+
 sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
-# may be CONFUSING:
-# additional.css special case:
-# values will be concatenated instead of returning first one
-# template/list/menu special case:
-# values will be concatenated instead of returning first one
+# sub GetThemeStyle {
+
+# ATTENTION: this may be CONFUSING at first:
+# * additional.css special case:
+#   values will be concatenated instead of returning first one
+# * #todo template/list/menu special case: #todo
+#   values will be concatenated instead of returning first one
 	my $attributeName = shift;
 	chomp $attributeName;
 
@@ -418,9 +441,19 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 
 	my $returnValue = '';
 
-	my $themesValue = GetConfig('theme');
-	$themesValue =~ s/[\s]+/ /g;
-	my @activeThemes = split(' ', $themesValue);
+	#my $themesValue = GetConfig('theme');
+	#$themesValue =~ s/[\s]+/ /g;
+	#my @activeThemes = split(' ', $themesValue);
+	state @activeThemes;
+	if (!@activeThemes) {
+		@activeThemes = GetActiveThemes();
+		if (!@activeThemes) {
+			WriteLog('GetThemeAttribute: warning: @activeThemes was FALSE');
+		} else {
+			WriteLog('GetThemeAttribute: @activeThemes = ' . join(' ', @activeThemes));
+		}
+	}
+
 	foreach my $themeName (@activeThemes) {
 		my $attributePath = 'theme/' . $themeName . '/' . $attributeName;
 
@@ -431,10 +464,7 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 
 		if ($attributeValue && trim($attributeValue) ne '') {
 			WriteLog('GetThemeAttribute: ' . $attributeName . ' + ' . $themeName . ' -> ' . $attributePath . ' -> length($attributeValue) = ' . length($attributeValue));
-			if ($attributeName ne 'additional.css') {
-				$returnValue = $attributeValue || '';
-				last;
-			} else {
+			if ($attributeName eq 'additional.css') {
 				$returnValue .= $attributeValue || '';
 				$returnValue .= "\n";
 				if (GetConfig('html/css_theme_concat')) {
@@ -444,7 +474,11 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 					last;
 				}
 			}
-		} # if ($attributeValue)
+			else {
+				$returnValue = $attributeValue || '';
+				last;
+			}
+		} # if ($attributeValue && trim($attributeValue) ne '')
 	} # foreach $themeName (@activeThemes)
 
 	if (trim($returnValue) eq '') {
