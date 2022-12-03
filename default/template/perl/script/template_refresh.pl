@@ -112,6 +112,7 @@ if ($changesDetectedCount) {
 			my $jsFile = $1;
 			print `grep \"$jsFile\" html -irl`;
 		}
+		print("\n");
 	}
 } # if ($changesDetectedCount)
 
