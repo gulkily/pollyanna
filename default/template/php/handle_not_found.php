@@ -129,7 +129,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'/example.html',
 			'/chat.html',
 			'/welcome.html',
-			'thanks.html',
+			'/thanks.html',
 		);
 
 		if (in_array($path, $validMakePageNames)) {
