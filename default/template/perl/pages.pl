@@ -1656,6 +1656,7 @@ sub MakeHtAccessPages {
 
 sub MakeMenuPages {
 # sub MenuPages {
+	WriteLog('MakeMenuPages()');
 	my @menuPages = split("\n", GetTemplate('list/menu'));
 	foreach my $menu (@menuPages) {
 		WriteLog('MakeSystemPages: $menu = ' . $menu);
@@ -2284,6 +2285,7 @@ while (my $arg1 = shift @foundArgs) {
 			print ("recognized --all\n");
 			SqliteQuery("UPDATE task SET priority = priority + 1 WHERE task_type = 'page'");
 			MakeSystemPages();
+			MakeMenuPages();
 			MakeListingPages();
 			MakeSummaryPages();
 			BuildTouchedPages(); # --all
