@@ -1,3 +1,13 @@
+current workflow for adding a new page (could improve)
+	add default/theme/thankyou/template/perl/page/thanks.pl
+	add default/theme/thankyou/template/html/page/thanks.template
+	add to $validMakePageNames in HandleNotFound() handle_not_found.php
+	add to @simplePages in MakePage() makepage.pl
+	the good news is that it is already automatically generated when ./pages.pl --all is called
+		probably from the menu list though?
+			#todo it should probably have a list of all available pages somehow
+	#todo something like perl/page/simple.pl that is also checked for when a simple pages is generated?
+
 add config/setting/admin/list_theme_attribute_concat
 
 perl templating feature:
