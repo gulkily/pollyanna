@@ -10,7 +10,10 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 
 	my $title = shift; # page title
 	if (!$title) {
-		$title = ucfirst($pageType);
+		$title = GetString("menu/$pageType");
+		if (!$title) {
+			$title = ucfirst($pageType);
+		}
 	}
 
 	if (
