@@ -815,16 +815,31 @@ sub GetNextPreviousDialog {
 # sub GetChainDialog {
 # sub get_chain {
 	my $fileHash = shift;
-	#todo sanity
 
-	my $query = "SELECT attribute, value FROM item_attribute WHERE file_hash = '$fileHash' AND attribute IN ('chain_next', 'chain_previous')";
+	if ($fileHash = IsItem($fileHash)) {
+		# sanity check passed
+	} else {
+		WriteLog('GetNextPreviousDialog: warning: $fileHash failed sanity check');
+		return '';
+	}
+
+	my $query = "
+		SELECT
+			attribute,
+			value
+		FROM
+			item_attribute
+		WHERE
+			file_hash = '$fileHash' AND
+			attribute IN ('chain_next', 'chain_previous')
+	";
 
 	my %params;
 	$params{'no_heading'} = 1;
 	$params{'no_status'} = 1;
 
 	return GetQueryAsDialog($query, 'Chain', '', \%params);
-}
+} # GetNextPreviousDialog()
 
 sub GetItemAttributesDialog { # %file
 # sub GetAttributesDialog {
