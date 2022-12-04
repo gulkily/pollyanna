@@ -1,0 +1,13 @@
+/* theme/thankyou/template/additional.css */
+
+p {
+	font-family: tahoma, arial, helvetica;
+	font-size: large;
+}
+
+p a {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+/* / additional.css */

@@ -1,0 +1,50 @@
+<!-- default/theme/thankyou/template/html/page/welcome.template -->
+
+<p>
+	Welcome to the home page of <b><i>thankyou</i></b>.
+</p>
+
+<br>
+
+<p>
+	<b><i>thankyou</i></b> is a toolkit for building Web-based community spaces, <br>
+	<br>
+	like blogs and microblogs, forums, social networks, message boards, wikis, <br>
+	<br>
+	collaborative link aggregators, organizational hubs, and similar websites. <br>
+</p>
+
+<br>
+
+<p>
+	<b><i>thankyou</i></b> provides common building blocks, including user accounts <br>
+	<br>
+	backed by private keys, threaded discussion, voting and moderation system, theme <br>
+	<br>
+	management, statistical analysis, and collaborative system modification tools. <br>
+</p>
+
+<br>
+
+<p>
+	Systems built with <b><i>thankyou</i></b> have the capabilities for full transparency, <br>
+	<br>
+	collective user data ownership, and collaborative system modification.
+</p>
+
+<hr>
+
+<p>
+    For more information, try one of the following pages:<br>
+    <br>
+    <a href="/examples.html">Examples</a> of communities already using <b><i>thankyou</i></b>;<br>
+    <br>
+    <a href="/thanks.html">Thanks and Acknowledgements</a> to learn about how <b><i>thankyou</i></b> is made possible;<br>
+    <br>
+    <a href="/faq.html">Frequently Asked Questions</a> for the basics;<br>
+    <br>
+    <a href="/manual.html">Manual</a> for more technical information;<br>
+    <br>
+</p>
+
+<!-- / welcome.template -->
