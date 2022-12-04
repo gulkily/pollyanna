@@ -1,3 +1,5 @@
+add config/setting/admin/list_theme_attribute_concat
+
 perl templating feature:
     save stack
     inject line number into every WriteLog() statement
