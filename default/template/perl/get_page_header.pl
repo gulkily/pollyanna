@@ -10,11 +10,13 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 
 	my $title = shift; # page title
 	if (!$title) {
-		$title = GetString("menu/$pageType");
+		# if title is not provided, come up with one
+		$title = GetString("menu/$pageType"); # look up in strings first
 		if (!$title) {
+			# if still no title, use the page type with capitalization
 			$title = ucfirst($pageType);
-		}
-	}
+		} # if (!$title)
+	} # if (!$title)
 
 	if (
 		!$pageType ||
