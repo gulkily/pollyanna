@@ -433,7 +433,8 @@ if (GetConfig('admin/php/route_enable')) {
 				if ($path == '/profile.html') {
 					// if profile, leave it alone
 					// otherwise, below is for forcing login
-				} else {
+				} # if ($path == '/profile.html')
+				else {
 					// redirect
 
 					$clientHasCookie = 0;
@@ -454,8 +455,8 @@ if (GetConfig('admin/php/route_enable')) {
 						if (! GetConfig('admin/force_profile_fallthrough')) {
 							exit; // #todo this is bad to have here
 						}
-					}
-				}
+					} # if ($clientHasCookie)
+				} # else (NOT $path == '/profile.html')
 			} # GetConfig('admin/force_profile'))
 
 			$pathSelf = $_SERVER['PHP_SELF'];
