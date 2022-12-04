@@ -4,6 +4,9 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 // Handle404 (  #todo #DRY
 // $pathRel?? relative path of $path (to current directory, which should be html/)
 
+// for searching:
+// thanks.html welcome.html help.html settings.html profile.html
+
 	WriteLog("HandleNotFound($path, $pathRel) BEGIN");
 
 	if (GetConfig('admin/php/regrow_404_pages')) {
@@ -124,7 +127,9 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'/profile.html',
 			'/child.html',
 			'/example.html',
-			'/chat.html'
+			'/chat.html',
+			'/welcome.html',
+			'thanks.html',
 		);
 
 		if (in_array($path, $validMakePageNames)) {
