@@ -19,9 +19,6 @@ input[type=text], input[type=password], select, option, textarea {
 	margin-right: 8pt;
 	margin-bottom: 8pt;
 }
-.titlebar td {
-	border-radius: 5pt;
-}
 @media only screen and (min-width : 40em) {
 	.item-textart {
 		max-width: 90%;
