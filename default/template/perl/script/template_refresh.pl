@@ -89,7 +89,7 @@ if ($changesDetectedCount) {
 	print "ATTENTION:\n";
 	print "Some default settings have changed \n";
 	print "If you are developing or upgrading \n";
-	print "something could be wrong. \n";
+	print "this is perfectly normal. \n";
 	print ".\n";
 	for my $change (@changed) {
 		print $change;
