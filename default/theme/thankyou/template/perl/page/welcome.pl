@@ -11,6 +11,11 @@ sub GetWelcomePage {
 		GetPageFooter('welcome')
 	;
 
+	if (GetConfig('admin/js/enable')) {
+		my @js = qw(utils);
+		$html = InjectJs($html, @js)
+	}
+
 	return $html;
 } # GetWelcomePage()
 
