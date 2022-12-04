@@ -1060,7 +1060,7 @@ function GetThemeAttribute ($attributeName) { // returns a config overlay value 
 
 		if ($attributeValue && trim($attributeValue) != '') {
 			WriteLog('GetThemeAttribute: ' . $attributeName . ' + ' . $themeName . ' -> ' . $attributePath . ' -> length($attributeValue) = ' . length($attributeValue));
-			if ($attributeName != 'additional.css') {
+			if ($attributeName == 'additional.css') {
 				$returnValue .= $attributeValue || '';
 				$returnValue .= "\n";
 				if (GetConfig('html/css_theme_concat')) {
