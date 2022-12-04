@@ -1018,15 +1018,38 @@ function GetWindowTemplate ( # body, title, headings, status, menu
 	return $windowTemplate;
 } # GetWindowTemplate()
 
+function GetActiveThemes () { # return list of active themes (config/setting/theme)
+# function GetThemes () {
+# function ListThemes () {
+# function GetThemeList () {
+# function GetThemesList () {
+# function GetActiveThemesList () {
+	WriteLog('GetActiveThemes()');
+	$themesValue = GetConfig('theme');
+	if ($themesValue) {
+		#$themesValue =~ s/[\s]+/ /g; # strip extra whitespace and convert to spaces
+		$themesValue = preg_replace('/[\s]+/', ' ', $themesValue);
+		$activeThemes = explode(' ', $themesValue); # split by spaces
+		foreach ($activeThemes as $themeName) {
+			#todo some validation
+		}
+		return $activeThemes;
+	} else {
+		WriteLog('GetActiveThemes: warning: $themesValue is FALSE; caller = ' . join(',', caller));
+		return '';
+	}
+} # GetActiveThemes()
+
 function GetThemeAttribute ($attributeName) { // returns a config overlay value from config/theme/...
 // uses GetConfig(), which means look first in config/ and then in default/
 
 	WriteLog('GetThemeAttribute(' . $attributeName . ')');
 
-	$themesValue = GetConfig('theme');
-	$themesValue = preg_replace('/[\s]+/', ' ', $themesValue);
+	#$themesValue = GetConfig('theme');
+	#$themesValue = preg_replace('/[\s]+/', ' ', $themesValue);
+	#$activeThemes = explode(' ', $themesValue);
+	$activeThemes = GetActiveThemes();
 
-	$activeThemes = explode(' ', $themesValue);
 	foreach ($activeThemes as $themeName) {
 		$attributePath = 'theme/' . $themeName . '/' . $attributeName;
 
@@ -1038,11 +1061,17 @@ function GetThemeAttribute ($attributeName) { // returns a config overlay value 
 		if ($attributeValue && trim($attributeValue) != '') {
 			WriteLog('GetThemeAttribute: ' . $attributeName . ' + ' . $themeName . ' -> ' . $attributePath . ' -> length($attributeValue) = ' . length($attributeValue));
 			if ($attributeName != 'additional.css') {
-				$returnValue = $attributeValue || '';
-				break;
-			} else {
 				$returnValue .= $attributeValue || '';
 				$returnValue .= "\n";
+				if (GetConfig('html/css_theme_concat')) {
+					# nothing
+					# concatenate all the selected themes' css together
+				} else {
+					break;
+				}
+			} else {
+				$returnValue = $attributeValue || '';
+				break;
 			}
 		} # if ($attributeValue)
 	} # foreach $themeName (@activeThemes)
