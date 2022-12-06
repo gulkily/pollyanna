@@ -1,2 +1,12 @@
 <!-- theme/thankyou/template/html/page/documentation.template -->
+<p>
+	Documentation for <b><i>thankyou</i></b> is somewhat sparse at the moment.<br>
+	Your best bets for now are:<br>
+	<br>
+	<a href="/manual.html">The Manual</a><br>
+	<br>
+	<a href="/manual_advanced.html">The Advanced Manual</a><br>
+	<br>
+	<a href="https://github.com/gulkily/thankyou/tree/master/doc">the doc/ directory in the repo</a>
+</p>
 <!-- / documentation.template -->

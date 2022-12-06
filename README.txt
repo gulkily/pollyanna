@@ -94,8 +94,8 @@ Validation chain prevents tampering with item posting timestamps.
 Items can be deleted by operator, but trace remains in timestamp log.
 
 Resilient:
-Avoid spam target by fine-tuning access.
-Avoid advertising by avoiding over-growth.
+Avoid being a spam target by fine-tuning access.
+Avoid advertising by avoiding community over-growth.
 User-centric operation allows easy migration in case of instance changes.
 
 

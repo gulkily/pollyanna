@@ -1,0 +1,13 @@
+<!-- default/theme/thankyou/template/html/page/enablers.template -->
+
+<p>
+	This project has been enabled by Free Software, including <br>
+	GNU, Linux, Perl, Git, PHP, Bash, ImageMagick, and many others.
+</p>
+
+<p>
+	This project has been written using IntelliJ Community 2019.3, <br>
+	which is not Free Software, but for which I am nonetheless grateful.
+</p>
+
+<!-- / enablers.template -->

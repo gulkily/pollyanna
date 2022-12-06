@@ -1,0 +1,21 @@
+<!-- theme/thankyou/template/html/page/faq_requirements.template -->
+<p>
+	What are the requirements?<br>
+	<br>
+	<b><i>thankyou</i></b> base requires Perl, Bash, and SQLite.<br>
+	It is planned to eventually drop the SQLite requirement.<br>
+	Git is a recommended dependency.<br>
+	<br>
+	For image-related features, ImageMagick is required.<br>
+	<br>
+	For dynamic sites, one of PHP or SSI is reqiured.<br>
+	<br>
+	For delayed-update sites, access.log reading is required.<br>
+	<br>
+	For serving, lighttpd and Apache are supported.<br>
+	Most other web servers should also work.<br>
+	<br>
+	For private-key user accounts, GnuPG is required on the server <br>
+	and JavaScript on the client. (Skilled users can do without the JavaScript.)
+</p>
+<!-- / faq_requirements.template -->

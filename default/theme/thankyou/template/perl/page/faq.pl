@@ -7,7 +7,8 @@ use 5.010;
 sub GetFaqPage {
 	my $html =
 		GetPageHeader('faq') .
-		GetWindowTemplate(GetTemplate('html/page/faq.template'), 'FAQ') .
+		GetWindowTemplate(GetTemplate('html/page/faq/faq_requirements.template'), 'Requirements') .
+		GetWindowTemplate(GetTemplate('html/page/faq/faq_any_browser.template'), 'Any Browser') .
 		GetPageFooter('faq')
 	;
 	if (GetConfig('admin/js/enable')) {
