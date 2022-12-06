@@ -5,6 +5,7 @@ use warnings;
 use 5.010;
 
 sub GetHelpPage { # returns html for help page (/help.html)
+# sub GetHelpDialog()
 	my $txtIndex = "";
 
 	$txtIndex =
