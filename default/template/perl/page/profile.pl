@@ -30,7 +30,11 @@ sub GetProfilePage { # returns profile page (allows sign in/out)
 		#my $tosWindow = GetTosDialog();
 		$txtIndex .= $profileWindow;
 
-		$txtIndex .= '<span class=advanced><form name=formSelectKey>'.GetWindowTemplate(GetTemplate('html/select_key.template'), 'Keychain').'</form></span>';
+		$txtIndex .=
+			'<span class=advanced><form name=formSelectKey>' .
+			GetWindowTemplate(GetTemplate('html/select_key.template'), 'Keychain') .
+			'</form></span>'
+		;
 
 		#$txtIndex .= $tosWindow;
 		$txtIndex .= GetPageFooter('identity');
