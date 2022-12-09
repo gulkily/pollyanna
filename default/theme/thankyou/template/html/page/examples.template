@@ -1,2 +1,32 @@
 <!-- theme/thankyou/template/html/page/examples.template -->
-<!-- / documentation.template -->
+<p>
+	Here are some examples of sites built with <b><i>thankyou</i></b>.
+</p>
+
+<p>
+	<a href="http://web.archive.org/web/20210420020352if_/https://mitbitcoinexpo.org/links.html">MIT Bitcoin Expo 2021</a><br>
+	A small content-only static site built for the conference.<br>
+	Static HTML was generated locally and GitHub Pages used for storage.<br>
+	No dynamic features.
+</p>
+
+<p>
+	<a href="http://26-110.com/">Banana Lounge Unofficial Fan Forum</a><br>
+	Proof-of-concept website for a physical space.<br>
+	Typical image gallery and discussion forum.<br>
+	Added an extra feature for tracking number of banana boxes.
+</p>
+
+<p>
+	<a href="http://shitmyself.com/">sHiTMyseLf.com</a><br>
+	Website for testing various platform features like moderation,<br>
+	content filters and network filter bypass methods.<br>
+</p>
+
+<p>
+	<a href="http://qdb.us/image.html">QDB.us</a><br>
+	Screenshots gallery of websites inspired by and referencing<br>
+	the GeekIssues.org Quote Database
+</p>
+
+<!-- / examples.template -->
