@@ -122,27 +122,6 @@ sub GetSearchDialog { # search dialog for search page
 	return $searchWindow;
 } # GetSearchDialog()
 
-sub GetProfileDialog {
-	# sub GetProfileDialog {
-	my $profileWindowContents = GetTemplate('html/form/profile.template');
-
-	if (GetConfig('admin/js/enable') && GetConfig('admin/js/openpgp')) {
-		#my $gpg2Choices = GetTemplate('html/gpg2.choices.template');
-		#$profileWindowContents =~ s/\$gpg2Algochoices/$gpg2Choices/;
-
-		$profileWindowContents = AddAttributeToTag($profileWindowContents, 'input id=btnRegister', 'onclick', "if (window.btnRegister_Click) { return btnRegister_Click(this); }");
-	} else {
-		$profileWindowContents =~ s/\$gpg2Algochoices//;
-	}
-
-	my $profileWindow = GetWindowTemplate(
-		$profileWindowContents,
-		'Profile',
-	);
-
-	return $profileWindow;
-}
-
 sub GetSimpleDialog { # dialogType ; gets simple dialog based on template/html/page/$dialogType.template
 	# sub GetSimpleWindow {
 	my $dialogType = shift;

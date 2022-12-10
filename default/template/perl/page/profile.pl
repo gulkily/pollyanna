@@ -3,6 +3,27 @@
 use strict;
 use warnings;
 
+sub GetProfileDialog {
+	# sub GetProfileDialog {
+	my $profileWindowContents = GetTemplate('html/form/profile.template');
+
+	if (GetConfig('admin/js/enable') && GetConfig('admin/js/openpgp')) {
+		#my $gpg2Choices = GetTemplate('html/gpg2.choices.template');
+		#$profileWindowContents =~ s/\$gpg2Algochoices/$gpg2Choices/;
+
+		$profileWindowContents = AddAttributeToTag($profileWindowContents, 'input id=btnRegister', 'onclick', "if (window.btnRegister_Click) { return btnRegister_Click(this); }");
+	} else {
+		$profileWindowContents =~ s/\$gpg2Algochoices//;
+	}
+
+	my $profileWindow = GetWindowTemplate(
+		$profileWindowContents,
+		'Profile',
+	);
+
+	return $profileWindow;
+} # GetProfileDialog()
+
 sub GetProfilePage { # returns profile page (allows sign in/out)
 #not the author page
 
