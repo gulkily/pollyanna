@@ -262,6 +262,14 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 			}
 		}
 	}
+
+	elsif ($fieldName eq 'cart' && !$fieldValue) {
+		if (GetConfig('setting/html/reply_cart')) {
+			require_once('widget/add_to_reply_cart.pl');
+			$fieldValue .= GetAddToReplyCartButton($itemRow{'file_hash'});
+		}
+	}
+
 	elsif (
 		substr($fieldName, 0, 8) eq 'special_' &&
 		!$fieldValue &&
