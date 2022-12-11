@@ -9,6 +9,7 @@ SELECT
 FROM
 	item_flat
 WHERE
-	item_score >= 0
+	item_score >= 0 AND
+	add_timestamp >= strftime('%s', 'now', '-3 day')
 ORDER BY
 	add_timestamp DESC
