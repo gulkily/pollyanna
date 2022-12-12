@@ -13,6 +13,18 @@ if (document.createElement && document.head) {
 function doSolvePuzzle () { // solves puzzle
 // called from a timeout set by solvePuzzle()
 
+/*
+
+depends on the following:
+=========================
+window.writeSubmit() is called after
+document.getElementById('btnSolvePuzzle') caption is changed
+document.compose is a form
+document.compose.comment is a textarea that's appended to
+window.getUserFp() is used to get user's fingerprint
+
+*/
+
 	var d = new Date();
 	var epochStart = d.getTime();
 	epochStart = Math.ceil(epochStart / 1000); // current time in epoch format
