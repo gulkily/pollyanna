@@ -1,3 +1,38 @@
+<div>
+	<p>Taken from wikpedia</p>
+	<img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
+    AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
+        9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
+</div>
+
+<form>
+</form>
+<script>
+ var imgBase64 = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCA..." //your bse64 image
+
+onSubmit(){
+const file = DataURIToBlob(imgBase64)
+const formData = new FormData();
+formData.append('upload', file, 'image.jpg')
+formData.append('profile_id', this.profile_id) //other param
+formData.append('path', 'temp/') //other param
+}
+
+    function DataURIToBlob(dataURI: string) {
+        const splitDataURI = dataURI.split(',')
+        const byteString = splitDataURI[0].indexOf('base64') >= 0 ? atob(splitDataURI[1]) : decodeURI(splitDataURI[1])
+        const mimeString = splitDataURI[0].split(':')[1].split(';')[0]
+
+        const ia = new Uint8Array(byteString.length)
+        for (let i = 0; i < byteString.length; i++)
+            ia[i] = byteString.charCodeAt(i)
+
+        return new Blob([ia], { type: mimeString })
+      }
+</script>
+
+
+
 <form action=/post.html>
 	<input type=submit name=comment value=Yes>
 	<input type=submit name=comment value=No>
