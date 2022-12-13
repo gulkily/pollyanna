@@ -2339,71 +2339,93 @@ while (my $arg1 = shift @foundArgs) {
 					print ("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/settings.html', $dialog);
 				}
-				if ($makeDialogArg eq 'stats') {
+				elsif ($makeDialogArg eq 'stats') {
 					my $dialog = GetStatsTable();
 					PutHtmlFile('dialog/stats.html', $dialog);
 					print ("-D $makeDialogArg\n");
 				}
-				if ($makeDialogArg eq 'access') {
+				elsif ($makeDialogArg eq 'access') {
 					my $dialog = GetAccessDialog();
 					print ("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/access.html', $dialog);
 				}
-				if ($makeDialogArg eq 'write') {
+				elsif ($makeDialogArg eq 'write') {
 					my $dialog = GetWriteForm();
 					print ("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/write.html', '<form action="/post.html" method=GET id=compose name=compose target=_top>' . $dialog . '</form>');
 				}
-				if ($makeDialogArg eq 'upload') {
+				elsif ($makeDialogArg eq 'upload') {
 					require_once('page/upload.pl');
 					my $dialog = GetUploadDialog();
 					print ("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/upload.html', $dialog);
 				}
-				if ($makeDialogArg eq 'read') {
+				elsif ($makeDialogArg eq 'read') {
 					my $dialog = GetQueryAsDialog('read', 'Top Threads');
 					print ("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/read.html', $dialog);
 				}
-				if ($makeDialogArg eq 'profile') {
+				elsif ($makeDialogArg eq 'profile') {
+					require_once('page/profile.pl');
 					my $dialog = GetProfileDialog();
 					print ("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/profile.html', $dialog);
 				}
-				if ($makeDialogArg eq 'help') {
+				elsif ($makeDialogArg eq 'help') {
 					my $dialog = GetSimpleDialog('help');
 					print ("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/help.html', $dialog);
 				}
-				if ($makeDialogArg eq 'threads') {
+				elsif ($makeDialogArg eq 'threads') {
 					my $dialog = GetQueryAsDialog('threads');
 					print ("-D $makeDialogArg\n");
 					$dialog = AddAttributeToTag($dialog, 'table', 'id', 'threads');
 					PutHtmlFile('dialog/threads.html', $dialog);
 				}
-				if ($makeDialogArg eq 'welcome') {
+				elsif ($makeDialogArg eq 'welcome') {
 					my $dialog = GetSimpleDialog('welcome');
 					print ("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/welcome.html', $dialog);
 				}
-				if ($makeDialogArg eq 'authors') {
+				elsif ($makeDialogArg eq 'authors') {
 					my $dialog = GetQueryAsDialog('authors', 'Authors');
 					print ("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/authors.html', $dialog);
 				}
-				if ($makeDialogArg eq 'tags') {
+				elsif ($makeDialogArg eq 'tags') {
 					my $dialog = GetQueryAsDialog('tags', 'Tags');
 					print ("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/tags.html', $dialog);
 				}
-
-				#				elsif (IsItem($arg1)) {
-#					print ("recognized item identifier\n");
-#					MakePage('item', $arg1, 1);
-#				}
-
-				if (0) {
-					# placeholder
+				elsif ($makeDialogArg eq 'new') {
+					my $dialog = GetQueryAsDialog('new', 'New');
+					print ("-D $makeDialogArg\n");
+					PutHtmlFile('dialog/new.html', $dialog);
+				}
+				elsif ($makeDialogArg eq 'chain') {
+					my $dialog = GetQueryAsDialog('chain', 'Chain');
+					print ("-D $makeDialogArg\n");
+					PutHtmlFile('dialog/chain.html', $dialog);
+				}
+				elsif ($makeDialogArg eq 'url') {
+					my $dialog = GetQueryAsDialog('url', 'URL');
+					print ("-D $makeDialogArg\n");
+					PutHtmlFile('dialog/url.html', $dialog);
+				}
+				elsif ($makeDialogArg eq 'image') {
+					my $dialog = GetQueryAsDialog('image', 'Image');
+					print ("-D $makeDialogArg\n");
+					PutHtmlFile('dialog/image.html', $dialog);
+				}
+				elsif ($makeDialogArg eq 'data') {
+					my $dialog = GetDataDialog();
+					print ("-D $makeDialogArg\n");
+					PutHtmlFile('dialog/data.html', $dialog);
+				}
+				elsif ($makeDialogArg eq 'search') {
+					my $dialog = GetSearchDialog();
+					print ("-D $makeDialogArg\n");
+					PutHtmlFile('dialog/search.html', $dialog);
 				}
 				elsif ($makeDialogArg =~ m/([0-9a-f]{8})/) {
 					print ("-D (item_prefix)\n");
