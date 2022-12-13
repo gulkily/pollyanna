@@ -280,6 +280,48 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		}
 
 		if (
+			$path == '/dialog/new.html'
+		) {
+			WriteLog('HandleNotFound: found new dialog');
+			$pagesPlArgument = '-D new';
+		}
+
+		if (
+			$path == '/dialog/chain.html'
+		) {
+			WriteLog('HandleNotFound: found chain dialog');
+			$pagesPlArgument = '-D chain';
+		}
+
+		if (
+			$path == '/dialog/data.html'
+		) {
+			WriteLog('HandleNotFound: found data dialog');
+			$pagesPlArgument = '-D data';
+		}
+
+		if (
+			$path == '/dialog/search.html'
+		) {
+			WriteLog('HandleNotFound: found search dialog');
+			$pagesPlArgument = '-D search';
+		}
+
+		if (
+			$path == '/dialog/url.html'
+		) {
+			WriteLog('HandleNotFound: found url dialog');
+			$pagesPlArgument = '-D url';
+		}
+
+		if (
+			$path == '/dialog/image.html'
+		) {
+			WriteLog('HandleNotFound: found image dialog');
+			$pagesPlArgument = '-D image';
+		}
+
+		if (
 			$path == '/dialog/help.html'
 		) {
 			WriteLog('HandleNotFound: found help dialog');
