@@ -20,6 +20,13 @@
 	</p>
 
 	<p>
+		<label for=chkDraggableSpawnFocus>
+			<input id=chkDraggableSpawnFocus name=chkDraggableSpawnFocus type=checkbox onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'draggable_spawn_focus'); }">
+			Focus spawned dialogs<noscript><b>*</b></noscript>
+		</label>
+	</p>
+
+	<p>
 		<label for=chkDraggableRestore>
 			<input id=chkDraggableRestore name=chkDraggableRestore type=checkbox onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'draggable_restore'); }">
 			Restore dialog positions<noscript><b>*</b></noscript>

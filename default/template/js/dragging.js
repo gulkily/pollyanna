@@ -1053,7 +1053,9 @@ function InsertFetchedDialog () {
 			//document.title = 'qwer';
 		}
 		if (newDialog.length) {
-			//SetActiveDialog(newDialog[0]); // InsertFetchedDialog()
+			if (GetPrefs('draggable_spawn_focus')) {
+				SetActiveDialog(newDialog[0]); // InsertFetchedDialog()
+			}
 
 			window.nextWindowToFocusTo = newDialog[0];
 

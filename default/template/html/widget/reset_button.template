@@ -6,6 +6,7 @@
 		SetPrefs('show_admin', 0);
 		SetPrefs('draggable_activate', 0);
 		SetPrefs('draggable_spawn', 0);
+		SetPrefs('draggable_spawn_focus', 0);
 		SetPrefs('draggable', 0);
 		SetPrefs('draggable_restore', 0);
 		SetPrefs('draggable_restore_collapsed', 0);
