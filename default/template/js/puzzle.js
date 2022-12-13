@@ -20,10 +20,27 @@ depends on the following:
 window.writeSubmit() is called after
 document.getElementById('btnSolvePuzzle') caption is changed
 document.compose is a form
+	if it is not found, looks for frmProfile
 document.compose.comment is a textarea that's appended to
 window.getUserFp() is used to get user's fingerprint
 
 */
+	if (!window.writeSubmit) {
+		//alert('DEBUG: warning: window.writeSubmit missing');
+	}
+	if (!document.getElementById('btnSolvePuzle')) {
+		//alert('DEBUG: warning: btnSolvePuzzle missing');
+	}
+	if (!document.compose) {
+		//alert('DEBUG: warning: document.compose missing');
+	}
+	if (!document.compose.comment) {
+		//alert('DEBUG: warning: document.compose.comment missing');
+	}
+	if (!window.getUserFp) {
+		//alert('DEBUG: warning: window.getUserFp missing');
+	}
+
 
 	var d = new Date();
 	var epochStart = d.getTime();
