@@ -81,6 +81,8 @@ WriteLog('template_refresh.pl: scalar(@changed) = ' . scalar(@changed));
 
 my $filesRemovedCount = 0;
 
+my $needRebuild = 0;
+
 if ($changesDetectedCount) {
 	print "\n";
 	print "=====================\n";
@@ -106,6 +108,11 @@ if ($changesDetectedCount) {
 			$filesRemovedCount++;
 			`rm -vf config/$key`;
 			print "\n";
+
+			if (index($key, 'perl') != -1) {
+				# if perl files were updated, need to rebuild
+				$needRebuild = 1;
+			}
 		}
 		print "$key";
 		if ($key =~ m/^template\/(js\/.+)/) {
@@ -116,8 +123,8 @@ if ($changesDetectedCount) {
 	}
 } # if ($changesDetectedCount)
 
-if ($filesRemovedCount) {
-	print "Some files were removed from config, building...\n";
+if ($needRebuild) {
+	print "Some perl files were removed from config, building...\n";
 	print `sh hike.sh build`;
 }
 
