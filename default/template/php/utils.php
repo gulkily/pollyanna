@@ -1598,7 +1598,8 @@ function GetItemHtmlLink ($hash, $linkCaption, $hashAnchor) { # $hash, [link cap
 		}
 
 		if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
-			#$itemLink = AddAttributeToTag($itemLink, 'a ', 'onclick', '');
+			# add onclick event to spawn a dialog in-page instead of navigating
+			# to a different page if those libraries are available and the setting is enabled
 			$itemLink = AddAttributeToTag(
 				$itemLink,
 				'a ',
@@ -1618,7 +1619,7 @@ function GetItemHtmlLink ($hash, $linkCaption, $hashAnchor) { # $hash, [link cap
 					}
 				"
 			);
-		}
+		} # if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging'))
 
 		return $itemLink;
 	} else {
