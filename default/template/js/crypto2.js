@@ -30,6 +30,8 @@ function GenerateKey () {
 } // GenerateKey()
 
 function MakeKey (t) { //makes key using default settings
+// returns FALSE for success, TRUE for failure
+
 // also prompts for username, redirects to profile page ...
 // calls GenerateKey() #todo
 // once key is generated, store it to localStorage
@@ -171,7 +173,8 @@ function MakeKey (t) { //makes key using default settings
 					//}
 					//PubKeyPing();
 
-					window.location = '/profile.html?' + myFingerprint;
+					// window.location = '/profile.html?' + myFingerprint;
+					PingUrl('/profile.html?' + myFingerprint);
 
 					//	if (window.sharePubKey) {
 					//		//alert('DEBUG: MakeKey: (window.sharePubKey) exists. calling');
