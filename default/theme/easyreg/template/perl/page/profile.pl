@@ -4,7 +4,6 @@ use strict;
 use warnings;
 
 sub GetProfileDialog {
-	# sub GetProfileDialog {
 	my $profileWindowContents = GetTemplate('html/form/profile.template');
 
 	my $profileWindow = GetWindowTemplate(
@@ -35,7 +34,13 @@ sub GetProfilePage { # returns profile page (allows sign in/out)
 		$txtIndex .= GetPageFooter('identity');
 
 		if (GetConfig('admin/js/enable')) {
-			$txtIndex = InjectJs($txtIndex, qw(avatar settings utils profile timestamp));
+			$txtIndex = InjectJs($txtIndex, qw(avatar settings utils profile timestamp write puzzle voting easy_register));
+			$txtIndex = AddAttributeToTag(
+				$txtIndex,
+				'input id=btnEasyRegister',
+				'onclick',
+				'if (window.EasyRegister) { return EasyRegister(this); }'
+			);
 		} else {
 			# js is disabled
 		}
