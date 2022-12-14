@@ -103,7 +103,14 @@ function btnRegister_Click (t) { // event for 'Register' button's click
 				//alert('DEBUG: btnRegister_Click: intKeyGenResult = ' + intKeyGenResult);
 				SetPrefs('latest_pubkey_ping', 1);
 				//alert('DEBUG: returning intKeyGenResult = ' + intKeyGenResult);
-				return intKeyGenResult;
+				myFingerprint = window.localStorage.getItem('fingerprint');
+				if (myFingerprint) {
+					window.location = '/profile.html?' + myFingerprint;
+				} else {
+					window.location = '/profile.html'; // #todo this needs to be fixed to work with relativized urls
+				}
+				return intKeyGenResult; // TRUE if failed, FALSE if failed,
+				// because it is used to determine whether to submit the form to get a cookie
 			}
 		}
 	} else {
@@ -479,7 +486,8 @@ function PubkeyCheckProfileExists (fp) { // check if profile exists on server
 
 	//alert('DEBUG: PubkeyCheckProfileExists: fp = ' + fp);
 
-	var profileUrl = '/author/' + fp + '/';
+	//var profileUrl = '/author/' + fp + '/';
+	var profileUrl = '/author/' + fp + '.zip';
 
 	//alert('DEBUG: profileUrl = ' + profileUrl);
 
