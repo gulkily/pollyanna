@@ -1788,6 +1788,7 @@ sub MakeListingPages {
 		$dialog = GetStatsTable();
 		PutHtmlFile('dialog/stats.html', $dialog);
 
+		require_once('page/profile.pl');
 		$dialog = GetProfileDialog();
 		PutHtmlFile('dialog/profile.html', $dialog);
 
