@@ -1,3 +1,16 @@
+easy registration
+	1) generate private and public keys
+	2) solve puzzle
+	3) send both to server
+
+add support for === divider which creates multiple files
+
+dig deeper into qdb.us bug causing many duplicated files
+
+
+
+===
+
 current workflow for adding a new page (could improve)
 	add default/theme/thankyou/template/perl/page/thanks.pl
 	add default/theme/thankyou/template/html/page/thanks.template
