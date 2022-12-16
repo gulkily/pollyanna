@@ -1765,6 +1765,7 @@ sub MakeSystemPages {
 } # MakeSystemPages()
 
 sub MakeListingPages {
+	WriteLog('MakeListingPages()');
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
 		my $dialog;
@@ -1795,23 +1796,27 @@ sub MakeListingPages {
 		$dialog = GetSimpleDialog('help');
 		PutHtmlFile('dialog/help.html', $dialog);
 	}
-	MakePage('profile');
 
-	MakePage('chain');
+	my @makePages = qw(profile chain deleted compost authors data);
+	for my $page (@makePages) {
+		WriteLog('MakeListingPages: calling MakePage(' . $page . ')');
+		MakePage($page);
+	}
 
-	MakePage('deleted');
-
-	MakePage('compost');
-
-	MakePage('authors');
-
-	MakePage('data');
+	# MakePage('profile');
+	# MakePage('chain');
+	# MakePage('deleted');
+	# MakePage('compost');
+	# MakePage('authors');
+	# MakePage('data');
 
 	#PutHtmlFile('desktop.html', GetDesktopPage());
 	MakeSimplePage('desktop');
 
 	if (1) {
 		# Ok page
+		# this page is for responding to user actions on a static mode server
+		# it just says ok, and then redirects after 10 seconds
 		my $okPage;
 		$okPage .= GetPageHeader('default', 'OK');
 		my $windowContents = GetTemplate('html/action_ok.template');
