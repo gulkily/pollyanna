@@ -2,8 +2,7 @@
 
 #todo sanity checks for git and cut
 echo ===============================
-#### Rejoice! RocketScience abcd1234
-echo "Rejoice! RocketScience" `git rev-parse HEAD | cut -c 1-8`
+echo "Rejoice! [thankyou]" `git rev-parse HEAD | cut -c 1-8`
 echo ===============================
 
 #Matthew 5:37
