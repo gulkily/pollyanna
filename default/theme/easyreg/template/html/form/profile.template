@@ -1,5 +1,9 @@
 <!-- profile.template -->
 
-hey
+<form action="/profile.html" name=compose>
+	<textarea cols=20 rows=20 id=comment name=comment></textarea>
+	<input id=btnEasyRegister type=submit value=Register>
+	<span id=spanSignAs></span>
+</form>
 
 <!-- / profile.template -->
