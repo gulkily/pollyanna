@@ -15,7 +15,7 @@ echo Verify:
 ls config/template config/theme/*/template/ *.pl cache/ html/*.html html/*.php log/log.log
 
 echo ===
-echo To rebuild RocketScience use "./build.sh" or "source hike.sh"
+echo To rebuild, use "./build.sh" or "source hike.sh"
 
 if [ -e config/debug ]
 	then
