@@ -269,7 +269,10 @@ sub MakeIndex { # indexes all available text files, and outputs any config found
 	if (GetConfig('admin/cpp/enable')) {
 		state $HTMLDIR = GetDir('html');
 
-		my @cppFiles = split("\n", `find $HTMLDIR/cpp -type f -name *.cpp`);
+		my $cppFilesCommand = "find $HTMLDIR/cpp -type f -name '*.cpp'";
+		WriteLog('MakeIndex: $cppFilesCommand = ' . $cppFilesCommand);
+
+		my @cppFiles = split("\n", `$cppFilesCommand`);
 		my $cppFilesCount = scalar(@cppFiles);
 		my $currentCppFile = 0;
 		WriteLog('MakeIndex: $cppFilesCount = ' . $cppFilesCount);
@@ -286,7 +289,10 @@ sub MakeIndex { # indexes all available text files, and outputs any config found
 	if (GetConfig('admin/py/enable')) {
 		state $HTMLDIR = GetDir('html');
 
-		my @pyFiles = split("\n", `find $HTMLDIR/py -type f -name *.py`);
+		my $pyFilesCommand = "find $HTMLDIR/py -type f -name '*.py'";
+		WriteLog('MakeIndex: $pyFilesCommand = ' . $pyFilesCommand);
+
+		my @pyFiles = split("\n", `$pyFilesCommand`);
 		my $pyFilesCount = scalar(@pyFiles);
 		my $currentPyFile = 0;
 		WriteLog('MakeIndex: $pyFilesCount = ' . $pyFilesCount);
