@@ -303,7 +303,10 @@ sub MakeIndex { # indexes all available text files, and outputs any config found
 	if (GetConfig('admin/perl/enable')) {
 		state $HTMLDIR = GetDir('html');
 
-		my @perlFiles = split("\n", `find $HTMLDIR/perl -type f -name *.pl`);
+		my $perlFilesCommand = "find $HTMLDIR/perl -type f -name '*.pl'";
+		WriteLog('MakeIndex: $perlFilesCommand = ' . $perlFilesCommand);
+
+		my @perlFiles = split("\n", `$perlFilesCommand`);
 		my $perlFilesCount = scalar(@perlFiles);
 		my $currentPerlFile = 0;
 		WriteLog('MakeIndex: $perlFilesCount = ' . $perlFilesCount);
