@@ -246,6 +246,7 @@ sub GetStylesheet { # $styleSheet ; returns stylesheet template based on config
 
 	if (GetConfig('admin/js/dragging') || GetConfig('html/css_inline_block')) {
 		$style .= "\n" . GetTemplate('css/dragging.css');
+		$style .= "\n" . GetTemplate('css/width.css');
 	}
 
 	if (GetConfig('html/css_shimmer')) {
