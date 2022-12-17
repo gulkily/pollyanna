@@ -9,6 +9,7 @@ FROM
 	item_flat
 WHERE
 	tags_list like '%,image,%' AND
-	item_type = 'image'
+	item_type = 'image' AND
+	item_score >= 0
 ORDER BY
 	add_timestamp DESC
