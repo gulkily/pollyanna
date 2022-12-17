@@ -1,11 +1,14 @@
 SELECT 
 	file_hash AS file_hash,
 	item_title AS item_title,
-	item_score AS item_score
+	item_name AS item_name,
+	item_score AS item_score,
+	file_path AS file_path,
+	item_type AS item_type
 FROM
 	item_flat
 WHERE
 	tags_list like '%,image,%' AND
-	item_type = 'image'
+	image_type = 'image'
 ORDER BY
 	add_timestamp DESC
