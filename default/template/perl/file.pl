@@ -324,7 +324,7 @@ sub GetFileMessage { # $fileHash ; get file message based on hash
 			WriteLog('GetFileMessage: (message_gpg) return GetFile(' . $messagePath . ')');
 			return GetFile($messagePath);
 		} else {
-			WriteLog('GetFileMessage: warning: not returning, no file at $messagePath = '. $messagePath . '; caller = ' . join(',', caller));
+			WriteLog('GetFileMessage: not returning, no file at $messagePath = '. $messagePath . '; caller = ' . join(',', caller));
 		}
 	}
 
