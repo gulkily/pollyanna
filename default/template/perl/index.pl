@@ -230,7 +230,9 @@ sub MakeIndex { # indexes all available text files, and outputs any config found
 
 	#my @filesToInclude = split("\n", `grep txt\$ ~/index/home.txt`); #homedir #~
 	#my @filesToInclude = split("\n", `find $TXTDIR -name \\\*.txt -o -name \\\*.html`); #includes html files #indevelopment
-	my @filesToInclude = split("\n", `find $TXTDIR -type f -name \\\*.txt`);
+	my $txtFilesCommand = "find $TXTDIR -type f -name '*.txt'";
+	WriteLog('MakeIndex: $txtFilesCommand = ' . $txtFilesCommand);
+	my @filesToInclude = split("\n", `$txtFilesCommand`);
 
 	my $filesCount = scalar(@filesToInclude);
 	my $currentFile = 0;
@@ -250,7 +252,9 @@ sub MakeIndex { # indexes all available text files, and outputs any config found
 	if (GetConfig('admin/image/enable')) {
 		state $HTMLDIR = GetDir('html');
 
-		my @imageFiles = split("\n", `find $HTMLDIR/image`);
+		my $imageFilesCommand = "find $HTMLDIR/image";
+		WriteLog('MakeIndex: $imageFilesCommand = ' . $imageFilesCommand);
+		my @imageFiles = split("\n", `$imageFilesCommand`);
 		my $imageFilesCount = scalar(@imageFiles);
 		my $currentImageFile = 0;
 		WriteLog('MakeIndex: $imageFilesCount = ' . $imageFilesCount);
