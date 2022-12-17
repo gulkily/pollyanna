@@ -1530,7 +1530,7 @@ sub DBAddItem { # $filePath, $fileName, $authorKey, $fileHash, $itemType, $verif
 
 	if (!$fileName) {
 		$fileName = 'Untitled';
-		WriteLog('DBAddItem: warning: $fileName missing; $filePath = ' . $filePath);
+		WriteLog('DBAddItem: warning: $fileName missing; $filePath = ' . $filePath . '; caller = ' . join(',', caller));
 	}
 #
 #	if ($authorKey) {
