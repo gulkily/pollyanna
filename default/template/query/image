@@ -9,6 +9,6 @@ FROM
 	item_flat
 WHERE
 	tags_list like '%,image,%' AND
-	image_type = 'image'
+	item_type = 'image'
 ORDER BY
 	add_timestamp DESC
