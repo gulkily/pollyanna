@@ -1012,7 +1012,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 			WriteLog('IndexTextFile: Calling PutFile(), $fileHash = ' . $fileHash . '; $messageCacheName = ' . $messageCacheName);
 			PutFile($messageCacheName, $message);
 		} else {
-			WriteLog('IndexTextFile: warning: I was going to save $messageCacheName, but $message is blank! $file = ' . $file);
+			WriteLog('IndexTextFile: warning: I was going to save $messageCacheName, but $message is blank! $file = ' . $file . '; caller = ' . join(',', caller));
 			WriteLog('IndexTextFile: warning: I was going to save $messageCacheName, but $message is blank! $fileHash = ' . $fileHash);
 			return ''; # $message is FALSE sanity check
 		}
