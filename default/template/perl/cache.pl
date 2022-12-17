@@ -152,12 +152,12 @@ sub GetMessageCacheName { # $itemHash ;
 	state $cacheDir = GetDir('cache');
 	my $messageCacheName = $cacheDir . '/' . $myVersion . '/message/' . $itemHash;
 
-	if (!-e $messageCacheName) {
-		WriteLog('GetMessageCacheName: warning: NO FILE: $messageCacheName = ' . $messageCacheName . '; caller = ' . join(',', caller));
-	}
+	#if (!-e $messageCacheName) {
+	#	WriteLog('GetMessageCacheName: warning: NO FILE: $messageCacheName = ' . $messageCacheName . '; caller = ' . join(',', caller));
+	#}
 
 	return $messageCacheName;
-}
+} # GetMessageCacheName()
 
 
 sub ExpireAvatarCache { # $fingerprint ; removes all caches for alias
