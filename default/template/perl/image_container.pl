@@ -38,6 +38,11 @@ sub GetImageContainer { # $fileHash, $imageAlt, $boolLinkToItemPage = 1
 	my $imageSmallUrl = "/thumb/thumb_42_$fileHash.gif"; #todo hardcoding no
 	#my $imageAlt = $itemTitle;
 
+	if (!$imageAlt) {
+		$imageAlt = 'image';
+		WriteLog('GetImageContainer: warning: $imageAlt missing; caller = ' . join(',', caller));
+	}
+
 	#if (file_exists($imageUrl) || file_exists($imageSmallUrl)) { #this doesn't work because paths are wrong
 	if (1) { #todo
 		WriteLog('GetImageContainer: $fileHash = ' . $fileHash . '; $imageAlt = ' . $imageAlt . '; $permalinkHtml = ' . $permalinkHtml);
