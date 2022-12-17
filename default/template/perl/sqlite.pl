@@ -1447,7 +1447,8 @@ sub DBAddItem2 {
 	my $filePath = shift;
 	my $fileHash = shift;
 	my $itemType = shift;
-	return DBAddItem($filePath, '', '', $fileHash, $itemType, 0);
+	my $fileName = TrimPath($filePath);
+	return DBAddItem($filePath, $fileName, '', $fileHash, $itemType, 0);
 } # DBAddItem2()
 
 sub DBAddItem { # $filePath, $fileName, $authorKey, $fileHash, $itemType, $verifyError ; Adds a new item to database
