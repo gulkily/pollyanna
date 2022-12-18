@@ -44,8 +44,8 @@ function WriteOnload () { // onload handler for write page
 				var gt = unescape('%3E');
 				if (window.getAvatar) {
 
-
 					if (window.solvePuzzle) {
+						//alert('DEBUG: window.solvePuzzle was true, adding button...');
 						var spanWriteAdvanced = document.getElementById('spanWriteAdvanced');
 						if (spanWriteAdvanced && window.solvePuzzle) {
 							var btnSolvePuzzle = document.createElement('input');
