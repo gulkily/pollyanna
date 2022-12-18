@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 sub GetProfileDialog {
-	# sub GetProfileDialog {
+# sub GetProfileForm {
 	my $profileWindowContents = GetTemplate('html/form/profile.template');
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/openpgp')) {
