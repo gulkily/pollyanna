@@ -4,14 +4,14 @@ use strict;
 use warnings;
 
 sub GetProfileDialog {
-	my $profileWindowContents = GetTemplate('html/form/profile.template');
+	my $profileDialogContents = GetTemplate('html/form/profile.template');
 
-	my $profileWindow = GetWindowTemplate(
-		$profileWindowContents,
+	my $profileDialog = GetWindowTemplate(
+		$profileDialogContents,
 		'Profile',
 	);
 
-	return $profileWindow;
+	return $profileDialog;
 } # GetProfileDialog()
 
 sub GetProfilePage { # returns profile page (allows sign in/out)
