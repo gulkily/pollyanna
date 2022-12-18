@@ -10,6 +10,65 @@ if (document.createElement && document.head) {
 	document.head.appendChild(script);
 }
 
+function getSolvedPuzzle (userFp, desiredPrefix, timeLimit, iterationLimit) {
+
+	// userFp example: ABCDEF0123456789
+	// desiredPrefix example: 1337
+	// timeLimit example: 15
+	// iterationLimit example: 1000000
+
+	var i = 0; // counts iterations
+	var done = 0; // done status
+
+	var r = 0 + ''; // stores random number as string
+	var lookingFor = desiredPrefix; // required hash prefix
+	var lookingForLength = lookingFor.length;
+	var cycleLimit = iterationLimit; // give up after this many tries
+	var secondsLimit = time; // give up after this many seconds
+	var puzzle = ''; // finished puzzle
+	var fp = userFp;
+
+	var hash = ''; // starting salt provided by server
+
+	var puzzleResult = '';
+
+	var d = new Date();
+	var epochStart = d.getTime();
+	epochStart = Math.ceil(epochStart / 1000); // current time in epoch format
+
+	while(done < 1) {
+		var d = new Date();
+		var epoch = d.getTime();
+		epoch = Math.ceil(epoch / 1000); // current time in epoch format
+
+		// look for a puzzle which fits criteria
+		i = i + 1; // counter
+		r = Math.random() + '';
+
+		puzzle = fp + ' ' + epochStart + ' ' + r;
+		hash = hex_sha512(puzzle);
+
+		if (hash.substring(0, lookingForLength) == lookingFor) {
+			// match found
+			puzzleResult = puzzleResult + puzzle + "\n";
+			done++;
+		}
+		if (cycleLimit < i) {
+			// give up
+			done = 100;
+		}
+		if (epochStart + secondsLimit < epoch) {
+			done = 100;
+		}
+	} // while(!done) -- solving puzzle
+
+	if (puzzleResult) {
+		return puzzleResult;
+	} else {
+		return '';
+	}
+}
+
 function doSolvePuzzle () { // solves puzzle
 // called from a timeout set by solvePuzzle()
 
@@ -41,60 +100,22 @@ window.getUserFp() is used to get user's fingerprint
 		//alert('DEBUG: warning: window.getUserFp missing');
 	}
 
-
-	var d = new Date();
-	var epochStart = d.getTime();
-	epochStart = Math.ceil(epochStart / 1000); // current time in epoch format
-
 	var fp = '0000000000000000';
 	if (window.getUserFp) {
 		fp = getUserFp();
 	}
 	// user's fp or default to 000
 
-	var i = 0; // counts iterations
-	var done = 0; // done status
+	var d = new Date();
+	var epochStart = d.getTime();
+	epochStart = Math.ceil(epochStart / 1000); // current time in epoch format
 
-	var r = 0 + ''; // stores random number as string
-	var lookingFor = '1337'; // required hash prefix
-	var lookingForLength = lookingFor.length;
-	var cycleLimit = 1000000; // give up after this many tries
-	var secondsLimit = 10; // give up after this many seconds
-	var puzzle = ''; // finished puzzle
-
-	var hash = ''; // starting salt provided by server
 	var txtComment = '';
 	if (document && document.compose && document.compose.comment) {
 		txtComment = document.compose.comment;
 	}
 
-	var puzzleResult = '';
-
-	while(done < 1) {
-		var d = new Date();
-		var epoch = d.getTime();
-		epoch = Math.ceil(epoch / 1000); // current time in epoch format
-
-		// look for a puzzle which fits criteria
-		i = i + 1; // counter
-		r = Math.random() + '';
-
-		puzzle = fp + ' ' + epochStart + ' ' + r;
-		hash = hex_sha512(puzzle);
-
-		if (hash.substring(0, lookingForLength) == lookingFor) {
-			// match found
-			puzzleResult = puzzleResult + puzzle + "\n";
-			done++;
-		}
-		if (cycleLimit < i) {
-			// give up
-			done = 100;
-		}
-		if (epochStart + secondsLimit < epoch) {
-			done = 100;
-		}
-	} // while(!done) -- solving puzzle
+	var puzzleResult = getSolvedPuzzle(fp, '1337', 10, 1000000);
 
 	// add to compose form, sign, and submit
 	//var txtComment = document.compose.comment; // dupe from above
@@ -112,6 +133,7 @@ window.getUserFp() is used to get user's fingerprint
 			}
 		}
 	}
+
 	var btnSolvePuzzle = document.getElementById('btnSolvePuzzle');
 	if (window.signMessage) {
 		if (btnSolvePuzzle) {
