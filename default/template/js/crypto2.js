@@ -361,6 +361,43 @@ function getUsername () { // returns pgp username
 	return '';
 } // getUsername()
 
+function signMessageBasic (message) {
+	var openpgp = window.openpgp;
+
+	//alert('DEBUG: signMessageBasic: openpgp = ' + openpgp);
+
+	var privkey = getPrivateKey();
+	var privKeyObj = openpgp.key.readArmored(privkey).keys[0];
+	var signedMessage = '';
+
+	//alert('DEBUG: signMessageBasic: privkey = ' + privkey);
+	//alert('DEBUG: signMessageBasic: privKeyObj = ' + privKeyObj);
+
+	// set basic options for signing the message
+	options = {
+		data: message,                             // input as String (or Uint8Array)
+		privateKeys: [privKeyObj]                  // for signing
+	};
+
+	//alert('DEBUG: signMessageBasic: options = ' + options);
+
+	openpgp.config.show_version = false; // don't add openpgp version message to output
+	openpgp.config.show_comment = false; // don't add comment to output
+	openpgp.sign(options).then(function(signed) {
+		//alert('DEBUG: signMessageBasic: signed = ' + signed);
+		//signedMessage = signed.data;
+
+		document.compose.comment.value = signed.data;
+		// #todo figure out how to do sync return in javascript with this
+
+		//alert(signed.data);
+	});
+
+	//alert('DEBUG: signMessageBasic: signedMessage = ' + signedMessage);
+
+	return signedMessage;
+} // signMessageBasic()
+
 function signMessage () { // find the compose textbox and sign whatever is in it
 // if message is already signed or is a public key, exit
 // relies on getElementById and localStorage
