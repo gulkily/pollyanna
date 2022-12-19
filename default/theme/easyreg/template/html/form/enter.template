@@ -3,7 +3,7 @@
 	<p>
 		To become a member, <br>
 		Press the Member button once, <br>
-		and wait a few secs.
+		wait for a response.
 	</p>
 	<p align=center>
 		<input id=member name=btnRegister type=submit value="Member">

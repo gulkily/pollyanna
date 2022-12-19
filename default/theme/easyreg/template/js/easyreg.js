@@ -33,7 +33,12 @@ function afterKeygen () {
 
 	var solvedPuzzle = getSolvedPuzzle(myFp, '1337', 10, 1000000);
 
-	var myMessage = 'New member has solved proof of work puzzle.' + "\n\n" + solvedPuzzle;
+	var myMessage =
+		'Welcome, New Member!' + "\n\n" +
+		'A new member has completed registration.' + "\n\n" +
+		'Feel free to introduce yourself below.' + "\n\n" +
+		solvedPuzzle
+	;
 
 	//alert('DEBUG: EasyMember: solvedPuzzle = ' + solvedPuzzle);
 
