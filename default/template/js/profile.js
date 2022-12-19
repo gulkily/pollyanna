@@ -164,35 +164,43 @@ function sharePubKey (t) { // shares current user's public key via injected form
 				}
 			}
 
-			//alert('DEBUG: sharePubKey: creating form');
+			if (0) {
 
-			var form = document.createElement('form');
-			form.setAttribute("action", "/post.html");
-			form.setAttribute("method", "get");
-			//form.setAttribute("target", "ifrSharePubKey");
+				//alert('DEBUG: sharePubKey: creating form');
 
-			//alert('DEBUG: sharePubKey: creating input');
+				var form = document.createElement('form');
+				form.setAttribute("action", "/post.html");
+				form.setAttribute("method", "GET");
+				//form.setAttribute("target", "ifrSharePubKey");
 
-			var txtComment = document.createElement('input');
-			txtComment.setAttribute("type", "hidden");
-			txtComment.setAttribute("value", pubKey);
-			txtComment.setAttribute("name", "comment");
+				//alert('DEBUG: sharePubKey: creating input');
 
-			//alert('DEBUG: sharePubKey: adding txtComment to form');
+				var txtComment = document.createElement('input');
+				txtComment.setAttribute("type", "hidden");
+				txtComment.setAttribute("value", pubKey);
+				txtComment.setAttribute("name", "comment");
 
-			form.appendChild(txtComment);
+				//alert('DEBUG: sharePubKey: adding txtComment to form');
 
-			//alert('DEBUG: sharePubKey: adding form to body');
+				form.appendChild(txtComment);
 
-			//document.getElementsByTagName('body')[0].appendChild(form);
+				//alert('DEBUG: sharePubKey: adding form to body');
 
-			document.body.appendChild(form);
+				//document.getElementsByTagName('body')[0].appendChild(form);
 
-			//alert('DEBUG: submitting form');
+				document.body.appendChild(form);
 
-			form.submit();
+				//alert('DEBUG: submitting form');
 
-			return false;
+				form.submit();
+
+				return false;
+			}
+
+			if (1) {
+				var postPubKeyUrl = '/post.html?comment=' + encodeURIComponent(pubKey);
+				PingUrl(postPubKeyUrl);
+			}
 		} else {
 			//alert('DEBUG: sharePubKey: pubKey was FALSE');
 
