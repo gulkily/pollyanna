@@ -195,7 +195,7 @@ function sharePubKey (t) { // shares current user's public key via injected form
 				form.submit();
 
 				return false;
-			}
+			} // if (0)
 
 			if (1) {
 				var postPubKeyUrl = '/post.html?comment=' + encodeURIComponent(pubKey);
