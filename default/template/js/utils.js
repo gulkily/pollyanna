@@ -662,6 +662,10 @@ function PingUrl (url, ele) { // loads arbitrary url via image or xhr
 	return true;
 } // PingUrl()
 
+// function EscapeUrl () {
+// function UriEscape () {
+// USE encodeURIComponent()
+
 
 //function ChangeInputToTextarea (input) { // called by onpaste
 ////#input_expand_into_textarea
