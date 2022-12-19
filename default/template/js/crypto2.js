@@ -366,7 +366,7 @@ function getUsername () { // returns pgp username
 	return '';
 } // getUsername()
 
-function signMessageBasic (message) {
+function signMessageBasic (message, messageField = '', callback = '') {
 	var openpgp = window.openpgp;
 
 	//alert('DEBUG: signMessageBasic: openpgp = ' + openpgp);
@@ -392,8 +392,15 @@ function signMessageBasic (message) {
 		//alert('DEBUG: signMessageBasic: signed = ' + signed);
 		//signedMessage = signed.data;
 
-		document.compose.comment.value = signed.data;
 		// #todo figure out how to do sync return in javascript with this
+
+		if (messageField) {
+			messageField.value = signed.data;
+		}
+
+		if (callback) {
+			setTimeout(callback, 100);
+		}
 
 		//alert(signed.data);
 	});
