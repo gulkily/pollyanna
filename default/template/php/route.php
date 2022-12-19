@@ -429,11 +429,16 @@ if (GetConfig('admin/php/route_enable')) {
 
 			if (GetConfig('admin/force_profile')) {
 			#if (GetConfig('admin/force_profile') || ($hostAccessCount > $hostRequestLimit)) { #todo add feature flag and uncomment
+				$redirectPath = GetConfig('admin/force_profile_redirect_path');
+				if (!$redirectPath) {
+					$redirectPath = '/profile.html';
+				}
+
 				// if registration is required, redirect user to profile.html
-				if ($path == '/profile.html') {
+				if ($path == $redirectPath) { # usually /profile.html or /welcome.html
 					// if profile, leave it alone
 					// otherwise, below is for forcing login
-				} # if ($path == '/profile.html')
+				} # if ($path == $redirectPath)
 				else {
 					// redirect
 
@@ -447,11 +452,12 @@ if (GetConfig('admin/php/route_enable')) {
 					WriteLog('route.php: $clientHasCookie = ' . $clientHasCookie);
 
 					if (!$clientHasCookie) {
+						# these headers help the original request not be cached, so that user can return to it after registration
 						header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 						header("Cache-Control: post-check=0, pre-check=0", false);
 						header("Pragma: no-cache");
 
-						RedirectWithResponse('/profile.html', 'Please create profile to continue.');
+						RedirectWithResponse($redirectPath, 'Please create profile to continue.'); # /profile.html /welcome.html
 						if (! GetConfig('admin/force_profile_fallthrough')) {
 							exit; // #todo this is bad to have here
 						}
