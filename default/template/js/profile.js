@@ -55,27 +55,27 @@ function btnSignOut_Click (t) { // event for 'Sign Out' button's click
 	if (0) { //#todo
 		// postmessage
 
-			var form = document.createElement('form');
-			form.setAttribute("action", "/post.html");
-			form.setAttribute("method", "get");
-			//form.setAttribute("target", "ifrSharePubKey");
+		var form = document.createElement('form');
+		form.setAttribute("action", "/post.html");
+		form.setAttribute("method", "get");
+		//form.setAttribute("target", "ifrSharePubKey");
 
-			//alert('DEBUG: sharePubKey: creating input');
+		//alert('DEBUG: sharePubKey: creating input');
 
-			var txtComment = document.createElement('input');
-			txtComment.setAttribute("type", "hidden");
-			txtComment.setAttribute("value", 'exiting... ' + GetTime());
-			txtComment.setAttribute("name", "comment");
+		var txtComment = document.createElement('input');
+		txtComment.setAttribute("type", "hidden");
+		txtComment.setAttribute("value", 'exiting... ' + GetTime());
+		txtComment.setAttribute("name", "comment");
 
-			//alert('DEBUG: sharePubKey: adding txtComment to form');
+		//alert('DEBUG: sharePubKey: adding txtComment to form');
 
-			form.appendChild(txtComment);
-			//alert('DEBUG: sharePubKey: adding form to body');
-			//document.getElementsByTagName('body')[0].appendChild(form);
-			document.body.appendChild(form);
-			//alert('DEBUG: submitting form');
-			signMessage();
-			//form.submit();
+		form.appendChild(txtComment);
+		//alert('DEBUG: sharePubKey: adding form to body');
+		//document.getElementsByTagName('body')[0].appendChild(form);
+		document.body.appendChild(form);
+		//alert('DEBUG: submitting form');
+		signMessage();
+		//form.submit();
 	}
 
 	return true;
