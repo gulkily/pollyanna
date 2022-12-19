@@ -1,7 +1,9 @@
 <!-- enter.template -->
-<form action="/profile.html">
-	<p align=center>
-		<input id=guest name=btnRegister type=submit value="Continue as Guest">
+<form name=formRegisterMember action="/profile.html">
+	<p>
+		To become a member, <br>
+		Press the Member button once, <br>
+		and wait a few secs.
 	</p>
 	<p align=center>
 		<input id=member name=btnRegister type=submit value="Member">
