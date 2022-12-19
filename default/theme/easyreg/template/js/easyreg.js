@@ -1,9 +1,10 @@
 /* easyreg.js */
 
 function EasyMember (t) {
-	var compose;
-	var comment;
-	var myFp;
+
+	//alert('EasyMember()');
+
+	var myFp;    // stores current user's fingerprint
 
 //	if (t && t.value) {
 //		t.value = 'Meditate...';
@@ -13,27 +14,47 @@ function EasyMember (t) {
 //
 	myFp = getUserFp();
 	if (!myFp) {
-		var keySuccess = MakeKey();
+		var keySuccess = MakeKey(t, 'afterKeygen()');
 		myFp = getUserFp();
+	} else {
+		afterKeygen();
 	}
+
+	return false;
+}
+
+function afterKeygen () {
+
+	//alert('afterKeygen()');
 
 	//alert('DEBUG: EasyMember: myFp = ' + myFp);
 
-	solvedPuzzle = getSolvedPuzzle(myFp, '1337', 10, 1000000);
+	var myFp = getUserFp();
+
+	var solvedPuzzle = getSolvedPuzzle(myFp, '1337', 10, 1000000);
+
+	var myMessage = 'New member registration, puzzle solved.' + "\n\n" + solvedPuzzle;
 
 	//alert('DEBUG: EasyMember: solvedPuzzle = ' + solvedPuzzle);
 
-	//alert('DEBUG: EasyMember: window.signMessageBasic = ' + window.signMessageBasic);
+	//alert('DEBUG: EasyMember: window.signMessageBasic= ' + window.signMessageBasic);
 
-	var signedPuzzle = signMessageBasic(solvedPuzzle);
+	sharePubKey();
+
+	var signedPuzzle = signMessageBasic(myMessage, document.compose.comment, 'sendSignedMessage()');
 
 	//alert('DEBUG: EasyMember: signedPuzzle = ' + signedPuzzle);
 
 	//comment.value = signedPuzzle;
 
 	//compose.submit();
+}
 
-	return false;
+function sendSignedMessage () {
+
+	//alert('sendSignedMessage()');
+
+	document.compose.submit();
 }
 
 /* / easyreg.js */

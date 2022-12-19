@@ -20,7 +20,7 @@ sub GetWelcomePage {
 		my @js = qw(utils profile write puzzle clock easyreg settings);
 		$html = InjectJs($html, @js);
 
-		$html = AddAttributeToTag($html, 'input id=member', 'onclick', 'if (window.EasyMember) { return EasyMember(this) }');
+		$html = AddAttributeToTag($html, 'input id=member', 'onclick', "if (window.EasyMember) { this.value = 'Meditate...'; setTimeout('EasyMember()', 50); return false; }");
 	}
 
 	return $html;
