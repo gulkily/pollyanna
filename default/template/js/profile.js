@@ -527,7 +527,7 @@ function GetFineTime () { // returns epoch in 10th of seconds
 function PubKeyPing () { // checks if user's public key is on server
 // function PingProfile ()
 // function PingPubKey ()
-// function PingPubey ()
+// function PingPublicKey ()
 // uploads it to server if it is missing
 //
 	//alert('DEBUG: PubKeyPing() begin');
