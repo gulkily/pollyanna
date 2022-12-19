@@ -29,7 +29,7 @@ function SimpleBenchmark () { // simple benchmark
 function GenerateKey () {
 } // GenerateKey()
 
-function MakeKey (t) { //makes key using default settings
+function MakeKey (t, callback = '') { //makes key using default settings
 // returns FALSE for success, TRUE for failure
 
 // also prompts for username, redirects to profile page ...
@@ -187,6 +187,11 @@ function MakeKey (t) { //makes key using default settings
 					//		window.location = '/write.html#inspubkey';
 					//		return true;
 					//	}
+					//alert('done MakeKey; callback = ' + callback);
+
+					if (callback) {
+						setTimeout(callback, 1000);
+					}
 				}
 			);
 
