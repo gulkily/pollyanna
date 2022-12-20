@@ -391,7 +391,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 						# if no author, no $authorLink
 						$statusBar =~ s/\$authorLink;//g;
 					}
-					WriteLog('$statusBar 1.5 = ' . $statusBar);
+					WriteLog('GetItemTemplate: $statusBar 1.5 = ' . $statusBar);
 
 					if (GetConfig('setting/html/reply_cart')) {
 						if (GetConfig('setting/admin/js/enable')) {
@@ -411,7 +411,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 				$statusBar = $file{'item_statusbar'};
 			}
 
-			WriteLog('$statusBar 2 = ' . $statusBar);
+			WriteLog('GetItemTemplate: $statusBar 2 = ' . $statusBar);
 			if ($itemType eq 'image') {
 				$windowParams{'status'} = $statusBar;
 				#$windowParams{'status'} = $statusBar . '<hr>' . GetQuickVoteButtonGroup($file{'file_hash'}, $file{'vote_return_to'});
