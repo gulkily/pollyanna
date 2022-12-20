@@ -161,6 +161,14 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 
 	$html .= GetPageHeader($pageQuery);
 
+	if ($pageQuery =~ m/[^\s]+/) {
+		# $pageQuery does not have any spaces, so it's a page name
+		my $pageDescription = GetString('page_intro/' . $pageQuery);
+		if ($pageDescription) {
+			$html .= GetWindowTemplate($pageDescription, $pageQuery);
+		}
+	}
+
 	my $paginationLinks = GetPaginationLinks($pageQuery, $pageNumber, $totalItemCount, $perPage);
 
 	if ($needPagination) {
