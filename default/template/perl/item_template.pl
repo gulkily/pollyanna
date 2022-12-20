@@ -185,6 +185,16 @@ sub GetItemTemplateBody {
 		$itemTemplateBody = str_replace('$itemText', $itemText, $itemTemplateBody);
 	} # 'perl'
 
+	if ($file{'item_type'} eq 'zip') {
+		WriteLog('GetItemTemplateBody: item_type = zip');
+
+		#$itemText = ZipForWeb(GetFile($file{'file_path'}));
+		$itemText = ZipForWeb('#todo'); #todo get some kind of friendly display of file, not binary content
+
+		$itemTemplateBody = GetTemplate('html/item/item.template'); # GetItemTemplate()
+		$itemTemplateBody = str_replace('$itemText', $itemText, $itemTemplateBody);
+	} # 'zip'
+
 	if (!$itemTemplateBody) {
 		WriteLog('GetItemTemplateBody: warning: $itemTemplateBody is FALSE; caller = ' . join(',', caller));
 	}

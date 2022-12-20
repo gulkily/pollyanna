@@ -141,6 +141,21 @@ sub PerlForWeb { # replaces some spaces with &nbsp; to preserve text-based layou
 	return $container;
 } # PerlForWeb()
 
+sub ZipForWeb { # replaces some spaces with &nbsp; to preserve text-based layout for html display; $text
+	my $text = shift;
+
+	if (!$text) {
+		return '';
+	}
+
+	$text = HtmlEscape($text);
+
+	my $container = GetTemplate('html/item/container/zip.template');
+	$container = str_replace('$text', $text, $container);
+
+	return $container;
+} # ZipForWeb()
+
 sub TextartForWeb { # replaces some spaces with &nbsp; to preserve text-based layout for html display; $text
 	my $text = shift;
 
