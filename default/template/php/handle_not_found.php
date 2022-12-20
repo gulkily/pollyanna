@@ -179,7 +179,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'/sha512.js',
 			'/crypto.js',
 			'/crypto2.js',
-			'/openpgp.js'			
+			'/openpgp.js'
 		);		
 		if (in_array($path, $validJsPage)) {
 			WriteLog('HandleNotFound: found js: ' . $path);
