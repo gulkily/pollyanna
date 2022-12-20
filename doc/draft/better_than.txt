@@ -1,0 +1,5 @@
+Describes what makes thankyou better than other systems and platforms
+
+Better than Facebook, reddit, Twitter, Instagram, Mastodon:
+	Fully featured interface without requiring JavaScript
+
