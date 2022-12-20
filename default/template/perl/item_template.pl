@@ -2,10 +2,11 @@ use strict;
 use 5.010;
 
 sub GetItemTemplateBody {
-#sub GetItemText {
-#sub FormatMessage {
-#sub GetContainer {
-#sub GetItemContainer {
+# sub GetItemText {
+# sub FormatMessage {
+# sub GetContainer {
+# sub GetItemContainer {
+# sub GetItemContent {
 	my %file = %{shift @_};
 	my $itemTemplateBody = '';
 	my $itemText = '';
