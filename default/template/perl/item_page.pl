@@ -645,8 +645,10 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			(index($file{'tags_list'}, ',py,') != -1 && GetConfig('setting/admin/py/enable'))
 			||
 			(index($file{'tags_list'}, ',perl,') != -1 && GetConfig('setting/admin/perl/enable'))
+			||
+			(index($file{'tags_list'}, ',zip,') != -1 && GetConfig('setting/admin/zip/enable'))
 		) {
-			# cpp / py / perl file
+			# cpp / py / perl / zip file
 			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'run_log');
 			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'compile_log');
 		}
@@ -656,6 +658,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		if (index($file{'tags_list'}, ',perl,') != -1 && !GetConfig('setting/admin/perl/enable')) {
 			$txtIndex .= GetWindowTemplate('Note: Perl module is off, this file was not parsed.', 'Notice');
 		}
+		#todo same as above for zip
 	}
 
 	# end page with footer

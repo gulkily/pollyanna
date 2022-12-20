@@ -142,7 +142,7 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 		} # add_dir_as_hashtag
 	} # ($ext eq 'txt')
 
-	if (0 && $ext eq 'html') { #todo enable once IndexHtmlFile() is better
+	if ($ext eq 'html' && GetConfig('admin/html/enable')) { #todo enable once IndexHtmlFile() is better
 		WriteLog('IndexFile: calling IndexHtmlFile()');
 		$indexSuccess = IndexHtmlFile($file);
 
@@ -152,7 +152,17 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 		}
 	} # if ($ext eq 'html')
 
-	if ($ext eq 'cpp') {
+	if ($ext eq 'zip' && GetConfig('admin/zip/enable')) {
+		WriteLog('IndexFile: calling IndexZipFile()');
+		$indexSuccess = IndexZipFile($file);
+
+		if (!$indexSuccess) {
+			WriteLog('IndexFile: warning: IndexZipFile() returned FALSE; $indexSuccess was FALSE');
+			$indexSuccess = 0;
+		}
+	} # if ($ext eq 'zip')
+
+	if ($ext eq 'cpp' && GetConfig('admin/cpp/enable')) {
 		WriteLog('IndexFile: calling IndexCppFile()');
 		$indexSuccess = IndexCppFile($file);
 
@@ -161,7 +171,7 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 			$indexSuccess = 0;
 		}
 	} # if ($ext eq 'cpp')
-	if ($ext eq 'py') {
+	if ($ext eq 'py' && GetConfig('admin/py/enable')) {
 		WriteLog('IndexFile: calling IndexPyFile()');
 		$indexSuccess = IndexPyFile($file);
 
@@ -170,7 +180,7 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 			$indexSuccess = 0;
 		}
 	} # if ($ext eq 'py')
-	if ($ext eq 'pl') {
+	if ($ext eq 'pl' && GetConfig('admin/pl/enable')) {
 		WriteLog('IndexFile: calling IndexPerlFile()');
 		$indexSuccess = IndexPerlFile($file);
 
@@ -190,7 +200,8 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 		$ext eq 'webp' ||
 		$ext eq 'jfif' ||
 		$ext eq 'tiff' ||
-		$ext eq 'tff'
+		$ext eq 'tff' &&
+		GetConfig('admin/image/enable')
 	) {
 		WriteLog('IndexFile: calling IndexImageFile()');
 		$indexSuccess = IndexImageFile($file);
