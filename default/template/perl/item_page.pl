@@ -198,13 +198,6 @@ sub GetHtmlToolboxes {
 			'</a><br>' . "\n";
 
 		$htmlToolbox .=
-			'<a href="https://chg.pw/post.html?comment=' .
-			$urlParamFullText .
-			'">' .
-			'chg.pw' .
-			'</a><br>' . "\n";
-
-		$htmlToolbox .=
 			'<a href="http://qdb.us/post.html?comment=' .
 			$urlParamFullText .
 			'">' .
@@ -1011,6 +1004,7 @@ sub GetItemAttributesDialog2 {
 } # GetItemAttributesDialog2()
 
 sub GetPublishForm {
+# sub GetPublishDialog {
 	my $template = GetTemplate('html/form/publish.template');
 
 	my $textEncoded = 'abc';
