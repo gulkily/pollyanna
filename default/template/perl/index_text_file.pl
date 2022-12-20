@@ -49,10 +49,16 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 	if (GetConfig('admin/organize_files') && !$flags{'skip_organize'}) {
 		# renames files to their hashes
+		#todo this should really be in IndexFile() and already is, but ...
+		WriteLog('IndexTextFile: calling OrganizeFile(' . $file . ')');
 		my $newFile = OrganizeFile($file); # IndexTextFile()
+
+		WriteLog('IndexTextFile: OrganizeFile() returned $newFile = ' . $newFile);
 
 		if ($file ne $newFile) {
 			push @indexMessageLog, 'file was organized (moved location, changed filename)';
+			WriteLog('IndexTextFile: changing $file = $newFile = ' . $newFile);
+			$file = $newFile;
 		}
 	}
 
