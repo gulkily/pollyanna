@@ -105,7 +105,11 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fieldValue = RenderLink($link, $linkText);
 	}
 
-	elsif ($fieldName =~ /.+timestamp/) {
+	elsif (
+		$fieldName =~ m/.+timestamp$/ ||
+		$fieldName =~ m/.+start$/ ||
+		$fieldName =~ m/.+finish$/
+	) {
 		if ($longMode) {
 			$fieldValue = GetTimestampWidget($fieldValue) . ' <tt class=advanced> ' . $fieldValue . '</tt>';
 		} else {
