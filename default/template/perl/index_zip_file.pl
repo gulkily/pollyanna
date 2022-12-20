@@ -25,7 +25,7 @@ sub IndexZipFile { # $file | 'flush' ; indexes one text file into database
 		DBGetAddedTime('flush');
 		DBAddVoteRecord('flush');
 		DBAddItemAttribute('flush');
-		WriteLog('IndexCppFile: flush');
+		WriteLog('IndexZipFile: flush');
 		return 1;
 	}
 
@@ -51,16 +51,15 @@ sub IndexZipFile { # $file | 'flush' ; indexes one text file into database
 	DBAddVoteRecord($fileHash, 0, 'zip');
 
 	my $unzipCommand = "unzip -o $file '*.txt' -d $TXTDIR 2>&1";
-	WriteLog('IndexCppFile: $unzipCommand = ' . $unzipCommand);
+	WriteLog('IndexZipFile: $unzipCommand = ' . $unzipCommand);
 	#
-	# my $compileStart = time();
+	my $unzipStart = time();
 	my $unzipLog = `$unzipCommand`;
-	# my $compileFinish = time();
+	my $unzipFinish = time();
 	#
-	# DBAddItemAttribute($fileHash, 'compile_start', $compileStart);
-	# DBAddItemAttribute($fileHash, 'compile_finish', $compileFinish);
+	DBAddItemAttribute($fileHash, 'unzip_start', $unzipStart);
+	DBAddItemAttribute($fileHash, 'unzip_finish', $unzipFinish);
 
-	# my $compileLog = `g++ -v $file -o $file.out 2>&1`;
 	if ($unzipCommand) {
 		PutCache('compile_log/' . $fileHash, $unzipLog); # parse_log parse.log ParseLog
 	}
@@ -87,19 +86,38 @@ sub IndexZipFile { # $file | 'flush' ; indexes one text file into database
 	}
 
 	if ($unzipLog) {
+		WriteLog('IndexZipFile: $unzipLog is TRUE, looking for files to index...');
+
+		my $indexStart = time();
+
+		my $filesIndexed = 0;
+
 		my $filesList = $unzipLog;
 		$filesList =~ s/[\s]+/ /g; # replace all consecutive whitespace characters with one space
 		my @outputTokens = split(' ', $filesList); # get list of all things in the output
+
 		for my $token (@outputTokens) {
 			if ($token =~ m/\.txt$/ && file_exists($token)) {
 				WriteLog('IndexZipFile: calling IndexFile(' . $token . ')');
 				my $resultHash = IndexFile($token);
+				if ($resultHash) {
+					$filesIndexed++;
+				}
 			}
 		}
+
+		WriteLog('IndexZipFile: $filesIndexed = ' . $filesIndexed);
+
+		my $indexFinish = time();
+
+		DBAddItemAttribute($fileHash, 'index_start', $indexStart);
+		DBAddItemAttribute($fileHash, 'index_finish', $indexFinish);
+
+		DBAddItemAttribute($fileHash, 'files_indexed', $filesIndexed);
+
 	}
 
 	return 1;
-} # IndexCppFile()
-
+} # IndexZipFile()
 
 1;
