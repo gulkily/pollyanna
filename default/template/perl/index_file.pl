@@ -78,16 +78,28 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 
 	my $fileHash = GetFileHash($file);
 
-	if (GetCache('indexed/' . $fileHash)) {
-		if (trim(GetCache('indexed/' . $fileHash)) eq $file) {
-			WriteLog('IndexFile: already indexed, returning. $fileHash = ' . $fileHash);
-			return $fileHash;
-		} else {
-			#return $fileHash; #who does that?#todo
-			WriteLog('IndexFile: already indexed, but from different path. continuing. $fileHash = ' . $fileHash);
-			if (GetConfig('admin/organize_files') && !$flags{'skip_organize'}) {
-				WriteLog('IndexFile: calling OrganizeFile() with $fileHash = ' . $fileHash);
-				$file = OrganizeFile($file); # IndexFile()
+	if (0) {
+		# this never seems to get called, so disabling it for now
+		if (GetCache('indexed/' . $fileHash)) {
+			if (trim(GetCache('indexed/' . $fileHash)) eq $file) {
+				WriteLog('IndexFile: already indexed, returning. $fileHash = ' . $fileHash);
+				return $fileHash;
+			} else {
+				#return $fileHash; #who does that?#todo
+				WriteLog('IndexFile: already indexed, but from different path. continuing. $fileHash = ' . $fileHash);
+				if (GetConfig('admin/organize_files') && !$flags{'skip_organize'}) {
+					WriteLog('IndexFile: calling OrganizeFile() with $fileHash = ' . $fileHash);
+					$file = OrganizeFile($file); # IndexFile()
+
+					if ($file) {
+						WriteLog('IndexFile: Calling IndexFile recusrively with $file = ' . $file);
+						my $recurseResult = IndexFile($file);
+						WriteLog('IndexFile: $recurseResult = ' . $recurseResult);
+						return $recurseResult;
+					} else {
+						WriteLog('IndexFile: OrganizeFile returned FALSE');
+					}
+				}
 			}
 		}
 	}
