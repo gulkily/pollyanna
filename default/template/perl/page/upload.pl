@@ -32,6 +32,16 @@ sub GetUploadDialog { # upload dialog for upload page
 
 	WriteLog('GetUploadDialog: $allowFiles = ' . $allowFiles);
 
+	my @otherPossibleFiles = qw(perl py cpp zip php);
+	for my $possibleFile (@otherPossibleFiles) {
+		if (GetConfig("admin/$possibleFile/enable")) {
+			if ($possibleFile eq 'perl') {
+				$possibleFile = 'pl';
+			}
+			$allowFiles .= ' ' . $possibleFile;
+		}
+	}
+
 	$uploadForm = str_replace('<span id=allowFiles></span>', '<span id=allowFiles>' . $allowFiles . '</span>', $uploadForm);
 
 	my $uploadWindow = GetWindowTemplate($uploadForm, $title);
