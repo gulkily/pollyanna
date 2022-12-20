@@ -434,8 +434,13 @@ if (GetConfig('admin/php/route_enable')) {
 					$redirectPath = '/profile.html';
 				}
 
+				$pathWithoutArgs = $path;
+				if (index($pathWithoutArgs, '?') != -1) {
+					$pathWithoutArgs = substr($pathWithoutArgs, 0, index($pathWithoutArgs, '?'));
+				}
+
 				// if registration is required, redirect user to profile.html
-				if ($path == $redirectPath) { # usually /profile.html or /welcome.html
+				if ($pathWithoutArgs == $redirectPath) { # usually /profile.html or /welcome.html
 					// if profile, leave it alone
 					// otherwise, below is for forcing login
 				} # if ($path == $redirectPath)
@@ -456,6 +461,10 @@ if (GetConfig('admin/php/route_enable')) {
 						header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 						header("Cache-Control: post-check=0, pre-check=0", false);
 						header("Pragma: no-cache");
+
+						if (GetConfig('admin/force_profile_include_origin')) {
+							$redirectPath = $redirectPath . '?origin=' . urlencode($path);
+						}
 
 						RedirectWithResponse($redirectPath, 'Please create profile to continue.'); # /profile.html /welcome.html
 						if (! GetConfig('admin/force_profile_fallthrough')) {
