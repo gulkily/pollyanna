@@ -1,0 +1,50 @@
+Why run a small social network site?
+The main reason to run a small social network site is that you can create an online environment tailored to the needs of your community in a way that a big corporation like Facebook or Twitter never could. Yes, you can always start a Facebook Group for your community and moderate that how you like, but only within certain bounds set by Facebook. If you (or your community) run the whole site, then you are ultimately the boss of what goes on. It is harder work than letting Facebook or Twitter or Slack or Basecamp or whoever else take care of everything, but I believe it's worth it.
+
+Let's go back to Friend Camp. While there are a hundred thousand people we can talk to from Friend Camp, there are only about 50 people with an active Friend Camp login. We call ourselves "campers" because we are corny like that. And campers have a special communication channel that lets us post messages that only other campers can see.
+
+If I make software that makes the lives of 50 people much nicer, and it makes 0 people more miserable, then on the balance I think I'm doing better than a lot of programmers in the world.
+Because we're mostly all friends with each other, this extra communications mode is kind of like a group chat on steroids. For our community it ends up being a sort of hybrid between Twitter and a group chat. As a result of having a community layer alongside a more public layer, we have a movie night, a book club, and a postcard club. Campers visit each other when we travel, even if we've never met in person before. We correspond with each other about what we're making for dinner and trade recipes. They're the kind of mundane interactions that you probably don't want to have with perfect strangers but you cherish in a group of people you care about.
+
+We are also able to have moderation rules that are hyper-specific to our own values as a community. It lets us maintain an environment that's far more pleasant than you find on most social media sites.
+
+And I can make custom features at the request of the people on the site. So if someone wants a particular kind of visual theme, or content filter, or a button to do something that the software can't do right now, I can make it happen, at least within the limits of my own ability.
+
+Software can be complicated where necessary
+There are certain things that are notoriously subtle and complex to communicate to users passively via a user interface. A classic example is security settings: Facebook, for example, offers a lot of decent security options but it can be overwhelming to many users. Of course, by having reasonable defaults you can get past this problem, but any default setting is at best going to work for some but not all users.
+
+For example, Mastodon has four levels of privacy available for your posts, ranging from "a private message to another person" to "anyone on the internet can see this". According to some discussions I've seen, one reason that Mastodon has been reluctant to add a "local-only" posting option to its service is that it multiplies that to a combination of eight total privacy settings. The idea is that it would confuse people and they would potentially use it wrong, which could lead to bad security breaches due to user error in dealing with a complex design.
+
+I agree with this in a situation where a user tries out Mastodon and has to learn to use it themselves. But in a case like Friend Camp, I can personally walk the user through what these complex features mean. I can tailor the instruction to their personal learning style and to their needs. Plus, I'm available to answer questions about it whenever they come up.
+
+I'll discuss this more below in the section "What you can do today".
+
+All that said, there's no need for overly complicated software. It should be as simple as possible. But in cases like security and privacy I think the ability to granularly control your settings outweighs factors like ease of use.
+
+You can have hyper-specific norms
+Because of their need to have as many users as possible, big social network sites have to try to be everything to everyone. In practice this means they need to limit the number of people they alienate, which means they have to be very careful about what kinds of actions and speech they ban on their network. Every person they ban from their network is another set of eyeballs that could otherwise be looking at advertisements and making them money.
+
+In the end, this means everyone is going to be unhappy with the policies of a big site. You can see it right now on Twitter and Facebook: people on the left complain that these sites support right wing extremism, and people on the right complain that these sites support left wing extremism. And for a website with thousands of posts a second from hundreds of millions of potential sources that's aiming to please as many people as possible, both of these viewpoints are absolutely going to be true. There is no way to moderate this effectively, and you can never come up with rules for behavior that make millions of people happy.
+
+But on a small social network site, you can set hyper-specific norms. For example, Mastodon allows for "content warnings", where you hide content behind a text tag that you define for your post. It's often things like "nsfw" or "mental health discussion". This acts as a warning so people who don't want to read about that kind of stuff won't click through to see it. On Friend Camp, we generally tag anything related to United States politics as "uspol" — we didn't invent this tag, and lots of other servers use it too. I couldn't ever imagine people tagging politics tweets on Twitter, since Twitter styles itself as a news network, for the broadest possible interpretation of the word "news".
+
+You also don't need to implement some kind of draconian filtering system to have norms: you simply model the behavior you want to see, and remind people to act a certain way when they post outside of those norms. This kind of thing does not work well in a forum of even 200 people, but in the 50-ish range it is entirely doable.
+
+Your small social network site can have its own rules about, for example:
+
+what speech is acceptable
+what actions are considered violence
+what actions are considered protected speech or expression
+This will be very different for every site and I think that's part of the beauty of this whole thing. I talk more about the specifics of this in the "What you can do today" section below.
+
+Why to NOT run a small social network site
+There are many reasons not to run a small social network site. As I've mentioned before and will continue to mention, it's really hard work. You need to at least have time for a hobby or figure out a way to get community support for doing it (maybe people chip in to keep things running; maybe you can trade in-kind services with your community members; etc.).
+
+If you choose to run a site like this, it means that people will now depend on you for something that's important to them. People on Friend Camp are very forgiving when we have down time, and sometimes that down time can last hours if I'm asleep or at a movie or otherwise busy. Later in this document I discuss some cases where people had to abandon a site because it got too big and unwieldy to run.
+
+Friend Campers are, of course, incredibly patient and gracious and understanding that I'm a person with a life.
+But none of this is unique to running a social network site. I think all of this stuff applies if you take away the internet and computers entirely. This is exactly the cost of starting a community theater group, activist group, social group, sports club, book club, and so on. Even the bit about "down time" applies if you run a physical space like a theater. You can't be there for every performance but if something goes wrong with the building, you'd better have a plan to deal with it.
+
+In other words, the costs of running a small social network site end up being more or less the costs of starting, well, anything involving other people.
+
+

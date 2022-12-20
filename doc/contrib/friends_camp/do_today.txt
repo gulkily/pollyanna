@@ -1,0 +1,118 @@
+What you can do today
+This section describes practices that anyone running Mastodon or similar software can do today to make for a cohesive, rewarding, and caring community. This section lays out some rules that have helped make Friend Camp a good place. The high level overview is:
+
+keep the number of users on your server very small
+remember that your job is social first and technical second
+provide custom onboarding
+provide group activities
+provide custom features if you can
+enforce your code of conduct
+Keep it small
+It is absolutely necessary to have no more than 50 to 100 active users who log in to your online community.
+
+This is a number I am pulling out of my ass. And eagle-eyed readers will notice that I'm not even settling on a single number here. I know that 50 is a number that works as a cap, and I think anything more than 100 definitely does not work as a cap.
+
+In my admittedly limited experience as a human being on this planet, you are not going to be able to form and maintain a cohesive group of more than about 50 to 100 people who all basically agree on values and moderation rules and that sort of stuff. Even as a group where people are mutually looking out for each other, you are not going to be able to meaningfully make sure everyone in that group's wellbeing is maintained. I don't have science to back this up. I have seen this happen in startups, in activist groups, and in internet forums.
+
+In the world of startups this is sometimes referred to as the problem of keeping your culture as you grow. I often hear people lament, "I miss when our company was just ten/twenty/fifty people."
+I can't stress enough how important it is to keep your numbers small. To draw from recent history, witches.town was one of the more popular Mastodon servers in 2017 and 2018. In mid-2018 there were a series of disagreements between the primary administrator and the users. I can't speak to the nature of these disagreements as I wasn't there but there were multiple disagreements about moderation policy, and also the primary administrator (who I believe actually owned the server and its domain) said they were burned out on running the server. In the end, the site was shut down. According to archive.org it had about 2400 registered accounts in April 2018, shortly before the instance was deleted. If we look at instances of similar size today we can extrapolate that there were perhaps 500 active users on the server at the time it went dark. KNZK is another network site that shut down on June 30th 2019 and it had about 3100 registered accounts and 560 active users. It shut down due to maintenance tasks demanding too much time and effort from administrators.
+
+I posit that 500 active, invested community members will not be able to achieve a values-based harmony or consensus. It's simply too big to be possible. My assertion is not backed up by any studies I have read but rather my personal experience in online and offline groups of all kinds. You cannot wrangle consensus from 500 people. With that many active, committed community members you will necessarily have at least a few dedicated members who feel investment and ownership in the community who are also extremely unhappy with the direction of the community.
+
+People like to bring up Dunbar's number when I talk about this stuff, and I have no idea if that concept is a crock of bullshit or what. For starters the number itself, 150 people, seems a bit on the high side to me intuitively. But if you believe in Dunbar's number then that does lend some credence to this idea.
+In addition to promoting group cohesion, having a small number of active users means moderation is completely achievable by a single person. With 50 active users I field, on average, one moderation request a month. This is in addition to me being vigilant and blocking bad actors as I see them. Now, this wouldn't be true if I had 50 random people who all signed up. But these are 50 users who are screened and onboarded into our community.
+
+Even tricky matters like delineating what is and is not acceptable speech become easier when you're dealing with a small community. For example, there may be some inalienable right for expression of disagreeable political speech, but if it is speech that all the people on your corner of the network agree you don't want to see, you can simply ban it internally and filter or block it externally.
+
+And when your community is small, you can use powerful tools that would be irresponsible to wield in a larger community. For example, when I discover a user on someone else's site engaging in speech that violates our local norms, I will often mute or ban the entire server that hosts the user in question on behalf of all the people on Friend Camp. This would be inadvisable on a huge network like Twitter, but on Friend Camp, we have all agreed we don't want to see certain things and we don't want to engage with other servers that allow for those types of speech.
+
+Of course, the question is how does this scale beyond those 50 people? Well, that is why I'm writing this guide. I think there should be thousands of these small servers talking to each other.
+
+You are the party host
+Running a small social network is like hosting a party. It requires social intelligence, empathy, and yes, technical skills.
+
+You might wonder what aspect of hosting a party is technical. I mean "technical" in the sense of "requiring technique and skill". Party hosts need all sorts of technical skills: managing RSVPs and calendars, planning and purchasing supplies, cooking and serving, wrangling a music playlist, etc. Not everyone is comfortable hosting a party because these are technical barriers to entry. Similarly, not everyone is comfortable running social network software because of technical barriers to entry.
+
+But as with hosting a party, technical skills aren't enough. You need to have social skills, or have someone assisting you who does.
+
+For example, I need to maintain an understanding of everyone on the server. I have to remember what their individual needs are, which means that I need to be able to hold all of that information in my head. It's not a task that everyone is suited to, but it's critically important.
+
+Similarly, programming computers is an important task that not everyone is suited to do. The big difference is that when it comes to anything dealing with software we tend to overestimate the importance of programmers and underestimate the importance of everyone else.
+Among other things, my duty is to read the local timeline and catch up on everyone's posts. I need to take the temperature of the network and also provide social lubrication where necessary. ("Hey, you just mentioned you're traveling to Montreal! So-and-so lives there, maybe you should message them and see if they want to meet up.") Catching up on all local posts would take forever with hundreds of active users, but with dozens, I only have to read the timeline for 20 minutes a day.
+
+Do not fool yourself into thinking that your job as an administrator is primarily technical. It's social first, and technical second. If you want to only focus on the tech, then please find someone who cares deeply about the social organizing side and recruit them as a co-administrator.
+
+Provide a custom introduction to your network for every user
+Because you only have 50 people in your community, you are able to do all sorts of things that would never be possible in a larger group. One really important place where this comes into play is in new user onboarding.
+
+When a new user joins Friend Camp, I now schedule a video chat with them (or an in-person chat if they are local). For one to three hours, I introduce them to Friend Camp and walk them through our basic features. I customize the content of the chat with them depending on their background. Generally we discuss the following topics:
+
+This does not have to be a video or in person thing. I think video works for many, but there are certainly all sorts of people who can't do that kind of interaction for all sorts of reasons. My recommendation ultimately comes down to: pick a form of onboarding with a personal touch, where you can convey a lot of information and answer questions in a way where the person you're onboarding feels comfortable asking questions.
+the basics of using Mastodon, tailored to the individual's needs
+how to find further help if they need it
+who everyone on the server is (I go down the list and explain in one sentence who every non-private user is, kind of like a party host might introduce guests to one another)
+our custom software features
+our group traditions and how to participate in them (movie night, for example)
+If I know them to be social media power users, I'll spend more time on those kinds of features. If they are not very technical and need more basic training, then I spend more time on that. I'll ask them what kind of phone they use, and give them specific information about iOS or Android as needed.
+
+In addition to explaining who everyone else on the server is, I point out specific people who I think they might get along with. Again, it's like being a party host. If you know people in common or have common interests, I will mention that.
+
+This is one of those things that a small social network site can provide that a big site could never provide, because it just doesn't scale.
+
+Group activities
+It's important to do things together as a group. Organize whatever makes sense for your community, and allow your community to organize as well.
+
+For example, on Friend Camp we have: movie night, book club, postcard club. Not everyone participates in these things, and that's okay too. But the option is there. The people on your site will probably want different activites than these specific ones, but the important thing about this is we are connecting through some kind of shared activity.
+
+Keep it interconnected
+The ultimate goal of the last three sections (hosting a party, custom onboarding, group activities) is to socialize everyone on your server with everyone else on your server. Not everyone has to get along with or even interact with everyone else, but the more positive connections you build between people on your server the better a place it will be. Having a tight-knit group where lots of people know each other is key to the principle of maintaining hyper-specific norms.
+
+An interconnected network also helps with conflict resolution, so when things go "wrong" it's hardly noticeable. As one camper put it to me:
+
+"Tiny scale conflict resolves between people without formal moderation. Alice says something that Bob didn't like, Bob points it out, Alice agrees and apologizes, and everyone moves on."
+That kind of conflict resolution doesn't easily happen between strangers, even in a group where people share values with one another. But when the chance of any two people being complete strangers is close to zero, this happens way more frequently.
+
+Funding
+Unfortunately, running a social network node requires you to move electrons around on pieces of metal, which means you need metal and electricity. And to have access to those resources, you need some kind of funding. Either you have a benefactor, you get together as a group and buy some equipment and internet service and pay for repairs, or pay a company like Linode some money to host a server for you.
+
+We have a Patreon for Friend Camp simply because it's the easiest way for me to collect monthly donations. Campers contribute what they want or what they can. I needed to upgrade our server at some point for various reasons and I made an appeal to the community. I ended up getting the monthly pledges to cover the new server costs for everyone. The monetary costs of running Friend Camp are laid out in this spreadsheet. At the moment, Friend Camp costs $31.00 a month to run. This is not a small cost for a single person, but spread between 50 people it can be very affordable, more like $1 per month per person even if half the active users can't afford to contribute anything.
+
+The bus problem
+For almost a year, Friend Camp had one person with the keys to the kingdom: me. In this first year, if I got hit by a bus, the server would probably run until its first crash and then never come back again.
+
+I decided to put out the word to see if a member of the community would be able to volunteer to be co-administrator. Thankfully, one of our own decided to take on the responsibility. I was lucky that there was a person in the community willing to do this and with development experience and experience running a server. It took just a handful of video calls to get them up to speed and within a month they had pushed their first production upgrade to Friend Camp.
+
+Not every community is going to have people who are willing and able to take on these duties. But if you have someone willing, there could be a longer mentoring process to get them to the point where they are able to do at least minimal work to maintain the server in the absence of the main administrator. If someone is at least able to reboot the server if things go weird, that's a huge step up from nothing.
+
+Ideally you can train a willing person to the point where they can do more complicated administrative tasks. If you have a small social network community that actually really means something to you, it's work that helps keep a thing alive that people deeply care about.
+
+Code of Conduct
+A code of conduct (CoC) is about what actions are acceptable on a network, which is absolutely necessary but not sufficient on its own for establishing a culture. A CoC perhaps implies certain values but it mostly states what is NOT acceptable rather than what IS encouraged. Some codes of conduct do state things like "please engage with people courteously" etc.
+
+I think a good CoC should be specific enough that it is actively repulsive to some people. And frankly, the more people who are repulsed by it the better. Perhaps simple anti-racist sentiment is enough to repulse a small number of explicitly white supremacist people, but if you add in sentiment like "no TERFs allowed", suddenly a lot of people who consider themselves leftists will also decide not to join. As an example, Friend Camp is anti-free-speech, at least in the sense that freedom of speech is commonly understood as a value. This is repulsive to some people on both the left and the right, and it's important that people with that core value find somewhere other than Friend Camp to set up their online home.
+
+For those wondering, the RationalWiki definition of freedom of speech is exactly the kind of freedom of speech we take issue with on our server. Again, you may find this abhorrent, but you don't have to join our server, and we're never going to house more than a few dozen people.
+Again this is a good thing. I remember one code of conduct I read for a chat forum where they stated that "before posting here, ask yourself if what you are saying is necessary for the health of the discourse". And I saw that and thought, "Wow, I would never feel comfortable posting on that forum because I am always doubting the necessity of what I have to say." This is good, though. The forum clearly signaled that they wanted a certain kind of person, one who is confident in the necessity of their speech. And that is not me, and I was able to steer clear. Did I feel excluded? Sure. But ultimately that feeling of pre-emptive exclusion is better than joining a community and THEN realizing that I don't belong there.
+
+I believe this rule was based on "The Three Gates of Speech", which is an idea that has been around for a long time that I think has some serious problems in practice as rules for engagement.
+Enforcement
+Valerie Aurora and Mary Gardiner have published a free book called How to Respond to Code of Conduct Reports that I think is required reading for anyone with a code of conduct on their site. The book explains what a CoC is and what it is not and how to make yours actually effective. Some of their recommendations make more sense for very large communities (like conferences of thousands of people) than the small ones I'm advocating for, but most of their recommendations do apply, and the book comes with many real world examples that you can learn from.
+
+One reason I'm a big fan of adding a local-only communication layer to these social network sites is that it helps with enforcement. The reason is that it creates serious social repercussions for violating rules to the point where you're kicked off of a server. This is because the person who was kicked out cannot just join a new server and re-follow everyone and continue to participate in or monitor conversations. It's more like being kicked from a group chat. It can be socially devastating, which means there are real consequences to violating group policy.
+
+At the moment, Mastodon does not support a local-only communication layer, though modifications like Hometown do.
+I'm sure there will be friction on Friend Camp but nobody has, to my knowledge, broken our code of conduct or otherwise required admonishment or disciplinary action. When that does happen and it is beyond a simple warning followed by an apology, I will individually solicit opinions from literally every active user on what should be done. Because we keep the server small, I could in theory host video calls with every single user where we discuss what ought to be done. I'm not sure if that last one is a good idea but I have that option, which you can't say for Facebook. This is all possible because we are a small group of people and we will never be a big group of people.
+
+Technical recommendations
+This section might not make a lot of sense if you're not a programmer. Feel free to skip it and move to "What we need to do in the future" if that's not you.
+
+Ideally you will pick social media software that has features which allow for communication that only your users on your server can see. In the case of Friend Camp, we maintain Friend Camp as a fork of Mastodon and pull in Renato Lond's great work that allows for posts that only the 50 people with logins to Friend Camp can see. I would go so far as to say this is a necessary feature for group cohesion, and my hope is that implementors of decentralized social media software come to understand it's important.
+
+If you are a programmer, I suggest that you maintain a fork of whatever open source social network software you end up using so that you can implement custom features for your users. You might end up making purely aesthetic changes, small browser hacks, or complicated new features that you need to maintain version to version. If you implement custom features that your users ask for, it gives them a stronger sense of ownership over the site even if they are not the ones writing the software. Make sure to credit them somewhere too! I try to credit individual users for each suggested feature in the commit messages and also on our server's About page.
+
+Provide multiple services for your community members! Probably not email because that is a nightmare but there are other possibilities. I use Mastodon's login to authenticate small helper applications that I write for my users. I just put in a hard coded gateway so that only people from my server have access to them (so their OAuth login account has to originate from the server friend.camp). This means the basic social media login for your server is also a login for many other services; kind of like a default LDAP but not.
+
+Examples of services you can provide
+I only have one auxilary service I provide my users that gets active use but I think it's a big one. Bugle is a bot that any Friend Camper can use that sends a direct message to every other person on the server (unless they have blocked it or have DMs otherwise disabled). This would normally be a horrible idea on a site like Twitter. But because we're a small community and we all know each other, I trust that my users will use it well and sparingly. If it is misused I will give the user a stern talking-to.
+
+
