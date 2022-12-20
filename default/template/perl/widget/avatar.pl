@@ -5,6 +5,7 @@ use warnings;
 use 5.010;
 
 sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, using avatar.template
+# sub GetAvatarCache {
 	# affected by config/html/avatar_icons
 	WriteLog("GetAvatar(...)");
 	my $aliasHtmlEscaped = '';
@@ -21,15 +22,19 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 			$avatarTemplate = 'html/avatar-username.template';
 		}
 		{
-			#todo this is not entirely correct ... should be based on entire theme value, not just the first line
-			# it's a hack to map theme value onto path
-
 			my $themesValue = GetConfig('theme');
-			$themesValue =~ s/[\s]+/ /g;
-			my @activeThemes = split(' ', $themesValue);
 
-			my $themeName = $activeThemes[0];
-			$avatarCachePrefix .= '/' . $themeName;
+			# this is not entirely correct ... should be based on entire theme value, not just the first line
+			# {
+				# it's a hack to map theme value onto path
+				#$themesValue =~ s/[\s]+/ /g;
+				#my @activeThemes = split(' ', $themesValue);
+				#my $themeName = $activeThemes[0];
+			# }
+
+			$avatarCachePrefix .= '/' . substr(md5_hex($themesValue), 0, 8);
+			# this is still less than ideal because it does not include theme names,
+			# but including theme names could run into many issues, like long directory names, sanity, etc.
 		}
 	}
 
