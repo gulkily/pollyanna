@@ -4,8 +4,6 @@ use strict;
 use warnings;
 use 5.010;
 
-
-
 sub IndexCppFile { # $file | 'flush' ; indexes one text file into database
 # sub IndexCpp {
 # DRAFT
@@ -43,6 +41,12 @@ sub IndexCppFile { # $file | 'flush' ; indexes one text file into database
 	my $itemName = TrimPath($file);
 	my $fileHash = GetFileHash($file);
 
+	if (IsFileDeleted($file, $fileHash)) {
+		# write to log
+		WriteLog('IndexCppFile: IsFileDeleted() returned true, returning');
+		return 0;
+	}
+
 	DBAddItem($file, $itemName, '', $fileHash, 'cpp', 0);
 	DBAddVoteRecord($fileHash, 0, 'cpp');
 
@@ -68,12 +72,6 @@ sub IndexCppFile { # $file | 'flush' ; indexes one text file into database
 	WriteLog('IndexCppFile: $file = ' . ($file?$file:'false'));
 	WriteLog('IndexCppFile: $fileHash = ' . ($fileHash?$fileHash:'false'));
 	WriteLog('IndexCppFile: $addedTime = ' . ($addedTime?$addedTime:'false'));
-
-	if (IsFileDeleted($file, $fileHash)) {
-		# write to log
-		WriteLog('IndexCppFile: IsFileDeleted() returned true, returning');
-		return 0;
-	}
 
 	if (!$addedTime) {
 		WriteLog('IndexCppFile: file missing $addedTime');
