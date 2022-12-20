@@ -1628,6 +1628,9 @@ function GetItemHtmlLink ($hash, $linkCaption, $hashAnchor) { # $hash, [link cap
 	}
 } # GetItemHtmlLink()
 
+// function UrlEncode () {
+// ^-- use built-in urlencode() --^
+
 //
 // function GetPageHeader ($pageType, $title) { # $pageType, $title ; returns html for page header
 //     if (!$title) {
