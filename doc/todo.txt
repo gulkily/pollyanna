@@ -159,41 +159,6 @@ if chain is in use, during rebuild items should be indexed in chain order
 			would require organize_files to be on
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-detect when default has changed and warn user, especially in debug mode
-	should cut down on mysteries of "it's not working"
-		look for files in default that are newer than config
-
 should all-lowercase and/or lowercase hashtags be in the advanced layer?
 
 problems with hashtag links
@@ -203,8 +168,6 @@ problems with hashtag links
 			it is top_
 	b) FetchDialogFromUrl() doesn't know how to check for existing dialog
 		should not be called directly, only by FetchDialog()
-
-system tags string lookup?
 
 debug snow should re-print the most recently reported progress percentage on every line so that it can be read
 
@@ -226,7 +189,6 @@ daily 1 minute of work
 	carlos
 	dp
 
-
 upload dialog should be separated from paste dialog?
 
 handle ^M line breaks as early as possible
@@ -235,13 +197,10 @@ when a pubkey fails a sanity check, the item template is just blank
 	there is also no parse log
 		may be nice to give some kind of feedback
 
-do a bit of refactoring in set.pl
-	so that even if there is only one match, value is printed
-
 dialog palette
-	pre-populate with dialogs on page
-	in the event loop, check for new ones just in case
-	put new dialogs into palette when they are injected into page
+	pre-populate with dialogs on pagex
+	in the event loop, check for new ones just in casex
+	put new dialogs into palette when they are injected into pagex
 	checkboxes in palette should hide/show dialogs
 	palette should also contain advanced/beginner toggle button
 	palette should not be affected by advanced/beginner
@@ -251,10 +210,7 @@ before cleaning db, dump the file to hash mapping in item table
 		but do not set cache/b/indexed, so that file gets indexed again
 			this will allow OrganizeFile() to work properly with RenameFile()
 
-when a dialog is brought into focus with InjectDialog() it should also get keyboard focusk
-
 organizing files and indexing files should be separate processes
-
 
 loading indicator can be implemented without js #idea
 	float it at the top of the page with css
@@ -263,7 +219,6 @@ loading indicator can be implemented without js #idea
 IndexImageFile() should also use cache/indexed/... to keep track of what's already been indexed
 	the same way as IndexTextFile()
 
-rebuild.sh should not exit if there's no sqlite file, even when more than 100 text files
 
 there should be a command which checks all references to a hash
 	paths in html/txt
@@ -271,8 +226,7 @@ there should be a command which checks all references to a hash
 	fingerprints of users
 	fulltext search
 
-
-multiple dialogs can be requested at once!
+make it so multiple dialogs can be requested at once!
 
 rss feed link should be at the bottom of the markup
 	lynx displays it at the top of the page, which is sub-optimal
@@ -313,8 +267,6 @@ profile js to do
 			localstorage
 			what the server says
 				they should match up
-
-
 
 js debug mode toggles should be sticky between pages
 	ideally cookie-based or even more resilient?
