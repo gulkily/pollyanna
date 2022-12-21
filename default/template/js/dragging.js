@@ -799,7 +799,7 @@ function SpotlightDialog (dialogId) {
 			dialog.style.display = 'none';
 		}
 	} else {
-		alert('DEBUG: SpotlightDialog: warning: dialog not found');
+		//alert('DEBUG: SpotlightDialog: warning: dialog not found');
 	}
 	return false;
 }
