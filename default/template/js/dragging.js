@@ -789,7 +789,19 @@ function GetDialogId (win) { // returns dialog id (based on id= or title bar cap
 } // GetDialogId()
 
 function SpotlightDialog (dialogId) {
-
+// should actually be called ToggleDialog()
+	var dialog = document.getElementById('d' + dialogId);
+	if (dialog) {
+		var dialogDisplay = dialog.style.display;
+		if (dialogDisplay == 'none') {
+			dialog.style.display = 'inline';
+		} else {
+			dialog.style.display = 'none';
+		}
+	} else {
+		alert('DEBUG: SpotlightDialog: warning: dialog not found');
+	}
+	return false;
 }
 
 function UpdateDialogList () { // DialogListDialog () dialog_list.template
@@ -797,17 +809,20 @@ function UpdateDialogList () { // DialogListDialog () dialog_list.template
 	if (lstDialog) {
 		var allOpenDialogs = document.getElementsByClassName('dialog');
 		if (allOpenDialogs.length) {
-			var listContent = '';
+//			var listContent = '<form>'; // id=formListDialog name=formListDialog
+			var listContent = ''; // id=formListDialog name=formListDialog
 			for (var iDialog = 0; iDialog < allOpenDialogs.length; iDialog++) {
 				var dialogTitle = GetDialogTitle(allOpenDialogs[iDialog]);
 				var dialogId = GetDialogId(allOpenDialogs[iDialog]);
+				allOpenDialogs[iDialog].setAttribute('id', 'd' + dialogId);
 				var gt = unescape('%3E');
 
 				if (24 < dialogTitle.length) {
 					dialogTitle = dialogTitle.substr(0, 24);
 				}
 
-				listContent = listContent + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { SpotlightDialog(' + dialogId + '); }"' + gt + dialogTitle + '</a' + gt + '<br' + gt;
+				listContent = listContent + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { return SpotlightDialog(\'' + dialogId + '\'); }"' + gt + dialogTitle + '</a' + gt + '<br' + gt;
+				//listContent = listContent + '<label for="c' + dialogId + '"' + gt + '<input type=checkbox name="c' + dialogId + '" id="c' + dialogId + '"' + gt + dialogId + '</label' + gt + '<br' + gt;
 				lstDialog.innerHTML = lstDialog.innerHTML + iDialog;
 
 				/* #todo
@@ -823,6 +838,7 @@ function UpdateDialogList () { // DialogListDialog () dialog_list.template
 				lstDialog.appendChild(newBr);
 				*/
 			}
+//			listContent = listContent + '</form>';
 
 			if (lstDialog.innerHTML != listContent) {
 				lstDialog.innerHTML = listContent;
