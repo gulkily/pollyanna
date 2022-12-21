@@ -262,7 +262,7 @@ sub GetReadPage { # generates page with item listing based on parameters
 
 			$needUploadJs = 1;
 		}
-	}
+	} # if ($pageType eq 'tag')
 
 	$txtIndex .= GetTemplate('html/maincontent.template');
 	if ($pageType eq 'author') {
@@ -352,14 +352,13 @@ sub GetReadPage { # generates page with item listing based on parameters
 			}
 		}
 
-
 		if (GetConfig('setting/zip/author')) {
 			my $zipLink = '<a href="/author/' . $authorKey . '.zip">' . $authorKey . '.zip</a>';
 			$txtIndex .= GetWindowTemplate($zipLink, 'Archive');
 		}
 
 		$txtIndex .= '<hr 5>';
-	}
+	} # if ($pageType eq 'author')
 
 	my $itemComma = '';
 
