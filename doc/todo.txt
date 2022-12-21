@@ -1,7 +1,3 @@
-easy registration
-	1) generate private and public keys
-	2) solve puzzle
-	3) send both to server
 
 add support for === divider which creates multiple files
 
