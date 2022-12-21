@@ -143,13 +143,10 @@ what needs to be uncached when a new item is indexed?
 	top/ pages for all affected hash tags
 	all dialog versions of above
 	previous item in chain
-lower priority
-	compost
-	threads
+	lower priority
+		compost
+		threads
 
-
-#bug cannot apply #run tag when author has #run tag
-	workaround: give author #admin tag
 
 
 if chain is in use, during rebuild items should be indexed in chain order
