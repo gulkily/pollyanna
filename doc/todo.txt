@@ -289,13 +289,9 @@ how to leave controls window when siwtching to light mode
 	clear document tree and replace with light mode xhr-loaded page
 	replace controls dialog  into document tree
 
-
-retemplate script
-	should remove templates which have been updated in default/ but no others
-		otherwise we run into issues with ./pages.pl because the scripts are gone
-
 all scoring tags should be permissioned?
 	setting/admin/scoring_tags_are_permissioned
+	get them from vote_value table
 
 pagehistory
 	on page load, record url and title
@@ -334,8 +330,10 @@ count pageloads
 		if reloaded 3 times, redo html template
 
 need script to clean up old caches and html files
+	find html -type f -name *.html -ctime +120 #something like this
 
 standardize file path regexes
+	# global-search for "file.+ =~"
 
 change attribute names to make them sort better
 	sha256 --> hash_sha256
@@ -353,6 +351,7 @@ what needs to happen after a new git pull?
 	if js ... clean templates clean html
 
 do not exclude hashtags from titles?
+	it creates meaning loss when the hashtag is part of the message
 
 put top parent id into thread dialog
 	generate a template for that thread
@@ -362,13 +361,12 @@ put writing settings on write page
 	it's missing <form> tag in all instances
 		make a GetFormTemplate extension for GetWindowTemplate which wraps form tag around it
 
-
 notifications of new mentions
 	mentions should be indexed
 		(currently just replaced when html rendered)
 	append to author/hash/mentions.txt
 
-dialogs should appear centered in the viewport
+new/injected dialogs should appear centered in the viewport
 	and possibly animate out?
 
 mentions
@@ -377,8 +375,6 @@ pick up author references by fingerprint during indexing
 	add to token_defs
 		add to mentions.txt under profile/ABCDEF0123456789/mentions.txt
 			read mentions.txt with js
-
-
 
 client-side frontend config
 ===========================
@@ -447,7 +443,6 @@ add automatic de-caching of affected pages
 	verify that item_page table is updated correctly
 	run through item_page table and delete affected pages
 
-
 add a default text and non-text colors for each theme to reduce the appearance of green for missing colors
 
 Sources of developer confusion
@@ -490,7 +485,6 @@ Data export is currently only possible individually (zip files are not generated
 		By thread (with all dependencies like authors, votes, etc.)
 		By date (with all deps)
 		By author (with all deps)
-
 
 Basic calendar view
     templatify it all
