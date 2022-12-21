@@ -87,11 +87,11 @@ if (!empty($_FILES['uploaded_file'])) {
 			}
 
 			else if (isset($_FILES['uploaded_file']['name'])) {
-				# SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE
-				# SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE
-				# SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE
-				# SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE
-				# SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE SINGLE
+				# ONE FILE ONE FILE ONE FILE ONE FILE ONE FILE ONE FILE ONE FILE
+				# ONE FILE ONE FILE ONE FILE ONE FILE ONE FILE ONE FILE ONE FILE
+				# ONE FILE ONE FILE ONE FILE ONE FILE ONE FILE ONE FILE ONE FILE
+				# ONE FILE ONE FILE ONE FILE ONE FILE ONE FILE ONE FILE ONE FILE
+				# ONE FILE ONE FILE ONE FILE ONE FILE ONE FILE ONE FILE ONE FILE
 
 				$path = $basePath . basename($_FILES['uploaded_file']['name']);
 				$path = str_replace(' ', '_', $path);
@@ -180,7 +180,14 @@ if (!empty($_FILES['uploaded_file'])) {
 					WriteLog('upload.php: file_exists($fileHtmlPath) = ' . file_exists($fileHtmlPath));
 
 					if (file_exists($fileHtmlPath) && $fileUrlPath) {
-						RedirectWithResponse($fileUrlPath, 'Success! Thank you for uploading this beautiful picture!');
+						if (preg_match( '/([0-9A-F]{16})\.zip/', $path, $matches)) {
+							// looks like a zip file with a profile in it
+							// #todo refactor this if statement one up
+							$redirectToAuthor = '/author/' . $matches[1] . '/index.html';
+							RedirectWithResponse($redirectToAuthor, 'Profile imported successfully');
+						} else {
+							RedirectWithResponse($fileUrlPath, 'Success! Thank you for uploading this beautiful picture!');
+						}
 					} else {
 						// good enough for now, eventually would be nice if it went to the actual item #todo
 						RedirectWithResponse('/write.html', 'Thank you! Upload received and processing.');
