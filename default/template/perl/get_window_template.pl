@@ -228,7 +228,8 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 						var button = this.getElementsByClassName('skip');
 						button = button[0];
 						return CollapseWindowFromButton(button);
-					} return false;
+					}
+					return false;
 				");
 				$windowTitlebar = InjectJs($windowTitlebar, qw(titlebar_with_button));
 			}
