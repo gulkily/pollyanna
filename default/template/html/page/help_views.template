@@ -35,6 +35,10 @@
 	<a href="/raw.html">Raw</a>
 </p>
 
+<p>
+	<a href="/random.html">Random</a>
+</p>
+
 </fieldset>
 
 <!-- / help_views.template -->
