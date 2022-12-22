@@ -292,6 +292,8 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 	my $queryItemCount = "SELECT COUNT(*) AS item_count FROM ($queryItemList) LIMIT 1";
 	my $totalItemCount = SqliteGetValue($queryItemCount);
 
+	WriteLog('WriteItemListingPages: $totalItemCount = ' . $totalItemCount);
+
 	if ($totalItemCount) {
 		# there is more than one item
 		my $pageCount = ceil($totalItemCount / $perPage);
