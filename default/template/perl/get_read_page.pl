@@ -373,88 +373,93 @@ sub GetReadPage { # generates page with item listing based on parameters
 	# LISTING ITEMS BEGINS HERE
 	# LISTING ITEMS BEGINS HERE
 
-	foreach my $row (@files) {
-		my $file = $row->{'file_path'};
+	if (scalar(@files)) {
+		foreach my $row (@files) {
+			my $file = $row->{'file_path'};
 
-		if ($pageType eq 'tag' && $pageParam) {
-			$row->{'vote_return_to'} = '/tag/' . $pageParam . '.html'; #todo unhardcode
-		}
-
-		WriteLog('GetReadPage: calling DBAddItemPage (1)'); #GetReadPage()
-		DBAddItemPage($row->{'file_hash'}, $pageType, $pageParam);
-
-		if ($file && -e $file) {
-			my $itemHash = $row->{'file_hash'};
-			my $gpgKey = $row->{'author_key'};
-			my $isSigned;
-			if ($gpgKey) {
-				$isSigned = 1;
-			} else {
-				$isSigned = 0;
+			if ($pageType eq 'tag' && $pageParam) {
+				$row->{'vote_return_to'} = '/tag/' . $pageParam . '.html'; #todo unhardcode
 			}
 
-			my $alias;
-			my $isAdmin = 0;
-			my $message;
-			my $messageCacheName = GetMessageCacheName($itemHash);
+			WriteLog('GetReadPage: calling DBAddItemPage (1)'); #GetReadPage()
+			DBAddItemPage($row->{'file_hash'}, $pageType, $pageParam);
 
-			WriteLog('GetReadPage: $row->{file_hash} = ' . $row->{'file_hash'});
-			if ($gpgKey) {
-				WriteLog('GetReadPage: $message = GetFile('.$messageCacheName.')');
-				$message = GetFile($messageCacheName);
-			} else {
-				WriteLog('GetReadPage: $message = GetFile('.$file.')');
-				$message = GetFile($file);
-			}
-			if (!$message) {
-				WriteLog('GetReadPage: warning: $message is false!');
-			} else {
-				WriteLog('GetReadPage: $message is true!');
-			}
-
-			#$message = FormatForWeb($message);
-			my $signedCss = "";
-			if ($isSigned) {
-				if (IsAdmin($gpgKey)) {
-					$isAdmin = 1;
-				}
-				if ($isAdmin) {
-					$signedCss = "signed admin";
+			if ($file && -e $file) {
+				my $itemHash = $row->{'file_hash'};
+				my $gpgKey = $row->{'author_key'};
+				my $isSigned;
+				if ($gpgKey) {
+					$isSigned = 1;
 				} else {
-					$signedCss = "signed";
+					$isSigned = 0;
 				}
-			} # $isSigned
 
-			#todo $alias = GetAlias($gpgKey);
+				my $alias;
+				my $isAdmin = 0;
+				my $message;
+				my $messageCacheName = GetMessageCacheName($itemHash);
 
-			$alias = HtmlEscape($alias);
+				WriteLog('GetReadPage: $row->{file_hash} = ' . $row->{'file_hash'});
+				if ($gpgKey) {
+					WriteLog('GetReadPage: $message = GetFile('.$messageCacheName.')');
+					$message = GetFile($messageCacheName);
+				} else {
+					WriteLog('GetReadPage: $message = GetFile('.$file.')');
+					$message = GetFile($file);
+				}
+				if (!$message) {
+					WriteLog('GetReadPage: warning: $message is false!');
+				} else {
+					WriteLog('GetReadPage: $message is true!');
+				}
 
-			my $itemTemplate = '';
-			if ($message) {
-#				$row->{'show_quick_vote'} = 1;
-				$row->{'trim_long_text'} = 1;
+				#$message = FormatForWeb($message);
+				my $signedCss = "";
+				if ($isSigned) {
+					if (IsAdmin($gpgKey)) {
+						$isAdmin = 1;
+					}
+					if ($isAdmin) {
+						$signedCss = "signed admin";
+					} else {
+						$signedCss = "signed";
+					}
+				} # $isSigned
 
-				WriteLog('GetReadPage: GetItemTemplate($row)');
+				#todo $alias = GetAlias($gpgKey);
 
-				$itemTemplate = GetItemTemplate($row); # GetReadPage() $message
-			}
+				$alias = HtmlEscape($alias);
+
+				my $itemTemplate = '';
+				if ($message) {
+	#				$row->{'show_quick_vote'} = 1;
+					$row->{'trim_long_text'} = 1;
+
+					WriteLog('GetReadPage: GetItemTemplate($row)');
+
+					$itemTemplate = GetItemTemplate($row); # GetReadPage() $message
+				}
+				else {
+					$itemTemplate = GetItemTemplate($row); # GetReadPage() missing $message
+					WriteLog('GetReadPage: warning: missing $message');
+				}
+
+				if ($itemComma eq '') {
+					#$itemComma = '<br><hr size=7>';
+					$itemComma = ' ';
+				} else {
+					$itemTemplate = $itemComma . $itemTemplate;
+				}
+
+				$txtIndex .= $itemTemplate;
+			} # $file
 			else {
-				$itemTemplate = GetItemTemplate($row); # GetReadPage() missing $message
-				WriteLog('GetReadPage: warning: missing $message');
+				WriteLog('GetReadPage: warning: file not found, $file = ' . $file);
 			}
-
-			if ($itemComma eq '') {
-				#$itemComma = '<br><hr size=7>';
-				$itemComma = ' ';
-			} else {
-				$itemTemplate = $itemComma . $itemTemplate;
-			}
-
-			$txtIndex .= $itemTemplate;
-		} # $file
-		else {
-			WriteLog('GetReadPage: warning: file not found, $file = ' . $file);
-		}
+		} # foreach my $row (@files)
+	} # if (scalar(@files))
+	else {
+		$txtIndex .= GetWindowTemplate('<p>No items found to display on this page.</p>', 'No results');
 	}
 
 	# LISTING ITEMS ENDS HERE
