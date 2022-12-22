@@ -11,10 +11,15 @@ sub GetDesktopPage { # returns html for desktop page (/desktop.html)
 
 	$html = GetPageHeader('desktop');
 	$html .= GetTemplate('html/maincontent.template');
-
-	$html .= GetQueryAsDialog('tags', 'Tags');
-
+	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('tags')." LIMIT 10", 'Tags');
+	$html .= GetQueryAsDialog('threads', 'Threads');
+	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('new')." LIMIT 10", 'New');
+	$html .= GetQueryAsDialog('authors', 'Authors');
+	$html .= GetQueryAsDialog('url', 'Links');
 	$html .= GetStatsTable(); # GetDesktopPage()
+
+	require_once('page/profile.pl');
+	$html .= GetProfileDialog(); # GetDesktopPage()
 
 	if (GetConfig('admin/php/enable')) {
 		if (GetConfig('admin/upload/enable')) {
@@ -23,7 +28,7 @@ sub GetDesktopPage { # returns html for desktop page (/desktop.html)
 		}
 	}
 
-	$html .= GetPageFooter('tags');
+	$html .= GetPageFooter('desktop');
 
 	if (GetConfig('admin/js/enable')) {
 		my @scripts = qw(settings avatar profile timestamp pingback utils);
