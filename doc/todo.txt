@@ -20,17 +20,17 @@ current workflow for adding a new page (could improve)
 add config/setting/admin/list_theme_attribute_concat
 
 perl templating feature:
-    save stack
-    inject line number into every WriteLog() statement
+	save stack
+	inject line number into every WriteLog() statement
 
 
 rewrite plan for mac
-    since regex does not work in lighttpd
-    need to rewrite all urls to php handler
-        /route.php for regular urls
-            /route.php?path=/write.html
-        /post.php for write pages
-    add setting default/setting/admin/lighttpd/without_rewrite_mac ??
+	since regex does not work in lighttpd
+	need to rewrite all urls to php handler
+		/route.php for regular urls
+			/route.php?path=/write.html
+		/post.php for write pages
+	add setting default/setting/admin/lighttpd/without_rewrite_mac ??
 
 most requested 404 pages
 
@@ -487,9 +487,9 @@ Data export is currently only possible individually (zip files are not generated
 		By author (with all deps)
 
 Basic calendar view
-    templatify it all
-    fuzzy date match when creating
-    revive event_add page
+	templatify it all
+	fuzzy date match when creating
+	revive event_add page
 
 
 	# action      param           touch_time     priority
@@ -529,11 +529,17 @@ meta importer should also include items which have been tagged #meta
 
 improve upload.php error feedback page
 
+===
+
 #bug access log timestamp not recorded properly (recording time is recorded instead)
+
+===
 
 required for usefulness
 	new items alerts and view
 	more memorable item id's, either shorter hash or words
+
+===
 
 plan for getting rid of progress indicator on pages which are returned to
 	meditate... element should get attribute of timestamp tick
@@ -542,17 +548,26 @@ plan for getting rid of progress indicator on pages which are returned to
 	therefore, if page is returned to, when eventloop starts ticking again, the
 		timestamp is a big difference away and can be detected
 
+===
 
 grep apt-get install and synchronize the three different lines
 	same for yum and freebsd
 
+===
+
 #bug php + htaccess: config/admin/php/rewrite=query doesn't work
 
+===
+
 etag should be generated based on page content, not output html
+
+===
 
 AddAccessKey()
 	// this should not only add accesskey= attribute, but also
 		figure out what the tag's title should be and set it
+
+===
 
 profile page ... go to profile link should not resubmit profile
 	especially when backend is static and it doesn't go to profile
@@ -560,8 +575,13 @@ profile page ... go to profile link should not resubmit profile
 ===
 
 detect duplicate id= and form name= and warn
+	PutHtmlFile()
+
+===
 
 detect client-server time differences
+
+===
 
 #todo undo vote
 ===============
@@ -569,7 +589,7 @@ detect client-server time differences
 		#undo #hashtag ?
 	ui -- needs to subtract 1 from counter?
 
-generate [identifier].html
+===
 
 need to do something about timed out requests
 
@@ -577,13 +597,21 @@ need to do something about timed out requests
 
 #bug with organize_files=0, GetFileMessage() returns empty
 
+===
+
 today i realized that w3m on freebsd has glitches with displaying the <hr> tag.
 	so <hr> must be somehow removed from all html templates
 		while still serving something nice in browsers where hr is a section break
 
+===
+
 allow proof of work by generating html pages
 
+===
+
 profile page is not updated after public key is shared
+
+===
 
 #nn3 netscape 3.04gold {
 	js enabled
@@ -592,43 +620,52 @@ profile page is not updated after public key is shared
 	b) js errors when dragging.js is included (due to nested functions)
 }
 
+===
+
 #queues pages are not being de-cached
 	in php mode
 	with lazy enabled
 	author page, stats page
+
+===
 
 #bug #lowpriority
 	in php mode
 		if php files are missing
 			html files return 404
 
+===
+
 #bug duplicate text files are cropping up
 	html/txt/aa/bb/aabb...
 	html/txt/aabb...
 
-#bug-feature when titlebar buttons is enabled
-	but js is disabled
-		js is still written to the page
+===
 
-light mode should not be available if not supported
+light mode should not be an option if not supported
+	light mode currently relies on php
+
+===
 
 #minor organize default/template/html a little bit
 	pages should be in page/
 	widget should be in widget/
 
+===
+
 #doc that index.php is not processed by route.php
 
-access.log needs to fingerprint ip address as cookie!!
+===
 
 static mode
-	finding what  you just posted is not obvious
+	finding what you just posted is not obvious
 		should be a "recently added" thingy
+
+===
 
 #bug advanced menu is not rendered
 
-changing php config should restart local lighttpd server
-	or prompt user to do it
-
+===
 
 show reply thread subjects below reply items on item page
 
@@ -639,6 +676,8 @@ config token {
 			static mode: remind user
 			dynamic mode: clear cache
 }
+
+===
 
 #accessibility form elements mode {
 	keyboard
@@ -653,16 +692,7 @@ config token {
 	proposed alternative: turn links into form elements
 }
 
-#problem caches have no cleanup process except _dev_clean_ALL
-
-#problem going from ./_dev_clean_ALL.sh to ./build.pl is not obvious
-	should trap db errors or something like that
-	#done clean_dev now automatically runs build.pl with a delay
-
-#minor query results dialog has extra row below header.
-
-#minor build.pl results in building pages when i'm about to rebuild them again
-
+===
 
 dupe detection plan {
 	split files into lines, hash each line
@@ -670,12 +700,18 @@ dupe detection plan {
 	adopt under oldest
 }
 
+===
+
 #todo how to trim entire subthread when trimming item
+
+===
 
 lighttpd {
 	#todo need lockfile for own dev server
 	#bug different instances are killing each other's servers
 }
+
+===
 
 pages.pl {
 	listing pages should also generate child listing pages
@@ -685,18 +721,24 @@ pages.pl {
 		like git's
 }
 
+===
+
 clean html leftovers {
 	empty subdirs a1/b2/
 	author/11BBCCDDEEFF/
 }
-
 
 disabling php should {
 	restart the local dev server if running/enabled
 	remove html/*.php (or list of php files)
 }
 
-#dupe file_hash vs item_hash
+===
+
+file_hash vs item_hash in database schema
+	make names consistent
+
+===
 
 generate static html {
 	config/admin/php/enable=0
@@ -709,8 +751,11 @@ generate static html {
 	time ./pages.pl --all
 }
 
+===
 
 #bug js messages on write page when js/enabled=0
+
+===
 
 flatten propsx
 	find all notext items which assign propsx
@@ -719,69 +764,88 @@ flatten propsx
 				export to new filex
 					archive the sources
 
-
-
+===
 
 alt tags for images
 	which ones?
 	how to generate?
 
+===
+
 if item has #eventlog (?) tag
 	focus reply form when page is loaded
 		to facilitate fast data entry
 
-
-creative proposals
-==================
-sorting by hash
+===
 
 add a clock js for starting the timeout if eventloop is missing
 	this is useful for the 404 page, which doesn't need to have utils.js on it
 
-Record what feature is accessed after pi button to decide what to show/hide
+===
+
+Record what feature is accessed after More/Expand button to decide what to show/hide
 	a la ms office 2000/win2000
+
+===
 
 post -->
 <-- receipt (received=messageid = thanks button)
 --> receipt for receipt
 
-//#DBGetAuthorScore
-//#fallback timeout for keygen #todo
+===
 
+GetItemPage() should try to index a file by hashpath
+	if item is missing
+		search filesystem for hash.txt
 
-no replies or reply form on item pages #bug
-
-add checkboxes to item template
-
-getitempage() should try to index a file by hashpath
-
-frontend_dev_loop.pl
-	md5sum default/templates
-	if changed, clean_html, clean_template, generate
+===
 
 split gpg from openpgp stuff
 	and add enable flags for both
 
+===
+
 /tag/... pages should be sorted by number of that tag applied
 
+===
+
 #bug same js template gets injected more than once
+	check for template name in html and issue warning
+
+===
 
 #bug without default/admin/accept_404_url_text_reduce_spam much spam due to ?message=
+
+===
 
 ensure all js functions
 	a) return a value
 	b) have a closing comment
 
+===
 
 automatically adjust timestamp highlight threshold
 	based on spread of item timestamps
+	e.g. if all items are newer than 5 minutes, only bold ones 1 minute or less old
 
-merge sqlite junk into two layers -- via shell and via dbi
+===
+
+xmerge sqlite junk into two layers -- via shell and via dbi
+	i think this is done, but could use a double-check
+		shell is preferred because DBI is not always available
+
+===
 
 server response message should have adjustable button caption
 	goodbye message
 
-#accessibility #todo need alternative way to handle http realm for chrome (chrome does not display it in auth dialog)
+===
+
+#accessibility #todo need alternative way to handle http realm for chrome
+	chrome does not display it in auth dialog
+		other chrome-based browsers also affected
+
+===
 
 If user signs out with cookie and later tries to sign in with localstorage,
 	Either sign them out
@@ -790,13 +854,20 @@ If user signs out with cookie and later tries to sign in with localstorage,
 		or
 	Welcome back message?
 
-Add sub to fill template with hash of variables
+===
 
 Being all caps makes html tags stand out more in a sea of text
+	implement "older style" html output where all tags and attributes are all-caps
+
+===
 
 Instrument panel
 
+===
+
 test: are there any files under default/ which are not mentioned anywhere in code?
+
+===
 
 improve clean process
 	instead of rm, use mv
@@ -809,9 +880,19 @@ improve clean process
 		clean out a bit at a time, so as to not stall flow
 		e.g. find first 1000 files and delete them
 
+===
+
 create "imprint" of shortcut keys so they don't keep changing
+	GetAccessKey()
+
+===
 
 attributes should be rewritten back into header-footer
+	first, file hashing should not be affeced by header-footer
+		this can be done from the shell as well
+	then, things like hashtags, timestamp, author name, etc. can be added to it
+
+===
 
 #security #taint
 In order to quickly add -T (taint mode) compliance, i've added
@@ -819,13 +900,17 @@ some VERY basic sanity checks against these unsafe strings.
 The checks should be extended, as they're mostly "not whitespace"
 which is however better than nothing.
 
+===
+
 Store current config
 	Compare current config to last stored config
 		Publish config if changes
 
-need to make more button sticky via same prefs as settings page
+===
 
-debug.log how to trim top?
+debug log how to trim top?
+
+===
 
 ARCHITECTURAL PRIORITIES
 ========================
@@ -833,20 +918,24 @@ ARCHITECTURAL PRIORITIES
 * redirect jankiness from profile and post
 * pages not expired from cache
 
-
-#bug reply field gets autofocused due to write js
+===
 
 route.php
 	if the html returning indicates it is the pre-generated version
 		call HandleNotFound ($path, $pathRel)
 
+===
+
 write page:
 	if not logged in:
 		"other options may be available when you register or sign in"
 
+===
 
-global timer should check if login state has changed and
+js EventLoop should check if login state has changed and
 	immediately burn crrently open page if state changes
+
+===
 
 upgrade etc process
 	user posts signed token
@@ -855,32 +944,36 @@ upgrade etc process
 		performs upgrade
 		build.pl
 
+===
+
 admin imprint key
 	email version
 		user enters email which hashes
 		server sends one-time auth token to email
 
+===
+
 #burnit token
 	note: you can't burn electrons
+
+===
 
 .js files can fall behind in version
 	self-check against etag somehow
 
+===
+
 more testing with failed db connection
 	fallback solutions
 
-whenever txt is removed
-	remove cache
-	remove html
-		can probably just glob using item's hash ;)
-
-sqlite: set wal mode
+===
 
 cron.lock : change from timestamp-based to timestamp + pid based
 	if timestamp is too old, change the pid
 	if pid doesn't match self, quit
 		check on every loop
 
+===
 
 aliases based on item attributes
 	/123 == could be anything
@@ -888,21 +981,33 @@ aliases based on item attributes
 		partial title
 		etc
 		hashtag
-		
+
+===
 
 PROBLEM: sometimes placeholder page is still not replaced
+	haven't seen this in a while, unless there's an error in a script i'm editing
+		this still should have some kind of fallback
+
+===
 
 PROBLEM: there is a sqlite query call every time a page is hit, even if it exists
+
+===
 
 Prefix all php (and js?) templates with:
 	die('removeme');
 	then remove the line when building from template
+
+===
 
 de-couple
 	indexing of file into intial hash-filename pair
 		this can happen fast
 	extensive indexing of file
 		this can be put off
+	this may also help fix bug with file hashes changing
+
+===
 
 useful structural tags
 	>>item #addparent <hash>
@@ -916,9 +1021,10 @@ useful structural tags
 		otherwise replace with item with that hash
 			this would mean content is replaced on the page
 				with a notice
+	>>item #deparent
+		make it a top-level thread (no parents)
 
-
-
+===
 
 any account tagging v2
 	1) create profile
@@ -928,7 +1034,10 @@ any account tagging v2
 		use ./once for caching (task?)
 	5) add reddit_username attribute to profile
 
+===
+
 reddit account tagging
+	(this is already implemented as proof of concept)
 	1) "i claim this reddit account http://
 	2) >>1 #redditclaim
 		look for parent's hash on reddit page
@@ -944,23 +1053,39 @@ reddit account tagging
 		make it to //www.reddit.com/
 		lowercase the whole thing
 
+===
+
 let user save/export/import cookie secret key
+
+===
 
 add option to rotate/trim access.log
 	on by default for lighttpd/local
-	off by default for other
+	off by default for apache
 
-$$ returns current process id
+===
+
+$$ returns current process id (in perl? bash?)
 	make lock file based on this
+
+===
 
 directory listings
 	instead of 404 page, there should be index.html in each directory showing its contents
 
+===
+
 for js/debug, add comment to end of each line like so:
 	// filename.js : 123
+	//alert('DEBUG: hi there');
+		==> alert('DEBUG: hi there, filename.js:123');
+
+===
 
 check the status of ssi includes module
 	add ssi include for status bar
+
+===
 
 Features would help me
 ======================
@@ -972,6 +1097,7 @@ Recognize URLs
 	present
 Recognize typical date formats
 
+===
 
 queue
 =====
@@ -984,41 +1110,31 @@ php post.php
 	display wait page
 	refresh to completed item page when done
 
+===
 
-flush
+flush command
 	if #approve or #keep
-		keep item and all its children
+		keep item and all its children, related items, and other dependencies
 	otherwise
-		archive
+		archive it
+
+===
 
 #setresourcepassword
 	hashes password to htpasswd standard
 	uploads hashed password
-	server adds to htpasswd (if should be allowed)
+	server adds to htpasswd
+		should not be allowed by default
+
+===
 
 add 404 --> new item to route.php
+
+===
 
 when only mouse click and no scrollbar, no way to move down page
 	button to move to end of section
 	potentially javascript scrollbars?
-
-
-write form
-...
-
-[keyboard]
-
-dropdown
-  system
-  dvorak
-  russian
-
-a s d f keyboard expando
-
-foreach table cell
- if letter = a
-   change to b
-   (translitkeypress())
 
 ===
 
@@ -1075,7 +1191,7 @@ tables should regrow if they are missing
 	allows pulling from another site
 
 xIf Item is being deleted, all its actions should be undone
-    xMost db entries should already have a source item field
+	xMost db entries should already have a source item field
 
 
 #bug when clicking reply link on listings page and it goes to item's page, reply textbox does not become focused
@@ -1460,10 +1576,10 @@ build crashes if config has a file which is looked up as a directory
 research .user.ini (php settings for apache)
 
 remove external js file dependencies from 404 page
-    404 page should only be 1 request
+	404 page should only be 1 request
 
 Anytime using rewrite to add attributes to a tag
-    If tag has no attributes, have to replace <tag> instead of "<tag "
+	If tag has no attributes, have to replace <tag> instead of "<tag "
 
 without php, profile page contains several $ placeholders
 
@@ -1472,24 +1588,24 @@ without php, profile page contains several $ placeholders
 #bug Currently update.pl is broken, only the first 100 files are imported
 
 #bug
-    create profile with local key
-    close browser (cookies lost)
-    open browser again, go to profile page
-        expected: handle and fingerprint populated
-        actual: handle is populated, but fingerprint is not
+	create profile with local key
+	close browser (cookies lost)
+	open browser again, go to profile page
+		expected: handle and fingerprint populated
+		actual: handle is populated, but fingerprint is not
 
 
 #bug PHP-supplied http response headers cause Mosaic to crash
-    Static html pages work ok
-    Pages routed through PHP cause crash
-    Check headers for differences
+	Static html pages work ok
+	Pages routed through PHP cause crash
+	Check headers for differences
 
 #bug IE11: window.Promise returns false, which causes openpgp to not load
-    openpgp does support ie11, and it used to work
-    Need to figure out which features the Promise polyfill depends on, and create a test for them
+	openpgp does support ie11, and it used to work
+	Need to figure out which features the Promise polyfill depends on, and create a test for them
 
 For js browsers, make the .txt link expand into a textarea instead of going to txt file
-    ?
+	?
 
 curl template
 pgp command template
@@ -1498,16 +1614,16 @@ Make a chart comparing to other systems
 	Started
 
 Move css from default.css into theme
-    Except for certain things
+	Except for certain things
 
 Facilitate removal of votes by ip address of voterx
 	Record IP address (obfuscated) when voting happensx
 	Add functionality to remove all votes by IP address
 
 When returning to a form with a button which turns to "please wait" when clicked
-    xThe button's caption should already be reset, ideally (via document/body.onunload?)
-        Or should be reset as soon as possible
-        { // add this to top of page
+	xThe button's caption should already be reset, ideally (via document/body.onunload?)
+		Or should be reset as soon as possible
+		{ // add this to top of page
 			<script>
 				<!--
 				if (document.createElement && document.innerHTML) {
@@ -1520,10 +1636,10 @@ When returning to a form with a button which turns to "please wait" when clicked
 				// -->
 			</script>
 		}
-        { // add this to OnLoadEverything() (or as a function in dragging)
-        	if (window.getElementById && window.getElementById('styleHideDialogs') && window.getElementById('styleHideDialogs').remove) {
-        		window.getElementById('styleHideDialogs').remove();
-        	}
+		{ // add this to OnLoadEverything() (or as a function in dragging)
+			if (window.getElementById && window.getElementById('styleHideDialogs') && window.getElementById('styleHideDialogs').remove) {
+				window.getElementById('styleHideDialogs').remove();
+			}
 		}
 		{ // add this in RestoreDialogPosition()
 
@@ -1538,35 +1654,35 @@ Need to connect instances without introducing a bunch of spam
 #bug theme/color/username remains at old setting in cache after config value change
 
 Many pages crash in Mosaic 3.0 Win
-    caused by headers added by php
-    turning off php solves the crashes
+	caused by headers added by php
+	turning off php solves the crashes
 
 #bug Wine IE8 clock ticks only on post.html, not other pages
 
 Alternate auth method: http-auth
 
 #bug tag pages are not generated initially
-    hastitle
-    reply
+	hastitle
+	reply
 
 On profile page, the page intro should reflect logged in status
-    You are signed in as Anonyomus
-    You are not signed in
-    etc
+	You are signed in as Anonyomus
+	You are not signed in
+	etc
 
 (checkmark) this text has been verified via vouch-web
 
 red tag links sohuld also be red without css
-    <font color=red>
+	<font color=red>
 
 Netscape 4.80 user-set font size is overridden by site #issue #bug #accessibility
-    Probably need to get rid of fixed font sizes
+	Probably need to get rid of fixed font sizes
 
 "reply anonyomusly" is not true if cookie set #bug
 
 access.pl:
-    vote2.html
-    event.html handlers are broken
+	vote2.html
+	event.html handlers are broken
 
 #bug advanced mode + admin text = invisible text
 
@@ -1576,28 +1692,28 @@ If item is a reply
 	If contains hashtag
 		Hashtag vote applies to parent
 Implementation:
-    Stupid way
-        1. Index and store all hash tags for given file_hash
-        2. Integrate into item_view page if it's top-level
-    Smarter way
-        1. Create a view which does it automatically for parent-level items
-    3.
+	Stupid way
+		1. Index and store all hash tags for given file_hash
+		2. Integrate into item_view page if it's top-level
+	Smarter way
+		1. Create a view which does it automatically for parent-level items
+	3.
 
 Views
-    Outputs: html listing, rss, zip, pdf, epub, docx, rtf, txt
+	Outputs: html listing, rss, zip, pdf, epub, docx, rtf, txt
 
 nn2 #bug cannot register again after clicking sign out
 
 Trigger for change in theme setting
-    Basically schedule everything to be re-generated
+	Basically schedule everything to be re-generated
 
 default/menu/default=read,write,settings,...
 default/menu/advanced=events,compost,...
 default/menu/voter=compost
 
 Smooth the flow of registering and sharing public key
-    dumb redirect #done
-    smarter - todo
+	dumb redirect #done
+	smarter - todo
 
 Make vouching easier and more visible
 	Add vouch button which does correct thing to user profiles
@@ -2108,8 +2224,8 @@ FEEDBACK FROM L.F.
 ==================
 it might be helpful to have the tags right on the home page, so that it's not landing on a jumble of messages. + 
 2) Submit items via URL without any additional prefix x
-   * e.g. http://qdb.us/text.goes.here x
-   * test if spaces work in GTr +
+	* e.g. http://qdb.us/text.goes.here x
+	* test if spaces work in GTr +
 3) Set up short URLs to accept input (for live version)
 4) Make UI smaller
 5) Make links for voting so that form submission not required
@@ -2124,35 +2240,35 @@ It might be somewhat counter-intuitive to have the pages going from 14-0 on the 
 xUnderlining 'publicly and right now' may be confused as a hyperlink, maybe can be left un-underlined. but if you want to emphasize this consider bold or italics
 xAlso, as a personal preference I think the ellipse around the numbers can be removed or made into a rectangle
 And consider adding a title/informative header to the page in general, to give more context to what this page is.
-   It could be something like "hike.qdb.us" on the very top, a very short description underneath it, and then tabs (home, write, tags, manual) go underneath that
+	It could be something like "hike.qdb.us" on the very top, a very short description underneath it, and then tabs (home, write, tags, manual) go underneath that
 
 Add to specifications:
-   items are always 0-9a-f{40} (lowercase)
-   authors are always 0-9A-F{16} (uppercase)
-   csrf is always 0-9a-f{32}
-   until better specifications are arrived at
-   consider an odd-numbered hash of some kind for uniqueness? +
-      e.g sha1 with one char removed or added or something +
+	items are always 0-9a-f{40} (lowercase)
+	authors are always 0-9A-F{16} (uppercase)
+	csrf is always 0-9a-f{32}
+	until better specifications are arrived at
+	consider an odd-numbered hash of some kind for uniqueness? +
+	  e.g sha1 with one char removed or added or something +
 
 test mode: remove random characters from scripts when embedding them in page
 
 How to make things easier???
-   More flow can be achieved with more one-click actions
-   Most common tags should be one-clickable for JS users
-      And possibly for non-JS users, just make them links
-      Logged in users should vote as themselves by default
-         Make sure this is very, very clear, possibly with a second confirmation 
-            [ interesting        v ] [ funny ] [ spam ] [ ... ] --> goes to /abcd.html#vote
-            | Vote as Anonymous    |
-            | Vote without signing |
+	More flow can be achieved with more one-click actions
+	Most common tags should be one-clickable for JS users
+	  And possibly for non-JS users, just make them links
+	  Logged in users should vote as themselves by default
+		 Make sure this is very, very clear, possibly with a second confirmation 
+			[ interesting        v ] [ funny ] [ spam ] [ ... ] --> goes to /abcd.html#vote
+			| Vote as Anonymous    |
+			| Vote without signing |
 
 Somehow handle cleanup of old .html files
 
 Fix Tags page so that correct counts are displayed +
 
 Add roles directory
-    Add roles/admin and roles/moderator
-        Add support for having multiple public keys in here as text file
+	Add roles/admin and roles/moderator
+		Add support for having multiple public keys in here as text file
 
 Add client-side handling of HTTP 431 messages when submitting something new
 
@@ -2170,8 +2286,8 @@ js fallback for saving via "more options" link on write-small.template
 
 
 When private key is pasted into [restore] textarea,
-   automatically check it for presence of private key
-      restore if it validates
+	automatically check it for presence of private key
+	  restore if it validates
 
 Ensure caches are deleted when a vote occurs
 
@@ -2181,13 +2297,13 @@ Add a message that appears the first time someone is posting something, like on 
 abc can assign a weight of up to 100 to anyone else?
 
 Entertaining stats page
-   top voter + top tags = top tags by voter
-   top voters
-   top used tags
-      add to profile page
-   number of voters
-   number of vote records
-   busiest days?
+	top voter + top tags = top tags by voter
+	top voters
+	top used tags
+	  add to profile page
+	number of voters
+	number of vote records
+	busiest days?
 
 
 rebuilding everything twice is a good way of maintaining integrity
@@ -2197,36 +2313,40 @@ forgot to add conversions to user pages
 mod_security can interfere with some signed posts #known
 
 curl
-    add to tree
-        add timestamp
+	add to tree
+		add timestamp
 
 textarea onchange
-    begins with header?
-        verify with openpgp
-            green if valid
+	begins with header?
+		verify with openpgp
+			green if valid
 
 Validate signed input on Write page
-    textarea onchange
-        begins with header?
-            verify signature with opengpg
-                green if valid
+	textarea onchange
+		begins with header?
+			verify signature with opengpg
+				green if valid
 
 Link target encryption key with parent id key using gpg --list-keys
-   This way "Encrypted message for ..." is linked to the correct profile
+	This way "Encrypted message for ..." is linked to the correct profile
 
 Feeds list
-   OPML
+	OPML
 Make post.html redirect to next drop from access.pl, which will contain any newly-added posts as a list.
-   If there is only one post, automatically redirect to it
-   Otherwise, "is this one of your posts?"
-   Create IndexLogLine() in index.pl
-   Create IndexParentLine() in index.pl
+	If there is only one post, automatically redirect to it
+	Otherwise, "is this one of your posts?"
+	Create IndexLogLine() in index.pl
+	Create IndexParentLine() in index.pl
+
+===
 
 Add support for linking sister sites
-   Add list of sites in config(?)
-   Add page
-   List them all on page
-   Add menu item for page
+	Add list of sites in config(?)
+	Add page
+	List them all on page
+	Add menu item for page
+
+===
 
 Cookie auth via secret URL per public key, encrypted for that key
 
@@ -2234,20 +2354,24 @@ Cookie auth via secret URL per public key, encrypted for that key
 
 Add CSRF token to reply form
 
+===
 
 Add support for messages with multiple ENC_TOs
-   Add loop
-   Limit to 5? 10?
-   List all of them on details page
-Add support for public key included inside signed message
+	(enc_to is a pgp/gpg setting for what key the message is encrypted for)
+	Add loop
+	Limit to 5? 10?
+	List all of them on details page
+	Add support for public key included inside signed message
 
+===
 
 Voting links cause crash in Mosaic 2.0 and 1.0
 
+===
+
 #bug Reset settings (with js) does not change checkbox values to their defaults
 
-PHP handler for event.html
-	Set date pre-set to current
+===
 
 #bug on iOS, the ticking clock causes the "paste" command to be inaccessible
 	When a textarea is held down, the Paste command appears briefly, but disappears as soon as the page needs to refresh
@@ -2255,53 +2379,32 @@ PHP handler for event.html
 		add clock in settings?
 
 Generate version page for each version mentioned in changelog
-
-
-===
-
-"attention this message is public"
+	code for this already exists, and is actually commented out
 
 ===
-
-#todo maybe files should stop after the page queue builds up a certain number?
-
-or perhaps finally architect it all into one queue? #tEcHnIcAlDeBt
-
-===
-
 
 profile page should be not cached?
 	#todo fix setup for this in lighttpd and apache templates
-
-somehow needs to do a better job of getting rid of old logged in displayed status after logout
-	no-cache all profile page things with a username on them #todo
-	add check to eventloop
+	somehow needs to do a better job of getting rid of old logged in displayed status after logout
+		no-cache all profile page things with a username on them #todo
+			but still needs a fallback when connection goes away?
+		add check to eventloop
 
 ===
 
 textart is jacked on bromite
+	need to do more testing on bromite browser (android, installable from f-droid)
 	partial workaround is request desktop site
 	actual solution is viewport modes for textart items
 
 
 ===
 
-
-
-
-===
-
 echochamber for votes
+	votes which are detected to be questionable should not be counted for stats
 
 #todo #meta standardize on configKey vs configName
 	should probably be Key?
-
-===
-
-
-===
-
-events, tags, authors all need fallback empty pages #meta #todo
 
 ===
 
@@ -2321,6 +2424,11 @@ already done for gif, but now need to replace original image and change its hash
 ===
 
 #bug {require profile mode} is janky and locks out links and any non-cookie users
+	how to make it not require cookies?
+		probably session id that is rewritten into all links?
+			a) generate cookie id
+			b) get cookie id from page parameter
+			c) rewrite cookie id into all links on page
 
 have an alternative to lighttpd (which takes longer) for when it is missing
 	possible fallbacks:
