@@ -1870,7 +1870,7 @@ sub DBAddItemAttribute { # $fileHash, $attribute, $value, $epoch, $source # add 
 
 	if ($attribute eq 'chain_next' || $attribute eq 'chain_previous') {
 		if (length($fileHash) > 40 || length($value) > 40) {
-			WriteLog('DBAddItemAttribute: warning: fixing chain_next or chain_previous');
+			#WriteLog('DBAddItemAttribute: warning: fixing chain_next or chain_previous');
 			$fileHash = substr($fileHash, 0, 40);
 			$value = substr($value, 0, 40);
 			#todo unhack this
