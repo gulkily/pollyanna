@@ -968,7 +968,7 @@ if (GetConfig('admin/php/route_enable')) {
 		}
 
 		if ($serverResponse) {
-			WriteLog('route.php: $serverResponse set');
+			WriteLog('route.php: $serverResponse IS SET');
 		}
 
 		if ($serverResponse) {
@@ -1055,7 +1055,7 @@ if (GetConfig('admin/php/route_enable')) {
 				// inject server message right after the body tag
 				$replaceWhat = '(<body\s[^>]*>|<body>)'; // both with attributes or without
 				$replaceWith = '$0' . $serverResponseTemplate; // the $0 is the original body tag, which we want to retain
-				$html = preg_replace($replaceWhat, $replaceWith, $html);
+				$html = preg_replace($replaceWhat, $replaceWith, $html, 1);
 
 				$messageInjected = 1;
 			}
