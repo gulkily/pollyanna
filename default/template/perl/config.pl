@@ -40,6 +40,8 @@ sub GetDefault { # $configName
 sub FixConfigName { # $configName ; prepend 'setting/' to config paths as appropriate
 	my $configName = shift;
 
+	$configName = trim($configName);
+
 	my @notSetting = qw(query res sqlite3 string setting template theme);
 	my $notSettingFlag = 0; # should NOT be prefixed with setting/
 	for my $notSettingItem (@notSetting) {
@@ -47,15 +49,15 @@ sub FixConfigName { # $configName ; prepend 'setting/' to config paths as approp
 			$notSettingFlag = 1;
 		}
 	}
-	if (!$notSettingFlag) {
-		WriteLog('GetConfig: adding setting/ prefix to $configName = ' . $configName);
+	if (!$notSettingFlag && $configName ne 'debug') {
+		WriteLog('FixConfigName: (GetConfig) adding setting/ prefix to $configName = ' . $configName);
 		$configName = 'setting/' . $configName;
 	} else {
-		WriteLog('GetConfig: NOT adding setting/ prefix to $configName = ' . $configName);
+		WriteLog('FixConfigName: (GetConfig) NOT adding setting/ prefix to $configName = ' . $configName);
 	}
 
 	return $configName;
-}
+} # FixConfigName()
 
 sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configuration value based for $key
 	# $token eq 'unmemo'
