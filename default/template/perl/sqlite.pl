@@ -356,6 +356,8 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 sub SqliteGetQueryTemplate { # $query ; look up query in templates if necessary or just return $query
 # sub SqliteGetQuery {
 # sub GetQuery {
+# sub ExpandQuery {
+# sub GetQueryTemplate {
 	my $query = shift;
 	if (!$query) {
 		WriteLog('SqliteGetQueryTemplate: warning: called without $query');
