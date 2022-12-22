@@ -1,9 +1,20 @@
+there's a serious bug with data sanitizing
+	reproducing: download all text files from 26-110.com
+		some text files are actually image files
+			causes an error in the sh-sqlite3 converter
+				#ouch
 
-add support for === divider which creates multiple files
+===
+
+dialog controls like Annoy should not be displayed if js/enable is false
+
+===
+
+add support for \n\n===\n\n divider which creates multiple files
+
+===
 
 dig deeper into qdb.us bug causing many duplicated files
-
-
 
 ===
 
@@ -17,12 +28,17 @@ current workflow for adding a new page (could improve)
 			#todo it should probably have a list of all available pages somehow
 	#todo something like perl/page/simple.pl that is also checked for when a simple pages is generated?
 
+===
+
 add config/setting/admin/list_theme_attribute_concat
+
+===
 
 perl templating feature:
 	save stack
 	inject line number into every WriteLog() statement
 
+===
 
 rewrite plan for mac
 	since regex does not work in lighttpd
@@ -32,27 +48,39 @@ rewrite plan for mac
 		/post.php for write pages
 	add setting default/setting/admin/lighttpd/without_rewrite_mac ??
 
+===
+
 most requested 404 pages
+
+===
 
 needs to be a separate tagset for item template and classify dialog
 
+===
+
 strip script directory from caller display in debug log to make easier to read
+
+===
 
 #bug hike set image should shortcut to image/enable
 	actually finds directory, which is totally wrong
 
+===
+
 #bug hike.sh / tcsh / hike command doesn't work right
+
+===
 
 refresh templates:
 	if file is a perl template, build after removing config
 
+===
 
 zip error: Nothing to do! (try: zip -qr /afs/athena.mit.edu/user/t/h/thankyou/hike/html/image.tmp.zip . -i /afs/athena.mit.edu/user/t/h/thankyou/hike/html/image/)
 
 zip error: Nothing to do! (try: zip -qr /afs/athena.mit.edu/user/t/h/thankyou/hike/html/index.sqlite3.zip.tmp . -i cache/b/index.sqlite3)
 Argument "" isn't numeric in numeric ne (!=) at /afs/athena.mit.edu/user/t/h/thankyou/hike/config/template/perl/dialog/stats_table.pl line 29.
 tail: cannot open 'html/chain.log' for reading: No such file or directory
-
 
 =====
 
@@ -455,6 +483,8 @@ this is ready to go, but needs to be conditional depending on Unicode::String av
 verify that #approve permission chaining actually works
 	it does not
 
+===
+
 What's Keeping Website From Being Used?
 =======================================
 Much confusion
@@ -486,11 +516,14 @@ Data export is currently only possible individually (zip files are not generated
 		By date (with all deps)
 		By author (with all deps)
 
+===
+
 Basic calendar view
 	templatify it all
 	fuzzy date match when creating
 	revive event_add page
 
+===
 
 	# action      param           touch_time     priority
 	# make_page   author/abc
@@ -501,11 +534,17 @@ Basic calendar view
 	# annotate_votes   (vote starts with valid=0, must be annotated)
 	#
 
-if zip is missing, data page doesn't generate correctly
+===
+
+if zip command is missing, data page doesn't generate correctly
 	very little operator feedback on cause
+
+===
 
 puzzle solving requires modern js, which locks out older browsers
 	workaround: existing puzzle-solved user can vouch for them
+
+===
 
 header-footers
 	xabandon idea of detached for now
@@ -513,19 +552,12 @@ header-footers
 	xsolidify merging of two files with merging all their header-footers
 	ensure there's only one "\n-- \n" (remove the others)
 
-make #puzzle like #admin and #approve,
-	where you have to have the tag already in order to apply it
-	note: puzzle tag does not apply to pubkey item itself
-
-hide loading indicator after dialog appears
-	InsertFetchedDialog()
-
-dialogs should have loading indicator, because some connections are slow
+===
 
 when item is deleted and then another resubmit attempt is made, you end up at a 404 page
 	would be nice to have some (optional) feedback that that's what happened
 
-meta importer should also include items which have been tagged #meta
+===
 
 improve upload.php error feedback page
 
