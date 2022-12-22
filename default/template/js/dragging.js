@@ -918,10 +918,9 @@ function CollapseWindow (p, newVisible) { // p = dialog element ; newVisible = '
 		}
 	}
 
-	return changesMade;
-	// this may cause a bug; to fix, use 'return !ChangesMade()'
-	// workaround:
-	//return '';
+	return !changesMade;
+	// if changes were made, then it should return false, because this will cancel the double-click event
+	// if changes were not made, it should return true, because it should let the double-click event happen
 } // CollapseWindow()
 
 function CollapseWindowFromButton (t) { // collapses or expands window based on button pressed (t)
