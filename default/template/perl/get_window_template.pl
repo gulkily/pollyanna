@@ -220,16 +220,18 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 			my $btnCloseCaption = '#'; # needs to match one other place in dragging.js #collapseButton
 			my $windowTitlebar = GetTemplate('html/window/titlebar_with_button.template'); #window_titlebar_buttons
 
-			$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=skip', 'onclick', "if (window.CollapseWindowFromButton) { return !CollapseWindowFromButton(this); } return false;");
-			$windowTitlebar = AddAttributeToTag($windowTitlebar, 'td', 'ondblclick', "
-				if (window.CollapseWindowFromButton) {
-					var button = this.getElementsByClassName('skip');
-					button = button[0];
-					return CollapseWindowFromButton(button);
-				} return false;
-			");
-
-			$windowTitlebar = InjectJs($windowTitlebar, qw(titlebar_with_button));
+			if (GetConfig('admin/js/enable')) {
+				$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=skip', 'onclick', "if (window.CollapseWindowFromButton) { return !CollapseWindowFromButton(this); } return false;");
+				$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=close', 'onclick', "if (window.GetParentDialog) { GetParentDialog(this).remove(); if (window.UpdateDialogList) { UpdateDialogList(); } }");
+				$windowTitlebar = AddAttributeToTag($windowTitlebar, 'td', 'ondblclick', "
+					if (window.CollapseWindowFromButton) {
+						var button = this.getElementsByClassName('skip');
+						button = button[0];
+						return CollapseWindowFromButton(button);
+					} return false;
+				");
+				$windowTitlebar = InjectJs($windowTitlebar, qw(titlebar_with_button));
+			}
 
 			$windowTitlebar =~ s/\$windowTitle/$windowTitle/g;
 			$windowTitlebar =~ s/\$windowAnchor/$windowAnchor/g;
