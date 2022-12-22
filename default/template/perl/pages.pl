@@ -1910,7 +1910,7 @@ sub PutStatsPages { # stores template for footer stats dialog
 		WriteLog('PutStatsPage: debug mode is ON');
 
 		#my $statsPage = GetStatsPage();
-		if (-e 'log/log.log') {
+		if (file_exists('log/log.log')) {
 			WriteLog('PutStatsPage: log/log.log EXISTS');
 
 			my $warningsLog = `grep -i warning log/log.log > html/warning.txt`;
