@@ -216,6 +216,11 @@ sub GetMavoItemTemplate { # \%file
 
 	my $itemText = GetFile($file{'file_path'});
 
+	if (index($itemText, "\n-- \n") != -1) {
+		# kind of a #hack, but it's necessary for now
+		$itemText = substr($itemText, 0, index($itemText, "\n-- \n"));
+	}
+
 	my $itemDialog = GetWindowTemplate($itemText);
 
 	return $itemDialog;
