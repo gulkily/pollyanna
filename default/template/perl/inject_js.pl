@@ -364,8 +364,9 @@ sub GetScriptTemplate { # $script ; returns script for name
 	}
 
 	if (GetConfig('debug')) {
-		$scriptTemplate = "\n" . '/* GetScriptTemplate(' . $script . ")\n" . 'caller = ' . join(',', caller) . "\n" . $scriptTemplate . ' */';
-		$scriptTemplate = $scriptTemplate . "\n" . '/*' . 'GetScriptTemplate(' . $script . ')' . "\n" . 'caller = ' . join(',', caller) . "\n" . ' */' . "\n";
+		# this is broken, #todo
+		#$scriptTemplate = "\n" . '/* GetScriptTemplate(' . $script . ")\n" . 'caller = ' . join(',', caller) . "\n" . $scriptTemplate . ' */';
+		#$scriptTemplate = $scriptTemplate . "\n" . '/*' . 'GetScriptTemplate(' . $script . ')' . "\n" . 'caller = ' . join(',', caller) . "\n" . ' */' . "\n";
 	}
 
 	if (trim($scriptTemplate) eq '') {

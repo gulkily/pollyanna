@@ -709,7 +709,8 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 	$template .= "\n";
 
 	if ($isHtmlTemplate && GetConfig('debug')) {
-		$template .= '<!-- ' . join(', ', caller) . '-->' . "\n";
+		#todo this is buggy
+		#$template .= '<!-- ' . join(', ', caller) . '-->' . "\n";
 	}
 
 	if ($isHtmlTemplate) {
