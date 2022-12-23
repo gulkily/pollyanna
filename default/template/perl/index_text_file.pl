@@ -47,6 +47,14 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 	push @indexMessageLog, 'indexing begins';
 
+	if (-s $file > 16000) {
+		# this is done primarily to eliminate binary files accidentally named .txt
+		#todo should also check for binary content in files
+		WriteLog('IndexTextFile: file is over 16K, sanity check failed; $file = ' . $file);
+		push @indexMessageLog, 'file over size limit, not indexing';
+		return ''
+	}
+
 	if (GetConfig('admin/organize_files') && !$flags{'skip_organize'}) {
 		# renames files to their hashes
 		#todo this should really be in IndexFile() and already is, but ...
