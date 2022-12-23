@@ -412,6 +412,17 @@ if (GetConfig('admin/php/route_enable')) {
 				}
 			}
 
+			if ($path == '/welcome.html') {
+				if (GetConfig('admin/php/route_welcome_desktop_logged_in')) {
+					// if logged in, replace welcome with desktop page
+					include_once('cookie.php');
+
+					if (isset($cookie) && $cookie) {
+						$path = '/desktop.html';
+					}
+				}
+			}
+
 			WriteLog('route.php: $path = ' . $path); // e.g. ab/cd/abcdef01.html
 			$pathFull = realpath('.' . $path); // e.g. /ab/cd/abcdef01.html
 
