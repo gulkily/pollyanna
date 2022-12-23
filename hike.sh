@@ -28,6 +28,11 @@ if [ $1 = test ]
 		echo testing 1 2 3
 fi
 
+if [ $1 = stats ]
+	then
+		echo text files: `find html/txt -type f -name '*.txt' | wc -l`
+fi
+
 if [ $1 = status ]
 	then
 		ps aux | grep lighttpd
