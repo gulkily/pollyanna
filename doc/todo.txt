@@ -1,3 +1,14 @@
+who invited you dialog
+	list of names with checkboxes
+		half the names are actual names
+			(do not use guest)
+
+===
+
+make easier way to have lists in localstorage
+
+===
+
 there's a serious bug with data sanitizing
 	reproducing: download all text files from 26-110.com
 		some text files are actually image files
