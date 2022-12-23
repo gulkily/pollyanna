@@ -12,9 +12,9 @@ sub GetDesktopPage { # returns html for desktop page (/desktop.html)
 	$html = GetPageHeader('desktop');
 	$html .= GetTemplate('html/maincontent.template');
 	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('tags')." LIMIT 10", 'Tags');
-	$html .= GetQueryAsDialog('threads', 'Threads');
+	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('threads')." LIMIT 10", 'Threads');
 	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('new')." LIMIT 10", 'New');
-	$html .= GetQueryAsDialog('authors', 'Authors');
+	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('authors'). "LIMIT 10", 'Authors');
 	$html .= GetQueryAsDialog('url', 'Links');
 	$html .= GetStatsTable(); # GetDesktopPage()
 
