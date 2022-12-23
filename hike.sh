@@ -154,6 +154,9 @@ if [ $1 = archive ]
 		time ./default/template/perl/script/_dev_archive.pl
 		sleep 1
 		time ./index.pl --sweep
+		time ./index.pl --all
+		time ./index.pl --all
+		./hike.sh frontend
 fi
 
 	echo source hike.sh = enable these commands
