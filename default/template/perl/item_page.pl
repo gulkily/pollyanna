@@ -115,14 +115,21 @@ sub GetHtmlToolboxes {
 			'<a href="https://en.wikipedia.org/w/index.php?search=' .
 			$urlParam .
 			'">' .
-			'Wikipedia EN' .
+			'Wikipedia English' .
 			'</a><br>' . "\n"
 		;
 		$htmlToolbox .=
 			'<a href="https://ru.wikipedia.org/w/index.php?search=' .
 			$urlParam .
 			'">' .
-			'Wikipedia RU' .
+			'Wikipedia Russian' .
+			'</a><br>' . "\n"
+		;
+		$htmlToolbox .=
+			'<a href="https://uk.wikipedia.org/w/index.php?search=' .
+			$urlParam .
+			'">' .
+			'Wikipedia Ukrainian' .
 			'</a><br>' . "\n"
 		;
 		$htmlToolbox .=
