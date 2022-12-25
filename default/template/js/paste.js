@@ -25,6 +25,10 @@ function PasteEvent (e) {
 				if (window.displayNotification) {
 					displayNotification('Uploading...');
 				}
+
+				if (document.getElementById('iospaste')) {
+					document.getElementById('iospaste').value = 'Uploading...';
+				}
 				
 				form1.submit();
 			}
