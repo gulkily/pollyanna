@@ -1153,8 +1153,44 @@ function FetchDialog (dialogName) {
 		}
 	}
 
+	//alert(dialogName);
+	var openDialogs = window.localStorage.getItem('open_dialogs');
+	if (openDialogs && openDialogs.indexOf(dialogId) != -1) {
+		//
+	} else {
+		window.localStorage.setItem('open_dialogs', openDialogs + ',' + dialogId);
+	}
+	//alert(openDialogs);
+
 	return FetchDialogFromUrl(url);
 } // FetchDialog()
+
+function CloseDialog(t) {
+	alert('CloseDialog()');
+	if (window.GetParentDialog) {
+		var parentDialog = GetParentDialog(t);
+		//GetParentDialog(t).remove();
+
+		var dialogTitle = GetDialogTitle(parentDialog);
+		//dialogTitle = dialogTitle.toLowerCase();
+		var dialogId = GetDialogId(parentDialog);
+
+		//alert(dialogName);
+		var openDialogs = window.localStorage.getItem('open_dialogs');
+		if (openDialogs && openDialogs.indexOf(dialogId) != -1) {
+			var withoutDialog = openDialogs.replace(',' + dialogId, '');
+			window.localStorage.setItem('open_dialogs', withoutDialog);
+		} else {
+			//window.localStorage.setItem('open_dialogs', openDialogs + ',' + dialogId);
+		}
+		//alert(openDialogs);
+
+		if (window.UpdateDialogList) {
+			UpdateDialogList();
+		}
+	}
+	return false;
+}
 
 function FetchDialogFromUrl (url) {
 // function InjectDialog () {

@@ -222,7 +222,8 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 
 			if (GetConfig('admin/js/enable')) {
 				$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=skip', 'onclick', "if (window.CollapseWindowFromButton) { return !CollapseWindowFromButton(this); } return false;");
-				$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=close', 'onclick', "if (window.GetParentDialog) { GetParentDialog(this).remove(); if (window.UpdateDialogList) { UpdateDialogList(); } }");
+				$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=close', 'onclick', "if (window.CloseDialog) { return CloseDialog(this) }");
+				# $windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=close', 'onclick', "if (window.GetParentDialog) { GetParentDialog(this).remove(); if (window.UpdateDialogList) { UpdateDialogList(); } }");
 				$windowTitlebar = AddAttributeToTag($windowTitlebar, 'td', 'ondblclick', "
 					if (window.CollapseWindowFromButton) {
 						var button = this.getElementsByClassName('skip');
