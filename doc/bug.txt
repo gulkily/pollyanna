@@ -162,3 +162,5 @@ perhaps it makes sense to not make it go away and just leave it there, unless it
 #brainstorm
 
 #meta
+===
+after partial rebuild, hike frontend does not work
