@@ -1,9 +1,7 @@
 SELECT
 	author_key,
 	author_key author_id,
-	last_seen,
-	item_count,
-	author_score,
+	author_score AS score,
 	'' AS tagset_author,
 	file_hash
 FROM
