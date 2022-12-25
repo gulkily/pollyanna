@@ -45,7 +45,7 @@ sub GetReadPage { # generates page with item listing based on parameters
 				return;
 			}
 
-			my $whereClause = "WHERE author_key = '$authorKey' AND item_score > 0";
+			my $whereClause = "WHERE author_key = '$authorKey' AND item_score >= 0";
 
 			my $authorAliasHtml = GetAlias($authorKey);
 			my $authorAvatarHtml = GetAvatar($authorKey);
@@ -65,7 +65,7 @@ sub GetReadPage { # generates page with item listing based on parameters
 			my %queryParams;
 			$queryParams{'where_clause'} = $whereClause;
 			$queryParams{'order_clause'} = 'ORDER BY add_timestamp DESC';
-			$queryParams{'limit_clause'} = "LIMIT 25"; #todo fix hardcoded limit #todo pagination
+			$queryParams{'limit_clause'} = "LIMIT 100"; #todo fix hardcoded limit #todo pagination
 
 			@files = DBGetItemList(\%queryParams); #used below in listing
 
