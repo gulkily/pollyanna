@@ -1169,7 +1169,6 @@ function CloseDialog(t) {
 	//alert('DEBUG: CloseDialog()');
 	if (window.GetParentDialog) {
 		var parentDialog = GetParentDialog(t);
-		//GetParentDialog(t).remove();
 
 		var dialogTitle = GetDialogTitle(parentDialog);
 		//dialogTitle = dialogTitle.toLowerCase();
@@ -1184,6 +1183,9 @@ function CloseDialog(t) {
 			//window.localStorage.setItem('open_dialogs', openDialogs + ',' + dialogId);
 		}
 		//alert(openDialogs);
+
+		//GetParentDialog(t).remove();
+		parentDialog.remove();
 
 		if (window.UpdateDialogList) {
 			UpdateDialogList();
