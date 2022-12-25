@@ -85,6 +85,12 @@ if [ $1 = frontend ]
 		time ./pages.pl --system
 fi
 
+if [ $1 = pages ]
+  then
+    perl -T default/template/perl/pages.pl --all
+    # should it be config? #todo
+fi
+
 if [ $1 = page ]
 	then
 		time ./pages.pl -M $2
@@ -113,6 +119,10 @@ fi
 if [ $1 = alog ]
 	then
 		time ./default/template/perl/script/access_log_read.pl --all
+		echo About to index and build pages...
+		sleep 3
+		./index.pl --all
+		./pages.pl --all
 fi
 
 if [ $1 = db ]
