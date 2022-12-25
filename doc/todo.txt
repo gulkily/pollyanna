@@ -29,6 +29,19 @@ dig deeper into qdb.us bug causing many duplicated files
 
 ===
 
+scores page creation log (listing page)
+	create query template
+		test query in guidb
+	edit pages.pl to add MakeDialog call
+		accidentally edited cached pages.pl, but intelij warned me
+	add scores to @listingPages in makepage.pl
+	add scores dialog to handle_not_found.php
+	add to $validViews in handle_not_found.php
+	add to @makePages for some reason in pages.pl ??
+	remember to rebuild
+
+===
+
 current workflow for adding a new page (could improve)
 	add default/theme/thankyou/template/perl/page/thanks.pl
 	add default/theme/thankyou/template/html/page/thanks.template
