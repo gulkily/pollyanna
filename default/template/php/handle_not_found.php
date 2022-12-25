@@ -152,6 +152,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'chain', # chain.html
 			'url', # url.html
 			'authors', # authors.html
+			'scores', # scores.html
 			'threads', # threads.html
 			'boxes', #banana #todo
 			'tasks', #dev tasks.html
@@ -270,6 +271,13 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		) {
 			WriteLog('HandleNotFound: found authors dialog');
 			$pagesPlArgument = '-D authors';
+		}
+
+		if (
+			$path == '/dialog/scores.html'
+		) {
+			WriteLog('HandleNotFound: found scores dialog');
+			$pagesPlArgument = '-D scores';
 		}
 
 		if (
