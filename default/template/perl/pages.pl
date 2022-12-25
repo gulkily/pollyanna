@@ -1561,7 +1561,9 @@ sub MakeSummaryPages { # generates and writes all "summary" and "static" pages S
 	MakeSystemPages();
 
 	# Add Authors page
-	MakePage('authors', 0);
+	MakePage('authors', 0); # authors.html
+
+	MakePage('scores', 0); # scores.html
 
 	MakePage('read', 0);
 
@@ -1794,7 +1796,7 @@ sub MakeListingPages {
 		PutHtmlFile('dialog/help.html', $dialog);
 	}
 
-	my @makePages = qw(profile chain deleted compost authors data);
+	my @makePages = qw(profile chain deleted compost authors scores data);
 	for my $page (@makePages) {
 		WriteLog('MakeListingPages: calling MakePage(' . $page . ')');
 		MakePage($page);
@@ -2394,6 +2396,11 @@ while (my $arg1 = shift @foundArgs) {
 					my $dialog = GetQueryAsDialog('authors', 'Authors');
 					print ("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/authors.html', $dialog);
+				}
+				elsif ($makeDialogArg eq 'scores') {
+					my $dialog = GetQueryAsDialog('scores', 'Scores');
+					print ("-D $makeDialogArg\n");
+					PutHtmlFile('dialog/scores.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'tags') {
 					my $dialog = GetQueryAsDialog('tags', 'Tags');

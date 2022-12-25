@@ -60,7 +60,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	WriteMessage('MakePage(' . $pageType . ', ' . $pageParam . ')');
 	WriteLog('MakePage(' . $pageType . ', ' . $pageParam . ')');
 
-	my @listingPages = qw(child chain url deleted compost new raw picture image read authors tags threads boxes tasks);
+	my @listingPages = qw(child chain url deleted compost new raw picture image read authors scores tags threads boxes tasks);
 	#chain.html #new.html #boxes.html #tasks.html
 	my @simplePages = qw(help example access welcome calendar profile upload links post cookie chat thanks examples about faq documentation);
 
@@ -101,6 +101,15 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 				#GetItemListAsGallery(\@itemsRandom) . # this doesn't work for some reason #todo
 				GetPageFooter('random');
 			;
+
+			my @jsToInject = qw(settings timestamp voting utils profile);
+			if (GetConfig('setting/admin/js/fresh')) {
+				push @jsToInject, 'fresh';
+			}
+			if (GetConfig('setting/html/reply_cart')) {
+				push @jsToInject, 'reply_cart';
+			}
+			$randomPage = InjectJs($randomPage, @jsToInject);
 
 			#my $randomPage = GetReadPage('random');
 			PutHtmlFile($targetPath, $randomPage);
