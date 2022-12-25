@@ -1166,7 +1166,7 @@ function FetchDialog (dialogName) {
 } // FetchDialog()
 
 function CloseDialog(t) {
-	alert('CloseDialog()');
+	//alert('DEBUG: CloseDialog()');
 	if (window.GetParentDialog) {
 		var parentDialog = GetParentDialog(t);
 		//GetParentDialog(t).remove();
