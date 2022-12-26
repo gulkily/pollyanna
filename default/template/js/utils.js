@@ -34,7 +34,10 @@ function LogWarning (text) {
 }
 
 function OnLoadEverything () { // checks for each onLoad function and calls it
-// keywords: OnLoadAll BodyOnLoad body onload body.onload
+// function OnLoadAll () {
+// function BodyOnLoad () {
+// body onload body.onload
+// function OnLoad {
 // typically called from body.onload
 	//alert('DEBUG: OnLoadEverything() begins');
 
