@@ -208,9 +208,12 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 		$html .= GetWindowTemplate($paginationLinks, 'Pages');
 	}
 	#my $displayQuery = TextartForWeb(SqliteGetQueryTemplate($pageQuery));
-	my $displayQuery = '<pre>'.HtmlEscape(SqliteGetQueryTemplate($pageQuery)).'<br></pre>'; #todo templatify
 
-	$html .= '<span class=advanced>' . GetWindowTemplate($displayQuery, $queryDisplayName) . '</span>';
+	{
+		# display query used to generate the listing
+		my $displayQuery = '<pre>'.HtmlEscape(SqliteGetQueryTemplate($pageQuery)).'<br></pre>'; #todo templatify
+		$html .= '<span class=advanced>' . GetWindowTemplate($displayQuery, $queryDisplayName) . '</span>';
+	}
 
 	if ($pageQuery eq 'chain') {
 		#special case hack for chain page
