@@ -268,7 +268,7 @@ sub TestYear {
 	}
 }
 
-sub GetCalendarPage {
+sub GetCalendarPage { # returns calendar page
 	my $html = '';
 	
 	my $epoch = time();
@@ -278,7 +278,7 @@ sub GetCalendarPage {
 	
 	$html .= GetPageHeader('calendar');
 	$html .= GetTemplate('html/maincontent.template');
-	
+
 	my @dates = SqliteQueryHashRef(
 		"
 			SELECT
@@ -290,65 +290,69 @@ sub GetCalendarPage {
 		"
 	);
 	shift @dates;
-	my %fillDates;
 
-	for my $fillDate (@dates) {
-		my %dateHash = %{$fillDate};
-		my $dateToAdd = $dateHash{'date'};
-		$fillDates{$dateToAdd} = $dateHash{'item_count'};
-	}
+	WriteLog('GetCalendarPage: scalar(@dates) = ' . scalar(@dates));
 
-	#for (my $year = $yearStart; $year != $yearEnd; $year--) {
-	#	TestYear($year, \%fillDates);
-	#}
+	if (scalar(@dates)) {
+		my %fillDates;
 
-	#$html .= GetWindowTemplate("$curYear $curMonth $curDay", 'As Of');
-
-	my @yearMonths = SqliteQueryHashRef(
-		"
-			SELECT
-				SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 8) AS year_month
-			FROM item_flat
-			WHERE item_score >= 0
-			GROUP BY year_month
-		"
-	);
-	shift @yearMonths;
-
-	for my $yearMonthRef (@yearMonths) {
-		my %yearMonthRow = %{$yearMonthRef};
-		my $yearMonth = $yearMonthRow{'year_month'};
-		if ($yearMonth) {
-			my $year = substr($yearMonth, 0, 4);
-			my $month = substr($yearMonth, 5, 2);
-			$html .= GetMonthTable($year, $month, \%fillDates);
-		} else {
-			WriteLog('GetCalendarPage: warning: $yearMonth failed sanity check');
+		for my $fillDate (@dates) {
+			my %dateHash = %{$fillDate};
+			my $dateToAdd = $dateHash{'date'};
+			$fillDates{$dateToAdd} = $dateHash{'item_count'};
 		}
-	}
 
-	if (0) {
+		#for (my $year = $yearStart; $year != $yearEnd; $year--) {
+		#	TestYear($year, \%fillDates);
+		#}
 
-		if ($curDay < 7) {
-			if ($curMonth == 1) {
-				$html .= GetMonthTable($curYear - 1, 12, \%fillDates);
+		#$html .= GetWindowTemplate("$curYear $curMonth $curDay", 'As Of');
+
+		my @yearMonths = SqliteQueryHashRef(
+			"
+				SELECT
+					SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 8) AS year_month
+				FROM item_flat
+				WHERE item_score >= 0
+				GROUP BY year_month
+			"
+		);
+		shift @yearMonths;
+
+		for my $yearMonthRef (@yearMonths) {
+			my %yearMonthRow = %{$yearMonthRef};
+			my $yearMonth = $yearMonthRow{'year_month'};
+			if ($yearMonth) {
+				my $year = substr($yearMonth, 0, 4);
+				my $month = substr($yearMonth, 5, 2);
+				$html .= GetMonthTable($year, $month, \%fillDates);
 			} else {
-				$html .= GetMonthTable($curYear, $curMonth - 1, \%fillDates);
+				WriteLog('GetCalendarPage: warning: $yearMonth failed sanity check');
 			}
 		}
 
-		$html .= GetMonthTable($curYear, $curMonth, \%fillDates);
+		if (0) {
+			if ($curDay < 7) {
+				if ($curMonth == 1) {
+					$html .= GetMonthTable($curYear - 1, 12, \%fillDates);
+				} else {
+					$html .= GetMonthTable($curYear, $curMonth - 1, \%fillDates);
+				}
+			}
 
-		if ($curDay > 21) {
-			if ($curMonth == 12) {
-				$html .= GetMonthTable($curYear + 1, 1, \%fillDates);
-			} else {
-				$html .= GetMonthTable($curYear, $curMonth + 1, \%fillDates);
+			$html .= GetMonthTable($curYear, $curMonth, \%fillDates);
+
+			if ($curDay > 21) {
+				if ($curMonth == 12) {
+					$html .= GetMonthTable($curYear + 1, 1, \%fillDates);
+				} else {
+					$html .= GetMonthTable($curYear, $curMonth + 1, \%fillDates);
+				}
 			}
 		}
+	} else {
+		$html .= GetWindowTemplate('<p>There is nothing in the calendar at this time.</p>', 'Calendar Empty');
 	}
-
-
 
 	$html .= GetPageFooter('calendar');
 	
