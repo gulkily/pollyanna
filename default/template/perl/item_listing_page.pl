@@ -204,6 +204,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 	}
 
 	if ($needPagination) {
+		$html .= '<br>';
 		$html .= GetWindowTemplate($paginationLinks, 'Pages');
 	}
 	#my $displayQuery = TextartForWeb(SqliteGetQueryTemplate($pageQuery));
