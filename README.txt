@@ -5,6 +5,7 @@
   _/_  /_   _/ ,_  /_, , ,  _  , ,
   /_  / / /_/ / / /\, /_/ /_/ /_/
                      __/
+
 CONSENT:
 
 For operators and administrators, thankyou supports every released software
@@ -100,30 +101,4 @@ Resilient:
 Avoid being a spam target by fine-tuning access.
 Avoid advertising by avoiding community over-growth.
 User-centric operation allows easy migration in case of instance changes.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
