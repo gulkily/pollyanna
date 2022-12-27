@@ -544,7 +544,8 @@ sub GetMyVersion { # Get the currently checked out version (current commit's has
 } # GetMyVersion()
 
 sub GetFileHash { # $fileName ; returns hash of file contents
-# // GetItemHash GetHash
+# sub GetItemHash {
+# sub GetHash {
 	WriteLog("GetFileHash()");
 
 	my $fileName = shift;
