@@ -107,6 +107,7 @@ sub MergeFiles { # $file1, $file2, ... ; merge files which have same body but di
 
 	foreach my $file (@files) {
 		WriteLog('MergeFiles: $file = ' . $file);
+
 		my $thisContent = GetFile($file);
 		my $thisBody = '';
 		my $thisFooter = '';
@@ -115,11 +116,14 @@ sub MergeFiles { # $file1, $file2, ... ; merge files which have same body but di
 		if ($divPos != -1) {
 			$thisBody = substr($thisContent, 0, $divPos);
 			if (length($thisContent) > ($divPos + 5)) {
+				#$thisFooter = substr($thisContent, $divPos + 5, length($thisContent) - $divPos + 5);
 				$thisFooter = substr($thisContent, $divPos + 5);
 			}
+			WriteLog('MergeFiles: if: $divPos = ' . $divPos . '; $thisFooter = ' . $thisFooter);
 		} else {
 			$thisBody = $thisContent;
 			$divPos = length($thisContent);
+			WriteLog('MergeFiles: else: $divPos = ' . $divPos . '; $thisFooter = ' . $thisFooter);
 		}	
 		$thisBody = trim($thisBody);
 		if (!$fileBody) {
