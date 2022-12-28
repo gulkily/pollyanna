@@ -1154,11 +1154,11 @@ function FetchDialog (dialogName) {
 	}
 
 	//alert(dialogName);
-	var openDialogs = window.localStorage.getItem('open_dialogs');
+	var openDialogs = GetPrefs('open_dialogs');
 	if (openDialogs && openDialogs.indexOf(dialogId) != -1) {
 		//
 	} else {
-		window.localStorage.setItem('open_dialogs', openDialogs + ',' + dialogId);
+		SetPrefs('open_dialogs', openDialogs + ',' + dialogId);
 	}
 	//alert(openDialogs);
 
@@ -1175,12 +1175,12 @@ function CloseDialog(t) {
 		var dialogId = GetDialogId(parentDialog);
 
 		//alert(dialogName);
-		var openDialogs = window.localStorage.getItem('open_dialogs');
+		var openDialogs = GetPrefs('open_dialogs');
 		if (openDialogs && openDialogs.indexOf(dialogId) != -1) {
 			var withoutDialog = openDialogs.replace(',' + dialogId, '');
-			window.localStorage.setItem('open_dialogs', withoutDialog);
+			SetPrefs('open_dialogs', withoutDialog);
 		} else {
-			//window.localStorage.setItem('open_dialogs', openDialogs + ',' + dialogId);
+			SetPrefs('open_dialogs', openDialogs + ',' + dialogId);
 		}
 		//alert(openDialogs);
 
