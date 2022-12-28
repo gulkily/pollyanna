@@ -1318,9 +1318,10 @@ function IndexTextFile ($filePath) {
 		WriteLog('IndexTextFile: warning: $filePath does not exist');
 		return '';
 	}
-//
-// 	WriteLog("IndexTextFile: cd $scriptDir ; ./pages.pl \"$hash\"");
-// 	WriteLog(`cd $scriptDir ; ./pages.pl "$hash"`);
+
+	//
+	// 	WriteLog("IndexTextFile: cd $scriptDir ; ./pages.pl \"$hash\"");
+	// 	WriteLog(`cd $scriptDir ; ./pages.pl "$hash"`);
 } # IndexTextFile()
 
 function MakePage ($pageName) {
