@@ -164,3 +164,76 @@ perhaps it makes sense to not make it go away and just leave it there, unless it
 #meta
 ===
 after partial rebuild, hike frontend does not work
+
+
+===
+
+write page reloaded and lost my content
+	cause/workaround:
+	config/setting/admin/dev/fresh_reload
+	(this is not a default setting)
+
+===
+
+dialogs should reflow when remember position is off and remember collapsed state is on
+
+===
+
+on write page some javascript shows up in light mode
+
+===
+
+textarea for replying should have an accesskey
+
+===
+
+archive notice is not automatically indexed after archive
+
+===
+
+author id sort is incorrect on authors and scores pages
+
+===
+
+paste action not very obvious on upload page
+
+===
+
+Version: OpenPGP.js v3.0.13
+Comment: https://openpgpjs.org
+
+message is included when signing proof of work puzzle from welcome page
+
+===
+
+when access log and received: header is turned on, many duplicate items appear because the hash is no longer not applied to the footer
+
+===
+
+author's page does not seem to display all items
+
+===
+
+/image.html is not reprinted after new image is uploaded
+
+===
+
+profile.html does not redirect after logging in
+
+url retains original parameters like btnRegister=...
+
+===
+
+keyboard switcher shortcut overrides cmd+r on mac
+
+===
+
+avatar cache only indexed under first theme in list, doesn't update when theme changes
+
+===
+
+Message Hash is still not consistent across messages with the same text.
+
+===
+
+when logged in with cookie but no private key, the welcome page does not reflect this (like on profile page)
