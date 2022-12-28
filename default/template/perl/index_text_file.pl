@@ -1030,7 +1030,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 			WriteLog('IndexTextFile: warning: I was going to save $messageCacheName, but $message is blank! $fileHash = ' . $fileHash);
 			return ''; # $message is FALSE sanity check
 		}
-	} # .txt
+	} # if (substr(lc($file), length($file) -4, 4) eq ".txt")
 
 	if (scalar(@indexMessageLog)) {
 		my $indexLog = join("\n", @indexMessageLog);
