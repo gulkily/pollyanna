@@ -710,6 +710,7 @@ function LoadCheckboxValues () {
 	LoadCheckbox(document.getElementById('chkDraggableSpawn'), 'draggable_spawn');
 	LoadCheckbox(document.getElementById('chkDraggableSpawnFocus'), 'draggable_spawn_focus');
 	LoadCheckbox(document.getElementById('chkShowAdmin'), 'show_admin');
+	LoadCheckbox(document.getElementById('chkShowBeginner'), 'beginner');
 	LoadCheckbox(document.getElementById('chkShowAdvanced'), 'show_advanced');
 	LoadCheckbox(document.getElementById('chkWriteEnhance'), 'write_enhance');
 	LoadCheckbox(document.getElementById('chkWriteAutoSave'), 'write_autosave');

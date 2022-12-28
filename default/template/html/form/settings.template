@@ -11,6 +11,13 @@
 
 <fieldset>
 	<p>
+		<label for=chkShowBeginner>
+			<input type=checkbox id=chkShowBeginner name=chkShowBeginner onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'beginner'); }">
+			Show beginner hints<noscript><b>*</b></noscript>
+		</label>
+	</p>
+
+	<p>
 		<label for=chkShowAdvanced>
 			<input type=checkbox id=chkShowAdvanced name=chkShowAdvanced onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'show_advanced'); }">
 			Show advanced controls<noscript><b>*</b></noscript>
