@@ -73,24 +73,28 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 	#top menu
 	my $topMenuTemplate = '';
 	if (GetConfig('html/menu_top')) {
-		require_once('widget/menu.pl');
-		$topMenuTemplate = GetMenuTemplate($pageType); #GetPageHeader()
+		if ($pageType eq 'welcome' && GetConfig('admin/php/route_welcome_desktop_logged_in') && GetConfig('admin/force_profile')) {
+			# no menu on welcome page if not logged in
+		} else {
+			require_once('widget/menu.pl');
+			$topMenuTemplate = GetMenuTemplate($pageType); #GetPageHeader()
 
-		# if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/controls_header')) {
-		# 	my $dialogControls = GetTemplate('html/widget/dialog_controls.template'); # GetPageHeader()
-		# 	$dialogControls = GetWindowTemplate($dialogControls, 'Controls'); # GetPageHeader()
-		# 	#$dialogControls = '<span class=advanced>' . $dialogControls . '</span>';
-		# 	$topMenuTemplate .= $dialogControls;
-		# }
+			# if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/controls_header')) {
+			# 	my $dialogControls = GetTemplate('html/widget/dialog_controls.template'); # GetPageHeader()
+			# 	$dialogControls = GetWindowTemplate($dialogControls, 'Controls'); # GetPageHeader()
+			# 	#$dialogControls = '<span class=advanced>' . $dialogControls . '</span>';
+			# 	$topMenuTemplate .= $dialogControls;
+			# }
 
-		if (GetConfig('html/dialog_list_dialog')) {
-			require_once('dialog/dialog_list.pl');
-			$topMenuTemplate .= GetDialogListDialog();
-		}
+			if (GetConfig('html/dialog_list_dialog')) {
+				require_once('dialog/dialog_list.pl');
+				$topMenuTemplate .= GetDialogListDialog();
+			}
 
-		if (GetConfig('html/dialog_history')) {
-			require_once('dialog/history.pl');
-			$topMenuTemplate .= GetHistoryDialog();
+			if (GetConfig('html/dialog_history')) {
+				require_once('dialog/history.pl');
+				$topMenuTemplate .= GetHistoryDialog();
+			}
 		}
 	}
 

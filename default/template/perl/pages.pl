@@ -795,22 +795,26 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 			# #todo this is confusing the way it's written right now, improve on it somehow
 		)
 	) {
-		require_once('widget/menu.pl');
-		my $menuBottom = GetMenuTemplate($pageType); # GetPageFooter()
+		if ($pageType eq 'welcome' && GetConfig('admin/php/route_welcome_desktop_logged_in') && GetConfig('admin/force_profile')) {
+			# no menu on welcome page if not logged in
+		} else {
+			require_once('widget/menu.pl');
+			my $menuBottom = GetMenuTemplate($pageType); # GetPageFooter()
 
-		# if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/controls_footer')) {
-		# 	my $dialogControls = GetTemplate('html/widget/dialog_controls.template'); # GetPageFooter()
-		# 	$dialogControls = GetWindowTemplate($dialogControls, 'Controls'); # GetPageFooter()
-		# 	#$dialogControls = '<span class=advanced>' . $dialogControls . '</span>';
-		# 	$menuBottom .= $dialogControls;
-		# }
+			# if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/controls_footer')) {
+			# 	my $dialogControls = GetTemplate('html/widget/dialog_controls.template'); # GetPageFooter()
+			# 	$dialogControls = GetWindowTemplate($dialogControls, 'Controls'); # GetPageFooter()
+			# 	#$dialogControls = '<span class=advanced>' . $dialogControls . '</span>';
+			# 	$menuBottom .= $dialogControls;
+			# }
 
-		require_once('widget/menu.pl');
-		$txtFooter = str_replace(
-			'</body>',
-			'<br>' . $menuBottom . '</body>',
-			$txtFooter
-		);
+			require_once('widget/menu.pl');
+			$txtFooter = str_replace(
+				'</body>',
+				'<br>' . $menuBottom . '</body>',
+				$txtFooter
+			);
+		}
 	}
 
 	if (GetConfig('setting/admin/js/enable')) {
