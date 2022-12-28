@@ -207,17 +207,17 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 		$html .= '<br>';
 		$html .= GetWindowTemplate($paginationLinks, 'Pages');
 	}
-	#my $displayQuery = TextartForWeb(SqliteGetQueryTemplate($pageQuery));
 
 	{
 		# display query used to generate the listing
-		my $displayQuery = '<pre>'.HtmlEscape(SqliteGetQueryTemplate($pageQuery)).'<br></pre>'; #todo templatify
+		#my $displayQuery = TextartForWeb(SqliteGetQueryTemplate($pageQuery));
+		my $displayQuery = '<pre>' . HtmlEscape(SqliteGetQueryTemplate($pageQuery)) . '<br></pre>'; #todo templatify
 		$html .= '<span class=advanced>' . GetWindowTemplate($displayQuery, $queryDisplayName) . '</span>';
 	}
 
 	if ($pageQuery eq 'chain') {
 		#special case hack for chain page
-		$html .= '<span class=advanced>' . GetWindowTemplate('<a href="/chain.log">chain.log</a>', 'PSV') . '</span>'; #should be called GetDialog? #todo
+		$html .= '<span class=advanced>' . GetWindowTemplate('<a href="/chain.log">chain.log</a>', 'Log') . '</span>'; #should be called GetDialog? #todo
 	}
 
 	if ($pageQuery eq 'boxes') { #banana theme
