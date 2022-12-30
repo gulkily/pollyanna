@@ -522,7 +522,8 @@ sub EnsureSubdirs { # $fullPath ; ensures that subdirectories for a file exist
 	}
 } # EnsureSubdirs()
 
-sub stringTrimUnicode { # $string, $maxLength
+sub stringTrimUnicode { # $string, $maxLength ; trims string to $maxLength in a unicode-friendly way
+# this subprocedure is meant to address the issue with substr() cutting unicode characters apart
 	my $string = shift;
 	my $maxLength = shift;
 
