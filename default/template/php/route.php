@@ -442,7 +442,7 @@ if (GetConfig('admin/php/route_enable')) {
 			#if (GetConfig('admin/force_profile') || ($hostAccessCount > $hostRequestLimit)) { #todo add feature flag and uncomment
 				$redirectPath = GetConfig('admin/force_profile_redirect_path');
 				if (!$redirectPath) {
-					$redirectPath = '/profile.html';
+					$redirectPath = '/profile.html'; # is often /welcome.html
 				}
 
 				$pathWithoutArgs = $path;
@@ -450,8 +450,16 @@ if (GetConfig('admin/php/route_enable')) {
 					$pathWithoutArgs = substr($pathWithoutArgs, 0, index($pathWithoutArgs, '?'));
 				}
 
+				$redirectExceptions = array(
+					'/rss.xml'
+				);
+
 				// if registration is required, redirect user to profile.html
-				if ($pathWithoutArgs == $redirectPath) { # usually /profile.html or /welcome.html
+				if (
+					$pathWithoutArgs == $redirectPath
+					||
+					in_array($pathWithoutArgs, $redirectExceptions)
+				) { # usually /profile.html or /welcome.html
 					// if profile, leave it alone
 					// otherwise, below is for forcing login
 				} # if ($path == $redirectPath)
