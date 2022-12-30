@@ -522,6 +522,22 @@ sub EnsureSubdirs { # $fullPath ; ensures that subdirectories for a file exist
 	}
 } # EnsureSubdirs()
 
+sub stringTrimUnicode { # $string, $maxLength
+	my $string = shift;
+	my $maxLength = shift;
+
+	#todo sanity
+
+	use Unicode::String qw(utf8);
+
+	my $us = utf8($string);
+	if ($us->length > $maxLength) {
+		$string = $us->substr(0, $maxLength) . '...';
+	}
+
+	return $string;
+} # stringTrimUnicode()
+
 sub GetMyVersion { # Get the currently checked out version (current commit's hash from git)
 	# GetVersion {
 	state $myVersion;
