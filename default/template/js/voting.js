@@ -42,19 +42,22 @@ function signCallback (signed) {
 }
 
 function IncrementTagLink (t) { // increments number of votes in tag button
-// IncrementVoteLink (
+// function IncrementVoteLink () {
+// function AddVote () {
 // adds a number if there isn't one already
 // #todo adapt to accommodate buttons as well
 
 	if (t.innerHTML) {
 		// update count in vote link
-		//alert('DEBUG: SignVote: t.innerHTML');
+		//alert('DEBUG: IncrementTagLink: t.innerHTML');
 		var ih = t.innerHTML;
 		if (ih.indexOf('(') == -1) {
-			//alert('DEBUG: SignVote: ( not found');
+			// there is no count yet, add a 1
+			//alert('DEBUG: IncrementTagLink: ( not found');
 			t.innerHTML = ih + '(1)';
 		} else {
-			//alert('DEBUG: SignVote: ( found');
+			// there is a count already, increment it
+			//alert('DEBUG: IncrementTagLink: ( found');
 
 			var numVal = ih.substring(ih.indexOf('(') + 1, ih.indexOf(')'));
 			var newVal = parseInt(numVal) + 1;
@@ -63,7 +66,7 @@ function IncrementTagLink (t) { // increments number of votes in tag button
 		}
 		//alert('DEBUG: SignVote: finished with t.innerHTML');
 	}
-}
+} IncrementTagLink()
 
 function SignVote (t, token) { // signs a vote from referenced vote button
 // t = reference to calling button's 'this'
