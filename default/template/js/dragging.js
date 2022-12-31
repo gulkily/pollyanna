@@ -802,7 +802,15 @@ function SpotlightDialog (dialogId) {
 		//alert('DEBUG: SpotlightDialog: warning: dialog not found');
 	}
 	return false;
-}
+} // SpotlightDialog()
+
+function HideDialog (dialog) { // takes dialog element as reference
+	//alert('DEBUG: HideDialog: dialog = ' + dialog);
+	if (dialog && dialog.style) {
+		//alert('DEBUG: HideDialog: sanity check passed');
+		dialog.style.display = 'none';
+	}
+} // HideDialog()
 
 function UpdateDialogList () { // DialogListDialog () dialog_list.template
 	var lstDialog = document.getElementById('lstDialog');
