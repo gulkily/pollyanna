@@ -522,7 +522,7 @@ sub EnsureSubdirs { # $fullPath ; ensures that subdirectories for a file exist
 	}
 } # EnsureSubdirs()
 
-sub stringTrimUnicode { # $string, $maxLength ; trims string to $maxLength in a unicode-friendly way
+sub TrimUnicodeString { # $string, $maxLength ; trims string to $maxLength in a unicode-friendly way
 # this subprocedure is meant to address the issue with substr() cutting unicode characters apart
 	my $string = shift;
 	my $maxLength = shift;
@@ -532,12 +532,22 @@ sub stringTrimUnicode { # $string, $maxLength ; trims string to $maxLength in a 
 	use Unicode::String qw(utf8);
 
 	my $us = utf8($string);
-	if ($us->length > $maxLength) {
-		$string = $us->substr(0, $maxLength) . '...';
+
+	my $stringLength = $us->length;
+
+	WriteLog('TrimUnicodeString: $string = ' . $string . '; $stringLength = ' . $stringLength);
+
+	if ($stringLength > $maxLength) {
+		my $stringNew = $us->substr(0, $maxLength) . '...';
+		WriteLog('TrimUnicodeString: $stringNew = ' . $stringNew);
+
+		return $stringNew;
+	} else {
+		WriteLog('TrimUnicodeString: not trimming');
 	}
 
 	return $string;
-} # stringTrimUnicode()
+} # TrimUnicodeString()
 
 sub GetMyVersion { # Get the currently checked out version (current commit's hash from git)
 	# GetVersion {
