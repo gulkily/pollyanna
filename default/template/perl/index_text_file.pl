@@ -911,9 +911,10 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						$titleCandidate .= ' #' . $hashTagApplied;
 					}
 					$titleCandidate = trim($titleCandidate);
-					if (length($titleCandidate) > 25) {
-						$titleCandidate = substr($titleCandidate, 0, 25) . ' [...]';
-					}
+					$titleCandidate = TrimUnicodeString($titleCandidate, 25); # substr()
+					# if (length($titleCandidate) > 25) {
+					# 	$titleCandidate = substr($titleCandidate, 0, 25) . ' [...]';
+					# }
 					if (scalar(@itemParents) > 1) {
 						$titleCandidate .= ' applied to ' . scalar(@itemParents) . ' items';
 					}
@@ -970,9 +971,11 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 				if ($firstEol > 0) {
 					my $title = '';
 					if ($firstEol <= $titleLength) {
-						$title = substr($detokenedMessage, 0, $firstEol);
+						#$title = substr($detokenedMessage, 0, $firstEol);
+						$title = TrimUnicodeString($detokenedMessage, $firstEol);
 					} else {
-						$title = substr($detokenedMessage, 0, $titleLength) . '...';
+						#$title = substr($detokenedMessage, 0, $titleLength) . '...';
+						$title = TrimUnicodeString($detokenedMessage, $titleLength);
 					}
 					DBAddItemAttribute($fileHash, 'title', $title, 0);
 
