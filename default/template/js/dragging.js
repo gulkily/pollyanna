@@ -1180,7 +1180,7 @@ function CloseDialog(t) {
 			var withoutDialog = openDialogs.replace(',' + dialogId, '');
 			SetPrefs('open_dialogs', withoutDialog);
 		} else {
-			SetPrefs('open_dialogs', openDialogs + ',' + dialogId);
+			//don't need to do anything
 		}
 		//alert(openDialogs);
 
