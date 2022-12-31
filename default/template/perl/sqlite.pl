@@ -1809,6 +1809,10 @@ sub DBAddItemAttribute { # $fileHash, $attribute, $value, $epoch, $source # add 
 # sub DBAddItemTitle {
 # sub AddTitle {
 # sub DBAddTitle {
+# sub DBSetItemAttribute {
+# sub SetItemAttribute {
+# sub DBSetItemTitle {
+# sub SetItemTitle {
 
 # currently no constraints
 	state $query;
