@@ -1109,10 +1109,13 @@ if (GetConfig('admin/php/route_enable')) {
 			header('Location: ' . $redirectUrl);
 		}
 
-		if ($path == '/profile.html') {
+		WriteLog('route.php: before check for profile.html: $path = ' . $path);
+
+		#if ($path == '/profile.html' || $path == '/welcome.html' || $path == '/desktop.html') {
 		#if ($path) { #todo #bug
-			// special handling for /profile.html
-			WriteLog('route.php: /profile.html');
+		if (index($html, 'frmProfile') != -1) {
+			// special handling for frmProfile (usually in /profile.html, /welcome.html, or /desktop.html
+			WriteLog('route.php: frmProfile handler activated');
 
 			// we need cookies
 			include_once('cookie.php');
