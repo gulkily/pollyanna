@@ -803,12 +803,20 @@ if (GetConfig('admin/php/route_enable')) {
 					}
 
 					//if ($path == '/settings.html') {
+					if (GetConfig('admin/php/form_add_timestamp_input')) {
+						// adds a 'timestamp' input element to all forms on the page to help avoid
+						// submitting the same exact request another time and getting a cached response
+						// it used to be only used on the settings page, but i found it useful on all pages
 						$timestampFormElement = '<input type=hidden name=timestamp value=' . time() . '>';
 						$html = str_ireplace('</form>', $timestampFormElement . '</form>' , $html);
+					}
 
+					if (GetConfig('admin/force_profile_include_origin')) {
+						// adds an 'origin' input element to forms on the page so that user can return to the page
+						// after submitting the form? #todo verify this works
 						$originPathFormElement = '<input type=hidden name=origin value="' . htmlspecialchars($path) . '">';
 						$html = str_ireplace('</form>', $originPathFormElement . '</form>' , $html);
-					//}
+					}
 
 					if (
 						$path == '/404.html' ||
