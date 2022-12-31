@@ -2396,15 +2396,22 @@ sub GetFileHashPath { # $file ; Returns text file's standardized path given its 
 
 	# file should exist and not be a directory
 	if (!-e $file || -d $file) {
-		WriteLog('GetFileHashPath: warning: $file sanity check failed, $file = ' . $file);
+		WriteLog('GetFileHashPath: warning: $file sanity check failed, $file = ' . $file . '; caller = ' . join(',', caller));
 		return '';
 	}
-	WriteLog("GetFileHashPath($file)");
+	# WriteLog("GetFileHashPath($file)");
 
 	if ($file) {
+		WriteLog('GetFileHashPath: $file = ' . $file);
 		my $fileHash = GetFileHash($file);
+		#my $fileHash = GetFileMessageHash($file); #todo
 		my $fileHashPath = GetPathFromHash($fileHash);
+		WriteLog('GetFileHashPath: $file = ' . $file . '; $fileHash = ' . $fileHash . '; $fileHashPath = ' . $fileHashPath);
+
 		return $fileHashPath;
+	} else {
+		WriteLog('GetFileHashPath: warning: $file was FALSE; caller = ' . join(',', caller));
+		return '';
 	}
 } # GetFileHashPath()
 
