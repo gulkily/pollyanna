@@ -85,6 +85,12 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 
 						$settingValue = `cat $settingKey`;
 						print "$settingKey=$settingValue";
+
+						if ($settingKey eq 'config/setting/theme') {
+							print "Theme changed, about to hike frontend...\n";
+							sleep 2;
+							print `sh hike.sh frontend`;
+						}
 					} else {
 						print 'warning';
 					}
