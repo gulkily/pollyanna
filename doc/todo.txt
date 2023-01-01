@@ -1,3 +1,19 @@
+problems found during some testing
+
+a) on mac, setup is a bit broken
+
+a1) needs a command which does these: hike alog; hike index; ./pages.pl --all
+
+a1a) hike needs more options to call pages.pl, so that pages.pl doesn't need to be called anymore
+
+b) item received page needs more instructions on how to refresh the site
+
+c) hike should offer to run enable_features.sh, or prompt the user to do so
+
+d) mac-- php is still broken, and ssi is not enabled by default
+
+===
+
 add perl-unicode-string to requirements
 
 ===
