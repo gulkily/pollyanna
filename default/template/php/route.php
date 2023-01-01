@@ -1120,8 +1120,18 @@ if (GetConfig('admin/php/route_enable')) {
 		WriteLog('route.php: before check for profile.html: $path = ' . $path);
 
 		if (index($html, '<a id=btnReprint href=#')) {
-			$selfPath = $path . '?time=' . (time() + 10);
-			$html = str_replace('<a id=btnReprint href=#', '<a id=btnReprint href="' . $selfPath . '"', $html);
+			$reprintPath = $path . '?time=' . (time() + 10);
+			$html = str_replace('<a id=btnReprint href=#', '<a id=btnReprint href="' . $reprintPath . '"', $html);
+		}
+
+		if (index($html, '<a id=btnAdvanced href=#')) {
+			$expandPath = $path . '?ui=Advanced&timestamp=' . (time() + 10);
+			$html = str_replace('<a id=btnAdvanced href=#', '<a id=btnAdvanced href="' . $expandPath . '"', $html);
+		}
+
+		if (index($html, '<a id=btnMinimal href=#')) {
+			$beginnerPath = $path . '?ui=Beginner&timestamp=' . (time() + 10);
+			$html = str_replace('<a id=btnMinimal href=#', '<a id=btnMinimal href="' . $beginnerPath . '"', $html);
 		}
 
 		#if ($path == '/profile.html' || $path == '/welcome.html' || $path == '/desktop.html') {
