@@ -353,8 +353,12 @@ sub GetReadPage { # generates page with item listing based on parameters
 		}
 
 		if (GetConfig('setting/zip/author')) {
-			my $zipLink = '<a href="/author/' . $authorKey . '.zip">' . $authorKey . '.zip</a>';
-			$txtIndex .= GetWindowTemplate($zipLink, 'Archive');
+			if (scalar(@files) > 0) {
+				my $zipLink = '<a href="/author/' . $authorKey . '.zip">' . $authorKey . '.zip</a>';
+				$txtIndex .= GetWindowTemplate($zipLink, 'Archive');
+			} else {
+				$txtIndex .= GetWindowTemplate('This author has not posted anything yet, <br>so no archive is available.', 'Archive');
+			}
 		}
 
 		$txtIndex .= '<hr 5>';
