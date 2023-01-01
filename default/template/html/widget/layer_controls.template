@@ -42,6 +42,7 @@
 		n = n + 86400;
 		winLoc = winLoc + '?time=' + n;
 		window.location = winLoc;
+		return false;
 	" title="Reprint">Reprint</a>;
 </span>
 

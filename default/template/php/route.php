@@ -1119,6 +1119,11 @@ if (GetConfig('admin/php/route_enable')) {
 
 		WriteLog('route.php: before check for profile.html: $path = ' . $path);
 
+		if (index($html, '<a id=btnReprint href=#')) {
+			$selfPath = $path . '?time=' . (time() + 10);
+			$html = str_replace('<a id=btnReprint href=#', '<a id=btnReprint href="' . $selfPath . '"', $html);
+		}
+
 		#if ($path == '/profile.html' || $path == '/welcome.html' || $path == '/desktop.html') {
 		#if ($path) { #todo #bug
 		if (index($html, 'frmProfile') != -1) {
