@@ -857,12 +857,12 @@ sub GetThemeColor { # returns theme color based on setting/theme
 	if (GetConfig('html/mourn')) { # GetThemeColor()
 		if (index(lc($colorName), 'text') != -1 || index(lc($colorName), 'link') != -1) {
 			if (index(lc($colorName), 'back') != -1) {
-				return '#000000';
+				return GetConfig('html/color/background'); # #BackgroundColor
 			} else {
-				return '#a0a0a0';
+				return GetConfig('html/color/text'); # #TextColor
 			}
 		} else {
-			return '#000000';
+			return GetConfig('html/color/background'); # #BackgroundColor
 		}
 	}
 
