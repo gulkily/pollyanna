@@ -9,24 +9,25 @@ sub GetDesktopPage { # returns html for desktop page (/desktop.html)
 	my $html = "";
 	my $title = "Desktop";
 
-	$html = GetPageHeader('desktop');
-	$html .= GetTemplate('html/maincontent.template');
-	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('tags')." LIMIT 10", 'Tags');
-	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('threads')." LIMIT 10", 'Threads');
-	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('new')." LIMIT 10", 'New');
-	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('authors'). "LIMIT 10", 'Authors');
-	$html .= GetQueryAsDialog('url', 'Links');
-	$html .= GetStatsTable(); # GetDesktopPage()
-
-	require_once('page/profile.pl');
 	$html .= GetProfileDialog(); # GetDesktopPage()
 
-	if (GetConfig('admin/php/enable')) {
-		if (GetConfig('admin/upload/enable')) {
-			require_once('page/upload.pl');
-			$html .= GetUploadDialog('html/form/upload.template');
-		}
-	}
+	$html = GetPageHeader('desktop');
+	$html .= GetTemplate('html/maincontent.template');
+	#$html .= GetQueryAsDialog(SqliteGetQueryTemplate('tags')." LIMIT 10", 'Tags');
+	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('threads')." LIMIT 10", 'Threads');
+	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('new')." LIMIT 10", 'New');
+	#$html .= GetQueryAsDialog(SqliteGetQueryTemplate('authors'). "LIMIT 10", 'Authors');
+	#$html .= GetQueryAsDialog('url', 'Links');
+	#$html .= GetStatsTable(); # GetDesktopPage()
+
+	require_once('page/profile.pl');
+
+	# if (GetConfig('admin/php/enable')) {
+	# 	if (GetConfig('admin/upload/enable')) {
+	# 		require_once('page/upload.pl');
+	# 		$html .= GetUploadDialog('html/form/upload.template');
+	# 	}
+	# }
 
 	$html .= GetPageFooter('desktop');
 
