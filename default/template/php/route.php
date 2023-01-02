@@ -814,7 +814,16 @@ if (GetConfig('admin/php/route_enable')) {
 					if (GetConfig('admin/force_profile_include_origin')) {
 						// adds an 'origin' input element to forms on the page so that user can return to the page
 						// after submitting the form? #todo verify this works
-						$originPathFormElement = '<input type=hidden name=origin value="' . htmlspecialchars($path) . '">';
+						$originValue = $path;
+						if (isset($_GET['origin']) && $_GET['origin']) {
+							$originValue = $_GET['origin'];
+						}
+						if (isset($_POST['origin']) && $_POST['origin']) {
+							$originValue = $_POST['origin'];
+						}
+						WriteLog('route.php: $originValue = ' . $originValue);
+
+						$originPathFormElement = '<input type=hidden name=origin value="' . htmlspecialchars($originValue) . '">';
 						$html = str_ireplace('</form>', $originPathFormElement . '</form>' , $html);
 					}
 

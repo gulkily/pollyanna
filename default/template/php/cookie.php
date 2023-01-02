@@ -101,7 +101,21 @@ else {
 		}
 
 		if ($responseSignedIn) {
-			RedirectWithResponse('/profile.html', 'Success! You have signed in.');
+			#todo more sanity on origin value
+			$redirectPath = '/profile.html';
+			$originValue = '';
+			if (isset($_GET['origin']) && $_GET['origin']) {
+				$originValue = $_GET['origin'];
+			}
+			if (isset($_POST['origin']) && $_POST['origin']) {
+				$originValue = $_POST['origin'];
+			}
+			if ($originValue) {
+				$redirectPath = $originValue;
+			}
+			WriteLog('cookie.php: $originValue = ' . $originValue . '; $redirectPath = ' . $redirectPath);
+
+			RedirectWithResponse($redirectPath, 'Success! You have signed in.');
 		}
 	} // if (isset($_COOKIE['test']) && $_COOKIE['test'])
 	else {
