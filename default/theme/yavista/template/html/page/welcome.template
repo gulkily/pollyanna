@@ -1,9 +1,9 @@
 <!-- welcome.template -->
 
-<p style="padding-left: 20pt; padding-right: 20pt;">
+<p style="padding-left: 20pt; padding-right: 20pt; text-align: center">
 	<font size=5>Welcome to Yavista!</font><br>
 	<font size=4>An online space made with prayer.</font><br>
-	Please read this page carefully before joining.
+	Please read this page carefully before entering.
 </p>
 
 <p>

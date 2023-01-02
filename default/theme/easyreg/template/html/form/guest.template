@@ -1,9 +1,7 @@
 <!-- enter.template -->
 <form name=formRegisterGuest action="/profile.html">
 	<p>
-		If you are a Guest, <br>
-		a Member must vouch for you <br>
-		before you are published.
+		Press for guest access:
 	</p>
 	<p align=center>
 		<input id=guest name=btnRegister type=submit value="Guest">

@@ -1,9 +1,7 @@
 <!-- enter.template -->
 <form name=formRegisterMember action="/profile.html">
 	<p>
-		To become a member, <br>
-		Press the Member button, <br>
-		and choose a username.
+		Press to choose a username:
 	</p>
 	<p align=center>
 		<input id=member name=btnRegister type=submit value="Member">
