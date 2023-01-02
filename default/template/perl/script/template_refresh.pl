@@ -98,10 +98,10 @@ if ($changesDetectedCount) {
 		print "\n";
 	}
 	print ".\n";
-	print "To remeditate this condition, meditate for 3 seconds... \n";
+	print "To remeditate this condition, meditate for 1 second... \n";
 	print "===================================\n";
 
-	sleep 3;
+	sleep 1;
 
 	for my $key (@changed) {
 		if (-f "config/$key") {
