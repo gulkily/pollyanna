@@ -143,12 +143,20 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 		#todo move to sqlite.pl
 	}
 
-	if (!GetConfig('html/mourn') && abs($itemsIndexed - $filesTotal) > 3) { # GetStatsTable() -- Check Engine indicator
-		$statsTable = str_replace(
-			'<p id=diagnostics></p>',
-			'<p id=diagnostics><a href="/engine.html"><b><font color=orange style="padding: 2pt; border-radius: 3pt; border: inset 1pt #606060; background-color: #404040;">Check engine!</font></b></a></p>',
-			$statsTable
-		);
+	if (abs($itemsIndexed - $filesTotal) > 3) { # GetStatsTable() -- Check Engine indicator
+		if (GetConfig('html/mourn')) {
+			$statsTable = str_replace(
+				'<p id=diagnostics></p>',
+				'<p id=diagnostics><a href="/engine.html"><b>Check engine!</b></a></p>',
+				$statsTable
+			);
+		} else {
+			$statsTable = str_replace(
+				'<p id=diagnostics></p>',
+				'<p id=diagnostics><a href="/engine.html"><b><font color=orange style="padding: 2pt; border-radius: 3pt; border: inset 1pt #606060; background-color: #404040;">Check engine!</font></b></a></p>',
+				$statsTable
+			);
+		}
 	}
 
 	my $tagsTotal = DBGetTagCount();
