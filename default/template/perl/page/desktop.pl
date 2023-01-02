@@ -9,6 +9,8 @@ sub GetDesktopPage { # returns html for desktop page (/desktop.html)
 	my $html = "";
 	my $title = "Desktop";
 
+	require_once('page/profile.pl');
+
 	$html .= GetProfileDialog(); # GetDesktopPage()
 
 	$html = GetPageHeader('desktop');
@@ -20,7 +22,6 @@ sub GetDesktopPage { # returns html for desktop page (/desktop.html)
 	#$html .= GetQueryAsDialog('url', 'Links');
 	#$html .= GetStatsTable(); # GetDesktopPage()
 
-	require_once('page/profile.pl');
 
 	# if (GetConfig('admin/php/enable')) {
 	# 	if (GetConfig('admin/upload/enable')) {
