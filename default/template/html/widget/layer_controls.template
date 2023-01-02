@@ -3,9 +3,8 @@
 <noscript>*</noscript>
 
 <span>
-	<a id=btnAdvanced
+	<a id=btnAdvanced href=#
 		accesskey=o
-		href=#
 		onclick="
 			if (window.SetPrefs) {
 				SetPrefs('show_advanced', 1);
