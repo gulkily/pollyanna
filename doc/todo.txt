@@ -1,3 +1,12 @@
+rename GetWindowTemplate() to...
+	GetDialog() ?
+
+===
+
+make it easier to make a dialog with no titlebar
+
+===
+
 problems found during some testing
 
 a) on mac, setup is a bit broken
