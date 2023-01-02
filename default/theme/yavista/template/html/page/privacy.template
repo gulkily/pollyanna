@@ -1,0 +1,22 @@
+<!-- privacy.template -->
+
+<p style="max-width: 50em">
+	Yavista does not collect or store personally identifiable information such as Internet Protocol address, location,
+	or device fingerprint. You are not required to use your official name on Yavista; In fact, it is discouraged.
+</p>
+
+<p style="max-width: 50em">
+	Everything you write on Yavista, including your username, is fully public and viewable by anyone. 
+</p>
+
+<p style="max-width: 50em">
+	Furthermore, in the interest of transparency and resilience of the project, Yavista provides data exports of all
+	public content posted to the resource.
+</p>
+
+<p style="max-width: 50em">
+	If you are a technical person and would like to set up a new instance-mirror of Yavista, please feel free to do so.
+	If you want help with such an endeavor, please reach out to the operators.
+</p>
+
+<!-- / privacy.template -->
