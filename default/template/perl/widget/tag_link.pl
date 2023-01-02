@@ -26,7 +26,7 @@ sub GetTagLink { # $tag ; returns html for a tag link
 		if (GetConfig('html/hash_color_hashtags') && !GetConfig('html/mourn')) { # GetTagLink()
 			$tagColor = GetStringHtmlColor($tag);
 		} else {
-			$tagColor = GetThemeColor('tag_text');
+			$tagColor = GetThemeColor('tag_text'); # #TextColor
 		}
 		my $voteItemLink = "/tag/" . $tag . ".html";
 		my $dialogName = '/tag/' . $tag;
