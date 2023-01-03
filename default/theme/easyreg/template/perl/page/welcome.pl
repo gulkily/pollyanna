@@ -11,8 +11,8 @@ sub GetWelcomePage {
 		GetWindowTemplate(GetTemplate('html/page/content.template'), 'Please Share') .
 		GetWindowTemplate(GetTemplate('html/page/rules.template'), 'Ground Rules') .
 		GetWindowTemplate(GetTemplate('html/page/privacy.template'), 'Privacy') .
-		GetWindowTemplate(GetTemplate('html/form/enter.template'), 'Member Entry') .
-		GetWindowTemplate(GetTemplate('html/form/guest.template'), 'Guest Entry') .
+		GetWindowTemplate(GetTemplate('html/form/enter.template'), 'Create Profile') .
+		GetWindowTemplate(GetTemplate('html/form/guest.template'), 'Guest') .
 		#GetWindowTemplate(GetTemplate('html/form/emergency.template'), 'Emergency Contact Form') .
 		'<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>' .
 		'<span class=advanced>' . GetWriteForm() . '</span>' .
