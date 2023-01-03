@@ -256,6 +256,13 @@ sub GetScriptTemplate { # $script ; returns script for name
 		$scriptTemplate = str_replace('var configJsOpenPgp = 0;', 'var configJsOpenPgp = ' . $configJsOpenPgp . ';', $scriptTemplate);
 	}
 
+	if ($script eq 'easyreg') {
+		my $puzzlePrefix = GetConfig('setting/admin/puzzle/prefix');
+		if ($puzzlePrefix) {
+			$scriptTemplate = str_replace("var puzzlePrefix = '1337';", "var puzzlePrefix = '" . $puzzlePrefix . "';", $scriptTemplate);
+		}
+	}
+
 	if ($script eq 'puzzle') {
 		# for voting.js we need to fill in some theme colors
 		my $puzzlePrefix = GetConfig('puzzle/prefix');;
