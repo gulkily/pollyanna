@@ -53,7 +53,8 @@ sub IndexPuzzle {
 					(substr($hash, 0, $puzzlePrefixLength) eq $puzzlePrefix) && # hash matches
 						($authorKey eq $puzzleAuthorKey) # key matches cookie or fingerprint
 				) {
-					$message = str_replace($puzzleAuthorKey . ' ' . $mintedAt . ' ' . $checksum, '[Puzzle Solved: ' . $puzzlePrefix . ']', $message);
+					$message = str_replace($puzzleAuthorKey . ' ' . $mintedAt . ' ' . $checksum, '[Puzzle Solved]', $message); #todo
+					#$message = str_replace($puzzleAuthorKey . ' ' . $mintedAt . ' ' . $checksum, '[Puzzle Solved: ' . $puzzlePrefix . ']', $message);
 
 					DBAddItemAttribute($fileHash, 'puzzle_timestamp', $mintedAt);
 					DBAddVoteRecord($fileHash, $mintedAt, 'puzzle');
