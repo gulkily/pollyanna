@@ -62,7 +62,11 @@ sub FormatDate { # $epoch, $showSeconds = 1 ; formats date depending on how long
 } # FormatDate()
 
 sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons for item in html form
-# GetItemVoteButtons GetVoteButtons GetVoteLinks GetItemVoteLinks GetVoteButton {
+# sub GetItemVoteButtons {
+# sub GetVoteButtons {
+# sub GetVoteLinks {
+# sub GetItemVoteLinks
+# sub GetVoteButton {
 	my $fileHash = shift; # item's file hash
 	my $tagSet = shift;   # (optional) use a particular tagset instead of item's default
 	my $returnTo = shift; # (optional) what page to return to instead of current (for use by post.php)
