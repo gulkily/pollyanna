@@ -248,20 +248,18 @@ function ShowAdvanced (force, container) { // show or hide controls based on pre
 					SetElementVisible(elemAdmin[i], displayAdmin, 0, 0);
 				}
 
-				{
-					// #todo make this optional
-					var elemAdmin = container.getElementsByClassName('heading');
-
-					for (var i = 0; i < elemAdmin.length; i++) {
-						SetElementVisible(elemAdmin[i], displayAdmin, 0, 0);
-					}
-
-					var elemAdmin = container.getElementsByClassName('statusbar');
-
-					for (var i = 0; i < elemAdmin.length; i++) {
-						SetElementVisible(elemAdmin[i], displayAdmin, 0, 0);
-					}
-				}
+				//// #todo make this optional
+				//var elemAdmin = container.getElementsByClassName('heading');
+				//
+				//for (var i = 0; i < elemAdmin.length; i++) {
+				//	SetElementVisible(elemAdmin[i], displayAdmin, 0, 0);
+				//}
+				//
+				//var elemAdmin = container.getElementsByClassName('statusbar');
+				//
+				//for (var i = 0; i < elemAdmin.length; i++) {
+				//	SetElementVisible(elemAdmin[i], displayAdmin, 0, 0);
+				//}
 
 				counterChangesMade++;
 			}
