@@ -1,5 +1,5 @@
 <!-- dialog_controls.template 'Interface Controls' -->
-<span>
+<span class=advanced>
 	<a id=btnCascade href=# onclick="
 		if (window.DraggingCascade) {
 			SetPrefs('draggable', 1);

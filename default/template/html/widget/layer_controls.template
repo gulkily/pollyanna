@@ -19,30 +19,34 @@
 		"
 	>Expand</a>;
 
-	<a id=btnMinimal href=#
-		accesskey=n
-		onclick="
-			if (window.SetPrefs) {
-				SetPrefs('show_advanced', 0);
-				SetPrefs('admin', 0);
-				ShowAdvanced(0, 0);
-			}
-		"
-	title=Minimal>Minimal</a>;
+	<span class=advanced>
 
-	<a id=btnReprint href=# accesskey=r onclick="
-		var winLoc = window.location.href;
-		if (winLoc.indexOf('?')) {
-			winLoc = winLoc.substr(0, winLoc.indexOf('?'));
-		}
-		var d = new Date();
-		var n = d.getTime();
-		n = Math.ceil(n / 1000);
-		n = n + 86400;
-		winLoc = winLoc + '?time=' + n;
-		window.location = winLoc;
-		return false;
-	" title="Reprint">Reprint</a>;
+		<a id=btnMinimal href=#
+			accesskey=n
+			onclick="
+				if (window.SetPrefs) {
+					SetPrefs('show_advanced', 0);
+					SetPrefs('admin', 0);
+					ShowAdvanced(0, 0);
+				}
+			"
+		title=Minimal>Minimal</a>;
+
+		<a id=btnReprint href=# accesskey=r onclick="
+			var winLoc = window.location.href;
+			if (winLoc.indexOf('?')) {
+				winLoc = winLoc.substr(0, winLoc.indexOf('?'));
+			}
+			var d = new Date();
+			var n = d.getTime();
+			n = Math.ceil(n / 1000);
+			n = n + 86400;
+			winLoc = winLoc + '?time=' + n;
+			window.location = winLoc;
+			return false;
+		" title="Reprint">Reprint</a>;
+
+	</span>
 </span>
 
 <!-- / layer_controls.template -->
