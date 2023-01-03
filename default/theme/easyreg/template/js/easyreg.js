@@ -31,7 +31,9 @@ function afterKeygen () {
 
 	var myFp = getUserFp();
 
-	var solvedPuzzle = getSolvedPuzzle(myFp, '1337', 10, 1000000);
+	var puzzlePrefix = '1337'; // note: this line is used for templating
+
+	var solvedPuzzle = getSolvedPuzzle(myFp, puzzlePrefix, 10, 1000000);
 
 	var myMessage =
 		'Welcome, New Member!' + "\n\n" +
