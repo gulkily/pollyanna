@@ -47,6 +47,12 @@ function IncrementTagLink (t) { // increments number of votes in tag button
 // adds a number if there isn't one already
 // #todo adapt to accommodate buttons as well
 
+	if (!t) {
+		// if t is missing, return true, so that click event can go through
+		//alert('DEBUG: IncrementTagLink: warning: t is missing');
+		return true;
+	}
+
 	if (t.innerHTML) {
 		// update count in vote link
 		//alert('DEBUG: IncrementTagLink: t.innerHTML');
