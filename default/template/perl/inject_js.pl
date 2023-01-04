@@ -218,6 +218,7 @@ sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 } # InjectJs()
 
 sub GetScriptTemplate { # $script ; returns script for name
+# sub GetScriptText {
 # sub GetScriptContent {
 	# default/template/js/$script.js
 	# config/template/js/$script.js
@@ -227,6 +228,8 @@ sub GetScriptTemplate { # $script ; returns script for name
 	#todo sanity
 
 	WriteLog('GetScriptTemplate: $script = ' . $script);
+
+	my $stringMeditate = GetString('meditate'); # default is 'Meditate...'
 
 	my $scriptTemplate = GetTemplate("js/$script.js");
 
@@ -358,6 +361,11 @@ sub GetScriptTemplate { # $script ; returns script for name
 		$scriptTemplate = str_replace("var colorSecondary = '';", "var colorSecondary = '$colorSecondary';", $scriptTemplate);
 		$scriptTemplate = str_replace("var colorTitlebarText = '';", "var colorTitlebarText = '$colorTitlebarText';", $scriptTemplate);
 	} #dragging
+
+	if ($stringMeditate ne 'Meditate...') {
+		WriteLog('GetScriptTemplate: $stringMeditate is not default, replacing');
+		$scriptTemplate = str_replace('Meditate...', $stringMeditate, $scriptTemplate);
+	}
 
 	if (index($scriptTemplate, '>') > -1) {
 		# warning here if script content contains > character, which is incompatible with mosaic's html comment syntax
