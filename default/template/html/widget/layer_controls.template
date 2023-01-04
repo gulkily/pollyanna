@@ -15,6 +15,7 @@
 			}
 			if (window.ShowAdvanced) {
 				ShowAdvanced(0, 0);
+				return false;
 			}
 		"
 	>Expand</a>;
@@ -27,7 +28,10 @@
 				if (window.SetPrefs) {
 					SetPrefs('show_advanced', 0);
 					SetPrefs('admin', 0);
+				}
+				if (window.ShowAdvanced) {
 					ShowAdvanced(0, 0);
+					return false;
 				}
 			"
 		title=Minimal>Minimal</a>;
