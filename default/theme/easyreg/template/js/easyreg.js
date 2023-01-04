@@ -12,15 +12,17 @@ function EasyMember (t) {
 //		return false;
 //	}
 //
-	myFp = getUserFp();
-	if (!myFp) {
-		var keySuccess = MakeKey(t, 'afterKeygen()');
+	if (window.getUserFp && window.MakeKey) {
 		myFp = getUserFp();
-	} else {
-		afterKeygen();
-	}
+		if (!myFp) {
+			var keySuccess = MakeKey(t, 'afterKeygen()');
+			myFp = getUserFp();
+		} else {
+			afterKeygen();
+		}
 
-	return false;
+		return false;
+	}
 }
 
 function afterKeygen () {
