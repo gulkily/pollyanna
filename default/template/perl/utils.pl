@@ -1084,6 +1084,14 @@ sub PutFile { # Writes content to a file; $file, $content, $binMode
 
 	WriteLog("PutFile($file)");
 
+	# keep track of files written so we can report them to user
+	state @debugFilesWritten;
+	# my $timeBegin = GetTime(); #todo
+	if ($file eq 'report_files_written') {
+		return @debugFilesWritten;
+	}
+	push @debugFilesWritten, GetPaddedEpochTimestamp() . ' ' . $file;
+
 	WriteLog("PutFile: EnsureSubdirs($file)");
 
 	EnsureSubdirs($file);
@@ -1108,14 +1116,6 @@ sub PutFile { # Writes content to a file; $file, $content, $binMode
 		$binMode = 1;
 		WriteLog('PutFile: $binMode: 1');
 	}
-
-	# keep track of files written so we can report them to user
-	state @debugFilesWritten;
-	# my $timeBegin = GetTime(); #todo
-	if ($file eq 'report_files_written') {
-		return @debugFilesWritten;
-	}
-	push @debugFilesWritten, GetPaddedEpochTimestamp() . ' ' . $file;
 
 	WriteLog('PutFile: $file = ' . $file . ', $content = (' . length($content) . 'b), $binMode = ' . $binMode);
 	#WriteLog("==== \$content ====");
