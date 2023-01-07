@@ -25,6 +25,10 @@ sub GetWelcomePage {
 		$html = InjectJs($html, @js);
 
 		$html = AddAttributeToTag($html, 'input id=member', 'onclick', "if (window.EasyMember) { this.value = 'Meditate...'; setTimeout('EasyMember()', 50); return false; }");
+
+		# this is supposed to add a timestamp field to the guest form
+		# to prevent the form response from being cached
+		# something is broken here though
 		# $html = AddAttributeToTag($html, 'input id=guest', 'onclick', "
 		# 	if (document.createElement && document.formRegisterGuest) {
 		# 		var d = new Date();
