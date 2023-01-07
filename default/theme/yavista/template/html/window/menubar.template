@@ -1,0 +1,5 @@
+		<tr class="menubar advanced">
+			<td colspan=$contentColumnCount>
+				<p>$windowMenubarContent
+			</td>
+		</tr>
