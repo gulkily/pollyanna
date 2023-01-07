@@ -438,9 +438,9 @@ if (GetConfig('admin/php/route_enable')) {
 				PutCache('access_count/' . $hostHash, $hostAccessCount);
 			} # $hostRequestLimit
 
-			if (GetConfig('admin/force_profile')) {
-			#if (GetConfig('admin/force_profile') || ($hostAccessCount > $hostRequestLimit)) { #todo add feature flag and uncomment
-				$redirectPath = GetConfig('admin/force_profile_redirect_path');
+			if (GetConfig('admin/php/force_profile')) {
+			#if (GetConfig('admin/php/force_profile') || ($hostAccessCount > $hostRequestLimit)) { #todo add feature flag and uncomment
+				$redirectPath = GetConfig('admin/php/force_profile_redirect_path');
 				if (!$redirectPath) {
 					$redirectPath = '/profile.html'; # is often /welcome.html
 				}
@@ -481,17 +481,17 @@ if (GetConfig('admin/php/route_enable')) {
 						header("Cache-Control: post-check=0, pre-check=0", false);
 						header("Pragma: no-cache");
 
-						if (GetConfig('admin/force_profile_include_origin')) {
+						if (GetConfig('admin/php/force_profile_include_origin')) {
 							$redirectPath = $redirectPath . '?origin=' . urlencode($path);
 						}
 
 						RedirectWithResponse($redirectPath, 'Please create profile to continue.'); # /profile.html /welcome.html
-						if (! GetConfig('admin/force_profile_fallthrough')) {
+						if (! GetConfig('admin/php/force_profile_fallthrough')) {
 							exit; // #todo this is bad to have here
 						}
 					} # if ($clientHasCookie)
 				} # else (NOT $path == '/profile.html')
-			} # GetConfig('admin/force_profile'))
+			} # GetConfig('admin/php/force_profile'))
 
 			$pathSelf = $_SERVER['PHP_SELF'];
 			$pathSelfReal = realpath('.'.$pathSelf);
@@ -811,7 +811,7 @@ if (GetConfig('admin/php/route_enable')) {
 						$html = str_ireplace('</form>', $timestampFormElement . '</form>' , $html);
 					}
 
-					if (GetConfig('admin/force_profile_include_origin')) {
+					if (GetConfig('admin/php/force_profile_include_origin')) {
 						// adds an 'origin' input element to forms on the page so that user can return to the page
 						// after submitting the form? #todo verify this works
 						$originValue = $path;

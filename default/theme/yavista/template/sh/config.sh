@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo 0 > config/setting/html/menu_top
+echo 0 > config/setting/html/menu_bottom
 echo 0 > config/setting/html/item_page/toolbox_publish
 echo 0 > config/setting/html/item_page/toolbox_search
 echo 1 > config/setting/html/mourn

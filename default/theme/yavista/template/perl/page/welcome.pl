@@ -15,7 +15,7 @@ sub GetWelcomePage {
 			#GetWindowTemplate(GetTemplate('html/form/guest.template'), 'Guest') .
 			#GetWindowTemplate(GetTemplate('html/form/emergency.template'), 'Emergency Contact Form') .
 			'<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>' .
-			GetWriteForm('Prayer') .
+			GetWriteForm('Prayer/Thanks') .
 			'</form>' . #todo unhack this
 			GetPageFooter('welcome')
 	;
