@@ -31,7 +31,8 @@ sub GetWriteForm { # $dialogTitle ; returns write form (for composing text messa
 		#todo sanity check
 	}
 
-	my $writeForm = GetWindowTemplate(GetTemplate('html/form/write/write.template'), 'Write');
+	my $writeForm = GetWindowTemplate(GetTemplate('html/form/write/write.template'), $dialogTitle);
+	# my $writeForm = GetWindowTemplate(GetTemplate('html/form/write/write.template'), 'Write');
 	WriteLog('GetWriteForm()');
 
 	if (GetConfig('admin/php/enable')) {
