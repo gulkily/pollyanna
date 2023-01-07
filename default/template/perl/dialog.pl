@@ -21,9 +21,16 @@ sub GetTosDialog {
 	return $tosWindow;
 }
 
-sub GetWriteForm { # returns write form (for composing text message)
+sub GetWriteForm { # $dialogTitle ; returns write form (for composing text message)
 # sub GetWriteDialog {
-# sub GetWriteWindow
+# sub GetWriteWindow {
+	my $dialogTitle = shift;
+	if (!$dialogTitle) {
+		$dialogTitle = 'Write';
+	} else {
+		#todo sanity check
+	}
+
 	my $writeForm = GetWindowTemplate(GetTemplate('html/form/write/write.template'), 'Write');
 	WriteLog('GetWriteForm()');
 
