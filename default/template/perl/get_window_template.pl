@@ -39,7 +39,8 @@ sub GetWindowTemplate { # $body, $title, $headings, $status, $menu ; returns htm
 	my %param = ();
 
 	$param{'body'} = shift;
-	$param{'title'} = shift || 'Untitled';
+	$param{'title'} = shift || '';
+	# $param{'title'} = shift || 'Untitled';
 	$param{'headings'} = shift || '';
 	$param{'status'} =  shift || '';
 	$param{'menu'} = shift || '';
@@ -74,11 +75,12 @@ sub GetWindowTemplate { # $body, $title, $headings, $status, $menu ; returns htm
 		#$param{'id'} = substr(md5_hex($param{'title'}), 0, 8);
 	}
 
-	WriteLog('GetWindowTemplate: $id = ' . $param{'id'});
+	WriteLog('GetWindowTemplate: $id = ' . ($param{'id'} ? $param{'id'} : 'FALSE'));
 
 	if (!$param{'title'}) {
-		WriteLog('GetWindowTemplate: warning: untitled window; caller = ' . join(',', caller));
-		$param{'title'} = 'Untitled';
+		#WriteLog('GetWindowTemplate: warning: untitled window; caller = ' . join(',', caller));
+		#$param{'title'} = 'Untitled';
+		$param{'title'} = '';
 	}
 
 	return GetWindowTemplate2(\%param);
@@ -206,8 +208,9 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 	WriteLog('GetWindowTemplate2: $showButtons = ' . $showButtons);
 
 	if (!$windowTitle) {
-		WriteLog('GetWindowTemplate2: warning: title missing, using Untitled');
-		$windowTitle = 'Untitled';
+		#WriteLog('GetWindowTemplate2: warning: title missing, using Untitled');
+		#$windowTitle = 'Untitled';
+		$windowTitle = '';
 	}
 
 	# titlebar, if there is a title
