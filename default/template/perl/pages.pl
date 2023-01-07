@@ -796,6 +796,7 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 		)
 	) {
 		if ($pageType eq 'welcome' && GetConfig('admin/php/route_welcome_desktop_logged_in') && GetConfig('admin/force_profile')) {
+			# when force_profile setting is on, there should be
 			# no menu on welcome page if not logged in
 		} else {
 			require_once('widget/menu.pl');
