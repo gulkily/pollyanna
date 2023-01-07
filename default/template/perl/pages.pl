@@ -320,7 +320,7 @@ sub GetPageLinks { # $currentPageNumber ; returns html for pagination links with
 
 	# check if we've generated the html already, if so, use it
 	if (defined($pageLinks)) {
-		WriteLog("GetPageLinks: \$pageLinks already exists, doing search and replace");
+		WriteLog('GetPageLinks: $pageLinks already exists, doing search and replace');
 
 		my $currentPageTemplate = GetPageLink($currentPageNumber, $itemCount);
 
