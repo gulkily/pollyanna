@@ -342,7 +342,7 @@ sub GetPageLinks { # $currentPageNumber ; returns html for pagination links with
 
 		# we've ended up here because we haven't generated $pageLinks yet
 
-		WriteLog("GetPageLinks: \$itemCount = $itemCount");
+		WriteLog('GetPageLinks: $itemCount = ' . $itemCount);
 
 		$pageLinks = "";
 
