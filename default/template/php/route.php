@@ -349,6 +349,15 @@ if (GetConfig('admin/php/route_enable')) {
 		// there is a get request
 		WriteLog('route.php: $_GET = ' . print_r($_GET, 1));
 
+		if (isset($_GET['q'])) {
+			if (GetConfig('setting/admin/php/root_search_query_redirect')) {
+				# redirects ?q= to search engine of choice
+				$queryString = urlencode($_GET['q']);
+				Header('Location: http://www.google.com/search?q=' . $queryString);
+				exit;
+			}
+		}
+
 		if (isset($_GET['path'])) {
 			WriteLog('route.php: cool: $_GET[path] confirmed!');
 
