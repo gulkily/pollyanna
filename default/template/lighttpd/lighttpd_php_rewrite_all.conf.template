@@ -32,6 +32,8 @@ url.rewrite = (
 	# this line is uncommented by templater #hack
 	#"(.+)" => "/route.php?path=$1" # admin/php/url_alias_friendly
 	#
+
+	"^/\?q=(.+)" => "/route.php?q=$1"
 )
 
 # / template/lighttpd/lighttpd_php_rewrite_all.conf.template

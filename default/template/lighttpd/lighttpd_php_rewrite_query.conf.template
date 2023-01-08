@@ -15,7 +15,9 @@ url.rewrite = (
 	"^(.+\.html)\?(.+)?" => "/route.php?path=$1&$2",
 
 	# profile.html should always be routed...?
-	"^profile\.html" => "/route.php?path=/profile.html"
+	"^profile\.html" => "/route.php?path=/profile.html",
+
+	"^/\?q=(.+)" => "/route.php?q=$1"
 )
 # / template/lighttpd/lighttpd_php_rewrite_query.conf.template
 
