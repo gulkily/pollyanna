@@ -44,7 +44,7 @@ sub GetContentFilterDialog { # ; returns thermostat / content filter dialog
 	my $dialog = GetWindowTemplate($list . $saveButton . $information, 'Temperament');
 
 	#my $form = '<form class=advanced
-	my $form = '<form name=frmContentFilter id=frmContentFilter class=advanced action="/post.html">' . $dialog . '</form>';
+	my $form = '<form name=frmContentFilter id=frmContentFilter class=admin action="/post.html">' . $dialog . '</form>';
 
 	return $form;
 } # GetContentFilterDialog()
