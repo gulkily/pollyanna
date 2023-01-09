@@ -35,7 +35,11 @@ sub GetWritePage { # returns html for write page
 
 	$writePageHtml .= '<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>'; #todo
 	$writePageHtml .= $writeForm;
-	$writePageHtml .= $writeOptions;
+
+	if (GetConfig('setting/html/write_options')) {
+		$writePageHtml .= $writeOptions;
+	}
+
 	$writePageHtml .= '</form>'; #todo
 
 	#if (GetConfig('admin/js/enable')) {
