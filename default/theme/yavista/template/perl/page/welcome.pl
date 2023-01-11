@@ -13,7 +13,7 @@ sub GetWelcomePage {
 		#GetWindowTemplate(GetTemplate('html/page/privacy.template'), 'Privacy') .
 		#GetWindowTemplate(GetTemplate('html/form/emergency.template'), 'Emergency Contact Form') .
 		'<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>' .
-		GetWriteForm('Prayer/Thanks') .
+		GetWriteForm('Contribute', 'Funniest, nicest, or deepest statement you can think of:') .
 		'</form>' . #todo unhack this
 		GetWindowTemplate(GetTemplate('html/form/guest.template'), 'Guest') .
 		GetWindowTemplate(GetTemplate('html/form/enter.template'), 'Create Profile') .
@@ -22,6 +22,11 @@ sub GetWelcomePage {
 
 	if (GetConfig('admin/js/enable')) {
 		my @js = qw(utils profile write puzzle clock easyreg settings);
+
+		if (GetConfig('admin/php/enable')) {
+			push @js, 'write_php';
+		}
+
 		$html = InjectJs($html, @js);
 
 		$html = AddAttributeToTag($html, 'input id=member', 'onclick', "if (window.EasyMember) { this.value = 'Meditate...'; setTimeout('EasyMember()', 50); return false; }");
