@@ -1,3 +1,12 @@
+on yavista.com, something goes wrong with the new item submission
+
+===
+
+#bug welcome page (yavista theme) doesn't have write.js
+	so the form does not correctly switch to POST mode when it should
+
+===
+
 rename GetWindowTemplate() to...
 	GetDialog() ?
 
