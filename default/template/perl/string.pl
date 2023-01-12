@@ -97,8 +97,12 @@ sub GetStringHtmlColor {
 	#todo dark/light or color(s) to match
 	#todo sanity
 
-	if (GetConfig('html/mourn')) { # GetStringHtmlColor()
+	if (GetConfig('html/monochrome')) { # GetStringHtmlColor()
 		return GetThemeColor('text');
+	}
+
+	if (GetConfig('html/mourn')) { # GetStringHtmlColor()
+		return '#c0c0c0';
 	}
 
 	if (!defined($string)) {

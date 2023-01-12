@@ -23,7 +23,7 @@ sub GetTagLink { # $tag ; returns html for a tag link
 		WriteLog('GetTagLink: $tag = ' . $tag);
 
 		my $tagColor = '';
-		if (GetConfig('html/hash_color_hashtags') && !GetConfig('html/mourn')) { # GetTagLink()
+		if (GetConfig('html/hash_color_hashtags') && !GetConfig('html/mourn') && !GetConfig('html/monochrome')) { # GetTagLink()
 			$tagColor = GetStringHtmlColor($tag);
 		} else {
 			$tagColor = GetThemeColor('tag_text'); # #TextColor

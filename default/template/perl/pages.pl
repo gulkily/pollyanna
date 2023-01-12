@@ -855,7 +855,7 @@ sub GetThemeColor { # returns theme color based on setting/theme
 		$colorName .= '_text';
 	}
 
-	if (GetConfig('html/mourn')) { # GetThemeColor()
+	if (GetConfig('html/monochrome')) { # GetThemeColor()
 		if (index(lc($colorName), 'text') != -1 || index(lc($colorName), 'link') != -1) {
 			if (index(lc($colorName), 'back') != -1) {
 				return GetConfig('html/color/background'); # #BackgroundColor
@@ -864,6 +864,18 @@ sub GetThemeColor { # returns theme color based on setting/theme
 			}
 		} else {
 			return GetConfig('html/color/background'); # #BackgroundColor
+		}
+	}
+
+	if (GetConfig('html/mourn')) { # GetThemeColor()
+		if (index(lc($colorName), 'text') != -1 || index(lc($colorName), 'link') != -1) {
+			if (index(lc($colorName), 'back') != -1) {
+				return '#000000'; # #BackgroundColor
+			} else {
+				return '#c0c0c0'; # #TextColor
+			}
+		} else {
+			return '#000000'; # #BackgroundColor
 		}
 	}
 

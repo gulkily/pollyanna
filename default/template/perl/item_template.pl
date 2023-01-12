@@ -382,7 +382,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			# TAGS LIST AKA HEADING
 			# TAGS LIST AKA HEADING
 			# TAGS LIST AKA HEADING
-			if ($file{'tags_list'} && (1||!GetConfig('html/mourn'))) { # GetItemTemplate() -- tags list
+			if ($file{'tags_list'}) { # GetItemTemplate() -- tags list
 				my $headings = GetTagsListAsHtmlWithLinks($file{'tags_list'});
 				$windowParams{'headings'} = $headings;
 			} # $file{'tags_list'}

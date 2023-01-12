@@ -144,7 +144,7 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 	}
 
 	if (abs($itemsIndexed - $filesTotal) > 3) { # GetStatsTable() -- Check Engine indicator
-		if (GetConfig('html/mourn')) {
+		if (GetConfig('html/mourn') || GetConfig('html/monochrome')) {
 			$statsTable = str_replace(
 				'<p id=diagnostics></p>',
 				'<p id=diagnostics><a href="/engine.html"><b>Check engine!</b></a></p>',
