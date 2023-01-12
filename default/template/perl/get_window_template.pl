@@ -47,6 +47,7 @@ sub GetWindowTemplate { # $body, $title, $headings, $status, $menu ; returns htm
 
 	if (!trim($param{'body'})) {
 		WriteLog('GetWindowTemplate: warning: body is FALSE; title = ' . $param{'title'} . '; caller = ' . join(',', caller));
+		return '';
 	} else {
 		#WriteLog('GetWindowTemplate: warning: body is TRUE; title = ' . $param{'title'} . '; caller = ' . join(',', caller));
 	}
