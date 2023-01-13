@@ -62,20 +62,28 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 
 	my @listingPages = qw(child chain url deleted compost new raw picture image read authors scores tags threads boxes tasks);
 	#chain.html #new.html #boxes.html #tasks.html
-	my @simplePages = qw(help example access welcome calendar profile upload links post cookie chat thanks examples about faq documentation);
+	my @simplePages = qw(spy data cloud bookmark help example access welcome calendar profile upload links post cookie chat thanks examples about faq documentation);
 
 	if (0) { } # this is to make all the elsifs below have consistent formatting
 	elsif (in_array($pageType, @simplePages)) {
+		WriteLog('MakePage: found "' . $pageType . '" in @simplePages');
 		MakeSimplePage($pageType);
+		if ($pageType eq 'settings') {
+			MakeStatsPages();
+		}
 	}
 	elsif (in_array($pageType, @listingPages)) {
+		WriteLog('MakePage: found "' . $pageType . '" in @listingPages');
 		require_once('item_listing_page.pl');
 		my %params;
+
+		# uses WriteItemListingPages() and GetItemListingPage()
 
 		if ($pageType eq 'chain') { # chain.html
 			$params{'dialog_columns'} = 'special_title_tags_list,chain_order,chain_timestamp,file_hash';
 		}
 		if ($pageType eq 'tags') {
+			#todo does this need to happen every time a listing page is generated?
 			my $tagsHorizontal = GetTagPageHeaderLinks();
 			PutHtmlFile('tags-horizontal.html', $tagsHorizontal);
 		}
@@ -156,6 +164,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	}
 
 	elsif ($pageType eq 'speakers') {
+		WriteLog("MakePage: speakers");
 		my $speakersPage = '';
 		$speakersPage = GetPageHeader('speakers');
 
@@ -183,6 +192,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 
 
 	elsif ($pageType eq 'committee') {
+		WriteLog("MakePage: committee");
 		my $committeePage = '';
 		$committeePage = GetPageHeader('committee');
 
@@ -213,6 +223,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		PutHtmlFile('committee.html', $committeePage);
 	}
 	elsif ($pageType eq 'sponsors') {
+		WriteLog("MakePage: sponsors");
 		my $sponsorsPage = '';
 		$sponsorsPage = GetPageHeader('sponsors');
 
@@ -332,44 +343,19 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	#
 	# topitems page
 	elsif ($pageType eq 'image') {
+		WriteLog("MakePage: image");
 		require_once('item_listing_page.pl');
 		WriteItemListingPages('image', 'image_gallery');
 	}
 	elsif ($pageType eq 'picture') {
+		WriteLog("MakePage: picture");
 		require_once('item_listing_page.pl');
 		WriteItemListingPages('picture', 'image_gallery');
 	}
-	elsif ($pageType eq 'settings') {
-		# Settings page
-		#my $settingsPage = GetSettingsPage();
-		#PutHtmlFile("settings.html", $settingsPage);
-		MakeSimplePage('settings');
-		PutStatsPages();
-	}
-	#
 	# stats page
 	elsif ($pageType eq 'stats') {
+		WriteLog("MakePage: stats");
 		PutStatsPages();
-	}
-	#
-	# dialog properties only
-	elsif ($pageType eq 'spy') {
-		MakeSimplePage('spy');
-	}
-	#
-	# data page
-	elsif ($pageType eq 'data') {
-		MakeSimplePage('data');
-	}
-	#
-	# data page
-	elsif ($pageType eq 'cloud') {
-		MakeSimplePage('cloud');
-	}
-	#
-	# bookmark page
-	elsif ($pageType eq 'bookmark') {
-		MakeSimplePage('bookmark');
 	}
 	#
 	# item prefix page
