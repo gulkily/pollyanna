@@ -1,3 +1,9 @@
+if (GetConfig('setting/html/menu_advanced')) {
+	$topMenuTemplate = '<span class=advanced>' . $topMenuTemplate . '</span>';
+}
+
+
+
 # if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
 # 	$tagLink = AddAttributeToTag(
 # 		$tagLink,

@@ -1,3 +1,9 @@
+const myFunction = async() => {
+	console.log(await a + await b);
+};
+myFunction();
+
+
 						if (!window.clockInitialValue) {
 							window.clockInitialValue = document.frmTopMenu.txtClock.value;
 						}
