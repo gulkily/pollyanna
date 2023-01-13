@@ -6,6 +6,24 @@ use utf8;
 
 #use Unicode::String qw(utf8); #todo TrimUnicodeString
 
+sub GetStringNoFallback { # $stringKey, $language, $noSubstitutions
+# returns empty string if $stringKey == result from GetString
+# sub GetString { # GetStringNoFallback {
+	my $stringKey = shift;
+	my $language = shift || '';
+	my $noSubstitutions = shift || '';
+
+	#todo sanity
+
+	my $resultString = GetString($stringKey, $language, $noSubstitutions);
+
+	if ($resultString eq $stringKey) {
+		return '';
+	} else {
+		return $resultString;
+	}
+}
+
 sub GetString { # $stringKey, $language, $noSubstitutions ; Returns string from config/string/en/
 # $stringKey = 'menu/top'
 # $language = 'en'
