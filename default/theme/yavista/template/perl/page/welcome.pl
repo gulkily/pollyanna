@@ -13,7 +13,7 @@ sub GetWelcomePage {
 		#GetWindowTemplate(GetTemplate('html/page/privacy.template'), 'Privacy') .
 		#GetWindowTemplate(GetTemplate('html/form/emergency.template'), 'Emergency Contact Form') .
 		'<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>' .
-		GetWriteForm('Contribute', 'Funniest, nicest, or deepest statement you can think of:') .
+		GetWriteForm('Contribute', 'Write something here, please:') .
 		'</form>' . #todo unhack this
 		GetWindowTemplate(GetTemplate('html/form/guest.template'), 'Guest') .
 		GetWindowTemplate(GetTemplate('html/form/enter.template'), 'Create Profile') .
