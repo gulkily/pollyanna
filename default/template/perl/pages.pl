@@ -2083,6 +2083,7 @@ while (my $arg1 = shift @foundArgs) {
 				} else {
 					print ("calling MakePage($makePageArg)\n");
 					MakePage($makePageArg);
+					# /new.html
 				}
 			} else {
 				print("missing argument for -M\n");
