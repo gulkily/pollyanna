@@ -4,4 +4,21 @@
 	<font size=5>Welcome to Yavista!</font><br>
 </p>
 
+<p>
+	Yavista is driven by your contributions, so <br>
+	please write something to enter the site. <br>
+	It can be as simple as "hi", but here are some other ideas:
+</p>
+
+<ul>
+	<li>Something you recently discovered about yourself</li>
+	<li>Something funny, interesting, and/or insightful</li>
+	<li>Constructive criticism</li>
+	<li>Share some love</li>
+	<li>Share a problem or a conundrum you're facing</li>
+	<li>How did you find this place?</li>
+	<li>Wishlist or idea for bettering the site</li>
+	<li>Book, paper, or movie you liked</li>
+</ul>
+
 <!-- / welcome.template -->
