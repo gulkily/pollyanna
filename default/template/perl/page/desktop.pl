@@ -37,11 +37,17 @@ sub GetDesktopPage { # returns html for desktop page (/desktop.html)
 		if (GetConfig('admin/js/dragging')) {
 			push @scripts, 'dragging'; # GetDesktopPage()
 		}
+
 		if (GetConfig('admin/php/enable')) {
 			if (GetConfig('admin/upload/enable')) {
 				push @scripts, 'upload';
 			}
 		}
+
+		if (GetConfig('setting/html/reply_cart')) {
+			push @scripts, 'reply_cart';
+		}
+
 		push @scripts, 'write';
 		$html = InjectJs($html, @scripts);
 	}
