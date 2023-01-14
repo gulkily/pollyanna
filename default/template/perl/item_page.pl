@@ -298,6 +298,7 @@ sub GetItemIndexLog { # $itemHash, $logType = index_log
 } # GetItemIndexLog()
 
 sub GetItemPage { # %file ; returns html for individual item page. %file as parameter
+# sub GetPageItem {
 	# %file {
 	#		file_hash = git's file hash
 	#		file_path = path where text file is stored
@@ -353,17 +354,18 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	}
 
 	# SET PAGE TITLE #####################
-	if (defined($file{'item_name'}) && $file{'item_name'}) {
-		WriteLog("GetItemPage: defined(item_name) = true!");
-		$title = HtmlEscape($file{'item_name'});
-	}
+	if (0) {} # this is here to make the below statements consistent
 	elsif (defined($file{'item_title'}) && $file{'item_title'}) {
-		WriteLog("GetItemPage: defined(item_title) = true!");
+		WriteLog("GetItemPage: title: defined(item_title) = true!");
 		$title = HtmlEscape($file{'item_title'});
+	}
+	elsif (defined($file{'item_name'}) && $file{'item_name'}) {
+		WriteLog("GetItemPage: title: defined(item_name) = true!");
+		$title = HtmlEscape($file{'item_name'});
 	}
 	else {
 		my $fileHashShort = substr($file{'file_hash'}, 0, 8);
-		WriteLog("GetItemPage: defined(item_title) = false!");
+		WriteLog("GetItemPage: title: defined(item_title) = false!");
 		$title = 'Untitled (' . $fileHashShort . ')'; #todo shouldn't be hard-coded here
 	}
 	# / SET PAGE TITLE #####################
