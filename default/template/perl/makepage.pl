@@ -101,7 +101,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	}
 
 	elsif ($pageType eq 'random') {
-		WriteLog("MakePage: random");
+		WriteLog('MakePage: random');
 
 		my @itemsRandom = SqliteQueryHashRef('random');
 		shift @itemsRandom;
@@ -136,7 +136,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	elsif ($pageType eq 'tag') {
 		my $tagName = $pageParam;
 		my $targetPath = "tag/$tagName.html";
-		WriteLog("MakePage: tag: $tagName");
+		WriteLog('MakePage: tag: $tagName = ' . $tagName);
 
 		if (0) {
 			require_once('item_listing_page.pl');
@@ -169,7 +169,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	}
 
 	elsif ($pageType eq 'speakers') {
-		WriteLog("MakePage: speakers");
+		WriteLog('MakePage: speakers');
 		my $speakersPage = '';
 		$speakersPage = GetPageHeader('speakers');
 
@@ -197,7 +197,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 
 
 	elsif ($pageType eq 'committee') {
-		WriteLog("MakePage: committee");
+		WriteLog('MakePage: committee');
 		my $committeePage = '';
 		$committeePage = GetPageHeader('committee');
 
@@ -228,7 +228,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		PutHtmlFile('committee.html', $committeePage);
 	}
 	elsif ($pageType eq 'sponsors') {
-		WriteLog("MakePage: sponsors");
+		WriteLog('MakePage: sponsors');
 		my $sponsorsPage = '';
 		$sponsorsPage = GetPageHeader('sponsors');
 
@@ -348,18 +348,18 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	#
 	# topitems page
 	elsif ($pageType eq 'image') {
-		WriteLog("MakePage: image");
+		WriteLog('MakePage: image');
 		require_once('item_listing_page.pl');
 		WriteItemListingPages('image', 'image_gallery');
 	}
 	elsif ($pageType eq 'picture') {
-		WriteLog("MakePage: picture");
+		WriteLog('MakePage: picture');
 		require_once('item_listing_page.pl');
 		WriteItemListingPages('picture', 'image_gallery');
 	}
 	# stats page
 	elsif ($pageType eq 'stats') {
-		WriteLog("MakePage: stats");
+		WriteLog('MakePage: stats');
 		PutStatsPages();
 	}
 	#
