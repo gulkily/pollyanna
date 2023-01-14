@@ -95,6 +95,11 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		}
 	}
 
+	elsif ($pageType eq 'write') {
+		WriteLog('MakePage: write');
+		MakeWritePage();
+	}
+
 	elsif ($pageType eq 'random') {
 		WriteLog("MakePage: random");
 

@@ -1928,6 +1928,29 @@ sub PrintBanner {
 	print $edge;
 } # PrintBanner()
 
+sub MakeWritePage {
+	WriteLog('MakeWritePage()');
+
+	require_once('page/write.pl');
+	my $submitPage = GetWritePage();
+	PutHtmlFile("write.html", $submitPage);
+
+	if (GetConfig('admin/php/enable')) {
+		# create write_post.html for longer messages if admin/php/enable
+		$submitPage =~ s/method=get/method=post/g;
+		if (index(lc($submitPage), 'method=post') == -1) {
+			$submitPage =~ s/\<form /<form method=post /g;
+		}
+		if (index(lc($submitPage), 'method=post') == -1) {
+			$submitPage =~ s/\<form/<form method=post /g;
+		}
+		$submitPage =~ s/cols=32/cols=50/g;
+		$submitPage =~ s/rows=9/rows=15/g;
+		$submitPage =~ s/please click here/you're in the right place/g;
+		PutHtmlFile("write_post.html", $submitPage);
+	}
+} # MakeWritePage()
+
 while (my $arg1 = shift @foundArgs) {
 	# evaluate each argument, fuzzy matching it, and generate requested pages
 
@@ -2008,28 +2031,8 @@ while (my $arg1 = shift @foundArgs) {
 			MakePage('tags');
 		}
 		elsif ($arg1 eq '--write') {
-			print ("recognized --write\n");
-
-			#MakeSimplePage('write');
-			require_once('page/write.pl');
-			my $submitPage = GetWritePage();
-			PutHtmlFile("write.html", $submitPage);
-
-			if (GetConfig('admin/php/enable')) {
-				# create write_post.html for longer messages if admin/php/enable
-				$submitPage =~ s/method=get/method=post/g;
-				if (index(lc($submitPage), 'method=post') == -1) {
-					$submitPage =~ s/\<form /<form method=post /g;
-				}
-				if (index(lc($submitPage), 'method=post') == -1) {
-					$submitPage =~ s/\<form/<form method=post /g;
-				}
-				$submitPage =~ s/cols=32/cols=50/g;
-				$submitPage =~ s/rows=9/rows=15/g;
-				$submitPage =~ s/please click here/you're in the right place/g;
-				PutHtmlFile("write_post.html", $submitPage);
-			}
-
+			print ("recognized --write, you can use -M write now\n");
+			MakePage('write');
 		}
 		elsif ($arg1 eq '--data' || $arg1 eq '-i') {
 			print ("recognized --data\n");

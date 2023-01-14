@@ -138,11 +138,6 @@ The value of the #puzzle token is hard-coded in the sql schema definitions
 	Changing accepted prefixes requires reindexing
 
 
--M write instead of --write pages.pl
-	it is --write instead of -M write because
-		there is some extra stuff related to php which needs to happen
-			if php is enabled
-
 require profile mode is janky and locks out links and any non-cookie users
 
 quirks mode and php debug are in conflict
