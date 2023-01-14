@@ -7,6 +7,16 @@ use 5.010;
 
 sub GetPageFooter { # $pageType ; returns html for page footer
 # sub GetFooter {
+
+# uses html/htmlend.template
+# adds menubar if setting/html/menu_bottom is true
+# adds loading_end.js if setting/admin/js/loading is true
+# adds html/widget/back_to_top_button.template if setting/html/back_to_top_button is true
+# adds html/widget/reset_button.template if setting/html/reset_button is true
+# adds stats_footer_ssi.template if setting/admin/ssi/enable is true
+# adds GetRecentItemsDialog() if setting/html/recent_items_footer is true
+# adds no-js notice if js/enable is true
+
 	WriteLog('GetPageFooter()');
 
 	my $pageType = shift;
