@@ -1,6 +1,10 @@
 Known Issues
 ============
 
+"source hike.sh" only been tested in bash
+	does not work in other shells like tcsh for some reason
+	workaround: use "./hike.sh [command]"
+
 config/admin/js/translit is incompatible with config/admin/php/ascii_only
 
 In w3m browser, when press Enter key
