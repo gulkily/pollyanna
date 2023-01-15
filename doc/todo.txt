@@ -1,3 +1,10 @@
+add recovery from this warning:
+	GetItemDetokenedMessage: warning: NO FILE: $messageCacheName =
+		a) search for matching file in htmlt/xt
+		b) reindex file
+		c) look for message again
+
+===
 
 rename GetWindowTemplate() to...
 	GetDialog() ?
