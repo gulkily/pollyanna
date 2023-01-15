@@ -42,6 +42,7 @@ there's a serious bug with data sanitizing
 		some text files are actually image files
 			causes an error in the sh-sqlite3 converter
 				#ouch
+	i think this may have something to do with tcsh
 
 ===
 
