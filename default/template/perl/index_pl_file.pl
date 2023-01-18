@@ -43,6 +43,7 @@ sub RunPerlItem {
 
 sub IndexPerlFile { # $file | 'flush' ; indexes one text file into database
 # sub IndexPerl {
+# sub IndexPlFile {
 # DRAFT
 # DRAFT
 # DRAFT
