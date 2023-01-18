@@ -575,12 +575,12 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		WriteLog('GetItemPage: scalar(@itemReplies) = ' . scalar(@itemReplies));
 		foreach my $itemReply (@itemReplies) {
 			WriteLog('GetItemPage: $itemReply = ' . $itemReply);
-			if ($itemReply->{'tags_list'} && index($itemReply->{'tags_list'}, 'hastext') != -1) {
-				my $itemReplyTemplate = GetItemTemplate($itemReply); # GetItemPage() reply #hastext
-				$txtIndex .= $itemReplyTemplate;
+			if ($itemReply->{'tags_list'} && index($itemReply->{'tags_list'}, 'notext') != -1) {
+				my $itemReplyTemplate = GetItemTemplate($itemReply); # GetItemPage() reply #notext
+				$txtIndex .= '<span class=advanced>' . $itemReplyTemplate . '</span>';
 			} else {
 				# does not #hastext
-				my $itemReplyTemplate = GetItemTemplate($itemReply); # GetItemPage() reply not #hastext
+				my $itemReplyTemplate = GetItemTemplate($itemReply); # GetItemPage() reply not #notext
 				#$itemReplyTemplate = '<span class=advanced>' . $itemReplyTemplate . '</span>';
 				$txtIndex .= $itemReplyTemplate;
 			}
