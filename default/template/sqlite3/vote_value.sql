@@ -24,6 +24,8 @@ insert into vote_value(vote, value) values('puzzle', 9000);
 
 insert into vote_value(vote, value) values('approve', 10);
 
+insert into vote_value(vote, value) values('thanks', 1);
+
 insert into vote_value(vote, value) values('flag', -50000);
 
 insert into vote_value(vote, value) values('scunthorpe', -1);

@@ -85,7 +85,7 @@ window.getUserFp() is used to get user's fingerprint
 
 */
 	if (!window.writeSubmit) {
-		//alert('DEBUG: warning: window.writeSubmit missing');
+		//alert('DEBUG: warning: missing window.writeSubmit');
 	}
 	if (!document.getElementById('btnSolvePuzle')) {
 		//alert('DEBUG: warning: btnSolvePuzzle missing');

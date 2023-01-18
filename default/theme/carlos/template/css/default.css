@@ -96,7 +96,7 @@ div.txt {
 	font-weight: bold;
 	padding: 3pt;
 }
-noscript {
+noscript, .noscript {
 	color: red;
 }
 .menubar a, .titlebar a, .topmenubar a {

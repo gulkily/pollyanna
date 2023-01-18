@@ -249,8 +249,8 @@ sub GetItemTemplateFromHash { # $ hash
 } # GetItemTemplateFromHash()
 
 sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALOG FRAME
-#sub GetItemDialog {
-	WriteLog("GetItemTemplate() begin");
+# sub GetItemDialog {
+	WriteLog('GetItemTemplate: caller = ' . join(',', caller));
 
 	# returns HTML for outputting one item WITH DIALOG FRAME
 	# uses GetWindowTemplate()
@@ -382,7 +382,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			# TAGS LIST AKA HEADING
 			# TAGS LIST AKA HEADING
 			# TAGS LIST AKA HEADING
-			if ($file{'tags_list'} && (1||!GetConfig('html/mourn'))) { # GetItemTemplate() -- tags list
+			if ($file{'tags_list'}) { # GetItemTemplate() -- tags list
 				my $headings = GetTagsListAsHtmlWithLinks($file{'tags_list'});
 				$windowParams{'headings'} = $headings;
 			} # $file{'tags_list'}
@@ -392,31 +392,29 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			# STATUS BAR
 			my $statusBar = '';
 			{
-				if (1 || !GetConfig('html/mourn')) { # GetItemTemplate() -- status bar
-					$statusBar = GetTemplate('html/item/status_bar.template');
+				$statusBar = GetTemplate('html/item/status_bar.template');
 
-					my $fileHashShort = substr($fileHash, 0, 8);
-					$statusBar = str_replace('<span class=fileHashShort></span>;', "<span class=fileHashShort>" . $fileHashShort . "</span>;", $statusBar);
-					#$statusBar =~ s/\$fileHashShort/$fileHashShort/g;
+				my $fileHashShort = substr($fileHash, 0, 8);
+				$statusBar = str_replace('<span class=fileHashShort></span>;', "<span class=fileHashShort>" . $fileHashShort . "</span>;", $statusBar);
+				#$statusBar =~ s/\$fileHashShort/$fileHashShort/g;
 
-					if ($gpgKey) {
-						# get author link for this gpg key
-						my $authorLink = trim(GetAuthorLink($gpgKey));
-						$statusBar =~ s/\$authorLink/$authorLink/g;
+				if ($gpgKey) {
+					# get author link for this gpg key
+					my $authorLink = trim(GetAuthorLink($gpgKey));
+					$statusBar =~ s/\$authorLink/$authorLink/g;
+				} else {
+					# if no author, no $authorLink
+					$statusBar =~ s/\$authorLink;//g;
+				}
+				WriteLog('GetItemTemplate: $statusBar 1.5 = ' . $statusBar);
+
+				if (GetConfig('setting/html/reply_cart')) {
+					if (GetConfig('setting/admin/js/enable')) {
+						require_once('widget/add_to_reply_cart.pl');
+						$statusBar .= '; ';
+						$statusBar .= '<span class=advanced>' . GetAddToReplyCartButton($fileHash) . '</span>';
 					} else {
-						# if no author, no $authorLink
-						$statusBar =~ s/\$authorLink;//g;
-					}
-					WriteLog('GetItemTemplate: $statusBar 1.5 = ' . $statusBar);
-
-					if (GetConfig('setting/html/reply_cart')) {
-						if (GetConfig('setting/admin/js/enable')) {
-							require_once('widget/add_to_reply_cart.pl');
-							$statusBar .= '; ';
-							$statusBar .= '<span class=advanced>' . GetAddToReplyCartButton($fileHash) . '</span>';
-						} else {
-							$statusBar .= '<!-- add_to_reply_cart button requires js, but it is not enabled -->';
-						}
+						$statusBar .= '<!-- add_to_reply_cart button requires js, but it is not enabled -->';
 					}
 				}
 			}

@@ -715,137 +715,7 @@ require_once('widget/tag_link.pl');
 
 require_once('item_template.pl');
 
-sub GetPageFooter { # $pageType ; returns html for page footer
-# sub GetFooter {
-	WriteLog('GetPageFooter()');
-
-	my $pageType = shift;
-	if (!$pageType) {
-		$pageType = '';
-	}
-
-	if (
-		!$pageType ||
-		(index($pageType, ' ') != -1)
-	) {
-		WriteLog('GetPageFooter: warning: $pageType failed sanity check; caller = ' . join(',', caller));
-	}
-
-	my $txtFooter = GetTemplate('html/htmlend.template');
-
-	#my $disclaimer = GetString('disclaimer');
-	#$txtFooter =~ s/\$disclaimer/$disclaimer/g;
-
-	$txtFooter = FillThemeColors($txtFooter);
-
-	if (GetConfig('admin/js/enable') && GetConfig('admin/js/loading')) { #finished loading
-		$txtFooter = InjectJs2($txtFooter, 'after', '</html>', qw(loading_end));
-
-		# # #templatize #loading
-		#this would hide all dialogs until they are ready to be shown
-		#it is a major impediment for many browsers, and should not be enabled willy-nilly
-		#it's challenging to show the dialogs reliably, especially with the !important bit
-		#todo how to override this style and remove it? remove node?
-		#the reason for trying this is trying to avoid windows changing position after page load
-		# # #
-		#$txtFooter .= "<style><!-- .dialog { display: table !important; } --></style>";
-		# # #
-	}
-
-	if (GetConfig('html/back_to_top_button')) {
-		# add back to top button to the bottom of the page, right before </body>
-		my $backToTopTemplate = GetTemplate('html/widget/back_to_top_button.template');
-		$backToTopTemplate = FillThemeColors($backToTopTemplate);
-		$txtFooter =~ s/\<\/body>/$backToTopTemplate<\/body>/i;
-
-		$txtFooter = InjectJs2($txtFooter, 'after', '</html>', qw(back_to_top_button));
-	}
-
-	if (GetConfig('setting/html/reset_button')) {
-		if (GetConfig('setting/admin/php/enable') && GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
-			my $resetButton = GetTemplate('html/widget/reset_button.template');
-			$resetButton = FillThemeColors($resetButton);
-			$txtFooter =~ s/\<\/body>/$resetButton<\/body>/i;
-		} else {
-			WriteLog('GetPageFooter: warning: reset_button requires php, js, and draggable. not adding reset button.');
-		}
-	}
-
-	if (GetConfig('admin/ssi/enable') && GetConfig('admin/ssi/footer_stats')) {
-		#footer stats inserted by ssi
-		WriteLog('GetPageFooter: ssi footer conditions met!');
-		# footer stats
-		$txtFooter = str_replace(
-			'</body>',
-			GetTemplate('stats_footer_ssi.template') . '</body>',
-			$txtFooter
-		);
-	} # ssi footer stats
-	else {
-		WriteLog('GetPageFooter: ssi footer conditions NOT met!');
-	}
-
-	if (
-		GetConfig('html/menu_bottom') ||
-		(
-			GetConfig('html/menu_top') &&
-			($pageType eq 'item')
-			# for item pages, we still put the menu at the bottom, because the item's content
-			# is the most important part of the page.
-			# #todo this is confusing the way it's written right now, improve on it somehow
-		)
-	) {
-		if ($pageType eq 'welcome' && GetConfig('admin/php/route_welcome_desktop_logged_in') && GetConfig('admin/php/force_profile')) {
-			# when force_profile setting is on, there should be
-			# no menu on welcome page if not logged in
-		} else {
-			require_once('widget/menu.pl');
-			my $menuBottom = GetMenuTemplate($pageType); # GetPageFooter()
-
-			# if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/controls_footer')) {
-			# 	my $dialogControls = GetTemplate('html/widget/dialog_controls.template'); # GetPageFooter()
-			# 	$dialogControls = GetWindowTemplate($dialogControls, 'Controls'); # GetPageFooter()
-			# 	#$dialogControls = '<span class=advanced>' . $dialogControls . '</span>';
-			# 	$menuBottom .= $dialogControls;
-			# }
-
-			require_once('widget/menu.pl');
-			$txtFooter = str_replace(
-				'</body>',
-				'<br>' . $menuBottom . '</body>',
-				$txtFooter
-			);
-		}
-	}
-
-	if (GetConfig('setting/admin/js/enable')) {
-		my $noJsInfo = GetWindowTemplate('* Some features may require JavaScript', 'Notice'); # GetDialog()
-		$noJsInfo = '<noscript>' . $noJsInfo . '</noscript>';
-		$txtFooter = str_replace(
-			'</body>',
-			'<br>' . $noJsInfo . '</body>',
-			$txtFooter
-		);
-	}
-
-	if (GetConfig('html/recent_items_footer')) {
-		require_once('widget/recent_items.pl');
-		$txtFooter = GetRecentItemsDialog() . $txtFooter;
-	}
-
-	# if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/controls_footer')) {
-	# 	my $dialogControls = GetTemplate('html/widget/dialog_controls.template'); # GetPageFooter()
-	# 	$dialogControls = GetWindowTemplate($dialogControls, 'Controls');
-	# 	#$dialogControls = '<span class=advanced>' . $dialogControls . '</span>';
-	# 	$txtFooter = str_replace(
-	# 		'</body>',
-	# 		'<br>' . $dialogControls . '</body>',
-	# 		$txtFooter
-	# 	);
-	# }
-
-	return $txtFooter;
-} # GetPageFooter()
+require_once('page_footer.pl');
 
 sub GetThemeColor { # returns theme color based on setting/theme
 	my $colorName = shift;
@@ -855,7 +725,7 @@ sub GetThemeColor { # returns theme color based on setting/theme
 		$colorName .= '_text';
 	}
 
-	if (GetConfig('html/mourn')) { # GetThemeColor()
+	if (GetConfig('html/monochrome')) { # GetThemeColor()
 		if (index(lc($colorName), 'text') != -1 || index(lc($colorName), 'link') != -1) {
 			if (index(lc($colorName), 'back') != -1) {
 				return GetConfig('html/color/background'); # #BackgroundColor
@@ -864,6 +734,18 @@ sub GetThemeColor { # returns theme color based on setting/theme
 			}
 		} else {
 			return GetConfig('html/color/background'); # #BackgroundColor
+		}
+	}
+
+	if (GetConfig('html/mourn')) { # GetThemeColor()
+		if (index(lc($colorName), 'text') != -1 || index(lc($colorName), 'link') != -1) {
+			if (index(lc($colorName), 'back') != -1) {
+				return '#000000'; # #BackgroundColor
+			} else {
+				return '#c0c0c0'; # #TextColor
+			}
+		} else {
+			return '#000000'; # #BackgroundColor
 		}
 	}
 
@@ -1000,136 +882,7 @@ sub GetSystemMenuList { # writes config/list/menu based on site configuration
 
 require_once('get_page_header.pl');
 
-sub GetItemListing { # returns listing of items based on topic
-	my $htmlOutput = '';
-
-	my @topItems; #todo rename this
-
-	my $fileHash = shift;
-	my $title = 'Welcome, Guest!';
-
-	if (!$fileHash) {
-		$fileHash = 'top'; #what
-	}
-
-	#refactor
-	if ($fileHash eq 'top') {
-		@topItems = DBGetTopItems(); # get top items from db
-	} else {
-		@topItems = DBGetItemReplies($fileHash);
-		$title = 'Replies';
-	}
-
-	if (!@topItems) {
-		WriteLog('GetItemListing: warning @topItems missing, sanity check failed');
-		return '';
-	}
-
-	my $itemCount = scalar(@topItems);
-
-	if ($itemCount) {
-	# at least one item returned
-
-		my $itemListingWrapper = GetTemplate('html/item_listing_wrapper2.template');
-
-		my $itemListings = '';
-
-		my $rowBgColor = ''; # stores current value of alternating row color
-		my $colorRow0Bg = GetThemeColor('row_0'); # color 0
-		my $colorRow1Bg = GetThemeColor('row_1'); # color 1
-
-		while (@topItems) {
-			my $itemTemplate = GetTemplate('html/item_listing.template');
-			# it's ok to do this every time because GetTemplate() already stores it in a static
-			# alternative is to store it in another variable above
-
-			#alternate row color
-			if ($rowBgColor eq $colorRow0Bg) {
-				$rowBgColor = $colorRow1Bg;
-			} else {
-				$rowBgColor = $colorRow0Bg;
-			}
-
-			my $itemRef = shift @topItems; # reference to hash containing item
-			my %item = %{$itemRef}; # hash containing item data
-
-			my $itemKey = $item{'file_hash'};
-			my $itemScore = $item{'item_score'};
-			my $authorKey = $item{'author_key'};
-
-			my $itemLastTouch = DBGetItemLatestAction($itemKey); #todo add to itemfields
-
-			my $itemTitle = $item{'item_title'};
-			if (trim($itemTitle) eq '') {
-				# if title is empty, use the item's hash
-				# $itemTitle = '(' . $itemKey . ')';
-				$itemTitle = 'Untitled';
-			}
-			$itemTitle = HtmlEscape($itemTitle);
-
-			# my $itemLink = '/' . GetHtmlFilename($itemKey); # GetItemListing() #todo this is a bandaid
-			my $itemLink = '/' . GetItemUrl($itemKey); # GetItemListing() #todo this is a bandaid
-
-			my $authorAvatar;
-			if ($authorKey) {
-#				$authorAvatar = GetPlainAvatar($authorKey);
-				my $authorLink = GetAuthorLink($authorKey, 1);
-				if ($authorLink) {
-					$authorAvatar = GetAuthorLink($authorKey, 1);
-#					$authorAvatar = 'by ' . GetAuthorLink($authorKey, 1);
-				} else {
-					$authorAvatar = 'Unsigned';
-				}
-			} else {
-				$authorAvatar = 'Unsigned';
-			}
-
-			$itemLastTouch = GetTimestampWidget($itemLastTouch);
-
-			# populate item template
-			$itemTemplate =~ s/\$link/$itemLink/g;
-			$itemTemplate =~ s/\$itemTitle/$itemTitle/g;
-			$itemTemplate =~ s/\$itemScore/$itemScore/g;
-			$itemTemplate =~ s/\$authorAvatar/$authorAvatar/g;
-			$itemTemplate =~ s/\$itemLastTouch/$itemLastTouch/g;
-			$itemTemplate =~ s/\$rowBgColor/$rowBgColor/g;
-
-			# add to main html
-			$itemListings .= $itemTemplate;
-		}
-
-		$itemListingWrapper =~ s/\$itemListings/$itemListings/;
-
-		my $statusText = '';
-		if ($itemCount == 0) {
-			$statusText = 'No threads found.';
-		} elsif ($itemCount == 1) {
-			$statusText = '1 thread';
-		} elsif ($itemCount > 1) {
-			$statusText = $itemCount . ' threads';
-		}
-
-		my $columnHeadings = 'title,author,activity';
-
-		$itemListingWrapper = GetWindowTemplate(
-			$itemListings,
-			$title,
-			$columnHeadings,
-			$statusText
-		);
-
-		$htmlOutput .= $itemListingWrapper;
-
-		#$htmlOutput .= GetWindowTemplate('<tt>... and that is ' . $itemCount . ' item(s) total! beep boop</tt>', 'robot voice');
-
-	} else {
-	# no items returned, use 'no items' template
-		$htmlOutput .= GetWindowTemplate(GetTemplate('html/item/no_items.template'), 'Welcome, Guest!');
-		#todo add menu?
-	}
-
-	return $htmlOutput;
-} # GetItemListing()
+require_once('get_item_listing.pl');
 
 sub GetTopItemsPage { # returns page with top items listing
 	WriteLog("GetTopItemsPage()");
@@ -2175,6 +1928,29 @@ sub PrintBanner {
 	print $edge;
 } # PrintBanner()
 
+sub MakeWritePage {
+	WriteLog('MakeWritePage()');
+
+	require_once('page/write.pl');
+	my $submitPage = GetWritePage();
+	PutHtmlFile("write.html", $submitPage);
+
+	if (GetConfig('admin/php/enable')) {
+		# create write_post.html for longer messages if admin/php/enable
+		$submitPage =~ s/method=get/method=post/g;
+		if (index(lc($submitPage), 'method=post') == -1) {
+			$submitPage =~ s/\<form /<form method=post /g;
+		}
+		if (index(lc($submitPage), 'method=post') == -1) {
+			$submitPage =~ s/\<form/<form method=post /g;
+		}
+		$submitPage =~ s/cols=32/cols=50/g;
+		$submitPage =~ s/rows=9/rows=15/g;
+		$submitPage =~ s/please click here/you're in the right place/g;
+		PutHtmlFile("write_post.html", $submitPage);
+	}
+} # MakeWritePage()
+
 while (my $arg1 = shift @foundArgs) {
 	# evaluate each argument, fuzzy matching it, and generate requested pages
 
@@ -2255,28 +2031,8 @@ while (my $arg1 = shift @foundArgs) {
 			MakePage('tags');
 		}
 		elsif ($arg1 eq '--write') {
-			print ("recognized --write\n");
-
-			#MakeSimplePage('write');
-			require_once('page/write.pl');
-			my $submitPage = GetWritePage();
-			PutHtmlFile("write.html", $submitPage);
-
-			if (GetConfig('admin/php/enable')) {
-				# create write_post.html for longer messages if admin/php/enable
-				$submitPage =~ s/method=get/method=post/g;
-				if (index(lc($submitPage), 'method=post') == -1) {
-					$submitPage =~ s/\<form /<form method=post /g;
-				}
-				if (index(lc($submitPage), 'method=post') == -1) {
-					$submitPage =~ s/\<form/<form method=post /g;
-				}
-				$submitPage =~ s/cols=32/cols=50/g;
-				$submitPage =~ s/rows=9/rows=15/g;
-				$submitPage =~ s/please click here/you're in the right place/g;
-				PutHtmlFile("write_post.html", $submitPage);
-			}
-
+			print ("recognized --write, you can use -M write now\n");
+			MakePage('write');
 		}
 		elsif ($arg1 eq '--data' || $arg1 eq '-i') {
 			print ("recognized --data\n");
@@ -2330,6 +2086,7 @@ while (my $arg1 = shift @foundArgs) {
 				} else {
 					print ("calling MakePage($makePageArg)\n");
 					MakePage($makePageArg);
+					# /new.html
 				}
 			} else {
 				print("missing argument for -M\n");

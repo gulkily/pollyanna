@@ -1084,7 +1084,7 @@ function GetThemeAttribute ($attributeName) { // returns a config overlay value 
 function GetThemeColor ($colorName) { // returns theme color based on setting/theme
 	WriteLog('GetThemeColor: $colorName = ' . $colorName);
 	
-	if (GetConfig('html/mourn')) { # GetThemeColor()
+	if (GetConfig('html/monochrome')) { # GetThemeColor()
 		WriteLog('GetThemeColor: config/html/mourn = TRUE');
 
 		if (index(lc($colorName), 'text') != -1 || index(lc($colorName), 'link') != -1) {
@@ -1095,6 +1095,20 @@ function GetThemeColor ($colorName) { // returns theme color based on setting/th
 			}
 		} else {
 			return GetConfig('html/color/background'); # #BackgroundColor
+		}
+	}
+
+	if (GetConfig('html/mourn')) { # GetThemeColor()
+		WriteLog('GetThemeColor: config/html/mourn = TRUE');
+
+		if (index(lc($colorName), 'text') != -1 || index(lc($colorName), 'link') != -1) {
+			if (index(lc($colorName), 'back') != -1) {
+				return '#000000'; # #BackgroundColor
+			} else {
+				return '#c0c0c0'; # #TextColor
+			}
+		} else {
+			return '#000000'; # #BackgroundColor
 		}
 	}
 

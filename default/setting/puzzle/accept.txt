@@ -1,0 +1,3 @@
+Must be in "reverse substring precedence"
+That is, aaa before aa (because aa is substring of aaa)
+

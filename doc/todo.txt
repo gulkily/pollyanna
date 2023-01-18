@@ -1,25 +1,24 @@
-rename GetWindowTemplate() to...
-	GetDialog() ?
+add recovery from this warning:
+	GetItemDetokenedMessage: warning: NO FILE: $messageCacheName =
+		a) search for matching file in htmlt/xt
+		b) reindex file
+		c) look for message again
 
 ===
 
-make it easier to make a dialog with no titlebar
+rename GetWindowTemplate() to...
+	GetDialog() ?
 
 ===
 
 problems found during some testing
 
 a) on mac, setup is a bit broken
-
-a1) needs a command which does these: hike alog; hike index; ./pages.pl --all
-
-a1a) hike needs more options to call pages.pl, so that pages.pl doesn't need to be called anymore
-
-b) item received page needs more instructions on how to refresh the site
-
-c) hike should offer to run enable_features.sh, or prompt the user to do so
-
-d) mac-- php is still broken, and ssi is not enabled by default
+	a1) needs a command which does these: hike alog; hike index; ./pages.pl --all
+		a1a) hike needs more options to call pages.pl, so that pages.pl doesn't need to be called anymore
+	b) item received page needs more instructions on how to refresh the site
+	c) hike should offer to run enable_features.sh, or prompt the user to do so
+	d) mac-- php is still broken, and ssi is not enabled by default
 
 ===
 
@@ -30,7 +29,7 @@ add perl-unicode-string to requirements
 who invited you dialog
 	list of names with checkboxes
 		half the names are actual names
-			(do not use guest)
+			(do not use accounts whose name is guest)
 
 ===
 
@@ -43,6 +42,7 @@ there's a serious bug with data sanitizing
 		some text files are actually image files
 			causes an error in the sh-sqlite3 converter
 				#ouch
+	i think this may have something to do with tcsh
 
 ===
 

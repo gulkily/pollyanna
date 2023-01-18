@@ -31,9 +31,21 @@ sub GetWriteForm { # $dialogTitle ; returns write form (for composing text messa
 		#todo sanity check
 	}
 
-	my $writeForm = GetWindowTemplate(GetTemplate('html/form/write/write.template'), $dialogTitle);
+	my $prompt = shift;
+	if (!$prompt) {
+		$prompt = 'Write something here:';
+	} else {
+		#todo sanity check
+	}
+
+	#my $writeForm = GetWindowTemplate(GetTemplate('html/form/write/write.template'), $dialogTitle);
+	my $writeForm = GetTemplate('html/form/write/write.template');
 	# my $writeForm = GetWindowTemplate(GetTemplate('html/form/write/write.template'), 'Write');
 	WriteLog('GetWriteForm()');
+
+	if ($prompt ne 'Write something here:') { #todo templatize this
+		$writeForm = str_replace('Write something here:', $prompt, $writeForm);
+	}
 
 	if (GetConfig('admin/php/enable')) {
 		WriteLog('GetWriteForm: php is ON');
@@ -97,7 +109,10 @@ sub GetWriteForm { # $dialogTitle ; returns write form (for composing text messa
 		}
 	} # js stuff in write form
 
-	return $writeForm;
+	my $writeDialog = GetWindowTemplate($writeForm, $dialogTitle);
+
+	return $writeDialog;
+	#return $writeForm;
 } # GetWriteForm()
 
 sub GetPuzzleDialog { # returns write form (for composing text message)

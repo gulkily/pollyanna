@@ -1,3 +1,14 @@
+
+{
+	if (GetConfig('setting/admin/php/force_profile')) {
+		if (!isset($_COOKIE['cookie']) || !isset($_COOKIE['checksum'])) {
+			setcookie2('test', '1');
+			RedirectWithResponse('/welcome.html', 'Welcome!');
+		}
+	}
+}
+
+
 						if (!GetConfig('config/hash_setting')) {
 							WriteLog(`find config/setting -type f | sort | xargs md5sum | md5sum | cut -d ' ' -f 1 > config/hash_setting`);
 						}

@@ -1,7 +1,7 @@
 <!-- settings.template -->
 <noscript>
 	<p>
-		<b>*</b> Some features may need <b>JavaScript</b>.
+		<b class=noscript>*</b> Some features may need <b>JavaScript</b>.
 		<!--
 			* getElementById and stuff like that.
 			Tested with in IE6+, Presto, Gecko, WebKit, Chrome

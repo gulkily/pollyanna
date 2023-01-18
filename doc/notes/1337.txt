@@ -22,9 +22,12 @@ Basic flow diagram:
    * * *
 DEPENDENCIES
 ============
-# apt install liburi-encode-perl libany-uri-escape-perl libhtml-parser-perl libdbd-sqlite3-perl libdigest-sha-perl sqlite3 gnupg gnupg2 imagemagick zip php-cgi
+# apt install liburi-encode-perl libany-uri-escape-perl libhtml-parser-perl libdbd-sqlite3-perl libdigest-sha-perl sqlite3 gnupg gnupg2 imagemagick zip php-cgi libunicode-string-perl
 
-# sudo yum install perl-Digest-MD5 perl-Digest-SHA perl-HTML-Parser perl-DBD-SQLite perl-URI-Encode perl-Digest-SHA1 sqlite gnupg gnupg2 perl-Devel-StackTrace perl-Digest-SHA perl-HTML-Parser perl-DBD-SQLite lighttpd-fastcgi ImageMagick php-cgi zip
+# sudo yum install perl-Digest-MD5 perl-Digest-SHA perl-HTML-Parser perl-DBD-SQLite perl-URI-Encode perl-Digest-SHA1 sqlite gnupg gnupg2 perl-Devel-StackTrace perl-Digest-SHA perl-HTML-Parser perl-DBD-SQLite lighttpd-fastcgi ImageMagick php-cgi zip perl-Unicode-String
+
+# sudo pacman -S perl-digest-md5 perl-unicode-string perl-digest-sha imagemagick zip php lighttpd perl-html-parser gnupg
+# note: the pacman list is not complete yet #todo
 
 # helpful for dev
 # IntelliJ IDEA Community 2019.3

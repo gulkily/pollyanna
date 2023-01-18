@@ -4,4 +4,17 @@
 	<font size=5>Welcome to Yavista!</font><br>
 </p>
 
+<p>
+	Yavista is driven by your contributions, so <br>
+	please write something. Here are some ideas:
+</p>
+
+<ul style="line-height: 2">
+	<li>Something you recently discovered</li>
+	<li>Problem or a conundrum you're facing</li>
+	<li>How did you find this place?</li>
+	<li>Wishlist or idea for the site</li>
+	<li>Book, paper, or movie you liked</li>
+</ul>
+
 <!-- / welcome.template -->
