@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ $1 = sql ]
+	then
+		sqlite3 cache/b/index.sqlite3 "${@:2}"
+		#sqlite3 cache/b/index.sqlite3 "${*:2}"
+		exit
+fi
+
 #todo sanity checks for git and cut
 echo =================
 echo Rejoice always
