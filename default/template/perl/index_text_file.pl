@@ -740,6 +740,10 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										WriteLog('IndexTextFile: Request to remove file was not found to be valid');
 
 										push @indexMessageLog, 'declined: #remove, insufficient privileges.';
+
+										if (!$titleCandidate) {
+											$titleCandidate = '[declined: #remove]';
+										}
 									}
 								} # foreach my $itemParent (@itemParents)
 							} # has parents
@@ -826,7 +830,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										DBAddPageTouch('stats', 0);
 
 										if (!$titleCandidate) {
-											$titleCandidate = '[#' . $hashTag . ']';
+											$titleCandidate = '[applied: #' . $hashTag . ']';
 										}
 
 										ExpireAvatarCache($authorKey); #uncache
@@ -847,6 +851,9 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										WriteLog('IndexTextFile: Request to admin file was not found to be valid');
 										$approveReason = 'lacking permissions to apply this hashtag';
 										push @indexMessageLog, 'declined: #' . $tokenFound{'param'} . '; reason: ' . $approveReason;
+										if (!$titleCandidate) {
+											$titleCandidate = '[declined: #' . $tokenFound{'param'} . ']';
+										}
 										if (GetConfig('admin/index/create_system_tags')) {
 											DBAddVoteRecord($fileHash, 0, 'declined');
 											DBAddVoteRecord('flush');
