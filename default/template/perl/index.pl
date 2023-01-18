@@ -404,7 +404,7 @@ sub SweepDeleted {
 	}
 	
 	my @attribs = SqliteQueryHashRef(
-		"select value, file_hash from item_attribute where attribute = 'file_path';"
+		"SELECT value, file_hash FROM item_attribute WHERE attribute = 'file_path';"
 	);
 	shift @attribs; # first one is headers
 
