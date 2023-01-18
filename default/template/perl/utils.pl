@@ -2199,7 +2199,24 @@ sub IsFileDeleted { # $file, $fileHash ; checks for file's hash in deleted.log a
 				if ($file =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
 					my $fileSafe = $1;
 					WriteLog("IsFileDeleted: warning: file exists, calling unlink($fileSafe)");
-					unlink($fileSafe); #todo -T
+
+					my $LOGDIR = GetDir('log');
+					if ( ! -d "$LOGDIR/deleted" ) {
+						WriteLog('IsFileDeleted: mkdir(' . "$LOGDIR/deleted" . ')');
+						mkdir("$LOGDIR/deleted");
+					}
+
+					if (-d "$LOGDIR/deleted") {
+						#unlink($fileSafe); #todo -T
+						my $justFilename = TrimPath($fileSafe);
+						my $newFilename = "$LOGDIR/deleted/$justFilename";
+
+						WriteLog('IsFileDeleted: rename(' . $fileSafe . ', ' . $newFilename . ')');
+
+						rename($fileSafe, $newFilename);
+					} else {
+						WriteLog('IsFileDeleted: warning: $LOGDIR/deleted does not exist, even after attempt to create');
+					}
 				} else {
 					WriteLog('IsFileDeleted: warning: did not unlink, sanity check failed on $file = ' . $file);
 				}
@@ -2616,6 +2633,7 @@ sub EnsureDirsThatShouldExist { # creates directories expected later
 		"$HTMLDIR/cpp",
 		"$HTMLDIR/py",
 		"$HTMLDIR/perl",
+		"$HTMLDIR/mp4",
 		"$HTMLDIR/thumb", #thumbnails
 		"$CACHEDIR/$cacheVersion", #ephemeral data
 		"$HTMLDIR/author",
