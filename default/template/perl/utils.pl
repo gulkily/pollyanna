@@ -2595,6 +2595,7 @@ sub ProcessTextFile { # $file ; add new text file to index
 } # ProcessTextFile()
 
 sub EnsureDirsThatShouldExist { # creates directories expected later
+# sub EnsureDirs {
 	WriteLog('EnsureDirsThatShouldExist() begin');
 	# make a list of some directories that need to exist
 	state $HTMLDIR = GetDir('html');
