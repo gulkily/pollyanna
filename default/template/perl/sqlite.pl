@@ -709,7 +709,8 @@ sub DBGetItemTitle { # get title for item ($itemhash)
 			if ($maxLength > 0 && $maxLength < 255) {
 				#todo sanity check failed message
 				if (length($itemTitle) > $maxLength) {
-					$itemTitle = substr($itemTitle, 0, $maxLength) . '...';
+					$itemTitle = TrimUnicodeString($itemTitle, 0, $maxLength) . '...';
+					# $itemTitle = substr($itemTitle, 0, $maxLength) . '...';
 				}
 			}
 		}
