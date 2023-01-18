@@ -47,10 +47,10 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 	push @indexMessageLog, 'indexing begins';
 
-	if (-s $file > 16000) {
+	if (-s $file > GetConfig('setting/admin/index/max_text_file_size')) {
 		# this is done primarily to eliminate binary files accidentally named .txt
 		#todo should also check for binary content in files
-		WriteLog('IndexTextFile: file is over 16K, sanity check failed; $file = ' . $file);
+		WriteLog('IndexTextFile: file is over max_text_file_size, sanity check failed; $file = ' . $file);
 		push @indexMessageLog, 'file over size limit, not indexing';
 		return ''
 	}
