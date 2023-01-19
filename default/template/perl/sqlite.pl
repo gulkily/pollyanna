@@ -156,7 +156,15 @@ sub SqliteGetNormalizedQueryString { # $query ; returns normalized query string
 } # SqliteGetNormalizedQueryString()
 
 sub SqliteQueryHashRef { # $query, @queryParams; calls sqlite with query, and returns result as array of hashrefs
+# NOTE, THIS RETURNS A REFERENCE TO AN ARRAY OF HASHES, NOT A HASH, DESPITE THE NAME
+
 # ATTENTION: first array element returned is an array of column names!
+
+# example uses:
+# 	my $hashRef1 = SqliteQueryHashRef('author_replies', @queryParams);
+# 	my @authorReplies = @{$hashRef};
+# 	my $hashRef2 = SqliteQueryHashRef('SELECT file_hash, item_title FROM item_flat', @queryParams);
+# 	my @allItems = @{$hashRef};
 
 #sub SqliteGetHash {
 #sub SqliteGetHashRef {
@@ -2158,6 +2166,9 @@ sub DBGetAuthorList { # returns list of all authors' gpg keys as array
 } # DBGetAuthorList()
 
 sub DBGetAuthorAlias { # returns author's alias by gpg key
+# sub GetAuthorUsername {
+# sub DBGetAuthorUsername {
+# sub GetAuthorAlias {
 	my $key = shift;
 	chomp $key;
 
