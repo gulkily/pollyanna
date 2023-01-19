@@ -2642,6 +2642,7 @@ sub EnsureDirsThatShouldExist { # creates directories expected later
 		"$HTMLDIR/thumb", #thumbnails
 		"$CACHEDIR/$cacheVersion", #ephemeral data
 		"$HTMLDIR/author",
+		"$HTMLDIR/dialog/replies",
 		"$HTMLDIR/action",
 		"$HTMLDIR/tag", #tag items for tags
 		"$CONFIGDIR",
