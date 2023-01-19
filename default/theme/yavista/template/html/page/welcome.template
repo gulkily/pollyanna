@@ -1,15 +1,15 @@
 <!-- welcome.template -->
 
-<p style="padding-left: 20pt; padding-right: 20pt; text-align: center">
+<center>
 	<font size=5>Welcome to Yavista!</font><br>
-</p>
+</center>
 
 <p>
 	Yavista is driven by your contributions, so <br>
 	please write something. Here are some ideas:
 </p>
 
-<ul style="line-height: 2">
+<ul>
 	<li>Something you recently discovered</li>
 	<li>Problem or a conundrum you're facing</li>
 	<li>How did you find this place?</li>
