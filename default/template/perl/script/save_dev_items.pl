@@ -48,3 +48,7 @@ for my $fileRef (@files) {
 PutFile($todoPath, $todoContents);
 
 WriteMessage('Items added: ' . $itemsAdded);
+
+1;
+
+
