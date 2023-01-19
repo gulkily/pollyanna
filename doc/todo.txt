@@ -1,3 +1,27 @@
+notify user of anything they may want to see
+	highest priority:
+		replies to anything they've posted
+	lower priority:
+		anything containing text on the server
+	more?
+	1) design query author_repliesx
+	2) make GetAuthorRepliesDialog()x
+	3) make trigger in pages.pl
+		basic version: auto generate the dialog when generating author's pagex
+	4) in route.php, if there's a current author
+		check for dialog
+			if dialog exists, inject it into page
+	it would be nice if author had some context what the replies are to
+		but this basic version is a good start
+	dialog should be re-generated whenever a reply is made where there's an author
+
+
+===
+
+IsFingerprint() should return sanitized author key, just like IsItem()
+
+===
+
 add recovery from this warning:
 	GetItemDetokenedMessage: warning: NO FILE: $messageCacheName =
 		a) search for matching file in htmlt/xt
