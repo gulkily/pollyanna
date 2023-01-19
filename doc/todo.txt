@@ -2702,30 +2702,18 @@ config/setting/admin/dev/fresh_reload=0
 ===
 
 #bug dialogs should reflow when remember position is off and remember collapsed state is on
--- 
-[Received]
-[Cookie]
-[Client]
 
 ===
 
 #bug 
 
 on write page some javascript shows up in light mode
--- 
-[Received]
-[Client]
-[Cookie]
 
 ===
 
 #todo #bug
 
 textarea for replying should have an accesskey
--- 
-[Cookie]
-[Client]
-[Received]
 
 ===
 
@@ -2760,10 +2748,6 @@ message is included when signing proof of work puzzle from welcome page
 ===
 
 #bug when access log and received: header is turned on, many duplicate items appear because the hash is no longer not applied to the footer
--- 
-[Received]
-[Cookie]
-[Client]
 
 ===
 
@@ -2782,142 +2766,17 @@ message is included when signing proof of work puzzle from welcome page
 
 ===
 
-
-# xTags
-vote_value	vote_count
-#hastext	764
-#hastitle	764
-#received	616
-#hashtag	305
-#hasvote	255
-#notext	249
-#signed	231
-#https	205
-#pubkey	144
-#changelog	67
-10 item(s) 
-# xThreads
-item_title	add_timestamp
-Welcome to Fall 2022 Semester!	3 months ago
-Guest has registered (public key)	1 day ago
-Joel Moses	1 month ago
-Welcome, New Member!	6 days ago
-Newmember has registered (public key)	1 day ago
-[http]	6 days ago
-Guest123 has registered (public key)	1 day ago
-archive notice is not automatically indexed after archive	1 day ago
-[https]	1 month ago
-[https]	1 month ago
-10 item(s) 
-# xNew
-item_title	add_timestamp	cart
-sm	1 day ago	+cart
-Welcome, New Member!	1 day ago	+cart
-Welcome, New Member!	1 day ago	+cart
-asdfadsfads	1 day ago	+cart
-Notice: Content was archived by the operator at 1671817847	1 day ago	+cart
-Software Updated to Version 7fde8671..	1 day ago	+cart
-Software Updated to Version 67aa1624..	1 day ago	+cart
-Software Updated to Version 49713f16..	1 day ago	+cart
-Software Updated to Version ae176f13..	1 day ago	+cart
-Software Updated to Version fa8d78aa..	1 day ago	+cart
-10 item(s) 
-# xAuthors
-author_id	last_seen	item_count
-Guest	1 day ago	222
-Guest	1 month ago	120
-Guest	1 day ago	95
-Guest	2 months ago	60
-Guest	1 day ago	36
-ilya	1 month ago	26
-Guest	5 days ago	19
-Guest	2 days ago	14
-guest_	1 day ago	13
-Johnny	1 day ago	13
-10 item(s) 
-# xLinks
-author_id	item_title
-Guest	[https]
-Newmember	Version: OpenPGP.js v3.0.13
-Guest	[https]
-Guest	The Central Randomizer
-Guest	[http]
-Pale Moon	<body mv-app=logo mv-mode=edit>
-Guest	[https]
-Guest	[https]
-Guest	[https]
-9 item(s) 
-# xStatus
-
-Updated: 27 seconds ago
-
-Version: 751
-
-Check engine!
-
-
-Built: 1 day ago
-
-120 tags
-
-95 authors
-
-62 threads
-
-0 images
-
-1014 items
-
-9 links
-
- 
-# xProfile
-
-Signed in with private key.
-
-Guest
-8F67CB5C74ED3E61
-Go to profile
-
-
-
- 
-# xUpload
-Upload one file.
-
-Remember to press Upload button.
-
-
-
-
-
-Allowed files: jpg jpeg gif png bmp svg jfif webp pl py cpp zip php
-
-Only images supported, video support later
-
-
-
-===
-
 #bug
 
 profile.html does not redirect after logging in
 
 url retains original parameters like btnRegister=...
--- 
-[Received]
-[Cookie]
-[Client]
 
 ===
 
 #bug
 
 keyboard switcher shortcut overrides cmd+r on mac
--- 
-[Received]
-[Client]
-[Cookie]
 
 ===
 
@@ -2933,10 +2792,6 @@ Logged in user should know they are logged in on any page
 #bug 
 
 avatar cache only indexed under first theme in list, doesn't update when theme changes
--- 
-[Client]
-[Received]
-[Cookie]
 
 ===
 
@@ -2962,20 +2817,12 @@ Message Hash is still not consistent across messages with the same text.
 #todo
 
 after any indexing where new files are added, basic pages like new and chain should be re-cached
--- 
-[Cookie]
-[Client]
-[Received]
 
 ===
 
 #todo threads dialog should collapse other threads not under current one by default?
 
 so it is less busy
--- 
-[Client]
-[Cookie]
-[Received]
 
 ===
 
@@ -3005,10 +2852,6 @@ I think there should be an additional "logged out" flag stored that takes preced
 #bug
 
 Some pages are very slow to load initially, especially links from the Help page, such as Manual and Browser Test
--- 
-[Received]
-[Cookie]
-[Client]
 
 ===
 
