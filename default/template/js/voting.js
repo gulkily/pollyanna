@@ -83,8 +83,12 @@ function IncrementTagLink (t) { // increments number of votes in tag button
 		}
 
 		//alert('DEBUG: IncrementTagLink: finished with t.innerHTML');
+
+		return false;
 	}
-} IncrementTagLink()
+
+	return true;
+} // IncrementTagLink()
 
 function SignVote (t, token) { // signs a vote from referenced vote button
 // t = reference to calling button's 'this'
