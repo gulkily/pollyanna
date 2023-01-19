@@ -17,13 +17,19 @@ sub GetItemListing { # returns listing of items based on topic
 		$fileHash = 'top'; #what
 	}
 
+	my $listingType = '';
+
 	#todo refactor
 	if ($fileHash eq 'top') {
 		@topItems = DBGetTopItems(); # get top items from db
+		$listingType = 'top';
 	} else {
 		@topItems = DBGetItemReplies($fileHash);
 		$title = 'Replies';
+		$listingType = 'replies';
 	}
+
+	WriteLog('GetItemListing(' . $fileHash . '); caller = ' . join(',', caller));
 
 	if (!@topItems) {
 		WriteLog('GetItemListing: warning @topItems missing, sanity check failed');
@@ -98,6 +104,13 @@ sub GetItemListing { # returns listing of items based on topic
 			$itemTemplate =~ s/\$authorAvatar/$authorAvatar/g;
 			$itemTemplate =~ s/\$itemLastTouch/$itemLastTouch/g;
 			$itemTemplate =~ s/\$rowBgColor/$rowBgColor/g;
+
+			# if ($listingType eq 'replies') {
+			# 	if (index($item{'tags_list'}, 'notext') != -1) {
+			# 		$itemTemplate .= '<span class=advanced>' . $itemTemplate . '</span>';
+			# 	}
+			# 	$itemTemplate .= $item{'tags_list'};
+			# }
 
 			# add to main html
 			$itemListings .= $itemTemplate;
