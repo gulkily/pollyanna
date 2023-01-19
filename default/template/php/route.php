@@ -1112,9 +1112,8 @@ if (GetConfig('admin/php/route_enable')) {
 				$html = InjectJs($html, array('server_response'), 'before', '</head>');
 
 				// add onkeydown event to body tag, which responds to escape key
-				// known issue: if there's non-32 whitespace, this may not work right
+				// known issue: if there's a non-chr(32) whitespace character directly after "<body", this may not work right
 				$replaceWith = '<body onkeydown="if (event.keyCode && event.keyCode == 27) { if (window.bodyEscPress) { return bodyEscPress(); } }"';
-
 				$replaceWhat = '<body ';
 				$html = str_replace($replaceWhat, $replaceWith . ' ', $html);
 				$replaceWhat = '<body>';
