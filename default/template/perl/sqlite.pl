@@ -2212,7 +2212,11 @@ sub DBGetAuthorScore { # returns author's total score
 		my @queryParams = ($key);
 		my $queryResult = SqliteGetValue($query, @queryParams);
 
-		if (defined($queryResult) && int($queryResult) == $queryResult) {
+		if (!$queryResult) {
+			$scoreCache{$key} = 0;
+			WriteLog('DBGetAuthorScore(' . $key . '): $queryResult was FALSE; key = ' . $scoreCache{$key} . '; caller = ' . join(',', caller));
+			return $scoreCache{$key};
+		} elsif (defined($queryResult) && int($queryResult) == $queryResult) {
 			$scoreCache{$key} = $queryResult;
 			WriteLog('DBGetAuthorScore(' . $key . ') = ' . $scoreCache{$key} . '; caller = ' . join(',', caller));
 			return $scoreCache{$key};
