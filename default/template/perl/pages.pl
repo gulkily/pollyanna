@@ -1909,6 +1909,11 @@ while (my $arg1 = shift @foundArgs) {
 					print ("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/authors.html', $dialog);
 				}
+				elsif ($makeDialogArg eq 'active') {
+					my $dialog = GetQueryAsDialog('active', 'Active');
+					print ("-D $makeDialogArg\n");
+					PutHtmlFile('dialog/active.html', $dialog);
+				}
 				elsif ($makeDialogArg eq 'scores') {
 					my $dialog = GetQueryAsDialog('scores', 'Scores');
 					print ("-D $makeDialogArg\n");
