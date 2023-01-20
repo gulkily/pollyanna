@@ -29,6 +29,8 @@ notify user of anything they may want to see
 	it would be nice if author had some context what the replies are to
 		but this basic version is a good start
 	dialog should be re-generated whenever a reply is made where there's an author
+	* query should exclude items author has already replied to or voted on
+	* add author_key field to query once that's more efficient
 
 ===
 
