@@ -1899,6 +1899,22 @@ sub IsTextFile { # $file ; returns 1 if txt file, 0 if not
 	return 0;
 } # IsTextFile()
 
+sub IsSaneFilename {
+# sub IsValidFile {
+# sub IsFile {
+	my $fileName = shift;
+
+	if ($fileName) {
+		if ($fileName =~ m/^([0-9a-zA-Z\/\._:\-]+)$/) {
+			return 1;
+		} else {
+			return 0;
+		}
+	} else {
+		return 0;
+	}
+} # IsSaneFilename()
+
 sub IsItem { # $string ; returns untained string, 0 if not item
 #sub IsHash {
 # should be called IsValidItemHash {
