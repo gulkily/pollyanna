@@ -930,6 +930,24 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 					}
 				}
 			} # hash tags applied to parent items
+
+			if (scalar(@itemParents)) {
+				my @authorsNotified;
+				foreach my $itemParent (@itemParents) {
+					my $authorItemParent = DBGetItemAuthor($itemParent);
+					if ($authorItemParent && GetConfig('setting/admin/php/cookie_inbox')) {
+						WriteLog('IndexTextFile: $authorItemParent = ' . $authorItemParent . ' for: ' . $itemParent);
+						#if (!in_array($authorItemParent, @authorsNotified)) {
+						#only do this once for each parent item
+						require_once('dialog/author_replies.pl');
+						PutAuthorRepliesDialog($authorItemParent);
+						push @authorsNotified, $authorItemParent;
+						#}
+					} else {
+						WriteLog('IndexTextFile: $authorItemParent NOT FOUND for: ' . $itemParent);
+					}
+				}
+			}
 		} # not #example
 
 		$detokenedMessage = trim($detokenedMessage);
