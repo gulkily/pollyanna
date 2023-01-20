@@ -1,6 +1,20 @@
+how to thorough cache invalidation basic
+	item's page
+	item's author's page
+	item has parents?
+		recurse through each one (only up)
+	item's tag's pages
+	item has children?
+		recurse downwards (only down)
+	chain, new, etc.
+	grep for other pages and issue warning so that they can be added
+
+===
+
 notify user of anything they may want to see
 	highest priority:
 		replies to anything they've posted
+		mentions
 	lower priority:
 		anything containing text on the server
 	more?
@@ -8,13 +22,13 @@ notify user of anything they may want to see
 	2) make GetAuthorRepliesDialog()x
 	3) make trigger in pages.pl
 		basic version: auto generate the dialog when generating author's pagex
-	4) in route.php, if there's a current author
-		check for dialog
-			if dialog exists, inject it into page
+	4) in route.php,
+		if there's a current author (cookie)x
+			check for dialog existencex
+				if dialog exists, inject it into pagex
 	it would be nice if author had some context what the replies are to
 		but this basic version is a good start
 	dialog should be re-generated whenever a reply is made where there's an author
-
 
 ===
 
