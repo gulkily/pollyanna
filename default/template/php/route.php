@@ -1225,6 +1225,21 @@ if (GetConfig('admin/php/route_enable')) {
 			}
 		} # /profile.html
 
+		if (GetConfig('setting/admin/php/cookie_inbox')) {
+			#if (isset($cookie) && $cookie) {
+			if (isset($_COOKIE['cookie']) && $_COOKIE['cookie']) {
+				if (IsFingerprint($_COOKIE['cookie'])) {
+					$authorCookie = $_COOKIE['cookie'];
+					$htmlDir = GetDir('html');
+					$cookieInboxDialogPath = $htmlDir . '/dialog/replies/' . $authorCookie . '.html';
+					if (file_exists($cookieInboxDialogPath)) {
+						$cookieInboxDialog = GetFile($cookieInboxDialogPath);
+						$html = str_ireplace('</body>', $cookieInboxDialog . '</body>', $html);
+					}
+				}
+			}
+		}
+
 		if ($path == '/bookmark.html') { #bookmarklets replace server name with host name
 			$hostName = 'localhost:2784';
 			if (isset($_SERVER['HTTP_HOST'])) {
