@@ -1,5 +1,10 @@
+#!/usr/bin/perl -T
+
 use strict;
+use warnings;
 use 5.010;
+
+require_once('get_window_template.pl');
 
 sub GetItemTemplateBody {
 # sub GetItemText {

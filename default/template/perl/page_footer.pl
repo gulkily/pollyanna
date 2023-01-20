@@ -119,6 +119,7 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 	}
 
 	if (GetConfig('setting/admin/js/enable')) {
+		require_once('get_window_template.pl');
 		my $noJsInfo = GetWindowTemplate('<b class=noscript>*</b> Some features may require JavaScript', 'Notice'); # GetDialog()
 		$noJsInfo = '<noscript>' . $noJsInfo . '</noscript>';
 		$txtFooter = str_replace(

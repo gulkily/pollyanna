@@ -2,6 +2,9 @@
 
 use strict;
 use warnings;
+use 5.010
+
+require_once('get_window_template.pl');
 
 sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with item listing based on parameters
 	# GetReadPage

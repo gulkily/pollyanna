@@ -15,6 +15,8 @@ use warnings;
 use utf8;
 use 5.010;
 
+require_once('get_window_template.pl');
+
 my @foundArgs;
 while (my $argFound = shift) {
 	push @foundArgs, $argFound;

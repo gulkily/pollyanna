@@ -6,6 +6,7 @@ use 5.010;
 
 require_once('dialog/chain_log.pl');
 require_once('dialog/access.pl');
+require_once('get_window_template.pl');
 
 sub GetTosDialog {
 	my $tosText = GetString('tos');
