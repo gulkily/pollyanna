@@ -2206,11 +2206,20 @@ sub DBGetAuthorScore { # returns author's total score
 	$key = SqliteEscape($key);
 
 	if ($key) { #todo fix non-param sql
-		my $query = "SELECT IFNULL(author_score, 0) author_score FROM author_score WHERE author_key = '$key'";
-		$scoreCache{$key} = SqliteGetValue($query);
-		return $scoreCache{$key};
+		my $query = "SELECT IFNULL(author_score, 0) author_score FROM author_score WHERE author_key = ?";
+		my @queryParams = ($key);
+		my $queryResult = SqliteGetValue($query, @queryParams);
+
+		if (defined($queryResult) && int($queryResult) == $queryResult) {
+			$scoreCache{$key} = $queryResult;
+			WriteLog('DBGetAuthorScore(' . $key . ') = ' . $scoreCache{$key} . '; caller = ' . join(',', caller));
+			return $scoreCache{$key};
+		} else {
+			WriteLog('DBGetAuthorScore: warning: $queryResult failed sanity check!');
+			return 0;
+		}
 	} else {
-		return "";
+		return 0;
 	}
 } # DBGetAuthorScore()
 
