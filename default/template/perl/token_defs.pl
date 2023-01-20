@@ -16,10 +16,40 @@ sub GetTokenDefs {
 	my @tokenDefs = (
 		# ATTENTION #tokenSanityCheck
 		# Whenever adding a new definition here
-		# Also add it to the sanity check below
-		# Look for this tag: #tokenSanityCheck
+		# Also add it to the sanity check
+		# Look for this tag: #tokenSanityCheck in index_text_file.pl
 		# ATTENTION #tokenSanityCheck
 
+		# values allowed for mask_params:
+		# mg   = multi-line, global
+		# mgi  = multi-line, global, case-insensitive
+		# gi   = global, case-insensitive
+		# g    = global
+
+		# token             = name of token; also used for item_attribute unless otherwise specified
+		# mask              = regex mask with three parentheses captures: name, spacer, and parameter/value
+		#                     for tokens without a prefix, use ()() for name and spacer placeholders
+		# mask_params       = what is used at the end of the regex call. see allowed values above
+		# message           = what the token is replaced with in the message when displayed to user
+		# target_attribute  = name of attribute when stored in item_attributes table (if not specified, token name is used)
+		# apply_to_parent   = when this is true, the token is applied to the parent item instead of the containing item
+		# eval_message      = USE WITH CARE!!! causes eval() to be called on message. USE WITH CARE!!!
+
+		# ATTENTION #tokenSanityCheck
+		# Whenever adding a new definition here
+		# Also add it to the sanity check
+		# Look for this tag: #tokenSanityCheck in index_text_file.pl
+		# ATTENTION #tokenSanityCheck
+
+		# DRAFT
+		# {
+		# 	'token'       => 'author_mention',
+		# 	'mask'        => '()()([0-9A-F]){16}',
+		# 	'mask_params' => 'g',
+		# 	'message'     => '[Author Mention]'
+		# },
+		# ATTENTION; remember to add this to #tokenSanityCheck when uncommenting
+		# DRAFT
 		{ # cookie of user who posted the message
 			'token'   => 'cookie',
 			'mask'    => '^(cookie)(\W+)([0-9A-F]{16})',
