@@ -39,7 +39,8 @@ sub GetAuthorRepliesDialog { # $authorKey
 	return $dialog;
 } # GetAuthorRepliesDialog()
 
-sub MakeAuthorRepliesDialog { # $authorKey
+sub PutAuthorRepliesDialog { # $authorKey
+# sub MakeAuthorRepliesDialog {
 	my $authorKey = shift;
 	#todo sanity
 
