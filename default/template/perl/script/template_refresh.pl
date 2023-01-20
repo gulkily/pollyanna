@@ -124,6 +124,7 @@ if ($changesDetectedCount) {
 } # if ($changesDetectedCount)
 
 if ($needRebuild) {
+	#todo this only needs to happen if it's one of the 'base' files
 	print "Some perl files were removed from config, building...\n";
 	print `sh hike.sh build`;
 }
