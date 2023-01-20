@@ -151,74 +151,16 @@ sub GetHtmlToolboxes {
 		my $htmlToolboxWindow = '<span class=advanced>' . GetWindowTemplate($htmlToolbox, 'Search') . '</span>';
 		$html .= $htmlToolboxWindow;
 	} # if ($file{'item_title'})
-	
 
-	my $urlParamFullText = '';
-	if ($file{'file_path'} && $file{'item_type'} eq 'txt') {
-		$urlParamFullText = $file{'file_path'};
-		$urlParamFullText = GetFile($urlParamFullText);
-		$urlParamFullText = uri_escape($urlParamFullText);
-		#$urlParamFullText = uri_encode($urlParamFullText);
-		$urlParamFullText = str_replace('+', '%2b', $urlParamFullText);
-		$urlParamFullText = str_replace('#', '%23', $urlParamFullText);
-		#todo other chars like ? & =
+
+	if (GetConfig('html/item_page/toolbox_publish') && $file{'file_path'} && $file{'item_type'} eq 'txt') {
+		require_once('dialog/toolbox_item_publish.pl');
+		my $dialogToolboxPublish = GetDialogToolboxItemPublish($file{'file_path'}, $file{'file_hash'});
+		if ($dialogToolboxPublish) {
+			$dialogToolboxPublish = '<span class=advanced>' . $dialogToolboxPublish . '</span>';
+			$html .= $dialogToolboxPublish;
+		}
 	}
-
-	if (
-		GetConfig('html/item_page/toolbox_publish') &&
-		$urlParamFullText &&
-		length($urlParamFullText) < 2048
-	) {
-		my $htmlToolbox = '';
-
-		$htmlToolbox .= "<p>";
-		#$htmlToolbox .= '<b>Publish:</b><br>';
-
-		#$htmlToolbox = GetPublishButton('localhost:2784', $file{'file_path'});
-
-		$htmlToolbox .=
-			'<a href="http://localhost:2784/post.html?comment=' .
-			$urlParamFullText .
-			'">' .
-			'localhost:2784' .
-			'</a><br>' . "\n";
-
-		$htmlToolbox .=
-			'<a href="http://localhost:31337/post.html?comment=' .
-			$urlParamFullText .
-			'">' .
-			'diary' .
-			'</a><br>' . "\n";
-
-		$htmlToolbox .=
-			'<a href="http://www.rocketscience.click/post.html?comment=' .
-			$urlParamFullText .
-			'">' .
-			'RocketScience' .
-			'</a><br>' . "\n";
-
-		$htmlToolbox .=
-			'<a href="http://www.shitmyself.com/post.html?comment=' .
-			$urlParamFullText .
-			'">' .
-			'sHiTMyseLf' .
-			'</a><br>' . "\n";
-
-		$htmlToolbox .=
-			'<a href="http://qdb.us/post.html?comment=' .
-			$urlParamFullText .
-			'">' .
-			'qdb.us' .
-			'</a><br>' . "\n";
-		;
-		
-		my $htmlToolboxWindow = '<span class=advanced>' . GetWindowTemplate($htmlToolbox, 'Publish') . '</span>';
-		$html .= $htmlToolboxWindow;
-
-	} else {
-		#$htmlToolbox .= "";
-	}
-
 
 	if (GetConfig('html/item_page/toolbox_share')) {
 		my $htmlToolbox = '';
