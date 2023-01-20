@@ -165,6 +165,14 @@ function SqliteGetValue ($query) { # Returns the first column from the first row
 	return $result;
 } # SqliteGetValue()
 
+function IsFingerprint($key) {
+	if (preg_match('/^([A-F0-9]{16})$/', $key, $itemHashMatch)) {
+		return 1;
+	} else {
+		return 0;
+	}
+} # IsFingerprint()
+
 function DBGetAuthorAlias ($key) { # returns author's alias
 // 	if (!IsFingerprint($key)) {
 // 		WriteLog('DBGetAuthorAlias: warning: called with invalid parameter! returning');
