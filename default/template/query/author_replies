@@ -14,5 +14,6 @@ WHERE
 			WHERE author_key = ?
 		)
 	) AND
-	author_key != ?
+	author_key != ? AND
+	add_timestamp >= strftime('%s', 'now', '-3 day')
 ORDER BY add_timestamp DESC
