@@ -47,6 +47,8 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 	push @indexMessageLog, 'indexing begins';
 
+	my @authorsToNotify;
+
 	state $maxFileSize = GetConfig('setting/admin/index/max_text_file_size') || 16000;
 	if (-s $file > $maxFileSize) {
 		# this is done primarily to eliminate binary files accidentally named .txt
@@ -442,6 +444,18 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 				} #param
 			} # foreach
 		} # second pass, look for cookie, parent, auth
+
+		if (scalar(@itemParents)) {
+			foreach my $itemParent (@itemParents) {
+				my $authorItemParent = DBGetItemAuthor($itemParent);
+				if ($authorItemParent && GetConfig('setting/admin/php/cookie_inbox')) {
+					WriteLog('IndexTextFile: $authorItemParent = ' . $authorItemParent . ' for: ' . $itemParent);
+					push @authorsToNotify, $authorItemParent;
+				} else {
+					WriteLog('IndexTextFile: $authorItemParent NOT FOUND for: ' . $itemParent);
+				}
+			}
+		}
 
 		WriteLog('IndexTextFile: %hasToken: ' . join(',', keys(%hasToken)));
 
@@ -931,18 +945,13 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 				}
 			} # hash tags applied to parent items
 
+			#if (GetConfig('setting/admin/php/cookie_inbox')) { #todo
 			if (scalar(@itemParents)) {
-				my @authorsNotified;
 				foreach my $itemParent (@itemParents) {
 					my $authorItemParent = DBGetItemAuthor($itemParent);
 					if ($authorItemParent && GetConfig('setting/admin/php/cookie_inbox')) {
 						WriteLog('IndexTextFile: $authorItemParent = ' . $authorItemParent . ' for: ' . $itemParent);
-						#if (!in_array($authorItemParent, @authorsNotified)) {
-						#only do this once for each parent item
-						require_once('dialog/author_replies.pl');
-						PutAuthorRepliesDialog($authorItemParent);
-						push @authorsNotified, $authorItemParent;
-						#}
+						push @authorsToNotify, $authorItemParent;
 					} else {
 						WriteLog('IndexTextFile: $authorItemParent NOT FOUND for: ' . $itemParent);
 					}
@@ -1066,6 +1075,18 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 	if (scalar(@indexMessageLog)) {
 		my $indexLog = join("\n", @indexMessageLog);
 		PutCache('index_log/' . $fileHash, $indexLog); # parse_log parse.log ParseLog
+	}
+
+	if (GetConfig('setting/admin/php/cookie_inbox')) {
+		IndexTextFile('flush');
+		my @authorsNotified;
+		foreach my $authorToNotify (@authorsToNotify) {
+			if (!in_array($authorToNotify, @authorsNotified)) {
+				require_once('dialog/author_replies.pl');
+				PutAuthorRepliesDialog($authorToNotify);
+				push @authorsNotified, $authorToNotify;
+			}
+		}
 	}
 
 	if (GetConfig('admin/index/expire_html_when_indexing')) {
