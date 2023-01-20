@@ -61,7 +61,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	WriteMessage('MakePage(' . $pageType . ', ' . $pageParam . ')');
 	WriteLog('MakePage(' . $pageType . ', ' . $pageParam . '); caller = ' . join(',', caller));
 
-	my @listingPages = qw(child chain url deleted compost new raw picture image read authors scores tags threads boxes tasks);
+	my @listingPages = qw(child chain url deleted compost new raw picture image read authors scores tags threads boxes tasks active);
 	#chain.html #new.html #boxes.html #tasks.html
 	my @simplePages = qw(spy data cloud bookmark help example access welcome calendar profile upload links post cookie chat thanks examples about faq documentation);
 

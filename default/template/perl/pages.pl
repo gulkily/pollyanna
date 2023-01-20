@@ -1069,6 +1069,8 @@ sub MakeSummaryPages { # generates and writes all "summary" and "static" pages S
 	# Add Authors page
 	MakePage('authors', 0); # authors.html
 
+	MakePage('active', 0); # active.html
+
 	MakePage('scores', 0); # scores.html
 
 	MakePage('read', 0);

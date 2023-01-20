@@ -152,6 +152,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'chain', # chain.html
 			'url', # url.html
 			'authors', # authors.html
+			'active', # active.html
 			'scores', # scores.html
 			'threads', # threads.html
 			'boxes', #banana #todo
