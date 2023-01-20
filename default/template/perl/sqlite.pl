@@ -2198,6 +2198,8 @@ sub DBGetAuthorScore { # returns author's total score
 		return '';
 	}
 
+	WriteLog('DBGetAuthorScore(' . $key . '); caller = ' . join(',', caller));
+
 	state %scoreCache;
 	if (exists($scoreCache{$key})) {
 		return $scoreCache{$key};
