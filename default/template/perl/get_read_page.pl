@@ -440,6 +440,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 				if ($message) {
 	#				$row->{'show_quick_vote'} = 1;
 					$row->{'trim_long_text'} = 1;
+					$row->{'format_avatars'} = 1;
 
 					WriteLog('GetReadPage: GetItemTemplate($row)');
 
