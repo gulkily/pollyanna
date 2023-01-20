@@ -90,6 +90,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fieldName eq 'gpg_id'
 	) {
 		# turn author key into linked avatar
+		require_once('widget/author_link.pl');
 		if ($longMode) {
 			$fieldValue = GetAuthorLink($fieldValue) . ' <tt class=advanced> ' . $fieldValue . '</tt>';
 		} else {
@@ -322,6 +323,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 				# title, tags list, and author avatar (if any)
 				# special_title_tags_list_author
 				# this should become a template
+				require_once('widget/author_link.pl');
 				$fieldValue =
 					'<b>' .
 						GetItemHtmlLink($itemRow{'file_hash'}, $itemRow{'item_title'}) .

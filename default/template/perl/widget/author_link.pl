@@ -7,6 +7,8 @@ sub GetAuthorLink { # $fingerprint, $showPlain ; returns avatar'ed link for an a
 	my $fingerprint = shift; # author's fingerprint
 	my $showPlain = shift; # 1 to display avatar without colors
 
+	require_once('widget/avatar.pl');
+
 	# sanitize $showPlain
 	if (!$showPlain) {
 		$showPlain = 0;
