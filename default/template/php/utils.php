@@ -1043,7 +1043,9 @@ function GetActiveThemes () { # return list of active themes (config/setting/the
 		}
 		return $activeThemes;
 	} else {
-		WriteLog('GetActiveThemes: warning: $themesValue is FALSE; caller = ' . join(',', caller));
+		$dbt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS,2);
+		$caller = isset($dbt[1]['function']) ? $dbt[1]['function'] : 'caller_missing';
+		WriteLog('GetActiveThemes: warning: $themesValue is FALSE; caller = ' . $caller);
 		return '';
 	}
 } # GetActiveThemes()
