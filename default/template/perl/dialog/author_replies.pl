@@ -33,10 +33,11 @@ sub GetAuthorRepliesDialog { # $authorKey
 	#my $hashRef = SqliteQueryHashRef('author_replies', @queryParams);
 	#my @authorReplies = @{$hashRef};
 
+	require_once('dialog/query_as_dialog.pl');
 	my $dialog = GetQueryAsDialog($authorRepliesQuery, $dialogTitle);
 
 	return $dialog;
-}
+} # GetAuthorRepliesDialog()
 
 sub MakeAuthorRepliesDialog { # $authorKey
 	my $authorKey = shift;
