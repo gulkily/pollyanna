@@ -507,6 +507,128 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 } # GetThemeAttribute()
 
 
+sub GetThemeColor { # returns theme color based on setting/theme
+	my $colorName = shift;
+	chomp $colorName;
+
+	if ($colorName eq 'link' || $colorName eq 'vlink') {
+		$colorName .= '_text';
+	}
+
+	if (GetConfig('html/monochrome')) { # GetThemeColor()
+		if (index(lc($colorName), 'text') != -1 || index(lc($colorName), 'link') != -1) {
+			if (index(lc($colorName), 'back') != -1) {
+				return GetConfig('html/color/background'); # #BackgroundColor
+			} else {
+				return GetConfig('html/color/text'); # #TextColor
+			}
+		} else {
+			return GetConfig('html/color/background'); # #BackgroundColor
+		}
+	}
+
+	if (GetConfig('html/mourn')) { # GetThemeColor()
+		if (index(lc($colorName), 'text') != -1 || index(lc($colorName), 'link') != -1) {
+			if (index(lc($colorName), 'back') != -1) {
+				return '#000000'; # #BackgroundColor
+			} else {
+				return '#c0c0c0'; # #TextColor
+			}
+		} else {
+			return '#000000'; # #BackgroundColor
+		}
+	}
+
+	$colorName = 'color/' . $colorName;
+	my $color = GetThemeAttribute($colorName);
+
+	if (!defined($color) || $color eq '') {
+		if (GetConfig('html/mourn')) { # GetThemeColor()
+			$color = '#000000';
+		} else {
+			$color = '#00ff00';
+		}
+		WriteLog('GetThemeColor: warning: value not found, $colorName = ' . $colorName . '; caller = ' . join(',', caller));
+	}
+
+	if ($color =~ m/^[0-9a-fA-F]{6}$/) {
+		$color = '#' . $color;
+	}
+
+	return $color;
+} # GetThemeColor()
+
+sub FillThemeColors { # $html ; fills in templated theme colors in provided html
+#todo think about whether this should be in html.pl? it just does so much more config stuff than html stuff... and it may be used for something other than html
+	my $html = shift;
+	chomp($html);
+
+	my $colorTagNegativeText = GetThemeColor('tag_negative_text');
+	$html =~ s/\$colorTagNegativeText/$colorTagNegativeText/g;
+
+	my $colorTagPositiveText = GetThemeColor('tag_positive_text');
+	$html =~ s/\$colorTagPositiveText/$colorTagPositiveText/g;
+
+	my $colorInputBackground = GetThemeColor('input_background');
+	$html =~ s/\$colorInputBackground/$colorInputBackground/g;
+
+	my $colorInputText = GetThemeColor('input_text');
+	$html =~ s/\$colorInputText/$colorInputText/g;
+
+	my $colorRow0Bg = GetThemeColor('row_0');
+	$html =~ s/\$colorRow0Bg/$colorRow0Bg/g;
+
+	my $colorRow1Bg = GetThemeColor('row_1');
+	$html =~ s/\$colorRow1Bg/$colorRow1Bg/g;
+
+	my $colorHighlightAlert = GetThemeColor('highlight_alert');
+	$html =~ s/\$colorHighlightAlert/$colorHighlightAlert/g;
+
+	my $colorHighlightBeginner = GetThemeColor('highlight_beginner');
+	$html =~ s/\$colorHighlightBeginner/$colorHighlightBeginner/g;
+
+	my $colorHighlightAdvanced = GetThemeColor('highlight_advanced');
+	$html =~ s/\$colorHighlightAdvanced/$colorHighlightAdvanced/g;
+
+	my $colorHighlightReady = GetThemeColor('highlight_ready');
+	$html =~ s/\$colorHighlightReady/$colorHighlightReady/g;
+	#
+	# my $colorWindow = GetThemeColor('window');
+	# $html =~ s/\$colorWindow/$colorWindow/g;
+
+	my $colorDialogHeading = GetThemeColor('dialog_heading');
+	$html =~ s/\$colorDialogHeading/$colorDialogHeading/g;
+
+	my @colors = qw(primary secondary background text link vlink window);
+	for my $color (@colors) {
+		#todo my @array1 = map ucfirst, @array;
+		my $templateToken = '$color' . ucfirst($color);
+		$html = str_replace($templateToken, GetThemeColor($color), $html);
+	}
+	# there are two issues with replacing below with above
+	# a) searching for template token in code wouldn't find this section
+	# b)
+	# my $colorPrimary = GetThemeColor('primary');
+	# $html =~ s/\$colorPrimary/$colorPrimary/g;
+	#
+	# my $colorSecondary = GetThemeColor('secondary');
+	# $html =~ s/\$colorSecondary/$colorSecondary/g;
+	#
+	# my $colorBackground = GetThemeColor('background');
+	# $html =~ s/\$colorBackground/$colorBackground/g;
+	#
+	# my $colorText = GetThemeColor('text');
+	# $html =~ s/\$colorText/$colorText/g;
+	#
+	# my $colorLink = GetThemeColor('link');
+	# $html =~ s/\$colorLink/$colorLink/g;
+	#
+	# my $colorVlink = GetThemeColor('vlink');
+	# $html =~ s/\$colorVlink/$colorVlink/g;
+
+	return $html;
+} # FillThemeColors()
+
 if (0) { #tests
 	require('./utils.pl');
 	require_once('./sqlite.pl');

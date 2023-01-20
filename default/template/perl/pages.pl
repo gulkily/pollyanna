@@ -123,56 +123,7 @@ sub RenderLink {
 
 require_once('render_field.pl');
 
-sub GetQueryAsDialog { # $query, $title, $columns, \%param
-# runs specified query and returns it as a dialog using GetResultSetAsDialog()
-# this has some special conditions for GetAttributesDialog()
-#todo this should report query error
-#todo this should take @queryArgs
-
-# sub GetQueryDialog {
-	my $query = shift;
-	my $title = shift;
-	my $columns = shift; # optional, default is to use all the columns from the query
-
-	my $paramHashRef = shift;
-	my %flags;
-	if ($paramHashRef) {
-		%flags = %{$paramHashRef};
-	}
-
-	WriteLog('GetQueryAsDialog(' . $query . '); caller = ' . join(',', caller));
-
-	if (!$query) {
-		WriteLog('GetQueryAsDialog: warning: $query is FALSE; caller = ' . join(',', caller));
-		return '';
-	}
-	if (!$title) {
-		WriteLog('GetQueryAsDialog: warning: $title is FALSE; caller = ' . join(',', caller));
-		$title = 'Untitled';
-	}
-
-	# 	$query = SqliteGetQueryTemplate("$query");
-
-	$flags{'query'} = $query;
-
-	if (index($query, ' ') == -1) {
-		WriteLog('GetQueryAsDialog: adding $flags{id}');
-		$flags{'id'} = $query;
-	} else {
-		WriteLog('GetQueryAsDialog: $query contains space, skipping addition of $flags{id}');
-	}
-
-	my @result  = SqliteQueryHashRef($query);
-
-	#WriteLog('GetQueryAsDialog: $query = ' . $query . '; calling GetResultSetAsDialog()');
-	#commented because it prints a lot
-
-	if (scalar(@result) < 2 && $flags{'no_empty'}) {
-		return '';
-	} else {
-		return GetResultSetAsDialog(\@result, $title, $columns, \%flags);
-	}
-} # GetQueryAsDialog()
+require_once('dialog/query_as_dialog.pl');
 
 sub LightenColor { # $color ; returns a lightened version of a color
 	my $color = shift;

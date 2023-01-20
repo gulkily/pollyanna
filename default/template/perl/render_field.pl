@@ -163,6 +163,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 				#todo there's a bug here
 				#Use of uninitialized value in concatenation (.) or string at ...render_field.pl line 138.
 			} else {
+				require_once('widget/item_html_link.pl');
 				$fieldValue = '<b>' . GetItemHtmlLink($itemRow{'file_hash'}, $fieldValue) . '</b>';
 			}
 		}
