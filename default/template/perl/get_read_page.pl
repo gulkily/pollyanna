@@ -3,9 +3,9 @@
 use strict;
 use warnings;
 
-sub GetReadPage { # generates page with item listing based on parameters
+sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with item listing based on parameters
 	# GetReadPage
-	#   $pageType, $parameter
+	#   $pageType, $parameter1, $parameter2
 	#		author, key/hash
 	#		tag, tag name/value
 	#		date, date in YYYY-MM-DD format
@@ -32,6 +32,8 @@ sub GetReadPage { # generates page with item listing based on parameters
 	my $queryDisplay = '';
 
 	if (defined($pageType)) {
+		WriteLog('GetReadPage($pageType = ' . $pageType . '); caller = ' . join(',', caller));
+
 		#$pageType can be 'author', 'tag', 'date'
 
 		if ($pageType eq 'author') {
