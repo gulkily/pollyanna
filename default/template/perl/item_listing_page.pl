@@ -124,7 +124,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 	chomp $pageMode;
 	chomp $pageNumber;
 
-	WriteLog('GetItemListingPage: $pageQuery = ' . $pageQuery . '; $pageMode = ' . $pageMode . '; $pageNumber = ' . $pageNumber);
+	WriteLog('GetItemListingPage($pageQuery = ' . $pageQuery . '; $pageMode = ' . $pageMode . '; $pageNumber = ' . $pageNumber . '); caller = ' . join(',', caller));
 
 	my $queryDisplayName = $pageQuery . '.sql';
 
