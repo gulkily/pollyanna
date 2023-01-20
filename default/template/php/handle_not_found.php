@@ -275,6 +275,13 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		}
 
 		if (
+			$path == '/dialog/active.html'
+		) {
+			WriteLog('HandleNotFound: found active dialog');
+			$pagesPlArgument = '-D active';
+		}
+
+		if (
 			$path == '/dialog/scores.html'
 		) {
 			WriteLog('HandleNotFound: found scores dialog');
