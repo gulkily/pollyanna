@@ -47,7 +47,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 	push @indexMessageLog, 'indexing begins';
 
-	my @authorsToNotify;
+	my @authorsToNotify; #todo make this a queue or something?
 
 	state $maxFileSize = GetConfig('setting/admin/index/max_text_file_size') || 16000;
 	if (-s $file > $maxFileSize) {
@@ -444,6 +444,12 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 				} #param
 			} # foreach
 		} # second pass, look for cookie, parent, auth
+
+		push @authorsToNotify, $authorKey;
+		# when item has an author, also update the author's inbox,
+		# in case they're replying to a reply in their inbox
+		# this could be limited to only replies to author's own comments
+		# but I think it would take longer to check than to just do it
 
 		if (scalar(@itemParents)) {
 			foreach my $itemParent (@itemParents) {
