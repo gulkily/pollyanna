@@ -531,6 +531,20 @@ function GetCookie (cname) { // get cookie value
 	return "";
 } // GetCookie()
 
+function GetParentElement (el, parentTagName) {
+// #todo maybe make this more flexible?
+	if (el) {
+		var parentElement = el;
+		while (parentElement && (parentElement.tagName != parentTagName)) {
+			parentElement = parentElement.parentElement;
+		}
+		if (parentElement) {
+			return parentElement;
+		}
+	}
+	return '';
+} // GetParentElement()
+
 function UnmaskBlurredImages () {
 	var im = document.images;
 	if (im) {
