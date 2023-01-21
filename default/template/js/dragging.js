@@ -412,6 +412,7 @@ function GetParentDialog (el) {
 			return parentDialog;
 		}
 	}
+	return '';
 } // GetParentDialog()
 
 function SetContainingDialogActive (ths) { // sets active dialog based on control which received focus
