@@ -112,6 +112,7 @@ sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons f
 		@quickVotesList = keys %dedupe;
 	}
 
+	require_once('widget/stylesheet.pl');
 	my $styleSheet = GetStylesheet(); # for looking up which vote buttons need a class=
 	# if they're listed in the stylesheet, add a class= below
 	# the class name is tag-foo, where foo is tag
