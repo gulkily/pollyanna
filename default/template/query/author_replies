@@ -1,8 +1,7 @@
 SELECT
 	file_hash,
 	item_title,
-	add_timestamp,
-	'' AS tagset_inbox
+	add_timestamp
 FROM item_flat
 WHERE
 	file_hash in (
