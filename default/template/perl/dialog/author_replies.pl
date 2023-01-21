@@ -35,7 +35,11 @@ sub GetAuthorRepliesDialog { # $authorKey
 	#my @authorReplies = @{$hashRef};
 
 	require_once('dialog/query_as_dialog.pl');
-	my $dialog = GetQueryAsDialog($authorRepliesQuery, $dialogTitle);
+
+	my %dialogFlags;
+	$dialogFlags{'no_no_results'} = 1;
+
+	my $dialog = GetQueryAsDialog($authorRepliesQuery, $dialogTitle, '', \%dialogFlags);
 
 	return $dialog;
 } # GetAuthorRepliesDialog()
