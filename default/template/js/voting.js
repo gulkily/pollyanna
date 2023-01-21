@@ -73,7 +73,7 @@ function IncrementTagLink (t) { // increments number of votes in tag button
 
 		var voteValue = t.innerHTML.substring(0, t.innerHTML.indexOf('('));
 
-		//alert('DEBUG: IncrementTagLink: voteValue = ' + voteValue);
+		//alert('DEBUG: IncrementTagLink: voteValue = "' + voteValue + '"');
 
 		if (voteValue == 'hide' && window.GetParentDialog) {
 			// if we clicked a 'hide' vote, hide the parent dialog
@@ -85,7 +85,7 @@ function IncrementTagLink (t) { // increments number of votes in tag button
 		//alert('DEBUG: IncrementTagLink: finished with t.innerHTML');
 
 		return false;
-	}
+	} // if (t.innerHTML)
 
 	return true;
 } // IncrementTagLink()
