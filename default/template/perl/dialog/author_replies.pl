@@ -25,6 +25,7 @@ sub GetAuthorRepliesDialog { # $authorKey
 	my @queryParams;
 	push @queryParams, $authorKey;
 	push @queryParams, $authorKey;
+	push @queryParams, $authorKey;
 	my $authorRepliesQuery = SqliteGetNormalizedQueryString('author_replies', @queryParams);
 
 	my $authorAlias = DBGetAuthorAlias($authorKey);
