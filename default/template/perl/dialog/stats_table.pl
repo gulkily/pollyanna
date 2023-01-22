@@ -57,7 +57,10 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 	}
 
 	my $serverId = '';#GetServerKey();
-	my $serverLink = GetAuthorLink($serverId);
+	my $serverLink = '';
+	if ($serverId) {
+		$serverLink = GetAuthorLink($serverId);
+	}
 
 	my $versionFull = GetMyVersion();
 	my $versionSuccinct = substr($versionFull, 0, 8);
