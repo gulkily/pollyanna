@@ -414,9 +414,6 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			This is a public key, <br>
 			which creates a profile placeholder, <br>
 			and allows verifying other posts. <br>
-			<br>
-			Name: $pubKeyFingerprint <br>
-			Hash: $pubKeyHash <br>
 		";#todo templatify and make a table with a caption above?
 
 		$txtIndex .= GetWindowTemplate(
@@ -556,7 +553,8 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			}
 		} else {
 			if (GetConfig('debug')) {
-				$txtIndex .= GetWindowTemplate('No related items for $file{\'file_hash\'} =  ' . $file{'file_hash'}, 'Debug');
+				# $txtIndex .= GetWindowTemplate('No related items for $file{\'file_hash\'} =  ' . $file{'file_hash'}, 'Debug');
+				$txtIndex .= GetWindowTemplate('No related items for <br>' . $file{'file_hash'}, 'Debug Notice');
 			}
 		}
 	}
