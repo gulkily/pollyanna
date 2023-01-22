@@ -50,14 +50,33 @@ function afterKeygen () {
 
 	sharePubKey();
 
-	var signedPuzzle = signMessageBasic(myMessage, document.compose.comment, 'sendSignedMessage()');
+	if (document.compose && document.compose.comment) {
+		// we already have a compose form with a comment field, everything is cool
+	} else {
+		// we need to create a form
+		var newForm = document.createElement('form');
+		newForm.setAttribute('method', 'GET');
+		newForm.setAttribute('action', '/post.html');
+		newForm.setAttribute('name', 'compose');
+		var newComment = document.createElement('input');
+		newComment.setAttribute('name', 'comment');
+		newComment.setAttribute('type', 'hidden');
+		newForm.appendChild(newComment);
+		document.body.appendChild(newForm);
+	}
 
-	//alert('DEBUG: EasyMember: signedPuzzle = ' + signedPuzzle);
+	if (document.compose && document.compose.comment) {
+		var signedPuzzle = signMessageBasic(myMessage, document.compose.comment, 'sendSignedMessage()');
+		//alert('DEBUG: EasyMember: signedPuzzle = ' + signedPuzzle);
+		//comment.value = signedPuzzle;
+		//compose.submit();
+	} else {
+		//alert('DEBUG: EasyMember: warning: form was missing');
+		return '';
+	}
 
-	//comment.value = signedPuzzle;
-
-	//compose.submit();
-}
+	return ''; // #todo is this right?
+} // afterKeygen()
 
 function sendSignedMessage () {
 
