@@ -7,7 +7,7 @@ use 5.010;
 sub GetWelcomePage {
 	my $html =
 		GetPageHeader('welcome') .
-		GetWindowTemplate(GetTemplate('html/page/welcome.template'), '') . # this is a bit of a hack, should really not be a titlebar
+		GetWindowTemplate(GetTemplate('html/page/welcome.template'), 'Welcome') .
 		#GetWindowTemplate(GetTemplate('html/page/content.template'), 'Please Share') .
 		#GetWindowTemplate(GetTemplate('html/page/rules.template'), 'Ground Rules') .
 		#GetWindowTemplate(GetTemplate('html/page/privacy.template'), 'Privacy') .
