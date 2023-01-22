@@ -1987,18 +1987,21 @@ sub IsDate {
 	}
 } # IsDate()
 
-sub IsFingerprint { # returns 1 if parameter is a user fingerprint, 0 otherwise
+sub IsFingerprint { # returns valid fingerprint if parameter is a valid user fingerprint, 0 otherwise
 # sub IsAuthor {
 # sub IsPubKey {
 	my $string = shift;
 
 	if (!$string) {
+		WriteLog('IsFingerprint: warning: $string is FALSE; caller = ' . join(',', caller));
 		return 0;
 	}
 
-	if ($string =~ m/[A-F0-9]{16}/) {
-		return 1;
+	if ($string =~ m/^([A-F0-9]{16})$/) {
+		WriteLog('IsFingerprint(' . $string . ') = ' . $1 . '; caller = ' . join(',', caller));
+		return $1;
 	} else {
+		WriteLog('IsFingerprint(' . $string . ') = FALSE; caller = ' . join(',', caller));
 		return 0;
 	}
 } # IsFingerprint()

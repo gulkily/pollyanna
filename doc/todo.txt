@@ -34,10 +34,6 @@ notify user of anything they may want to see
 
 ===
 
-IsFingerprint() should return sanitized author key, just like IsItem()
-
-===
-
 add recovery from this warning:
 	GetItemDetokenedMessage: warning: NO FILE: $messageCacheName =
 		a) search for matching file in htmlt/xt
