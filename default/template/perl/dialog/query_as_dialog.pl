@@ -49,8 +49,12 @@ sub GetQueryAsDialog { # $query, $title, $columns, \%param
 	#commented because it prints a lot
 
 	if (scalar(@result) < 2 && $flags{'no_empty'}) {
+		# if scalar(@result) is less than 2, that means there are no results
+		# it is 2 and not 1 because the first row returns the column names
+		# if no_empty flag is set, we want to return an empty string here
 		return '';
 	} else {
+		# everything seems good, get our dialog and return it
 		return GetResultSetAsDialog(\@result, $title, $columns, \%flags);
 	}
 } # GetQueryAsDialog()
