@@ -30,7 +30,7 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 		#todo sanity checks and check against list of allowed/supported
 	}
 
-	WriteLog('GetResultSetAsDialog: $title = ' . ($title ? $title : 'FALSE') . '; caller: ' . join(', ', caller) . '; $columns = ' . ($columns ? $columns : 'FALSE'));
+	WriteLog('GetResultSetAsDialog($title = ' . ($title ? $title : 'FALSE') . '; caller: ' . join(', ', caller) . '; $columns = ' . ($columns ? $columns : 'FALSE') . ')');
 
 	# PARAMETERS FISHING ENDS
 	##############################################################
