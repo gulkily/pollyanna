@@ -1820,7 +1820,8 @@ while (my $arg1 = shift @foundArgs) {
 			my $makeDialogArg = shift @foundArgs;
 			#todo sanity check of $makeDialogArg
 			if ($makeDialogArg) {
-				if ($makeDialogArg eq 'settings') {
+				if (0) { }
+				elsif ($makeDialogArg eq 'settings') {
 					my $dialog = GetSettingsDialog();
 					print ("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/settings.html', $dialog);
