@@ -348,3 +348,20 @@ UNION ALL
 )
 GROUP BY file_hash
 ORDER BY score_relative DESC;
+
+
+CREATE VIEW author_alias_valid AS
+SELECT
+	author_alias.key AS author_key,
+	author_alias.alias AS alias,
+	author_alias.fingerprint AS fingerprint,
+	author_alias.file_hash AS file_hash
+FROM
+	author_alias
+WHERE
+	file_hash IN (
+		SELECT file_hash
+		FROM vote
+		WHERE vote_value IN ('approve', 'vouch')
+	)
+
