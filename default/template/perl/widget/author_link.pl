@@ -16,6 +16,11 @@ sub GetAuthorLink { # $fingerprint, $showPlain ; returns avatar'ed link for an a
 		$showPlain = 1;
 	}
 
+	if (!$fingerprint) {
+		WriteLog('GetAuthorLink: warning: $fingerprint is missing; caller = ' . join(',', caller));
+		return '';
+	}
+
 	# verify $fingerprint is valid
 	if (!IsFingerprint($fingerprint)) {
 		WriteLog('GetAuthorLink: warning: sanity check failed on $fingerprint = ' . ($fingerprint ? $fingerprint : 'FALSE') . '; caller: ' . join(',', caller));
