@@ -5,6 +5,7 @@ use warnings;
 
 
 sub GetWelcomePage {
+	require_once('page/profile.pl'); # GetProfileDialog()
 	my $welcomePage =
 		GetPageHeader('welcome') .
 			GetWindowTemplate(GetTemplate('html/page/welcome.template'), 'Welcome') .
