@@ -155,12 +155,12 @@ function sharePubKey (t) { // shares current user's public key via injected form
 		if (pubKey) {
 			if (window.displayNotification) {
 				if (t) {
-					displayNotification('Creating profile...', t);
+					displayNotification('Profile created', t);
 				} else {
 					// #todo this appears at the bottom of the page
 					// probably not visible to most users
 					// so the redirect is a surprise
-					displayNotification('Creating profile...');
+					displayNotification('Profile created');
 				}
 			}
 
