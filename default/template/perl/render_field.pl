@@ -89,12 +89,17 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fieldName eq 'cookie_id' ||
 		$fieldName eq 'gpg_id'
 	) {
-		# turn author key into linked avatar
-		require_once('widget/author_link.pl');
-		if ($longMode) {
-			$fieldValue = GetAuthorLink($fieldValue) . ' <tt class=advanced> ' . $fieldValue . '</tt>';
+		if ($fieldValue) {
+			# turn author key into linked avatar
+			require_once('widget/author_link.pl');
+			if ($longMode) {
+				$fieldValue = GetAuthorLink($fieldValue) . ' <tt class=advanced> ' . $fieldValue . '</tt>';
+			} else {
+				$fieldValue = GetAuthorLink($fieldValue);
+			}
 		} else {
-			$fieldValue = GetAuthorLink($fieldValue);
+			WriteLog('RenderField: warning: $fieldValue was FALSE, not calling GetAuthorLink()');
+			$fieldValue = 'Guest'; #todo is this right?
 		}
 	}
 
