@@ -236,6 +236,7 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 					}
 					return false;
 				");
+				require_once('inject_js.pl');
 				$windowTitlebar = InjectJs($windowTitlebar, qw(titlebar_with_button));
 			}
 
