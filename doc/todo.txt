@@ -1,3 +1,10 @@
+fresh.js should be more persistent
+	when a page goes 404, check less frequently, but still check now and then
+	gradually reduce frequency of checks after a while
+		(see metafilter article)
+
+===
+
 how to thorough cache invalidation basic
 	item's page
 	item's author's page
