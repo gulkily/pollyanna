@@ -83,7 +83,7 @@ sub GetServerConfigDialog { #$dialogTitle/$formId, $listOfFields# makes a dialog
 
 	$html .= '<tr><td colspan=2 align=center>- <input type=submit value=Preview> -</td></tr>';
 
-	$html = GetWindowTemplate($html, $dialogTitle, 'setting,value');
+	$html = GetDialogX($html, $dialogTitle, 'setting,value');
 
 	my $formId = 'frm' . $dialogTitle; #todo make this smell better
 

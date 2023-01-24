@@ -1477,14 +1477,14 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 				if (GetConfig('debug')) {
 					#$messageNotification .= '<br><form><textarea>'.HtmlEscape('<script>alert()</script>').'</textarea></form>';
 				}
-				$content = str_ireplace('</body>', GetWindowTemplate($messageNotification, 'Notice') . '</body>', $content);
+				$content = str_ireplace('</body>', GetDialogX($messageNotification, 'Notice') . '</body>', $content);
 			}
 		}
 	}
 
 
 	if (0) { #todo quick-write setting #quickwrite #quick-write #quick_write
-		my $quickWriteWindow = GetWindowTemplate(GetTemplate('html/form/write/write-quick.template'), 'Quick-Write');
+		my $quickWriteWindow = GetDialogX(GetTemplate('html/form/write/write-quick.template'), 'Quick-Write');
 		$quickWriteWindow =
 			'<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>' .
 			$quickWriteWindow .

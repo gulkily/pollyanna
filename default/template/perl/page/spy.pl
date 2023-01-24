@@ -8,7 +8,7 @@ sub GetSpyPage { # returns html for settings page (/settings.html)
 
 	$txtIndex = GetPageHeader('spy');
 
-	$txtIndex .= GetWindowTemplate(GetTemplate('html/widget/spy.template'), 'Dialog');
+	$txtIndex .= GetDialogX(GetTemplate('html/widget/spy.template'), 'Dialog');
 
 	$txtIndex .= GetPageFooter('spy');
 

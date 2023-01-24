@@ -7,16 +7,16 @@ use 5.010;
 sub GetWelcomePage {
 	my $html =
 		GetPageHeader('welcome') .
-		GetWindowTemplate(GetTemplate('html/page/welcome.template'), 'Welcome') .
-		# #GetWindowTemplate(GetTemplate('html/page/content.template'), 'Please Share') .
-		# #GetWindowTemplate(GetTemplate('html/page/rules.template'), 'Ground Rules') .
-		# #GetWindowTemplate(GetTemplate('html/page/privacy.template'), 'Privacy') .
-		# #GetWindowTemplate(GetTemplate('html/form/emergency.template'), 'Emergency Contact Form') .
+		GetDialogX(GetTemplate('html/page/welcome.template'), 'Welcome') .
+		# #GetDialogX(GetTemplate('html/page/content.template'), 'Please Share') .
+		# #GetDialogX(GetTemplate('html/page/rules.template'), 'Ground Rules') .
+		# #GetDialogX(GetTemplate('html/page/privacy.template'), 'Privacy') .
+		# #GetDialogX(GetTemplate('html/form/emergency.template'), 'Emergency Contact Form') .
 		# '<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>' .
 		# GetWriteForm('Contribute', 'Write something here, please:') .
 		# '</form>' . #todo unhack this
-		GetWindowTemplate(GetTemplate('html/form/guest.template'), 'Guest') .
-		GetWindowTemplate(GetTemplate('html/form/enter.template'), 'Create Profile') .
+		GetDialogX(GetTemplate('html/form/guest.template'), 'Guest') .
+		GetDialogX(GetTemplate('html/form/enter.template'), 'Create Profile') .
 		GetPageFooter('welcome')
 	;
 

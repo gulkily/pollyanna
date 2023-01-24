@@ -890,13 +890,14 @@ function RedirectWithResponse ($url, $message) { // redirects to page with serve
 	}
 } # RedirectWithResponse()
 
-function GetWindowTemplate ( # body, title, headings, status, menu
+function GetDialogX ( # body, title, headings, status, menu
 	$windowBody,
 	$windowTitle = '',
 	$columnHeadings = '',
 	$windowStatus = '',
 	$windowMenubarContent = ''
 ) { // returns html for window template
+# function GetWindowTemplate {
 // uses template/window/standard.template by default
 
 	// stores number of columns if they exist
@@ -910,13 +911,13 @@ function GetWindowTemplate ( # body, title, headings, status, menu
 	$windowTemplate = GetTemplate('html/window/standard.template');
 
 	$showButtons = GetConfig('html/window_titlebar_buttons'); # titlebar hide and skip buttons;
-	WriteLog('GetWindowTemplate: $showButtons = ' . $showButtons);
+	WriteLog('GetDialogX: $showButtons = ' . $showButtons);
 
 	// titlebar, if there's a title
 	if ($windowTitle) {
 		//
 		// 		if ($showButtons && GetConfig('admin/js/dragging')) {
-		// 			WriteLog('GetWindowTemplate: $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle . '; dragging = ' . GetConfig('admin/js/dragging'));
+		// 			WriteLog('GetDialogX: $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle . '; dragging = ' . GetConfig('admin/js/dragging'));
 		//
 		// 			$btnCloseCaption = '{-}'; # needs to match one other place in dragging.js #collapseButton
 		// 			$windowTitlebar = GetTemplate('html/window/titlebar_with_button.template'); #window_titlebar_buttons
@@ -1024,7 +1025,7 @@ function GetWindowTemplate ( # body, title, headings, status, menu
 	$windowTemplate = str_replace('$windowAnchor', '', $windowTemplate);
 
 	return $windowTemplate;
-} # GetWindowTemplate()
+} # GetDialogX()
 
 function GetActiveThemes () { # return list of active themes (config/setting/theme)
 # function GetThemes () {
@@ -1726,7 +1727,7 @@ function GetItemHtmlLink ($hash, $linkCaption, $hashAnchor) { # $hash, [link cap
 //
 //         # if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/controls_header')) {
 //         # 	my $dialogControls = GetTemplate('html/widget/dialog_controls.template'); # GetPageHeader()
-//         # 	$dialogControls = GetWindowTemplate($dialogControls, 'Controls'); # GetPageHeader()
+//         # 	$dialogControls = GetDialogX($dialogControls, 'Controls'); # GetPageHeader()
 //         # 	#$dialogControls = '<span class=advanced>' . $dialogControls . '</span>';
 //         # 	$topMenuTemplate .= $dialogControls;
 //         # }
@@ -1734,7 +1735,7 @@ function GetItemHtmlLink ($hash, $linkCaption, $hashAnchor) { # $hash, [link cap
 //
 //     if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/dialog_properties')) {
 //         my $dialogStyle = GetTemplate('html/widget/dialog_style.template'); # GetPageHeader()
-//         $dialogStyle = GetWindowTemplate($dialogStyle, 'Dialog');
+//         $dialogStyle = GetDialogX($dialogStyle, 'Dialog');
 //         $topMenuTemplate .= $dialogStyle;
 //     }
 //
@@ -1749,7 +1750,7 @@ function GetItemHtmlLink ($hash, $linkCaption, $hashAnchor) { # $hash, [link cap
 //                     $logoText = '';
 //                 }
 //             }
-//             my $logoTemplate = GetWindowTemplate('<a href="/" class=logo>Home</a>', $logoText);
+//             my $logoTemplate = GetDialogX('<a href="/" class=logo>Home</a>', $logoText);
 //             $htmlStart .= $logoTemplate;
 //         }
 //     }

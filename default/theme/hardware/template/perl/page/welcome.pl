@@ -65,9 +65,9 @@ sub GetTagCategoriesDialog { # $rootTag ; traverses all tagsets under a tag and 
 sub GetWelcomePage {
 	my $welcomePage =
 		GetPageHeader('welcome') .
-			GetWindowTemplate(GetTemplate('html/page/welcome.template'), 'Welcome') .
-			GetWindowTemplate(GetTagCategoriesDialog('suggest'), 'Browse') .
-			GetWindowTemplate(GetTemplate('html/page/create_new.template'), 'Create New') .
+			GetDialogX(GetTemplate('html/page/welcome.template'), 'Welcome') .
+			GetDialogX(GetTagCategoriesDialog('suggest'), 'Browse') .
+			GetDialogX(GetTemplate('html/page/create_new.template'), 'Create New') .
 			GetQueryAsDialog('top', 'Top Items') .
 			GetPageFooter('welcome');
 
@@ -81,7 +81,7 @@ sub GetWelcomePage {
 sub GetClonePage {
 	my $page =
 		GetPageHeader('clone') .
-		GetWindowTemplate(GetTemplate('html/page/clone_instructions.template'), 'Cloning Instructions') .
+		GetDialogX(GetTemplate('html/page/clone_instructions.template'), 'Cloning Instructions') .
 		GetPageFooter('clone')
 	;
 	if (GetConfig('admin/js/enable')) {

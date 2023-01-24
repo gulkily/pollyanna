@@ -129,7 +129,7 @@ sub GetItemListing { # returns listing of items based on topic
 
 		my $columnHeadings = 'title,author,activity';
 
-		$itemListingWrapper = GetWindowTemplate(
+		$itemListingWrapper = GetDialogX(
 			$itemListings,
 			$title,
 			$columnHeadings,
@@ -138,11 +138,11 @@ sub GetItemListing { # returns listing of items based on topic
 
 		$htmlOutput .= $itemListingWrapper;
 
-		#$htmlOutput .= GetWindowTemplate('<tt>... and that is ' . $itemCount . ' item(s) total! beep boop</tt>', 'robot voice');
+		#$htmlOutput .= GetDialogX('<tt>... and that is ' . $itemCount . ' item(s) total! beep boop</tt>', 'robot voice');
 
 	} else {
 	# no items returned, use 'no items' template
-		$htmlOutput .= GetWindowTemplate(GetTemplate('html/item/no_items.template'), 'Welcome, Guest!');
+		$htmlOutput .= GetDialogX(GetTemplate('html/item/no_items.template'), 'Welcome, Guest!');
 		#todo add menu?
 	}
 

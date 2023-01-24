@@ -167,14 +167,14 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 		my $pageDescription = GetStringNoFallback('page_intro/' . $pageQuery);
 		if ($pageDescription) {
 			$pageDescription = str_replace("\n", "<br>\n", $pageDescription);
-			$html .= GetWindowTemplate($pageDescription, $pageQuery);
+			$html .= GetDialogX($pageDescription, $pageQuery);
 		}
 	}
 
 	my $paginationLinks = GetPaginationLinks($pageQuery, $pageNumber, $totalItemCount, $perPage);
 
 	if ($needPagination) {
-		$html .= GetWindowTemplate($paginationLinks, 'Pages');
+		$html .= GetDialogX($paginationLinks, 'Pages');
 	}
 
 	#$html .= $totalItemCount;
@@ -200,29 +200,29 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 	if ($itemListing) {
 		$html .= $itemListing;
 	} else {
-		$html .= GetWindowTemplate('Sorry, there was a problem generating an item listing.');
+		$html .= GetDialogX('Sorry, there was a problem generating an item listing.');
 		WriteLog('GetItemListingPage: warning: $itemListing is FALSE');
 	}
 
 	if ($needPagination) {
 		$html .= '<br>';
-		$html .= GetWindowTemplate($paginationLinks, 'Pages');
+		$html .= GetDialogX($paginationLinks, 'Pages');
 	}
 
 	{
 		# display query used to generate the listing
 		#my $displayQuery = TextartForWeb(SqliteGetQueryTemplate($pageQuery));
 		my $displayQuery = '<pre>' . HtmlEscape(SqliteGetQueryTemplate($pageQuery)) . '<br></pre>'; #todo templatify
-		$html .= '<span class=advanced>' . GetWindowTemplate($displayQuery, $queryDisplayName) . '</span>';
+		$html .= '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName) . '</span>';
 	}
 
 	if ($pageQuery eq 'chain') {
 		#special case hack for chain page
-		$html .= '<span class=advanced>' . GetWindowTemplate('<a href="/chain.log">chain.log</a>', 'Log') . '</span>'; #should be called GetDialog? #todo
+		$html .= '<span class=advanced>' . GetDialogX('<a href="/chain.log">chain.log</a>', 'Log') . '</span>'; #should be called GetDialog? #todo
 	}
 
 	if ($pageQuery eq 'boxes') { #banana theme
-		$html .= GetWindowTemplate(GetTemplate('html/dialog/new_box_count.template'), 'Add');
+		$html .= GetDialogX(GetTemplate('html/dialog/new_box_count.template'), 'Add');
 	}
 
 	$html .= GetPageFooter($pageQuery);
@@ -319,13 +319,13 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 		my $pageNoContent = '';
 		my $queryDisplayName = $pageQuery . '.sql';
 		$pageNoContent .= GetPageHeader($pageQuery);
-		$pageNoContent .= GetWindowTemplate('This page reserved for future content.');
+		$pageNoContent .= GetDialogX('This page reserved for future content.');
 
 		my $displayQuery = '<pre>'.HtmlEscape(SqliteGetQueryTemplate($pageQuery)).'<br></pre>'; #todo templatify
-		$pageNoContent .= '<span class=advanced>' . GetWindowTemplate($displayQuery, $queryDisplayName) . '</span>'; #todo should have <pre> like in GetItemListingPage()
+		$pageNoContent .= '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName) . '</span>'; #todo should have <pre> like in GetItemListingPage()
 
 		if ($pageQuery eq 'boxes') { #banana theme
-			$pageNoContent .= GetWindowTemplate(GetTemplate('html/dialog/new_box_count.template'), 'Add');
+			$pageNoContent .= GetDialogX(GetTemplate('html/dialog/new_box_count.template'), 'Add');
 		}
 
 		$pageNoContent .= GetPageFooter($pageQuery);

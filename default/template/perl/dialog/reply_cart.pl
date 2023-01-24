@@ -28,7 +28,7 @@ sub GetReplyCartDialog { # uses reply_cart.template and needs reply_cart.js
 		"if (window.ReplyCartAddAll) { return ReplyCartAddAll() }"
 	);
 
-	my $replyCartDialog = GetWindowTemplate($replyCart, 'Cart');
+	my $replyCartDialog = GetDialogX($replyCart, 'Cart');
 	$replyCartDialog = '<span class=advanced>' . $replyCartDialog . '</span>';
 	return $replyCartDialog;
 } # GetReplyCartDialog()

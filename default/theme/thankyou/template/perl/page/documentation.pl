@@ -101,14 +101,14 @@ Avoid advertising by avoiding community over-growth.
 User-centric operation allows easy migration in case of instance changes.
 ";
 	my $textArt = str_replace("\n", " <br>\n", $text);
-	my $textArtDialog = GetWindowTemplate($textArt, "README");
+	my $textArtDialog = GetDialogX($textArt, "README");
 
 } # GetReadmeDialog()
 
 sub GetDocumentationPage {
 	my $html =
 		GetPageHeader('documentation') .
-		GetWindowTemplate(GetTemplate('html/page/documentation.template'), 'Documentation') .
+		GetDialogX(GetTemplate('html/page/documentation.template'), 'Documentation') .
 		GetReadmeDialog() .
 		GetPageFooter('documentation')
 	;

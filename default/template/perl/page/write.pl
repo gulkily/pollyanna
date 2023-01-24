@@ -25,7 +25,7 @@ sub GetWritePage { # returns html for write page
 	my $writeOptions =
 		'<span class=advanced>' .
 		AddAttributeToTag(
-			GetWindowTemplate(GetTemplate('html/form/write/write_options.template'), 'Options'),
+			GetDialogX(GetTemplate('html/form/write/write_options.template'), 'Options'),
 			'a href="/frame.html"',
 			'accesskey',
 			GetAccessKey('Keyboard')
@@ -43,7 +43,7 @@ sub GetWritePage { # returns html for write page
 	$writePageHtml .= '</form>'; #todo
 
 	#if (GetConfig('admin/js/enable')) {
-	#	$writePageHtml .= GetWindowTemplate(GetTemplate('html/form/writing.template'), 'Options');
+	#	$writePageHtml .= GetDialogX(GetTemplate('html/form/writing.template'), 'Options');
 	#}
 	#
 	# if (GetConfig('setting/html/reply_cart')) {
@@ -52,7 +52,7 @@ sub GetWritePage { # returns html for write page
 	# } # if (GetConfig('setting/html/reply_cart'))
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/zalgo')) {
-		$writePageHtml .= GetWindowTemplate(GetTemplate('html/form/write/write_zalgo_button.template'), 'Zalgo');
+		$writePageHtml .= GetDialogX(GetTemplate('html/form/write/write_zalgo_button.template'), 'Zalgo');
 	}
 
 	#	if (defined($itemCount) && defined($itemLimit) && $itemCount) {

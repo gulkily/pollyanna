@@ -6,7 +6,7 @@ use warnings;
 sub GetProfileDialog {
 	my $profileDialogContents = GetTemplate('html/form/profile.template');
 
-	my $profileDialog = GetWindowTemplate(
+	my $profileDialog = GetDialogX(
 		$profileDialogContents,
 		'Profile',
 	);

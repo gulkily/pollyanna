@@ -256,13 +256,13 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		if ($tagInfo && ($tagInfo ne $pageParam)) {
 			# don't show tag info if it matches page param
 			# as that provides no additional useful information
-			$txtIndex .= GetWindowTemplate($tagInfo, 'Tag Information');
+			$txtIndex .= GetDialogX($tagInfo, 'Tag Information');
 		}
 		if ($pageParam eq 'image') { # GetReadPage()
 			#$txtIndex .= GetUploadDialog();
 
 			if (GetConfig('admin/js/enable')) {
-				$txtIndex .= GetWindowTemplate('<a href=# onclick="if (window.UnmaskBlurredImages) { UnmaskBlurredImages() }">Show Masked Images</a>', 'One Lonesome Link');
+				$txtIndex .= GetDialogX('<a href=# onclick="if (window.UnmaskBlurredImages) { UnmaskBlurredImages() }">Show Masked Images</a>', 'One Lonesome Link');
 			}
 
 			$needUploadJs = 1;
@@ -360,9 +360,9 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		if (GetConfig('setting/zip/author')) {
 			if (scalar(@files) > 0) {
 				my $zipLink = '<a href="/author/' . $authorKey . '.zip">' . $authorKey . '.zip</a>';
-				$txtIndex .= GetWindowTemplate($zipLink, 'Archive');
+				$txtIndex .= GetDialogX($zipLink, 'Archive');
 			} else {
-				$txtIndex .= GetWindowTemplate('This author has not posted anything yet, <br>so no archive is available.', 'Archive');
+				$txtIndex .= GetDialogX('This author has not posted anything yet, <br>so no archive is available.', 'Archive');
 			}
 		}
 
@@ -372,7 +372,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	my $itemComma = '';
 
 	if (scalar(@files) > 0) {
-		$txtIndex .= GetWindowTemplate('Items on page: ' . scalar(@files), 'Count');
+		$txtIndex .= GetDialogX('Items on page: ' . scalar(@files), 'Count');
 	}
 	WriteLog('GetReadPage: scalar(@files) = ' . scalar(@files));
 
@@ -469,7 +469,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		} # foreach my $row (@files)
 	} # if (scalar(@files))
 	else {
-		$txtIndex .= GetWindowTemplate('<p>No items found to display on this page.</p>', 'No results');
+		$txtIndex .= GetDialogX('<p>No items found to display on this page.</p>', 'No results');
 	}
 
 	# LISTING ITEMS ENDS HERE
@@ -485,7 +485,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 
 	if ($queryDisplay) {
 		my $queryWindowContents .= '<pre>' . HtmlEscape($queryDisplay) . '<br></pre>'; #todo templatify
-		my $queryDisplayDialog = GetWindowTemplate($queryWindowContents, 'Query');
+		my $queryDisplayDialog = GetDialogX($queryWindowContents, 'Query');
 		$queryDisplayDialog = '<span class=advanced>' . $queryDisplayDialog . '</span>';
 		$txtIndex .= $queryDisplayDialog;
 	}

@@ -12,7 +12,7 @@ sub GetAccessDialog {
 		$accessTemplate = AddAttributeToTag($accessTemplate, 'input value="Advanced"', 'onclick', "if (window.SetInterfaceMode) { return SetInterfaceMode('expert', this); }");
 	}
 
-	$accessTemplate = GetWindowTemplate(
+	$accessTemplate = GetDialogX(
 		$accessTemplate,
 		'Interface'
 	);

@@ -1,5 +1,5 @@
-print "this script is not finished";
-exit;
+#jprint "this script is not finished";
+#exit;
 
 require('./utils.pl');
 require_once('index.pl');

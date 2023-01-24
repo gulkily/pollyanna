@@ -58,7 +58,7 @@ sub GetCloudPage { # print list of tag pairs
 	$cloudPage =
 		GetPageHeader('stats') .
 			GetTemplate('html/maincontent.template') .
-			GetWindowTemplate($dialogContent, 'Cloud', 'tag1,tag2,item_count') .
+			GetDialogX($dialogContent, 'Cloud', 'tag1,tag2,item_count') .
 			GetPageFooter('cloud');
 
 	$cloudPage = InjectJs($cloudPage, qw(utils settings avatar timestamp pingback profile));

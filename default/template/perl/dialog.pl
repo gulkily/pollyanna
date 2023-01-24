@@ -14,7 +14,7 @@ sub GetTosDialog {
 
 	$tosText = '<p class=txt>' . $tosText . '</p>';
 	#$tosText .= '<p><a href="/post.html?comment=tos">[Do You Agree?]</a></p>';
-	my $tosWindow = GetWindowTemplate(
+	my $tosWindow = GetDialogX(
 		$tosText,
 		'Terms of Service',
 	);
@@ -39,9 +39,9 @@ sub GetWriteForm { # $dialogTitle ; returns write form (for composing text messa
 		#todo sanity check
 	}
 
-	#my $writeForm = GetWindowTemplate(GetTemplate('html/form/write/write.template'), $dialogTitle);
+	#my $writeForm = GetDialogX(GetTemplate('html/form/write/write.template'), $dialogTitle);
 	my $writeForm = GetTemplate('html/form/write/write.template');
-	# my $writeForm = GetWindowTemplate(GetTemplate('html/form/write/write.template'), 'Write');
+	# my $writeForm = GetDialogX(GetTemplate('html/form/write/write.template'), 'Write');
 	WriteLog('GetWriteForm()');
 
 	if ($prompt ne 'Write something here:') { #todo templatize this
@@ -110,7 +110,7 @@ sub GetWriteForm { # $dialogTitle ; returns write form (for composing text messa
 		}
 	} # js stuff in write form
 
-	my $writeDialog = GetWindowTemplate($writeForm, $dialogTitle);
+	my $writeDialog = GetDialogX($writeForm, $dialogTitle);
 
 	return $writeDialog;
 	#return $writeForm;
@@ -118,7 +118,7 @@ sub GetWriteForm { # $dialogTitle ; returns write form (for composing text messa
 
 sub GetPuzzleDialog { # returns write form (for composing text message)
 	return 'GetPuzzleDialog() is not finished'; #draft
-	my $puzzleForm = GetWindowTemplate(GetTemplate('html/form/puzzle.template'), 'Puzzle?');
+	my $puzzleForm = GetDialogX(GetTemplate('html/form/puzzle.template'), 'Puzzle?');
 	#dirty hack
 	#$writeForm =~ s/textarea/input type=hidden/g;
 	WriteLog('GetPuzzleDialog()');
@@ -142,7 +142,7 @@ sub GetPuzzleDialog { # returns write form (for composing text message)
 
 sub GetSearchDialog { # search dialog for search page
 	my $searchForm = GetTemplate('html/form/search.template');
-	my $searchWindow = GetWindowTemplate($searchForm, 'Public Search');
+	my $searchWindow = GetDialogX($searchForm, 'Public Search');
 	return $searchWindow;
 } # GetSearchDialog()
 
@@ -159,7 +159,7 @@ sub GetSimpleDialog { # dialogType ; gets simple dialog based on template/html/p
 		WriteLog('GetSimpleDialog: warning: empty template, sanity check failed');
 		return '';
 	}
-	my $contentWindow = GetWindowTemplate(
+	my $contentWindow = GetDialogX(
 		$pageContent,
 		ucfirst($dialogType)
 	);
@@ -174,7 +174,7 @@ sub GetSimpleDialog { # dialogType ; gets simple dialog based on template/html/p
 sub GetOperatorDialog {
 
 	my $operatorTemplate = GetTemplate('html/form/operator.template');
-	my $operatorWindow = GetWindowTemplate($operatorTemplate, 'Operator');
+	my $operatorWindow = GetDialogX($operatorTemplate, 'Operator');
 	$operatorWindow = '<form id=frmOperator name=frmOperator class=admin>' . $operatorWindow . '</form>';
 	return $operatorWindow;
 	#return 'hi';
@@ -183,7 +183,7 @@ sub GetOperatorDialog {
 sub GetAnnoyancesDialog { # returns settings dialog
 # sub GetAnnoyancesWindow {
 	WriteLog('GetAnnoyancesDialog() BEGIN');
-	return '<form>' . GetWindowTemplate(GetTemplate('html/form/annoyances.template'), 'Annoyances') . '</form>';
+	return '<form>' . GetDialogX(GetTemplate('html/form/annoyances.template'), 'Annoyances') . '</form>';
 } # GetAnnoyancesDialog()
 
 sub GetSettingsDialog { # returns settings dialog
@@ -207,10 +207,10 @@ sub GetSettingsDialog { # returns settings dialog
 		#		);
 	}
 
-	my $settingsWindow = GetWindowTemplate($settingsTemplate, 'Settings');
+	my $settingsWindow = GetDialogX($settingsTemplate, 'Settings');
 	$settingsWindow =
 		'<form action="/settings.html" id=frmSettings name=frmSettings>' .
-			GetWindowTemplate($settingsTemplate, 'Settings') .
+			GetDialogX($settingsTemplate, 'Settings') .
 			'</form>'
 	;
 	#todo template this, and fill in the current page url

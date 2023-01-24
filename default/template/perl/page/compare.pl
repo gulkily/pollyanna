@@ -41,7 +41,7 @@ sub GetComparePage {
 	$itemImageB = AddAttributeToTag($itemImageB, 'img', 'width', '45%');
 	$itemImageB = '<a href="/post.html?replyto='.$hashItemB.'&comment=surpass%20'.$hashItemA.'">'.$itemImageB.'</a>';
 
-	$html .= GetWindowTemplate($itemImageA . $itemImageB, 'Please Choose Your Preferred Image');
+	$html .= GetDialogX($itemImageA . $itemImageB, 'Please Choose Your Preferred Image');
 
 	$html .= GetPageFooter('compare');
 	$html = InjectJs($html, qw(settings utils));

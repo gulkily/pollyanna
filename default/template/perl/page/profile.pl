@@ -16,7 +16,7 @@ sub GetProfileDialog {
 		$profileWindowContents =~ s/\$gpg2Algochoices//;
 	}
 
-	my $profileWindow = GetWindowTemplate(
+	my $profileWindow = GetDialogX(
 		$profileWindowContents,
 		'Profile',
 	);
@@ -53,7 +53,7 @@ sub GetProfilePage { # returns profile page (allows sign in/out)
 
 		$txtIndex .=
 			'<span class=advanced><form name=formSelectKey>' .
-			GetWindowTemplate(GetTemplate('html/select_key.template'), 'Keychain') .
+			GetDialogX(GetTemplate('html/select_key.template'), 'Keychain') .
 			'</form></span>'
 		;
 
@@ -72,7 +72,7 @@ sub GetProfilePage { # returns profile page (allows sign in/out)
 		$txtIndex .= GetTemplate('html/maincontent.template');
 
 		my $profileWindowContents = GetTemplate('html/form/profile_no.template');
-		my $profileWindow = GetWindowTemplate(
+		my $profileWindow = GetDialogX(
 			$profileWindowContents,
 			'Profile'
 		);

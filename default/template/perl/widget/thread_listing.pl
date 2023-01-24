@@ -18,7 +18,7 @@ sub GetThreadListingDialog {
 	my $threadListing = GetThreadListing($topLevelItem, $currentItem, 0, \@itemsInThreadListing);
 	if ($threadListing) {
 		# sub GetThreadDialog {
-		my $threadListingDialog .= GetWindowTemplate($threadListing, 'Thread', 'item_title,add_timestamp');
+		my $threadListingDialog .= GetDialogX($threadListing, 'Thread', 'item_title,add_timestamp');
 		return $threadListingDialog;
 	}
 

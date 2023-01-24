@@ -44,7 +44,7 @@ sub GetUploadDialog { # upload dialog for upload page
 
 	$uploadForm = str_replace('<span id=allowFiles></span>', '<span id=allowFiles>' . $allowFiles . '</span>', $uploadForm);
 
-	my $uploadWindow = GetWindowTemplate($uploadForm, $title);
+	my $uploadWindow = GetDialogX($uploadForm, $title);
 	return $uploadWindow;
 } # GetUploadDialog()
 
@@ -63,7 +63,7 @@ sub GetPasteDialog { # paste dialog for upload page
 
 	my $pasteForm = GetTemplate($template);
 
-	my $pasteWindow = GetWindowTemplate($pasteForm, $title);
+	my $pasteWindow = GetDialogX($pasteForm, $title);
 	return $pasteWindow;
 } # GetPasteDialog()
 
@@ -89,8 +89,8 @@ sub GetUploadPage { # returns html for upload page
 	} else {
 		$html .= GetPageHeader('upload');
 		$html .= GetTemplate('html/maincontent.template');
-		$html .= GetWindowTemplate(GetTemplate('html/form/upload_no.template'), $title);
-		# $html .= GetWindowTemplate('<p>Upload feature is not available. Apologies.</p>', $title);
+		$html .= GetDialogX(GetTemplate('html/form/upload_no.template'), $title);
+		# $html .= GetDialogX('<p>Upload feature is not available. Apologies.</p>', $title);
 		$html .= GetPageFooter('upload');
 		if (GetConfig('admin/js/enable')) {
 			$html = InjectJs($html, qw(utils settings avatar profile));

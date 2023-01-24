@@ -76,7 +76,7 @@ sub GetDialogToolboxItemPublish { # $filePath, $fileHash = '' ; returns dialog w
 			'</a><br>' . "\n";
 	;
 
-	my $htmlToolboxDialog = GetWindowTemplate($htmlToolbox, 'Publish');
+	my $htmlToolboxDialog = GetDialogX($htmlToolbox, 'Publish');
 
 	return $htmlToolboxDialog;
 } # GetDialogToolboxItemPublish()

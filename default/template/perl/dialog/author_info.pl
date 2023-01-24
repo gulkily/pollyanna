@@ -105,7 +105,7 @@ sub GetAuthorInfoBox {
 		$authorInfoTemplate =~ s/\$authorMessageLink/*/g;
 	}
 
-	$authorInfoTemplate = GetWindowTemplate($authorInfoTemplate, 'Author Information', 2);
+	$authorInfoTemplate = GetDialogX($authorInfoTemplate, 'Author Information', 2);
 
 	return $authorInfoTemplate;
 } # GetAuthorInfoBox()

@@ -6,7 +6,7 @@ use 5.010;
 
 sub GetHistoryDialog {
 	my $dialogContent = GetTemplate('html/widget/history.template');
-	my $dialog = GetWindowTemplate($dialogContent, 'History');
+	my $dialog = GetDialogX($dialogContent, 'History');
 
 	return $dialog;
 }

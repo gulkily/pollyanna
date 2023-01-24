@@ -82,7 +82,7 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 
 			# if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/controls_header')) {
 			# 	my $dialogControls = GetTemplate('html/widget/dialog_controls.template'); # GetPageHeader()
-			# 	$dialogControls = GetWindowTemplate($dialogControls, 'Controls'); # GetPageHeader()
+			# 	$dialogControls = GetDialogX($dialogControls, 'Controls'); # GetPageHeader()
 			# 	#$dialogControls = '<span class=advanced>' . $dialogControls . '</span>';
 			# 	$topMenuTemplate .= $dialogControls;
 			# }
@@ -101,7 +101,7 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/dialog_properties')) {
 		my $dialogStyle = GetTemplate('html/widget/dialog_style.template'); # GetPageHeader()
-		$dialogStyle = GetWindowTemplate($dialogStyle, 'Dialog');
+		$dialogStyle = GetDialogX($dialogStyle, 'Dialog');
 		$topMenuTemplate .= $dialogStyle;
 	}
 
@@ -116,7 +116,7 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 					$logoText = '';
 				}
 			}
-			my $logoTemplate = GetWindowTemplate('<a href="/" class=logo>Home</a>', $logoText);
+			my $logoTemplate = GetDialogX('<a href="/" class=logo>Home</a>', $logoText);
 			$htmlStart .= $logoTemplate;
 		}
 	}

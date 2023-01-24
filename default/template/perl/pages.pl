@@ -69,7 +69,7 @@ sub GetDialogPage { # $pageName, $pageTitle, $windowContents ; returns html page
 
 			$pageTemplate .= GetPageHeader('404'); #GetTemplate('html/htmlstart.template');
 			$pageTemplate .= GetTemplate('html/maincontent.template');
-			$pageTemplate .= GetWindowTemplate($windowContents, $pageTitle);
+			$pageTemplate .= GetDialogX($windowContents, $pageTitle);
 			#: $windowTitle, $windowMenubar, $columnHeadings, $windowBody, $windowStatus
 			$pageTemplate .= GetPageFooter('404');
 
@@ -90,7 +90,7 @@ sub GetDialogPage { # $pageName, $pageTitle, $windowContents ; returns html page
 
 			$pageTemplate .= GetPageHeader('401'); #GetTemplate('html/htmlstart.template');
 			$pageTemplate .= GetTemplate('html/maincontent.template');
-			$pageTemplate .= GetWindowTemplate($windowContents, $pageTitle);
+			$pageTemplate .= GetDialogX($windowContents, $pageTitle);
 			$pageTemplate .= GetPageFooter('401');
 
 			return $pageTemplate;
@@ -426,7 +426,7 @@ sub GetQueryPage { # $pageName, $title, $columns ;
 
 #
 #		$html .= '<span class=advanced><form action=/post.html>'; #todo templatify
-#		$html .= GetWindowTemplate($queryWindowContents, 'View Selector');
+#		$html .= GetDialogX($queryWindowContents, 'View Selector');
 #		$html .= '</form></span>';
 
 		my $queryWindowContents;
@@ -444,7 +444,7 @@ sub GetQueryPage { # $pageName, $title, $columns ;
 		#$html .= GetReplyCartDialog(); # GetQueryPage()
 
 		$html .= '<span class=advanced><form action=/post.html>'; #todo templatify
-		$html .= GetWindowTemplate($queryWindowContents, $pageName . '.sql', '', scalar(split("\n", $query)) . ' lines; ' . length($query) . ' bytes');
+		$html .= GetDialogX($queryWindowContents, $pageName . '.sql', '', scalar(split("\n", $query)) . ' lines; ' . length($query) . ' bytes');
 		$html .= '</form></span>';
 
 		$html .= GetPageFooter($pageName);
@@ -738,7 +738,7 @@ sub GetItemPrefixPage { # $prefix ; returns page with items matching specified p
 #		my $columnHeadings = 'Title,Score,Replied,Author';
 		my $columnHeadings = 'title,author,activity';
 
-		$itemListingWrapper = GetWindowTemplate(
+		$itemListingWrapper = GetDialogX(
 			$itemListings,
 			'Items prefixed ' . $prefix,
 			$columnHeadings,
@@ -1296,7 +1296,7 @@ sub MakeListingPages {
 		my $okPage;
 		$okPage .= GetPageHeader('default', 'OK');
 		my $windowContents = GetTemplate('html/action_ok.template');
-		$okPage .= GetWindowTemplate($windowContents, 'Data Received', '', 'Ready');
+		$okPage .= GetDialogX($windowContents, 'Data Received', '', 'Ready');
 		$okPage .= GetPageFooter('default');
 		$okPage =~ s/<\/head>/<meta http-equiv="refresh" content="10; url=\/"><\/head>/;
 		$okPage = InjectJs($okPage, qw(settings));
@@ -1448,7 +1448,7 @@ sub PutStatsPages { # stores template for footer stats dialog
 		WriteLog('PutStatsPage: debug mode is OFF');
 	}
 
-	my $statsFooter = GetWindowTemplate(
+	my $statsFooter = GetDialogX(
 		GetStatsTable('stats-horizontal.template'),
 		'Site Statistics*'
 	);

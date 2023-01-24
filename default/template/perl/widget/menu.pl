@@ -243,7 +243,7 @@ sub GetMenuTemplate { # returns menubar
 
 	if (GetConfig('admin/js/enable') || GetConfig('admin/php/enable')) { #todo there should be a config called profile_enabled
 		if ($pageType ne 'profile' && $pageType ne 'identity') {
-			#$topMenuTemplate .= GetWindowTemplate(GetTemplate('html/widget/identity.template'), 'Identity');
+			#$topMenuTemplate .= GetDialogX(GetTemplate('html/widget/identity.template'), 'Identity');
 		}
 	}
 
@@ -257,7 +257,7 @@ sub GetMenuTemplate { # returns menubar
 			require_once('dialog/reply_cart.pl');
 			$topMenuTemplate .= GetReplyCartDialog(); # GetMenuTemplate()
 		} else {
-			#$topMenuTemplate .= GetWindowTemplate('$pageType = ' . $pageType, 'no reply cart?');
+			#$topMenuTemplate .= GetDialogX('$pageType = ' . $pageType, 'no reply cart?');
 			#nothing needed here
 		}
 	}

@@ -33,7 +33,7 @@ sub GetChainLogAsDialog {
 	$dialogParams{'title'} = 'Notarized';
 	$dialogParams{'headings'} = 'title,item,timestamp,checksum';
 	$dialogParams{'table_sort'} = 0;
-	my $chainDialog = GetWindowTemplate2(\%dialogParams);
+	my $chainDialog = GetDialogX2(\%dialogParams);
 
 	if (!$chainDialog) {
 		WriteLog('GetChainLogAsDialog: warning: $chainDialog is FALSE');

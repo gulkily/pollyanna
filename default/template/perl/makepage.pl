@@ -129,7 +129,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 			PutHtmlFile($targetPath, $randomPage);
 		} else {
 			my $targetPath = "random.html";
-			PutHtmlFile($targetPath, GetPageHeader('random') . GetWindowTemplate('Nothing to display on the random page yet.') . GetPageFooter('random'));
+			PutHtmlFile($targetPath, GetPageHeader('random') . GetDialogX('Nothing to display on the random page yet.') . GetPageFooter('random'));
 		}
 	} #random
 
@@ -247,7 +247,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 				}
 				my $sponsorImage = GetImageContainer($itemSponsor->{'file_hash'}, $itemSponsor->{'item_name'});
 				$sponsorImage = AddAttributeToTag($sponsorImage, 'img', 'height', '100');
-				$sponsorImage = GetWindowTemplate($sponsorImage, '');
+				$sponsorImage = GetDialogX($sponsorImage, '');
 				$sponsorsImages .= $sponsorImage;
 				$sponsorsImages .= "<br><br><br>";
 				#my $itemSponsorTemplate = GetItemTemplate($itemSponsor);
@@ -255,7 +255,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 			}
 
 			$sponsorsImages = '<center style="padding: 5pt">' . $sponsorsImages . '</center>';
-			$sponsorsPage .= GetWindowTemplate('<tr><td>' . $sponsorsImages . '</td></tr>', ucfirst($sponsorLevel) . ' Sponsors');
+			$sponsorsPage .= GetDialogX('<tr><td>' . $sponsorsImages . '</td></tr>', ucfirst($sponsorLevel) . ' Sponsors');
 
 			$sponsorsPage .= "<br><br>";
 		}
@@ -338,7 +338,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 			# my $queryDialog = GetQueryAsDialog($query, 'Newest');
 			# my $page =
 			# 	GetPageHeader('help') .
-			# 	GetWindowTemplate('Could not find item. It may have been renamed?', 'Error') .
+			# 	GetDialogX('Could not find item. It may have been renamed?', 'Error') .
 			# 	$queryDialog .
 			# 	GetPageFooter('help')
 			# ;

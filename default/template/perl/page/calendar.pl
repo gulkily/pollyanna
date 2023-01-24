@@ -243,7 +243,7 @@ sub GetMonthTable { # $year, $month, \%fillDates ; return html table with links 
 	$windowTemplateParams{'headings'} = 'Sun,Mon,Tue,Wed,Thu,Fri,Sat';
 	$windowTemplateParams{'table_sort'} = 0;
 
-	$html = GetWindowTemplate2(\%windowTemplateParams);
+	$html = GetDialogX2(\%windowTemplateParams);
 
 	return $html;
 } # GetMonthTable()
@@ -306,7 +306,7 @@ sub GetCalendarPage { # returns calendar page
 		#	TestYear($year, \%fillDates);
 		#}
 
-		#$html .= GetWindowTemplate("$curYear $curMonth $curDay", 'As Of');
+		#$html .= GetDialogX("$curYear $curMonth $curDay", 'As Of');
 
 		my @yearMonths = SqliteQueryHashRef(
 			"
@@ -351,7 +351,7 @@ sub GetCalendarPage { # returns calendar page
 			}
 		}
 	} else {
-		$html .= GetWindowTemplate('<p>There is nothing in the calendar at this time.</p>', 'Calendar Empty');
+		$html .= GetDialogX('<p>There is nothing in the calendar at this time.</p>', 'Calendar Empty');
 	}
 
 	$html .= GetPageFooter('calendar');

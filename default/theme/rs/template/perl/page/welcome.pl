@@ -8,7 +8,7 @@ sub GetWelcomePage {
 	require_once('page/profile.pl'); # GetProfileDialog()
 	my $welcomePage =
 		GetPageHeader('welcome') .
-			GetWindowTemplate(GetTemplate('html/page/welcome.template'), 'Welcome') .
+			GetDialogX(GetTemplate('html/page/welcome.template'), 'Welcome') .
 			'<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>' .
 			GetWriteForm() .
 			'</form>' . #todo unhack this

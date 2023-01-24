@@ -104,7 +104,7 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 
 			# if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/controls_footer')) {
 			# 	my $dialogControls = GetTemplate('html/widget/dialog_controls.template'); # GetPageFooter()
-			# 	$dialogControls = GetWindowTemplate($dialogControls, 'Controls'); # GetPageFooter()
+			# 	$dialogControls = GetDialogX($dialogControls, 'Controls'); # GetPageFooter()
 			# 	#$dialogControls = '<span class=advanced>' . $dialogControls . '</span>';
 			# 	$menuBottom .= $dialogControls;
 			# }
@@ -120,7 +120,7 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 
 	if (GetConfig('setting/admin/js/enable')) {
 		require_once('get_window_template.pl');
-		my $noJsInfo = GetWindowTemplate('<b class=noscript>*</b> Some features may require JavaScript', 'Notice'); # GetDialog()
+		my $noJsInfo = GetDialogX('<b class=noscript>*</b> Some features may require JavaScript', 'Notice'); # GetDialog()
 		$noJsInfo = '<noscript>' . $noJsInfo . '</noscript>';
 		$txtFooter = str_replace(
 			'</body>',
@@ -136,7 +136,7 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 
 	# if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/controls_footer')) {
 	# 	my $dialogControls = GetTemplate('html/widget/dialog_controls.template'); # GetPageFooter()
-	# 	$dialogControls = GetWindowTemplate($dialogControls, 'Controls');
+	# 	$dialogControls = GetDialogX($dialogControls, 'Controls');
 	# 	#$dialogControls = '<span class=advanced>' . $dialogControls . '</span>';
 	# 	$txtFooter = str_replace(
 	# 		'</body>',

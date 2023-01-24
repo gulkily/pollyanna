@@ -95,7 +95,7 @@ sub MakeSimplePage { # given page name, makes page
 		if (trim($pageContent) eq '') {
 			$pageContent = 'Coming Soon...';
 		}
-		my $contentWindow = GetWindowTemplate(
+		my $contentWindow = GetDialogX(
 			$pageContent,
 			$title
 		);

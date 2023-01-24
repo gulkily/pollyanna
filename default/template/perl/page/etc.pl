@@ -23,7 +23,7 @@ sub GetEtcPage { # returns html for etc page (/etc.html)
 
 	$etcPageContent =~ s/\$etcMenuItems/$menuItems/;
 
-	my $etcPageWindow = GetWindowTemplate($etcPageContent, 'More');
+	my $etcPageWindow = GetDialogX($etcPageContent, 'More');
 
 	$txtIndex .= $etcPageWindow;
 

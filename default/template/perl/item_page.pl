@@ -150,7 +150,7 @@ sub GetHtmlToolboxes {
 			'</a><br>' . "\n"
 		;
 
-		my $htmlToolboxWindow = '<span class=advanced>' . GetWindowTemplate($htmlToolbox, 'Search') . '</span>';
+		my $htmlToolboxWindow = '<span class=advanced>' . GetDialogX($htmlToolbox, 'Search') . '</span>';
 		$html .= $htmlToolboxWindow;
 	} # if ($file{'item_title'})
 
@@ -190,7 +190,7 @@ sub GetHtmlToolboxes {
 			'</a><br>' . "\n"
 		;
 
-		my $htmlToolboxWindow = '<span class=advanced>' . GetWindowTemplate($htmlToolbox, 'Share') . '</span>';
+		my $htmlToolboxWindow = '<span class=advanced>' . GetDialogX($htmlToolbox, 'Share') . '</span>';
 		$html .= $htmlToolboxWindow;
 	} # if (GetConfig('show_share_options'))
 
@@ -229,9 +229,9 @@ sub GetItemIndexLog { # $itemHash, $logType = index_log
 			$log = str_replace('allowed:', '<font color=green>allowed:</font>', $log);
 		}
 
-		#my $logWindow = GetWindowTemplate($log, 'Log');
-		my $logWindow = GetWindowTemplate($log, $logType);
-		# my $logWindow = GetWindowTemplate($log, 'IndexFile(' . $shortHash . ')');
+		#my $logWindow = GetDialogX($log, 'Log');
+		my $logWindow = GetDialogX($log, $logType);
+		# my $logWindow = GetDialogX($log, 'IndexFile(' . $shortHash . ')');
 		if ($logType ne 'run_log') {
 			$logWindow = '<span class=advanced>' . $logWindow . '</span>';
 		}
@@ -416,7 +416,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			and allows verifying other posts. <br>
 		";#todo templatify and make a table with a caption above?
 
-		$txtIndex .= GetWindowTemplate(
+		$txtIndex .= GetDialogX(
 			#'Public key allows verifiable signatures.',
 			$pubKeyMessage,
 			'Information'
@@ -495,7 +495,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 				);
 
 				# CLASSIFY BOX
-				$txtIndex .= '<span class=advanced>'.GetWindowTemplate($classifyForm, 'Classify').'</span>';
+				$txtIndex .= '<span class=advanced>'.GetDialogX($classifyForm, 'Classify').'</span>';
 			}
 		}
 
@@ -549,12 +549,12 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			if ($relatedListing) {
 				$txtIndex .= $relatedListing;
 			} else {
-				#$txtIndex .= GetWindowTemplate('No related items found for this item.', 'Debug');
+				#$txtIndex .= GetDialogX('No related items found for this item.', 'Debug');
 			}
 		} else {
 			if (GetConfig('debug')) {
-				# $txtIndex .= GetWindowTemplate('No related items for $file{\'file_hash\'} =  ' . $file{'file_hash'}, 'Debug');
-				$txtIndex .= GetWindowTemplate('No related items for <br>' . $file{'file_hash'}, 'Debug Notice');
+				# $txtIndex .= GetDialogX('No related items for $file{\'file_hash\'} =  ' . $file{'file_hash'}, 'Debug');
+				$txtIndex .= GetDialogX('No related items for <br>' . $file{'file_hash'}, 'Debug Notice');
 			}
 		}
 	}
@@ -596,10 +596,10 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'compile_log');
 		}
 		if (index($file{'tags_list'}, ',py,') != -1 && !GetConfig('setting/admin/py/enable')) {
-			$txtIndex .= GetWindowTemplate('Note: Python module is off, this file was not parsed.', 'Notice');
+			$txtIndex .= GetDialogX('Note: Python module is off, this file was not parsed.', 'Notice');
 		}
 		if (index($file{'tags_list'}, ',perl,') != -1 && !GetConfig('setting/admin/perl/enable')) {
-			$txtIndex .= GetWindowTemplate('Note: Perl module is off, this file was not parsed.', 'Notice');
+			$txtIndex .= GetDialogX('Note: Perl module is off, this file was not parsed.', 'Notice');
 		}
 		#todo same as above for zip
 	}
@@ -642,7 +642,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 
 sub GetReplyListingEmpty {
 	my $html = '<p>No replies found.</p>';
-	$html = GetWindowTemplate($html, 'No replies');
+	$html = GetDialogX($html, 'No replies');
 	return $html;
 }
 
@@ -717,7 +717,7 @@ sub GetRelatedListing { # $fileHash
 			return $listing;
 		} else {
 			return '';
-			#return GetWindowTemplate('No related found. (' . scalar(@result) . ')', 'Related');
+			#return GetDialogX('No related found. (' . scalar(@result) . ')', 'Related');
 		}
 	}
 
@@ -940,7 +940,7 @@ sub GetItemAttributesDialog2 {
 
 		$itemAttributesTable = '<tbody class=content>' . $itemAttributesTable . '</tbody>';
 
-		my $itemAttributesWindow = GetWindowTemplate($itemAttributesTable, 'Item Attributes', 'attribute,value'); #deprecated
+		my $itemAttributesWindow = GetDialogX($itemAttributesTable, 'Item Attributes', 'attribute,value'); #deprecated
 		$itemAttributesWindow = '<span class=advanced>' . $itemAttributesWindow . '</span>';
 
 		my $accessKey = GetAccessKey('Item Attributes');

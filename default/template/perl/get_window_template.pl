@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-# GetWindowTemplate()
+# GetDialogX()
 #	 $body = what's inside the dialog
 # 	$title = title
 # 	$headings
@@ -12,9 +12,9 @@ use warnings;
 # 		number of columns (integer)
 # 	$status = what goes in the status bar
 # 	$menu = goes at the top of the window, below the title
-# 	calls GetWindowTemplate2()
+# 	calls GetDialogX2()
 
-# GetWindowTemplate2()
+# GetDialogX2()
 # 	\%paramHash (reference to a hash of parameters
 # 		body
 # 		title
@@ -26,16 +26,19 @@ use warnings;
 # 		form_action
 # 		id
 
-# GetWindowTemplate3()
+# GetDialogX3()
 #	$body
 #	$title
 #	\%paramHash (see above)
 
-sub GetWindowTemplate { # $body, $title, $headings, $status, $menu ; returns html with window/dialog
-#todo this should be renamed to GetDialog()
+sub GetDialogX { # $body, $title, $headings, $status, $menu ; returns html with window/dialog
+# renamed from GetWindowTemplate()
+# it's called GetDialogX instead of GetDialog to amke
+
+# sub GetWindowTemplate {
 # sub GetDialog {
 # sub GetDialogPage {
-	# calls GetWindowTemplate2()
+	# calls GetDialogX2()
 	my %param = ();
 
 	$param{'body'} = shift;
@@ -46,13 +49,13 @@ sub GetWindowTemplate { # $body, $title, $headings, $status, $menu ; returns htm
 	$param{'menu'} = shift || '';
 
 	if (!trim($param{'body'})) {
-		WriteLog('GetWindowTemplate: warning: body is FALSE; title = ' . $param{'title'} . '; caller = ' . join(',', caller));
+		WriteLog('GetDialogX: warning: body is FALSE; title = ' . $param{'title'} . '; caller = ' . join(',', caller));
 		return '';
 	} else {
-		#WriteLog('GetWindowTemplate: warning: body is TRUE; title = ' . $param{'title'} . '; caller = ' . join(',', caller));
+		#WriteLog('GetDialogX: warning: body is TRUE; title = ' . $param{'title'} . '; caller = ' . join(',', caller));
 	}
 
-	WriteLog('GetWindowTemplate: $param{title}: ' . $param{'title'} . '; caller = ' . join(',', caller));
+	WriteLog('GetDialogX: $param{title}: ' . $param{'title'} . '; caller = ' . join(',', caller));
 
 	#hack
 	my $id = lc($param{'title'});
@@ -76,18 +79,18 @@ sub GetWindowTemplate { # $body, $title, $headings, $status, $menu ; returns htm
 		#$param{'id'} = substr(md5_hex($param{'title'}), 0, 8);
 	}
 
-	WriteLog('GetWindowTemplate: $id = ' . ($param{'id'} ? $param{'id'} : 'FALSE'));
+	WriteLog('GetDialogX: $id = ' . ($param{'id'} ? $param{'id'} : 'FALSE'));
 
 	if (!$param{'title'}) {
-		#WriteLog('GetWindowTemplate: warning: untitled window; caller = ' . join(',', caller));
+		#WriteLog('GetDialogX: warning: untitled window; caller = ' . join(',', caller));
 		#$param{'title'} = 'Untitled';
 		$param{'title'} = '';
 	}
 
-	return GetWindowTemplate2(\%param);
-} # GetWindowTemplate()
+	return GetDialogX2(\%param);
+} # GetDialogX()
 
-sub GetWindowTemplate3 { # $body $title \%param
+sub GetDialogX3 { # $body $title \%param
 	# use when need several parameters and not much else
 	my $body = shift;
 	my $title = shift;
@@ -98,20 +101,20 @@ sub GetWindowTemplate3 { # $body $title \%param
 		%param = %$paramHashRef;
 	}
 
-	WriteLog('GetWindowTemplate3($body = ' . $body . '; $title = ' . $title . '; %param has ' . length(keys(%param)) . ')');
+	WriteLog('GetDialogX3($body = ' . $body . '; $title = ' . $title . '; %param has ' . length(keys(%param)) . ')');
 
 	$param{'body'} = $body;
 	$param{'title'} = $title;
 
-	return GetWindowTemplate2(\%param);
-} # GetWindowTemplate3()
+	return GetDialogX2(\%param);
+} # GetDialogX3()
 
-sub GetWindowTemplate2 { # \%paramHash ; returns window
+sub GetDialogX2 { # \%paramHash ; returns window
 	# returns html-table-based-"window"
 	my $paramHashRef = shift;
 	my %param = %{$paramHashRef};
 
-	#return GetWindowTemplate($param{'body'}, $param{'title'}, $param{'headings'}, $param{'status'}, $param{'menu'});
+	#return GetDialogX($param{'body'}, $param{'title'}, $param{'headings'}, $param{'status'}, $param{'menu'});
 
 	# returns template for html-table-based-"window"
 
@@ -134,8 +137,8 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 
 	# NOT IMPLEMENTED $windowId = if set, id=foo parameter is added to top-level tag
 
-	WriteLog('GetWindowTemplate2: %param: ' . join(',', keys(%param)));
-	WriteLog('GetWindowTemplate2: caller: ' . join(',', caller));
+	WriteLog('GetDialogX2: %param: ' . join(',', keys(%param)));
+	WriteLog('GetDialogX2: caller: ' . join(',', caller));
 
 	my $windowBody = $param{'body'};
 	my $windowTitle = $param{'title'};
@@ -148,7 +151,7 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 	my $windowId = $param{'id'};
 
 	if (!$windowAnchor) {
-		WriteLog('GetWindowTemplate2: warning: $windowAnchor is FALSE, activating fallback; caller = ' . join(',', caller));
+		WriteLog('GetDialogX2: warning: $windowAnchor is FALSE, activating fallback; caller = ' . join(',', caller));
 		if (!$windowAnchor && $windowId) {
 			$windowAnchor = $windowId;
 		}
@@ -161,7 +164,7 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 			$windowAnchor = substr(md5_hex($windowBody), 0, 8);
 		}
 		if (!$windowAnchor) {
-			WriteLog('GetWindowTemplate2: warning: $windowAnchor is FALSE after fallbacks; caller = ' . join(',', caller));
+			WriteLog('GetDialogX2: warning: $windowAnchor is FALSE after fallbacks; caller = ' . join(',', caller));
 		}
 	}
 
@@ -172,7 +175,7 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 		$tableSort = 1;
 	}
 
-	#WriteLog('GetWindowTemplate2: $windowTitle = ' . $windowTitle . '; $tableSort = ' . $tableSort);
+	#WriteLog('GetDialogX2: $windowTitle = ' . $windowTitle . '; $tableSort = ' . $tableSort);
 
 	my $contentColumnCount = 1;
 	# stores number of columns if they exist
@@ -187,39 +190,39 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 	if ($windowId) {
 		if ($windowId =~ m/^([0-9a-zA-Z_]+)$/) {
 			$windowId = $1;
-			WriteLog('GetWindowTemplate2: $windowId = ' . $windowId);
+			WriteLog('GetDialogX2: $windowId = ' . $windowId);
 			$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'id', $windowId);
 		} else {
-			WriteLog('GetWindowTemplate2: warning: sanity check failed: $windowId = ' . $windowId);
+			WriteLog('GetDialogX2: warning: sanity check failed: $windowId = ' . $windowId);
 		}
 	} else {
-		WriteLog('GetWindowTemplate2: $windowId is FALSE');
+		WriteLog('GetDialogX2: $windowId is FALSE');
 	}
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
 		#$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onmousedown', 'this.style.zIndex = ++window.draggingZ;');
 
-		$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onmouseenter', 'if (window.SetActiveDialogDelay) { return SetActiveDialogDelay(this); }'); #SetActiveDialog() GetWindowTemplate2()
-		$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onmousedown', 'if (window.SetActiveDialog) { return SetActiveDialog(this); }'); #SetActiveDialog() GetWindowTemplate2()
-		#$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'ontouchstart', 'if (window.SetActiveDialog) { return SetActiveDialog(this); }'); #SetActiveDialog() GetWindowTemplate2()
+		$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onmouseenter', 'if (window.SetActiveDialogDelay) { return SetActiveDialogDelay(this); }'); #SetActiveDialog() GetDialogX2()
+		$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onmousedown', 'if (window.SetActiveDialog) { return SetActiveDialog(this); }'); #SetActiveDialog() GetDialogX2()
+		#$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'ontouchstart', 'if (window.SetActiveDialog) { return SetActiveDialog(this); }'); #SetActiveDialog() GetDialogX2()
 		#$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onfocus', 'if (window.SetActiveDialog) { SetActiveDialog(this); return true; }'); #SetActiveDialog()
 	}
 
 	my $showButtons = GetConfig('html/window_titlebar_buttons'); # titlebar hide and skip buttons;
-	WriteLog('GetWindowTemplate2: $showButtons = ' . $showButtons);
+	WriteLog('GetDialogX2: $showButtons = ' . $showButtons);
 
 	if (!$windowTitle) {
-		#WriteLog('GetWindowTemplate2: warning: title missing, using Untitled');
+		#WriteLog('GetDialogX2: warning: title missing, using Untitled');
 		#$windowTitle = 'Untitled';
 		$windowTitle = '';
 	}
 
 	# titlebar, if there is a title
 	if ($windowTitle) {
-		WriteLog('GetWindowTemplate2: $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle);
+		WriteLog('GetDialogX2: $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle);
 
 		if ($showButtons && GetConfig('admin/js/dragging')) {
-			WriteLog('GetWindowTemplate2: $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle . '; dragging = ' . GetConfig('admin/js/dragging'));
+			WriteLog('GetDialogX2: $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle . '; dragging = ' . GetConfig('admin/js/dragging'));
 
 			my $btnCloseCaption = '#'; # needs to match one other place in dragging.js #collapseButton
 			my $windowTitlebar = GetTemplate('html/window/titlebar_with_button.template'); #window_titlebar_buttons
@@ -279,11 +282,11 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 		# (for example, the author information dialog)
 		# in this case, we specify the number of columns as an integer
 		# this allows the title bar and status bar to have the proper value for colspan=
-		WriteLog('GetWindowTemplate: $columnHeadings is NUMERIC');
+		WriteLog('GetDialogX: $columnHeadings is NUMERIC');
 		$contentColumnCount = int($columnHeadings);
 		$columnHeadings = '';
 	} else {
-		WriteLog('GetWindowTemplate: $columnHeadings is not numeric');
+		WriteLog('GetDialogX: $columnHeadings is not numeric');
 		#$columnHeadings = '';
 	}
 
@@ -323,7 +326,7 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 				);
 			}
 			if (0 && $columnHeadingsLookup) { #todo
-				WriteLog('GetWindowTemplate2: $columnHeadingsLookup is TRUE');
+				WriteLog('GetDialogX2: $columnHeadingsLookup is TRUE');
 
 				my $columnString = GetString('column_name/' . $columnCaption);
 				if ($columnString && ($columnString ne $columnCaption)) {
@@ -426,12 +429,12 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 			if ($param{'guid'} =~ m/^[0-9a-f]{8}$/) {
 				$windowGuid = $param{'guid'};
 			} else {
-				WriteLog('GetWindowTemplate2: warning: $param{guid} failed sanity check');
+				WriteLog('GetDialogX2: warning: $param{guid} failed sanity check');
 			}
 		}
 
 		my $itemEndAnchor = substr($windowGuid, 0, 8);
-		WriteLog('GetWindowTemplate2: length($windowTemplate) = ' . length($windowTemplate) . '; $windowGuid = ' . $windowGuid);
+		WriteLog('GetDialogX2: length($windowTemplate) = ' . length($windowTemplate) . '; $windowGuid = ' . $windowGuid);
 		$windowTemplate =~ s/\$itemEndAnchor/$itemEndAnchor/g;
 		$windowTemplate .= "<a name=$itemEndAnchor></a>";
 	}
@@ -445,6 +448,6 @@ sub GetWindowTemplate2 { # \%paramHash ; returns window
 	}
 
 	return $windowTemplate;
-} # GetWindowTemplate2()
+} # GetDialogX2()
 
 1;

@@ -890,7 +890,7 @@ if (GetConfig('admin/php/route_enable')) {
 						$printedNotice = str_replace('$hashSetting', $hashSetting, $printedNotice);
 						#$printedNotice
 
-						$printedNotice = '<span class=advanced>' . GetWindowTemplate($printedNotice, 'Page Information', '', '', '') . '</span>';
+						$printedNotice = '<span class=advanced>' . GetDialogX($printedNotice, 'Page Information', '', '', '') . '</span>';
 
 						if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
 							#$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onmousedown', 'this.style.zIndex = ++window.draggingZ;');

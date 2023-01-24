@@ -42,9 +42,9 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 	# IMPORTANT NOTE ABOUT COLUMN HEADERS
 	# IMPORTANT NOTE ABOUT COLUMN HEADERS
 	#
-	# GetWindowTemplate() actually prints the columns!
+	# GetDialogX() actually prints the columns!
 	# DON'T LOOK FOR COLUMN PRINTING HERE!
-	# $columnsDisplay is passed into GetWindowTemplate() later!
+	# $columnsDisplay is passed into GetDialogX() later!
 	# $columnsDisplay is a comma-delimited string
 	#
 
@@ -96,7 +96,7 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 		}
 	}
 
-	# $columnsDisplay will be passed to GetWindowTemplate() below
+	# $columnsDisplay will be passed to GetDialogX() below
 
 	# COLUMN HEADERS SETUP ENDS
 	##############################################################
@@ -200,7 +200,7 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 
 		my $statusText = $resultCount . ' item(s)';
 
-		#return GetWindowTemplate($content, $title, $columnsDisplay, $statusText);
+		#return GetDialogX($content, $title, $columnsDisplay, $statusText);
 
 		my %param;
 		$param{'headings'} = $columnsDisplay;
@@ -214,14 +214,14 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 		}
 
 		require_once('get_window_template.pl');
-		return GetWindowTemplate3($content, $title, \%param);
+		return GetDialogX3($content, $title, \%param);
 	} else {
 		# empty results
 		if ($flags{'no_no_results'}) {
 			return '';
 		} else {
 			require_once('get_window_template.pl');
-			return GetWindowTemplate('This space reserved for future content.', $title);
+			return GetDialogX('This space reserved for future content.', $title);
 		}
 	}
 } # GetResultSetAsDialog()

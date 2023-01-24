@@ -1111,7 +1111,7 @@ sub DBCheckItemSurpass2 { # $a, $b
 #
 #			{
 #				my $voteButtons = GetItemTagButtons($file{'file_hash'});
-#				$allReplies .= '<hr>'.GetWindowTemplate($voteButtons, 'Add Tags').'<hr>';
+#				$allReplies .= '<hr>'.GetDialogX($voteButtons, 'Add Tags').'<hr>';
 #			}
 #
 #
@@ -3995,7 +3995,7 @@ sub RemoveOldItems {
 #
 #			$windowParams{'content'} = $message;
 #
-#			$itemTemplate = GetWindowTemplate2(\%windowParams);
+#			$itemTemplate = GetDialogX2(\%windowParams);
 #		}
 #		return $itemTemplate;
 #

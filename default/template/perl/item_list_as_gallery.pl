@@ -15,7 +15,7 @@ sub GetItemListAsGallery { # \@items ; returns gallery as series of dialogs with
 		WriteLog('GetItemListAsGallery: scalar(@items) = ' . scalar(@items));
 	} else {
 		WriteLog('GetItemListAsGallery: warning: @items missing');
-		my $html = GetWindowTemplate('An image gallery is coming soon at this address.', 'Gallery');
+		my $html = GetDialogX('An image gallery is coming soon at this address.', 'Gallery');
 		return $html;
 	}
 
@@ -37,7 +37,7 @@ sub GetItemListAsGallery { # \@items ; returns gallery as series of dialogs with
 			$itemImage = GetImageContainer($item{'file_hash'}, $item{'item_name'}, $boolLinkImage, 'g');
 		}
 		$itemImage = AddAttributeToTag($itemImage, 'img', 'height', '100');
-		$itemImage = GetWindowTemplate($itemImage, '');
+		$itemImage = GetDialogX($itemImage, '');
 
 		$html .= $itemImage;
 	}

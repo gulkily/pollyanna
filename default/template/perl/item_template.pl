@@ -226,7 +226,7 @@ sub GetMavoItemTemplate { # \%file
 		$itemText = substr($itemText, 0, index($itemText, "\n-- \n"));
 	}
 
-	my $itemDialog = GetWindowTemplate($itemText);
+	my $itemDialog = GetDialogX($itemText);
 
 	return $itemDialog;
 }
@@ -258,7 +258,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 	WriteLog('GetItemTemplate: caller = ' . join(',', caller));
 
 	# returns HTML for outputting one item WITH DIALOG FRAME
-	# uses GetWindowTemplate()
+	# uses GetDialogX()
 
 	# %file(hash for each file)
 	# file_path = file path including filename
@@ -359,7 +359,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			### this is the item template itself, including the window
 			##########################################################
 
-			#return GetWindowTemplate($param{'body'}, $param{'title'}, $param{'headings'}, $param{'status'}, $param{'menu'});
+			#return GetDialogX($param{'body'}, $param{'title'}, $param{'headings'}, $param{'status'}, $param{'menu'});
 			my %windowParams;
 
 			{
@@ -455,7 +455,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			$windowParams{'id'} = substr($file{'file_hash'}, 0, 8);
 			$windowParams{'table_sort'} = 0; #disable table sort
 
-			$itemTemplate = GetWindowTemplate2(\%windowParams);
+			$itemTemplate = GetDialogX2(\%windowParams);
 			$itemTemplate .= '<replies></replies>';
 		} ### this is the item template itself, including the window
 

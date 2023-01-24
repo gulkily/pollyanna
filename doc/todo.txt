@@ -42,11 +42,6 @@ add recovery from this warning:
 
 ===
 
-rename GetWindowTemplate() to...
-	GetDialog() ?
-
-===
-
 problems found during some testing
 
 a) on mac, setup is a bit broken
@@ -597,7 +592,7 @@ put top parent id into thread dialog
 
 put writing settings on write page
 	it's missing <form> tag in all instances
-		make a GetFormTemplate extension for GetWindowTemplate which wraps form tag around it
+		make a GetFormTemplate extension for GetDialogX which wraps form tag around it
 
 ===
 

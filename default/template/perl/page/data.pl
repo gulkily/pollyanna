@@ -39,7 +39,7 @@ sub GetDataDialog {
 	#$dialog =~ s/\$sizeImageZip/$sizeImageZip/g;
 	#$dialog =~ s/\$sizeSqliteZip/$sizeSqliteZip/g;
 
-	my $dialogWithFrame = GetWindowTemplate(
+	my $dialogWithFrame = GetDialogX(
 		$dialog,
 		'Data'
 	);

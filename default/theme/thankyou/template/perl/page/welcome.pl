@@ -7,7 +7,7 @@ use 5.010;
 sub GetWelcomePage {
 	my $html =
 		GetPageHeader('welcome') .
-		GetWindowTemplate(GetTemplate('html/page/welcome.template'), 'Welcome') .
+		GetDialogX(GetTemplate('html/page/welcome.template'), 'Welcome') .
 		GetPageFooter('welcome')
 	;
 

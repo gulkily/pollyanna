@@ -7,9 +7,9 @@ use 5.010;
 sub GetThanksPage {
 	my $html =
 		GetPageHeader('thanks') .
-		GetWindowTemplate(GetTemplate('html/page/thanks/god.template'), 'Creator') .
-		GetWindowTemplate(GetTemplate('html/page/thanks/supporters.template'), 'Supporters') .
-		GetWindowTemplate(GetTemplate('html/page/thanks/enablers.template'), 'Enablers') .
+		GetDialogX(GetTemplate('html/page/thanks/god.template'), 'Creator') .
+		GetDialogX(GetTemplate('html/page/thanks/supporters.template'), 'Supporters') .
+		GetDialogX(GetTemplate('html/page/thanks/enablers.template'), 'Enablers') .
 		GetPageFooter('thanks')
 	;
 	if (GetConfig('admin/js/enable')) {

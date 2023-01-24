@@ -9,7 +9,7 @@ sub GetWelcomePage {
 
 	$html =
 		GetPageHeader('welcome') .
-		GetWindowTemplate(GetTemplate('html/page/welcome.template')) .
+		GetDialogX(GetTemplate('html/page/welcome.template')) .
 		GetPageFooter('welcome')
 	;
 

@@ -75,7 +75,7 @@ sub GetReplyForm { # $replyTo ; returns reply form for specified item
 		}
 	} # GetConfig('admin/js/enable')
 
-	$replyForm = GetWindowTemplate($replyForm, 'Comment');
+	$replyForm = GetDialogX($replyForm, 'Comment');
 
 	return $replyForm;
 } # GetReplyForm()

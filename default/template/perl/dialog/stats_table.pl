@@ -196,7 +196,7 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 	$statsTable =~ s/\$chainLogLength/$chainLogLength/;
 
 	if ($templateName eq 'html/stats.template') { # GetStatsTable() conditional
-		$statsTable = GetWindowTemplate($statsTable, 'Status');
+		$statsTable = GetDialogX($statsTable, 'Status');
 		#todo remove this once other template is fixed #???
 	}
 

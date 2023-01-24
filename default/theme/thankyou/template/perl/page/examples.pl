@@ -7,7 +7,7 @@ use 5.010;
 sub GetExamplesPage {
 	my $html =
 		GetPageHeader('examples') .
-		GetWindowTemplate(GetTemplate('html/page/examples.template'), 'Examples') .
+		GetDialogX(GetTemplate('html/page/examples.template'), 'Examples') .
 		GetPageFooter('examples')
 	;
 	if (GetConfig('admin/js/enable')) {
