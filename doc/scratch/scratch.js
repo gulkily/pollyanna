@@ -1,3 +1,26 @@
+module.exports = function toUTCString() {
+        thisTimeValue(this); // to brand check
+
+        var day = $getUTCDay(this);
+        var date = $getUTCDate(this);
+        var month = $getUTCMonth(this);
+        var year = $getUTCFullYear(this);
+        var hour = $getUTCHours(this);
+        var minute = $getUTCMinutes(this);
+        var second = $getUTCSeconds(this);
+        return dayNames[day] + ', '
+                + (date < 10 ? '0' + date : date) + ' '
+                + monthNames[month] + ' '
+                + year + ' '
+                + (hour < 10 ? '0' + hour : hour) + ':'
+                + (minute < 10 ? '0' + minute : minute) + ':'
+                + (second < 10 ? '0' + second : second) + ' GMT';
+
+
+
+
+
+
 const myFunction = async() => {
 	console.log(await a + await b);
 };
