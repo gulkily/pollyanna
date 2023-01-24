@@ -1,5 +1,9 @@
-#jprint "this script is not finished";
-#exit;
+print "this script is not finished";
+exit;
+
+# todo.txt --> new items
+# this script is designed to inflate todo.txt into text files and the database
+# CAUTION: may create many files!
 
 require('./utils.pl');
 require_once('index.pl');
