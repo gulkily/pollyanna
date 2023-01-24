@@ -102,3 +102,41 @@ Avoid being a spam target by fine-tuning access.
 Avoid advertising by avoiding community over-growth.
 User-centric operation allows easy migration in case of instance changes.
 
+TESTED AND SUPPORTED BROWSERS AND CLIENTS:
+
+The list below is by no means extensive, and is growing often.
+In no particular order.
+
+Safari 1.0+ (iOS, Mac, and Windows)
+Netscape 2.0+
+Internet Explorer 3.0+
+Mozilla SeaMonkey 1.0+
+Firefox 1.0+
+Lynx
+Links (GUI and console)
+w3m
+qutebrowser
+Luakit
+LibreWolf
+Pale Moon
+Waterfox
+Waterfox Classic
+Microsoft Edge
+Dillo
+Liferea
+OffByOne
+Brave
+Falkon
+Camino
+Beacon
+Vivaldi
+Opera 2.0+
+Samsung Internet (Android)
+Samsung TV (name unknown)
+Kindle
+Google Translate (requires skilled operator for some features)
+Tor Browser
+Chromium
+wget
+curl
+NCSA Mosaic (requires accommodations)
