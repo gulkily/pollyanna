@@ -140,3 +140,4 @@ Chromium
 wget
 curl
 NCSA Mosaic (requires accommodations)
+QuiteRSS
