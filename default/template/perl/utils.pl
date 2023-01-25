@@ -1607,6 +1607,8 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 			# ensure document contains a mainconvent-tagged element
 			# typically: <MAIN ID=maincontent><A NAME=maincontent></A>
 			if (index($fileProvided, '.js') != -1) {
+				# it's cool
+			} else {
 				WriteLog('PutHtmlFile: warning: "maincontent" not found in file! $file = ' . ($file ? $file : '-'));
 			}
 		}
