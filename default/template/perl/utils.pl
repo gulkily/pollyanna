@@ -1417,7 +1417,7 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 	}
 
 	if (!$content) {
-		WriteLog('PutHtmlFile: warning: $content missing');
+		WriteLog('PutHtmlFile: warning: $content missing; caller = ' . join(',', caller));
 		$content = '';
 	}
 
@@ -1718,12 +1718,12 @@ sub AuthorHasTag { # $key ; returns 1 if user is admin, otherwise 0
 	my $tagInQuestion = shift;
 
 	if (!IsFingerprint($key)) {
-		WriteLog('AuthorHasTag: warning: $key failed sanity check, returning 0');
+		WriteLog('AuthorHasTag: warning: $key failed sanity check, returning 0; caller = ' . join(',', caller));
 		return 0;
 	}
 
 	if (!trim($tagInQuestion)) {
-		WriteLog('AuthorHasTag: warning: $tagInQuestion failed sanity check, returning 0');
+		WriteLog('AuthorHasTag: warning: $tagInQuestion failed sanity check, returning 0; caller = ' . join(',', caller));
 		return 0;
 	}
 
@@ -1747,7 +1747,7 @@ sub AuthorHasTag { # $key ; returns 1 if user is admin, otherwise 0
 			return 0;
 		}
 	} else {
-		WriteLog('AuthorHasTag: warning, no $pubKeyHash, how did we even get here?');
+		WriteLog('AuthorHasTag: warning, no $pubKeyHash, how did we even get here? caller = ' . join(',', caller));
 		return 0;
 	}
 
