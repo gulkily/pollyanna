@@ -24,6 +24,7 @@ sub IndexPuzzle {
 		$mintedAt = $2;
 		$checksum = $3;
 	}
+	my $titleCandidate = '';
 
 	if ($puzzleAuthorKey && $mintedAt && $checksum) {
 		WriteLog("IndexPuzzle: token: puzzle: $puzzleAuthorKey, $mintedAt, $checksum");
@@ -62,6 +63,8 @@ sub IndexPuzzle {
 					$detokenedMessage = str_replace($puzzleAuthorKey . ' ' . $mintedAt . ' ' . $checksum, '', $detokenedMessage);
 					$puzzleAccepted = 1;
 
+					$titleCandidate = '[Puzzle Solved]';
+
 					last;
 				}
 			} # foreach my $puzzlePrefix (@acceptPuzzlePrefix) {
@@ -72,6 +75,7 @@ sub IndexPuzzle {
 	$text{'detokenedMessage'} = $detokenedMessage;
 	$text{'messageLog'} = \@indexMessageLog;
 	$text{'fileHash'} = $fileHash;
+	$text{'titleCandidate'} = $titleCandidate;
 
 	return \%text;
 } # IndexPuzzle()

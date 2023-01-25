@@ -206,6 +206,9 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 			$detokenedMessage = $text{'detokenedMessage'};
 			@indexMessageLog = @{$text{'messageLog'}};
 			$fileHash = $text{'fileHash'};
+			if (!$titleCandidate && $text{'titleCandidate'}) {
+				$titleCandidate = $text{'titleCandidate'};
+			}
 		} # puzzle
 
 		#WriteLog('IndexTextFile: pass1: $message = ' . length($message) . '; $detokenedMessage = ' . length($detokenedMessage));
