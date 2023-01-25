@@ -73,7 +73,7 @@ sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons f
 	WriteLog('GetItemTagButtons(' . ($fileHash ? $fileHash : '-') . ', ' . ($tagSet ? $tagSet : '-') . '); caller = ' . join(',', caller));
 
 	if (!IsItem($fileHash)) {
-		WriteLog('GetItemTagButtons: warning: sanity check failed: $fileHash = ' . $fileHash);
+		WriteLog('GetItemTagButtons: warning: sanity check failed: $fileHash = ' . $fileHash . '; caller = ' . join(',', caller));
 		return '';
 	}
 
@@ -90,7 +90,7 @@ sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons f
 		}
 		else {
 			# no tagset?
-			WriteLog('GetItemTagButtons: warning: tagset not found: ' . $tagSet);
+			WriteLog('GetItemTagButtons: warning: tagset not found: ' . $tagSet . '; caller = ' . join(',', caller));
 			return '';
 		}
 	} # $tagSet
