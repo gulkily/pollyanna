@@ -16,7 +16,7 @@ sub GetAuthorRepliesDialog { # $authorKey
 	#$authorKey = IsFingerprint($authorKey);
 
 	if (!IsFingerprint($authorKey)) {
-		WriteLog('GetAuthorReplies: warning: $authorKey failed sanity check.');
+		WriteLog('GetAuthorRepliesDialog: warning: $authorKey failed sanity check; caller = ' . join(',', caller));
 		return '';
 	}
 
