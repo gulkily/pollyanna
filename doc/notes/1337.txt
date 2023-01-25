@@ -41,6 +41,9 @@ DEPENDENCIES
 
 # php can be excluded if php module will not be used
 
+Mac:
+sudo cpan Unicode::String
+
 BUILD
 =====
 $ git clone https://www.github.com/gulkily/RocketScience hike
