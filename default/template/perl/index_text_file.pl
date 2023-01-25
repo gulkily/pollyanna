@@ -266,7 +266,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 					} elsif ($tokenMaskParams eq 'g') {
 						@tokenLines = ($detokenedMessage =~ m/$tokenMask/g);
 					} else {
-						WriteLog('IndexTextFile: warning: sanity check failed: $tokenMaskParams not in approved list');
+						WriteLog('IndexTextFile: warning: sanity check failed: $tokenMaskParams = "' . $tokenMaskParams . '" not in approved list; $tokenName = ' . $tokenName);
 						@tokenLines = ();
 					}
 
@@ -278,14 +278,12 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						push @indexMessageLog, 'token limit reached, no more tokens will be processed!';
 						last; # not a return, but should be searchable as one
 					} else {
-						WriteLog('IndexTextFile: sanity check passed');
+						WriteLog('IndexTextFile: sanity check passed on @tokensFound');
 					}
 
 					while (@tokenLines) {
 						my $foundTokenName = shift @tokenLines;
-						if (!$foundTokenName) {
-							WriteLog('IndexTextFile: warning: $foundTokenName is FALSE');
-						} else {
+						if ($foundTokenName) {
 							my $foundTokenSpacer = shift @tokenLines;
 							if (!$foundTokenSpacer) {
 								WriteLog('IndexTextFile: warning: $foundTokenSpacer is FALSE');
@@ -322,6 +320,9 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							}
 
 							$detokenedMessage = str_replace($reconLine, '', $detokenedMessage);
+						} # if ($foundTokenName)
+						else {
+							WriteLog('IndexTextFile: warning: $foundTokenName is FALSE');
 						}
 					} # while (@tokenLines)
 				} # GetConfig("admin/token/$tokenName") && $detokenedMessage
