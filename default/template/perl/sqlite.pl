@@ -470,15 +470,14 @@ sub DBGetVotesForItem { # Returns all votes (weighed) for item
 	my $fileHash = shift;
 
 	if (!IsItem($fileHash)) {
-		WriteLog("DBGetVotesTable called with invalid parameter! returning");
-		WriteLog("$fileHash");
+		WriteLog('DBGetVotesTable: warning: $fileHash failed sanity check; caller = ' . join(',', caller));
 		return '';
 	}
 
 	my $query;
 	my @queryParams;
 
-	$query = "
+	$query = '
 		SELECT
 			file_hash,
 			ballot_time,
@@ -486,7 +485,7 @@ sub DBGetVotesForItem { # Returns all votes (weighed) for item
 			author_key
 		FROM vote
 		WHERE file_hash = ?
-	";
+	';
 	@queryParams = ($fileHash);
 
 	my @result = SqliteQueryHashRef($query, @queryParams);
@@ -1432,12 +1431,12 @@ sub DBAddItemParent { # $itemHash, $parentItemHash ; Add item parent record.
 	my $parentHash = shift;
 
 	if (!$parentHash) {
-		WriteLog('DBAddItemParent: warning: $parentHash missing');
+		WriteLog('DBAddItemParent: warning: $parentHash missing; caller = ' . join(',', caller));
 		return;
 	}
 
 	if ($itemHash eq $parentHash) {
-		WriteLog('DBAddItemParent: warning: $itemHash eq $parentHash');
+		WriteLog('DBAddItemParent: warning: $itemHash eq $parentHash; caller = ' . join(',', caller));
 		return;
 	}
 
@@ -1796,7 +1795,7 @@ sub DBGetItemAttribute { # $fileHash, $attribute ; returns one attribute for ite
 		WriteLog('DBGetItemAttribute: sanity check passed on $fileHash = ' . $fileHash);
 		$fileHash = $1;
 	} else {
-		WriteLog('DBGetItemAttribute: warning: sanity check FAILED on $fileHash = ' . $fileHash);
+		WriteLog('DBGetItemAttribute: warning: sanity check FAILED on $fileHash = ' . $fileHash . '; caller = ' . join(',', caller));
 		return '';
 	}
 
@@ -1804,7 +1803,7 @@ sub DBGetItemAttribute { # $fileHash, $attribute ; returns one attribute for ite
 		$attribute =~ s/[^a-zA-Z0-9_]//g;
 		#todo add sanity check
 	} else {
-		WriteLog('DBGetItemAttribute: warning: $attribute is missing');
+		WriteLog('DBGetItemAttribute: warning: $attribute is missing; caller = ' . join(',', caller));
 		return '';
 	}
 
@@ -1925,18 +1924,18 @@ sub DBAddItemAttribute { # $fileHash, $attribute, $value, $epoch, $source # add 
 sub DBGetAddedTime { # return added time for item specified
 	my $fileHash = shift;
 	if (!$fileHash) {
-		WriteLog('DBGetAddedTime: warning: $fileHash missing');
+		WriteLog('DBGetAddedTime: warning: $fileHash missing; caller = ' . join(',', caller));
 		return;
 	}
 	chomp ($fileHash);
 
 	if (!IsItem($fileHash)) {
-		WriteLog('DBGetAddedTime: warning: called with invalid parameter! returning');
+		WriteLog('DBGetAddedTime: warning: called with invalid parameter! returning; caller = ' . join(',', caller));
 		return;
 	}
 
 	if (!IsItem($fileHash) || $fileHash ne SqliteEscape($fileHash)) {
-		WriteLog('DBGetAddedTime: warning: important sanity check failed! this should never happen: !IsItem($fileHash) || $fileHash ne SqliteEscape($fileHash)');
+		WriteLog('DBGetAddedTime: warning: important sanity check failed! this should never happen: !IsItem($fileHash) || $fileHash ne SqliteEscape($fileHash); caller = ' . join(',', caller));
 		return '';
 	} #todo ideally this should verify it's a proper hash too
 
