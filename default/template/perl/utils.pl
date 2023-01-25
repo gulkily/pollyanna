@@ -534,7 +534,9 @@ sub TrimUnicodeString { # $string, $maxLength ; trims string to $maxLength in a 
 
 	#todo sanity
 
-	use Unicode::String qw(utf8);
+	eval(
+		'require Unicode::String qw(utf8);'
+	);	
 
 	my $us = utf8($string);
 
