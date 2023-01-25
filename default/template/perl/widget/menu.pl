@@ -330,13 +330,14 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 	}
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
-		#todo ??
-		$menuItem = AddAttributeToTag(
-			$menuItem,
-			'a ',
-			'onclick',
-			"if ((!window.GetPrefs || GetPrefs('draggable_spawn'))) { return FetchDialog('$menuName'); }"
-		);
+		if ($menuName ne 'help') {
+			$menuItem = AddAttributeToTag(
+				$menuItem,
+				'a ',
+				'onclick',
+				"if ((!window.GetPrefs || GetPrefs('draggable_spawn'))) { return FetchDialog('$menuName'); }"
+			);
+		}
 		#todo this also needs relativize support
 	}
 
