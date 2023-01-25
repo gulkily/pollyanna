@@ -290,7 +290,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 		# if reference exists, set %file
 		%file = %{$hashRef};
 	} else {
-		WriteLog('GetItemTemplate: warning: argument missing, returning');
+		WriteLog('GetItemTemplate: warning: argument missing, returning; caller = ' . join(',', caller));
 		#todo output something anyway?
 		return '';
 	}
