@@ -6,6 +6,12 @@
   /_  / / /_/ / / /\, /_/ /_/ /_/
                      __/
 
+FLAGSHIP INSTANCE:
+
+http://www.yavista.com/ (for classic browsers)
+
+https://www.yavista.com/ (for current browsers)
+
 CONSENT:
 
 For operators and administrators, thankyou supports every released software
