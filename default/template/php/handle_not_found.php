@@ -134,6 +134,9 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'/documentation.html',
 			'/about.html',
 			'/examples.html',
+			'/biography.html', # shadowme
+			'/interests.html', # shadowme
+			'/messages.html' # shadowme
 		);
 
 		if (in_array($path, $validMakePageNames)) {
@@ -157,6 +160,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'threads', # threads.html
 			'boxes', #banana #todo
 			'tasks', #dev tasks.html
+			'browse', #shadowme browse.html
 		);
 		#todo make this nicer and configurable etc
 
