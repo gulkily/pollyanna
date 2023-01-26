@@ -36,6 +36,14 @@ sub GetProfilePage { # returns profile page (allows sign in/out)
 		# js or php is required for profiles to work
 
 		$txtIndex = GetPageHeader('identity');
+
+		{ # shadowme
+			my $pageIntro = GetString('page_intro/identity');
+			if ($pageIntro) {
+				$txtIndex .= GetDialogX($pageIntro, 'Information');
+			}
+		}
+
 		$txtIndex .= GetTemplate('html/maincontent.template');
 
 		# my $profileWindowContents = GetTemplate('html/form/profile.template');
