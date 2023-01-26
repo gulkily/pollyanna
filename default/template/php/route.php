@@ -1225,6 +1225,17 @@ if (GetConfig('admin/php/route_enable')) {
 			}
 		} # /profile.html
 
+		if (GetConfig('setting/admin/php/route_insert_cookie_fingerprint')) {
+			if (index($html, '1337133713371337') != -1) { # shadowme
+				$currentCookie = GetSessionFingerprint();
+				if ($currentCookie) {
+					#todo if IsFingerprint() sanity check
+					# this is a hack, needs improvement #todo
+					$html = str_replace('1337133713371337', $currentCookie, $html);
+				}
+			}
+		}
+
 		if (GetConfig('setting/admin/php/cookie_inbox')) {
 			#if (isset($cookie) && $cookie) {
 			if (isset($_COOKIE['cookie']) && $_COOKIE['cookie']) {
