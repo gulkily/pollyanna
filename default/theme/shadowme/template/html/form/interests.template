@@ -1,0 +1,19 @@
+<form name=bio id=bio action="/post.html">
+	<p class=notice>
+		Please select the fields and tasks you are most interested in
+	</p>
+
+	<hr>
+
+	<span id=fields></span>
+
+	<hr>
+
+	<span id=tasks></span>
+
+	<hr>
+
+	<input type=hidden name=author_key value="1337133713371337">
+
+	<input type=submit value=Save>
+</form>

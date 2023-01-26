@@ -1,0 +1,20 @@
+SELECT
+	file_hash,
+	item_title,
+	author_key AS author_id,
+	add_timestamp
+FROM item_flat
+WHERE
+	file_hash IN (
+		SELECT item_hash
+		FROM item_parent
+		WHERE parent_hash IN
+		(
+			SELECT file_hash
+			FROM item_flat
+			WHERE author_key = ?
+		)
+	) AND
+	author_key != ? AND
+	author_key != ?
+ORDER BY add_timestamp DESC

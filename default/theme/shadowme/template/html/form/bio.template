@@ -1,0 +1,46 @@
+<form name=bio id=bio action="/post.html">
+	<p class=notice>
+		Notice: Please type carefully. <br>
+		Your input will be stored in an auditable chain. <br>
+		You will be able to make corrections, <br>
+		but not delete what you wrote. <br>
+		Thank you for your interest in ShadowMe.<br>
+		You must fill in the Comment field.
+	</p>
+
+	<hr>
+
+	<label for=name>
+		Name:
+		<input type=text size=20 name=name id=name>
+	</label>
+	<label for=institutions>
+		Institutions:
+		<input type=text size=20 name=institutions id=institutions>
+	</label>
+	<label for=resume>
+		Résumé:
+		<input type=text size=20 name=resume id=resume>
+	</label>
+	<label for=linkedin>
+		LinkedIn:
+		<input type=text size=20 name=linkedin id=linkedin>
+	</label>
+	<label for=location>
+		Location:
+		<input type=text size=20 name=location id=location>
+	</label>
+	<label for=biography>
+		Biography:<br>
+		<textarea cols=20 rows=5 name=biography id=biography>
+		</textarea
+	</label>
+	<label for=comment>
+		Comment:
+		<input type=text size=20 name=comment id=comment>
+	</label>
+
+	<hr>
+
+	<input type=submit value=Save>
+</form>
