@@ -86,6 +86,7 @@ sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons f
 		# if $tagSet is specified, just use that list of tags
 		my $quickVotesForTagSet = GetTemplate('tagset/' . $tagSet);
 		if ($quickVotesForTagSet) {
+			WriteLog('GetItemTagButtons: tagset found: ' . $tagSet . '; caller = ' . join(',', caller));
 			push @quickVotesList, split("\n", $quickVotesForTagSet);
 		}
 		else {
@@ -95,6 +96,8 @@ sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons f
 		}
 	} # $tagSet
 	else {
+		WriteLog('GetItemTagButtons: tagset not specified; caller = ' . join(',', caller));
+
 		# need to look up item's default tagset
 		my $quickVotesForTags;
 		foreach my $voteTag (keys %voteTotals) {
@@ -121,7 +124,7 @@ sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons f
 	my $doVoteButtonStyles = GetConfig('html/style_vote_buttons');
 	my $jsEnabled = GetConfig('admin/js/enable');
 
-	WriteLog('GetItemTagButtons: @quickVotesList = ' . scalar(@quickVotesList));
+	WriteLog('GetItemTagButtons: scalar(@quickVotesList) = ' . scalar(@quickVotesList));
 
 	my $commaCount = scalar(@quickVotesList) - 1; # actually semicolons
 
@@ -142,7 +145,7 @@ sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons f
 						}
 					")
 				);
-			} #todo this should only be added when openpgp.js is enabled
+			} #todo maybe this should only be added when openpgp.js is enabled? but still use PingUrl() to vote
 
 			if ($doVoteButtonStyles) {
 				# this is a hack, think about replace with config/tag_color
@@ -188,7 +191,7 @@ sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons f
 		} # if ($fileHash && $ballotTime)
 	} # foreach my $quickTagValue (@quickVotesList)
 
-	WriteLog('GetItemTagButtons: returning: $tagButtons = (' . length($tagButtons) . 'b)');
+	WriteLog('GetItemTagButtons: returning $tagButtons; length($tagButtons) = ' . length($tagButtons));
 
 	return $tagButtons;
 } # GetItemTagButtons()
