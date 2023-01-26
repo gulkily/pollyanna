@@ -1237,15 +1237,22 @@ if (GetConfig('admin/php/route_enable')) {
 		}
 
 		if (GetConfig('setting/admin/php/cookie_inbox')) {
-			#if (isset($cookie) && $cookie) {
-			if (isset($_COOKIE['cookie']) && $_COOKIE['cookie']) {
-				if (IsFingerprint($_COOKIE['cookie'])) {
-					$authorCookie = $_COOKIE['cookie'];
-					$htmlDir = GetDir('html');
-					$cookieInboxDialogPath = $htmlDir . '/dialog/replies/' . $authorCookie . '.html';
-					if (file_exists($cookieInboxDialogPath)) {
-						$cookieInboxDialog = GetFile($cookieInboxDialogPath);
-						$html = str_ireplace('</body>', $cookieInboxDialog . '</body>', $html);
+			if (index($html, '</span>') != -1) {
+				#if (isset($cookie) && $cookie) {
+				if (isset($_COOKIE['cookie']) && $_COOKIE['cookie']) {
+					if (IsFingerprint($_COOKIE['cookie'])) {
+						$authorCookie = $_COOKIE['cookie'];
+						$htmlDir = GetDir('html');
+						$cookieInboxDialogPath = $htmlDir . '/dialog/replies/' . $authorCookie . '.html';
+						if (file_exists($cookieInboxDialogPath)) {
+							$cookieInboxDialog = GetFile($cookieInboxDialogPath);
+							#$html = str_ireplace('</body>', $cookieInboxDialog . '</body>', $html);
+							$html = str_ireplace('<span id=messages></span>', '<span id=messages>' . $cookieInboxDialog . '</span>', $html); # shadowme
+						} else {
+							# shadowme
+							$cookieInboxDialog = GetDialogX('No messages at this time.', 'Inbox');
+							$html = str_ireplace('<span id=messages></span>', '<span id=messages>' . $cookieInboxDialog . '</span>', $html);
+						}
 					}
 				}
 			}
