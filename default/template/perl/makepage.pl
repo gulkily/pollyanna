@@ -62,8 +62,11 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	WriteLog('MakePage(' . $pageType . ', ' . $pageParam . '); caller = ' . join(',', caller));
 
 	my @listingPages = qw(child chain url deleted compost new raw picture image read authors scores tags threads boxes tasks active);
+	push @listingPages, qw(browse); # shadowme
 	#chain.html #new.html #boxes.html #tasks.html
+
 	my @simplePages = qw(spy data cloud bookmark help example access welcome calendar profile upload links post cookie chat thanks examples about faq documentation);
+	push @simplePages, qw(biography interests messages); # shadowme
 
 	if (0) { } # this is to make all the elsifs below have consistent formatting
 	elsif (in_array($pageType, @simplePages)) {
