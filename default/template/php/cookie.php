@@ -3,6 +3,27 @@
 $cookie = 0;
 include_once('utils.php');
 
+function GetSessionFingerprint () { # returns logged in user's fingerprint based on cookie
+	if (isset($_COOKIE['test']) && $_COOKIE['test']) {
+		WriteLog('GetSessionFingerprint: test cookie found');
+		if (isset($_COOKIE['cookie']) && $_COOKIE['cookie']) {
+			$cookie = $_COOKIE['cookie'];
+		}
+		if (isset($_COOKIE['checksum']) && $_COOKIE['checksum']) {
+			$checksum = $_COOKIE['checksum'];
+		}
+		WriteLog('GetSessionFingerprint: $cookie = ' . (isset($cookie) ? $cookie : '(unset)') . '; $checksum= ' . (isset($checksum) ? $checksum : '(unset)'));
+		$secret = GetConfig('admin/secret');
+		if (md5($cookie . '/' . $secret) == $checksum) {
+			return $cookie;
+		} else {
+			return '';
+		}
+	} else {
+		return '';
+	}
+} # GetSessionFingerprint()
+
 // #technically all the commands stuff should be in profile.php
 
 //	WriteLog(htmlspecialchars(nl2br(print_r($_GET))));
