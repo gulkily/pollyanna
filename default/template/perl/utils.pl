@@ -534,23 +534,34 @@ sub TrimUnicodeString { # $string, $maxLength ; trims string to $maxLength in a 
 
 	#todo sanity
 
+	# code below tries to account for environments where Unicode::String is missing
+	# it falls back on regular substr(), which has the downside of sometimes cutting
+	# unicode characters in half. this can probably be detected and remedied, but I don't know how yet
 	eval(
 		'require Unicode::String qw(utf8);'
-	);	
+	);
+	if (exists(&{'utf8'})) {
+		my $us = utf8($string);
+		my $stringLength = $us->length;
+		WriteLog('TrimUnicodeString: $string = ' . $string . '; $stringLength = ' . $stringLength);
 
-	my $us = utf8($string);
+		if ($stringLength > $maxLength) {
+			my $stringNew = $us->substr(0, $maxLength) . '...';
+			WriteLog('TrimUnicodeString: $stringNew = ' . $stringNew);
 
-	my $stringLength = $us->length;
-
-	WriteLog('TrimUnicodeString: $string = ' . $string . '; $stringLength = ' . $stringLength);
-
-	if ($stringLength > $maxLength) {
-		my $stringNew = $us->substr(0, $maxLength) . '...';
-		WriteLog('TrimUnicodeString: $stringNew = ' . $stringNew);
-
-		return $stringNew;
+			return $stringNew;
+		} else {
+			WriteLog('TrimUnicodeString: not trimming');
+		}
 	} else {
-		WriteLog('TrimUnicodeString: not trimming');
+		my $stringLength = length($string);
+		if ($stringLength > $maxLength) {
+			my $stringNew = substr($string, 0, $maxLength);
+			WriteLog('TrimUnicodeString: fallback mode: $stringNew = ' . $stringNew);
+			return $stringNew;
+		} else {
+			WriteLog('TrimUnicodeString: fallback mode: not trimming');
+		}
 	}
 
 	return $string;
