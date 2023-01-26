@@ -777,9 +777,23 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 	}
 } # GetTemplate()
 
-sub GetList { # $listName ; returns array from template
+sub GetList { # $listName ; reads a list from a template and returns it as an array
+# GetTagSet {
+# tagsets are also lists, so use this
+# Examples:
+# my @menu = GetList('list/menu');
+# my @tagsForMe = GetList('tagset/me');
+
 	my $listName = shift;
 	#todo sanity
+
+	chomp $listName;
+	if (!$listName) {
+		WriteLog('GetList: warning: sanity check failed on $listName');
+		return '';
+	}
+
+	WriteLog('GetList(' . $listName . '); caller = ' . join(',', caller));
 
 	my $templateContents = GetTemplate($listName);
 	#todo sanity
