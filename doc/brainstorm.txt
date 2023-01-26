@@ -1,3 +1,9 @@
+add one confirmation step to some scripts
+	by including a dummy (or different implementation) script e.g. update.pl and update.sh and update.py
+        then the user has to think about which interpreter they're about to use
+
+===
+
 if config changes, it should be detected by php shim and appropriate de-caching  place #brainstorm
 
 
