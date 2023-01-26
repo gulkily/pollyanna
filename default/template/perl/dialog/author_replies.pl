@@ -29,7 +29,9 @@ sub GetAuthorRepliesDialog { # $authorKey
 	my $authorRepliesQuery = SqliteGetNormalizedQueryString('author_replies', @queryParams);
 
 	my $authorAlias = DBGetAuthorAlias($authorKey);
-	my $dialogTitle = 'Recent Replies to Author ' . $authorAlias;
+	my $dialogTitle = 'Inbox'; # shadowme
+	# my $dialogTitle = 'Messages For ' . $authorAlias;
+	# my $dialogTitle = 'Recent Replies to Author ' . $authorAlias;
 
 	#my $hashRef = SqliteQueryHashRef('author_replies', @queryParams);
 	#my @authorReplies = @{$hashRef};
