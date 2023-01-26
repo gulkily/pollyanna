@@ -1,5 +1,5 @@
-print "this script is not finished";
-exit;
+#print "this script is not finished";
+#exit;
 
 # todo.txt --> new items
 # this script is designed to inflate todo.txt into text files and the database
@@ -14,8 +14,13 @@ require_once('index.pl');
 	# write todo.txt out into items
 
 	my $todo = GetFile('doc/todo.txt');
-	my @todoArray = split("\n\n", $todo);
+	my @todoArray = split("\n\n===\n\n", $todo);
 	my $i = 0;
+
+	print("\n");
+	print("Todo items found: " . scalar(@todoArray) . "\n");
+	print("Wait 5 seconds to continue creating files" . "\n");
+	sleep 5;
 
 	my $todoReply = "";
 
