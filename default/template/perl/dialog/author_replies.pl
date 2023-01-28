@@ -26,6 +26,13 @@ sub GetAuthorRepliesDialog { # $authorKey
 	push @queryParams, $authorKey;
 	push @queryParams, $authorKey;
 	push @queryParams, $authorKey;
+	# the $authorKey parameter is used three times in the default author_replies query
+	# this means that there are three question mark (?) placeholders in the query for it
+	# in the future, there may be a way to do this more gracefully, but for now we just
+	# push the same parameter three times.
+	# this also means that if we replace the query in a theme, such as in the shadowme theme,
+	# we still need to have three placeholders, otherwise the query builder will complain
+	# about the mismatch.
 	my $authorRepliesQuery = SqliteGetNormalizedQueryString('author_replies', @queryParams);
 
 	my $authorAlias = DBGetAuthorAlias($authorKey);
