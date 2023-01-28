@@ -272,12 +272,17 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 					$fieldValue .= $voteButton;
 					#todo make this a setting
 				} else {
-					$fieldValue .= GetItemTagButtons($itemRow{'file_hash'}, $tagsetName);
-					if (GetConfig('setting/html/reply_cart')) {
-						require_once('widget/add_to_reply_cart.pl');
-						#$fieldValue .= '; ';
-						#$fieldValue =~ s|</a>([^;])|</a>;$1|;
-						$fieldValue .= GetAddToReplyCartButton($itemRow{'file_hash'});
+					if ($itemRow{'file_hash'} && IsItem($itemRow{'file_hash'})) {
+						$fieldValue .= GetItemTagButtons($itemRow{'file_hash'}, $tagsetName);
+						if (GetConfig('setting/html/reply_cart')) {
+							require_once('widget/add_to_reply_cart.pl');
+							#$fieldValue .= '; ';
+							#$fieldValue =~ s|</a>([^;])|</a>;$1|;
+							$fieldValue .= GetAddToReplyCartButton($itemRow{'file_hash'});
+						} else {
+							WriteLog('RenderField: warning: $itemRow{\'file_hash\'} failed sanity check; caller = ' . join(',', caller));
+							# do nothing
+						}
 					}
 				}
 			}
