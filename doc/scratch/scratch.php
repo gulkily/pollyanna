@@ -1,4 +1,10 @@
 
+				if (GetConfig('setting/admin/js/enable')) {
+					$html = AddAttributeToTag($html, 'a href=#maincontent', 'onclick', "if (window.displayNotification) { displayNotification('You are welcome!') }");
+				}
+
+
+
 {
 	if (GetConfig('setting/admin/php/force_profile')) {
 		if (!isset($_COOKIE['cookie']) || !isset($_COOKIE['checksum'])) {
