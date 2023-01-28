@@ -1,3 +1,10 @@
+latent trust
+	when you rely on the age of the hashes to form a relatively good ability
+	to trust the content without being able to verify the entire chain all
+	the way back to the first block
+
+===
+
 add one confirmation step to some scripts
 	by including a dummy (or different implementation) script e.g. update.pl and update.sh and update.py
         then the user has to think about which interpreter they're about to use
@@ -6,6 +13,7 @@ add one confirmation step to some scripts
 
 if config changes, it should be detected by php shim and appropriate de-caching  place #brainstorm
 
+===
 
 fun ideas
 ==========
@@ -18,18 +26,20 @@ surviving the 21st century as a human being
 3. avoid zeitgeist/crowds
 4. exit funnels by jumping
 
+===
 
 #todo items which have a negative score should not be counted towards their parents' scores?
 	this means reweighing constantly or a recursion problem
 
+===
 
 types of muscle memory
 
+===
+
 demo site
 
-zip reinflating
-
-
+===
 
 set a cookie for javascript enabled, and don't serve it until then?
 	would also allow clipping js-dependent elements
