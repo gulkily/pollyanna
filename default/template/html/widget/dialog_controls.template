@@ -24,7 +24,6 @@
 		if (window.DraggingRetile) {
 			SetPrefs('draggable', 1);
 			SetPrefs('draggable_activate', 1);
-			SetPrefs('draggable_spawn', 1);
 			SetPrefs('draggable_spawn_focus', 1);
 			SetPrefs('draggable', 1);
 			SetPrefs('draggable_restore', 1);
@@ -32,9 +31,7 @@
 			SetActiveDialog(GetParentDialog(this));
 			DraggingInit(0);
 			DraggingMakeFit(0);
-			DraggingCascade(1);
 			DraggingInit(0);
-			FetchDialog('annoyances');
 		}
 	" title=Annoy>Annoy</a>;
 </span>
