@@ -83,9 +83,13 @@ sub GetString { # $stringKey, $language, $noSubstitutions ; Returns string from 
 			if (!$string) {
 				$string = TrimPath($stringKey);
 
-				WriteLog('GetString: warning: string value missing for $stringKey = ' . $stringKey);
+				if ($stringKey =~ m/^menu\// || $stringKey =~ m/^page_intro\//) {
+					# it is ok
+				} else {
+					WriteLog('GetString: warning: string value missing for $stringKey = ' . $stringKey . '; caller = ' . join(',', caller));
+				}
 				# if string is not found, display string key
-				# trin string key's path to make it less confusing
+				# trim string key's path to make it less confusing
 			}
 
 			chomp($string);
