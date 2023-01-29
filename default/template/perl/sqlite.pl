@@ -71,7 +71,7 @@ sub SqliteMakeTables { # creates sqlite schema
 	}
 
 	my $schemaQueries = GetTemplate('sqlite3/schema.sql');
-	$schemaQueries .= GetTemplate('sqlite3/vote_value.sql');
+	$schemaQueries .= "\n;\n" . GetTemplate('sqlite3/vote_value.sql');
 
 	$schemaQueries =~ s/^#.+$//mg; # remove sh-style comments (lines which begin with #)
 

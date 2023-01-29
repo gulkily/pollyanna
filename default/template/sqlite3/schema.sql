@@ -364,4 +364,4 @@ WHERE
 		FROM vote
 		WHERE vote_value IN ('approve', 'vouch')
 	)
-
+;
