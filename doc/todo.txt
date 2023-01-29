@@ -1,8 +1,12 @@
 option to not add to log but just display in frontend
+	model after X-No-Archive header in Usenet/NNTP
 
 ===
 
 search
+	generate search page based on keyword
+	add option in route.php
+	add global setting
 
 ===
 
@@ -18,7 +22,7 @@ should be able to go straight to editing a query on any view page
 
 ===
 
-#bug pubkeyping is not compatible with relativized urls at the moment
+#bug PubKeyPing() is not compatible with relativized urls at the moment
 
 ===
 
