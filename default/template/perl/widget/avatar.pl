@@ -95,9 +95,11 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 		my $alias = '';
 
 		if (!$alias) {
-			#todo huh?
 			$alias = GetAlias($authorKey, $noCache);
 			if (!$alias) {
+				#user has no alias for some reason.
+				#not sure how this would happen, except if they generated a key with a blank alias
+				WriteLog('GetAlias: warning: $alias was FALSE; $authorKey = ' . $authorKey . '; caller = ' . join(',', caller));
 				$alias = 'Guest'; #guest...
 			}
 			$alias = trim($alias);
