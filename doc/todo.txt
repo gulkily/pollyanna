@@ -11,6 +11,9 @@ search
 ===
 
 reflect user status in avatar based on user's tags
+	1) fix $authorItemAttributes block in GetAvatar()
+	2) check for pubkey, approve, vouch tags
+	3) display indicator
 
 ===
 
