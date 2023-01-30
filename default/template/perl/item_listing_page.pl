@@ -109,6 +109,8 @@ sub GetPaginationLinks { # $pageQuery, $currentPageNumber, $itemCount, $perPage
 sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialog_list), $pageNumber ;
 # sub GetListingPage {
 # sub MakeListingPage {
+# sub GetAuthorsPage {
+# sub GetViewPage {
 	my $pageQuery = shift;
 	my $pageMode = shift; # example: dialog_list, 'full_items', 'image_gallery'
 	my $pageNumber = shift;
