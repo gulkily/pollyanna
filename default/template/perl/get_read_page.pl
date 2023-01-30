@@ -258,7 +258,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		if ($tagInfo && ($tagInfo ne $pageParam)) {
 			# don't show tag info if it matches page param
 			# as that provides no additional useful information
-			$txtIndex .= GetDialogX($tagInfo, 'Tag Information');
+			$txtIndex .= GetDialogX(FormatForWeb($tagInfo), 'Tag Information');
 		}
 		if ($pageParam eq 'image') { # GetReadPage()
 			#$txtIndex .= GetUploadDialog();
