@@ -158,6 +158,8 @@ sub GetLighttpdConfig { # generate contents for lighttpd.conf file based on sett
 		my $phpCgiPath = `which php-cgi`;
 		chomp($phpCgiPath);
 
+		WriteLog('GetLighttpdConfig: $phpCgiPath = ' . $phpCgiPath);
+
 		if ($phpCgiPath) {
 			#$phpConf =~ s/\/bin\/php-cgi/$phpCgiPath/g;
 			WriteLog('GetLighttpdConfig: $phpCgiPath = ' . $phpCgiPath);
