@@ -16,7 +16,7 @@ while (my $argFound = shift) {
 }
 
 require_once('item_list_as_gallery.pl');
-require_once('get_window_template.pl');
+require_once('get_dialog.pl');
 
 sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it into $HTMLDIR directory; $pageType, $pageParam
 # sub makepage {

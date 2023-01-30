@@ -7,7 +7,7 @@ use 5.010;
 use POSIX;
 
 require './utils.pl';
-require_once('get_window_template.pl');
+require_once('get_dialog.pl');
 
 my @argsFound;
 while (my $argFound = shift) {

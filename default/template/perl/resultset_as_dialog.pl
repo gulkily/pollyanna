@@ -213,14 +213,14 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 			$param{'id'} = $flags{'id'};
 		}
 
-		require_once('get_window_template.pl');
+		require_once('get_dialog.pl');
 		return GetDialogX3($content, $title, \%param);
 	} else {
 		# empty results
 		if ($flags{'no_no_results'}) {
 			return '';
 		} else {
-			require_once('get_window_template.pl');
+			require_once('get_dialog.pl');
 			return GetDialogX('This space reserved for future content.', $title);
 		}
 	}

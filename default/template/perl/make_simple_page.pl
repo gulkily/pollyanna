@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use 5.010;
 
-require_once('get_window_template.pl');
+require_once('get_dialog.pl');
 
 sub MakeSimplePage { # given page name, makes page
 # sub GetSimplePage {

@@ -215,7 +215,7 @@ sub GetPageLink { # returns one pagination link as html, used by GetPageLinks
 	return $pageLink;
 } # GetPageLink()
 
-require_once('get_window_template.pl');
+require_once('get_dialog.pl');
 
 sub GetPageLinks { # $currentPageNumber ; returns html for pagination links with frame/window
 	my $currentPageNumber = shift; #
