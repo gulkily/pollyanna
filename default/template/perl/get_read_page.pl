@@ -158,23 +158,25 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 
 			#weird indentation here because we want it to look nice in the query dialog on the page
 			$queryParams{'where_clause'} = "
-	WHERE
-		file_hash IN (
-			SELECT
-				file_hash
-			FROM
-				vote
-			WHERE
-				vote_value = '$tagName' OR
-				vote_value IN (
-					SELECT tag
-					FROM tag_parent
-					WHERE tag_parent = '$tagName'
+		WHERE
+			item_flat.file_hash IN (
+				SELECT
+					file_hash
+				FROM
+					vote
+				WHERE
+					vote_value = '$tagName' OR
+					vote_value IN (
+						SELECT tag
+						FROM tag_parent
+						WHERE tag_parent = '$tagName'
+				)
 			)
-		)
 			";
 			$queryParams{'order_clause'} = "ORDER BY item_score DESC, item_flat.add_timestamp DESC";
 			$queryParams{'limit_clause'} = "LIMIT 1000"; #todo fix hardcoded limit #todo pagination
+			#todo this code is old-style and should be replaced
+			#it should use a query template in ../template/query/
 
 			$queryDisplay = DBGetItemListQuery(\%queryParams);
 
