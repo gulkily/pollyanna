@@ -166,6 +166,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 
 	if ($pageQuery =~ m/[^\s]+/) {
 		# $pageQuery does not have any spaces, so it's a page name
+		# page_info/
 		my $pageDescription = GetStringNoFallback('page_intro/' . $pageQuery);
 		if ($pageDescription) {
 			$pageDescription = str_replace("\n", "<br>\n", $pageDescription);
