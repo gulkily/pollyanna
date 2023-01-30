@@ -170,7 +170,8 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 		my $pageDescription = GetStringNoFallback('page_intro/' . $pageQuery);
 		if ($pageDescription) {
 			$pageDescription = str_replace("\n", "<br>\n", $pageDescription);
-			$html .= GetDialogX($pageDescription, $pageQuery);
+			my %dialogParam = { 'id' => 'page_intro' };
+			$html .= GetDialogX3($pageDescription, $pageQuery, \%dialogParam);
 		}
 	}
 
