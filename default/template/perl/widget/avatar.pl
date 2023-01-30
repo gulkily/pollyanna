@@ -84,8 +84,7 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 
 	my $isVerified = 0;
 	my $redditUsername = '';
-	if (0 && $authorKey) {
-		#todo code below no longer works, and should be fixed in order to correctly display author's status
+	if ($authorKey) {
 		WriteLog('GetAvatar: $authorKey = ' . $authorKey);
 
 		my $authorPubKeyHash = DBGetAuthorPublicKeyHash($authorKey) || '';
@@ -105,7 +104,8 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 			}
 			$alias = trim($alias);
 		}
-		if ($authorItemAttributes) {
+		if (0 && $authorItemAttributes) {
+			#todo code below no longer works, and should be fixed in order to correctly display author's status
 			#todo this doesn't work because it is expecting a big string, while it's getting a hash reference
 			foreach my $authorAttributeLine (split("\n", $authorItemAttributes)) {
 				WriteLog('GetAvatar: $authorAttributeLine = ' . $authorAttributeLine);
