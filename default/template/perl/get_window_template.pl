@@ -98,7 +98,7 @@ sub GetDialogX3 { # $body $title \%param
 	my $paramHashRef = shift;
 	my %param;
 	if ($paramHashRef) {
-		%param = %$paramHashRef;
+		%param = %{$paramHashRef};
 	}
 
 	WriteLog('GetDialogX3($body = ' . $body . '; $title = ' . $title . '; %param has ' . length(keys(%param)) . ')');
