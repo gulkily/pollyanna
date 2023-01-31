@@ -37,13 +37,13 @@ sub GetYes { # $message, $defaultYes ; print $message, and get Y response from t
 		return 1;
 	}
 	return 0;
-}
+} # GetYes()
 
 if (!GetConfig('admin/lighttpd/enable')) {
 	if (GetConfig('admin/dev/dont_confirm') || GetYes('admin/lighttpd/enable is false, set to true?', 1)) {
 		PutConfig('admin/lighttpd/enable', 1);
 	}
-}
+} # if (!GetConfig('admin/lighttpd/enable'))
 
 sub StartLighttpd { # run command to start local lighttpd instance
 	WriteLog('StartLighttpd() BEGIN');
@@ -76,7 +76,8 @@ sub StartLighttpd { # run command to start local lighttpd instance
 
 	if (-e $pathLighttpd) {
 		WriteLog('StartLighttpd: path found in config is good, continuing; $pathLighttpd = ' . $pathLighttpd);
-	} else {
+	}
+	else {
 		WriteLog('StartLighttpd: valid path not found, trying to find it');
 		$pathLighttpd = `which lighttpd`;
 		chomp $pathLighttpd;
@@ -102,7 +103,7 @@ sub StartLighttpd { # run command to start local lighttpd instance
 
 			WriteLog('StartLighttpd: valid path found after looking! Saving to config, $pathLighttpd = ' . $pathLighttpd);
 		}
-	}
+	} # else (!-e $pathLighttpd)
 
 	if ($pathLighttpd =~ m/^([^\s]+)$/) {
 		$pathLighttpd = $1;
@@ -125,12 +126,14 @@ sub StartLighttpd { # run command to start local lighttpd instance
 #			}
 #			#system("screen -m -S hike$port $pathLighttpd -D -f config/lighttpd/lighttpd.conf");
 #			system("screen -m -S hike$port $pathLighttpd -f config/lighttpd/lighttpd.conf &");
-		} else {
+		} # if ($screenCommand)
+		else {
 			print "\n";
 			system("$pathLighttpd -D -f config/lighttpd/lighttpd.conf");
 		}
 		#todo background it if opening browser
-	} else {
+	} # if ($insanityLevel == 0)
+	else {
 		WriteMessage('StartLighttpd: lighttpd path missing or failed sanity check. $insanityLevel = ' . $insanityLevel);
 	}
 } # StartLighttpd()
@@ -258,7 +261,8 @@ if (GetConfig('admin/lighttpd/enable')) {
 	WriteMessage('http://localhost:' . GetConfig('admin/lighttpd/port') . '/help.html' . "\n");
 	WriteMessage("===================\n");
 	StartLighttpd();
-} else {
+} # if (GetConfig('admin/lighttpd/enable'))
+else {
 	WriteMessage("server_local_lighttpd.pl: WARNING: admin/lighttpd/enable was false, not starting server");
 }
 
