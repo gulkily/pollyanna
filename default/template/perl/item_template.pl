@@ -23,6 +23,8 @@ sub GetItemTemplateBody {
 		return '';
 	}
 
+	WriteLog('GetItemTemplateBody: exists($file{trim_long_text}) = ' . exists($file{'trim_long_text'}));
+
 	my $fileHash = $file{'item_type'};
 	WriteLog('GetItemTemplateBody: $fileHash = image');
 
@@ -48,13 +50,6 @@ sub GetItemTemplateBody {
 		if (-1 != index(','.$file{'tags_list'}.',', ',pubkey,')) {
 			$isPubKey = 1;
 			WriteLog('GetItemTemplateBody: $isPubKey = 1');
-		}
-
-		my $isTooLong = 0;
-		my $itemLongThreshold = GetConfig('html/item_long_threshold') || 1024;
-		if (length($itemText) > $itemLongThreshold && exists($file{'trim_long_text'}) && $file{'trim_long_text'}) {
-			#todo this never gets called ??
-			$isTooLong = 1;
 		}
 
 		my $isPhone = 0;
@@ -96,6 +91,19 @@ sub GetItemTemplateBody {
 			$itemText = GetItemDetokenedMessage($file{'file_hash'}, $file{'file_path'});
 			$itemText =~ s/\r//g;
 
+			my $isTooLong = 0;
+			my $itemLongThreshold = GetConfig('html/item_long_threshold') || 1024;
+			WriteLog('GetItemTemplateBody: exists($file{trim_long_text}) = ' . exists($file{'trim_long_text'}));
+			WriteLog('GetItemTemplateBody: length($itemText) = ' . length($itemText) . '; $itemLongThreshold = ' . $itemLongThreshold);
+
+			if ((length($itemText) > $itemLongThreshold) && exists($file{'trim_long_text'}) && $file{'trim_long_text'}) {
+				#todo this never gets called ??
+				WriteLog('GetItemTemplateBody: $isTooLong = 1');
+				$isTooLong = 1;
+			} else {
+				WriteLog('GetItemTemplateBody: $isTooLong = 0');
+			}
+
 			if ($file{'remove_token'}) {
 				# if remove_token is specified, remove it from the message
 				WriteLog('GetItemTemplateBody: ' . $file{'file_hash'} . ': $file{remove_token} = ' . $file{'remove_token'});
@@ -112,6 +120,7 @@ sub GetItemTemplateBody {
 			}
 
 			if ($isTooLong) {
+				WriteLog('GetItemTemplateBody: $isTooLong is TRUE');
 				if (length($itemText) > $itemLongThreshold) {
 					$itemText = substr($itemText, 0, $itemLongThreshold) . "\n" . '[...]';
 					# if item is long, trim it
