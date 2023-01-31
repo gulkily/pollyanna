@@ -1131,6 +1131,12 @@ sub PutFile { # Writes content to a file; $file, $content, $binMode
 				WriteLog('PutFile: binmode $fileHandle = ' . $fileHandle . ', :utf8;');
 				binmode $fileHandle, ':utf8';
 			}
+
+			if ($content =~ m/[^\x00-\xFF]/) {
+				WriteLog('PutFile: warning: $content contains wide characters, setting :utf8; caller = ' . join(',', caller));
+				binmode $fileHandle, ':utf8';
+			}
+
 			WriteLog('PutFile: print $fileHandle $content;');
 			print $fileHandle $content; #todo wide character warning here why??
 
