@@ -67,7 +67,8 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 	$txtIndex .= GetOperatorDialog();
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
-		$txtIndex .= '<span class=advanced>' . GetDialogX(GetTemplate('html/form/annoyances.template'), 'Annoyances') . '</span>';
+		# $txtIndex .= '<span class=advanced>' . GetDialogX(GetTemplate('html/form/annoyances.template'), 'Annoyances') . '</span>';
+		$txtIndex .= GetDialogX(GetTemplate('html/form/annoyances.template'), 'Annoyances');
 	}
 	#$txtIndex .= GetMenuTemplate();
 
