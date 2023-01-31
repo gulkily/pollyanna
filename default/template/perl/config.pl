@@ -92,6 +92,10 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 		$token = '';
 	}
 	my $parameter = shift;
+	if (!defined($parameter)) {
+		# otherwise we get a warning below
+		$parameter = '';
+	}
 	if ($parameter) {
 		chomp $parameter;
 	}
@@ -140,7 +144,7 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 	}
 
 	#WriteLog('GetConfig: $configName BEFORE FixConfigName() is ' . $configName);
-	my $configName = FixConfigName($configName);
+	$configName = FixConfigName($configName);
 	#WriteLog('GetConfig: $configName AFTER FixConfigName() is ' . $configName);
 
 	if ($token && ($token eq 'override')) {
@@ -207,10 +211,13 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 			my @statConfig = stat("$CONFIGDIR/$configName");
 
 			my $timeDefault = $statDefault[9];
-			my $timeConfig = $statConfig[9];
 
-			if ($timeDefault > $timeConfig) {
-				WriteLog('GetConfig: warning: default is newer than config: ' . $configName);
+			if ($timeDefault) {
+				my $timeConfig = $statConfig[9];
+
+				if ($timeDefault > $timeConfig) {
+					WriteLog('GetConfig: warning: default is newer than config: ' . $configName);
+				}
 			}
 		}
 
