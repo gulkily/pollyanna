@@ -1,8 +1,9 @@
 #!/usr/bin/perl -T
-#
 
 use strict;
 use warnings;
+use 5.010;
+use utf8;
 
 sub GetTagLink { # $tag ; returns html for a tag link
 # sub GetHashTagLink {
@@ -67,6 +68,5 @@ sub GetTagLink { # $tag ; returns html for a tag link
 		return '';
 	}
 } # GetTaglink()
-
 
 1;

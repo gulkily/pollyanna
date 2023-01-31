@@ -2,6 +2,8 @@
 
 use strict;
 use warnings;
+use 5.010;
+use utf8;
 
 sub GetAddToReplyCartButton { # itemHash
 	my $itemHash = shift;
@@ -14,7 +16,7 @@ sub GetAddToReplyCartButton { # itemHash
 	#todo sanity
 
 	my $button = '
-	    <a class=replyCartButton href=#>+cart</a>
+		<a class=replyCartButton href=#>+cart</a>
 	';
 	$button = trim($button);
 

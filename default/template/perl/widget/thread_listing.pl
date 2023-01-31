@@ -2,6 +2,8 @@
 
 use strict;
 use warnings;
+use 5.010;
+use utf8;
 
 #todo this is the first version, and is sub-optimal
 

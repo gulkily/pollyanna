@@ -2,6 +2,8 @@
 
 use strict;
 use warnings;
+use 5.010;
+use utf8;
 
 sub GetAuthorLink { # $fingerprint, $showPlain ; returns avatar'ed link for an author id
 	my $fingerprint = shift; # author's fingerprint

@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use 5.010;
+use utf8;
 
 sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, using avatar.template
 # sub GetAvatarCache {

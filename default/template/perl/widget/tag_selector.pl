@@ -1,7 +1,8 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -T
+
 use strict;
-use warnings FATAL => 'all';
-
-
+use warnings;
+use 5.010;
+use utf8;
 
 1;

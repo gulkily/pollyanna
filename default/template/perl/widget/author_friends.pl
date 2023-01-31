@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use 5.010;
+use utf8;
 
 sub GetAuthorFriendsList { # $authorKey ; returns friends list as html with avatars and links
 	my $authorKey = shift;
