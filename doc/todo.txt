@@ -1,9 +1,6 @@
-test
-
-===
 
 rename get_dialog.pl to dialog.pl
-	refactor existing dialog.pl into separate files
+	refactor existing dialog.pl into separate filesx
 
 ===
 
