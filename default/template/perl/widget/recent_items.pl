@@ -2,25 +2,13 @@
 
 use strict;
 use warnings;
+use 5.010;
+use utf8;
 
 sub GetRecentItemsDialog {
-	my $query = "
-		SELECT
-			item_title,
-			add_timestamp,
-			file_hash
-		FROM
-			item_flat
-		WHERE
-			item_score > 0
-		ORDER BY
-			add_timestamp DESC
-		LIMIT 10
-	";
-
-	my $dialog = GetQueryAsDialog($query, 'Recently Posted');
+	my $dialog = GetQueryAsDialog('recent_items', 'Recently Posted');
 
 	return $dialog;
-}
+} # GetRecentItemsDialog()
 
 1;
