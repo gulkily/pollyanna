@@ -857,40 +857,6 @@ sub encode_entities2 { # returns $string with html entities <>"& encoded
 	return $string;
 } # encode_entities2()
 
-sub GetHtmlAvatar { # Returns HTML avatar from cache 
-	state %avatarCache;
-
-	# returns avatar suitable for comments
-	my $key = shift;
-	if (!$key) {
-		return;
-	}
-
-	if (!IsFingerprint($key)) {
-		return;
-	}
-
-	if ($avatarCache{$key}) {
-		WriteLog("GetHtmlAvatar: found in hash");
-		return $avatarCache{$key};
-	}
-
-	my $avatar = GetAvatar($key);
-	if ($avatar) {
-		if (-e 'html/author/' . $key) {
-			my $avatarLink = GetAuthorLink($key);
-			$avatarCache{$key} = $avatar;
-			return $avatarLink;
-		}
-	} else {
-		return $key;
-		#		return 'unregistered';
-	}
-
-	return $key;
-	#	return 'unregistered';
-} # GetHtmlAvatar
-
 sub GetAlias { # $fingerprint, $noCache ; Returns alias for an author
 	my $fingerprint = shift;
 
