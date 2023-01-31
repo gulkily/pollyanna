@@ -1132,7 +1132,7 @@ sub PutFile { # Writes content to a file; $file, $content, $binMode
 				binmode $fileHandle, ':utf8';
 			}
 			WriteLog('PutFile: print $fileHandle $content;');
-			print $fileHandle $content; #todo wide character error here
+			print $fileHandle $content; #todo wide character warning here why??
 
 			WriteLog('PutFile: close $fileHandle;');
 			close $fileHandle;
