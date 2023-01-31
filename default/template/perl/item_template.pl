@@ -60,11 +60,11 @@ sub GetItemTemplateBody {
 			}
 		}
 
-		my $isAdress = 0;
+		my $isAddress = 0;
 		if (GetConfig('html/format_item/address')) {
 			if (-1 != index(','.$file{'tags_list'}.',', ',address,')) {
-				$isAdress = 1;
-				WriteLog('GetItemTemplateBody: $isAdress = 1');
+				$isAddress = 1;
+				WriteLog('GetItemTemplateBody: $isAddress = 1');
 			}
 		}
 
@@ -80,7 +80,7 @@ sub GetItemTemplateBody {
 			if (!$itemText) {
 				$itemText = PhoneForWeb(GetFile($file{'file_path'}));
 			}
-		} elsif ($isAdress) {
+		} elsif ($isAddress) {
 			$itemText = AddressForWeb(GetCache('message/' . $file{'file_hash'} . '_gpg'));
 			if (!$itemText) {
 				$itemText = AddressForWeb(GetFile($file{'file_path'}));
