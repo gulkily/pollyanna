@@ -15,6 +15,7 @@
 #   message typically contains original text, minus pgp envelope
 
 use strict;
+use warnings;
 use 5.010;
 use utf8;
 

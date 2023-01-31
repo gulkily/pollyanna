@@ -2,8 +2,8 @@
 
 use strict;
 use warnings;
-
 use 5.010;
+use utf8;
 
 sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 # sub InjectDebug {

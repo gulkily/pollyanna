@@ -2,9 +2,9 @@
 #freebsd: #!/usr/local/bin/perl
 
 use strict;
+use warnings;
 use 5.010;
 use utf8;
-#use warnings FATAL => 'all';
 
 require './utils.pl';
 

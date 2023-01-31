@@ -2,6 +2,8 @@
 
 use strict;
 use warnings;
+use 5.010;
+use utf8;
 
 # GetDialogX()
 #	 $body = what's inside the dialog

@@ -2,8 +2,8 @@
 
 use strict;
 use warnings;
-
 use 5.010;
+use utf8;
 
 sub GetPageFooter { # $pageType ; returns html for page footer
 # sub GetFooter {

@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use 5.010;
+use utf8;
 
 sub IndexCppFile { # $file | 'flush' ; indexes one text file into database
 # sub IndexCpp {

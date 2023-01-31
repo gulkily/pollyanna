@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 
 use strict;
+use warnings;
 use 5.010;
 use utf8;
 
@@ -11,7 +12,7 @@ sub WriteMessage {
 	my $text = shift;
 	print $text;
 	print "\n";
-}
+} # WriteMessage()
 
 sub GetChoice { # $message ; gets input from user
 	my $message = shift;
@@ -42,7 +43,7 @@ sub RunCommand {
 	print GetTime() . " " . $command;
 	my $return = `$command`;
 	return `$command`;
-}
+} # RunCommand()
 
 my %dep;
 $dep{'php'} = `which php`;

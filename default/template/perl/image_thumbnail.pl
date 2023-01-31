@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use 5.010;
+use utf8;
 
 sub ImageMakeThumbnails { # $file
 	my $file = shift;

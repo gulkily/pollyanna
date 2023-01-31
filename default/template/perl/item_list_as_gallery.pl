@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use 5.010;
+use utf8;
 
 require_once('get_dialog.pl');
 

@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use 5.010;
+use utf8;
 
 sub IndexZipFile { # $file | 'flush' ; indexes one text file into database
 # sub IndexZip {

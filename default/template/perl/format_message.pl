@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use 5.010;
+use utf8;
 
 sub SurveyForWeb { # replaces some spaces with &nbsp; to preserve text-based layout for html display; $text
 	my $text = shift;

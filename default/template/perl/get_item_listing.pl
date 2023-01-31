@@ -2,8 +2,8 @@
 
 use strict;
 use warnings;
-
 use 5.010;
+use utf8;
 
 sub GetItemListing { # returns listing of items based on topic
 	my $htmlOutput = '';

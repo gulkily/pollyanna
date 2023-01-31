@@ -1,7 +1,9 @@
 #!/usr/bin/perl
 
-# use strict;
+use strict;
 use warnings;
+use 5.010;
+use utf8;
 
 sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 # \@result is an array of hash references

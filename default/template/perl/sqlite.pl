@@ -1,12 +1,14 @@
 #!/usr/bin/perl -T
 #freebsd: #!/usr/local/bin/perl
 
+
 use strict;
 use warnings;
+use 5.010;
 use utf8;
+
 use Data::Dumper;
 use Carp;
-use 5.010;
 
 my @foundArgs;
 while (my $argFound = shift) {

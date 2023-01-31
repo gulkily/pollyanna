@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use 5.010;
+use utf8;
 
 sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFile() based on extension ;
 # returns TRUE when success, FALSE when failure

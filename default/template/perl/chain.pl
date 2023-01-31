@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use 5.010;
+use utf8;
 
 sub MakeChainIndex { # $import = 1; reads from log/chain.log and puts it into item_attribute table
 	# note: this is kind of a hack, and non-importing validation should just be separate own sub

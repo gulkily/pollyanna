@@ -1,11 +1,11 @@
 #!/usr/bin/perl -T
-#
 
 die "File needs fixing and debugging";
 
 use strict;
-use utf8;
 use warnings;
+use 5.010;
+use utf8;
 
 my $versionBefore = GetMyVersion();
 

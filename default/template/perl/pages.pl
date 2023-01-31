@@ -6,9 +6,8 @@
 
 use strict;
 use warnings;
-use utf8;
-use URI::Escape qw(uri_escape);
 use 5.010;
+use utf8;
 
 my @foundArgs;
 while (my $argFound = shift) {
@@ -16,6 +15,7 @@ while (my $argFound = shift) {
 }
 
 use lib qw(lib);
+use URI::Escape qw(uri_escape);
 use Digest::MD5 qw(md5_hex);
 use POSIX qw(strftime ceil);
 use Data::Dumper;

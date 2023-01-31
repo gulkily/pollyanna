@@ -5,6 +5,9 @@
 # max interval is 1000 seconds
 #
 use strict;
+use warnings;
+use 5.010;
+use utf8;
 
 use Digest::MD5 qw(md5_hex);
 

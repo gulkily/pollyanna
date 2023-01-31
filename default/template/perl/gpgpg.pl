@@ -17,11 +17,10 @@
 #   anything good is written to database
 #   #gpg_naive_regex_pubkey #gpg_naive_regex_signed #gpg_naive_regex_encrypted
 
-
 use strict;
 use warnings;
-use utf8;
 use 5.010;
+use utf8;
 
 my @argsFound;
 while (my $argFound = shift) {

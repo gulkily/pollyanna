@@ -5,10 +5,12 @@ use warnings;
 use utf8;
 use 5.010;
 
-#use threads ('yield',
-#             'stack_size' => 64*4096,
-#             'exit' => 'threads_only',
-#             'stringify');
+# use threads (
+# 	'yield',
+# 	'stack_size' => 64*4096,
+# 	'exit' => 'threads_only',
+# 	'stringify'
+# );
 
 my @argsFound;
 while (my $argFound = shift) {

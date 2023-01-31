@@ -2,6 +2,8 @@
 
 use strict;
 use warnings;
+use 5.010;
+use utf8;
 
 sub IndexScunthorpe {
 	my $cussWords = GetTemplate('list/scunthorpe');

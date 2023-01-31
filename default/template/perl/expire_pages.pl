@@ -2,6 +2,8 @@
 
 use strict;
 use warnings;
+use 5.010;
+use utf8;
 
 sub ExpirePages { # $fileHash ; expire html pages affected by a change in item
 # sub DeletePages {

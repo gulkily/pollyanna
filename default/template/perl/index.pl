@@ -20,10 +20,12 @@ while (my $argFound = shift) {
 use Digest::SHA qw(sha512_hex);
 use POSIX qw(floor);
 
-#use threads ('yield',
-#             'stack_size' => 64*4096,
-#             'exit' => 'threads_only',
-#             'stringify');
+# use threads (
+# 	'yield',
+# 	'stack_size' => 64*4096,
+# 	'exit' => 'threads_only',
+# 	'stringify'
+# );
 
 require('./utils.pl');
 require_once('gpgpg.pl');
