@@ -27,7 +27,7 @@ sub GetSimpleDialog { # dialogType ; gets simple dialog based on template/html/p
 	my $html = '';
 	my $pageContent = GetTemplate("html/page/$dialogType.template");
 	if (!$pageContent) {
-		WriteLog('GetSimpleDialog: warning: empty template, sanity check failed');
+		WriteLog('GetSimpleDialog: warning: empty template, sanity check failed; $pageContent was FALSE');
 		return '';
 	}
 	my $contentWindow = GetDialogX(
