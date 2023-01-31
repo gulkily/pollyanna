@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use 5.010
+use 5.010;
 use utf8;
 
 sub GetPuzzleDialog { # returns write form (for composing text message)
