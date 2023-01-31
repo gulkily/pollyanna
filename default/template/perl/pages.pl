@@ -1633,7 +1633,20 @@ sub BuildStaticExportPages { #
 require_once('widget/avatar.pl');
 require_once('format_message.pl');
 require_once('widget.pl');
-require_once('dialog.pl');
+
+require_once('get_dialog.pl');
+
+require_once('dialog/chain_log.pl');
+require_once('dialog/access.pl');
+require_once('dialog/tos.pl');
+require_once('dialog/write.pl');
+require_once('dialog/puzzle.pl');
+require_once('dialog/annoyances.pl');
+require_once('dialog/operator.pl');
+require_once('dialog/search.pl');
+require_once('dialog/simple.pl');
+require_once('dialog/settings.pl');
+
 require_once('dialog/reply.pl');
 
 sub PrintBanner {
