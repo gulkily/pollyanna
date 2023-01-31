@@ -29,11 +29,13 @@ sub GetHtmlAvatar { # $key ; Returns HTML avatar from cache
 	# returns avatar suitable for comments
 	my $key = shift;
 	if (!$key) {
-		return;
+		WriteLog('GetHtmlAvatar: warning: $key was FALSE; caller = ' . join(',', caller));
+		return '';
 	}
 
 	if (!IsFingerprint($key)) {
-		return;
+		WriteLog('GetHtmlAvatar: warning: $key failed sanity check; caller = ' . join(',', caller));
+		return '';
 	}
 
 	if ($avatarMemo{$key}) {
