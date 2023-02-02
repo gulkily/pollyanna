@@ -1237,19 +1237,24 @@ if (GetConfig('admin/php/route_enable')) {
 		}
 
 		if (GetConfig('setting/admin/php/cookie_inbox')) {
-			if (index($html, '</span>') != -1) {
+			WriteLog('route.php: cookie_inbox is TRUE');
+			if (index($html, '</body>') != -1) {
 				#if (isset($cookie) && $cookie) {
 				if (isset($_COOKIE['cookie']) && $_COOKIE['cookie']) {
+					WriteLog('route.php: cookie_inbox: $_COOKIE[cookie] is TRUE');
 					if (IsFingerprint($_COOKIE['cookie'])) {
+						WriteLog('route.php: cookie_inbox: IsFingerprint($_COOKIE[cookie]) is TRUE');
 						$authorCookie = $_COOKIE['cookie'];
 						$htmlDir = GetDir('html');
 						$cookieInboxDialogPath = $htmlDir . '/dialog/replies/' . $authorCookie . '.html';
 						if (file_exists($cookieInboxDialogPath)) {
+							WriteLog('route.php: file_exists($cookieInboxDialogPath) is TRUE');
 							$cookieInboxDialog = GetFile($cookieInboxDialogPath);
 							#$html = str_ireplace('</body>', $cookieInboxDialog . '</body>', $html);
 							$html = str_ireplace('<span id=messages></span>', '<span id=messages>' . $cookieInboxDialog . '</span>', $html); # shadowme
 						} else {
 							# shadowme
+							WriteLog('route.php: file_exists($cookieInboxDialogPath) is FALSE');
 							$cookieInboxDialog = GetDialogX('No messages at this time.', 'Inbox');
 							$html = str_ireplace('<span id=messages></span>', '<span id=messages>' . $cookieInboxDialog . '</span>', $html);
 						}
