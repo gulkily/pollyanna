@@ -700,7 +700,8 @@ sub DBGetItemTitle { # get title for item ($itemhash)
 	my $itemHash = shift;
 
 	if (!$itemHash || !IsItem($itemHash)) {
-		return;
+		WriteLog('DBGetItemTitle: warning: $itemHash failed sanity check; caller = ' . join(',', caller));
+		return '';
 	}
 
 	#my $query = 'SELECT title FROM item_title WHERE file_hash = ?';
