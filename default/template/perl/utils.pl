@@ -611,7 +611,13 @@ sub GetFileHash { # $fileName ; returns hash of file contents
 	WriteLog('GetFileHash: memo miss for $fileName = ' . $fileName);
 
 	if (-e $fileName) {
-		$memoFileHash{$fileName} = sha1_hex(GetFile($fileName));
+		my $fileContent = GetFile($fileName);
+		# if (!utf8::is_utf8($fileContent)) {
+		# 	$fileContent = Encode::encode_utf8($fileContent);
+		# }
+		# $memoFileHash{$fileName} = sha1_hex(GetFile($fileName));
+		# $memoFileHash{$fileName} = sha1_hex(Encode::encode_utf8($fileContent));
+		$memoFileHash{$fileName} = GetSHA1(GetFile($fileName));
 		return $memoFileHash{$fileName};
 	} else {
 		return '';
@@ -669,7 +675,8 @@ sub GetFileMessageHash { # $fileName ; returns hash of file contents
 			$fileContent = trim($fileContent);
 			WriteLog('GetFileMessageHash: length after removing signature and trim = ' . length($fileContent));
 			WriteLog('GetFileMessageHash: $fileContent = ' . $fileContent);
-			$memoFileHash{$fileName} = sha1_hex($fileContent);
+			# $memoFileHash{$fileName} = sha1_hex($fileContent);
+			$memoFileHash{$fileName} = GetSHA1($fileContent);
 			WriteLog('GetFileMessageHash: returning ' . $memoFileHash{$fileName});
 			return $memoFileHash{$fileName};
 		} else {
