@@ -620,6 +620,18 @@ sub GetFileHash { # $fileName ; returns hash of file contents
 	return '';
 } # GetFileHash()
 
+sub GetSHA1 {
+	my $string = shift;
+	my $hash = sha1_hex(Encode::encode_utf8($string));
+	return $hash;
+} # GetSHA1()
+
+sub GetMD5 {
+	my $string = shift;
+	my $hash = md5_hex(Encode::encode_utf8($string));
+	return $hash;
+} # GetMD5()
+
 sub GetFileMessageHash { # $fileName ; returns hash of file contents
 # sub GetItemHash {
 # sub GetHash {
