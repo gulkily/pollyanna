@@ -58,6 +58,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		##### this is special hack for item attributes dialog
 		##### this is special hack for item attributes dialog
 		##### this is special hack for item attributes dialog
+
 		# GetItemAttributesDialog {
 		if ($fieldName eq 'attribute') {
 			$fieldValue = '<span title="' . $itemRow{'attribute'} . '">' . GetString('item_attribute/' . $itemRow{'attribute'}) . '</span>' . ':';
@@ -80,18 +81,16 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$longMode = 1;
 	}
 
-	if (0) { # just a placeholder to make all the elsif statements look similar
-	}
-
-	elsif ($fieldName eq 'last_seen') {
-		$fieldValue = GetTimestampWidget($fieldValue);
-	}
+	if (0) {} # placeholder to make all the elsif statements below consistent
 
 	elsif (
 		$fieldName eq 'author_id' ||
 		$fieldName eq 'cookie_id' ||
 		$fieldName eq 'gpg_id'
 	) {
+		# author identifier as 16-character uppercase hexadecimal
+		# example: A0B1C2D3E4F56789
+
 		if ($fieldValue) {
 			# turn author key into linked avatar
 			require_once('widget/author_link.pl');
@@ -106,8 +105,13 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		}
 	}
 
-	elsif ($fieldName eq 'vote_value') {
-		#todo redo
+	elsif (
+		$fieldName eq 'vote_value'
+	) {
+		# vote_value field should contain one tag
+		# example: good
+		#todo redo and sanity check
+
 		my $tagColor = GetStringHtmlColor($fieldValue);
 		my $link = "/tag/" . $fieldValue . ".html";
 		my $linkText = '<font color="' . $tagColor . '">#</font>' . $fieldValue;
@@ -117,8 +121,12 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 	elsif (
 		$fieldName =~ m/.+timestamp$/ ||
 		$fieldName =~ m/.+start$/ ||
-		$fieldName =~ m/.+finish$/
+		$fieldName =~ m/.+finish$/ ||
+		$fieldName eq 'last_seen'
 	) {
+		# timestamp in epoch format, displayed as a timestamp widget
+		# example: 1675297480
+
 		if ($longMode) {
 			$fieldValue = GetTimestampWidget($fieldValue) . ' <tt class=advanced> ' . $fieldValue . '</tt>';
 		} else {
@@ -135,7 +143,10 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fieldName eq 'md5' ||
 		$fieldName eq 'chain_hash' ||
 		$fieldName eq 'message_hash'
-	) { #todo make it match on _hash and use _hash on the names
+	) {
+		# various hashes, displayed in fixed-width font
+		#todo make it match on _hash and use _hash on the names
+
 		$fieldValue = '<tt>' . $fieldValue . '</tt>';
 	}
 
@@ -144,7 +155,11 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fieldName eq 'https' ||
 		$fieldName eq 'http' ||
 		$fieldName eq 'url'
-	) { #url
+	) {
+		# url, displayed as hyperlink, and shortened to 60 characters if necessary
+		# example: http://www.yavista.com/
+		# example: https://www.yavista.com/
+
 		if (length($fieldValue) < 64) {
 			$fieldValue = '<a href="' . HtmlEscape($fieldValue) . '">' . HtmlEscape($fieldValue) . '';
 		} else {
@@ -165,7 +180,32 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		}
 	}
 
-	elsif ($fieldName eq 'item_title') {
+	elsif (
+		$fieldName eq 'file_hash'
+	) {
+		# file hash, displayed as first 8 characters
+		#
+		# not sure why this is handled differently from all the other hashes above,
+		# BUT i think it because file_hash is used mainly in tabular listings,
+		# where horizontal space is at a premium, while the above fields are
+		# mainly used in vertical listings in item attributes dialog
+		#
+		# <tt> is not used here because it would add a lot to page weight
+		# when there is a long list of results
+
+		if ($fieldValue) {
+			$fieldValue = substr($fieldValue, 0, 8);
+		} else {
+			$fieldValue = '';
+		}
+	}
+
+	elsif (
+		$fieldName eq 'item_title'
+	) {
+		# item title, displayed as shortened version
+		# if row also includes file_hash field, it is linked to item's page
+
 		if (%itemRow && $itemRow{'file_hash'}) {
 			if ($itemRow{'this_row'}) {
 				$fieldValue = '<b>' . HtmlEscape($fieldValue) . '</b>';
@@ -178,15 +218,13 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		}
 	}
 
-	elsif ($fieldName eq 'file_hash') {
-		if ($fieldValue) {
-			$fieldValue = substr($fieldValue, 0, 8);
-		} else {
-			$fieldValue = '';
-		}
-	}
+	elsif (
+		$fieldName eq 'tags_list'
+	) {
+		# list of tags, to be displayed as links to tag pages
+		# preceding and trailing commas are ignored
+		# example: ,like,good,flag,approve,interesting,
 
-	elsif ($fieldName eq 'tags_list') {
 		if ($fieldValue) {
 			$fieldValue = GetTagsListAsHtmlWithLinks($fieldValue);
 		} else {
@@ -194,7 +232,15 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		}
 	}
 
-	elsif ($fieldName eq 'chain_previous') {
+	elsif (
+		$fieldName eq 'chain_next' ||
+		$fieldName eq 'chain_previous'
+	) {
+		# links to previous and next items in notarization chain
+		# this field has a performance hit, since there is a lookup
+		# something to do here would be to allow chain_next_title and chain_previous_title
+		#   as complementary fields in the resultset
+
 		if ($fieldValue) {
 			my $itemHash = substr($fieldValue, 0, 40); #todo unhack
 			$fieldValue = GetItemHtmlLink($itemHash, DBGetItemTitle($itemHash, 16));
@@ -203,23 +249,26 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		}
 	}
 
-	elsif ($fieldName eq 'chain_next') {
-		if ($fieldValue) {
-			my $itemHash = substr($fieldValue, 0, 40); #todo unhack
-			$fieldValue = GetItemHtmlLink($itemHash, DBGetItemTitle($itemHash, 16));
-		} else {
-			$fieldValue = '';
-		}
-	}
-
-	elsif ($fieldName eq 'local_path') {
+	elsif (
+		$fieldName eq 'local_path'
+	) {
+		# local file path, usually useful when running local instance
+		# example: /home/username/hike/html/txt/aa/bb/aabbccddeeff00112233445566778899.txt
+		# becomes prefixed with file:// for direct navigation if browser supports it
+		# (most browsers block this type of link nowadays, even on localhost)
+		# depends on local_path attribute being added to item_attribute table,
+		# which is controlled by: config/setting/admin/index/index_local_path_as_attribute
 		#todo templatize
+
 		$fieldValue = '<a href="file://' . HtmlEscape($fieldValue) . '">' . HtmlEscape($fieldValue) . '</a>';
 	}
 
-	elsif ($fieldName eq 'file_path') {
-		# link file path to file
-		state $HTMLDIR = GetDir('html'); #todo
+	elsif (
+		$fieldName eq 'file_path'
+	) {
+		# path to source file, which should become hyperlink
+
+		state $HTMLDIR = GetDir('html'); #todo this is not currently used
 		#problem here is GetDir() returns full path, but here we already have relative path
 		#currently we assume html dir is 'html'
 
@@ -228,9 +277,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fileClientPath =~ s/^html\//\//; #dirty #hack #bughere
 
 		WriteLog('RenderField: warning: file_path is using hard-coded path to HTML dir');
-
 		$fieldValue = ''; # initialize/reset
-
 		$fieldValue .= '<a href="' . HtmlEscape($fileClientPath) . '">' . HtmlEscape($fileClientPath) . '</a>';
 
 		#hack #dirty #todo #performance
@@ -253,27 +300,40 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 
 	}
 
-#
-#	if ($itemRow{'file_size'}) {
-#		if ($itemRow{'file_size'} > 1024) {
-#			$fieldValue .= GetFileSizeWidget($itemRow{'file_size'}) . ' <tt class=advanced>' . $itemRow{'file_size'} . '</tt>';
-#		} else {
-#			$fieldValue .= GetFileSizeWidget($itemRow{'file_size'});
-#		}
-#	}
+	# if ($itemRow{'file_size'}) {
+	# 	if ($itemRow{'file_size'} > 1024) {
+	# 		$fieldValue .= GetFileSizeWidget($itemRow{'file_size'}) . ' <tt class=advanced>' . $itemRow{'file_size'} . '</tt>';
+	# 	} else {
+	# 		$fieldValue .= GetFileSizeWidget($itemRow{'file_size'});
+	# 	}
+	# }
 
-	elsif (substr($fieldName, 0, 7) eq 'tagset_' && !$fieldValue) {
+	elsif (
+		substr($fieldName, 0, 7) eq 'tagset_' && !$fieldValue
+	) {
+		# placeholder field for voting buttons from tagset
+		#
+		# in the query, it should look like this:
+		# 	SELECT
+		#		'' AS tagset_compost,
+		#		...
+		#	FROM
+		#		...
+		#
+		# above would create voting buttons for all tags in config/template/tagset/compost
+
 		if (length($fieldName) > 7) {
 			my $tagsetName = substr($fieldName, 7);
 			if (GetTemplate('tagset/' . $tagsetName)) {
 				if ($tagsetName eq 'inbox') {
+					# special case for inbox button, which would hide the row
+					# but it currently keeps the actual vote from happening, so that's why
+					# the AddAttributeToTag() below is commented out
+					#todo make this dependent on the inbox feature
 					my $voteButton = GetItemTagButtons($itemRow{'file_hash'}, $tagsetName);
-
 					#$voteButton = AddAttributeToTag($voteButton, 'a', 'onmouseup', "if (window.GetParentElement) { var pe = GetParentElement(this, 'TR'); if (pe) { pe.remove() } }");
 					#this works, but keeps the actual voting from firing
-
 					$fieldValue .= $voteButton;
-					#todo make this a setting
 				} else {
 					if ($itemRow{'file_hash'} && IsItem($itemRow{'file_hash'})) {
 						$fieldValue .= GetItemTagButtons($itemRow{'file_hash'}, $tagsetName);
@@ -292,7 +352,17 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		}
 	}
 
-	elsif ($fieldName eq 'cart' && !$fieldValue) {
+	elsif (
+		$fieldName eq 'cart' && !$fieldValue
+	) {
+		# +cart button placeholder field
+		#
+		# in the query, it should look like this:
+		# 	SELECT
+		#		'' AS cart,
+		#		...
+		#	FROM
+		#		...
 		if (GetConfig('setting/html/reply_cart')) {
 			require_once('widget/add_to_reply_cart.pl');
 			$fieldValue .= GetAddToReplyCartButton($itemRow{'file_hash'});
@@ -324,11 +394,16 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		if (1) {
 			#todo add #sanity
 
-			my $specialName = substr($fieldName, 8);
-			if ($specialName eq 'title_tags_list') {
+			my $specialName = substr($fieldName, 8); # remove 'special_' prefix from field name
+
+			if (0) {} # placeholder to make all other elsif statements consistent
+			elsif ($specialName eq 'title_tags_list') {
 				# title, tags list, and author avatar (if any)
 				# special_title_tags_list
 				# this should become a template
+
+				#todo sanity check for all required fields being present
+
 				$fieldValue =
 					'<b>' .
 						GetItemHtmlLink($itemRow{'file_hash'}, $itemRow{'item_title'}) .
@@ -342,10 +417,13 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 					)
 				;
 			}
-			if ($specialName eq 'title_tags_list_author') {
+			elsif ($specialName eq 'title_tags_list_author') {
 				# title, tags list, and author avatar (if any)
 				# special_title_tags_list_author
 				# this should become a template
+
+				#todo sanity check for all required fields being present
+
 				require_once('widget/author_link.pl');
 				$fieldValue =
 					'<b>' .
@@ -361,8 +439,13 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 					)
 				;
 			}
+			else {
+				WriteLog('RenderField: warning: unknown field type: $fieldName = ' . $fieldName . '; caller = ' . join(',', caller));
+				return '';
+			}
 		}
 	}
+
 	#
 	#	if ($fieldName eq 'tagset_compost') {
 	#		if (%itemRow && $itemRow{'file_hash'}) {
@@ -377,8 +460,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 	#	}
 
 	elsif (
-		# these are just valid fields!
-
+		# these are just valid fields which can be displayed as is
 		$fieldName eq 'attribute' || # RenderField() not to be confused with field_advanced
 		$fieldName eq 'author_key' || # RenderField() not to be confused with field_advanced
 		$fieldName eq 'chain_order' || # RenderField() not to be confused with field_advanced
@@ -395,13 +477,14 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fieldName eq 'chain_checksum_good' || # RenderField() not to be confused with field_advanced
 		$fieldName eq 'boxes' || # RenderField() not to be confused with field_advanced (this is for banana theme)
 		$fieldName eq 'file_size' || # RenderField() not to be confused with field_advanced (this is for banana theme)
-		0 # this is here to make above more consistent
+		0 # this is here to make formatting above more consistent
 	) {
-		#cool
+		# leave the field value as is
 	}
 
-
 	else {
+		# unknown field name, generate a warning and html-escape it just in case
+
 		#if (trim($fieldValue) eq '' || (!$fieldValue && $fieldValue != 0 && $fieldValue ne '0')) {
 		if (!$fieldValue) {
 			WriteLog('RenderField: warning: unhandled $fieldValue is also missing; $fieldName = ' . $fieldName . '; caller: ' . join(', ', caller));
