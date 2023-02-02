@@ -388,6 +388,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			if (GetConfig('admin/expo_site_mode')) { #todo #debug #expo
 				$windowParams{'title'} = HtmlEscape($file{'item_name'});
 			} else {
+				WriteLog('GetItemTemplate: $file{item_title} = ' . ($file{'item_title'} ? $file{'item_title'} : 'FALSE'));
 				$windowParams{'title'} = HtmlEscape($file{'item_title'});
 			}
 
