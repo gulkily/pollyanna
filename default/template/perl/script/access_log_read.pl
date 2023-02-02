@@ -399,8 +399,13 @@ sub ProcessAccessLog { # reads an access log and writes .txt files as needed
 			}
 		}
 
+		WriteLog('ProcessAccessLog: checkpoint!');
+
 		# If a submission prefix was found
+
 		if ($submitPrefix) {
+			WriteLog('ProcessAccessLog: $submitPrefix = ' . $submitPrefix);
+
 			# Look for it in the beginning of the requested URL
 			if (substr($file, 0, length($submitPrefix)) eq $submitPrefix) {
 				WriteLog("Found a message...\n");
@@ -423,6 +428,8 @@ sub ProcessAccessLog { # reads an access log and writes .txt files as needed
 						$message = shift @messageItems;
 					}
 
+					WriteLog('ProcessAccesLog: after removing one, scalar(@messageItems) = ' . scalar(@messageItems));
+
 					# Unpack from URL encoding
 					$message =~ s/\+/ /g;
 					$message = uri_decode($message);
@@ -433,7 +440,7 @@ sub ProcessAccessLog { # reads an access log and writes .txt files as needed
 						my ($paramName, $paramValue) = split('=', $urlParam);
 
 						if (!defined($paramValue)) {
-							WriteLog('ProcessAccessLog: warning: urlParam: $paramValue missing');
+							WriteLog('ProcessAccessLog: warning: urlParam: $paramValue missing, $paramName = ' . $paramName);
 							next;
 						}
 
