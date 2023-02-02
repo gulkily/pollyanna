@@ -1570,7 +1570,8 @@ sub DBAddItem { # $filePath, $fileName, $authorKey, $fileHash, $itemType, $verif
 	DBAddItemAttribute($fileHash, 'sha1', $fileHash);
 
 	if (GetConfig('setting/admin/index/extra_hashes')) {
-		DBAddItemAttribute($fileHash, 'md5', md5_hex(GetFile($filePath)));
+		#DBAddItemAttribute($fileHash, 'md5', md5_hex(Encode::encode_utf8(GetFile($filePath))));
+		DBAddItemAttribute($fileHash, 'md5', GetMD5(GetFile($filePath)));
 	}
 
 	if (GetConfig('setting/admin/index/sha1sum')) {
