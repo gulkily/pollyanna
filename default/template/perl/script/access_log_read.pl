@@ -498,6 +498,12 @@ sub ProcessAccessLog { # reads an access log and writes .txt files as needed
 
 						else {
 							if ($paramName && $paramValue) {
+								#todo
+								# store the name and parameter in the message
+								# do not include the comment, since it's already stored
+								# add signature divider if necessary
+								# should match what post.php does, so that items are not duplicated
+
 								# $message .= "\n" . $paramName . '=' . $paramValue . "\n";
 								# $message .= "\n" . $paramName . '=' . $paramValue . "\n";
 								$headerFooter{$paramName} = $paramValue
