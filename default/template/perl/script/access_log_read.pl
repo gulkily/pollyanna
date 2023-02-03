@@ -710,6 +710,8 @@ sub ProcessAccessLog { # reads an access log and writes .txt files as needed
 					}
 				}
 			}
+		} else {
+			WriteLog('ProcessAccessLog: $submitPrefix NOT FOUND');
 		}
 
 		{
