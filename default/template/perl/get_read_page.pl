@@ -482,6 +482,8 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	# LISTING ITEMS ENDS HERE
 
 	if ($pageType eq 'tag' && $pageParam eq 'image') { # GetReadPage()
+		# a special case for the #image page
+		# include upload dialog
 		require_once('page/upload.pl');
 		$txtIndex .= GetUploadDialog();
 	}
