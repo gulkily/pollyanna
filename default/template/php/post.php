@@ -70,6 +70,8 @@ $returnTo = '';        // page to return to, can be different from new item's pa
 $strSourceUrl = '';    // source document's url, specified as s= parameter in GET
 $strSourceTitle = '';  // source document's title, specified as t= parameter in GET
 
+$allParameters = array();
+
 if ($_POST) { // if POST request, populate variables from $_POST
 	WriteLog('post.php: $_POST');
 
@@ -103,6 +105,13 @@ if ($_POST) { // if POST request, populate variables from $_POST
 
 	if (isset($_POST['recfing']) && $_POST['recfing']) {
 		$recordFingerprint = $_POST['recfing'];
+	}
+
+	if (GetConfig('setting/admin/php/post/log_all_parameters')) {
+		foreach($_POST as $paramKey => $paramValue) {
+			WriteLog('post.php: $_POST: log_all_parameters: $paramKey = ' . $paramKey . '; $paramValue = ' . $paramValue);
+			$allParameters[$paramKey] = $paramValue;
+		}
 	}
 } // $_POST
 
@@ -153,6 +162,13 @@ elseif ($_GET) { // if GET request, populate variables from $_GET
 	if (isset($_GET['recfing']) && $_GET['recfing']) {
 		$recordFingerprint = $_GET['recfing'];
 	}
+
+	if (GetConfig('setting/admin/php/post/log_all_parameters')) {
+		foreach($_GET as $paramKey => $paramValue) {
+			WriteLog('post.php: $_POST: log_all_parameters: $paramKey = ' . $paramKey . '; $paramValue = ' . $paramValue);
+			$allParameters[$paramKey] = $paramValue;
+		}
+	}
 } # $_GET
 elseif ($_REQUEST) { // if HEAD request, populate variables from $_REQUEST
 	WriteLog('post.php: $_REQUEST found: ' . print_r($_REQUEST, 1));
@@ -198,6 +214,13 @@ elseif ($_REQUEST) { // if HEAD request, populate variables from $_REQUEST
 	if (isset($_REQUEST['recfing']) && $_REQUEST['recfing']) {
 		$recordFingerprint = $_REQUEST['recfing'];
 	}
+
+	if (GetConfig('setting/admin/php/post/log_all_parameters')) {
+		foreach($_REQUEST as $paramKey => $paramValue) {
+			WriteLog('post.php: $_POST: log_all_parameters: $paramKey = ' . $paramKey . '; $paramValue = ' . $paramValue);
+			$allParameters[$paramKey] = $paramValue;
+		}
+	}
 } # $_REQUEST
 
 
@@ -212,6 +235,7 @@ if (isset($boxesCount) && $boxesCount && !$comment) {
 {
 	if (isset($comment) && $comment && GetConfig('setting/admin/php/post/require_cookie')) {
 		if ((!isset($_COOKIE['cookie']) || !isset($_COOKIE['checksum'])) && index($comment, 'SIGNED') == -1 && index($comment, 'PUBLIC') == -1) {
+			#todo page does not look right, especially with dark theme
 			$returnMessage = GetDialogX(
 				"<p>Please forgive me, friend, <br>but you must <a href=/profile.html>register</a> first, <br>before you do that</p>",
 				'No Cookie Haiku'
@@ -402,6 +426,18 @@ if (isset($comment) && $comment) {
 
 		if (isset($boxesCount) && $boxesCount) { #boxes #banana
 			$comment = 'boxes: ' . $boxesCount . "\n" . $comment;
+		}
+
+		if (isset($allParameters)) {
+			$comment = $comment . "\n-- \n";
+			foreach ($allParameters as $paramKey => $paramValue) {
+				#todo sanity checks
+				if ($paramKey == 'comment') {
+					# comment is already added by default
+				} else {
+					$comment = $comment . $paramKey . ': ' . $paramValue . "\n";
+				}
+			}
 		}
 
 		$newFileHash = ProcessNewComment($comment, $replyTo); // post.php // PutFile()
