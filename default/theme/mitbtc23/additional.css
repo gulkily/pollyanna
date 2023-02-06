@@ -1,0 +1,8 @@
+body{background:#b8b8b8;font:1.2rem sans-serif;}
+.container{max-width:64rem;margin:0 auto;}
+.title{text-align:center;font-size:2.4rem;}
+.header{background:#000;padding:.6rem;}
+.subheader{font-size:1.2rem;text-align:center;}
+.block{background:#bbb;padding:.6rem;}
+.footer{background:#000;padding:.6rem;}
+.copyright{font-size:.8rem;text-align:center;}
