@@ -303,7 +303,7 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 		WriteLog('SqliteQuery: $query passed sanity check');
 		$shCommand = $1;
 	} else {
-		my $outLogName = sha1_hex(time().$shCommand).'.shcommand';
+		my $outLogName = GetSHA1(time().$shCommand).'.shcommand';
 		state $outLogDir = GetDir('log');
 		PutFile("$outLogDir/$outLogName", $shCommand);
 		WriteLog('SqliteQuery: warning: $shCommand failed sanity check for printable characters only: ' . $outLogName);
