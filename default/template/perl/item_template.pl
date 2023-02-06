@@ -293,6 +293,9 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 
 	# get %file hash from supplied parameters
 
+	#todo needs to be sanity check for these fields:
+	# file_hash, item_title, file_path, add_timestamp, file_hash, item_type
+
 	#my %file = %{shift @_};
 	my $hashRef = shift; # reference to hash
 	my %file;            # actual hash
@@ -312,7 +315,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 		#cool
 	}
 	else {
-		WriteLog('GetItemTemplate: warning: -e $file{file_path} was FALSE; $file{file_path} = ' . $file{'file_path'});
+		WriteLog('GetItemTemplate: warning: -e $file{file_path} was FALSE; caller = ' . join(',', caller));
 		$sourceFileHasGoneAway = 1;
 	}
 
