@@ -1,5 +1,15 @@
-SELECT file_hash, item_title
-FROM item_flat
-WHERE item_score > 0
-ORDER BY RANDOM()
-LIMIT 25
+SELECT
+	file_hash,
+	item_title,
+	file_path,
+	add_timestamp,
+	file_hash,
+	item_type
+FROM
+	item_flat
+WHERE
+	item_score > 0
+ORDER BY
+	RANDOM()
+LIMIT
+	25
