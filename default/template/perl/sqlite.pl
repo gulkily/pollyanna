@@ -190,6 +190,8 @@ sub SqliteQueryHashRef { # $query, @queryParams; calls sqlite with query, and re
 		my $resultString = SqliteQuery($queryWithParams);
 
 		WriteLog('SqliteQueryHashRef: $resultString is ' . ($resultString ? 'TRUE' : 'FALSE') . '; $queryWithParams = ' . $queryWithParams);
+		#WriteLog('SqliteQueryHashRef: $resultString = ' . ($resultString ? $resultString : 'FALSE'));
+
 
 		if ($resultString) {
 			my @resultsArray;
@@ -310,8 +312,32 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 		return '';
 	}
 
+	###########################################################################
+	###########################################################################
+	### RUN QUERY VIA SHELL ###################################################
+	### RUN QUERY VIA SHELL ###################################################
+
 	my $results = '';
-	$results = `$shCommand`;
+	#use open ':std', ':encoding(UTF-8)';
+	if ($shCommand =~ m/^(.+)$/s) {
+		$shCommand = $1;
+		$results = `$shCommand`;
+
+		WriteLog('SqliteQuery: $results = ' . $results);
+		if (index($results, '90f7c1d87f56afbf1fc18ce49b9031f035e92a95') != -1) {
+			print($results);
+			#die($results);
+		}
+	}
+	#utf8::encode($results);
+
+	#print($results);
+
+	#todo utf8 decoding is broken here, results are returned as bytes instead of chars (?)
+	### RUN QUERY VIA SHELL ###################################################
+	### RUN QUERY VIA SHELL ###################################################
+	###########################################################################
+	###########################################################################
 
 	if (index(trim(lc(GetFile($sqliteErrorLog))), 'locked') != -1) {
 		#sometimes the database is locked for a moment, so we retry 3 times before giving up
@@ -1910,6 +1936,7 @@ sub DBAddItemAttribute { # $fileHash, $attribute, $value, $epoch, $source # add 
 		$value =~ s/[\n\r]//g;
 		if ($lengthBefore != length($value)) {
 			WriteLog('DBAddItemAttribute: warning: value of title attribute was sanitized. caller = ' . join(',', caller));
+			#todo this doesn't actually seem to work
 		}
 	}
 
