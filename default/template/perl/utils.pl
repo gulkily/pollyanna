@@ -955,16 +955,17 @@ sub GetFile { # Gets the contents of file $fileName
 	# default to reading a max of 2MB of the file. #scaling #bug #todo
 
 	WriteLog('GetFile: trying to open file...');
+	use open qw(:utf8);
 	if (
 		-e $fileName # file exists
 			&&
 		!-d $fileName # not a directory
 			&&
-		open (my $file, "<", $fileName) # opens successfully
+		open(my $file, "<", $fileName) # opens successfully
 	) {
 		WriteLog('GetFile: opened successfully, trying to read...');
 		my $return;
-		read ($file, $return, $length);
+		read($file, $return, $length);
 		#WriteLog('GetFile: read success, returning.');
 		#WriteLog('GetFile: read success, returning. $return = ' . $return);
 		WriteLog('GetFile: read success, returning. length($return) = ' . ($return ? length($return) : 'FALSE'));
@@ -1127,8 +1128,8 @@ sub PutFile { # Writes content to a file; $file, $content, $binMode
 	#		return;
 	#	}
 	if (!$binMode) {
-		WriteLog('PutFile: $binMode: 0');
 		$binMode = 0;
+		WriteLog('PutFile: $binMode: 0');
 	} else {
 		$binMode = 1;
 		WriteLog('PutFile: $binMode: 1');
@@ -1143,17 +1144,23 @@ sub PutFile { # Writes content to a file; $file, $content, $binMode
 
 	if ($file =~ m/^([^\s]+)$/) { #todo this is overly permissive #security #taint
 		$file = $1;
-		if (open (my $fileHandle, ">", $file)) {
-#		if (open (my $fileHandle, ">:encoding(UTF-8)", $file)) {
+		use open qw(:utf8);
+		if (open(my $fileHandle, ">", $file)) {
+#		if (open(my $fileHandle, ">:encoding(UTF-8)", $file)) {
 			WriteLog('PutFile: file handle opened, $file = ' . $file);
 			if ($binMode) {
 				WriteLog('PutFile: binmode $fileHandle = ' . $fileHandle . ', :utf8;');
-				binmode $fileHandle, ':utf8';
+				#binmode $fileHandle, ':utf8';
 			}
 
+			# if ($content =~ m/[^\x00-\xFF]/) {
+			# 	WriteLog('PutFile: warning: $content contains wide characters, setting :utf8; caller = ' . join(',', caller));
+			# 	binmode $fileHandle, ':utf8';
+			# }
+
 			if ($content =~ m/[^\x00-\xFF]/) {
-				WriteLog('PutFile: warning: $content contains wide characters, setting :utf8; caller = ' . join(',', caller));
-				binmode $fileHandle, ':utf8';
+				#WriteLog('PutFile: warning: $content contains wide characters, setting :utf8; caller = ' . join(',', caller));
+				#binmode $fileHandle, ':utf8';
 			}
 
 			WriteLog('PutFile: print $fileHandle $content;');
@@ -1723,8 +1730,9 @@ sub AppendFile { # appends something to a file; $file, $content to append
 	# cannot use WriteLog() here because it calls this sub
 	#print('AppendFile($file = ' . $file . '; $content = ' . length($content) . ' bytes)');
 
-	if (open (my $fileHandle, ">>", $file)) {
-	#if (open (my $fileHandle, ">>:encoding(UTF-8)", $file)) {
+	#use open qw(:utf8);
+	#if (open(my $fileHandle, ">>", $file)) {
+	if (open(my $fileHandle, ">>:encoding(UTF-8)", $file)) {
 		say $fileHandle $content; #note that this appends \n automatically
 		close $fileHandle;
 	}
