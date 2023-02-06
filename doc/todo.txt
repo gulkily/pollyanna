@@ -1,3 +1,12 @@
+dev mode with instant updates after code is changed
+
+===
+
+access_log_read.pl
+	should be able to parse request in any order, not just when comment is first argument
+	add option to add arbitrary argument values (like post.php)
+
+===
 
 rename get_dialog.pl to dialog.pl
 	refactor existing dialog.pl into separate filesx
