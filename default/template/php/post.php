@@ -429,6 +429,7 @@ if (isset($comment) && $comment) {
 		}
 
 		if (isset($allParameters)) {
+			#todo this could use more sanity and cleanness
 			$comment = $comment . "\n-- \n";
 			foreach ($allParameters as $paramKey => $paramValue) {
 				#todo sanity checks
