@@ -116,12 +116,8 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 			my $targetPath = "random.html";
 			my $randomPage =
 				GetPageHeader('random') .
-				#GetQueryAsDialog('select file_hash, item_title from item_flat order by random() limit 25') .
-				#GetItemListAsGallery(\@itemsRandom) . # this doesn't work for some reason #todo
-				#GetQueryAsDialog('select file_hash, item_title from item_flat order by random() limit 25') .
-				#GetItemListAsGallery(\@itemsRandom) . # this doesn't work for some reason #todo
 				GetItemListHtml(\@itemsRandom) .
-				GetPageFooter('random');
+				GetPageFooter('random')
 			;
 
 			my @jsToInject = qw(settings timestamp voting utils profile);
@@ -133,15 +129,25 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 			}
 			$randomPage = InjectJs($randomPage, @jsToInject);
 
-			#my $randomPage = GetReadPage('random');
 			PutHtmlFile($targetPath, $randomPage);
 		} else {
 			my $targetPath = "random.html";
-			PutHtmlFile($targetPath, GetPageHeader('random') . GetDialogX('Nothing to display on the random page yet.') . GetPageFooter('random'));
-#			my $targetPath = "random.html";
-#			#my $randomPage = GetReadPage('random');
-#			PutHtmlFile($targetPath, $randomPage);
+			my $randomPage =
+				GetPageHeader('random') .
+				GetDialogX('Nothing to display on the random page yet.') .
+				GetPageFooter('random')
+			;
 
+			my @jsToInject = qw(settings timestamp voting utils profile);
+			if (GetConfig('setting/admin/js/fresh')) {
+				push @jsToInject, 'fresh';
+			}
+			if (GetConfig('setting/html/reply_cart')) {
+				push @jsToInject, 'reply_cart';
+			}
+			$randomPage = InjectJs($randomPage, @jsToInject);
+
+			PutHtmlFile($targetPath, $randomPage);
 		}
 	} #random
 
