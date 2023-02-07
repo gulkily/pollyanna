@@ -90,8 +90,12 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 
 		my $authorPubKeyHash = DBGetAuthorPublicKeyHash($authorKey) || '';
 		WriteLog('GetAvatar: $authorPubKeyHash = ' . $authorPubKeyHash);
-		my $authorItemAttributes = $authorPubKeyHash ? DBGetItemAttributes($authorPubKeyHash) : '' || '';
-		WriteLog('GetAvatar: $authorItemAttributes = ' . $authorItemAttributes);
+		my $authorItemAttributesRef = $authorPubKeyHash ? DBGetItemAttributes($authorPubKeyHash) : '' || '';
+		WriteLog('GetAvatar: $authorItemAttributesRef = ' . $authorItemAttributesRef);
+		my %authorItemAttributes;
+		if ($authorItemAttributesRef) {
+			%authorItemAttributes = %{$authorItemAttributesRef};
+		}
 
 		my $alias = '';
 
@@ -105,45 +109,24 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 			}
 			$alias = trim($alias);
 		}
-		if (0 && $authorItemAttributes) {
+		if (%authorItemAttributes) {
 			#todo code below no longer works, and should be fixed in order to correctly display author's status
 			#todo this doesn't work because it is expecting a big string, while it's getting a hash reference
-			foreach my $authorAttributeLine (split("\n", $authorItemAttributes)) {
-				WriteLog('GetAvatar: $authorAttributeLine = ' . $authorAttributeLine);
-				my ($authorAttribute, $authorAttributeValue) = split('\|', $authorAttributeLine);
-				WriteLog('GetAvatar: $authorAttribute = ' . $authorAttribute);
+			if ($authorItemAttributes{'gpg_id'}) {
+				WriteLog('GetAvatar: found gpg_id!');
 
-				if ($authorAttribute eq 'gpg_id') { #todo add or admin
-#				if ($authorAttribute eq 'reddit_username') { #todo add or admin
-					WriteLog('GetAvatar: found gpg_id!');
+				$isVerified = 1;
 
-					$isVerified = 1;
-
-					if (!GetConfig('admin/html/ascii_only')) {
-						#$alias .= '✔';
-						#$alias .= '&check;';
-						#$alias .= 'V';
-						$alias .= '+';
-					} else {
-						$alias .= '+';
-					}
-
-					#$redditUsername = $authorAttributeValue . 'xx';
-#
-#					if ($redditUsername eq $alias) {
-#						# if alias is the same as reddit username,
-#						# don't print it twice
-#						if (!GetConfig('admin/html/ascii_only')) {
-#							$alias .= '✔';
-#						} else {
-#							$alias .= '(verified)';
-#						}
-#					} else {
-#						$alias .= '(' . $redditUsername . ')';
-#					}
-				} # gpg_id
-			} # $authorAttributeLine
-		} # $authorItemAttributes
+				if (!GetConfig('admin/html/ascii_only')) {
+					#$alias .= '✔';
+					#$alias .= '&check;';
+					#$alias .= 'V';
+					$alias .= '+';
+				} else {
+					$alias .= '+';
+				}
+			} # if ($authorItemAttributes{'gpg_id'})
+		} # if (%authorItemAttributes)
 
 		if (GetConfig('html/avatar_icons')) {
 			my $color1 = '#' . substr($authorKey, 0, 6);
