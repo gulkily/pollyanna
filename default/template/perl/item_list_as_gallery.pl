@@ -5,7 +5,7 @@ use warnings;
 use 5.010;
 use utf8;
 
-require_once('get_dialog.pl');
+require_once('dialog.pl');
 
 sub GetItemListAsGallery { # \@items ; returns gallery as series of dialogs without <body>
 #

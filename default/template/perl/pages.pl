@@ -215,7 +215,7 @@ sub GetPageLink { # returns one pagination link as html, used by GetPageLinks
 	return $pageLink;
 } # GetPageLink()
 
-require_once('get_dialog.pl');
+require_once('dialog.pl');
 
 sub GetPageLinks { # $currentPageNumber ; returns html for pagination links with frame/window
 	my $currentPageNumber = shift; #
@@ -1634,7 +1634,7 @@ require_once('widget/avatar.pl');
 require_once('format_message.pl');
 require_once('widget.pl');
 
-require_once('get_dialog.pl');
+require_once('dialog.pl');
 
 require_once('dialog/chain_log.pl');
 require_once('dialog/access.pl');

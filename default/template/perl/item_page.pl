@@ -15,7 +15,7 @@ use warnings;
 use utf8;
 use 5.010;
 
-require_once('get_dialog.pl');
+require_once('dialog.pl');
 
 my @foundArgs;
 while (my $argFound = shift) {
