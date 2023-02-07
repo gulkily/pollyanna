@@ -28,10 +28,19 @@ reflect user status in avatar based on user's tags
 ===
 
 color-code each fingerprint or hash character (0-F) for easier visual identification
+	there are at least two ways to do this
+		one is to individually use <font color=>
+			this is more compatible
+		other one is to use contains()
+			this saves a lot of space
 
 ===
 
 should be able to go straight to editing a query on any view page
+	one way to do this is to just put the query into a textarea
+		more compatible
+	another way to do this is to createElement('textarea')
+		makes page look nicer
 
 ===
 
