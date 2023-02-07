@@ -1788,32 +1788,45 @@ sub DBAddVoteRecord { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHa
 sub DBGetItemAttributes { # $fileHash ; returns reference to hash of attributes
 	my $fileHash = shift;
 
-	if ($fileHash && $fileHash =~ m/^([a-f0-9]+)$/) {
-		WriteLog('DBGetItemAttributes: sanity check passed on $fileHash = ' . $fileHash);
-		$fileHash = $1;
+	# if ($fileHash && $fileHash =~ m/^([a-f0-9]+)$/) {
+	if ($fileHash && IsItem($fileHash)) {
+		#$fileHash = $1;
+		#cool
 	} else {
-		WriteLog('DBGetItemAttributes: warning: sanity check FAILED on $fileHash = ' . $fileHash);
+		WriteLog('DBGetItemAttributes: warning: sanity check FAILED on $fileHash = ' . $fileHash . '; caller = ' . join(',', caller));
 		return '';
 	}
 
+	WriteLog('DBGetItemAttributes($fileHash = ' . $fileHash . '); caller = ' . join(',', caller));
+
 	state %memo;
 	if ($memo{$fileHash}) {
+		WriteLog('DBGetItemAttributes: found in memo, returning');
 		return $memo{$fileHash};
 	}
 
 	my $query = "SELECT attribute, value FROM item_attribute WHERE file_hash LIKE '$fileHash%'";
-	my @results = SqliteQuery($query);
+	my @results = SqliteQueryHashRef($query);
 
-	my %itemAttributes;
-	shift @results;
-	while (@results) {
-		my $rowReference = shift @results;
-		my %row = %{$rowReference};
-		$itemAttributes{$row{'attribute'}} = $row{'value'};
+	if (scalar(@results) >= 2) { # 2 because first row is column headers
+		my %itemAttributes;
+		shift @results;
+		while (@results) {
+			my $rowReference = shift @results;
+			my %row = %{$rowReference};
+			$itemAttributes{$row{'attribute'}} = $row{'value'};
+		}
+		$memo{$fileHash} = \%itemAttributes;
+
+		WriteLog('DBGetItemAttributes: database lookup successful, stored in memo, returning');
+		return $memo{$fileHash};
+	} else {
+		my %empty;
+		$memo{$fileHash} = \%empty;
+
+		WriteLog('DBGetItemAttributes: database lookup empty, stored empty hash memo, returning');
+		return $memo{$fileHash};
 	}
-	$memo{$fileHash} = \%itemAttributes;
-
-	return $memo{$fileHash};
 } # DBGetItemAttributes()
 
 sub DBGetItemAttribute { # $fileHash, $attribute ; returns one attribute for item
