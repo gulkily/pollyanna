@@ -390,6 +390,12 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 } # SqliteQuery()
 
 sub SqliteGetQueryTemplate { # $query ; look up query in templates if necessary or just return $query
+# looks up query in template/query/$query or template/query/$query.sql
+# exceptions:
+#   if $query contains one or more spaces
+#   if $query begins with period character (.) the way sqlite utility queries do
+#   if $query does not match /^([a-zA-Z0-9\-_.]+)$/
+
 # sub SqliteGetQuery {
 # sub GetQuery {
 # sub ExpandQuery {
@@ -415,7 +421,7 @@ sub SqliteGetQueryTemplate { # $query ; look up query in templates if necessary 
 			}
 		} else {
 			WriteLog('SqliteGetQueryTemplate: warning: query has no spaces, failed sanity check; $query = ' . $query);
-			return $query;
+			return '';
 		}
 	} else {
 		WriteLog('SqliteGetQueryTemplate: query has space character(s), returning without change; caller = ' . join(',', caller));
