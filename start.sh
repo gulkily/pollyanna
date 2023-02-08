@@ -6,7 +6,7 @@ if [ -e ./build.sh ]
 	then
 		echo "Building..."
 		time ./build.sh > /dev/null
-		time ./pages.pl -M welcome --php > /dev/null
+		time ./config/template/perl/pages.pl -M welcome --php > /dev/null
 		echo
 		echo "Build finished."
 		echo
@@ -58,7 +58,7 @@ while true; do
 	if [ $opt = 1 ]
 		then
 			./server_local_lighttpd.pl &
-			./pages.pl --system &
+			./config/template/perl/pages.pl --system &
 			sleep 1
 			xdg-open http://localhost:2784/ &
 	fi
@@ -70,10 +70,10 @@ while true; do
 			./clean.sh
 			./build.sh
 			killall lighttpd
-			./pages.pl -M read -M write -M settings -M profile -M help --php --js
+			./config/template/perl/pages.pl -M read -M write -M settings -M profile -M help --php --js
 			./server_local_lighttpd.pl &
 			./index.pl --all --chain
-			./pages.pl -M chain
+			./config/template/perl/pages.pl -M chain
 
 			end=`date +%s`
 			runtime=$((end-start))
@@ -97,7 +97,7 @@ while true; do
 			rm -vrf config/template/html
 			rm -vrf config/template/js
 			rm -vrf config/template/php
-			time ./pages.pl --system
+			time ./config/template/perl/pages.pl --system
 	fi
 
 	if [ $opt = 6 ]

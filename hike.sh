@@ -93,18 +93,18 @@ if [ $1 = frontend ]
 	then
 		perl -T default/template/perl/script/template_refresh.pl
 		default/template/sh/_dev_clean_html.sh
-		time ./pages.pl --system
+		time ./config/template/perl/pages.pl --system
 fi
 
 if [ $1 = pages ]
   then
-    perl -T default/template/perl/pages.pl --all
+    perl -T ./config/template/perl/pages.pl --all
     # should it be config? #todo
 fi
 
 if [ $1 = page ]
 	then
-		time ./pages.pl -M $2
+		time ./config/template/perl/pages.pl -M $2
 fi
 
 if [ $1 = restart ]
@@ -133,7 +133,7 @@ if [ $1 = alog ]
 		echo About to index and build pages...
 		sleep 3
 		./index.pl --all
-		./pages.pl --all
+		./config/template/perl/pages.pl --all
 fi
 
 if [ $1 = db ]

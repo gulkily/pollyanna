@@ -26,4 +26,4 @@ sleep 1
 ./index.pl --all
 echo Making frontend essentials...
 sleep 1
-./pages.pl --php -M chain --listing
+./config/template/perl/pages.pl --php -M chain --listing
