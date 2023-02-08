@@ -140,7 +140,11 @@ sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 	$scriptInject =~ s/\$javascript/$scriptsText/g; #todo why is this /g ??
 
 	if (GetConfig('debug')) {
-		$scriptInject = str_replace('scriptinject.template -->', 'scriptinject.template (' . join(',', caller) . ') -->', $scriptInject);
+		my $callerStr = join(',', caller);
+		my $scriptDir = GetDir('script');
+		$callerStr = str_replace($scriptDir . '/', '', $callerStr);
+
+		$scriptInject = str_replace('scriptinject.template -->', 'scriptinject.template (' . $callerStr . ') -->', $scriptInject);
 	}
 
 	$scriptInject = "\n" . '<!-- InjectJs: ' . $scriptNamesList . ' -->' . "\n\n" . $scriptInject;
@@ -474,7 +478,11 @@ sub InjectJs2 { # $html, $injectMode, $htmlTag, @scriptNames, ; inject js templa
 	$scriptInject =~ s/\$javascript/$scriptsText/g; #todo why is this /g ??
 
 	if (GetConfig('debug')) {
-		$scriptInject = str_replace('scriptinject.template -->', 'scriptinject.template (' . join(',', caller) . ') -->', $scriptInject);
+		my $callerStr = join(',', caller);
+		my $scriptDir = GetDir('script');
+		$callerStr = str_replace($scriptDir . '/', '', $callerStr);
+
+		$scriptInject = str_replace('scriptinject.template -->', 'scriptinject.template (' . $callerStr . ') -->', $scriptInject);
 	}
 
 	$scriptInject = "\n" . '<!-- InjectJs2: ' . $scriptNamesList . ' -->' . "\n\n" . $scriptInject;
