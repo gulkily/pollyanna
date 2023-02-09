@@ -10,13 +10,13 @@ function escapeHTML (html) {
 		escapeTA.textContent = html;
 		return escapeTA.innerHTML;
 	}
-}
+} // escapeHTML()
 function unescapeHTML (html) {
 	if (window.escapeTA) {
 		escapeTA.innerHTML = html;
 		return escapeTA.textContent;
 	}
-}
+} // unescapeHTML()
 // end html escape hack
 //#todo above hack seems to be broken, because escapeTA is not global?
 
@@ -31,7 +31,7 @@ function LogWarning (text) {
 			}
 		}
 	}
-}
+} // LogWarning()
 
 function OnLoadEverything () { // checks for each onLoad function and calls it
 // function OnLoadAll () {
@@ -171,6 +171,8 @@ function OnLoadEverything () { // checks for each onLoad function and calls it
 } // OnLoadEverything()
 
 if (!window.performanceOptimization && window.GetPrefs) {
+	// if performanceOptimization setting hasn't been initialized yet,
+	// and we have a way to do it via GetPrefs() go ahead and do it now
 	window.performanceOptimization = GetPrefs('performance_optimization'); // utils.js
 }
 
@@ -396,14 +398,15 @@ function UrlExists (url) { // checks if url exists
 
 		return (httpStatusReturned == 200);
 	}
-}
+} // UrlExists()
 
 function DisplayStatus (status) {
+// #todo this doesn't seem to be used anywhere yet
 	if (document.getElementById) {
 		var statusBar = document.getElementById('status');
 		// #todo finish this
 	}
-}
+} // DisplayStatus()
 
 function DownloadAsTxt (filename, text) {
 	var element = document.createElement('a');
@@ -430,7 +433,7 @@ function displayNotificationWithTimeout (strMessage, thisButton) {
 
 		return spanNotification;
 	}
-}
+} // displayNotificationWithTimeout()
 
 function displayNotification (strMessage, thisButton) { // adds notification to page
 // function progressIndicator () { // progress indicator
@@ -482,7 +485,7 @@ function newA (href, target, innerHTML, parent) { // makes new a element and app
 	if (innerHTML) { innernewLink.setAttribute('innerHTML', innerHTML); }
 	parent.appendChild(newLink);
 	return newLink;
-}
+} // newA()
 
 function SetCookie (cname, cvalue, exdays) { // set cookie
 	//alert('DEBUG: SetCookie(' + cname + ', ' + cvalue + ', ' + exdays + ')');
@@ -583,7 +586,7 @@ function elementInViewport (el) {
 		(top + height) <= (window.pageYOffset + window.innerHeight) &&
 		(left + width) <= (window.pageXOffset + window.innerWidth)
 	);
-}
+} // elementInViewport()
 //You could modify this simply to determine if any part of the element is visible in the viewport:
 
 function elementInViewport2 (el) {
@@ -604,7 +607,7 @@ function elementInViewport2 (el) {
 		window.pageYOffset < (top + height) &&
 		window.pageXOffset < (left + width)
 	);
-}
+} // elementInViewport2()
 
 
 function PingUrl (url, ele) { // loads arbitrary url via image or xhr
