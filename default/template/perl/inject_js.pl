@@ -221,30 +221,40 @@ sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 	return $html;
 } # InjectJs()
 
-sub GetScriptTemplate { # $script ; returns script for name
+sub GetScriptTemplate { # $script ; returns script based on name
+# fills in theme colors and server-side settings
+# uses GetTemplate(), so theme-based overlays apply:
+#   config/theme/.../template/js/$script.js
+#   default/theme/.../template/js/$script.js
+#   config/template/js/$script.js
+#   default/template/js/$script.js
+
 # sub GetScriptText {
 # sub GetScriptContent {
-	# default/template/js/$script.js
-	# config/template/js/$script.js
-	# fills in theme colors and server-side settings
+
 	my $script = shift;
 
-	#todo sanity
+	if ($script =~ m/^([0-9a-z_]+)$/) {
+		$script = $1;
+		# passed sanity check
+	} else {
+		WriteLog('GetScriptTemplate: warning: $script failed sanity check; $script = ' . $script . '; caller = ' . join(',', caller));
+		return '';
+	}
 
 	WriteLog('GetScriptTemplate: $script = ' . $script);
 
 	my $stringMeditate = GetString('meditate'); # default is 'Meditate...'
-
 	my $scriptTemplate = GetTemplate("js/$script.js");
 
 	if (!$scriptTemplate) {
-		WriteLog("InjectJs: WARNING: Missing script contents for $script");
+		WriteLog('InjectJs: warning: Missing script contents for $script = ' . $script);
+		return '';
 	}
 
 	if ($script eq 'fresh') {
-		#todo this should work for all admins, not just root
-		# for profile.js we need to fill in current admin id
-		if (GetConfig('admin/dev/fresh_reload')) {
+		# for fresh.js, there's a debug/dev setting for auto-reloading a changed page
+		if (GetConfig('setting/admin/dev/fresh_reload')) {
 			$scriptTemplate =~ s/freshUserWantsReload = 0/freshUserWantsReload = 1/g;
 		}
 	}
@@ -259,11 +269,15 @@ sub GetScriptTemplate { # $script ; returns script for name
 	}
 
 	if ($script eq 'profile' || $script eq 'write' || $script eq 'crypto2' || $script eq 'avatar') {
-		my $configJsOpenPgp = GetConfig('setting/admin/js/openpgp') ? 1 : 0;
-		$scriptTemplate = str_replace('var configJsOpenPgp = 0;', 'var configJsOpenPgp = ' . $configJsOpenPgp . ';', $scriptTemplate);
+		# setting/admin/js/openpgp
+		if (GetConfig('setting/admin/js/openpgp')) {
+			$scriptTemplate = str_replace('var configJsOpenPgp = 0;', 'var configJsOpenPgp = 1;', $scriptTemplate);
+		}
 	}
 
 	if ($script eq 'easyreg') {
+		# for easyreg script/theme, set the default proof of work puzzle prefix
+		# setting/admin/puzzle/prefix
 		my $puzzlePrefix = GetConfig('setting/admin/puzzle/prefix');
 		if ($puzzlePrefix) {
 			$scriptTemplate = str_replace("var puzzlePrefix = '1337';", "var puzzlePrefix = '" . $puzzlePrefix . "';", $scriptTemplate);
@@ -271,10 +285,11 @@ sub GetScriptTemplate { # $script ; returns script for name
 	}
 
 	if ($script eq 'puzzle') {
-		# for voting.js we need to fill in some theme colors
-		my $puzzlePrefix = GetConfig('puzzle/prefix');;
-		my $puzzleCycleLimit = GetConfig('puzzle/cycle_limit');
-		my $puzzleSecondsLimit = GetConfig('puzzle/seconds_limit');
+		# for puzzle.js we need to fill in default puzzle prefix, cycle limit, and time limit
+
+		my $puzzlePrefix = GetConfig('setting/admin/puzzle/prefix');;
+		my $puzzleCycleLimit = GetConfig('setting/admin/puzzle/cycle_limit');
+		my $puzzleSecondsLimit = GetConfig('setting/admin/puzzle/seconds_limit');
 
 		WriteLog('InjectJs: puzzle: $puzzlePrefix = ' . $puzzlePrefix);
 		WriteLog('InjectJs: puzzle: $puzzleCycleLimit = ' . $puzzleCycleLimit);
@@ -287,19 +302,21 @@ sub GetScriptTemplate { # $script ; returns script for name
 
 	if ($script eq 'profile') {
 		#todo this should work for all admins, not just root
+		#todo rewrite and enable
 		# for profile.js we need to fill in current admin id
 		my $currentAdminId = '';#GetRootAdminKey() || '-';
 		#todo this whole thing should change to include non-root admins
 		$scriptTemplate =~ s/\$currentAdminId/$currentAdminId/g;
 
-		my $openPgpChecked = GetConfig('admin/js/openpgp_checked');
+		# pre-set the "generate private key" checkbox on
+		my $openPgpChecked = GetConfig('setting/admin/js/openpgp_checked');
 		if ($openPgpChecked) {
 			$scriptTemplate = str_replace('var chkEnablePgpOn = 0;', 'var chkEnablePgpOn = 1;', $scriptTemplate);
 		}
 	}
 
 	if ($script eq 'table_sort') {
-		# for settings.js we also need to fill in some theme colors
+		# for table_sort.js we need to fill in some theme colors
 		my $colorRow0 = GetThemeColor('row_0');
 		my $colorRow1 = GetThemeColor('row_1');
 
@@ -308,6 +325,8 @@ sub GetScriptTemplate { # $script ; returns script for name
 	}
 
 	if ($script eq 'itsyou') {
+		# for itsyou.js, if the page has a self-id, set it
+		#todo this is not finished
 		my $itemFp = '00000000000000000'; #todo
 		$scriptTemplate =~ s/var itemFp = 0;/var itemFp = '$itemFp';/g;
 	}
@@ -315,10 +334,11 @@ sub GetScriptTemplate { # $script ; returns script for name
 	#if ($script eq 'settings' || $script eq 'loading_begin') {
 	if (
 		$script eq 'settings' ||
-			$script eq 'timestamp' ||
-			$script eq 'loading_end'
+		$script eq 'timestamp' ||
+		$script eq 'loading_end'
 	) {
-		# for settings.js we also need to fill in some theme colors
+		# for settings.js, timestamp.js, loading_end.js we also need to fill in some theme colors
+
 		my $colorHighlightAlert = GetThemeColor('highlight_alert');
 		my $colorHighlightAdvanced = GetThemeColor('highlight_advanced');
 		my $colorHighlightBeginner = GetThemeColor('highlight_beginner');
@@ -333,6 +353,7 @@ sub GetScriptTemplate { # $script ; returns script for name
 		if ($colorRecentTimestamp) {
 			$scriptTemplate =~ s/\$colorRecentTimestamp/$colorRecentTimestamp/g;
 		} else {
+			WriteLog('InjectJs: warning: $colorRecentTimestamp was FALSE, using fallback; caller = ' . join(',', caller));
 			$colorRecentTimestamp = '#808000';
 			$scriptTemplate =~ s/\$colorRecentTimestamp/$colorRecentTimestamp/g;
 		}
@@ -345,6 +366,7 @@ sub GetScriptTemplate { # $script ; returns script for name
 			$scriptTemplate = str_replace('-cart', '–cart', $scriptTemplate);
 			# if not ascii-only mode, use an n-dash for the -cart button
 			# n-dash should be the same width as + sign and keep the button from changing size
+			#todo the - sometimes causes wrapping, which doesn't happen with +cart (annoying)
 
 			#$scriptTemplate = str_replace('-cart', '&ndash;cart', $scriptTemplate);
 		}
@@ -364,31 +386,39 @@ sub GetScriptTemplate { # $script ; returns script for name
 		$scriptTemplate = str_replace("var colorTitlebar = '';", "var colorTitlebar = '$colorTitlebar';", $scriptTemplate);
 		$scriptTemplate = str_replace("var colorSecondary = '';", "var colorSecondary = '$colorSecondary';", $scriptTemplate);
 		$scriptTemplate = str_replace("var colorTitlebarText = '';", "var colorTitlebarText = '$colorTitlebarText';", $scriptTemplate);
-	} #dragging
+	} # dragging
 
 	if ($stringMeditate ne 'Meditate...') {
+		# if progress indicator string is different from default, look for it and replace in scripts
+		# it occurs in several different places, which is why shotgun approach is used here
 		WriteLog('GetScriptTemplate: $stringMeditate is not default, replacing');
 		$scriptTemplate = str_replace('Meditate...', $stringMeditate, $scriptTemplate);
 	}
 
 	if (index($scriptTemplate, '>') > -1) {
-		# warning here if script content contains > character, which is incompatible with mosaic's html comment syntax
-		WriteLog('GetScriptTemplate: warning: Inject script "' . $script . '" contains > character');
+		# warning here if script content contains > character,
+		# which is incompatible with mosaic's html comment syntax
+		# javascript templates should avoid using the > character
+		# in if statements, they can be replaced with < by flipping the operands
+		# in strings, they can be replaced with: var gt = unescape('%3E');
+
+		WriteLog('GetScriptTemplate: warning: Inject script "' . $script . '" contains > character; caller = ' . join(',', caller));
 	}
 
 	if (GetConfig('admin/js/debug')) {
-		#uncomment all javascript debug alert statements
-		#and replace them with confirm()'s which stop on no/cancel
+		# javascript debugging is turned on, so
+		# uncomment/enable all javascript debug alert statements
 		$scriptTemplate = EnableJsDebug($scriptTemplate);
 	}
 
 	if (GetConfig('debug')) {
 		# this is broken, #todo
+		# it should inject a notice about from where and how each script was added to the html
 		#$scriptTemplate = "\n" . '/* GetScriptTemplate(' . $script . ")\n" . 'caller = ' . join(',', caller) . "\n" . $scriptTemplate . ' */';
 		#$scriptTemplate = $scriptTemplate . "\n" . '/*' . 'GetScriptTemplate(' . $script . ')' . "\n" . 'caller = ' . join(',', caller) . "\n" . ' */' . "\n";
 	}
 
-	if (trim($scriptTemplate) eq '') {
+	if (trim($scriptTemplate) eq '' || !$scriptTemplate) {
 		WriteLog('GetScriptTemplate: warning: $scriptTemplate is empty!');
 		return '';
 	}
@@ -515,11 +545,21 @@ sub InjectJs2 { # $html, $injectMode, $htmlTag, @scriptNames, ; inject js templa
 	}
 
 	return $html;
-}
+} # InjectJs2()
 
 sub EnableJsDebug { # $scriptTemplate ; enables javascript debug mode
 # sub InjectDebug {
-	# works by uncommenting any lines which begin with //alert('DEBUG:
+
+	# uncomments or otherwise modifies any lines which begin with //alert('DEBUG:
+	# $debugType is determined by config/setting/admin/js/debug
+	#   console.log     = changes lines to console.log('...
+	#   document.title  = changes lines to document.title = ('...
+	#   LogWarning      = changes lines to LogWarning('...
+	#                     LogWarning writes ONLY warnings to console.log() or document.title, whichever is available
+	#   1               = just uncomments the line (remains as alert('DEBUG:...
+	#   0               = leaves commented
+	# window.dbgoff flag is used for disabling further debug output
+
 	state $debugType;
 	if (!$debugType) {
 		$debugType = GetConfig('admin/js/debug');
@@ -531,7 +571,8 @@ sub EnableJsDebug { # $scriptTemplate ; enables javascript debug mode
 
 	WriteLog('EnableJsDebug: $debugType = ' . $debugType);
 
-	if ($debugType eq 'console.log') {
+	if (0) {} # unused statement for consistency of below statements
+	elsif ($debugType eq 'console.log') {
 		$scriptTemplate =~ s/\/\/alert\('DEBUG:/if(!window.dbgoff)console.log('/gi;
 	}
 	elsif ($debugType eq 'document.title') {
@@ -541,7 +582,7 @@ sub EnableJsDebug { # $scriptTemplate ; enables javascript debug mode
 		# todo this could check the line for 'warning' first?
 		$scriptTemplate =~ s/\/\/alert\('DEBUG:/if(!window.dbgoff&&window.LogWarning)LogWarning('/gi;
 	}
-	else {
+	else { # 1
 		#$scriptTemplate =~ s/\/\/alert\('DEBUG:/if(!window.dbgoff)dbgoff=!confirm('DEBUG:/gi;
 		#		$scriptTemplate =~ s/(function\ )([a-zA-Z0-9_]+)( \))(.+?)\)( \{)/$1$2$3$4$5\n\/\/alert('DEBUG: $2: caller: ' + $2.caller);/gi
 		#$scriptTemplate =~ s/(function\ )([a-zA-Z0-9_]+)( \))(.+?)\)( \{)/$1$2$3$4$5\n\/\/hi/gi
