@@ -426,7 +426,7 @@ sub GetDialogX2 { # \%paramHash ; returns window
 	}
 
 	if ($showButtons) {#todo review this area
-		my $windowGuid = md5_hex($windowTemplate);
+		my $windowGuid = GetMD5($windowTemplate);
 		if (defined($param{'guid'})) {
 			if ($param{'guid'} =~ m/^[0-9a-f]{8}$/) {
 				$windowGuid = $param{'guid'};
