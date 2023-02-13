@@ -23,7 +23,7 @@ ln -sf config/template/perl/server_local_lighttpd.pl server_local_lighttpd.pl
 
 perl -T ./build.pl
 
-perl -T ./pages.pl --system
+perl -T ./config/template/perl/pages.pl --system
 
 chmod -v -w *.pl
 chmod -v +x *.pl

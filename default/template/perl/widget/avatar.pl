@@ -204,7 +204,6 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 
 	$avatar =~ s/\$alias/$aliasHtmlEscaped/g;
 
-	#my $colorUsername = GetThemeColor('username_text');
 	my $colorUsername = GetThemeColor('author_text');
 	WriteLog('GetAvatar: $colorUsername reason is basic');
 	if ($isVerified) {

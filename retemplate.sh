@@ -1,3 +1,3 @@
 #!/bin/sh
 
-./pages.pl --system -M chain --listing
+./config/template/perl/pages.pl --system -M chain --listing

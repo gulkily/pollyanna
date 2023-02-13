@@ -520,6 +520,7 @@ sub GetThemeColor { # returns theme color based on setting/theme
 	chomp $colorName;
 
 	if ($colorName eq 'link' || $colorName eq 'vlink') {
+		WriteLog('GetThemeColor: $colorName = ' . $colorName . ' changed to ' . ($colorName . '_text') . '; caller = ' . join(',', caller));
 		$colorName .= '_text';
 	}
 

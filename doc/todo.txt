@@ -1,3 +1,7 @@
+fallback colors should default to background and text colors, not just green
+
+===
+
 dev mode with instant updates after code is changed
 
 ===
@@ -14,7 +18,7 @@ option to not add to log but just display in frontend
 ===
 
 search
-	generate search page based on keyword
+	generate search page based on keyword(s)
 	add option in route.php
 	add global setting
 
