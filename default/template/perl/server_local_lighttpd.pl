@@ -246,7 +246,7 @@ if (GetConfig('admin/lighttpd/enable')) {
 #		WriteMessage('Opening browser in 1...');
 #		sleep 2;
 		my $portNumber = GetConfig('admin/lighttpd/port');
-		if ($portNumber =~ m/^([0-9]{0-6})$/) {
+		if ($portNumber =~ m/^([0-9]+)$/) {
 			$portNumber = $1;
 			my $openString = 'screen -S test -d -m xdg-open "http://localhost:' . GetConfig('admin/lighttpd/port') . '/help.html"';
 			WriteMessage('Opening browser with `' . $openString . '`');
