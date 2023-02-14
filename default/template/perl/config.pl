@@ -552,6 +552,9 @@ sub GetThemeColor { # returns theme color based on setting/theme
 	my $color = GetThemeAttribute($colorName);
 
 	if (!defined($color) || $color eq '') {
+		# we didn't find a color using GetThemeAttribute() so let's try to find a fallback
+		# if the color we're looking up is called "..text" or "..background", use text or background color
+		# otherwise, use green
 		if (0) {}
 		elsif ($color =~ m/text$/ && $color ne 'text') {
 			WriteLog('GetThemeColor: warning: substituting $colorName = text for ' . $colorName . '; caller = ' . join(',', caller));
