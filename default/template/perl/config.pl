@@ -552,10 +552,21 @@ sub GetThemeColor { # returns theme color based on setting/theme
 	my $color = GetThemeAttribute($colorName);
 
 	if (!defined($color) || $color eq '') {
-		if (GetConfig('html/mourn')) { # GetThemeColor()
-			$color = '#000000';
-		} else {
-			$color = '#00ff00';
+		if (0) {}
+		elsif ($color =~ m/text$/ && $color ne 'text') {
+			WriteLog('GetThemeColor: warning: substituting $colorName = text for ' . $colorName . '; caller = ' . join(',', caller));
+			$color = GetThemeColor('text');
+		}
+		elsif ($color =~ m/background$/ && $color ne 'background') {
+			WriteLog('GetThemeColor: warning: substituting $colorName = background for ' . $colorName . '; caller = ' . join(',', caller));
+			$color = GetThemeColor('background');
+		}
+		elsif ($color eq 'text' || $color eq 'background') {
+			if (GetConfig('html/mourn')) { # GetThemeColor()
+				$color = '#000000';
+			} else {
+				$color = '#00ff00';
+			}
 		}
 		WriteLog('GetThemeColor: warning: value not found, $colorName = ' . $colorName . '; caller = ' . join(',', caller));
 	}
