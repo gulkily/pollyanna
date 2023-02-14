@@ -575,6 +575,7 @@ sub GetThemeColor { # returns theme color based on setting/theme
 	}
 
 	if ($color =~ m/^[0-9a-fA-F]{6}$/) {
+		# if it looks like a hex color without '#' prefix, add the prefix
 		$color = '#' . $color;
 	}
 
