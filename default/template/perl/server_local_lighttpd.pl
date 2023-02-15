@@ -145,11 +145,20 @@ sub GetLighttpdConfig { # generate contents for lighttpd.conf file based on sett
 	my $pwd = cwd();
 	chomp $pwd; # get rid of tailing newline
 
-	my $docRoot = $pwd . '/' . 'html' . '/';
-	my $serverPort = GetConfig('admin/lighttpd/port') || 2784;
-	my $errorFilePrefix = $docRoot . 'error/error-';
+	my $docRoot = GetDir('html');
 
-	$conf =~ s/\$serverDocumentRoot/$docRoot/;
+	my $serverPort = GetConfig('admin/lighttpd/port') || 2784;
+	my $serverPort = GetConfig('admin/lighttpd/port');
+	if ($serverPort =~ m/^([0-9]+)$/) {
+		$serverPort = $1;
+	} else {
+		WriteLog('GetLighttpdConfig: warning: sanity check failed on $serverPort');
+		return '';
+	}
+
+	my $errorFilePrefix = $docRoot . '/error/error-';
+
+	$conf =~ s/\$serverDocumentRoot/$docRoot\//;
 	$conf =~ s/\$serverPort/$serverPort/;
 	$conf =~ s/\$errorFilePrefix/$errorFilePrefix/;
 
@@ -248,7 +257,7 @@ if (GetConfig('admin/lighttpd/enable')) {
 		my $portNumber = GetConfig('admin/lighttpd/port');
 		if ($portNumber =~ m/^([0-9]+)$/) {
 			$portNumber = $1;
-			my $openString = 'screen -S test -d -m xdg-open "http://localhost:' . GetConfig('admin/lighttpd/port') . '/help.html"';
+			my $openString = 'screen -S test -d -m xdg-open "http://localhost:' . $portNumber . '/help.html"';
 			WriteMessage('Opening browser with `' . $openString . '`');
 			
 			my $openResult = `$openString`;
