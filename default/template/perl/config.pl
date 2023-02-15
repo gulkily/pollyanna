@@ -353,9 +353,10 @@ sub ResetConfig { # Resets $configName to default by removing the config/* file
 	my $CONFIGDIR = GetDir('config');
 
 	if (ConfigKeyValid($configName)) {
+		WriteLog('ResetConfig: removing stored config; $configName = ' . $configName . '; caller = ' .join(',', caller));
 		unlink("$CONFIGDIR/$configName");
 	}
-}
+} # ResetConfig()
 
 sub PutConfig { # $configName, $configValue ; writes config value to config storage
 	# $configName = config name/key (file path)
@@ -513,7 +514,6 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 #
 #	return trim($attributeValue);
 } # GetThemeAttribute()
-
 
 sub GetThemeColor { # returns theme color based on setting/theme
 	my $colorName = shift;
