@@ -1,8 +1,7 @@
-fallback colors should default to background and text colors, not just green
-
-===
 
 dev mode with instant updates after code is changed
+	keep track of changes
+	rebuild frontend pieces as necessary
 
 ===
 
