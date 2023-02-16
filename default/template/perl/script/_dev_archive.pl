@@ -173,7 +173,7 @@ my $IMAGEDIR = $HTMLDIR . '/image';
 	if ($archiveDirRelative =~ m/^([^\s]+)$/) { #security #taint
 		$archiveDirRelative = $1;
 	} else {
-		print ('sanity check failed on $archiveDirRelative' . "\n");
+		print('sanity check failed on $archiveDirRelative' . "\n");
 		exit;
 	}
 
