@@ -570,11 +570,12 @@ sub DBGetAuthorCount { # Returns author count.
 
 sub DBGetItemCount { # Returns item count.
 # By default, all items, unless $whereClause is specified
+#todo remove this in favor of using SqliteGetCount()
 	#my $whereClause = shift;
 
 	my $itemCount;
 
-	$itemCount = SqliteGetValue('item_count');
+	$itemCount = SqliteGetCount('compost');
 #	}
 	if ($itemCount) {
 		chomp($itemCount);
