@@ -55,10 +55,10 @@ function WriteConfigDump() {
 			$d = str_replace($DEF, '', $d);
 			//WriteLog('WriteConfigDump: $d after replace = ' . $d);
 
-	//		print (isset($configLookup[$d]) ? $configLookup[$d] : '');
+			// print(isset($configLookup[$d]) ? $configLookup[$d] : '');
 
 			if (isset($configLookup[$d])) {
-				//print ('<b>+</b>');
+				//print('<b>+</b>');
 				if ($configValue[$d] == $defaultValue[$d]) {
 					//print 'default';
 				} else {
