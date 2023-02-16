@@ -13,7 +13,7 @@ my $time = time();
 my $upgradeLogFilename = "html/txt/upgrade_$time.txt";
 
 my $titleUpgradeLogCommand = "echo 'upgrade initiated at $time' >> $upgradeLogFilename";
-print (`$titleUpgradeLogCommand`);
+print(`$titleUpgradeLogCommand`);
 
 my $pullCommand = "time git pull --all >> $upgradeLogFilename";
 print(`$pullCommand`);
@@ -33,7 +33,7 @@ if ($versionBefore ne $versionAfter) {
 
 $time = time();
 my $finishedUpgradeLogCommand = "echo 'upgrade finished at $time' >> $upgradeLogFilename";
-print (`$finishedUpgradeLogCommand`);
+print(`$finishedUpgradeLogCommand`);
 
 my $indexUpgradeLogCommand = 'time ./index.pl html/txt/upgrade_$time.txt';
 print(`$indexUpgradeLogCommand`);

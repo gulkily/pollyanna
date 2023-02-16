@@ -1701,86 +1701,86 @@ while (my $arg1 = shift @foundArgs) {
 		#
 		if ($arg1 eq '--theme') {
 			# override the theme for remaining pages
-			print ("recognized token --theme");
+			WriteMessage("recognized token --theme");
 			my $themeArg = shift @foundArgs;
 			chomp $themeArg;
 			GetConfig('theme', 'override', $themeArg);
 		}
 		elsif (IsItem($arg1)) {
 			WriteLog('pages.pl; recognized item identifier; $arg1 = ' . $arg1 . '; caller = ' . join(',', caller));
-			print ("recognized item identifier\n");
+			WriteMessage("recognized item identifier\n");
 			MakePage('item', $arg1, 1);
 		}
 		elsif (IsItemPrefix($arg1)) {
-			print ("recognized item prefix\n");
+			WriteMessage("recognized item prefix\n");
 			MakePage('prefix', $arg1, 1);
 		}
 		elsif (IsFingerprint($arg1)) {
-			print ("recognized author fingerprint\n");
+			WriteMessage("recognized author fingerprint\n");
 			MakePage('author', $arg1, 1);
 		}
 		elsif (IsDate($arg1)) {
-			print ("recognized date\n");
+			WriteMessage("recognized date\n");
 			MakePage('date', $arg1, 1);
 		}
 		elsif (substr($arg1, 0, 1) eq '#') {
 			#todo sanity checks here
-			print ("recognized hash tag $arg1\n");
+			WriteMessage("recognized hash tag $arg1\n");
 			MakePage('tag', substr($arg1, 1), 1);
 		}
 		elsif ($arg1 eq '--summary' || $arg1 eq '-s') {
-			print ("recognized --summary\n");
+			WriteMessage("recognized --summary\n");
 			MakeSummaryPages();
 		}
 		elsif ($arg1 eq '--system' || $arg1 eq '-S') { #--system #system pages
-			print ("recognized --system\n");
+			WriteMessage("recognized --system\n");
 			MakeSystemPages();
 		}
 		elsif ($arg1 eq '--listing' || $arg1 eq '-L') { #--listing #listing pages
-			print ("recognized --listing\n");
+			WriteMessage("recognized --listing\n");
 			MakeListingPages();
 		}
 		elsif ($arg1 eq '--php') {
-			print ("recognized --php\n");
+			WriteMessage("recognized --php\n");
 			if (!GetConfig('admin/php/enable')) {
 				print("warning: --php was used, but admin/php/enable is false\n");
 			}
 			MakePhpPages();
 		}
 		elsif ($arg1 eq '--js') {
-			print ("recognized --js\n");
+			WriteMessage("recognized --js\n");
 			MakeJsPages();
 		}
 		elsif ($arg1 eq '--settings') {
-			print ("recognized --settings\n");
+			WriteMessage("recognized --settings\n");
 			#my $settingsPage = GetSettingsPage();
 			#PutHtmlFile('settings.html', $settingsPage);
 			MakeSimplePage('settings');
 			PutStatsPages();
 		}
 		elsif ($arg1 eq '--tags') {
-			print ("recognized --tags\n");
+			WriteMessage("recognized --tags\n");
 			MakePage('tags');
 		}
 		elsif ($arg1 eq '--write') {
-			print ("recognized --write, you can use -M write now\n");
+			WriteMessage("recognized --write, you can use -M write now\n");
 			MakePage('write');
 		}
 		elsif ($arg1 eq '--data' || $arg1 eq '-i') {
-			print ("recognized --data\n");
+			WriteMessage("recognized --data\n");
 			MakePage('data');
 		}
 		elsif ($arg1 eq '--desktop' || $arg1 eq '-i') {
-			print ("recognized --desktop\n");
+			WriteMessage("recognized --desktop\n");
 			#PutHtmlFile('desktop.html', GetDesktopPage());
 			MakeSimplePage('desktop');
 		}
 		elsif ($arg1 eq '--queue' || $arg1 eq '-Q') {
-			print ("recognized --queue\n");
+			WriteMessage("recognized --queue\n");
 			BuildTouchedPages(); # -queue or -Q
 		}
 		elsif ($arg1 eq '--all' || $arg1 eq '-a') {
-			print ("recognized --all\n");
+			WriteMessage("recognized --all\n");
 			SqliteQuery("UPDATE task SET priority = priority + 1 WHERE task_type = 'page'");
 			MakeSystemPages();
 			MakeMenuPages();
@@ -1793,11 +1793,11 @@ while (my $arg1 = shift @foundArgs) {
 			GetConfig('admin/js/enable', 'override', 0);
 			GetConfig('admin/pages/lazy_page_generation', 'override', 0);
 			GetConfig('admin/expo_mode_edit', 'override', 0);
-			print ("recognized --export\n");
+			WriteMessage("recognized --export\n");
 			BuildStaticExportPages();
 		}
 		elsif ($arg1 eq '-M' || $arg1 eq '-m') { # makepage
-			print ("recognized -M or -m\n");
+			WriteMessage("recognized -M or -m\n");
 			my $makePageArg = shift @foundArgs;
 			#todo sanity check of $makePageArg
 			if ($makePageArg) {
@@ -1809,14 +1809,14 @@ while (my $arg1 = shift @foundArgs) {
 
 					if ($itemA && $itemB && IsItem($itemA) && IsItem($itemB)) {
 						my $comparePage = GetComparePage($itemA, $itemB);
-						print ("calling GetComparePage($itemA, $itemB)\n");
+						WriteMessage("calling GetComparePage($itemA, $itemB)\n");
 						PutHtmlFile('compare1.html', $comparePage);
 					} else {
-						print ("compare needs 2 items\n");
+						WriteMessage("compare needs 2 items\n");
 						#todo ...
 					}
 				} else {
-					print ("calling MakePage($makePageArg)\n");
+					WriteMessage("calling MakePage($makePageArg)\n");
 					MakePage($makePageArg);
 					# /new.html
 				}
@@ -1829,116 +1829,116 @@ while (my $arg1 = shift @foundArgs) {
 			##### DIALOGS ######################
 			##### DIALOGS ######################
 			##### DIALOGS ######################
-			print ("recognized -D\n");
+			WriteMessage("recognized -D\n");
 			my $makeDialogArg = shift @foundArgs;
 			#todo sanity check of $makeDialogArg
 			if ($makeDialogArg) {
 				if (0) { }
 				elsif ($makeDialogArg eq 'settings') {
 					my $dialog = GetSettingsDialog();
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/settings.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'stats') {
 					my $dialog = GetStatsTable();
 					PutHtmlFile('dialog/stats.html', $dialog);
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 				}
 				elsif ($makeDialogArg eq 'access') {
 					my $dialog = GetAccessDialog();
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/access.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'write') {
 					my $dialog = GetWriteForm();
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/write.html', '<form action="/post.html" method=GET id=compose name=compose target=_top>' . $dialog . '</form>');
 				}
 				elsif ($makeDialogArg eq 'upload') {
 					require_once('page/upload.pl');
 					my $dialog = GetUploadDialog();
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/upload.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'read') {
 					my $dialog = GetQueryAsDialog('read', 'Top Threads');
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/read.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'profile') {
 					require_once('page/profile.pl');
 					my $dialog = GetProfileDialog();
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/profile.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'help') {
 					my $dialog = GetSimpleDialog('help');
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/help.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'threads') {
 					my $dialog = GetQueryAsDialog('threads');
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					$dialog = AddAttributeToTag($dialog, 'table', 'id', 'threads');
 					PutHtmlFile('dialog/threads.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'welcome') {
 					my $dialog = GetSimpleDialog('welcome');
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/welcome.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'authors') {
 					my $dialog = GetQueryAsDialog('authors', 'Authors');
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/authors.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'active') {
 					my $dialog = GetQueryAsDialog('active', 'Active');
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/active.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'scores') {
 					my $dialog = GetQueryAsDialog('scores', 'Scores');
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/scores.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'tags') {
 					my $dialog = GetQueryAsDialog('tags', 'Tags');
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/tags.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'new') {
 					my $dialog = GetQueryAsDialog('new', 'New');
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/new.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'chain') {
 					my $dialog = GetQueryAsDialog('chain', 'Chain');
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/chain.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'url') {
 					my $dialog = GetQueryAsDialog('url', 'URL');
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/url.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'image') {
 					my $dialog = GetQueryAsDialog('image', 'Image');
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/image.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'data') {
 					my $dialog = GetDataDialog();
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/data.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'search') {
 					my $dialog = GetSearchDialog();
-					print ("-D $makeDialogArg\n");
+					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/search.html', $dialog);
 				}
 				elsif ($makeDialogArg =~ m/([0-9a-f]{8})/) {
-					print ("-D (item_prefix)\n");
+					WriteMessage("-D (item_prefix)\n");
 					my $dialog = GetItemTemplateFromHash($makeDialogArg);
 					my $dialogPath = GetHtmlFilename($makeDialogArg); # pages.pl #todo
 
@@ -1949,12 +1949,12 @@ while (my $arg1 = shift @foundArgs) {
 					}
 				}
 				#				elsif (IsFingerprint($arg1)) {
-				#					print ("recognized author fingerprint\n");
+				#					WriteMessage("recognized author fingerprint\n");
 				#					MakePage('author', $arg1, 1);
 				#				}
 				elsif (substr($makeDialogArg, 0, 1) eq '#') { #hashtag tag/like.html
 					#todo sanity checks here
-					print ("-D hash tag $makeDialogArg\n");
+					WriteMessage("-D hash tag $makeDialogArg\n");
 
 					my $hashTag = substr($makeDialogArg, 1);
 
@@ -1986,7 +1986,7 @@ while (my $arg1 = shift @foundArgs) {
 					print "\n";
 				}
 
-				#print ("calling MakePage($makePageArg)\n");
+				#WriteMessage("calling MakePage($makePageArg)\n");
 				#MakePage($makePageArg);
 			} else {
 				print("missing argument for -D\n");
@@ -1999,22 +1999,22 @@ while (my $arg1 = shift @foundArgs) {
 
 		}
 		else {
-			print ("Available arguments:\n");
-			print ("--summary or -s for all summary or system pages\n");
-			print ("--system or -S for basic system pages\n");
-			print ("--php for all php pages\n");
-			print ("--queue or -Q for all pages in queue\n");
-			print ("-M [page] to call MakePage\n");
-			print ("-D [dialog] to make dialog page\n");
-			print ("item id for one item's page\n");
-			print ("author fingerprint for one item's page\n");
-			print ("#tag for one tag's page\n");
-			print ("YYYY-MM-DD for a date page\n");
+			print("Available arguments:\n");
+			print("--summary or -s for all summary or system pages\n");
+			print("--system or -S for basic system pages\n");
+			print("--php for all php pages\n");
+			print("--queue or -Q for all pages in queue\n");
+			print("-M [page] to call MakePage\n");
+			print("-D [dialog] to make dialog page\n");
+			print("item id for one item's page\n");
+			print("author fingerprint for one item's page\n");
+			print("#tag for one tag's page\n");
+			print("YYYY-MM-DD for a date page\n");
 		}
 	}
 
-	print "-------";
-	print "\n";
+	print("-------");
+	print("\n");
 	my @filesWrittenHtml = PutHtmlFile('report_files_written');
 	for my $fileWritten (@filesWrittenHtml) {
 		print $fileWritten;
