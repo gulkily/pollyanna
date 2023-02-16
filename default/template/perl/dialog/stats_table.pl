@@ -4,8 +4,7 @@ use strict;
 use warnings;
 use 5.010;
 
-
-sub GetStatsTable { # returns Stats dialog (without dialog frame)
+sub GetStatsTable { # $templateName = 'html/stats.template' ; returns Stats dialog (without dialog frame if template is not default value)
 # sub GetStatsDialog {
 #note this can take a while to warm up first time, because lots of sql count() and group by such
 	my $templateName = shift;
@@ -17,36 +16,35 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 	WriteLog('GetStatsTable() BEGIN');
 
 	state $itemsIndexed;
-	if (!$itemsIndexed && (!defined($itemsIndexed) || $itemsIndexed != 0)) {
-		# a bit of a mess, should be refactored #todo
-		$itemsIndexed = DBGetItemCount();
-		if ($itemsIndexed == -1) {
-			$itemsIndexed = 0;
-		}
+	if (!$itemsIndexed && (!defined($itemsIndexed))) {
+		$itemsIndexed = DBGetItemCount(); # SqliteGetCount('compost')
 	}
 
 	state $threadsCount;
-	if (!$threadsCount && (!defined($threadsCount) || $threadsCount != 0)) {
-		#$threadsCount = SqliteGetValue('threads');
-		$threadsCount = SqliteGetValue('SELECT COUNT(file_hash) FROM item_flat WHERE parent_count = 0 AND child_count > 0 AND item_score >= 0');
+	if (!$threadsCount && (!defined($threadsCount))) {
+		$threadsCount = SqliteGetCount('threads');
 	}
 
-	my $imagesCount = SqliteGetValue("SELECT COUNT(*) FROM item_flat WHERE tags_list LIKE '%,image,%'");
+	state $imagesCount;
+	if (!$imagesCount && (!defined($imagesCount))) {
+		$imagesCount = SqliteGetCount('image');
+	}
 
-	my $authorCount = DBGetAuthorCount();
+	state $authorCount;
+	if (!$authorCount && (!defined($authorCount))) {
+		$authorCount = SqliteGetCount('authors');
+	}
 
 	state $itemsDeleted;
-	if (!$itemsDeleted) {
-		my @result = SqliteQueryHashRef('deleted');
-		$itemsDeleted = (scalar(@result) - 1); #minus 1 because first row is headers
-		#todo optimize
+	if (!$itemsDeleted && (!defined($itemsDeleted))) {
+		$itemsDeleted = SqliteGetCount('deleted');
 	}
 
-#	my $adminId = GetRootAdminKey();
-#	my $adminUsername = GetAlias($adminId);
-#	my $adminLink = GetAuthorLink($adminId);
+	# my $adminId = GetRootAdminKey();
+	# my $adminUsername = GetAlias($adminId);
+	# my $adminLink = GetAuthorLink($adminId);
 
-	#my $adminId = '';#GetRootAdminKey();
+	# my $adminId = '';#GetRootAdminKey();
 	my $adminId = DBGetAdminKey(); # returns highest scoring
 
 	my $adminUsername = '';
@@ -56,7 +54,7 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 		$adminLink = GetAuthorLink($adminId);
 	}
 
-	my $serverId = '';#GetServerKey();
+	my $serverId = ''; #GetServerKey();
 	my $serverLink = '';
 	if ($serverId) {
 		$serverLink = GetAuthorLink($serverId);
@@ -64,7 +62,6 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 
 	my $versionFull = GetMyVersion();
 	my $versionSuccinct = substr($versionFull, 0, 8);
-
 	my $versionSequence = `git log --oneline | wc -l`; #todo don't shell
 
 	UpdateUpdateTime();
@@ -115,9 +112,6 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 	} else {
 		WriteLog('GetStatsTable: warning: sanity check failed: $TXTDIR contains space');
 	}
-	#
-	# finished counting files
-
 	if (GetConfig('admin/image/enable')) {
 		state $IMAGEDIR = GetDir('image');
 		if ($IMAGEDIR =~ m/^([^\s]+)$/) { #security #taint
@@ -136,6 +130,8 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 			WriteLog('GetStatsTable: warning: sanity check failed: $IMAGEDIR contains space');
 		}
 	}
+	#
+	# finished counting files
 
 	my $chainLogLength = 0;
 	if (GetConfig('admin/logging/write_chain_log')) {
@@ -162,13 +158,15 @@ sub GetStatsTable { # returns Stats dialog (without dialog frame)
 		}
 	}
 
-	my $tagsTotal = DBGetTagCount();
+	#my $tagsTotal = DBGetTagCount();
+	my $tagsTotal = SqliteGetCount('tags');
 	if (!$tagsTotal) {
-		WriteLog('GetStatsTable: warning: $tagsTotal was false');
+		WriteLog('GetStatsTable: warning: $tagsTotal was FALSE');
 		$tagsTotal = 0;
 	}
 
-	my $newLength = SqliteGetValue('SELECT COUNT(file_hash) FROM item_flat WHERE item_score >= 0');
+	#my $newLength = SqliteGetValue('SELECT COUNT(file_hash) FROM item_flat WHERE item_score >= 0');
+	my $newLength = SqliteGetCount('new');
 	if (!$newLength) {
 		$newLength = 0;
 	}
