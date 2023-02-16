@@ -39,6 +39,11 @@ sub GetItemTemplateBody {
 	if ($file{'item_type'} eq 'txt') {
 		WriteLog('GetItemTemplateBody: item_type = txt');
 
+		if (!$file{'tags_list'}) {
+			$file{'tags_list'} = '';
+			WriteLog('GetItemTemplateBody: warning: $file{tags_list} is FALSE');
+		}
+
 		my $isTextart = 0;
 		if (GetConfig('html/format_item/textart')) {
 			if (-1 != index(','.$file{'tags_list'}.',', ',textart,')) {
