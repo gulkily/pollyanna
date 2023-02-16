@@ -65,7 +65,11 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 			if ($settingKey =~ m/^([0-9a-zA-Z.\/_\-:]+)$/) { #todo bug here?
 				$settingKey = $1;
 				my $settingValue = `cat $settingKey`;
+
+				chomp $settingValue;
+
 				print "$settingKey=$settingValue";
+				print "\n";
 
 				if (-e "$settingKey.list") {
 					my $settingList = `cat $settingKey.list`;
@@ -87,12 +91,12 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 						print "$settingKey=$settingValue";
 
 						if ($settingKey eq 'config/setting/theme') {
-							print "Theme changed, about to hike frontend...\n";
+							print "Theme changed, about to rebuild frontend...\n";
 							sleep 2;
 							print `sh hike.sh frontend`;
 						}
 					} else {
-						print 'warning';
+						print 'Warning: Value not changed';
 					}
 				} else {
 					print 'warning';
