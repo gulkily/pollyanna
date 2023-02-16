@@ -1,7 +1,7 @@
 <!-- enter.template -->
 <form name=formRegisterMember action="/profile.html">
 	<p>
-		Press to choose a username:
+		Press for membership:
 	</p>
 	<p align=center>
 		<noscript><font color=red>*</font></noscript>

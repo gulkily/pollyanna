@@ -16,7 +16,7 @@ sub GetWelcomePage {
 		# GetWriteForm('Contribute', 'Write something here, please:') .
 		# '</form>' . #todo unhack this
 		GetDialogX(GetTemplate('html/form/guest.template'), 'Guest') .
-		GetDialogX(GetTemplate('html/form/enter.template'), 'Create Profile') .
+		GetDialogX(GetTemplate('html/form/enter.template'), 'Membership') .
 		GetPageFooter('welcome')
 	;
 

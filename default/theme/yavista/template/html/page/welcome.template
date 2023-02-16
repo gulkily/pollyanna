@@ -5,16 +5,15 @@
 </center>
 
 <p>
-	Yavista is driven by your contributions, so <br>
-	please write something. Here are some ideas:
+	Yavista is an experimental online social space.<br>
 </p>
 
-<ul>
-	<li>Something you recently discovered</li>
-	<li>Problem or a conundrum you're facing</li>
-	<li>How did you find this place?</li>
-	<li>Wishlist or idea for the site</li>
-	<li>Book, paper, or movie you liked</li>
-</ul>
+<p>
+	Yavista utilizes technologies such as <br>
+	private-public key pairs, hashes, <br>
+	chains, cryptographic signatures, and <br>
+	Merkle trees, to create user-owned, <br>
+	consensual online community spaces.
+</p>
 
 <!-- / welcome.template -->
