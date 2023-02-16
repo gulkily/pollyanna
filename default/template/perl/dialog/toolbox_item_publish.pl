@@ -28,7 +28,8 @@ sub GetDialogToolboxItemPublish { # $filePath, $fileHash = '' ; returns dialog w
 	my $urlParamFullText = '';
 
 	$urlParamFullText = GetFile($filePath);
-	$urlParamFullText = uri_escape($urlParamFullText);
+	$urlParamFullText = uri_escape_utf8($urlParamFullText);
+	# $urlParamFullText = uri_escape_utf8($urlParamFullText); #todo do this if ascii_only
 	#$urlParamFullText = uri_encode($urlParamFullText);
 	$urlParamFullText = str_replace('+', '%2b', $urlParamFullText);
 	$urlParamFullText = str_replace('#', '%23', $urlParamFullText);
