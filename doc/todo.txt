@@ -2379,6 +2379,7 @@ Import for QDB data
 	votes
 	vote_caption
 
+===
 
 If item is just one line
 	And item has replies
@@ -2392,6 +2393,7 @@ If item is just one line
 Then
 	create url alias pointing to all replies to item
 
+===
 
 Update pages for parent items recursively
 
@@ -2417,21 +2419,11 @@ Add setting to ignore plain URL messages if they are an exact match for a file
 
 If file is submitted via plain URL, make (optionally) a token noting that
 
-Current Top UI priorities
-	Titles
-		xAlready stored in database
-		xShould replace $hash at the top of items
-		xShort listing style with titles and attributes only (no text)
-	Event listing
-		Chronological
-		Clear dates
-		Grouped by month
-		All future/current events
-	Author listing
-		xMore friendly table-like listing of authors
-			xAction counts with sort
-
-Does vote still need timestamp?
+Event listing
+	Chronological
+	Clear dates
+	Grouped by month
+	All future/current events
 
 Connect users
 	Using >> replies for user registration posts
