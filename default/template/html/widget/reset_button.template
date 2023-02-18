@@ -14,6 +14,7 @@
 		//window.location.reload();
 
 		var winLoc = window.location.href;
+		//var winLoc = '/help.html'; #option
 		if (winLoc.indexOf('?')) {
 			winLoc = winLoc.substr(0, winLoc.indexOf('?'));
 		}

@@ -50,6 +50,7 @@
 		SetPrefs('draggable_scale', 0);
 		SetPrefs('draggable_restore_collapsed', 0);
 		DraggingReset();
+		//window.location = '/help.html'; #option
 		window.location.reload(false);
 	}
 " title="Reset">Reset</a>
