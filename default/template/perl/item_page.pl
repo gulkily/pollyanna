@@ -582,6 +582,10 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$txtIndex .= GetHashComparisonDialog($file{'file_hash'});
 	}
 
+	if (GetConfig('setting/admin/debug_dialogs')) { #todo
+		$txtIndex .= GetDialogX(GetFileMessageCachePath($file{'file_hash'}), 'GetFileMessageCachePath()');
+	}
+
 	if (GetConfig('html/item_page/parse_log')) {
 		$txtIndex .= GetItemIndexLog($file{'file_hash'});
 		if (
