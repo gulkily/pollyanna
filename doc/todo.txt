@@ -1,3 +1,20 @@
+CACHING CACHING CACHING CACHING CACHING CACHING
+	after any indexing where new files are added, basic pages like new and chain should be re-cached
+
+	avatar cache only indexed under first theme in list, doesn't update when theme changes
+
+	profile page should be not cached?
+		#todo fix setup for this in lighttpd and apache templates
+		somehow needs to do a better job of getting rid of old logged in displayed status after logout
+			no-cache all profile page things with a username on them #todo
+				but still needs a fallback when connection goes away?
+			add check to eventloop
+
+	Ensure caches are deleted when a vote occurs
+
+	Add quick way to transition cache to new version without clean-build
+		Or possibly fallback to old cache if new cache is missing
+
 
 dev mode with instant updates after code is changed
 	keep track of changes
@@ -2445,9 +2462,6 @@ Colorize item hashes
 
 Re-enable hashtag links
 
-Add quick way to transition cache to new version without clean-build
-	Or possibly fallback to old cache if new cache is missing
-
 todo events page should have link to add to
 	google calendar
 	outlook
@@ -2596,8 +2610,6 @@ When private key is pasted into [restore] textarea,
 	automatically check it for presence of private key
 	  restore if it validates
 
-Ensure caches are deleted when a vote occurs
-
 Add a message that appears the first time someone is posting something, like on HN
 
 [Admin] has assigned a weight of [100] to [ABC]
@@ -2687,15 +2699,6 @@ Voting links cause crash in Mosaic 2.0 and 1.0
 
 Generate version page for each version mentioned in changelog
 	code for this already exists, and is actually commented out
-
-===
-
-profile page should be not cached?
-	#todo fix setup for this in lighttpd and apache templates
-	somehow needs to do a better job of getting rid of old logged in displayed status after logout
-		no-cache all profile page things with a username on them #todo
-			but still needs a fallback when connection goes away?
-		add check to eventloop
 
 ===
 
@@ -2847,13 +2850,6 @@ Welcome page should look different for a logged in user?
 
 Logged in user should know they are logged in on any page
 
-
-===
-
-#bug 
-
-avatar cache only indexed under first theme in list, doesn't update when theme changes
-
 ===
 
 #todo date page should display date used
@@ -2871,13 +2867,6 @@ workaround: look at url
 #bug
 
 Message Hash is still not consistent across messages with the same text.
-
-
-===
-
-#todo
-
-after any indexing where new files are added, basic pages like new and chain should be re-cached
 
 ===
 
