@@ -186,12 +186,12 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'/crypto.js',
 			'/crypto2.js',
 			'/openpgp.js'
-		);		
+		);
 		if (in_array($path, $validJsPage)) {
 			WriteLog('HandleNotFound: found js: ' . $path);
 			$pagesPlArgument = '--js';
 		}
-				
+
 
 		if (
 			$path == '/settings.html'
