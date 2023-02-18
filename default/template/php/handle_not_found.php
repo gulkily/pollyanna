@@ -201,166 +201,59 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		}
 
 ########### DIALOGS BEGIN
-		if (
-			$path == '/dialog/threads.html'
-		) {
-			WriteLog('HandleNotFound: found threads dialog');
-			$pagesPlArgument = '-D threads';
-		}
+		if (substr($path, 0, 8) == '/dialog/') {
+			$basicDialogs = array(
+				'threads',
+				'stats',
+				'settings',
+				'help',
+				'image',
+				'url',
+				'search',
+				'data',
+				'chain',
+				'new',
+				'tags',
+				'scores',
+				'active',
+				'authors',
+				'welcome',
+				'profile',
+				'read',
+				'upload',
+				'write',
+				'access',
+				'annoyances'
+			); # /dialog/
 
-		if (
-			$path == '/dialog/stats.html'
-		) {
-			WriteLog('HandleNotFound: found stats dialog');
-			$pagesPlArgument = '-D stats';
-		}
+			foreach ($basicDialogs as $basicDialog) {
+				if (
+					$path == '/dialog/' . $basicDialog . '.html'
+				) {
+					WriteLog('HandleNotFound: found ' . $basicDialog . ' dialog');
+					$pagesPlArgument = '-D ' . $basicDialog;
+					break;
+				}
+			}
 
-		if (
-			$path == '/dialog/settings.html'
-		) {
-			WriteLog('HandleNotFound: found settings dialog');
-			$pagesPlArgument = '-D settings';
-		}
+			if (!$pagesPlArgument) {
+				# simple dialogs not matched, try some other strategies
+			}
 
-		if (
-			$path == '/dialog/annoyances.html'
-		) {
-			WriteLog('HandleNotFound: found annoyances dialog');
-			$pagesPlArgument = '-D annoyances';
-		}
+			if (preg_match('/^\/dialog\/[a-f0-9]{2}\/[a-f0-9]{2}\/([a-f0-9]{8})/', $path, $itemHashMatch)) {
+				# Item URL in the form: /ab/01/ab01cd23.html
+				WriteLog('HandleNotFound: found dialog / item hash');
+				$itemHash = $itemHashMatch[1];
+				$pagesPlArgument = '-D ' . $itemHash;
+			}
 
-		if (
-			$path == '/dialog/access.html'
-		) {
-			WriteLog('HandleNotFound: found access dialog');
-			$pagesPlArgument = '-D access';
-		}
-
-		if (
-			$path == '/dialog/write.html'
-		) {
-			WriteLog('HandleNotFound: found write dialog');
-			$pagesPlArgument = '-D write';
-		}
-
-		if (
-			$path == '/dialog/upload.html'
-		) {
-			WriteLog('HandleNotFound: found upload dialog');
-			$pagesPlArgument = '-D upload';
-		}
-
-		if (
-			$path == '/dialog/read.html'
-		) {
-			WriteLog('HandleNotFound: found read dialog');
-			$pagesPlArgument = '-D read';
-		}
-
-		if (
-			$path == '/dialog/profile.html'
-		) {
-			WriteLog('HandleNotFound: found profile dialog');
-			$pagesPlArgument = '-D profile';
-		}
-
-		if (
-			$path == '/dialog/welcome.html'
-		) {
-			WriteLog('HandleNotFound: found welcome dialog');
-			$pagesPlArgument = '-D welcome';
-		}
-
-		if (
-			$path == '/dialog/authors.html'
-		) {
-			WriteLog('HandleNotFound: found authors dialog');
-			$pagesPlArgument = '-D authors';
-		}
-
-		if (
-			$path == '/dialog/active.html'
-		) {
-			WriteLog('HandleNotFound: found active dialog');
-			$pagesPlArgument = '-D active';
-		}
-
-		if (
-			$path == '/dialog/scores.html'
-		) {
-			WriteLog('HandleNotFound: found scores dialog');
-			$pagesPlArgument = '-D scores';
-		}
-
-		if (
-			$path == '/dialog/tags.html'
-		) {
-			WriteLog('HandleNotFound: found tags dialog');
-			$pagesPlArgument = '-D tags';
-		}
-
-		if (
-			$path == '/dialog/new.html'
-		) {
-			WriteLog('HandleNotFound: found new dialog');
-			$pagesPlArgument = '-D new';
-		}
-
-		if (
-			$path == '/dialog/chain.html'
-		) {
-			WriteLog('HandleNotFound: found chain dialog');
-			$pagesPlArgument = '-D chain';
-		}
-
-		if (
-			$path == '/dialog/data.html'
-		) {
-			WriteLog('HandleNotFound: found data dialog');
-			$pagesPlArgument = '-D data';
-		}
-
-		if (
-			$path == '/dialog/search.html'
-		) {
-			WriteLog('HandleNotFound: found search dialog');
-			$pagesPlArgument = '-D search';
-		}
-
-		if (
-			$path == '/dialog/url.html'
-		) {
-			WriteLog('HandleNotFound: found url dialog');
-			$pagesPlArgument = '-D url';
-		}
-
-		if (
-			$path == '/dialog/image.html'
-		) {
-			WriteLog('HandleNotFound: found image dialog');
-			$pagesPlArgument = '-D image';
-		}
-
-		if (
-			$path == '/dialog/help.html'
-		) {
-			WriteLog('HandleNotFound: found help dialog');
-			$pagesPlArgument = '-D help';
-		}
-
-		if (preg_match('/^\/dialog\/[a-f0-9]{2}\/[a-f0-9]{2}\/([a-f0-9]{8})/', $path, $itemHashMatch)) {
-			# Item URL in the form: /ab/01/ab01cd23.html
-			WriteLog('HandleNotFound: found dialog / item hash');
-			$itemHash = $itemHashMatch[1];
-			$pagesPlArgument = '-D ' . $itemHash;
-		}
-
-		if (preg_match('/^\/dialog\/tag\/([a-zA-Z0-9_-]+)\.html/', $path, $itemTagMatch)) {
-			# Item URL in the form: /tag/nice.html
-			WriteLog('HandleNotFound: found dialog / tag');
-			$tagName = $itemTagMatch[1];
-			$pagesPlArgument = '-D \#' . $tagName;
-		}
+			if (preg_match('/^\/dialog\/tag\/([a-zA-Z0-9_-]+)\.html/', $path, $itemTagMatch)) {
+				# Item URL in the form: /tag/nice.html
+				WriteLog('HandleNotFound: found dialog / tag');
+				$tagName = $itemTagMatch[1];
+				$pagesPlArgument = '-D \#' . $tagName;
+			}
+		} # /dialog/...
 
 ############################ DIALOGS END
 		if (
