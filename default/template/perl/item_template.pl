@@ -8,6 +8,8 @@ use utf8;
 require_once('dialog.pl');
 
 sub GetItemTemplateBody {
+# sub GetItemBody {
+# sub GetBody {
 # sub GetItemText {
 # sub FormatMessage {
 # sub GetContainer {
@@ -376,6 +378,8 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			### this is the item template itself, including the window
 			### this is the item template itself, including the window
 			##########################################################
+
+			#item body itembody
 
 			#return GetDialogX($param{'body'}, $param{'title'}, $param{'headings'}, $param{'status'}, $param{'menu'});
 			my %windowParams;

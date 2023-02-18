@@ -35,7 +35,7 @@ use utf8;
 
 sub GetDialogX { # $body, $title, $headings, $status, $menu ; returns html with window/dialog
 # renamed from GetWindowTemplate()
-# it's called GetDialogX instead of GetDialog to amke
+# it's called GetDialogX instead of GetDialog to make it easier to search for
 
 # sub GetWindowTemplate {
 # sub GetDialog {

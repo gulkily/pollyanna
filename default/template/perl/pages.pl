@@ -27,6 +27,7 @@ require_once('sqlite.pl');
 require_once('makepage.pl');
 
 sub GetDialogPage { # $pageName, $pageTitle, $windowContents ; returns html page with dialog
+# sub GetDialog()
 # this is for getting one page with one dialog, not a /dialog/... page
 	my $pageName = shift; # page name: 404
 	my $pageTitle = shift; # page title (

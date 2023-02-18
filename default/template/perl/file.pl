@@ -308,6 +308,12 @@ sub OrganizeFile { # $file ; renames file based on hash of its contents
 
 
 sub GetFileMessage { # $fileHash ; get file message based on hash
+# returns the post-processing and detokened message by file hash
+# reads it from cache
+# uses GetFileMessageCachePath()
+# caution: may also look up file path in database and read from file
+# sub GetMessage {
+# sub GetItemMessage {
 	my $fileHash = shift;
 	if (!$fileHash) {
 		return ''; #todo
@@ -333,22 +339,22 @@ sub GetFileMessage { # $fileHash ; get file message based on hash
 		}
 	}
 
-	$messagePath = GetFileMessageCachePath($fileHash);
-	WriteLog('GetFileMessage: $messagePath2: ' . $messagePath);
+	$messagePath = GetFileMessageCachePath($fileHash); # GetCache() should probably be used here instead #todo
+	WriteLog('GetFileMessage: $messagePath: ' . $messagePath);
 
 	if (-e $messagePath) {
 		WriteLog('GetFileMessage: (message) return GetFile(' . $fileHash . ')');
 		return GetFile($messagePath);
-	} else {
-		WriteLog('GetFileMessage: return GetPathFromHash(' . $fileHash . ')');
+	}
+	else { # file at $messagePath missing,
 		my $filePath = GetPathFromHash($fileHash);
+		WriteLog('GetFileMessage: $filePath = ' . $fileHash);
 
-		if (!(-e $filePath)) { # file_exists()
-			WriteLog('GetFileMessage: warning: !-e $filePath = ' . $filePath);
-
+		if (!(file_exists($filePath))) {
+			WriteLog('GetFileMessage: warning: $filePath was FALSE');
 			$filePath = SqliteGetValue("SELECT file_name FROM item WHERE file_hash = '$fileHash'");
 
-			if (!(-e $filePath)) { # file_exists()
+			if (!file_exists($filePath)) { # ()
 				WriteLog('GetFileMessage: warning: #2 !-e $filePath = ' . $filePath);
 				return '';
 			} else {

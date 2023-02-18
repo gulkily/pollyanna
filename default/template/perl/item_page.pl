@@ -357,6 +357,8 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 
 
 	# ITEM TEMPLATE
+	# item tempalte #searchable
+	# item body #searchable
 
 	my $addMavo = 0; #todo refactor
 	my $addMermaid = 0; #todo refactor
