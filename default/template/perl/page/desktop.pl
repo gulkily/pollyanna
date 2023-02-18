@@ -15,12 +15,12 @@ sub GetDesktopPage { # returns html for desktop page (/desktop.html)
 
 	$html = GetPageHeader('desktop');
 	$html .= GetTemplate('html/maincontent.template');
-	#$html .= GetQueryAsDialog(SqliteGetQueryTemplate('tags')." LIMIT 10", 'Tags');
+	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('tags')." LIMIT 10", 'Tags');
 	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('threads')." LIMIT 10", 'Threads');
 	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('new')." LIMIT 10", 'New');
-	#$html .= GetQueryAsDialog(SqliteGetQueryTemplate('authors'). "LIMIT 10", 'Authors');
-	#$html .= GetQueryAsDialog('url', 'Links');
-	#$html .= GetStatsTable(); # GetDesktopPage()
+	$html .= GetQueryAsDialog(SqliteGetQueryTemplate('authors'). "LIMIT 10", 'Authors');
+	$html .= GetQueryAsDialog('url', 'Links');
+	$html .= GetStatsTable(); # GetDesktopPage()
 
 
 	# if (GetConfig('admin/php/enable')) {
@@ -34,6 +34,7 @@ sub GetDesktopPage { # returns html for desktop page (/desktop.html)
 
 	if (GetConfig('admin/js/enable')) {
 		my @scripts = qw(settings avatar profile timestamp pingback utils);
+		push @scripts, 'desktop';
 		if (GetConfig('admin/js/dragging')) {
 			push @scripts, 'dragging'; # GetDesktopPage()
 		}

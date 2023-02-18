@@ -86,6 +86,12 @@ function OnLoadEverything () { // checks for each onLoad function and calls it
 		//alert('DEBUG: OnLoadEverything: SearchOnload()');
 		SearchOnload();
 	}
+
+	if (window.DesktopOnLoad) {
+		//alert('DEBUG: OnLoadEverything: DesktopOnLoad()');
+		DesktopOnLoad();
+	}
+
 	if (window.UploadAddImagePreviewElement) {
 		//alert('DEBUG: OnLoadEverything: UploadAddImagePreviewElement()');
 		UploadAddImagePreviewElement();
