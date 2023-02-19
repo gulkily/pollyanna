@@ -63,8 +63,8 @@ sub GetDialogPage { # $pageName, $pageTitle, $windowContents ; returns html page
 				$lookingFor = $lookingForList[rand scalar(@lookingForList)];
 			}
 
-			#$windowContents =~ s/looking for mittens/looking for $lookingFor/;
-			$windowContents =~ str_replace('looking for mittens', 'How is the site working for everyone', $windowContents);
+			$windowContents =~ s/looking for mittens/looking for $lookingFor/;
+			#$windowContents =~ str_replace('looking for mittens', 'How is the site working for everyone', $windowContents);
 
 			my $pageTemplate;
 			$pageTemplate = '';
