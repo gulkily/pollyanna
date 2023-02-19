@@ -153,6 +153,12 @@ sub GetItemTemplateBody {
 				$itemText =~ s/([A-F0-9]{16})/GetHtmlAvatar($1)/eg;
 			}
 
+			if ($isTooLong) {
+				#todo there should be a feature flag on whether to do this or not
+				my $itemSelfLink = GetItemHtmlLink($file{'file_hash'}, '[...]'); #todo should be ok to say item_hash
+				$itemText = str_replace('[...]', $itemSelfLink, $itemText);
+			}
+
 			if (GetConfig('html/item_remove_first_line_if_matches_title')) {
 				if ($file{'item_title'}) {
 					if (substr($itemText, 0, length($file{'item_title'}))) {
