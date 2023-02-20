@@ -148,7 +148,7 @@ sub GetLighttpdConfig { # generate contents for lighttpd.conf file based on sett
 	my $docRoot = GetDir('html');
 
 	my $serverPort = GetConfig('admin/lighttpd/port') || 2784;
-	my $serverPort = GetConfig('admin/lighttpd/port');
+	#my $serverPort = GetConfig('admin/lighttpd/port');
 	if ($serverPort =~ m/^([0-9]+)$/) {
 		$serverPort = $1;
 	} else {
