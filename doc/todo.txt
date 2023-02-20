@@ -1,5 +1,7 @@
 fix titles... how to?
-
+	problem: non-ascii titles are gibberished
+	they are returned ok by sqlite
+		but when being read in via backtick call to sqlite, they're corrupted
 
 $itemLongThreshold
 	should be about display dimensions, not file length
