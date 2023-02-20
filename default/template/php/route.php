@@ -543,6 +543,7 @@ if (GetConfig('admin/php/route_enable')) {
 						WriteLog('route.php: $_GET[time] = ' . $_GET['time']);
 						if (intval($_GET['time'])) {
 							if ((intval($_GET['time']) + 3600) > time()) {
+								#timeout
 								$cacheOverrideFlag = 1;
 							}
 						}
@@ -553,17 +554,20 @@ if (GetConfig('admin/php/route_enable')) {
 					$fileCacheTime = 0;
 					if (file_exists($pathRel)) {
 						$fileCacheTime = time() - filemtime($pathRel);
+						#timeout
 					}
 
 					if ($cacheOverrideFlag) {
 						if ($path) {
 							$refStart = time();
+							#timeout
 							$html = HandleNotFound($path, $pathRel); # cacheOverrideFlag
 
 							if ($html) {
 								$refFinish = time();
 								$messagePageReprinted = 'OK, I reprinted the page for you.';
 								RedirectWithResponse($path, $messagePageReprinted . ' ' . '<small class=advanced>in ' . ($refFinish - $refStart) . 's</small>');
+								#todo the time display should be refactored out
 							} else {
 								WriteLog('route.php: cacheOverrideFlag: warning: $html was FALSE');
 							}
@@ -604,6 +608,7 @@ if (GetConfig('admin/php/route_enable')) {
 
 						WriteLog('route.php: $fileCacheTime = ' . $fileCacheTime . '; $cacheTimeLimit = ' . $cacheTimeLimit);
 						WriteLog('route.php: time() = ' . time() . '; time() - $fileCacheTime = ' . (time() - $fileCacheTime));
+						#timeout
 
 						// file exists and is new enough
 						WriteLog("route.php: file_exists($pathRel) was true");
