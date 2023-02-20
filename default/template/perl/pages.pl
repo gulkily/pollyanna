@@ -45,26 +45,17 @@ sub GetDialogPage { # $pageName, $pageTitle, $windowContents ; returns html page
 
 			if (GetConfig('admin/expo_site_mode')) {
 				$windowContents = str_replace(
-					'<span id=mittens></span>',
+					'<span id=lookingFor></span>',
 					'',
 					$windowContents
 				)
 			} else {
 				$windowContents = str_replace(
-					'<span id=mittens></span>',
-					'<span id=mittens>' . GetTemplate('html/form/mittens.template') . '</span>',
+					'<span id=lookingFor></span>',
+					'<span id=lookingFor></span>' . GetTemplate('html/form/looking_for.template') . '</span>',
 					$windowContents
 				)
 			}
-
-			my $lookingFor = 'test';
-			my @lookingForList = split("\n", GetTemplate('list/looking_for')); #todo make safer
-			if (@lookingForList) {
-				$lookingFor = $lookingForList[rand scalar(@lookingForList)];
-			}
-
-			$windowContents =~ s/looking for mittens/looking for $lookingFor/;
-			#$windowContents =~ str_replace('looking for mittens', 'How is the site working for everyone', $windowContents);
 
 			my $pageTemplate;
 			$pageTemplate = '';
