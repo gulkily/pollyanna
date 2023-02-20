@@ -1,4 +1,15 @@
+fix titles... how to?
+
+
+$itemLongThreshold
+	should be about display dimensions, not file length
+	so lines and width both should be constrained
+
+for recognized clients, http_auth should be bypassed
+
 CACHING CACHING CACHING CACHING CACHING CACHING
+	main pages which rarely update should have different timeouts
+
 	after any indexing where new files are added, basic pages like new and chain should be re-cached
 
 	avatar cache only indexed under first theme in list, doesn't update when theme changes
