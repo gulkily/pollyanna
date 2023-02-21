@@ -215,6 +215,19 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 			$param{'id'} = $flags{'id'};
 		}
 
+		if (0) {
+			$flags{'page_query'} = 'compost';
+			$flags{'page_current'} = 1;
+			$flags{'page_item_count'} = 500;
+			$flags{'page_items_per_page'} = 25;
+
+			if ($flags{'page_query'} && $flags{'page_current'} && $flags{'page_item_count'} && $flags{'page_items_per_page'}) { # #pagination
+				require_once('pagination_links.pl');
+				my $paginationLinks = GetPaginationLinks($flags{'page_query'}, $flags{'page_current'}, $flags{'page_item_count'}, $flags{'page_items_per_page'});
+				$param{'status'} = $paginationLinks;
+			}
+		}
+
 		require_once('dialog.pl');
 		return GetDialogX3($content, $title, \%param);
 	} else {
