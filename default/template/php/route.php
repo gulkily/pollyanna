@@ -846,6 +846,8 @@ if (GetConfig('admin/php/route_enable')) {
 						$path == '/keyboard.html' ||
 						$path == '/keyboard_netscape.html' ||
 						$path == '/keyboard_android.html' ||
+						$path == '/index.html' ||
+						$path == '/' ||
 						(index($html, 'Message received, and scheduled to be posted.') != -1)
 					) {
 						$skipPrintedNotice = 1;
