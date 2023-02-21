@@ -236,22 +236,21 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 				}
 			}
 
-			if (!$pagesPlArgument) {
+			if (!isset($pagesPlArgument) || !$pagesPlArgument) {
 				# simple dialogs not matched, try some other strategies
-			}
+				if (preg_match('/^\/dialog\/[a-f0-9]{2}\/[a-f0-9]{2}\/([a-f0-9]{8})/', $path, $itemHashMatch)) {
+					# Item URL in the form: /ab/01/ab01cd23.html
+					WriteLog('HandleNotFound: found dialog / item hash');
+					$itemHash = $itemHashMatch[1];
+					$pagesPlArgument = '-D ' . $itemHash;
+				}
 
-			if (preg_match('/^\/dialog\/[a-f0-9]{2}\/[a-f0-9]{2}\/([a-f0-9]{8})/', $path, $itemHashMatch)) {
-				# Item URL in the form: /ab/01/ab01cd23.html
-				WriteLog('HandleNotFound: found dialog / item hash');
-				$itemHash = $itemHashMatch[1];
-				$pagesPlArgument = '-D ' . $itemHash;
-			}
-
-			if (preg_match('/^\/dialog\/tag\/([a-zA-Z0-9_-]+)\.html/', $path, $itemTagMatch)) {
-				# Item URL in the form: /tag/nice.html
-				WriteLog('HandleNotFound: found dialog / tag');
-				$tagName = $itemTagMatch[1];
-				$pagesPlArgument = '-D \#' . $tagName;
+				if (preg_match('/^\/dialog\/tag\/([a-zA-Z0-9_-]+)\.html/', $path, $itemTagMatch)) {
+					# Item URL in the form: /tag/nice.html
+					WriteLog('HandleNotFound: found dialog / tag');
+					$tagName = $itemTagMatch[1];
+					$pagesPlArgument = '-D \#' . $tagName;
+				}
 			}
 		} # /dialog/...
 
