@@ -6,6 +6,7 @@ use 5.010;
 use utf8;
 
 sub GetItemListing { # returns listing of items based on topic
+# sub GetResultsPage {
 	my $htmlOutput = '';
 
 	my @topItems; #todo rename this
