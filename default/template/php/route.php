@@ -606,7 +606,7 @@ if (GetConfig('admin/php/route_enable')) {
 						($fileCacheTime < $cacheTimeLimit)
 					) {
 						# ok to use cache
-						if ($fileCacheTime > 360) {
+						if (GetConfig('setting/admin/php/route_stale_page_notice') && $fileCacheTime > 360) {
 							# 10 minutes = stale page
 							#todo make this a configurable setting
 							$stalePageNotice = 1;
