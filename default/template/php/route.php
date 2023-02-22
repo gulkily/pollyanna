@@ -339,6 +339,7 @@ if (GetConfig('admin/php/route_enable')) {
 
 	$cacheWasUsed = 0;
 	$skipPrintedNotice = 0;
+	$stalePageNotice = 0;
 	#$html = '';
 
 	if (GetConfig('admin/php/debug_do_not_use_cache')) {
@@ -605,6 +606,11 @@ if (GetConfig('admin/php/route_enable')) {
 						($fileCacheTime < $cacheTimeLimit)
 					) {
 						# ok to use cache
+						if ($fileCacheTime > 360) {
+							# 10 minutes = stale page
+							#todo make this a configurable setting
+							$stalePageNotice = 1;
+						}
 
 						WriteLog('route.php: $fileCacheTime = ' . $fileCacheTime . '; $cacheTimeLimit = ' . $cacheTimeLimit);
 						WriteLog('route.php: time() = ' . time() . '; time() - $fileCacheTime = ' . (time() - $fileCacheTime));
@@ -853,7 +859,7 @@ if (GetConfig('admin/php/route_enable')) {
 						$skipPrintedNotice = 1;
 					}
 
-					if (GetConfig('admin/php/notify_printed_time') && !$skipPrintedNotice) { # route.php -- page printed time notice
+					if (GetConfig('admin/php/route_notify_printed_time') && !$skipPrintedNotice) { # route.php -- page printed time notice
 						# this should be in a template,
 						# but it would be very awkward to make at this time
 						# why is it awkward?
@@ -925,7 +931,7 @@ if (GetConfig('admin/php/route_enable')) {
 						// } else {
 						// $html = str_ireplace('</body>', $printedNotice . '</body>', $html);
 						// }
-					} // if (notify_printed_time)
+					} // if (route_notify_printed_time)
 				} # $path
 				else {
 					// no $path
@@ -1130,6 +1136,16 @@ if (GetConfig('admin/php/route_enable')) {
 			if ($messageInjected) {
 				// ask browser to not cache page if it contains server response message
 				header('Pragma: no-cache');
+			}
+		} # if ($serverResponse)
+		else {
+			if ($stalePageNotice) {
+				$notice = 'Notice: Cached page served to save server effort. ';
+				$selfPath = $path . '?time=' . (time() + 10);
+				$notice .= '<a href="' . $selfPath . '">Reprint</a>';
+				$notice = '<p class=advanced><small><small>' . $notice . '</small></small></p>';
+				#$html = preg_replace('/(<body[^>]+>)/', '$1' . $notice, $html);
+				$html = str_replace('</body>', $notice . '</body>', $html);
 			}
 		}
 

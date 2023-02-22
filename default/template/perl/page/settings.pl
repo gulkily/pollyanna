@@ -49,7 +49,7 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 		admin/gpg/use_gpg2
 		admin/php/enable
 		admin/php/debug
-		admin/php/notify_printed_time
+		admin/php/route_notify_printed_time
 		admin/php/post/use_return_to
 		admin/php/footer_stats
 	);
