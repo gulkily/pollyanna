@@ -1782,6 +1782,7 @@ sub AuthorHasTag { # $key ; returns 1 if user is admin, otherwise 0
 } # AuthorHasTag()
 
 sub IsAdmin { # $key ; returns 1 if user is admin, otherwise 0
+# sub UserIsAdmin {
 	# returns 2 if user is root admin.
 
 	my $key = shift;
