@@ -1006,6 +1006,7 @@ function SelectMe (ths) {
 
 function InsertFetchedDialog () {
 //alert('DEBUG: InsertFetchedDialog()');
+// inserts dialog at the top of the document, before the first child
 // function InjectDialog () { // InsertFetchedDialog()
 // function InsertDialog () {
 	//debug document.title = 'InsertFetchedDialog';
@@ -1019,6 +1020,8 @@ function InsertFetchedDialog () {
 
 		if (1) {
 		//if (1 || window.location.href.indexOf('chat') != -1) {
+			// insert dialog at the top of the document, before the first child
+
 			//debug document.title += 1;
 			// #todo this should probably be somewhere else, as it relates to chat only
 			// this is a special case handler for the chat page, allowing
@@ -1051,6 +1054,7 @@ function InsertFetchedDialog () {
 			}
 		} else {
 			//debug document.title += 2;
+			// add the dialog at the bottom/end of the document
 			document.body.appendChild(inject);
 		}
 		//debug document.title += 5;
@@ -1077,12 +1081,14 @@ function InsertFetchedDialog () {
 			//document.title = 'qwer';
 		}
 		if (newDialog.length) {
+			// new dialog was found in page, and is referenced by newDialog
+
 			if (GetPrefs('draggable_spawn_focus')) {
+				// focus newly inserted dialog
 				SetActiveDialog(newDialog[0]); // InsertFetchedDialog()
 			}
 
-			window.nextWindowToFocusTo = newDialog[0];
-
+			// if it is profile dialog, call ProfileOnLoad()
 			var frmProfile = newDialog[0].getElementsByClassName('frmProfile');
 			if (frmProfile) {
 				if (window.ProfileOnLoad) {
@@ -1090,6 +1096,7 @@ function InsertFetchedDialog () {
 				}
 			}
 
+			// if there is a textarea inside new dialog, focus the textarea
 			var textareaNew = newDialog[0].getElementsByClassName('txtarea');
 			if (textareaNew && textareaNew.length && textareaNew[0]) {
 				if (textareaNew[0].focus) {
@@ -1101,18 +1108,26 @@ function InsertFetchedDialog () {
 					WriteOnLoad();
 				}
 			} else {
+				// if there is no textarea, look for a skip link
 				var dialogLinks = newDialog[0].getElementsByClassName('skip');
 				if (dialogLinks && dialogLinks[0]) {
 					dialogLinks[0].focus();
 				} else {
 					//alert('DEBUG: InsertFetchedDialog: dialogLinks missing');
-					return '';
+					//return '';
 				}
 			}
 		} // if (newDialog.length)
 
 		if (window.ShowAdvanced) {
+			//alert('DEBUG: InsertFetchedDialog: ShowAdvanced found, calling');
+
+			// show/hide document layers based on user settings
+			// #todo this doesn't actually seem to work.
 			ShowAdvanced(1, newDialog[0]);
+			//ShowAdvanced(1); // call global ShowAdvanced(), which is slightly less efficient, but should actually work
+		} else {
+			//alert('DEBUG: InsertFetchedDialog: ShowAdvanced NOT found');
 		}
 
 		//var isinv = IsInViewport(newDialog[0]);
@@ -1121,9 +1136,12 @@ function InsertFetchedDialog () {
 		if (document.getElementsByClassName) {
 			var notifications = document.getElementsByClassName('notification');
 			if (notifications) {
+				//alert('DEBUG: InsertFetchedDialog: notifications found, removing');
 				for (var notif = 0; notif < notifications.length; notif++) {
 					notifications[notif].remove();
 				}
+			} else {
+				//alert('DEBUG: InsertFetchedDialog: notifications NOT found');
 			}
 
 			// #todo
