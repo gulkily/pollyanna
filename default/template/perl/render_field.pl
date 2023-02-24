@@ -260,7 +260,8 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		# which is controlled by: config/setting/admin/index/index_local_path_as_attribute
 		#todo templatize
 
-		$fieldValue = '<a href="file://' . HtmlEscape($fieldValue) . '">' . HtmlEscape($fieldValue) . '</a>';
+		#$fieldValue = '<a href="file://' . HtmlEscape($fieldValue) . '">' . HtmlEscape($fieldValue) . '</a>';
+		$fieldValue = '<form><input onclick="if (this.select) { this.select() }" spellcheck=false type=text size=60 value="' . HtmlEscape($fieldValue) . '"></form>';
 	}
 
 	elsif (
