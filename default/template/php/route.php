@@ -1498,7 +1498,7 @@ if (GetConfig('admin/php/route_enable')) {
 			$html .= '</h3>';
 			$html .= '<p>';
 			$html .= '<hr>';
-			$html .= '<form action=/post.html><label>Send Message:</label><br><input type=text size=30 name=comment value="test"><input type=submit value=Send></form>';
+			$html .= '<form action=/post.html><label>Send Message:</label><br><input type=text size=30 name=comment value="Is anyone else having a problem with the system?"><input type=submit value=Send></form>';
 			$html .= '</td></tr></table></center>';
 			$html .= '</body>';
 			$html .= '</html>';
@@ -1516,7 +1516,27 @@ if (GetConfig('admin/php/route_enable')) {
 			}
 		}
 
+		$html = str_replace('/profile.html', '/profile.html' . time(), $html);
+
+		////////////////////////////
+		////////////////////////////
+		////////////////////////////
+		////////////////////////////
+		////////////////////////////
+		////////////////////////////
+		////////////////////////////
+		////////////////////////////
+		// output html /////////////
+		////////////////////////////
 		print($html); // final output
+		////////////////////////////
+		////////////////////////////
+		////////////////////////////
+		////////////////////////////
+		////////////////////////////
+		////////////////////////////
+		////////////////////////////
+		////////////////////////////
 		////////////////////////////
 	}
 } # if (GetConfig('admin/php/route_enable'))
