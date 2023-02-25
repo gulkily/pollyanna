@@ -803,7 +803,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 											$hashTag eq 'admin' &&
 											GetConfig('admin/allow_self_admin_when_adminless') &&
 											!DBGetAdminCount() &&
-											int(DBGetAuthorScore($authorKey)) > int(GetConfig('setting/admin/self_admin_minimum_score'))
+											int(DBGetAuthorScore($authorKey)) >= int(GetConfig('setting/admin/self_admin_minimum_score'))
 										) {
 											$approveStatus = 2;
 											$approveReason = 'self-admin when adminless is allowed';
@@ -811,7 +811,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										elsif (
 											$hashTag eq 'admin' &&
 											GetConfig('admin/allow_self_admin_whenever') &&
-											int(DBGetAuthorScore($authorKey)) > int(GetConfig('setting/admin/self_admin_minimum_score'))
+											int(DBGetAuthorScore($authorKey)) >= int(GetConfig('setting/admin/self_admin_minimum_score'))
 										) {
 											$approveStatus = 3;
 											$approveReason = 'self-admin whenever is allowed';
