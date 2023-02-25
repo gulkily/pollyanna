@@ -1516,8 +1516,6 @@ if (GetConfig('admin/php/route_enable')) {
 			}
 		}
 
-		$html = str_replace('/profile.html', '/profile.html' . time(), $html);
-
 		////////////////////////////
 		////////////////////////////
 		////////////////////////////
