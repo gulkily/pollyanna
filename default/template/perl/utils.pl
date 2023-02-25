@@ -968,7 +968,7 @@ sub GetFile { # Gets the contents of file $fileName
 		read($file, $return, $length);
 		#WriteLog('GetFile: read success, returning.');
 		#WriteLog('GetFile: read success, returning. $return = ' . $return);
-		WriteLog('GetFile: read success, returning. length($return) = ' . ($return ? length($return) : 'FALSE'));
+		#WriteLog('GetFile: read success, returning. length($return) = ' . ($return ? length($return) : 'FALSE'));
 		return $return;
 	} else {
 		WriteLog('GetFile: warning: open failed! $fileName = ' . $fileName);
