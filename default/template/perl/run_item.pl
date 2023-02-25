@@ -43,16 +43,35 @@ sub RunItem {
 		if (-e $filePath) {
 			if ($filePath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
 				$filePath = $1;
-				`chmod +x $filePath`;
-				my $runStart = time();
-				my $result = `python $filePath`;
-				my $runFinish = time();
+
+				my $pythonCommand = '';
+				$pythonCommand = `which python`;
+				if (!$pythonCommand) {
+					$pythonCommand = `which python3`;
+				}
+				if (!$pythonCommand) {
+					$pythonCommand = `which python2`;
+				}
+				if (!$pythonCommand) {
+					WriteLog('warning: $pythonCommand was FALSE');
+					return '';
+				}
+				if ($pythonCommand =~ m/^([\/a-z]+)$/) {
+					$pythonCommand = $1;
+
+					`chmod +x $filePath`;
+					my $runStart = time();
+					my $result = `$pythonCommand $filePath`;
+					my $runFinish = time();
 
 					DBAddItemAttribute($item, 'python_run_start', $runStart);
 					DBAddItemAttribute($item, 'python_run_finish', $runFinish);
 
-				PutCache($runLog, $result);
-				return 1;
+					PutCache($runLog, $result);
+					return 1;
+				} else {
+					WriteLog('RunFile: $pythonCommand failed sanity check');
+				}
 			}
 		}
 	}
