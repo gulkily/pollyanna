@@ -30,8 +30,8 @@ sub RunItem {
 				my $result = `perl $filePath`;
 				my $runFinish = time();
 
-				DBAddItemAttribute($item, 'run_start', $runStart);
-				DBAddItemAttribute($item, 'run_finish', $runFinish);
+				DBAddItemAttribute($item, 'perl_run_start', $runStart);
+				DBAddItemAttribute($item, 'perl_run_finish', $runFinish);
 
 				PutCache($runLog, $result);
 				return 1;
@@ -48,8 +48,8 @@ sub RunItem {
 				my $result = `python $filePath`;
 				my $runFinish = time();
 
-				DBAddItemAttribute($item, 'run_start', $runStart);
-				DBAddItemAttribute($item, 'run_finish', $runFinish);
+					DBAddItemAttribute($item, 'python_run_start', $runStart);
+					DBAddItemAttribute($item, 'python_run_finish', $runFinish);
 
 				PutCache($runLog, $result);
 				return 1;
@@ -68,8 +68,8 @@ sub RunItem {
 				my $result = `$fileBinaryPath`;
 				my $runFinish = time();
 
-				DBAddItemAttribute($item, 'run_start', $runStart);
-				DBAddItemAttribute($item, 'run_finish', $runFinish);
+				DBAddItemAttribute($item, 'cpp_run_start', $runStart);
+				DBAddItemAttribute($item, 'cpp_run_finish', $runFinish);
 
 				PutCache($runLog, $result);
 				return 1;
