@@ -351,7 +351,7 @@ sub GetFileMessage { # $fileHash ; get file message based on hash
 		WriteLog('GetFileMessage: $filePath = ' . $fileHash);
 
 		if (!(file_exists($filePath))) {
-			WriteLog('GetFileMessage: warning: $filePath was FALSE');
+			WriteLog('GetFileMessage: warning: $filePath was FALSE; caller = ' . join(',', caller));
 			$filePath = SqliteGetValue("SELECT file_name FROM item WHERE file_hash = '$fileHash'");
 
 			if (!file_exists($filePath)) { # ()
