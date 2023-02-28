@@ -1,3 +1,6 @@
+how to hand-verify a puzzle?
+	seems to be some kind of issue, probably involving \n
+
 fix titles... how to?
 	problem: non-ascii titles are gibberished
 	they are returned ok by sqlite
