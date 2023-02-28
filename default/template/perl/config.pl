@@ -583,6 +583,9 @@ sub GetThemeColor { # returns theme color based on setting/theme
 } # GetThemeColor()
 
 sub FillThemeColors { # $html ; fills in templated theme colors in provided html
+# sub FillHtmlColors {
+# sub FillColors {
+# sub ReplaceColors {
 #todo think about whether this should be in html.pl? it just does so much more config stuff than html stuff... and it may be used for something other than html
 	my $html = shift;
 	chomp($html);
@@ -613,6 +616,18 @@ sub FillThemeColors { # $html ; fills in templated theme colors in provided html
 
 	my $colorHighlightAdvanced = GetThemeColor('highlight_advanced');
 	$html =~ s/\$colorHighlightAdvanced/$colorHighlightAdvanced/g;
+
+	my $colorTopMenuTitlebarText = GetThemeColor('top_menu_titlebar_text');
+	$html =~ s/\$colorTopMenuTitlebarText/$colorTopMenuTitlebarText/g;
+
+	my $colorTopMenuTitlebar = GetThemeColor('top_menu_titlebar');
+	$html =~ s/\$colorTopMenuTitlebar/$colorTopMenuTitlebar/g;
+
+	my $colorTitlebar = GetThemeColor('titlebar');
+	$html =~ s/\$colorTitlebar/$colorTitlebar/g;
+
+	my $colorTitlebarText = GetThemeColor('titlebar_text');
+	$html =~ s/\$colorTitlebarText/$colorTitlebarText/g;
 
 	my $colorHighlightReady = GetThemeColor('highlight_ready');
 	$html =~ s/\$colorHighlightReady/$colorHighlightReady/g;

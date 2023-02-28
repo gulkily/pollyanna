@@ -610,6 +610,11 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		#todo same as above for zip
 	}
 
+	if (GetConfig('admin/js/enable') && GetConfig('setting/html/reply_cart')) {
+		require_once('dialog/reply_cart.pl');
+		$txtIndex .= GetReplyCartDialog();
+	}
+
 	# end page with footer
 	$txtIndex .= GetPageFooter('item');
 

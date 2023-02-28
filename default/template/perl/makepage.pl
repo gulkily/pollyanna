@@ -376,10 +376,17 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		require_once('item_listing_page.pl');
 		WriteItemListingPages('picture', 'image_gallery');
 	}
+	#
 	# stats page
 	elsif ($pageType eq 'stats') {
 		WriteLog('MakePage: stats');
 		PutStatsPages();
+	}
+	#
+	# topmenu (in all existing pages)
+	elsif ($pageType eq 'topmenu') {
+		WriteLog('MakePage: topmenu');
+		ReplaceMenuInAllPages();
 	}
 	#
 	# item prefix page

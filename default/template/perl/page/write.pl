@@ -61,6 +61,12 @@ sub GetWritePage { # returns html for write page
 	#		$itemCounts =~ s/\$itemLimit/$itemLimit/g;
 	#	}
 	#
+
+	if (GetConfig('admin/js/enable') && GetConfig('setting/html/reply_cart')) {
+		require_once('dialog/reply_cart.pl');
+		$writePageHtml .= GetReplyCartDialog();
+	}
+
 	$writePageHtml .= GetPageFooter('write');
 
 	if (GetConfig('admin/js/enable')) {

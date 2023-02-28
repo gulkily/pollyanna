@@ -144,11 +144,12 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template'; ret
 	return $menuItems;
 } # GetMenuFromList()
 
-sub GetMenuTemplate { # returns menubar
+sub GetMenuTemplate { # $pageType ; returns menubar
 # sub GetMenubarTemplate {
 # sub GetMenubar {
 # sub GetMenuBar {
 # sub GetTopMenu {
+# sub GetMenu {
 	my $topMenuTemplate = GetTemplate('html/topmenu2.template');
 
 	my $dialogControls = GetTemplate('html/widget/layer_controls.template');
@@ -246,21 +247,6 @@ sub GetMenuTemplate { # returns menubar
 	if (GetConfig('admin/js/enable') || GetConfig('admin/php/enable')) { #todo there should be a config called profile_enabled
 		if ($pageType ne 'profile' && $pageType ne 'identity') {
 			#$topMenuTemplate .= GetDialogX(GetTemplate('html/widget/identity.template'), 'Identity');
-		}
-	}
-
-	if (GetConfig('admin/js/enable') || GetConfig('setting/html/reply_cart')) {
-		if (
-			$pageType eq 'write' ||
-			$pageType eq 'read_author' ||
-			$pageType eq 'item'
-		) {
-			#todo should open a write dialog automatically
-			require_once('dialog/reply_cart.pl');
-			$topMenuTemplate .= GetReplyCartDialog(); # GetMenuTemplate()
-		} else {
-			#$topMenuTemplate .= GetDialogX('$pageType = ' . $pageType, 'no reply cart?');
-			#nothing needed here
 		}
 	}
 

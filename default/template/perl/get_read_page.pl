@@ -495,6 +495,11 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		$txtIndex .= $queryDisplayDialog;
 	}
 
+	if (GetConfig('admin/js/enable') && GetConfig('setting/html/reply_cart')) {
+		require_once('dialog/reply_cart.pl');
+		$txtIndex .= GetReplyCartDialog();
+	}
+
 	# Close html
 	$txtIndex .= GetPageFooter('read_' . $pageType);
 
