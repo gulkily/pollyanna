@@ -311,6 +311,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	#
 	# if $pageType eq item, generate that item's page
 	elsif ($pageType eq 'item') {
+		WriteLog('MakePage: $pageType = item; caller = ' . join(',', caller));
 		# get the item's hash from the param field
 		my $fileHash = $pageParam;
 
