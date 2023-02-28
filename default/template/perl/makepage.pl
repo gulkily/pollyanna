@@ -180,11 +180,16 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	
 	elsif ($pageType eq 'date') {
 		my $pageDate = $pageParam;
-		my $targetPath = "date/$pageDate.html";
-		
-		WriteLog('MakePage: date: $pageDate = ' . $pageDate);
-		my $datePage = GetReadPage('date', $pageDate);
-		PutHtmlFile($targetPath, $datePage);
+		if ($pageDate && $pageDate =~ m/^([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9])/) { #basic sanity check
+			$pageDate = $1;
+			my $targetPath = "date/$pageDate.html";
+
+			WriteLog('MakePage: date: $pageDate = ' . $pageDate);
+			my $datePage = GetReadPage('date', $pageDate);
+			PutHtmlFile($targetPath, $datePage);
+		} else {
+			WriteLog('MakePage: date: sanity check failed on $pageDate; caller = ' . join(',', caller));
+		}
 	}
 
 	elsif ($pageType eq 'speakers') {
