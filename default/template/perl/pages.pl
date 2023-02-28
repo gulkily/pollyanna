@@ -1857,109 +1857,80 @@ while (my $arg1 = shift @foundArgs) {
 			my $makeDialogArg = shift @foundArgs;
 			#todo sanity check of $makeDialogArg
 			if ($makeDialogArg) {
+				my @validDialogs = qw(settings access upload data search);
+				my @needRequire = qw(profile upload);
+				my @queryDialogs = qw(read image url chain new tags scores active authors threads);
+				my @simpleDialogs = qw(help );
+
 				if (0) { }
-				elsif ($makeDialogArg eq 'settings') {
-					my $dialog = GetSettingsDialog();
+				elsif (in_array($makeDialogArg, @validDialogs)) {
+					# basically this accomplishes the following:
+					#
+					# my $dialog = GetSettingsDialog();
+					# WriteMessage("-D $makeDialogArg\n");
+					# PutHtmlFile('dialog/settings.html', $dialog);
+					#
+					# /dialog/settings.html
+					# /dialog/access.html
+					# /dialog/upload.html
+					# /dialog/data.html
+					# /dialog/search.html
+
+					WriteLog('pages.pl: $makeDialogArg found in @validDialogs');
+					if (in_array($makeDialogArg, @needRequire)) {
+						my $requirePath = 'page/' . $makeDialogArg . '.pl';
+						require_once($requirePath);
+					}
+					no strict 'refs';
+					my $subName = 'Get' . ucfirst($makeDialogArg) . 'Dialog';
+					if (exists &{$subName}) {
+						WriteLog('pages.pl: ' . $subName . '() exists! calling it...');
+						WriteMessage('-D ' . $makeDialogArg);
+						my $dialogContent = &{$subName}();
+						my $dialogOutputPath = 'dialog/' . $makeDialogArg . '.html';
+						PutHtmlFile($dialogOutputPath, $dialogContent);
+					} else {
+						WriteLog('pages.pl: warning: ' . $subName . '() was not found!');
+					}
+				} # @validDialogs
+
+				elsif (in_array($makeDialogArg, @queryDialogs)) {
+					# /dialog/read.html
+					# /dialog/image.html
+					# /dialog/url.html
+					# /dialog/chain.html
+					# /dialog/new.html
+					# /dialog/tags.html
+					# /dialog/scores.html
+					# /dialog/active.html
+					# /dialog/authors.html
+					# /dialog/threads.html
+
+					my $dialog = GetQueryAsDialog($makeDialogArg);
 					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/settings.html', $dialog);
-				}
+					my $dialogOutputPath = 'dialog/' . $makeDialogArg . '.html';
+					PutHtmlFile($dialogOutputPath, $dialog);
+				} # @queryDialogs
+
 				elsif ($makeDialogArg eq 'stats') {
 					my $dialog = GetStatsTable();
 					PutHtmlFile('dialog/stats.html', $dialog);
 					WriteMessage("-D $makeDialogArg\n");
-				}
-				elsif ($makeDialogArg eq 'access') {
-					my $dialog = GetAccessDialog();
-					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/access.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'write') {
 					my $dialog = GetWriteForm();
 					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/write.html', '<form action="/post.html" method=GET id=compose name=compose target=_top>' . $dialog . '</form>');
 				}
-				elsif ($makeDialogArg eq 'upload') {
-					require_once('page/upload.pl');
-					my $dialog = GetUploadDialog();
-					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/upload.html', $dialog);
-				}
-				elsif ($makeDialogArg eq 'read') {
-					my $dialog = GetQueryAsDialog('read', 'Top Threads');
-					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/read.html', $dialog);
-				}
-				elsif ($makeDialogArg eq 'profile') {
-					require_once('page/profile.pl');
-					my $dialog = GetProfileDialog();
-					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/profile.html', $dialog);
-				}
 				elsif ($makeDialogArg eq 'help') {
 					my $dialog = GetSimpleDialog('help');
 					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/help.html', $dialog);
 				}
-				elsif ($makeDialogArg eq 'threads') {
-					my $dialog = GetQueryAsDialog('threads');
-					WriteMessage("-D $makeDialogArg\n");
-					$dialog = AddAttributeToTag($dialog, 'table', 'id', 'threads');
-					PutHtmlFile('dialog/threads.html', $dialog);
-				}
 				elsif ($makeDialogArg eq 'welcome') {
 					my $dialog = GetSimpleDialog('welcome');
 					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/welcome.html', $dialog);
-				}
-				elsif ($makeDialogArg eq 'authors') {
-					my $dialog = GetQueryAsDialog('authors', 'Authors');
-					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/authors.html', $dialog);
-				}
-				elsif ($makeDialogArg eq 'active') {
-					my $dialog = GetQueryAsDialog('active', 'Active');
-					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/active.html', $dialog);
-				}
-				elsif ($makeDialogArg eq 'scores') {
-					my $dialog = GetQueryAsDialog('scores', 'Scores');
-					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/scores.html', $dialog);
-				}
-				elsif ($makeDialogArg eq 'tags') {
-					my $dialog = GetQueryAsDialog('tags', 'Tags');
-					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/tags.html', $dialog);
-				}
-				elsif ($makeDialogArg eq 'new') {
-					my $dialog = GetQueryAsDialog('new', 'New');
-					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/new.html', $dialog);
-				}
-				elsif ($makeDialogArg eq 'chain') {
-					my $dialog = GetQueryAsDialog('chain', 'Chain');
-					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/chain.html', $dialog);
-				}
-				elsif ($makeDialogArg eq 'url') {
-					my $dialog = GetQueryAsDialog('url', 'URL');
-					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/url.html', $dialog);
-				}
-				elsif ($makeDialogArg eq 'image') {
-					my $dialog = GetQueryAsDialog('image', 'Image');
-					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/image.html', $dialog);
-				}
-				elsif ($makeDialogArg eq 'data') {
-					my $dialog = GetDataDialog();
-					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/data.html', $dialog);
-				}
-				elsif ($makeDialogArg eq 'search') {
-					my $dialog = GetSearchDialog();
-					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/search.html', $dialog);
 				}
 				elsif ($makeDialogArg =~ m/([0-9a-f]{8})/) {
 					WriteMessage("-D (item_prefix)\n");
