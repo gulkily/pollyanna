@@ -33,7 +33,7 @@ sub GetDesktopPage { # returns html for desktop page (/desktop.html)
 	$html .= GetPageFooter('desktop');
 
 	if (GetConfig('admin/js/enable')) {
-		my @scripts = qw(settings avatar profile timestamp pingback utils);
+		my @scripts = qw(settings avatar profile timestamp pingback utils voting);
 		push @scripts, 'desktop';
 		if (GetConfig('admin/js/dragging')) {
 			push @scripts, 'dragging'; # GetDesktopPage()
