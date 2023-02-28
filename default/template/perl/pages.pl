@@ -1943,37 +1943,42 @@ while (my $arg1 = shift @foundArgs) {
 						WriteLog('pages.pl: warning: $dialog or $dialogPath is FALSE');
 					}
 				}
-				#				elsif (IsFingerprint($arg1)) {
-				#					WriteMessage("recognized author fingerprint\n");
-				#					MakePage('author', $arg1, 1);
-				#				}
+				# elsif (IsFingerprint($arg1)) {
+				# 	WriteMessage("recognized author fingerprint\n");
+				# 	MakePage('author', $arg1, 1);
+				# }
 				elsif (substr($makeDialogArg, 0, 1) eq '#') { #hashtag tag/like.html
 					#todo sanity checks here
 					WriteMessage("-D hash tag $makeDialogArg\n");
-
 					my $hashTag = substr($makeDialogArg, 1);
 
-					#todo sanity checks here
+					if ($hashTag =~ m/^([a-zA-Z_\-0-9]+)$/) { #todo non-latin characters #hashtag
+						$hashTag = $1;
 
-					my $query = GetTemplate('query/tag_dozen');
-					my $queryLikeString = "'%,$hashTag,%'";
-					$query =~ s/\?/$queryLikeString/;
+						my $query = GetTemplate('query/tag_dozen');
+						my $queryLikeString = "'%,$hashTag,%'";
+						$query =~ s/\?/$queryLikeString/;
 
-					WriteLog('MakePage: $query = ' . $query); #todo removeme
+						WriteLog('MakePage: $query = ' . $query); #todo removeme
+						my $queryDialogTitle = '#' . $hashTag;
 
+						my $dialog = GetQueryAsDialog(
+							$query,
+							$queryDialogTitle
+						); #todo sanity
+						my $dialogPath = 'tag/' . $hashTag . '.html';
 
-					my $dialog = GetQueryAsDialog(
-						$query,
-						'#' . $hashTag
-					); #todo sanity
-					my $dialogPath = 'tag/' . $hashTag . '.html';
+						$dialog = AddAttributeToTag($dialog, 'table', 'id', 'top_' . $hashTag);
 
-					$dialog = AddAttributeToTag($dialog, 'table', 'id', 'top_' . $hashTag);
-
-					if ($dialog && $dialogPath) {
-						PutHtmlFile('dialog/' . $dialogPath, $dialog);
-					} else {
-						WriteLog('MakePage: warning: dialog: nothing returned for #' . $makeDialogArg);
+						if ($dialog && $dialogPath) {
+							PutHtmlFile('dialog/' . $dialogPath, $dialog);
+						} else {
+							WriteLog('MakePage: warning: dialog: nothing returned for #' . $makeDialogArg);
+						}
+					} # $hashTag sanity check
+					else {
+						WriteLog('MakePage: warning: sanity check failed on $hashTag (-D)');
+						return '';
 					}
 				}
 				else {
