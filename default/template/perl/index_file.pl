@@ -274,6 +274,13 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 
 	if ($indexSuccess) {
 		PutCache('indexed/' . $indexSuccess, $file);
+
+		if (GetConfig('setting/admin/index/rewrite_menu_after_index')) {
+			# rewrites all the menubars in all the existing pages
+			require_once('pages.pl');
+			ReplaceMenuInAllPages();
+		}
+
 		WriteLog('IndexFile: returning $fileHash = ' . $fileHash);
 		return $fileHash;
 	} else {
