@@ -252,7 +252,6 @@ sub GetPageLinks { # $currentPageNumber ; returns html for pagination links with
 
 		return $pageLinksReturn;
 	} else {
-
 		# we've ended up here because we haven't generated $pageLinks yet
 
 		WriteLog('GetPageLinks: $itemCount = ' . $itemCount);
@@ -260,25 +259,6 @@ sub GetPageLinks { # $currentPageNumber ; returns html for pagination links with
 		$pageLinks = "";
 
 		my $lastPageNum = ceil($itemCount / $pageLimit);
-
-		#	my $beginExpando;
-		#	my $endExpando;
-		#
-		#	if ($lastPageNum > 15) {
-		#		if ($currentPageNumber < 5) {
-		#			$beginExpando = 0;
-		#		} elsif ($currentPageNumber < $lastPageNum - 5) {
-		#			$beginExpando = $currentPageNumber - 2;
-		#		} else {
-		#			$beginExpando = $lastPageNum - 5;
-		#		}
-		#
-		#		if ($currentPageNumber < $lastPageNum - 5) {
-		#			$endExpando = $lastPageNum - 2;
-		#		} else {
-		#			$endExpando = $currentPageNumber;
-		#		}
-		#	}
 
 		if ($itemCount > $pageLimit) {
 			#		for (my $i = $lastPageNum - 1; $i >= 0; $i--) {
@@ -413,30 +393,10 @@ sub GetQueryPage { # $pageName, $title, $columns ;
 		###
 		$html .= GetResultSetAsDialog(\@result, $title, $columns);
 		###
-#
-#        my @queryChoices;
-#        push @queryChoices, 'read';
-#        push @queryChoices, 'compost';
-#        push @queryChoices, 'chain';
-
-#
-#		$html .= '<span class=advanced><form action=/post.html>'; #todo templatify
-#		$html .= GetDialogX($queryWindowContents, 'View Selector');
-#		$html .= '</form></span>';
 
 		my $queryWindowContents;
 
-		$queryWindowContents .= '<pre>'.HtmlEscape($query).'<br></pre>'; #todo templatify
-
-		if (0) {
-			#todo
-			my @queryChoices = split("\n", `ls config/template/query`); #todo sanity
-			my $querySelectorWidget = GetWidgetSelect('query', $pageName, @queryChoices);
-			my $button = '<input type=submit value=Go>';
-			$queryWindowContents .= '<label for=query>' . $querySelectorWidget . '</label> ' . $button; #todo templatify
-		}
-
-		#$html .= GetReplyCartDialog(); # GetQueryPage()
+		$queryWindowContents .= '<pre>' . HtmlEscape($query) . '<br></pre>'; #todo templatify
 
 		$html .= '<span class=advanced><form action=/post.html>'; #todo templatify
 		$html .= GetDialogX($queryWindowContents, $pageName . '.sql', '', scalar(split("\n", $query)) . ' lines; ' . length($query) . ' bytes');
@@ -2009,6 +1969,6 @@ while (my $arg1 = shift @foundArgs) {
 #if (%configLookupList) {
 #	print Dumper(keys(%configLookupList));
 #}
-print "\n";
+#print "\n";
 
 1;

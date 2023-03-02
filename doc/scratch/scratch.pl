@@ -1,3 +1,57 @@
+#
+#        my @queryChoices;
+#        push @queryChoices, 'read';
+#        push @queryChoices, 'compost';
+#        push @queryChoices, 'chain';
+
+#
+#		$html .= '<span class=advanced><form action=/post.html>'; #todo templatify
+#		$html .= GetDialogX($queryWindowContents, 'View Selector');
+#		$html .= '</form></span>';
+
+
+# this is from GetPageLinks()
+		#	my $beginExpando;
+		#	my $endExpando;
+		#
+		#	if ($lastPageNum > 15) {
+		#		if ($currentPageNumber < 5) {
+		#			$beginExpando = 0;
+		#		} elsif ($currentPageNumber < $lastPageNum - 5) {
+		#			$beginExpando = $currentPageNumber - 2;
+		#		} else {
+		#			$beginExpando = $lastPageNum - 5;
+		#		}
+		#
+		#		if ($currentPageNumber < $lastPageNum - 5) {
+		#			$endExpando = $lastPageNum - 2;
+		#		} else {
+		#			$endExpando = $currentPageNumber;
+		#		}
+		#	}
+
+
+
+		if (0) {
+			#todo
+			my @queryChoices = split("\n", `ls config/template/query`); #todo sanity
+			my $querySelectorWidget = GetWidgetSelect('query', $pageName, @queryChoices);
+			my $button = '<input type=submit value=Go>';
+			$queryWindowContents .= '<label for=query>' . $querySelectorWidget . '</label> ' . $button; #todo templatify
+		}
+
+
+
+
+		if (
+			$pageType eq 'item'
+		) {
+
+
+
+			#print "\n          Hare Krishna, Hare Krishna, Krishna Krishna Hare Hare,";
+			#print "\n                Hare Rama, Hare Rama, Rama Rama Hare Hare.";
+
 
 sub ReplaceMenuInAllPages {
 	# the idea here is to in-place replace the menu in all the pages when the menu changes
