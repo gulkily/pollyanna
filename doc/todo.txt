@@ -1,3 +1,7 @@
+#bug when hike frontend removes essential perl files, build should run, but does not
+
+event loop on profile page should check for stale "go to profile" link
+
 how to hand-verify a puzzle?
 	seems to be some kind of issue, probably involving \n
 
