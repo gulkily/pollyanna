@@ -304,9 +304,6 @@ when fresh.js detects a change
 
 ===
 
-GetMenu() doesn't work
-
-===
 
 test results on macos monterey 12.6
 	zsh does not have a "source" command
