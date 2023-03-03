@@ -1913,14 +1913,14 @@ while (my $arg1 = shift @foundArgs) {
 					}
 				}
 				else {
-					print 'huh... what kind of dialog is ' . $makeDialogArg . '?';
+					print 'pages: did not recognize dialog type: ' . $makeDialogArg;
 					print "\n";
 				}
 
 				#WriteMessage("calling MakePage($makePageArg)\n");
 				#MakePage($makePageArg);
 			} else {
-				print("missing argument for -D\n");
+				print("pages: missing argument for -D\n");
 			}
 			##### DIALOGS ######################
 			##### DIALOGS ######################
