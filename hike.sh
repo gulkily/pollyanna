@@ -113,13 +113,15 @@ if [ $1 = restart ]
 		time config/template/perl/server_local_lighttpd.pl
 fi
 
-if [ $1 = start ]
+if [ $1 = start ] # hike start
 	then
 		if [ ! -e  config/template/perl/server_local_lighttpd.pl ]
 			then
 				/bin/sh ./build.sh
 		fi
+		echo 1 > config/setting/admin/lighttpd/server_started
 		time config/template/perl/server_local_lighttpd.pl
+		rm config/setting/admin/lighttpd/server_started
 fi
 
 if [ $1 = stop ]
