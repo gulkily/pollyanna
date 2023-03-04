@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# clean.sh removes most configuration files, except content
+
 rm -vrf config/template/
 rm -vrf config/theme/*/template/
 rm -vrf config/theme/*/additional.css
