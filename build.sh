@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# build.sh builds local environment including symlinks to perl scripts and sets +x
+
 mkdir -p config/template/perl
 
 cp default/template/perl/build.pl config/template/perl/build.pl
@@ -9,6 +11,7 @@ cp default/template/perl/config.pl config/template/perl/config.pl
 cp default/template/perl/setup.pl config/template/perl/setup.pl
 cp default/template/perl/server_local_lighttpd.pl config/template/perl/server_local_lighttpd.pl 
 
+# this should not be necessary anymore #todo
 ln -sf config/template/perl/build.pl build.pl
 ln -sf config/template/perl/utils.pl utils.pl
 ln -sf config/template/perl/config.pl config.pl
