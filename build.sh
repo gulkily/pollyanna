@@ -1,7 +1,5 @@
 #!/bin/sh
 
-rm -vrf config/template/perl
-
 mkdir -p config/template/perl
 
 cp default/template/perl/build.pl config/template/perl/build.pl
