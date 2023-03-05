@@ -142,7 +142,7 @@ function OnLoadEverything () { // checks for each onLoad function and calls it
 		}
 		window.eventLoopEnabled = 1;
 		EventLoop();
-	}
+	} // if (window.EventLoop)
 
 	// FetchDialog('help');
 
