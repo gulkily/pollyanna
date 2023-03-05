@@ -38,6 +38,13 @@ function addLoadingIndicator (strMessage) { // adds loading indicator bar (to to
 
 } // addLoadingIndicator()
 
+function GetMeditateMessage() {
+	var message = 'Meditate...';
+	//return 'Meditate...';
+
+	return message;
+}
+
 function ShowPreNavigateNotification () { // displays 'Meditate...' message
 	// OnUnload ()
 	//alert('DEBUG: ShowPreNavigateNotification() begin');
@@ -63,7 +70,7 @@ function ShowPreNavigateNotification () { // displays 'Meditate...' message
 				ariaAlert = document.createElement('p');
 				ariaAlert.setAttribute('role', 'alert');
 				ariaAlert.setAttribute('id', 'ariaAlert');
-				ariaAlert.innerHTML = 'Meditate...';
+				ariaAlert.innerHTML = GetMeditateMessage();
 				ariaAlert.style.opacity = '1';
 				ariaAlert.style.zIndex = '1337';
 				//document.body.appendChild(ariaAlert);
