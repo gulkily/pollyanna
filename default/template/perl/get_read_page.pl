@@ -174,7 +174,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 				)
 			)
 			";
-			$queryParams{'order_clause'} = "ORDER BY item_score DESC, item_flat.add_timestamp DESC";
+			$queryParams{'order_clause'} = "ORDER BY item_flat.add_timestamp DESC";
 			$queryParams{'limit_clause'} = "LIMIT 1000"; #todo fix hardcoded limit #todo pagination
 			#todo this code is old-style and should be replaced
 			#it should use a query template in ../template/query/
