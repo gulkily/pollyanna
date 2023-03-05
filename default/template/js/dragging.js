@@ -818,7 +818,8 @@ function UpdateDialogList () { // DialogListDialog () dialog_list.template
 	if (lstDialog) {
 		var allOpenDialogs = document.getElementsByClassName('dialog');
 		if (allOpenDialogs.length) {
-//			var listContent = '<form>'; // id=formListDialog name=formListDialog
+//			var gt = unescape('%3E');
+//			var listContent = '<form' + gt; // id=formListDialog name=formListDialog
 			var listContent = ''; // id=formListDialog name=formListDialog
 			for (var iDialog = 0; iDialog < allOpenDialogs.length; iDialog++) {
 				var dialogTitle = GetDialogTitle(allOpenDialogs[iDialog]);
@@ -847,7 +848,7 @@ function UpdateDialogList () { // DialogListDialog () dialog_list.template
 				lstDialog.appendChild(newBr);
 				*/
 			}
-//			listContent = listContent + '</form>';
+//			listContent = listContent + '</form' + gt;
 
 			if (lstDialog.innerHTML != listContent) {
 				lstDialog.innerHTML = listContent;
