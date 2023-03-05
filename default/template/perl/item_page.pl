@@ -556,7 +556,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		} else {
 			if (GetConfig('debug')) {
 				# $txtIndex .= GetDialogX('No related items for $file{\'file_hash\'} =  ' . $file{'file_hash'}, 'Debug');
-				$txtIndex .= GetDialogX('No related items for <br>' . $file{'file_hash'}, 'Debug Notice');
+				$txtIndex .= GetDialogX('Did not find any related items.', 'Debug Notice');
 			}
 		}
 	}
