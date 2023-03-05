@@ -14,3 +14,8 @@ attribute_list
 attribute_count
 item_type
 cart
+file_path
+item_name
+parent_count
+item_order
+item_sequence
