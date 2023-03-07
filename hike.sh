@@ -182,12 +182,12 @@ if [ $1 = archive ]
 		./hike.sh frontend
 fi
 
-	echo source hike.sh = enable these commands
-	echo hike clean = clean including templates
-	echo hike build = build base
-	echo hike start = start local server
-	echo hike archive = archive all content
-	echo hike help = see more commands
+echo source hike.sh = enable these commands
+echo hike clean = clean including templates
+echo hike build = build base
+echo hike start = start local server
+echo hike archive = archive all content
+echo hike help = see more commands
 
 if [ $1 = help ]
 	then
