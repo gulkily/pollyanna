@@ -255,6 +255,9 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 			# as that provides no additional useful information
 			$txtIndex .= GetDialogX(FormatForWeb($tagInfo), 'Tag Information');
 		}
+		# this would add a list of all the items on the page
+		# 		$txtIndex .= GetQueryAsDialog($queryDisplay);
+
 		if ($pageParam eq 'image') { # GetReadPage()
 			#$txtIndex .= GetUploadDialog();
 
