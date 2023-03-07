@@ -1,3 +1,27 @@
+active:
+
+Most recently active authors are shown here.
+
+This list is sorted by the user's most recent activity.
+
+Operator notes:
+
+config/template/query/active
+default/template/query/active
+
+Technical notes:
+
+The activity is logged in /chain.log, viewable as /chain.html, and is cryptographically sound.
+
+The format of chain.log is:
+
+(hash of item) | (timestamp as float) | (checksum hash which includes the previous line as its input)
+
+The hashes used in this proof-of-concept system are old-fashioned in order to promote easy switching between hash algorithms, but developer prior experience compatibility is also a factor.
+
+
+===
+
 gpg php-cgi php lighttpd convert sqlite3
 
 
