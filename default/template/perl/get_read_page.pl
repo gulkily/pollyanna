@@ -186,17 +186,10 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 			$zipName = "$tagName.zip";
 		} # $pageType eq 'tag'
 		if ($pageType eq 'random') { #'/random.html'
+			WriteLog('GetReadPage: random');
 			# RANDOM  PAGE ##############################################################
 
 			$pageParam = shift;
-			my $tagName = $pageParam;
-
-			if (!$tagName) {
-				WriteLog('GetReadPage: warning: $tagName is FALSE; caller = ' . join(',', caller));
-				return '';
-			}
-
-			chomp($tagName);
 
 			$title = 'Random';
 			$titleHtml = $title;
@@ -241,6 +234,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		# this is where it says, "this page shows all items with tag $tagSelected
 
 		$htmlStart =~ s/\$tagSelected/$pageParam/;
+
 		# $pageParam is the chosen tag for this page
 	}
 
