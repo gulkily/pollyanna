@@ -138,10 +138,10 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 				}
 			}
 			if ($row->{'this_row'}) {
-					$rowBgColor = GetThemeColor('highlight_alert');
+				$rowBgColor = GetThemeColor('highlight_alert');
 			}
 			if ($row->{'tags_list'} && (index($row->{'tags_list'}, 'mourn') != -1)) {
-					$rowBgColor = '#000000';
+				$rowBgColor = '#000000';
 			}
 
 			if (0 && $row->{'this_row'}) {
