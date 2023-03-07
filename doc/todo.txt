@@ -1,3 +1,6 @@
+debug output should verify caller matches first word of log
+	this is already practically done in WriteLog()
+
 #bug when hike frontend removes essential perl files, build should run, but does not
 
 event loop on profile page should check for stale "go to profile" link
