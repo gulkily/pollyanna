@@ -7,9 +7,13 @@ SELECT
 	item_type
 FROM
 	item_flat
-WHERE
-	item_score > 0
+WHERE 1
+	AND item_score > 0
+	AND tags_list NOT LIKE '%pubkey%'
+	AND tags_list NOT LIKE '%puzzle%'
+	AND tags_list NOT LIKE '%notext%'
+	AND tags_list NOT LIKE '%http%'
 ORDER BY
-	RANDOM()
-LIMIT
-	25
+	RANDOM(),
+	item_score DESC
+LIMIT 100
