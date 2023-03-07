@@ -771,6 +771,7 @@ sub GetTimestampsDialog {
 sub GetNextPreviousDialog {
 # sub GetChainDialog {
 # sub get_chain {
+# this displays the next and previous item in chain.log
 	my $fileHash = shift;
 
 	if ($fileHash = IsItem($fileHash)) {
@@ -794,6 +795,7 @@ sub GetNextPreviousDialog {
 	my %params;
 	$params{'no_heading'} = 1;
 	$params{'no_status'} = 1;
+	$params{'no_no_results'} = 1;
 
 	return GetQueryAsDialog($query, 'Chain', '', \%params);
 } # GetNextPreviousDialog()
