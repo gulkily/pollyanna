@@ -8,3 +8,4 @@ WHERE
 	file_hash NOT IN (
 		SELECT file_hash FROM item
 	)
+ORDER BY file_hash
