@@ -68,10 +68,10 @@ echo "================="
 echo "Cleanup complete!"
 echo "================="
 
-echo "Rebuilding with ./build.pl..."
+echo "Rebuilding with ./build.sh..."
 
-echo "Running ./build.pl"
-perl -T ./build.pl
+echo "Running ./build.sh"
+sh ./build.sh
 
 echo "==============="
 echo "Build complete!"

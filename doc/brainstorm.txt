@@ -688,7 +688,7 @@ Cookie? Y : Cookie
 Useragent+IP
 
 
-build.pl
+build.sh
 The following config values differ from defaults:
 The following config values were looked up during build:
 Not looked up during build:
@@ -1491,7 +1491,7 @@ upgrade etc process
 	server validates
 		changes /index.html to status message
 		performs upgrade
-		build.pl
+		build.sh
 
 admin imprint key
 	email version
@@ -1732,7 +1732,7 @@ on profile page
 "singleton" tags like #motd
 
 tables should regrow if they are missing
-	currently ./build.pl is required after ./clean
+	currently ./build.sh is required after ./clean
 
 
 

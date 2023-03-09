@@ -18,7 +18,7 @@ git pull [...]
 time ./clean.sh
 
 5. build new version (site is usable after this)
-time ./build.pl
+time ./build.sh
 
 6. re-import data
 time ./update.pl --all

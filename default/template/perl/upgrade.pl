@@ -24,7 +24,7 @@ if ($versionBefore ne $versionAfter) {
 	my $cleanCommand = "time ./clean.sh >> $upgradeLogFilename";
 	print(`$cleanCommand`);
 
-	my $buildCommand = "time ./build.pl >> $upgradeLogFilename";
+	my $buildCommand = "time ./build.sh >> $upgradeLogFilename";
 	print(`$buildCommand`);
 } else {
 	my $noUpgradeNeededCommand = "echo 'version no change' >> $upgradeLogFilename";

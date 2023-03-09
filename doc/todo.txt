@@ -1120,7 +1120,7 @@ generate static html {
 	config/admin/pages/lazy_page_generation=0
 	config/admin/expo_mode_edit=0
 	./_dev_clean_ALL.sh
-	time ./build.pl
+	time ./build.sh
 	time ./index.pl --all
 	time ./pages.pl --all
 }
@@ -1316,7 +1316,7 @@ upgrade etc process
 	server validates
 		changes /index.html to status message
 		performs upgrade
-		build.pl
+		build.sh
 
 ===
 
@@ -1553,7 +1553,7 @@ on profile page
 "singleton" tags like #motd
 
 tables should regrow if they are missing
-	currently ./build.pl is required after ./clean
+	currently ./build.sh is required after ./clean
 
 
 

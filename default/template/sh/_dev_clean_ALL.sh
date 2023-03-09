@@ -75,7 +75,7 @@ echo "================="
 echo "Cleanup complete!"
 echo "================="
 
-echo "Rebuilding with ./build.pl..."
+echo "Rebuilding with ./build.sh..."
 
 echo "3... "
 sleep 1
@@ -86,8 +86,8 @@ sleep 2
 echo "1... "
 sleep 3
 
-echo "Running ./build.pl"
-perl -T ./build.pl
+echo "Running ./build.sh"
+sh ./build.sh
 
 echo "==============="
 echo "Build complete!"

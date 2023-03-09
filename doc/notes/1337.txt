@@ -48,7 +48,7 @@ BUILD
 =====
 $ git clone https://www.github.com/gulkily/RocketScience hike
 $ cd hike
-$ ./build.pl
+$ ./build.sh
 
 APACHE
 ======
@@ -61,7 +61,7 @@ $ ln -s /var/www/html ./html
 LIGHTTPD (DEV)
 ==============
 $ echo 1 > config/admin/lighttpd/enable
-$ ./build.pl
+$ ./build.sh
 $ ./lighttpd.pl
 $ lynx http://admin:admin@localhost:2784/
 
@@ -187,7 +187,7 @@ If you can't upgrade with git
 $ cd ~/hike
 $ git stash
 $ git pull --all
-$ ./build.pl
+$ ./build.sh
 
 If site is taking too long to update
 ====================================
@@ -202,7 +202,7 @@ If you are using manual configuration, use this to back up your
 existing configuration and reset it:
 $ cd ~/hike
 $ mv config config.`date +%s`
-$ ./build.pl
+$ ./build.sh
 
 If using signed configuration, do this first:
 $ cd ~/hike

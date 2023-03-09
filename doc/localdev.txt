@@ -21,7 +21,7 @@ Otherwise I get many unwanted results in global search.
 
 ===
 
-After editing templates, I run ./clean.sh, and then ./build.pl
+After editing templates, I run ./clean.sh, and then ./build.sh
 
 To re-import existing data into the newly-built site, I run "./update.pl --all"
 

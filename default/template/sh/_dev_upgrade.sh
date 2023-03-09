@@ -15,6 +15,6 @@ git merge --no-edit
 
 ./_dev_clean_ALL_no_delay.sh
 
-./build.pl
+./build.sh
 
 ./pages.pl --system

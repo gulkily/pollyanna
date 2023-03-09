@@ -15,7 +15,7 @@ I logged in, and did the following
 ssh gidotnet@geekissues.net
 git clone ...
 cd hike
-./clean.sh ; ./build.pl
+./clean.sh ; ./build.sh
 
 The build succeeded, so that's good.
 Now on with the connecting it to the webserver.
