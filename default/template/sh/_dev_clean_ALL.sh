@@ -153,7 +153,7 @@ echo "======================"
 
 
 echo "================================================================="
-echo "To run local webserver using lighttpd: ./server_local_lighttpd.pl"
+echo "To run local webserver using lighttpd: ./hike.sh start"
 echo "================================================================="
 
 

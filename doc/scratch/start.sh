@@ -57,7 +57,7 @@ while true; do
 
 	if [ $opt = 1 ]
 		then
-			./server_local_lighttpd.pl &
+			./hike.sh start &
 			./config/template/perl/pages.pl --system &
 			sleep 1
 			xdg-open http://localhost:2784/ &
@@ -71,7 +71,7 @@ while true; do
 			./build.sh
 			killall lighttpd
 			./config/template/perl/pages.pl -M read -M write -M settings -M profile -M help --php --js
-			./server_local_lighttpd.pl &
+			./hike.sh start &
 			./index.pl --all --chain
 			./config/template/perl/pages.pl -M chain
 

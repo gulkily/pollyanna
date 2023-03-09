@@ -137,7 +137,7 @@ PutConfig('admin/allow_self_admin_whenever', 1);
 PutConfig('admin/allow_self_admin_when_adminless', 1);
 PutConfig('admin/token/remove', 1);
 
-#print `perl -T ./server_local_lighttpd.pl &`;
+#print `./hike.sh start &`;
 
 #print "Making pages and indexing existing files...\n";
 
