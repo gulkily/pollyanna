@@ -71,6 +71,7 @@ dir-listing.activate = "enable"
 # this is where we will find error-401.html and error-404.html
 # typically under html/error/
 # build.pl will put absolute path here
+# #todo this should have a working predefined value
 server.errorfile-prefix = "$errorFilePrefix"
 
 # when url-ctrls-reject is enabled, it interferes with submitting text via GET
