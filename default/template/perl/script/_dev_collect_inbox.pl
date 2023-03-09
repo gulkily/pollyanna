@@ -1,7 +1,7 @@
 #!/usr/bin/perl -T
 
 require './utils.pl';
-require './sqlite.pl';
+require('sqlite.pl');
 
 my $itemCount = SqliteGetValue('Select count(*) from item_flat');
 

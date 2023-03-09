@@ -10,7 +10,8 @@ use URI::Encode qw(uri_encode);
 use Digest::SHA qw(sha1_hex);
 use URI::Escape qw(uri_escape);
 
-require './sqlite.pl';
+require('./utils.pl');
+require_once('sqlite.pl');
 
 sub PullFeedFromHost { # connects to $host with http and downloads any new items posted
 # downloads /rss.txt first

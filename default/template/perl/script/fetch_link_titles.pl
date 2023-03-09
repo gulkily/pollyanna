@@ -1,7 +1,7 @@
 #!/usr/bin/perl -T
 
 require './utils.pl';
-require './sqlite.pl';
+require_once('sqlite.pl');
 
 my @links = SqliteQueryHashRef("
 	select 

@@ -19,7 +19,7 @@ ln -sf config/template/perl/utils.pl utils.pl
 ln -sf config/template/perl/config.pl config.pl
 ln -sf config/template/perl/index.pl index.pl
 ln -sf config/template/perl/pages.pl pages.pl
-ln -sf config/template/perl/sqlite.pl sqlite.pl
+#ln -sf config/template/perl/sqlite.pl sqlite.pl
 #ln -sf config/template/perl/install.pl install.pl
 #ln -sf config/template/perl/setup.pl setup.pl
 ln -sf config/template/perl/server_local_lighttpd.pl server_local_lighttpd.pl

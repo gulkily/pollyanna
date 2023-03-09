@@ -3,7 +3,7 @@
 use strict;
 
 require './utils.pl';
-require './sqlite.pl';
+require_once('sqlite.pl');
 
 my @items = SqliteQueryHashRef("
 	select * from item_flat 

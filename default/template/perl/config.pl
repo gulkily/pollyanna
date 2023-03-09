@@ -670,7 +670,7 @@ sub FillThemeColors { # $html ; fills in templated theme colors in provided html
 
 if (0) { #tests
 	require('./utils.pl');
-	require_once('./sqlite.pl');
+	require_once('sqlite.pl');
 	print "GetConfig('current_version') = " . GetConfig('current_version') . "\n";
 	print "GetTemplate('query/related') = " . GetTemplate('query/related') . "\n";
 	print "SqliteGetQueryTemplate('related') = " . SqliteGetQueryTemplate('related') . "\n";
