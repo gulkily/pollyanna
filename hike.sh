@@ -78,9 +78,16 @@ fi
 
 if [ $1 = index ]
 	then
-		time ./index.pl --chain
-		sleep 1
-		time ./index.pl --all
+		if [ $2 ]
+			then
+				time perl -T ./config/template/perl/index.pl $2
+		fi
+		if [ ! $2 ]
+			then
+				time perl -T ./config/template/perl/index.pl --chain
+				sleep 1
+				time perl -T ./config/template/perl/index.pl --all
+		fi
 fi
 
 if [ $1 = update ]
@@ -97,9 +104,9 @@ if [ $1 = frontend ]
 fi
 
 if [ $1 = pages ]
-  then
-    perl -T ./config/template/perl/pages.pl --all
-    # should it be config? #todo
+	then
+		perl -T ./config/template/perl/pages.pl --all
+		# should it be config? #todo
 fi
 
 if [ $1 = page ]
@@ -107,20 +114,14 @@ if [ $1 = page ]
 		time ./config/template/perl/pages.pl -M $2
 fi
 
-if [ $1 = restart ]
-	then
-		killall lighttpd
-		time config/template/perl/server_local_lighttpd.pl
-fi
-
 if [ $1 = start ] # hike start
 	then
-		if [ ! -e  config/template/perl/server_local_lighttpd.pl ]
+		if [ ! -e config/template/perl/server_local_lighttpd.pl ]
 			then
 				/bin/sh ./build.sh
 		fi
 		echo 1 > config/setting/admin/lighttpd/server_started
-		time config/template/perl/server_local_lighttpd.pl
+		time perl -T config/template/perl/server_local_lighttpd.pl
 		rm config/setting/admin/lighttpd/server_started
 fi
 
@@ -134,7 +135,7 @@ if [ $1 = alog ]
 		time ./default/template/perl/script/access_log_read.pl --all
 		echo About to index and build pages...
 		sleep 3
-		./index.pl --all
+		perl -T ./config/template/perl/index.pl --all
 		./config/template/perl/pages.pl --all
 fi
 
@@ -151,7 +152,7 @@ fi
 
 if [ $1 = sweep ]
 	then
-		time ./index.pl --sweep
+		time perl -T ./config/template/perl/index.pl --sweep
 fi
 
 if [ $1 = flush ]
@@ -176,9 +177,9 @@ if [ $1 = archive ]
 	then
 		time ./default/template/perl/script/_dev_archive.pl
 		sleep 1
-		time ./index.pl --sweep
-		time ./index.pl --all
-		time ./index.pl --all
+		time perl -T ./config/template/perl/index.pl --sweep
+		time perl -T ./config/template/perl/index.pl --all
+		time perl -T ./config/template/perl/index.pl --all
 		./hike.sh frontend
 fi
 

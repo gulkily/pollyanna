@@ -1,4 +1,22 @@
 #
+##require('default/template/perl/config.pl');
+#if (-e './config/template/perl/config.pl') {
+#	require('./config/template/perl/config.pl');
+#} else {
+#	if (-e './default/template/perl/config.pl') {
+#		use File::Copy;
+#		copy('./default/template/perl/config.pl', './config/template/perl/config.pl');
+#		if (-e './config/template/perl/config.pl') {
+#			require('./config/template/perl/config.pl');
+#		} else {
+#			exit; #todo warning
+#		}
+#	} else {
+#		exit; #todo warning
+#	}
+#}
+
+#
 #        my @queryChoices;
 #        push @queryChoices, 'read';
 #        push @queryChoices, 'compost';

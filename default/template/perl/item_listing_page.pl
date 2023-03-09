@@ -7,7 +7,7 @@ use 5.010;
 
 use POSIX;
 
-require './utils.pl';
+#require('./utils.pl');
 require_once('dialog.pl');
 
 my @argsFound;

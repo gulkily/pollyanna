@@ -18,7 +18,7 @@ sub BuildMessage { # prints timestamped message to output
 } # BuildMessage()
 
 BuildMessage "Require ./utils.pl...";
-require './utils.pl';
+require('./config/template/perl/utils.pl');
 
 #EnsureDirsThatShouldExist();
 

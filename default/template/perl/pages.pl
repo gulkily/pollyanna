@@ -22,7 +22,7 @@ use Data::Dumper;
 use File::Copy;
 use Cwd qw(cwd);
 
-require './utils.pl';
+require('./config/template/perl/utils.pl');
 require_once('sqlite.pl');
 require_once('makepage.pl');
 

@@ -42,7 +42,7 @@ sub trim { # trims whitespace from beginning and end of $string
 	return;
 } # trim()
 
-require('./config.pl');
+require('./config/template/perl/config.pl');
 
 my @modules = qw(
 	string
