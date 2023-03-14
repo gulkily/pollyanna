@@ -8,7 +8,7 @@ use utf8;
 require_once('dialog.pl');
 
 sub GetItemListAsGallery { # \@items ; returns gallery as series of dialogs without <body>
-#
+# sub GetGallery {
 	my $itemsRef = shift;
 	my @items = @{$itemsRef};
 

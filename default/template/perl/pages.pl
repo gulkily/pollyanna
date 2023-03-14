@@ -725,6 +725,7 @@ require_once('widget/author_friends.pl');
 require_once('get_read_page.pl');
 
 sub GetItemListHtml { # @files(array of hashes) ; takes @files, returns html list
+# sub GetItemListing {
 	my $filesArrayReference = shift; # array of hash refs which contains items
 	if (!$filesArrayReference) {
 		WriteLog('GetItemListHtml: warning: sanity check failed, missing $filesArrayReference');
