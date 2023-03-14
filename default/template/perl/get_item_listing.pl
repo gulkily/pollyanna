@@ -5,7 +5,7 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub GetItemListing { # returns listing of items based on topic
+sub GetItemListing { # $fileHash ; returns listing of items based on topic
 # sub GetResultsPage {
 	my $htmlOutput = '';
 
