@@ -15,10 +15,10 @@ cp default/template/perl/server_local_lighttpd.pl config/template/perl/server_lo
 
 # this should not be necessary anymore #todo
 # ln -sf config/template/perl/build.pl build.pl
-#ln -sf config/template/perl/utils.pl utils.pl
+ln -sf config/template/perl/utils.pl utils.pl
 #ln -sf config/template/perl/config.pl config.pl
-#ln -sf config/template/perl/index.pl index.pl
-#ln -sf config/template/perl/pages.pl pages.pl
+ln -sf config/template/perl/index.pl index.pl
+ln -sf config/template/perl/pages.pl pages.pl
 #ln -sf config/template/perl/sqlite.pl sqlite.pl
 #ln -sf config/template/perl/install.pl install.pl
 #ln -sf config/template/perl/setup.pl setup.pl
@@ -28,5 +28,5 @@ perl -T config/template/perl/build.pl
 
 perl -T ./config/template/perl/pages.pl --system
 
-#chmod -v -w *.pl
-#chmod -v +x *.pl
+chmod -v -w *.pl
+chmod -v +x *.pl
