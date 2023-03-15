@@ -556,29 +556,6 @@ require_once('get_page_header.pl');
 
 require_once('get_item_listing.pl');
 
-sub GetTopItemsPage { # returns page with top items listing
-	WriteLog("GetTopItemsPage()");
-
-	my $htmlOutput = ''; # stores the html
-
-	my $title = 'Topics';
-	my $titleHtml = 'Topics';
-
-	$htmlOutput = GetPageHeader('read'); # <html><head>...</head><body>
-	$htmlOutput .= GetTemplate('html/maincontent.template'); # where "skip to main content" goes
-
-	$htmlOutput .= GetItemListing('top');
-
-	$htmlOutput .= GetPageFooter('read'); # </body></html>
-
-	if (GetConfig('admin/js/enable')) {
-		# add necessary js
-		$htmlOutput = InjectJs($htmlOutput, qw(settings voting timestamp profile avatar utils));
-	}
-
-	return $htmlOutput;
-} # GetTopItemsPage()
-
 sub GetItemPrefixPage { # $prefix ; returns page with items matching specified prefix
 	WriteLog("GetItemPrefixPage()");
 
