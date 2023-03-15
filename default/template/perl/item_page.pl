@@ -399,8 +399,9 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	if (GetConfig('html/item_page/thread_listing')) {
 		require_once('widget/thread_listing.pl');
 		my $threadListingDialog = GetThreadListingDialog($file{'file_hash'});
+		#$threadListingDialog .= '<span class=advanced>' . $threadListingDialog . '</span>';
 		if ($threadListingDialog) {
-			$txtIndex .= '<span class=advanced>' . $threadListingDialog . '</span>';
+			$txtIndex .= $threadListingDialog;
 		} else {
 			#todo warning
 		}
