@@ -132,8 +132,6 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 	# $htmlStart =~ s/\$titleHtml/$titleHtml/g;
 	# $htmlStart =~ s/\$title/$title/g;
 
-	$htmlStart =~ s/\$introText/$introText/g;
-
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/loading')) { #begin loading
 		$htmlStart = InjectJs2($htmlStart, 'after', '<body>', qw(loading_begin));
 
