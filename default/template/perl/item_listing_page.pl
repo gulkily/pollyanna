@@ -75,7 +75,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 
 	$html .= GetPageHeader($pageQuery);
 
-	if ($pageQuery =~ m/[^\s]+/) {
+	if (GetConfig('setting/html/page_intro') && $pageQuery =~ m/[^\s]+/) {
 		# $pageQuery does not have any spaces, so it's a page name
 		# page_info/
 		my $pageDescription = GetStringNoFallback('page_intro/' . $pageQuery);
