@@ -683,7 +683,7 @@ sub ProcessAccessLog { # reads an access log and writes .txt files as needed
 								$addedMessage .= "SHA512: $fileSha512\n";
 							}
 
-							if ($addedMessage) {
+							if (GetConfig('setting/admin/access_log/write_addendum') && $addedMessage) {
 								$addedMessage = '#addendum' . "\n-- \n" . '>>' . $fileHash . "\n" . $addedMessage;
 
 								PutFile($addedFilename, $addedMessage);
