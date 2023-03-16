@@ -93,7 +93,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 			my $tagsHorizontal = GetTagPageHeaderLinks();
 			PutHtmlFile('tags-horizontal.html', $tagsHorizontal);
 		}
-		if ($pageType eq 'image') {
+		if ($pageType eq 'image' || $pageType eq 'read') {
 			#todo unhardcode
 			WriteItemListingPages($pageType, 'full_items', \%params);
 		} else {
