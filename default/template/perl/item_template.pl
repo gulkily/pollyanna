@@ -324,7 +324,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 	my $sourceFileHasGoneAway = 0;
 
 	# verify that referenced file path exists
-	if (-e $file{'file_path'}) {
+	if ($file{'file_path'} && -e $file{'file_path'}) {
 		#cool
 	}
 	else {
@@ -522,9 +522,9 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 
 		#my $authorUrl; # author's profile url
 		#my $authorAvatar; # author's avatar
-		my $permalinkTxt = $file{'file_path'};
+		my $permalinkTxt = $file{'file_path'} || '';
 
-		{
+		if ($permalinkTxt) {
 			#todo still does not work perfectly, this
 			# set up $permalinkTxt, which links to the .txt version of the file
 
