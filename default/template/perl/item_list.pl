@@ -40,39 +40,6 @@ sub GetItemListHtml { # @files(array of hashes) ; takes @files, returns html lis
 	foreach my $rowHashRef (@files) { # loop through each file
 		my %row = %{$rowHashRef};
 
-		#print Dumper(%row);
-
-		my $file = $row{'file_path'};
-
-		if ($file && -e $file) { # file exists
-		} else {
-			WriteLog('GetItemListHtml: warning: $file does not exist; $file = ' . ($file ? $file : 'FALSE'));
-			$file = 0;
-		}
-
-		my $itemHash = $row{'file_hash'};
-
-		my $gpgKey = $row{'author_key'};
-		my $isSigned;
-		if ($gpgKey) {
-			$isSigned = 1;
-		} else {
-			$isSigned = 0;
-		}
-		my $alias = '';
-		my $isAdmin = 0;
-
-		my $message;
-		if (CacheExists("message/$itemHash")) {
-			$message = GetCache("message/$itemHash");
-		} else {
-			if ($file) {
-				$message = GetFile($file);
-			} else {
-				$message = '';
-			}
-		}
-
 		$row{'vote_buttons'} = 1;
 		$row{'show_vote_summary'} = 1;
 		$row{'display_full_hash'} = 0;
