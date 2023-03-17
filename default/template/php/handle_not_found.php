@@ -136,7 +136,8 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'/examples.html',
 			'/biography.html', # shadowme
 			'/interests.html', # shadowme
-			'/messages.html' # shadowme
+			'/messages.html', # shadowme
+			'/network.html' # ilyag
 		);
 
 		if (in_array($path, $validMakePageNames)) {
