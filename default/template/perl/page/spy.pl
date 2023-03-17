@@ -3,20 +3,20 @@
 use strict;
 use warnings;
 
-sub GetSpyPage { # returns html for settings page (/settings.html)
+sub GetInspectorPage { # returns html for settings page (/settings.html)
 	my $txtIndex = "";
 
-	$txtIndex = GetPageHeader('spy');
+	$txtIndex = GetPageHeader('inspector');
 
-	$txtIndex .= GetDialogX(GetTemplate('html/widget/spy.template'), 'Dialog');
+	$txtIndex .= GetDialogX(GetTemplate('html/widget/inspector.template'), 'Inspector');
 
-	$txtIndex .= GetPageFooter('spy');
+	$txtIndex .= GetPageFooter('inspector');
 
 	if (GetConfig('admin/js/enable')) {
 		$txtIndex = InjectJs($txtIndex, qw(settings dragging utils));
 	}
 
 	return $txtIndex;
-} # GetSpyPage()
+} # GetInspectorPage()
 
 1;
