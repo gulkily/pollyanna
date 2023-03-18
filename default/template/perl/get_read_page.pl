@@ -20,6 +20,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	# sub MakeReadPage {
 	# sub PrintReadPage {
 	# sub GetTagPage {
+	# sub GetUserPage {
 
 	my $title; # plain-text title for <title>
 	my $titleHtml; # title which can have html formatting

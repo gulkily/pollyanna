@@ -7,6 +7,8 @@ use 5.010;
 sub GetItemListHtml { # @files(array of hashes) ; takes @files, returns html list
 # sub GetItemListing {
 # sub GetItemList {
+# sub GetItemListingHtml {
+# sub GetItemListing {
 # example: GetItemListHtml(\@files)
 # uses GetItemTemplate()
 	my $filesArrayReference = shift; # array of hash refs which contains items

@@ -22,6 +22,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 # sub MakeListingPage {
 # sub GetAuthorsPage {
 # sub GetViewPage {
+# sub GetItemListing {
 	my $pageQuery = shift;
 	my $pageMode = shift; # example: dialog_list, 'full_items', 'image_gallery'
 	my $pageNumber = shift;
