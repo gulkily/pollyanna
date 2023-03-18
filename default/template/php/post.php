@@ -240,6 +240,7 @@ if (isset($boxesCount) && $boxesCount && !$comment) {
 				"<p>Please forgive me, friend, <br>but you must <a href=/profile.html>register</a> first, <br>before you do that</p>",
 				'No Cookie Haiku'
 			);
+			#todo there should be a body and stuff here
 			print($returnMessage);
 			return '';
 		} else {
