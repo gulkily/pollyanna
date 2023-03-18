@@ -238,7 +238,7 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 		$pageNoContent .= GetPageHeader($pageQuery);
 		$pageNoContent .= GetDialogX('This page reserved for future content.');
 
-		my $displayQuery = '<pre>'.HtmlEscape(SqliteGetQueryTemplate($pageQuery)).'<br></pre>'; #todo templatify
+		my $displayQuery = '<pre>' . HtmlEscape(SqliteGetQueryTemplate($pageQuery)) . '<br></pre>'; #todo templatify
 		$pageNoContent .= '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName) . '</span>'; #todo should have <pre> like in GetItemListingPage()
 
 		if ($pageQuery eq 'boxes') { #banana theme
