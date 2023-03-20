@@ -3307,7 +3307,7 @@ sub DBGetItemListByTagList { #get list of items by taglist (as array)
 	return DBGetItemList(\%queryParams);
 }
 
-sub DBGetItemList { # get list of items from database. takes reference to hash of parameters
+sub DBGetItemList { # get list of items from database. takes reference to hash of parameters; returns array of hashrefs
 	my $paramHashRef = shift;
 	my %params = %$paramHashRef;
 
