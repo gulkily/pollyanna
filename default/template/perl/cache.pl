@@ -25,7 +25,7 @@ sub GetMyCacheVersion { # returns "version" of cache
 	return $cacheVersion;
 }
 
-sub GetCache { # get cache by cache key
+sub GetCache { # $cacheName ; get cache by cache key
 	my $cacheName = shift;
 	chomp $cacheName;
 
@@ -89,7 +89,7 @@ sub PutCache { # $cacheName, $content; stores value in cache
 	return PutFile($cacheName, $content);
 } # PutCache()
 
-sub UnlinkCache { # removes cache by unlinking file it's stored in
+sub UnlinkCache { # $cacheName ; removes cache by unlinking file it's stored in
 # sub DeleteCache {
 # sub RemoveCache {
 # sub ClearCache {
@@ -124,7 +124,7 @@ sub UnlinkCache { # removes cache by unlinking file it's stored in
 	}
 } # UnlinkCache()
 
-sub CacheExists { # Check whether specified cache entry exists, return 1 (exists) or 0 (not)
+sub CacheExists { # $cacheName ; Check whether specified cache entry exists, return 1 (exists) or 0 (not)
 	my $cacheName = shift;
 	chomp($cacheName);
 
@@ -140,7 +140,7 @@ sub CacheExists { # Check whether specified cache entry exists, return 1 (exists
 	}
 }
 
-sub GetMessageCacheName { # $itemHash ;
+sub GetMessageCacheName { # $itemHash ; get name of cache for an item
 	my $itemHash = shift;
 	chomp($itemHash);
 
@@ -160,8 +160,7 @@ sub GetMessageCacheName { # $itemHash ;
 	return $messageCacheName;
 } # GetMessageCacheName()
 
-
-sub ExpireAvatarCache { # $fingerprint ; removes all caches for alias
+sub ExpireAvatarCache { # $fingerprint ; removes all avatar caches
 # sub DeleteAvatarCache
 # sub ExpireAliasCache {
 
@@ -194,6 +193,5 @@ sub ExpireAvatarCache { # $fingerprint ; removes all caches for alias
 #	UnlinkCache('avatar_color/' . $themeName . '/' . $key);
 #	UnlinkCache('avatar_plain/' . $themeName . '/' . $key);
 } # ExpireAvatarCache()
-
 
 1;
