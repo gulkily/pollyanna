@@ -45,6 +45,75 @@ if (!GetConfig('admin/lighttpd/enable')) {
 	}
 } # if (!GetConfig('admin/lighttpd/enable'))
 
+sub FindBinPath { # $binName, $configPath ; tries to figure out local path for a binary
+# sub GetBinPath {
+	# $binName is the name of the binary, e.g. lighttpd or php-cgi
+	# $configPath is where the path may be stored in config
+
+	# my @options = qw(/bin/ /usr/bin/ /usr/sbin/ /usr/local/sbin/ /usr/local/bin/);
+	# #todo this should be used
+
+	my $binName = shift;
+	chomp $binName;
+
+	if ($binName =~ m/^([a-zA-Z\-_]+)$/) {
+		$binName = $1;
+		WriteLog('FindBinPath: $binName sanity check passed');
+	} else {
+		WriteLog('FindBinPath: warning: $binName failed sanity check; caller = ' . join(',', caller));
+		return '';
+	}
+
+	my $configPath = shift;
+	chomp $configPath;
+
+	my $binPath = '';
+	if ($configPath) {
+		$binPath = GetConfig($configPath);
+		WriteLog('FindBinPath: path found in config; $configPath = ' . $configPath);
+	}
+
+	if (-e $binPath) {
+		WriteLog('FindBinPath: path found in config is good, returning; $binPath = ' . $binPath);
+		return $binPath;
+	}
+	else {
+		WriteLog('FindBinPath: there is no file at $binPath, looking for alternatives');
+
+		$binPath = `which $binName`;
+		chomp $binPath;
+		WriteLog('FindBinPath: which $binName returned $binPath = ' . $binPath);
+
+		if (!$binPath) {
+			WriteLog('FindBinPath: trying some common paths...');
+			if (-e "/usr/local/sbin/$binName") {
+				# FreeBSD
+				$binPath = "/usr/local/sbin/$binName";
+			}
+			if (-e "/usr/local/bin/$binName") {
+				# Mac
+				$binPath = "/usr/local/bin/$binName";
+			}
+			elsif (-e "/usr/bin/$binName") {
+				# GNU/Linux
+				$binPath = "/usr/bin/$binName";
+			}
+			elsif (-e "/usr/sbin/$binName") {
+				# GNU/Linux
+				$binPath = "/usr/sbin/$binName";
+			}
+		}
+		if (-e $binPath) {
+			WriteLog('FindBinPath: valid path found after looking! Saving to config, $binPath = ' . $binPath);
+			PutConfig($configPath, $binPath);
+			return $binPath;
+		} else {
+			WriteLog('FindBinPath: warning: valid path still not found; $binName = ' . $binName . '; caller = ' . join(',', caller));
+			return '';
+		}
+	} # else (!-e $binPath)
+} # FindBinPath()
+
 sub StartLighttpd { # run command to start local lighttpd instance
 	WriteLog('StartLighttpd() BEGIN');
 	if (!-e './log') {
@@ -147,6 +216,8 @@ sub GetLighttpdConfig { # generate contents for lighttpd.conf file based on sett
 
 	my $docRoot = GetDir('html');
 
+	WriteLog('GetLighttpdConfig(); caller = ' . join(',', caller));
+
 	my $serverPort = GetConfig('admin/lighttpd/port') || 2784;
 	#my $serverPort = GetConfig('admin/lighttpd/port');
 	if ($serverPort =~ m/^([0-9]+)$/) {
@@ -167,8 +238,7 @@ sub GetLighttpdConfig { # generate contents for lighttpd.conf file based on sett
 
 		my $phpConf = GetTemplate('lighttpd/lighttpd_php.conf.template');
 
-		my $phpCgiPath = `which php-cgi`;
-		chomp($phpCgiPath);
+		my $phpCgiPath = FindBinPath('php-cgi', 'admin/php/php_path');
 
 		WriteLog('GetLighttpdConfig: $phpCgiPath = ' . $phpCgiPath);
 
