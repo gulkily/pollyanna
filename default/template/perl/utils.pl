@@ -1230,7 +1230,7 @@ sub str_replace { # $replaceWhat, $replaceWith, $string ; emulates some of str_r
 	}
 
 	if (length($replace_this) < 32 && length($with_this) < 32) {
-		WriteLog("str_replace($replace_this, $with_this, ($stringLength))");
+		WriteLog("str_replace($replace_this, $with_this, ($stringLength)); caller = " . join(',', caller));
 	} else {
 		WriteLog('str_replace($replace_this = ' . length($replace_this) . 'b, $with_this = ' . length($with_this) . 'b , ($stringLength = ' . $stringLength . ')); caller = ' . join (',', caller));
 	}
