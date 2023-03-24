@@ -47,15 +47,20 @@ if (!GetConfig('admin/lighttpd/enable')) {
 
 sub FindBinPath { # $binName, $configPath ; tries to figure out local path for a binary
 # sub GetBinPath {
+# sub FindBinaryPath {
 	# $binName is the name of the binary, e.g. lighttpd or php-cgi
 	# $configPath is where the path may be stored in config
 
-	# my @options = qw(/bin/ /usr/bin/ /usr/sbin/ /usr/local/sbin/ /usr/local/bin/);
-	# #todo this should be used
-
+	# READ ARGUMENTS #####
 	my $binName = shift;
 	chomp $binName;
+	my $configPath = shift;
+	chomp $configPath;
 
+	# INITIALIZE RETURN VALUE #####
+	my $binPath = '';
+
+	# SANITY CHECK ARGUMENTS #####
 	if ($binName =~ m/^([a-zA-Z\-_]+)$/) {
 		$binName = $1;
 		WriteLog('FindBinPath: $binName sanity check passed');
@@ -64,43 +69,48 @@ sub FindBinPath { # $binName, $configPath ; tries to figure out local path for a
 		return '';
 	}
 
-	my $configPath = shift;
-	chomp $configPath;
-
-	my $binPath = '';
 	if ($configPath) {
-		$binPath = GetConfig($configPath);
-		WriteLog('FindBinPath: path found in config; $configPath = ' . $configPath);
+		if (ConfigKeyValid($configPath)) {
+			$binPath = GetConfig($configPath);
+			WriteLog('FindBinPath: $configPath = ' . $configPath);
+		} else {
+			WriteLog('FindBinPath: warning: $configPath was specified, but failed sanity check; caller = ' . join(',', caller));
+			return '';
+		}
+	} # if ($configPath)
+	else {
+		WriteLog('FindBinPath: $configPath was not specified');
 	}
 
+	# WAS PATH SPECIFIED IN CONFIG VALID? #####
+	# if (file_exists($binPath)) { # #todo
 	if (-e $binPath) {
 		WriteLog('FindBinPath: path found in config is good, returning; $binPath = ' . $binPath);
 		return $binPath;
 	}
+
+	# TRY TO FIND A PATH #####
 	else {
 		WriteLog('FindBinPath: there is no file at $binPath, looking for alternatives');
 
-		$binPath = `which $binName`;
+		$binPath = `which $binName`; # for some reason this may return empty string
 		chomp $binPath;
 		WriteLog('FindBinPath: which $binName returned $binPath = ' . $binPath);
 
 		if (!$binPath) {
-			WriteLog('FindBinPath: trying some common paths...');
-			if (-e "/usr/local/sbin/$binName") {
-				# FreeBSD
-				$binPath = "/usr/local/sbin/$binName";
-			}
-			if (-e "/usr/local/bin/$binName") {
-				# Mac
-				$binPath = "/usr/local/bin/$binName";
-			}
-			elsif (-e "/usr/bin/$binName") {
-				# GNU/Linux
-				$binPath = "/usr/bin/$binName";
-			}
-			elsif (-e "/usr/sbin/$binName") {
-				# GNU/Linux
-				$binPath = "/usr/sbin/$binName";
+			WriteLog('FindBinPath: `which` did not work, trying some common paths...');
+
+			my @options;
+			push @options, '/bin/'; # GNU/Linux
+			push @options, '/usr/local/bin/'; # Mac OS X / macOS
+			push @options, '/usr/sbin/'; # GNU/Linux
+			push @options, '/usr/local/sbin/'; # FreeBSD
+
+			for my $prefix (@options) {
+				if (-e ($prefix . $binName)) { #todo use file_exists()
+					$binPath = $prefix . $binName;
+					last;
+				}
 			}
 		}
 		if (-e $binPath) {
