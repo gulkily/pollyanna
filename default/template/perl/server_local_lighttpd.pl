@@ -150,38 +150,14 @@ sub StartLighttpd { # run command to start local lighttpd instance
 	}
 	my $port = $portNumber;
 
-	my $pathLighttpd = GetConfig('admin/lighttpd/path');
-	WriteLog('StartLighttpd: path found in config; $pathLighttpd = ' . $pathLighttpd);
+	my $pathLighttpd = FindBinPath('lighttpd', 'setting/admin/lighttpd/path');
+	WriteLog('StartLighttpd: $pathLighttpd = ' . $pathLighttpd);
 
 	if (-e $pathLighttpd) {
 		WriteLog('StartLighttpd: path found in config is good, continuing; $pathLighttpd = ' . $pathLighttpd);
 	}
 	else {
-		WriteLog('StartLighttpd: valid path not found, trying to find it');
-		$pathLighttpd = `which lighttpd`;
-		chomp $pathLighttpd;
-		if (!$pathLighttpd) {
-			if (-e '/usr/local/sbin/lighttpd') {
-				# FreeBSD
-				$pathLighttpd = '/usr/local/sbin/lighttpd';
-			}
-			elsif (-e '/usr/bin/lighttpd') {
-				# GNU/Linux
-				$pathLighttpd = '/usr/bin/lighttpd';
-			}
-			elsif (-e '/usr/sbin/lighttpd') {
-				# GNU/Linux
-				$pathLighttpd = '/usr/sbin/lighttpd';
-			}
-		}
-		if (-e $pathLighttpd) {
-			#todo
-			#Macs-MacBook-Pro:~ mac$ find ~ | grep lighttpd$ | xargs file | grep -i executable
-			#/Users/mac/lighttpd-1.4.63/src/lighttpd:        POSIX shell script text executable, ASCII text
-			#/Users/mac/lighttpd-1.4.63/src/.libs/lighttpd:  Mach-O 64-bit executable x86_64
-
-			WriteLog('StartLighttpd: valid path found after looking! Saving to config, $pathLighttpd = ' . $pathLighttpd);
-		}
+		WriteLog('StartLighttpd: warning: $pathLighttpd is FALSE');
 	} # else (!-e $pathLighttpd)
 
 	if ($pathLighttpd =~ m/^([^\s]+)$/) {
@@ -193,23 +169,8 @@ sub StartLighttpd { # run command to start local lighttpd instance
 	WriteLog('StartLighttpd: $insanityLevel = ' . $insanityLevel);
 
 	if ($insanityLevel == 0) {
-		if ($screenCommand) {
-#			if (!GetConfig('admin/dev/dont_confirm') || GetYes('kill existing lighttpd process?', 1)) {
-#				#kill existing instance using killall lighttpd
-#				`killall lighttpd`;
-#
-#				#kill existing instance using screen's session name
-#				#todo this doesn't work yet for some reason
-#				WriteMessage("StartLighttpd: screen -X -S hike$port kill");
-#				`screen -X -S hike$port kill`;
-#			}
-#			#system("screen -m -S hike$port $pathLighttpd -D -f config/lighttpd/lighttpd.conf");
-#			system("screen -m -S hike$port $pathLighttpd -f config/lighttpd/lighttpd.conf &");
-		} # if ($screenCommand)
-		else {
-			print "\n";
-			system("$pathLighttpd -D -f config/lighttpd/lighttpd.conf");
-		}
+		print "\n";
+		system("$pathLighttpd -D -f config/lighttpd/lighttpd.conf");
 		#todo background it if opening browser
 	} # if ($insanityLevel == 0)
 	else {
