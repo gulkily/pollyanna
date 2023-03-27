@@ -149,7 +149,7 @@ sub LogError { #stores error notice in separate text file
 	PutFile($debugFilename, $debugInfo);
 } # LogError()
 
-sub ProcessAccessLog { # reads an access log and writes .txt files as needed
+sub ProcessAccessLog { # $logfile, $vhostParse ; reads an access log and writes .txt files as needed
 # ProcessAccessLog(
 #	access log file path
 #   parse mode:
