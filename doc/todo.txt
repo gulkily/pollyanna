@@ -1647,8 +1647,6 @@ styles to add
 	perhaps there should be a combined item_attribute table?
 
 
-make a separate color for the top bar for the news theme
-
 #BUG footers are lost when rebuilding
 	Problem: organize_file overwrites existing file which has footer-signature with one which does not
 	xSolution: Only rename file to hashed-path if larger file not already there
