@@ -130,18 +130,6 @@ sub StartLighttpd { # run command to start local lighttpd instance
 		mkdir('./log');
 	}
 
-	my $screenCommand;
-
-	#$screenCommand = `which screen`;
-	#if ($screenCommand) {
-	#	#use screen command
-	#	$screenCommand = 1;
-	#} else {
-	#	$screenCommand = 0;
-	#}
-	$screenCommand = 0; # using screen requires some tweaking, disable for now
-	WriteLog('StartLighttpd: $screenCommand = ' . $screenCommand);
-
 	my $insanityLevel = 2; # track sanity checklist
 	my $portNumber = GetConfig('admin/lighttpd/port');
 	$portNumber = int($portNumber);
