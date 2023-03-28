@@ -12,6 +12,7 @@ cp default/template/perl/config.pl config/template/perl/config.pl
 #cp default/template/perl/install.pl config/template/perl/install.pl
 #cp default/template/perl/setup.pl config/template/perl/setup.pl
 cp default/template/perl/server_local_lighttpd.pl config/template/perl/server_local_lighttpd.pl
+cp default/template/perl/server_local_python.pl config/template/perl/server_local_python.pl
 
 # this should not be necessary anymore #todo
 # ln -sf config/template/perl/build.pl build.pl

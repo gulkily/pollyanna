@@ -125,6 +125,17 @@ if [ $1 = start ] # hike start
 		rm config/setting/admin/lighttpd/server_started
 fi
 
+if [ $1 = startpython ] # hike startpython
+	then
+		if [ ! -e config/template/perl/server_local_python.pl ]
+			then
+				/bin/sh ./build.sh
+		fi
+		#todo echo 1 > config/setting/admin/lighttpd/server_started
+		time perl -T config/template/perl/server_local_python.pl
+		#todo rm config/setting/admin/lighttpd/server_started
+fi
+
 if [ $1 = stop ]
 	then
 		killall -v lighttpd
