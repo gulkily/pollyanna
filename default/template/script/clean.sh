@@ -27,14 +27,14 @@ rm -rf html/*.zip
 echo "rm -rf html/rss.xml html/rss.txt"
 rm -rf html/rss.xml html/rss.txt
 
-echo "rm -rf config/template/*"
-rm -rf config/template/*
+#echo "rm -rf config/template/*"
+#rm -rf config/template/*
 
-echo "rm -rf config/string/*"
-rm -rf config/string/*
+#echo "rm -rf config/string/*"
+#rm -rf config/string/*
 
-echo "rm -rf config/theme/*"
-rm -rf config/theme/*
+#echo "rm -rf config/theme/*"
+#rm -rf config/theme/*
 
 echo "rm -rf config/setting/admin/my_version"
 rm -rf config/setting/admin/my_version
