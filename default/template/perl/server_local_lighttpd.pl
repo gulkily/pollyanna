@@ -142,7 +142,7 @@ sub StartLighttpd { # run command to start local lighttpd instance
 	WriteLog('StartLighttpd: $pathLighttpd = ' . $pathLighttpd);
 
 	if (-e $pathLighttpd) {
-		WriteLog('StartLighttpd: path found in config is good, continuing; $pathLighttpd = ' . $pathLighttpd);
+		WriteLog('StartLighttpd: path found is good, continuing; $pathLighttpd = ' . $pathLighttpd);
 	}
 	else {
 		WriteLog('StartLighttpd: warning: $pathLighttpd is FALSE');
