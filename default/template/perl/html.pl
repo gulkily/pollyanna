@@ -240,4 +240,55 @@ sub RemoveHtmlFile { # $file ; removes existing html file
 	}
 } # RemoveHtmlFile()
 
+sub GetTargetPath { # $target ; gets the target url for an action
+# for example, GetTargetPath('post') may return /post.html or /post.php or /cgi-bin/post.py depending on configuration
+# sub GetUrl {
+# sub GetTargetUrl {
+# sub GetEndpointPath {
+# sub GetRoutePath {
+	my $target = shift;
+	if ($target =~ m/([a-z]+)/) {
+		$target = $1;
+	} else {
+		WriteLog('GetTargetPath: warning: sanity check failed on $target; caller = ' . join(',', caller));
+		return '';
+	}
+
+	my $returnValue = '';
+
+	my @validTargets = qw(post);
+
+	if (in_array($target, @validTargets)) {
+		if ($target eq 'post') {
+			if (GetConfig('setting/admin/python3_server/enable')) {
+				if (GetConfig('setting/admin/cgi/enable')) {
+					$returnValue = '/cgi-bin/post.py';
+				} else {
+					$returnValue = '/post.html';
+				}
+			}
+			if (GetConfig('setting/admin/lighttpd/enable')) {
+				if (GetConfig('setting/admin/php/enable')) {
+					if (GetConfig('setting/admin/php/rewrite')) {
+						$returnValue = '/post.html';
+					} else {
+						$returnValue = '/post.php';
+					}
+				} else {
+					$returnValue = '/post.html';
+				}
+			}
+		}
+	} else {
+		WriteLog('GetTargetPath: warning: $target was not in @validTargets; caller = ' . join(',', caller));
+		return '';
+	}
+
+	#todo sanity check on $returnValue;
+
+	WriteLog('GetTargetPath: $target = ' . $target . '; $returnValue = ' . $returnValue);
+
+	return $returnValue;
+} # GetTargetPath()
+
 1;
