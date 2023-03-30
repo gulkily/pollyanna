@@ -1,3 +1,6 @@
+GetWriteForm() should include <form> tag
+    add GetWriteDialog()
+
 cgi-bin
     basics
         post
