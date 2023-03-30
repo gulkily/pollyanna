@@ -1,3 +1,13 @@
+cgi-bin
+    basics
+        post
+        update page
+        redirect
+    languages
+        perl
+        sh
+        python
+
 lighttpd and python3_server should not be enabled at the same time
     otherwise it may cause a problem in GetTargetPath()
 
