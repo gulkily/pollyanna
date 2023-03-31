@@ -24,7 +24,7 @@ sub GetPuzzleDialog { # returns write form (for composing text message)
 	my $initText = '';
 	$puzzleForm =~ s/\$initText/$initText/g;
 
-	$puzzleForm = '<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>' . $puzzleForm . '</form>';
+	$puzzleForm = '<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>' . $puzzleForm . '</form>';#todo
 
 	return $puzzleForm;
 } # GetPuzzleDialog()
