@@ -34,7 +34,8 @@ function PingUrlCallback () {
 //}
 
 function signCallback (signed) {
-	var url = '/post.html?comment=' + encodeURIComponent(signed.data);
+    var postUrl = '/post.html';
+	var url = postUrl + '?comment=' + encodeURIComponent(signed.data);
 
 	if (PingUrl(url)) {
 		// todo incrememnt counter
@@ -196,7 +197,8 @@ function SignVote (t, token) { // signs a vote from referenced vote button
 	} else {
 		//	    if (document.images) {
 		//	        var myUrl = window.location;
-		//	    	document.images[0].src = '/post.html?mydomain=' + myUrl;
+		//	        var postUrl = '/post.html';
+		//	    	document.images[0].src = postUrl + '?mydomain=' + myUrl;
 		//
 		//	    	//alert('DEBUG: t = ' + t);
 		//
