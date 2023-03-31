@@ -3,8 +3,8 @@
 #hastitle tag should only apply if title was actually applied to item
     assumed titles e.g. from first line should not result in #hastitle
 
-GetWriteForm() should include <form> tag
-    add GetWriteDialog()
+GetWriteForm() should include <form> tag x
+    add GetWriteDialog() x
     perhaps <form> should be added by GetWriteDialog,
         otherwise it may result in weirdness for some browsers which assume <form> is a block element
 
