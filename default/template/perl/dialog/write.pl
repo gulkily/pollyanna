@@ -5,8 +5,7 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub GetWriteForm { # $dialogTitle ; returns write form (for composing text message)
-# sub GetWriteDialog {
+sub GetWriteDialog {
 # sub GetWriteWindow {
 	my $dialogTitle = shift;
 	if (!$dialogTitle) {
@@ -15,21 +14,33 @@ sub GetWriteForm { # $dialogTitle ; returns write form (for composing text messa
 		#todo sanity check
 	}
 
-	my $prompt = shift;
-	if (!$prompt) {
-		$prompt = 'Write something here:';
-	} else {
-		#todo sanity check
-	}
+	my $formWrite = GetWriteForm2();
+
+	my $dialog = GetDialogX($formWrite, $dialogTitle);
+
+	return $dialog;
+} # GetWriteDialog()
+
+sub GetWriteForm2 { # $dialogTitle ; returns write form (for composing text message)
+# sub GetWriteForm {
+	# renamed so that old references which assumed it is a dialog break and can be fixed
+
+	#
+	# my $prompt = shift;
+	# if (!$prompt) {
+	# 	$prompt = 'Write something here:';
+	# } else {
+	# 	#todo sanity check
+	# }
 
 	#my $writeForm = GetDialogX(GetTemplate('html/form/write/write.template'), $dialogTitle);
 	my $writeForm = GetTemplate('html/form/write/write.template');
 	# my $writeForm = GetDialogX(GetTemplate('html/form/write/write.template'), 'Write');
-	WriteLog('GetWriteForm()');
+	#WriteLog('GetWriteForm: $dialogTitle = ' . $dialogTitle . '; caller = ' . join(',', caller));
 
-	if ($prompt ne 'Write something here:') { #todo templatize this
-		$writeForm = str_replace('Write something here:', $prompt, $writeForm);
-	}
+	# if ($prompt ne 'Write something here:') { #todo templatize this
+	# 	$writeForm = str_replace('Writek something here:', $prompt, $writeForm);
+	# }
 
 	if (GetConfig('admin/php/enable')) {
 		WriteLog('GetWriteForm: php is ON');
@@ -39,18 +50,18 @@ sub GetWriteForm { # $dialogTitle ; returns write form (for composing text messa
 			$writeForm = str_replace($targetElement, $targetElement . $writeLongMessage, $writeForm);
 		}
 
-		if (GetConfig('admin/php/enable') && !GetConfig('admin/php/rewrite')) {
-			# if php is enabled but rewrite is disabled
-			# change submit target to post.php
-			#my $postHtml = 'post.html'; # post.html
-			WriteLog('GetWriteForm: replacing post.html post.php');
-			$writeForm = str_replace('post.html', 'post.php', $writeForm);
-			#$writeForm =~ s/$postHtml/post.php/;
-		} else {
-			WriteLog('GetWriteForm: NOT replacing post.html post.php');
-		}
+		# if (GetConfig('admin/php/enable') && !GetConfig('admin/php/rewrite')) {
+		# 	# if php is enabled but rewrite is disabled
+		# 	# change submit target to post.php
+		# 	#my $postHtml = 'post.html'; # post.html
+		# 	WriteLog('GetWriteForm: replacing post.html post.php');
+		# 	$writeForm = str_replace('/post.html', '/post.php', $writeForm);
+		# 	#$writeForm =~ s/$postHtml/post.php/;
+		# } else {
+		# 	WriteLog('GetWriteForm: NOT replacing post.html post.php');
+		# }
 
-			# this is how auto-save to server would work (with privacy implications) #autosave
+		# this is how auto-save to server would work (with privacy implications) #autosave
 		# $submitForm =~ s/\<textarea/<textarea onkeyup="if (this.length > 2) { document.forms['compose'].action='\/post2.php'; }" /;
 	} else {
 		WriteLog('GetWriteForm: php is OFF');
@@ -90,10 +101,7 @@ sub GetWriteForm { # $dialogTitle ; returns write form (for composing text messa
 		}
 	} # js stuff in write form
 
-	my $writeDialog = GetDialogX($writeForm, $dialogTitle);
-
-	return $writeDialog;
-	#return $writeForm;
+	return $writeForm;
 } # GetWriteForm()
 
 1;

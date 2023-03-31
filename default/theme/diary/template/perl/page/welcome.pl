@@ -6,9 +6,7 @@ use warnings;
 sub GetWelcomePage {
 	my $welcomePage =
 		GetPageHeader('welcome') .
-			'<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>' .
-			GetWriteForm() .
-			'</form>' . #todo unhack this
+			GetWriteDialog() .
 			GetQueryAsDialog('tags', 'Tags') .
 			GetQueryAsDialog('newest', 'Newest') .
 			GetPageFooter('welcome');

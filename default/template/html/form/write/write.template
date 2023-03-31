@@ -1,31 +1,33 @@
 <!-- write.template -->
 <fieldset>
-	<span id=writeintro></span>
-	<span class=beginner><label for="comment" class=beginner>Write something here:</label><br></span>
-	<textarea
-		class=txtarea
-		id=comment
-		title="Enter some text to share."
-		rows=9
-		cols=32
-		name=comment
-		autofocus
-		wrap=soft
-	>$initText</textarea><br>
-	<p>
-		<input type=submit value="Send Now" name=addtext id=addtext>
-		<span id=spanSignAs></span>
-	</p>
-	<p>
-		<span id=spanEncrypt></span>
-		<p id=spanWriteAdvanced class=advanced></p>
-		<span class=advanced>
-			<label for=recfing>
-				<input name=recfing id=recfing type=checkbox>
-				Identify with device
-			</label>
-		</span>
-	</p>
-	<span id=writefooter></span>
+    <form action="/post.html" method=GET id=compose class=submit name=compose target=_top>
+        <span id=writeintro></span>
+        <span class=beginner><label for="comment" class=beginner>Write something here:</label><br></span>
+        <textarea
+            class=txtarea
+            id=comment
+            title="Enter some text to share."
+            rows=9
+            cols=32
+            name=comment
+            autofocus
+            wrap=soft
+        >$initText</textarea><br>
+        <p>
+            <input type=submit value="Send Now" name=addtext id=addtext>
+            <span id=spanSignAs></span>
+        </p>
+        <p>
+            <span id=spanEncrypt></span>
+            <p id=spanWriteAdvanced class=advanced></p>
+            <span class=advanced>
+                <label for=recfing>
+                    <input name=recfing id=recfing type=checkbox>
+                    Identify with device
+                </label>
+            </span>
+        </p>
+        <span id=writefooter></span>
+    </form>
 </fieldset>
 <!--/ write.template -->

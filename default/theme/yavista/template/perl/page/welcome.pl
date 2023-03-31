@@ -12,9 +12,7 @@ sub GetWelcomePage {
 		# #GetDialogX(GetTemplate('html/page/rules.template'), 'Ground Rules') .
 		# #GetDialogX(GetTemplate('html/page/privacy.template'), 'Privacy') .
 		# #GetDialogX(GetTemplate('html/form/emergency.template'), 'Emergency Contact Form') .
-		# '<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>' .
-		# GetWriteForm('Contribute', 'Write something here, please:') .
-		# '</form>' . #todo unhack this
+		# GetWriteDialog('Contribute', 'Write something here, please:') .
 		GetDialogX(GetTemplate('html/form/guest.template'), 'Guest') .
 		GetDialogX(GetTemplate('html/form/enter.template'), 'Membership') .
 		GetPageFooter('welcome')

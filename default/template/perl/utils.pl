@@ -1511,7 +1511,7 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 	if (0) { #todo quick-write setting #quickwrite #quick-write #quick_write
 		my $quickWriteWindow = GetDialogX(GetTemplate('html/form/write/write-quick.template'), 'Quick-Write');
 		$quickWriteWindow =
-			'<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>' .
+			'<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>' . #todo
 			$quickWriteWindow .
 			'</form>';
 

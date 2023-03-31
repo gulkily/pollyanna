@@ -8,16 +8,14 @@ sub GetChatPage {
 
 	my $html = '';
 
-	my $writeForm = GetWriteForm();
+	my $writeDialog = GetWriteDialog();
+
+	#todo the form tag needs a target change to point to the iframe
 
 	$html =
 		GetPageHeader('chat') .
-
-		'<form action="/post.html" method=GET id=compose class=submit name=compose target=ifr>' .
-		$writeForm .
-		'</form>' .
+		str_replace($writeDialog, 'target=_top', 'target=ifr') . #todo this is a hack
 		'<iframe name=ifr id=ifr height=20 width=20></iframe>' .
-
 		GetTemplate('html/maincontent.template') .
 		'</MAIN>' .
 		GetPageFooter('chat');

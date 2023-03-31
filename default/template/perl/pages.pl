@@ -1106,8 +1106,8 @@ sub MakeListingPages {
 		$dialog = GetUploadDialog();
 		PutHtmlFile('dialog/upload.html', $dialog);
 
-		$dialog = GetWriteForm();
-		PutHtmlFile('dialog/write.html', '<form action="/post.html" method=GET id=compose name=compose target=_top>' . $dialog . '</form>');
+		$dialog = GetWriteDialog();
+		PutHtmlFile('dialog/write.html', $dialog);
 
 		$dialog = GetSettingsDialog();
 		PutHtmlFile('dialog/settings.html', $dialog);
@@ -1743,9 +1743,9 @@ while (my $arg1 = shift @foundArgs) {
 					WriteMessage("-D $makeDialogArg\n");
 				}
 				elsif ($makeDialogArg eq 'write') {
-					my $dialog = GetWriteForm();
+					my $dialog = GetWriteDialog();
 					WriteMessage("-D $makeDialogArg\n");
-					PutHtmlFile('dialog/write.html', '<form action="/post.html" method=GET id=compose name=compose target=_top>' . $dialog . '</form>');
+					PutHtmlFile('dialog/write.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'help') {
 					my $dialog = GetSimpleDialog('help');

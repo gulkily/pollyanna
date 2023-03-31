@@ -19,7 +19,7 @@ sub GetWritePage { # returns html for write page
 	$writePageHtml = GetPageHeader('write');
 	$writePageHtml .= GetTemplate('html/maincontent.template');
 
-	my $writeForm = GetWriteForm();
+	my $writeForm = GetWriteDialog();
 
 	WriteLog('GetWriteForm: js is on, adding write_options.template');
 	my $writeOptions =
@@ -33,14 +33,11 @@ sub GetWritePage { # returns html for write page
 		'</span>'
 	; #todo this is a hack
 
-	$writePageHtml .= '<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>'; #todo
 	$writePageHtml .= $writeForm;
 
 	if (GetConfig('setting/html/write_options')) {
 		$writePageHtml .= $writeOptions;
 	}
-
-	$writePageHtml .= '</form>'; #todo
 
 	#if (GetConfig('admin/js/enable')) {
 	#	$writePageHtml .= GetDialogX(GetTemplate('html/form/writing.template'), 'Options');

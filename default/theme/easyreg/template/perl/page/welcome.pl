@@ -14,9 +14,7 @@ sub GetWelcomePage {
 		GetDialogX(GetTemplate('html/form/enter.template'), 'Create Profile') .
 		GetDialogX(GetTemplate('html/form/guest.template'), 'Guest') .
 		#GetDialogX(GetTemplate('html/form/emergency.template'), 'Emergency Contact Form') .
-		'<form action="/post.html" method=GET id=compose class=submit name=compose target=_top>' .
-		'<span class=advanced>' . GetWriteForm() . '</span>' .
-		'</form>' . #todo unhack this
+		'<span class=advanced>' . GetWriteDialog() . '</span>' .
 		GetPageFooter('welcome')
 	;
 
