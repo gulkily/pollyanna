@@ -1,16 +1,18 @@
 #!/usr/bin/perl -T
 
+# for items with urls, fetches linked pages and stores their titles
+
 require './utils.pl';
 require_once('sqlite.pl');
 
 my @links = SqliteQueryHashRef("
-	select 
-		file_hash, 
-		value as url 
-	from 
+	SELECT
+		file_hash,
+		value AS url
+	FROM
 		item_attribute
-	where 
-		attribute in ('http', 'https')
+	WHERE
+		attribute IN('http', 'https')
 ");
 
 shift @links;
@@ -53,7 +55,7 @@ for my $link (@links) {
 	
 	if ($urlContents) {
 		my $title = '';
-		if ($urlContents =~ m|<title>([^\<]+)</title>|) {
+		if ($urlContents =~ m|<title>([^\<]+)</title>|i) {
 			$title = $1;
 			
 			DBAddItemAttribute($fileHash, 'title', $title, GetTime(), $fileHash);

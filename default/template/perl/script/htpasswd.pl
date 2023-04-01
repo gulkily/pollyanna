@@ -1,6 +1,10 @@
 #!/usr/bin/perl
 
+# generates a username:hashed-password for the htpasswd file
+# to be used in conjunction with http basic auth
+
 use strict;
+use warnings;
 use 5.010;
 use utf8;
 
@@ -27,6 +31,5 @@ if ($username && $password) {
 	my $line = GetHtpasswdLine($username, $password);
 	print $line . "\n";
 }
-
 
 1;

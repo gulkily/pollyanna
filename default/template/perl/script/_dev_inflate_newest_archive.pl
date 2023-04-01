@@ -1,5 +1,7 @@
 #!/usr/bin/perl -T
 #
+# inflates a .tar.gz file into current instance
+#
 print "Please use this script with caution.\n";
 exit;
 

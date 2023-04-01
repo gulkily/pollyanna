@@ -1,5 +1,7 @@
 #!/usr/bin/perl -T
 
+# converts absolute links to relative links
+
 require './utils.pl';
 
 my $rootPath = shift;

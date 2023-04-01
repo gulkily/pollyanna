@@ -1,5 +1,9 @@
 #!/usr/bin/perl
 
+#draft
+# skeleton script for downloading all git-based feeds from github
+# in its current state, this script would depend on organize_files being OFF
+
 use strict;
 use warnings FATAL => 'all';
 use utf8;

@@ -1,5 +1,10 @@
 #!/usr/bin/perl -T
 #
+# powers the 'hike archive' command
+# archives all of the instance's content into a .tar.gz archive in the archive/ directory
+# and then removes it from the instance, clearing it
+# followed by rebuilding the frontend to reflect the changes
+#
 # _dev_archive.pl
 # 
 # archive current data/user state into .tar.gz file

@@ -1,5 +1,7 @@
 #!/usr/bin/perl -T
 
+# saves items with #meta, #todo, and #bug tags into doc/inbox/
+
 require './utils.pl';
 require('sqlite.pl');
 

@@ -1,5 +1,9 @@
 #!/usr/bin/perl
 
+# opens local browser to localhost:2784
+# attempts to be cross-platform by looking for different available browsers and openers
+#
+
 use strict;
 use warnings;
 

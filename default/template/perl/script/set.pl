@@ -1,6 +1,7 @@
 #!/usr/bin/perl -T
 
 # set.pl basic
+# used by the 'hike set' command
 # lets you set config values to 0 or 1
 # #todo:
 #  read from defaults if missing in config

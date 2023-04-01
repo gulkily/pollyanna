@@ -1,9 +1,9 @@
 #!/usr/bin/perl
 #
-#
 # groups items using nearby timestamps
 # max interval is 1000 seconds
 #
+
 use strict;
 use warnings;
 use 5.010;
