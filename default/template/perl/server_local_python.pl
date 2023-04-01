@@ -132,7 +132,7 @@ sub StartHttpServer { # run command to start local python3 http.server instance
 
     my $insanityLevel = 2; # track sanity checklist
     my $portNumber = GetConfig('admin/python3_server/port');
-    if ($portNumber =~ m/^([0-9+])/) {
+    if ($portNumber =~ m/^([0-9]+)/) {
         $portNumber = $1;
     } else {
         WriteLog('StartHttpServer: warning: $portNumber failed sanity check');
@@ -160,6 +160,7 @@ sub StartHttpServer { # run command to start local python3 http.server instance
     }
 
     WriteLog('StartHttpServer: $pathPython3 = ' . $pathPython3);
+    WriteLog('StartHttpServer: $port = ' . $port);
     WriteLog('StartHttpServer: $insanityLevel = ' . $insanityLevel);
 
     if ($insanityLevel == 0) {
