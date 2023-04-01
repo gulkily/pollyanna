@@ -287,12 +287,18 @@ sub ProcessAccessLog { # $logfile, $vhostParse ; reads an access log and writes 
 		# useragent is last. everything that is not the values we have pulled out so far
 		# is the useragent.
 		my $notUseragentLength = length($clientHostname . $serverHostname . $fullName . $date . $gmt . $req . $file . $proto . $status . $length . $ref) + 11;
-		$userAgent = substr($line, $notUseragentLength);
-		chomp($userAgent);
-		$userAgent = trim($userAgent);
+
+		if ($notUseragentLength < length($line)) {
+			$userAgent = substr($line, $notUseragentLength);
+			chomp($userAgent);
+			$userAgent = trim($userAgent);
+			AppendFile('log/useragent.log', $userAgent);
+		} else {
+			$userAgent = '';
+		}
 
 		WriteLog('ProcessAccessLog: $date = ' . $date);
-		AppendFile('log/useragent.log', $userAgent);
+		#todo needs better support for python's http.server format
 
 		my $errorTrap = 0;
 
