@@ -241,11 +241,12 @@ sub RemoveHtmlFile { # $file ; removes existing html file
 } # RemoveHtmlFile()
 
 sub GetTargetPath { # $target ; gets the target url for an action
-# for example, GetTargetPath('post') may return /post.html or /post.php or /cgi-bin/post.py depending on configuration
+# for example, GetTargetPath('post') may return /post.html or /post.php or /cgi-bin/post depending on configuration
 # sub GetUrl {
 # sub GetTargetUrl {
 # sub GetEndpointPath {
 # sub GetRoutePath {
+# sub GetPostUrl {
 	my $target = shift;
 	if ($target =~ m/([a-z]+)/) {
 		$target = $1;
@@ -254,28 +255,32 @@ sub GetTargetPath { # $target ; gets the target url for an action
 		return '';
 	}
 
-	my $returnValue = '';
+	state %returnValue;
 
 	my @validTargets = qw(post);
 
 	if (in_array($target, @validTargets)) {
+		if ($returnValue{$target}) {
+			return $returnValue{$target};
+		}
+
 		if ($target eq 'post') {
 			if (GetConfig('setting/admin/python3_server/enable')) {
 				if (GetConfig('setting/admin/cgi/enable')) {
-					$returnValue = '/cgi-bin/post.py';
+					$returnValue{$target} = '/cgi-bin/post.py';
 				} else {
-					$returnValue = '/post.html';
+					$returnValue{$target} = '/post.html';
 				}
 			}
 			if (GetConfig('setting/admin/lighttpd/enable')) {
 				if (GetConfig('setting/admin/php/enable')) {
 					if (GetConfig('setting/admin/php/rewrite')) {
-						$returnValue = '/post.html';
+						$returnValue{$target} = '/post.html';
 					} else {
-						$returnValue = '/post.php';
+						$returnValue{$target} = '/post.php';
 					}
 				} else {
-					$returnValue = '/post.html';
+					$returnValue{$target} = '/post.html';
 				}
 			}
 		}
@@ -286,9 +291,9 @@ sub GetTargetPath { # $target ; gets the target url for an action
 
 	#todo sanity check on $returnValue;
 
-	WriteLog('GetTargetPath: $target = ' . $target . '; $returnValue = ' . $returnValue);
+	WriteLog('GetTargetPath: $target = ' . $target . '; $returnValue{$target} = ' . $returnValue{$target});
 
-	return $returnValue;
+	return $returnValue{$target};
 } # GetTargetPath()
 
 1;
