@@ -2777,6 +2777,17 @@ sub PopulateResource { # populate resources needed by all active themes
 	}
 } # PopulateResource()
 
+sub StorePostUrl {
+	# this exists to synchronize two redundant ways of getting the url to post things
+	# config/setting/admin/post/post_url and GetTargetPath('post')
+	if (GetConfig('setting/admin/post/post_url') ne GetTargetPath('post')) {
+		WriteLog('StorePostUrl: warning: config/setting/admin/post/post_url did not match GetTargetPath(post), updating it');
+		PutConfig('setting/admin/post/post_url', GetTargetPath('post'));
+	}
+}
+
+StorePostUrl();
+
 EnsureDirsThatShouldExist();
 
 CheckForInstalledVersionChange();
