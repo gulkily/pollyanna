@@ -6,5 +6,6 @@ once/*
 temp/*
 archive/*
 html/*
+lib/*
 .idea/*
 *.swp
