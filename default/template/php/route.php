@@ -244,6 +244,11 @@ function InjectJs ($html, $scriptNames, $injectMode = 'before', $htmlTag = '</bo
 
 			$scriptTemplate = str_replace('$colorSuccessVoteUnsigned', $colorSuccessVoteUnsigned, $scriptTemplate);
 			$scriptTemplate = str_replace('$colorSuccessVoteSigned', $colorSuccessVoteSigned, $scriptTemplate);
+
+            $postUrl = GetConfig('setting/admin/post/post_url'); #my
+            if ($postUrl != '/post.html') {
+                $scriptTemplate = str_replace('/post.html', $postUrl, $scriptTemplate);
+            }
 		}
 		// #todo finish porting this when GetRootAdminKey() is available in php
 		//		if ($script == 'profile') {

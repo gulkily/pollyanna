@@ -266,6 +266,11 @@ sub GetScriptTemplate { # $script ; returns script based on name
 
 		$scriptTemplate =~ s/\$colorSuccessVoteUnsigned/$colorSuccessVoteUnsigned/g;
 		$scriptTemplate =~ s/\$colorSuccessVoteSigned/$colorSuccessVoteSigned/g;
+
+		my $postUrl = GetConfig('setting/admin/post/post_url');
+		if ($postUrl ne '/post.html') {
+			$scriptTemplate = str_replace('/post.html', $postUrl, $scriptTemplate);
+		}
 	}
 
 	if ($script eq 'profile' || $script eq 'write' || $script eq 'crypto2' || $script eq 'avatar') {

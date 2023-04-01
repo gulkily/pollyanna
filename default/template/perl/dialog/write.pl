@@ -67,6 +67,16 @@ sub GetWriteForm2 { # $dialogTitle ; returns write form (for composing text mess
 		WriteLog('GetWriteForm: php is OFF');
 	}
 
+	my $postPath = GetTargetPath('post'); #todo should this use config/setting/admin/post/post_url?
+
+	if ($postPath eq '/post.html') {
+		# don't need to replace
+		WriteLog('GetWriteForm: no need to replace /post.html');
+	} else {
+		WriteLog('GetWriteForm: replacing /post.html with $postPath = ' . $postPath);
+		$writeForm = str_replace('/post.html', $postPath, $writeForm);
+	}
+
 	my $initText = '';
 	$writeForm =~ s/\$initText/$initText/g;
 
