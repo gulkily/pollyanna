@@ -291,6 +291,13 @@ sub GetTargetPath { # $target ; gets the target url for an action
 
 	#todo sanity check on $returnValue;
 
+	if ($returnValue{$target}) {
+		# sanity check passed
+	} else {
+		WriteLog('GetTargetPath: warning: sanity check failed on $returnValue{$target}; caller = ' . join(',', caller));
+		$returnValue{$target} = '/post.html';
+	}
+
 	WriteLog('GetTargetPath: $target = ' . $target . '; $returnValue{$target} = ' . $returnValue{$target});
 
 	return $returnValue{$target};
