@@ -177,13 +177,6 @@ if [ $1 = open ]
 		#todo reduce hard-coding
 fi
 
-if [ $1 = refresh ]
-	then
-		#time ./default/template/perl/browser_open.pl
-		time ./default/template/perl/_dev_refresh.pl
-		#todo reduce hard-coding
-fi
-
 if [ $1 = archive ]
 	then
 		time ./default/template/perl/script/_dev_archive.pl
@@ -215,6 +208,5 @@ if [ $1 = help ]
 		echo hike rebuild = clean, build, and index
 		echo hike test = testing 1 2 3
 		echo hike version = show version
-		echo hike refresh = refresh updated defaults
 fi
 
