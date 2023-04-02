@@ -5,7 +5,7 @@ function PingUrlCallback () {
 	var xmlhttpElement = window.xmlhttpElement;
 
 	if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-		// alert('DEBUG: PingUrlCallback() found status 200!');
+		//alert('DEBUG: PingUrlCallback() found status 200!');
 
 		if (xmlhttpElement) {
 			var elemOK = document.createElement('span');
@@ -24,7 +24,7 @@ function PingUrlCallback () {
 		// document.close();
 		window.xmlhttp = 0;
 	} else {
-		// alert('DEBUG: PingUrlCallback: warning: unrecognized: xmlhttp.status = ' + xmlhttp.status + '; xmlhttp.readyState = ' + xmlhttp.readyState);
+		//alert('DEBUG: PingUrlCallback: warning: unrecognized: xmlhttp.status = ' + xmlhttp.status + '; xmlhttp.readyState = ' + xmlhttp.readyState);
 	}
 }
 
