@@ -42,4 +42,4 @@ echo "================="
 
 #echo "Running ./generate_html_frontend.pl"
 #./generate_html_frontend.pl
-./pages.pl --php --js -M welcome
+#./pages.pl --php --js -M welcome

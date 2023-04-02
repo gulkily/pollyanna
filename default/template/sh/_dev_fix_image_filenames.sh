@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+# fix image files with a space in the name
+# replace space with underscore _
+
 for f in html/image/*
 do
   new="${f// /_}"

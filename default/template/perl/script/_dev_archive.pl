@@ -88,6 +88,7 @@ use File::Copy qw(copy);
 
 my $date = '';
 if (`date +%s` =~ m/^([0-9]{10})/) { #good for a few years
+	# this sets $date to the current epoch time
 	$date = $1;
 } else {
 	die "\$date should be a decimal number, but it's actually $date";
@@ -96,9 +97,10 @@ if (`date +%s` =~ m/^([0-9]{10})/) { #good for a few years
 my $SCRIPTDIR = cwd();
 chomp $SCRIPTDIR;
 if ($SCRIPTDIR =~ m/^([^\s]+)$/) { #security #taint
+	# sanity check on $SCRIPTDIR
 	$SCRIPTDIR = $1;
 } else {
-	print "sanity check failed #\n";
+	print "sanity check failed on \$SCRIPTDIR #\n";
 	exit;
 }
 
@@ -182,27 +184,36 @@ my $IMAGEDIR = $HTMLDIR . '/image';
 		exit;
 	}
 
-	print("tar -acf $archiveDirRelative.tar.gz $archiveDirRelative\n");
-	system("tar -acf $archiveDirRelative.tar.gz $archiveDirRelative");
+	# GNU tar supports -a flag, which automatically compresses if you specify a .gz extension
+	# BSD tar, however, does not support -a, so we cannot use it here for compatibility reasons
+	# print("tar -acf $archiveDirRelative.tar.gz $archiveDirRelative\n");
+	# system("tar -acf $archiveDirRelative.tar.gz $archiveDirRelative");
+	#
 
-	print("rm -rf $ARCHIVE_DATE_DIR\n");
-	system("rm -rf $ARCHIVE_DATE_DIR");
+	print("tar -cf $archiveDirRelative.tar $archiveDirRelative\n");
+	my $tarResult = system("tar -cf $archiveDirRelative.tar $archiveDirRelative");
 
-	print("echo \"Notice: Content was archived by the operator at $date\" > $TXTDIR/archived_$date\.txt\n");
-	system("echo \"Notice: Content was archived by the operator at $date\" > $TXTDIR/archived_$date\.txt");
+	if ($tarResult) {
+		print("tar command failed! skipping rm.\n");
+	} else {
+		print("gzip -9 $archiveDirRelative.tar\n");
+		my $gzipResult = system("gzip -9 $archiveDirRelative.tar");
 
-	print("=================\n");
-	print("Archive finished!\n");
-	print("=================\n");
+		if ($gzipResult) {
+			print("gzip command failed! skipping rm.\n");
+		} else {
 
-	#system('echo "\n"');
-	#system('echo "Running ./_dev_clean_ALL.sh in 3..."; sleep 2');
-	#system('echo "2..."; sleep 2');
-	#system('echo "1..."; sleep 2');
+			print("rm -rf $ARCHIVE_DATE_DIR\n");
+			system("rm -rf $ARCHIVE_DATE_DIR");
 
-	system('./clean.sh');
+			print("echo \"Notice: Content was archived by the operator at $date\" > $TXTDIR/archived_$date\.txt\n");
+			system("echo \"Notice: Content was archived by the operator at $date\" > $TXTDIR/archived_$date\.txt");
 
-	system('./build.sh');
+			print("=================\n");
+			print("Archive finished!\n");
+			print("=================\n");
+		}
+	}
 
 	print("=============================\n");
 	print("Archive and Rebuild finished!\n");

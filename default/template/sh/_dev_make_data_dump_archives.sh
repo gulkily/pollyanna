@@ -1,3 +1,0 @@
-#!/bin/sh
-
-echo making archives...

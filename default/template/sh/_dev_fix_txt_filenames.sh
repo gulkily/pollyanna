@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# fix text files with a space in the name
+# replace space with underscore _
+
 for f in html/txt/*
 do
   new="${f// /_}"

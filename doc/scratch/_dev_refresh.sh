@@ -1,6 +1,15 @@
 #!/bin/sh
 
+# called by 'hike refresh' command
+# not really used anymore, should probably remove it
+# #todo
+# use template_refresh.pl instead
+
 # notification
+
+echo "use this script only for reference"
+exit
+
 
 echo ==================================
 echo Resetting templates from: default/
