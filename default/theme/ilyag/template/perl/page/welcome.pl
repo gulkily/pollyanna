@@ -5,26 +5,29 @@ use warnings;
 use 5.010;
 
 sub GetWelcomePage {
-# this welcome page displays all items which have a tag of 'approve' and a score of greater than 0
-	my %params;
-	$params{'where_clause'} = "WHERE tags_list LIKE '%approve%' AND item_score > 0";
-	my @files = DBGetItemList(\%params);
+	WriteLog('GetWelcomePage: ilyag theme');
+## this welcome page displays all items which have a tag of 'approve' and a score of greater than 0
+#	my %params;
+#	$params{'where_clause'} = "WHERE tags_list LIKE '%approve%' AND item_score > 0";
+#	my @files = DBGetItemList(\%params);
+#
+#	my $welcomePage =
+#		GetPageHeader('welcome') .
+#		GetItemListHtml(\@files) .
+#		GetPageFooter('welcome')
+#	;
+#
+#	if (GetConfig('admin/js/enable')) {
+#		my @js = qw(avatar puzzle settings profile utils timestamp clock fresh table_sort voting write);
+#		if (GetConfig('admin/php/enable')) {
+#			push @js, 'write_php'; # write.html
+#		}
+#		$welcomePage = InjectJs($welcomePage, @js)
+#	}
+#	return $welcomePage
 
-	my $welcomePage =
-		GetPageHeader('welcome') .
-		GetItemListHtml(\@files) .
-		GetPageFooter('welcome')
-	;
-
-	if (GetConfig('admin/js/enable')) {
-		my @js = qw(avatar puzzle settings profile utils timestamp clock fresh table_sort voting write);
-		if (GetConfig('admin/php/enable')) {
-			push @js, 'write_php'; # write.html
-		}
-		$welcomePage = InjectJs($welcomePage, @js)
-	}
-
-	return $welcomePage
+	my $html = GetTemplate('html/page/home.template');
+	return $html;
 }
 
-1
+1;
