@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# multi-threaded indexing of all .txt files in html/txt
+
 echo this script may lock up your system, so it is disabled by default
 exit
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# create directories for a new theme
+# create template directories for a theme
 
 if [ ! $1 ] ; then
 	echo theme name not specified, exiting
