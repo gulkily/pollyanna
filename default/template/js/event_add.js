@@ -1,5 +1,10 @@
 // == begin event_add.js
+
+// helpers for form which adds ne events
+
 function UpdateTimeString() {
+// sets epoch-format timestamp in appropriate field on event add page
+
 	//alert('DEBUG: UpdateTimeString()');
 
 	var year = document.forms['addevent'].year.value;

@@ -1,4 +1,5 @@
-// == begin formencode.js 
+// == begin formencode.js
+
 function formToText(formId) {
 	var form = document.getElementById(formId);
 
