@@ -5,7 +5,7 @@ function PingUrlCallback () {
 	var xmlhttpElement = window.xmlhttpElement;
 
 	if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-		// alert('DEBUG: PingUrlCallback() found status 200!');
+		//alert('DEBUG: PingUrlCallback() found status 200!');
 
 		if (xmlhttpElement) {
 			var elemOK = document.createElement('span');
@@ -23,8 +23,15 @@ function PingUrlCallback () {
 		// document.write(xmlhttp.responseText);
 		// document.close();
 		window.xmlhttp = 0;
+	} else if (xmlhttp.readyState == 4 && xmlhttp.status == 401) {
+		// server returned 401, which most likely means that we need a cookie
+		// redirect user to profile.html page so that they can register
+		// this is very basic, jarring, and unfriendly, but it is better than failing silently
+		// relative links setting should also be taken into account
+		// #todo
+		window.location = '/profile.html'; // #todo relativize
 	} else {
-		// alert('DEBUG: PingUrlCallback: warning: unrecognized: xmlhttp.status = ' + xmlhttp.status + '; xmlhttp.readyState = ' + xmlhttp.readyState);
+		//alert('DEBUG: PingUrlCallback: warning: unrecognized: xmlhttp.status = ' + xmlhttp.status + '; xmlhttp.readyState = ' + xmlhttp.readyState);
 	}
 }
 
