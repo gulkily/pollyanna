@@ -537,14 +537,14 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 
 		# REPLIES LIST
 		#$txtIndex .= GetReplyListing($file{'file_hash'});
+		if (GetConfig('reply/enable')) {
+			$txtIndex .= GetReplyForm($file{'file_hash'});
+		}
 
 		# RELATED LIST
 		my $showRelated = GetConfig('setting/html/item_page/toolbox_related');
 		if (index(',' . $file{'tags_list'} . ',', ',pubkey,') != -1) {
 			$showRelated = 0;
-		}
-		if (GetConfig('reply/enable')) {
-			$txtIndex .= GetReplyForm($file{'file_hash'});
 		}
 		if ($showRelated) {
 			my $relatedListing = GetRelatedListing($file{'file_hash'});
@@ -552,13 +552,15 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			if ($relatedListing) {
 				$txtIndex .= $relatedListing;
 			} else {
-				#$txtIndex .= GetDialogX('No related items found for this item.', 'Debug');
+				if (GetConfig('debug')) {
+					# $txtIndex .= GetDialogX('No related items for $file{\'file_hash\'} =  ' . $file{'file_hash'}, 'Debug');
+					$txtIndex .= GetDialogX('Did not find any related items.', 'Debug Notice');
+				} else {
+					# nothing to do
+				}
 			}
 		} else {
-			if (GetConfig('debug')) {
-				# $txtIndex .= GetDialogX('No related items for $file{\'file_hash\'} =  ' . $file{'file_hash'}, 'Debug');
-				$txtIndex .= GetDialogX('Did not find any related items.', 'Debug Notice');
-			}
+			# nothing to do
 		}
 	}
 
