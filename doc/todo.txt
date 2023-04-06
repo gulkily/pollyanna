@@ -2940,7 +2940,6 @@ this Chrome device had a weird issue where I logged out, but when I clicked the 
 
 I think there should be an additional "logged out" flag stored that takes precedence over any accidentally stored session and does extra to ensure the session information is wiped.
 
-
 ===
 
 #bug
@@ -2953,16 +2952,13 @@ Some pages are very slow to load initially, especially links from the Help page,
 
 when printing, some dialogs do not show up
 
-
 ===
 
 #bug images counter on stats page does not account for images which do not appear in regular view
 
-
 ===
 
 #todo enable logging of anonymized client id?
-
 
 ===
 
@@ -2972,7 +2968,6 @@ some page titles are lowercase
 
 item pages are titled with the item's hash instead of item's title
 
-
 ===
 
 #todo
@@ -2981,16 +2976,13 @@ when user logs in, their welcome page changes, and this triggers a notification
 
 probably should not happen on the welcome page, as it is confusing and doesn't help the user, who is welcome for their proof-of-work puzzle to complete
 
-
 ===
 
 #todo turn on cookie header
 
-
 ===
 
 #todo geographical address book
-
 
 ===
 
@@ -3010,28 +3002,5 @@ because i did not remember the url character code for \n, i could not post an ac
 
 i think all item references should add that item as a child.
 
-===
-
->>a39d161b2df8676ba80ade79bf223712191088bd
-
-i think the status bar should be returned to beginner layer.
-
-perhaps the hashtags should also be made accessible.
-
-one way to do this is to show the hashtags on the item page, but not on the regular item template.
-
-===
-
-#bug
-
-for some reason item templates are being made without +cart button
-
-===
-
-#bug
-
-on the profile page, "creating profile..." notification hangs after the profile has been created in the background
-
-this is somewhere in PingUrl()
 ===
 need to restart server if php flag changes
