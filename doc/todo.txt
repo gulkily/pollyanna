@@ -23,6 +23,7 @@ cgi-bin
 
 lighttpd and python3_server should not be enabled at the same time
     otherwise it may cause a problem in GetTargetPath()
+        add warning in GetTargetPath() x
 
 debug output should verify caller matches first word of log
 	this is already practically done in WriteLog()
