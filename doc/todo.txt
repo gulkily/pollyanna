@@ -2,7 +2,6 @@
 1680385761.98751 ``"""++++++++>+++++++++`++>++++++____grep: /Users/mac/thankyou/html/chain.log: No such file or directory
 `tail: /Users/mac/thankyou/html/chain.log: No such file or directory
 
-
 #hastitle tag should only apply if title was actually applied to item
     assumed titles e.g. from first line should not result in #hastitle
 
@@ -14,16 +13,16 @@ GetWriteForm() should include <form> tag x
 cgi-bin
     basics
         post
-        update page
+        update pagex
         redirect
-    languages
-        perl
-        sh
-        python
+            how to redirect?
+    languages proof of concept
+        perlx
+        shx
+        pythonx
 
 lighttpd and python3_server should not be enabled at the same time
     otherwise it may cause a problem in GetTargetPath()
-
 
 debug output should verify caller matches first word of log
 	this is already practically done in WriteLog()
