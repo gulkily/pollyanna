@@ -264,6 +264,10 @@ sub GetTargetPath { # $target ; gets the target url for an action
 			return $returnValue{$target};
 		}
 
+		if (GetConfig('setting/admin/python3_server/enable') && GetConfig('setting/admin/lighttpd/enable')) {
+			WriteLog('GetTargetPath: warning: python3_server and lighttpd are enabled together.');
+		}
+
 		if ($target eq 'post') {
 			if (GetConfig('setting/admin/python3_server/enable')) {
 				if (GetConfig('setting/admin/cgi/enable')) {
