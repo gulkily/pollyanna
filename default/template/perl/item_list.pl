@@ -35,7 +35,7 @@ sub GetItemListHtml { # @files(array of hashes) ; takes @files, returns html lis
 	my $itemList = '';
 	my $itemComma = '';
 
-	my $itemListTemplate = GetTemplate('html/widget/item_list.pl');
+	my $itemListTemplate = GetTemplate('html/widget/item_list.template');
 
 	#shift @files;
 
