@@ -265,6 +265,7 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 	WriteLog('GetMenuItem: $address = ' . $address . '; $caption = ' . $caption);
 
 	my $menuName = lc($caption);
+	my $dialogName = substr($address, 1, length($address) - 6); # '/foo.html' ==> 'foo'
 
 	# if (!-e "$HTMLDIR/$address") {
 	#	#don't make a menu item if file doesn't exist
@@ -326,7 +327,7 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 				$menuItem,
 				'a ',
 				'onclick',
-				"if ((!window.GetPrefs || GetPrefs('draggable_spawn'))) { return FetchDialog('$menuName'); }"
+				"if ((!window.GetPrefs || GetPrefs('draggable_spawn'))) { return FetchDialog('$dialogName'); }"
 			);
 		}
 		#todo this also needs relativize support
