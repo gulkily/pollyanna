@@ -1682,7 +1682,7 @@ while (my $arg1 = shift @foundArgs) {
 			my $makeDialogArg = shift @foundArgs;
 			#todo sanity check of $makeDialogArg
 			if ($makeDialogArg) {
-				my @validDialogs = qw(settings access upload data search);
+				my @validDialogs = qw(settings access upload data search profile);
 				my @needRequire = qw(profile upload);
 				my @queryDialogs = qw(read image url chain new tags scores active authors threads);
 				my @simpleDialogs = qw(help );
@@ -1805,7 +1805,7 @@ while (my $arg1 = shift @foundArgs) {
 						WriteLog('MakePage: warning: sanity check failed on $hashTag (-D)');
 						return '';
 					}
-				}
+				} # -D #foo
 				else {
 					print 'pages: did not recognize dialog type: ' . $makeDialogArg;
 					print "\n";
