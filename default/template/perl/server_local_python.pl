@@ -168,9 +168,9 @@ sub StartHttpServer { # run command to start local python3 http.server instance
         my $docRoot = GetDir('html');
 
         if (GetConfig('setting/admin/cgi/enable')) {
-            system("$pathPython3 -m http.server -d $docRoot --cgi $port");
+            system("$pathPython3 -m http.server -d $docRoot --cgi $port 2> log/p3access.log");
         } else {
-            system("$pathPython3 -m http.server -d $docRoot $port");
+            system("$pathPython3 -m http.server -d $docRoot $port 2> log/p3access.log");
         }
 
         #todo background it if opening browser
