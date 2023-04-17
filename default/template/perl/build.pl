@@ -55,6 +55,10 @@ if (!-e $TXTDIR) {
 	mkdir($TXTDIR);
 }
 
+if (!-e $HTMLDIR . '/chain.log') {
+    PutFile($HTMLDIR . '/chain.log', '');
+}
+
 if (!-e $IMAGEDIR) {
 	# create $IMAGEDIR directory if it doesn't exist
 	mkdir($IMAGEDIR);
@@ -67,6 +71,7 @@ BuildMessage "Looking for files...";
 
 BuildMessage "DBAddPageTouch('summary')...";
 DBAddPageTouch('system');
+`./pages.pl --system`;
 
 BuildMessage("UpdateUpdateTime()...");
 UpdateUpdateTime();
