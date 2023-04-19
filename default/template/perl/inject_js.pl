@@ -349,6 +349,8 @@ sub GetScriptTemplate { # $script ; returns script based on name
 		my $colorHighlightBeginner = GetThemeColor('highlight_beginner');
 		my $colorHighlightReady = GetThemeColor('highlight_ready');
 
+		$scriptTemplate = str_replace("var colorHighlightAlert = '';", "var colorHighlightAlert = '$colorHighlightAlert';", $scriptTemplate);
+
 		$scriptTemplate =~ s/\$colorHighlightAlert/$colorHighlightAlert/g;
 		$scriptTemplate =~ s/\$colorHighlightAdvanced/$colorHighlightAdvanced/g;
 		$scriptTemplate =~ s/\$colorHighlightBeginner/$colorHighlightBeginner/g;

@@ -234,7 +234,10 @@ function ShowTimestamps () { // finds any class=timestamp, updates its displayed
 					}
 					if ((secs * (-1)) < 86400) {
 						// less than a day ago = highlight
-						te[i].style.backgroundColor = '$colorHighlightAlert';
+						var colorHighlightAlert = ''; // templated
+						if (colorHighlightAlert) {
+						    te[i].style.backgroundColor = colorHighlightAlert;
+                        }
 					} else {
 						te[i].style.backgroundColor = '';
 					}
