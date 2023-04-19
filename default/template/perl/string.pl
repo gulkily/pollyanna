@@ -23,7 +23,7 @@ sub GetStringNoFallback { # $stringKey, $language, $noSubstitutions
 	} else {
 		return $resultString;
 	}
-}
+} # GetStringNoFallback()
 
 sub GetString { # $stringKey, $language, $noSubstitutions ; Returns string from config/string/en/
 # $stringKey = 'menu/top'
@@ -105,13 +105,13 @@ sub htmlspecialchars { # $text, encodes supplied string for html output
 	my $text = shift;
 	$text = encode_entities2($text);
 	return $text;
-}
+} # htmlspecialchars()
 
 sub HtmlEscape { # encodes supplied string for html output
 	my $text = shift;
 	$text = encode_entities2($text);
 	return $text;
-}
+} # HtmlEscape()
 
 sub GetStringHtmlColor {
 # GetColorFromHash {
@@ -146,7 +146,7 @@ sub str_repeat {
 	WriteLog('str_repeat: $string = ' . $string . '; $count = ' . $count);
 	WriteLog('str_repeat: ' . $string x $count); #todo performance?
 	return $string x $count;
-}
+} # str_repeat()
 
 #sub TrimUnicodeString {
 #	my $string = shift;
@@ -160,7 +160,7 @@ sub str_repeat {
 #	}
 #
 #	return $unicodeString;
-#}
+#} # TrimUnicodeString()
 
 sub GetFirstLine {
 	my $text = shift;
@@ -171,6 +171,6 @@ sub GetFirstLine {
 	}
 	
 	return $text;
-}
+} # GetFirstLine()
 
 1;
