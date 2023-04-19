@@ -15,7 +15,7 @@ ORDER BY epoch DESC
 
 
 select
-	key||','||date 
+	key||','||date
 from
 	config
 where
@@ -31,28 +31,28 @@ where
 
 
 CREATE VIEW relative_score
-SELECT 
+SELECT
 	sum(relative_score) AS relative_score,
 	file_hash
 FROM (
-	SELECT 
-		COUNT(*) AS relative_score, 
-		file_hash 
-	FROM 
-		item_attribute 
-	WHERE 
-		attribute = 'surpass' 
-	GROUP BY 
-		file_hash 
+	SELECT
+		COUNT(*) AS relative_score,
+		file_hash
+	FROM
+		item_attribute
+	WHERE
+		attribute = 'surpass'
+	GROUP BY
+		file_hash
 UNION ALL
 	SELECT
 		(-(COUNT(*))) AS relative_score,
 		`value` AS file_hash
-	FROM 
+	FROM
 		item_attribute
 	WHERE
 		attribute = 'surpass'
-	GROUP BY 
+	GROUP BY
 		file_hash
 )
 GROUP BY file_hash
