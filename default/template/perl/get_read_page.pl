@@ -186,7 +186,30 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 
 			@files = DBGetItemList(\%queryParams);
 
-			$zipName = "$tagName.zip";
+			if (GetConfig('setting/zip/tag')) {
+				$zipName = "tag/$tagName.zip";
+				#todo move this somewhere else
+				if ($zipName) {
+					require_once('make_zip.pl');
+					my %zipOptions;
+					$zipOptions{'where_clause'} = "		WHERE
+                                                   			item_flat.file_hash IN (
+                                                   				SELECT
+                                                   					file_hash
+                                                   				FROM
+                                                   					vote
+                                                   				WHERE
+                                                   					vote_value = '$tagName' OR
+                                                   					vote_value IN (
+                                                   						SELECT tag
+                                                   						FROM tag_parent
+                                                   						WHERE tag_parent = '$tagName'
+                                                   				)
+                                                   			)";
+					my @zipFiles = DBGetItemList(\%zipOptions);
+					MakeZipFromItemList($zipName, \@zipFiles);
+				} # if ($zipName)
+			} # if (GetConfig('setting/zip/tag'))
 		} # $pageType eq 'tag'
 		if ($pageType eq 'random') { #'/random.html'
 			WriteLog('GetReadPage: random');
@@ -260,6 +283,15 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		}
 		# this would add a list of all the items on the page
 		# 		$txtIndex .= GetQueryAsDialog($queryDisplay);
+
+        if (GetConfig('setting/zip/tag')) {
+            if (scalar(@files) > 0) {
+                my $zipLink = '<a href="/tag/' . $pageParam . '.zip">' . $pageParam . '.zip</a>';
+                $txtIndex .= GetDialogX($zipLink, 'Archive');
+            } else {
+                $txtIndex .= GetDialogX('This tag has no items yet, <br>so no archive is available.', 'Archive');
+            }
+        }
 
 		if ($pageParam eq 'image') { # GetReadPage()
 			#$txtIndex .= GetUploadDialog();
