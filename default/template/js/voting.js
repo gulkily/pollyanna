@@ -83,13 +83,6 @@ function IncrementTagLink (t) { // increments number of votes in tag button
 
 		//alert('DEBUG: IncrementTagLink: voteValue = "' + voteValue + '"');
 
-		if (voteValue == 'hide' && window.GetParentDialog) {
-			// if we clicked a 'hide' vote, hide the parent dialog
-			//alert('DEBUG: IncrementTagLink: special case for voteValue == hide');
-			var parentDialog = GetParentDialog(t);
-			HideDialog(parentDialog);
-		}
-
 		//alert('DEBUG: IncrementTagLink: finished with t.innerHTML');
 
 		return false;

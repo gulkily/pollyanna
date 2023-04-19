@@ -1,3 +1,12 @@
+		if (voteValue == 'hide' && window.GetParentDialog) {
+			// if we clicked a 'hide' vote, hide the parent dialog
+			//alert('DEBUG: IncrementTagLink: special case for voteValue == hide');
+			var parentDialog = GetParentDialog(t);
+			HideDialog(parentDialog);
+		}
+
+
+
 module.exports = function toUTCString() {
         thisTimeValue(this); // to brand check
 
