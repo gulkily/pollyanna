@@ -179,6 +179,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	}
 	
 	elsif ($pageType eq 'date') {
+#sub MakeDatePage {
 		my $pageDate = $pageParam;
 		if ($pageDate && $pageDate =~ m/^([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9])/) { #basic sanity check
 			$pageDate = $1;
