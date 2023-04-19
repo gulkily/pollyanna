@@ -729,6 +729,7 @@ function LoadCheckboxValues () {
 	LoadCheckbox(document.getElementById('chkWriteAutoSave'), 'write_autosave');
 	LoadCheckbox(document.getElementById('chkFocusReply'), 'focus_reply');
 	LoadCheckbox(document.getElementById('chkSignByDefault'), 'sign_by_default');
+	LoadCheckbox(document.getElementById('chkUncheckSignWhenPasting'), 'uncheck_sign_when_pasting');
 
 	//alert('DEBUG: LoadCheckboxValues: about to do option groups');
 

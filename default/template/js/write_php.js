@@ -28,19 +28,29 @@ function CommentOnChange (t, formId) {
 
 	if (!t.value || !t.value.length) {
 		//alert('DEBUG: CommentOnChange: window.intCommentOnChangeLastValue <= 1024 && t.value.length <= 1024, return');
-
+		window.intCommentOnChangeLastValue = 0;
 		return true;
+	}
+
+	if ((t.value.length - intCommentOnChangeLastValue) > 16) {
+		//alert('DEBUG: CommentOnChange: paste detected');
+		if (GetPrefs('uncheck_sign_when_pasting')) {
+			var chkSignAs = document.getElementById('chkSignAs');
+			if (chkSignAs.checked) {
+				chkSignAs.removeAttribute('checked');
+			}
+		}
 	}
 
 	if ((window.intCommentOnChangeLastValue <= 1024) && t.value && t.value.length && (t.value.length <= 1024)) {
 		//alert('DEBUG: CommentOnChange: window.intCommentOnChangeLastValue <= 1024 && t.value.length <= 1024, return');
-
+		window.intCommentOnChangeLastValue = t.value.length;
 		return true;
 	}
 
 	if (1024 < window.intCommentOnChangeLastValue && t.value && t.value.length && (1024 < t.value.length)) {
 		//alert('DEBUG: CommentOnChange: 1024 < window.intCommentOnChangeLastValue && 1024 < t.value.length, return');
-
+		window.intCommentOnChangeLastValue = t.value.length;
 		return true;
 	}
 
