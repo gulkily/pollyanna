@@ -279,29 +279,7 @@ sub GetCalendarPage { # returns calendar page
 	$html .= GetPageHeader('calendar');
 	$html .= GetTemplate('html/maincontent.template');
 
-	my @dates = SqliteQueryHashRef(
-		"
-		    SELECT
-		        date,
-		        SUM(item_count) AS item_count
-            FROM (
-                SELECT
-                    SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 11) AS date,
-                    COUNT(file_hash) AS item_count
-                FROM item_flat
-                WHERE item_score >= 0
-                GROUP BY date
-                UNION ALL
-                SELECT
-                    value AS date,
-                    COUNT(file_hash) AS item_count
-                FROM item_attribute
-                WHERE attribute = 'date'
-                GROUP BY date
-            )
-            GROUP BY date
-		"
-	);
+	my @dates = SqliteQueryHashRef('calendar_days');
 	shift @dates;
 
 	WriteLog('GetCalendarPage: scalar(@dates) = ' . scalar(@dates));
@@ -321,26 +299,7 @@ sub GetCalendarPage { # returns calendar page
 
 		#$html .= GetDialogX("$curYear $curMonth $curDay", 'As Of');
 
-		my @yearMonths = SqliteQueryHashRef(
-			"
-				SELECT
-					year_month
-				FROM (
-					SELECT
-						SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 8) AS year_month
-					FROM item_flat
-					WHERE item_score >= 0
-					GROUP BY year_month
-					UNION ALL
-					SELECT
-						SUBSTR(value, 0, 8) AS year_month
-					FROM item_attribute
-					WHERE attribute = 'date'
-					GROUP BY year_month
-				)
-				GROUP BY year_month
-			"
-		);
+		my @yearMonths = SqliteQueryHashRef('calendar_months');
 		shift @yearMonths;
 
 		for my $yearMonthRef (@yearMonths) {
