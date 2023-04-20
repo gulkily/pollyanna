@@ -124,6 +124,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'/committee.html', #expo
 			'/speakers.html', #expo
 			'/academic.html', #expo
+			'/schedule.html', #expo
 			'/profile.html',
 			'/child.html',
 			'/example.html',
