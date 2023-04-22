@@ -105,11 +105,16 @@ function btnRegister_Click (t) { // event for 'Register' button's click
 				//alert('DEBUG: returning intKeyGenResult = ' + intKeyGenResult);
 				myFingerprint = window.localStorage.getItem('fingerprint');
 				if (myFingerprint) {
-					window.location = '/profile.html?' + myFingerprint;
+					//window.location = '/profile.html?' + myFingerprint;
 				} else {
-					window.location = '/profile.html'; // #todo this needs to be fixed to work with relativized urls
+					//window.location = '/profile.html'; // #todo this needs to be fixed to work with relativized urls
 				}
-				return intKeyGenResult; // TRUE if failed, FALSE if failed,
+				//return intKeyGenResult; // TRUE if failed, FALSE if failed,
+				//alert('Registration success.\nYou may need to reload the page.\nPlease forgive us for not being better at JavaScript.');
+				setTimeout("window.location.reload()", 1000);
+				return false;
+				//return true;
+				//return false;
 				// because it is used to determine whether to submit the form to get a cookie
 			}
 		}
