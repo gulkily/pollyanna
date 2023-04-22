@@ -292,7 +292,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		my $fileClientPath = $fieldValue;
 		$fileClientPath =~ s/^html\//\//; #dirty #hack #bughere
 
-		WriteLog('RenderField: warning: file_path is using hard-coded path to HTML dir');
+		WriteLog('RenderField: warning: file_path is using hard-coded path to HTML dir; caller: ' . join(',', caller));
 		$fieldValue = ''; # initialize/reset
 		$fieldValue .= '<a href="' . HtmlEscape($fileClientPath) . '">' . HtmlEscape($fileClientPath) . '</a>';
 
@@ -311,7 +311,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 				}
 			}
 		} else {
-			WriteLog('RenderField: warning: file_path: file does not exist: ' . $fileLocalPath);
+			WriteLog('RenderField: warning: file_path: file does not exist: ' . $fileLocalPath . '; caller = ' . join(',', caller));
 		}
 
 	}
