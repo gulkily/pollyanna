@@ -90,15 +90,13 @@ if [ $1 = index ]
 		fi
 fi
 
-if [ $1 = update ]
+if [ $1 = refresh ]
 	then
 		perl -T default/template/perl/script/template_refresh.pl
-		./build.sh
 fi
 
 if [ $1 = frontend ]
 	then
-		perl -T default/template/perl/script/template_refresh.pl
 		default/template/sh/_dev_clean_html.sh
 		time ./config/template/perl/pages.pl --system
 fi
