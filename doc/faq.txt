@@ -1,6 +1,6 @@
 Localhost can't connect / server not found
 I tried to connect to http://localhost:2784/ and it didn't work
-A: Run server_local_lighttpd.pl
+A: Run hike start
 
 
 Why bother with supporting older browsers?

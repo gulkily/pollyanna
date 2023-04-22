@@ -1,3 +1,7 @@
+#!/bin/sh
+
+# this configures git
+
 git config --global --unset credential.helper
 git config --global credential.helper store
 git config --global pull.rebase false

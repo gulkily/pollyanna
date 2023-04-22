@@ -7,39 +7,35 @@ Known Issues
 
 config/admin/js/translit is incompatible with config/admin/php/ascii_only
 
-In w3m browser, when press Enter key
+In w3m browser, when pressing Enter key
 	Redirection loop detected
 	Workaround: press Ctrl+R to reload page
 		Logging in works this way
 
-When try to resubmit deleted item (exact text) get 404 page
+When trying to resubmit a deleted item (exact text) get 404 page
 	Feature-bug
-		The 404 is good, but could use additional messaging
+		The 404 is expected, but could use additional messaging
 
 Lighttpd + PHP
-	Changing ./config/admin/php/enable requires rebuild and lighttpd restart
+	Changing ./config/admin/php/enable requires lighttpd restart
 
 Sometimes new entries stop being picked up from access.log and/or written to the access log by web server
 	The solution is to rm or trim the access log and restart the web server
 	The cause is still unknown to me, probably file is too big
-
-Timestamp in the page footer (when inserted by php) is, for some reason, not updated on the first ShowTimestamps(), but is on the second
-	As a result, the "x units ago" text is not displayed for the first 5-15 seconds after page load
+		Another possible cause is that the file node changes
 
 Browsers which do not support Unicode display gibberish when faced with non-Ascii characters
 	This can be remediated in the future by down-converting to one particular encoding based on which non-ascii characters are used
-		e.g. if there are Cyrillic Unicode characters present, down-convert into koi8-r or
+		e.g. if there are Cyrillic Unicode characters present, down-convert into koi8-r
 
 When rebuilding site, user-submitted config settings are re-applied one by one as the items are indexed
 	This means, for example, theme values set with "#config theme"
 		will change, and you may see different themes applied on some pages
 	Partially remediated by loading items containing "#config" ahead of everything else except pubkeys
+	A real fix for this would be to import items in chain order
 
-Content returned via PHP shims has different headers
+Content returned via PHP shim (route.php) has different headers
 	gzip is not used, so filesize is bigger
-
-Voting on author fingerprints does not work, even though the buttons on the authors list page try.
-	Removed buttons
 
 Lighttpd directory listings cause JS error in NN3
 	Partially remediated by forbidding directory listings, showing 404 page instead
@@ -64,9 +60,7 @@ Long messages without JS may cause URI too long error
 
 All 40-character-long hex-looking strings are assumed to be existing items
 	Linked in the html-ized posts, even if they do not exist
-
-Logging out does not clear client-side settings
-	These settings include list of items user has voted on
+	This can be remediated by checking for GetCache('indexed/$hash') first #todo
 
 There's a piece missing from the PGP-to-cookie auth transition
 	See #knownCookieAuth
@@ -88,6 +82,7 @@ default/html/reply_form_after_reply_list
 		after will not be shown if before is enabled
 
 Sometimes generated keys have the header/comment field
+	This may be a bug in OpenPGP.js
 
 Code Issues
 ===========

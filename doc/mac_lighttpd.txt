@@ -1,5 +1,8 @@
 # how I compiled lighttpd and php on Mac:
 
+# note that this does not include regex,
+# which is required for setting/admin/php/rewrite
+
 cd
 curl -O -k https://ftp.gnu.org/gnu/gettext/gettext-0.21.tar.gz
 tar -vzxf gettext-0.21.tar.gz

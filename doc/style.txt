@@ -40,7 +40,7 @@ function SomeJavaScriptFunction (firstArgument, argumentTheSecond) { // demonstr
 def SomePythonFunction (firstArgument, argumentTheSecond): #{
 	WriteLog("SomePythonFunction(", firstArgument, argumentTheSecond, ")")#;
 	print("Hello, World!")#;
-#}
+#} # SomePythonFunction()
 
 
 This is tuned for global search, so that one can press Ctrl+Shift+F, type in "SomeFunction ", and immediately see this information.
@@ -70,6 +70,6 @@ JavaScript and > symbols
 			var gt = unescape('%3E');
 			var someTag = '<p' + gt;
 			var someHtmlString = '<p' + gt + 'hello, world</p' + gt;
-	It's kind of a pain in the ass, but also happens to discourage html strings in JS which is a plus
+	It also discourages html strings in JS, which should be in templates instead
 
 

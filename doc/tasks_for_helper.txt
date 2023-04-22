@@ -1,1 +1,0 @@
-identify which #todo items in this codebase you know you can fix and propose fixes for 10 easiest tasks
