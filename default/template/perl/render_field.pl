@@ -213,7 +213,22 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 				#Use of uninitialized value in concatenation (.) or string at ...render_field.pl line 138.
 			} else {
 				require_once('widget/item_html_link.pl');
-				$fieldValue = '<b>' . GetItemHtmlLink($itemRow{'file_hash'}, $fieldValue) . '</b>';
+
+				# this is a bit hacky, but it works
+				# includes small thumbnail of image
+				if ($itemRow{'item_type'} && ($itemRow{'item_type'} eq 'image')) {
+					#todo use GetImageContainer()
+					my $fileHash = $itemRow{'file_hash'};
+					my $imageSmallUrl = "/thumb/thumb_42_$fileHash.gif";
+					my $imageContainer = "<img border=1 src=$imageSmallUrl style=height:1em;vertical-align:middle;margin-right:0.3em>";
+					$fieldValue = $imageContainer . HtmlEscape($fieldValue);
+				} else {
+					$fieldValue = HtmlEscape($fieldValue);
+				}
+
+				my %flags;
+				$flags{'do_not_escape_html_characters'} = 1;
+				$fieldValue = '<b>' . GetItemHtmlLink($itemRow{'file_hash'}, $fieldValue, 0, \%flags) . '</b>';
 			}
 		}
 	}
