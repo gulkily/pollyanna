@@ -1549,6 +1549,7 @@ while (my $arg1 = shift @foundArgs) {
 		#		}
 		#
 		if ($arg1 eq '--theme') {
+			#todo this is broken, fix it
 			# override the theme for remaining pages
 			WriteMessage("recognized token --theme");
 			my $themeArg = shift @foundArgs;
