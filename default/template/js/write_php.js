@@ -32,7 +32,7 @@ function CommentOnChange (t, formId) {
 		return true;
 	}
 
-	if ((t.value.length - intCommentOnChangeLastValue) > 16) {
+	if (16 < (t.value.length - intCommentOnChangeLastValue)) {
 		//alert('DEBUG: CommentOnChange: paste detected');
 		if (GetPrefs('uncheck_sign_when_pasting')) {
 			var chkSignAs = document.getElementById('chkSignAs');
