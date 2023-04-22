@@ -3,6 +3,7 @@ SELECT
 	item_flat.author_key AS author_id,
 	author_score,
 	item_score,
+	item_type,
 	add_timestamp,
 	'' AS tagset_compost,
 	file_hash
