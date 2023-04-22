@@ -35,7 +35,17 @@ sub GetItemHtmlLink { # $hash, [link caption], [#anchor] ; returns <a href=...
 			$hashAnchor = '';
 		}
 
-		$linkCaption = HtmlEscape($linkCaption);
+		my $flagsReference = shift;
+		my %flags;
+		if ($flagsReference) {
+			%flags = %{$flagsReference};
+		}
+
+		if ($flags{'do_not_escape_html_characters'}) {
+			# do not escape
+		} else {
+			$linkCaption = HtmlEscape($linkCaption);
+		}
 
 		#my $htmlFilename = GetHtmlFilename($hash); # GetItemHtmlLink()
 		my $htmlFilename = GetItemUrl($hash); # GetItemHtmlLink()
