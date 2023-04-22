@@ -1,4 +1,4 @@
-<!-- easy_register.js -->
+/* easy_register.js */
 
 function EasyRegister (t) {
 	MakeKey(t);
@@ -8,4 +8,4 @@ function EasyRegister (t) {
 	return false;
 }
 
-<!-- easy_register.js -->
+/* / easy_register.js */
