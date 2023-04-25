@@ -293,7 +293,7 @@ sub MakeIndex { # indexes all available text files, and outputs any config found
 
 		IndexCppFile('flush');
 	} # admin/cpp/enable
-	if (GetConfig('admin/py/enable')) {
+	if (GetConfig('admin/python3/enable')) {
 		state $HTMLDIR = GetDir('html');
 
 		my $pyFilesCommand = "find $HTMLDIR/py -type f -name '*.py'";
@@ -312,7 +312,7 @@ sub MakeIndex { # indexes all available text files, and outputs any config found
 		}
 
 		IndexPyFile('flush');
-	} # admin/py/enable
+	} # admin/python3/enable
 	if (GetConfig('admin/perl/enable')) {
 		state $HTMLDIR = GetDir('html');
 

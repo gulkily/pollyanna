@@ -184,7 +184,7 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 			$indexSuccess = 0;
 		}
 	} # if ($ext eq 'cpp')
-	if ($ext eq 'py' && GetConfig('admin/py/enable')) {
+	if ($ext eq 'py' && GetConfig('admin/python3/enable')) {
 		WriteLog('IndexFile: calling IndexPyFile()');
 		$indexSuccess = IndexPyFile($file);
 
