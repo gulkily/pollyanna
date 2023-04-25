@@ -78,4 +78,7 @@ button.close, button.skip {
 button:hover {
 	color: red;
 }
+#spanDialogControls a {
+	color: white;
+}
 /* / theme/chicago/additional.css */
