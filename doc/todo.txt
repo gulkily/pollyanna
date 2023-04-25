@@ -1,3 +1,5 @@
+hypercode theme tables with rounded corners should have table border=0 in the html
+
 #bug if chain.log is missing (such as after hike archive)
 1680385761.98751 ``"""++++++++>+++++++++`++>++++++____grep: /Users/mac/thankyou/html/chain.log: No such file or directory
 `tail: /Users/mac/thankyou/html/chain.log: No such file or directory
