@@ -11,6 +11,7 @@ sub GetQueryAsDialog { # $query, $title, $columns, \%param
 #todo this should take @queryArgs
 
 # sub GetQueryDialog {
+# sub GetDialogFromQuery {
 	my $query = shift;
 	my $title = shift;
 	my $columns = shift; # optional, default is to use all the columns from the query
