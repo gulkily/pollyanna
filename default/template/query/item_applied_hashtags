@@ -1,0 +1,3 @@
+SELECT vote_value
+FROM vote
+WHERE ballot_hash = ?;
