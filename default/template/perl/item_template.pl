@@ -425,7 +425,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			# STATUS BAR
 			# STATUS BAR
 			my $statusBar = '';
-			{
+			if (GetConfig('setting/html/item_dialog_status_bar')) {
 				$statusBar = GetTemplate('html/item/status_bar.template');
 
 				my $fileHashShort = substr($fileHash, 0, 8);
@@ -451,7 +451,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 						$statusBar .= '<!-- add_to_reply_cart button requires js, but it is not enabled -->';
 					}
 				}
-			}
+			} # if (GetConfig('setting/html/item_dialog_status_bar')
 
 			#$statusBar = s/\$permalinkHtml/$permalinkHtml/g;
 
