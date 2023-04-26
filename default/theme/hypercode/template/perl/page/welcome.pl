@@ -7,7 +7,7 @@ use 5.010;
 sub GetWelcomePage {
 	my $html = 
 		GetPageHeader('welcome') .
-		GetDialogX('Welcome to HyperCode, <br> an experimental web space for you. <br> Please, be nice.', 'Welcome') .
+		GetDialogX(GetTemplate('html/page/welcome.template'), 'Welcome') .
 		GetPageFooter('welcome')
 	;
 
