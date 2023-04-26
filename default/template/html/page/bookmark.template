@@ -78,5 +78,10 @@
 		<br>
 		<span class=beginner>Update site to reflect new data.</span>
 	</p>
+	<p>
+		<a href="javascript:window.location=window.location+'?time=9999999999'">Reprint</a>
+		<br>
+		<span class=beginner>Asks server to reprint current page.</span>
+	</p>
 </fieldset>
 <!-- / bookmark.template -->
