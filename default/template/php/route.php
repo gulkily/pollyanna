@@ -1035,7 +1035,7 @@ if (GetConfig('admin/php/route_enable')) {
 			WriteLog('route.php: $serverResponse IS SET');
 		}
 
-		if ($serverResponse) {
+		if ($serverResponse && GetConfig('setting/admin/php/server_response_display_to_client')) {
 			// inject server message into html
 
 			// base template for server message, not including js
