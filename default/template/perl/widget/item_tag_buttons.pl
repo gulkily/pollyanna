@@ -11,6 +11,7 @@ sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons f
 	# sub GetVoteLinks {
 	# sub GetItemVoteLinks
 	# sub GetVoteButton {
+	# sub GetTagLinks {
 	my $fileHash = shift; # item's file hash
 	my $tagSet = shift;   # (optional) use a particular tagset instead of item's default
 	my $returnTo = shift; # (optional) what page to return to instead of current (for use by post.php)
