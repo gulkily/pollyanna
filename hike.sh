@@ -76,13 +76,26 @@ if [ $1 = rebuild ]
 		time ./rebuild.sh
 fi
 
+if [ $1 = reindex ]
+  # remove all 'file has been indexed' flags in cache/b/indexed/
+  # reindex all data files
+  then
+    echo this will remove item_attributes table. are you sure?
+    sleep 3
+    sqlite3 cache/b/index.sqlite3 "delete from item_attribute";
+    rm -v cache/b/indexed/*
+    time perl -T ./config/template/perl/index.pl --all
+fi
+
 if [ $1 = index ]
+  # if a parameter is specified, it looks for that file/data
 	then
 		if [ $2 ]
 			then
 				time perl -T ./config/template/perl/index.pl $2
 		fi
 		if [ ! $2 ]
+		  # if no parameter is specified, it does a full index
 			then
 				time perl -T ./config/template/perl/index.pl --chain
 				sleep 1
@@ -93,12 +106,15 @@ fi
 if [ $1 = refresh ]
 	then
 		perl -T default/template/perl/script/template_refresh.pl
+		./default/template/sh/_dev_clean_html.sh
+		./pages.pl --php
 fi
 
 if [ $1 = frontend ]
 	then
 		default/template/sh/_dev_clean_html.sh
 		time ./config/template/perl/pages.pl --system
+		#todo every item in the menu should be built here
 fi
 
 if [ $1 = pages ]
@@ -110,6 +126,11 @@ fi
 if [ $1 = page ]
 	then
 		time ./config/template/perl/pages.pl -M $2
+fi
+
+if [ $1 = info ]
+  then
+    find . | grep $2 | xargs cat | less
 fi
 
 if [ $1 = start ] # hike start
@@ -194,7 +215,9 @@ echo hike help = see more commands
 
 if [ $1 = help ]
 	then
-		echo hike index = reindex chain and data
+		echo hike index = index chain and data
+		echo hike reindex = reindex all data
+		echo hike info = info on item by hash
 		echo hike frontend = refresh frontend
 		echo hike alog = import access log
 		echo hike help = see more commands
