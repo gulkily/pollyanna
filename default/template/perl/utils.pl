@@ -1626,6 +1626,7 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 			if (!($fileProvided eq 'openpgp.js')) {
 				# except for openpgp.js, most files should not have $ characters
 				WriteLog('PutHtmlFile: warning: $content contains $ symbol! $file = ' . ($file ? $file : '-'));
+				# $content = GetPageHeader('error') . GetDialogX('This page is under construction.', 'Under Construction') . GetPageFooter('error');
 			}
 		}
 		if (index($content, 'maincontent') == -1) {
