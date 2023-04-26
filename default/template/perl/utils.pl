@@ -1087,6 +1087,7 @@ sub GetClockFormattedTime() { # returns current time in appropriate format from 
 } # GetClockFormattedTime()
 
 sub PutFile { # Writes content to a file; $file, $content, $binMode
+# sub PutTextFile {
 	# $file = file path
 	# $content = content to write
 	# $binMode = whether or not to use binary mode when writing
@@ -1213,8 +1214,8 @@ sub GetPaddedEpochTimestamp { # returns zero-padded formatted epoch time
 	return $time;
 } # GetPaddedEpochTimestamp()
 
-#props http://www.bin-co.com/perl/scripts/str_replace.php
 sub str_replace { # $replaceWhat, $replaceWith, $string ; emulates some of str_replace() from php
+#props http://www.bin-co.com/perl/scripts/str_replace.php
 	# fourth $count parameter not implemented yet
 	my $replace_this = shift;
 	my $with_this  = shift;
@@ -1284,8 +1285,8 @@ sub str_replace { # $replaceWhat, $replaceWith, $string ; emulates some of str_r
 	}
 } # str_replace()
 
-#props http://www.bin-co.com/perl/scripts/str_replace.php
 sub str_ireplace { # $replaceWhat, $replaceWith, $string ; emulates some of str_ireplace() from php
+#props http://www.bin-co.com/perl/scripts/str_replace.php
 	# fourth $count parameter not implemented yet
 	#todo this definitely has a performance problem
 	# and also possible bugs
@@ -1391,7 +1392,6 @@ sub ReplaceStrings { # automatically replaces strings in html with looked up val
 sub IsUrl { # add basic isurl()
 	return 1;
 } # IsUrl()
-#
 
 sub PutHtmlFile { # $file, $content ; writes content to html file, with special rules; parameters: $file, $content
 # sub WriteHtmlFile {
@@ -1813,37 +1813,6 @@ sub IsAdmin { # $key ; returns 1 if user is admin, otherwise 0
 
 	WriteLog('IsAdmin: warning: unreachable reached'); #should never reach here
 } # IsAdmin()
-#
-#sub GetServerKey { # Returns server's public key, 0 if there is none
-#	state $serversKey;
-#
-#	if ($serversKey) {
-#		return $serversKey;
-#	}
-#
-#	state $TXTDIR = GetDir('txt');
-#
-#	if (-e "$TXTDIR/server.key.txt") { #server's pub key should reside here
-#		my %adminsInfo = GpgParse("$TXTDIR/server.key.txt");
-#
-#		if ($adminsInfo{'isSigned'}) {
-#			if ($adminsInfo{'key'}) {
-#				$serversKey = $adminsInfo{'key'};
-#
-#				return $serversKey;
-#			} else {
-#				return 0;
-#			}
-#		} else {
-#			return 0;
-#		}
-#	} else {
-#		return 0;
-#	}
-#
-#	WriteLog('GetServerKey: warning: fallthrough!');
-#	return 0;
-#} # GetServerKey()
 
 sub TrimPath { # $string ; Trims the directories AND THE FILE EXTENSION from a file path
 # sub GetFileName {
@@ -2140,80 +2109,6 @@ sub CheckForInstalledVersionChange {
 		return 0;
 	}
 } # CheckForInstalledVersionChange()
-#
-#sub ServerSign { # Signs a given file with the server's key
-#	# If config/admin/server_key_id exists
-#	#   Otherwise, does nothing
-#	# Replaces file with signed version
-#	#
-#	# Server key should be stored in gpg keychain
-#	# Key ID should be stored in config/admin/server_key_id
-#	#
-#
-#	WriteLog('ServerSign() BEGINS');
-#
-#	# get filename from parameters and ensure it exists
-#	my $file = shift;
-#	if (!-e $file) {
-#		return 0;
-#	}
-#
-#	WriteLog('ServerSign: $file = ' . $file);
-#
-#	# see if config/admin/server_key_id is set
-#	my $serverKeyId = trim(GetConfig('admin/server_key_id'));
-#
-#	WriteLog('ServerSign: $serverKeyId = ' . $serverKeyId);
-#
-#	# return if it is not
-#	if (!$serverKeyId) {
-#		return 0;
-#	}
-#
-#	# verify that key exists in gpg keychain
-#	WriteLog("ServerSign: gpg --list-keys $serverKeyId");
-#
-#	my $serverKey = `gpg --list-keys $serverKeyId`;
-#	WriteLog('ServerSign: $serverKey = ' . $serverKey);
-#
-#	# if public key has not been published yet, do it
-#	state $TXTDIR = GetDir('txt');
-#
-#	if (!-e "$TXTDIR/server.key.txt") {
-#		#todo move to gpgp.pl
-#		WriteLog("ServerSign: gpg --batch --yes --armor --export $serverKeyId");
-#		my $gpgOutput = `gpg --batch --yes --armor --export $serverKeyId`;
-#
-#		PutFile($TXTDIR . '/server.key.txt', $gpgOutput);
-#
-#		WriteLog('ServerSign: $gpgOutput = ' . $gpgOutput);
-#	} #todo here we should also verify that server.key.txt matches server_key_id
-#
-#	# if everything is ok, proceed to sign
-#	if ($serverKey) {
-#		WriteLog("ServerSign: We have a server key, so go ahead and sign the file.");
-#
-#		WriteLog("ServerSign: gpg --batch --yes -u $serverKeyId --clearsign \"$file\"");
-#		system("gpg --batch --yes -u $serverKeyId --clearsign \"$file\"");
-#
-#		if (-e "$file.asc") {
-#			WriteLog("ServerSign: Sign appears successful, rename .asc file to .txt");
-#			rename("$file.asc", "$file");
-#
-#			return 1; #success
-#		} else {
-#			WriteLog("ServerSign: warning: Tried to sign, but no .asc file.");
-#			return 0;
-#		}
-#	} else {
-#		#$changeLogMessage .= "\n\n(No server key found, not signing.)";
-#		WriteLog("ServerSign: warning: No server key found, will not sign changelog.");
-#		return 0;
-#	}
-#
-#	WriteLog('ServerSign: warning: unreachable reached.');
-#	return 0;
-#} # ServerSign()
 
 sub IsFileDeleted { # $file, $fileHash ; checks for file's hash in deleted.log and removes it if found
 #todo rename to IsFileMarkedAsDeleted()

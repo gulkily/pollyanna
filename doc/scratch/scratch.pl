@@ -1,4 +1,45 @@
-	if (scalar(@files)) {
+#
+#sub GetServerKey { # Returns server's public key, 0 if there is none
+#	state $serversKey;
+#
+#	if ($serversKey) {
+#		return $serversKey;
+#	}
+#
+#	state $TXTDIR = GetDir('txt');
+#
+#	if (-e "$TXTDIR/server.key.txt") { #server's pub key should reside here
+#		my %adminsInfo = GpgParse("$TXTDIR/server.key.txt");
+#
+#		if ($adminsInfo{'isSigned'}) {
+#			if ($adminsInfo{'key'}) {
+#				$serversKey = $adminsInfo{'key'};
+#
+#				return $serversKey;
+#			} else {
+#				return 0;
+#			}
+#		} else {
+#			return 0;
+#		}
+#	} else {
+#		return 0;
+#	}
+#
+#	WriteLog('GetServerKey: warning: fallthrough!');
+#	return 0;
+#} # GetServerKey()
+
+
+
+
+
+						if ($tokenFound{'token'} eq 'computer_pleace') {
+							push @indexMessageLog, 'found veryyy special token';
+						}
+
+
+							if (scalar(@files)) {
 		foreach my $row (@files) {
 			my $file = $row->{'file_path'};
 
