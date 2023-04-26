@@ -575,6 +575,8 @@ function GetTemplate ($templateKey) { // get template from config tree
 function GetFile ($file) { // gets file contents
 	$file = trim($file);
 
+	WriteLog('GetFile: $file = ' . $file);
+
 	if (!$file || !file_exists($file)) {
 		if (GetConfig('debug')) {
 			$dbt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS,2);
@@ -582,6 +584,14 @@ function GetFile ($file) { // gets file contents
 			WriteLog('GetFile: warning: $file was not provided; caller = ' . $caller);
 		}
 		return '';
+	}
+
+	$fileContents = file_get_contents($file);
+
+	if ($fileContents) {
+		WriteLog('GetFile: length($fileContents) = ' . length($fileContents));
+	} else {
+		WriteLog('GetFile: warning: $fileContents is FALSE');
 	}
 
 	return file_get_contents($file);

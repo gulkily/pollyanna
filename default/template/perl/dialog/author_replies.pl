@@ -57,6 +57,7 @@ sub PutAuthorRepliesDialog { # $authorKey
 # sub MakeAuthorRepliesDialog {
 	my $authorKey = shift;
 	#todo sanity
+	WriteLog('PutAuthorRepliesDialog: $authorKey = ' . $authorKey . '; caller = ' . join(',', caller));
 
 	require_once('dialog/author_replies.pl');
 	my $dialog = GetAuthorRepliesDialog($authorKey);

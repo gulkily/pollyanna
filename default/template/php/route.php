@@ -752,8 +752,9 @@ if (GetConfig('admin/php/route_enable')) {
 
 						// user asked for a particular file, and that's what we'll give them
 						if (file_exists($pathRel) && is_file($pathRel)) {
-							WriteLog('route.php: $html = file_get_contents($pathRel)');
-							$html = file_get_contents($pathRel);
+							WriteLog('route.php: $html = GetFile($pathRel)');
+							$html = GetFile($pathRel);
+							#$html = GetFile($pathRel);
 
 							if ($hashSetting) {
 								if (index($html, $hashSetting) != -1) {
@@ -1275,19 +1276,37 @@ if (GetConfig('admin/php/route_enable')) {
 						$authorCookie = $_COOKIE['cookie'];
 						$htmlDir = GetDir('html');
 						$cookieInboxDialogPath = $htmlDir . '/dialog/replies/' . $authorCookie . '.html';
+						WriteLog('route.php: cookie_inbox: $cookieInboxDialogPath = ' . $cookieInboxDialogPath);
 						if (file_exists($cookieInboxDialogPath)) {
-							WriteLog('route.php: file_exists($cookieInboxDialogPath) is TRUE');
+							WriteLog('route.php: cookie_inbox: file_exists($cookieInboxDialogPath) is TRUE');
 							$cookieInboxDialog = GetFile($cookieInboxDialogPath);
+
+							if ($cookieInboxDialog) {
+								WriteLog('route.php: cookie_inbox: $cookieInboxDialog is TRUE');
+							} else {
+								WriteLog('route.php: cookie_inbox: warning: $cookieInboxDialog is FALSE');
+							}
 							#$html = str_ireplace('</body>', $cookieInboxDialog . '</body>', $html);
-							$html = str_ireplace('<span id=messages></span>', '<span id=messages>' . $cookieInboxDialog . '</span>', $html); # shadowme
+
+							if (index($html, '<span id=messages></span>') != -1) {
+								$html = str_ireplace('<span id=messages></span>', '<span id=messages>' . $cookieInboxDialog . '</span>', $html); # shadowme
+							} else {
+								WriteLog('route.php: cookie_inbox: warning: $html lacks placeholder');
+							}
 						} else {
 							# shadowme
-							WriteLog('route.php: file_exists($cookieInboxDialogPath) is FALSE');
+							WriteLog('route.php: cookie_inbox: file_exists($cookieInboxDialogPath) is FALSE');
 							$cookieInboxDialog = GetDialogX('No messages at this time.', 'Inbox');
 							$html = str_ireplace('<span id=messages></span>', '<span id=messages>' . $cookieInboxDialog . '</span>', $html);
 						}
+					} else {
+						WriteLog('route.php: cookie_inbox: warning: cookie did not pass fingerprint sanity check');
 					}
+				} else {
+					WriteLog('route.php: cookie_inbox: user has no cookie');
 				}
+			} else {
+				WriteLog('route.php: cookie_inbox: warning: could not find closing body tag');
 			}
 		}
 
