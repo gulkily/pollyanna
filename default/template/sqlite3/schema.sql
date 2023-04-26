@@ -126,14 +126,21 @@ item.file_hash
 CREATE VIEW item_attribute_latest
 AS
 SELECT
-file_hash,
-attribute,
-value,
-source,
-MAX(epoch) AS epoch
-FROM item_attribute
-GROUP BY file_hash, attribute
+item_attribute_latest_timestamp.file_hash, 
+item_attribute_latest_timestamp.attribute, 
+item_attribute_latest_timestamp.epoch,
+item_attribute.value
+FROM (
+SELECT file_hash, attribute, MAX(epoch) AS epoch FROM item_attribute
+GROUP BY
+file_hash, attribute, value
 ORDER BY epoch DESC
+) AS item_attribute_latest_timestamp
+JOIN item_attribute ON (
+item_attribute.file_hash = item_attribute_latest_timestamp.file_hash AND
+item_attribute.attribute = item_attribute_latest_timestamp.attribute AND
+item_attribute.epoch = item_attribute_latest_timestamp.epoch
+)
 ;
 
 CREATE VIEW added_time
