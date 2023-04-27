@@ -504,7 +504,8 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						push @indexMessageLog, 'applying: ' . $targetAttribute;
 					} else {
 						#todo what is this?
-						push @indexMessageLog, 'applying: ' . $tokenFound{'token'} . ' (as ' . $targetAttribute . ')';
+						#push @indexMessageLog, 'applying: ' . $tokenFound{'token'} . ' (as ' . $targetAttribute . ')';
+						push @indexMessageLog, 'token found, but has no processor: ' . $tokenFound{'token'};
 					}
 
 					#todo put into config
@@ -528,7 +529,10 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						time
 						hashtag
 						s_replace
+						computer_please
 					); #tokenSanityCheck
+					#### TODO #TODO there should really really be a warning when this doesn't pan out, because ...
+
 
 					if (in_array($tokenFound{'token'}, @validTokens)) {
 						# these tokens are applied to:
@@ -542,8 +546,9 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							WriteLog('IndexTextFile: warning: $itemTimestamp being set to time()');
 							$itemTimestamp = GetTime(); #todo #fixme #stupid
 						}
-						
+
 						if ($tokenFound{'recon'} && $tokenFound{'message'} && $tokenFound{'param'}) {
+							push @indexMessageLog, 'token found: ' . $tokenFound{'token'};
 							my $newMessage = $tokenFound{'message'};
 							# if ($tokenFound{'token'} eq 'http' || $tokenFound{'token'} eq 'https') {
 							# 	# this hack is so that i can stay with the 3-item regex
@@ -564,11 +569,35 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							WriteLog('IndexTextFile: %tokenFound: ' . Dumper(%tokenFound));
 
 							if ($tokenFound{'apply_to_parent'} && @itemParents) {
+								push @indexMessageLog, 'token has apply_to_parent: ' . $tokenFound{'token'};
 								foreach my $itemParent (@itemParents) {
 									DBAddItemAttribute($itemParent, $targetAttribute, $tokenFound{'param'}, $itemTimestamp, $fileHash);
 								}
 							} else {
+								push @indexMessageLog, 'token does not have apply_to_parent: ' . $tokenFound{'token'};
 								DBAddItemAttribute($fileHash, $targetAttribute, $tokenFound{'param'}, $itemTimestamp, $fileHash);
+
+								if ($tokenFound{'token'} eq 'computer_please') {
+									#push @indexMessageLog, 'found veryyy special token';
+									push @indexMessageLog, 'computer, please ' . $tokenFound{'param'};
+
+									require_once('computer_response.pl');
+
+									my $action = $tokenFound{'param'};
+									my $response = $tokenFound{'param'} . ' =sha1hex()=> ' . sha1_hex($tokenFound{'param'});
+									$response .= "\n\n";
+									$response .= GetComputerResponse($action);
+
+									my $newFilePath = GetDir('txt') . '/' . GetRandomHash() . '.txt';
+									PutFile($newFilePath, '>>'.$fileHash."\n\n".$response);
+									IndexTextFile($newFilePath);
+
+									if (!$titleCandidate) {
+                                        $titleCandidate = 'Computer, please...';
+                                    }
+								} else {
+									#push @indexMessageLog, 'not thaaat specil';
+								}
 
 								if (
 									$tokenFound{'token'} eq 'http'
@@ -578,11 +607,11 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									if (
 										$tokenFound{'param'} =~ m|http://([^/]+)|
 										||
-										$tokenFound{'param'} =~ m|https://([^/]+)|
+ 										$tokenFound{'param'} =~ m|https://([^/]+)|
 									) {
 										my $urlDomain = $1;
 										DBAddItemAttribute($fileHash, 'url_domain', $urlDomain, $itemTimestamp, $fileHash);
-										
+
 										#if (trim($tokenFound{'param'}) ne trim($message)) {
 										#	my $newFileName = sha1_sum($tokenFound{'param'}) . '.txt';
 										#	$newFileName = GetDir('txt') . '/' . $newFileName;
@@ -592,6 +621,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 								}
 							}
 						} else {
+							push @indexMessageLog, 'warning, token not valid @validTokens IndexTextFile: ' . $tokenFound{'token'};
 							WriteLog('IndexTextFile: warning: ' . $tokenFound{'token'} . ' (generic): sanity check failed');
 						}
 
@@ -609,6 +639,9 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 						DBAddVoteRecord($fileHash, $voteTime, $tokenFound{'token'}); #'hashtag'
 					} # title, access_log_hash, http, https, alt, name, self_timestamp
+					else {
+						WriteLog('IndexTextFile: warning: token not found in @validTokens, sanity check failed; caller = ' . join(',', caller));
+					}
 
 					if ($tokenFound{'token'} eq 'config') { #config
 						if (
@@ -673,6 +706,9 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 								DBAddKeyAlias($authorKey, $tokenFound{'param'}, $fileHash); #bug here cd145d82
 								DBAddKeyAlias('flush');
+
+								MakePage('author', 'ABCDEF01234567890');
+								#todo should go to author's page after this
 
 								if (!$titleCandidate) {
 									$titleCandidate = $tokenFound{'param'} . ' has self-identified';
@@ -860,7 +896,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										}
 
 										ExpireAvatarCache($authorKey); #uncache
-										
+
 										push @indexMessageLog, 'allowed: #' . $tokenFound{'param'} . '; reason: ' . $approveReason;
 
 										if (GetConfig('admin/index/create_system_tags')) {
@@ -981,7 +1017,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 		WriteLog('IndexTextFile: $fileHash = ' . $fileHash . '; length($detokenedMessage) = ' . length($detokenedMessage));
 		#WriteLog('IndexTextFile: $fileHash = ' . $fileHash . '; $detokenedMessage = "' . $detokenedMessage . '"');
 
-		
+
 #		if ($fileHash eq 'ef5f020ffae013876493cf25e323a2c67a3f09db') {
 #			die($detokenedMessage);
 #		}

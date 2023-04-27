@@ -741,8 +741,7 @@ sub DBGetItemTitle { # get title for item ($itemhash)
 	my @queryParams = ();
 	#push @queryParams, $itemHash;
 
-	#fuck parametrized queries
-	my $query = 'SELECT title FROM item_title WHERE file_hash LIKE \'' . $itemHash . '%\'';
+	my $query = 'SELECT title FROM item_title WHERE file_hash LIKE \'' . $itemHash . '%\' ORDER BY epoch DESC LIMIT 1';
 
 	my $itemTitle = SqliteGetValue($query, @queryParams);
 
@@ -2544,7 +2543,10 @@ sub DBGetItemsByPrefix { # $prefix ; get items whose hash begins with $prefix
 	return @resultsArray;
 } # DBGetItemsByPrefix()
 
-sub DBGetItemVoteTotals2 { # get tag counts for specified item, returned as hash of [tag] -> count
+sub DBGetItemVoteTotals2 { # $fileHash ; get tag counts for specified item, returned as hash of [tag] -> count
+# sub DBGetItemTagsList {
+# sub DBGetItemVotes {
+# sub DBGetItemTagList {
 	my $fileHash = shift;
 	if (!$fileHash) {
 		WriteLog('DBGetItemVoteTotals: warning: $fileHash missing, returning');

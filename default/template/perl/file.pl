@@ -147,6 +147,7 @@ sub MergeFiles { # $file1, $file2, ... ; merge files which have same body but di
 	$fileFooter = join("\n", @footerLines);	
 
 	my $fileOutContent = $fileBody . "\n-- \n" . $fileFooter;
+	#signatureSeparator
 	state $fileOutPath = GetDir('txt') . '/merged_' . GetSHA1($fileOutContent) . '.txt';
 
 	WriteLog('MergeFiles: pass!');

@@ -19,6 +19,13 @@ sub RunItem {
 	my $itemType = DBGetItemType($item);
 	#todo optimize this to reduce database queries
 
+	my $voteTotalsRef = DBGetItemVoteTotals2($item);
+	my %voteTotals = %{$voteTotalsRef};
+	if ($voteTotals{'python3'}) {
+		$itemType = 'py';
+		# a bit of a hack
+	}
+
 	WriteLog('RunItem: $filePath = ' . $filePath . '; $itemType = ' . $itemType);
 
 	if ($itemType eq 'perl') {
@@ -49,9 +56,9 @@ sub RunItem {
 				if (!$pythonCommand) {
 					$pythonCommand = `which python3`;
 				}
-				if (!$pythonCommand) {
-					$pythonCommand = `which python2`;
-				}
+				# if (!$pythonCommand) {
+				# 	$pythonCommand = `which python2`;
+				# }
 				if (!$pythonCommand) {
 					WriteLog('warning: $pythonCommand was FALSE');
 					return '';

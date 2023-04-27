@@ -270,6 +270,13 @@ sub GetTokenDefs {
 			'mask_params' => 'mgi',
 			'message' => '[Config]',
 			'apply_to_parent' => 1
+		},
+		{
+			'token' => 'computer_please',
+			'mask' => '^(computer, please)(\W)(.+)$',
+			'mask_params' => 'mgi',
+			'message' => '[Please]',
+			'apply_to_parent' => 0
 		}
 	);
 
