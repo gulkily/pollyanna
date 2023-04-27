@@ -1,3 +1,24 @@
+write dialog should tell user when they're logged in with a cookie
+
+should be a "logged in as" dialog
+
+
+
+"computer, please add x feature"
+	similar to hike set
+	is there a config/...x/enable ? set to 1, rebuild frontend
+	is there a config/.../x ? set to 1, rebuild frontend
+
+
+it would be very nice if going from changed setting to updated frontend was all automatic
+	there is no watch process on config right now
+		there's some sketch code for hashing the entire file tree
+
+#bug i wrote the menu items capitalized and it broke the menu
+	for now, we can all-lowercase the menu name before evaluating?
+		we can also generate the html as the user asks
+			but that's later
+
 hypercode theme tables with rounded corners should have table border=0 in the html
 
 #bug if chain.log is missing (such as after hike archive)
