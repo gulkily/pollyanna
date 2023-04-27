@@ -277,6 +277,13 @@ sub GetTokenDefs {
 			'mask_params' => 'mgi',
 			'message' => '[Please]',
 			'apply_to_parent' => 0
+		},
+		{
+			'token' => 'hike_set',
+			'mask' => '^(hike set)(\W)(.+)$',
+			'mask_params' => 'mgi',
+			'message' => '[hike set]',
+			'apply_to_parent' => 0
 		}
 	);
 
