@@ -547,6 +547,7 @@ sub ProcessAccessLog { # $logfile, $vhostParse ; reads an access log and writes 
 						# append "signature" to file if record_http_host is enabled
 						if ($serverHostname) {
 							$message .= "\n-- \nHost: " . $serverHostname;
+							#signatureSeparator
 						}
 					}
 
@@ -690,7 +691,7 @@ sub ProcessAccessLog { # $logfile, $vhostParse ; reads an access log and writes 
 							}
 
 							if (GetConfig('setting/admin/access_log/write_addendum') && $addedMessage) {
-								$addedMessage = '#addendum' . "\n-- \n" . '>>' . $fileHash . "\n" . $addedMessage;
+								$addedMessage = '#addendum' . "\n----- \n" . '>>' . $fileHash . "\n" . $addedMessage; #addendum
 
 								PutFile($addedFilename, $addedMessage);
 								#IndexFile($addedFilename);
