@@ -53,6 +53,12 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 				if ($settingKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 					my $settingKeySanitized = $1;
 					`echo $argumentValueSanitized > $settingKeySanitized`;
+
+					#if (index($settingKeySanitized, 'html') != -1) {
+					#	`hike.sh refresh`;
+					#} #todo
+
+					# set value
 				}
 			}
 		} else {
