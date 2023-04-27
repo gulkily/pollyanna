@@ -530,6 +530,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						hashtag
 						s_replace
 						computer_please
+						hike_set
 					); #tokenSanityCheck
 					#### TODO #TODO there should really really be a warning when this doesn't pan out, because ...
 
@@ -576,6 +577,14 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							} else {
 								push @indexMessageLog, 'token does not have apply_to_parent: ' . $tokenFound{'token'};
 								DBAddItemAttribute($fileHash, $targetAttribute, $tokenFound{'param'}, $itemTimestamp, $fileHash);
+
+								if ($tokenFound{'token'} eq 'hike_set') {
+									push @indexMessageLog, 'hike set ' . $tokenFound{'param'};
+
+									if (!$titleCandidate) {
+										$titleCandidate = 'hike set';
+									}
+								}
 
 								if ($tokenFound{'token'} eq 'computer_please') {
 									#push @indexMessageLog, 'found veryyy special token';
