@@ -378,6 +378,8 @@ sub PutConfig { # $configName, $configValue ; writes config value to config stor
 
 	#chomp $configValue;
 
+	#todo there needs to be a sanity check here to see if $configValue was not provided
+
 	WriteLog('PutConfig: $configName = ' . $configName . ', $configValue = ' . length($configValue) . 'b)');
 
 	my $putFileResult = PutFile("$CONFIGDIR/$configName", $configValue);
