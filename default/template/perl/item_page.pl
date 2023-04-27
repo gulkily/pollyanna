@@ -51,6 +51,7 @@ sub GetHtmlToolboxes {
 	}
 
 	if (GetConfig('html/item_page/toolbox_search') && $urlParam && $urlParam ne 'Untitled') {
+		#todo 'notext' items should also not get a search toolbox
 		#sub SearchToolbox {
 		#sub SearchDialog {
 		my $htmlToolbox = '';
