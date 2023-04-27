@@ -28,6 +28,7 @@ if [ ! $1 ]
 		set 1=help
 fi
 
+# hike set
 if [ $1 = set ]
 	then
 		default/template/perl/script/set.pl $2 $3
