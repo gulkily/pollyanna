@@ -135,7 +135,8 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 
 	if ($pageQuery eq 'chain') {
 		#special case hack for chain page
-		$html .= '<span class=advanced>' . GetDialogX('<a href="/chain.log">chain.log</a>', 'Log') . '</span>'; #should be called GetDialog? #todo
+		$html .= GetDialogX('<a href="/chain.log">chain.log</a>', 'Log');
+		# $html .= '<span class=advanced>' . GetDialogX('<a href="/chain.log">chain.log</a>', 'Log') . '</span>'; #should be called GetDialog? #todo
 	}
 
 	if ($pageQuery eq 'boxes') { #banana theme
