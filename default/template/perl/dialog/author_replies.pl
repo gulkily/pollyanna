@@ -10,7 +10,7 @@ sub GetAuthorRepliesDialog { # $authorKey
 # returns dialog with replies to author's posts
 # sub GetAuthorReplies {
 # sub GetReplies {
-
+# sub GetInboxDialog {
 	my $authorKey = shift;
 
 	#$authorKey = IsFingerprint($authorKey);
@@ -33,6 +33,7 @@ sub GetAuthorRepliesDialog { # $authorKey
 	# this also means that if we replace the query in a theme, such as in the shadowme theme,
 	# we still need to have three placeholders, otherwise the query builder will complain
 	# about the mismatch.
+	# todo make this more automatic like a for loop for number of question marks
 	my $authorRepliesQuery = SqliteGetNormalizedQueryString('author_replies', @queryParams);
 
 	my $authorAlias = DBGetAuthorAlias($authorKey);
@@ -55,6 +56,11 @@ sub GetAuthorRepliesDialog { # $authorKey
 
 sub PutAuthorRepliesDialog { # $authorKey
 # sub MakeAuthorRepliesDialog {
+# sub MakeInbox {
+# sub WriteInbox {
+# sub NakeIndexDialog {
+# sub PutInboxDialog {
+# sub GetInboxDialog {
 	my $authorKey = shift;
 	#todo sanity
 	WriteLog('PutAuthorRepliesDialog: $authorKey = ' . $authorKey . '; caller = ' . join(',', caller));

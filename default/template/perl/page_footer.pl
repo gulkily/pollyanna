@@ -109,7 +109,6 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 			# 	$menuBottom .= $dialogControls;
 			# }
 
-			require_once('widget/menu.pl');
 			$txtFooter = str_replace(
 				'</body>',
 				'<br>' . $menuBottom . '</body>',

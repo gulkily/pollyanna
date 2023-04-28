@@ -187,7 +187,7 @@ sub GetComputerResponse {
 		return 'ok, I added a Dvorak layout transliteration in javascript. to access it, press ctrl+d. i added an on-screen keyboard to the write page to help you.';
 	}
 	if ($query eq 'make me admin') {
-		PutConfig('setting')
+		#PutConfig('setting')
 	}
 	if ($query =~ /compatibility/i) {
 		return "this website should be compatible with every mainstream and historically mainstream (1% or higher peak adoption rate) browser which supports HTTP/1.1.";
