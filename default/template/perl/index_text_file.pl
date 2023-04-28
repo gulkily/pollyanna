@@ -575,7 +575,8 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									DBAddItemAttribute($itemParent, $targetAttribute, $tokenFound{'param'}, $itemTimestamp, $fileHash);
 								}
 							} else {
-								push @indexMessageLog, 'token does not have apply_to_parent: ' . $tokenFound{'token'};
+								#push @indexMessageLog, 'token does not have apply_to_parent: ' . $tokenFound{'token'};
+								WriteLog('IndexTextFile: token does not have apply_to_parent: ' . $tokenFound{'token'});
 								DBAddItemAttribute($fileHash, $targetAttribute, $tokenFound{'param'}, $itemTimestamp, $fileHash);
 
 								if ($tokenFound{'token'} eq 'hike_set') {
@@ -716,7 +717,8 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 								DBAddKeyAlias($authorKey, $tokenFound{'param'}, $fileHash); #bug here cd145d82
 								DBAddKeyAlias('flush');
 
-								MakePage('author', 'ABCDEF01234567890');
+								require_once('pages.pl');
+								MakePage('author', $authorKey);
 								#todo should go to author's page after this
 
 								if (!$titleCandidate) {
@@ -892,6 +894,8 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										if ($authorGpgFingerprint) {
 											WriteLog('IndexTextFile: permissioned: found $authorGpgFingerprint');
 											ExpireAvatarCache($authorGpgFingerprint); #uncache
+											require_once('pages.pl');
+											MakePage('author', $authorGpgFingerprint);
 										} else {
 											WriteLog('IndexTextFile: permissioned: did NOT find $authorGpgFingerprint');
 										}
