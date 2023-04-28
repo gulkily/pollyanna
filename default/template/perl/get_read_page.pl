@@ -57,6 +57,8 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 			my $whereClause = "WHERE author_key = '$authorKey' AND item_score >= 0";
 
 			my $authorAliasHtml = GetAlias($authorKey);
+
+			#require_once('widget/avatar.pl');
 			my $authorAvatarHtml = GetAvatar($authorKey);
 
 			if (IsAdmin($authorKey)) {
@@ -252,6 +254,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 
 	my $htmlStart = '';
 
+	#require_once('get_page_header.pl');
 	#$htmlStart .= GetPageHeader('read_' . $pageType);
 	$htmlStart = GetPageHeader($title);
 
