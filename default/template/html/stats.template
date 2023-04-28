@@ -2,12 +2,12 @@
 
 <fieldset>
 	<p>Updated: $lastUpdateTime
+	<p>Built: $lastBuildTime
 	<p>Version: $versionSequence
 	<p></p>
 	<p id=diagnostics></p>
 </fieldset>
 <fieldset>
-	<p>Built: $lastBuildTime
 	<p>
 		<a href="/tags.html">
 			<b>$tagsTotal tags</b>
