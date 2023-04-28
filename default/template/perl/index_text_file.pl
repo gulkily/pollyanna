@@ -582,9 +582,22 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 								if ($tokenFound{'token'} eq 'hike_set') {
 									push @indexMessageLog, 'hike set ' . $tokenFound{'param'};
 
+									#todo sanity check
+									my $params = $tokenFound{'param'};
+									my $result = `bash hike.sh set $params`;
+
+									my $action = "hike set " . $tokenFound{'param'};
+									my $response = $tokenFound{'param'} . ' =sha1hex()=> ' . sha1_hex($tokenFound{'param'});
+									$response .= "\n\n";
+									$response .= $result;
+
+									my $newFilePath = GetDir('txt') . '/' . GetRandomHash() . '.txt';
+									PutFile($newFilePath, '>>'.$fileHash."\n\n".$response);
+									IndexTextFile($newFilePath);
+
 									if (!$titleCandidate) {
-										$titleCandidate = 'hike set';
-									}
+                                        $titleCandidate = 'hike set ...';
+                                    }
 								}
 
 								if ($tokenFound{'token'} eq 'computer_please') {
