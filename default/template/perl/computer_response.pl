@@ -44,6 +44,10 @@ sub GetComputerResponse {
 		`bash hike.sh page profile`;
 		return 'ok, I added profile page with basic cookie authentication.';
 	}
+	if ($query =~ m/bitcoin/i) {
+		AddToMenu('tag/BitcoinExpo2023');
+		return 'ok, I added a page about the 2023 MIT Bitcoin Expo. it may take a minute.';
+	}
 	if ($query =~ m/OpenPGP/) {
 		PutConfig('setting/admin/js/openpgp', 1);
 		PutConfig('setting/admin/js/openpgp_checked', 1);
