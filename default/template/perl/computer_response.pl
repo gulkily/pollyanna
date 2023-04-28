@@ -123,7 +123,13 @@ sub GetComputerResponse {
 		`bash hike.sh refresh`;
 		return 'ok, I added a basic tags page, including item-descriptive tags and hashtags';
 	}
-	if ($query eq 'let me download our conversation' || $query =~ m/conversation.+download/i) {
+	if ($query =~ m/inbox/) {
+		AddToMenu('active');
+		PutConfig('setting/admin/php/cookie_inbox', 1);
+		`bash hike.sh refresh`;
+		return 'ok, you should see any replies in your inbox, and I added an active users page.';
+	}
+	if ($query eq 'let me download our conversation' || $query =~ m/conversation.+download/i || $query =~ m/download.+conversation/i) {
 		AddToMenu('data');
 		`bash hike.sh page data`;
 		return 'ok, I added a data page where you can download our conversation';
@@ -145,12 +151,25 @@ sub GetComputerResponse {
 	}
 	if ($query =~ /hacker news/) {
 		my $bookmarkFile = GetTemplate('js/bookmark/scrape_hn_comments.js');
-		return $bookmarkFile . "\n\n#textart";
+		return "/* please use this bookmarklet to input the comments */\n\n" . $bookmarkFile . "\n\n/* #example */";
+	}
+	if ($query =~ /interface.+draggable/) {
+		PutConfig('setting/admin/js/dragging', 1);
+		PutConfig('setting/html/menu_layer_controls', 1);
+		`bash hike.sh refresh`;
+		return "ok, I added some javascript for draggable dialogs.";
+		#my $bookmarkFile = GetTemplate('js/bookmark/scrape_hn_comments.js');
+		#return "/* please use this bookmarklet to input the comments */\n\n" . $bookmarkFile . "\n\n/* #example */";
 	}
 	if ($query eq 'add authors page') {
 		AddToMenu('authors');
 		`bash hike.sh page authors`;
 		return "ok, I added an authors page. there may not be much on it at the moment.";
+	}
+	if ($query eq 'add random page' || $query eq 'add a random items page' || $query =~ m/add.+random.+page/) {
+		AddToMenu('random');
+		`bash hike.sh page random`;
+		return "ok, I added a page with random items";
 	}
 	if ($query eq 'make a python file') {
 		AddToMenu('tag/python3');
@@ -171,7 +190,7 @@ sub GetComputerResponse {
 		PutConfig('setting')
 	}
 	if ($query =~ /compatibility/i) {
-		return "this website should be compatible with every mainstream (1% or higher adoption rate) browser which supports HTTP/1.1.";
+		return "this website should be compatible with every mainstream and historically mainstream (1% or higher peak adoption rate) browser which supports HTTP/1.1.";
 	}
 	else {
 		return 'I did not understand that query';
