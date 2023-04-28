@@ -309,6 +309,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 
 		WriteLog('MakePage: author: ' . $authorKey);
 
+		require_once('get_read_page.pl');
 		my $authorPage = GetReadPage('author', $authorKey);
 		if (!-e "$HTMLDIR/author/$authorKey") {
 			mkdir ("$HTMLDIR/author/$authorKey");
