@@ -46,6 +46,7 @@ sub GetComputerResponse {
 	}
 	if ($query =~ m/OpenPGP/) {
 		PutConfig('setting/admin/js/openpgp', 1);
+		PutConfig('setting/admin/js/openpgp_checked', 1);
 		`./pages.pl --js`;
 		`bash hike.sh page profile`;
 		return 'ok, I added basic OpenPGP.js integration to the profiles.';
