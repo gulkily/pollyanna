@@ -1498,6 +1498,23 @@ require_once('dialog/settings.pl');
 
 require_once('dialog/reply.pl');
 
+sub GetQuerySqlDialog { # $pageQuery ;
+# sub DisplayQueryDialog {
+# sub GetSqlDialog {
+# sub QuerySqlDialog {
+	# display query used to generate the listing
+	#my $displayQuery = TextartForWeb(SqliteGetQueryTemplate($pageQuery));
+	my $pageQuery = shift;
+	#todo sanity checks
+
+	my $queryDisplayName = $pageQuery . '.sql';
+
+	my $displayQuery = '<pre>' . HtmlEscape(SqliteGetQueryTemplate($pageQuery)) . '<br></pre>'; #todo templatify
+	my $dialog = '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName) . '</span>';
+
+	return $dialog;
+}
+
 sub PrintBanner {
 	my $string = shift; #todo sanity checks
 	my $width = length($string);

@@ -126,12 +126,8 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 		$html .= GetDialogX($paginationLinks, 'Pages');
 	}
 
-	{
-		# display query used to generate the listing
-		#my $displayQuery = TextartForWeb(SqliteGetQueryTemplate($pageQuery));
-		my $displayQuery = '<pre>' . HtmlEscape(SqliteGetQueryTemplate($pageQuery)) . '<br></pre>'; #todo templatify
-		$html .= '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName) . '</span>';
-	}
+
+	$html .= GetQuerySqlDialog($pageQuery);
 
 	if ($pageQuery eq 'chain') {
 		#special case hack for chain page

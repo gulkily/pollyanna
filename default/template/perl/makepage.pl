@@ -119,6 +119,8 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 			my $randomPage =
 				GetPageHeader('random') .
 				GetItemListHtml(\@itemsRandom) .
+				#GetDialogX(GetTemplate('query/random')) .
+				GetQuerySqlDialog('random') .
 				GetPageFooter('random')
 			;
 
@@ -137,6 +139,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 			my $randomPage =
 				GetPageHeader('random') .
 				GetDialogX('Nothing to display on the random page yet.') .
+				GetQuerySqlDialog('random') .
 				GetPageFooter('random')
 			;
 
