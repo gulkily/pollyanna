@@ -89,7 +89,8 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 		GetConfig('html/menu_bottom') ||
 		(
 			GetConfig('html/menu_top') &&
-			($pageType eq 'item')
+			($pageType eq 'item') &&
+			GetConfig('html/item_page_menu_bottom')
 			# for item pages, we still put the menu at the bottom, because the item's content
 			# is the most important part of the page.
 			# #todo this is confusing the way it's written right now, improve on it somehow
