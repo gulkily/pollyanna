@@ -125,7 +125,11 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 	if ($pageType ne 'item') {
 		$htmlStart =~ s/\$topMenu/$topMenuTemplate/g;
 	} else {
-		$htmlStart =~ s/\$topMenu//g;
+		if (GetConfig('html/item_page_menu_bottom')) {
+			$htmlStart =~ s/\$topMenu//g;
+		} else {
+			$htmlStart =~ s/\$topMenu/$topMenuTemplate/g;
+		}
 	}
 
 	$htmlStart =~ s/\$styleSheet/$styleSheet/g;
