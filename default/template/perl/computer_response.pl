@@ -158,8 +158,12 @@ sub GetComputerResponse {
 		PutConfig('setting/html/menu_layer_controls', 1);
 		`bash hike.sh refresh`;
 		return "ok, I added some javascript for draggable dialogs.";
-		#my $bookmarkFile = GetTemplate('js/bookmark/scrape_hn_comments.js');
-		#return "/* please use this bookmarklet to input the comments */\n\n" . $bookmarkFile . "\n\n/* #example */";
+	}
+	if ($query =~ /cryptographic.+attributes/) {
+		PutConfig('setting/admin/js/dragging', 1);
+		PutConfig('setting/html/menu_layer_controls', 1);
+		`bash hike.sh refresh`;
+		return "to see more detailed information about items on the current page, please use the Expand menu item in the. use the Minimal menu item to hide the technical details.";
 	}
 	if ($query eq 'add authors page') {
 		AddToMenu('authors');
@@ -186,11 +190,23 @@ sub GetComputerResponse {
 		`./pages.pl --write`;
 		return 'ok, I added a Dvorak layout transliteration in javascript. to access it, press ctrl+d. i added an on-screen keyboard to the write page to help you.';
 	}
-	if ($query eq 'make me admin') {
+	if ($query =~ m/raw.+items/i) {
+		AddToMenu('raw');
+		`bash hike.sh page raw`;
+		return 'ok, I added a Dvorak layout transliteration in javascript. to access it, press ctrl+d. i added an on-screen keyboard to the write page to help you.';
+	}
+	if ($query =~ m/reset.+site/i) {
+		`bash default/theme/hypercode/template/sh/reset_config.sh`;
+		`bash hike.sh refresh`;
+		return 'ok, I reset the website settings';
+	}
+	if ($query =~ m/make me admin/) {
+		return 'In order to become admin, you have to solve a puzzle.';
 		#PutConfig('setting')
 	}
 	if ($query =~ /compatibility/i) {
-		return "this website should be compatible with every mainstream and historically mainstream (1% or higher peak adoption rate) browser which supports HTTP/1.1.";
+		return "this website should be compatible with every mainstream and historically mainstream (1% or higher peak adoption rate) browser which supports HTTP/1.1.\n\n" .
+		" the browsers I am aware of are Google Chrome and Chromium, Vivaldi, and Brave; Mozilla Firefox and Waterfox, Waterfox Classic, PaleMoon, LibreWolf, and Abrowser; Internet Explorer, Apple Safari for Mac OS and for iOS and iPadOS, Microsoft Edge, Lynx, Links, w3m, Dillo, Mozilla SeaMonkey, Netscape Navigator, OffByOne Browser, Opera Browser (post-Chromium transition, Presto era, and pre-Presto), WebTV Browser, Samsung TV browser, America Online 3.0 and higher, Midori, Luakit, qutebrowser, Camino, OmniWeb, NetSurf, Nyxt, Falkon, Beacon, GNU IceCat, Emacs Web Wowser, and curl.";
 	}
 	else {
 		return 'I did not understand that query';
