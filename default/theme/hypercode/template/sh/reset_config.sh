@@ -15,6 +15,9 @@ echo 0 > config/setting/html/write_options
 echo 0 > config/setting/admin/php/cookie_inbox
 echo 0 > config/setting/admin/php/route_notify_printed_time
 echo 1 > config/setting/html/monochrome
+echo 1 > config/setting/html/menu_top
+echo 0 > config/setting/html/menu_bottom
+echo 0 > config/setting/html/item_page_menu_bottom
 #echo 0 > config/setting/admin/index/create_system_tags
 echo "hypercode chicago" > config/setting/theme
 bash hike.sh frontend
