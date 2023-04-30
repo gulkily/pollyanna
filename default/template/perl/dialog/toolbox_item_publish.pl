@@ -56,6 +56,13 @@ sub GetDialogToolboxItemPublish { # $filePath, $fileHash = '' ; returns dialog w
 			'</a><br>' . "\n";
 
 	$htmlToolbox .=
+		'<a href="http://www.hypercode.com/post.html?comment=' .
+			$urlParamFullText .
+			'">' .
+			'Hypercode' .
+			'</a><br>' . "\n";
+
+	$htmlToolbox .=
 		'<a href="http://www.rocketscience.click/post.html?comment=' .
 			$urlParamFullText .
 			'">' .
