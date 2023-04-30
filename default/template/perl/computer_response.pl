@@ -55,7 +55,7 @@ sub GetComputerResponse {
 		`bash hike.sh page profile`;
 		return 'ok, I added basic OpenPGP.js integration to the profiles.';
 	}
-	if ($query eq 'add upload feature with paste option' || $query eq 'add upload page') {
+	if ($query eq 'add upload feature with paste option' || $query eq 'add upload page' || $query eq 'add upload') {
 		AddToMenu('upload');
 		PutConfig('setting/admin/upload/enable', 1);
 		PutConfig('setting/admin/image/enable', 1);
