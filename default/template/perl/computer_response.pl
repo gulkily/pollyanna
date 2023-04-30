@@ -64,12 +64,12 @@ sub GetComputerResponse {
 	}
 	if ($query =~ m/monochrome/i) {
 		PutConfig('setting/html/monochrome', 1);
-		`bash hike.sh refresh`;
+		#`bash hike.sh refresh`;
 		return 'ok, I made the site less colorful';
 	}
 	if ($query eq 'add inline-block to dialogs') {
 		PutConfig('setting/html/css_inline_block', 1);
-		`bash hike.sh refresh`;
+		#`bash hike.sh refresh`;
 		return 'ok, I added display: inline-block to the dialog class';
 	}
 	if ($query eq 'add notarization chain') {
@@ -80,7 +80,7 @@ sub GetComputerResponse {
 	if ($query =~ m/sha1.+md5/i) {
 		AddToMenu('help');
 		`bash hike.sh page help`;
-		`bash hike.sh refresh`;
+		#`bash hike.sh refresh`;
 		return 'I used SHA1 and MD5 in the notarization chain to make it easier for other computers to audit the data while still retaining reasonable tampering protection';
 	}
 	if ($query eq 'add a basic image board' || $query eq 'add image board') {
@@ -106,17 +106,17 @@ sub GetComputerResponse {
 	}
 	if ($query eq 'change appearance to dark theme') {
 		PutConfig('setting/theme', 'hypercode dark');
-		`bash hike.sh refresh`;
+		#`bash hike.sh refresh`;
 		return 'ok, I changed the theme to hypercode dark';
 	}
 	if ($query eq 'reset appearance to default theme') {
 		PutConfig('setting/theme', 'hypercode chicago');
-		`bash hike.sh refresh`;
+		#`bash hike.sh refresh`;
 		return 'ok, I reset the theme to hypercode chicago';
 	}
 	if ($query eq 'remove javascript' || $query eq 'turn off javascript') {
 		PutConfig('setting/admin/js/enable', 0);
-		`bash hike.sh refresh`;
+		#`bash hike.sh refresh`;
 		if (GetConfig('setting/admin/js/openpgp')) {
 			return 'ok, I removed all the javascript. please note, OpenPGP.js integration does not work without javascript.';
 		} else {
@@ -125,13 +125,13 @@ sub GetComputerResponse {
 	}
 	if ($query eq 'add a tags page' || $query eq 'add tags page') {
 		AddToMenu('tags');
-		`bash hike.sh refresh`;
+		#`bash hike.sh refresh`;
 		return 'ok, I added a basic tags page, including item-descriptive tags and hashtags';
 	}
 	if ($query =~ m/inbox/) {
 		AddToMenu('active');
 		PutConfig('setting/admin/php/cookie_inbox', 1);
-		`bash hike.sh refresh`;
+		#`bash hike.sh refresh`;
 		return 'ok, you should see any replies in your inbox, and I added an active users page.';
 	}
 	if ($query eq 'let me download our conversation' || $query =~ m/conversation.+download/i || $query =~ m/download.+conversation/i) {
@@ -141,17 +141,17 @@ sub GetComputerResponse {
 	}
 	if ($query eq 'accept my gratitude') {
 		AddToMenu('tag/gratitude');
-		`bash hike.sh refresh`;
+		#`bash hike.sh refresh`;
 		return "you're welcome! I added a gratitude page";
 	}
 	if ($query eq 'enable javascript debugging') {
 		PutConfig('setting/admin/js/debug', 'console.log');
-		`bash hike.sh refresh`;
+		#`bash hike.sh refresh`;
 		return "ok, I enabled javascript debug output to the console";
 	}
 	if ($query eq 'turn off javascript debugging') {
 		PutConfig('setting/admin/js/debug', 0);
-		`bash hike.sh refresh`;
+		#`bash hike.sh refresh`;
 		return "ok, I turned off javascript debugging";
 	}
 	if ($query =~ /hacker news/) {
@@ -161,13 +161,13 @@ sub GetComputerResponse {
 	if ($query =~ /interface.+draggable/) {
 		PutConfig('setting/admin/js/dragging', 1);
 		PutConfig('setting/html/menu_layer_controls', 1);
-		`bash hike.sh refresh`;
+		#`bash hike.sh refresh`;
 		return "ok, I added some javascript for draggable dialogs.";
 	}
 	if ($query =~ /cryptographic.+attributes/) {
 		PutConfig('setting/admin/js/dragging', 1);
 		PutConfig('setting/html/menu_layer_controls', 1);
-		`bash hike.sh refresh`;
+		#`bash hike.sh refresh`;
 		return "to see more detailed information about items on the current page, please use the Expand menu item in the. use the Minimal menu item to hide the technical details.";
 	}
 	if ($query eq 'add authors page') {
@@ -202,7 +202,7 @@ sub GetComputerResponse {
 	}
 	if ($query =~ m/reset.+site/i) {
 		`bash default/theme/hypercode/template/sh/reset_config.sh`;
-		`bash hike.sh refresh`;
+		#`bash hike.sh refresh`;
 		return 'ok, I reset the website settings';
 	}
 	if ($query =~ m/make me admin/) {
