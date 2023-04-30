@@ -17,6 +17,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 
 	# sub MakeAuthorPage {
 	# sub GetAuthorPage {
+	# sub GetAuthors {
 	# sub MakeReadPage {
 	# sub PrintReadPage {
 	# sub GetTagPage {

@@ -173,6 +173,9 @@ sub SqliteQueryHashRef { # $query, @queryParams; calls sqlite with query, and re
 #sub SqliteGetQueryHashRef {
 #sub SqliteGetQuery {
 #sub GetQuery {
+#sub GetQueryAsHash {
+#sub GetQueryAsArray {
+#sub GetQueryAsArrayOfHashRefs {
 
 #	WriteLog('SqliteQueryGetArrayOfHashRef: begin');
 	WriteLog('SqliteQueryHashRef: begin; caller = ' . join(',', caller));

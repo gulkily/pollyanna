@@ -71,6 +71,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	# my @validPages =
 	my @simplePages = qw(inspector data cloud bookmark help example access welcome calendar profile upload links post cookie chat thanks examples about faq documentation network schedule);
 	push @simplePages, qw(biography interests messages); # shadowme
+	# yes, this is what you need for GetXPage() in template/perl/page/x.pl to work!
 
 	if (0) { } # this is to make all the elsifs below have consistent formatting
 	elsif (in_array($pageType, @simplePages)) {

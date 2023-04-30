@@ -186,6 +186,7 @@ function InjectJs ($html, $scriptNames, $injectMode = 'before', $htmlTag = '</bo
 // $injectMode: before, after, append (to end of html)
 // $htmlTag: e.g. </body>, only used with before/after
 // if $htmlTag is not found, does fall back to append
+// @validRoutes may not be here in anymore #note
 
 	WriteLog('InjectJs() begin...');
 
