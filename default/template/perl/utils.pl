@@ -1390,6 +1390,7 @@ sub ReplaceStrings { # automatically replaces strings in html with looked up val
 } # ReplaceStrings()
 
 sub ServerSign { # $filePath
+	return '';
 	#todo sanity
 	my $newFilePath = shift;
 	chomp $newFilePath;
