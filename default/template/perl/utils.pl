@@ -1389,6 +1389,15 @@ sub ReplaceStrings { # automatically replaces strings in html with looked up val
 	return $content;
 } # ReplaceStrings()
 
+sub ServerSign { # $filePath
+	#todo sanity
+	my $newFilePath = shift;
+	chomp $newFilePath;
+	`gpg --clearsign $newFilePath`;
+	`mv $newFilePath.asc $newFilePath`;
+	IndexRecentTextFiles();
+}
+
 sub IsUrl { # add basic isurl()
 	return 1;
 } # IsUrl()
@@ -2095,13 +2104,21 @@ sub CheckForInstalledVersionChange {
 
 		$changeLogMessage .= "\n\n#changelog";
 		state $TXTDIR = GetDir('txt');
+		my $newChangelogFile = "$TXTDIR/$changeLogFilename";
 
-		PutFile("$TXTDIR/$changeLogFilename", $changeLogMessage);
-		#my $changelogIndexResult = IndexFile("$TXTDIR/$changeLogFilename");
+		WriteLog('About to PutFile() to $newChangelogFile = ' . $newChangelogFile);
+
+		PutFile($newChangelogFile, $changeLogMessage);
+
+		if (GetConfig('setting/admin/gpg/sign_git_changelog')) {
+			ServerSign($newChangelogFile);
+		}
+
+		#my $changelogIndexResult = IndexFile($newChangelogFile);
 		#if (!$changelogIndexResult) {
 		#	WriteLog('CheckForInstalledVersionChange: warning: $changelogIndexResult was FALSE');
 		#}
-		#ServerSign("$TXTDIR/$changeLogFilename");
+
 		PutConfig('current_version', $currVersion);
 
 		return $currVersion;
