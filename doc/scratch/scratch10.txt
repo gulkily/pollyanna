@@ -1,0 +1,12 @@
+git stash
+
+git fetch
+
+git merge
+
+source hike.sh
+
+hike.sh refresh
+
+hike.sh build
+
