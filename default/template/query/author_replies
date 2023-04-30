@@ -1,6 +1,7 @@
 SELECT
 	file_hash,
 	item_title,
+	'' AS tagset_all,
 	add_timestamp
 FROM item_flat
 WHERE
