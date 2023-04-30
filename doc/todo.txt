@@ -1,3 +1,7 @@
+bad reference to template --> empty dialog -- developer confusion problem
+	I had a bad parameter to GetTemplate() and it was hard to figure out the cause
+		it should really return a debug dialog, especially if config/debug is on
+
 write dialog should tell user when they're logged in with a cookie
 
 should be a "logged in as" dialog
