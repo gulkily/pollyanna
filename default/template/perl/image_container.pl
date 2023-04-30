@@ -53,6 +53,9 @@ sub GetImageContainer { # $fileHash, $imageAlt, $boolLinkToItemPage = 1
 		$imageContainer =~ s/\$imageAlt/$imageAlt/g;
 		if ($boolLinkToItemPage) {
 			$imageContainer =~ s/\$permalinkHtml/$permalinkHtml/g;
+		} else {
+			$imageContainer =~ s/\$permalinkHtml/#/g;
+			#todo make this nicer
 		}
 
 		WriteLog('GetImageContainer: returning, length($imageContainer) = ' . length($imageContainer));

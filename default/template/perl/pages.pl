@@ -1702,7 +1702,7 @@ while (my $arg1 = shift @foundArgs) {
 			if ($makeDialogArg) {
 				my @validDialogs = qw(settings access upload data search profile);
 				my @needRequire = qw(profile upload);
-				my @queryDialogs = qw(read image url chain new tags scores active authors threads);
+				my @queryDialogs = qw(read image url chain new tags scores active authors people threads);
 				my @simpleDialogs = qw(help );
 
 				if (0) { }
@@ -1747,6 +1747,7 @@ while (my $arg1 = shift @foundArgs) {
 					# /dialog/scores.html
 					# /dialog/active.html
 					# /dialog/authors.html
+					# /dialog/people.html
 					# /dialog/threads.html
 
 					my $dialog = GetQueryAsDialog($makeDialogArg);

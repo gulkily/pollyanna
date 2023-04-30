@@ -15,13 +15,17 @@ sub GetPeoplePage {
 
 	my $dialog = '';
 
+	require_once('image_container.pl'); #todo move into widget
+
 	for my $authorHashRef (@authors) {
 		my %author = %{$authorHashRef};
 
-		my $template = GetTemplate('html/widget/author2.template');
+		my $template = GetTemplate('html/widget/person.template');
 
-		#todo sanity checks on each field
+		my $htmlThumbnail = GetImageContainer('1ef353f5604b500cce80d1a213d9efa95b806b26', 'Picture of ' . HtmlEscape($author{'author_alias'}), 1);
+		$htmlThumbnail = AddAttributeToTag($htmlThumbnail, 'img', 'width', '150');
 
+		$template = str_replace('<span class=author_image></span>', '<span class=author_image>' . $htmlThumbnail . '</span>', $template);
 		$template = str_replace('<span class=author_alias></span>', '<span class=author_alias>' . HtmlEscape($author{'author_alias'}) . '</span>', $template);
 		$template = str_replace('<span class=author_key_count></span>', '<span class=author_key_count>' . HtmlEscape($author{'author_key_count'}) . '</span>', $template);
 		$template = str_replace('<span class=last_seen></span>', '<span class=last_seen>' . GetTimestampWidget($author{'last_seen'}) . '</span>', $template);

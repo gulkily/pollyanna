@@ -219,7 +219,8 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 				'tags',
 				'scores',
 				'active',
-				'authors',
+				'authors', # /dialog/authors.html
+				'people', # /dialog/people.html
 				'welcome',
 				'profile',
 				'read',
