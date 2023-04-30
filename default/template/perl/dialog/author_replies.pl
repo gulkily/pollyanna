@@ -47,7 +47,7 @@ sub GetAuthorRepliesDialog { # $authorKey
 	require_once('dialog/query_as_dialog.pl');
 
 	my %dialogFlags;
-	$dialogFlags{'no_no_results'} = 1;
+	#$dialogFlags{'no_no_results'} = 1;
 
 	my $dialog = GetQueryAsDialog($authorRepliesQuery, $dialogTitle, '', \%dialogFlags);
 
