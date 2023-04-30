@@ -1,3 +1,16 @@
+combined inboxes by validated username/alias
+
+link from people card to profiles
+
+1) post item which assigns  #keep tag to everything to keep
+	this list is taken from existing items with #keep tag
+2) remove un#keep things (excluding pubkeys and admin things) and the above new item
+3)
+
+hike addmenu token/command
+
+need a hike edit command for multiline files
+
 bad reference to template --> empty dialog -- developer confusion problem
 	I had a bad parameter to GetTemplate() and it was hard to figure out the cause
 		it should really return a debug dialog, especially if config/debug is on
