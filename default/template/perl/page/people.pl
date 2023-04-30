@@ -4,13 +4,13 @@ use strict;
 use warnings;
 use 5.010;
 
-sub GetAuthors2Page {
-	WriteLog('GetAuthors2Page: caller = ' . join(',', caller));
+sub GetPeoplePage {
+	WriteLog('GetPeoplePage: caller = ' . join(',', caller));
 
     my $html = '';
 
-	#my $dialog = GetQueryAsDialog('authors2');
-	my @authors = SqliteQueryHashRef('authors2');
+	#my $dialog = GetQueryAsDialog('people');
+	my @authors = SqliteQueryHashRef('people');
 	shift @authors;
 
 	my $dialog = '';
@@ -36,10 +36,10 @@ sub GetAuthors2Page {
 	}
 
     $html =
-        GetPageHeader('authors2') .
+        GetPageHeader('people') .
         $dialog .
-		GetQuerySqlDialog('authors2') .
-        GetPageFooter('authors2')
+		GetQuerySqlDialog('people') .
+        GetPageFooter('people')
     ;
 
 	if (GetConfig('admin/js/enable')) {
