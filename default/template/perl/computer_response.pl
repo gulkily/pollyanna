@@ -173,7 +173,12 @@ sub GetComputerResponse {
 	if ($query eq 'add authors page') {
 		AddToMenu('authors');
 		`bash hike.sh page authors`;
-		return "ok, I added an authors page. there may not be much on it at the moment.";
+		return "ok, I added an authors page. there may not be much on it at first.";
+	}
+	if ($query eq 'add people page') {
+		AddToMenu('people');
+		`bash hike.sh page people`;
+		return "ok, I added a people page. there may not be much on it at first.";
 	}
 	if ($query eq 'add random page' || $query eq 'add a random items page' || $query =~ m/add.+random.+page/) {
 		AddToMenu('random');
