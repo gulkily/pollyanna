@@ -33,6 +33,11 @@ sub GetStylesheet { # $styleSheet ; returns stylesheet template based on config
 		$style .= "\n" . GetThemeAttribute('additional.css'); # may concatenate styles from all applied themes!
 	}
 
+	if (1) {
+		#todo unhardcode this
+		$style .= "\n" . GetTemplate('css/pre_time_sans.css');
+	}
+
 	$styleSheet = $style;
 
 	return $styleSheet;
