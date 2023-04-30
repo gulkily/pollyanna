@@ -26,6 +26,7 @@
 	if (window.DraggingRetile) {
 		SetPrefs('draggable', 1);
 		SetPrefs('draggable_activate', 1);
+		SetPrefs('draggable_spawn', 1);
 		SetPrefs('draggable_spawn_focus', 1);
 		SetPrefs('draggable', 1);
 		SetPrefs('draggable_restore', 1);
