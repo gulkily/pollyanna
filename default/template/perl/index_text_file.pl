@@ -613,6 +613,12 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 									my $newFilePath = GetDir('txt') . '/' . GetRandomHash() . '.txt';
 									PutFile($newFilePath, '>>'.$fileHash."\n\n".$response);
+
+									if (GetConfig('setting/admin/gpg/enable') && GetConfig('setting/admin/gpg/sign_computer_response')) {
+										`gpg --clearsign $newFilePath`;
+										`mv $newFilePath.asc $newFilePath`;
+									}
+
 									IndexTextFile($newFilePath);
 
 									if (!$titleCandidate) {
