@@ -154,7 +154,8 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 
 			# row color above
 
-			my @fieldAdvanced = GetConfigListAsArray('field_advanced');
+			my @fieldAdvanced = GetConfigListAsArray('field_advanced'); #todo inconsistent with the other one?
+			# fields_advanced advanced_fields advancedfields
 
 			foreach my $column (split(',', $columns)) {
 				#print $column . ',' . $row->{$column} . "\n";

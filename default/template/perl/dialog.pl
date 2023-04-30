@@ -300,6 +300,8 @@ sub GetDialogX2 { # \%paramHash ; returns window
 
 		my $printedColumnsCount = 0;
 		my @fieldAdvanced = split("\n", GetTemplate('list/field_advanced'));
+		# fields_advanced advanced_fields advancedfields
+
 		foreach my $columnCaption (@columnsArray) {
 			$printedColumnsCount++;
 			my $columnHeaderTemplate = GetTemplate('html/window/header_column.template'); # <td></td>

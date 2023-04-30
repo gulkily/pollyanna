@@ -6,6 +6,12 @@ use 5.010;
 use utf8;
 
 sub GetImageContainer { # $fileHash, $imageAlt, $boolLinkToItemPage = 1
+#sub GetThumbnail {
+#sub GetImageThumbnail {
+#sub GetImageTemplate {
+#sub GetImage {
+
+#todo, needs to take an optional %file hash and read from it instead of the database
 	my $fileHash = shift;
 	my $imageAlt = shift;
 	my $boolLinkToItemPage = shift;
@@ -32,6 +38,7 @@ sub GetImageContainer { # $fileHash, $imageAlt, $boolLinkToItemPage = 1
 	} else {
 		$imageContainer = GetTemplate('html/item/container/image_with_link.template');
 		#$imageContainer = GetTemplate('html/item/container/image.template');
+		#todo fix this
 	}
 
 	my $imageUrl = "/thumb/thumb_800_$fileHash.gif"; #todo hardcoding no
