@@ -1,3 +1,6 @@
+#brainstorm should it offer different annoyance levels?
+	or automatically select 1, 2, 3 on repeated clicks?
+
 combined inboxes by validated username/alias
 
 link from people card to profiles
