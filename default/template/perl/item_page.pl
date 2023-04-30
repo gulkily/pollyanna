@@ -391,6 +391,11 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$itemTemplate = '';
 	}
 
+	# REPLY FORM
+	if (GetConfig('reply/enable')) {
+		$txtIndex .= GetReplyForm($file{'file_hash'});
+	}
+
 	# REPLY CART
 	#if (GetConfig('setting/html/reply_cart')) {
 	#	require_once('dialog/reply_cart.pl');
@@ -538,9 +543,11 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 
 		# REPLIES LIST
 		#$txtIndex .= GetReplyListing($file{'file_hash'});
-		if (GetConfig('reply/enable')) {
-			$txtIndex .= GetReplyForm($file{'file_hash'});
-		}
+
+		# REPLY FORM
+		#if (GetConfig('reply/enable')) {
+		#	$txtIndex .= GetReplyForm($file{'file_hash'});
+		#}
 
 		# RELATED LIST
 		my $showRelated = GetConfig('setting/html/item_page/toolbox_related');
