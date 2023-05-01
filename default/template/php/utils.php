@@ -266,6 +266,12 @@ function GetMyVersion () { // returns current git commit id
 } # GetMyVersion()
 
 function index ($string, $needle) { // emulates perl's index(), returning -1 when not found
+	if (is_string($string)) {
+		WriteLog('index: sanity check passed');
+	} else {
+		WriteLog('index: warning: sanity check FAILED');
+		return '';
+	}
 	$strpos = strpos($string, $needle);
 	if ($strpos === false) {
 		return -1;
