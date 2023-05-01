@@ -467,7 +467,15 @@ while (my $arg1 = shift @argsFound) {
 		}
 		if ($arg1 eq '--all') {
 			print "index.pl: --all\n";
+
+			my $operatorPlease = GetConfig('setting/admin/token/operator_please');
+			PutConfig('setting/admin/token/operator_please', 0);
+			my $hikeSet = GetConfig('setting/admin/token/hike_set');
+			PutConfig('setting/admin/token/hike_set', 0);
 			MakeIndex();
+			PutConfig('setting/admin/token/hike_set', $hikeSet);
+			PutConfig('setting/admin/token/operator_please', $operatorPlease);
+
 			print "=========================\n";
 			print "index.pl: --all finished!\n";
 			print "=========================\n";
