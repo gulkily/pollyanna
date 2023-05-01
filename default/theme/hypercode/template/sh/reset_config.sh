@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# theme/hypercode/template/sh/reset_config.sh
+
 rm config/theme/hypercode/template/list/menu
 echo 0 > config/setting/admin/js/openpgp
 echo 0 > config/setting/admin/upload/enable
@@ -12,7 +14,7 @@ echo 1 > config/setting/html/reset_button
 echo 0 > config/setting/html/item_page/toolbox_search
 echo 0 > config/setting/html/menu_layer_controls
 echo 0 > config/setting/html/write_options
-echo 0 > config/setting/admin/php/cookie_inbox
+echo 1 > config/setting/admin/php/cookie_inbox
 echo 0 > config/setting/admin/php/route_notify_printed_time
 echo 1 > config/setting/html/monochrome
 echo 1 > config/setting/html/menu_top
