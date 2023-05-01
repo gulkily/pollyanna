@@ -587,7 +587,10 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									my $result = `bash hike.sh set $params`;
 
 									my $action = "hike set " . $tokenFound{'param'};
-									my $response = $tokenFound{'param'} . ' =sha1hex()=> ' . sha1_hex($tokenFound{'param'});
+									my $response = '';
+									$response .= $tokenFound{'param'};
+									$response .= "\n";
+									$response .= sha1_hex($tokenFound{'param'});
 									$response .= "\n\n";
 									$response .= $result;
 
@@ -598,7 +601,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									if (!$titleCandidate) {
                                         $titleCandidate = 'hike set ...';
                                     }
-								}
+								} # hike_set
 
 								if ($tokenFound{'token'} eq 'operator_please') {
 									#push @indexMessageLog, 'found veryyy special token';
