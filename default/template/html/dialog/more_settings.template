@@ -1,0 +1,9 @@
+<!-- more_settings.template -->
+
+<fieldset>
+	<p>
+		<a href="/settings.html">More Settings...</a>
+	</p>
+</fieldset>
+
+<!-- / more_settings.template -->
