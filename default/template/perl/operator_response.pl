@@ -24,11 +24,11 @@ sub GetOperatorResponse {
 
 	#todo need to set client-side flags
 
-	my $onceLog = GetOnce($query);
-	if (!$onceLog) {
-		WriteLog('GetOperatorResponse: warning: encountered previously done task');
-		return 'I may have done that already';
-	}
+#	my $onceLog = GetOnce($query);
+#	if (!$onceLog) {
+#		WriteLog('GetOperatorResponse: warning: encountered previously done task');
+#		return 'I may have done that already';
+#	}
 
 	if ($query eq 'add calendar page') {
 		AddToMenu('calendar');
