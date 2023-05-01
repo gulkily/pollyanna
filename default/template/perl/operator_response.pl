@@ -220,6 +220,10 @@ sub GetOperatorResponse {
 		return 'In order to become admin, you have to solve a puzzle.';
 		#PutConfig('setting')
 	}
+	if ($query =~ m/make.+accessible.+text/) {
+		PutConfig('setting/admin/php/light_mode_always_on', 1);
+		return 'I switched on light mode. Does that help?';
+	}
 	if ($query =~ /compatibility/i) {
 		return "this website should be compatible with every mainstream and historically mainstream (1% or higher peak adoption rate) browser which supports HTTP/1.1.\n\n" .
 		" the browsers I am aware of are Google Chrome and Chromium, Vivaldi, and Brave; Mozilla Firefox and Waterfox, Waterfox Classic, PaleMoon, LibreWolf, and Abrowser; Internet Explorer, Apple Safari for Mac OS and for iOS and iPadOS, Microsoft Edge, Lynx, Links, w3m, Dillo, Mozilla SeaMonkey, Netscape Navigator, OffByOne Browser, Opera Browser (post-Chromium transition, Presto era, and pre-Presto), WebTV Browser, Samsung TV browser, America Online 3.0 and higher, Midori, Luakit, qutebrowser, Camino, OmniWeb, NetSurf, Nyxt, Falkon, Beacon, GNU IceCat, Emacs Web Wowser, and curl.";
