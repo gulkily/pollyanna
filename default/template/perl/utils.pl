@@ -154,7 +154,8 @@ sub GetDir { # $dirName ; returns path to special directory specified
 # 'html' = html root
 # 'script'
 # 'txt'
-# 'image
+# 'image'
+# #todo 'once'
 	my $dirName = shift;
 	if (!$dirName) {
 		WriteLog('GetDir: warning: $dirName missing');

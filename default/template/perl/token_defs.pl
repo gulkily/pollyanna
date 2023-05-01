@@ -272,10 +272,10 @@ sub GetTokenDefs {
 			'apply_to_parent' => 1
 		},
 		{
-			'token' => 'computer_please',
-			'mask' => '^(computer, please)(\W)(.+)$',
+			'token' => 'operator_please',
+			'mask' => '^(operator, please)(\W)(.+)$',
 			'mask_params' => 'mgi',
-			'message' => '[Please]',
+			'message' => '[Operator]',
 			'apply_to_parent' => 0
 		},
 		{

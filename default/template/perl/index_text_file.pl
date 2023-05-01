@@ -529,7 +529,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						time
 						hashtag
 						s_replace
-						computer_please
+						operator_please
 						hike_set
 					); #tokenSanityCheck
 					#### TODO #TODO there should really really be a warning when this doesn't pan out, because ...
@@ -600,28 +600,31 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
                                     }
 								}
 
-								if ($tokenFound{'token'} eq 'computer_please') {
+								if ($tokenFound{'token'} eq 'operator_please') {
 									#push @indexMessageLog, 'found veryyy special token';
-									push @indexMessageLog, 'computer, please ' . $tokenFound{'param'};
+									push @indexMessageLog, 'operator, please ' . $tokenFound{'param'};
 
-									require_once('computer_response.pl');
+									require_once('operator_response.pl');
 
 									my $action = $tokenFound{'param'};
-									my $response = $tokenFound{'param'} . ' =sha1hex()=> ' . sha1_hex($tokenFound{'param'});
+									my $response = '';
+									$response .= $tokenFound{'param'};
+									$response .= "\n";
+									$response .= sha1_hex($tokenFound{'param'});
 									$response .= "\n\n";
-									$response .= GetComputerResponse($action);
+									$response .= GetOperatorResponse($action);
 
 									my $newFilePath = GetDir('txt') . '/' . GetRandomHash() . '.txt';
 									PutFile($newFilePath, '>>'.$fileHash."\n\n".$response);
 
-									if (GetConfig('setting/admin/gpg/enable') && GetConfig('setting/admin/gpg/sign_computer_response')) {
+									if (GetConfig('setting/admin/gpg/enable') && GetConfig('setting/admin/gpg/sign_operator_response')) {
 										ServerSign($newFilePath);
 									}
 
 									IndexTextFile($newFilePath);
 
 									if (!$titleCandidate) {
-                                        $titleCandidate = 'Computer, please...';
+                                        $titleCandidate = 'Operator, please...';
                                     }
 								} else {
 									#push @indexMessageLog, 'not thaaat specil';
