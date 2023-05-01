@@ -34,8 +34,8 @@
 
 
 
-						if ($tokenFound{'token'} eq 'computer_pleace') {
-							push @indexMessageLog, 'found veryyy special token';
+						if ($tokenFound{'token'} eq 'operator_pleace') {
+							push @indexMessageLog, 'found operator request';
 						}
 
 
