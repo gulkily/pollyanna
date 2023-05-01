@@ -2087,6 +2087,12 @@ sub CheckForInstalledVersionChange {
 			'Software Updated to Version ' . substr($currVersion, 0, 8) . '..' . "\n\n" .
 			'Installed software version has changed from ' . $lastVersion . ' to ' . $currVersion . "\n\n";
 
+		WriteLog('CheckForInstalledVersionChange: $changeLogFilename = ' . $changeLogFilename);
+
+		if (!$lastVersion) {
+			$lastVersion = 0;
+		}
+
 		if ($lastVersion) {
 			#my $changeLogList = "Version has changed from $lastVersion to $currVersion";
 			if ($lastVersion =~ m/^([0-9a-f]+)$/) {
