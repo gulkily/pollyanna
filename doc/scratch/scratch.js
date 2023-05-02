@@ -1,3 +1,7 @@
+		document.frmReply.comment.value = commtext + "\n\n" + window.location.href;
+
+
+
 		if (voteValue == 'hide' && window.GetParentDialog) {
 			// if we clicked a 'hide' vote, hide the parent dialog
 			//alert('DEBUG: IncrementTagLink: special case for voteValue == hide');
