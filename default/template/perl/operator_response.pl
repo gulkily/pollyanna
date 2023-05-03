@@ -231,6 +231,6 @@ sub GetOperatorResponse {
 	else {
 		return 'I did not understand that query';
 	}
-}
+} # GetOperatorResponse()
 
 1;
