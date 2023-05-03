@@ -59,7 +59,11 @@ sub GetProfilePage { # returns profile page (allows sign in/out)
 		#my $tosWindow = GetTosDialog();
 		$txtIndex .= $profileWindow;
 
-		if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/openpgp')) {
+		if (
+			GetConfig('setting/admin/js/enable') &&
+			GetConfig('setting/admin/js/openpgp') &&
+			GetConfig('setting/admin/js/openpgp_keychain')
+		) {
 			$txtIndex .=
 				#'<span class=advanced>' . 
 				'<form name=formSelectKey>' .
