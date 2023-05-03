@@ -1,4 +1,4 @@
-config/*
+*secret*
 cache/*
 html/*
 log/*
@@ -9,3 +9,6 @@ html/*
 lib/*
 .idea/*
 *.swp
+index.pl
+utils.pl
+pages.pl
