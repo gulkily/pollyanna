@@ -1,3 +1,0 @@
-<!-- menuitem-p.template -->
-<p><a href="$address">$caption</a>;</p>
-<!-- / menuitem-p.template -->

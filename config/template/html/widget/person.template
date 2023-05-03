@@ -1,8 +1,0 @@
-<!-- widget/person.template -->
-<span class=author_image></span>
-<pre>Alias: <span class=author_alias></span>
- Seen: <span class=last_seen></span><span class=advanced>
- Keys: <span class=author_key_count></span>
-Score: <span class=author_score></span>
-Items: <span class=item_count></span></span></pre>
-<!-- widget/person.template -->

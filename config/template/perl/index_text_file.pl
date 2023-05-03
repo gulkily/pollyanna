@@ -610,12 +610,22 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									require_once('operator_response.pl');
 
 									my $action = $tokenFound{'param'};
+									my $taskId = sha1_hex($tokenFound{'param'});
+									my $operatorResponse = GetOperatorResponse($action);
+									my $gitLog = `git add -v config`;
+								        $gitLog .= `git commit -m 'updating config to perform task $taskId'`;
+								       	$gitLog .= `commit ; git push`;
+
 									my $response = '';
 									$response .= $tokenFound{'param'};
 									$response .= "\n";
 									$response .= sha1_hex($tokenFound{'param'});
 									$response .= "\n\n";
-									$response .= GetOperatorResponse($action);
+									$response .= $operatorResponse;
+									$response .= "\n\n";
+									$response .= "===";
+									$response .= "\n\n";
+									$response .= $gitLog;
 
 									my $newFilePath = GetDir('txt') . '/' . GetRandomHash() . '.txt';
 									PutFile($newFilePath, '>>'.$fileHash."\n\n".$response);

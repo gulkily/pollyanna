@@ -1,5 +1,0 @@
-<!-- image_with_link.template -->
-<a href="$permalinkHtml">
-	<img style="max-width: 100%" src="$imageUrl" lowsrc="$imageSmallUrl" alt="$imageAlt">
-</a>
-<!-- / image_with_link.template -->
