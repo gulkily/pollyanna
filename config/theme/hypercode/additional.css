@@ -1,0 +1,9 @@
+* {
+	border-radius: 5pt !important;
+	border: 0 !important;
+}
+input, textarea {
+	background-color: white !important;
+	border: 2pt solid #404040 !important;
+	margin-top: 2pt !important;
+}

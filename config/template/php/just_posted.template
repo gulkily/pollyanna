@@ -1,0 +1,13 @@
+<!-- just_posted.template -->
+
+<a href="$fileUrlPath">
+	See what you just posted
+</a>
+
+<p>
+
+<a class=advanced href="$fileUrlPath">
+	$fileUrlPath
+</a>
+
+<!-- / just_posted.template -->

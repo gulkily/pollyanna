@@ -1,0 +1,185 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+		<title>jstest1</title>
+
+		<style type="text/css">
+			<!--
+				input {
+					box-shadow: 3pt 3pt 5pt gray;
+				}
+				p {
+					padding-left: 15pt;
+					font-family: monospace;
+					font-size: 8pt;
+				}
+			-->
+		</style>
+	</head>
+	<body>
+		<noscript>
+			<p>
+				<font color="#ff8000">
+					<b>JavaScript</b> appears to be turned off or unsupported.<br>
+					Please skip Step 1 and go straight to Step 2.
+				</font>
+			</p>
+		</noscript>
+
+		<form name=frmTest id=frmTest action="/post.html">
+			<p>
+				To help site better itself, please follow steps below:
+			</p>
+
+			<input
+				type=button
+				onclick="if(window.RunTest || RunTest) { return RunTest() } else { alert('window.RunTest was FALSE. You may be using Netscape 2.01 or Opera 3.62?'); return false; }"
+				value="1. Run Tests"
+			>
+
+			<input type=submit value="2. Share With Operator" onclick="this.value='Meditate...'; return true;">
+
+			<p>
+				Comments:<br>
+				<input name=comment type=text size=80>
+			</p>
+
+			<p>
+				User Agent Seen By Server:<br>
+				<input name=txtNetworkUserAgent type=text size=80>
+			</p>
+
+			<hr>
+
+			<p>
+				navigator.userAgent:<br>
+				<input name=txtNavigatorUserAgent type=text size=80>
+			</p>
+
+			<p>
+				navigator.language:<br>
+				<input type=text name=txtNavigatorLanguage size=11>
+			</p>
+
+			<p>
+				window.location.href:<br>
+				<input type=text name=txtWindowLocationHref size=80>
+			</p>
+
+			<hr>
+
+			<p>
+				<input type=text name=txtDocumentGetElementById size=11>
+				document.getElementById
+			</p>
+
+			<p>
+				<input type=text name=txtDocumentGetElementsByClassName size=11>
+				document.getElementsByClassName
+			</p>
+
+			<p>
+				<input type=text name=txtDocumentCreateElement size=11>
+				document.createElement
+			</p>
+
+			<p>
+				<input type=text name=txtDocumentCreateTextNode size=11>
+				document.createTextNode
+			</p>
+
+			<p>
+				<input type=text name=txtWindowLocalStorage size=11>
+				window.localStorage
+			</p>
+
+			<p>
+				<input type=text name=txtWindowPromise size=11>
+				window.Promise
+			</p>
+
+			<!-- strings -->
+
+			<p>
+				<input type=text name=txtWindowUnescape size=11>
+				window.unescape
+			</p>
+
+			<p>
+				<input type=text name=txtBodyInnerHtml size=11>
+				window.document.body.innerHTML
+			</p>
+
+			<p>
+				<input type=text name=txtBodyTextContent size=11>
+				window.document.body.textContent
+			</p>
+
+			<p>
+				<input type=text name=txtWindowXmlHttpRequest size=11>
+				window.XMLHttpRequest
+			</p>
+
+			<p>
+				<input type=text name=txtStringFromCharCode size=11>
+				String.fromCharCode
+			</p>
+
+			<p>
+				<input type=text name=txtDateGetMilliseconds size=11>
+				Date.getMilliseconds
+			</p>
+
+			<p>
+				<input type=text name=txtWindowHistory size=11>
+				window.history
+			</p>
+
+			<p>
+				<input type=text name=txtWindowSetTimeout size=11>
+				window.setTimeout
+			</p>
+
+			<p>
+				<input type=text name=txtWindowSetTimeoutReturn size=11>
+				window.setTimeout(...)
+			</p>
+
+			<p>
+				<input type=text name=txtDocumentCookie size=11>
+				document.cookie
+			</p>
+
+			<p>
+				<input type=text name=txtDocumentCookieSplit size=11>
+				document.cookie.split
+			</p>
+
+			<hr>
+
+			<p>
+				<input type=text name=txtNavigatorJavaEnabled size=11>
+				navigator.javaEnabled
+			</p>
+
+			<p>
+				<input type=text name=txtDocumentLayers size=11>
+				document.layers
+			</p>
+
+			<p>
+				<input type=text name=txtDocumentAll size=11>
+				document.all
+			</p>
+
+			<p>
+				<input type=text name=txtWindowOpener size=11>
+				window.opener
+			</p>
+		</form>
+	</body>
+</html>
+<!-- jstest1.template -->

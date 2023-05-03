@@ -1,0 +1,243 @@
+<h1>Advanced Manual</h1>
+
+<h2>Introduction</h2>
+
+<p>
+	Please enjoy this manual, and report any inaccuracies or potential for improvement.
+	It also helps if you use both <code>#meta</code> and <code>#manual</code> tags.
+</p>
+
+<h3>Possibly Confusing Features</h3>
+
+<ul>
+	<li>Your profile key lives on your device, not on this website or server.</li>
+	<li>This means that you own your profile, not this website or server.</li>
+	<li>Forum can be exported, migrated, cloned, and forked, without restriction.</li>
+	<li>Your profile stays on your device, and you can use it between any other forums.</li>
+	<li>Profile management must be done with your hands and taught to others.</li>
+</ul>
+
+<!-- -->
+
+<h3>Expert Mode Overview</h3>
+	<p>
+		To send message:<br>
+		* Write message in text file<br>
+		* Submit it (e.g. using <tt>curl</tt>) to <tt>/post.html</tt>
+	</p>
+	<p>
+		To create profile:<br>
+		* Use <tt>gpg --gen-key</tt> to generate key<br>
+		* Export your public key using <tt>--gpg --armor --export</tt><br>
+		* Submit (e.g. using <tt>curl</tt>) to <tt>/post.html</tt>.<br>
+	</p>
+	<p>
+		To post using profile:<br>
+		* Use <tt>gpg --clearsign</tt> to sign your text file<br>
+		* Submit to <tt>/post.html</tt>.<br>
+	</p>
+	<p>
+		* Refer to <a href="/manual.html">Manual</a> for token syntax.<br>
+	</p>
+
+<!-- -->
+
+<h3>Terminology and Notation</h3>
+
+<p><b>epoch time</b></p>
+<p>
+    Most timestamps are use epoch time, either integer or floating point.<br>
+    Examples: <br>
+    <code>1557587720</code> <br>
+    <code>1557587720.12345</code>
+</p>
+
+<p><b>item</b></p>
+<p>
+    An item is one "something" that has been added to the message board. <br>
+    Stored as plain text (.txt) for easy access.<br>
+    Identified with a hash, usually shortened like this: <code><a href="/6b/50/a8112fde3a6276cb0c5b9cd8c949bc1625d0.html">&gt;&gt;6b50a811..</a></code></p>
+</p>
+
+<p><b>token</b></p>
+<p>
+    A token is any text which is recognized as a command.<br>
+    Common examples are ">>" prefixed item references and #HashTags<br>
+</p>
+
+
+<p>(more to come)</p>
+
+<!-- -->
+
+
+<a name=gpg><h3>How to use GPG</h3></a>
+
+<h4>Summary for Experts</h4>
+
+<p>Creating a profile: Generate a PGP key, post public key.</p>
+
+<p>Posting stuff as your profile: sign with GPG, paste into textbox.</p>
+
+<h4>More descriptive version</h4>
+
+<p>You will need to <b>generate a key</b> and then <b>sign your messages</b>. Piece of cake.</p>
+
+<!-- -->
+
+<a name=sign><h3>Writing As Yourself</h3></a>
+
+<p>To write something under your new profile, you will need to sign your text.</p>
+
+<p>First, write the text that you want to post. Once you have finished writing it, save it to a .txt file.</p>
+
+<p>Look for the command to "Sign" (not encrypt) your text in your GPG software.</p>
+
+<p>Some software has no such option. In this case, you should use the "Encrypt" command, but ensure that the "To:" field is blank.</p>
+
+<p>You should end up with a big block of text that begins with "<tt>-----BEGIN PGP SIGNED MESSAGE-----</tt>"</p>
+
+<p>Copy this entire block of text, including the <tt>-----</tt> part, and submit it via the <a href="/write.html">Write</a> page.</p>
+
+<p>That's it!</p>
+
+<!-- -->
+
+
+<a name=uploadkey><h3>Uploading Your Public Key</h3></a>
+
+<p>Look for the option to export your public key in your software.</p>
+
+<p>You should end up with a block of text that starts with "<tt>-----BEGIN PGP PUBLIC KEY BLOCK-----</tt>".
+
+<p>Copy the whole thing, including the <tt>-----</tt> part, and submit it via the <a href="/write.html">Write</a> page.</p>
+
+<p>You have now aliased your name to your key fingerprint.</p>
+
+<!-- -->
+
+
+<!-- -->
+
+<a name=gpgcli><h3>Signing With Command-Line GPG</h3></a>
+
+<h4>Check GPG Version</h4>
+
+<p><tt>gpg --version</tt></p>
+
+<p>If you don't have GnuPG installed, go here: <a href="https://www.opengpg.org/">https://www.opengpg.org/</a></p>
+
+<h4>Generate Key Pair</h4>
+
+<p><tt>gpg --gen-key</tt></p>
+
+<h4>Export Public Key</h4>
+
+<p><tt>gpg --armor --export</tt></p>
+
+<h4>Sign Message in Text File</h4>
+
+<p><tt>gpg --clearsign example.txt</tt></p>
+
+<h4>Sign Message After Typing It</h4>
+
+<p><tt>gpg --clearsign</tt></p>
+
+<p>Start typing your message. When you're finished, press Enter, then ^D (Ctrl+D).</p>
+
+<!-- -->
+
+
+<a name=other><h3>Other Resources</h3></a>
+
+<p><a href="manual_tokens.html">Tokens Reference</a>.</p>
+
+<p><a href="write.html">If you have questions, please ask them using Write page</a>.</p>
+
+<!-- -->
+
+<h4>Server Key</h4>
+
+<p>The server key functionality is currently not functional.</p>
+<!--
+<p>The Server key is set by first generating or importing the whole key into the server's keychain.</p>
+
+<p>The Server key is used for signing (and in the process also timestamping) various events that happen on the server.</p>
+
+<p>This ensures that the items were not posted by a random.</p>
+
+<p>The following actions are currently server-signed:</p>
+
+<p>Admin user changes. Server-signed notice is posted.</p>
+
+<p>Version changed. Server-signed "changelog" is posted, which includes the comment from the current version's commit, as well as all the previous commits that came before it, up to the most recent commit included in a changelog.</p>
+
+<p>Client fingerprint and timestamp for items that are posted where the user requests this.</p>
+-->
+<!-- -->
+
+<a name=admin><h3>Administration</h3></a>
+
+<p>Please see doc/1337.txt</p>
+
+<!-- -->
+
+<a name=gpg><h3>How to use GPG</h3></a>
+
+<h4>Read This First</h4>
+
+<p>GnuPG<br><a href="https://www.gnupg.org/">https://www.gnupg.org/</a></p>
+
+<p>Read the GnuPG home page to familiarize yourself.</p>
+
+<h4>Android</h4>
+
+<p>OpenKeychain<br><a href="https://www.openkeychain.org/">https://www.openkeychain.org/</a></p>
+
+<h4>Apple iOS, iPhone, iPad</h4>
+
+<p>PGP Everywhere<br><a href="http://pgpeverywhere.com/">http://pgpeverywhere.com/</a></p>
+
+<h4>Apple macOS</h4>
+
+<p>GPG Suite<br><a href="https://gpgtools.org/">https://gpgtools.org/</a></p>
+
+<h4>Microsoft Windows</h4>
+
+<p>Gpg4Win<br><a href="https://www.gpg4win.org/">https://www.gpg4win.org/</a></p>
+
+<h4>More Options</h4>
+
+<p>OpenPGP Software<br><a href="https://www.openpgp.org/software/">https://www.openpgp.org/software/</a></p>
+
+<a name=keypair><h3>Creating Your Profile, AKA Key Pair</h3></a>
+
+<p>You can post your messages anonymously. Anonymous posting is very easy. Why even bother creating a profile?</p>
+
+<h3>Benefits and Explanation of Registration and Signatures</h3>
+
+<ul>
+	<li>All your posts will appear on your author page.</li>
+	<li>You can sign your posts with your name.</li>
+	<li>You can edit or delete your posts later.</li>
+	<li>You will get a colorful avatar that will appear with all your posts.</li>
+</ul>
+
+<p>
+	You will need to create a key pair.
+	Look for this option in your software and use it.
+</p>
+
+<p>
+	GPG is traditionally used for email,
+	but <b>you do not have to provide your address</b> for this forum.
+	In fact, we recommend that you either leave the field blank.
+	Otherwise, your email address will be accessible to spambots.
+</p>
+
+<p>
+	The key pair is stored on your device.
+	If it is important to you, keep it safe, and back it up.
+</p>
+
+<!-- -->

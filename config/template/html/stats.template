@@ -1,0 +1,76 @@
+<!-- stats.template -->
+
+<fieldset>
+	<p>Updated: $lastUpdateTime
+	<p>Built: $lastBuildTime
+	<p>Version: $versionSequence
+	<p></p>
+	<p id=diagnostics></p>
+</fieldset>
+<fieldset>
+	<p>
+		<a href="/tags.html">
+			<b>$tagsTotal tags</b>
+			<span class=advanced><span class=beginner><br>applied to make content more findable</span></span>
+		</a>
+	</p>
+	<p>
+		<a href="/authors.html">
+			<b>$authorCount authors</b>
+			<span class=advanced><span class=beginner><br>shared their names or public keys</span></span>
+		</a>
+	</p>
+	<p>
+		<a href="/threads.html">
+			<b>$threadsCount threads</b>
+			<span class=advanced><span class=beginner><br>items with replies</span></span>
+		</a>
+	</p>
+	<p>
+		<a href="/image.html">
+			<b>$imagesCount images</b>
+		</a>
+	</p>
+	<p>
+		<a href="/new.html">
+			<b>$newLength items</b>
+			<span class=advanced><span class=beginner><br>new public items on site</span></span>
+		</a>
+	</p>
+	<p>
+		<a href="/url.html">
+			<b>$urlLength links</b>
+			<span class=advanced><span class=beginner><br>links to pages and sites</span></span>
+		</a>
+	</p>
+	<p class=advanced>
+		<a href="/chain.html">
+			<b>$chainLogLength notarized</b>
+			<span class=advanced><span class=beginner><br>time was recorded into server's chain log</span></span>
+		</a>
+	</p>
+	<p class=advanced>
+		<a href="/compost.html">
+			<b>$itemsIndexed composting</b>
+			<span class=beginner><br>pieces of content available for moderation</span>
+		</a>
+	</p>
+	<p class=advanced>
+		<a href="/deleted.html">
+			<b>$itemsDeleted archived</b>
+			<span class=beginner></span>
+		</a>
+	</p>
+	<p class=advanced>
+		<a href="/data.html">
+			<b>$filesTotal files</b>
+			<span class=beginner><br>found under /html/txt (click to download)</span>
+		</a>
+	</p>
+	<p class=advanced>
+		<span class=beginner>version: </span>
+		<span title="`git rev-parse HEAD`">$versionSuccinct</span>
+	</p>
+</fieldset>
+
+<!-- / stats.template -->

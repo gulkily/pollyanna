@@ -1,0 +1,84 @@
+/* theme/chicago/additional.css */
+body {
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	background-color: $colorBackground;
+}
+input {
+}
+input[type=text], input[type=password], select, option, textarea {
+	background-color: $colorInputBackground;
+	color: $colorInputText;
+}
+#txtClock {
+	border: 1pt inset $colorWindow;
+}
+@media (prefers-color-scheme: dark) {
+
+}
+.beginner {
+}
+.dialog {
+	box-shadow: 5pt 5pt 0 rgba(0, 20, 20, 0.3);
+	border: $borderDialog;
+	background-color: $colorWindow;
+	border-radius: 1pt;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	margin-right: 8pt;
+	margin-bottom: 8pt;
+}
+.statusbar td {
+	border: 1pt inset $colorWindow;
+}
+textarea {
+    font-family: Fixedsys, "Courier New", Courier, monospace;
+    font-size: 12pt;
+}
+
+.txt {
+/* regular text */
+	font-family: "Times New Roman", Times, sans-serif;
+	/*font-family: Tahoma, Arial, Helvetica, sans-serif;*/
+	font-size: 14pt;
+}
+a:focus, a:active {
+    color: red !important;
+    border-radius: 1pt;
+}
+textarea:focus {
+}
+input:focus {
+}
+#serverResponse {
+/* response messages from the server */
+    background-color: $colorHighlightAlert;
+    color: $colorText;
+    padding: 5pt;
+    border: 0;
+	box-shadow: 5pt 5pt 0 rgba(0, 20, 20, 0.5);
+}
+#txtClock {
+	border: 1pt inset $colorWindow;
+	background-color: $colorWindow;
+}
+.fileHashShort {
+	text-decoration: underline dotted;
+}
+#spanDialogControls a {
+	color: $colorTitlebarText;
+}
+.titlebarButtons {
+	float: right;
+}
+button.close, button.skip {
+	border: 0;
+	margin: 0;
+	font-weight: bold;
+}
+button:hover {
+	color: red;
+}
+#spanDialogControls a {
+	color: $colorTopMenuTitlebarText;
+}
+/* / theme/chicago/additional.css */

@@ -1,0 +1,89 @@
+<!-- settings.template -->
+<noscript>
+	<p>
+		<b class=noscript>*</b> Some features may need <b>JavaScript</b>.
+		<!--
+			* getElementById and stuff like that.
+			Tested with in IE6+, Presto, Gecko, WebKit, Chrome
+		-->
+	</p>
+</noscript>
+
+<fieldset>
+	<p>
+		<label for=chkShowBeginner>
+			<input type=checkbox id=chkShowBeginner name=chkShowBeginner onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'beginner'); }">
+			Show beginner hints<noscript><b>*</b></noscript>
+		</label>
+	</p>
+
+	<p>
+		<label for=chkShowAdvanced>
+			<input type=checkbox id=chkShowAdvanced name=chkShowAdvanced onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'show_advanced'); }">
+			Show advanced controls<noscript><b>*</b></noscript>
+		</label>
+	</p>
+
+	<p>
+		<label for=chkShowAdmin>
+			<input id=chkShowAdmin type=checkbox name=chkShowAdmin onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'show_admin'); }">
+			Assume operator role<noscript><b>*</b></noscript>
+		</label>
+	</p>
+</fieldset>
+
+<fieldset class=advanced>
+	<legend><b>Timestamp Format<noscript>*</noscript></b></legend>
+	<p>
+		<label for=optTimestampsAdjusted>
+			<input type=radio id=optTimestampsAdjusted name=optTimestampsFormat value=adjusted onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'timestamps_format'); }">
+			Readable: 1 day ago
+		</label>
+		<br>
+		<label for=optTimestampsSeconds>
+			<input type=radio id=optTimestampsSeconds name=optTimestampsFormat value=seconds onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'timestamps_format'); }">
+			Relative seconds: -86400
+		</label>
+		<br>
+		<label for=optTimestampsEpoch>
+			<input type=radio id=optTimestampsEpoch name=optTimestampsFormat value=epoch onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'timestamps_format'); }">
+			Unix Epoch: 1652258031
+		</label>
+		<br>
+		<label for=optTimestampsExact>
+			<input type=radio id=optTimestampsExact name=optTimestampsFormat value=exact onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'timestamps_format'); }">
+			Shortened: 12:00
+		</label>
+		<br>
+		<label for=optTimestampsExactFull>
+			<input type=radio id=optTimestampsExactFull name=optTimestampsFormat value=exact_full onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'timestamps_format'); }">
+			Full: 1900-01-01 12:00
+		</label>
+		<br>
+		<label for=optTimestampsISO>
+			<input type=radio id=optTimestampsISO name=optTimestampsFormat value=iso onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'timestamps_format'); }">
+			ISO 8601 / RFC 3339
+		</label>
+	</p>
+</fieldset>
+
+
+<fieldset class=advanced>
+	<legend><b>Performance Mode</b></legend>
+	<p>
+		<label for=optPerformanceQuicker>
+			<input type=radio id=optPerformanceQuicker name=optPerformanceOptimization value=quicker onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'performance_optimization'); }">
+			Quicker<noscript><b>*</b></noscript><span class=beginner> (computer works harder)<br></span>
+		</label>
+		<label for=optPerformanceFaster>
+			<input type=radio id=optPerformanceFaster name=optPerformanceOptimization value=faster onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'performance_optimization'); }">
+			Faster<span class=beginner> (computer works less)<br></span>
+		</label>
+		<label for=optPerformanceNone>
+			<input type=radio id=optPerformanceNone name=optPerformanceOptimization value=none onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'performance_optimization'); }">
+			None<noscript><b>*</b></noscript><span class=beginner> (computer rests)<br></span>
+		</label>
+	</p>
+</fieldset>
+
+<!-- / settings.template -->

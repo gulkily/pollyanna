@@ -1,0 +1,3 @@
+<!-- item/item.template -->
+<p class="txt">$itemText<br></p>
+<!-- / item/item.template -->

@@ -1,0 +1,162 @@
+<html xmlns="http://www.w3.org/1999/html">
+<!-- keyboard_a.template -->
+<!-- keyboard implemented with a elements -->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>keyboard</title>
+</head>
+
+<body>
+<style type="text/css">
+    <!--
+        a {
+            font-family: monospace;
+            font-size: larger;
+        }
+    -->
+</style>
+<script>
+<!--
+	function hi (letter) {
+		var text = letter;
+		//alert('DEBUG: "' + text + '"');
+
+		for (var i = 0; i < text.length; i++) {
+			//alert('DEBUG: i = ' + i);
+			if (text.substr(i, 1) != ' ') {
+				// ok
+			} else {
+				if (i == 0) {
+					text = text.substr(i + 1);
+				} else {
+					text = text.substr(0, i) + '' + text.substr(i + 1);
+				}
+				i = i - 1;
+			}
+		}
+
+		if (text == 'Enter') {
+			text = "\n";
+		}
+
+		if (text == 'Space') {
+			text = " ";
+		}
+		if (text == 'Tag') {
+			text = "#";
+		}
+
+		var parentFrames = parent.frames;
+		if (parentFrames) {
+			var parentFramesMain = parent.frames['main'];
+			if (parentFramesMain) {
+				var documentCompose = parentFramesMain.document.compose;
+				if (documentCompose) {
+					var txtComment = documentCompose.comment;
+					if (txtComment) {
+						if (text == 'Back') {
+							// backspace
+							if (txtComment.value.length) {
+								txtComment.value = txtComment.value.substr(0, txtComment.value.length - 1);
+							}
+						} else {
+							txtComment.value += '' + text;
+						}
+					}
+				}
+			}
+		}
+
+		var frmKbd = document.compose;
+		if (frmKbd) {
+			var kbdText = frmKbd.kbdText;
+			if (kbdText) {
+				if (text == 'Back') {
+					// backspace
+					if (kbdText.value.length) {
+						kbdText.value = kbdText.value.substr(0, kbdText.value.length - 1);
+					}
+				} else {
+					kbdText.value += '' + text;
+				}
+			}
+		}
+
+		//alert('DEBUG: "' + text + '"');
+
+		return false;
+	}
+// -->
+</script>
+
+<table bgcolor="$colorWindow" cellpadding=4 cellspacing=0 border=0>
+
+<tr><td>
+    <a href="/post.html" onclick="return hi('`');" ondblclick="return hi('`');">`</a>
+    <a href="/post.html" onclick="return hi('1');" ondblclick="return hi('1');">1</a>
+    <a href="/post.html" onclick="return hi('2');" ondblclick="return hi('2');">2</a>
+    <a href="/post.html" onclick="return hi('3');" ondblclick="return hi('3');">3</a>
+    <a href="/post.html" onclick="return hi('4');" ondblclick="return hi('4');">4</a>
+    <a href="/post.html" onclick="return hi('5');" ondblclick="return hi('5');">5</a>
+    <a href="/post.html" onclick="return hi('6');" ondblclick="return hi('6');">6</a>
+    <a href="/post.html" onclick="return hi('7');" ondblclick="return hi('7');">7</a>
+    <a href="/post.html" onclick="return hi('8');" ondblclick="return hi('8');">8</a>
+    <a href="/post.html" onclick="return hi('9');" ondblclick="return hi('9');">9</a>
+    <a href="/post.html" onclick="return hi('0');" ondblclick="return hi('0');">0</a>
+    <a href="/post.html" onclick="return hi('-');" ondblclick="return hi('-');">-</a>
+    <a href="/post.html" onclick="return hi('=');" ondblclick="return hi('=');">=</a>
+    <a href="/post.html" onclick="return hi('Back');" ondblclick="return hi('Back');">Back</a>
+    <br>
+</td></tr>
+<tr><td>
+    <a href="/post.html" onclick="return hi('Tag');" ondblclick="return hi('Tag');">Tag</a>
+    <a href="/post.html" onclick="return hi('Q');" ondblclick="return hi('Q');">Q</a>
+    <a href="/post.html" onclick="return hi('W');" ondblclick="return hi('W');">W</a>
+    <a href="/post.html" onclick="return hi('E');" ondblclick="return hi('E');">E</a>
+    <a href="/post.html" onclick="return hi('R');" ondblclick="return hi('R');">R</a>
+    <a href="/post.html" onclick="return hi('T');" ondblclick="return hi('T');">T</a>
+    <a href="/post.html" onclick="return hi('Y');" ondblclick="return hi('Y');">Y</a>
+    <a href="/post.html" onclick="return hi('U');" ondblclick="return hi('U');">U</a>
+    <a href="/post.html" onclick="return hi('I');" ondblclick="return hi('I');">I</a>
+    <a href="/post.html" onclick="return hi('O');" ondblclick="return hi('O');">O</a>
+    <a href="/post.html" onclick="return hi('P');" ondblclick="return hi('P');">P</a>
+    <a href="/post.html" onclick="return hi('[');" ondblclick="return hi('[');">[</a>
+    <a href="/post.html" onclick="return hi(']');" ondblclick="return hi(']');">]</a>
+    <a href="/post.html" onclick="return hi('\ ');" ondblclick="return hi('\ ');">\ </a>
+    <br>
+</td></tr>
+<tr><td>
+    <a href="/post.html" onclick="return hi('Copy');" ondblclick="return hi('Copy');">Copy</a>
+    <a href="/post.html" onclick="return hi('A');" ondblclick="return hi('A');">A</a>
+    <a href="/post.html" onclick="return hi('S');" ondblclick="return hi('S');">S</a>
+    <a href="/post.html" onclick="return hi('D');" ondblclick="return hi('D');">D</a>
+    <a href="/post.html" onclick="return hi('F');" ondblclick="return hi('F');">F</a>
+    <a href="/post.html" onclick="return hi('G');" ondblclick="return hi('G');">G</a>
+    <a href="/post.html" onclick="return hi('H');" ondblclick="return hi('H');">H</a>
+    <a href="/post.html" onclick="return hi('J');" ondblclick="return hi('J');">J</a>
+    <a href="/post.html" onclick="return hi('K');" ondblclick="return hi('K');">K</a>
+    <a href="/post.html" onclick="return hi('L');" ondblclick="return hi('L');">L</a>
+    <a href="/post.html" onclick="return hi(';');" ondblclick="return hi(';');">;</a>
+    <a href="/post.html" onclick="return hi('\'');" ondblclick="return hi('\'');">'</a>
+    <a href="/post.html" onclick="return hi('Enter');" ondblclick="return hi('Enter');">Enter</a>
+    <br>
+</td></tr>
+<tr><td>
+    <a href="/post.html" onclick="return hi('Space');" ondblclick="return hi('Space');">Space</a>
+    <a href="/post.html" onclick="return hi('Z');" ondblclick="return hi('Z');">Z</a>
+    <a href="/post.html" onclick="return hi('X');" ondblclick="return hi('X');">X</a>
+    <a href="/post.html" onclick="return hi('C');" ondblclick="return hi('C');">C</a>
+    <a href="/post.html" onclick="return hi('V');" ondblclick="return hi('V');">V</a>
+    <a href="/post.html" onclick="return hi('B');" ondblclick="return hi('B');">B</a>
+    <a href="/post.html" onclick="return hi('N');" ondblclick="return hi('N');">N</a>
+    <a href="/post.html" onclick="return hi('M');" ondblclick="return hi('M');">M</a>
+    <a href="/post.html" onclick="return hi(',');" ondblclick="return hi(',');">,</a>
+    <a href="/post.html" onclick="return hi('.');" ondblclick="return hi('.');">.</a>
+    <a href="/post.html" onclick="return hi('/');" ondblclick="return hi('/');">/</a>
+    <a href="/post.html" onclick="return hi('Space');" ondblclick="return hi('Space');">Space</a>
+    <br>
+</td></tr>
+</table>
+
+<!-- / keyboard_a.template -->
+</body></html>

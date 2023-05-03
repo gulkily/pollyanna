@@ -1,0 +1,26 @@
+<!-- write_options.template ; additional controls for js-enhanced write form -->
+<hr class=advanced>
+<span id=spanInputOptions class=advanced>
+	<p>
+		<a href=/upload.html>Upload</a><br>
+		Image, Photo, or File
+		<!-- technically, not a js feature, and may also be disabled on server... #todo -->
+	</p>
+
+	<p>
+		On-Screen Keyboards: <noscript>*</noscript><br>
+		<a href="/frame.html" target=_top>Keyboard</a><br>
+		<a href="/frame2.html" target=_top>Android</a><br>
+		<a href="/frame2.html" target=_top>iPhone</a><br>
+		<a href="/frame2.html" target=_top>iPad</a><br>
+		<a href="/frame3.html" target=_top>Netscape</a><br>
+	</p>
+
+	<p>
+		Transliterated Keyboard Layouts: <noscript>*</noscript><br>
+		<a href=#>Russian/Ukrainian/Cyrillic</a>: Ctrl+R, Alt+R, Meta+R<br>
+		<a href=#>Dvorak</a>: Ctrl+D, Alt+D, Meta+D<br>
+		(Press again to switch back to default.)
+	</p>
+</span>
+<!-- / write_options.template -->

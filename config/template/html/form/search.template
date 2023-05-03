@@ -1,0 +1,13 @@
+<!-- search.template -->
+<p class=beginner>
+    <b>Please Pay Attention:</b><br>
+    Search query will be published<br>
+    Put text, press button
+</p>
+<form action="/post.html" name=search>
+    <p>
+        <input name=comment id=q type=text size=40>
+        <input type=submit name=tag value="#Search">
+    </p>
+</form>
+<!-- / search.template -->

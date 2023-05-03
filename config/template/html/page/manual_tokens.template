@@ -1,0 +1,83 @@
+<!-- manual_tokens.template -->
+
+<h1>Tokens Reference</h1>
+
+<h2>Introduction</h2>
+
+<p>Actions like replying, voting, configuring, etc. is done with text-based tokens.</p>
+
+<p>A token is just a bit of text which tells the system to do something.</p>
+
+<p>For example, you may submit a "<code><b>my name is ...</b></code>" token to share your name.</p>
+
+<p>Other examples include <code><b>title: ...</b></code></p>
+
+<p>A #hashtag is also a type of token you may already be familiar with.</p>
+
+<p>The rest of this document is a reference of tokens the system supports.</p>
+
+<p>If you want to learn more about this system, this is a good place to look.</p>
+
+<p>If something is unclear, please comment with your question.</p>
+
+<!-- -->
+
+<h2>Reply</h2>
+
+<p>Example: <code>&gt;&gt;0123456789abcdef</code></p>
+
+<p>On a line by itself, this will reference the message which has that identifier.)</p>
+
+<p>The reply token is used in conjunction with either reply text or other tokens.</p>
+
+<p>For example, the "title:" token, used with a reply token, will suggest that title for the item referenced.</p>
+
+<!-- -->
+
+<h4>Configure</h4>
+
+<p>The #config and #resetconfig tokens allow changing configuration.</p>
+
+<p>Example: <code>#config html/avatar_icons 1</code></p>
+
+<p>Example: <code>#config string/en/page_intro/post dc4f0b7833c04bcdf0a5e89b4be6bc9e11a1518f</code></p>
+
+<p>Example: <code>#resetconfig string/en/page_intro/post</code></p>
+
+<p>Settings under the <code>admin/</code> tree are always restricted to admin users.</p>
+
+<p>
+	Notes:
+	Value is a string.
+	If value looks like an item identifier, a lookup will be attempted.
+	If the item is found, its contents will be used as the value.
+</p>
+
+<p>
+	Restricted to admin users, unless <br>
+	config/setting/anyone_can_config=1 and/or<br>
+	config/setting/signed_can_config=1 and/or<br>
+	config/setting/cookied_can_config=1
+</p>
+
+<!-- -->
+
+<h4>Title</h4>
+
+<p>The <code><b>title</b></code> token changes the item's title.</p>
+
+<p>Example:</p>
+
+<pre>title: this is the title</pre>
+
+<p>If it is used in a reply, it is applied to the PARENT item, to make it easier to re-title things.</p>
+
+<p>Otherwise, it applies to the current item, and can be placed anywhere, including the "header-footer".</p>
+
+<!-- -->
+
+<h4>Hashtags</h4>
+
+<p>Example: <code>#meta</code></p>
+
+<p>Translates to vote being added to parent.</p>

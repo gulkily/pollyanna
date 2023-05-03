@@ -1,0 +1,31 @@
+<!-- writing.template -->
+<fieldset>
+	<p>
+		<label for=chkWriteEnhance>
+			<input type=checkbox id=chkWriteEnhance name=chkWriteEnhance onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'write_enhance'); }">
+			Make write box 80x24 fixed<noscript><b>*</b></noscript>
+		</label>
+	</p>
+
+	<p>
+		<label for=chkFocusReply>
+			<input type=checkbox id=chkFocusReply name=chkFocusReply onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'focus_reply'); }">
+			Automatically focus reply field<noscript><b>*</b></noscript>
+		</label>
+	</p>
+
+	<p>
+		<label for=chkSignByDefault>
+			<input type=checkbox id=chkSignByDefault name=chkSignByDefault onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'sign_by_default'); }">
+			Sign messages by default<noscript><b>*</b></noscript>
+		</label>
+	</p>
+
+	<p>
+		<label for=chkUncheckSignWhenPasting>
+			<input type=checkbox id=chkUncheckSignWhenPasting name=chkUncheckSignWhenPasting onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'uncheck_sign_when_pasting'); }">
+			Uncheck sign option when pasting<noscript><b>*</b></noscript>
+		</label>
+	</p>
+</fieldset>
+<!-- / writing.template -->

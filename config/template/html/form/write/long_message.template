@@ -1,0 +1,8 @@
+<!-- long_message.template -->
+<noscript>
+	<p>
+		<b>*</b>
+		<a href="/write_post.html">To write a longer text over 2000 characters, click here.</a>
+	</p>
+</noscript>
+<!-- / long_message.template -->
