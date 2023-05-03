@@ -1,3 +1,5 @@
+/* puts all comments into one post request and ships it off to localhost */
+
 var d=document;
 var ct = d.getElementsByClassName('commtext');
 
