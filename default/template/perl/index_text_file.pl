@@ -616,6 +616,11 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 									if (GetConfig('setting/admin/git/operator_please_commit_and_push')) {
 										my $pwd = cwd();
+										if ($pwd =~ m/^(.+)$/) { #todo more sanity
+											$pwd = $1;
+										} else {
+											#todo bad
+										}
 										$gitLog .= `cd config ; git add -v . ; git commit -m 'task $taskId' . ; git push ; cd "$pwd"`;
 										$gitLog .= "\n\n";
 										$gitLog .= "===";
@@ -626,6 +631,11 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 									if (GetConfig('setting/admin/git/operator_please_commit_and_push')) {
 										my $pwd = cwd();
+										if ($pwd =~ m/^(.+)$/) { #todo more sanity
+											$pwd = $1;
+										} else {
+											#todo bad
+										}
 										$gitLog .= `cd config ; git add -v . ; git commit -m 'task $taskId' . ; git push ; cd "$pwd"`;
 									}
 
