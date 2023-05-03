@@ -611,13 +611,22 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 									my $action = $tokenFound{'param'};
 									my $taskId = sha1_hex($tokenFound{'param'});
-									my $operatorResponse = GetOperatorResponse($action);
+
 									my $gitLog = '';
 
-									if (0) {
-										$gitLog .= `git add -v config`;
-										$gitLog .= `git commit -m 'updating config to perform task $taskId' config`;
-										$gitLog .= `git push`;
+									if (GetConfig('setting/admin/git/operator_please_commit_and_push')) {
+										my $pwd = cwd();
+										$gitLog .= `cd config ; git add -v . ; git commit -m 'task $taskId' . ; git push ; cd "$pwd"`;
+										$gitLog .= "\n\n";
+										$gitLog .= "===";
+										$gitLog .= "\n\n";
+									}
+
+									my $operatorResponse = GetOperatorResponse($action);
+
+									if (GetConfig('setting/admin/git/operator_please_commit_and_push')) {
+										my $pwd = cwd();
+										$gitLog .= `cd config ; git add -v . ; git commit -m 'task $taskId' . ; git push ; cd "$pwd"`;
 									}
 
 									my $response = '';
