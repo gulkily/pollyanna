@@ -124,7 +124,6 @@ sub RemakeChain {
 }
 
 sub AddToChainLog { # $fileHash ; add line to log/chain.log
-# sub AddToChain {
 	# line format is:
 	# file_hash|timestamp|checksum
 	# file_hash = hash of file, a-f0-9 40
@@ -137,16 +136,14 @@ sub AddToChainLog { # $fileHash ; add line to log/chain.log
 
 	if (!$fileHash) {
 		WriteLog('AddToChainLog: warning: sanity check failed');
-		return ''; # fail
+		return '';
 	}
 
 	chomp $fileHash;
 
-	WriteLog('AddToChainLog: $fileHash = ' . $fileHash);
-
 	if (!IsItem($fileHash)) {
 		WriteLog('AddToChainLog: warning: sanity check failed');
-		return ''; # fail
+		return '';
 	}
 
 	state $HTMLDIR = GetDir('html');
@@ -166,16 +163,13 @@ sub AddToChainLog { # $fileHash ; add line to log/chain.log
 			my ($exHash, $exTime, $exChecksum) = split('\|', $findExistingResult);
 
 			if ($exTime) {
-				WriteLog('AddToChainLog: warning: returning 0 where we used to return the found time');
-				return 0; # already exists
-				#return $exTime; # success?
+				return $exTime;
 			} else {
-				return 0; # fail
+				return 0;
 			}
 		}
 	} else {
 		WriteLog('AddToChainLog: warning: sanity check failed');
-		return ''; # fail
 	}
 
 	# get components of new line: hash, timestamp, and previous line
@@ -220,17 +214,9 @@ sub AddToChainLog { # $fileHash ; add line to log/chain.log
 		DBAddItemAttribute($fileHash, 'chain_checksum_good', 1);
 		DBAddItemAttribute($fileHash, 'chain_hash', $fileHash);
 		DBAddItemAttribute('flush');
-
-		WriteLog('AddToChainLog: all done, $fileHash = ' . $fileHash . '; $newAddedTime = ' . $newAddedTime);
-
-		return $newAddedTime; # success
-	} # if (!$lastLineAddedLog || ($newLineAddedLog ne $lastLineAddedLog))
-	else {
-		WriteLog('AddToChainLog: warning: conditions not met; caller = ' . join(',', caller));
-		return 0; # fail
 	}
 
-	return 0; # fail
+	return $newAddedTime;
 } # AddToChainLog()
 
 sub SquashChain { # compresses chain by removing references to removed items

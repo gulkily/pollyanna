@@ -77,12 +77,7 @@ sub MakeSimplePage { # given page name, makes page
 	if (!$subFound) {
 		WriteLog('MakeSimplePage: $subFound = FALSE');
 
-		my $title = '';
-		if (GetString('page_title/' . $pageName)) {
-			$title = GetString('page_title/' . $pageName);
-		} else {
-			$title = ucfirst($pageName);
-		}
+		my $title = ucfirst($pageName);
 
 		if (GetConfig('admin/expo_site_mode')) {
 			if (lc($pageName) eq 'media') {

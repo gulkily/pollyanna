@@ -386,7 +386,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 				WriteLog('GetReadPage: warning: ...'); #todo
 			} else {
 				my $query = "select file_hash, item_title from
-						item_flat where file_hash in (select file_hash from vote where vote.author_key = '$authorKey' AND vote_value = 'flag');";
+						item_flat where file_hash in (select file_hash from vote where vote.author_key = '$authorKey' AND vote = 'flag');";
 				$txtIndex .= GetQueryAsDialog($query
 					,
 					'Posts Flagged By Author',

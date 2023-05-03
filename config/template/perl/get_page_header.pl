@@ -18,10 +18,6 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 			$title = ucfirst($pageType);
 		} # if (!$title)
 	} # if (!$title)
-	else {
-		# $title was provided, check if it can be expanded using GetString()
-		$title = GetString("page_title/$title", 0) || $title;
-	}
 
 	if (
 		!$pageType ||

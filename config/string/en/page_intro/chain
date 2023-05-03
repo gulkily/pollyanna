@@ -1,5 +1,0 @@
-The chain is a linked list 
-of item hash and timestamp item pairs, 
-enforced with a hashing algorithm.
-If you understand what this says, 
-please comment with #IUnderstandHashes

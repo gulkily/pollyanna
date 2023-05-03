@@ -1,6 +1,0 @@
-This notarization chain
-is a linked list of hashes, timestamps, and checksums
-built using sha1 and md5
-stored in a pipe-separated file called <a href="/chain.log">chain.log</a>
-which can be audited/revalidated 
-using the provided shell script, verify_chain.sh

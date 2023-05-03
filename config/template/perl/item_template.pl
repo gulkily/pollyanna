@@ -417,7 +417,6 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			# TAGS LIST AKA HEADING
 			# TAGS LIST AKA HEADING
 			if ($file{'tags_list'}) { # GetItemTemplate() -- tags list
-				#todo remove hastext and hastitle tags here
 				my $headings = GetTagsListAsHtmlWithLinks($file{'tags_list'});
 				$windowParams{'headings'} = $headings;
 			} # $file{'tags_list'}
@@ -443,7 +442,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 				}
 				WriteLog('GetItemTemplate: $statusBar 1.5 = ' . $statusBar);
 
-				if (GetConfig('setting/reply/enable') && GetConfig('setting/html/reply_cart')) {
+				if (GetConfig('setting/html/reply_cart')) {
 					if (GetConfig('setting/admin/js/enable')) {
 						require_once('widget/add_to_reply_cart.pl');
 						$statusBar .= '; ';
@@ -478,7 +477,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			# 	}
 			# }
 
-			if (GetConfig('setting/reply/enable') && defined($file{'show_quick_vote'})) {
+			if (defined($file{'show_quick_vote'})) {
 				$windowParams{'menu'} = GetQuickVoteButtonGroup($file{'file_hash'}, $file{'vote_return_to'});
 			}
 
@@ -639,14 +638,12 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 		}
 
 		my $itemFlagButton = '';
-		if (GetConfig('setting/reply/enable')) {
-			if (defined($file{'vote_return_to'}) && $file{'vote_return_to'}) {
-				WriteLog('GetItemTemplate: $file{\'vote_return_to\'} = ' . $file{'vote_return_to'});
-				$itemFlagButton = GetItemTagButtons($file{'file_hash'}, 'all', $file{'vote_return_to'}); #todo refactor to take vote totals directly
-			} else {
-				# WriteLog('GetItemTemplate: $file{\'vote_return_to\'} = ' . $file{'vote_return_to'});
-				$itemFlagButton = GetItemTagButtons($file{'file_hash'}, 'all'); #todo refactor to take vote totals directly
-			}
+		if (defined($file{'vote_return_to'}) && $file{'vote_return_to'}) {
+			WriteLog('GetItemTemplate: $file{\'vote_return_to\'} = ' . $file{'vote_return_to'});
+			$itemFlagButton = GetItemTagButtons($file{'file_hash'}, 'all', $file{'vote_return_to'}); #todo refactor to take vote totals directly
+		} else {
+			# WriteLog('GetItemTemplate: $file{\'vote_return_to\'} = ' . $file{'vote_return_to'});
+			$itemFlagButton = GetItemTagButtons($file{'file_hash'}, 'all'); #todo refactor to take vote totals directly
 		}
 
 		$itemTemplate =~ s/\$itemFlagButton/$itemFlagButton/g;
