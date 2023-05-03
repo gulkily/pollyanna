@@ -98,6 +98,10 @@ sub GetWritePage { # returns html for write page
 			}
 		}
 
+		if (GetConfig('setting/admin/php/enable') && GetConfig('setting/admin/php/cookie_inbox')) {
+			push @js, 'voting';
+		}
+
 		if (GetConfig('html/reply_cart')) {
 			push @js, 'reply_cart';
 		}
