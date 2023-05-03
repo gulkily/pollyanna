@@ -1,3 +1,0 @@
-<!-- admin.template -->
-<font color="$colorAdmin">$message</font>
-<!-- / admin.template -->

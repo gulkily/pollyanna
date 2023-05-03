@@ -13,6 +13,7 @@ sub GetSettingsDialog { # returns settings dialog
 
 	if (GetConfig('admin/js/dragging')) {
 	} else {
+		#todo remove this, no longer a thing in this dialog
 		# kind of a hack
 		# dragging is disabled, so make the option unavailable
 		$settingsTemplate = AddAttributeToTag($settingsTemplate, 'input id=chkDraggable', 'disabled', '');
@@ -33,6 +34,8 @@ sub GetSettingsDialog { # returns settings dialog
 			'</form>'
 	;
 	#todo template this, and fill in the current page url
+
+	#$settingsWindow .= GetDialogX(GetTemplate('html/dialog/more_settings.template'), 'More');
 
 	WriteLog('GetSettingsDialog: return $settingsWindow = ' . length($settingsWindow) . ' bytes');
 

@@ -1,3 +1,0 @@
-<!-- timestamp_time.template -->
-<time class=timestamp datetime=$timestamp title="$timeDateTitle">$timeDate</time>
-<!-- / timestamp_time.template -->

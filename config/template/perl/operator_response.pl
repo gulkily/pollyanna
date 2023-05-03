@@ -24,6 +24,14 @@ sub GetOperatorResponse {
 
 	#todo need to set client-side flags
 
+	my $queryHash = sha1_hex($query);
+	my $queryChain = AddToChainLog($queryHash);
+	if ($queryChain) {
+		#cool
+	} else {
+		return "I've already run that query";
+	}
+
 #	my $onceLog = GetOnce($query);
 #	if (!$onceLog) {
 #		WriteLog('GetOperatorResponse: warning: encountered previously done task');
@@ -110,8 +118,9 @@ sub GetOperatorResponse {
 			return 'would you like to allow javascript in the html templates?';
 		}
 	}
-	if ($query eq 'change appearance to dark theme') {
-		PutConfig('setting/theme', 'hypercode dark');
+	if ($query =~ m/dark theme/) {
+		PutConfig('setting/theme', 'dark');
+		PutConfig('setting/html/monochrome', '0');
 		#`bash hike.sh refresh`;
 		return 'ok, I changed the theme to hypercode dark';
 	}
@@ -161,7 +170,7 @@ sub GetOperatorResponse {
 		return "ok, I turned off javascript debugging";
 	}
 	if ($query =~ /hacker news/) {
-		my $bookmarkFile = GetTemplate('js/bookmark/scrape_hn_comments.js');
+		my $bookmarkFile = GetTemplate('js/bookmark/hn_scrape_comments.js');
 		return "/* please use this bookmarklet to input the comments */\n\n" . $bookmarkFile . "\n\n/* #example */";
 	}
 	if ($query =~ /interface.+draggable/) {

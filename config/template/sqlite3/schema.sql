@@ -126,10 +126,10 @@ item.file_hash
 CREATE VIEW item_attribute_latest
 AS
 SELECT
-item_attribute_latest_timestamp.file_hash, 
-item_attribute_latest_timestamp.attribute, 
-item_attribute_latest_timestamp.epoch,
-item_attribute.value
+item_attribute_latest_timestamp.file_hash AS file_hash, 
+item_attribute_latest_timestamp.attribute AS attribute, 
+item_attribute_latest_timestamp.epoch AS epoch,
+item_attribute.value AS value
 FROM (
 SELECT file_hash, attribute, MAX(epoch) AS epoch FROM item_attribute
 GROUP BY
@@ -161,7 +161,8 @@ CREATE VIEW item_title
 AS
 SELECT
 file_hash,
-value AS title
+value AS title,
+epoch AS epoch
 FROM item_attribute_latest
 WHERE attribute = 'title';
 

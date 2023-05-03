@@ -1,3 +1,0 @@
-<!-- tag_link.template -->
-<a href="$voteItemLink"><font color="$tagColor">#</font>$tagCaption</a>
-<!-- / tag_link.template -->
