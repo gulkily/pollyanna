@@ -1,3 +1,32 @@
+/* theme/hypercode/additional.css */
+
 * {
 	border-radius: 5pt !important;
+	font-family: georgia, "times new roman", serif !important;
 }
+input, textarea {
+	background-color: white !important;
+	border: 2pt solid #404040 !important;
+	margin-top: 2pt !important;
+}
+#serverResponse {
+	display: none;
+}
+.titlebar {
+	background-image: linear-gradient(to bottom right, #ffffff, #fff0ef) !important;
+}
+#loadingIndicator, #ariaAlert {
+	background-color: yellow;
+	border-radius: 0 !important;
+}
+#messages {
+	position: absolute !important;
+	top: 0 !important;
+	right: 0 !important;
+	margin-top: 5pt !important;
+}
+#spanSignAs {
+	float: right;
+}
+
+/* / theme/hypercode/additional.css */
