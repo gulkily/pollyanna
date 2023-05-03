@@ -192,6 +192,8 @@ function MakeKey (t, callback = '') { //makes key using default settings
 					if (callback) {
 						setTimeout(callback, 1000);
 					}
+
+					return false;
 				}
 			);
 
