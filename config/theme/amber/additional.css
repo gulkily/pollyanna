@@ -1,0 +1,60 @@
+/* theme/amber/additional.css */
+body, table, .item, #txtClock, input {
+	font-family: courier;
+	font-size: 14pt;
+	background-color: $colorBackground;
+	color: $colorText;
+}
+.dialog, hr {
+	border: 3pt solid $colorTitlebar;
+	border-radius: 3pt;
+}
+fieldset {
+	border-color: $colorSecondary;
+}
+input[type=text], input[type=password], select, option, textarea {
+	background-color: $colorInputBackground;
+	color: $colorInputText;
+}
+button, input[type=button], input[type=submit], input[type=checkbox] {
+	background-color: $colorWindow;
+	color: $colorText;
+	border-color: #808080;
+	box-shadow: 0 0 5pt #335555;
+}
+#txtClock {
+	border: 1pt inset $colorWindow;
+}
+@media only screen and (min-width : 30em) {
+	.item-textart {
+		max-width: 90%;
+		background-color: #808080;
+	}
+	.dialog .txt {
+		max-width: 30em;
+	}
+}
+#serverResponse {
+	/* messages from server */
+    background-color: $colorHighlightAlert;
+    color: $colorText;
+    padding: 5pt;
+    border: 10pt $colorWindow double;
+    display: block;
+}
+a:focus, a:active {
+    color: #ffc040;
+    background-color: #402000;
+}
+input:focus, textarea:focus {
+    background-color: #402000;
+    color: #ffc040;
+}
+.fileHashShort {
+	text-decoration: underline dotted;
+}
+.dialog tbody tr td {
+	background-color: #101000;
+}
+
+/* / theme/amber/additional.css */

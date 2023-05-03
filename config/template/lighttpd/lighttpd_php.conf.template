@@ -1,0 +1,11 @@
+# php fastcgi connector
+# template/lighttpd/lighttpd_php.conf.template
+fastcgi.server = (
+	".php" => (
+		(
+			"bin-path" => "/bin/php-cgi",
+			"socket" => "/tmp/php.socket"
+		)
+	)
+)
+# / template/lighttpd/lighttpd_php.conf.template
