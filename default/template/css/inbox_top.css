@@ -1,0 +1,10 @@
+/* inbox_top.css */
+
+#messages {
+	position: absolute !important;
+	top: 0 !important;
+	right: 0 !important;
+	margin-top: 5pt !important;
+}
+
+/* / inbox_top.css */
