@@ -4,6 +4,5 @@ $authorLink;
 <span class=advanced>
 	<span class=fileHashShort></span>;
 </span>
-<a href="$permalinkHtml#reply">reply($replyCount)</a>;
 $itemFlagButton
 <!-- status_bar.template -->
