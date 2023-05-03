@@ -7,6 +7,7 @@
 # performs basic state validation whenever run
 # 
 
+
 $ENV{PATH}="/bin:/usr/bin"; #this is needed for -T to work
 
 #freebsd: $ENV{PATH}="/bin:/usr/bin:/usr/local/bin"; #this is needed for -T to work
@@ -2102,7 +2103,7 @@ sub CheckForInstalledVersionChange {
 				$currVersion = $1;
 			}
 			my $changeLogListCommand = "git log --oneline $lastVersion..$currVersion";
-			my $changeLogList = `$changeLogListCommand`;
+			my $changeLogList = ''; # `$changeLogListCommand`;
 			$changeLogList = trim($changeLogList);
 			$changeLogMessage .= "$changeLogList";
 		} else {
