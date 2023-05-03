@@ -22,7 +22,7 @@ sub GetPeoplePage {
 
 		my $template = GetTemplate('html/widget/person.template');
 
-		my $htmlThumbnail = GetImageContainer('1ef353f5604b500cce80d1a213d9efa95b806b26', 'Picture of ' . HtmlEscape($author{'author_alias'}), 1);
+		my $htmlThumbnail = GetImageContainer('db3a3798d1db6f01c9a4e7df9b9e0590910d2351', 'Picture of ' . HtmlEscape($author{'author_alias'}), 1);
 		$htmlThumbnail = AddAttributeToTag($htmlThumbnail, 'img', 'width', '150');
 
 		$template = str_replace('<span class=author_image></span>', '<span class=author_image>' . $htmlThumbnail . '</span>', $template);
