@@ -96,6 +96,11 @@ sub GetOperatorResponse {
 		#`bash hike.sh refresh`;
 		return 'ok, I made the site less colorful';
 	}
+	if ($query =~ m/inbox+.top/) {
+		PutConfig('setting/html/css_inbox_top', 1);
+		#`bash hike.sh refresh`;
+		return 'ok, I put the inbox dialog at the top of the page';
+	}
 	if ($query eq 'add inline-block to dialogs') {
 		PutConfig('setting/html/css_inline_block', 1);
 		#`bash hike.sh refresh`;
@@ -157,7 +162,7 @@ sub GetOperatorResponse {
 		#`bash hike.sh refresh`;
 		return 'ok, I added a basic tags page, including item-descriptive tags and hashtags';
 	}
-	if ($query =~ m/inbox/) {
+	if ($query =~ m/inbox/ && !GetConfig('setting/admin/php/cookie_inbox')) {
 		AddToMenu('active');
 		PutConfig('setting/admin/php/cookie_inbox', 1);
 		#`bash hike.sh refresh`;

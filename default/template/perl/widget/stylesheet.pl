@@ -25,6 +25,10 @@ sub GetStylesheet { # $styleSheet ; returns stylesheet template based on config
 		$style .= "\n" . GetTemplate('css/width.css');
 	}
 
+	if (GetConfig('html/css_inbox_top')) {
+		$style .= "\n" . GetTemplate('css/inbox_top.css');
+	}
+
 	if (GetConfig('html/css_shimmer')) {
 		$style .= "\n" . GetTemplate('css/shimmer.css');
 	}
