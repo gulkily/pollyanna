@@ -610,45 +610,21 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									require_once('operator_response.pl');
 
 									my $action = $tokenFound{'param'};
-									my $taskId = sha1_hex($tokenFound{'param'});
 
-									my $gitLog = '';
-
-									if (GetConfig('setting/admin/git/operator_please_commit_and_push')) {
-										my $pwd = cwd();
-										if ($pwd =~ m/^(.+)$/) { #todo more sanity
-											$pwd = $1;
-										} else {
-											#todo bad
-										}
-										$gitLog .= `cd config ; git add -v . ; git commit -m 'task $taskId' . ; git push ; cd "$pwd"`;
-										$gitLog .= "\n\n";
-										$gitLog .= "===";
-										$gitLog .= "\n\n";
-									}
+									LogChangesToGit("before $action");
 
 									my $operatorResponse = GetOperatorResponse($action);
 
-									if (GetConfig('setting/admin/git/operator_please_commit_and_push')) {
-										my $pwd = cwd();
-										if ($pwd =~ m/^(.+)$/) { #todo more sanity
-											$pwd = $1;
-										} else {
-											#todo bad
-										}
-										$gitLog .= `cd config ; git add -v . ; git commit -m 'task $taskId' . ; git push ; cd "$pwd"`;
-									}
+									LogChangesToGit("$action");
 
 									my $response = '';
-									$response .= $tokenFound{'param'};
+									$response .= $action;
 									$response .= "\n";
 									$response .= sha1_hex($tokenFound{'param'});
 									$response .= "\n\n";
 									$response .= $operatorResponse;
 									$response .= "\n\n";
 									$response .= "===";
-									$response .= "\n\n";
-									$response .= $gitLog;
 
 									my $newFilePath = GetDir('txt') . '/' . GetRandomHash() . '.txt';
 									PutFile($newFilePath, '>>'.$fileHash."\n\n".$response);

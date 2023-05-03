@@ -18,6 +18,25 @@ sub AddToMenu { # $menuItem
 	}
 }
 
+sub LogChangesToGit {
+	if (GetConfig('setting/admin/git/operator_please_commit_and_push')) {
+		my $action = shift;
+		my $taskId = substr(sha1_hex($action), 0, 8);
+
+		my $gitLog = '';
+
+		my $pwd = cwd();
+		if ($pwd =~ m/^(.+)$/) { #todo more sanity
+			$pwd = $1;
+		} else {
+			#todo bad
+		}
+
+		$gitLog .= `cd config 2>&1 ; git add -v . 2>&1 ; git commit -m '$action $taskId' . 2>&1 ; git push 2>&1 ; cd "$pwd"`;
+		$gitLog .= `cd html 2>&1 ; git add -v . 2>&1 ; git commit -m '$action $taskId' . 2>&1 ; git push 2>&1 ; cd "$pwd"`;
+	}
+} # LogChangesToGit()
+
 sub GetOperatorResponse {
 	my $query = shift;
 	chomp $query;
@@ -29,6 +48,10 @@ sub GetOperatorResponse {
 #		WriteLog('GetOperatorResponse: warning: encountered previously done task');
 #		return 'I may have done that already';
 #	}
+
+	if (GetConfig('setting/admin/git/operator_please_commit_and_push')) {
+		LogChangesToGit("before $query");
+	}
 
 	if ($query eq 'add calendar page') {
 		AddToMenu('calendar');
