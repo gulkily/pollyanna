@@ -103,6 +103,3 @@ sub GetUploadPage { # returns html for upload page
 } # GetUploadPage()
 
 1;
-
-
-

@@ -613,8 +613,8 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									my $taskId = sha1_hex($tokenFound{'param'});
 									my $operatorResponse = GetOperatorResponse($action);
 									my $gitLog = `git add -v config`;
-								        $gitLog .= `git commit -m 'updating config to perform task $taskId'`;
-								       	$gitLog .= `commit ; git push`;
+									$gitLog .= `git commit -m 'updating config to perform task $taskId' config`;
+									$gitLog .= `git push`;
 
 									my $response = '';
 									$response .= $tokenFound{'param'};
