@@ -744,7 +744,7 @@ sub DBGetItemTitle { # get title for item ($itemhash)
 	my @queryParams = ();
 	#push @queryParams, $itemHash;
 
-	my $query = 'SELECT title FROM item_title WHERE file_hash LIKE \'' . $itemHash . '%\' ORDER BY epoch DESC LIMIT 1';
+	my $query = 'SELECT title FROM item_title WHERE file_hash LIKE \'' . $itemHash . '%\' LIMIT 1';
 
 	my $itemTitle = SqliteGetValue($query, @queryParams);
 
