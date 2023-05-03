@@ -37,7 +37,7 @@ sub GetProfilePage { # returns profile page (allows sign in/out)
 
 		$txtIndex = GetPageHeader('identity');
 
-		{ # shadowme
+		if (0) { # shadowme
 			my $pageIntro = GetString('page_intro/identity');
 			if ($pageIntro) {
 				$txtIndex .= GetDialogX($pageIntro, 'Information');
@@ -59,11 +59,15 @@ sub GetProfilePage { # returns profile page (allows sign in/out)
 		#my $tosWindow = GetTosDialog();
 		$txtIndex .= $profileWindow;
 
-		$txtIndex .=
-			'<span class=advanced><form name=formSelectKey>' .
-			GetDialogX(GetTemplate('html/select_key.template'), 'Keychain') .
-			'</form></span>'
-		;
+		if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/openpgp')) {
+			$txtIndex .=
+				#'<span class=advanced>' . 
+				'<form name=formSelectKey>' .
+				GetDialogX(GetTemplate('html/select_key.template'), 'Keychain') .
+				#'</form>' . 
+				'</span>'
+			;
+		}
 
 		#$txtIndex .= $tosWindow;
 		$txtIndex .= GetPageFooter('identity');
