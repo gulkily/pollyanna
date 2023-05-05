@@ -15,6 +15,8 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 	state $avatarTemplate;
 
 	if (!$avatarCachePrefix || !$avatarTemplate) {
+		WriteLog('GetAvatar: setting up state $avatarTemplate');
+
 		if (GetConfig('html/avatar_icons')) {
 			$avatarCachePrefix = 'avatar_color';
 			$avatarTemplate = 'html/avatar.template';
@@ -45,7 +47,7 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 
 	my $authorKey = shift;
 	if (!$authorKey) {
-		WriteLog('GetAvatar: warning: $authorKey is false, returning empty string');
+		WriteLog('GetAvatar: warning: $authorKey is FALSE, returning empty string');
 		return '';
 	}
 	chomp $authorKey;
