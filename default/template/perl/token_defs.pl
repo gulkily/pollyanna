@@ -1,5 +1,9 @@
 #!/usr/bin/perl -T
 
+# token_defs.pl
+# definitions for tokens which can be found in messages
+# returned as 
+
 use strict;
 use warnings;
 use 5.010;
@@ -13,8 +17,8 @@ sub GetTokenDefs {
 #	if (@tokenDefs) {
 #		return @tokenDefs;
 #	}
-
-	#todo memo
+	#todo memo (not sure why above is commented out)
+	
 	my @tokenDefs = (
 		# ATTENTION #tokenSanityCheck
 		# Whenever adding a new definition here
@@ -201,28 +205,6 @@ sub GetTokenDefs {
 			'message'    => '[$1]',
 			'apply_to_parent' => 1
 		},
-		# { # anything beginning with http and up to next space character (or eof)
-		# 	'token' => 'http',
-		# 	'mask' => '()()(http:[\S]+)',
-		# 	'mask_params' => 'mg',
-		# 	'message' => '[http]',
-		# 	'apply_to_parent' => 1
-		# },
-		# { # anything beginning with https and up to next space character (or eof)
-		# 	'token' => 'https',
-		# 	'mask' => '()()(https:[\S]+)',
-		# 	'mask_params' => 'mg',
-		# 	'message' => '[https]',
-		# 	'apply_to_parent' => 1
-		# },
-#todo
-#		{ # for things quoted from hackernews
-#			'token' => 'hn_user',
-#			'mask' => '^(.+)(.+\W)([–])$',
-#			'mask_params' => 'mg',
-#			'message' => '[hn_user]',
-#			'apply_to_parent' => 0
-#		},
 		{ # plustags, currently restricted to latin alphanumeric and underscore
 			'token' => 'plustag',
 			'mask'  => '(\+)()([a-zA-Z0-9_]{1,32})',
@@ -258,19 +240,19 @@ sub GetTokenDefs {
 			'message' => '[SQL]',
 			'apply_to_parent' => 0
 		},
-		{ # config token for setting configuration
-			# config/admin/anyone_can_config = allow anyone to config (for open-access boards)
-			# config/admin/signed_can_config = allow only signed users to config
-			# config/admin/cookied_can_config = allow any user (including cookies) to config
-			# otherwise, only admin user can config
-			# also, anything under config/admin/ is still restricted to admin user only
-			# admin user must have a pubkey
-			'token' => 'config',
-			'mask'  => '^(config)(\W)(.+)$', #bughere #todo
-			'mask_params' => 'mgi',
-			'message' => '[Config]',
-			'apply_to_parent' => 1
-		},
+#		{ # config token for setting configuration
+#			# config/admin/anyone_can_config = allow anyone to config (for open-access boards)
+#			# config/admin/signed_can_config = allow only signed users to config
+#			# config/admin/cookied_can_config = allow any user (including cookies) to config
+#			# otherwise, only admin user can config
+#			# also, anything under config/admin/ is still restricted to admin user only
+#			# admin user must have a pubkey
+#			'token' => 'config',
+#			'mask'  => '^(config)(\W)(.+)$', #bughere #todo
+#			'mask_params' => 'mgi',
+#			'message' => '[Config]',
+#			'apply_to_parent' => 1
+#		},
 		{
 			'token' => 'operator_please',
 			'mask' => '^(operator, please)(\W)(.+)$',
