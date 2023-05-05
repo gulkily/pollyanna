@@ -40,6 +40,7 @@ sub GetTokenDefs {
 		# target_attribute  = name of attribute when stored in item_attributes table (if not specified, token name is used)
 		# apply_to_parent   = when this is true, the token is applied to the parent item instead of the containing item
 		# eval_message      = USE WITH CARE!!! causes eval() to be called on message. USE WITH CARE!!!
+		# hashtag           = apply this hashtag instead of value of 'token'
 
 		# ATTENTION #tokenSanityCheck
 		# Whenever adding a new definition here
@@ -255,6 +256,7 @@ sub GetTokenDefs {
 #		},
 		{
 			'token' => 'operator_please',
+			'hashtag' => 'operator',
 			'mask' => '^(operator, please)(\W)(.+)$',
 			'mask_params' => 'mgi',
 			'message' => '[Operator]',
