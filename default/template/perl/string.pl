@@ -9,7 +9,12 @@ use utf8;
 
 sub GetStringNoFallback { # $stringKey, $language, $noSubstitutions
 # returns empty string if $stringKey == result from GetString
-# sub GetString { # GetStringNoFallback {
+# sub GetString {
+
+# if $noSubstitutions is FALSE, it will use the default language as a secondary source!
+# if $noSubstitutions is FALSE, it will use the default language as a secondary source!
+# if $noSubstitutions is FALSE, it will use the default language as a secondary source!
+
 	my $stringKey = shift;
 	my $language = shift || '';
 	my $noSubstitutions = shift || '';
@@ -28,7 +33,12 @@ sub GetStringNoFallback { # $stringKey, $language, $noSubstitutions
 sub GetString { # $stringKey, $language, $noSubstitutions ; Returns string from config/string/en/
 # $stringKey = 'menu/top'
 # $language = 'en'
-# $noSubstitute = returns empty string if no exact match
+# $noSubstitutions = returns empty string if no exact match
+
+# if $noSubstitutions is FALSE, it will use the default language as a secondary source!
+# if $noSubstitutions is FALSE, it will use the default language as a secondary source!
+# if $noSubstitutions is FALSE, it will use the default language as a secondary source!
+
 	my $defaultLanguage = 'en';
 
 	my $stringKey = shift;
@@ -101,7 +111,7 @@ sub GetString { # $stringKey, $language, $noSubstitutions ; Returns string from 
 } # GetString()
 
 sub htmlspecialchars { # $text, encodes supplied string for html output
-	# port of php built-in
+# port of php's htmlspecialchars()
 	my $text = shift;
 	$text = encode_entities2($text);
 	return $text;
@@ -114,9 +124,10 @@ sub HtmlEscape { # encodes supplied string for html output
 } # HtmlEscape()
 
 sub GetStringHtmlColor {
-# GetColorFromHash {
-# GetHashColor {
+# sub GetColorFromHash {
+# sub GetHashColor {
 	my $string = shift;
+	
 	#todo dark/light or color(s) to match
 	#todo sanity
 
@@ -140,7 +151,8 @@ sub GetStringHtmlColor {
 	return $color;
 } # GetStringHtmlColor()
 
-sub str_repeat {
+sub str_repeat { # $string, $count ; returns $string repeated $count times
+# port of php's str_repeat()
 	my $string = shift;
 	my $count = shift;
 	WriteLog('str_repeat: $string = ' . $string . '; $count = ' . $count);
@@ -162,7 +174,7 @@ sub str_repeat {
 #	return $unicodeString;
 #} # TrimUnicodeString()
 
-sub GetFirstLine {
+sub GetFirstLine { # $text ; returns first line of $text based on \n
 	my $text = shift;
 	
 	$text = trim($text);
