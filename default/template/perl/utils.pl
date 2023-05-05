@@ -44,7 +44,9 @@ sub trim { # trims whitespace from beginning and end of $string
 } # trim()
 
 require('./config/template/perl/config.pl');
+# config.pl is required for looking up the paths using require_once()
 
+#todo these may not need to be included for every load of utils.pl?
 my @modules = qw(
 	string
 	cache
@@ -70,6 +72,9 @@ for my $module (@modules) {
 } # for my $module (@modules)
 
 sub ensure_module { # $path ; ensures module is available under config/
+# sub EnsureModule {
+# the reason it is not EnsureModule() is to match reuquire_once(), 
+# which is styled after PHP's function of the same name
 	my $module = shift;
 	chomp $module;
 
@@ -103,6 +108,8 @@ sub ensure_module { # $path ; ensures module is available under config/
 } # ensure_module()
 
 sub require_once { # $path ; use require() unless already done
+# sub RequireOnce {
+# styled after PHP's require_once()
 	my $module = shift;
 	chomp $module;
 
@@ -121,6 +128,7 @@ sub require_once { # $path ; use require() unless already done
 	WriteLog('require_once(' . $module . ')');
 
 	my $path = GetDir('config') . '/template/perl/' . $module;
+	#todo state?
 
 	ensure_module($module);
 
@@ -140,7 +148,7 @@ sub require_once { # $path ; use require() unless already done
 } # require_once()
 
 sub EscapeShellChars { # $string ; escapes string for including as parameter in shell command
-	#security this is still probably not safe and should be improved upon #security
+#todo #security this is still probably not safe and should be improved upon #security
 
 	my $string = shift;
 	chomp $string;
@@ -156,7 +164,12 @@ sub GetDir { # $dirName ; returns path to special directory specified
 # 'script'
 # 'txt'
 # 'image'
-# #todo 'once'
+# 'php'
+# 'cache'
+# 'config'
+# 'default'
+# 'log'
+
 	my $dirName = shift;
 	if (!$dirName) {
 		WriteLog('GetDir: warning: $dirName missing');
@@ -168,7 +181,7 @@ sub GetDir { # $dirName ; returns path to special directory specified
 	#my $scriptDir = `pwd`;
 	#$scriptDir = trim($scriptDir);
 
-	state $scriptDir = trim(`pwd`);
+	state $scriptDir = trim(`pwd`); #todo replace this?
 
 	if ($scriptDir =~ m/^([\.0-9a-zA-Z_\/]+)$/) {
 		$scriptDir = $1;
@@ -225,13 +238,21 @@ sub GetDir { # $dirName ; returns path to special directory specified
 	}
 
 	WriteLog('GetDir: warning: fallthrough on $dirName = ' . $dirName);
+	#todo WriteLog('GetDir: warning: fallthrough on $dirName = ' . $dirName . '; caller = ' . join(',', caller));
 	return '';
 } # GetDir()
 
+#my $SCRIPTDIR = GetDir('script');
 my $SCRIPTDIR = cwd();
 if (!$SCRIPTDIR) {
 	die ('Sanity check failed: $SCRIPTDIR is false!');
 } # (!$SCRIPTDIR)
+
+#my $SCRIPTDIR = cwd();
+#if (!$SCRIPTDIR) {
+#	die ('Sanity check failed: $SCRIPTDIR is false!');
+#} # (!$SCRIPTDIR)
+
 
 #my $HTMLDIR = $SCRIPTDIR . '/html';
 #my $TXTDIR = $HTMLDIR . '/txt';
@@ -260,9 +281,15 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 
 	# Only if debug mode is enabled
 	state $debugOn;
+	#todo state $debugOn = -e 'config/debug'; #todo this path should not be hardcoded?
 	my $timestamp = '';
+	
+	#todo if ($debugOn) {
 	if ($debugOn || -e 'config/debug') {
-		$timestamp = GetTime();
+		$timestamp = GetTime(); # set timestamp
+		
+		# adjust timestamp formatating to always have the same number
+		# of digits after the decimal point, if included
 		if ($timestamp =~ m/^[0-9]+\.[0-9]{1}$/) {
 			$timestamp .= '0';
 		}
@@ -277,13 +304,14 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 		}
 
 		if (0) { # debug use milliseconds #featureflag
+			#deprecated feature which gets differently formatted timestamp
 			my $t = time;
 			my $date = $timestamp;#strftime "%Y%m%d %H:%M:%S", localtime $t;
 			$date .= sprintf ".%03d", ($t-int($t))*1000; # without rounding
 			$timestamp = $date;
 		}
 
-		#AppendFile("log/log.log", $timestamp . " " . $text);
+		#AppendFile("log/log.log", $timestamp . " " . $text); # (happens later)
 		$debugOn = 1; #verbose #quiet mode #quietmode #featureflag
 	}
 
@@ -298,10 +326,10 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 			$firstWord = substr($firstWord, 0, index($firstWord, ':'));
 		}
 		if ($firstWord ne 'WriteMessage') {
-			#print($firstWord."\n");
+			# add one character to the snow
+			
 			my $firstWordHash = md5_hex($firstWord);
 			my $firstWordHashFirstChar = substr($firstWordHash, 0, 1);
-			#$firstWordHashFirstChar =~ tr/0123456789abcdef/><+-.,[]><+-.,[]/; #brainfuck
 			$firstWordHashFirstChar =~ tr/0123456789abcdef/.;]\-,<">'+[:`_|+/; #brainfuckXL
 			#todo use 2 characters of the hash, convert to 1 out of 64 characters
 
@@ -318,8 +346,8 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 			}
 
 			$charPrefix = $firstWordHashFirstChar;
-		}
-	}
+		} # if ($firstWord ne 'WriteMessage')
+	} # if ($debugOn)
 	
 	if ($debugOn) {
 		if ($charPrefix eq '') {
@@ -339,7 +367,7 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 			}
 			AppendFile("log/log.log", $timestamp . " " . $charPrefix . " " . $text);
 		}
-	}
+	} # if ($debugOn)
 } # WriteLog()
 
 sub WriteMessage { # Writes timestamped message to console (stdout)
@@ -360,8 +388,6 @@ sub WriteMessage { # Writes timestamped message to console (stdout)
 	if ($timestamp =~ m/^[0-9]+\.[0-9]{4}$/) {
 		$timestamp .= '0';
 	}
-
-
 
 	if (!$text) {
 		print('WriteMessage: warning: $text is false; caller = ' . join(',', caller) . "\n");
@@ -435,6 +461,19 @@ sub WriteMessage { # Writes timestamped message to console (stdout)
 		$output = substr($output, 0, 60) . '...';
 	}
 
+#todo
+#	print("\n");
+#	print($timestamp);
+#	print($output);
+#
+#	print("\n");
+#	print($timestamp);
+#	print(" =======================================================");
+#
+#	print("\n");
+#	print($timestamp);
+#	print(" ");
+
 	# THIS is the part that prints the message
 	# this code is not approved for public viewing
 	#todo print "\n================================================================================\n";
@@ -448,16 +487,19 @@ sub MakePath { # $newPath ; ensures all subdirs for path exist
 	chomp $newPath;
 
 	if (! $newPath) {
+		#todo WriteLog('MakePath: warning: failed sanity check, $newPath missing; caller = ' . join(',', caller));
 		WriteLog('MakePath: warning: failed sanity check, $newPath missing');
 		return '';
 	}
 
 	if (-e $newPath) {
 		WriteLog('MakePath: path already exists, returning');
+		#todo WriteLog('MakePath: path already exists, returning; caller = ' . join(',', caller));
 		return '';
 	}
 
 	if (! $newPath =~ m/^[0-9a-zA-Z\/]+$/) {
+		#todo WriteLog('MakePath: warning: failed sanity check; caller = ' . join(',', caller));
 		WriteLog('MakePath: warning: failed sanity check');
 		return '';
 	}
@@ -473,7 +515,7 @@ sub MakePath { # $newPath ; ensures all subdirs for path exist
 			WriteLog('MakePath: mkdir ' . $newPathCreated);
 			mkdir $newPathCreated;
 		}
-		if (1 || $newPathCreated) {
+		if (1 || $newPathCreated) { #todo
 			$newPathCreated .= '/';
 		}
 	}
@@ -492,10 +534,12 @@ sub EnsureSubdirs { # $fullPath ; ensures that subdirectories for a file exist
 		substr($fullPath, 0, length($scriptDir)) ne $scriptDir
 	) {
 		WriteLog('EnsureSubdirs: warning: $fullPath begins with / AND does not begin with $scriptDir = ' . $scriptDir);
+		#todo WriteLog('EnsureSubdirs: warning: $fullPath begins with / AND does not begin with $scriptDir = ' . $scriptDir . '; caller = ' . join(',', caller));
 	}
 
 	if (index($fullPath, '..') != -1 ) {
 		WriteLog('EnsureSubdirs: warning: $fullPath contains .. ' . $fullPath);
+		#todo WriteLog('EnsureSubdirs: warning: $fullPath contains .. ' . $fullPath . '; ' . join(',', caller));
 	}
 
 	WriteLog("EnsureSubdirs($fullPath)");
