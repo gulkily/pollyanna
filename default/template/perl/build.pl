@@ -71,7 +71,7 @@ BuildMessage "Looking for files...";
 
 BuildMessage "DBAddPageTouch('summary')...";
 DBAddPageTouch('system');
-`./pages.pl --system`;
+#`./pages.pl --system`;
 
 BuildMessage("UpdateUpdateTime()...");
 UpdateUpdateTime();
