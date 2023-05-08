@@ -5,6 +5,7 @@
 
 rm config/theme/hypercode/template/list/menu
 echo 0 > config/setting/admin/js/openpgp
+echo 0 > config/setting/admin/js/openpgp_keychain
 echo 0 > config/setting/admin/upload/enable
 echo 0 > config/setting/admin/image/enable
 echo 0 > config/setting/admin/js/loading
