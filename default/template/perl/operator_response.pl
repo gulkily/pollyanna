@@ -77,12 +77,17 @@ sub GetOperatorResponse {
 		AddToMenu('tag/BitcoinExpo2023');
 		return 'ok, I added a page about the 2023 MIT Bitcoin Expo. it may take a minute.';
 	}
-	if ($query =~ m/OpenPGP/) {
+	if ($query =~ m/add.+OpenPGP.+profile/) {
 		PutConfig('setting/admin/js/openpgp', 1);
 		PutConfig('setting/admin/js/openpgp_checked', 1);
 		`./pages.pl --js`;
 		`bash hike.sh page profile`;
 		return 'ok, I added basic OpenPGP.js integration to the profiles.';
+	}
+	if ($query =~ m/add.+keychain/) {
+		PutConfig('setting/admin/js/openpgp_keychain', 1);
+		`bash hike.sh page profile`;
+		return 'ok, I added a keychain for private keys to the profile page.';
 	}
 	if ($query eq 'add upload feature with paste option' || $query eq 'add upload page' || $query eq 'add upload') {
 		AddToMenu('upload');
@@ -124,10 +129,10 @@ sub GetOperatorResponse {
 		return 'ok, I added a basic image board';
 	}
 	if ($query eq 'add basic javascript' || $query eq 'add javascript support' || $query eq 'enable javascript') {
-		AddToMenu('settings');
+		#AddToMenu('settings');
 		PutConfig('setting/admin/js/enable', 1);
 		`bash hike.sh frontend`;
-		return 'ok, I added a basic javascript, including live timestamps, in-place voting buttons, and a settings page';
+		return 'ok, I added a basic javascript, including live timestamps, in-place voting buttons. a settings page is available on request.';
 	}
 	if ($query eq 'add page loading indicator' || $query eq 'add loading indicator' || $query =~ m/progress.+indicator/) {
 		PutConfig('setting/admin/js/loading', 1);
@@ -151,6 +156,12 @@ sub GetOperatorResponse {
 	if ($query eq 'remove javascript' || $query eq 'turn off javascript') {
 		PutConfig('setting/admin/js/enable', 0);
 		#`bash hike.sh refresh`;
+		if (GetConfig('setting/html/menu_layer_controls')) {
+			PutConfig('setting/html/menu_layer_controls', 0);
+		}
+		if (GetConfig('setting/html/back_to_top_button')) {
+			PutConfig('setting/html/back_to_top_button', 0);
+		}
 		if (GetConfig('setting/admin/js/openpgp')) {
 			return 'ok, I removed all the javascript. please note, OpenPGP.js integration does not work without javascript.';
 		} else {
