@@ -2,9 +2,12 @@
 
 #messages {
 	position: absolute !important;
-	top: 0 !important;
-	right: 0 !important;
 	margin-top: 5pt !important;
 }
+
+/* todo add option for this:
+	right: 0 !important;
+	top: 0 !important;
+*/
 
 /* / inbox_top.css */
