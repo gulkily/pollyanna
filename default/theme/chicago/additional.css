@@ -27,9 +27,6 @@ input[type=text], input[type=password], select, option, textarea {
 	margin-right: 8pt;
 	margin-bottom: 8pt;
 }
-.statusbar td {
-	border: 1pt inset $colorWindow;
-}
 textarea {
     font-family: Fixedsys, "Courier New", Courier, monospace;
     font-size: 12pt;
