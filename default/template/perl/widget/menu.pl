@@ -257,6 +257,7 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 } # GetMenuTemplate()
 
 sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for a menu item (used for both top and footer menus)
+# sub GetMenuButton {
 	my $address = shift;
 	my $caption = shift;
 
@@ -334,6 +335,8 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 	}
 
 	if (in_array($menuName, qw(threads tags authors people new image))) {
+		# sum counters like this:
+		#Threads(5) Tags(3) People(7)
 		#todo this should be a list instead of hard-coded
 		my $threadCount = SqliteGetCount($menuName);
 		# my $threadCount = SqliteGetValue('thread_count');
@@ -344,7 +347,6 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 
 	$menuItem =~ s/\$address/$address/g;
 	$menuItem =~ s/\$caption/$caption/g;
-
 
 	# $menuItem =~ s/\$color/$color/g;
 	# $menuItem =~ s/\$firstLetter/$firstLetter/g;
