@@ -58,8 +58,8 @@ sub GetItemHtmlLink { # $hash, [link caption], [#anchor] ; returns <a href=...
 		my $itemLink = '';
 
 		if (
-			GetConfig('html/overline_links_with_missing_html_files') &&
-			! -e GetDir('html') . '/' . $htmlFilename
+			GetConfig('html/overline_links_with_missing_html_files') && # #todo this could potentially be a css class?
+ 			! -e GetDir('html') . '/' . $htmlFilename
 		) {
 			# html file does't exist, annotate link to indicate this
 			# the html file may be generated as needed
