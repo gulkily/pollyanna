@@ -67,6 +67,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	my @listingPages = qw(child chain url deleted compost new raw picture image read authors scores tags threads boxes tasks active);
 	push @listingPages, qw(browse); # shadowme
 	#chain.html #new.html #boxes.html #tasks.html
+	# sub GetChainPage {
 
 	# my @validPages =
 	my @simplePages = qw(inspector data cloud bookmark help example access welcome calendar profile upload links post cookie chat thanks examples about faq documentation network schedule people);
