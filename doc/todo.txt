@@ -1,3 +1,15 @@
+GetItemLink()
+GetAuthorLink()
+etc should all use RenderLink()
+then we can patch in cachebusting easily
+
+#brainstorm
+some settings should have a "fuzzy" or "best known" setting
+for example:
+return_to (which page is returned to)
+	if only hashtags are applied, return to parent, but if it is a comment, show new item page
+
+
 #brainstorm should it offer different annoyance levels?
 	or automatically select 1, 2, 3 on repeated clicks?
 
