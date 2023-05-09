@@ -747,6 +747,8 @@ sub GetRandomHash { # returns a random sha1-looking hash, lowercase
 } # GetRandomHash()
 
 sub GetTemplateFilePath { # $templateName
+# sub GetTemplatePath {
+	#todo
 } # GetTemplateFilePath()
 
 sub GetTemplate { # $templateName ; returns specified template from template directory

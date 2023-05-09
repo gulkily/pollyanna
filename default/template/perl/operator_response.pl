@@ -5,6 +5,7 @@ use warnings;
 use 5.010;
 
 sub AddToMenu { # $menuItem
+# sub AppendToMenu {
 	my $menuItem = shift;
 	chomp $menuItem;
 
@@ -16,7 +17,7 @@ sub AddToMenu { # $menuItem
 		PutFile(GetDir('config') . '/theme/hypercode/template/list/menu', $newMenu);
 		`bash hike.sh page write`;
 	}
-}
+} # AppendToMenu()
 
 sub LogChangesToGit {
 	if (GetConfig('setting/admin/git/operator_please_commit_and_push')) {
