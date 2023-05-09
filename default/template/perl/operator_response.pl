@@ -9,12 +9,16 @@ sub AddToMenu { # $menuItem
 	my $menuItem = shift;
 	chomp $menuItem;
 
+	#todo sanity checks
+
+	WriteLog("AddToMenu($menuItem)");
+
 	my $existingMenu = GetTemplate('list/menu');
 	if ($existingMenu =~ m/^$menuItem/im) {
 		# already exists
 	} else {
 		my $newMenu = $existingMenu . "\n" . $menuItem;
-		PutFile(GetDir('config') . '/theme/hypercode/template/list/menu', $newMenu);
+		PutFile(GetDir('config') . '/template/list/menu', $newMenu);
 		`bash hike.sh page write`;
 	}
 } # AppendToMenu()
