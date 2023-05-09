@@ -695,59 +695,6 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						WriteLog('IndexTextFile: warning: token not found in @validTokens, sanity check failed; caller = ' . join(',', caller));
 					}
 
-					if ($tokenFound{'token'} eq 'config') { #config
-						if (
-							IsAdmin($authorKey) || #admin can always config #todo
-							GetConfig('admin/anyone_can_config') || # anyone can config
-							(GetConfig('admin/signed_can_config') || 0) || # signed can config #todo
-							(GetConfig('admin/cookied_can_config') || 0) # cookied can config #todo
-						) {
-							my ($configKey, $configSpacer, $configValue) = ($tokenFound{'param'} =~ m/(.+)(\W)(.+)/);
-
-							push @indexMessageLog, 'config: ' . $tokenFound{'param'};
-
-							WriteLog('IndexTextFile: $configKey = ' . (defined($configKey) ? $configKey : '(undefined)'));
-							WriteLog('IndexTextFile: $configSpacer = ' . (defined($configSpacer) ? $configSpacer : '(undefined)'));
-							WriteLog('IndexTextFile: $configValue = ' . (defined($configValue) ? $configValue : '(undefined)'));
-
-							if (!defined($configKey) || !$configKey || !defined($configValue)) {
-								WriteLog('IndexTextFile: warning: $configKey or $configValue missing from $tokenFound token');
-							} else {
-								my $configKeyActual = $configKey;
-								if ($configKey && defined($configValue) && $configValue ne '') {
-									#todo merge html/clock and html/clock_format
-									$configValue = trim($configValue);
-								}
-
-								if (IsAdmin($authorKey) || ConfigKeyValid($configKeyActual)) { #todo
-									# admins can write to any config
-									# non-admins can only write to existing config keys (and not under admin/)
-
-									# #todo create a whitelist of safe keys non-admins can change
-
-									DBAddConfigValue($configKeyActual, $configValue, 0, $fileHash);
-
-									#this must be called before WriteIndexedConfig()
-									#because we must flush to indexing database
-									#because that's where WriteIndexedConfig() gets its new config
-									IndexTextFile('flush'); #todo optimize
-
-									#WriteIndexedConfig(); # #config/...= token in index.pl
-									$message = str_replace($tokenFound{'recon'}, "[Config: $configKeyActual = $configValue]", $message);
-									$detokenedMessage = str_replace($tokenFound{'recon'}, '', $detokenedMessage);
-
-									if (!$titleCandidate) {
-										$titleCandidate = 'Configuration change';
-									}
-								} else {
-									# token tried to pass unacceptable config key
-									$message = str_replace($tokenFound{'recon'}, "[Not Accepted: $configKeyActual]", $message);
-									$detokenedMessage = str_replace($tokenFound{'recon'}, '', $detokenedMessage);
-								}
-							} # sanity check
-						} # has permission to config
-					} # #config
-
 					if ($tokenFound{'token'} eq 'my_name_is') { # my_name_is
 						if ($tokenFound{'recon'} && $tokenFound{'message'} && $tokenFound{'param'}) {
 							WriteLog('IndexTextFile: my_name_is: sanity check PASSED');
