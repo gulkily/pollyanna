@@ -268,6 +268,13 @@ sub GetTokenDefs {
 			'mask_params' => 'mgi',
 			'message' => '[hike set]',
 			'apply_to_parent' => 0
+		},
+		{
+			'token' => 'hike_addmenu',
+			'mask' => '^(hike addmenu)(\W)(.+)$',
+			'mask_params' => 'mgi',
+			'message' => '[hike addmenu]',
+			'apply_to_parent' => 0
 		}
 	);
 
