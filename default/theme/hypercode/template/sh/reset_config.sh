@@ -3,7 +3,6 @@
 # theme/hypercode/template/sh/reset_config.sh
 # reset.sh
 
-rm config/theme/hypercode/template/list/menu
 echo 0 > config/setting/admin/js/openpgp
 echo 0 > config/setting/admin/js/openpgp_keychain
 echo 0 > config/setting/admin/upload/enable
@@ -24,7 +23,6 @@ echo 1 > config/setting/html/monochrome
 echo 1 > config/setting/html/menu_top
 echo 0 > config/setting/html/menu_bottom
 echo 0 > config/setting/html/item_page_menu_bottom
-#echo 0 > config/setting/admin/index/create_system_tags
 echo "hypercode chicago" > config/setting/theme
 bash hike.sh frontend
 
