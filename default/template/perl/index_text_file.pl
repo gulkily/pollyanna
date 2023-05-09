@@ -317,6 +317,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							$newTokenFound{'message'} = $tokenMessage;
 							$newTokenFound{'apply_to_parent'} = $tokenDef{'apply_to_parent'};
 							$newTokenFound{'target_attribute'} = $tokenDef{'target_attribute'};
+							$newTokenFound{'hashtag'} = $tokenDef{'hashtag'};
 							push(@tokensFound, \%newTokenFound);
 
 							if ($tokenName eq 'hashtag' || $tokenName eq 'plustag') {
@@ -572,7 +573,11 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							if ($tokenFound{'apply_to_parent'} && @itemParents) {
 								push @indexMessageLog, 'token has apply_to_parent: ' . $tokenFound{'token'};
 								foreach my $itemParent (@itemParents) {
-									DBAddItemAttribute($itemParent, $targetAttribute, $tokenFound{'param'}, $itemTimestamp, $fileHash);
+									if ($tokenFound{'hashtag'}) {
+										DBAddItemAttribute($itemParent, $targetAttribute, $tokenFound{'hashtag'}, $itemTimestamp, $fileHash);
+									} else {
+										DBAddItemAttribute($itemParent, $targetAttribute, $tokenFound{'param'}, $itemTimestamp, $fileHash);
+									}
 								}
 							} else {
 								#push @indexMessageLog, 'token does not have apply_to_parent: ' . $tokenFound{'token'};
@@ -680,8 +685,12 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						}
 						WriteLog('IndexTextFile: $voteTime = ' . $voteTime);
 
-						DBAddVoteRecord($fileHash, $voteTime, $tokenFound{'token'}); #'hashtag'
-					} # title, access_log_hash, http, https, alt, name, self_timestamp
+						if ($tokenFound{'hashtag'}) {
+							DBAddVoteRecord($fileHash, $voteTime, $tokenFound{'hashtag'}); #'hashtag'
+						} else {
+							DBAddVoteRecord($fileHash, $voteTime, $tokenFound{'token'}); #'hashtag'
+						}
+					} # title, access_log_hash, http, https, alt, name, self_timestamp, operator_please
 					else {
 						WriteLog('IndexTextFile: warning: token not found in @validTokens, sanity check failed; caller = ' . join(',', caller));
 					}
@@ -864,7 +873,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							$tokenFound{'param'} eq 'run' || #run token needs permission
 							0
 						) { # permissioned token
-							my $hashTag = $tokenFound{'param'};
+							my $hashTag = $tokenFound{'hashtag'} || $tokenFound{'param'};
 							if (scalar(@itemParents)) {
 								WriteLog('IndexTextFile: Found permissioned token ' . $tokenFound{'param'} . ', and item has parents');
 								foreach my $itemParent (@itemParents) {
