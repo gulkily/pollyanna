@@ -9,19 +9,33 @@ use utf8;
 
 sub GetThreadListingDialog {
 	my $fileHash = shift;
-	#todo sanity
+	chomp $fileHash;
+
+	if ($fileHash = IsItem($fileHash)) {
+		# ok
+	} else {
+		WriteLog('GetThreadListingDialog: warning: $fileHash failed sanity check; caller = ' . join(',', caller));
+		return '';
+	}
+
+	WriteLog("GetThreadListingDialog($fileHash)");
 
 	my $topLevelItem = DBGetTopLevelItem($fileHash);
 	#if ($topLevelItem ne $file{'file_hash'}) {
 	my $currentItem = $fileHash;
 
+	WriteLog('GetThreadListingDialog: $topLevelItem = ' . $topLevelItem . '; $currentItem = ' . $currentItem);
+
 	my @itemsInThreadListing;
 
 	my $threadListing = GetThreadListing($topLevelItem, $currentItem, 0, \@itemsInThreadListing);
+
 	if ($threadListing) {
 		# sub GetThreadDialog {
 		my $threadListingDialog .= GetDialogX($threadListing, 'Thread', 'item_title,add_timestamp');
 		return $threadListingDialog;
+	} else {
+		WriteLog('GetThreadListingDialog: warning: $threadListing returned FALSE');
 	}
 
 	return '';
@@ -29,10 +43,15 @@ sub GetThreadListingDialog {
 
 sub GetThreadListing { # $topLevel, $selectedItem, $indentLevel, $itemsListReference
 # sub GetThreadDialog {
+
+	WriteLog('GetThreadListing()');
+
 	my $topLevel = shift; #todo sanity
 	my $selectedItem = shift || '';
 	my $indentLevel = shift || 0;
 	my $itemsListReference = shift; # reference to array of all items included in thread listing
+
+	WriteLog('GetThreadListing: $topLevel = ' . $topLevel);
 
 	my @itemInfo = SqliteQueryHashRef("SELECT * FROM item_flat WHERE file_hash = '$topLevel' LIMIT 1");
 	#todo config/template/query/...
@@ -42,11 +61,13 @@ sub GetThreadListing { # $topLevel, $selectedItem, $indentLevel, $itemsListRefer
 		#most basic sanity check passed
 	} else {
 		# @itemInfo is false
-			WriteLog('GetThreadListing: warning: @itemInfo is FALSE; $topLevel = ' . $topLevel . '; caller = ' . join(',', caller));
+		WriteLog('GetThreadListing: warning: @itemInfo is FALSE; $topLevel = ' . $topLevel . '; caller = ' . join(',', caller));
 		return '';
 	}
 
 	my %topLevelItem = %{$itemInfo[0]}; # top level item, parent of all other items in this thread, also the first row
+
+	WriteLog('GetThreadListing: $topLevelItem{file_hash} = ' . $topLevelItem{'file_hash'});
 
 	if ($itemsListReference) {
 		push @{$itemsListReference}, $topLevel;
@@ -76,7 +97,7 @@ sub GetThreadListing { # $topLevel, $selectedItem, $indentLevel, $itemsListRefer
 	}
 	$listing .= '<td>';
 
-	$listing .= '&nbsp; &nbsp; ' x $indentLevel;
+	$listing .= '&nbsp; &nbsp; ' x $indentLevel; # x operator means repeat
 
 	$listing .= GetItemHtmlLink($topLevel, $itemTitle);
 
