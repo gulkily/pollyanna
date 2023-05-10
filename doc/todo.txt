@@ -1,3 +1,8 @@
+topics page
+	topics are different from threads
+
+there's a bug in include_notext_in_thread_list=0
+
 GetItemLink()
 GetAuthorLink()
 etc should all use RenderLink()
