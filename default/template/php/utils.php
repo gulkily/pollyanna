@@ -47,6 +47,15 @@ function GetDir2 ($dirName) { # returns path to special directory specified
 # 'script'
 # 'txt'
 # 'image
+# 'template'
+# 'html'
+# 'php'
+# 'txt'
+# 'image'
+# 'cache'
+# 'config'
+# 'default'
+# 'log'
 
 	if (!$dirName) {
 		WriteLog('GetDir: warning: $dirName missing');
