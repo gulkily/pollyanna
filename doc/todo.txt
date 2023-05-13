@@ -1,3 +1,30 @@
+demo
+	
+
+#reindex tag
+	triggers item reindex
+	like 'hike reindex' but only for that item (and perhaps dependent items)
+	can be used when e.g. 'hike set <token> 1' has been run to enable that token
+
+implement per-page-type css and js
+	add feature flag css_auto_add_template_by_page_type (ok)
+	a) when generating getpageheader, look for
+		template/css/page/pagetype.css (ok)
+		template/js/page/pagetype.js
+	b) if template is found, then:
+		add it to the page header (ok)
+		inject 2 textareas into the page, css and js
+	c) else
+		inject 2 textareas into the page default.css and default.js (ok)
+	d) if it is an item page, look for these (for each tag):
+		template/css/page/item/tagname.css
+		template/css/page/item/tagname.js
+		* this is complicated by getpageheader/footer not getting the item it for current page?
+	e) implement saving of template contents
+		to config/template/css/page/pagetype.css in post.php
+		to config/template/css/page/pagetype.js in post.php
+		in post.php, add argument to return to page
+
 topics page
 	topics are different from threads
 
