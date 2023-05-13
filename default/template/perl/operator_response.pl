@@ -26,7 +26,11 @@ sub AddToMenu { # $menuItem
 sub LogChangesToGit {
 	if (GetConfig('setting/admin/git/operator_please_commit_and_push')) {
 		my $action = shift;
+		chomp $action;
+
 		my $taskId = substr(sha1_hex($action), 0, 8);
+
+		WriteLog("LogChangesToGit($action): $taskId = " . $taskId);
 
 		my $gitLog = '';
 
@@ -39,6 +43,9 @@ sub LogChangesToGit {
 
 		$gitLog .= `cd config 2>&1 ; git add -v . 2>&1 ; git commit -m '$action $taskId' . 2>&1 ; git push 2>&1 ; cd "$pwd"`;
 		$gitLog .= `cd html 2>&1 ; git add -v . 2>&1 ; git commit -m '$action $taskId' . 2>&1 ; git push 2>&1 ; cd "$pwd"`;
+	} else {
+		WriteLog('LogChangesToGit: warning: operator_please_commit_and_push is FALSE, returning; caller = ' . join(',', caller));
+		return '';
 	}
 } # LogChangesToGit()
 
