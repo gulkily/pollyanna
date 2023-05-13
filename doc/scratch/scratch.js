@@ -1,3 +1,12 @@
+
+			var walkUp = comment;
+			while (walkUp != document.body) {
+				walkUp.style.maxWidth = '95%';
+				walkUp = walkUp.parentElement;
+			}
+
+
+
 		document.frmReply.comment.value = commtext + "\n\n" + window.location.href;
 
 
