@@ -105,6 +105,7 @@ function SignVote (t, token) { // signs a vote from referenced vote button
 	) {
 		// removes a notification if it is immediately afer this button
 		t.nextSibling.remove();
+		// #todo there is a bug here, somehow remove() isn't there
 	}
 
 	if (window.xmlhttp) {
