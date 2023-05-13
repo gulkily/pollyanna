@@ -5,6 +5,26 @@ function WriteOnload () { // onload handler for write page
 
 	if (document.getElementById) {
 		//alert('DEBUG: WriteOnload: document.getElementById is true');
+
+		if (0) {
+			var comment = document.getElementById('comment');
+			if (comment && comment.style) {
+				// store current width
+				// compare to viewport width
+				// if wider than viewport reduce
+				// otherwise, leave exactly the same
+				var curWidth = comment.clientWidth;
+				//alert(curWidth);
+				var curHeight = comment.clientHeight;
+				//alert(curHeight);
+				comment.removeAttribute('cols');
+				comment.removeAttribute('rows');
+				comment.style.maxWidth = '95%';
+				comment.style.width = curWidth + 'px';
+				comment.style.height = curHeight + 'px';
+			}
+		}
+
 		if (window.GetPrefs) {
 			//alert('DEBUG: window.GetPrefs = TRUE');
 			if (GetPrefs('write_enhance')) {
