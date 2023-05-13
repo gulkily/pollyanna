@@ -5,12 +5,65 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub GetStylesheet { # $styleSheet ; returns stylesheet template based on config
+sub GetHeaderStylesheet { # $pageType ; returns base stylesheet, plus extra stylesheet for particular page type,
+# can be called without parameter
+# sub GetPageStylesheet {
+# sub GetPageCss {
+	state $baseStylesheet = GetStylesheet();
+
+	my $pageType = shift;
+	#todo sanity
+	if (!$pageType) {
+		$pageType = '';
+	}
+	chomp $pageType;
+
+	WriteLog('GetHeaderStylesheet: $pageType = ' . $pageType);
+
+	if ($pageType) {
+		$baseStylesheet . "\n" . GetPageStylesheet($pageType);
+	} else {
+        return $baseStylesheet . "\n" . '/* GetHeaderStylesheet: $pageType not specified */';
+	}
+} # GetHeaderStylesheet()
+
+sub GetPageStylesheet {
+	my $pageType = shift;
+    #todo sanity
+    if (!$pageType) {
+        $pageType = '';
+    }
+    chomp $pageType;
+
+	WriteLog('GetPageStylesheet: $pageType = ' . $pageType);
+
+	if ($pageType) {
+		#todo multiple page types
+		if (GetTemplate("css/page/$pageType.css")) {
+            return GetTemplate("css/page/$pageType.css");
+#            return '/* GetPageStylesheet: adding stylesheet below: */' . "\n" . GetTemplate("css/page/$pageType.css");
+        } else {
+            return '/* GetPageStylesheet: ' . "$pageType.css" . ' not found */';
+        }
+	} else {
+        return '/* GetPageStylesheet: $pageType not specified */';
+	}
+} # GetPageStylesheet()
+
+sub GetBaseStylesheet {
+	return GetStylesheet();
+}
+
+sub GetStylesheet { # ; returns common stylesheet template based on config
+# uses $styleSheet as memo
 # sub GetCss {
+# sub GetCommonStylesheet {
 	state $styleSheet;
 	if ($styleSheet) {
 		return $styleSheet;
 	}
+
+	WriteLog('GetStylesheet(); caller = ' . join(',', caller));
 
 	my $style = GetTemplate('css/default.css');
 	# baseline style
