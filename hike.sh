@@ -8,13 +8,13 @@
 #fi
 
 #todo sanity checks for git and cut
-echo =================
-echo Rejoice always
-echo Pray without ceasing
-echo Give thanks in all circumstances
-echo =================
-echo "pollyanna" `git rev-parse HEAD | cut -c 1-8`
-echo =================
+#echo =================
+#echo Rejoice always
+#echo Pray without ceasing
+#echo Give thanks in all circumstances
+#echo =================
+#echo "pollyanna" `git rev-parse HEAD | cut -c 1-8`
+#echo =================
 
 #Matthew 5:37
 #Let what you say be simply ‘Yes’ or ‘No’; anything more than this comes from evil.
