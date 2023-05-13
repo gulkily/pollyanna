@@ -85,6 +85,44 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 		WriteLog('GetPageFooter: ssi footer conditions NOT met!');
 	}
 
+	if (GetConfig('setting/html/css_footer')) { #todo setting/html/css_footer
+		WriteLog('GetPageFooter: adding css textarea');
+
+		my $pageStylesheet = GetPageStylesheet($pageType);
+		if ($pageStylesheet) {
+
+			my $escapedCssOutput = HtmlEscape($pageStylesheet);
+			my $textareaCss = '<textarea name=newCss cols=80 rows=10>' . $escapedCssOutput . '</textarea>';
+			my $inputPageType = '<input type=hidden name=pageType value=' . $pageType . '>';
+			my $inputReturnTo = '<input type=hidden name=returnTo value=' . "/$pageType.html" . '>'; #todo
+			my $buttonSave = '<input type=submit value=Save>';
+			my $form = '<form class=advanced action="/post.html" method=GET>' . GetDialogX($textareaCss . '<br>' . $buttonSave . $inputPageType . $inputReturnTo, 'Style Editor') . '</form>';
+
+			# footer stats
+			$txtFooter = str_replace(
+				'</body>',
+				$form . '</body>',
+				$txtFooter
+			);
+		} else {
+			my $escapedCssOutput = HtmlEscape('');
+			my $textareaCss = '<textarea name=newCss cols=80 rows=10>' . $escapedCssOutput . '</textarea>';
+			my $inputPageType = '<input type=hidden name=pageType value=' . $pageType . '>';
+			my $buttonSave = '<input type=submit value=Save>';
+			my $form = '<form action="/post.html" method=GET>' . $textareaCss . '<br>' . $buttonSave . $inputPageType . '</form>';
+
+			# footer stats
+			$txtFooter = str_replace(
+				'</body>',
+				$form . '</body>',
+				$txtFooter
+			);
+		}
+	}
+	else {
+		WriteLog('GetPageFooter: NOT adding css textarea');
+	}
+
 	if (
 		GetConfig('html/menu_bottom') ||
 		(

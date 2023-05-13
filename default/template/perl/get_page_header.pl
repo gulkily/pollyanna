@@ -40,7 +40,7 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 	}
 
 	my $txtIndex = "";
-	my $styleSheet = GetStylesheet();
+	my $styleSheet = GetHeaderStylesheet($pageType); #todo also pass parameter
 
 	my $introText = trim(GetString('page_intro/' . $pageType));
 	if (!$introText) {
