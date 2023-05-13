@@ -345,8 +345,17 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 		}
 	}
 
+	if ($address eq '/write.html' && GetConfig('setting/admin/js/translit')) {
+		#todo make it more clear how to change this
+		$address = '/frame.html';
+	}
+
 	$menuItem =~ s/\$address/$address/g;
 	$menuItem =~ s/\$caption/$caption/g;
+
+	if ($address eq '/frame.html') {
+		$menuItem = AddAttributeToTag($menuItem, 'a ', 'target', '_top');
+	}
 
 	# $menuItem =~ s/\$color/$color/g;
 	# $menuItem =~ s/\$firstLetter/$firstLetter/g;
