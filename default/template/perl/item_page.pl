@@ -50,7 +50,7 @@ sub GetHtmlToolboxes {
 		$urlParam = str_replace('#', '%23', $urlParam);
 	}
 
-	if (GetConfig('html/item_page/toolbox_search') && $urlParam && $urlParam ne 'Untitled') {
+	if ((index($file{'tags_list'}, ',search,') != -1) && GetConfig('html/item_page/toolbox_search') && $urlParam) {
 		#todo 'notext' items should also not get a search toolbox
 		#sub SearchToolbox {
 		#sub SearchDialog {
@@ -151,7 +151,8 @@ sub GetHtmlToolboxes {
 			'</a><br>' . "\n"
 		;
 
-		my $htmlToolboxWindow = '<span class=advanced>' . GetDialogX($htmlToolbox, 'Search') . '</span>';
+		my $htmlToolboxWindow = GetDialogX($htmlToolbox, 'Search');
+		# $htmlToolboxWindow = '<span class=advanced>' . $htmlToolboxWindow . '</span>';
 		$html .= $htmlToolboxWindow;
 	} # if ($file{'item_title'})
 
