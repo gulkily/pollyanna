@@ -55,6 +55,9 @@ sub MakeDataZips {
 	}
 	WriteLog('MakeDataZips: $zipInterval = ' . $zipInterval . '; $touchZip = ' . $touchZip);
 
+	state $zipExists = !!`which zip`;
+	state $gitExists = !!`which git`;
+
 	if (!$touchZip || (GetTime() - $touchZip) > $zipInterval) {
 		WriteLog('MakeDataZips: Making zip files...');
 		state $HTMLDIR = GetDir('html');
@@ -64,23 +67,32 @@ sub MakeDataZips {
 		# -q for quiet
 		# -r for recursive
 
-		system("git archive --format zip --output $HTMLDIR/tree.tmp.zip master");
-		rename("$HTMLDIR/tree.tmp.zip", "$HTMLDIR/tree.zip");
+		if ($gitExists) {
+			system("git archive --format zip --output $HTMLDIR/tree.tmp.zip master");
+			rename("$HTMLDIR/tree.tmp.zip", "$HTMLDIR/tree.zip");
+		} else {
+			WriteLog('MakeDataZips: warning: $gitExists was FALSE');
+		}
 
-		system("zip -qr $HTMLDIR/image.tmp.zip $HTMLDIR/image/");
-		rename("$HTMLDIR/image.tmp.zip", "$HTMLDIR/image.zip");
+		if ($zipExists) {
+			system("zip -qr $HTMLDIR/image.tmp.zip $HTMLDIR/image/");
+			rename("$HTMLDIR/image.tmp.zip", "$HTMLDIR/image.zip");
 
-		system("zip -qr $HTMLDIR/txt.tmp.zip $HTMLDIR/txt/ $HTMLDIR/chain.log");
-		rename("$HTMLDIR/txt.tmp.zip", "$HTMLDIR/txt.zip");
+			system("zip -qr $HTMLDIR/txt.tmp.zip $HTMLDIR/txt/ $HTMLDIR/chain.log");
+			rename("$HTMLDIR/txt.tmp.zip", "$HTMLDIR/txt.zip");
 
-		system("zip -qr $HTMLDIR/index.sqlite3.zip.tmp cache/" . GetMyCacheVersion() . "/index.sqlite3");
-		rename("$HTMLDIR/index.sqlite3.zip.tmp", "$HTMLDIR/index.sqlite3.zip");
+			system("zip -qr $HTMLDIR/index.sqlite3.zip.tmp cache/" . GetMyCacheVersion() . "/index.sqlite3");
+			rename("$HTMLDIR/index.sqlite3.zip.tmp", "$HTMLDIR/index.sqlite3.zip");
 
-		PutCache('touch/zip', GetTime());
+			PutCache('touch/zip', GetTime());
+		} else {
+			WriteLog('MakeDataZips: warning: $zipExists was FALSE');
+			return '';
+		}
 	} else {
-		WriteLog("Zip file was made less than $zipInterval ago, too lazy to do it again");
+		WriteLog("MakeDataZips: Zip file was made less than $zipInterval ago, too lazy to do it again");
 	}
-}
+} # MakeDataZips()
 
 sub GetDataPage { # writes /data.html (and zip files if needed) # MakeZip txt.zip
 	# sub MakeDataPage {
