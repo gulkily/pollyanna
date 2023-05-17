@@ -1,43 +1,26 @@
+menubar is kind of big in netscape 9.0.0.6
+
+===
+
 on windows:
 
 1684344995.94019 Can't exec "git": No such file or directory at /c/Users/digdu/pollyanna/config/template/perl/page/data.pl line 67.
-Can't exec "zip": No such file or directory at /c/Users/digdu/pollyanna/config/template/perl/page/data.pl line 70.
-Can't exec "zip": No such file or directory at /c/Users/digdu/pollyanna/config/template/perl/page/data.pl line 73.
-Can't exec "zip": No such file or directory at /c/Users/digdu/pollyanna/config/template/perl/page/data.pl line 76.
-Use of uninitialized value $fileSize in numeric eq (==) at /c/Users/digdu/pollyanna/config/template/perl/widget.pl line 73.
-Use of uninitialized value $fileSize in int at /c/Users/digdu/pollyanna/config/template/perl/widget.pl line 74.
-Use of uninitialized value $fileSize in numeric eq (==) at /c/Users/digdu/pollyanna/config/template/perl/widget.pl line 73.
-Use of uninitialized value $fileSize in int at /c/Users/digdu/pollyanna/config/template/perl/widget.pl line 74.
-Use of uninitialized value $fileSize in numeric eq (==) at /c/Users/digdu/pollyanna/config/template/perl/widget.pl line 73.
-Use of uninitialized value $fileSize in int at /c/Users/digdu/pollyanna/config/template/perl/widget.pl line 74.
 sh: line 1: git: command not found
 sh: line 1: git: command not found
 
 
-=====
+===
+
+not sure why this happens, it works when done manually:
 
 $ hike build
 ln: failed to create symbolic link 'index.pl': No such file or directory
 ln: failed to create symbolic link 'pages.pl': No such file or directory
 
+===
+
+this is caused by GetMyVersion() trying to run git:
 1684323298: Require ./utils.pl...
-Can't exec "git": No such file or directory at ./config/template/perl/utils.pl line 626.
-
-1684323299: SqliteMakeTables()...
-
-1684323300: Ensure there's /c/Users/digdu/pollyanna/html and something inside...
-
-1684323300: Looking for files...
-
-1684323300: DBAddPageTouch('summary')...
-
-1684323300: UpdateUpdateTime()...
-
-1684323300: ===============
-
-1684323300: Build finished!
-
-1684323300: ===============
 Can't exec "git": No such file or directory at ./config/template/perl/utils.pl line 626.
 
 
