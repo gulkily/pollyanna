@@ -1,3 +1,31 @@
+on windows:
+
+$ hike build
+ln: failed to create symbolic link 'index.pl': No such file or directory
+ln: failed to create symbolic link 'pages.pl': No such file or directory
+
+1684323298: Require ./utils.pl...
+Can't exec "git": No such file or directory at ./config/template/perl/utils.pl line 626.
+
+1684323299: SqliteMakeTables()...
+
+1684323300: Ensure there's /c/Users/digdu/pollyanna/html and something inside...
+
+1684323300: Looking for files...
+
+1684323300: DBAddPageTouch('summary')...
+
+1684323300: UpdateUpdateTime()...
+
+1684323300: ===============
+
+1684323300: Build finished!
+
+1684323300: ===============
+Can't exec "git": No such file or directory at ./config/template/perl/utils.pl line 626.
+
+
+===
 
 #bug in ie4, the mouse cursor blinks every time the clock is updated
    or maybe something else is causing it, but either way, not great...
