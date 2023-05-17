@@ -1,3 +1,12 @@
+how to make sqlite3 optional
+	reason: ubuntu doesn't come with sqlite3 by default
+	windows gitbash also doesn't come with sqlite3
+
+how to make git optional
+	reason: ubuntu doesn't come with git by default
+	windows gitbash also doesn't come with git
+
+
 fix lib_heal.pl on windows (gitbash)
 
 demo
