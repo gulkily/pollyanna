@@ -1,5 +1,21 @@
 on windows:
 
+1684344995.94019 Can't exec "git": No such file or directory at /c/Users/digdu/pollyanna/config/template/perl/page/data.pl line 67.
+Can't exec "zip": No such file or directory at /c/Users/digdu/pollyanna/config/template/perl/page/data.pl line 70.
+Can't exec "zip": No such file or directory at /c/Users/digdu/pollyanna/config/template/perl/page/data.pl line 73.
+Can't exec "zip": No such file or directory at /c/Users/digdu/pollyanna/config/template/perl/page/data.pl line 76.
+Use of uninitialized value $fileSize in numeric eq (==) at /c/Users/digdu/pollyanna/config/template/perl/widget.pl line 73.
+Use of uninitialized value $fileSize in int at /c/Users/digdu/pollyanna/config/template/perl/widget.pl line 74.
+Use of uninitialized value $fileSize in numeric eq (==) at /c/Users/digdu/pollyanna/config/template/perl/widget.pl line 73.
+Use of uninitialized value $fileSize in int at /c/Users/digdu/pollyanna/config/template/perl/widget.pl line 74.
+Use of uninitialized value $fileSize in numeric eq (==) at /c/Users/digdu/pollyanna/config/template/perl/widget.pl line 73.
+Use of uninitialized value $fileSize in int at /c/Users/digdu/pollyanna/config/template/perl/widget.pl line 74.
+sh: line 1: git: command not found
+sh: line 1: git: command not found
+
+
+=====
+
 $ hike build
 ln: failed to create symbolic link 'index.pl': No such file or directory
 ln: failed to create symbolic link 'pages.pl': No such file or directory
