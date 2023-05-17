@@ -18,15 +18,15 @@ if ($result) {
 	# challenge: how to detect this?
 
 	my $os = '';
-	if () {
+	if (1) {
 	    $os = 'windows';
-	} elsif () {
+	} elsif (0) {
 	    $os = 'gnu';
-	} elsif () {
+	} elsif (0) {
 	    $os = 'mac';
-    } elsif () {
+    } elsif (0) {
         $os = 'solaris';
-    } elsif () {
+    } elsif (0) {
         $os = 'freebsd';
 	} else {
 	    $os = 'unknown';
@@ -36,6 +36,8 @@ if ($result) {
 		system("mkdir lib; mkdir lib/URI; cp default/template/perl/lib/URI/Encode.pm lib/URI/Encode.pm");
 	} elsif ($os eq 'windows') {
 	    system("mkdir lib; mkdir lib/URI; copy default\\template\\perl\\lib\\URI\\Encode.pm lib\\URI\\Encode.pm");
+	} else {
+	    #todo
 	}
 } else {
 	# 0 means it is ok
