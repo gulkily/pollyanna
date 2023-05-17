@@ -70,6 +70,13 @@ sub GetFileSizeWidget { # $fileSize ; takes file size as number, and returns htm
 		chomp ($fileSize);
 	}
 
+	if (defined($fileSize)) {
+	    # ok
+	} else {
+	    WriteLog('GetFileSizeWidget: warning: defined($fileSize) was FALSE; caller = ' . join(',', caller));
+	    return '';
+	}
+
 	if ($fileSize == 0 || int($fileSize)) {
 		$fileSize = int($fileSize);
 		WriteLog('GetFileSizeWidget: sanity check passed, $fileSize = ' . $fileSize);
