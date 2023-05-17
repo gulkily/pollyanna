@@ -614,7 +614,16 @@ sub TrimUnicodeString { # $string, $maxLength ; trims string to $maxLength in a 
 } # TrimUnicodeString()
 
 sub GetMyVersion { # Get the currently checked out version (current commit's hash from git)
-	# GetVersion {
+# sub GetVersion {
+
+	state $gitExists = !!`which git`;
+
+	if ($gitExists) {
+		# ok
+	} else {
+		return '7dc8eb9d3b1573755aec2f5c5e2af0ea10082f02';
+	}
+
 	state $myVersion;
 	my $ignoreSaved = shift;
 
@@ -624,6 +633,8 @@ sub GetMyVersion { # Get the currently checked out version (current commit's has
 	}
 
 	$myVersion = `git rev-parse HEAD`;
+	#todo windows gitbash doesn't like this, even though `which git` works
+	#
 
 	#freebsd: $myVersion = `/usr/local/bin/git rev-parse HEAD`;
 	if (!$myVersion) {
