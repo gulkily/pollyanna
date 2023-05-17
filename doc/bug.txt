@@ -8,6 +8,9 @@ on windows:
 sh: line 1: git: command not found
 sh: line 1: git: command not found
 
+i think this is the cause:
+$ENV{PATH}="/bin:/usr/bin"; #this is needed for -T to work
+in gitbash, git is located in /mingw64/bin/git
 
 ===
 
