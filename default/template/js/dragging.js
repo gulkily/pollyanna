@@ -6,6 +6,7 @@
 	* problem: syntax errors on older browsers like netscape and ie3
 	  proposed solution: remove nested function declarations
 	  -or-
+	  make dragging.js an external library like openpgp.js
 
 	* problem: no keyboard alternative at this time
 	  proposed solution: somehow allow moving through windows and moving them with keyboard
@@ -15,17 +16,6 @@
 */
 
 // props https://www.w3schools.com/howto/howto_js_draggable.asp
-
-/*
-		#mydiv {
-			position: absolute;
-			z-index: 9;
-		}
-
-		#mydivheader {
-			this is just the titlebar
-		}
-*/
 
 window.draggingZ = 0; // keeps track of the topmost box's zindex
 // incremented whenever dragging is initiated, that way element pops to top
@@ -197,7 +187,8 @@ function ExpandAll () {
 
 function DraggingRetile () {
 	return DraggingRetile2(1);
-}
+
+} // DraggingRetile()
 
 function DraggingRetile2 (ignoreMenu) {
 	//alert('DEBUG: DraggingRetile()');
@@ -229,7 +220,7 @@ function DraggingRetile2 (ignoreMenu) {
 //	}
 //
 //	DraggingInit(0);
-}
+} // DraggingRetile2()
 
 function UpdateDialogPropertyDialog (dialog) {
 	if (dialog && window.getComputedStyle && document.getElementById && document.getElementById('propDisplay')) {
@@ -274,7 +265,7 @@ function SetActiveDialogDelay (ths) {
 		//set timeout to focus to that window
 
 		setTimeout('window.SetActiveDialog(window.nextWindowToFocusTo);', 130);
-}
+} // SetActiveDialogDelay()
 
 function SetActiveDialog (ths) {
 // ActivateDialog {
@@ -567,8 +558,8 @@ function DraggingInitDialog (el, doPosition) {
 
 	return '';
 } // DraggingInitDialog()
-//
-//function EnsureDialogIsInViewport (el) {
+
+function EnsureDialogIsInViewport (el) {
 //	var height = window.innerHeight;
 //	var width = window.innerWidth;
 //
@@ -583,7 +574,7 @@ function DraggingInitDialog (el, doPosition) {
 //        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
 //        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
 //    );
-//}
+} // EnsureDialogIsInViewport()
 
 function DraggingMakeFit (doPosition) { // initialize all class=dialog elements on the page to be draggable
 // function DraggableMakeFit () {
@@ -1220,7 +1211,7 @@ function CloseDialog(t) {
 		}
 	}
 	return false;
-}
+} // CloseDialog()
 
 function FetchDialogFromUrl (url) {
 // function InjectDialog () {
@@ -1233,7 +1224,11 @@ function FetchDialogFromUrl (url) {
 		return true; // return true so that click can happen
 	}
 
-	if (window.XMLHttpRequest) {
+	if (
+		document.getElementById &&
+		window.XMLHttpRequest &&
+		window.InsertFetchedDialog
+	) {
 		//alert('DEBUG: FetchDialogFromUrl: window.XMLHttpRequest feature check PASSED');
 
 		var xmlhttp;
@@ -1243,6 +1238,12 @@ function FetchDialogFromUrl (url) {
 			window.xmlhttp2 = new XMLHttpRequest();
 			xmlhttp = window.xmlhttp2;
 		}
+		// this is a hack to always use the same instance
+		// of xhr which also makes the process non-async
+		// which is ok for our purposes.
+		// this is the main reason for the 'too fast' message
+		// which appears if you try to vote when already waiting
+		// for a vote request to return
 
 		if (window.displayNotification) {
 			displayNotification('Meditate...');
