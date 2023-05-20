@@ -364,7 +364,7 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 
 	if ($?) {
 		# this is a special perl thing which contains STDERR from most recent backtick command
-		WriteLog('SqliteQuery: warning: error returned; caller = ' . join(',', caller));
+		WriteLog('SqliteQuery: warning: error returned; log = ' . $sqliteErrorLog . '; caller = ' . join(',', caller));
 		AppendFile($sqliteErrorLog, $query);
 		AppendFile($sqliteErrorLog, 'caller: ' . join(',', caller));
 		return '';
