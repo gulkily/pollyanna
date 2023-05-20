@@ -390,7 +390,10 @@ function GetPrefs (prefKey, storeName) { // get prefs value from localstorage
 		//var nameContainer = 'settings';
 		var nameContainer = storeName;
 
-		{ // settings beginning with gtgt go into separate container
+		{
+			// settings beginning with gtgt go into separate container
+			// this is a local record of the user's votes and
+			// is used to avoid attempting to double-vote
 			var gt = unescape('%3E');
 			if (prefKey.substr(0, 2) == gt+gt) {
 				nameContainer = 'voted';
@@ -433,7 +436,7 @@ function GetPrefs (prefKey, storeName) { // get prefs value from localstorage
 			}
 
 			if (prefKey == 'performance_optimization') {
-				// default to 'adjusted' timestamp format
+				// default to 'faster' performance optimization
 				prefValue = 'faster';
 			}
 
