@@ -436,6 +436,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	# fallthrough
 	else {
 		WriteMessage('Warning: did not recognize that page type: ' . $pageType);
+		WriteLog('MakePage: warning: did not recognize that page type: ' . $pageType . '; caller = ' . join(',', caller));
 		WriteMessage('=========================================');
 	}
 
