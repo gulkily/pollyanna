@@ -49,6 +49,10 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	my $pageParam = shift;
 	my $htmlRoot = shift;
 
+	$pageType = trim($pageType);
+	$pageParam = trim($pageParam);
+	$htmlRoot = trim($htmlRoot);
+
 	if ($htmlRoot) {
 		$HTMLDIR = $htmlRoot;
 	}
