@@ -71,7 +71,7 @@ sub MakeDataZips {
 			system("git archive --format zip --output $HTMLDIR/tree.tmp.zip master");
 			rename("$HTMLDIR/tree.tmp.zip", "$HTMLDIR/tree.zip");
 		} else {
-			WriteLog('MakeDataZips: warning: $gitExists was FALSE');
+			WriteLog('MakeDataZips: warning: $gitExists was FALSE; caller = ' . join(',', caller));
 		}
 
 		if ($zipExists) {
@@ -86,7 +86,7 @@ sub MakeDataZips {
 
 			PutCache('touch/zip', GetTime());
 		} else {
-			WriteLog('MakeDataZips: warning: $zipExists was FALSE');
+			WriteLog('MakeDataZips: warning: $zipExists was FALSE; caller = ' . join(',', caller));
 			return '';
 		}
 	} else {
