@@ -1,3 +1,44 @@
+demo transition from localhost:8000 to hypercode.com
+	0) localhost theme matches hypercode.com theme
+		on local server: echo "hypercode chicago" > config/theme
+		on remote server: should already be set to this theme
+	a) user becomes immersed in the demo experience
+		page through all the menu items
+		begin smoke testing with different browsers
+		begin a roll call thread
+		click a few things
+		return to the write page
+	b) with user's explicit opt-in consent,
+		except when the demo smoothness and magic trick requires it not to be?
+		when the write form submits a new item, the form targets hypercode.com
+	b1) this is done with a selector checkbox
+		to be implemented
+	c) the lie is that localhost:8000 is entirely static, which may seem like magic because we ran python -m http.server ;)
+		the other lie is that we redirected the user to a new server which looks like the old server and without their consent
+			make the write page say "you have set your publish node to hypercode.com"
+		the alternative is that the localhost theme does not match the hypercode.com theme,
+			and the viewer becomes aware of the change,
+			although they do not immediately know what it is
+	d) the truth is that localhost:8000 is a proxy to hypercode.com
+	e) the user is given a link to hypercode.com
+	f) the user is given a link to the source code
+	g) the user is given a link to the documentation
+	h) the user is given a link to the demo
+	i) the user is given a link to the demo source code
+	j) the user is given a link to the demo documentation
+
+===
+
+1684526148.99190 MakePage(data, 0)
+1684526148.99190 =======================================================
+1684526148.99190 which: no zip in (/bin:/usr/bin:/mingw64/bin)
+
+===
+
+1684526123.75909 Warning: did not recognize that page type: settings
+
+===
+
 how to make sqlite3 optional
 	reason: ubuntu doesn't come with sqlite3 by default
 	windows gitbash also doesn't come with sqlite3

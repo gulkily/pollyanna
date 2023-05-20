@@ -10,6 +10,7 @@ sh: line 1: git: command not found
 
 i think this is the cause:
 $ENV{PATH}="/bin:/usr/bin"; #this is needed for -T to work
+$ENV{PATH}="/bin:/usr/bin:/mingw64/bin"; #this is needed for -T to work
 in gitbash, git is located in /mingw64/bin/git
 
 ===
@@ -267,3 +268,8 @@ Message Hash is still not consistent across messages with the same text.
 ===
 
 when logged in with cookie but no private key, the welcome page does not reflect this (like on profile page)
+
+===
+
+1684537953.56932 /c/Users/digdu/pollyanna/html//c/Users/digdu/pollyanna/html/index.html
+
