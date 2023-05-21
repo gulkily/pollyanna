@@ -3144,3 +3144,8 @@ i think all item references should add that item as a child.
 
 ===
 need to restart server if php flag changes
+
+===
+
+Archive dialog should be moved to a separate module out of default/template/perl/get_read_page.pl
+
