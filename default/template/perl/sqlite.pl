@@ -1949,6 +1949,13 @@ sub DBAddItemAttribute { # $fileHash, $attribute, $value, $epoch, $source # add 
 		}
 	}
 
+	if ($attribute eq 'title') {
+		if ($value =~ m/[Ð²Ñ]/) {
+			WriteLog('DBAddItemAttribute: warning: problem title detected');
+			$value = 'Untitled';
+		}
+	}
+
 	if (!$epoch) {
 		$epoch = '';
 	}
