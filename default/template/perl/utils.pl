@@ -79,7 +79,7 @@ sub ensure_module { # $path ; ensures module is available under config/
 	chomp $module;
 
 	if (!$module) {
-		WriteLog('ensure_module: warning sanity check failed');
+		WriteLog('ensure_module: warning: module was FALSE, returning; caller = ' . join(',', caller));
 		return 0;
 	}
 
@@ -98,7 +98,7 @@ sub ensure_module { # $path ; ensures module is available under config/
 	}
 
 	if (!-e $localPath) {
-	#	PutFile($localPath, $moduleContent);
+		# PutFile($localPath, $moduleContent);
 	}
 
 	if (!$path || !-e $path) {
@@ -119,6 +119,7 @@ sub require_once { # $path ; use require() unless already done
 	}
 
 	if ($module =~ m/^([a-zA-Z0-9_\/]+\.pl)$/) {
+		# sanity check passed
 		$module = $1;
 	} else {
 		WriteLog('require_once: warning: sanity check failed; $module = ' . $module);
@@ -130,7 +131,7 @@ sub require_once { # $path ; use require() unless already done
 	my $path = GetDir('config') . '/template/perl/' . $module;
 	#todo state?
 
-	ensure_module($module);
+	ensure_module($module); # this ensures module is copied to config
 
 	state %state;
 	if (defined($state{$module})) {
@@ -148,7 +149,7 @@ sub require_once { # $path ; use require() unless already done
 } # require_once()
 
 sub EscapeShellChars { # $string ; escapes string for including as parameter in shell command
-#todo #security this is still probably not safe and should be improved upon #security
+	#todo #security this is still probably not safe and should be improved upon #security
 
 	my $string = shift;
 	chomp $string;
@@ -757,7 +758,7 @@ sub GetRandomHash { # returns a random sha1-looking hash, lowercase
 	return $randomString;
 } # GetRandomHash()
 
-sub GetTemplateFilePath { # $templateName
+sub GetTemplateFilePath { # $templateName, like 'perl/dialog/write.pl'
 # sub GetTemplatePath {
 	#todo
 } # GetTemplateFilePath()

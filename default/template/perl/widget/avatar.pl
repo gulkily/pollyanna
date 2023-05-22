@@ -7,7 +7,8 @@ use utf8;
 
 sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, using avatar.template
 # sub GetAvatarCache {
-	# affected by config/html/avatar_icons
+# affected by config/html/avatar_icons
+
 	WriteLog("GetAvatar(...)");
 	my $aliasHtmlEscaped = '';
 
@@ -36,6 +37,7 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 			# }
 
 			$avatarCachePrefix .= '/' . substr(md5_hex($themesValue), 0, 8);
+			# generate cache prefix using hash of all the enabled themes together
 			# this is still less than ideal because it does not include theme names,
 			# but including theme names could run into many issues, like long directory names, sanity, etc.
 		}
@@ -69,24 +71,25 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 			WriteLog('GetAvatar: found cache, returning: $avatarCache{$authorKey} = ' . $avatarCache{$authorKey});
 			return $avatarCache{$authorKey};
 		}
+		WriteLog('GetAvatar: not found in cache, continuing');
 	} else {
 		WriteLog('GetAvatar: $noCache is true, ignoring cache');
 	}
 
 	my $avatar = GetTemplate($avatarTemplate);
-	#WriteLog('GetAvatar: $avatar = ' . $avatar . '; $avatarTemplate = ' . $avatarTemplate);
 
-	{ # trim whitespace from avatar template
-		#this trims extra whitespace from avatar template
-		#otherwise there may be extra spaces in layout
-		#WriteLog('avdesp before:'.$avatar);
+	{
+		# trim whitespace from avatar template
+		# this trims extra whitespace from avatar template
+		# otherwise there may be extra spaces in layout
+
 		$avatar =~ s/\>\s+/>/g;
 		$avatar =~ s/\s+\</</g;
-		#WriteLog('avdesp after:'.$avatar);
 	}
 
 	my $isVerified = 0;
 	my $redditUsername = '';
+
 	if ($authorKey) {
 		WriteLog('GetAvatar: $authorKey = ' . $authorKey);
 
@@ -112,8 +115,6 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 			$alias = trim($alias);
 		}
 		if (%authorItemAttributes) {
-			#todo code below no longer works, and should be fixed in order to correctly display author's status
-			#todo this doesn't work because it is expecting a big string, while it's getting a hash reference
 			if ($authorItemAttributes{'gpg_id'}) {
 				WriteLog('GetAvatar: found gpg_id!');
 
@@ -122,9 +123,9 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 				if (!GetConfig('admin/html/ascii_only')) {
 					#$alias .= '✔';
 					#$alias .= '&check;';
-					#$alias .= 'V';
 					$alias .= '+';
 				} else {
+					#$alias .= 'V';
 					$alias .= '+';
 				}
 			} # if ($authorItemAttributes{'gpg_id'})
@@ -188,7 +189,7 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 			else {
 				$avatar = '';
 			}
-		}
+		} # GetConfig('html/avatar_icons')
 		else {
 			# no icons
 			$aliasHtmlEscaped = encode_entities2($alias);
@@ -198,10 +199,12 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 				$aliasHtmlEscaped = '<b><i>'.$aliasHtmlEscaped.'</i></b>';
 			}
 		}
-		#$avatar =~ s/\$alias/$aliasHtmlEscaped/g;
-	} else {
+	} # if ($authorKey)
+	else {
 		WriteLog('GetAvatar: warning: sanity check failed, $authorKey is false');
-		$avatar = "";
+		$avatar = '';
+		#option:
+		#$avatar = '(Guest)';
 	}
 
 	$avatar =~ s/\$alias/$aliasHtmlEscaped/g;
@@ -219,6 +222,7 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 	WriteLog('GetAvatar: $colorUsername = ' . $colorUsername);
 	$avatar =~ s/\$colorUsername/$colorUsername/g;
 
+	# save to memo cache
 	$avatarCache{$authorKey} = $avatar;
 
 	if ($avatar) {

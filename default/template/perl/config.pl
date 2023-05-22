@@ -393,6 +393,7 @@ sub PutConfig { # $configName, $configValue ; writes config value to config stor
 sub GetConfigListAsArray { # $listName
 	my $listName = shift;
 	chomp $listName;
+
 	#todo sanity checks
 
 	my @listRaw = split("\n", trim(GetTemplate('list/' . $listName)));

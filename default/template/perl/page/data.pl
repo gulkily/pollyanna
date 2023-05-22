@@ -45,7 +45,7 @@ sub GetDataDialog {
 	);
 
 	return $dialogWithFrame;
-}
+} # GetDataDialog()
 
 sub MakeDataZips {
 	my $zipInterval = 1;
@@ -57,6 +57,11 @@ sub MakeDataZips {
 
 	state $zipExists = !!`which zip`;
 	state $gitExists = !!`which git`;
+
+	# option:
+	# if zip or git not in env, it could cause a problem
+	#state $zipExists = !!`which zip 2>/dev/null`;
+	#state $gitExists = !!`which git 2>/dev/null`;
 
 	if (!$touchZip || (GetTime() - $touchZip) > $zipInterval) {
 		WriteLog('MakeDataZips: Making zip files...');

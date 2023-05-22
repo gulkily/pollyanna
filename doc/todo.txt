@@ -118,8 +118,6 @@ write dialog should tell user when they're logged in with a cookie
 
 should be a "logged in as" dialog
 
-
-
 "computer, please add x feature"
 	similar to hike set
 	is there a config/...x/enable ? set to 1, rebuild frontend
