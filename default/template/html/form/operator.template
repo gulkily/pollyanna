@@ -20,16 +20,6 @@
 	</p>
 	<p>
 		<span class=beginner>
-			Reset templates and rebuild site:<br>
-		</span>
-		<label for=chkRebuild>
-			<input type=checkbox id=chkRebuild name=chkRebuild>
-			Rebuild
-		</label>
-		<input type=submit name=btnRebuild id=btnRebuild value=Rebuild>
-	</p>
-	<p>
-		<span class=beginner>
 			Check for un-indexed files:<br>
 		</span>
 		<label for=chkReindex>
@@ -37,26 +27,6 @@
 			Reindex
 		</label>
 		<input type=submit name=btnReindex id=btnReindex value=Reindex>
-	</p>
-	<p>
-		<span class=beginner>
-			If something you expect does not appear, try this button:<br>
-		</span>
-		<label for=chkUpdate>
-			<input type=checkbox id=chkUpdate name=chkUpdate>
-			Update
-		</label>
-		<input type=submit name=btnUpdate id=btnUpdate value=Update>
-	</p>
-	<p>
-		<span class=beginner>
-			Use Flush to make space for new content:<br>
-		</span>
-		<label for=chkFlush>
-			<input type=checkbox id=chkFlush name=chkFlush>
-			Flush
-		</label>
-		<input type=submit name=btnFlush id=btnFlush value=Flush>
 	</p>
 	<p class=beginner>
 		To activate, check box, then press button.<br>
