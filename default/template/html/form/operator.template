@@ -7,7 +7,16 @@
 
 <fieldset>
 	<legend><b>Operator Controls</b></legend>
-
+	<p>
+		<span class=beginner>
+			Reset:<br>
+		</span>
+		<label for=chkRefreshFrontend>
+			<input type=checkbox id=chkRefreshFrontend name=chkRefreshFrontend>
+			Refresh Frontend
+		</label>
+		<input type=submit name=btnConfigDump id=btnConfigDump value=ConfigExport>
+	</p>
 	<p>
 		<span class=beginner>
 			Save snapshot file with configuration:<br>
