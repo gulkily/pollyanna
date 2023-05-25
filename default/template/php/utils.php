@@ -410,30 +410,29 @@ function DoReindex () {
 	}
 } # DoReindex()
 
-function DoFlush () {
+function DoRefreshFrontend () {
 	$pwd = getcwd();
-	WriteLog('$pwd = ' . $pwd);
+	WriteLog('DoRefreshFrontend: $pwd = ' . $pwd);
 	$scriptDir = GetScriptDir();
-	WriteLog('$scriptDir = ' . $scriptDir);
+	WriteLog('DoRefreshFrontend: $scriptDir = ' . $scriptDir);
 
-	if (file_exists($scriptDir . '/query/flush_no_keep.sh')) {
-		WriteLog('query/flush_no_keep.sh found, calling query/flush_no_keep.sh');
-		WriteLog('cd "' . $scriptDir . '" ; query/flush_no_keep.sh');
-		WriteLog(`cd "$scriptDir" ; query/flush_no_keep.sh`);
-		WriteLog('cd "' . $pwd . '"');
+	if (file_exists($scriptDir . '/index.pl')) {
+		WriteLog('DoRefreshFrontend: index.pl found, calling index.pl');
+		$commandRefreshFrontend = 'cd "' . $scriptDir . '" ; perl -T "' . $scriptDir . '/index.pl" --chain --all';
+		WriteLog('DoRefreshFrontend: $commandRefreshFrontend = ' . $commandRefreshFrontend);
+		$refreshFrontendLog = shell_exec($commandRebuildFrontend);
+		WriteLog('DoRefreshFrontend: $refreshFrontendLog = ' . $refreshFrontendLog);
+		WriteLog('DoRefreshFrontend: cd "' . $pwd . '"');
 		WriteLog(`cd "$pwd"`);
+
+		if (0) { #remake some key pages after a rebuild frontend #todo
+			$commandMakePages = 'cd "' . $scriptDir . '" ; perl -T "' . $scriptDir . '/pages.pl -M settings -M new';
+			$makePagesLog = shell_exec($commandMakePages);
+		}
+
+		return $refreshFrontendLog;
 	}
-// 	if (file_exists($scriptDir . '/archive.pl')) {
-// 		WriteLog('archive.pl found, calling archive.pl');
-// 		WriteLog('cd "' . $scriptDir . '" ; perl ./archive.pl');
-//
-// 		WriteLog(`cd "$scriptDir" ; perl ./archive.pl`);
-//
-// 		WriteLog('cd "' . $pwd . '"');
-//
-// 		WriteLog(`cd "$pwd"`);
-// 	}
-} # DoFlush()
+} # DoReindex()
 
 function FixConfigName ($configName) { # prepend 'setting/' to config paths as appropriate
 	$notSetting = array('query', 'res', 'sqlite3', 'string', 'setting', 'template', 'theme');

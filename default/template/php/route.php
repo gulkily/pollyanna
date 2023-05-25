@@ -668,17 +668,21 @@ if (GetConfig('admin/php/route_enable')) {
 						//							echo "<p>You entered {$_SERVER['PHP_AUTH_PW']} as your password.</p>";
 						//						}
 
-						if (
-							isset($_GET['chkUpdate']) &&
-							isset($_GET['btnUpdate'])
-						) {
-							$updateStartTime = time();
-							DoUpdate();
-							$fileUrlPath = '';
-							$updateFinishTime = time();
-							$updateDuration = $updateFinishTime - $updateStartTime;
 
-							RedirectWithResponse('/stats.html', "Update finished! <small>in $updateDuration"."s</small>");
+						if (
+							isset($_GET['chkRefreshFrontend']) &&
+							isset($_GET['btnRefreshFrontend'])
+						) {
+                            $refreshFrontendStartTime = time();
+                            $refreshFrontendLog = DoRefreshFrontend();
+                            $refreshFrontendFinishTime = time();
+                            $refreshFrontendDuration = $reindexFinishTime - $reindexStartTime;
+
+                            WriteLog('route.php: refreshFrontendLog = ' . $refreshFrontendLog);
+
+                            /* my */ $refreshFrontendLogSaved = ProcessNewComment($refreshFrontendLog, '');
+                            ProcessNewComment("Rebuild Frontend log metadata\n-- \n>>$reindexLogSaved\n#textart\ntitle: Rebuild Frontend finished at $refreshFrontendFinishTime", '');
+                            RedirectWithResponse(GetHtmlFilename($refreshFrontendLogSaved), "Rebuild Frontend finished! <small>in $refreshFrontendDuration"."s</small>");
 						}
 
 						if (

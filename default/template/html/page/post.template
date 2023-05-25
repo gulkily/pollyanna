@@ -19,13 +19,16 @@
 				<p><hr>
 				<span class=advanced>
 					<br>
-					<p>Operator: If you see this message, run <br>
+					<p>Operator: If you see this message, it is because <br>
+					   delayed message processing is in effect. To process the <br>
+					   queues once, run:
 					<code>./hike.sh alog</code>
 					<br>
 					or
 					<br>
-					<br>
 					<code>hike alog</code>
+					<p>For immediate message processing and display, <br>
+					   see file enable_features.sh
 				</span>
 			</td>
 		</tr>
