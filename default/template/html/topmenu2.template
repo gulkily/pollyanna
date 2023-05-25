@@ -12,12 +12,12 @@
 		</td>
 	</tr>
 	<tr bgcolor="$colorTopMenuTitlebar" class=titlebar>
-		<td>
+		<td class=left>
 			<small>
 				<font color="$colorTopMenuTitlebarText"><b>$siteName</b></font>
 			</small>
 		</td>
-		<td align=right>
+		<td align=right class=right>
 			<small>
 				<span id=spanDialogControls></span>
 			</small>
