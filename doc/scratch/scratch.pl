@@ -1,4 +1,20 @@
-#
+
+						if (
+							isset($_GET['chkUpdate']) &&
+							isset($_GET['btnUpdate'])
+						) {
+							$updateStartTime = time();
+							DoUpdate();
+							$fileUrlPath = '';
+							$updateFinishTime = time();
+							$updateDuration = $updateFinishTime - $updateStartTime;
+
+							RedirectWithResponse('/stats.html', "Update finished! <small>in $updateDuration"."s</small>");
+						}
+
+
+
+						#
 #sub GetServerKey { # Returns server's public key, 0 if there is none
 #	state $serversKey;
 #
