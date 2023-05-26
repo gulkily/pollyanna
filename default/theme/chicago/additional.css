@@ -78,4 +78,10 @@ button:hover {
 #spanDialogControls a {
 	color: $colorTopMenuTitlebarText;
 }
+.titlebar .left {
+	/* todo fix the border corners */
+}
+.titlebar .right {
+	/* todo fix the border corners */
+}
 /* / theme/chicago/additional.css */
