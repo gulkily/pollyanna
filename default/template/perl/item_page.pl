@@ -574,6 +574,24 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		} else {
 			# nothing to do
 		}
+
+		# SIMILAR TIMESTAMP LIST
+		my $showSimilarTimestamps = GetConfig('setting/html/item_page/toolbox_similar_timestamp');
+		if ($showSimilarTimestamps) {
+			my $similarTimestampsListing = GetSimilarTimestampsListing($file{'file_hash'});
+			$similarTimestampsListing = '<span class=advanced>' . $similarTimestampsListing . '</span>';
+			if ($similarTimestampsListing) {
+				$txtIndex .= $similarTimestampsListing;
+			} else {
+				if (GetConfig('debug')) {
+					$txtIndex .= GetDialogX('Did not find any items with similar timestamps.', 'Debug Notice');
+				} else {
+					# nothing to do
+				}
+			}
+		} else {
+			# nothing to do
+		}
 	}
 
 	## FINISHED REPLIES
@@ -703,10 +721,70 @@ sub GetReplyListing {
 	return '';
 } # GetReplyListing()
 
+sub GetSimilarTimestampsListing { # $fileHash, [$existingTimestamp] ; returns dialog of items with similar timestamps
+	#todo more sanity checks
+
+	my $fileHash = shift;
+	if (!$fileHash) {
+		WriteLog('GetSimilarTimestampsListing: warning: $fileHash was FALSE');
+		return '';
+	}
+	chomp $fileHash;
+
+	if (IsItem($fileHash)) {
+		# ok
+	} else {
+		# not ok
+		return ''; #todo warning
+	}
+
+	my $existingTimestamp = shift;
+	if (!$existingTimestamp) {
+		$existingTimestamp = SqliteGetValue("SELECT add_timestamp FROM added_time WHERE file_hash = '$fileHash'");
+		#todo warning, encourage to pass it in
+	}
+
+	if ($fileHash) {
+		chomp $fileHash;
+
+		my $query = SqliteGetQueryTemplate('similar_timestamp');
+		$query =~ s/\?/'$fileHash'/;
+		$query =~ s/\?/'$existingTimestamp'/;
+		$query =~ s/\?/'$existingTimestamp'/;
+
+		WriteLog('GetSimilarTimestampsListing: $query = ' . $query);
+
+		my @result = SqliteQueryHashRef($query);
+
+		# this non-working code would remove items from
+		# the related items list if they're already in the
+		# threads list
+		#
+		# my $threadListingReference = shift;
+		# my @itemsInThreadListing = @{$threadListingReference};
+		#
+		# for (my $row = 1; $row < scalar(@result); $row++) {
+		# 	my $rowReference = $result[$row];
+		# 	my %rowHash = %{$rowReference};
+		# 	if (in_array($rowHash{'file_hash'}, @itemsInThreadListing)) {
+		# 		#@result = splice(@result, $row, 1);
+		# 		#$row--;
+		# 	}
+		# }
+
+		if (scalar(@result) > 2) { # first row is column headers; related
+			my $listing = GetResultSetAsDialog(\@result, 'Similar', 'item_title, add_timestamp, file_hash');
+			return $listing;
+		} else {
+			return '';
+		}
+	}
+
+	WriteLog('GetSimilarTimestampsListing: warning: unreachable reached');
+	return '';
+} # GetSimilarTimestampsListing()
+
 sub GetRelatedListing { # $fileHash
-	# keywords: reply replies subitems child parent
-	# REPLIES #replies #reply GetItemPage()
-	######################################
 
 	my $fileHash = shift;
 	if (!$fileHash) {
