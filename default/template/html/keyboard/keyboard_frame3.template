@@ -5,8 +5,8 @@
 </head>
 <!-- keyboard_frame3.template -->
 <frameset border=0 rows="*,190">
-<frame src="write.html" name=main>
-<frame src="keyboard_netscape.html" name=kbd>
+<frame src="write.html" name=main bgcolor="$colorBackground">
+<frame src="keyboard_netscape.html" name=kbd bgcolor="$colorBackground">
 </frameset>
-<noframes><a href="/write.html">write.html</a></noframes>
+<noframes><body><a href="/write.html">write.html</a></body></noframes>
 </html>

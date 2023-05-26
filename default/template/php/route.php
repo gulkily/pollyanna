@@ -445,7 +445,7 @@ if (GetConfig('admin/php/route_enable')) {
 			WriteLog('route.php: $pathFull = ' . $pathFull);
 
 			$hostRequestLimit = GetConfig('setting/admin/php/route_per_host_request_limit'); #my
-			$hostAccessCount = 0; #my
+			/* my */ $hostAccessCount = 0;
 
 			if ($hostRequestLimit) {
 				$hostHash = md5($_SERVER['REMOTE_ADDR']); #my

@@ -241,7 +241,12 @@ sub RemoveHtmlFile { # $file ; removes existing html file
 } # RemoveHtmlFile()
 
 sub GetTargetPath { # $target ; gets the target url for an action
-# for example, GetTargetPath('post') may return /post.html or /post.php or /cgi-bin/post depending on configuration
+# for example, GetTargetPath('post') may return
+# /post.html or
+# /post.php or
+# /cgi-bin/post
+# depending on webserver configuration
+#
 # sub GetUrl {
 # sub GetTargetUrl {
 # sub GetEndpointPath {

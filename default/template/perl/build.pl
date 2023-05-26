@@ -1,6 +1,9 @@
 #!/usr/bin/perl -T
 #freebsd: #!/usr/local/bin/perl -T
 
+#gitbash: $ENV{PATH}="/bin:/usr/bin:/mingw64/bin"; #this is needed for -T to work
+$ENV{PATH} = "/bin:/usr/bin"; # this is needed for -T to work
+
 use strict;
 use warnings;
 use 5.010;
@@ -16,6 +19,12 @@ sub BuildMessage { # prints timestamped message to output
 	print shift;
 	print "\n";
 } # BuildMessage()
+
+# sanity check for utils.pl, copy from default if missing, warn user
+if (!-e './config/template/perl/utils.pl') {
+	BuildMessage "utils.pl missing, copying from default...";
+	system('cp default/template/perl/utils.pl ./config/template/perl/utils.pl');
+}
 
 BuildMessage "Require ./utils.pl...";
 require('./config/template/perl/utils.pl');
