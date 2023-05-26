@@ -1,3 +1,48 @@
+#bug
+browser displays "operation is insecure" error message in debug console
+setting:
+    abrowser (close firefox derivative) 113.0.1
+    set to highest security mode in privacy settings
+todo: add traps for this error message
+workaround:
+    continue using site without javascript features
+    to suppress error message, turn off javascript
+        hike set js/enable 0 # this will turn off javascript rendering on the entire site, for all users
+        turn off javascript support in browser
+            about:config, javascript.enabled
+    switch out of firefox secure mode
+
+===
+
+it is a general problem that js errors are not trapped and communicated to user
+one indicator of when this happens is when the meditate message appears on the screen and does not go away
+
+===
+
+#bug
+setting: fresh trisquel 11 build, lighttpd, abrowser, enable_features.sh was run
+behavior: browser gets stuck in a redirect loop. it is to /settings.html?message=abcd0234
+(the message id keeps changing, so it is continuously redirecting)
+debugging method:
+a) enable php/debug
+b) reload the page
+c) read the message: You pressed the Rebuild Frontend button, but did not check the checkbox. Please try again!
+d) conclude that it is caused by the just-added chkRebuildFrontend handler
+e) find the bug and fix it (in route.php)
+f) run hike refresh
+fixed!
+
+
+how the system could have self-recovered from that problem:
+a) detect the problem with tests
+b) go backwards one commit at a time until the problem goes away
+
+===
+
+first build should display some kind of congratulations message
+
+===
+
 demo transition from localhost:8000 to hypercode.com
 	0) localhost theme matches hypercode.com theme
 		on local server: echo "hypercode chicago" > config/theme
