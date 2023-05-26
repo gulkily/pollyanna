@@ -9,6 +9,8 @@
 
 
 $ENV{PATH}="/bin:/usr/bin"; #this is needed for -T to work
+#gitbash: $ENV{PATH}="/bin:/usr/bin:/mingw64/bin"; #this is needed for -T to work
+# /mingw64/bin is default location for gitbash on windows
 
 #freebsd: $ENV{PATH}="/bin:/usr/bin:/usr/local/bin"; #this is needed for -T to work
 
@@ -114,7 +116,7 @@ sub require_once { # $path ; use require() unless already done
 	chomp $module;
 
 	if (!$module) {
-		WriteLog('require_once: warning sanity check failed');
+		WriteLog('require_once: warning sanity check failed; $module is FALSE; caller = ' . join(',', caller));
 		return 0;
 	}
 
@@ -129,6 +131,9 @@ sub require_once { # $path ; use require() unless already done
 	WriteLog('require_once(' . $module . ')');
 
 	my $path = GetDir('config') . '/template/perl/' . $module;
+
+	#todo my $path = GetTemplateFilePath("perl/$module");
+
 	#todo state?
 
 	ensure_module($module); # this ensures module is copied to config
