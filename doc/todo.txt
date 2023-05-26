@@ -43,10 +43,63 @@ first build should display some kind of congratulations message
 
 ===
 
+require_once is still broken on windows/gitbash
+
+===
+
+priority fix
+upload page and uploading files should only be allowed for approved users
+
+===
+
+person page
+	combines all authors with the same name
+		default: only cross-verified or one-direction verified authors
+			optional button to transmit message to all of them
+	operator's report of new authors, and what their name is
+
+===
+
+in hypercode theme, table cell corners need to join up or it looks weird
+	solution (sigh)
+		a) mark outer table cells as left and right
+			ignore language direction for now, please forgive me, father
+		b) mark inner table cells as inner
+		c) create stylesheet rules for inner, left, and right
+			border-radius
+		???
+
+===
+
+page introduction dialog like on the tags page should get a nice frame for the text inside
+
+===
+
+hike guidb command needs to work on windows too
+	on both windows and linux it should install the viewer if possible and necessary
+
+===
+
+user should see items posted around the same time
+
+===
+
+need a special fix for when config.pl is missing after refresh
+	workaround: hike build
+
+===
+
+fix ensure_module() and require_once()
+	it's halfway to being converted to use themes
+		reason for the conversion is /
+
+===
+
 demo transition from localhost:8000 to hypercode.com
-	0) localhost theme matches hypercode.com theme
+	0) localhost theme differs from hypercode.com theme
 		on local server: echo "hypercode chicago" > config/theme
 		on remote server: should already be set to this theme
+
 	a) user becomes immersed in the demo experience
 		page through all the menu items
 		begin smoke testing with different browsers
