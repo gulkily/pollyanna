@@ -454,6 +454,18 @@ if (GetConfig('admin/php/route_enable')) {
 				PutCache('access_count/' . $hostHash, $hostAccessCount);
 			} # $hostRequestLimit
 
+			if ($path == '/upload.html') {
+				if (GetConfig('admin/php/restrict_upload')) {
+					include_once('cookie.php');
+
+					if (isset($cookie) && $cookie) {
+						#ok
+					} else {
+						$path = '/profile.html';
+					}
+				}
+			}
+
 			if (GetConfig('admin/php/force_profile')) {
 			#if (GetConfig('admin/php/force_profile') || ($hostAccessCount > $hostRequestLimit)) { #todo add feature flag and uncomment
 				$redirectPath = GetConfig('admin/php/force_profile_redirect_path');
