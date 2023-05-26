@@ -7,7 +7,12 @@
 #		exit
 #fi
 
-#todo sanity checks for git and cut
+# sanity checks for git and cut
+# check that git command exists
+# check that cut command exists
+# check that git rev-parse HEAD returns a string
+
+
 #echo =================
 #echo Rejoice always
 #echo Pray without ceasing
