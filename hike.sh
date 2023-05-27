@@ -225,6 +225,7 @@ if [ $1 = help ]
 		echo hike reindex = reindex all data
 		echo hike info = info on item by hash
 		echo hike frontend = refresh frontend
+		echo hike refresh = refresh templates
 		echo hike alog = import access log
 		echo hike help = see more commands
 		echo hike db = open sqlite3 command line
