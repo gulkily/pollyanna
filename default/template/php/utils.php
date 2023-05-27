@@ -416,8 +416,8 @@ function DoRefreshFrontend () {
 	$scriptDir = GetScriptDir();
 	WriteLog('DoRefreshFrontend: $scriptDir = ' . $scriptDir);
 
-	if (file_exists($scriptDir . '/index.pl')) {
-		WriteLog('DoRefreshFrontend: index.pl found, calling index.pl');
+	if (file_exists($scriptDir . '/hike.sh')) {
+		WriteLog('DoRefreshFrontend: hike.sh found, calling sh hike.sh frontend');
 		$commandRefreshFrontend = 'cd "' . $scriptDir . '" ; sh hike.sh frontend';
 		WriteLog('DoRefreshFrontend: $commandRefreshFrontend = ' . $commandRefreshFrontend);
 		$refreshFrontendLog = shell_exec($commandRebuildFrontend);
@@ -426,7 +426,7 @@ function DoRefreshFrontend () {
 		WriteLog(`cd "$pwd"`);
 
 		return $refreshFrontendLog;
-	}
+	} # if (file_exists($scriptDir . '/hike.sh'))
 } # DoRefreshFrontend()
 
 function FixConfigName ($configName) { # prepend 'setting/' to config paths as appropriate
