@@ -209,6 +209,7 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 
 	$avatar =~ s/\$alias/$aliasHtmlEscaped/g;
 
+    my $colorUsername = '';
 	if (IsAdmin($authorKey)) {
 		$colorUsername = GetThemeColor('admin_text');
 		WriteLog('GetAvatar: $colorUsername reason is admin');
@@ -218,7 +219,7 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 		WriteLog('GetAvatar: $colorUsername reason is verified');
 	}
 	else {
-		my $colorUsername = GetThemeColor('author_text');
+		$colorUsername = GetThemeColor('author_text');
 		WriteLog('GetAvatar: $colorUsername reason is basic');
 	}
 	WriteLog('GetAvatar: $colorUsername = ' . $colorUsername);
