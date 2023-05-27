@@ -289,11 +289,11 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 	state $debugOn;
 	#todo state $debugOn = -e 'config/debug'; #todo this path should not be hardcoded?
 	my $timestamp = '';
-	
+
 	#todo if ($debugOn) {
 	if ($debugOn || -e 'config/debug') {
 		$timestamp = GetTime(); # set timestamp
-		
+
 		# adjust timestamp formatating to always have the same number
 		# of digits after the decimal point, if included
 		if ($timestamp =~ m/^[0-9]+\.[0-9]{1}$/) {
@@ -333,7 +333,7 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 		}
 		if ($firstWord ne 'WriteMessage') {
 			# add one character to the snow
-			
+
 			my $firstWordHash = md5_hex($firstWord);
 			my $firstWordHashFirstChar = substr($firstWordHash, 0, 1);
 			$firstWordHashFirstChar =~ tr/0123456789abcdef/.;]\-,<">'+[:`_|+/; #brainfuckXL
@@ -354,7 +354,7 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 			$charPrefix = $firstWordHashFirstChar;
 		} # if ($firstWord ne 'WriteMessage')
 	} # if ($debugOn)
-	
+
 	if ($debugOn) {
 		if ($charPrefix eq '') {
 			$charPrefix = '$';
