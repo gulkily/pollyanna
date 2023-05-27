@@ -418,21 +418,16 @@ function DoRefreshFrontend () {
 
 	if (file_exists($scriptDir . '/index.pl')) {
 		WriteLog('DoRefreshFrontend: index.pl found, calling index.pl');
-		$commandRefreshFrontend = 'cd "' . $scriptDir . '" ; perl -T "' . $scriptDir . '/index.pl" --chain --all';
+		$commandRefreshFrontend = 'cd "' . $scriptDir . '" ; sh hike.sh frontend';
 		WriteLog('DoRefreshFrontend: $commandRefreshFrontend = ' . $commandRefreshFrontend);
 		$refreshFrontendLog = shell_exec($commandRebuildFrontend);
 		WriteLog('DoRefreshFrontend: $refreshFrontendLog = ' . $refreshFrontendLog);
 		WriteLog('DoRefreshFrontend: cd "' . $pwd . '"');
 		WriteLog(`cd "$pwd"`);
 
-		if (0) { #remake some key pages after a rebuild frontend #todo
-			$commandMakePages = 'cd "' . $scriptDir . '" ; perl -T "' . $scriptDir . '/pages.pl -M settings -M new';
-			$makePagesLog = shell_exec($commandMakePages);
-		}
-
 		return $refreshFrontendLog;
 	}
-} # DoReindex()
+} # DoRefreshFrontend()
 
 function FixConfigName ($configName) { # prepend 'setting/' to config paths as appropriate
 	$notSetting = array('query', 'res', 'sqlite3', 'string', 'setting', 'template', 'theme');

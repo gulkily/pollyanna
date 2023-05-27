@@ -9,13 +9,13 @@
 	<legend><b>Operator Controls</b></legend>
 	<p>
 		<span class=beginner>
-			Reset:<br>
+			Refresh website frontend:<br>
 		</span>
 		<label for=chkRefreshFrontend>
 			<input type=checkbox id=chkRefreshFrontend name=chkRefreshFrontend>
-			Refresh Frontend
+			Refresh
 		</label>
-		<input type=submit name=btnConfigDump id=btnConfigDump value=ConfigExport>
+		<input type=submit name=btnRefreshFrontend id=btnRefreshFrontend value=Refresh>
 	</p>
 	<p>
 		<span class=beginner>
