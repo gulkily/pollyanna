@@ -377,7 +377,15 @@ function GetPrefs (prefKey, storeName) { // get prefs value from localstorage
 // function GetSetting () {
 
 	if (!storeName) {
-		storeName = 'settings';
+        // settings beginning with gtgt go into separate container
+        // this is a local record of the user's votes and
+        // is used to avoid attempting to double-vote
+        var gt = unescape('%3E');
+        if (prefKey.substr(0, 2) == gt+gt) {
+            storeName = 'voted';
+        } else {
+    		storeName = 'settings';
+        }
 	}
 
 	if (!prefKey) {
@@ -387,19 +395,7 @@ function GetPrefs (prefKey, storeName) { // get prefs value from localstorage
 
 	//alert('DEBUG: GetPrefs(' + prefKey + ')');
 	if (window.localStorage) {
-		//var nameContainer = 'settings';
-		var nameContainer = storeName;
-
-		{
-			// settings beginning with gtgt go into separate container
-			// this is a local record of the user's votes and
-			// is used to avoid attempting to double-vote
-			var gt = unescape('%3E');
-			if (prefKey.substr(0, 2) == gt+gt) {
-				nameContainer = 'voted';
-			}
-		}
-		var currentPrefs = localStorage.getItem(nameContainer);
+		var currentPrefs = localStorage.getItem(storeName);
 
 		var prefsObj;
 		if (currentPrefs) {
@@ -470,8 +466,15 @@ function SetPrefs (prefKey, prefValue, storeName) { // set prefs key prefKey to 
 	}
 
 	if (!storeName) {
-		storeName = 'settings';
+		var gt = unescape('%3E'); // #todo this should be elsewhere
+		if (prefKey.substr(0, 2) == gt+gt) {
+			storeName = 'voted';
+		} else {
+		    storeName = 'settings';
+        }
 	}
+
+	//alert('DEBUG: SetPrefs(' + prefKey + ', ' + prefValue + ', ' + storeName + ')');
 
 	if (prefKey == 'show_advanced' || prefKey == 'beginner' || prefKey == 'show_admin') { // SetPrefs()
 		//alert('DEBUG: SetPrefs: setting cookie to match LocalStorage');
@@ -496,15 +499,7 @@ function SetPrefs (prefKey, prefValue, storeName) { // set prefs key prefKey to 
 	}
 
 	if (window.localStorage) {
-		//var nameContainer = 'settings';
-		var nameContainer = storeName;
-
-		var gt = unescape('%3E'); // #todo this should be elsewhere
-		if (prefKey.substr(0, 2) == gt+gt) {
-			nameContainer = 'voted';
-		}
-
-		var currentPrefs = localStorage.getItem(nameContainer);
+		var currentPrefs = localStorage.getItem(storeName);
 		var prefsObj;
 		if (currentPrefs) {
 			prefsObj = JSON.parse(currentPrefs);
@@ -514,7 +509,7 @@ function SetPrefs (prefKey, prefValue, storeName) { // set prefs key prefKey to 
 		prefsObj[prefKey] = prefValue;
 
 		var newPrefsString = JSON.stringify(prefsObj);
-		localStorage.setItem(nameContainer, newPrefsString);
+		localStorage.setItem(storeName, newPrefsString);
 
 		if (prefKey != 'prefs_timestamp') {
 			// remember time preferences were last changed
