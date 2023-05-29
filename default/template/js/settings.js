@@ -458,7 +458,7 @@ function SetPrefs (prefKey, prefValue, storeName) { // set prefs key prefKey to 
 // show_admin
 
 // some preferences update their global variables:
-// performance_optimization ==> window.performanceOptimization
+// performance_optimization updates window.performanceOptimization
 
 	if (!prefKey || !prefKey.substr) {
 		//alert('DEBUG: GetPrefs: warning: missing prefKey');
