@@ -77,6 +77,14 @@ sub GetHtmlToolboxes {
 		;
 
 		$htmlToolbox .=
+			'<a href="https://www.bing.com/search?q=' .
+			$urlParam .
+			'">' .
+			'Bing' .
+			'</a><br>' . "\n"
+		;
+
+		$htmlToolbox .=
 			'<a href="https://search.brave.com/search?q=' .
 			$urlParam .
 			'">' .
