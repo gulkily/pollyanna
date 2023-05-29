@@ -1651,7 +1651,7 @@ function GetItemHtmlLink ($hash, $linkCaption, $hashAnchor) { # $hash, [link cap
 				'onclick',
 				"
 					if (
-						(!window.GetPrefs || GetPrefs('draggable_spawn')) &&
+						(!(window.GetPrefs) || GetPrefs('draggable_spawn')) &&
 						(window.FetchDialogFromUrl) &&
 						document.getElementById
 					) {

@@ -1902,7 +1902,7 @@ function SetInterfaceMode (ab) { // updates several settings to change to "ui mo
 
                 ShowAdvanced(1);
 
-        //alert('DEBUG: window.SetPrefs was found, and ShowAdvanced(1) was called');
+        //alert('DEBUG: window.SetPrefs() was found, and ShowAdvanced(1) was called');
 
                 return false;
         }

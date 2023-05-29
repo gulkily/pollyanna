@@ -3191,7 +3191,7 @@ if (GetConfig('setting/html/menu_advanced')) {
 # 		'onclick',
 # 		"
 # 			if (
-# 				(!window.GetPrefs || GetPrefs('draggable_spawn')) &&
+# 				(!(window.GetPrefs) || GetPrefs('draggable_spawn')) &&
 # 				(window.FetchDialogFromUrl) &&
 # 				document.getElementById
 # 			) {

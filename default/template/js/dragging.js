@@ -268,10 +268,13 @@ function SetActiveDialogDelay (ths) {
 } // SetActiveDialogDelay()
 
 function SetActiveDialog (ths) {
-// ActivateDialog {
-// FocusMe ShowMe ActivateMe {
+// function ActivateDialog () {
+// function FocusMe () {
+// function ShowMe () {
+// function ActivateMe () {
+// function ShowDialog () {
 
-	if (!window.GetPrefs || !GetPrefs('draggable') || !GetPrefs('draggable_activate')) {
+	if (!(window.GetPrefs) || !GetPrefs('draggable') || !GetPrefs('draggable_activate')) {
 		// #todo optimize
 		return '';
 	}
@@ -293,7 +296,7 @@ function SetActiveDialog (ths) {
 
 	//alert('DEBUG: SetActiveDialog(ths = ' + ths + ')');
 		// #thoughts should this be dependent on GetPrefs?
-		// or should it unintentionally come on if GetPrefs is not available?
+		// or should it unintentionally come on if GetPrefs() is not available?
 
 	if (ths) {
 		ths.style.zIndex = ++window.draggingZ;
@@ -589,7 +592,7 @@ function DraggingMakeFit (doPosition) { // initialize all class=dialog elements 
 		return '';
 	}
 
-	//if (window.GetPrefs && !GetPrefs('draggable')) {
+	//if ((window.GetPrefs) && !GetPrefs('draggable')) {
 	//	//alert('DEBUG: DraggingInit: warning: GetPrefs(draggable) was false, returning');
 	//	return '';
 	//}
@@ -641,7 +644,7 @@ function DraggingInit (doPosition) { // initialize all class=dialog elements on 
 		return '';
 	}
 
-	//if (window.GetPrefs && !GetPrefs('draggable')) {
+	//if ((window.GetPrefs) && !GetPrefs('draggable')) {
 	//	//alert('DEBUG: DraggingInit: warning: GetPrefs(draggable) was false, returning');
 	//	return '';
 	//}
@@ -1065,7 +1068,7 @@ function InsertFetchedDialog () {
 		if (window.LoadCheckboxValues) {
 			LoadCheckboxValues();
 		}
-		if (window.DraggingInit && window.GetPrefs && GetPrefs('draggable')) {
+		if ((window.DraggingInit) && (window.GetPrefs) && GetPrefs('draggable')) {
 			//DraggingInit(0);
 			DraggingInitDialog(newDialog[0], 1); // InsertFetchedDialog()
 			//document.title = 'asdf';
@@ -1149,7 +1152,7 @@ function InsertFetchedDialog () {
 
 function FetchDialog (dialogName) {
 // function InjectDialog () { // FetchDialog
-	if (window.GetPrefs && !GetPrefs('draggable_spawn')) {
+	if ((window.GetPrefs) && !GetPrefs('draggable_spawn')) {
 		//alert('DEBUG: FetchDialog: warning: draggable_spawn is FALSE');
 		return true; // #todo..
 	}
@@ -1217,7 +1220,7 @@ function FetchDialogFromUrl (url) {
 // function InjectDialog () {
 // function FetchDialogFromUrl () {
 // function SpawnDialog () {
-	if (window.GetPrefs && !window.GetPrefs('draggable_spawn')) {
+	if ((window.GetPrefs) && !window.GetPrefs('draggable_spawn')) {
 		// #should be one layer above #todo
 		// not cool
 		//alert('DEBUG: warning: FetchDialogFromUrl() called, but draggable_spawn is FALSE');

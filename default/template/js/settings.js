@@ -373,8 +373,8 @@ function ShowAdvanced (force, container) { // show or hide controls based on pre
 } // ShowAdvanced()
 
 function GetPrefs (prefKey, storeName) { // get prefs value from localstorage
-	// function GetConfig {
-	// function  GetSetting {
+// function GetConfig () {
+// function GetSetting () {
 
 	if (!storeName) {
 		storeName = 'settings';
@@ -451,7 +451,18 @@ function GetPrefs (prefKey, storeName) { // get prefs value from localstorage
 } // GetPrefs()
 
 function SetPrefs (prefKey, prefValue, storeName) { // set prefs key prefKey to value prefValue
-	//alert('DEBUG: SetPrefs(' + prefKey + ', ' + prefValue + ')');
+// storeName defaults to 'settings'
+// special case: if prefKey begins with gt+gt, it is 'voted'
+
+// the preferences are stored as json in LocalStorage
+
+// some preferences are also copied into cookies:
+// show_advanced
+// beginner
+// show_admin
+
+// some preferences update their global variables:
+// performance_optimization ==> window.performanceOptimization
 
 	if (!prefKey || !prefKey.substr) {
 		//alert('DEBUG: GetPrefs: warning: missing prefKey');
@@ -658,7 +669,7 @@ function SetInterfaceMode (ab, thisButton) { // updates several settings to chan
 		ShowAdvanced(1, 0);
 		LoadCheckboxValues();
 
-		//alert('DEBUG: window.SetPrefs was found, and ShowAdvanced(1) was called');
+		//alert('DEBUG: window.SetPrefs() was found, and ShowAdvanced(1) was called');
 
 		return false;
 	}

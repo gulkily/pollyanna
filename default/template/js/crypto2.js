@@ -262,7 +262,7 @@ function AddPrivateKey (keyArmored) {
 	//var openpgp = window.openpgp;
 	//var privKeyObj = openpgp.key.readArmored(newKey);
 
-	if (window.SetPrefs && window.GetPrefs) {
+	if ((window.SetPrefs) && (window.GetPrefs)) {
 		var iPrivKey = 0;
 		while (GetPrefs('pk' + iPrivKey, 'PrivateKey1')) {
 			if (GetPrefs('pk' + iPrivKey, 'PrivateKey1') == keyArmored) {

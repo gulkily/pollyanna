@@ -58,7 +58,7 @@ sub GetTagLink { # $tag ; returns html for a tag link
 				$tagLink,
 				'a ',
 				'onclick',
-				"if (window.GetPrefs && GetPrefs('draggable_spawn') && window.FetchDialog) { return FetchDialog('$dialogName'); }"
+				"if ((window.GetPrefs) && GetPrefs('draggable_spawn') && window.FetchDialog) { return FetchDialog('$dialogName'); }"
 			);
 		}
 

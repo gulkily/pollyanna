@@ -107,7 +107,7 @@ function OnLoadEverything () { // checks for each onLoad function and calls it
 			window.location.hash.indexOf('reply') != -1 ||
 			(
 				window.location.href.indexOf('message') != -1 &&
-				window.GetPrefs &&
+				(window.GetPrefs) &&
 				GetPrefs('focus_reply')
 			)
 				&&
@@ -195,7 +195,7 @@ function EventLoop () { // for calling things which need to happen on a regular 
 	}
 	window.eventLoopBegin = eventLoopBegin;
 
-	if (window.GetPrefs && GetPrefs('draggable') && window.innerWidth && window.innerHeight) {
+	if ((window.GetPrefs) && GetPrefs('draggable') && window.innerWidth && window.innerHeight) {
 		// if viewport size has changed, retile dialogs
 		if (!window.rememberInnerWidth) {
 			window.rememberInnerWidth = window.innerWidth;
@@ -317,7 +317,7 @@ function EventLoop () { // for calling things which need to happen on a regular 
 				//window.eventLoopFresh = eventLoopBegin;
 				if (
 					window.eventLoopFresh &&
-					(!window.GetPrefs || GetPrefs('notify_on_change'))
+					(!(window.GetPrefs) || GetPrefs('notify_on_change'))
 				) {
 					// notify_on_change client-side setting needs to be on
 					CheckIfFresh();
@@ -453,7 +453,7 @@ function displayNotification (strMessage, thisButton) { // adds notification to 
 	spanNotification.innerHTML = strMessage;
 	spanNotification.style.zIndex = GetFineTime();
 
-	if (window.GetPrefs && GetPrefs('draggable')) {
+	if ((window.GetPrefs) && GetPrefs('draggable')) {
 		thisButton = 0;
 		// #todo this is a workaround for floating notification being messed up in draggable mode
 	}
@@ -648,7 +648,7 @@ function PingUrl (url, ele) { // loads arbitrary url via image or xhr
 			xmlhttp = window.xmlhttp;
 		}
 
-		if (window.GetPrefs && GetPrefs('show_admin')) {
+		if ((window.GetPrefs) && GetPrefs('show_admin')) {
 			// skip callback to save resources
 		} else {
 			xmlhttp.onreadystatechange = window.PingUrlCallback;

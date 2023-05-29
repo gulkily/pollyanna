@@ -77,7 +77,7 @@ sub GetItemHtmlLink { # $hash, [link caption], [#anchor] ; returns <a href=...
 				'onclick',
 				"
 					if (
-						(!window.GetPrefs || GetPrefs('draggable_spawn')) &&
+						(!(window.GetPrefs) || GetPrefs('draggable_spawn')) &&
 						(window.FetchDialogFromUrl) &&
 						document.getElementById
 					) {
