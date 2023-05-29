@@ -109,8 +109,10 @@ function SignVote (t, token) { // signs a vote from referenced vote button
 		t.nextSibling.getAttribute('class') == 'notification'
 	) {
 		// removes a notification if it is immediately afer this button
-		t.nextSibling.remove();
-		// #todo there is a bug here, somehow remove() isn't there
+		if (t.nextSibling.remove) {
+    		// #todo there is a bug here, somehow remove() isn't always there
+		    t.nextSibling.remove();
+		}
 	}
 
 	if (window.xmlhttp) {
