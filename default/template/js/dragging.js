@@ -119,7 +119,7 @@ function SaveDialogPosition (elmnt) {
 } // SaveDialogPosition()
 
 function AddToDialogHistory (dialog) {
-	// #todo sanity
+	// #todo sanity checks
 	var dialogHistory = GetPrefs('dialog_history');
 	if (!dialogHistory) {
 		dialogHistory = dialog + '\n';
