@@ -86,8 +86,8 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 			my %dialogParam;
 			$dialogParam{'id'} = 'page_intro';
 			$html .= GetDialogX3($dialogContents, $pageQuery, \%dialogParam);
-		}
-	}
+		} # if ($pageDescription)
+	} # if (GetConfig('setting/html/page_intro') && $pageQuery =~ m/[^\s]+/)
 
 	my $paginationLinks = GetPaginationLinks($pageQuery, $pageNumber, $totalItemCount, $perPage);
 
