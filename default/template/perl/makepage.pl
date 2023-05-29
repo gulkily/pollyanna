@@ -26,7 +26,8 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 # sub GetTagsPage {
 # sub GetPage {
 # sub MakeProfilePage {
-			# supported page types so far:
+
+# supported page types so far:
 # tag, #hashtag
 # author, ABCDEF01234567890
 # item, 0123456789abcdef0123456789abcdef01234567
