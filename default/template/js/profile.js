@@ -583,7 +583,7 @@ function selectKeyPopulate () {
 		if (1 < document.formSelectKey.selectKey.length) {
 			// already populated
 		} else { // #todo put this in event loop?
-			if (window.SetPrefs && window.GetPrefs) {
+			if ((window.SetPrefs) && (window.GetPrefs)) {
 				var iPrivKey = 0;
 				while (GetPrefs('pk' + iPrivKey, 'PrivateKey1')) {
 					//if (GetPrefs('pk' + iPrivKey, 'PrivateKey1') == keyArmored) {

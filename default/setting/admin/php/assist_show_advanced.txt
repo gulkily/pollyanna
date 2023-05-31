@@ -1,5 +1,9 @@
 Summary: This reduces page jitter (moving around) after page load.
 
+This feature depends on a cookie that is synchronized with LocalStorage
+    This cookie can be set either by JS when LS is changed
+        or from the server side, by route.php
+
 The downside is that when user changes settings, page must be reloaded.
 This should be fixed in the future. #todo
 

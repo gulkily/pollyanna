@@ -123,7 +123,7 @@ function ShowTimestamps () { // finds any class=timestamp, updates its displayed
 
 	var restAfter = 100; // stop after this many changes to avoid slowing things down
 	if (
-		window.GetPrefs &&
+		(window.GetPrefs) &&
 		(GetPrefs('performance_optimization') == 'faster')
 	) {
 		restAfter = 30;

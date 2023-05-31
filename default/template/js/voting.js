@@ -95,6 +95,11 @@ function SignVote (t, token) { // signs a vote from referenced vote button
 // t = reference to calling button's 'this'
 // token = full voting token, in the format (gt)(gt)fileHash\n#tag
 // where (gt) is a greater-than sign, omitted here
+
+// function SendVote () {
+// function StoreVote () {
+// function SaveVote () {
+
 	//alert('DEBUG: SignVote(' + t + ',' + token +')');
 
 	if (
@@ -104,8 +109,10 @@ function SignVote (t, token) { // signs a vote from referenced vote button
 		t.nextSibling.getAttribute('class') == 'notification'
 	) {
 		// removes a notification if it is immediately afer this button
-		t.nextSibling.remove();
-		// #todo there is a bug here, somehow remove() isn't there
+		if (t.nextSibling.remove) {
+    		// #todo there is a bug here, somehow remove() isn't always there
+		    t.nextSibling.remove();
+		}
 	}
 
 	if (window.xmlhttp) {
@@ -113,8 +120,10 @@ function SignVote (t, token) { // signs a vote from referenced vote button
 		//unless user is operator
 
 		if (GetPrefs('show_admin')) {
-			// continue
+			// user has assumed operator role, continue without check
 		} else {
+		    // user has not assumed operator role,
+		    // show notification and cancel vote
 			if (window.displayNotificationWithTimeout) {
 				displayNotificationWithTimeout('Too fast', t);
 			}
@@ -136,6 +145,7 @@ function SignVote (t, token) { // signs a vote from referenced vote button
 			if (window.displayNotificationWithTimeout) {
 				window.duplicateVoteTries ? window.duplicateVoteTries++ : window.duplicateVoteTries = 1;
 				if (3 <= window.duplicateVoteTries) {
+				    // display alternative message if user has tried to duplicate-vote 3 or more times
 					displayNotificationWithTimeout('Hey!', t);
 				} else {
 					displayNotificationWithTimeout('Already voted', t);

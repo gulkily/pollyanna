@@ -104,7 +104,7 @@ function UpdateOnscreenKeyboard () {
 
 	{
 		//#todo should be somewhere else
-		if (window.GetPrefs && GetPrefs('translit_state') != window.translitKeyState) {
+		if ((window.GetPrefs) && GetPrefs('translit_state') != window.translitKeyState) {
 			if (window.SetPrefs) {
 				SetPrefs('translit_state', window.translitKeyState);
 			}
@@ -421,7 +421,7 @@ function translitKey(e, t) { // replaces pressed qwerty key with russian or cyri
 //    var sel = getInputSelection(el), val = el.value;
 //    el.value = val.slice(0, sel.start) + text + val.slice(sel.end);
 //}
-if (window.GetPrefs && GetPrefs('remember_translit_state') && GetPrefs('translit_state')) {
+if ((window.GetPrefs) && GetPrefs('remember_translit_state') && GetPrefs('translit_state')) {
 	// #todo review this
 	window.translitKeyState = GetPrefs('translit_state');
 }

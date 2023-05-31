@@ -43,7 +43,8 @@ function ChatInject (chatState) {
 			var itemHash = itemThings[0];
 			var itemTime = itemThings[1];
 
-			var itemUrl = '/dialog/' + itemHash.substr(0,2) + '/' + itemHash.substr(2, 2) + '/' + itemHash.substr(0, 8) + '.html'; // #todo GetHtmlFilename()
+			var itemUrl = '/dialog/' + itemHash.substr(0,2) + '/' + itemHash.substr(2, 2) + '/' + itemHash.substr(0, 8) + '.html';
+			// #todo make a GetHtmlFilename() function in js
 			var dialogId = itemHash.substr(0, 8);
 
 			if (!document.getElementById(dialogId)) {

@@ -26,7 +26,7 @@ function WriteOnload () { // onload handler for write page
 		}
 
 		if (window.GetPrefs) {
-			//alert('DEBUG: window.GetPrefs = TRUE');
+			//alert('DEBUG: (window.GetPrefs) = TRUE');
 			if (GetPrefs('write_enhance')) {
 				//alert('DEBUG: write_enhance = TRUE');
 				var comment = document.getElementById('comment');
@@ -43,7 +43,7 @@ function WriteOnload () { // onload handler for write page
 				//alert('DEBUG: write_enhance = FALSE');
 			}
 		} else {
-			//alert('DEBUG: window.GetPrefs = FALSE');
+			//alert('DEBUG: (window.GetPrefs) = FALSE');
 		}
 		var pubKey = '';
 		if (window.getPublicKey) {
@@ -97,7 +97,7 @@ function WriteOnload () { // onload handler for write page
 					chkSignAs.setAttribute('id', 'chkSignAs');
 					chkSignAs.setAttribute('type', 'checkbox');
 
-					if (!window.GetPrefs || GetPrefs('sign_by_default')) {
+					if (!(window.GetPrefs) || GetPrefs('sign_by_default')) {
 						chkSignAs.setAttribute('checked', 1);
 					}
 
@@ -256,7 +256,7 @@ function DoAutoSave() {
 		//alert('DEBUG: DoAutoSave: document.getElementById is true');
 
 		if (window.GetPrefs) {
-			//alert('DEBUG: DoAutoSave: window.GetPrefs = TRUE');
+			//alert('DEBUG: DoAutoSave: (window.GetPrefs) = TRUE');
 
 			if (GetPrefs('write_autosave')) { // #todo this can't be right
 				//alert('DEBUG: DoAutoSave: write_autosave = TRUE');
@@ -274,7 +274,7 @@ function DoAutoSave() {
 				//alert('DEBUG: write_autosave = FALSE');
 			}
 		} else {
-			//alert('DEBUG: window.GetPrefs = FALSE');
+			//alert('DEBUG: (window.GetPrefs) = FALSE');
 		}
 	}
 

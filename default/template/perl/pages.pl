@@ -105,7 +105,7 @@ sub RenderLink {
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
 		if ($url =~ m/\/tag\//) {
-			$link = AddAttributeToTag($link, 'a ', 'onclick', "if (window.GetPrefs && GetPrefs('draggable_spawn') && window.FetchDialogFromUrl) { return FetchDialogFromUrl('/dialog" . $url . "'); }");
+			$link = AddAttributeToTag($link, 'a ', 'onclick', "if ((window.GetPrefs) && GetPrefs('draggable_spawn') && window.FetchDialogFromUrl) { return FetchDialogFromUrl('/dialog" . $url . "'); }");
 			#bughere #todo this is where needs fix for duplicate hashtag listing dialogs #duplicatedialogs
 			#todo this may not be the right place for this at all
 		}
@@ -340,7 +340,7 @@ sub GetTagPageHeaderLinks { # $tagSelected ; returns html-formatted links to exi
 						$voteItemTemplate,
 						'a ',
 						'onclick',
-						"if (window.GetPrefs && GetPrefs('draggable_spawn') && window.FetchDialogFromUrl) { return FetchDialogFromUrl('/dialog" . $voteItemLink . "'); }"
+						"if ((window.GetPrefs) && GetPrefs('draggable_spawn') && window.FetchDialogFromUrl) { return FetchDialogFromUrl('/dialog" . $voteItemLink . "'); }"
 					);
 				}
 

@@ -82,11 +82,12 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 		my $pageDescription = GetStringNoFallback('page_intro/' . $pageQuery);
 		if ($pageDescription) {
 			$pageDescription = str_replace("\n", "<br>\n", $pageDescription);
+			my $dialogContents = '<fieldset>' . $pageDescription . '</fieldset>';
 			my %dialogParam;
 			$dialogParam{'id'} = 'page_intro';
-			$html .= GetDialogX3($pageDescription, $pageQuery, \%dialogParam);
-		}
-	}
+			$html .= GetDialogX3($dialogContents, $pageQuery, \%dialogParam);
+		} # if ($pageDescription)
+	} # if (GetConfig('setting/html/page_intro') && $pageQuery =~ m/[^\s]+/)
 
 	my $paginationLinks = GetPaginationLinks($pageQuery, $pageNumber, $totalItemCount, $perPage);
 

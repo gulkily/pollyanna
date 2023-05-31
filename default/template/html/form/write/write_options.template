@@ -4,7 +4,6 @@
 	<p>
 		<a href=/upload.html>Upload</a><br>
 		Image, Photo, or File
-		<!-- technically, not a js feature, and may also be disabled on server... #todo -->
 	</p>
 
 	<p>
