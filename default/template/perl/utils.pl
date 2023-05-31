@@ -760,6 +760,7 @@ sub GetRandomHash { # returns a random sha1-looking hash, lowercase
 	foreach (1..40) {
 		$randomString .= $chars[rand @chars];
 	}
+	WriteLog('GetRandomHash: returning $randomString = ' . $randomString . '; caller = ' . join(',', caller));
 	return $randomString;
 } # GetRandomHash()
 
