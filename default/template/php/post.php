@@ -247,7 +247,7 @@ if (isset($boxesCount) && $boxesCount && !$comment) {
 			$returnMessage .= GetDialogX(
 				"<p>Return to this page <br>via bookmarks, history, <br>or the Back button.</p>" ,
 				'Tips'
-			)
+			);
 
 			print($returnMessage);
 			return '';
