@@ -618,21 +618,21 @@ textarea:focus {
 //var loadingIndicatorWaitToShowMin = 1500;
 //var loadingIndicatorWaitToHideMin = 500;
 
-function addLoadingIndicator (strMessage) { // adds loading indicator bar (to top of page, depending on style)
-        //alert('DEBUG: addLoadingIndicator(' + strMessage + ')');
+function AddLoadingIndicator (strMessage) { // adds loading indicator bar (to top of page, depending on style)
+        //alert('DEBUG: AddLoadingIndicator(' + strMessage + ')');
         if (strMessage == undefined || !strMessage) {
                 //alert('DEBUG: strMessage = ' + strMessage);
                 strMessage = 'Meditate...';
         }
-        //alert('DEBUG: addLoadingIndicator: strMessage = ' + strMessage);
+        //alert('DEBUG: AddLoadingIndicator: strMessage = ' + strMessage);
 
         if (!document.createElement) {
-                //alert('DEBUG: addLoadingIndicator: warning: no document.createElement');
+                //alert('DEBUG: AddLoadingIndicator: warning: no document.createElement');
                 return '';
                 // #todo improve compatibility here
         }
 
-        //alert('DEBUG: addLoadingIndicator: sanity checks passed!');
+        //alert('DEBUG: AddLoadingIndicator: sanity checks passed!');
         var spanLoadingIndicator = document.createElement('span');
         spanLoadingIndicator.setAttribute('id', 'loadingIndicator');
         spanLoadingIndicator.innerHTML = strMessage;
@@ -641,7 +641,7 @@ function addLoadingIndicator (strMessage) { // adds loading indicator bar (to to
 
         return '';
 
-} // addLoadingIndicator()
+} // AddLoadingIndicator()
 
 if (document.createElement) {
         //alert('DEBUG: loading_begin.js: createElement feature check PASSED!');
@@ -650,7 +650,7 @@ if (document.createElement) {
         var gt = unescape('%3E');
 
         //var loadingIndicatorloadCounter = 0;
-        addLoadingIndicator('Meditate...');
+        AddLoadingIndicatork('Meditate...');
 } else {
         //alert('DEBUG: loading_begin.js: createElement feature check FAILED!');
 }
