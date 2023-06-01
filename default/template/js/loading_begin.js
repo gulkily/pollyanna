@@ -3,28 +3,28 @@
 //var loadingIndicatorWaitToShowMin = 1500;
 //var loadingIndicatorWaitToHideMin = 500;
 
-function addLoadingIndicator (strMessage) { // adds loading indicator bar (to top of page, depending on style)
+function AddLoadingIndicator (strMessage) { // adds loading indicator bar (to top of page, depending on style)
 // function ShowLoadingIndicator ()
-	//alert('DEBUG: addLoadingIndicator(' + strMessage + ')');
+	//alert('DEBUG: AddLoadingIndicator(' + strMessage + ')');
 	if (!strMessage) {
 		//alert('DEBUG: strMessage = ' + strMessage);
 		strMessage = 'Meditate...';
 	}
-	//alert('DEBUG: addLoadingIndicator: strMessage = ' + strMessage);
+	//alert('DEBUG: AddLoadingIndicator: strMessage = ' + strMessage);
 
 	if (!document.createElement) {
-		//alert('DEBUG: addLoadingIndicator: warning: no document.createElement');
+		//alert('DEBUG: AddLoadingIndicator: warning: no document.createElement');
 		return '';
 		// #todo improve compatibility here
 	}
 
 	if (window.loadingIndicator) {
-	    //alert('DEBUG: addLoadingIndicator: warning: loading indicator already exists');
+	    //alert('DEBUG: AddLoadingIndicator: warning: loading indicator already exists');
 	    return '';
 	}
 	window.loadingIndicator = 1;
 
-	//alert('DEBUG: addLoadingIndicator: sanity checks passed!');
+	//alert('DEBUG: AddLoadingIndicator: sanity checks passed!');
 	var spanLoadingIndicator = document.createElement('span');
 	if (spanLoadingIndicator) {
 		spanLoadingIndicator.setAttribute('id', 'loadingIndicator');
@@ -36,17 +36,20 @@ function addLoadingIndicator (strMessage) { // adds loading indicator bar (to to
 
 	return '';
 
-} // addLoadingIndicator()
+} // AddLoadingIndicator()
 
 function GetMeditateMessage() {
 	var message = 'Meditate...';
 	//return 'Meditate...';
 
 	return message;
-}
+} // GetMeditateMessage()
 
 function ShowPreNavigateNotification () { // displays 'Meditate...' message
-	// OnUnload ()
+// function OnUnload () {
+// function NavigateAway () {
+// function OnNavigateAway () {
+
 	//alert('DEBUG: ShowPreNavigateNotification() begin');
 
 	if (window.blockPreNavigateNotification) {
@@ -89,7 +92,7 @@ if (document.createElement) {
 	var d = new Date();
 	var loadingIndicatorStart = d.getTime() * 1;
 
-	addLoadingIndicator('Meditate...');
+	AddLoadingIndicator('Meditate...');
 } else {
 	//alert('DEBUG: loading_begin.js: createElement feature check FAILED!');
 }

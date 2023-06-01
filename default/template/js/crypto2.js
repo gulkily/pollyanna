@@ -168,8 +168,8 @@ function MakeKey (t, callback = '') { //makes key using default settings
 
 					//alert('DEBUG: MakeKey: about to share public key');
 
-					//if (window.addLoadingIndicator) {
-					//	addLoadingIndicator('Creating profile...');
+					//if (window.AddLoadingIndicator) {
+					//	AddLoadingIndicator('Creating profile...');
 					//}
 					//PubKeyPing();
 

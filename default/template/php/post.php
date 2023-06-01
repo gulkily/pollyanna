@@ -238,7 +238,11 @@ if (isset($boxesCount) && $boxesCount && !$comment) {
 			#todo page does not look right, especially with dark theme
 			header('HTTP/1.1 401 Unauthorized');
 			$returnMessage = GetDialogX(
-				"<p>Please forgive me, friend, <br>but you must <a href=/profile.html>register</a> first, <br>before you do that</p>",
+				"<p>Please forgive me, friend, <br>but you must <a href=/profile.html>register</a> first, <br>before you do that</p>" .
+				"<p>Tip: Bookmark this page to resend later.</p>" .
+				"<p>Tip: Back to this page to resend later.</p>" .
+				"<p>Tip: You can also find this page in your history and resend that way.</p>",
+				#todo this page should also auto-reload
 				'No Cookie Haiku'
 			);
 			#todo there should be a body and stuff here
