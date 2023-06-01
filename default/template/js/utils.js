@@ -41,11 +41,11 @@ function OnLoadEverything () { // checks for each onLoad function and calls it
 // typically called from body.onload
 	//alert('DEBUG: OnLoadEverything() begins');
 
-	if ((window.addLoadingIndicator) && (!window.loadingIndicator)) {
-		//alert('DEBUG: OnLoadEverything: addLoadingIndicator()');
-		addLoadingIndicator('Meditate...');
+	if ((window.AddLoadingIndicator) && (!window.loadingIndicator)) {
+		//alert('DEBUG: OnLoadEverything: AddLoadingIndicator()');
+		AddLoadingIndicator('Meditate...');
 	} else {
-		//alert('DEBUG: OnLoadEverything: (window.addLoadingIndicator) is FALSE');
+		//alert('DEBUG: OnLoadEverything: (window.AddLoadingIndicator) is FALSE');
 	}
 
 	if (window.setClock) {
