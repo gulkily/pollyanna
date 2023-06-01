@@ -8,6 +8,8 @@ SELECT
 	file_hash
 FROM
 	author_flat
+WHERE
+	last_seen >= strftime('%s', 'now', '-3 day')
 ORDER BY
 	last_seen DESC
 
