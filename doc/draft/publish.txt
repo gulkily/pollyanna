@@ -1,0 +1,20 @@
+Publishing AN ENTIRE PROFILE is done as follows:
+
+1) go to Profile page
+
+2) if "Reprint" button is visible, press it, wait for page to reprint (this will update the archive file)
+
+3) click on the archive link to download the archive
+	if there is no zip file on the page, use "hike set zip/enable 1" and "hike set zip/author 1"
+	hike set zip/author 1
+	hike set zip/enable 1
+	you need to reprint the author's page again after running these commands.
+
+4) go to target instance's upload page*
+
+5) ATTENTION: before uploading the zip file, review its contents. upload the zip file
+
+* depending on the context, you may want to review the contents for PII, actual content you want to publish, etc.
+
+* if upload feature is not available, contact admin for alternative
+
