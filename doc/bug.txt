@@ -27,12 +27,10 @@ this is caused by GetMyVersion() trying to run git:
 1684323298: Require ./utils.pl...
 Can't exec "git": No such file or directory at ./config/template/perl/utils.pl line 626.
 
-
 ===
 
 #bug in ie4, the mouse cursor blinks every time the clock is updated
    or maybe something else is causing it, but either way, not great...
-
 
 ===
 
@@ -40,15 +38,12 @@ Can't exec "git": No such file or directory at ./config/template/perl/utils.pl l
    or maybe something else is causing it, but either way, not great...
 addtext=Meditate...
 
-
-
 ===
 
 #bug in ie4, the mouse cursor blinks every time the clock is updated
    or maybe something else is causing it, but either way, not great...
 -- 
 Authorization: admin
-
 
 ===
 
@@ -58,11 +53,7 @@ on the plus side, unicode seems to be supported, at least for cyrillic!
 
 very nice
 
-#meta #bug #testing
--- 
-Authorization: admin
-Cookie: 35BF609DF8BFF1E0
-
+#testing
 
 ===
 
@@ -72,86 +63,34 @@ on the plus side, unicode seems to be supported, at least for cyrillic!
 
 very nice
 
-#meta #bug #testing
+#testing
 addtext=Meditate...
-
-
 
 ===
 
 #bug when accessibility mode is enabled and then disabled, old pages are still in the previous mode sometimes
 #canwefixit #yeswecan #probablyinmostbrowsers
 
+===
 
-
-manual oage is now our of date #meta #bug
-
+manual page is now our of date 
 
 ===
 
-#meta #bug
-
-sorry about that, netscape.
-
-
-
->>67e488486efc1830df7ebec4a12a4a63f6c10833
-timestamp=1601841263
-
--- 
-Host: localhost:2784
-
+netscape keyboard is broken on nn 2.01 with js enabled
 
 ===
 
-#meta #bug
-
-sorry about that, netscape.
-
-
-
->>67e488486efc1830df7ebec4a12a4a63f6c10833
--- 
-Cookie: 1B326915D959F366
-Host: localhost:2784
-
+on opera 4.0 (js enabled) the reply links don't do anything
 
 ===
 
-#meta #bug netscape keyboard is broken on nn 2.01 with js enabled
-
-
-
-===
-
-#meta #bug
-
->>5253d140799bc8f215257caba831d7fa44bc0747
--- 
-Cookie: 4EA1957B064467C3
-Host: 10.0.2.2:2784
-
-
-===
-
-#meta #bug on opera 4.0 (js enabled) the reply links don't do anything
--- 
-Cookie: E1D82AC8B0951B6D
-Host: 10.0.2.2:2784
-
-
-===
-
-#meta #bug on opera 4.0 (js enabled) the reply links don't do anything
+on opera 4.0 (js enabled) the reply links don't do anything
 addtext=Meditate...
 
--- 
-Host: 10.0.2.2:2784
-
-
 ===
 
-#meta #bug strange behavior after git init: 
+strange behavior after git init: 
 
 `"--"--"+-++""+-+"++-++DBD::SQLite::db prepare failed: no such table: item_attribute at ./sqlite.pl line 1950.
 Can't call method "execute" on an undefined value at ./sqlite.pl line 1951.
@@ -169,20 +108,13 @@ Use '--' to separate paths from revisions, like this:
 
 1606626458 update.pl: Calling ProcessAllAccessLogsInConfig...
 
-
-
 ===
 
-#meta #bug
-
 child admin's avatar does not turn red.
-
 
 ===
 
 cookie auth doesn't work without php, but still pretends to work
-
-
 
 ===
 
@@ -190,12 +122,9 @@ cookie auth doesn't work without php, but still pretends to work
 
 perhaps it makes sense to not make it go away and just leave it there, unless it is clicked?
 
-#brainstorm
-
-#meta
 ===
-after partial rebuild, hike frontend does not work
 
+after partial rebuild, hike frontend does not work
 
 ===
 
@@ -272,4 +201,26 @@ when logged in with cookie but no private key, the welcome page does not reflect
 ===
 
 1684537953.56932 /c/Users/digdu/pollyanna/html//c/Users/digdu/pollyanna/html/index.html
+
+===
+
+after logging in, "please create profile to continue" message appears one more time on the desktop page
+	unable to reproduce 27-may-23
+
+===
+
+when printing, some dialogs do not show up
+	cannot reproduce 27-may-23
+
+===
+
+a Chrome device had a weird issue where I logged out,
+	but when I clicked the Member button, I was logged back into the same account... very strange.
+	I think there should be an additional "logged out" flag stored that takes precedence over any accidentally stored session and does extra to ensure the session information is wiped.
+
+===
+
+keyboard switcher shortcut overrides cmd+r on mac
+
+===
 

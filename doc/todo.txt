@@ -1,3 +1,10 @@
+problem: in offline mode or without connection,
+	firefox and other browsers cannot save a page
+	proposal: add a "save" button which has in-page encoded downloadable file?
+		encode it in the html?
+
+===
+
 #bug
 browser displays "operation is insecure" error message in debug console
 setting:
@@ -31,11 +38,9 @@ d) conclude that it is caused by the just-added chkRebuildFrontend handler
 e) find the bug and fix it (in route.php)
 f) run hike refresh
 fixed!
-
-
-how the system could have self-recovered from that problem:
-a) detect the problem with tests
-b) go backwards one commit at a time until the problem goes away
+	how the system could have self-recovered from that problem:
+	a) detect the problem with tests
+	b) go backwards one commit at a time until the problem goes away
 
 ===
 
@@ -141,20 +146,26 @@ how to make sqlite3 optional
 	reason: ubuntu doesn't come with sqlite3 by default
 	windows gitbash also doesn't come with sqlite3
 
+===
+
 how to make git optional
 	reason: ubuntu doesn't come with git by default
 	windows gitbash also doesn't come with git
 
 
+===
+
 fix lib_heal.pl on windows (gitbash)
 
-demo
-	
+===
 
+demo
 #reindex tag
 	triggers item reindex
 	like 'hike reindex' but only for that item (and perhaps dependent items)
 	can be used when e.g. 'hike set <token> 1' has been run to enable that token
+
+===
 
 implement per-page-type css and js
 	add feature flag css_auto_add_template_by_page_type (ok)
@@ -175,15 +186,23 @@ implement per-page-type css and js
 		to config/template/css/page/pagetype.js in post.php
 		in post.php, add argument to return to page
 
+===
+
 topics page
 	topics are different from threads
 
+===
+
 there's a bug in include_notext_in_thread_list=0
+
+===
 
 GetItemLink()
 GetAuthorLink()
 etc should all use RenderLink()
 then we can patch in cachebusting easily
+
+===
 
 #brainstorm
 some settings should have a "fuzzy" or "best known" setting
@@ -191,36 +210,57 @@ for example:
 return_to (which page is returned to)
 	if only hashtags are applied, return to parent, but if it is a comment, show new item page
 
+===
 
 #brainstorm should it offer different annoyance levels?
 	or automatically select 1, 2, 3 on repeated clicks?
 
+===
+
 combined inboxes by validated username/alias
 
+===
+
 link from people card to profiles
+
+===
 
 1) post item which assigns  #keep tag to everything to keep
 	this list is taken from existing items with #keep tag
 2) remove un#keep things (excluding pubkeys and admin things) and the above new item
 3)
 
+===
+
 hike addmenu token/command
 
+===
+
 need a hike edit command for multiline files
+
+===
 
 bad reference to template --> empty dialog -- developer confusion problem
 	I had a bad parameter to GetTemplate() and it was hard to figure out the cause
 		it should really return a debug dialog, especially if config/debug is on
 
+===
+
 write dialog should tell user when they're logged in with a cookie
+
+===
 
 should be a "logged in as" dialog
 
-"computer, please add x feature"
+===
+
+"operator, please add x feature"
 	similar to hike set
+		location: operator_please.pl
 	is there a config/...x/enable ? set to 1, rebuild frontend
 	is there a config/.../x ? set to 1, rebuild frontend
 
+===
 
 it would be very nice if going from changed setting to updated frontend was all automatic
 	there is no watch process on config right now
@@ -231,55 +271,86 @@ it would be very nice if going from changed setting to updated frontend was all 
 		we can also generate the html as the user asks
 			but that's later
 
+===
+
 hypercode theme tables with rounded corners should have table border=0 in the html
+
+===
 
 #bug if chain.log is missing (such as after hike archive)
 1680385761.98751 ``"""++++++++>+++++++++`++>++++++____grep: /Users/mac/thankyou/html/chain.log: No such file or directory
 `tail: /Users/mac/thankyou/html/chain.log: No such file or directory
 
+===
+
 #hastitle tag should only apply if title was actually applied to item
 	assumed titles e.g. from first line should not result in #hastitle
+
+===
 
 GetWriteForm() should include <form> tag x
 	add GetWriteDialog() x
 	perhaps <form> should be added by GetWriteDialog,
 		otherwise it may result in weirdness for some browsers which assume <form> is a block element
 
+===
+
 cgi-bin
 	basics
-		post
+		postx
 		update pagex
-		redirect
+		redirectx
 			how to redirect?
 	languages proof of concept
 		perlx
 		shx
 		pythonx
 
+===
+
 lighttpd and python3_server should not be enabled at the same time
 	otherwise it may cause a problem in GetTargetPath()
 		add warning in GetTargetPath() x
 
+===
+
 debug output should verify caller matches first word of log
 	this is already practically done in WriteLog()
 
+===
+
 #bug when hike frontend removes essential perl files, build should run, but does not
+
+===
 
 event loop on profile page should check for stale "go to profile" link
 
+===
+
 how to hand-verify a puzzle?
 	seems to be some kind of issue, probably involving \n
+
+===
 
 fix titles... how to?
 	problem: non-ascii titles are gibberished
 	they are returned ok by sqlite
 		but when being read in via backtick call to sqlite, they're corrupted
 
+===
+
 $itemLongThreshold
 	should be about display dimensions, not file length
 	so lines and width both should be constrained
 
+===
+
 for recognized clients, http_auth should be bypassed
+	location: probably route.php
+	look at how cookie works, it should be similar
+	clients can be looked up in item_attribute table
+
+===
 
 CACHING CACHING CACHING CACHING CACHING CACHING
 	main pages which rarely update should have different timeouts
@@ -300,6 +371,7 @@ CACHING CACHING CACHING CACHING CACHING CACHING
 	Add quick way to transition cache to new version without clean-build
 		Or possibly fallback to old cache if new cache is missing
 
+===
 
 dev mode with instant updates after code is changed
 	keep track of changes
@@ -1776,6 +1848,9 @@ when only mouse click and no scrollbar, no way to move down page
 
 light mode
 	checkboxes for each option
+		see #lightmode
+		in debug mode, comments and whitespace should not be stripped
+			even though js will be on page?
 	when light mode page is opened
 		light mode is enabled, but not saved
 		"enable light mode" button
@@ -1785,6 +1860,7 @@ light mode
 		replace links with buttons
 	strip js+css+htmlcomments
 
+===
 
 if light mode default
 	welcome page
@@ -1799,26 +1875,36 @@ top menu should be refreshed based on settings
 		e.g. profile, settings
 	add links to tags which have >x items
 
+
+===
+
 index page should trim long items regardless of #toolong
+
+===
 
 top of item should also link to item, not just bottom
 
+===
+
 how to colapse an item
 
-
+===
 
 on profile page
 	put "logged in state" value on page load into page
 		then check if value is same as value determined by js
 			if different, take some action (change shown state, and/or reload page?)
 
+===
+
 "singleton" tags like #motd
+
+===
 
 tables should regrow if they are missing
 	currently ./build.sh is required after ./clean
 
-
-
+===
 
 /my_bookmarks.php
 	returns all my votes based on cookie
@@ -1826,51 +1912,74 @@ tables should regrow if they are missing
 		or?
 	allows pulling from another site
 
+===
+
 xIf Item is being deleted, all its actions should be undone
 	xMost db entries should already have a source item field
 
+===
 
 #bug when clicking reply link on listings page and it goes to item's page, reply textbox does not become focused
 
+===
 
 in netscape 3, light mode sometimes turns off without asking
+
+===
 
 move/copy update buton to operator dialog
 	move/copy backend piece from post.php to route.php
 
+===
+
 xde-emoji for accessibility mode x
+
+===
 
 #mean hashtag
 	[x] hide mean people
 
+===
+
 #BUG #security image filenames are not shell-escaped before update.pl (?) is called
 	reproduce: try an image with an ` in the name
+
+===
 
 wherever file counts are done with find
 	cache it so that not recounting every time
 
+===
 
 allow aliasing of ??
 
-
+===
 
 #bigtodo: remove dependencies on external pm modules
 
+===
 
 netscape 4: suggested files for image upload are *.html #bug
+
+===
 
 Testing Results July 17 2020
 ============================
 ie6 "sign as undefined" on reply form
 konq too
 
+===
+
 w3m reports redirect loop when logging in
+
+===
 
 list of voted items is not cleared when logging out
 	bug or not
 		should this list be re-downlaoded on login
 		and somehow updated?
 
+===
 
 something to validate chain.log
 	validate hashes
@@ -1878,13 +1987,19 @@ something to validate chain.log
 	see if items still exist
 		what to do about missing items?
 
+===
+
 handle 414 errors (request too long)
 	happens when write.html is used without js
 		and long text is submitted
 			lighttpd has longer limits than apache, it seems
 				at least the apache dreamhost uses
 
+===
+
 feature: export current config
+
+===
 
 upgrade.pl
 ==========
@@ -1894,6 +2009,7 @@ upgrade.pl
 	3. compare new schema to previous schema
 	4. if exact match, rename index.sqlite3 
 
+===
 
 styles to add
 =============
@@ -1902,12 +2018,12 @@ styles to add
 	reddit
 	lobster
 	
-
-
+===
 
 "my name is" should follow similar rules as title: in terms of timestamp priority
 	perhaps there should be a combined item_attribute table?
 
+===
 
 #BUG footers are lost when rebuilding
 	Problem: organize_file overwrites existing file which has footer-signature with one which does not
@@ -1915,18 +2031,28 @@ styles to add
 	Problem: organize_files is implemented 3 times in 3 differnet places
 	Solution: Switch everything to OrganizeFies()
 
+===
 
 fix config/admin/accept_404_url_text
 
+===
+
 add heic files support to image upload
+
+===
 
 multiple image selection and upload
 
+===
+
 paste image from clipboard
 
+===
 
 when changing versions
 	see which configs are changing from being the default to not being the default anymore
+
+===
 
 Priorities
 ===============================
@@ -1935,25 +2061,42 @@ allows building and updating without pre-building all the html
 fast page updates with perl (fix targeting in index.pl and update.pl)
 #bug long comments no longer sent via post!
 
+===
+
 Need a timer to reset submit buttons from "Meditate" back to initial state
 	When user navigates Back to page they submitted from
 
+===
+
 Image exif strip
+
+===
 
 Create .nfo for image
 
+===
+
 auto urls from title
+
+===
 
 #bug two message= after submitting post
 
+===
+
 move some config/default settings to system/ tree
 
+===
+
 /admin ==> /tag/admin.html (if exists)
+
+===
 
 hide/disable with note unavailable features
 	e.g. gui registration with js=0 and php=0
 	light mode without php
 
+===
 
 make clean.sh safer
 	maybe change to clean.pl for easier writing
@@ -1961,11 +2104,17 @@ make clean.sh safer
 	then, double-check that they're in proper directory
 	then, delete each one
 
+===
+
 #moderator
+
+===
 
 "paste a lot of text" form
 	method=post
 	"warning: this method is less reliable, but allows more text"
+
+===
 
 profile page
 	without js
@@ -1975,84 +2124,132 @@ profile page
 	without js or php
 		should show message that profiles are only available using pgp
 
+===
+
 new comments since last visit
 	store in localstorage: page key, last visit
 	highlight new comments
 
-
+===
 
 When displaying thread, OP's top-replies should be sorted first
 
+===
+
 make #config token not sensitive to whitespace differences
+
+===
 
 detect client-side advanced mode
 	flip class=beginner nodes to hidden by default during page pre-process
 		eliminate page jump
 
+===
+
 import rss
+
+===
 
 #bug
 list of tags has issues in light mode
 
+===
+
 make setting to prefer post over get when possible
 	this will help avoid tripping up dreamhost's mod_security when sharing pubkey
 
+===
+
 address possibility of mismatch between cookie and localstorage
+
+===
 
 custom 401 page
 
+===
+
 when replying to public key, replyto should be author's fingerprint, not item's hash
 
+===
 
 Profile page
 	if js
 		somehow check if logged-in state has changed
 			because when returning to cached page, old values preserved
-	
+
+===
 
 Provide cookieless sessions via url prefix
 	example.com/abcdefghi/tag/agree.html
 
+===
+
 .nfo support for non-txt files, which cannot have ""\n-- \n" footer-signature
+
+===
 
 Include relevant library repos in lib/
 	Include only necessary files
 	But also the .git/config file
 	And also import script from lib/ to template/
 
+===
+
 Stream of vouched items
+
+===
 
 Parametrized item output
 	Sorting / Filtering
 	RSS
 
+===
+
 SQL Query Log
+
+===
 
 GetButtonTemplate?
 
+===
 
 Allow tags:
 <i></i>
 <b></b>
 
+===
+
 Installer
 	For techies
 	For regulars
+		should come with a setup device
+
+===
 
 Tag permissions system
 	partially done, can work with #approve and #admin
+
+===
 
 Setup modes (collection of config presets)
 	Forum, public
 	Forum, private
 	Weblog
 
+===
+
 Register from any page without leaving page
+
+===
 
 If you are looking for the $_FILES['error'] code explanations, be sure to read:
 
+===
+
 Handling File Uploads - Error Messages Explained
 http://www.php.net/manual/en/features.file-upload.errors.php
+
+===
 
 25 sparticvs at popebp dot com ¶7 years ago
 	A note of security: Don't ever trust $_FILES["image"]["type"].
@@ -2061,9 +2258,11 @@ http://www.php.net/manual/en/features.file-upload.errors.php
 	It will parse the MAGIC in the file and return it's type...this can be trusted
 	(you can also use the "file" program on Unix, but I would refrain from ever making a System call with your PHP code...that's just asking for problems).
 
-
+===
 
 #bug loading indicator doesn't go away on pages without openpgp.js
+
+===
 
 Reply form
 ==========
@@ -2071,15 +2270,19 @@ Reply form
 	refactor for writeSubmit() to be called with form reference
 	add write.js to page conditional on replies enabled
 
+===
+
 janitor role
 ============
 
+===
+
 content packs
 =============
-	questions (russian)
-	gay in russia book
+	questions (multiple languages)
 	little prince
-		
+
+===
 
 facebook login
 ==============
@@ -2096,10 +2299,19 @@ facebook login
 twilio integration
 ==================
 
+===
+
 "fingerprint me" token
+
+===
 
 For an item page with a reply box
 	Move the voting/response hash tag buttons to the reply form
+		Or to a separate page/dialog
+			Should be a "dialogs" dialog
+				This feature already exists for open dialogs, but not for common ones (for the item)
+					Currently this is accomplished only with beginner/advanced layers
+===
 
 During overthrow, automatically re-vouch previous admin
 	I think continuity is expected by most
@@ -3102,25 +3314,17 @@ message is included when signing proof of work puzzle from welcome page
 
 #todo needs to be more indication of how the score is composed
 
+===
+
+#todo
+	/image.html should be reprinted after new image is uploaded
+		location: IndexImageFile()
 
 ===
 
-#bug /image.html is not reprinted after new image is uploaded
-
-
-===
-
-#bug
-
-profile.html does not redirect after logging in
-
-url retains original parameters like btnRegister=...
-
-===
-
-#bug
-
-keyboard switcher shortcut overrides cmd+r on mac
+profile.html should redirect to referring page logging in
+	url retains original parameters like btnRegister=...
+		this doesn't always happen
 
 ===
 
@@ -3136,99 +3340,52 @@ Logged in user should know they are logged in on any page
 
 workaround: look at url
 
+===
+
+list clients associated with cookie and author on profile page?
 
 ===
 
-#todo need to list clients on profile page?
-
-
-===
-
-#bug
-
-Message Hash is still not consistent across messages with the same text.
+Message Hash should be consistent across messages with the same text.
 
 ===
 
-#todo threads dialog should collapse other threads not under current one by default?
-
-so it is less busy
-
-===
-
-#bug
-
-when logged in with cookie but no private key, the welcome page does not reflect this (like on profile page)
-
+threads dialog should collapse other threads not under current one by default?
+	so it is less busy
+	suggested by user study participant
 
 ===
 
-#todo
-
-this is test
-
+when logged in with cookie but no private key, the welcome page should reflect this
+	(like on profile page)
 
 ===
 
-#bug
-
-this Chrome device had a weird issue where I logged out, but when I clicked the Member button, I was logged back into the same account... very strange.
-
-I think there should be an additional "logged out" flag stored that takes precedence over any accidentally stored session and does extra to ensure the session information is wiped.
+route.php should be able to individually generate pages like browser test and manual should be
+	currently it's all done with one call to GetSystemPages(), which is kind of slow
 
 ===
 
-#bug
-
-Some pages are very slow to load initially, especially links from the Help page, such as Manual and Browser Test
-
-===
-
-#bug
-
-when printing, some dialogs do not show up
-
-===
-
-#bug images counter on stats page does not account for images which do not appear in regular view
-
-===
-
-#todo enable logging of anonymized client id?
+enable logging of anonymized client id?
+	this is already done with client: header and client_id attribute
 
 ===
 
 #todo page titles have issues
-
-some page titles are lowercase
-
-item pages are titled with the item's hash instead of item's title
-
-===
-
-#todo
-
-when user logs in, their welcome page changes, and this triggers a notification
-
-probably should not happen on the welcome page, as it is confusing and doesn't help the user, who is welcome for their proof-of-work puzzle to complete
+	some page titles are lowercase
+	item pages are titled with the item's hash instead of item's title
+	non-ascii titles are mistranslated
 
 ===
 
-#todo turn on cookie header
+when user logs in, their welcome page changes, and this triggers a "page updated" notification
+	probably should not happen on the welcome page,
+		as it is confusing and doesn't help the user,
+		who is waiting for their proof-of-work puzzle to complete
 
 ===
 
-#todo geographical address book
-
-===
-
-#bug the puzzle button is actually missing
-
-===
-
-#bug
-
-after logging in, "please create profile to continue" message appears one more time on the desktop page
+geographical address book
 
 ===
 
@@ -3244,4 +3401,5 @@ need to restart server if php flag changes
 ===
 
 Archive dialog should be moved to a separate module out of default/template/perl/get_read_page.pl
-
+	This is complicated by needing to check the file count,
+		which I guess can be passed in, as it's only true/false
