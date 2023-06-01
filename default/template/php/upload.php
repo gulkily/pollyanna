@@ -186,6 +186,8 @@ if (!empty($_FILES['uploaded_file'])) {
 							$redirectToAuthor = '/author/' . $matches[1] . '/index.html';
 							RedirectWithResponse($redirectToAuthor, 'Profile imported successfully');
 						} else {
+							#todo ensure this is safe and add a feature flag:
+							# MakePage('image');
 							RedirectWithResponse($fileUrlPath, 'Success! Thank you for uploading this beautiful picture!');
 						}
 					} else {
