@@ -43,10 +43,13 @@ function GetMeditateMessage() {
 	//return 'Meditate...';
 
 	return message;
-}
+} // GetMeditateMessage()
 
 function ShowPreNavigateNotification () { // displays 'Meditate...' message
-	// OnUnload ()
+// function OnUnload () {
+// function NavigateAway () {
+// function OnNavigateAway () {
+
 	//alert('DEBUG: ShowPreNavigateNotification() begin');
 
 	if (window.blockPreNavigateNotification) {
