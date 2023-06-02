@@ -1,3 +1,12 @@
+for each client_id, cookie_id, gpg_id:
+	find items which have that attribute
+		find matching items which have the same file_hash
+			create table of pairs
+				build consolidated profile page
+					which includes all
+
+===
+
 latent trust
 	when you rely on the age of the hashes to form a relatively good ability
 	to trust the content without being able to verify the entire chain all
