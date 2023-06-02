@@ -34,6 +34,11 @@ When rebuilding site, user-submitted config settings are re-applied one by one a
 	Partially remediated by loading items containing "#config" ahead of everything else except pubkeys
 	A real fix for this would be to import items in chain order
 
+PHP-supplied http response headers cause Mosaic to crash
+	Static html pages work ok
+	Pages routed through PHP cause crash
+	Check headers for differences
+	The issue is semicolon in Content-Type: value
 Content returned via PHP shim (route.php) has different headers
 	gzip is not used, so filesize is bigger
 

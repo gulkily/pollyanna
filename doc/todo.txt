@@ -1,3 +1,9 @@
+when navigating away from upload page or write page
+	the submit button's caption should be reset
+		from "Meditate..." back to "Send" or "Upload"
+
+===
+
 problem: in offline mode or without connection,
 	firefox and other browsers cannot save a page
 	proposal: add a "save" button which has in-page encoded downloadable file?
@@ -2316,15 +2322,25 @@ For an item page with a reply box
 During overthrow, automatically re-vouch previous admin
 	I think continuity is expected by most
 
+===
+
 Make it so that all 500 bajillion index pages aren't rewritten at once
 	especially every time there's an update
 		when 'index' goes through, increase priority of each page by 1*(page_no/total_pages)
 
+===
+
 move all html templates under template/html
 
-in php, if debug is enabled, save WRitelo() when passig server messagewriteindexpage
+===
+
+in php, if debug is enabled, save WriteLog() when passing server message WriteIndexPage
+
+===
 
 Give update.pl a parameter which looks up in page_item and only does those
+
+===
 
 Automatic filtering of problematic items
 	.txt with binary in it ;
@@ -2332,46 +2348,59 @@ Automatic filtering of problematic items
 	many hashtags
 		perhaps use `file`
 
+===
 
 Replace #pubkey items with author page
 	No need to have 2 pages for each pubkey
 
+===
 
 #bug title mismatch between untitled item ('untitled') and page title (hash)
 
-If user signs in without OpenPGP, is signed in via cookies only
-	There is a problem with the Profile page not displaying correctly
+===
 
 admin/organize_files should not be in IndexTextFile... somewhere else, not there
+
+===
 
 separate out rewrite stuff
 	xmove rewrite config to separate webserver config file elements
 	rewrite .html links to .php if rewrite is off
+		xpost.html to post.php
+		what else?
 
-#bug links in server messages don't go to their link but just close the server message
-
+===
 
 place to enter private key into textbox
 	just like show private key link
 	but also with a button
 	it used to be that way, so id_create or id_current may have the code
 
-
-#bug reply counts are not reported when comments are listed as replies
+===
 
 deleted items page
+	add explanation:
 	X items are deleted. Here are their IDs and comments on them
 
-#known some html templates include onclick, onchange, etc. events, which still there when config/admin/js/enable is 0
+===
 
-#bug in translit: letters on -=[]\ keys don't listen to caps lock
+some html templates
+	like controls
+		onclick, onchange, etc. events should be separated out
+			so that they are not printed when config/admin/js/enable is 0
 
-assigning someone a tagset allows them to assign all the tags in the tagset
+===
+
+assigning someone a tagset should allow them to assign all the tags in the tagset
+
+===
 
 local save
 	autosave to localstorage
 	autosave to cookie
 	save draft button
+
+===
 
 mosaic doesn't understand relative redirects
 	location: header must include full url
@@ -2381,12 +2410,17 @@ mosaic doesn't understand relative redirects
 		:port if not default
 		/rest of the url
 
-rate limiting
+===
+
+rate limiting is partially implemented, needs re-testing
 	by ip
 	by action type
 
+===
+
 for one-liner items, create new template which displays larger text
 
+===
 
 no-js php server-side profiles
 	add link to profile on profile.html page
@@ -2394,6 +2428,7 @@ no-js php server-side profiles
 user's own id should be identified anywhere it is displayed
 	in unique color and with "(this is you)"
 
+===
 
 Image Support Enhancements
 ==========================
@@ -2413,58 +2448,74 @@ Image Support Enhancements
 size stuff may not be as important if
 	on pages, display standardized image (standard dimensions)
 	link to original image (not necessary)
+images should be rotated properly
+	when exif tags specify rotation, it should be saved properly in thumbnails
 
-build crashes if config has a file which is looked up as a directory
+===
 
 #bug relative redirects don't work on some browsers
+	like mosaic, see above
 
+===
 
 research .user.ini (php settings for apache)
+
+===
 
 remove external js file dependencies from 404 page
 	404 page should only be 1 request
 
+===
+
 Anytime using rewrite to add attributes to a tag
 	If tag has no attributes, have to replace <tag> instead of "<tag "
 
-without php, profile page contains several $ placeholders
+===
 
-#todo make textareas nowrap in netscape 4, currently annoying
+make textareas nowrap in netscape 4, currently annoying
 
-#bug Currently update.pl is broken, only the first 100 files are imported
+===
+
+#featurebug
+create profile with local key
+close browser (cookies lost)
+open browser again, go to profile page
+	expected: handle and fingerprint populated
+	actual: handle is populated, but fingerprint is not
+
+===
 
 #bug
-	create profile with local key
-	close browser (cookies lost)
-	open browser again, go to profile page
-		expected: handle and fingerprint populated
-		actual: handle is populated, but fingerprint is not
-
-
-#bug PHP-supplied http response headers cause Mosaic to crash
-	Static html pages work ok
-	Pages routed through PHP cause crash
-	Check headers for differences
-
-#bug IE11: window.Promise returns false, which causes openpgp to not load
+IE11: window.Promise returns false, which causes openpgp to not load
 	openpgp does support ie11, and it used to work
 	Need to figure out which features the Promise polyfill depends on, and create a test for them
 
+===
+
 For js browsers, make the .txt link expand into a textarea instead of going to txt file
-	?
+
+===
 
 curl template
 pgp command template
 
+===
+
 Make a chart comparing to other systems
 	Started
+
+===
 
 Move css from default.css into theme
 	Except for certain things
 
+===
+
 Facilitate removal of votes by ip address of voterx
 	Record IP address (obfuscated) when voting happensx
 	Add functionality to remove all votes by IP address
+
+===
 
 When returning to a form with a button which turns to "please wait" when clicked
 	xThe button's caption should already be reset, ideally (via document/body.onunload?)
@@ -2494,44 +2545,57 @@ When returning to a form with a button which turns to "please wait" when clicked
 			}
 		}
 
+===
+
 Need to connect instances without introducing a bunch of spam
 	Need to store hash of message's hash without signature?
 
+===
+
 #bug theme/color/username remains at old setting in cache after config value change
+
+===
 
 Many pages crash in Mosaic 3.0 Win
 	caused by headers added by php
 	turning off php solves the crashes
 
-#bug Wine IE8 clock ticks only on post.html, not other pages
+===
 
 Alternate auth method: http-auth
 
-#bug tag pages are not generated initially
-	hastitle
-	reply
+===
 
 On profile page, the page intro should reflect logged in status
 	You are signed in as Anonyomus
 	You are not signed in
 	etc
 
+===
+
 (checkmark) this text has been verified via vouch-web
 
-red tag links sohuld also be red without css
+===
+
+red tag links should also be red without css
 	<font color=red>
+
+===
 
 Netscape 4.80 user-set font size is overridden by site #issue #bug #accessibility
 	Probably need to get rid of fixed font sizes
 
-"reply anonyomusly" is not true if cookie set #bug
+===
+
+"reply anonymously" is not true if cookie set #bug
+
+===
 
 access.pl:
 	vote2.html
 	event.html handlers are broken
 
-#bug advanced mode + admin text = invisible text
-
+===
 
 HASHTAG VOTES SHOULD APPLY TO PARENT ITEMS
 If item is a reply
@@ -2545,42 +2609,49 @@ Implementation:
 		1. Create a view which does it automatically for parent-level items
 	3.
 
+===
+
 Views
 	Outputs: html listing, rss, zip, pdf, epub, docx, rtf, txt
 
-nn2 #bug cannot register again after clicking sign out
+===
 
 Trigger for change in theme setting
 	Basically schedule everything to be re-generated
+
+===
 
 default/menu/default=read,write,settings,...
 default/menu/advanced=events,compost,...
 default/menu/voter=compost
 
-Smooth the flow of registering and sharing public key
-	dumb redirect #done
-	smarter - todo
+===
 
 Make vouching easier and more visible
 	Add vouch button which does correct thing to user profiles
 	Display user's vouch status when displaying post
 	Potentially hide non-vouched posts as a feature
 
+===
+
 Pages which have lists of posts should also have a zip file
-	Author page
+	xAuthor page
 	Tags page
+
+===
 
 Dillo
 	<form> requires action=
 	<font> cannot contain <table>
 
-#bug On nn3, without a titlebar and table borders, a title-less post looks strange at the top of the Compost page
+===
 
 RSS
 	Fix hard-coded host in URLs
 	put fingerprint into author field
 	Add date field
 
+===
 
 Fix relativize_urls on 404 page #bug
 	1. go to /ab/cd
@@ -2591,35 +2662,46 @@ Fix relativize_urls on 404 page #bug
 		without javascript, they can be fixed with ssi or php
 		with full static only mode, ????
 
-xUnbreak
-	xProfile page
-	xWrite page
-	xVoting
+===
 
 xProfile refactor
 	xCookie-auth should work for non-JS browsers
 	xFactor out nuJS code into separate template
 	xSet cookie via server after private key is set locally
 
+===
+
 Space-wrap long strings in topics list
 	??
 
+===
 
 Setting for large font size
 	Default on "mobile"
 
+===
+
 Allow vouching by non-admin users
 	Establish vouch chain
+
+===
 
 Add timestamp to session cookie
 	To allow time limit for cookie validity
 		This will also require rewriting the cookie now and then
 
+===
+
 Bug: There's a duplicate <a name=maincontent> on home page
+
+===
 
 Problem
 =======
 Whole install can be clobbered by setting a value on a directory
+#dupe
+
+===
 
 Safe mode:
 	If any kind of error occurs
@@ -2629,6 +2711,7 @@ Safe mode:
 				Provide zip file of previous directory?
 					Maybe just on the first try, as this can cause an error as well
 
+===
 
 Side-quest
 ==========
@@ -2637,22 +2720,28 @@ Report bug to lighttpd team
 		There's probably no huge need to use that operator there
 			Maybe investigate if anything else would cause error?
 				Submit patch?
+	Update: reported, and they said wontfix. maybe try again?
 
-#bug crypto.js and openpgp.js are requested multiple times
-	reproduced with Preferences page
+===
 
 Render everything in doc/ as items
 	List them under /help.html
+
+===
 
 #bug when replying, duplicate replies are posted
 	cause: perl and php will generate different messages
 		cause: php doesn't strip >> or replyto token
 			solution: ensure php strips it too
 
+===
+
 Content-Length can cause problem
 	If full page fails to download, browser may return error
 	Typically sent with static html files
 	How to disable it?
+
+===
 
 #bug with PHP enabled, replies create a dupe
 	Dupe contains >> token at the bottom (from access log)
@@ -2660,33 +2749,63 @@ Content-Length can cause problem
 		#cause is cookie: and host: footers
 		[in progress]
 
+===
+
 Rename "beginner" to "hint" or something even better
 
+===
+
 <script language="JavaScript1.3">
+	this is some kind of nn4 thing, i think?
+	#ToResearch
+
+===
 
 Resolve issues with missing modules. Add everything to lib/ dir
 
+===
+
 #IE4 has too many redirect dialogs when Enter is pressed to sign in
+
+===
 
 Create token which allows a new item to "overwrite" an item
 	Perhaps only admin or original author?
 
+===
+
 Warning when write content becomes close to too long for GET
+
+===
 
 Summarize >1k points
 Only display points if > 1k
 
+===
+
 #bug going back to a page with [x] advanced does not update checkbox status after it is has been changed down-history
+
+===
 
 Split config/admin/debug into log file and stdout
 
+===
+
 #bug figure out wtf is going on with GitPipe and why there are so many "fatal:"s
+
+===
 
 Last seen for new user is not updated correctly
 
+===
+
 Update last-seen times with ping
 
+===
+
 Check for public key on server and re-upload if missing
+
+===
 
 Vacuum old items
 	Items older than 1 day
@@ -2695,8 +2814,12 @@ Vacuum old items
 			admin
 			vouch
 
+===
+
 Implement client-side hide/show of class=admin elements x
 	Determine admin state by reading variable or array which is embedded in html pages
+
+===
 
 Event page
 	Add end date fields
@@ -2708,30 +2831,51 @@ Event page
 	Create Event button needs Please wait
 	Target form to php if php enabled
 
+===
+
 Events Page
 	Split into Current, Upcoming, Past events
 	Fix no-js display of dates in future (currently just 01:00
 
+===
+
 getElementById() polyfill for netscape
 	until better alternative
 
+===
+
 Add simple index page for txt/
+
+===
 
 Put infobox with all of the item's attributes on item details page
 
+===
+
 sharePubKey() should not change the current page, if possible
-	Make it submit in teh background
+	Make it submit in the background
+
+===
 
 Make an archive of 88x31 browser buttons and display ones which test OK
 
+===
+
 Item page :
 	Reply box title should be "Re: parent's title" (if there is one)
-		All the way up to root comment
+		xAll the way up to root comment
+
+===
 
 #todo #bug 404 page links do not work with relative rewrite
+#dupe
+
+===
 
 "New Items" page for items not processed yet
 	added to by post.php
+
+===
 
 select * from item_flat 
 where (',' || item_flat.tags_list || ',')  not like '%,vote,%'  
@@ -2740,11 +2884,17 @@ and (',' || item_flat.tags_list || ',')  not like '%,accept,%'
 and (',' || item_flat.tags_list || ',')  not like '%,pubkey,%' 
 and (',' || item_flat.tags_list || ',')  not like '%,reply,%';
 
+===
+
 Add number of unprocessed text files to stats page
+
+===
 
 After rebuild/upgrade, have setting which notifies
 	This server was recently rebuilt, still updating
 		Remove message when update = 0
+
+===
 
 Archiving
 	Select entries 
@@ -2753,32 +2903,48 @@ Archiving
 		Not part of a thread
 	Add to zip file
 	Remove from tree
-	
+
+===
+
 Handling text file removal
 	Find deleted files via git
 	Remove item page
 	Rebuild all associated pages
 
+===
+
 Add one-click Bump button to top menu
+	#todo rename Reprint button to Bump?
+
+===
 
 Write page -- client-side save of preferences
 	Checkbox already exists
 
+===
+
 User keys should also be voteable on?
+	should be able to tag/vote on fingerprints as well is item hashes #todo
 	Isn't that what vouch does?
 		But also perhaps friend and flag and all that too?
 
-"Message the Admin(s)" link which goes to reply form on admin's pubkey page
+===
+
+"Message the Admin(s)" link
+	which posts to inbox of all the admins
+
+===
 
 Prefill reply box with >>
 	Optionally by default?
 	Because NN 1.22 does not seem to support <input type=hidden>
 
+===
+
 setcontent/abcde/abcd2
 setcontent/{hash of 404 url}/{hash of content}
 
-split lighttpd.conf into templates?
-	necessary?
+===
 
 cleanup stale items
 	items with 0 children
@@ -2788,29 +2954,34 @@ cleanup stale items
 	what else?
 what else to clean up?
 
-
-	
-	
-====
+===
 
 Arrange files into subdirs by author key
 Rename them to title.txt, where appropriate
 
+===
+
 Crypt::OpenPGP
 
-Prefs link appears for no-JS #bug #issue
-	Prefs page is blank with no-JS
+===
 
 Use item_page table to remove/rebuild all pages containing deleted item
 
+===
+
 JS-driven global new items indicator
 
+===
 
 Instead of index db being stored under version hash
 	Store it under md5(all schema creation statements)
 		Then it doesn't have to change unless schema changes
 
+===
+
 Fix bug in progress indicator (debug output)
+
+===
 
 DATA page
 Zip files
@@ -2820,67 +2991,101 @@ Zip files
 		pubkeys
 	Refresh with update
 
-
+===
 
 Generate json sets in /author/friends.json /votes.json and so on
 	For consumption by client
 		But also how to when nojs?
 
+===
+
 If an exact line more than 5 words long is matched in any other files [>>]
 	(create a reference link)
 
+===
+
 If item has no parents
 	Generate a full thread page
-	
+
+===
+
 When updating item's touch status
 	If item has parents, traverse them and update them all
 	Update the top level thread page too
 
+===
+
 Display warning if message is signed, but there is no public key to verify
+
+===
 
 Cut up event_add.template
 	So that the dropdowns are individually generated
 		Then put sane presets into them
 
+===
+
 shortlink/foobar/sha1
 	added to .htaccess
 	added to lighttpd config
+
+===
 
 xNon-JS voting links redirect
 	xShould redirect to page vote came from
 		And include anchor to item being voted on
 
+===
+
 How to recover from out of space errors?
 
+===
+
 How to recover from broken perl script errors?
+
+===
 
 Add ability to type in item hash
 	autocomplete with js
 		when returned items is 1, display item below
 		when 0, tell user to stop typing
 
+===
 
 add pdf export for devices that prefer it
 
+===
+
 addalias/5questions/abcdef0123456789
+
+===
 
 Take stuff that is not PGP-related out of crypto.js
 
+===
+
 #bug Opera 12.x : advanced controls cannot be shown
+
+===
 
 default/admin/require_token_for_indexing
 
-Write function to do js injection into pages
-	Replace the copy-pasta code
+===
 
 Fill in zipfile(s) in update.pl
+
+===
 
 Allow profiles to claim client ids
 	Items with fingerprint are then assigned to said profile
 
+===
+
 Automatically friend server and operator on account creation
 	default/admin/auto_friend_admin
 	default/admin/auto_friend_server
+
+===
 
 Import for QDB data
 	voter_id
@@ -2906,27 +3111,39 @@ Then
 
 Update pages for parent items recursively
 
+===
+
 Web server handler for potential 404:
 	sha(url string)
 		check for item
 			return or redirect to item's page
 
+===
+
 Log each script's runtime and output in timestamped logs
+
+===
 
 In Queue index pages, votes/replies should include parent message in a box
 
+===
+
 With SSI calculate user's fingerprint and direct them to /fp/abcdef
+
+===
 
 Import data from FB, G+, IG, etc.
 
-Build threads page
-	select * from item_flat where parent_count = 0
-		find all children recursively
+===
 
 Add setting to ignore plain URL messages if they are an exact match for a file
 	This means no unintentional hit counting via hastext tag
 
+===
+
 If file is submitted via plain URL, make (optionally) a token noting that
+
+===
 
 Event listing
 	Chronological
@@ -2934,25 +3151,41 @@ Event listing
 	Grouped by month
 	All future/current events
 
+===
+
 Connect users
 	Using >> replies for user registration posts
 	And/or usernames??
 		Any user mentioned can vote to remove the post.
 
+===
+
 user expiration
 
+===
+
 link pub-key txt and post from profile
+
+===
 
 #bug for sub-replies, >> token to be stripped is not set correctly
 
 #bug When 0 text files, there is no Profile link
 
+===
+
 Colorize item hashes
 	Possibly make "short" hashes 12 chars (6+6 for fg/bg color0
 
+===
+
 [propose edit] button
 
+===
+
 Re-enable hashtag links
+
+===
 
 todo events page should have link to add to
 	google calendar
@@ -2962,31 +3195,45 @@ todo events page should have link to add to
 	yandex?
 	what others?
 
+===
+
 record referring sites
 	generate registry
+
+===
 
 whenever a new pubkey is posted
 	messages that have "begin signed" header
 		and are not attached to an existing pubkey
 			should be re-checked
 
+===
+
 user page should show all replies
 	local client should log visited time and highlight new replies
 
+===
+
 fix the remaining duplicate tags (?)
+
+===
 
 From openpgp.js docs:
 	The dist/compat/openpgp.min.js bundle also works with Internet Explorer 11 and old versions of Safari.
 Ensure that this (and the non-min version) is the version that is in the templates
 
-
+===
 
 Make JS load more tolerable on slower connections
 	* minify the js (and test)
 	* https://stackoverflow.com/questions/20014933/progress-of-loading-external-js-file
 
+===
+
 ** Fix the bug with messages by new users not being processed correctly **
 	This happens if the message is indexed before the public key
+
+===
 
 Adjust avatars: number of asterisks should reflect
 	number of votes/replies/responses the author has attracted
@@ -2994,24 +3241,37 @@ Adjust avatars: number of asterisks should reflect
 		* anon * = 16+
 		** anon * = 128+
 		** anon ** = 1024+
+===
 
 Generate client hash in JS for added fingerprinting
+
+===
 
 Review feed.pl
 	Fix rss.txt
 
+===
+
 Add verification that default/ is consistent with repository
 	Warn otherwise (settings should be in config/)
+
+===
 
 Auto-generate server key if one does not exist
 	Store its id in config/admin/server_key_id
 
+===
+
 Ensure that maincontent tags are present at the right place on all pages
 	<main id=maincontent><a name=maincontent></a>
+
+===
 
 If logged in
 	Periodically check for public key on current server
 		If doesn't exist, resubmit
+
+===
 
 SERVER MESSAGE SIGNING
 ======================
@@ -3022,6 +3282,7 @@ Does server.key.txt exist?
 	Yes:
 		Sign message with it
 
+===
 
 Other filetypes that can be supported
 	latex
@@ -3031,7 +3292,11 @@ Other filetypes that can be supported
 	xls
 	and so on
 
+===
+
 Consider changing background color based on time of day?
+
+===
 
 FEEDBACK FROM L.F.
 ==================
@@ -3043,7 +3308,11 @@ it might be helpful to have the tags right on the home page, so that it's not la
 4) Make UI smaller
 5) Make links for voting so that form submission not required
 
+===
+
 Consider changing background color based on time of day?
+
+===
 
 FEEDBACK FROM L.F.
 ==================
@@ -3055,6 +3324,8 @@ xAlso, as a personal preference I think the ellipse around the numbers can be re
 And consider adding a title/informative header to the page in general, to give more context to what this page is.
 	It could be something like "hike.qdb.us" on the very top, a very short description underneath it, and then tabs (home, write, tags, manual) go underneath that
 
+===
+
 Add to specifications:
 	items are always 0-9a-f{40} (lowercase)
 	authors are always 0-9A-F{16} (uppercase)
@@ -3063,7 +3334,11 @@ Add to specifications:
 	consider an odd-numbered hash of some kind for uniqueness? +
 	  e.g sha1 with one char removed or added or something +
 
+===
+
 test mode: remove random characters from scripts when embedding them in page
+
+===
 
 How to make things easier???
 	More flow can be achieved with more one-click actions
@@ -3075,37 +3350,61 @@ How to make things easier???
 			| Vote as Anonymous    |
 			| Vote without signing |
 
+===
+
 Somehow handle cleanup of old .html files
 
+===
+
 Fix Tags page so that correct counts are displayed +
+
+===
 
 Add roles directory
 	Add roles/admin and roles/moderator
 		Add support for having multiple public keys in here as text file
 
+===
+
 Add client-side handling of HTTP 431 messages when submitting something new
 
+===
+
 Function to add file to index and update affected pages
+
+===
 
 Untagged page = all untagged posts
  - make it easier to vote on this one
 
+===
+
 No pubkey and/or bad sig should result in big red warning on page/listing +
+
+===
 
 Front-end signature checks/indicators in input boxes +
 
+===
 
 js fallback for saving via "more options" link on write-small.template
 
+===
 
 When private key is pasted into [restore] textarea,
 	automatically check it for presence of private key
 	  restore if it validates
 
+===
+
 Add a message that appears the first time someone is posting something, like on HN
+
+===
 
 [Admin] has assigned a weight of [100] to [ABC]
 abc can assign a weight of up to 100 to anyone else?
+
+===
 
 Entertaining stats page
 	top voter + top tags = top tags by voter
@@ -3116,21 +3415,32 @@ Entertaining stats page
 	number of vote records
 	busiest days?
 
+===
 
 rebuilding everything twice is a good way of maintaining integrity
 
+===
+
 forgot to add conversions to user pages
 
+===
+
 mod_security can interfere with some signed posts #known
+
+===
 
 curl
 	add to tree
 		add timestamp
 
+===
+
 textarea onchange
 	begins with header?
 		verify with openpgp
 			green if valid
+
+===
 
 Validate signed input on Write page
 	textarea onchange
@@ -3138,8 +3448,12 @@ Validate signed input on Write page
 			verify signature with opengpg
 				green if valid
 
+===
+
 Link target encryption key with parent id key using gpg --list-keys
 	This way "Encrypted message for ..." is linked to the correct profile
+
+===
 
 Feeds list
 	OPML
@@ -3189,6 +3503,8 @@ Voting links cause crash in Mosaic 2.0 and 1.0
 		make clock off by default?
 		add clock in settings?
 
+===
+
 Generate version page for each version mentioned in changelog
 	code for this already exists, and is actually commented out
 
@@ -3199,11 +3515,12 @@ textart is jacked on bromite
 	partial workaround is request desktop site
 	actual solution is viewport modes for textart items
 
-
 ===
 
 echochamber for votes
 	votes which are detected to be questionable should not be counted for stats
+
+===
 
 #todo #meta standardize on configKey vs configName
 	should probably be Key?
@@ -3222,7 +3539,6 @@ already done for gif, but now need to replace original image and change its hash
 		target from keyboard to write dialog
 			button pressed -> targed to large frame up top -> new write page reloads with textarea prefilled
 
-
 ===
 
 #bug {require profile mode} is janky and locks out links and any non-cookie users
@@ -3232,28 +3548,28 @@ already done for gif, but now need to replace original image and change its hash
 			b) get cookie id from page parameter
 			c) rewrite cookie id into all links on page
 
+===
+
 have an alternative to lighttpd (which takes longer) for when it is missing
 	possible fallbacks:
 		apache
 		file:// url instructions
+		python3 -m http.server
 make sure everything under default/ has a trailing \n
 
 ===
+
 how to rechain / multiple chain?
 	store chain as item
-=======
-
 
 ===
 
 #bug write page reloaded and lost my content
-
-workaround:
-
-config/setting/admin/dev/fresh_reload=0
-
-(this is not a default setting)
-
+	workaround:
+	config/setting/admin/dev/fresh_reload=0
+	(this is not a default setting)
+	todo:
+		write page should be excluded from this, perhaps?
 
 ===
 
@@ -3261,13 +3577,9 @@ config/setting/admin/dev/fresh_reload=0
 
 ===
 
-#bug 
-
 on write page some javascript shows up in light mode
 
 ===
-
-#todo #bug
 
 textarea for replying should have an accesskey
 
@@ -3275,11 +3587,9 @@ textarea for replying should have an accesskey
 
 #bug archive notice is not automatically indexed after archive
 
-
 ===
 
 #bug author id sort is incorrect on authors and scores pages
-
 
 ===
 
@@ -3287,19 +3597,14 @@ textarea for replying should have an accesskey
 
 paste action not very obvious on upload page
 
-
-
-
 ===
 
 #bug
-
 
 Version: OpenPGP.js v3.0.13
 Comment: https://openpgpjs.org
 
 message is included when signing proof of work puzzle from welcome page
-
 
 ===
 
@@ -3308,7 +3613,6 @@ message is included when signing proof of work puzzle from welcome page
 ===
 
 #bug author's page does not seem to display all items
-
 
 ===
 
@@ -3328,17 +3632,13 @@ profile.html should redirect to referring page logging in
 
 ===
 
-#todo
-
 Welcome page should look different for a logged in user?
-
-Logged in user should know they are logged in on any page
+	Logged in user should know they are logged in on any page
 
 ===
 
 #todo date page should display date used
-
-workaround: look at url
+	workaround: look at url
 
 ===
 
@@ -3396,6 +3696,7 @@ because i did not remember the url character code for \n, i could not post an ac
 i think all item references should add that item as a child.
 
 ===
+
 need to restart server if php flag changes
 
 ===
