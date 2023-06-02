@@ -1,3 +1,7 @@
+how to set py files allowed to upload?
+
+===
+
 problem: in offline mode or without connection,
 	firefox and other browsers cannot save a page
 	proposal: add a "save" button which has in-page encoded downloadable file?
