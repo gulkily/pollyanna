@@ -224,3 +224,4 @@ keyboard switcher shortcut overrides cmd+r on mac
 
 ===
 
+hike set cookie does not show option of config/setting/admin/php/post/require_cookie
