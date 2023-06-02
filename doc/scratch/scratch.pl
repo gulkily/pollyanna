@@ -2836,6 +2836,20 @@ my $utilsPl = 1;
 
 
 ===
+
+
+			return GetDialogX('
+				<fieldset>
+					<p>This space reserved for future content.</p>
+					<p class=advanced>Query: ' . $flags{'page_query'} . '</p>
+				</fieldset>
+			', $title);
+
+
+
+===
+
+
 						if (
 							isset($_GET['chkUpdate']) &&
 							isset($_GET['btnUpdate'])
