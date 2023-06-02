@@ -233,11 +233,14 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 		return GetDialogX3($content, $title, \%param);
 	} else {
 		# empty results
+		# no_results
 		if ($flags{'no_no_results'}) {
+			WriteLog('GetResultSetAsDialog: no_results: returning empty string due to $flags{no_no_results}');
 			return '';
 		} else {
+			WriteLog('GetResultSetAsDialog: no_results: returning space reserved for future content dialog');
 			require_once('dialog.pl');
-			return GetDialogX('This space reserved for future content.', $title);
+			return GetDialogX('<fieldset><p>This space reserved for future content.</p></fieldset>', $title);
 		}
 	}
 } # GetResultSetAsDialog()
