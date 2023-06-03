@@ -224,4 +224,49 @@ keyboard switcher shortcut overrides cmd+r on mac
 
 ===
 
+links in server messages don't go to their link but just close the server message
+
+===
+
+in translit: letters on -=[]\ keys don't listen to caps lock
+
+===
+
+build crashes if config has a file which is looked up as a directory
+
+===
+
+without php, profile page contains several $ placeholders
+
+===
+
+update.pl is broken, only the first 100 files are imported
+
+===
+
+#bug Wine IE8 clock ticks only on post.html, not other pages
+
+===
+
+tag pages are not generated initially
+	hastitle
+	reply
+
+===
+
+advanced mode + admin text = invisible text
+
+===
+
+nn2 cannot register again after clicking sign out
+
+===
+
+On nn3, without a titlebar and table borders, a title-less post looks strange at the top of the Compost page
+
+===
+
+crypto.js and openpgp.js are requested multiple times
+	reproduced with Preferences page
+
 hike set cookie does not show option of config/setting/admin/php/post/require_cookie
