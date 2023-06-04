@@ -1,3 +1,7 @@
+how to set py files allowed to upload?
+
+===
+
 when navigating away from upload page or write page
 	the submit button's caption should be reset
 		from "Meditate..." back to "Send" or "Upload"
