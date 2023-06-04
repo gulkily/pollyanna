@@ -236,6 +236,8 @@ if (isset($boxesCount) && $boxesCount && !$comment) {
 	if (isset($comment) && $comment && GetConfig('setting/admin/php/post/require_cookie')) {
 		if ((!isset($_COOKIE['cookie']) || !isset($_COOKIE['checksum'])) && index($comment, 'SIGNED') == -1 && index($comment, 'PUBLIC') == -1) {
 			#todo page does not look right, especially with dark theme
+			setcookie2('comment_draft', $comment);
+
 			header('HTTP/1.1 401 Unauthorized');
 			$returnMessage = GetDialogX(
 				"<p>Please forgive me, friend, <br>but you must <a href=/profile.html>register</a> first, <br>before you do that</p>",
