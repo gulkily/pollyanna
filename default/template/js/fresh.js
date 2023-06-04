@@ -169,8 +169,7 @@ function freshCallback() { // callback for requesting HEAD for current page
 			ariaAlert.setAttribute('role', 'alert');
 			ariaAlert.setAttribute('id', 'ariaAlert');
 			ariaAlert.style.zIndex = '1337'; //#todo
-			ariaAlert.innerHTML = 'Check page existence';
-			// page has gone away on server. what does it mean to exist?
+			ariaAlert.innerHTML = 'Page was deleted from server.';
 
 			//document.body.appendChild(ariaAlert);
 			document.body.insertBefore(ariaAlert, document.body.firstChild);
