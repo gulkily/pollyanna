@@ -1,3 +1,7 @@
+ensure that cache and other files are cleaned up regularly
+
+===
+
 how to set py files allowed to upload?
 
 ===
