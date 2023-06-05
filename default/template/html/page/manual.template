@@ -10,45 +10,23 @@
 
 <p>To create a profile, go to the Profile page.</p>
 
-<p>Advanced: You can write "my name is ..." or "call me ..." to change your displayed name.</p>
+<p>If you want to change your display name, write "my name is ...". For example: "my name is ilyag"</p>
 
 <p>Press the Exit button to sign out.</p>
 
 <!-- -->
 
-<a name=write><h3>Write/Read</h3></a>
+<a name=write><h3>Write</h3></a>
 
-<p>The Write page allows you to share with others.</p>
+<p>Write page is for posting a message.</p>
 
-<p>Privacy Note: Please ensure your own privacy.</p>
-
-<p>If you are using profile, your message may be signed with cookie and/or signature.</p>
+<p>Privacy Note: What you write may be read by others.</p>
 
 <p>Your message may be moderated and/or filtered.</p>
 
-<p>No guarantees of message delivery are provided by this resource.</p>
-
-<p>Do not get distracted, press Send button to submit to message board.</p>
-
-<p>Advanced: Use message identifier and profile fingerprint numbers to verify message delivery via separate channel.</p>
-
-<p>Expert: Validate message tree in your favorite language.</p>
+<p>You can use sha1sum and GnuPG to revalidate the posted messages.</p>
 
 <!-- -->
-
-<a name=topics><h3>Finding Newest Information</h3></a>
-
-<p>Go to the "Read" page. Newest moderated posts are here.</p>
-
-<p>Advanced: To see unmoderated content, go to Index0 page.</p>
-
-<!-- -->
-
-<a name=status><h3>Advanced</h3></a>
-	
-<p>Status page has basic information about forum.</p>
-
-<p>Advanced: Press Update button and wait.</p>
 
 <p><a href="manual_advanced.html">Technical Details</a></p>
 

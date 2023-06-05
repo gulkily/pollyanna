@@ -1,3 +1,24 @@
+<!-- -->
+
+<a name=topics><h3>Finding Newest Information</h3></a>
+
+<p>Go to the "Read" page. Newest moderated posts are here.</p>
+
+<p>Advanced: To see unmoderated content, go to Help page.</p>
+
+===
+
+<p>Expert: Validate message tree in your favorite language.</p>
+
+<p>Advanced: Use message identifier and profile fingerprint numbers to verify message delivery via separate channel.</p>
+
+<p>Do not get distracted, press Send button to submit to message board.</p>
+
+<p>No guarantees of message delivery are provided by this resource.</p>
+
+<p>If you are using profile, your message may be signed with cookie and/or signature.</p>
+
+
 	<p>
 		<span class=beginner>
 			Use Flush to make space for new content:<br>
