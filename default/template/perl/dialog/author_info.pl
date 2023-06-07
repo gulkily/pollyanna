@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use 5.010;
 
-sub GetAuthorInfoBox {
+sub GetAuthorInfoBox { # $authorKey ; returns author info box
 # sub GetAuthorDialog {
 	my $authorKey = shift;
 	chomp $authorKey;
@@ -17,11 +17,11 @@ sub GetAuthorInfoBox {
 		#todo refactor this nonsense
 		my @queryParams;
 		push @queryParams, $authorKey;
-		my $newAuthorKey = SqliteGetValue('select author_key from author_flat where file_hash = ?', @queryParams);
+		my $newAuthorKey = SqliteGetValue('SELECT author_key FROM author_flat WHERE file_hash = ?', @queryParams);
 		if ($newAuthorKey) {
 			$authorKey = $newAuthorKey;
 		}
-	}
+	} # if (!IsFingerprint($authorKey) && IsItem($authorKey))
 
 	my $authorInfoTemplate = GetTemplate('html/author_info.template');
 	$authorInfoTemplate = FillThemeColors($authorInfoTemplate);
