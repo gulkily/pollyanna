@@ -290,8 +290,9 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 
         if (GetConfig('setting/zip/tag')) {
             if (scalar(@files) > 0) {
-                my $zipLink = '<a href="/tag/' . $pageParam . '.zip">' . $pageParam . '.zip</a>';
-                $txtIndex .= GetDialogX($zipLink, 'Archive');
+                my $zipLink = '<a href="/tag/' . $pageParam . '.zip">' . $pageParam . '.zip</a>'; #todo use RenderLink()
+                $zipLink = '<fieldset>' . $zipLink . '</fieldset>';
+                $txtIndex .= GetDialogX($zipLink, 'Archive'); # tag.zip
             } else {
                 $txtIndex .= GetDialogX('This tag has no items yet, <br>so no archive is available.', 'Archive');
             }
@@ -398,8 +399,9 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 
 		if (GetConfig('setting/zip/author')) {
 			if (scalar(@files) > 0) {
-				my $zipLink = '<a href="/author/' . $authorKey . '.zip">' . $authorKey . '.zip</a>';
-				$txtIndex .= GetDialogX($zipLink, 'Archive');
+				my $zipLink = '<a href="/author/' . $authorKey . '.zip">' . $authorKey . '.zip</a>'; #todo use RenderLink()
+				$zipLink = '<fieldset>' . $zipLink . '</fieldset>';
+				$txtIndex .= GetDialogX($zipLink, 'Archive'); # author.zip
 			} else {
 				$txtIndex .= GetDialogX('This author has not posted anything yet, <br>so no archive is available.', 'Archive');
 			}
