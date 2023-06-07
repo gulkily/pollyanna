@@ -1,4 +1,6 @@
 ensure that cache and other files are cleaned up regularly
+    write script to remove files more than 24 hours ago
+    call script regularly from ...?
 
 ===
 
@@ -164,8 +166,6 @@ how to make sqlite3 optional
 
 how to make git optional
 	reason: ubuntu doesn't come with git by default
-	windows gitbash also doesn't come with git
-
 
 ===
 
