@@ -1,10 +1,10 @@
 ensure that cache and other files are cleaned up regularly
+    write script to remove files more than 24 hours ago
+    call script regularly from ...?
 
 ===
 
 how to set py files allowed to upload?
-	(there was a bug... inconsistency between admin/python3/enable and admin/py/enable)
-	config/setting/admin/python3/enable
 
 ===
 
@@ -166,8 +166,6 @@ how to make sqlite3 optional
 
 how to make git optional
 	reason: ubuntu doesn't come with git by default
-	windows gitbash also doesn't come with git
-
 
 ===
 
