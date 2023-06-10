@@ -22,8 +22,14 @@ sub GetUploadDialog { # upload dialog for upload page
 	if (GetConfig('admin/js/enable')) {
 		# $uploadForm = AddAttributeToTag($uploadForm, 'input name=uploaded_file', 'onchange', "if (document.upload && document.upload.submit && document.upload.submit.value == 'Upload') { document.upload.submit.click(); }");
 		# this caused back button breaking
+
+		# single upload form
 		$uploadForm = AddAttributeToTag($uploadForm, 'input name=uploaded_file', 'onchange', "if (window.UploadedFileOnChange) { UploadedFileOnChange(this); }");
+
+		# multi upload form
 		$uploadForm = AddAttributeToTag($uploadForm, 'input name="uploaded_file[]"', 'onchange', "if (window.UploadedFileMultiOnChange) { UploadedFileMultiOnChange(this); }");
+
+		# both forms
 		$uploadForm = AddAttributeToTag($uploadForm, 'input name=submit', 'onclick', "this.value='Meditate...';");
 	}
 	my $allowFiles = GetConfig('admin/image/allow_files');
