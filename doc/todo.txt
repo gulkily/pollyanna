@@ -1,10 +1,14 @@
 ensure that cache and other files are cleaned up regularly
     write script to remove files more than 24 hours ago
+    	cache
+    	trim log file
+
     call script regularly from ...?
 
 ===
 
 how to set py files allowed to upload?
+	config/setting/admin/python3/enable
 
 ===
 
@@ -3150,7 +3154,9 @@ Add setting to ignore plain URL messages if they are an exact match for a file
 ===
 
 If file is submitted via plain URL, make (optionally) a token noting that
-	location: route.php
+	location:
+		php version: route.php
+		perl version: access_log_read.pl
 
 ===
 
