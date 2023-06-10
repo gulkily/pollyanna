@@ -4,7 +4,9 @@
 	<p class=beginner>
 		Remember to press Upload button.
 	</p>
+	<!-- uploaded_file tag is updated by templater -->
 	<p><input name=uploaded_file type=file id=uploaded_file></p>
+	<!-- submit button is updated by templater -->
 	<p><input name=submit type=submit value=Upload id=submit></p>
 	<span id=spanImagePreview></span>
 	<p>Allowed files: <span id=allowFiles></span></p>
