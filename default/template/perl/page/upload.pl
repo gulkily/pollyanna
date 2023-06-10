@@ -32,13 +32,16 @@ sub GetUploadDialog { # upload dialog for upload page
 
 	WriteLog('GetUploadDialog: $allowFiles = ' . $allowFiles);
 
-	my @otherPossibleFiles = qw(perl py cpp zip);
+	my @otherPossibleFiles = qw(perl python3 cpp zip);
 	# my $allowedFiles = # for searching through code
 	# my @allowedFiles = # for searching through code
 	for my $possibleFile (@otherPossibleFiles) {
 		if (GetConfig("admin/$possibleFile/enable")) {
 			if ($possibleFile eq 'perl') {
 				$possibleFile = 'pl';
+			}
+			if ($possibleFile eq 'python3') {
+				$possibleFile = 'py';
 			}
 			$allowFiles .= ' ' . $possibleFile;
 		}
