@@ -47,7 +47,11 @@ sub GetUploadDialog { # upload dialog for upload page
 		}
 	}
 
-	$uploadForm = str_replace('<span id=allowFiles></span>', '<span id=allowFiles>' . $allowFiles . '</span>', $uploadForm);
+	$uploadForm = str_replace(
+		'<span id=allowFiles></span>',
+		'<span id=allowFiles>' . $allowFiles . '</span>',
+		$uploadForm
+	);
 
 	my $uploadWindow = GetDialogX($uploadForm, $title);
 	return $uploadWindow;
