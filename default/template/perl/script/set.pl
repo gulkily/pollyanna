@@ -16,6 +16,30 @@ $ENV{PATH}="/bin:/usr/bin"; #this is needed for -T to work
 
 my $argumentKey = shift;
 
+sub UpdateSetting {
+	my $settingKeySanitized = shift;
+	my $argumentValueSanitized = shift;
+
+	print "UpdateSetting($settingKeySanitized, $argumentValueSanitized)\n";
+
+	#todo sanity checks
+	`echo "$argumentValueSanitized" > $settingKeySanitized`;
+
+
+	if ($settingKeySanitized eq 'config/setting/theme') {
+		print "Theme changed, about to rebuild frontend...\n";
+		sleep 2;
+		print `sh hike.sh frontend`;
+	}
+
+	if ($settingKeySanitized =~ m|config/setting/admin/php|) {
+		print "setting changed for PHP module\n";
+		#todo rebuild relevant frontend parts
+		#todo restart lighttpd if that module is enabled
+		sleep 2;
+	}
+} # UpdateSetting()
+
 if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 	my $argumentKeySanitized = $1;
 
@@ -49,10 +73,10 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 				my $argumentValueSanitized = $1;
 				#print "$argumentValueSanitized\n";
 				#print "$argumentKeySanitized=$argumentValueSanitized";
-				print "echo $argumentValueSanitized > $settingKey\n";
 				if ($settingKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 					my $settingKeySanitized = $1;
-					`echo $argumentValueSanitized > $settingKeySanitized`;
+					# `echo $argumentValueSanitized > $settingKeySanitized`;
+					UpdateSetting($settingKeySanitized, $argumentValueSanitized);
 
 					#if (index($settingKeySanitized, 'html') != -1) {
 					#	`hike.sh refresh`;
@@ -92,16 +116,11 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 
 					if ($input =~ m/(.+)/) { #todo
 						$input = $1;
-						`echo $input > $settingKey`;
+
+						UpdateSetting($settingKey, $input);
 
 						$settingValue = `cat $settingKey`;
 						print "$settingKey=$settingValue";
-
-						if ($settingKey eq 'config/setting/theme') {
-							print "Theme changed, about to rebuild frontend...\n";
-							sleep 2;
-							print `sh hike.sh frontend`;
-						}
 					} else {
 						print 'Warning: Value not changed';
 					}

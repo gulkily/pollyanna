@@ -270,3 +270,12 @@ crypto.js and openpgp.js are requested multiple times
 	reproduced with Preferences page
 
 hike set cookie does not show option of config/setting/admin/php/post/require_cookie
+
+===
+
+usernames with dash (-) symbol fail sanity check and result in empty item
+	location: look in log/log.log for "warning"
+		rm log/log.log
+		rm cache/b/indexed/...
+		hike index html/txt/...
+		grep -ir warning log/log.log

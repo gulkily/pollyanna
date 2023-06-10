@@ -1,3 +1,23 @@
+SELECT
+	DISTINCT item_flat.author_key,
+	c.value AS client_id
+FROM
+	(
+		SELECT
+			file_hash,
+			value
+		FROM
+			item_attribute
+		WHERE
+			attribute = 'client_id'
+	) AS c
+	JOIN
+		item_flat
+	ON (item_flat.file_hash = c.file_hash)
+;
+
+===
+
 <!-- -->
 
 <a name=topics><h3>Finding Newest Information</h3></a>
