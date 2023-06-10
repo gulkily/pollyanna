@@ -33,10 +33,14 @@ sub UpdateSetting {
 	}
 
 	if ($settingKeySanitized =~ m|config/setting/admin/php|) {
-		print "setting changed for PHP module\n";
-		#todo rebuild relevant frontend parts
-		#todo restart lighttpd if that module is enabled
+		print "Setting changed for PHP module, rebuild frontend\n";
 		sleep 2;
+		`sh hike.sh frontend`; # rebuild frontend
+		if (0) {
+			#todo this should only happen when it's a lighttpd installation
+			`sh hike.sh stop`; #todo restart lighttpd if that module is enabled
+			`sh hike.sh start`; #todo restart lighttpd if that module is enabled
+		}
 	}
 } # UpdateSetting()
 
