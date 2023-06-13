@@ -237,6 +237,10 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 			my $pageContent = GetItemListingPage($pageQuery, $pageMode, $page, \%params);
 			PutHtmlFile($pageFilename, $pageContent);
 		}
+
+		if (GetConfig('html/write_listing_txt')) {
+			MakeFeed($pageQuery);
+		}
 	} else {
 		# no items returned by database
 		my $pageNoContent = '';
