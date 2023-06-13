@@ -155,21 +155,25 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 } # GetItemListingPage()
 
 sub MakeFeed { # writes a bare-bones txt file with items list
-	my $feed = 'new'; # 'new.txt' "new.txt"
+	my $feed = shift;
+	chomp $feed;
 
-	# outputs plaintext list version of query if it has certain tags
-	#hack #todo
-	#if ($pageQuery =~ m/file_hash/ && $pageQuery =~ m/item_title/ && $pageQuery =~ m/add_timestamp/) {
-	#my $plaintextList = SqliteQuery("SELECT file_hash, item_title, add_timestamp FROM ($pageQuery) LIMIT 25");
-	my $plaintextList = SqliteQuery("SELECT file_hash, CAST (add_timestamp AS INT) AS add_timestamp FROM item_flat ORDER BY add_timestamp DESC LIMIT 20");
+	WriteLog('MakeFeed: $feed = ' . $feed . '; caller = ' . join(',', caller));
+
+	my $plaintextList = '';
+	if ($feed eq 'new') {
+		$plaintextList = SqliteQuery("SELECT file_hash, CAST (add_timestamp AS INT) AS add_timestamp FROM item_flat ORDER BY add_timestamp DESC LIMIT 20");
+	} else {
+		WriteLog('MakeFeed: warning: $feed unrecognized; caller = ' . join(',', caller));
+	}
 	$plaintextList =~ s/^[^\n]+\n//s;
 
-	#if ($plaintextList) {
-	PutFile(GetDir('html').'/'.$feed.'.txt', $plaintextList);
-	#PutFile(GetDir('html').'/'.$pageQuery.'.txt', $plaintextList);
-	#}
-	#}
-}
+	if ($plaintextList) {
+		PutFile(GetDir('html').'/'.$feed.'.txt', $plaintextList);
+	} else {
+		WriteLog('MakeFeed: warning: $plaintextList is FALSE; caller = ' . join(',', caller));
+	}
+} # MakeFeed()
 
 sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 	my $pageQuery = shift; # example: 'chain', 'select ...'
