@@ -1,0 +1,30 @@
+<!-- template/html/page/about.template --> 
+
+<p>
+    Hypercode is an experiment in <br>
+    accessible and compatible websites.
+</p>
+
+<p>
+    Source: <a href="/tree.zip">/tree.zip</a>
+</p>
+
+<p>
+    GitHub: <a href="https://www.github.com/gulkily/pollyanna">pollyanna</a>
+</p>
+
+<p>
+    Maintainers: <br>
+    Several <a href="/tag/developer.html">developers</a> <br>
+    of various backgrounds.
+</p>
+
+<p>
+    Motivation: <br>
+    Make a nice website <br>
+    to please and enable <br>
+    the technical and non-technical <br>
+    users and intelligences.
+</p>
+
+<!-- / template/html/page/about.template --> 
