@@ -528,6 +528,7 @@ sub GetThemeColor { # returns theme color based on setting/theme
 	}
 
 	if (GetConfig('html/monochrome')) { # GetThemeColor()
+	    #todo in hypercode theme + monochrome, the page background color should be #e9caad, to match hypercode_bg.jpg
 		if (index(lc($colorName), 'text') != -1 || index(lc($colorName), 'link') != -1) {
 			if (index(lc($colorName), 'back') != -1) {
 				return GetConfig('html/color/background'); # #BackgroundColor
