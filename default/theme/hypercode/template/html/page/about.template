@@ -1,27 +1,30 @@
 <!-- template/html/page/about.template --> 
 
 <p>
-    Hypercode is an experiment in accessible and compatible websites.
+    Hypercode is an experiment in <br>
+    accessible and compatible websites.
 </p>
 
 <p>
-    Data: <a href="/data.html">/data.html</a>
+    Source: <a href="/tree.zip">/tree.zip</a>
 </p>
 
 <p>
-    Source: <a href="https://www.github.com/gulkily/pollyanna">pollyanna</a>
+    GitHub: <a href="https://www.github.com/gulkily/pollyanna">pollyanna</a>
 </p>
 
 <p>
-    Maintainers: Three developers of various backgrounds.
+    Maintainers: <br>
+    Several <a href="/tag/developer.html">developers</a> <br>
+    of various backgrounds.
 </p>
 
 <p>
-    Motivation: Make a nice website to please and enable the user.
+    Motivation: <br>
+    Make a nice website <br>
+    to please and enable <br>
+    the technical and non-technical <br>
+    users and intelligences.
 </p>
-
-<p>
-    Background image: DALL-E, "hypercode.com nice website tileable image", 2023
-<p>
 
 <!-- / template/html/page/about.template --> 
