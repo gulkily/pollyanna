@@ -311,6 +311,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 
 	$txtIndex .= GetTemplate('html/maincontent.template');
 	if ($pageType eq 'author') {
+		# sub GetAuthorPage {
 		# author info box
 		$txtIndex .= GetAuthorInfoBox($authorKey);
 
