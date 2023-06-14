@@ -38,7 +38,8 @@ sub GetTokenDefs {
 		# mask_params       = what is used at the end of the regex call. see allowed values above
 		# message           = what the token is replaced with in the message when displayed to user
 		# target_attribute  = name of attribute when stored in item_attributes table (if not specified, token name is used)
-		# apply_to_parent   = when this is true, the token is applied to the parent item instead of the containing item
+		# apply_to_parent   = when this is true, the token is applied to the parent item
+		# apply_to_self     = when this is true, the token is applied to the item it is found in
 		# eval_message      = USE WITH CARE!!! causes eval() to be called on message. USE WITH CARE!!!
 		# hashtag           = apply this hashtag instead of value of 'token'
 
