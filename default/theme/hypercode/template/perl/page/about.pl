@@ -5,9 +5,12 @@ use warnings;
 use 5.010;
 
 sub GetAboutPage {
+    require_once('page/data.pl');
 	my $html = 
 		GetPageHeader('about') .
 		GetDialogX(GetTemplate('html/page/about.template'), 'About') .
+		GetDataDialog() .
+		GetDialogX('DALL-E, <br>"hypercode.com nice website tileable image, cosmic latte", <br>2023', 'Image Credit') .
 		GetPageFooter('welcome')
 	;
 
