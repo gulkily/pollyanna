@@ -1,3 +1,8 @@
+"my name is tag" should by default only work on pubkey items
+	this will also restrict self-naming to key-based accounts
+
+===
+
 ensure that cache and other files are cleaned up regularly
     write script to remove files more than 24 hours ago
     	cache
