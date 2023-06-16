@@ -61,6 +61,21 @@ sub GetAuthorInfoBox { # $authorKey ; returns author info box
 		$authorDescription = $adminContainer;
 	}
 
+	# if author does not have public key, add notice about it in the description
+	if (!$publicKeyHash) {
+		if ($authorDescription) {
+			$authorDescription .= '<br>';
+		}
+
+		my $descText = '<b>Author does not have public key.</b>';
+#		my $adminContainer = GetTemplate('html/item/container/admin.template');
+#		my $colorAdmin = GetThemeColor('admin_text') || '#c00000';
+#		$adminContainer =~ s/\$colorAdmin/$colorAdmin/g;
+#		$adminContainer =~ s/\$message/$descText/g;
+
+		$authorDescription .= $descText;
+	}
+
 	if ($authorDescription) {
 		$authorDescription .= '<br>';
 	}
