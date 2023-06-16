@@ -62,38 +62,44 @@ sub GetTokenDefs {
 			'token'   => 'cookie',
 			'mask'    => '^(cookie)(\W+)([0-9A-F]{16})',
 			'mask_params'    => 'mgi',
-			'message' => '[Cookie]'
+			'message' => '[Cookie]',
+			'apply_to_self' => 1
 		},
 		{ # client id of user who posted the message
 			'token'   => 'client',
 			'mask'    => '^(client)(\W+)([0-9A-F]{16})',
 			'mask_params'    => 'mgi',
-			'message' => '[Client]'
+			'message' => '[Client]',
+			'apply_to_self' => 1
 		},
 		{ # server receipt time of message
 			'token'   => 'received',
 			'mask'    => '^(received)(\W+)([0-9]{10})',
 			'mask_params'    => 'mgi',
-			'message' => '[Received]'
+			'message' => '[Received]',
+			'apply_to_self' => 1
 		},
 		{ # date in yyyy-mm-dd format
 			'token'   => 'date',
 			'mask'    => '^(date)(\W+)([0-9]{4}\-[0-9]{2}\-[0-9]{2})',
 			'mask_params'    => 'mgi',
-			'message' => '[Date]'
+			'message' => '[Date]',
+			'apply_to_self' => 1
 		},
 		{ # time in epoch
 			'token'   => 'time',
 			'mask'    => '^(time)(\W+)([0-9]+)',
 			'mask_params'    => 'mgi',
 			'message' => '[Time]',
-			'target_attribute' => 'manual_timestamp'
+			'target_attribute' => 'manual_timestamp',
+			'apply_to_self' => 1
 		},
 		{ # host user used to post message
 			'token'   => 'host',
 			'mask'    => '^(host)(\W+)([0-9a-z\.:]+)',
 			'mask_params'    => 'mgi',
-			'message' => '[Host]'
+			'message' => '[Host]',
+			'apply_to_self' => 1
 		},
 		{ # surpass: this item is better than another item
 			'token'   => 'surpass',
@@ -106,13 +112,15 @@ sub GetTokenDefs {
 			'token'   => 'my_name_is',
 			'mask'    => '^(my name is)(\W+)([A-Za-z0-9\'_\., ]+)\r?$',
 			'mask_params'    => 'mgi',
-			'message' => '[MyNameIs]'
+			'message' => '[MyNameIs]',
+			'apply_to_self' => 1
 		},
 		{ # parent of item (to which item is replying)
 			'token'   => 'parent',
 			'mask'    => '^(\>\>)(\W?)([0-9a-f]{40})', # >>
 			'mask_params' => 'mg',
-			'message' => '[Parent]'
+			'message' => '[Parent]',
+			'apply_to_self' => 1
 		},
 		{ # parent of item (to which item is replying)
 			'token'   => 'signature_divider',
@@ -131,6 +139,7 @@ sub GetTokenDefs {
 			'mask'    => '^(title)(\W)(.+)$',
 			'mask_params'    => 'mg',
 			'apply_to_parent' => 1,
+			'apply_to_self' => 0,
 			'message' => '[Title]'
 		},
 		{ # title of item, either self or parent. used for display when title is needed #title title:
@@ -138,19 +147,22 @@ sub GetTokenDefs {
 			'mask'    => '^(boxes)(\W)(.+)$',
 			'mask_params'    => 'mg',
 			'apply_to_parent' => 0,
+			'apply_to_self' => 1,
 			'message' => '[BoxCount]'
 		},
 		{ # begin time, self only:
 			'token'   => 'begin',
 			'mask'    => '^(begin)(\W)(.+)$',
 			'mask_params'    => 'mg',
-			'message' => '[Begin]'
+			'message' => '[Begin]',
+			'apply_to_self' => 1
 		},
 		{ # duration, self only:
 			'token'   => 'duration',
 			'mask'    => '^(duration)(\W)(.+)$',
 			'mask_params'    => 'mg',
-			'message' => '[Duration]'
+			'message' => '[Duration]',
+			'apply_to_self' => 1
 		},
 		# { # track: self only:
 		# 	'token'   => 'track',
@@ -163,6 +175,7 @@ sub GetTokenDefs {
 			'mask'    => '^(name)(\W)(.+)$',
 			'mask_params'    => 'mg',
 			'apply_to_parent' => 1,
+			'apply_to_self' => 1,
 			'message' => '[Name]'
 		},
 		{ # order of item, either self or parent. used for ordering things
@@ -170,6 +183,7 @@ sub GetTokenDefs {
 			'mask'    => '^(order)(\W)(.+)$',
 			'mask_params'    => 'mg',
 			'apply_to_parent' => 1,
+			'apply_to_self' => 0,
 			'message' => '[Order]'
 		},
 		{ # used for image alt tags #todo
@@ -220,7 +234,8 @@ sub GetTokenDefs {
 			'mask_params' => 'mgi',
 			'message' => '',
 			#'message' => '[HashTag]',
-			'apply_to_parent' => 0,
+			'apply_to_parent' => 1, #todo why is this 0?
+			'apply_to_self' => 1,
 			#'require_spacer' => 0
 		},
 		{ # verify token, for third-party identification
