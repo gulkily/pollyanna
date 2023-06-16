@@ -19,6 +19,8 @@ sub GetWritePage { # returns html for write page
 	$writePageHtml = GetPageHeader('write');
 	$writePageHtml .= GetTemplate('html/maincontent.template');
 
+	require_once('dialog/write.pl');
+
 	my $writeForm = GetWriteDialog();
 
 	WriteLog('GetWriteForm: js is on, adding write_options.template');
