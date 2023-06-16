@@ -579,9 +579,10 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										DBAddItemAttribute($itemParent, $targetAttribute, $tokenFound{'param'}, $itemTimestamp, $fileHash);
 									}
 								}
-							} else {
+							}
+							if ($tokenFound{'apply_to_self'} || !($tokenFound{'apply_to_parent'} && @itemParents)) {
 								#push @indexMessageLog, 'token does not have apply_to_parent: ' . $tokenFound{'token'};
-								WriteLog('IndexTextFile: token does not have apply_to_parent: ' . $tokenFound{'token'});
+								WriteLog('IndexTextFile: apply_to_self: ' . $tokenFound{'token'});
 								DBAddItemAttribute($fileHash, $targetAttribute, $tokenFound{'param'}, $itemTimestamp, $fileHash);
 
 								if ($tokenFound{'token'} eq 'hike_set') {
@@ -686,9 +687,9 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						WriteLog('IndexTextFile: $voteTime = ' . $voteTime);
 
 						if ($tokenFound{'hashtag'}) {
-							DBAddVoteRecord($fileHash, $voteTime, $tokenFound{'hashtag'}); #'hashtag'
+							DBAddVoteRecord($fileHash, $voteTime, $tokenFound{'hashtag'}); # 'hashtag'
 						} else {
-							DBAddVoteRecord($fileHash, $voteTime, $tokenFound{'token'}); #'hashtag'
+							DBAddVoteRecord($fileHash, $voteTime, $tokenFound{'token'}); # not 'hashtag'
 						}
 					} # title, access_log_hash, http, https, alt, name, self_timestamp, operator_please
 					else {
