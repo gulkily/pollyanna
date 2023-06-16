@@ -91,18 +91,6 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 		$templateMemo{$filename} = $template;
 		return $template;
 	} else {
-		if (index($templateName, 'query') != -1) {
-			# if template is under template/query and it doesn't have an .sql extension, try it with the sql extension
-			# this shouldn't be necessary eventually #todo
-			if (index($templateName, '.sql') == -1) {
-				$template = GetTemplate($templateName . '.sql');
-				if ($template) {
-					$templateMemo{$filename} = $template;
-					return $template;
-				}
-			}
-		}
-
 		#if result is blank, report it
 		WriteLog("GetTemplate: warning: GetTemplate() returning empty string for $filename.");
 		return '';
