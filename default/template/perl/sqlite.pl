@@ -415,7 +415,10 @@ sub SqliteGetQueryTemplate { # $query ; look up query in templates if necessary 
 			my $querySane = $1;
 			WriteLog('SqliteGetQueryTemplate: looking up query/' . $querySane);
 
-			if (GetTemplate('query/' . $querySane)) {
+			if (GetTemplate('query/' . $querySane . '.sql')) {
+				$querySane = GetTemplate('query/' . $querySane . '.sql');
+				return $querySane;
+			} elsif (GetTemplate('query/' . $querySane)) {
 				$querySane = GetTemplate('query/' . $querySane);
 				return $querySane;
 			} else {
