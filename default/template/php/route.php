@@ -911,6 +911,7 @@ if (GetConfig('admin/php/route_enable')) {
 
 						#todo this should fail gracefully if git or backtick-exec is not available
 						$versionFull = `git rev-parse HEAD`; #todo fix this
+						$versionFull = trim($versionFull);
 						$versionSuccinct = substr($versionFull, 0, 8);
 						#$versionSequence = '775'; #my
 						#$versionFull = 'abcdef01'; #my
