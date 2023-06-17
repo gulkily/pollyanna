@@ -688,12 +688,12 @@ if (GetConfig('admin/php/route_enable')) {
                             $refreshFrontendStartTime = time();
                             $refreshFrontendLog = DoRefreshFrontend();
                             $refreshFrontendFinishTime = time();
-                            $refreshFrontendDuration = $reindexFinishTime - $reindexStartTime;
+                            $refreshFrontendDuration = $refreshFrontendFinishTime - $refreshFrontendStartTime;
 
                             WriteLog('route.php: refreshFrontendLog = ' . $refreshFrontendLog);
 
                             /* my */ $refreshFrontendLogSaved = ProcessNewComment($refreshFrontendLog, '');
-                            ProcessNewComment("Rebuild Frontend log metadata\n-- \n>>$reindexLogSaved\n#textart\ntitle: Rebuild Frontend finished at $refreshFrontendFinishTime", '');
+                            ProcessNewComment("Rebuild Frontend log metadata\n-- \n>>$refreshFrontendLogSaved\n#textart\ntitle: Rebuild Frontend finished at $refreshFrontendFinishTime", '');
                             RedirectWithResponse(GetHtmlFilename($refreshFrontendLogSaved), "Rebuild Frontend finished! <small>in $refreshFrontendDuration"."s</small>");
 						}
 

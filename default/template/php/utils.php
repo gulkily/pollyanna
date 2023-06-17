@@ -420,7 +420,7 @@ function DoRefreshFrontend () {
 		WriteLog('DoRefreshFrontend: hike.sh found, calling sh hike.sh frontend');
 		$commandRefreshFrontend = 'cd "' . $scriptDir . '" ; sh hike.sh frontend';
 		WriteLog('DoRefreshFrontend: $commandRefreshFrontend = ' . $commandRefreshFrontend);
-		$refreshFrontendLog = shell_exec($commandRebuildFrontend);
+		$refreshFrontendLog = shell_exec($commandRefreshFrontend);
 		WriteLog('DoRefreshFrontend: $refreshFrontendLog = ' . $refreshFrontendLog);
 		WriteLog('DoRefreshFrontend: cd "' . $pwd . '"');
 		WriteLog(`cd "$pwd"`);
