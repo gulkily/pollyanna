@@ -511,6 +511,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 					#todo put into config
 					my @validTokens = qw(
+						hashtag
 						title 
 						name 
 						order 
@@ -642,8 +643,8 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									IndexTextFile($newFilePath);
 
 									if (!$titleCandidate) {
-                                        $titleCandidate = 'Operator, please...';
-                                    }
+										$titleCandidate = 'Operator, please...';
+									}
 								} else {
 									#push @indexMessageLog, 'not thaaat specil';
 								}
