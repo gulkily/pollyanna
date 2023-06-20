@@ -365,6 +365,16 @@ if (GetConfig('admin/php/route_enable')) {
 			}
 		}
 
+		# look for user-provided fingerprint
+		foreach ($_GET as $keyGet => $valueGet) {
+			if (preg_match( '/([0-9A-F]{16})/', $keyGet, $matches)) {
+				/* my */ $getFp = $matches[0];
+				WriteLog('route.php: found user-provided fingerprint: ' . $getFp);
+				RedirectWithResponse('/profile.html', 'Welcome, human. Thank you for');
+			}
+		}
+
+
 		if (isset($_GET['path'])) {
 			WriteLog('route.php: cool: $_GET[path] confirmed!');
 
