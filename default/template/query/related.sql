@@ -22,7 +22,7 @@ FROM
 						item_attribute
 					WHERE
 						file_hash IN (?) AND
-						attribute IN(
+						attribute IN (
 							'http',
 							'https',
 							'url_domain',
