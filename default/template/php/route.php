@@ -546,14 +546,13 @@ if (GetConfig('admin/php/route_enable')) {
 			########################################################
 			########################################################
 
-// 			if ( $path == '/a.gif' || $path == '/p.gif' ) {
-// 				if (time() % 2) {
-// 					$html = file_get_contents('404.html');
-// 					header("HTTP/1.0 404 Not Found");
-// 					exit;
-// 				}
-// 			}
-
+			// 			if ( $path == '/a.gif' || $path == '/p.gif' ) {
+			// 				if (time() % 2) {
+			// 					$html = file_get_contents('404.html');
+			// 					header("HTTP/1.0 404 Not Found");
+			// 					exit;
+			// 				}
+			// 			}
 
 			if (
 				$path == '/404.html' ||
@@ -1459,7 +1458,7 @@ if (GetConfig('admin/php/route_enable')) {
 			if (!isset($_COOKIE['show_advanced']) || $_COOKIE['show_advanced'] == '0') {
 				# this defaults to true
 				# hides advanced elements
-				
+
 				WriteLog('route.php: $_COOKIE[show_advanced] = ' . ( isset( $_COOKIE['show_advanced']) ? $_COOKIE['show_advanced'] : 'UNDEFINED' ) ) ;
 
 				$assistCss .= ".advanced, .admin { display:none }\n";
@@ -1505,7 +1504,7 @@ if (GetConfig('admin/php/route_enable')) {
 
 		{ # assist_sequence_counter
 			if (GetConfig('admin/js/enable') && GetConfig('admin/php/assist_sequence_counter')) {
-				
+
 				// this allows clients to see the sequence counter
 				// and thus know how many posts they haven't seen yet
 				#$html .= '<script><!-- window.sequenceServerValue = 0; // --></script>';
@@ -1619,3 +1618,5 @@ else {
 		}
 	}
 } # NOT GetConfig('admin/php/route_enable')
+
+# /* route.php END */
