@@ -30,7 +30,8 @@ FROM
 							'title',
 							'cookie_id',
 							'client_id',
-							'url_domain'
+							'url_domain',
+							'message_hash'
 						)
 				)
 			)
