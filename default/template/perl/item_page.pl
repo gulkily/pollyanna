@@ -1010,7 +1010,12 @@ sub GetItemAttributesDialog2 {
 						$iaValue = '<a href="' . $iaValue . '">' . $iaValue . '</a>';
 						#todo sanitizing #security
 					}
-					if ($iaName eq 'git_hash_object' || $iaName eq 'normalized_hash' || $iaName eq 'sha1' || $iaName eq 'md5' || $iaName eq 'chain_hash') { #todo make it match on _hash and use _hash on the names
+					if (
+					    $iaName eq 'git_hash_object' ||
+					    $iaName eq 'sha1' ||
+					    $iaName eq 'md5' ||
+					    $iaName eq 'chain_hash'
+                    ) { #todo make it match on _hash and use _hash on the names
 						$iaValue = '<tt>' . $iaValue . '</tt>';
 					}
 					if ($iaName eq 'chain_previous') {

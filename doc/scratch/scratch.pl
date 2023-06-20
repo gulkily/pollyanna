@@ -1,3 +1,28 @@
+			#my $normalizedHash = sha1_hex(trim($detokenedMessage));
+			#v1
+			#
+			# {#v2
+			# 	my $hash = sha1_hex('');
+			# 	#draft better normalized hash
+			# 	my @lines = split("\n", $detokenedMessage);
+			# 	my @lines2;
+			# 	for my $line (@lines) {
+			# 		$line = trim($line);
+			# 		if ($line ne '') {
+			# 			push @lines2, lc($line);
+			# 		}
+			# 	}
+			# 	my @lines3 = uniq(sort(@lines2));
+			# 	for my $line (@lines3) {
+			# 		$hash = sha1_hex($hash . $line);
+			# 	}
+			# 	$normalizedHash = $hash;
+			# }
+
+
+#====
+
+
 #!/usr/bin/perl -T
 #freebsd: #!/usr/local/bin/perl -T
 #

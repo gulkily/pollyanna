@@ -25,7 +25,6 @@ FROM
 						attribute IN(
 							'http',
 							'https',
-							'normalized_hash',
 							'url_domain',
 							'title',
 							'cookie_id',
