@@ -450,6 +450,23 @@ function DraggingReset () {
 	return '';
 } // DraggingReset()
 
+function ReopenDialogs () {
+	//alert('DEBUG: ReopenDialogs()');
+
+	// stored dialogs are stored as a JSON string in localStorage
+
+	var dialogPosition = window.localStorage.getItem('dialogPosition');
+	//alert('DEBUG: dialogPosition.length = ' + dialogPosition.length);
+
+	// we need to parse that string into an object
+	// then we can walk through the object and recreate the dialogs
+	// #todo this should be done via SetPrefs()
+
+
+
+	return '';
+} // ReopenDialogs()
+
 function DraggingCascade () {
 	//alert('DEBUG: DraggingCascade()');
 	
@@ -652,6 +669,8 @@ function DraggingInit (doPosition) { // initialize all class=dialog elements on 
 	var doPosition = GetPrefs('draggable_restore');
 
 	UnhideHiddenElements();
+
+	// ReopenDialogs();
 
 	// find all class=dialog elements and walk through them
 	var elements = document.getElementsByClassName('dialog');
