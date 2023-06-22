@@ -370,6 +370,9 @@ if (GetConfig('admin/php/route_enable')) {
 			if (preg_match( '/([0-9A-F]{16})/', $keyGet, $matches)) {
 				/* my */ $getFp = $matches[0];
 				WriteLog('route.php: found user-provided fingerprint: ' . $getFp);
+				RedirectWithResponse('/profile.html', 'Welcome, human. Please, create a profile.');
+				# #todo actually make note of client id by storing a new item
+				# /* my */ $fileName = StoreNewComment($getFp, 0, 1);
 			}
 		}
 
