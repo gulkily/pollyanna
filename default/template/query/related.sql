@@ -1,7 +1,7 @@
 SELECT
 	COALESCE(NULLIF(item_title,''), 'Untitled') AS item_title,
 	item_flat.add_timestamp AS add_timestamp,
-	(item_flat.file_hash = ?) this_row,
+	(item_flat.file_hash = ?) AS this_row,
 	item_flat.file_hash AS file_hash,
 	GROUP_CONCAT(related_list.attribute) AS attribute_list,
 	COUNT(attribute) AS attribute_count
@@ -22,15 +22,15 @@ FROM
 						item_attribute
 					WHERE
 						file_hash IN (?) AND
-						attribute IN(
+						attribute IN (
 							'http',
 							'https',
-							'normalized_hash',
 							'url_domain',
 							'title',
 							'cookie_id',
 							'client_id',
-							'url_domain'
+							'url_domain',
+							'message_hash'
 						)
 				)
 			)

@@ -136,7 +136,6 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 
 	elsif (
 		$fieldName eq 'git_hash_object' ||
-		$fieldName eq 'normalized_hash' ||
 		$fieldName eq 'sha1' ||
 		$fieldName eq 'sha1sum' ||
 		$fieldName eq 'sha256sum' ||

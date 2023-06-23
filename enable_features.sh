@@ -15,6 +15,7 @@ echo self-admin
 echo operator, please
 echo hike set
 echo cookie inbox
+echo dialog controls
 
 echo 1 > config/setting/admin/js/enable
 echo 1 > config/setting/admin/php/enable
@@ -28,3 +29,4 @@ echo 1 > config/setting/admin/allow_self_admin_when_adminless
 echo 1 > config/setting/admin/token/operator_please
 echo 1 > config/setting/admin/token/hike_set
 echo 1 > config/setting/admin/php/cookie_index
+echo 1 > config/setting/html/menu_layer_controls
