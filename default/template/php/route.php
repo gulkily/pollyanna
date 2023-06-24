@@ -18,13 +18,13 @@ $hashSettingSuccinct = substr($hashSetting, 0, 8); #my
 
 WriteLog('route.php begins');
 
-if (GetConfig('admin/php/route_random_update') && rand(1, 17) == 1) {
+if (GetConfig('setting/admin/php/route_random_update') && rand(1, 17) == 1) {
 # randomly call DoUpdate() on page load
 # may slow down user's experience, but site is more likely to be up to date
 	if (function_exists('DoUpdate')) {
 		DoUpdate();
 	}
-} # if (GetConfig('admin/php/route_random_update') && rand(1, 17) == 1)
+} # if (GetConfig('setting/admin/php/route_random_update') && rand(1, 17) == 1)
 
 function SetHtmlClock ($html) { // sets html clock on page if present
 	WriteLog('SetHtmlClock()');
@@ -190,7 +190,7 @@ function InjectJs ($html, $scriptNames, $injectMode = 'before', $htmlTag = '</bo
 
 	WriteLog('InjectJs() begin...');
 
-	if (!GetConfig('admin/js/enable')) {
+	if (!GetConfig('setting/admin/js/enable')) {
 		return $html;
 	}
 
@@ -204,7 +204,7 @@ function InjectJs ($html, $scriptNames, $injectMode = 'before', $htmlTag = '</bo
 //		$scriptNames[] = 'clock';
 //	}
 //
-//	if (GetConfig('admin/js/enable') && GetConfig('admin/js/fresh')) {
+//	if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/fresh')) {
 //		// if clock is enabled, automatically add it
 //		$scriptNames[] = 'fresh';
 //	}
@@ -275,7 +275,7 @@ function InjectJs ($html, $scriptNames, $injectMode = 'before', $htmlTag = '</bo
 
 		static $debugType;
 		if (!isset($debugType)) {
-			$debugType = GetConfig('admin/js/debug');
+			$debugType = GetConfig('setting/admin/js/debug');
 			$debugType = trim($debugType);
 		}
 
@@ -301,7 +301,7 @@ function InjectJs ($html, $scriptNames, $injectMode = 'before', $htmlTag = '</bo
 	// get the wrapper, i.e. <script>$javascript</script>
 	$scriptInject = GetTemplate('html/utils/scriptinject.template');
 
-	if (GetConfig('admin/php/debug')) {
+	if (GetConfig('setting/admin/php/debug')) {
 		$dbt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS,2);
 		$caller = isset($dbt[1]['function']) ? $dbt[1]['function'] : null;
 		// <3 https://stackoverflow.com/questions/2110732/how-to-get-name-of-calling-function-method-in-php/28602181#28602181
@@ -337,18 +337,18 @@ function ReadGetParams ($GET) { // does what's needed with $_GET, takes $_GET as
 	#todo
 }
 
-if (GetConfig('admin/php/route_enable')) {
+if (GetConfig('setting/admin/php/route_enable')) {
 // admin/php/route_enable is true
 	$redirectUrl = '';
 	$cacheOverrideFlag = 0;
-	$cacheTimeLimit = GetConfig('admin/php/route_cache_time_limit'); // seconds page cache is good for
+	$cacheTimeLimit = GetConfig('setting/admin/php/route_cache_time_limit'); // seconds page cache is good for
 
 	$cacheWasUsed = 0;
 	$skipPrintedNotice = 0;
 	$stalePageNotice = 0;
 	#$html = '';
 
-	if (GetConfig('admin/php/debug_do_not_use_cache')) {
+	if (GetConfig('setting/admin/php/debug_do_not_use_cache')) {
 		$cacheOverrideFlag = 1;
 	}
 
@@ -441,7 +441,7 @@ if (GetConfig('admin/php/route_enable')) {
 			}
 
 			if ($path == '/welcome.html') {
-				if (GetConfig('admin/php/route_welcome_desktop_logged_in')) {
+				if (GetConfig('setting/admin/php/route_welcome_desktop_logged_in')) {
 					// if logged in, replace welcome with desktop page
 					include_once('cookie.php');
 
@@ -467,7 +467,7 @@ if (GetConfig('admin/php/route_enable')) {
 			} # $hostRequestLimit
 
 			if ($path == '/upload.html') {
-				if (GetConfig('admin/php/restrict_upload')) {
+				if (GetConfig('setting/admin/php/restrict_upload')) {
 					include_once('cookie.php');
 
 					if (isset($cookie) && $cookie) {
@@ -478,9 +478,9 @@ if (GetConfig('admin/php/route_enable')) {
 				}
 			}
 
-			if (GetConfig('admin/php/force_profile')) {
-			#if (GetConfig('admin/php/force_profile') || ($hostAccessCount > $hostRequestLimit)) { #todo add feature flag and uncomment
-				$redirectPath = GetConfig('admin/php/force_profile_redirect_path');
+			if (GetConfig('setting/admin/php/force_profile')) {
+			#if (GetConfig('setting/admin/php/force_profile') || ($hostAccessCount > $hostRequestLimit)) { #todo add feature flag and uncomment
+				$redirectPath = GetConfig('setting/admin/php/force_profile_redirect_path');
 				if (!$redirectPath) {
 					$redirectPath = '/profile.html'; # is often /welcome.html
 				}
@@ -521,17 +521,17 @@ if (GetConfig('admin/php/route_enable')) {
 						header("Cache-Control: post-check=0, pre-check=0", false);
 						header("Pragma: no-cache");
 
-						if (GetConfig('admin/php/force_profile_include_origin')) {
+						if (GetConfig('setting/admin/php/force_profile_include_origin')) {
 							$redirectPath = $redirectPath . '?origin=' . urlencode($path);
 						}
 
 						RedirectWithResponse($redirectPath, 'Please create profile to continue.'); # /profile.html /welcome.html
-						if (! GetConfig('admin/php/force_profile_fallthrough')) {
+						if (! GetConfig('setting/admin/php/force_profile_fallthrough')) {
 							exit; // #todo this is bad to have here
 						}
 					} # if ($clientHasCookie)
 				} # else (NOT $path == '/profile.html')
-			} # GetConfig('admin/php/force_profile'))
+			} # GetConfig('setting/admin/php/force_profile'))
 
 			$pathSelf = $_SERVER['PHP_SELF'];
 			$pathSelfReal = realpath('.'.$pathSelf);
@@ -670,7 +670,7 @@ if (GetConfig('admin/php/route_enable')) {
 							}
 
 							if (!$serverResponse && !$redirectUrl) {
-								if ($messageId != 'test' && GetConfig('admin/php/route_redirect_when_missing_message')) {
+								if ($messageId != 'test' && GetConfig('setting/admin/php/route_redirect_when_missing_message')) {
 									# if there is a message ticket provided,
 									# but nothing under that ticket,
 									# remove it from the url
@@ -814,7 +814,7 @@ if (GetConfig('admin/php/route_enable')) {
 							}
 						}
 
-						if (GetConfig('admin/js/enable') && GetConfig('admin/js/fresh')) {
+						if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/fresh')) {
 							// because javascript cannot access the page's headers
 							// we will put the ETag value at the end of the page
 							// as window.myOwnETag
@@ -828,7 +828,7 @@ if (GetConfig('admin/php/route_enable')) {
 								$html .= "<script><!-- window.myOwnETag = '$md5'; // --></script>";
 								// #todo this should probably be templated and added using InjectJs()
 							}
-						} # GetConfig('admin/js/enable') && GetConfig('admin/js/fresh')
+						} # GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/fresh')
 
 						$cacheWasUsed = 1;
 					} # it's reasonable to use cache (file exists, is not too old)
@@ -858,7 +858,7 @@ if (GetConfig('admin/php/route_enable')) {
 					}
 
 					//if ($path == '/settings.html') {
-					if (GetConfig('admin/php/form_add_timestamp_input')) {
+					if (GetConfig('setting/admin/php/form_add_timestamp_input')) {
 						// adds a 'timestamp' input element to all forms on the page to help avoid
 						// submitting the same exact request another time and getting a cached response
 						// it used to be only used on the settings page, but i found it useful on all pages
@@ -866,7 +866,7 @@ if (GetConfig('admin/php/route_enable')) {
 						$html = str_ireplace('</form>', $timestampFormElement . '</form>' , $html);
 					}
 
-					if (GetConfig('admin/php/force_profile_include_origin')) {
+					if (GetConfig('setting/admin/php/force_profile_include_origin')) {
 						// adds an 'origin' input element to forms on the page so that user can return to the page
 						// after submitting the form? #todo verify this works
 						$originValue = $path;
@@ -894,7 +894,7 @@ if (GetConfig('admin/php/route_enable')) {
 						$skipPrintedNotice = 1;
 					}
 
-					if (GetConfig('admin/php/route_notify_printed_time') && !$skipPrintedNotice) { # route.php -- page printed time notice
+					if (GetConfig('setting/admin/php/route_notify_printed_time') && !$skipPrintedNotice) { # route.php -- page printed time notice
 						# this should be in a template,
 						# but it would be very awkward to make at this time
 						# why is it awkward?
@@ -940,7 +940,7 @@ if (GetConfig('admin/php/route_enable')) {
 
 						$printedNotice = '<span class=advanced>' . GetDialogX($printedNotice, 'Page Information', '', '', '') . '</span>';
 
-						if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
+						if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
 							#$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onmousedown', 'this.style.zIndex = ++window.draggingZ;');
 							$printedNotice = AddAttributeToTag($printedNotice, 'table', 'onmouseenter', 'if (window.SetActiveDialog) { return SetActiveDialog(this); }'); #SetActiveDialog() route.php
 							$printedNotice = AddAttributeToTag($printedNotice, 'table', 'onmousedown', 'if (window.SetActiveDialog) { return SetActiveDialog(this); }'); #SetActiveDialog() route.php
@@ -991,13 +991,13 @@ if (GetConfig('admin/php/route_enable')) {
 			$html = SetHtmlClock($html);
 		}
 
-		if ($path == '/jstest1.html' && GetConfig('admin/js/enable')) {
+		if ($path == '/jstest1.html' && GetConfig('setting/admin/js/enable')) {
 			WriteLog('route.php: jstest1.html: inject $userAgentValue into /jstest1.html');
 			$userAgentValue = $_SERVER['HTTP_USER_AGENT'];
 			$userAgentValue = htmlspecialchars($userAgentValue);
 			$html = AddAttributeToTag($html, 'input name=txtNetworkUserAgent', 'value', $userAgentValue);
 		} else {
-			WriteLog('route.php: NOT jstest1.html: $path = ' . $path . '; admin/js/enable = ' . GetConfig('admin/js/enable'));
+			WriteLog('route.php: NOT jstest1.html: $path = ' . $path . '; admin/js/enable = ' . GetConfig('setting/admin/js/enable'));
 		}
 
 		if (isset($_GET['mode'])) {
@@ -1038,7 +1038,7 @@ if (GetConfig('admin/php/route_enable')) {
 			setcookie2('light', $lightMode);
 		}
 
-		if (GetConfig('admin/php/light_mode_always_on')) {
+		if (GetConfig('setting/admin/php/light_mode_always_on')) {
 			$lightMode = 1;
 		}
 
@@ -1070,7 +1070,7 @@ if (GetConfig('admin/php/route_enable')) {
 			// base template for server message, not including js
 			$serverResponseTemplate = GetTemplate('html/server_response.template');
 
-			if (GetConfig('admin/js/enable')) {
+			if (GetConfig('setting/admin/js/enable')) {
 				// add javascript call to close server response message
 				// for the entire server response message table
 				$serverResponseTemplate = AddAttributeToTag(
@@ -1105,7 +1105,7 @@ if (GetConfig('admin/php/route_enable')) {
 				if (index($html, "<a name=$anchorTo>") > -1) {
 					// same as below, same message applies
 
-					if (GetConfig('admin/js/enable')) {
+					if (GetConfig('setting/admin/js/enable')) {
 						// add javascript call to close server response message for the 'thanks' link
 						$serverResponseTemplate = AddAttributeToTag(
 							$serverResponseTemplate,
@@ -1121,7 +1121,7 @@ if (GetConfig('admin/php/route_enable')) {
 						$serverResponseTemplate
 					);
 
-					if (!$lightMode && GetConfig('admin/php/server_response_attach_to_anchor')) {
+					if (!$lightMode && GetConfig('setting/admin/php/server_response_attach_to_anchor')) {
 						WriteLog('route.php: server_response_attach_to_anchor');
 						// if server_response_attach_to_anchor, we will put the server message next to the anchor
 						// unless we are in light mode, because then we want the message at the top of the page
@@ -1153,7 +1153,7 @@ if (GetConfig('admin/php/route_enable')) {
 				$messageInjected = 1;
 			}
 
-			if (GetConfig('admin/js/enable')) {
+			if (GetConfig('setting/admin/js/enable')) {
 				//javascript stuff, if javascript is enabled
 
 				// inject server_response.js for hiding the server message popup
@@ -1224,7 +1224,7 @@ if (GetConfig('admin/php/route_enable')) {
 			if (isset($cookie) && $cookie) {
 				$fingerprint = $cookie;
 
-				if (!$handle && GetConfig('admin/php/alias_lookup')) {
+				if (!$handle && GetConfig('setting/admin/php/alias_lookup')) {
 					$handle = GetAlias($fingerprint);
 				} else {
 					$handle = 'Guest'; #todo #guest...
@@ -1260,7 +1260,7 @@ if (GetConfig('admin/php/route_enable')) {
 				);
 
 				if (isset($cookie) && $cookie) {
-					if (GetConfig('admin/js/enable')) {
+					if (GetConfig('setting/admin/js/enable')) {
 						#$html = str_replace('<span id=spanProfileLink></span>', '<span id=spanProfileLink><p><a href="/author/' . $cookie . '/index.html" onclick="if (window.sharePubKey) { return sharePubKey(this); }">Check in</a></p></span>', $html);
 						#$html = str_replace('<p id=spanProfileLink></p>', '<p id=spanProfileLink><a href="/author/' . $cookie . '/index.html" onclick="if (window.sharePubKey) { return sharePubKey(this); }">Check in</a></p>', $html);
 
@@ -1365,7 +1365,7 @@ if (GetConfig('admin/php/route_enable')) {
 			$html = SetHtmlClock($html);
 		}
 
-		if (GetConfig('admin/php/footer_stats') && file_exists('stats-footer.html')) { # Site Statistics*
+		if (GetConfig('setting/admin/php/footer_stats') && file_exists('stats-footer.html')) { # Site Statistics*
 			# footer stats
 			if ($path == '/keyboard.html' || $path == '/keyboard_netscape.html' || $path == '/keyboard_android.html') {
 				# no footer for the keyboard pages, because they are displayed in a thin frame at bottom of page
@@ -1439,7 +1439,7 @@ if (GetConfig('admin/php/route_enable')) {
 			);
 		} // light mode
 
-		if (GetConfig('admin/php/assist_show_advanced')) {
+		if (GetConfig('setting/admin/php/assist_show_advanced')) {
 			WriteLog('route.php: admin/php/assist_show_advanced is true');
 
 			#todo the defaults are hard-coded
@@ -1505,7 +1505,7 @@ if (GetConfig('admin/php/route_enable')) {
 		} # assist_show_advanced
 
 		{ # assist_sequence_counter
-			if (GetConfig('admin/js/enable') && GetConfig('admin/php/assist_sequence_counter')) {
+			if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/php/assist_sequence_counter')) {
 				
 				// this allows clients to see the sequence counter
 				// and thus know how many posts they haven't seen yet
@@ -1514,7 +1514,7 @@ if (GetConfig('admin/php/route_enable')) {
 			}
 		} # assist_sequence_counter
 
-		if (0 && GetConfig('admin/php/remove_post_links_when_no_cookie')) {
+		if (0 && GetConfig('setting/admin/php/remove_post_links_when_no_cookie')) {
 			#todo
 			#2022-05-31 13:26:34: (mod_fastcgi.c.451) FastCGI-stderr:PHP Warning:  Undefined variable $cookie in /home/manjaro/diary/html/route.php on line 1230
 
@@ -1558,7 +1558,7 @@ if (GetConfig('admin/php/route_enable')) {
 			$html .= '</html>';
 		}
 
-		if (function_exists('WriteLog') && GetConfig('admin/php/debug')) {
+		if (function_exists('WriteLog') && GetConfig('setting/admin/php/debug')) {
 			// DEBUG LOG
 			// inject at the bottom of page
 			if ($foo = stripos($html, '</body>')) {
@@ -1591,7 +1591,7 @@ if (GetConfig('admin/php/route_enable')) {
 		////////////////////////////
 		////////////////////////////
 	}
-} # if (GetConfig('admin/php/route_enable'))
+} # if (GetConfig('setting/admin/php/route_enable'))
 else {
 	WriteLog('route.php: config/setting/admin/php/route_enable = false');
 
@@ -1619,4 +1619,4 @@ else {
 			}
 		}
 	}
-} # NOT GetConfig('admin/php/route_enable')
+} # NOT GetConfig('setting/admin/php/route_enable')
