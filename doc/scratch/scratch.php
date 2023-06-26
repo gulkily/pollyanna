@@ -1,4 +1,18 @@
 
+// this was in route.php, but i am not sure why
+// it returns a 404 error for a.gif and p.gif with a 50% probability
+			// 			if ( $path == '/a.gif' || $path == '/p.gif' ) {
+			// 				if (time() % 2) {
+			// 					$html = file_get_contents('404.html');
+			// 					header("HTTP/1.0 404 Not Found");
+			// 					exit;
+			// 				}
+			// 			}
+
+===
+
+
+
 				if (GetConfig('setting/admin/js/enable')) {
 					$html = AddAttributeToTag($html, 'a href=#maincontent', 'onclick', "if (window.displayNotification) { displayNotification('You are welcome!') }");
 				}
