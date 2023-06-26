@@ -604,6 +604,9 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 						if ($messageId == 'test') {
 							# easter egg
+
+							WriteLog('route.php: $messageId = test');
+
 							$testMessage = '
 								Over the firewall,
 								out the antenna,
