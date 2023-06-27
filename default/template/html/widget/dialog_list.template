@@ -1,5 +1,7 @@
 <!-- dialog_list.template -->
-<noscript>*</noscript>
-<span id=lstDialog>
-</span>
+<fieldset>
+    <noscript>*</noscript>
+    <span id=lstDialog>
+    </span>
+</fieldset>
 <!-- / dialog_list.template -->
