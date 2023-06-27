@@ -7,19 +7,23 @@
 </p>
 
 <p>
-    <a href="/txt.zip">/txt.zip</a> (<span id=sizeTxtZip></span>)<br>
-    Contains all items as individual text files<br>
-    <a href="/txt.zip.txt">List of files</a>
+    <a href="/txt.zip">/txt.zip</a> (<span id=sizeTxtZip></span>) <br>
+    Contains all items as individual text files <br>
 </p>
 
 <p>
-    <a href="/image.zip">/image.zip</a> (<span id=sizeImageZip></span>)<br>
-    Contains all image files<br>
+    <a href="/image.zip">/image.zip</a> (<span id=sizeImageZip></span>) <br>
+    Contains all image files <br>
 </p>
 
 <p>
-<a href="/index.sqlite3.zip">/index.sqlite3.zip</a> (<span id=sizeSqliteZip></span>)<br>
-    Contains index of items in SQLite database
+    <a href="/index.sqlite3.zip">/index.sqlite3.zip</a> (<span id=sizeSqliteZip></span>) <br>
+    Contains index of items in SQLite database <br>
+</p>
+
+<p>
+    <a href="/tree.zip">/tree.zip</a> (<span id=sizeTreeZip></span>) <br>
+    Contains zip of the source tree <br>
 </p>
 
 <!-- / data.template -->
