@@ -862,22 +862,22 @@ select * from author_flat where file_hash in
 
 insec auth
 
+
 admin/state/welcome=1
+    1. Enter password:
+    Hint: xxxxxxxxyy
 
-1. Enter password:
-Hint: xxxxxxxxyy
+    2. Submit to adminset.html
 
-2. Submit to adminset.html
+    3. Generate key, create txt with setadmin token
 
-3. Generate key, create txt with setadmin token
+    4. Replace index.html
 
-4. Replace index.html
+    admin/state/last_seen
 
-admin/state/last_seen
+    admin/state/warning_window=7d
 
-admin/state/warning_window=7d
-
-admin/state/reset_window=60d
+    admin/state/reset_window=60d
 
 ==
 
