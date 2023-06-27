@@ -216,6 +216,8 @@ sub GetDialogX2 { # \%paramHash ; returns window
 	if (!$windowTitle) {
 		#WriteLog('GetDialogX2: warning: title missing, using Untitled');
 		#$windowTitle = 'Untitled';
+		#todo this doesn't look right and should be improved upon
+
 		$windowTitle = '';
 	}
 
