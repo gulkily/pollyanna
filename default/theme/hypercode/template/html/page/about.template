@@ -2,7 +2,17 @@
 
 <p>
     Hypercode is an experiment in <br>
-    accessible and compatible websites.
+    accessible and compatible websites. <br>
+    <br>
+    What does that mean? <br>
+    <br>
+    Hypercode wants to create a space where discussion can take place <br>
+    in a safe, transparent, and efficient space and manner.
+</p>
+
+<p>
+    Technically speaking, Hypercode is designed to <br>
+    "make the easy things easy, and the hard things possible".
 </p>
 
 <p>
@@ -10,21 +20,11 @@
 </p>
 
 <p>
-    GitHub: <a href="https://www.github.com/gulkily/pollyanna">pollyanna</a>
+    GitHub: <a href="https://www.github.com/gulkily/pollyanna">gulkily/pollyanna</a>
 </p>
 
 <p>
-    Maintainers: <br>
-    Several <a href="/tag/developer.html">developers</a> <br>
-    of various backgrounds.
-</p>
-
-<p>
-    Motivation: <br>
-    Make a nice website <br>
-    to please and enable <br>
-    the technical and non-technical <br>
-    users and intelligences.
+    Maintainers: Several <a href="/tag/developer.html">developers</a> of various backgrounds.
 </p>
 
 <!-- / template/html/page/about.template --> 
