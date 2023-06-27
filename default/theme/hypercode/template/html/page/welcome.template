@@ -1,6 +1,10 @@
 <!-- welcome.template -->
-Welcome to HyperCode, <br> 
-an experimental web space for you. <br> 
-Please, <a href="/write.html" onclick="InjectDialog('write'); return false;">be nice</a>.
+
+<fieldset>
+    Welcome to HyperCode, <br>
+    an experimental web space for you. <br>
+    Please, <a href="/write.html" onclick="InjectDialog('write'); return false;">be nice</a>.
+</fieldset>
+
 <!-- / welcome.template -->
 
