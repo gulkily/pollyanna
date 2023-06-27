@@ -1,6 +1,6 @@
 <!-- author_listing.template -->
 <tr>
 	<td>$authorLink</td>
-	<td>$authorLastSeen</td>
+	<td>$authorSeen</td>
 </tr>
 <!-- / author_listing.template -->

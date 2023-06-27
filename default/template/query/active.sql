@@ -1,7 +1,7 @@
 SELECT
 	author_key,
 	author_key author_id,
-	last_seen,
+	author_seen,
 	item_count,
 	author_score,
 	'' AS tagset_author,
@@ -9,7 +9,7 @@ SELECT
 FROM
 	author_flat
 WHERE
-	last_seen >= strftime('%s', 'now', '-3 day')
+	author_seen >= strftime('%s', 'now', '-3 day')
 ORDER BY
-	last_seen DESC
+	author_seen DESC
 

@@ -122,7 +122,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fieldName =~ m/.+timestamp$/ ||
 		$fieldName =~ m/.+start$/ ||
 		$fieldName =~ m/.+finish$/ ||
-		$fieldName eq 'last_seen'
+		$fieldName eq 'author_seen'
 	) {
 		# timestamp in epoch format, displayed as a timestamp widget
 		# example: 1675297480

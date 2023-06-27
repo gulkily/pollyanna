@@ -1,7 +1,7 @@
 SELECT
 	author_key,
 	author_key author_id,
-	last_seen,
+	author_seen,
 	item_count,
 	author_score,
 	'' AS tagset_author,

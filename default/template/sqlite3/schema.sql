@@ -312,7 +312,7 @@ AS
 SELECT
 author.key AS author_key,
 author_alias.alias AS author_alias,
-MAX(item_flat.add_timestamp) AS last_seen,
+MAX(item_flat.add_timestamp) AS author_seen,
 SUM(item_flat.item_score) AS author_score,
 COUNT(item_flat.file_hash) AS item_count,
 author_alias.file_hash AS file_hash
