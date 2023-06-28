@@ -6530,7 +6530,7 @@ sub DBGetTopAuthors { # Returns top-scoring authors from the database
 	}
 
 	return @resultsArray;
-}
+} # DBGetTopAuthors()
 
 sub DBGetTopItems { # get top items minus flag (hard-coded for now)
 	WriteLog('DBGetTopItems()');
