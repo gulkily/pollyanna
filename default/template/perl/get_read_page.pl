@@ -195,20 +195,22 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 				if ($zipName) {
 					require_once('make_zip.pl');
 					my %zipOptions;
-					$zipOptions{'where_clause'} = "		WHERE
-                                                   			item_flat.file_hash IN (
-                                                   				SELECT
-                                                   					file_hash
-                                                   				FROM
-                                                   					vote
-                                                   				WHERE
-                                                   					vote_value = '$tagName' OR
-                                                   					vote_value IN (
-                                                   						SELECT tag
-                                                   						FROM tag_parent
-                                                   						WHERE tag_parent = '$tagName'
-                                                   				)
-                                                   			)";
+					$zipOptions{'where_clause'} = "
+						WHERE
+							item_flat.file_hash IN (
+								SELECT
+									file_hash
+								FROM
+									vote
+								WHERE
+									vote_value = '$tagName' OR
+									vote_value IN (
+										SELECT tag
+										FROM tag_parent
+										WHERE tag_parent = '$tagName'
+								)
+							)
+					";
 					my @zipFiles = DBGetItemList(\%zipOptions);
 					MakeZipFromItemList($zipName, \@zipFiles);
 				} # if ($zipName)
