@@ -7,7 +7,7 @@ use 5.010;
 sub GetPeoplePage {
 	WriteLog('GetPeoplePage: caller = ' . join(',', caller));
 
-    my $html = '';
+	my $html = '';
 
 	#my $dialog = GetQueryAsDialog('people');
 	my @authors = SqliteQueryHashRef('people');
@@ -39,12 +39,12 @@ sub GetPeoplePage {
 		#$dialog = $dialog . GetDialogX($author{'author_alias'}, $authorHashRef);
 	}
 
-    $html =
-        GetPageHeader('people') .
-        $dialog .
+	$html =
+		GetPageHeader('people') .
+		$dialog .
 		GetQuerySqlDialog('people') .
-        GetPageFooter('people')
-    ;
+		GetPageFooter('people')
+	;
 
 	if (GetConfig('admin/js/enable')) {
 		my @js = qw(avatar puzzle settings profile utils timestamp clock fresh table_sort voting write);
@@ -54,7 +54,7 @@ sub GetPeoplePage {
 		$html = InjectJs($html, @js);
 	}
 
-    return $html;
+	return $html;
 }
 
 1;

@@ -209,7 +209,7 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 
 	$avatar =~ s/\$alias/$aliasHtmlEscaped/g; #todo use str_replace()
 
-    my $colorUsername = '';
+	my $colorUsername = '';
 	if (IsAdmin($authorKey)) {
 		$colorUsername = GetThemeColor('admin_text');
 		WriteLog('GetAvatar: $colorUsername reason is admin');

@@ -606,8 +606,8 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									IndexTextFile($newFilePath);
 
 									if (!$titleCandidate) {
-                                        $titleCandidate = 'hike set ...';
-                                    }
+										$titleCandidate = 'hike set ...';
+									}
 								} # hike_set
 
 								if ($tokenFound{'token'} eq 'operator_please') {
@@ -657,7 +657,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									if (
 										$tokenFound{'param'} =~ m|http://([^/]+)|
 										||
- 										$tokenFound{'param'} =~ m|https://([^/]+)|
+										$tokenFound{'param'} =~ m|https://([^/]+)|
 									) {
 										my $urlDomain = $1;
 										DBAddItemAttribute($fileHash, 'url_domain', $urlDomain, $itemTimestamp, $fileHash);
