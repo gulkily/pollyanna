@@ -197,6 +197,10 @@ function EventLoop () { // for calling things which need to happen on a regular 
 
 	if ((window.GetPrefs) && GetPrefs('draggable') && window.innerWidth && window.innerHeight) {
 		// if viewport size has changed, retile dialogs
+
+		// #todo needs some debugging and fixing on mobile devices, where
+		// innerWidth and innerHeight seem to change continuously
+
 		if (!window.rememberInnerWidth) {
 			window.rememberInnerWidth = window.innerWidth;
 		}
@@ -362,12 +366,12 @@ function EventLoop () { // for calling things which need to happen on a regular 
 			if (GetPrefs('notify_event_loop')) {
 				displayNotification('EventLoop: ' + eventLoopDuration + 'ms');
 			}
-//
-//			// #todo make it known to user that hitting performance limit
-//			if (document.title.substr(0,3) != '/ ') {
-//				// for now we just prepend the title with a slash
-//				document.title = '/ ' + document.title;
-//			}
+            //
+            //			// #todo make it known to user that hitting performance limit
+            //			if (document.title.substr(0,3) != '/ ') {
+            //				// for now we just prepend the title with a slash
+            //				document.title = '/ ' + document.title;
+            //			}
 
 			// set performance setting to 'faster'
 
@@ -691,7 +695,6 @@ function PingUrl (url, ele) { // loads arbitrary url via image or xhr
 // function EscapeUrl () {
 // function UriEscape () {
 // USE encodeURIComponent()
-
 
 //function ChangeInputToTextarea (input) { // called by onpaste
 ////#input_expand_into_textarea
