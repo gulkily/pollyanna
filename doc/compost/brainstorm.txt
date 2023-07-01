@@ -1,3 +1,8 @@
+"my name is tag" should by default only work on pubkey items
+	this will also restrict self-naming to key-based accounts
+
+===
+
 how to request deletion of item by voter+item+vote?
 	easy way to undo a vote from client
 
