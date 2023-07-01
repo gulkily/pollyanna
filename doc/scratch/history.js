@@ -12,7 +12,7 @@
 //				var dialogId = GetDialogId(allOpenDialogs[iDialog]);
 //				var gt = unescape('%3E');
 //
-//				if (dialogTitle.length > 24) {
+//				if (24 < dialogTitle.length) {
 //					dialogTitle = dialogTitle.substr(0, 24);
 //				}
 //
@@ -38,6 +38,6 @@
 //			}
 //		}
 //	}
-//} // UpdateDialogList()
+//} // UpdateHistoryList()
 
 // / history.js
