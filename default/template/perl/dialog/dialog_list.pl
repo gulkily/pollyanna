@@ -5,10 +5,15 @@ use warnings;
 use 5.010;
 
 sub GetDialogListDialog {
-	my $dialogContent = GetTemplate('html/widget/dialog_list.template');
+	WriteLog('GetDialogListDialog()');
+
+	my $dialogContent =
+		GetTemplate('html/widget/dialog_list.template') .
+		# GetTemplate('html/form/settings.template')
+	;
 	my $dialog = GetDialogX($dialogContent, 'Dialogs');
 
 	return $dialog;
-}
+} GetDialogListDialog()
 
 1;
