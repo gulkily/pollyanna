@@ -379,7 +379,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 				";
 				$txtIndex .= GetQueryAsDialog($query
 					,
-					'Posts Liked By Author',
+					'Posts Liked by Author',
 					'',
 					\%queryFlags
 				);
