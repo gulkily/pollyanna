@@ -52,6 +52,9 @@ sub MakeChainIndex { # $import = 1; reads from log/chain.log and puts it into it
 				}
 
 				if ($previousLine) {
+					#todo
+					#note: the claimed next/previous values are added regardless, and before 
+					#being hash-validated
 					my @arrayPreviousLine = split('-', $previousLine);
 					my $previousHash = $arrayPreviousLine[0];
 					DBAddItemAttribute($previousHash, 'chain_next', $fileHash);
@@ -73,6 +76,9 @@ sub MakeChainIndex { # $import = 1; reads from log/chain.log and puts it into it
 
 				$sequenceNumber = $sequenceNumber + 1;
 
+				# #todo here, if there is any wrong hash found,
+				# we ignore all subsequent hashes and generate a new chain
+				# this should be more obvious to the user
 				if ($isChecksumGood) {
 					$previousLine = $currentLine;
 				} else {
