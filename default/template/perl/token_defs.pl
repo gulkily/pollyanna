@@ -128,12 +128,12 @@ sub GetTokenDefs {
 			'mask_params' => 'mg',
 			'message' => '[Signature Divider]'
 		},
-	#				{ # reference to item
-	#					'token'   => 'itemref',
-	#					'mask'    => '(\W?)([0-9a-f]{8})(\W?)',
-	#					'mask_params' => 'mg',
-	#					'message' => '[Reference]'
-	#				}, #todo make it ensure item exists before parsing
+        # { # reference to item
+        # 	'token'   => 'itemref',
+        # 	'mask'    => '(\W?)([0-9a-f]{8})(\W?)',
+        # 	'mask_params' => 'mg',
+        # 	'message' => '[Reference]'
+        # }, #todo make it ensure item exists before parsing
 		{ # title of item, either self or parent. used for display when title is needed #title title:
 			'token'   => 'title',
 			'mask'    => '^(title)(\W)(.+)$',
@@ -257,19 +257,19 @@ sub GetTokenDefs {
 			'message' => '[SQL]',
 			'apply_to_parent' => 0
 		},
-#		{ # config token for setting configuration
-#			# config/admin/anyone_can_config = allow anyone to config (for open-access boards)
-#			# config/admin/signed_can_config = allow only signed users to config
-#			# config/admin/cookied_can_config = allow any user (including cookies) to config
-#			# otherwise, only admin user can config
-#			# also, anything under config/admin/ is still restricted to admin user only
-#			# admin user must have a pubkey
-#			'token' => 'config',
-#			'mask'  => '^(config)(\W)(.+)$', #bughere #todo
-#			'mask_params' => 'mgi',
-#			'message' => '[Config]',
-#			'apply_to_parent' => 1
-#		},
+        # { # config token for setting configuration
+        # 	# config/admin/anyone_can_config = allow anyone to config (for open-access boards)
+        # 	# config/admin/signed_can_config = allow only signed users to config
+        # 	# config/admin/cookied_can_config = allow any user (including cookies) to config
+        # 	# otherwise, only admin user can config
+        # 	# also, anything under config/admin/ is still restricted to admin user only
+        # 	# admin user must have a pubkey
+        # 	'token' => 'config',
+        # 	'mask'  => '^(config)(\W)(.+)$', #bughere #todo
+        # 	'mask_params' => 'mgi',
+        # 	'message' => '[Config]',
+        # 	'apply_to_parent' => 1
+        # },
 		{
 			'token' => 'operator_please',
 			'hashtag' => 'operator',
