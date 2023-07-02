@@ -1,7 +1,8 @@
 SELECT
 	item_title,
 	add_timestamp,
-	file_hash
+	file_hash,
+	item_score
 FROM
 	item_flat
 WHERE
