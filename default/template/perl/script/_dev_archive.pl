@@ -19,6 +19,7 @@
 
 print "========================================\n";
 print "About to archive content and reset site!\n";
+print "ALL PROFILES AND CONTENT MAY BE DELETED!\n";
 print "========================================\n";
 print "You have 3 seconds to press Ctrl + C ...\n";
 print "========================================\n";
