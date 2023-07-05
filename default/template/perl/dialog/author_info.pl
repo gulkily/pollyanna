@@ -31,7 +31,7 @@ sub GetAuthorInfoBox { # $authorKey ; returns author info box
 	my $authorImportance = 1;
 	my $itemCount = DBGetAuthorItemCount($authorKey);
 	my $authorDescription = '';
-	my $authorLastSeen = DBGetAuthorLastSeen($authorKey) || 0;
+	my $authorSeen = DBGetAuthorSeen($authorKey) || 0;
 
 	my $publicKeyHash = DBGetAuthorPublicKeyHash($authorKey);
 	my $publicKeyHashHtml = '';
@@ -86,7 +86,7 @@ sub GetAuthorInfoBox { # $authorKey ; returns author info box
 		$profileVoteButtons = '*';
 	}
 
-	$authorLastSeen = GetTimestampWidget($authorLastSeen) || '*';
+	$authorSeen = GetTimestampWidget($authorSeen) || '*';
 
 	if (!$authorDescription) {
 		$authorDescription = '*';
@@ -107,7 +107,7 @@ sub GetAuthorInfoBox { # $authorKey ; returns author info box
 	$authorInfoTemplate =~ s/\$authorScore/$authorScore/;
 	$authorInfoTemplate =~ s/\$itemCount/$itemCount/;
 	$authorInfoTemplate =~ s/\$authorDescription/$authorDescription/;
-	$authorInfoTemplate =~ s/\$authorLastSeen/$authorLastSeen/g;
+	$authorInfoTemplate =~ s/\$authorSeen/$authorSeen/g;
 	$authorInfoTemplate =~ s/\$profileVoteButtons/$profileVoteButtons/g;
 	if ($publicKeyHashHtml) {
 		$authorInfoTemplate =~ s/\$publicKeyHash/$publicKeyHashHtml/g;

@@ -1,6 +1,6 @@
 SELECT
 	author_key AS author_id,
-	last_seen
+	author_seen
 FROM author_flat 
 WHERE 
 	file_hash IN (

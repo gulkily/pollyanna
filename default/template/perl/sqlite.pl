@@ -2333,7 +2333,7 @@ sub DBGetAuthorItemCount { # returns number of items attributed to author identi
 	return 0;
 } # DBGetAuthorItemCount()
 
-sub DBGetAuthorLastSeen { # return timestamp of last item attributed to author
+sub DBGetAuthorSeen { # return timestamp of most recent item attributed to author
 # $key = author's gpg key
 	my $key = shift;
 	chomp ($key);
@@ -2351,7 +2351,7 @@ sub DBGetAuthorLastSeen { # return timestamp of last item attributed to author
 	$key = SqliteEscape($key);
 
 	if ($key) { #todo fix non-param sql
-		my $query = "SELECT MAX(item_flat.add_timestamp) AS last_seen FROM item_flat WHERE tags_list NOT LIKE '%,pubkey,%' AND author_key = '$key'";
+		my $query = "SELECT MAX(item_flat.add_timestamp) AS author_seen FROM item_flat WHERE tags_list NOT LIKE '%,pubkey,%' AND author_key = '$key'";
 		$lastSeenCache{$key} = SqliteGetValue($query);
 		return $lastSeenCache{$key};
 	} else {
@@ -2485,7 +2485,7 @@ sub DBGetTopAuthors { # Returns top-scoring authors from the database
 		SELECT
 			author_key,
 			author_alias,
-			last_seen,
+			author_seen,
 			item_count
 		FROM author_flat
 		ORDER BY item_count DESC

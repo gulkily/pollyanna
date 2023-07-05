@@ -4637,7 +4637,7 @@ sub SqliteMakeTables { # creates sqlite schema
 			author.key AS author_key,
 			author_alias.alias AS author_alias,
 			IFNULL(author_score.author_score, 0) AS author_score,
-			MAX(item_flat.add_timestamp) AS last_seen,
+			MAX(item_flat.add_timestamp) AS author_seen,
 			COUNT(item_flat.file_hash) AS item_count,
 			author_alias.file_hash AS file_hash
 		FROM
@@ -6423,7 +6423,7 @@ sub DBGetAuthorItemCount { # returns number of items attributed to author identi
 	return 0;
 } # DBGetAuthorItemCount()
 
-sub DBGetAuthorLastSeen { # return timestamp of last item attributed to author
+sub DBGetAuthorSeen { # return timestamp of most recent item attributed to author
 # $key = author's gpg key
 	my $key = shift;
 	chomp ($key);
@@ -6441,7 +6441,7 @@ sub DBGetAuthorLastSeen { # return timestamp of last item attributed to author
 	$key = SqliteEscape($key);
 
 	if ($key) { #todo fix non-param sql
-		my $query = "SELECT MAX(item_flat.add_timestamp) AS last_seen FROM item_flat WHERE author_key = '$key'";
+		my $query = "SELECT MAX(item_flat.add_timestamp) AS author_seen FROM item_flat WHERE author_key = '$key'";
 		$lastSeenCache{$key} = SqliteGetValue($query);
 		return $lastSeenCache{$key};
 	} else {
@@ -6511,7 +6511,7 @@ sub DBGetTopAuthors { # Returns top-scoring authors from the database
 			author_key,
 			author_alias,
 			author_score,
-			last_seen,
+			author_seen,
 			item_count
 		FROM author_flat
 		ORDER BY author_score DESC
@@ -6530,7 +6530,7 @@ sub DBGetTopAuthors { # Returns top-scoring authors from the database
 	}
 
 	return @resultsArray;
-}
+} # DBGetTopAuthors()
 
 sub DBGetTopItems { # get top items minus flag (hard-coded for now)
 	WriteLog('DBGetTopItems()');

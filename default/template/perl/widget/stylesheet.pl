@@ -23,30 +23,30 @@ sub GetHeaderStylesheet { # $pageType ; returns base stylesheet, plus extra styl
 	if ($pageType) {
 		$baseStylesheet . "\n" . GetPageStylesheet($pageType);
 	} else {
-        return $baseStylesheet . "\n" . '/* GetHeaderStylesheet: $pageType not specified */';
+		return $baseStylesheet . "\n" . '/* GetHeaderStylesheet: $pageType not specified */';
 	}
 } # GetHeaderStylesheet()
 
 sub GetPageStylesheet {
 	my $pageType = shift;
-    #todo sanity
-    if (!$pageType) {
-        $pageType = '';
-    }
-    chomp $pageType;
+	#todo sanity
+	if (!$pageType) {
+		$pageType = '';
+	}
+	chomp $pageType;
 
 	WriteLog('GetPageStylesheet: $pageType = ' . $pageType);
 
 	if ($pageType) {
 		#todo multiple page types
 		if (GetTemplate("css/page/$pageType.css")) {
-            return GetTemplate("css/page/$pageType.css");
+			return GetTemplate("css/page/$pageType.css");
 #            return '/* GetPageStylesheet: adding stylesheet below: */' . "\n" . GetTemplate("css/page/$pageType.css");
-        } else {
-            return '/* GetPageStylesheet: ' . "$pageType.css" . ' not found */';
-        }
+		} else {
+			return '/* GetPageStylesheet: ' . "$pageType.css" . ' not found */';
+		}
 	} else {
-        return '/* GetPageStylesheet: $pageType not specified */';
+		return '/* GetPageStylesheet: $pageType not specified */';
 	}
 } # GetPageStylesheet()
 

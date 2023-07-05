@@ -12,7 +12,7 @@
 	</th>
 </tr>
 
-<tr><td>last seen:</td><td>$authorLastSeen</td></tr>
+<tr><td>seen:</td><td>$authorSeen</td></tr>
 <tr><td>fingerprint:</td><td><tt>$fingerprint</tt></td></tr>
 <tr><td>notes:</td><td><b><span id=itsyou>*</span></b></td></tr>
 <tr class=advanced><td>actions:</td><td><b><span id=profileVoteButtons>$profileVoteButtons</span></b></td></tr>

@@ -65,7 +65,7 @@ if (!-e $TXTDIR) {
 }
 
 if (!-e $HTMLDIR . '/chain.log') {
-    PutFile($HTMLDIR . '/chain.log', '');
+	PutFile($HTMLDIR . '/chain.log', '');
 }
 
 if (!-e $IMAGEDIR) {

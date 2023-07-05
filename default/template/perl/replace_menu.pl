@@ -4,8 +4,8 @@ use strict;
 use warnings;
 use 5.010;
 
-
 sub ReplaceMenuInAllPages {
+# sub ReplaceMenu {
 # sub PutMenu {
 # sub WriteMenu {
 # sub UpdateMenu {
@@ -19,8 +19,9 @@ sub ReplaceMenuInAllPages {
 
 	require_once('widget/menu.pl');
 
-	my @pages = `grep "topmenu2.template" html -rl`; #todo htmldir
+	my @pages = `grep "topmenu2.template" "$HTMLDIR" -rl`;
 	WriteLog('ReplaceMenuInAllPages: scalar(@pages) = ' . scalar(@pages));
+
 	for my $page (@pages) {
 		chomp $page;
 		if ($page =~ m/\.html$/) {
@@ -38,6 +39,5 @@ sub ReplaceMenuInAllPages {
 		}
 	}
 } # ReplaceMenuInAllPages()
-
 
 1

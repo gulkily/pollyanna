@@ -15,6 +15,7 @@ sub GetDataDialog {
 	my $sizeTxtZip = -s "$HTMLDIR/txt.zip";
 	my $sizeImageZip = -s "$HTMLDIR/image.zip";
 	my $sizeSqliteZip = -s "$HTMLDIR/index.sqlite3.zip";
+	my $sizeTreeZip = -s "$HTMLDIR/tree.zip";
 
 	$sizeTxtZip = GetFileSizeWidget($sizeTxtZip);
 	if (!$sizeTxtZip) {
@@ -31,9 +32,16 @@ sub GetDataDialog {
 		$sizeSqliteZip = 0;
 	}
 
+	$sizeTreeZip = GetFileSizeWidget($sizeTreeZip);
+	if (!$sizeTreeZip) {
+		$sizeTreeZip = 0;
+	}
+
 	$dialog = str_replace('<span id=sizeTxtZip></span>', '<span id=sizeTxtZip>' . $sizeTxtZip . '</span>', $dialog);
 	$dialog = str_replace('<span id=sizeImageZip></span>', '<span id=sizeImageZip>' . $sizeImageZip . '</span>', $dialog);
 	$dialog = str_replace('<span id=sizeSqliteZip></span>', '<span id=sizeSqliteZip>' . $sizeSqliteZip . '</span>', $dialog);
+	$dialog = str_replace('<span id=sizeTreeZip></span>', '<span id=sizeTreeZip>' . $sizeTreeZip . '</span>', $dialog);
+	$dialog = str_replace('<span id=sizeTreeZip></span>', '<span id=sizeTreeZip>' . $sizeTreeZip . '</span>', $dialog);
 
 	#$dialog =~ s/\$sizeTxtZip/$sizeTxtZip/g;
 	#$dialog =~ s/\$sizeImageZip/$sizeImageZip/g;

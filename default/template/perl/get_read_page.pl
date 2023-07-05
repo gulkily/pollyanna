@@ -195,20 +195,22 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 				if ($zipName) {
 					require_once('make_zip.pl');
 					my %zipOptions;
-					$zipOptions{'where_clause'} = "		WHERE
-                                                   			item_flat.file_hash IN (
-                                                   				SELECT
-                                                   					file_hash
-                                                   				FROM
-                                                   					vote
-                                                   				WHERE
-                                                   					vote_value = '$tagName' OR
-                                                   					vote_value IN (
-                                                   						SELECT tag
-                                                   						FROM tag_parent
-                                                   						WHERE tag_parent = '$tagName'
-                                                   				)
-                                                   			)";
+					$zipOptions{'where_clause'} = "
+						WHERE
+							item_flat.file_hash IN (
+								SELECT
+									file_hash
+								FROM
+									vote
+								WHERE
+									vote_value = '$tagName' OR
+									vote_value IN (
+										SELECT tag
+										FROM tag_parent
+										WHERE tag_parent = '$tagName'
+								)
+							)
+					";
 					my @zipFiles = DBGetItemList(\%zipOptions);
 					MakeZipFromItemList($zipName, \@zipFiles);
 				} # if ($zipName)
@@ -288,15 +290,15 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		# this would add a list of all the items on the page
 		# 		$txtIndex .= GetQueryAsDialog($queryDisplay);
 
-        if (GetConfig('setting/zip/tag')) {
-            if (scalar(@files) > 0) {
-                my $zipLink = '<a href="/tag/' . $pageParam . '.zip">' . $pageParam . '.zip</a>'; #todo use RenderLink()
-                $zipLink = '<fieldset>' . $zipLink . '</fieldset>';
-                $txtIndex .= GetDialogX($zipLink, 'Archive'); # tag.zip
-            } else {
-                $txtIndex .= GetDialogX('This tag has no items yet, <br>so no archive is available.', 'Archive');
-            }
-        }
+		if (GetConfig('setting/zip/tag')) {
+			if (scalar(@files) > 0) {
+				my $zipLink = '<a href="/tag/' . $pageParam . '.zip">' . $pageParam . '.zip</a>'; #todo use RenderLink()
+				$zipLink = '<fieldset>' . $zipLink . '</fieldset>';
+				$txtIndex .= GetDialogX($zipLink, 'Archive'); # tag.zip
+			} else {
+				$txtIndex .= GetDialogX('This tag has no items yet, <br>so no archive is available.', 'Archive');
+			}
+		}
 
 		if ($pageParam eq 'image') { # GetReadPage()
 			#$txtIndex .= GetUploadDialog();
