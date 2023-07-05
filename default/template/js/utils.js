@@ -580,14 +580,14 @@ function UnmaskBlurredImages () {
 
 function elementInViewport (el) {
 	var top = el.offsetTop;
-	var left=el.offsetLeft;
+	var left = el.offsetLeft;
 	var width = el.offsetWidth;
 	var height = el.offsetHeight;
 
 	while (el.offsetParent) {
 		el = el.offsetParent;
 		top += el.offsetTop;
-		left+=el.offsetLeft;
+		left += el.offsetLeft;
 	}
 
 	return (
@@ -601,14 +601,14 @@ function elementInViewport (el) {
 
 function elementInViewport2 (el) {
 	var top = el.offsetTop;
-	var left=el.offsetLeft;
+	var left = el.offsetLeft;
 	var width = el.offsetWidth;
 	var height = el.offsetHeight;
 
 	while (el.offsetParent) {
 		el = el.offsetParent;
 		top += el.offsetTop;
-		left+=el.offsetLeft;
+		left += el.offsetLeft;
 	}
 
 	return (
