@@ -1516,6 +1516,10 @@ sub DBAddItem { # $filePath, $fileName, $authorKey, $fileHash, $itemType, $verif
 # if you're looking for a good place to e.g. patch in MakePage(),
 # you can append it all the way at the bottom
 
+# sub CreateItem {
+# sub PostItem {
+# sub InsertItem {
+
 	state $query;
 	state @queryParams;
 
