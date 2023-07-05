@@ -418,7 +418,8 @@ function GetPrefs (prefKey, storeName) { // get prefs value from localstorage
 				prefKey == 'show_advanced' || // default
 				prefKey == 'show_admin' || // default
 				prefKey == 'draggable' || // default
-				prefKey == 'draggable_scale' // default
+				prefKey == 'draggable_scale' || // default
+				prefKey == 'draggable_arrange_viewport_resize' // default
 			) {
 				// these settings default to 0/false:
 				// #todo does this need to be pre-set, if it is 0?
@@ -621,6 +622,7 @@ function SetInterfaceMode (ab, thisButton) { // updates several settings to chan
 			SetPrefs('performance_optimization', 'faster');
 			SetPrefs('draggable', 0);
 			SetPrefs('draggable_scale', 0);
+			SetPrefs('draggable_arrange_viewport_resize', 0);
 			SetPrefs('draggable_activate', 0);
 			SetPrefs('draggable_restore', 1);
 			SetPrefs('draggable_restore_collapsed', 1);
@@ -727,6 +729,7 @@ function LoadCheckboxValues () {
 	LoadCheckbox(document.getElementById('chkDraggableRestore'), 'draggable_restore');
 	LoadCheckbox(document.getElementById('chkDraggableRestoreCollapsed'), 'draggable_restore_collapsed');
 	LoadCheckbox(document.getElementById('chkDraggableScale'), 'draggable_scale');
+	LoadCheckbox(document.getElementById('chkArrangeViewportResize'), 'draggable_arrange_viewport_resize');
 	LoadCheckbox(document.getElementById('chkDraggableActivate'), 'draggable_activate');
 
 	LoadCheckbox(document.getElementById('chkDraggableSpawn'), 'draggable_spawn');

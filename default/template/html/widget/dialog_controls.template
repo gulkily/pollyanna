@@ -31,6 +31,7 @@
 		SetPrefs('draggable', 1);
 		SetPrefs('draggable_restore', 1);
 		SetPrefs('draggable_restore_collapsed', 1);
+		SetPrefs('draggable_arrange_viewport_resize', 1);
 		SetActiveDialog(GetParentDialog(this));
 		DraggingInit(0);
 		DraggingMakeFit(0);
@@ -50,6 +51,7 @@
 		SetPrefs('draggable_restore', 0);
 		SetPrefs('draggable_scale', 0);
 		SetPrefs('draggable_restore_collapsed', 0);
+		SetPrefs('draggable_arrange_viewport_resize', 0);
 		DraggingReset();
 		//window.location = '/help.html'; #option
 		window.location.reload(false);

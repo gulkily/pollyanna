@@ -48,6 +48,13 @@
 	</p>
 
 	<p>
+		<label for=chkArrangeViewportResize>
+			<input id=chkArrangeViewportResize name=chkArrangeViewportResize type=checkbox onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'draggable_arrange_viewport_resize'); }">
+			Arrange on viewport resize<noscript><b>*</b></noscript>
+		</label>
+	</p>
+
+	<p>
 		<label for=chkDraggableActivate>
 			<input id=chkDraggableActivate name=chkDraggableActivate type=checkbox onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'draggable_activate'); }">
 			Activate with pointer<noscript><b>*</b></noscript>
