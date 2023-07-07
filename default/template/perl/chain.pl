@@ -59,6 +59,7 @@ sub MakeChainIndex { # $import = 1; reads from log/chain.log and puts it into it
 					my $previousHash = $arrayPreviousLine[0];
 					DBAddItemAttribute($previousHash, 'chain_next', $fileHash);
 					DBAddItemAttribute($fileHash, 'chain_previous', $previousLine);
+					MakePage('item', $previousHash, 1); #todo: this is a hack, should be in DBAddItemAttribute(
 					$return{'chain_previous'} = $previousLine; # no next here yet, no chain_next
 				}
 

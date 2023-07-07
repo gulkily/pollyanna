@@ -234,7 +234,7 @@ sub GetTokenDefs {
 			'mask_params' => 'mgi',
 			'message' => '',
 			#'message' => '[HashTag]',
-			'apply_to_parent' => 1, #todo why is this 0?
+			'apply_to_parent' => 1,
 			'apply_to_self' => 1,
 			#'require_spacer' => 0
 		},

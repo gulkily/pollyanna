@@ -85,6 +85,7 @@ sub IndexHtmlFile { # $file | 'flush' ; indexes one text file into database
 
 	sleep 3;
 } # IndexHtmlFile()
+#todo this should be in its own module/file
 
 require_once('index_cpp_file.pl');
 require_once('index_py_file.pl');
@@ -222,6 +223,7 @@ sub IndexImageFile { # $file ; indexes one image file into database
 		return $fileHash;
 	}
 } # IndexImageFile()
+#todo this should be in its own module/file
 
 sub MakeIndex { # indexes all available text files, and outputs any config found
 # sub IndexFiles {
