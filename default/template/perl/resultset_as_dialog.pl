@@ -145,7 +145,7 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 			}
 
 			if (0 && $row->{'this_row'}) {
-				# selected row, highlight it
+				# selected row, highlight it, selected_row, row_selected
 				$content .= '<tr bgcolor="' . GetThemeColor('highlight_alert') . '">';
 			} else {
 				# use specified bg color
