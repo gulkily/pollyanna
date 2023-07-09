@@ -31,6 +31,46 @@
 
 
 
+		if (1) {
+			# list all other authors with the same alias
+
+			# get query from template and replace ? with authorKey
+			my $queryAuthorThreads =
+				"SELECT
+                 	author_key author_id,
+                 	author_seen,
+                 	item_count,
+                 	author_score,
+                    (author_key = ?) AS this_row
+                 FROM
+                 	author_flat
+                 WHERE
+                 	author_key IN (
+                 		SELECT author_key
+                 		FROM author_flat WHERE author_key = ?
+                 	)
+                ";
+			#todo properly template the parameters
+			$queryAuthorThreads = str_replace('?', "'$authorKey'", $queryAuthorThreads);
+			$queryAuthorThreads = str_replace('?', "'$authorKey'", $queryAuthorThreads);
+
+			WriteLog('queryAuthorThreads: ' . $queryAuthorThreads);
+
+			my %queryFlags;
+			my $sameAliasDialog = GetQueryAsDialog(
+				$queryAuthorThreads,
+				'Related Authors',
+				#'Other Authors with Alias ' . GetAlias($authorKey),
+				'',
+				\%queryFlags
+			);
+			$txtIndex .= $sameAliasDialog;
+		}
+
+
+
+
+
 			#my $normalizedHash = sha1_hex(trim($detokenedMessage));
 			#v1
 			#
