@@ -1,3 +1,15 @@
+people pages
+    /person/hash.html
+        hash is based on username
+            case-insensitive, probably
+
+===
+
+there needs to be a script for recovering from accidentally editing config/* in code editor
+    there needs to be a warning, like config/* being read-only
+        this should automatically be done if .idea directory is present
+
+===
 
 Outbox feature
 	Adding
