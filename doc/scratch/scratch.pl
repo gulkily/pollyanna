@@ -1,3 +1,36 @@
+		if (1) {
+			# list all other authors with the same alias
+
+			# get query from template and replace ? with authorKey
+			my $queryAuthorThreads =
+				"SELECT
+                 	author_key author_id,
+                 	author_seen,
+                 	item_count,
+                 	author_score
+                 FROM
+                 	author_flat
+                 WHERE
+                 	author_key IN (
+                 		SELECT author_key
+                 		FROM author_flat WHERE author_key = ?
+                 	)
+                 	AND author_key NOT IN (?)"; #todo template it in template/query
+			#todo properly template the parameters
+			$queryAuthorThreads =~ str_replace('?', "'$authorKey'", $queryAuthorThreads);
+			$queryAuthorThreads =~ str_replace('?', "'$authorKey'", $queryAuthorThreads);
+			my $sameAliasDialog = GetQueryAsDialog(
+				$queryAuthorThreads,
+				'Other Authors with Alias ' . GetAlias($authorKey),
+				'',
+				\%queryFlags
+			);
+			$txtIndex .= $sameAliasDialog;
+		}
+
+
+
+
 			#my $normalizedHash = sha1_hex(trim($detokenedMessage));
 			#v1
 			#
