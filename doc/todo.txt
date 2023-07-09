@@ -1,4 +1,21 @@
 
+Outbox feature
+	Adding
+		When Send button is pressed:
+			Store hash:content in LocalStorage
+				It should contain >> tag to reply item
+	/outbox.html
+		1) List all the stored things
+
+
+
+===
+
+"my name is tag" should by default only work on pubkey items
+	this will also restrict self-naming to key-based accounts
+
+===
+
 ensure that cache and other files are cleaned up regularly
 	write script to remove files more than 24 hours ago
 		cache
