@@ -540,7 +540,7 @@ function SaveCheckbox (ths, prefKey) { // saves value of checkbox, toggles affec
 	///////////////////////////////
 	// BEFORE SAVE ACTIONS BEGIN //
 	//if (prefKey == '' +	'draggable_scale') {
-	if (prefKey == '' +	'draggable_scale') {
+	if (prefKey == '' +	'draggable_scale') { // this is done in case prefKey is somehow a number
 		if (window.SetActiveDialog) {
 			SetActiveDialog(0);
 		}
