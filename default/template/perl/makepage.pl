@@ -436,7 +436,27 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		MakeSummaryPages();
 	}
 	#
-	# summary pages
+	# item identifier or prefix
+	elsif (IsItem($pageType)) {
+	    WriteMessage("recognized item identifier\n");
+	    MakePage('item', $pageType, 1);
+	}
+	elsif (IsItemPrefix($pageType)) {
+	    WriteMessage("recognized item prefix\n");
+	    MakePage('prefix', $pageType, 1);
+	}
+	#
+	# author fingerprint
+	elsif (IsFingerprint($pageType)) {
+	    WriteMessage("recognized author fingerprint\n");
+	    MakePage('author', $pageType, 1);
+	}
+	#
+	# date
+	elsif (IsDate($pageType)) {
+	    WriteMessage("recognized date\n");
+	    MakePage('date', $pageType, 1);
+	}
 	#
 	# fallthrough
 	else {
