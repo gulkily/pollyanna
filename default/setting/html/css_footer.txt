@@ -1,0 +1,2 @@
+Adds "Style Editor" dialog to footer of page (in advanced layer)
+however, Save button doesn't work? #todo
