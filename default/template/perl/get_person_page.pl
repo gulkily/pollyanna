@@ -29,6 +29,15 @@ sub GetPersonPage { # $personName
 		GetPageFooter('person')
 	;
 
+	my @jsToInject = qw(settings timestamp voting utils profile);
+	if (GetConfig('setting/admin/js/fresh')) {
+		push @jsToInject, 'fresh';
+	}
+	if (GetConfig('setting/html/reply_cart')) {
+		push @jsToInject, 'reply_cart';
+	}
+	$html = InjectJs($html, @jsToInject);
+
 	return $html;
 } # GetPersonPage()
 
