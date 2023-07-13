@@ -15,6 +15,7 @@ fieldset {
 input[type=text], input[type=password], select, option, textarea {
 	background-color: $colorInputBackground;
 	color: $colorInputText;
+	border-color: $colorSecondary;
 }
 button, input[type=button], input[type=submit], input[type=checkbox] {
 	background-color: $colorWindow;
@@ -55,6 +56,9 @@ input:focus, textarea:focus {
 }
 .dialog tbody tr td {
 	background-color: #101000;
+}
+.titlebarButtons {
+	float: right;
 }
 
 /* / theme/amber/additional.css */
