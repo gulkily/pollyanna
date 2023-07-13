@@ -1,13 +1,32 @@
+ballot_time field should reflect ballot time
+	(currently  0 for user-applied hashtags)
+	workaround: join to item_flat
+make person_avatar view
+
+===
+
+how to link image to user who uploaded it?
+	this can be done by the user manually by tagging the image after upload
+
+item has type image
+	voter of item is user
+		and vote is 'avatar' or 'profilepic' etc
+
+
+===
+
 people pages
     /person/hash.html
         hash is based on username
             case-insensitive, probably
+for now, just make /person/username/index.html x
 
 ===
 
 there needs to be a script for recovering from accidentally editing config/* in code editor
     there needs to be a warning, like config/* being read-only
         this should automatically be done if .idea directory is present
+			if -e .idea chmod -w config/template/*
 
 ===
 
