@@ -1683,9 +1683,15 @@ while (my $arg1 = shift @foundArgs) {
 						#todo ...
 					}
 				} else {
-					WriteMessage("calling MakePage($makePageArg)\n");
-					MakePage($makePageArg);
-					# /new.html
+				    if ($makePageArg eq 'person') {
+				        my $personArg = shift @foundArgs;
+				        #todo sanity check
+				        MakePage('person', $personArg);
+				    } else {
+                        WriteMessage("calling MakePage($makePageArg)\n");
+                        MakePage($makePageArg);
+                        # /new.html
+                    }
 				}
 			} else {
 				print("missing argument for -M\n");

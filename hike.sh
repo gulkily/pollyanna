@@ -131,7 +131,7 @@ fi
 
 if [ $1 = page ]
 	then
-		time ./config/template/perl/pages.pl -M $2
+		time ./config/template/perl/pages.pl -M $2 $3
 fi
 
 if [ $1 = info ]

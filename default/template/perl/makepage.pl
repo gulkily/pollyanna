@@ -302,6 +302,27 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		PutHtmlFile('sponsors.html', $sponsorsPage);
 	} #sponsors
 	#
+	# person page, get person's alias/handle/name from $pageParam
+	elsif ($pageType eq 'person') {
+	    if ($pageParam =~ m/^([0-9a-zA-Z]+)$/) {
+	        $pageParam = $1;
+	    } else {
+	        WriteLog('MakePage: person: warning: $pageParam failed sanity check; caller = ' . join(',', caller));
+	        return '';
+	    }
+
+	    my $personName = $pageParam;
+	    my $targetPath = "person/$personName/index.html";
+
+	    WriteLog('MakePage: person: ' . $personName);
+
+        require_once('get_person_page.pl');
+	    my $personPage = GetPersonPage($personName);;
+
+	    PutHtmlFile($targetPath, $personPage);
+
+	}
+	#
 	# author page, get author's id from $pageParam
 	elsif ($pageType eq 'author') {
 		if ($pageParam =~ m/^([0-9A-F]{16})$/) {
