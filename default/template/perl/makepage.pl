@@ -340,13 +340,10 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		require_once('get_read_page.pl');
 		my $authorPage = GetReadPage('author', $authorKey);
 		if (!-e "$HTMLDIR/author/$authorKey") {
+		    # #todo make this not use -e
 			mkdir ("$HTMLDIR/author/$authorKey");
 		}
 		PutHtmlFile($targetPath, $authorPage);
-
-		if (IsAdmin($authorKey) == 2) {
-			MakeSummaryPages();
-		}
 	}
 	#
 	# if $pageType eq item, generate that item's page
