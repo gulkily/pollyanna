@@ -119,8 +119,15 @@ sub htmlspecialchars { # $text, encodes supplied string for html output
 
 sub HtmlEscape { # encodes supplied string for html output
 	my $text = shift;
-	$text = encode_entities2($text);
-	return $text;
+
+	if (defined($text)) {
+		$text = encode_entities2($text);
+		WriteLog('HtmlEscape: passed sanity check; caller = ' . join(',', caller));
+		return $text;
+	} else {
+		WriteLog('HtmlEscape: warning: defined($text) was FALSE; caller = ' . join(',', caller));
+		return '';
+	}
 } # HtmlEscape()
 
 sub GetStringHtmlColor {
