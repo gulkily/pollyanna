@@ -238,7 +238,7 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 			WriteLog('GetResultSetAsDialog: no_results: returning empty string due to $flags{no_no_results}');
 			return '';
 		} else {
-			WriteLog('GetResultSetAsDialog: no_results: returning space reserved for future content dialog');
+			WriteLog('GetResultSetAsDialog: no_results: returning space reserved for future content dialog; caller = ' . join(',', caller));
 			require_once('dialog.pl');
 			return GetDialogX('<fieldset><p>This space reserved for future content.</p></fieldset>', $title);
 		}
