@@ -898,6 +898,7 @@ function GetDialogTitle (win) { // returns dialog title (based on title bar capt
 } // GetDialogId()
 
 function CollapseWindow (p, newVisible) { // p = dialog element ; newVisible = 'none'/0 or anything else
+// function ExpandDialog () {
 // should be called CollapseExpandDialog ?
 // collapses or expands specified window/dialog
 // function CollapseDialog (
