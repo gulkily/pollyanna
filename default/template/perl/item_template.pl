@@ -357,9 +357,14 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			$isAdmin = 1;
 		}
 
-
 		# escape the alias name for outputting to page
-		$alias = HtmlEscape($alias);
+		if ($alias) {
+			#todo why is $alias false sometimes?
+			$alias = HtmlEscape($alias);
+		} else {
+			WriteLog('GetItemTemplate: warning: $alias was FALSE; caller = ' . join(',', caller);
+			$alias = 'Guest?';
+		}
 
 		my $fileHash = '';
 		if ($file{'file_path'}) {
