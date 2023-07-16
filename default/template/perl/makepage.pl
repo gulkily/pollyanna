@@ -95,6 +95,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		# uses WriteItemListingPages() and GetItemListingPage()
 
 		if ($pageType eq 'chain') { # chain.html
+			# sub GetChainPage {
 			$params{'dialog_columns'} = 'special_title_tags_list,chain_order,chain_timestamp,file_hash';
 		}
 		if ($pageType eq 'tags') {
