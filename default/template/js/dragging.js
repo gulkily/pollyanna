@@ -146,7 +146,7 @@ function CollapseAll () {
 			if (elements[i].getAttribute('id') == 'topmenu') {
 				// controls dialog
 			} else {
-				CollapseWindow(elements[i], 'none');
+				CollapseWindow(elements[i], 'none'); // CollapseAll()
 			}
 		}
 	}
@@ -161,7 +161,7 @@ function CollapseMost () {
 			if (elements[i].getAttribute('id') == 'topmenu') {
 				// controls dialog
 			} else {
-				changesMade += CollapseWindow(elements[i], 'none');
+				changesMade += CollapseWindow(elements[i], 'none'); // CollapseMost()
 			}
 		}
 
@@ -179,7 +179,7 @@ function ExpandAll () {
 			if (elements[i].getAttribute('id') == 'topmenu') {
 				// controls dialog
 			} else {
-				CollapseWindow(elements[i], 'initial');
+				CollapseWindow(elements[i], 'initial'); // ExpandAll()
 			}
 		}
 	}
@@ -439,7 +439,7 @@ function DraggingReset () {
 			// if we walk forwards here, all the elements will end up in the top left corner
 			window.draggingZ++;
 			DraggingInitDialog(elements[i], 0); // DraggingReset()
-			CollapseWindow(elements[i], 'show');
+			CollapseWindow(elements[i], 'show'); // DraggingReset()
 		} // for i in elements
 
 		return '';
@@ -561,7 +561,7 @@ function DraggingInitDialog (el, doPosition) {
 
 		if (GetPrefs('draggable_restore_collapsed')) {
 			if (GetPrefs(elId + '.collapse', 'dialogPosition') == 'none') {
-				CollapseWindow(el, 'none'); //#meh
+				CollapseWindow(el, 'none'); // DraggingInitDialog() // #meh
 			} else {
 				//ok
 			}
@@ -988,7 +988,7 @@ function CollapseWindowFromButton (t) { // collapses or expands window based on 
 			var winId = GetDialogId(p);
 			SetPrefs(winId + '.collapse', newVisible, 'dialogPosition');
 
-			return CollapseWindow(p, newVisible);
+			return CollapseWindow(p, newVisible); // CollapseWindowFromButton()
 		}
 	}
 

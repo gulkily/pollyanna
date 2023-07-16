@@ -240,7 +240,7 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 		} else {
 			WriteLog('GetResultSetAsDialog: no_results: returning space reserved for future content dialog; caller = ' . join(',', caller));
 			require_once('dialog.pl');
-			return GetDialogX('<fieldset><p>This space reserved for future content.</p></fieldset>', $title);
+			return GetDialogX('<fieldset><p>This space reserved for future content.</p></fieldset>', $title); # GetResultSetAsDialog()
 		}
 	}
 } # GetResultSetAsDialog()

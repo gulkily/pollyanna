@@ -56,7 +56,7 @@ sub GetTagCategoriesDialog { # $rootTag ; traverses all tagsets under a tag and 
 	}
 
 	if (!$somethingWasFound) {
-		$html = '<p>This space reserved for future content.</p>';
+		$html = '<p>This space reserved for future content.</p>'; # GetTagCategoriesDialog()
 	}
 
 	return $html;
