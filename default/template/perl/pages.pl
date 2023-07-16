@@ -1806,11 +1806,11 @@ while (my $arg1 = shift @foundArgs) {
 					if ($hashTag =~ m/^([a-zA-Z_\-0-9]+)$/) { #todo non-latin characters #hashtag
 						$hashTag = $1;
 
-						my $query = GetTemplate('query/tag_dozen');
+						my $query = GetTemplate('query/tag_dozen.sql');
 						my $queryLikeString = "'%,$hashTag,%'";
 						$query =~ s/\?/$queryLikeString/;
 
-						WriteLog('MakePage: $query = ' . $query); #todo removeme
+						WriteLog('MakePage: $query = ' . $query . '; caller = ' . join(',', caller)); #todo removeme
 						my $queryDialogTitle = '#' . $hashTag;
 
 						my $dialog = GetQueryAsDialog(
