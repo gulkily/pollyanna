@@ -1702,7 +1702,7 @@ while (my $arg1 = shift @foundArgs) {
 			##### DIALOGS ######################
 			##### DIALOGS ######################
 			##### DIALOGS ######################
-			WriteMessage("recognized -D\n");
+			WriteMessage("pages.pl: recognized -D\n");
 			my $makeDialogArg = shift @foundArgs;
 			#todo sanity check of $makeDialogArg
 			if ($makeDialogArg) {
@@ -1756,7 +1756,8 @@ while (my $arg1 = shift @foundArgs) {
 					# /dialog/people.html
 					# /dialog/threads.html
 
-					my $dialog = GetQueryAsDialog($makeDialogArg);
+					my $dialogTitle = $makeDialogArg; #todo make nicer
+					my $dialog = GetQueryAsDialog($makeDialogArg, $dialogTitle);
 					WriteMessage("-D $makeDialogArg\n");
 					my $dialogOutputPath = 'dialog/' . $makeDialogArg . '.html';
 					PutHtmlFile($dialogOutputPath, $dialog);
