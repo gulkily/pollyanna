@@ -17,15 +17,75 @@ sub GetPersonPage { # $personName
 
 	#todo add person.template
 
-	my %params;
-	$params{'where_clause'} = "WHERE file_hash IN (SELECT file_hash FROM item_flat WHERE author_key IN(SELECT author_key FROM author_flat WHERE author_alias = '$personName'))";
-	my @files = DBGetItemList(\%params);
+	my $keyList = '';
+	{
+		my %params;
+		$params{'where_clause'} = "
+			WHERE
+				tags_list LIKE '%,pubkey,%' AND
+				tags_list LIKE '%,approve,%' AND
+				file_hash IN (
+					SELECT file_hash
+					FROM item_flat
+					WHERE author_key IN(
+						SELECT author_key
+						FROM author_flat
+						WHERE author_alias = '$personName'
+					)
+				)
+		";
+		my @files = DBGetItemList(\%params);
+		$keyList = GetItemListHtml(\@files); #todo use GetAuthorInfoBox()
+	}
 
-	my $itemList = GetItemListHtml(\@files);
+	my $pendingKeyList = '';
+	{
+		my %params;
+		$params{'where_clause'} = "
+			WHERE
+				tags_list LIKE '%,pubkey,%' AND
+				tags_list NOT LIKE '%,approve,%' AND
+				file_hash IN (
+					SELECT file_hash
+					FROM item_flat
+					WHERE author_key IN(
+						SELECT author_key
+						FROM author_flat
+						WHERE author_alias = '$personName'
+					)
+				)
+		";
+		my @files = DBGetItemList(\%params);
+		$pendingKeyList = GetItemListHtml(\@files); #todo use GetAuthorInfoBox()
+	}
+
+
+
+	my $itemList = '';
+	{
+		my $queryItemList = "
+			SELECT
+				file_hash,
+				item_title,
+				add_timestamp
+			FROM
+				item_flat
+				JOIN person_author ON (person_author.author_key = item_flat.author_key)
+			WHERE person_author.author_alias = '$personName'
+			ORDER BY add_timestamp DESC
+			LIMIT 15
+		";
+		$itemList = GetQueryAsDialog($queryItemList, 'Activity');
+		#todo templatize the query, use parameter injection
+	}
 
 	my $html =
-		GetPageHeader('person') .
+		GetPageHeader('person', HtmlEscape($personName)) .
 		$itemList .
+		"\n<hr>\n" .
+		$keyList .
+		"\n<hr>\n" .
+		$pendingKeyList .
 		GetPageFooter('person')
 	;
 
