@@ -6,6 +6,7 @@ SELECT * FROM (
 		SUM(author_score) AS author_score,
 		SUM(item_count) AS item_count
 	FROM author_flat
+	WHERE author_key IN (SELECT author_key FROM person_author)
 	GROUP BY author_alias
 )
 WHERE
