@@ -89,6 +89,10 @@ sub GetDialogX { # $body, $title, $headings, $status, $menu ; returns html with 
 		$param{'title'} = '';
 	}
 
+	if (GetConfig('debug')) {
+		$param{'debug_message'} = 'GetDialogX: caller = ' . join(',', caller);
+	}
+
 	return GetDialogX2(\%param);
 } # GetDialogX()
 
@@ -188,6 +192,17 @@ sub GetDialogX2 { # \%paramHash ; returns window
 
 	# base template
 	my $windowTemplate = GetTemplate('html/window/standard.template');
+
+	if (GetConfig('debug')) { #todo separate debug setting for html templating
+		my $debugComment = '<!-- GetDialogX2: caller = ' . join(',', caller) . ' -->';
+
+		#todo go 2 levels up, since this is probably called from GetDialogX()
+		if ($param{'debug_message'}) {
+			$debugComment = '<!-- ' . $param{'debug_message'} . ' -->';
+		}
+
+		$windowTemplate = "\n" . $debugComment . "\n" . $windowTemplate;
+	}
 
 	if ($windowId) {
 		if ($windowId =~ m/^([0-9a-zA-Z_]+)$/) {
