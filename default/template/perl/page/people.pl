@@ -55,6 +55,9 @@ sub GetPeoplePage {
 		if (GetConfig('admin/php/enable')) {
 			push @js, 'write_php'; # write.html
 		}
+		if (GetConfig('setting/html/reply_cart')) {
+			push @js, 'reply_cart';
+		}
 		$html = InjectJs($html, @js);
 	}
 
