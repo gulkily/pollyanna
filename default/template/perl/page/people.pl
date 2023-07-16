@@ -59,6 +59,6 @@ sub GetPeoplePage {
 	}
 
 	return $html;
-}
+} # GetPeoplePage()
 
 1;
