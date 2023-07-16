@@ -341,6 +341,15 @@ WHERE author_alias != ''
 GROUP BY author_alias
 ;
 
+CREATE VIEW person_author
+AS
+SELECT DISTINCT
+author_key,
+author_alias
+FROM author_flat
+WHERE author_alias != ''
+AND file_hash IN (SELECT file_hash FROM item_flat WHERE tags_list LIKE '%,approve,%');
+
 CREATE VIEW item_score_relative AS
 SELECT 
 	SUM(score_relative) AS score_relative,
