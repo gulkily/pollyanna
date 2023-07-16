@@ -362,7 +362,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			#todo why is $alias false sometimes?
 			$alias = HtmlEscape($alias);
 		} else {
-			WriteLog('GetItemTemplate: warning: $alias was FALSE; caller = ' . join(',', caller);
+			WriteLog('GetItemTemplate: warning: $alias was FALSE; caller = ' . join(',', caller));
 			$alias = 'Guest?';
 		}
 
