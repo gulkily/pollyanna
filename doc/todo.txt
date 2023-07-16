@@ -1,3 +1,15 @@
+should be a warning if reply_cart.js is not included while reply cart buttons are present
+
+===
+
+add person_name to item_flat table
+
+===
+
+"hike page \#hashtag" should work
+
+===
+
 frame.html should have $colorBackground filled in
 
 ===
