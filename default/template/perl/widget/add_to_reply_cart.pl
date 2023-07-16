@@ -16,7 +16,7 @@ sub GetAddToReplyCartButton { # itemHash
 	#todo sanity
 
 	my $button = '
-		<a class=replyCartButton href=#>+cart</a>
+		<nobr><a class=replyCartButton href=#>+cart</a></nobr>
 	';
 	$button = trim($button);
 
