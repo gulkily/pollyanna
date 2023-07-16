@@ -2,6 +2,13 @@
 
 /* route.php BEGIN */
 
+/*
+	ATTENTION
+	The actual routes are defined in handle_not_found.php
+	ATTENTION
+	This should be fixed at some point...
+*/
+
 {
 	// this fixes a crash bug in mosaic. it should not cause a problem anywhere else
 	// <_<     >_>      o_O      -_-     ^_^
