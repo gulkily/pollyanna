@@ -13,23 +13,40 @@ sub GetPeoplePage {
 	my @authors = SqliteQueryHashRef('people');
 	shift @authors;
 
-	my $dialog = '';
+	my $people = '';
+	{
+		require_once('image_container.pl'); #todo move into widget
+		require_once('widget/person.pl'); #todo move into widget
+		for my $authorHashRef (@authors) {
+			my %author = %{$authorHashRef};
+			$people = $people . GetPersonDialog(\%author);
 
-	require_once('image_container.pl'); #todo move into widget
-	require_once('widget/person.pl'); #todo move into widget
+			#$dialog = $dialog . GetDialogX($author{'author_alias'}, $authorHashRef);
+		}
+	}
 
-	for my $authorHashRef (@authors) {
-		my %author = %{$authorHashRef};
-
-		$dialog = $dialog . GetPersonDialog(\%author);
-
-		#$dialog = $dialog . GetDialogX($author{'author_alias'}, $authorHashRef);
+	my $pending = '';
+	{
+		$pending = GetQueryAsDialog("
+				SELECT
+					file_hash,
+					'' AS tagset_author,
+					item_title,
+					add_timestamp,
+					author_key AS author_id,
+					author_key
+				FROM item_flat
+				WHERE tags_list LIKE '%,pubkey,%' AND tags_list NOT LIKE '%,approve,%'
+			",
+			'Pending Approval'
+		);
 	}
 
 	$html =
 		GetPageHeader('people') .
-		$dialog .
-		GetQuerySqlDialog('people') .
+		$people .
+		$pending .
+		# GetQuerySqlDialog('people') .
 		GetPageFooter('people')
 	;
 
