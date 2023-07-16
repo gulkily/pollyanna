@@ -411,8 +411,11 @@ sub SqliteGetQueryTemplate { # $query ; look up query in templates if necessary 
 	}
 	chomp $query;
 
-	if (index($query, ' ') == -1 && substr($query, 0, 1) ne '.') {
-		if ($query =~ m/^([a-zA-Z0-9\-_.]+)$/) {
+	if (
+		(index($query, ' ') == -1) &&  # if it has a space, it's probably already an sql query if it has a space
+		(substr($query, 0, 1) ne '.')  # if it begins with a period, it's probably a query like '.tables'
+	) {
+		if ($query =~ m/^([a-zA-Z0-9\-_.]+)$/) { # sanity check
 			my $querySane = $1;
 			WriteLog('SqliteGetQueryTemplate: looking up query/' . $querySane);
 
