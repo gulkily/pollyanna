@@ -721,6 +721,7 @@ function LoadCheckbox (c, prefKey) { // updates checkbox state to reflect settin
 } // LoadCheckbox()
 
 function LoadCheckboxValues () {
+// function LoadCheckbox () {
 	//alert('DEBUG: LoadCheckboxValues()');
 
 	// #todo check if being called too often?
