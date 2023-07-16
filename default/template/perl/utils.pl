@@ -860,6 +860,7 @@ sub GetTemplate { # $filename ; returns specified template from template directo
 		if (index($filename, 'query') != -1) {
 			# if template is under template/query and it doesn't have an .sql extension, try it with the sql extension
 			# this shouldn't be necessary eventually #todo
+			#todo this doesn't seem to work, as with query/tag_dozen
 			if (index($filename, '.sql') == -1) {
 				$template = GetTemplate($filename . '.sql');
 				if ($template) {
