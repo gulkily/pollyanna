@@ -1185,13 +1185,20 @@ function FetchDialog (dialogName) {
 	if (document.getElementById) {
 		var dialogExists = document.getElementById(dialogId);
 		if (dialogExists) {
-			//alert('DEBUG: FetchDialog: dialogExists');
-			if (GetPrefs('draggable_spawn')) {
-				//document.title = !!dialogExists.getAttribute('imactive');
-				SetActiveDialog(dialogExists);
-				return false;
+			// if dialog is already on page, we just focus it
+			// UNLESS it is the settings dialog, in which case we go to the settings page
+			// because we want to see the other settings dialogs
+			if (dialogName == 'settings') {
+				return true;
+			} else {
+				//alert('DEBUG: FetchDialog: dialogExists');
+				if (GetPrefs('draggable_spawn')) {
+					//document.title = !!dialogExists.getAttribute('imactive');
+					SetActiveDialog(dialogExists);
+					return false;
+				}
+				return false; // #todo refactor this
 			}
-			return false; // #todo refactor this
 		}
 	}
 
