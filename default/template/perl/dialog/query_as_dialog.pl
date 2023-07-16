@@ -47,7 +47,7 @@ sub GetQueryAsDialog { # $query, $title, $columns, \%param
 
 	my @result  = SqliteQueryHashRef($query);
 
-	#WriteLog('GetQueryAsDialog: $query = ' . $query . '; calling GetResultSetAsDialog()');
+	#WriteLog('GetQueryAsDialog: $query = ' . $query . '; calling GetResultSetAsDialog(); caller = ' . join(',', caller));
 	#commented because it prints a lot
 
 	if (scalar(@result) < 2 && $flags{'no_empty'}) {
