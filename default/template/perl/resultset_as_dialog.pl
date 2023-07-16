@@ -229,6 +229,11 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 			}
 		}
 
+		if (GetConfig('debug')) {
+			#todo
+			#$param{'debug_message'} = 'GetResultSetAsDialog: caller = ' . join(',', caller);
+		}
+
 		require_once('dialog.pl');
 		return GetDialogX3($content, $title, \%param);
 	} else {
