@@ -947,7 +947,7 @@ function CollapseWindow (p, newVisible) { // p = dialog element ; newVisible = '
 	// if changes were not made, it should return true, because it should let the double-click event happen
 } // CollapseWindow()
 
-function CollapseWindowFromButton (t) { // collapses or expands window based on button pressed (t)
+function CollapseWindowFromButton (t) { // collapses or expands window based on parentage of button pressed (t)
 // t is presumed to be clicked element's this, but can be any other element
 // if t's caption is '~', window is re-expanded
 // if '#' (or anything else) collapses window
