@@ -30,13 +30,14 @@ sub GetPeoplePage {
 		$pending = GetQueryAsDialog("
 				SELECT
 					file_hash,
-					'' AS tagset_pending,
-					item_title,
-					add_timestamp,
 					author_key AS author_id,
+					'' AS tagset_pending,
 					author_key
 				FROM item_flat
-				WHERE tags_list LIKE '%,pubkey,%' AND tags_list NOT LIKE '%,approve,%'
+				WHERE
+					tags_list LIKE '%,pubkey,%'
+					AND (tags_list NOT LIKE '%,approve,%' AND tags_list NOT like '%,person,%')
+					AND author_key NOT IN (SELECT author_key FROM author_flat WHERE author_alias = 'Guest')
 			",
 			'Pending Approval'
 		);
