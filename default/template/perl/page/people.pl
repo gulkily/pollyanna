@@ -30,7 +30,7 @@ sub GetPeoplePage {
 		$pending = GetQueryAsDialog("
 				SELECT
 					file_hash,
-					'' AS tagset_author,
+					'' AS tagset_pending,
 					item_title,
 					add_timestamp,
 					author_key AS author_id,
