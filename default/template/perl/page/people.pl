@@ -30,10 +30,16 @@ sub GetPeoplePage {
 		$pending = GetQueryAsDialog('people_pending', 'Pending Approval');
 	}
 
+	my $guests = '';
+	{
+		$guests = GetQueryAsDialog('people_guest', 'Guests');
+	}
+
 	$html =
 		GetPageHeader('people') .
 		$people .
 		$pending .
+		$guests .
 		# GetQuerySqlDialog('people') .
 		GetPageFooter('people')
 	;
