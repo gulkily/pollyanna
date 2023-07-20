@@ -13,36 +13,34 @@ sub GetPeoplePage {
 	my @authors = SqliteQueryHashRef('people');
 	shift @authors;
 
-	my $dialog = '';
+	my $people = '';
+	{
+		require_once('image_container.pl'); #todo move into widget
+		require_once('widget/person.pl'); #todo move into widget
+		for my $authorHashRef (@authors) {
+			my %author = %{$authorHashRef};
+			$people = $people . GetPersonDialog(\%author);
 
-	require_once('image_container.pl'); #todo move into widget
+			#$dialog = $dialog . GetDialogX($author{'author_alias'}, $authorHashRef);
+		}
+	}
 
-	for my $authorHashRef (@authors) {
-		my %author = %{$authorHashRef};
+	my $pending = '';
+	{
+		$pending = GetQueryAsDialog('people_pending', 'Pending Approval');
+	}
 
-		my $template = GetTemplate('html/widget/person.template');
-
-		my $htmlThumbnail = GetImageContainer('9fd6ad2dacc9041bbce7480fc03bb9393f0468de', 'Picture of ' . HtmlEscape($author{'author_alias'}), 1);
-		$htmlThumbnail = AddAttributeToTag($htmlThumbnail, 'img', 'width', '150');
-
-		$template = str_replace('<span class=author_image></span>', '<span class=author_image>' . $htmlThumbnail . '</span>', $template);
-		$template = str_replace('<span class=author_alias></span>', '<span class=author_alias>' . HtmlEscape($author{'author_alias'}) . '</span>', $template);
-		$template = str_replace('<span class=author_key_count></span>', '<span class=author_key_count>' . HtmlEscape($author{'author_key_count'}) . '</span>', $template);
-		$template = str_replace('<span class=author_seen></span>', '<span class=last_seen>' . GetTimestampWidget($author{'author_seen'}) . '</span>', $template);
-		$template = str_replace('<span class=author_score></span>', '<span class=author_score>' . HtmlEscape($author{'author_score'}) . '</span>', $template);
-		$template = str_replace('<span class=item_count></span>', '<span class=item_count>' . HtmlEscape($author{'item_count'}) . '</span>', $template);
-
-		#$template = $template . join(',',keys(%author));
-
-		$dialog = $dialog . GetDialogX($template, $author{'author_alias'});
-
-		#$dialog = $dialog . GetDialogX($author{'author_alias'}, $authorHashRef);
+	my $guests = '';
+	{
+		$guests = GetQueryAsDialog('people_guest', 'Guests');
 	}
 
 	$html =
 		GetPageHeader('people') .
-		$dialog .
-		GetQuerySqlDialog('people') .
+		$people .
+		$pending .
+		$guests .
+		# GetQuerySqlDialog('people') .
 		GetPageFooter('people')
 	;
 
@@ -51,10 +49,13 @@ sub GetPeoplePage {
 		if (GetConfig('admin/php/enable')) {
 			push @js, 'write_php'; # write.html
 		}
+		if (GetConfig('setting/html/reply_cart')) {
+			push @js, 'reply_cart';
+		}
 		$html = InjectJs($html, @js);
 	}
 
 	return $html;
-}
+} # GetPeoplePage()
 
 1;

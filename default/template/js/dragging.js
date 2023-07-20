@@ -146,7 +146,7 @@ function CollapseAll () {
 			if (elements[i].getAttribute('id') == 'topmenu') {
 				// controls dialog
 			} else {
-				CollapseWindow(elements[i], 'none');
+				CollapseWindow(elements[i], 'none'); // CollapseAll()
 			}
 		}
 	}
@@ -161,7 +161,7 @@ function CollapseMost () {
 			if (elements[i].getAttribute('id') == 'topmenu') {
 				// controls dialog
 			} else {
-				changesMade += CollapseWindow(elements[i], 'none');
+				changesMade += CollapseWindow(elements[i], 'none'); // CollapseMost()
 			}
 		}
 
@@ -179,7 +179,7 @@ function ExpandAll () {
 			if (elements[i].getAttribute('id') == 'topmenu') {
 				// controls dialog
 			} else {
-				CollapseWindow(elements[i], 'initial');
+				CollapseWindow(elements[i], 'initial'); // ExpandAll()
 			}
 		}
 	}
@@ -439,7 +439,7 @@ function DraggingReset () {
 			// if we walk forwards here, all the elements will end up in the top left corner
 			window.draggingZ++;
 			DraggingInitDialog(elements[i], 0); // DraggingReset()
-			CollapseWindow(elements[i], 'show');
+			CollapseWindow(elements[i], 'show'); // DraggingReset()
 		} // for i in elements
 
 		return '';
@@ -561,7 +561,7 @@ function DraggingInitDialog (el, doPosition) {
 
 		if (GetPrefs('draggable_restore_collapsed')) {
 			if (GetPrefs(elId + '.collapse', 'dialogPosition') == 'none') {
-				CollapseWindow(el, 'none'); //#meh
+				CollapseWindow(el, 'none'); // DraggingInitDialog() // #meh
 			} else {
 				//ok
 			}
@@ -898,6 +898,7 @@ function GetDialogTitle (win) { // returns dialog title (based on title bar capt
 } // GetDialogId()
 
 function CollapseWindow (p, newVisible) { // p = dialog element ; newVisible = 'none'/0 or anything else
+// function ExpandDialog () {
 // should be called CollapseExpandDialog ?
 // collapses or expands specified window/dialog
 // function CollapseDialog (
@@ -946,7 +947,7 @@ function CollapseWindow (p, newVisible) { // p = dialog element ; newVisible = '
 	// if changes were not made, it should return true, because it should let the double-click event happen
 } // CollapseWindow()
 
-function CollapseWindowFromButton (t) { // collapses or expands window based on button pressed (t)
+function CollapseWindowFromButton (t) { // collapses or expands window based on parentage of button pressed (t)
 // t is presumed to be clicked element's this, but can be any other element
 // if t's caption is '~', window is re-expanded
 // if '#' (or anything else) collapses window
@@ -987,7 +988,7 @@ function CollapseWindowFromButton (t) { // collapses or expands window based on 
 			var winId = GetDialogId(p);
 			SetPrefs(winId + '.collapse', newVisible, 'dialogPosition');
 
-			return CollapseWindow(p, newVisible);
+			return CollapseWindow(p, newVisible); // CollapseWindowFromButton()
 		}
 	}
 
@@ -1184,13 +1185,20 @@ function FetchDialog (dialogName) {
 	if (document.getElementById) {
 		var dialogExists = document.getElementById(dialogId);
 		if (dialogExists) {
-			//alert('DEBUG: FetchDialog: dialogExists');
-			if (GetPrefs('draggable_spawn')) {
-				//document.title = !!dialogExists.getAttribute('imactive');
-				SetActiveDialog(dialogExists);
-				return false;
+			// if dialog is already on page, we just focus it
+			// UNLESS it is the settings dialog, in which case we go to the settings page
+			// because we want to see the other settings dialogs
+			if (dialogName == 'settings') {
+				return true;
+			} else {
+				//alert('DEBUG: FetchDialog: dialogExists');
+				if (GetPrefs('draggable_spawn')) {
+					//document.title = !!dialogExists.getAttribute('imactive');
+					SetActiveDialog(dialogExists);
+					return false;
+				}
+				return false; // #todo refactor this
 			}
-			return false; // #todo refactor this
 		}
 	}
 

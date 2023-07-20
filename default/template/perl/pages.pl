@@ -1702,7 +1702,7 @@ while (my $arg1 = shift @foundArgs) {
 			##### DIALOGS ######################
 			##### DIALOGS ######################
 			##### DIALOGS ######################
-			WriteMessage("recognized -D\n");
+			WriteMessage("pages.pl: recognized -D\n");
 			my $makeDialogArg = shift @foundArgs;
 			#todo sanity check of $makeDialogArg
 			if ($makeDialogArg) {
@@ -1756,7 +1756,8 @@ while (my $arg1 = shift @foundArgs) {
 					# /dialog/people.html
 					# /dialog/threads.html
 
-					my $dialog = GetQueryAsDialog($makeDialogArg);
+					my $dialogTitle = $makeDialogArg; #todo make nicer
+					my $dialog = GetQueryAsDialog($makeDialogArg, $dialogTitle);
 					WriteMessage("-D $makeDialogArg\n");
 					my $dialogOutputPath = 'dialog/' . $makeDialogArg . '.html';
 					PutHtmlFile($dialogOutputPath, $dialog);
@@ -1805,11 +1806,11 @@ while (my $arg1 = shift @foundArgs) {
 					if ($hashTag =~ m/^([a-zA-Z_\-0-9]+)$/) { #todo non-latin characters #hashtag
 						$hashTag = $1;
 
-						my $query = GetTemplate('query/tag_dozen');
+						my $query = GetTemplate('query/tag_dozen.sql');
 						my $queryLikeString = "'%,$hashTag,%'";
 						$query =~ s/\?/$queryLikeString/;
 
-						WriteLog('MakePage: $query = ' . $query); #todo removeme
+						WriteLog('MakePage: $query = ' . $query . '; caller = ' . join(',', caller)); #todo removeme
 						my $queryDialogTitle = '#' . $hashTag;
 
 						my $dialog = GetQueryAsDialog(

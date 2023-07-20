@@ -328,6 +328,28 @@ author_alias.alias,
 author_alias.file_hash
 ;
 
+CREATE VIEW person_flat
+AS
+SELECT
+author_alias,
+COUNT(author_key) AS author_key_count,
+MAX(author_seen) AS author_seen,
+SUM(author_score) AS author_score,
+SUM(item_count) AS item_count
+FROM author_flat
+WHERE author_alias != ''
+GROUP BY author_alias
+;
+
+CREATE VIEW person_author
+AS
+SELECT DISTINCT
+author_key,
+author_alias
+FROM author_flat
+WHERE author_alias != ''
+AND file_hash IN (SELECT file_hash FROM item_flat WHERE tags_list LIKE '%,approve,%');
+
 CREATE VIEW item_score_relative AS
 SELECT 
 	SUM(score_relative) AS score_relative,

@@ -1,3 +1,26 @@
+
+SELECT author_alias, c.file_hash from
+(
+	SELECT
+		*
+	FROM
+		item_flat
+) a
+JOIN
+(
+	SELECT * FROM vote) b
+	ON (a.file_hash = b.ballot_hash)
+	join (select * from item_flat) c
+	on (b.ballot_hash = c.file_hash)
+JOIN author_flat ON (author_flat.author_key = a.author_key)
+where
+	b.vote_value = 'avatar'
+	AND author_flat.author_alias = 'testing2'
+order by a.add_timestamp desc
+LIMIT 1
+
+
+
 CREATE VIEW item_attribute_latest
 AS
 SELECT

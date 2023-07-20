@@ -229,6 +229,11 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 			}
 		}
 
+		if (GetConfig('debug')) {
+			#todo
+			#$param{'debug_message'} = 'GetResultSetAsDialog: caller = ' . join(',', caller);
+		}
+
 		require_once('dialog.pl');
 		return GetDialogX3($content, $title, \%param);
 	} else {
@@ -240,7 +245,7 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 		} else {
 			WriteLog('GetResultSetAsDialog: no_results: returning space reserved for future content dialog; caller = ' . join(',', caller));
 			require_once('dialog.pl');
-			return GetDialogX('<fieldset><p>This space reserved for future content.</p></fieldset>', $title);
+			return GetDialogX('<fieldset><p>This space reserved for future content.</p></fieldset>', $title); # GetResultSetAsDialog()
 		}
 	}
 } # GetResultSetAsDialog()

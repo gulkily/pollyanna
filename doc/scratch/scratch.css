@@ -1,3 +1,7 @@
+.titlebar * {
+	cursor: drag; /* #todo */
+	cursor: pointer; /* #todo */
+}
 
 
 

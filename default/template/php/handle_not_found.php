@@ -35,6 +35,11 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			$authorFingerprint = $itemHashMatch[1];
 			$pagesPlArgument = $authorFingerprint;
 		}
+		if (preg_match('/^\/person\/([A-Za-z0-9]+)/', $path, $itemHashMatch)) {
+			WriteLog('HandleNotFound: found person name');
+			$personName = $itemHashMatch[1];
+			$pagesPlArgument = "-M person $personName";
+		}
 		if (preg_match('/^\/tag\/([a-zA-Z0-9_]+)\.html/', $path, $hashTagMatch)) { #tagName
 		# Item URL in the form: /tag/nice.html
 			WriteLog('HandleNotFound: found hashtag');

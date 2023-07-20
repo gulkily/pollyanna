@@ -32,6 +32,7 @@
 		SetPrefs('draggable_restore', 1);
 		SetPrefs('draggable_restore_collapsed', 1);
 		SetPrefs('draggable_arrange_viewport_resize', 1);
+		LoadCheckboxValues();
 		SetActiveDialog(GetParentDialog(this));
 		DraggingInit(0);
 		DraggingMakeFit(0);
