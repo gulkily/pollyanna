@@ -27,26 +27,19 @@ sub GetPeoplePage {
 
 	my $pending = '';
 	{
-		$pending = GetQueryAsDialog("
-				SELECT
-					file_hash,
-					author_key AS author_id,
-					'' AS tagset_pending,
-					author_key
-				FROM item_flat
-				WHERE
-					tags_list LIKE '%,pubkey,%'
-					AND (tags_list NOT LIKE '%,approve,%' AND tags_list NOT like '%,person,%')
-					AND author_key NOT IN (SELECT author_key FROM author_flat WHERE author_alias = 'Guest')
-			",
-			'Pending Approval'
-		);
+		$pending = GetQueryAsDialog('people_pending', 'Pending Approval');
+	}
+
+	my $guests = '';
+	{
+		$guests = GetQueryAsDialog('people_guest', 'Guests');
 	}
 
 	$html =
 		GetPageHeader('people') .
 		$people .
 		$pending .
+		$guests .
 		# GetQuerySqlDialog('people') .
 		GetPageFooter('people')
 	;
