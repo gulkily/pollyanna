@@ -8,6 +8,7 @@ use utf8;
 sub GetPageHeader { # $pageType, $title ; returns html for page header
 # sub GetHeader {
 	my $pageType = shift; # type of page
+	# my $pageHeaderHtml = '';
 
 	my $title = shift; # page title
 	if (!$title) {
@@ -39,7 +40,7 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 		$title = '';
 	}
 
-	my $txtIndex = "";
+	my $pageHeaderHtml = ''; 
 	my $styleSheet = GetHeaderStylesheet($pageType); #todo also pass parameter
 
 	my $introText = trim(GetString('page_intro/' . $pageType));
@@ -70,6 +71,8 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 		my $prefetchTags = GetTemplate('html/prefetch_head.template');
 		$htmlStart = str_replace('</head>', $prefetchTags . "\n" . '</head>', $htmlStart);
 	}
+
+
 
 	#top menu
 	my $topMenuTemplate = '';
@@ -144,9 +147,9 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 	}
 
 	$htmlStart = FillThemeColors($htmlStart);
-	$txtIndex .= $htmlStart;
+	$pageHeaderHtml .= $htmlStart;
 
-	return $txtIndex;
+	return $pageHeaderHtml ;
 } # GetPageHeader()
 
 1;
