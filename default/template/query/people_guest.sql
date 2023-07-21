@@ -9,4 +9,4 @@ WHERE
 	AND (tags_list NOT LIKE '%,approve,%' AND tags_list NOT like '%,person,%')
 	AND author_key IN (SELECT author_key FROM author_flat WHERE author_alias = 'Guest')
 ORDER BY
-	add_timestamp DESC
+	author_seen DESC
