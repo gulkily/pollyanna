@@ -214,7 +214,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		my %queryParams;
 		$queryParams{'where_clause'} = "WHERE ','||tags_list||',' LIKE '%,speaker,%'";
 		$queryParams{'order_clause'} = "ORDER BY file_name";
-#		$queryParams{'where_clause'} = "WHERE ','||tags_list||',' LIKE '%,speaker,%'";
+		#$queryParams{'where_clause'} = "WHERE ','||tags_list||',' LIKE '%,speaker,%'";
 
 		my @itemSpeakers = DBGetItemList(\%queryParams);
 		foreach my $itemSpeaker (@itemSpeakers) {
@@ -232,7 +232,6 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		$speakersPage = InjectJs($speakersPage, qw(settings utils));
 		PutHtmlFile('speakers.html', $speakersPage);
 	}
-
 
 	elsif ($pageType eq 'committee') {
 		WriteLog('MakePage: committee');
