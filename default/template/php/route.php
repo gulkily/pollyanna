@@ -1338,7 +1338,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						} else {
 							# shadowme
 							WriteLog('route.php: cookie_inbox: file_exists($cookieInboxDialogPath) is FALSE');
-							$cookieInboxDialog = GetDialogX('No messages at this time.', 'Inbox');
+							$cookieInboxDialog = GetDialogX('<fieldset><p>No messages at this time.</p></fieldset>', 'Inbox');
 							$html = str_ireplace('<span id=messages></span>', '<span id=messages>' . $cookieInboxDialog . '</span>', $html);
 						}
 					} else {
