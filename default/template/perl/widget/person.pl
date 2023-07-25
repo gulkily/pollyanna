@@ -24,6 +24,7 @@ sub GetPersonDialog { # \%author
 	#todo get person avatar
 
 	if ($personAvatar) {
+		WriteLog('GetPersonDialog: $personAvatar = ' . $personAvatar . '; caller = ' . join(',', caller));
 		my $htmlThumbnail = GetImageContainer($personAvatar, 'Picture of ' . HtmlEscape($author{'author_alias'}), 1);
 		$htmlThumbnail = AddAttributeToTag($htmlThumbnail, 'img', 'width', '150');
 		$template = str_replace('<span class=author_image></span>', '<span class=author_image>' . $htmlThumbnail . '</span>', $template);
