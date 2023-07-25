@@ -476,6 +476,12 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	    MakePage('date', $pageType, 1);
 	}
 	#
+	# #hashtag
+	elsif (substr($pageType, 0, 1) eq '#') {
+		WriteMessage('recognized #hashtag');
+		MakePage('tag', substr($pageType, 1));
+	}
+	#
 	# fallthrough
 	else {
 		WriteMessage('Warning: did not recognize that page type: ' . $pageType);
