@@ -1800,7 +1800,7 @@ while (my $arg1 = shift @foundArgs) {
 				# }
 				elsif (substr($makeDialogArg, 0, 1) eq '#') { #hashtag tag/like.html
 					#todo sanity checks here
-					WriteMessage("-D hash tag $makeDialogArg\n");
+					WriteMessage("-D hashtag $makeDialogArg\n");
 					my $hashTag = substr($makeDialogArg, 1);
 
 					if ($hashTag =~ m/^([a-zA-Z_\-0-9]+)$/) { #todo non-latin characters #hashtag
@@ -1810,7 +1810,7 @@ while (my $arg1 = shift @foundArgs) {
 						my $queryLikeString = "'%,$hashTag,%'";
 						$query =~ s/\?/$queryLikeString/;
 
-						WriteLog('MakePage: $query = ' . $query . '; caller = ' . join(',', caller)); #todo removeme
+						WriteLog('pages.pl: $query = ' . $query . '; caller = ' . join(',', caller)); #todo removeme
 						my $queryDialogTitle = '#' . $hashTag;
 
 						my $dialog = GetQueryAsDialog(
@@ -1824,11 +1824,11 @@ while (my $arg1 = shift @foundArgs) {
 						if ($dialog && $dialogPath) {
 							PutHtmlFile('dialog/' . $dialogPath, $dialog);
 						} else {
-							WriteLog('MakePage: warning: dialog: nothing returned for #' . $makeDialogArg);
+							WriteLog('pages.pl: warning: dialog: nothing returned for #' . $makeDialogArg);
 						}
 					} # $hashTag sanity check
 					else {
-						WriteLog('MakePage: warning: sanity check failed on $hashTag (-D)');
+						WriteLog('pages.pl: warning: sanity check failed on $hashTag (-D)');
 						return '';
 					}
 				} # -D #foo
