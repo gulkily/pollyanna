@@ -159,6 +159,7 @@ function SqliteEscape ($text) { # Escapes supplied text for use in sqlite query
 } # SqliteEscape()
 
 function SqliteGetValue ($query) { # Returns the first column from the first row returned by sqlite $query
+	# #todo should allow returning columns other than 0
 	WriteLog("SqliteGetValue($query)");
 
 	$sqliteDir = GetSqliteDbName();

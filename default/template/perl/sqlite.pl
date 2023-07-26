@@ -695,7 +695,8 @@ sub SqliteGetCount {
 	return $rowCount;
 } # SqliteGetCount()
 
-sub SqliteGetValue {
+sub SqliteGetValue { # $query ; Returns the first column from the first row returned by sqlite $query
+# #todo should allow returning columns other than 0
 # sub SqliteQueryGetValue {
 # sub SqliteQueryValue {
 # sub GetSqliteValue {
