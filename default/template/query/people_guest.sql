@@ -6,7 +6,7 @@ SELECT
 	item_count
 FROM author_flat
 WHERE
-	author_alias != 'Guest'
+	author_alias = 'Guest'
 	AND author_score >= 0
 ORDER BY
 	author_seen DESC
