@@ -19,5 +19,8 @@ input, textarea {
 #spanSignAs {
 	float: right;
 }
+.titlebar {
+	background-image: linear-gradient(to left top, #fff0ef, #f8e7e8, #f0dde2, #e7d4dd, #ddccd8);
+}
 
 /* / theme/hypercode/additional.css */
