@@ -216,11 +216,17 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 				# this is a bit hacky, but it works
 				# includes small thumbnail of image
 				if ($itemRow{'item_type'} && ($itemRow{'item_type'} eq 'image')) {
-					#todo use GetImageContainer()
-					my $fileHash = $itemRow{'file_hash'};
-					my $imageSmallUrl = "/thumb/thumb_42_$fileHash.gif";
-					my $imageContainer = "<img border=1 src=$imageSmallUrl style=height:1em;vertical-align:middle;margin-right:0.3em>";
-					$fieldValue = $imageContainer . HtmlEscape($fieldValue);
+					if ($fieldValue) {
+						#todo use GetImageContainer()
+						my $fileHash = $itemRow{'file_hash'};
+						my $imageSmallUrl = "/thumb/thumb_42_$fileHash.gif";
+						my $imageContainer = "<img border=1 src=$imageSmallUrl style=height:1em;vertical-align:middle;margin-right:0.3em>";
+						#todo remove hardcoding of this style, etc
+						$fieldValue = $imageContainer . HtmlEscape($fieldValue);
+					} else {
+						WriteLog('RenderField: warning: $fieldValue is FALSE; caller = ' . join(',', caller));
+						return '';
+					}
 				} else {
 					$fieldValue = HtmlEscape($fieldValue);
 				}
