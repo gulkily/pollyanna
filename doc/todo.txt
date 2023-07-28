@@ -6,14 +6,6 @@ add person_name to item_flat table
 
 ===
 
-"hike page \#hashtag" should work
-
-===
-
-frame.html should have $colorBackground filled in
-
-===
-
 ballot_time field should reflect ballot time
 	(currently  0 for user-applied hashtags)
 	workaround: join to item_flat
