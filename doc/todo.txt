@@ -13,16 +13,6 @@ make person_avatar view
 
 ===
 
-how to link image to user who uploaded it?
-	this can be done by the user manually by tagging the image after upload
-
-item has type image
-	voter of item is user
-		and vote is 'avatar' or 'profilepic' etc
-
-
-===
-
 people pages
     /person/hash.html
         hash is based on username
