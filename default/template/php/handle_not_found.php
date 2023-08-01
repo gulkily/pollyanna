@@ -184,6 +184,9 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			if (in_array($pathView, $validViews)) {
 				WriteLog('HandleNotFound: found view: $pathView = ' . $pathView . '; $pathViewPageNumber = ' . $pathViewPageNumber);
 				$pagesPlArgument = '-M ' . $pathView;
+			} else {
+				WriteLog('HandleNotFound: warning: view NOT FOUND in $validViews: $pathView = ' . $pathView);
+				// #todo should be possible to recover if in dev mode
 			}
 		} else {
 			WriteLog('HandleNotFound: no match in $validViews');
