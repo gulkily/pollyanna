@@ -170,7 +170,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'tasks', #dev tasks.html
 			'browse', #shadowme browse.html
 			'donate' #donate donate.html
-		);
+		); # $validViews
 		#todo make this nicer and configurable etc
 
 		if (preg_match('/^\/([a-z]+)([0-9]+)?\.html$/', $path, $pathMatches)) {
