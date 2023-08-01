@@ -48,6 +48,7 @@ fi
 if [ $1 = stats ]
 	then
 		echo text files: `find html/txt -type f -name '*.txt' | wc -l`
+		echo ==================
 fi
 
 if [ $1 = status ]
