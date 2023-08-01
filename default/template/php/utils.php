@@ -439,7 +439,7 @@ function FixConfigName ($configName) { # prepend 'setting/' to config paths as a
 		}
 	}
 	if (!$notSettingFlag) {
-		WriteLog('GetConfig: warning: adding setting/ prefix to $configName = ' . $configName . '; caller = ' . join(',', caller));
+		//WriteLog('GetConfig: warning: adding setting/ prefix to $configName = ' . $configName . '; caller = ' . join(',', caller));
 		$configName = 'setting/' . $configName;
 	} else {
 		WriteLog('GetConfig: NOT adding setting/ prefix to $configName = ' . $configName);
