@@ -8,6 +8,8 @@ use utf8;
 sub GetItemListing { # $fileHash ; returns listing of items based on topic
 # sub GetResultsPage {
 # sub GetItemListingHtml {
+#
+# ATTENTION: not to be confused with GetItemListingPage()
 	my $htmlOutput = '';
 
 	my @topItems; #todo rename this
