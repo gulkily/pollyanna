@@ -160,6 +160,7 @@ sub MakeSimplePage { # given page name, makes page
 	# }
 
 	if ($pageName eq 'welcome') {
+		WriteLog('MakeSimplePage: welcome page, writing index.html; caller = ' . join(',', caller));
 		PutHtmlFile("index.html", $html);
 	}
 } # MakeSimplePage()
