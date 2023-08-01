@@ -6,7 +6,7 @@ use 5.010;
 use utf8;
 
 sub GetSimpleDialog { # dialogType ; gets simple dialog based on template/html/page/$dialogType.template
-	# sub GetSimpleWindow {
+# sub GetSimpleWindow {
 	my $dialogType = shift;
 
 	WriteLog('GetSimpleDialog: $dialogType = ' . $dialogType);
