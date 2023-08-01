@@ -169,6 +169,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'boxes', #banana #todo
 			'tasks', #dev tasks.html
 			'browse', #shadowme browse.html
+			'donate' #donate donate.html
 		);
 		#todo make this nicer and configurable etc
 
