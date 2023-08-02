@@ -16,6 +16,11 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 	chomp $filename;
 	#	$filename = "$SCRIPTDIR/template/$filename";
 
+	#todo if more than one argument, raise warning
+	#if (scalar(@_)) {
+	#	WriteLog('GetTemplate: warning: was called with more than one argument; caller = ' . join(',', caller));
+	#}
+
 	my $isHtmlTemplate = 0;
 	if ($filename =~ m/^html/) {
 		$isHtmlTemplate = 1;
