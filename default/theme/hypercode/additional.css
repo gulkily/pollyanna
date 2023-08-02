@@ -31,6 +31,7 @@ input, textarea {
     width: 70%;
     height: 70%;
     border: 2pt $colorPrimary double;
+    font-family: inherit;
     font-size: xx-large;
 	border-radius: 5pt;
 	text-align: center;
