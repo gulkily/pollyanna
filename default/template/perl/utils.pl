@@ -2184,7 +2184,7 @@ sub CheckForInstalledVersionChange {
 				$currVersion = $1;
 			}
 			my $changeLogListCommand = "git log --oneline $lastVersion..$currVersion";
-			my $changeLogList = ''; # `$changeLogListCommand`;
+			my $changeLogList = `$changeLogListCommand`;
 			$changeLogList = trim($changeLogList);
 			$changeLogMessage .= "$changeLogList";
 		} else {
