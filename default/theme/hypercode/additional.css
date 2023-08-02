@@ -9,9 +9,6 @@ input, textarea {
 	border: 2pt solid #404040 !important;
 	margin-top: 2pt !important;
 }
-#serverResponse {
-	display: none;
-}
 #loadingIndicator, #ariaAlert {
 	background-color: yellow;
 	border-radius: 0 !important;
@@ -21,6 +18,22 @@ input, textarea {
 }
 .titlebar {
 	background-image: linear-gradient(to left top, #fff0ef, #f8e7e8, #f0dde2, #e7d4dd, #ddccd8);
+}
+#serverResponse {
+/* responses from server */
+    background-color: $colorWindow;
+    color: $colorText;
+    padding: 5pt;
+    spacing: 5pt;
+    position: fixed;
+    top: 10%;
+    left: 15%;
+    width: 70%;
+    height: 70%;
+    border: 2pt $colorPrimary double;
+    font-size: xx-large;
+	border-radius: 5pt;
+	text-align: center;
 }
 
 /* / theme/hypercode/additional.css */
