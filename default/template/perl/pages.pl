@@ -1106,6 +1106,10 @@ sub MakeListingPages {
 		$dialog = GetUploadDialog();
 		PutHtmlFile('dialog/upload.html', $dialog);
 
+		$dialog = GetPasteDialog();
+		$dialog = InjectJs($dialog, qw(paste));
+		PutHtmlFile('dialog/paste.html', $dialog);
+
 		$dialog = GetWriteDialog();
 		PutHtmlFile('dialog/write.html', $dialog);
 
