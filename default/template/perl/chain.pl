@@ -131,6 +131,8 @@ sub RemakeChain {
 }
 
 sub AddToChainLog { # $fileHash ; add line to log/chain.log
+# sub AddToChain {
+# sub AddItemToChain {
 	# line format is:
 	# file_hash|timestamp|checksum
 	# file_hash = hash of file, a-f0-9 40
