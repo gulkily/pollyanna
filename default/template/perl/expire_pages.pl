@@ -7,6 +7,7 @@ use utf8;
 
 sub ExpirePages { # $fileHash ; expire html pages affected by a change in item
 # sub DeletePages {
+# sub ExpirePage {
 	my $fileHash = shift;
 
 	if (!$fileHash) {
