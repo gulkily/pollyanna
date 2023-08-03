@@ -14,7 +14,7 @@ sub GetChatPage {
 
 	$html =
 		GetPageHeader('chat') .
-		str_replace($writeDialog, 'target=_top', 'target=ifr') . #todo this is a hack
+		str_replace('target=_top', 'target=ifr', $writeDialog) . #todo this is a hack
 		'<iframe name=ifr id=ifr height=20 width=20></iframe>' .
 		GetTemplate('html/maincontent.template') .
 		'</MAIN>' .
