@@ -1421,7 +1421,7 @@ sub DBAddKeyAlias { # adds new author-alias record $key, $alias, $pubkeyFileHash
 		}
 
 		return;
-	}
+	} # if ($key eq 'flush')
 
 	if ($query && (length($query) > DBMaxQueryLength() || scalar(@queryParams) > DBMaxQueryParams())) {
 		DBAddKeyAlias('flush');
@@ -1777,9 +1777,9 @@ sub DBAddVoteRecord { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHa
 		#return '';
 	}
 
-#	if (!$signedBy) {
-#		WriteLog("DBAddVoteRecord() called without \$signedBy! Returning.");
-#	}
+	#if (!$signedBy) {
+	#	WriteLog("DBAddVoteRecord() called without \$signedBy! Returning.");
+	#}
 
 	chomp $fileHash;
 	chomp $ballotTime;
