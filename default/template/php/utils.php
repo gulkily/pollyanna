@@ -945,7 +945,7 @@ function GetDialogX ( # body, title, headings, status, menu
 		// 			$windowTitlebar = InjectJs($windowTitlebar, array('titlebar_with_button'));
 		//
 		// 			$windowTitlebar = str_replace('$windowTitle', $windowTitle, $windowTitlebar);
-		// 			#$windowTitlebar = str_replace('$windowAnchor', $windowAnchor, $windowTitlebar);
+		// 			#$windowTitlebar = str_replace('$dialogAnchor', $dialogAnchor, $windowTitlebar);
 		// 			$windowTemplate = str_replace('$windowTitlebar', $windowTitlebar, $windowTitlebar);
 		// 			$windowTemplate = str_replace('$btnCloseCaption', $btnCloseCaption, $windowTitlebar);
 		// 			#$contentColumnCount = 2;
@@ -953,12 +953,12 @@ function GetDialogX ( # body, title, headings, status, menu
 		// 			$windowTitlebar = GetTemplate('html/window/titlebar.template');
 		// 			#
 		// 			#			if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
-		// 			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$windowAnchor', 'onfocus', 'document.title=this.innerHTML;');
-		// 			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$windowAnchor', 'onclick', 'document.title=this.innerHTML;');
+		// 			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$dialogAnchor', 'onfocus', 'document.title=this.innerHTML;');
+		// 			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$dialogAnchor', 'onclick', 'document.title=this.innerHTML;');
 		// 			#			}
 		// 			#
 		// 			$windowTitlebar = str_replace('$windowTitle', $windowTitle, $windowTitlebar);
-		// 			$windowTitlebar = str_replace('$windowAnchor', $windowAnchor, $windowTitlebar);
+		// 			$windowTitlebar = str_replace('$dialogAnchor', $dialogAnchor, $windowTitlebar);
 		// 			$windowTemplate = str_replace('$windowTitlebar', $windowTitlebar, $windowTitlebar);
 		// 		}
 		if (1 || $showButtons && GetConfig('admin/js/dragging')) {
@@ -1042,7 +1042,7 @@ function GetDialogX ( # body, title, headings, status, menu
 	$windowTemplate = str_replace('$colorWindow', GetThemeColor('window'), $windowTemplate);
 	$windowTemplate = str_replace('$colorTitlebarText', GetThemeColor('titlebar_text'), $windowTemplate);
 	$windowTemplate = str_replace('$colorTitlebar', GetThemeColor('titlebar'), $windowTemplate);
-	$windowTemplate = str_replace('$windowAnchor', '', $windowTemplate);
+	$windowTemplate = str_replace('$dialogAnchor', '', $windowTemplate);
 
 	return $windowTemplate;
 } # GetDialogX()

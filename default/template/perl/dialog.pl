@@ -148,7 +148,7 @@ sub GetDialogX2 { # \%paramHash ; returns window
 
 	my $windowBody = $param{'body'};
 	my $windowTitle = $param{'title'};
-	my $windowAnchor = $param{'anchor'};
+	my $dialogAnchor = $param{'anchor'};
 	my $columnHeadings = $param{'headings'};
 	my $columnHeadingsLookup = $param{'columns_lookup'};
 	my $windowStatus =  $param{'status'};
@@ -156,21 +156,21 @@ sub GetDialogX2 { # \%paramHash ; returns window
 	my $formAction = $param{'form_action'};
 	my $windowId = $param{'id'};
 
-	if (!$windowAnchor) {
-		WriteLog('GetDialogX2: warning: $windowAnchor is FALSE, activating fallback; caller = ' . join(',', caller));
-		if (!$windowAnchor && $windowId) {
-			$windowAnchor = $windowId;
+	if (!$dialogAnchor) {
+		WriteLog('GetDialogX2: warning: $dialogAnchor is FALSE, activating fallback; caller = ' . join(',', caller));
+		if (!$dialogAnchor && $windowId) {
+			$dialogAnchor = $windowId;
 		}
-		if (!$windowAnchor && $windowTitle) {
-			$windowAnchor = str_replace(' ', '', $windowTitle);
-			$windowAnchor =~ s/[^a-zA-Z0-9]//g;
+		if (!$dialogAnchor && $windowTitle) {
+			$dialogAnchor = str_replace(' ', '', $windowTitle);
+			$dialogAnchor =~ s/[^a-zA-Z0-9]//g;
 			#todo
 		}
-		if (!$windowAnchor && $windowBody) {
-			$windowAnchor = substr(md5_hex($windowBody), 0, 8);
+		if (!$dialogAnchor && $windowBody) {
+			$dialogAnchor = substr(md5_hex($windowBody), 0, 8);
 		}
-		if (!$windowAnchor) {
-			WriteLog('GetDialogX2: warning: $windowAnchor is FALSE after fallbacks; caller = ' . join(',', caller));
+		if (!$dialogAnchor) {
+			WriteLog('GetDialogX2: warning: $dialogAnchor is FALSE after fallbacks; caller = ' . join(',', caller));
 		}
 	}
 
@@ -263,7 +263,7 @@ sub GetDialogX2 { # \%paramHash ; returns window
 			}
 
 			$windowTitlebar =~ s/\$windowTitle/$windowTitle/g;
-			$windowTitlebar =~ s/\$windowAnchor/$windowAnchor/g;
+			$windowTitlebar =~ s/\$dialogAnchor/$dialogAnchor/g;
 			$windowTemplate =~ s/\$windowTitlebar/$windowTitlebar/g;
 			$windowTemplate =~ s/\$btnCloseCaption/$btnCloseCaption/g;
 			#$contentColumnCount = 2;
@@ -271,12 +271,12 @@ sub GetDialogX2 { # \%paramHash ; returns window
 			my $windowTitlebar = GetTemplate('html/window/titlebar.template');
 			#
 			#			if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
-			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$windowAnchor', 'onfocus', 'document.title=this.innerHTML;');
-			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$windowAnchor', 'onclick', 'document.title=this.innerHTML;');
+			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$dialogAnchor', 'onfocus', 'document.title=this.innerHTML;');
+			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$dialogAnchor', 'onclick', 'document.title=this.innerHTML;');
 			#			}
 			#
 			$windowTitlebar =~ s/\$windowTitle/$windowTitle/g;
-			$windowTitlebar =~ s/\$windowAnchor/$windowAnchor/g;
+			$windowTitlebar =~ s/\$dialogAnchor/$dialogAnchor/g;
 			$windowTemplate =~ s/\$windowTitlebar/$windowTitlebar/g;
 		}
 	} else {
