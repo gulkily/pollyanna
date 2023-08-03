@@ -1728,6 +1728,7 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 			if (index($fileProvided, '.js') != -1) {
 				# it's cool
 			} else {
+				#todo /dialog/.. files should be excluded
 				WriteLog('PutHtmlFile: warning: "maincontent" not found in file! $file = ' . ($file ? $file : '-'));
 			}
 		}
@@ -1746,6 +1747,13 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 		if ($content =~ m/<html.+<html/i) {
 			# test for duplicate <html> tag
 			WriteLog('PutHtmlFile: warning: $content contains duplicate <html> tags');
+		}
+		if (index($content, 'replyCartButton') != -1) {
+			# reply buttons are present on page
+			if (index($content, 'reply_cart.js') == -1) {
+				# reply_cart.js is not present on page
+				WriteLog('PutHtmlFile: warning: $content contains replyCartButton, but not reply_cart.js; caller = ' . join(',', caller));
+			}
 		}
 	} # tests and warnings
 
