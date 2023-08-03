@@ -201,10 +201,18 @@ file_hash,
 MAX(value) AS author_key
 FROM item_attribute_latest
 WHERE attribute IN ('cookie_id', 'gpg_id')
-GROUP BY file_hash;
+GROUP BY file_hash
+;
 
-
-
+CREATE VIEW item_client
+AS
+SELECT
+file_hash,
+MAX(value) AS author_key
+FROM item_attribute_latest
+WHERE attribute IN ('client_id')
+GROUP BY file_hash
+;
 
 CREATE VIEW item_flat
 AS
@@ -297,7 +305,6 @@ GROUP BY
 item.file_hash
 ;
 
-
 CREATE VIEW author
 AS
 SELECT DISTINCT
@@ -348,49 +355,49 @@ author_key,
 author_alias
 FROM author_flat
 WHERE author_alias != ''
-AND file_hash IN (SELECT file_hash FROM item_flat WHERE tags_list LIKE '%,approve,%');
+AND file_hash IN (SELECT file_hash FROM item_flat WHERE tags_list LIKE '%,approve,%')
+;
 
 CREATE VIEW item_score_relative AS
 SELECT 
-	SUM(score_relative) AS score_relative,
-	file_hash
+SUM(score_relative) AS score_relative,
+file_hash
 FROM (
-	SELECT 
-		COUNT(*) AS score_relative, 
-		file_hash 
-	FROM 
-		item_attribute 
-	WHERE 
-		attribute = 'surpass' 
-	GROUP BY 
-		file_hash 
+SELECT
+COUNT(*) AS score_relative,
+file_hash
+FROM
+item_attribute
+WHERE
+attribute = 'surpass'
+GROUP BY
+file_hash
 UNION ALL
-	SELECT
-		(-(COUNT(*))) AS score_relative,
-		`value` AS file_hash
-	FROM 
-		item_attribute
-	WHERE
-		attribute = 'surpass'
-	GROUP BY 
-		file_hash
+SELECT
+(-(COUNT(*))) AS score_relative,
+`value` AS file_hash
+FROM
+item_attribute
+WHERE
+attribute = 'surpass'
+GROUP BY
+file_hash
 )
 GROUP BY file_hash
 ORDER BY score_relative DESC;
 
-
 CREATE VIEW author_alias_valid AS
 SELECT
-	author_alias.key AS author_key,
-	author_alias.alias AS alias,
-	author_alias.fingerprint AS fingerprint,
-	author_alias.file_hash AS file_hash
+author_alias.key AS author_key,
+author_alias.alias AS alias,
+author_alias.fingerprint AS fingerprint,
+author_alias.file_hash AS file_hash
 FROM
-	author_alias
+author_alias
 WHERE
-	file_hash IN (
-		SELECT file_hash
-		FROM vote
-		WHERE vote_value IN ('approve', 'vouch')
-	)
+file_hash IN (
+SELECT file_hash
+FROM vote
+WHERE vote_value IN ('approve', 'vouch')
+)
 ;
