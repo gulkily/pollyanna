@@ -389,14 +389,15 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 				#something is wrong
 				WriteLog('GetReadPage: warning: ...'); #todo
 			} else {
-				my $query = "select file_hash, item_title from
-						item_flat where file_hash in (select file_hash from vote where vote.author_key = '$authorKey' AND vote = 'flag');";
-				$txtIndex .= GetQueryAsDialog($query
-					,
-					'Posts Flagged By Author',
-					'',
-					\%queryFlags
-				);
+				#todo fix this
+				#my $query = "select file_hash, item_title from
+				#		item_flat where file_hash in (select file_hash from vote where vote.author_key = '$authorKey' AND vote = 'flag');";
+				#$txtIndex .= GetQueryAsDialog($query
+				#	,
+				#	'Posts Flagged By Author',
+				#	'',
+				#	\%queryFlags
+				#);
 			}
 		}
 
