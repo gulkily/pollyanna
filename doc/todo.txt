@@ -1,4 +1,10 @@
-rename windowAnchor to dialogAnchor
+add link to own profile to each page
+	see older builds for implementation
+
+===
+
+raise admin warning if there are sqlerr files (especially if there are many)
+	summarize them
 
 ===
 
