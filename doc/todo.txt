@@ -1,3 +1,7 @@
+rename windowAnchor to dialogAnchor
+
+===
+
 should be a warning if reply_cart.js is not included while reply cart buttons are present
 
 ===
