@@ -10,8 +10,23 @@ use warnings;
 use 5.010;
 use utf8;
 
+sub FormatDateAbsolute { # $epoch
+	my $epoch = shift;
+
+	WriteLog('FormatDateAbsolute: $epoch = ' . $epoch);
+
+	if ($epoch =~ m/\D/ && !($epoch =~ m/\d\.\d/)) { # has non-digits
+		WriteLog('FormatDate: warning: $epoch failed sanity check. $epoch = ' . $epoch);
+		return '[timestamp]';
+	}
+
+	my $timeDate = strftime '%Y-%m-%d %H:%M:%S', localtime $epoch;
+
+	return $timeDate;
+} # FormatDateAbsolute()
+
 sub FormatDate { # $epoch, $showSeconds = 1 ; formats date depending on how long ago it was
-	# FormatDateForDisplay()
+# sub FormatDateForDisplay {
 	my $epoch = shift;
 
 	my $showSeconds = shift;
@@ -168,7 +183,8 @@ sub GetTimestampWidget { # $time ; returns timestamp widget
 		# my $timeDate = strftime '%Y/%m/%d %H:%M:%S', localtime $time;
 
 		my $timeDateTitle = time;
-		$timeDateTitle = FormatDate($time, 1);
+		#$timeDateTitle = FormatDate($time, 1);
+		$timeDateTitle = FormatDateAbsolute($time, 1);
 
 		# replace into template
 		$widget =~ s/\$timestamp/$time/g;
