@@ -1,6 +1,7 @@
 SELECT
 	file_hash,
 	author_key AS author_id,
+	add_timestamp,
 	'' AS tagset_pending,
 	author_key
 FROM item_flat
