@@ -25,11 +25,6 @@ input, textarea {
     color: $colorText;
     padding: 5pt;
     spacing: 5pt;
-    position: fixed;
-    top: 10%;
-    left: 15%;
-    width: 70%;
-    height: 70%;
     border: 2pt $colorPrimary double;
     font-family: inherit;
     font-size: xx-large;
