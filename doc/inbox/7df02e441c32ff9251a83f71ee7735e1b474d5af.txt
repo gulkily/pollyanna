@@ -1,3 +1,0 @@
-#bug 
-
-focusing a dialog's titlebar button does not focus the dialog

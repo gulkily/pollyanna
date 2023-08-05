@@ -1,3 +1,7 @@
+recent items page
+
+===
+
 add link to own profile to each page
 	see older builds for implementation
 
