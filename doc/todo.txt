@@ -627,6 +627,8 @@ rewrite plan for mac
 ===
 
 most requested 404 pages
+	record from handle_not_found.php
+	create summary page
 
 ===
 
