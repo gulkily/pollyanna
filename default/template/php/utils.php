@@ -135,11 +135,11 @@ function GetSqliteDbName () {
 	}
 } # GetSqliteDbName()
 
-function uc ($string) { # uppercase, perl port
+function uc ($string) { # uppercase, port of perl utility function
 	return strtoupper($string);
 } # uc()
 
-function lc ($string) { # lowercase, perl port
+function lc ($string) { # lowercase, port of perl utility function
 	return strtolower($string);
 } # lc()
 
