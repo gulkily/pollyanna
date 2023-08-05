@@ -667,9 +667,12 @@ function PutFile ($file, $content) { // puts file contents
 	return $putFileResult; #todo && $renameResult ?
 } # PutFile()
 
+function GetMyCacheVersion () {
+	return 'b';
+} # GetMyCacheVersion()
+
 function GetCache ($cacheName) { // get cache contents by key/name
-	// comes from cache/ directory, under current git commit
-	// this keeps cache version-specific
+	// comes from cache/ directory
 
 	static $cacheDir;
 	if (!$cacheDir) {
@@ -749,7 +752,7 @@ function StoreServerResponse ($message) { // adds server response message and re
 	}
 
 	#my
-	$mesageId = '';
+	$messageId = '';
 
 	#my
 	$cookie = '0000000000000000';
@@ -770,6 +773,7 @@ function StoreServerResponse ($message) { // adds server response message and re
 
 	PutCache('response/' . $messageId, $message);
 	WriteLog("StoreServerResponse: $messageId, cache written");
+
 	return $messageId;
 } # StoreServerResponse()
 
@@ -857,6 +861,9 @@ function RedirectWithResponse ($url, $message) { // redirects to page with serve
 		elseif (GetConfig('admin/my_domain')) {
 			$url = 'http://' . $urlAuthPrefix . GetConfig('admin/my_domain') . $url;
 		}
+		else {
+			// #todo handle this
+		}
 	}
 
 	if (index($url, '?') < 0) {
@@ -922,7 +929,7 @@ function GetDialogX ( # body, title, headings, status, menu
 	$columnHeadings = '',
 	$windowStatus = '',
 	$windowMenubarContent = ''
-) { // returns html for window template
+) { // returns html for dialog template
 # function GetWindowTemplate {
 // uses template/window/standard.template by default
 
@@ -1053,7 +1060,7 @@ function GetDialogX ( # body, title, headings, status, menu
 	return $windowTemplate;
 } # GetDialogX()
 
-function GetActiveThemes () { # return list of active themes (config/setting/theme)
+function GetActiveThemes () { # return list of active themes (from config/setting/theme)
 # function GetThemes () {
 # function ListThemes () {
 # function GetThemeList () {
@@ -1122,7 +1129,7 @@ function GetThemeColor ($colorName) { // returns theme color based on setting/th
 	WriteLog('GetThemeColor: $colorName = ' . $colorName);
 	
 	if (GetConfig('html/monochrome')) { # GetThemeColor()
-		WriteLog('GetThemeColor: config/html/mourn = TRUE');
+		WriteLog('GetThemeColor: config/html/monochrome = TRUE');
 
 		if (index(lc($colorName), 'text') != -1 || index(lc($colorName), 'link') != -1) {
 			if (index(lc($colorName), 'back') != -1) {
@@ -1154,7 +1161,7 @@ function GetThemeColor ($colorName) { // returns theme color based on setting/th
 
 	if (!$color) {
 		$color = '#00ff00';
-		WriteLog("GetThemeColor: WARNING: Value for $colorName not found");
+		WriteLog("GetThemeColor: warning: Value for $colorName not found");
 	}
 
 	if (preg_match('/^[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]$/', $color)) {
@@ -1225,7 +1232,7 @@ function AddAttributeToTag ($html, $tag, $attributeName, $attributeValue) { // a
 } # AddAttributeToTag()
 
 function GetClockFormattedTime () { // returns current time in appropriate format from config
-//formats supported: union, epoch (default)
+//formats supported: union, 24hour, epoch (default)
 
 	WriteLog("GetClockFormattedTime()");
 
@@ -1298,7 +1305,7 @@ function IsItem ($string) { # returns 1 if parameter is in item hash format (40 
 	WriteLog("IsItem($string)");
 
 	if (!$string) {
-		WriteLog("IsItem: NO STRING!");
+		WriteLog('IsItem: warning: $string was FALSE!');
 		return 0;
 	}
 
@@ -1312,7 +1319,7 @@ function IsItem ($string) { # returns 1 if parameter is in item hash format (40 
 		return $matches[0];
 	}
 
-	WriteLog("IsItem: NO MATCH!");
+	WriteLog("IsItem: warning: NO MATCH!");
 	return 0;
 } # IsItem()
 
@@ -1328,7 +1335,7 @@ function setcookie2 ($key, $value, $updateCurrent = 0) { // sets cookie with ie3
 	if ($updateCurrent) {
 		$_COOKIE[$key] = $value;
 	}
-} # setcookie()
+} # setcookie2()
 
 function unsetcookie2 ($key) { // remove cookie in most compatible way
 	WriteLog('unsetcookie2(' . $key . ')');
@@ -1387,10 +1394,10 @@ function MakePage ($pageName) {
 		WriteLog("cd $pwd");
 		WriteLog(`cd $pwd`);
 	}
-//
-// 	WriteLog("cd $scriptDir ; ./pages.pl \"$hash\"");
-// 	WriteLog(`cd $scriptDir ; ./pages.pl "$hash"`);
-} # IndexNewFile()
+	//
+	// WriteLog("cd $scriptDir ; ./pages.pl \"$hash\"");
+	// WriteLog(`cd $scriptDir ; ./pages.pl "$hash"`);
+} # MakePage()
 
 require_once('store_new_comment.php');
 
