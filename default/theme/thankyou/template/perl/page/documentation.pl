@@ -11,10 +11,10 @@ with an emphasis on consent and accessibility.
 
 CONSENT:
 
-For operators and administrators, RocketScience supports every released software
+For operators and administrators, Pollyanna supports every released software
 version indefinitely, forgoing forced updates or any coersion.
 
-For users and clients, RocketScience facilitates full account and data ownership
+For users and clients, Pollyanna facilitates full account and data ownership
 and accessibility. Users should be able to access or not access the service as
 they see fit and in whatever way they see fit, as long as it is with the consent
 of the operator. Users should be able to see, with full transparency, all the
@@ -22,18 +22,18 @@ data and information contained in the service.
 
 ACCESSIBILITY:
 
-RocketScience bends over backwards to accommodate every user and client,
+Pollyanna bends over backwards to accommodate every user and client,
 regardless of their access method of choice, browser and configuration,
 connection speed, device type, abilities, and situation.
 
-RocketScience tries to perpetuate the Any Browser philosophy, and is regularly
-tested with a variety of browsers and configurations. In particular, RocketScience
+Pollyanna tries to perpetuate the Any Browser philosophy, and is regularly
+tested with a variety of browsers and configurations. In particular, Pollyanna
 has been tested with popular versions of Lynx, Mosaic, Netscape, Internet Explorer,
 Opera, Firefox, Brave, Safari, and even Google Chrome.
 
 WHY USE THIS?
 =============
-Below is an outline of reasons you would want to use RocketScience.
+Below is an outline of reasons you would want to use Pollyanna.
 
 Empowering:
 User account, aka private key, remains in user's possession and control.

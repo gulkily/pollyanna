@@ -1,4 +1,4 @@
-How RocketScience attempts to "solve" the spam problem.
+How Pollyanna attempts to "solve" the spam problem.
 
 A multi-layer approach is used:
 

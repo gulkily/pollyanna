@@ -46,9 +46,10 @@ sudo cpan Unicode::String
 
 BUILD
 =====
-$ git clone https://www.github.com/gulkily/RocketScience hike
-$ cd hike
-$ ./build.sh
+$ git clone https://www.github.com/gulkily/pollyanna pollyanna
+$ cd pollyanna
+$ source hike.sh
+$ hike build
 
 APACHE
 ======
@@ -184,7 +185,7 @@ TROUBLESHOOTING
 
 If you can't upgrade with git
 =============================
-$ cd ~/hike
+$ cd ~/pollyanna
 $ git stash
 $ git pull --all
 $ ./build.sh
@@ -193,19 +194,19 @@ If site is taking too long to update
 ====================================
 The following will archive content to make room for new content.
 	*** Archived files go into ./archive/ ***
-$ cd ~/hike
+$ cd ~/pollyanna
 $ ./_dev_archive.pl
 
 If config is messed up
 ======================
 If you are using manual configuration, use this to back up your
 existing configuration and reset it:
-$ cd ~/hike
+$ cd ~/pollyanna
 $ mv config config.`date +%s`
 $ ./build.sh
 
 If using signed configuration, do this first:
-$ cd ~/hike
+$ cd ~/pollyanna
 $ grep config html/txt
 (Move these files into ./archive/)
 

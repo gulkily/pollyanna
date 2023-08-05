@@ -1899,7 +1899,7 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 		# add generator meta tag to head
 		if (index(lc($content), '</head>')) {
 			#die;
-			my $progName = 'RocketScience';
+			my $progName = 'Pollyanna';
 			my $versionSeq = '1337';
 			my $versionGit = '01234abc';
 
