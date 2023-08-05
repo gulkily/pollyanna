@@ -13,9 +13,10 @@ This is done in the Dreamhost control panel.
 I logged in, and did the following
 
 ssh gidotnet@geekissues.net
-git clone ...
-cd hike
-./clean.sh ; ./build.sh
+git clone https://www.github.com/gulkily/pollyanna
+cd pollyanna
+source hike.sh
+hike build
 
 The build succeeded, so that's good.
 Now on with the connecting it to the webserver.
@@ -26,9 +27,10 @@ rm -rf ~/geekissues.net
 This removes the existing directory for the website.
 Going to geekissues.net now produces a 404 or placeholder page.
 
-ln -s hike/html geekissues.net
+cd ~
+ln -s pollyanna/html geekissues.net
 
-This creates a soft-link to hike/html/ called geekissues.net, which is where
+This creates a soft-link to pollyanna/html/ called geekissues.net, which is where
 the webserver is looking for the webroot.
 Loading geekissues.net now produces the home page.
 
@@ -37,7 +39,7 @@ I'll do this the other way: Instead of removing the original and creating a soft
 I will remove hike/log/access.log and replace it with a softlink to
 ~/logs/geekissues.net/http/access.log
 
-There are two settings I changed from their defaults:
+I then ran this to enable some convenience features:
 
-config/admin/php/rewrite, from "query" to "all"
-config/admin/php/update_on_post, from 0 to 1
+source enable_features.sh
+hike build
