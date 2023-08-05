@@ -17,6 +17,7 @@ sub GetPersonPage { # $personName
 
 	#todo add person.template
 
+	# COLLECT LIST OF APPROVED KEYS
 	my $keyList = '';
 	{
 		my %params;
@@ -38,6 +39,7 @@ sub GetPersonPage { # $personName
 		$keyList = GetItemListHtml(\@files); #todo use GetAuthorInfoBox()
 	}
 
+	# COLLECT LIST OF PENDING (NOT APPROVED) KEYS
 	my $pendingKeyList = '';
 	{
 		my %params;
@@ -59,8 +61,7 @@ sub GetPersonPage { # $personName
 		$pendingKeyList = GetItemListHtml(\@files); #todo use GetAuthorInfoBox()
 	}
 
-
-
+	# COLLECT LIST OF ITEMS BY APPROVED AUTHORS
 	my $itemList = '';
 	{
 		my $queryItemList = "
@@ -79,6 +80,7 @@ sub GetPersonPage { # $personName
 		#todo templatize the query, use parameter injection
 	}
 
+	# BUILD HTML PAGE OUT OF ABOVE UNITS
 	my $html =
 		GetPageHeader('person', HtmlEscape($personName)) .
 		$itemList .
@@ -89,6 +91,7 @@ sub GetPersonPage { # $personName
 		GetPageFooter('person')
 	;
 
+	# INJECT NECESSARY JS
 	my @jsToInject = qw(settings timestamp voting utils profile);
 	if (GetConfig('setting/admin/js/fresh')) {
 		push @jsToInject, 'fresh';
@@ -98,6 +101,7 @@ sub GetPersonPage { # $personName
 	}
 	$html = InjectJs($html, @jsToInject);
 
+	# RETURN HTML
 	return $html;
 } # GetPersonPage()
 
