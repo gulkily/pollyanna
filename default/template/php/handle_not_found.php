@@ -316,7 +316,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 				WriteLog('$pwd = ' . $pwd);
 
 				WriteLog("HandleNotFound: cd $SCRIPTDIR ; ./pages.pl $pagesPlArgument");
-				WriteLog(`cd $SCRIPTDIR ; ./pages.pl $pagesPlArgument`);
+				WriteLog(`cd $SCRIPTDIR ; timeout 5s ./pages.pl $pagesPlArgument`);
 
 				WriteLog("HandleNotFound: cd $pwd");
 				WriteLog(`cd $pwd`);
