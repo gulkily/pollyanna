@@ -8,10 +8,11 @@ template/perl/page/example.pl
 makepage.pl: add to valid pages
     may be unclear, but comment added #todo
 
-test: hike page x should work
+test: `hike page example` should work
     #check
 
 route.php: add to valid routes
+    look for "validRoutes"
     not there anymore? #todo
 
 handle_not_found.php: add to $validMakePageNames
