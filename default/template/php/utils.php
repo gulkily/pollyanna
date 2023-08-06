@@ -667,10 +667,6 @@ function PutFile ($file, $content) { // puts file contents
 	return $putFileResult; #todo && $renameResult ?
 } # PutFile()
 
-function GetMyCacheVersion () {
-	return 'b';
-} # GetMyCacheVersion()
-
 function GetCache ($cacheName) { // get cache contents by key/name
 	// comes from cache/ directory
 
