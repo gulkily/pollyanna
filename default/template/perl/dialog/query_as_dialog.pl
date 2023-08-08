@@ -9,6 +9,7 @@ sub GetQueryAsDialog { # $query, $title, $columns, \%param
 # this has some special conditions for GetAttributesDialog()
 #todo this should report query error
 #todo this should take @queryArgs
+#todo document no_empty flag
 
 # sub GetQueryDialog {
 # sub GetDialogFromQuery {
