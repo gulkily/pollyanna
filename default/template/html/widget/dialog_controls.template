@@ -1,26 +1,24 @@
 <!-- dialog_controls.template 'Interface Controls' -->
 
-<span class=advanced>
-	<a id=btnCascade href=# onclick="
-		if (window.DraggingCascade) {
-			SetPrefs('draggable', 1);
-			DraggingInit(0);
-			DraggingMakeFit(0);
-			DraggingCascade();
-			DraggingInit(0);
-		}
-	" title=Cascade>Cascade</a>;
+<a id=btnCascade href=# onclick="
+	if (window.DraggingCascade) {
+		SetPrefs('draggable', 1);
+		DraggingInit(0);
+		DraggingMakeFit(0);
+		DraggingCascade();
+		DraggingInit(0);
+	}
+" title=Cascade>Cascade</a>;
 
-	<a id=btnArrange href=# onclick="
-		if (window.DraggingRetile) {
-			SetPrefs('draggable', 1);
-			DraggingInit(0);
-			DraggingMakeFit(0);
-			DraggingRetile();
-			DraggingInit(0);
-		}
-	" title=Arrange>Arrange</a>;
-</span>
+<a id=btnArrange href=# onclick="
+	if (window.DraggingRetile) {
+		SetPrefs('draggable', 1);
+		DraggingInit(0);
+		DraggingMakeFit(0);
+		DraggingRetile();
+		DraggingInit(0);
+	}
+" title=Arrange>Arrange</a>;
 
 <a id=btnAnnoy href=# onclick="
 	if (window.DraggingRetile) {
