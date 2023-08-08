@@ -5,6 +5,7 @@ use warnings;
 use 5.010;
 
 sub GetDialogListDialog {
+# sub GetDialogsDialog {
 	WriteLog('GetDialogListDialog()');
 
 	my $dialogContent =
