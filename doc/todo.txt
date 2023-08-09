@@ -560,7 +560,7 @@ a) on mac, setup is a bit broken
 
 ===
 
-add perl-unicode-string to requirements
+add perl-unicode-string to requirements x
 
 ===
 
