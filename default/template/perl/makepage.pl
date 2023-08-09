@@ -76,7 +76,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 
 	# my @validPages =
 	# valid pages
-	my @simplePages = qw(inspector data cloud bookmark help example access welcome calendar profile upload links post cookie chat thanks examples about faq documentation network schedule people donate);
+	my @simplePages = qw(inspector data cloud bookmark help example topics access welcome calendar profile upload links post cookie chat thanks examples about faq documentation network schedule people donate);
 	push @simplePages, qw(biography interests messages); # shadowme
 	# yes, this is what you need for GetXPage() in template/perl/page/x.pl to work!
 
