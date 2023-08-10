@@ -610,7 +610,9 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		my @parameters;
 		push @parameters, $file{'file_hash'}; #it's an item, it's a file
 		my $query = SqliteGetNormalizedQueryString('item_applied_hashtags', @parameters);
-		$txtIndex .= GetQueryAsDialog($query, 'Applied Hashtags');
+		my %param;
+		$param{'no_empty'} = 1;
+		$txtIndex .= GetQueryAsDialog($query, 'Applied Hashtags', 0, \%param);
 	}
 
 	if (GetConfig('setting/html/item_page/attributes_list')) {
