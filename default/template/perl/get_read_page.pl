@@ -179,6 +179,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 						WHERE tag_parent = '$tagName'
 				)
 			)
+			AND item_flat.item_score >= 0
 			";
 			$queryParams{'order_clause'} = "ORDER BY item_flat.add_timestamp DESC";
 			$queryParams{'limit_clause'} = "LIMIT 1000"; #todo fix hardcoded limit #todo pagination
