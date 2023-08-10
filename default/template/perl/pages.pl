@@ -908,6 +908,11 @@ sub MakeHtAccessPages {
 			$HtaccessTemplate .= "\n" . $ssiConf;
 		}
 
+		if (GetConfig('admin/htaccess_block_list')) {
+			my $htaccessBlockList = GetConfig('admin/htaccess_block_list');
+			$HtaccessTemplate .= "\n" . $htaccessBlockList;
+		}
+
 		PutFile("$HTMLDIR/.htaccess", $HtaccessTemplate);
 
 		# WriteDataPage();
