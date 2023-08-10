@@ -169,9 +169,11 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'boxes', #banana #todo
 			'tasks', #dev tasks.html
 			'browse', #shadowme browse.html
-			'donate' #donate donate.html
+			'donate', #donate donate.html
+			'topics' #topics topics.html
 		); # $validViews
 		#todo make this nicer and configurable etc
+		# validRoutes
 
 		if (preg_match('/^\/([a-z]+)([0-9]+)?\.html$/', $path, $pathMatches)) {
 			WriteLog('HandleNotFound: $pathMatches = ' . print_r($pathMatches, 1));
@@ -317,6 +319,18 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 
 				WriteLog("HandleNotFound: cd $SCRIPTDIR ; ./pages.pl $pagesPlArgument");
 				WriteLog(`cd $SCRIPTDIR ; timeout 5s ./pages.pl $pagesPlArgument`);
+
+				/* #todo
+				$command = 'timeout 5 ls';
+                $output = exec($command);
+                $return_code = $output[0];
+
+                if ($return_code == 124) {
+                  echo 'The command timed out.';
+                } else {
+                  echo 'The command completed successfully.';
+                }
+                */
 
 				WriteLog("HandleNotFound: cd $pwd");
 				WriteLog(`cd $pwd`);

@@ -25,6 +25,12 @@ sub GetTagLink { # $tag ; returns html for a tag link
 
 		my $tagColor = '';
 		if (GetConfig('html/hash_color_hashtags') && !GetConfig('html/mourn') && !GetConfig('html/monochrome')) { # GetTagLink()
+			# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
+			# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
+			# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
+			# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
+			# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
+
 			$tagColor = GetStringHtmlColor($tag);
 		} else {
 			$tagColor = GetThemeColor('tag_text'); # #TextColor

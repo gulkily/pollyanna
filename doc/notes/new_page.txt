@@ -1,9 +1,11 @@
 Creating a new page
 
 template/html/page/example.template
+	skip
 
 template/perl/page/example.pl
 - needs to have GetExamplePage()
+	need to create a query template if using GetQueryAsDialog()
 
 makepage.pl: add to valid pages
     may be unclear, but comment added #todo
@@ -13,7 +15,6 @@ test: `hike page example` should work
 
 route.php: add to valid routes
     look for "validRoutes"
-    not there anymore? #todo
 
 handle_not_found.php: add to $validMakePageNames
     

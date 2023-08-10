@@ -288,6 +288,8 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 	#
 
 	my $shCommand = "sqlite3 -header \"$SqliteDbName\" \"$query\" 2>$sqliteErrorLog";
+	#todo send to /dev/null if debug mode is not enabled
+
 	WriteLog('SqliteQuery: $shCommand = ' . $shCommand);
 	#my $results = `sqlite3 -header "$SqliteDbName" "$query" 2>$sqliteErrorLog`;
 

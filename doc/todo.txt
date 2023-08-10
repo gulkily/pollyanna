@@ -1,3 +1,28 @@
+create topics page
+	topics are capitalized hashtags
+		topics table should include most recent post under that topic (and possibly more)
+	should have two dialogs/paginated resultsets:
+		a) capitalized hashtags ( the topics )
+		b) all-lowercase hashtags (utility/system)
+		c) might as well throw in a calendar?
+
+===
+
+how to make hash-colored lowercase hashtag links in tags dialog?
+
+===
+
+daily 1 minute of work
+	hypercode
+	banana
+	lilatom
+	papers
+	phoenix
+	carlos
+	dp
+
+===
+
 recent items page
 
 ===
@@ -545,7 +570,7 @@ a) on mac, setup is a bit broken
 
 ===
 
-add perl-unicode-string to requirements
+add perl-unicode-string to requirements x
 
 ===
 
@@ -674,6 +699,9 @@ layers dialog
 ===
 
 calculate hash of text live in js and display below textbox
+	add field to form
+	add function to populate text field
+	add event to textarea
 
 ===
 
@@ -824,16 +852,6 @@ column headers should feedback sort order and click
 ===
 
 reply(#) link should not appear if reply/enable is false
-
-===
-
-daily 1 minute of work
-	banana
-	lilatom
-	papers
-	phoenix
-	carlos
-	dp
 
 ===
 
