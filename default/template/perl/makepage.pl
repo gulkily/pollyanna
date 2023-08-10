@@ -84,9 +84,6 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	elsif (in_array($pageType, @simplePages)) {
 		WriteLog('MakePage: found "' . $pageType . '" in @simplePages');
 		MakeSimplePage($pageType);
-		if ($pageType eq 'settings') {
-			MakeStatsPages();
-		}
 	}
 	elsif (in_array($pageType, @listingPages)) {
 		WriteLog('MakePage: found "' . $pageType . '" in @listingPages');
@@ -101,7 +98,6 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		}
 		if ($pageType eq 'tags') {
 			#todo does this need to happen every time a listing page is generated?
-			require_once('widget/get_tag_page_header_links.pl');
 			my $tagsHorizontal = GetTagPageHeaderLinks();
 			PutHtmlFile('tags-horizontal.html', $tagsHorizontal);
 		}
