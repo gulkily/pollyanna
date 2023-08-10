@@ -1334,7 +1334,7 @@ sub DBGetVoteCounts { # Get total vote counts by tag value
 			FROM
 				vote
 			WHERE
-				file_hash IN (SELECT file_hash FROM item_flat WHERE item_score >= 0)
+				file_hash IN (SELECT file_hash FROM item_score WHERE item_score >= 0)
 			GROUP BY
 				vote_value
 		)
