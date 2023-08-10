@@ -2344,8 +2344,8 @@ http://www.php.net/manual/en/features.file-upload.errors.php
 
 Reply form
 ==========
-	add writeSubmit() call
-	refactor for writeSubmit() to be called with form reference
+	add WriteSubmit() call
+	refactor for WriteSubmit() to be called with form reference
 	add write.js to page conditional on replies enabled
 
 ===

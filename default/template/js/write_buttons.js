@@ -24,7 +24,7 @@ if (window.getUserFp) {
 			chkSignAs.setAttribute('id', 'chkSignAs');
 			chkSignAs.setAttribute('type', 'checkbox');
 			chkSignAs.setAttribute('checked', 1);
-			// this checkbox being checked means signMessage() is called in writeSubmit()
+			// this checkbox being checked means signMessage() is called in WriteSubmit()
 
 			lblSignAs.innerHTML = 'Sign as ' + getAvatar();
 

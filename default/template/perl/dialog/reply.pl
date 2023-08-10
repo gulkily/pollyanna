@@ -37,21 +37,21 @@ sub GetReplyForm { # $replyTo ; returns reply form for specified item
 				$replyForm,
 				'input id=btnSendReply',
 				'onclick',
-				"this.value = 'Meditate...'; if (window.writeSubmit) { setTimeout('writeSubmit();', 100); return true; } else { return true; }" #reply, optimize_for_delivery = true
+				"this.value = 'Meditate...'; if (window.WriteSubmit) { setTimeout('WriteSubmit();', 100); return true; } else { return true; }" #reply, optimize_for_delivery = true
 			);
 		} else {
 			$replyForm = AddAttributeToTag(
 				$replyForm,
 				'input id=btnSendReply',
 				'onclick',
-				"this.value='Meditate...';if(window.writeSubmit){return writeSubmit(this);}" #reply, optimize_for_delivery = false
+				"this.value='Meditate...';if(window.WriteSubmit){return WriteSubmit(this);}" #reply, optimize_for_delivery = false
 			);
 		}
 
 		#todo the return value can be changed from false to true to issue two submissions, one signed and one not
 		#		Use this line instead for improved delivery, but duplicate messages
 		#			#todo merge the duplicates server-side
-		#			"this.value = 'Meditate...'; if (window.writeSubmit) { setTimeout('writeSubmit();', 1); return false; } else { return true; }"
+		#			"this.value = 'Meditate...'; if (window.WriteSubmit) { setTimeout('WriteSubmit();', 1); return false; } else { return true; }"
 
 
 		if (GetConfig('admin/php/enable')) {

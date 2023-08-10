@@ -109,7 +109,7 @@ function WriteOnload () { // onload handler for write page
 
 					// implied getElementById already been feature checked here
 					//chkSignAs.setAttribute('onclick', "if (document.getElementById('btnSolvePuzzle')) { document.getElementById('btnSolvePuzzle').setAttribute('disabled', !chkSignAs.checked); }");
-					// this checkbox being checked means signMessage() is called in writeSubmit()
+					// this checkbox being checked means signMessage() is called in WriteSubmit()
 
 					lblSignAs.innerHTML = 'Sign as ' + getAvatar();
 					lblSignAs.appendChild(chkSignAs);
@@ -179,8 +179,8 @@ function CommentMakeWp (comment) { // makes editor textarea larger and gives it 
 	return '';
 } // CommentMakeWp()
 
-function writeSubmit (t) { // called when user submits write form //signMessage (
-	//alert('DEBUG: writeSubmit() begin');
+function WriteSubmit (t) { // called when user submits write form //signMessage (
+	//alert('DEBUG: WriteSubmit() begin');
 	if (window.localStorage) {
 		//alert('DEBUG: window.localStorage');
 		if (window.ClearAutoSave) {
@@ -194,7 +194,7 @@ function writeSubmit (t) { // called when user submits write form //signMessage 
 	if (configJsOpenPgp && window.getPrivateKey && window.signMessage) {
 		//alert('DEBUG: window.getPrivateKey && window.signMessage test passed');
 		if (getPrivateKey()) {
-			//alert('DEBUG: getPrivateKey() is true, writeSubmit() Calling signMessage()');
+			//alert('DEBUG: getPrivateKey() is true, WriteSubmit() Calling signMessage()');
 
 			if (document.getElementById) {
 				var chkSignAs = document.getElementById('chkSignAs');
@@ -227,10 +227,10 @@ function writeSubmit (t) { // called when user submits write form //signMessage 
 
 	window.eventLoopFresh = 0; // disables fresh.js. may not be a wise move here.
 
-	//alert('DEBUG: writeSubmit: about to return true');
+	//alert('DEBUG: WriteSubmit: about to return true');
 
 	return true;
-} // writeSubmit()
+} // WriteSubmit()
 
 function DoAutoSave() {
 	var initDone = window.autoSaveInitDone;

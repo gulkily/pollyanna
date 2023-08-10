@@ -99,14 +99,14 @@ sub GetWriteForm2 { # $dialogTitle ; returns write form (for composing text mess
 				$writeForm,
 				'input type=submit',
 				'onclick',
-				"this.value = 'Meditate...'; if (window.writeSubmit) { setTimeout('writeSubmit();', 100); return true; } else { return true; }" #write #optimize_for_delivery = true
+				"this.value = 'Meditate...'; if (window.WriteSubmit) { setTimeout('WriteSubmit();', 100); return true; } else { return true; }" #write #optimize_for_delivery = true
 			);
 		} else {
 			$writeForm = AddAttributeToTag(
 				$writeForm,
 				'input type=submit',
 				'onclick',
-				"this.value = 'Meditate...'; if (window.writeSubmit) { return writeSubmit(); } else { return true; }" #write #optimize_for_delivery = false
+				"this.value = 'Meditate...'; if (window.WriteSubmit) { return WriteSubmit(); } else { return true; }" #write #optimize_for_delivery = false
 			);
 		}
 	} # js stuff in write form

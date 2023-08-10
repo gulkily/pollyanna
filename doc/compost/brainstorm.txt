@@ -2025,8 +2025,8 @@ A note of security: Don't ever trust $_FILES["image"]["type"]. It takes whatever
 
 Reply form
 ==========
-	add writeSubmit() call
-	refactor for writeSubmit() to be called with form reference
+	add WriteSubmit() call
+	refactor for WriteSubmit() to be called with form reference
 	add write.js to page conditional on replies enabled
 
 janitor role
