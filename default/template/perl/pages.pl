@@ -1020,7 +1020,7 @@ sub MakeSystemPages {
 		}
 	}
 
-	MakePage('read');
+	#MakePage('read');
 
 } # MakeSystemPages()
 
