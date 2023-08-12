@@ -23,8 +23,8 @@ function SortTable (t, sortOrder) {
 		return '';
 	}
 
-	var rowColor0 = '';
-	var rowColor1 = '';
+	var rowColor0 = ''; // these are templated from theme/.../color/row0
+	var rowColor1 = ''; // these are templated from theme/.../color/row1
 
 	sortOrder = sortOrder ? 1 : 0;
 
