@@ -29,7 +29,7 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 	state $CONFIGDIR = GetDir('config');
 	state $DEFAULTDIR = GetDir('default');
 
-	WriteLog("GetTemplate($filename) caller: " . join(', ', caller));
+	WriteLog("GetTemplate($filename) get_template.pl caller: " . join(', ', caller));
 	state %templateMemo; #stores local memo cache of template
 	if ($templateMemo{$filename}) {
 		#if already been looked up, return memo version

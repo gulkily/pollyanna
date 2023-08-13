@@ -790,7 +790,7 @@ sub GetTemplate { # $filename ; returns specified template from template directo
 	state $CONFIGDIR = GetDir('config');
 	state $DEFAULTDIR = GetDir('default');
 
-	WriteLog("GetTemplate($filename) caller: " . join(', ', caller));
+	WriteLog("GetTemplate($filename) utils.pl caller: " . join(', ', caller));
 	state %templateMemo; #stores local memo cache of template
 	if ($templateMemo{$filename}) {
 		#if already been looked up, return memo version
