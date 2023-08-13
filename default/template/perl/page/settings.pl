@@ -26,7 +26,7 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 		$txtIndex .= GetSettingsDialog();
 	}
 
-	$txtIndex .= GetStatsTable();  # GetSettingsPage()
+	# $txtIndex .= GetStatsTable();  # GetSettingsPage()
 
 	my @settingsVisible1 = qw(
 		theme
