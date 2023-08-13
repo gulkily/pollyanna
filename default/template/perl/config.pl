@@ -359,10 +359,11 @@ sub ResetConfig { # Resets $configName to default by removing the config/* file
 } # ResetConfig()
 
 sub PutConfig { # $configName, $configValue ; writes config value to config storage
+#sub SetString {
 	# $configName = config name/key (file path)
 	# $configValue = value to write for key
 	# Uses PutFile()
-	#
+
 	my $configName = shift;
 	my $configValue = shift;
 
