@@ -770,7 +770,11 @@ sub GetTemplateFilePath { # $templateName, like 'perl/dialog/write.pl'
 	#todo
 } # GetTemplateFilePath()
 
-sub GetTemplate { # $filename ; returns specified template from template directory
+sub GetTemplate { # $templateName ; returns specified template from template directory
+# ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION
+# GetTemplate() needs to be in utils.pl, because you can't require_once() without GetTemplate()
+# don't try this: require_once('get_template.pl');
+# ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION
 # returns empty string if template not found
 # here is how the template file is chosen:
 # 1. template's existence is checked in config/template/ or default/template/
@@ -778,24 +782,24 @@ sub GetTemplate { # $filename ; returns specified template from template directo
 #    b. if it is not found in the theme directory, then it is looked up in config/template/, and then default/template/
 # this allows themes to override existing templates, but not create new ones
 #
-	my $filename = shift;
-	chomp $filename;
-	#	$filename = "$SCRIPTDIR/template/$filename";
+	my $templateName = shift;
+	chomp $templateName;
+	my $filename = $templateName;
 
 	my $isHtmlTemplate = 0;
-	if ($filename =~ m/^html/) {
+	if ($templateName =~ m/^html/) {
 		$isHtmlTemplate = 1;
 	}
 
 	state $CONFIGDIR = GetDir('config');
 	state $DEFAULTDIR = GetDir('default');
 
-	WriteLog("GetTemplate($filename) utils.pl caller: " . join(', ', caller));
+	WriteLog("GetTemplate($templateName) get_template.pl caller: " . join(', ', caller));
 	state %templateMemo; #stores local memo cache of template
-	if ($templateMemo{$filename}) {
+	if ($templateMemo{$templateName}) {
 		#if already been looked up, return memo version
-		WriteLog('GetTemplate: returning from memo for ' . $filename);
-		if (trim($templateMemo{$filename}) eq '') {
+		WriteLog('GetTemplate: returning from memo for $templateName = ' . $templateName);
+		if (trim($templateMemo{$templateName}) eq '') {
 			WriteLog('GetTemplate: warning: returning empty string for ' . $filename);
 		}
 		return $templateMemo{$filename};
