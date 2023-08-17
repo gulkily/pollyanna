@@ -8,6 +8,10 @@ use utf8;
 require_once('dialog.pl');
 
 sub GetItemTemplateBody {
+# sub FormatItem {
+# sub EscapeHtml {
+# sub FormatHtml {
+# sub FormatAsHtml {
 # sub GetItemBody {
 # sub GetBody {
 # sub GetItemText {
@@ -277,6 +281,7 @@ sub GetItemTemplateFromHash { # $ hash
 } # GetItemTemplateFromHash()
 
 sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALOG FRAME
+# for just the message formatter,
 # sub GetItemDialog {
 	WriteLog('GetItemTemplate: caller = ' . join(',', caller));
 

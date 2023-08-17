@@ -2153,6 +2153,8 @@ sub AddItemToConfigList { # Adds a line to a list stored in config
 } # AddItemToConfigList()
 
 sub CheckForInstalledVersionChange {
+# sub MakeChangelog {
+
 	WriteLog('CheckForInstalledVersionChange() begin');
 
 	my $lastVersion = GetConfig('current_version');
