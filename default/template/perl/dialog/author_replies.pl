@@ -11,6 +11,7 @@ sub GetAuthorRepliesDialog { # $authorKey
 # sub GetAuthorReplies {
 # sub GetReplies {
 # sub GetInboxDialog {
+# sub GetInbox {
 	my $authorKey = shift;
 
 	#$authorKey = IsFingerprint($authorKey);
@@ -61,6 +62,7 @@ sub PutAuthorRepliesDialog { # $authorKey
 # sub NakeIndexDialog {
 # sub PutInboxDialog {
 # sub GetInboxDialog {
+# sub GetInbox {
 	my $authorKey = shift;
 	#todo sanity
 	WriteLog('PutAuthorRepliesDialog: $authorKey = ' . $authorKey . '; caller = ' . join(',', caller));
