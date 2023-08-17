@@ -1,3 +1,8 @@
+improvements in auth
+	user should see when they have new keys pending approval
+
+===
+
 create topics page
 	topics are capitalized hashtags
 		topics table should include most recent post under that topic (and possibly more)
