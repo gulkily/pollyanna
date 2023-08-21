@@ -130,7 +130,7 @@ if [ $1 = pages ]
 		# should it be config? #todo
 fi
 
-if [ $1 = page ]
+if [ $1 = page ] # hike page
 	then
 		time ./config/template/perl/pages.pl -M $2 $3
 fi

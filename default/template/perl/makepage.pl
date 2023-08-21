@@ -114,6 +114,13 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		MakeWritePage();
 	}
 
+	elsif ($pageType eq 'settings') {
+		WriteLog('MakePage: settings');
+
+		MakeSimplePage('settings');
+		PutStatsPages();
+	}
+
 	elsif ($pageType eq 'random') {
 		WriteLog('MakePage: random');
 
