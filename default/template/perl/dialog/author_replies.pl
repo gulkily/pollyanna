@@ -67,7 +67,7 @@ sub PutAuthorRepliesDialog { # $authorKey
 	#todo sanity
 	WriteLog('PutAuthorRepliesDialog: $authorKey = ' . $authorKey . '; caller = ' . join(',', caller));
 
-	require_once('dialog/author_replies.pl');
+	# require_once('dialog/author_replies.pl');
 	my $dialog = GetAuthorRepliesDialog($authorKey);
 	PutHtmlFile('dialog/replies/' . $authorKey . '.html', $dialog);
 }
