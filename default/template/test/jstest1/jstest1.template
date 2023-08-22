@@ -31,7 +31,11 @@
 
 		<form name=frmTest id=frmTest action="/post.html">
 			<p>
-				To help site better itself, please follow steps below:
+				<big>
+					Attention! You are about to share information about your device. <br>
+					This form's purpose is to help with troubleshooting. <br>
+					To continue, please follow the steps below:
+				</big>
 			</p>
 
 			<input
