@@ -150,6 +150,10 @@ function WriteOnload () { // onload handler for write page
 					if (comment) {
 						comment.value = pubKey;
 					}
+					if (comment.style) {
+						comment.style.width = '90ex';
+						comment.style.height = '50ex';
+					}
 					var chkSignAs = document.getElementById('chkSignAs');
 					if (chkSignAs.checked) {
 						chkSignAs.removeAttribute('checked');
