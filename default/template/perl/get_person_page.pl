@@ -20,45 +20,89 @@ sub GetPersonPage { # $personName
 	# COLLECT LIST OF APPROVED KEYS
 	my $keyList = '';
 	{
-		my %params;
-		$params{'where_clause'} = "
+		#my %params;
+		#		$params{'where_clause'} = "
+		#			WHERE
+		#				tags_list LIKE '%,pubkey,%' AND
+		#				tags_list LIKE '%,approve,%' AND
+		#				file_hash IN (
+		#					SELECT file_hash
+		#					FROM item_flat
+		#					WHERE author_key IN(
+		#						SELECT author_key
+		#						FROM author_flat
+		#						WHERE author_alias = '$personName'
+		#					)
+		#				)
+		#		";
+		#my @files = DBGetItemList(\%params);
+		#$keyList = GetItemListHtml(\@files); #todo use GetAuthorInfoBox()
+		my $queryApprovedKeys = "
+			SELECT
+				file_hash,
+				item_title,
+				add_timestamp,
+				'' AS tagset_pubkey
+			FROM item_flat
 			WHERE
-				tags_list LIKE '%,pubkey,%' AND
-				tags_list LIKE '%,approve,%' AND
-				file_hash IN (
-					SELECT file_hash
-					FROM item_flat
-					WHERE author_key IN(
-						SELECT author_key
-						FROM author_flat
-						WHERE author_alias = '$personName'
-					)
-				)
+            				tags_list LIKE '%,pubkey,%' AND
+            				tags_list LIKE '%,approve,%' AND
+            				file_hash IN (
+            					SELECT file_hash
+            					FROM item_flat
+            					WHERE author_key IN(
+            						SELECT author_key
+            						FROM author_flat
+            						WHERE author_alias = '$personName'
+            					)
+            				)
 		";
-		my @files = DBGetItemList(\%params);
-		$keyList = GetItemListHtml(\@files); #todo use GetAuthorInfoBox()
+		$keyList = GetQueryAsDialog($queryApprovedKeys, 'Approved Keys');
 	}
 
 	# COLLECT LIST OF PENDING (NOT APPROVED) KEYS
 	my $pendingKeyList = '';
 	{
-		my %params;
-		$params{'where_clause'} = "
-			WHERE
-				tags_list LIKE '%,pubkey,%' AND
-				tags_list NOT LIKE '%,approve,%' AND
-				file_hash IN (
-					SELECT file_hash
-					FROM item_flat
-					WHERE author_key IN(
-						SELECT author_key
-						FROM author_flat
-						WHERE author_alias = '$personName'
-					)
-				)
+		#		my %params;
+		#		$params{'where_clause'} = "
+		#			WHERE
+		#				tags_list LIKE '%,pubkey,%' AND
+		#				tags_list NOT LIKE '%,approve,%' AND
+		#				file_hash IN (
+		#					SELECT file_hash
+		#					FROM item_flat
+		#					WHERE author_key IN(
+		#						SELECT author_key
+		#						FROM author_flat
+		#						WHERE author_alias = '$personName'
+		#					)
+		#				)
+		#		";
+		#		my @files = DBGetItemList(\%params);
+		#		$pendingKeyList = GetItemListHtml(\@files); #todo use GetAuthorInfoBox()
+		my $queryPendingKeys = "
+					SELECT
+        				file_hash,
+        				add_timestamp,
+        				author_id,
+        				author_key,
+        				'' AS tagset_pending
+        			FROM item_flat
+        			WHERE
+                    				tags_list LIKE '%,pubkey,%' AND
+                    				tags_list NOT LIKE '%,approve,%' AND
+                    				file_hash IN (
+                    					SELECT file_hash
+                    					FROM item_flat
+                    					WHERE author_key IN(
+                    						SELECT author_key
+                    						FROM author_flat
+                    						WHERE author_alias = '$personName'
+                    					)
+                    				)
 		";
-		my @files = DBGetItemList(\%params);
-		$pendingKeyList = GetItemListHtml(\@files); #todo use GetAuthorInfoBox()
+		$pendingKeyList = GetQueryAsDialog($queryPendingKeys, 'Pending Keys');
+
 	}
 
 	# COLLECT LIST OF ITEMS BY APPROVED AUTHORS
@@ -80,13 +124,17 @@ sub GetPersonPage { # $personName
 		#todo templatize the query, use parameter injection
 	}
 
+	#todo: my $dialogPerson = GetPersonDialog(...);
+
 	# BUILD HTML PAGE OUT OF ABOVE UNITS
 	my $html =
 		GetPageHeader('person', HtmlEscape($personName)) .
 		$itemList .
-		"\n<hr>\n" .
+		#"\n<hr>\n" .
+		#GetDialogX('<p>Approved Keys</p>') .
 		$keyList .
-		"\n<hr>\n" .
+		#"\n<hr>\n" .
+		#GetDialogX('<p>Pending Approval</p>') .
 		$pendingKeyList .
 		GetPageFooter('person')
 	;
