@@ -305,20 +305,43 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			$mostRecentCacheName = 'pages/' . md5($pagesPlArgument);
 			$mostRecentCall = intval(GetCache($mostRecentCacheName));
 
-			WriteLog('HandleNotFound: $mostRecentCacheName = ' . $mostRecentCacheName . '; $mostRecentCall = ' . $mostRecentCall);
-
 			#my
 			$refreshWindowInterval = GetConfig('admin/php/route_pages_pl_sane_limit');
 				#todo still a bug here; cache should be used if pages.pl sanity check fails
 
-			if (time() - $mostRecentCall > $refreshWindowInterval) { #todo config for this
-				WriteLog('HandleNotFound: pages.pl was called more than 5 seconds ago, trying to grow page');
+			WriteLog('HandleNotFound: $mostRecentCacheName = ' . $mostRecentCacheName . '; $mostRecentCall = ' . $mostRecentCall . '; $refreshWindowInterval = ' . $refreshWindowInterval);
+
+			if (time() - $mostRecentCall > $refreshWindowInterval) {
+				WriteLog('HandleNotFound: interval check passed, trying to grow page');
 				# call pages.pl to generate the page
 				$pwd = getcwd();
-				WriteLog('$pwd = ' . $pwd);
+				WriteLog('HandleNotFound: $pwd = ' . $pwd);
 
 				WriteLog("HandleNotFound: cd $SCRIPTDIR ; ./pages.pl $pagesPlArgument");
-				WriteLog(`cd $SCRIPTDIR ; timeout 5s ./pages.pl $pagesPlArgument`);
+				/* my */ $pagesPlTimeout = 0;
+				if ($pagesPlTimeout) {
+					#use timeout to give up on html generation after 5 seconds
+					#todo use GetDir() and not ./pages.pl
+					/* my */ $pagesPlCommand = 'cd "' . $SCRIPTDIR . '" ; timeout ' . $pagesPlTimeout . 's ' . './pages.pl ' . $pagesPlArgument;
+					WriteLog('HandleNotFound: $pagesPlCommand = ' . $pagesPlCommand);
+					/*my*/ $exitCode = exec($pagesPlCommand);
+					WriteLog('HandleNotFound: $exitCode = ' . $exitCode);
+
+					if ($exitCode) {
+						# there was an error, probably timed out
+						WriteLog('HandleNotFound: $exitCode was TRUE, writing placeholder page');
+						#todo:
+						#	/*my*/ $pathLocal = './' . $path;
+						#	PutFile($pathLocal, 'hi');
+					} else {
+						# ok
+					}
+				} else {
+					#todo use GetDir() and not ./pages.pl
+					/* my */ $pagesPlCommand = 'cd "' . $SCRIPTDIR . '" ; ./pages.pl ' . $pagesPlArgument;
+					WriteLog('HandleNotFound: $pagesPlCommand = ' . $pagesPlCommand);
+					WriteLog('HandleNotFound: ' . `$pagesPlCommand`);
+				}
 
 				/* #todo
 				$command = 'timeout 5 ls';
@@ -333,7 +356,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
                 */
 
 				WriteLog("HandleNotFound: cd $pwd");
-				WriteLog(`cd $pwd`);
+				WriteLog('HandleNotFound: cd $pwd = ' . `cd $pwd`);
 
 				PutCache($mostRecentCacheName, time());
 			} else {
@@ -357,7 +380,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 
 	if (!isset($html) || !$html) {
 		// don't know how to handle this request, default to 404
-		WriteLog('HandleNotFound: no $html');
+		WriteLog('HandleNotFound: warning: $html is FALSE, returning 404');
 		if (file_exists('404.html')) {
 			$html = file_get_contents('404.html');
 			header("HTTP/1.0 404 Not Found");
