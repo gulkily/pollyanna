@@ -150,6 +150,10 @@ function WriteOnload () { // onload handler for write page
 					if (comment) {
 						comment.value = pubKey;
 					}
+					var chkSignAs = document.getElementById('chkSignAs');
+					if (chkSignAs.checked) {
+						chkSignAs.removeAttribute('checked');
+					}
 				} else {
 					//alert('DEBUG: pubKey was false, this is unexpected. Giving up.');
 				}
