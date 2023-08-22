@@ -1191,9 +1191,16 @@ function FetchDialog (dialogName) {
 		var dialogExists = document.getElementById(dialogId);
 		if (dialogExists) {
 			// if dialog is already on page, we just focus it
-			// UNLESS it is the settings dialog, in which case we go to the settings page
 			// because we want to see the other settings dialogs
-			if (dialogName == 'settings') {
+			if (
+				dialogName == 'upload'
+				||
+				dialogName == 'settings'
+				||
+				dialogName == 'write'
+			) {
+				// these are exceptions to the rule above
+				//alert('DEBUG: FetchDialog: dialogExists, opening page: ' + dialogName);
 				return true;
 			} else {
 				//alert('DEBUG: FetchDialog: dialogExists');
