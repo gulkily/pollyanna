@@ -617,6 +617,8 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		my $query = SqliteGetNormalizedQueryString('item_applied_hashtags', @parameters);
 		my %param;
 		$param{'no_empty'} = 1;
+		$param{'no_heading'} = 1;
+		$param{'no_status'} = 1;
 		$txtIndex .= GetQueryAsDialog($query, 'Applied Hashtags', 0, \%param);
 	}
 
