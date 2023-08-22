@@ -511,6 +511,8 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fieldName eq 'chain_checksum_good' || # RenderField() not to be confused with field_advanced
 		$fieldName eq 'boxes' || # RenderField() not to be confused with field_advanced (this is for banana theme)
 		$fieldName eq 'file_size' || # RenderField() not to be confused with field_advanced (this is for banana theme)
+		$fieldName eq 'attribute_list' || # RenderField() not to be confused with field_advanced (this is for banana theme)
+		$fieldName eq 'attribute_count' || # RenderField() not to be confused with field_advanced (this is for banana theme)
 		0 # this is here to make formatting above more consistent
 	) {
 		# leave the field value as is
