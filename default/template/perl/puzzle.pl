@@ -5,6 +5,8 @@ use warnings;
 use 5.010;
 use utf8;
 
+#puzzle
+
 sub IndexPuzzle {
 	my $textRef = shift;
 	my %text = %{$textRef};

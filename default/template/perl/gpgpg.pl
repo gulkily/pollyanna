@@ -154,6 +154,7 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache
 
 		if ($pubKeyFlag) {
 			### PUBKEY
+			#pubkey
 			##########
 			my $gpgKeyPub = '';
 

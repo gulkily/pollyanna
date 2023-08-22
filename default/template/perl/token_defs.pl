@@ -84,6 +84,10 @@ sub GetTokenDefs {
 			'apply_to_self' => 1
 		},
 		{ # date in yyyy-mm-dd format
+			# date:
+			# token/date
+			# 'date:
+			# /date:
 			'token'   => 'date',
 			'mask'    => '^(date)(\W+)([0-9]{4}\-[0-9]{2}\-[0-9]{2})',
 			'mask_params'    => 'mgi',

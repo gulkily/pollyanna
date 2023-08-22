@@ -388,6 +388,11 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$addMavo = 1;
 	}
 	else {
+		#		if ( $file{'item_type'} eq 'image' && GetConfig('setting/admin/image/enable') ) {
+		#			#todo get link for full size image
+		#			my $imageLink = '';
+		#		}
+		#
 		$itemTemplate = GetItemTemplate(\%file); # GetItemPage()
 	}
 	WriteLog('GetItemPage: child_count: ' . $file{'file_hash'} . ' = ' . $file{'child_count'});
