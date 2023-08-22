@@ -186,9 +186,22 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache
 							DBAddVoteRecord($fileHash, 0, 'pubkey');
 						}
 
-#
-#						DBAddKeyAlias($authorKey, $tokenFound{'param'}, $fileHash);
-#						DBAddKeyAlias('flush');
+						#todo add message to index_log
+						if (GetConfig('setting/admin/auto_approve_first_user')) {
+							#todo optimize below
+							my $existingAuthors = SqliteGetValue("SELECT COUNT(key) AS author_count FROM author_alias WHERE alias = '$aliasReturned'"); #todo parameterize
+							WriteLog('GpgParse: $existingAuthors = ' . $existingAuthors);
+							if ($existingAuthors) {
+								# do not auto-approve
+							}
+							else {
+								#todo should apply to fingerprint?
+								DBAddVoteRecord($fileHash, GetTime(), 'approve', $gpgKeyPub, $fileHash);
+							}
+						}
+
+						# DBAddKeyAlias($authorKey, $tokenFound{'param'}, $fileHash);
+						# DBAddKeyAlias('flush');
 
 						# gpg author alias shim
 						DBAddKeyAlias($gpgKeyPub, $aliasReturned, $fileHash);
