@@ -103,6 +103,8 @@ if ($changesDetectedCount) {
 
 	sleep 1;
 
+	my $needRebuild = 0;
+
 	for my $key (@changed) {
 		if (-f "config/$key") {
 			$filesRemovedCount++;
