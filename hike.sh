@@ -110,11 +110,39 @@ if [ $1 = index ]
 		fi
 fi
 
-if [ $1 = refresh ]
+if [ $1 = refresh ] # hike refresh
 	then
 		perl -T default/template/perl/script/template_refresh.pl
+
+		if [ ! -e config/template/perl/pages.pl ]
+			then
+				cp -v default/template/perl/pages.pl config/template/perl/pages.pl
+		fi
+		if [ ! -e pages.pl ]
+			then
+				ln -sv config/template/perl/pages.pl pages.pl
+		fi
+
+		if [ ! -e config/template/perl/index.pl ]
+			then
+				cp -v default/template/perl/index.pl config/template/perl/index.pl
+		fi
+		if [ ! -e index.pl ]
+			then
+				ln -sv config/template/perl/index.pl index.pl
+		fi
+
+		if [ ! -e config/template/perl/utils.pl ]
+			then
+				cp -v default/template/perl/utils.pl config/template/perl/utils.pl
+		fi
+		if [ ! -e utils.pl ]
+			then
+				ln -sv config/template/perl/utils.pl utils.pl
+		fi
+
 		./default/template/sh/_dev_clean_html.sh
-		./pages.pl --php
+		./pages.pl --php #todo this should not be necessary
 fi
 
 if [ $1 = frontend ]
