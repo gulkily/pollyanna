@@ -1,3 +1,8 @@
+how to make it easier to reintegrate an archive?
+how to encourage users to make backups?
+
+===
+
 Traditionally, a FILE_ID.DIZ should be "up to 10 lines of text, each line being no more than 45 characters long",
 according to v.1.9 of the specification.[3] The concept of .DIZ files was to allow for a concise description of
 uploaded files to be automatically applied.
