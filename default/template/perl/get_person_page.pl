@@ -15,7 +15,8 @@ sub GetPersonPage { # $personName
 		return '';
 	}
 
-	#todo add person.template
+	#todo add person.template ;
+	#GetPersonDialog(\%author);
 
 	# COLLECT LIST OF APPROVED KEYS
 	my $keyList = '';
@@ -37,6 +38,8 @@ sub GetPersonPage { # $personName
 		#		";
 		#my @files = DBGetItemList(\%params);
 		#$keyList = GetItemListHtml(\@files); #todo use GetAuthorInfoBox()
+
+		#todo templatize query
 		my $queryApprovedKeys = "
 			SELECT
 				file_hash,
@@ -80,6 +83,7 @@ sub GetPersonPage { # $personName
 		#		";
 		#		my @files = DBGetItemList(\%params);
 		#		$pendingKeyList = GetItemListHtml(\@files); #todo use GetAuthorInfoBox()
+		#todo templatize query
 		my $queryPendingKeys = "
 					SELECT
         				file_hash,
@@ -120,15 +124,18 @@ sub GetPersonPage { # $personName
 			ORDER BY add_timestamp DESC
 			LIMIT 15
 		";
-		$itemList = GetQueryAsDialog($queryItemList, 'Activity');
+		$itemList = GetQueryAsDialog($queryItemList, 'Recent Activity');
 		#todo templatize the query, use parameter injection
 	}
 
 	#todo: my $dialogPerson = GetPersonDialog(...);
 
+	my $personDialog = GetDialogX('<fieldset><p>This page is about a person named ' . HtmlEscape($personName) . '.</p></fieldset>', HtmlEscape($personName));
+
 	# BUILD HTML PAGE OUT OF ABOVE UNITS
 	my $html =
 		GetPageHeader('person', HtmlEscape($personName)) .
+		$personDialog .
 		$itemList .
 		#"\n<hr>\n" .
 		#GetDialogX('<p>Approved Keys</p>') .
