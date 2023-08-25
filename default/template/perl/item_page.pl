@@ -437,9 +437,11 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		#todo sanity check on vars above
 
 		my $pubKeyMessage = "
-			This is a public key, <br>
-			which creates a profile placeholder, <br>
-			and allows verifying other posts. <br>
+			<fieldset><p>
+				This is a public key, <br>
+				which creates a profile placeholder, <br>
+				and allows verifying other posts. <br>
+			</p></fieldset>
 		";#todo templatify and make a table with a caption above?
 
 		$txtIndex .= GetDialogX(
