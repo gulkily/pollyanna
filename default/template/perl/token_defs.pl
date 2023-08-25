@@ -243,8 +243,23 @@ sub GetTokenDefs {
 			'message' => '',
 			#'message' => '[HashTag]',
 			'apply_to_parent' => 1,
-			'apply_to_self' => 1,
+			'apply_to_self' => 1
 			#'require_spacer' => 0
+		},
+#		{ # @tag for usernames
+#			'token' => 'at_tag',
+#			'mask'  => '(@)()([a-zA-Z0-9_]{1,32})',
+#			'mask_params' => 'mgi',
+#			'message' => '', #retain original ?
+#			'apply_to_self' => 1
+#		},
+		{ # @tag for usernames
+			'token' => 'attrib_tag',
+			'mask'  => '(\(c\))()([a-zA-Z0-9_]{1,32})',
+			'mask_params' => 'mgi',
+			'message' => '', #retain original ?
+			'apply_to_parent' => 1,
+			'apply_to_self' => 1
 		},
 		{ # verify token, for third-party identification
 			# example: verify http://www.example.com/user/JohnSmith/

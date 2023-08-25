@@ -1,3 +1,92 @@
+what to do about the duplicate items bug?
+	options
+		remove all -- and --- lines from item when saving new item
+			a bit dirty
+			existing items will change their hashes
+		allow aliasing of hashes when merging items
+			needs major changes in db structure?
+				maybe not, just alias items together by replying
+		make hashing more consistent and duplicate-resistant
+			there are several ways where an item is hashed, and they all have to be changed
+
+	challenges
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===
+
 "my name is tag" should by default only work on pubkey items
 	this will also restrict self-naming to key-based accounts
 

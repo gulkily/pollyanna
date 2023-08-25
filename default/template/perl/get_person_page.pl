@@ -116,7 +116,8 @@ sub GetPersonPage { # $personName
 			SELECT
 				file_hash,
 				item_title,
-				add_timestamp
+				add_timestamp,
+				'' AS cart
 			FROM
 				item_flat
 				JOIN person_author ON (person_author.author_key = item_flat.author_key)
