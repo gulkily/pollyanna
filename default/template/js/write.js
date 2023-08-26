@@ -161,6 +161,21 @@ function WriteOnload () { // onload handler for write page
 					if (chkSignAs.checked) {
 						chkSignAs.removeAttribute('checked');
 					}
+
+					// hide unrelated options
+					var spanSignAs = document.getElementById('spanSignAs');
+					if (spanSignAs) {
+						spanSignAs.style.display = 'none';
+					}
+					var spanWriteAdvanced = document.getElementById('spanWriteAdvanced');
+					if (spanWriteAdvanced) {
+						spanWriteAdvanced.style.display = 'none';
+					}
+					var addtext = document.getElementById('addtext');
+					if (addtext && addtext.value) {
+						addtext.value = 'Share Public Key';
+					}
+
 				} else {
 					//alert('DEBUG: pubKey was false, this is unexpected. Giving up.');
 				}
