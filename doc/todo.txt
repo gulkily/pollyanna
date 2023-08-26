@@ -1,3 +1,8 @@
+tags page should include capitalized hashtags, just like the horizontal bar
+should be a separate dialog for system hashtags (lowercase)
+
+===
+
 how to make it easier to reintegrate an archive?
 how to encourage users to make backups?
 
