@@ -43,6 +43,7 @@ sub GetPeoplePage {
 	$html =
 		GetPageHeader('people') .
 		$people .
+		'<hr>' .
 		$pending .
 		$guests .
 		# GetQuerySqlDialog('people') .
