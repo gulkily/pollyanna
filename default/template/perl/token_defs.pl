@@ -118,7 +118,7 @@ sub GetTokenDefs {
 		},
 		{ # allows cookied user to set own name
 			'token'   => 'my_name_is',
-			'mask'    => '^(my name is)(\W+)([\(\)A-Za-z0-9\'_\., ]+)\r?$',
+			'mask'    => '^(my name is)(\W+)([\(\)A-Za-z0-9_\., ]+)\r?$', # note that single quotes are currently not allowed in names
 			'mask_params'    => 'mgi',
 			'message' => '[MyNameIs]',
 			'apply_to_self' => 1
