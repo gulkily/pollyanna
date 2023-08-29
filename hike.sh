@@ -68,14 +68,26 @@ if [ $1 = version ]
 		git rev-parse HEAD
 fi
 
-if [ $1 = build ]
+if [ $1 = build ] # hike build
 	then
 		time ./build.sh
+		echo
+		echo "                            ==============="
+		echo "                            build complete!"
+		echo "              ==============="
+		echo "              build complete!"
+		echo "==============="
+		echo "build complete!"
 fi
 
-if [ $1 = clean ]
+if [ $1 = clean ] # hike clean
 	then
 		time ./clean.sh
+		echo ""
+		echo "==============="
+		echo "clean complete!"
+		echo "                            ==============="
+		echo "                            clean complete!"
 fi
 
 if [ $1 = rebuild ]
@@ -241,12 +253,15 @@ if [ $1 = archive ]
 		./hike.sh frontend
 fi
 
-echo source hike.sh = enable these commands
-echo hike clean = clean including templates
-echo hike build = build base
-echo hike start = start local server
-echo hike archive = archive all content
-echo hike help = see more commands
+if [ ! $1 ]
+	then
+		echo source hike.sh = enable these commands
+		echo hike clean = clean including templates
+		echo hike build = build base
+		echo hike start = start local server
+		echo hike archive = archive all content
+		echo hike help = see more commands
+fi
 
 if [ $1 = help ]
 	then
