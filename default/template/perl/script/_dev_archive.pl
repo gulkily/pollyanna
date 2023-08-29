@@ -168,6 +168,9 @@ my $IMAGEDIR = $HTMLDIR . '/image';
 	print("mkdir($HTMLDIR)\n");
 	mkdir("$HTMLDIR");
 
+	# after an archive, this file being missing can cause an error message during build
+	system("touch $HTMLDIR/chain.log"); #todo only do this if chain feature is enabled
+
 	print("mkdir($TXTDIR)\n");
 	mkdir("$TXTDIR");
 
