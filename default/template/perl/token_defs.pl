@@ -253,7 +253,7 @@ sub GetTokenDefs {
 #			'message' => '', #retain original ?
 #			'apply_to_self' => 1
 #		},
-		{ # @tag for usernames
+		{ # (c) attribution tag for usernames #attrib
 			'token' => 'attrib_tag',
 			'mask'  => '(\(c\))()([a-zA-Z0-9_]{1,32})',
 			'mask_params' => 'mgi',
