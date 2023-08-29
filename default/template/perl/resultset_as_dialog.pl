@@ -154,7 +154,8 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 
 			# row color above
 
-			my @fieldAdvanced = GetConfigListAsArray('field_advanced'); #todo inconsistent with the other one?
+			my @fieldAdvanced = GetConfigListAsArray('field_advanced'); #todo make consistent with the other one?
+			my @fieldAdmin = GetConfigListAsArray('field_admin'); #todo make consistent with the other one?
 			# fields_advanced advanced_fields advancedfields
 
 			foreach my $column (split(',', $columns)) {
@@ -162,7 +163,12 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 				if (in_array($column, @fieldAdvanced)) { #  advanced column column_advanced
 					#this hides the file_hash column from non-advanced users
 					$content .= '<td class=advanced>';
-				} else {
+				}
+				elsif (in_array($column, @fieldAdmin)) { #  admin column admin_advanced
+					#this hides the file_hash column from non-admin users
+					$content .= '<td class=admin>';
+				}
+				else {
 					$content .= '<td>';
 				}
 
