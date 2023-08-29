@@ -2574,14 +2574,13 @@ sub in_array { # $needle, @haystack ; emulates php's in_array()
 #	} else {
 #		return 0;
 #	}
-	WriteLog('in_array: caller = ' . join(',', caller));
 
 	my %params = map { $_ => 1 } @haystack;
 	if(exists($params{$needle})) {
-		WriteLog('in_array: $needle = ' . $needle . '; @haystack = ' . join(',', @haystack) . ' = 1');
+		WriteLog('in_array: $needle = ' . $needle . '; @haystack = ' . join(',', @haystack) . ' = 1 ; caller = ' . join(',', caller));
 		return 1;
 	} else {
-		WriteLog('in_array: $needle = ' . $needle . '; @haystack = ' . join(',', @haystack) . ' = 0');
+		WriteLog('in_array: $needle = ' . $needle . '; @haystack = ' . join(',', @haystack) . ' = 0 ; caller = ' . join(',', caller));
 		return 0;
 	}
 } # in_array()
