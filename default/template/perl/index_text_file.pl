@@ -533,6 +533,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						s_replace
 						operator_please
 						hike_set
+						my_name_is
 					); #tokenSanityCheck
 					#### TODO #TODO there should really really be a warning when this doesn't pan out, because ...
 
