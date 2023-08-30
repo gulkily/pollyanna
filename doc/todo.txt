@@ -1,5 +1,6 @@
-tags page should include capitalized hashtags, just like the horizontal bar
-should be a separate dialog for system hashtags (lowercase)
+tags page should include capitalized hashtags, just like the horizontal bar x
+	should be a separate dialog for system hashtags (lowercase)
+		this can be on a separate page/dialog for now
 
 ===
 
