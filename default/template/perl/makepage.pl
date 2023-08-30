@@ -98,6 +98,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		}
 		if ($pageType eq 'tags') {
 			#todo does this need to happen every time a listing page is generated?
+			# for the tags page, look at template/query/tags
 			my $tagsHorizontal = GetTagPageHeaderLinks();
 			PutHtmlFile('tags-horizontal.html', $tagsHorizontal);
 		}
@@ -107,7 +108,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		} else {
 			WriteItemListingPages($pageType, 'dialog_list', \%params);
 		}
-	}
+	} # elsif (in_array($pageType, @listingPages))
 
 	elsif ($pageType eq 'write') {
 		WriteLog('MakePage: write');
