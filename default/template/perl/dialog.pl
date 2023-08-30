@@ -317,6 +317,7 @@ sub GetDialogX2 { # \%paramHash ; returns window
 
 		my $printedColumnsCount = 0;
 		my @fieldAdvanced = split("\n", GetTemplate('list/field_advanced'));
+		my @fieldAdmin = split("\n", GetTemplate('list/field_admin'));
 		# fields_advanced advanced_fields advancedfields
 
 		foreach my $columnCaption (@columnsArray) {
@@ -332,6 +333,16 @@ sub GetDialogX2 { # \%paramHash ; returns window
 					'advanced'
 				);
 			}
+			elsif (in_array($columnCaption, @fieldAdmin)) {
+				#todo caption and field name should be different things
+				$columnHeaderTemplate = AddAttributeToTag(
+					$columnHeaderTemplate,
+					'th',
+					'class',
+					'admin'
+				);
+			}
+
 			if ($tableSort && GetConfig('admin/js/enable') && GetConfig('admin/js/table_sort')) {
 				$columnHeaderTemplate = AddAttributeToTag(
 					$columnHeaderTemplate,
