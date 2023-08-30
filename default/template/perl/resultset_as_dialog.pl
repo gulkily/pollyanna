@@ -14,6 +14,8 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 #
 # ATTENTION: the first member of the @result array is the list of columns
 # this list (and order) of columns is used if $columns parameter is not specified
+#
+# sub GetResultSet {
 
 	##############################################################
 	# PARAMETERS FISHING BEGINS
@@ -48,6 +50,7 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 	# DON'T LOOK FOR COLUMN PRINTING HERE!
 	# $columnsDisplay is passed into GetDialogX() later!
 	# $columnsDisplay is a comma-delimited string
+	# @fieldAdmin @fieldAdvanced
 	#
 
 	my $columnsRef = shift @result; # (reference) columns returned as first line of result
