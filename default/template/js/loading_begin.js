@@ -49,6 +49,7 @@ function ShowPreNavigateNotification () { // displays 'Meditate...' message
 // function OnUnload () {
 // function NavigateAway () {
 // function OnNavigateAway () {
+// function OnLoadAll () {
 
 	//alert('DEBUG: ShowPreNavigateNotification() begin');
 
