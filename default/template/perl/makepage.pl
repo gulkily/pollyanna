@@ -73,6 +73,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	push @listingPages, qw(browse); # shadowme
 	#chain.html #new.html #boxes.html #tasks.html
 	# sub GetChainPage {
+	# sub GetTagsPage { # tags.html
 
 	# my @validPages =
 	# valid pages

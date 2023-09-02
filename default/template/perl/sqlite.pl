@@ -1,7 +1,6 @@
 #!/usr/bin/perl -T
 #freebsd: #!/usr/local/bin/perl
 
-
 use strict;
 use warnings;
 use 5.010;
