@@ -88,7 +88,7 @@ sub GetPersonPage { # $personName
 					SELECT
         				file_hash,
         				add_timestamp,
-        				author_id,
+        				author_key AS author_id,
         				author_key,
         				'' AS tagset_pending
         			FROM item_flat
