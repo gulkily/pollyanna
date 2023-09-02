@@ -90,7 +90,8 @@ sub GetPersonPage { # $personName
         				add_timestamp,
         				author_key AS author_id,
         				author_key,
-        				'' AS tagset_pending
+        				'' AS tagset_pending,
+        				'' AS cart
         			FROM item_flat
         			WHERE
                     				tags_list LIKE '%,pubkey,%' AND
