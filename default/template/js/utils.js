@@ -176,6 +176,16 @@ function OnLoadEverything () { // checks for each onLoad function and calls it
 	//
 } // OnLoadEverything()
 
+function OnUnloadEverything () { // does all the things that should happen when onunload is triggered
+	// ATTENTION: this may not work on current browsers
+	if (window.ShowPreNavigateNotification) {
+		ShowPreNavigateNotification();
+	}
+	if (document.getElementById && document.getElementById('iospaste')) {
+		// upload field
+	}
+} // OnUnloadEverything()
+
 if (!window.performanceOptimization && window.GetPrefs) {
 	// if performanceOptimization setting hasn't been initialized yet,
 	// and we have a way to do it via GetPrefs() go ahead and do it now
