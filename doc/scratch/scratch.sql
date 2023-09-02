@@ -1,3 +1,24 @@
+--keys that need approval for a user
+		file_hash IN (
+			SELECT file_hash
+			FROM author_flat
+			WHERE
+				author_alias IN (
+					SELECT alias FROM author_alias
+					WHERE key = ?
+				)
+				AND file_hash IN (
+					SELECT file_hash
+					FROM item_flat
+					WHERE (
+						tags_list NOT LIKE '%,approve,%' AND tags_list NOT LIKE '%,flag,%'
+					)
+				)
+		)
+
+
+
+
 SELECT
 	file_hash,
 	author_key AS author_id,
