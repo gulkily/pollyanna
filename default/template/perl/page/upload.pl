@@ -66,7 +66,12 @@ sub GetUploadDialog { # upload dialog for upload page
 sub GetPasteDialog { # paste dialog for upload page
 #todo what about text pasting?
 	if (!GetConfig('admin/upload/enable')) {
-		WriteLog('GetUploadDialog: warning: called while admin/upload/enable was false');
+		WriteLog('GetPasteDialog: warning: called while admin/upload/enable was false');
+		return '';
+	}
+
+	if (!GetConfig('admin/js/enable')) {
+		WriteLog('GetPasteDialog: warning: called while admin/js/enable was false');
 		return '';
 	}
 
