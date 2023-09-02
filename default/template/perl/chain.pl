@@ -230,6 +230,10 @@ sub AddToChainLog { # $fileHash ; add line to log/chain.log
 
 sub SquashChain { # compresses chain by removing references to removed items
 # sub CollapseChain {
+# chaincollapse
+# chain compress
+# chain collapse
+
 	#todo check for if squash is not needed?
 
 	WriteLog('SquashChain: warning: this sub is not yet finished');
