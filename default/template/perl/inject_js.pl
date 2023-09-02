@@ -192,13 +192,13 @@ sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 		} else {
 			if (GetConfig('admin/js/loading')) {
 				if (index($html, '<body') != -1) {
-					# add onload attribute to body tag
+					# add onbeforeunload attribute to body tag
 					$html = AddAttributeToTag(
 						$html,
 						'body',
 						'onbeforeunload',
-						'if (window.ShowPreNavigateNotification){ ShowPreNavigateNotification();}'
-						#					'if (window.OnUnloadEverything) { OnUnloadEverything(); }'
+						#'if (window.ShowPreNavigateNotification){ ShowPreNavigateNotification();}'
+						'if (window.OnUnloadEverything) { OnUnloadEverything(); }'
 					);
 				} else {
 					WriteLog('InjectJs: warning: $html does not contain <body; caller = ' . join(',', caller));
