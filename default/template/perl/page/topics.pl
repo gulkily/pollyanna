@@ -15,7 +15,13 @@ sub GetTopicsPage {
 		GetPageFooter('topics')
 	;
 
+	my @js = qw(utils settings avatar voting table_sort profile timestamp);
+	if (GetConfig('setting/html/reply_cart')) {
+		push @js, 'reply_cart';
+	}
+	$topicsPage = InjectJs($topicsPage, @js);
+
 	return $topicsPage;
-}
+} # GetTopicsPage()
 
 1;
