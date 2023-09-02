@@ -6,7 +6,8 @@ SELECT
 	item_attribute.value AS chain_order,
 	item_attribute.epoch chain_timestamp,
 	item_attribute.file_hash AS file_hash,
-	'' AS tagset_chain
+	'' AS tagset_chain,
+	'' AS cart
 FROM
 	item_attribute
 	JOIN item_flat ON (item_flat.file_hash = item_attribute.file_hash)

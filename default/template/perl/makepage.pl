@@ -94,7 +94,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 
 		if ($pageType eq 'chain') { # chain.html
 			# sub GetChainPage {
-			$params{'dialog_columns'} = 'special_title_tags_list,chain_order,chain_timestamp,file_hash';
+			$params{'dialog_columns'} = 'special_title_tags_list,chain_order,chain_timestamp,file_hash,tagset_chain,cart';
 		}
 		if ($pageType eq 'tags') {
 			#todo does this need to happen every time a listing page is generated?
