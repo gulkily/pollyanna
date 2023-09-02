@@ -334,15 +334,16 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 		#todo this also needs relativize support
 	}
 
-	if (in_array($menuName, qw(threads tags authors active people new image))) {
+	if (in_array($menuName, qw(threads tags authors active people new image topics))) {
 		# counter counters #counter
 		# sum counters like this:
 		#Threads(5) Tags(3) People(7)
+		# topics counter
 		#todo this should be a list instead of hard-coded
-		my $threadCount = SqliteGetCount($menuName);
+		my $itemCount = SqliteGetCount($menuName);
 		# my $threadCount = SqliteGetValue('thread_count');
-		if ($threadCount) {
-			$caption .= '(' . $threadCount . ')';
+		if ($itemCount) {
+			$caption .= '(' . $itemCount . ')';
 		}
 	}
 

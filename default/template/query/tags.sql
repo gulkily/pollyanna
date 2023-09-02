@@ -17,6 +17,6 @@ FROM (
 		vote.vote_value
 	)
 WHERE
-	vote_value != LOWER(vote_value)
+	vote_value = LOWER(vote_value)
 ORDER BY
 	vote_count DESC
