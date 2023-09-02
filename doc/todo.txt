@@ -17,6 +17,8 @@ uploaded files to be automatically applied.
 
 improvements in auth
 	user should see when they have new keys pending approval
+		create query for the keys listing
+		add an inbox-like mechanism
 
 ===
 
