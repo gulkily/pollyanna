@@ -1,11 +1,15 @@
 --keys that need approval for a user
+	SELECT * FROM item_flat
+	WHERE
 		file_hash IN (
 			SELECT file_hash
 			FROM author_flat
 			WHERE
 				author_alias IN (
 					SELECT alias FROM author_alias
-					WHERE key = ?
+					WHERE
+						key = ?
+						AND file_hash IN (SELECT file_hash FROM item_flat WHERE tags_list LIKE '%,approve,%')
 				)
 				AND file_hash IN (
 					SELECT file_hash
