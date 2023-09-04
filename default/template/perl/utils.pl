@@ -1185,7 +1185,7 @@ sub PutFile { # Writes content to a file; $file, $content, $binMode
 		return;
 	}
 
-	WriteLog("PutFile($file)");
+	WriteLog("PutFile($file); caller = " . join(',', caller));
 
 	# keep track of files written so we can report them to user
 	state @debugFilesWritten;
