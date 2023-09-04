@@ -166,13 +166,16 @@ sub MakeFeed { # writes a bare-bones txt file with items list
 
 	my $plaintextList = '';
 	if ($feed eq 'new') {
-		$plaintextList = SqliteQuery("SELECT file_hash, CAST (add_timestamp AS INT) AS add_timestamp FROM item_flat ORDER BY add_timestamp DESC LIMIT 20");
+		$plaintextList = SqliteQuery("SELECT file_hash, CAST (add_timestamp AS INT) AS add_timestamp, file_path FROM item_flat ORDER BY add_timestamp DESC LIMIT 20");
 	} else {
 		WriteLog('MakeFeed: warning: $feed unrecognized; caller = ' . join(',', caller));
 	}
 	$plaintextList =~ s/^[^\n]+\n//s;
 
 	if ($plaintextList) {
+		my $htmlPath = GetDir('html');
+		$plaintextList = str_replace($htmlPath, '', $plaintextList); # this is a horrible hack #todo
+
 		PutFile(GetDir('html').'/'.$feed.'.txt', $plaintextList);
 	} else {
 		WriteLog('MakeFeed: warning: $plaintextList is FALSE; caller = ' . join(',', caller));
