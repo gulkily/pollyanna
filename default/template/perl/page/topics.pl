@@ -8,10 +8,17 @@ sub GetTopicsPage {
 	my %flags;
 	$flags{'no_empty'} = 1;
 
+	my $explainDialog = GetStringNoFallback('page_intro/topics');
+	if ($explainDialog) {
+		$explainDialog = '<fieldset><p>' . FormatForWeb($explainDialog) . '</fieldset></p>';
+		$explainDialog = GetDialogX($explainDialog, 'Topics');
+	}
+
 	state $topicsPage = 
-		GetPageHeader('topics') . 
-		GetQueryAsDialog('topics', 'Topics') .
-		GetQueryAsDialog("SELECT item_title, file_hash FROM item_flat WHERE tags_list like '%topic%'", 'Topics', '', \%flags) .
+		GetPageHeader('topics') .
+		GetQueryAsDialog('topics', 'Tags') .
+		GetQueryAsDialog("SELECT item_title, file_hash FROM item_flat WHERE tags_list LIKE '%topic%'", 'Threads', '', \%flags) .
+		$explainDialog .
 		GetPageFooter('topics')
 	;
 
