@@ -1536,8 +1536,15 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 	}
 
 	if (!$content) {
-		WriteLog('PutHtmlFile: warning: $content missing; caller = ' . join(',', caller));
-		$content = '';
+		if (
+			$file eq 'favicon.ico' ||
+			$file eq 'blank.html'
+		) {
+			# it's ok
+		} else {
+			WriteLog('PutHtmlFile: warning: $content missing; caller = ' . join(',', caller));
+			$content = '';
+		}
 	}
 
 	# remember what the filename provided is, so that we can use it later
