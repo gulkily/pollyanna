@@ -2580,15 +2580,6 @@ sharePubKey() should not change the current page, if possible
 
 Make an archive of 88x31 browser buttons and display ones which test OK
 
-Create titles for
-	Pubkey
-	One-vote items
-	anything else Untitled
-	Where to do it?
-		Probably insert into item_title
-		Or on output
-			if pubkey and no title then output 'user registration'
-
 Cache voted items locally so that buttons can be disabled on client-side
 
 Item page :
@@ -2674,13 +2665,6 @@ what else to clean up?
 
 
 
-
-generate.pl
-update.pl
-	do not process all by default
-	accept file/item as parameter
-	
-	
 ====
 
 Arrange files into subdirs by author key

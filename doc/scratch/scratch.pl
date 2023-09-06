@@ -4520,19 +4520,19 @@ sub SqliteMakeTables { # creates sqlite schema
 	}
 
 
-#
-# 	SqliteQuery("
-# 		CREATE VIEW item_title_latest AS
-# 		SELECT
-# 			file_hash,
-# 			title,
-# 			source_item_hash,
-# 			MAX(source_item_timestamp) AS source_item_timestamp
-# 		FROM item_title
-# 		GROUP BY file_hash
-# 		ORDER BY source_item_timestamp DESC
-# 	;");
-# 	#SqliteQuery("CREATE UNIQUE INDEX item_title_unique ON item_title(file_hash)");
+	#
+	# 	SqliteQuery("
+	# 		CREATE VIEW item_title_latest AS
+	# 		SELECT
+	# 			file_hash,
+	# 			title,
+	# 			source_item_hash,
+	# 			MAX(source_item_timestamp) AS source_item_timestamp
+	# 		FROM item_title
+	# 		GROUP BY file_hash
+	# 		ORDER BY source_item_timestamp DESC
+	# 	;");
+	# 	#SqliteQuery("CREATE UNIQUE INDEX item_title_unique ON item_title(file_hash)");
 
 	# item_parent
 	SqliteQuery("CREATE TABLE item_parent(item_hash, parent_hash)");
