@@ -17,11 +17,20 @@ sub GetItemHtmlLink { # $hash, [link caption], [#anchor] ; returns <a href=...
 		return '';
 	}
 
+	WriteLog('GetItemHtmlLink: $hash = ' . $hash . '; caller = ' . join(',', caller));
+
 	if ($hash) {
 		#todo templatize this
-		my $linkCaption = shift;
+		my $linkCaption = '';
+		if (scalar(@_)) {
+			$linkCaption = shift; #todo there's a bug here, it still causes a warning sometimes
+		}
+		else {
+			$linkCaption = substr($hash, 0, 8) . '..';
+		}
 		if (!$linkCaption) {
 			$linkCaption = substr($hash, 0, 8) . '..';
+			WriteLog('GetItemHtmlLink: warning: $linkCaption is FALSE; caller = ' . join(',', caller));
 		}
 
 		my $shortHash = substr($hash, 0, 8);
