@@ -44,7 +44,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 		%params = %{$refParams};
 	}
 
-	if (!$pageNumber) {
+	if (!$pageNumber && $pageNumber != 0) {
 		WriteLog('GetItemListingPage: warning: $pageNumber was FALSE; caller = ' . join(',', caller));
 		return '';
 	}
@@ -162,7 +162,16 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 	if (GetConfig('setting/html/reply_cart')) {
 		push @js, 'reply_cart';
 	}
+
+	if (!$html) {
+		WriteLog('GetItemListingPage: warning: $html is FALSE before InjectJs(); caller = ' . join(',', caller));
+	}
+
 	$html = InjectJs($html, @js);
+
+	if (!$html) {
+		WriteLog('GetItemListingPage: warning: $html is FALSE after InjectJs(); caller = ' . join(',', caller));
+	}
 
 	return $html;
 } # GetItemListingPage()
@@ -242,16 +251,22 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 		# there is more than one item
 		my $pageCount = ceil($totalItemCount / $perPage);
 
-		for (my $page = 0; $page < $pageCount; $page++) {
+		for (my $pageNumber = 0; $pageNumber < $pageCount; $pageNumber++) {
 			my $pageFilename = '';
 			if ($params{'target_path'}) {
-				$pageFilename = $params{'target_path'} . $page . '.html';
+				$pageFilename = $params{'target_path'} . $pageNumber . '.html';
 				#todo unhack this hack
 			} else {
-				$pageFilename = GetPageFileName($pageQuery, $page);
+				$pageFilename = GetPageFileName($pageQuery, $pageNumber);
 			}
-			my $pageContent = GetItemListingPage($pageQuery, $pageMode, $page, \%params);
-			PutHtmlFile($pageFilename, $pageContent);
+			my $pageContent = GetItemListingPage($pageQuery, $pageMode, $pageNumber, \%params);
+
+			if ($pageContent) {
+				PutHtmlFile($pageFilename, $pageContent);
+			} else {
+				WriteLog('WriteItemListingPages: warning: $pageContent was FALSE; caller = ' . join(',', caller));
+				PutHtmlFile($pageFilename, '<html><body>There was a problem creating this listing. <a href=/>Home</a></body></html>');
+			}
 		}
 
 		if (GetConfig('html/write_listing_txt')) {
