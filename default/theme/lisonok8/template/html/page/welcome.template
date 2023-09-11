@@ -1,0 +1,26 @@
+<p>
+	This page is currently about Alice & Mike's Wedding, <br>
+	or Mike & Alice's Wedding, as some may call it.
+</p>
+
+<p>
+	If you want to use all of this website's features, <br>
+	please go to the Profile page and use the Register button.
+</p>
+
+<p>
+	Share something you liked about the wedding?
+</p>
+
+<form action="/post.html">
+<textarea type=text name=comment rows=10 cols=40></textarea>
+<br>
+<input type=submit value=Send>
+</form>
+
+<p>For any site issues, please <a href="/write.html#operator">contact the operator</a>.</p>
+
+<p>
+	We also ask that if you are technically literate, <br>
+	you help others use this website.
+</p>
