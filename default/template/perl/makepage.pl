@@ -87,6 +87,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		MakeSimplePage($pageType);
 	}
 	elsif (in_array($pageType, @listingPages)) {
+		# sub MakeImagePage {
 		WriteLog('MakePage: found "' . $pageType . '" in @listingPages');
 		require_once('item_listing_page.pl');
 		my %params;
