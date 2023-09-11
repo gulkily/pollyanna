@@ -1,3 +1,35 @@
+sub GetAuthorPendingKeysDialog {
+	my $authorKey = shift;
+
+	if (!IsFingerprint($authorKey)) {
+		WriteLog('GetAuthorPendingKeysDialog: warning: $authorKey failed sanity check; caller = ' . join(',', caller));
+		return '';
+	}
+
+	WriteLog('GetAuthorPendingKeysDialog(' . $authorKey . '); caller = ' . join(',', caller));
+
+	my $dialogTitle = 'Keys Pending Approval';
+
+	my @queryParams;
+	push @queryParams, $authorKey;
+
+	my $authorPendingKeysQuery = SqliteGetNormalizedQueryString('author_pending_keys', @queryParams);
+
+	require_once('dialog/query_as_dialog.pl');
+
+	my %dialogFlags;
+	$dialogFlags{'no_no_results'} = 1;
+
+	my $dialog = GetQueryAsDialog($authorPendingKeysQuery, $dialogTitle, '', \%dialogFlags);
+
+	WriteLog('GetAuthorPendingKeysDialog: $dialog is ' . ($dialog ? 'TRUE' : 'FALSE'));
+
+	return $dialog;
+} # GetAuthorPendingKeysDialog()
+
+
+
+
 		if (1) {
 			# list all other authors with the same alias
 
