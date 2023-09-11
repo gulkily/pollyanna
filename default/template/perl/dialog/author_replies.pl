@@ -61,7 +61,7 @@ sub PutAuthorRepliesDialog { # $authorKey
 # sub MakeAuthorRepliesDialog {
 # sub MakeInbox {
 # sub WriteInbox {
-# sub NakeIndexDialog {
+# sub MakeIndexDialog {
 # sub PutInboxDialog {
 # sub GetInboxDialog {
 # sub GetInbox {
