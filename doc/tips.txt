@@ -1,0 +1,1 @@
+To change default browser in GNU/Linux, use: sudo update-alternatives --config x-www-browser
