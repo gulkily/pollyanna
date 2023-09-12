@@ -1,3 +1,65 @@
+	WriteLog('DBGetItemList: scalar(@resultsArray) = ' . scalar(@resultsArray));
+
+
+
+
+
+
+sub DBGetItemTitle { # $itemHash ; get title for item
+	my $itemHash = shift;
+
+	if (!$itemHash || !IsItem($itemHash)) {
+		WriteLog('DBGetItemTitle: warning: $itemHash failed sanity check; caller = ' . join(',', caller));
+		return '';
+	}
+
+	WriteLog('DBGetItemTitle(' . $itemHash . '); caller = ' . join(',', caller));
+
+	#my $query = 'SELECT title FROM item_title WHERE file_hash = ?';
+	my @queryParams = ();
+	#push @queryParams, $itemHash;
+
+	my $query = 'SELECT title FROM item_title WHERE file_hash LIKE \'' . $itemHash . '%\' LIMIT 1';
+	#todo improve this query
+
+	#my $itemTitle = SqliteGetValue($query, @queryParams);
+	my $resultRef = SqliteQueryDBH($query, @queryParams);
+
+	if ($resultRef) {
+		my @result = @{$resultRef};
+		shift @result;
+		my $firstRowRef = shift @result;
+		if ($firstRowRef) {
+			my %firstRow = %{$firstRowRef};
+			my $itemTitle = $firstRow{'title'};
+			#todo SqliteGetValueDBH()
+
+			if ($itemTitle) {
+				my $maxLength = shift;
+				if ($maxLength) {
+					if ($maxLength > 0 && $maxLength < 255) {
+						#todo sanity check failed message
+						if (length($itemTitle) > $maxLength) {
+							$itemTitle = TrimUnicodeString($itemTitle, $maxLength);
+							# $itemTitle = substr($itemTitle, 0, $maxLength) . '...';
+						}
+					}
+				}
+
+				return $itemTitle;
+			} else {
+				return '';
+			}
+		} else {
+			#todo handle this
+		}
+	} else {
+		#todo handle this
+	}
+} # DBGetItemTitle()
+
+
+
 sub GetAuthorPendingKeysDialog {
 	my $authorKey = shift;
 
