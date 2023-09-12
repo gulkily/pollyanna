@@ -752,13 +752,15 @@ sub SqliteGetValue { # $query ; Returns the first column from the first row retu
 	}
 } # SqliteGetValue()
 
-sub DBGetItemTitle { # get title for item ($itemhash)
+sub DBGetItemTitle { # $itemHash ; get title for item
 	my $itemHash = shift;
 
 	if (!$itemHash || !IsItem($itemHash)) {
 		WriteLog('DBGetItemTitle: warning: $itemHash failed sanity check; caller = ' . join(',', caller));
 		return '';
 	}
+
+	WriteLog('DBGetItemTitle(' . $itemHash . '); caller = ' . join(',', caller));
 
 	#my $query = 'SELECT title FROM item_title WHERE file_hash = ?';
 	my @queryParams = ();
