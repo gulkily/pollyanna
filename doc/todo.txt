@@ -1,3 +1,12 @@
+#bug /p.gif is served with text/html header for some reason:
+HTTP warning: 'http://localhost:2784/p.gif' cannot be displayed as image; has media type 'text/html'
+
+demo
+====
+	with c++, run sample code file, post the output
+
+===
+
 feeds/sync
 	read a feed list, save locally
 		save to file named after source server
