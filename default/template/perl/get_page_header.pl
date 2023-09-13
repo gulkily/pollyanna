@@ -100,6 +100,14 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 				require_once('dialog/history.pl');
 				$topMenuTemplate .= GetHistoryDialog();
 			}
+
+			if (GetConfig('html/global_message')) {
+				#todo it may be nice to have a #GlobalMessage hashtag option here
+				my $globalMessage = GetString('server/global_message');
+				if ($globalMessage) {
+					$topMenuTemplate .= GetDialogX('<fieldset><p>' . $globalMessage . '</p></fieldset>');
+				}
+			}
 		}
 	}
 

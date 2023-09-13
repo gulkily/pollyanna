@@ -4,10 +4,10 @@ SELECT
 	add_timestamp
 FROM item_flat
 WHERE
-	file_hash in (
+	file_hash IN (
 		SELECT item_hash
 		FROM item_parent
-		WHERE parent_hash in
+		WHERE parent_hash IN
 		(
 			SELECT file_hash
 			FROM item_flat
@@ -17,11 +17,11 @@ WHERE
 	author_key != ? AND
 	add_timestamp >= strftime('%s', 'now', '-3 day') AND
 	file_hash NOT IN (
-		SELECT parent_hash 
-		FROM item_parent 
+		SELECT parent_hash
+		FROM item_parent
 		WHERE item_hash IN (
-			SELECT file_hash 
-			FROM item_author 
+			SELECT file_hash
+			FROM item_author
 			WHERE author_key = ?
 		)
 	)

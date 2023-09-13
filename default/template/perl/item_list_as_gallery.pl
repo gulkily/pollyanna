@@ -29,7 +29,7 @@ sub GetItemListAsGallery { # \@items ; returns gallery as series of dialogs with
 			$item{'item_title'} = substr($item{'item_title'}, 0, 43) . '[...]';
 		}
 		my $itemImage = '';
-		if ($item{'item_score'} && $item{'item_score'} > 0) {
+		if (exists($item{'item_score'}) && $item{'item_score'} > 0) {
 			$itemImage = GetImageContainer($item{'file_hash'}, $item{'item_name'}, $boolLinkImage, '');
 		} else {
 			#todo check if file exists first
@@ -45,6 +45,5 @@ sub GetItemListAsGallery { # \@items ; returns gallery as series of dialogs with
 
 	return $html;
 } # GetItemListAsGallery()
-
 
 1;

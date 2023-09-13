@@ -20,5 +20,6 @@ tags_list
 tagset_author
 tagset_pending
 tagset_url
+tagset_pubkey
 this_row
 url

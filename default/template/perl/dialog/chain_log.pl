@@ -16,9 +16,16 @@ sub GetChainLogAsDialog {
 		my $line = pop @chainArray;
 		my @lineItems = split('\|', $line);
 
+		my $itemTitle = DBGetItemTitle($lineItems[0]);
+		if ($itemTitle) {
+			$itemTitle = substr($itemTitle, 0, 16);
+		} else {
+			$itemTitle = substr($lineItems[0], 0, 8);
+		}
+
 		$chainRows .= '<tr>';
 		#$chainRows .= '<td>' . $lineNumber . '</td>';
-		$chainRows .= '<td>' . GetItemHtmlLink($lineItems[0], substr(DBGetItemTitle($lineItems[0]), 0, 16)) . '</td>'; #item
+		$chainRows .= '<td>' . GetItemHtmlLink($lineItems[0], $itemTitle) . '</td>'; #item
 		$chainRows .= '<td>' . substr($lineItems[0], 0, 8) . '</td>'; #item
 		#$chainRows .= '<td>' . substr($lineItems[1], 0, 10) . '</td>'; #timestamp
 		$chainRows .= '<td>' . GetTimestampWidget($lineItems[1]) . '</td>'; #timestamp

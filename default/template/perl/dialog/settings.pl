@@ -12,6 +12,7 @@ sub GetSettingsDialog { # returns settings dialog
 	my $settingsTemplate = GetTemplate('html/form/settings.template');
 
 	if (GetConfig('admin/js/dragging')) {
+		# dragging module is enabled, keep the setting available
 	} else {
 		# kind of a hack
 		# dragging is disabled, so make the option unavailable

@@ -11,6 +11,9 @@ sub GetAuthorRepliesDialog { # $authorKey
 # sub GetAuthorReplies {
 # sub GetReplies {
 # sub GetInboxDialog {
+# sub GetInbox {
+# sub GetInboxPage {
+# inbox.sql
 	my $authorKey = shift;
 
 	#$authorKey = IsFingerprint($authorKey);
@@ -58,14 +61,15 @@ sub PutAuthorRepliesDialog { # $authorKey
 # sub MakeAuthorRepliesDialog {
 # sub MakeInbox {
 # sub WriteInbox {
-# sub NakeIndexDialog {
+# sub MakeIndexDialog {
 # sub PutInboxDialog {
 # sub GetInboxDialog {
+# sub GetInbox {
 	my $authorKey = shift;
 	#todo sanity
 	WriteLog('PutAuthorRepliesDialog: $authorKey = ' . $authorKey . '; caller = ' . join(',', caller));
 
-	require_once('dialog/author_replies.pl');
+	# require_once('dialog/author_replies.pl');
 	my $dialog = GetAuthorRepliesDialog($authorKey);
 	PutHtmlFile('dialog/replies/' . $authorKey . '.html', $dialog);
 }

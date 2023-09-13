@@ -533,6 +533,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						s_replace
 						operator_please
 						hike_set
+						my_name_is
 					); #tokenSanityCheck
 					#### TODO #TODO there should really really be a warning when this doesn't pan out, because ...
 
@@ -707,6 +708,19 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 								DBAddKeyAlias($authorKey, $tokenFound{'param'}, $fileHash); #bug here cd145d82
 								DBAddKeyAlias('flush');
+
+								{
+									#todo this section should be optimized
+									my $existingAuthors = SqliteGetValue("SELECT COUNT(key) AS author_count FROM author_alias WHERE alias = '$nameGiven'"); #todo parameterize
+									WriteLog('IndexTextFile: my_name_is: $existingAuthors = ' . $existingAuthors);
+									if ($existingAuthors) {
+										# do not auto-approve
+									}
+									else {
+										#todo approve should generally apply to fingerprint instead of item
+										DBAddVoteRecord($fileHash, GetTime(), 'approve', $authorKey, $fileHash);
+									}
+								}
 
 								require_once('pages.pl');
 								MakePage('author', $authorKey);

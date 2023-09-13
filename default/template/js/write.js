@@ -148,8 +148,34 @@ function WriteOnload () { // onload handler for write page
 					//alert('DEBUG: pubKey is true, inserting it into comment');
 					var comment = document.getElementById('comment');
 					if (comment) {
+						// set comment textarea to public key text
 						comment.value = pubKey;
 					}
+					if (comment.style) {
+						// expand comment textarea to size of public key text
+						comment.style.width = '90ex';
+						comment.style.height = '50ex';
+					}
+					// uncheck the 'sign as' checkbox
+					var chkSignAs = document.getElementById('chkSignAs');
+					if (chkSignAs.checked) {
+						chkSignAs.removeAttribute('checked');
+					}
+
+					// hide unrelated options
+					var spanSignAs = document.getElementById('spanSignAs');
+					if (spanSignAs) {
+						spanSignAs.style.display = 'none';
+					}
+					var spanWriteAdvanced = document.getElementById('spanWriteAdvanced');
+					if (spanWriteAdvanced) {
+						spanWriteAdvanced.style.display = 'none';
+					}
+					var addtext = document.getElementById('addtext');
+					if (addtext && addtext.value) {
+						addtext.value = 'Share Public Key';
+					}
+
 				} else {
 					//alert('DEBUG: pubKey was false, this is unexpected. Giving up.');
 				}

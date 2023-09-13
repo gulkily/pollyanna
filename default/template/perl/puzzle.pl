@@ -5,6 +5,8 @@ use warnings;
 use 5.010;
 use utf8;
 
+#puzzle
+
 sub IndexPuzzle {
 	my $textRef = shift;
 	my %text = %{$textRef};
@@ -59,6 +61,9 @@ sub IndexPuzzle {
 					#$message = str_replace($puzzleAuthorKey . ' ' . $mintedAt . ' ' . $checksum, '[Puzzle Solved: ' . $puzzlePrefix . ']', $message);
 
 					DBAddItemAttribute($fileHash, 'puzzle_timestamp', $mintedAt);
+					DBAddItemAttribute($fileHash, 'puzzle_input', $puzzleAuthorKey . ' ' . $mintedAt . ' ' . $checksum);
+					DBAddItemAttribute($fileHash, 'puzzle_result', $hash);
+					DBAddItemAttribute($fileHash, 'puzzle_prefix', $puzzlePrefix);
 					DBAddVoteRecord($fileHash, $mintedAt, 'puzzle');
 
 					$detokenedMessage = str_replace($puzzleAuthorKey . ' ' . $mintedAt . ' ' . $checksum, '', $detokenedMessage);

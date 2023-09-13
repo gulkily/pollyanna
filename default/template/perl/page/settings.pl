@@ -26,7 +26,7 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 		$txtIndex .= GetSettingsDialog();
 	}
 
-	$txtIndex .= GetStatsTable();  # GetSettingsPage()
+	# $txtIndex .= GetStatsTable();  # GetSettingsPage()
 
 	my @settingsVisible1 = qw(
 		theme
@@ -59,6 +59,10 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 	$txtIndex .= GetServerConfigDialog('Frontend', @settingsVisible1); # >frontend< #for searches
 	$txtIndex .= GetServerConfigDialog('Backend', @settingsVisible2); # >backend< #for searches
 	$txtIndex .= GetContentFilterDialog();
+
+	#todo add dialog for voting options
+	#add option to use a "cart" for voting, submitting all the votes at once
+	#this would require some server-side additions too, unless we use the old-style pipe-separated syntax
 
 	if (GetConfig('admin/js/enable')) {
 		$txtIndex .= GetDialogX(GetTemplate('html/form/writing.template'), 'Writing');

@@ -285,6 +285,17 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 	}
 
 	elsif (
+		$fieldName eq 'puzzle_result'
+	) {
+		# a long hash (sha256) which is an output of #puzzle
+		# example: 1337637046590d5f91d11066214346e8c660b91ef173858830fe2155a271ae6ef5e4c478dffe7c3fdf54c473f0572dd2cfe8335dbe6715a59a08e265d4f0f79e
+		#todo templatize
+
+		#$fieldValue = '<a href="file://' . HtmlEscape($fieldValue) . '">' . HtmlEscape($fieldValue) . '</a>';
+		$fieldValue = '<form><input onclick="if (this.select) { this.select() }" spellcheck=false type=text size=60 value="' . HtmlEscape($fieldValue) . '"></form>';
+	}
+
+	elsif (
 		$fieldName eq 'file_path'
 	) {
 		# path to source file, which should become hyperlink
@@ -359,14 +370,16 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 					if ($itemRow{'file_hash'} && IsItem($itemRow{'file_hash'})) {
 						$fieldValue .= GetItemTagButtons($itemRow{'file_hash'}, $tagsetName);
 						if (GetConfig('setting/html/reply_cart')) {
-							require_once('widget/add_to_reply_cart.pl');
+							#require_once('widget/add_to_reply_cart.pl');
 							#$fieldValue .= '; ';
 							#$fieldValue =~ s|</a>([^;])|</a>;$1|;
-							$fieldValue .= GetAddToReplyCartButton($itemRow{'file_hash'});
+							#$fieldValue .= GetAddToReplyCartButton($itemRow{'file_hash'});
 						} else {
-							WriteLog('RenderField: warning: $itemRow{\'file_hash\'} failed sanity check; caller = ' . join(',', caller));
 							# do nothing
 						}
+					} else {
+						WriteLog('RenderField: warning: $itemRow{\'file_hash\'} failed sanity check; caller = ' . join(',', caller));
+						# sanity check failed
 					}
 				}
 			}
@@ -498,6 +511,8 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fieldName eq 'chain_checksum_good' || # RenderField() not to be confused with field_advanced
 		$fieldName eq 'boxes' || # RenderField() not to be confused with field_advanced (this is for banana theme)
 		$fieldName eq 'file_size' || # RenderField() not to be confused with field_advanced (this is for banana theme)
+		$fieldName eq 'attribute_list' || # RenderField() not to be confused with field_advanced (this is for banana theme)
+		$fieldName eq 'attribute_count' || # RenderField() not to be confused with field_advanced (this is for banana theme)
 		0 # this is here to make formatting above more consistent
 	) {
 		# leave the field value as is

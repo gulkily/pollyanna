@@ -1,3 +1,97 @@
+	WriteLog('DBGetItemList: scalar(@resultsArray) = ' . scalar(@resultsArray));
+
+
+
+
+
+
+sub DBGetItemTitle { # $itemHash ; get title for item
+	my $itemHash = shift;
+
+	if (!$itemHash || !IsItem($itemHash)) {
+		WriteLog('DBGetItemTitle: warning: $itemHash failed sanity check; caller = ' . join(',', caller));
+		return '';
+	}
+
+	WriteLog('DBGetItemTitle(' . $itemHash . '); caller = ' . join(',', caller));
+
+	#my $query = 'SELECT title FROM item_title WHERE file_hash = ?';
+	my @queryParams = ();
+	#push @queryParams, $itemHash;
+
+	my $query = 'SELECT title FROM item_title WHERE file_hash LIKE \'' . $itemHash . '%\' LIMIT 1';
+	#todo improve this query
+
+	#my $itemTitle = SqliteGetValue($query, @queryParams);
+	my $resultRef = SqliteQueryDBH($query, @queryParams);
+
+	if ($resultRef) {
+		my @result = @{$resultRef};
+		shift @result;
+		my $firstRowRef = shift @result;
+		if ($firstRowRef) {
+			my %firstRow = %{$firstRowRef};
+			my $itemTitle = $firstRow{'title'};
+			#todo SqliteGetValueDBH()
+
+			if ($itemTitle) {
+				my $maxLength = shift;
+				if ($maxLength) {
+					if ($maxLength > 0 && $maxLength < 255) {
+						#todo sanity check failed message
+						if (length($itemTitle) > $maxLength) {
+							$itemTitle = TrimUnicodeString($itemTitle, $maxLength);
+							# $itemTitle = substr($itemTitle, 0, $maxLength) . '...';
+						}
+					}
+				}
+
+				return $itemTitle;
+			} else {
+				return '';
+			}
+		} else {
+			#todo handle this
+		}
+	} else {
+		#todo handle this
+	}
+} # DBGetItemTitle()
+
+
+
+sub GetAuthorPendingKeysDialog {
+	my $authorKey = shift;
+
+	if (!IsFingerprint($authorKey)) {
+		WriteLog('GetAuthorPendingKeysDialog: warning: $authorKey failed sanity check; caller = ' . join(',', caller));
+		return '';
+	}
+
+	WriteLog('GetAuthorPendingKeysDialog(' . $authorKey . '); caller = ' . join(',', caller));
+
+	my $dialogTitle = 'Keys Pending Approval';
+
+	my @queryParams;
+	push @queryParams, $authorKey;
+
+	my $authorPendingKeysQuery = SqliteGetNormalizedQueryString('author_pending_keys', @queryParams);
+
+	require_once('dialog/query_as_dialog.pl');
+
+	my %dialogFlags;
+	$dialogFlags{'no_no_results'} = 1;
+
+	my $dialog = GetQueryAsDialog($authorPendingKeysQuery, $dialogTitle, '', \%dialogFlags);
+
+	WriteLog('GetAuthorPendingKeysDialog: $dialog is ' . ($dialog ? 'TRUE' : 'FALSE'));
+
+	return $dialog;
+} # GetAuthorPendingKeysDialog()
+
+
+
+
 		if (1) {
 			# list all other authors with the same alias
 
@@ -4520,19 +4614,19 @@ sub SqliteMakeTables { # creates sqlite schema
 	}
 
 
-#
-# 	SqliteQuery("
-# 		CREATE VIEW item_title_latest AS
-# 		SELECT
-# 			file_hash,
-# 			title,
-# 			source_item_hash,
-# 			MAX(source_item_timestamp) AS source_item_timestamp
-# 		FROM item_title
-# 		GROUP BY file_hash
-# 		ORDER BY source_item_timestamp DESC
-# 	;");
-# 	#SqliteQuery("CREATE UNIQUE INDEX item_title_unique ON item_title(file_hash)");
+	#
+	# 	SqliteQuery("
+	# 		CREATE VIEW item_title_latest AS
+	# 		SELECT
+	# 			file_hash,
+	# 			title,
+	# 			source_item_hash,
+	# 			MAX(source_item_timestamp) AS source_item_timestamp
+	# 		FROM item_title
+	# 		GROUP BY file_hash
+	# 		ORDER BY source_item_timestamp DESC
+	# 	;");
+	# 	#SqliteQuery("CREATE UNIQUE INDEX item_title_unique ON item_title(file_hash)");
 
 	# item_parent
 	SqliteQuery("CREATE TABLE item_parent(item_hash, parent_hash)");

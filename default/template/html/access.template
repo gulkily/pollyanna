@@ -6,11 +6,6 @@
 			<input name=btnLightOn value="Light" id=lightOn type=submit>
 			<input name=btnLightOff value="Modern" id=lightOff type=submit>
 		</p>
-		<p>
-			<input value="Beginner" type=submit name=ui>
-			<input value="Intermediate" type=submit name=ui>
-			<input value="Advanced" type=submit name=ui>
-		</p>
 	</fieldset>
 </form>
 <!-- / access.template -->

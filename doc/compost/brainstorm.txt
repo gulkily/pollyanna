@@ -1,3 +1,92 @@
+what to do about the duplicate items bug?
+	options
+		remove all -- and --- lines from item when saving new item
+			a bit dirty
+			existing items will change their hashes
+		allow aliasing of hashes when merging items
+			needs major changes in db structure?
+				maybe not, just alias items together by replying
+		make hashing more consistent and duplicate-resistant
+			there are several ways where an item is hashed, and they all have to be changed
+
+	challenges
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===
+
 "my name is tag" should by default only work on pubkey items
 	this will also restrict self-naming to key-based accounts
 
@@ -2491,15 +2580,6 @@ sharePubKey() should not change the current page, if possible
 
 Make an archive of 88x31 browser buttons and display ones which test OK
 
-Create titles for
-	Pubkey
-	One-vote items
-	anything else Untitled
-	Where to do it?
-		Probably insert into item_title
-		Or on output
-			if pubkey and no title then output 'user registration'
-
 Cache voted items locally so that buttons can be disabled on client-side
 
 Item page :
@@ -2585,13 +2665,6 @@ what else to clean up?
 
 
 
-
-generate.pl
-update.pl
-	do not process all by default
-	accept file/item as parameter
-	
-	
 ====
 
 Arrange files into subdirs by author key

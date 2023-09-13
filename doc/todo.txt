@@ -1,3 +1,43 @@
+#bug /p.gif is served with text/html header for some reason:
+HTTP warning: 'http://localhost:2784/p.gif' cannot be displayed as image; has media type 'text/html'
+
+demo
+====
+	with c++, run sample code file, post the output
+
+===
+
+feeds/sync
+	read a feed list, save locally
+		save to file named after source server
+	figure out which items need to be pulled from host
+
+===
+
+tags page should include capitalized hashtags, just like the horizontal bar x
+	should be a separate dialog for system hashtags (lowercase)
+		this can be on a separate page/dialog for now
+
+===
+
+how to make it easier to reintegrate an archive?
+how to encourage users to make backups?
+
+===
+
+Traditionally, a FILE_ID.DIZ should be "up to 10 lines of text, each line being no more than 45 characters long",
+according to v.1.9 of the specification.[3] The concept of .DIZ files was to allow for a concise description of
+uploaded files to be automatically applied.
+
+===
+
+improvements in auth
+	user should see when they have new keys pending approval
+		create query for the keys listing
+		add an inbox-like mechanism
+
+===
+
 create topics page
 	topics are capitalized hashtags
 		topics table should include most recent post under that topic (and possibly more)

@@ -592,6 +592,15 @@ if (GetConfig('setting/admin/php/route_enable')) {
 					$fileCacheTime = 0;
 					if (file_exists($pathRel)) {
 						$fileCacheTime = time() - filemtime($pathRel);
+
+						#todo
+						# what should happen here:
+						# 1) immediately return a message to the user
+						# 2) if possible, start generating fresh page in the background, via some queue
+						# 3) offer the user the option of a fresh page
+						# 4) possibly do an archive.is-style self-reloading status page
+						# 5) done?
+
 						#timeout
 					}
 

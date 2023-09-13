@@ -30,20 +30,25 @@ sub MakeZipFromItemList {
 
 	my $zipCommand = "zip -qrj $zipPath ";
 
+	#shift @items;
 	for my $row (@items) {
-		my $fileName = $row->{'file_path'};
-		if ($fileName =~ m/^([0-9a-zA-Z\/._-]+)$/) {
-			$fileName = $1;
-			if (file_exists($fileName)) {
-				WriteLog('MakeZipFromItemList: $zipCommand $fileName = ' . "$zipCommand $fileName");
-				system("$zipCommand $fileName");
-				#my %item = %{$refItem};
-				#my $fileName = $item{'file_name'};
+		if (1) { #todo this should check if $row is a hash reference
+			my $fileName = $row->{'file_path'};
+			if ($fileName =~ m/^([0-9a-zA-Z\/._-]+)$/) {
+				$fileName = $1;
+				if (file_exists($fileName)) {
+					WriteLog('MakeZipFromItemList: $zipCommand $fileName = ' . "$zipCommand $fileName");
+					system("$zipCommand $fileName");
+					#my %item = %{$refItem};
+					#my $fileName = $item{'file_name'};
+				} else {
+					WriteLog('MakeZipFromItemList: warning: file_exists() was FALSE; $fileName = ' . $fileName);
+				}
 			} else {
-				WriteLog('MakeZipFromItemList: warning: file_exists() was FALSE; $fileName = ' . $fileName);
+				WriteLog('MakeZipFromItemList: warning: sanity check failed on $fileName = ' . $fileName);
 			}
 		} else {
-			WriteLog('MakeZipFromItemList: warning: sanity check failed on $fileName = ' . $fileName);
+			WriteLog('MakeZipFromItemList: warning: $row->{file_path} was not defined; caller = ' . join(',', caller));
 		}
 	}
 } # MakeZipFromItemList()

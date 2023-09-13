@@ -68,14 +68,26 @@ if [ $1 = version ]
 		git rev-parse HEAD
 fi
 
-if [ $1 = build ]
+if [ $1 = build ] # hike build
 	then
 		time ./build.sh
+		echo
+		echo "                            ==============="
+		echo "                            build complete!"
+		echo "              ==============="
+		echo "              build complete!"
+		echo "==============="
+		echo "build complete!"
 fi
 
-if [ $1 = clean ]
+if [ $1 = clean ] # hike clean
 	then
 		time ./clean.sh
+		echo ""
+		echo "==============="
+		echo "clean complete!"
+		echo "                            ==============="
+		echo "                            clean complete!"
 fi
 
 if [ $1 = rebuild ]
@@ -110,11 +122,39 @@ if [ $1 = index ]
 		fi
 fi
 
-if [ $1 = refresh ]
+if [ $1 = refresh ] # hike refresh
 	then
 		perl -T default/template/perl/script/template_refresh.pl
+
+		if [ ! -e config/template/perl/pages.pl ]
+			then
+				cp -v default/template/perl/pages.pl config/template/perl/pages.pl
+		fi
+		if [ ! -e pages.pl ]
+			then
+				ln -sv config/template/perl/pages.pl pages.pl
+		fi
+
+		if [ ! -e config/template/perl/index.pl ]
+			then
+				cp -v default/template/perl/index.pl config/template/perl/index.pl
+		fi
+		if [ ! -e index.pl ]
+			then
+				ln -sv config/template/perl/index.pl index.pl
+		fi
+
+		if [ ! -e config/template/perl/utils.pl ]
+			then
+				cp -v default/template/perl/utils.pl config/template/perl/utils.pl
+		fi
+		if [ ! -e utils.pl ]
+			then
+				ln -sv config/template/perl/utils.pl utils.pl
+		fi
+
 		./default/template/sh/_dev_clean_html.sh
-		./pages.pl --php
+		./pages.pl --php #todo this should not be necessary
 fi
 
 if [ $1 = frontend ]
@@ -130,7 +170,7 @@ if [ $1 = pages ]
 		# should it be config? #todo
 fi
 
-if [ $1 = page ]
+if [ $1 = page ] # hike page
 	then
 		time ./config/template/perl/pages.pl -M $2 $3
 fi
@@ -213,12 +253,15 @@ if [ $1 = archive ]
 		./hike.sh frontend
 fi
 
-echo source hike.sh = enable these commands
-echo hike clean = clean including templates
-echo hike build = build base
-echo hike start = start local server
-echo hike archive = archive all content
-echo hike help = see more commands
+if [ ! $1 ]
+	then
+		echo source hike.sh = enable these commands
+		echo hike clean = clean including templates
+		echo hike build = build base
+		echo hike start = start local server
+		echo hike archive = archive all content
+		echo hike help = see more commands
+fi
 
 if [ $1 = help ]
 	then

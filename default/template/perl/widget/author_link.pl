@@ -29,7 +29,14 @@ sub GetAuthorLink { # $fingerprint, $showPlain ; returns avatar'ed link for an a
 		return 'Guest'; #guest...
 	}
 
-	my $authorUrl = "/author/$fingerprint/index.html";
+	my $authorUrl;
+	if (1) {
+		$authorUrl = "/author/$fingerprint/index.html";
+	}
+	else {
+		#todo
+		#$authorUrl = "/person/$authorName/index.html"
+	}
 
 	my $authorAvatar = '';
 	if ($showPlain) {

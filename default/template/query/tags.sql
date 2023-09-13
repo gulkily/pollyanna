@@ -16,5 +16,7 @@ FROM (
 	GROUP BY
 		vote.vote_value
 	)
+WHERE
+	vote_value = LOWER(vote_value)
 ORDER BY
 	vote_count DESC

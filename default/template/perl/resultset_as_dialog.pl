@@ -14,6 +14,8 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 #
 # ATTENTION: the first member of the @result array is the list of columns
 # this list (and order) of columns is used if $columns parameter is not specified
+#
+# sub GetResultSet {
 
 	##############################################################
 	# PARAMETERS FISHING BEGINS
@@ -48,6 +50,7 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 	# DON'T LOOK FOR COLUMN PRINTING HERE!
 	# $columnsDisplay is passed into GetDialogX() later!
 	# $columnsDisplay is a comma-delimited string
+	# @fieldAdmin @fieldAdvanced
 	#
 
 	my $columnsRef = shift @result; # (reference) columns returned as first line of result
@@ -154,7 +157,8 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 
 			# row color above
 
-			my @fieldAdvanced = GetConfigListAsArray('field_advanced'); #todo inconsistent with the other one?
+			my @fieldAdvanced = GetConfigListAsArray('field_advanced'); #todo make consistent with the other one?
+			my @fieldAdmin = GetConfigListAsArray('field_admin'); #todo make consistent with the other one?
 			# fields_advanced advanced_fields advancedfields
 
 			foreach my $column (split(',', $columns)) {
@@ -162,7 +166,12 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 				if (in_array($column, @fieldAdvanced)) { #  advanced column column_advanced
 					#this hides the file_hash column from non-advanced users
 					$content .= '<td class=advanced>';
-				} else {
+				}
+				elsif (in_array($column, @fieldAdmin)) { #  admin column admin_advanced
+					#this hides the file_hash column from non-admin users
+					$content .= '<td class=admin>';
+				}
+				else {
 					$content .= '<td>';
 				}
 

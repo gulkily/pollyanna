@@ -73,6 +73,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	push @listingPages, qw(browse); # shadowme
 	#chain.html #new.html #boxes.html #tasks.html
 	# sub GetChainPage {
+	# sub GetTagsPage { # tags.html
 
 	# my @validPages =
 	# valid pages
@@ -86,6 +87,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		MakeSimplePage($pageType);
 	}
 	elsif (in_array($pageType, @listingPages)) {
+		# sub MakeImagePage {
 		WriteLog('MakePage: found "' . $pageType . '" in @listingPages');
 		require_once('item_listing_page.pl');
 		my %params;
@@ -94,10 +96,11 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 
 		if ($pageType eq 'chain') { # chain.html
 			# sub GetChainPage {
-			$params{'dialog_columns'} = 'special_title_tags_list,chain_order,chain_timestamp,file_hash';
+			$params{'dialog_columns'} = 'special_title_tags_list,chain_order,chain_timestamp,file_hash,tagset_chain,cart';
 		}
 		if ($pageType eq 'tags') {
 			#todo does this need to happen every time a listing page is generated?
+			# for the tags page, look at template/query/tags
 			my $tagsHorizontal = GetTagPageHeaderLinks();
 			PutHtmlFile('tags-horizontal.html', $tagsHorizontal);
 		}
@@ -107,11 +110,18 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		} else {
 			WriteItemListingPages($pageType, 'dialog_list', \%params);
 		}
-	}
+	} # elsif (in_array($pageType, @listingPages))
 
 	elsif ($pageType eq 'write') {
 		WriteLog('MakePage: write');
 		MakeWritePage();
+	}
+
+	elsif ($pageType eq 'settings') {
+		WriteLog('MakePage: settings');
+
+		MakeSimplePage('settings');
+		PutStatsPages();
 	}
 
 	elsif ($pageType eq 'random') {

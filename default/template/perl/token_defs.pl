@@ -84,6 +84,10 @@ sub GetTokenDefs {
 			'apply_to_self' => 1
 		},
 		{ # date in yyyy-mm-dd format
+			# date:
+			# token/date
+			# 'date:
+			# /date:
 			'token'   => 'date',
 			'mask'    => '^(date)(\W+)([0-9]{4}\-[0-9]{2}\-[0-9]{2})',
 			'mask_params'    => 'mgi',
@@ -114,7 +118,7 @@ sub GetTokenDefs {
 		},
 		{ # allows cookied user to set own name
 			'token'   => 'my_name_is',
-			'mask'    => '^(my name is)(\W+)([\(\)A-Za-z0-9\'_\., ]+)\r?$',
+			'mask'    => '^(my name is)(\W+)([\(\)A-Za-z0-9_\., ]+)\r?$', # note that single quotes are currently not allowed in names
 			'mask_params'    => 'mgi',
 			'message' => '[MyNameIs]',
 			'apply_to_self' => 1
@@ -239,8 +243,23 @@ sub GetTokenDefs {
 			'message' => '',
 			#'message' => '[HashTag]',
 			'apply_to_parent' => 1,
-			'apply_to_self' => 1,
+			'apply_to_self' => 1
 			#'require_spacer' => 0
+		},
+#		{ # @tag for usernames
+#			'token' => 'at_tag',
+#			'mask'  => '(@)()([a-zA-Z0-9_]{1,32})',
+#			'mask_params' => 'mgi',
+#			'message' => '', #retain original ?
+#			'apply_to_self' => 1
+#		},
+		{ # (c) attribution tag for usernames #attrib
+			'token' => 'attrib_tag',
+			'mask'  => '(\(c\))()([a-zA-Z0-9_]{1,32})',
+			'mask_params' => 'mgi',
+			'message' => '', #retain original ?
+			'apply_to_parent' => 1,
+			'apply_to_self' => 1
 		},
 		{ # verify token, for third-party identification
 			# example: verify http://www.example.com/user/JohnSmith/

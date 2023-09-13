@@ -25,7 +25,7 @@ sub GetImageContainer { # $fileHash, $imageAlt, $boolLinkToItemPage = 1
 	#$fileHash = SqliteGetValue("SELECT file_hash FROM item_flat WHERE file_hash LIKE '$fileHash%'");
 	#todo this is a hack
 
-	WriteLog('GetImageContainer: $fileHash = ' . $fileHash);
+	WriteLog('GetImageContainer: $fileHash = ' . $fileHash . '; $imageAlt = ' . $imageAlt . '; $boolLinkToItemPage = ' . ($boolLinkToItemPage ? 'TRUE' : 'FALSE') . '; caller = ' . join(',', caller));
 
 	my $permalinkHtml = '';
 	if (!$permalinkHtml) {
@@ -36,7 +36,7 @@ sub GetImageContainer { # $fileHash, $imageAlt, $boolLinkToItemPage = 1
 	if ($boolLinkToItemPage) {
 		$imageContainer = GetTemplate('html/item/container/image_with_link.template');
 	} else {
-		$imageContainer = GetTemplate('html/item/container/image_with_link.template');
+		$imageContainer = GetTemplate('html/item/container/image_without_link.template');
 		#$imageContainer = GetTemplate('html/item/container/image.template');
 		#todo fix this
 	}
@@ -52,7 +52,7 @@ sub GetImageContainer { # $fileHash, $imageAlt, $boolLinkToItemPage = 1
 	}
 
 	#if (file_exists($imageUrl) || file_exists($imageSmallUrl)) { #this doesn't work because paths are wrong
-	if (1) { #todo
+	if (1) { #todo, see above comment
 		WriteLog('GetImageContainer: $fileHash = ' . $fileHash . '; $imageAlt = ' . $imageAlt . '; $permalinkHtml = ' . $permalinkHtml);
 
 		$imageContainer =~ s/\$imageUrl/$imageUrl/g;
@@ -61,8 +61,7 @@ sub GetImageContainer { # $fileHash, $imageAlt, $boolLinkToItemPage = 1
 		if ($boolLinkToItemPage) {
 			$imageContainer =~ s/\$permalinkHtml/$permalinkHtml/g;
 		} else {
-			$imageContainer =~ s/\$permalinkHtml/#/g;
-			#todo make this nicer
+			# nothing to do, there is no link
 		}
 
 		WriteLog('GetImageContainer: returning, length($imageContainer) = ' . length($imageContainer));
@@ -70,7 +69,7 @@ sub GetImageContainer { # $fileHash, $imageAlt, $boolLinkToItemPage = 1
 		return $imageContainer;
 	} else {
 		WriteLog('GetImageContainer: warning: thumbnails do not exist');
-		#todo at some point thumbnails may be lazy-generated, and this will fail
+		#todo at some point thumbnails may need to be lazy-generated, and this will fail
 		return '';
 	}
 

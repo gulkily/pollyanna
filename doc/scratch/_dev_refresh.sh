@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# called by 'hike refresh' command
+# was previously called by 'hike refresh' command
 # not really used anymore, should probably remove it
 # #todo
 # use template_refresh.pl instead

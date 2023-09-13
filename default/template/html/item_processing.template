@@ -8,7 +8,12 @@
 <table bgcolor="$colorWindow">
 <tr><td>
 <p>
-    Message received, and scheduled to be posted.
+    Message received, and scheduled to be posted.<br>
+    <br>
+    You may be seeing this message if the server is busy.
+</p>
+<p>
+	<span id=commentInfo></span>
 </p>
 <p>
     <a href="/">Return Home</a>

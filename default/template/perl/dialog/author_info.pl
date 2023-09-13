@@ -96,6 +96,10 @@ sub GetAuthorInfoBox { # $authorKey ; returns author info box
 		$publicKeyHash = '*';
 	}
 
+	if (index($authorDescription, 'approve') != -1) { #todo do it properly
+		$authorDescription .= '<p>Key is approved.</p>';
+	}
+
 	if (IsAdmin($authorKey)) {
 		#todo make this more proper like
 		$authorInfoTemplate =~ s/<p>This page about author listed below.<\/p>/<p>Note: This user is a system operator.<\/p>/;

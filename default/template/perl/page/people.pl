@@ -9,35 +9,41 @@ sub GetPeoplePage {
 
 	my $html = '';
 
-	#my $dialog = GetQueryAsDialog('people');
-	my @authors = SqliteQueryHashRef('people');
-	shift @authors;
+	my @people = SqliteQueryHashRef('people');
+	shift @people;
 
 	my $people = '';
-	{
+	if (scalar(@people)) {
 		require_once('image_container.pl'); #todo move into widget
 		require_once('widget/person.pl'); #todo move into widget
-		for my $authorHashRef (@authors) {
+		for my $authorHashRef (@people) {
 			my %author = %{$authorHashRef};
 			$people = $people . GetPersonDialog(\%author);
 
 			#$dialog = $dialog . GetDialogX($author{'author_alias'}, $authorHashRef);
 		}
+	} else {
+		$people = GetDialogX('<fieldset><p>No people found.</p></fieldset>', 'People');
 	}
 
 	my $pending = '';
 	{
-		$pending = GetQueryAsDialog('people_pending', 'Pending Approval');
+		my %params;
+		$params{'no_empty'} = 1;
+		$pending = GetQueryAsDialog('people_pending', 'Pending Approval', '', \%params);
 	}
 
 	my $guests = '';
 	{
-		$guests = GetQueryAsDialog('people_guest', 'Guests');
+		my %params;
+		$params{'no_empty'} = 1;
+		$guests = GetQueryAsDialog('people_guest', 'Guests', '', \%params);
 	}
 
 	$html =
 		GetPageHeader('people') .
 		$people .
+		'<hr>' .
 		$pending .
 		$guests .
 		# GetQuerySqlDialog('people') .

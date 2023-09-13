@@ -1,7 +1,6 @@
 #!/usr/bin/perl -T
 #freebsd: #!/usr/local/bin/perl
 
-
 use strict;
 use warnings;
 use 5.010;
@@ -245,17 +244,20 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 	chomp $query;
 	my @queryParams = @_; # shift
 
+	my $queryId = substr(md5_hex(GetTime() . $query), 0, 5);
+	#todo $queryId should be output in all debug logging in this sub
+
 	#WriteLog('SqliteQuery: $query = ' . $query);
-	WriteLog('SqliteQuery: caller = ' . join(',', caller));
+	WriteLog('SqliteQuery: ' . $queryId . ' caller = ' . join(',', caller));
 	$query = SqliteGetNormalizedQueryString($query, @queryParams);
 
 	my $SqliteDbName = GetSqliteDbName();
 
 	if ($SqliteDbName =~ m/^([_a-zA-Z0-9\/.]+)$/) {
 		$SqliteDbName = $1;
-		WriteLog('SqliteQuery: $SqliteDbName passed sanity check: ' . $SqliteDbName);
+		WriteLog('SqliteQuery: ' . $queryId . ' $SqliteDbName passed sanity check: ' . $SqliteDbName);
 	} else {
-		WriteLog('SqliteQuery: $SqliteDbName FAILED sanity check: ' . $SqliteDbName);
+		WriteLog('SqliteQuery: ' . $queryId . ' $SqliteDbName FAILED sanity check: ' . $SqliteDbName);
 		return '';
 	}
 
@@ -263,18 +265,18 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 #	if ($query =~ m/^([[:print:]\n\r\s]+)$/s) {
 		# this is only a basic sanity check, but it's better than nothing
 		$query = $1;
-		WriteLog('SqliteQuery: $query passed sanity check');
+		WriteLog('SqliteQuery: ' . $queryId . ' $query passed sanity check');
 	} else {
 		my $outLogName = sha1_hex(time().$query).'.query';
 		state $outLogDir = GetDir('log');
 		PutFile("$outLogDir/$outLogName", $query);
 
-		WriteLog('SqliteQuery: warning! non-printable characters found: ' . $outLogName);
+		WriteLog('SqliteQuery: ' . $queryId . ' warning! non-printable characters found: ' . $outLogName);
 		return '';
 	}
 
 	if ($query =~ m/\?/) {
-		WriteLog('SqliteQuery: warning: $query contains QM; caller = ' . join(',', caller));
+		WriteLog('SqliteQuery: ' . $queryId . ' warning: $query contains QM; caller = ' . join(',', caller));
 		# this may indicate that a variable placeholder was not filled
 	}
 
@@ -287,10 +289,10 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 	$query = str_replace('`', '\`', $query);
 	#
 
-	my $shCommand = "sqlite3 -header \"$SqliteDbName\" \"$query\" 2>$sqliteErrorLog";
+	my $shCommand = "sqlite3 -header \"$SqliteDbName\" \"$query\" 2>$sqliteErrorLog"; # $sqliteCommand #sqlite3Command
 	#todo send to /dev/null if debug mode is not enabled
 
-	WriteLog('SqliteQuery: $shCommand = ' . $shCommand);
+	WriteLog('SqliteQuery: ' . $queryId . ' $shCommand = ' . $shCommand);
 	#my $results = `sqlite3 -header "$SqliteDbName" "$query" 2>$sqliteErrorLog`;
 
 	if (0 && GetConfig('debug')) {
@@ -308,13 +310,13 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 	if ($shCommand =~ m/^(.+)$/s) {
 	# if ($shCommand =~ m/^([[:print:]\n\r\s]+)$/s) {
 		# this is only a basic sanity check, but it's better than nothing
-		WriteLog('SqliteQuery: $query passed sanity check');
+		WriteLog('SqliteQuery: ' . $queryId . ' $query passed sanity check');
 		$shCommand = $1;
 	} else {
 		my $outLogName = GetSHA1(time().$shCommand).'.shcommand';
 		state $outLogDir = GetDir('log');
 		PutFile("$outLogDir/$outLogName", $shCommand);
-		WriteLog('SqliteQuery: warning: $shCommand failed sanity check for printable characters only: ' . $outLogName);
+		WriteLog('SqliteQuery: ' . $queryId . ' warning: $shCommand failed sanity check for printable characters only: ' . $outLogName);
 		return '';
 	}
 
@@ -327,9 +329,17 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 	#use open ':std', ':encoding(UTF-8)';
 	if ($shCommand =~ m/^(.+)$/s) {
 		$shCommand = $1;
+
+		my $timeBefore = GetTime();
+
 		$results = `$shCommand`;
 
-		WriteLog('SqliteQuery: $results = ' . $results);
+		my $timeAfter = GetTime();
+
+		WriteLog('SqliteQuery: ' . $queryId . ' $results = ' . $results);
+
+		WriteLog('SqliteQuery: ' . $queryId . ' $time = ' . ($timeAfter - $timeBefore));
+
 		if (index($results, '90f7c1d87f56afbf1fc18ce49b9031f035e92a95') != -1) {
 			print($results);
 			#die($results);
@@ -348,33 +358,33 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 	if (index(trim(lc(GetFile($sqliteErrorLog))), 'locked') != -1) {
 		#sometimes the database is locked for a moment, so we retry 3 times before giving up
 		#hack
-		WriteLog('SqliteQuery: warning: locked database detected. retrying');
+		WriteLog('SqliteQuery: ' . $queryId . ' warning: locked database detected. retrying');
 		my $retryCount = 0;
 		while ($retryCount < 3 && trim(GetFile($sqliteErrorLog))) {
-			WriteLog('SqliteQuery: locked retrying in 0.25s. Error is: ' . trim(GetFile($sqliteErrorLog)));
+			WriteLog('SqliteQuery: ' . $queryId . ' locked retrying in 0.25s. Error is: ' . trim(GetFile($sqliteErrorLog)));
 			select(undef, undef, undef, 0.25);
 			$retryCount++;
 			$results = `$shCommand`;
 		}
-		WriteLog('SqliteQuery: locked: retry loop exited, Error is: ' . trim(GetFile($sqliteErrorLog)));
+		WriteLog('SqliteQuery: ' . $queryId . ' locked: retry loop exited, Error is: ' . trim(GetFile($sqliteErrorLog)));
 		if (trim(GetFile($sqliteErrorLog))) {
-			WriteLog('SqliteQuery: unable to recover from locked state; $retryCount = ' . $retryCount);
+			WriteLog('SqliteQuery: ' . $queryId . ' unable to recover from locked state; $retryCount = ' . $retryCount);
 			unlink($sqliteErrorLog);
 		} else {
-			WriteLog('SqliteQuery: recovered from locked state; $retryCount = ' . $retryCount);
+			WriteLog('SqliteQuery: ' . $queryId . ' recovered from locked state; $retryCount = ' . $retryCount);
 		}
 	}
 
 	if ($?) {
 		# this is a special perl thing which contains STDERR from most recent backtick command
-		WriteLog('SqliteQuery: warning: error returned; log = ' . $sqliteErrorLog . '; caller = ' . join(',', caller));
+		WriteLog('SqliteQuery: ' . $queryId . ' warning: error returned; log = ' . $sqliteErrorLog . '; caller = ' . join(',', caller));
 		AppendFile($sqliteErrorLog, $query);
 		AppendFile($sqliteErrorLog, 'caller: ' . join(',', caller));
 		return '';
 	}
 
 	if (GetFile($sqliteErrorLog)) {
-		WriteLog('SqliteQuery: warning: sqlite3 call wrote to stderr: ' . $sqliteErrorLog . '; caller = ' . join(',', caller));
+		WriteLog('SqliteQuery: ' . $queryId . ' warning: sqlite3 call wrote to stderr: ' . $sqliteErrorLog . '; caller = ' . join(',', caller));
 
 		AppendFile('' . $sqliteErrorLog, $query . "\n");
 		AppendFile('' . $sqliteErrorLog, join(',', caller));
@@ -742,13 +752,15 @@ sub SqliteGetValue { # $query ; Returns the first column from the first row retu
 	}
 } # SqliteGetValue()
 
-sub DBGetItemTitle { # get title for item ($itemhash)
+sub DBGetItemTitle { # $itemHash ; get title for item
 	my $itemHash = shift;
 
 	if (!$itemHash || !IsItem($itemHash)) {
 		WriteLog('DBGetItemTitle: warning: $itemHash failed sanity check; caller = ' . join(',', caller));
 		return '';
 	}
+
+	WriteLog('DBGetItemTitle(' . $itemHash . '); caller = ' . join(',', caller));
 
 	#my $query = 'SELECT title FROM item_title WHERE file_hash = ?';
 	my @queryParams = ();

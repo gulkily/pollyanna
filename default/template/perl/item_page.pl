@@ -388,6 +388,11 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$addMavo = 1;
 	}
 	else {
+		#		if ( $file{'item_type'} eq 'image' && GetConfig('setting/admin/image/enable') ) {
+		#			#todo get link for full size image
+		#			my $imageLink = '';
+		#		}
+		#
 		$itemTemplate = GetItemTemplate(\%file); # GetItemPage()
 	}
 	WriteLog('GetItemPage: child_count: ' . $file{'file_hash'} . ' = ' . $file{'child_count'});
@@ -432,9 +437,11 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		#todo sanity check on vars above
 
 		my $pubKeyMessage = "
-			This is a public key, <br>
-			which creates a profile placeholder, <br>
-			and allows verifying other posts. <br>
+			<fieldset><p>
+				This is a public key, <br>
+				which creates a profile placeholder, <br>
+				and allows verifying other posts. <br>
+			</p></fieldset>
 		";#todo templatify and make a table with a caption above?
 
 		$txtIndex .= GetDialogX(
@@ -612,6 +619,8 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		my $query = SqliteGetNormalizedQueryString('item_applied_hashtags', @parameters);
 		my %param;
 		$param{'no_empty'} = 1;
+		$param{'no_heading'} = 1;
+		$param{'no_status'} = 1;
 		$txtIndex .= GetQueryAsDialog($query, 'Applied Hashtags', 0, \%param);
 	}
 

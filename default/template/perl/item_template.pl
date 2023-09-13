@@ -8,6 +8,10 @@ use utf8;
 require_once('dialog.pl');
 
 sub GetItemTemplateBody {
+# sub FormatItem {
+# sub EscapeHtml {
+# sub FormatHtml {
+# sub FormatAsHtml {
 # sub GetItemBody {
 # sub GetBody {
 # sub GetItemText {
@@ -33,7 +37,7 @@ sub GetItemTemplateBody {
 
 	if ($file{'item_type'} eq 'image') {
 		WriteLog('GetItemTemplateBody: item_type = ' . $file{'item_type'});
-		my $imageContainer = GetImageContainer($file{'file_hash'}, $file{'item_name'}, 0);
+		my $imageContainer = GetImageContainer($file{'file_hash'}, $file{'item_name'}, 1);
 		$itemTemplateBody = GetTemplate('html/item/item.template'); # GetItemTemplate()
 		$itemTemplateBody = str_replace('$itemText', $imageContainer, $itemTemplateBody); #todo #bug $itemText is always empty here
 	}
@@ -277,6 +281,7 @@ sub GetItemTemplateFromHash { # $ hash
 } # GetItemTemplateFromHash()
 
 sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALOG FRAME
+# for just the message formatter,
 # sub GetItemDialog {
 	WriteLog('GetItemTemplate: caller = ' . join(',', caller));
 

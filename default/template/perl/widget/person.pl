@@ -25,9 +25,10 @@ sub GetPersonDialog { # \%author
 
 	if ($personAvatar) {
 		WriteLog('GetPersonDialog: $personAvatar = ' . $personAvatar . '; caller = ' . join(',', caller));
-		my $htmlThumbnail = GetImageContainer($personAvatar, 'Picture of ' . HtmlEscape($author{'author_alias'}), 1);
+		my $htmlThumbnail = GetImageContainer($personAvatar, 'Picture of ' . HtmlEscape($author{'author_alias'}), 0);
 		$htmlThumbnail = AddAttributeToTag($htmlThumbnail, 'img', 'width', '150');
-		$template = str_replace('<span class=author_image></span>', '<span class=author_image>' . $htmlThumbnail . '</span>', $template);
+		my $htmlThumbnailLink = '<a href="/person/' . UriEscape($author{'author_alias'}) . '">' . $htmlThumbnail . '</a>'; #todo make this nicer
+		$template = str_replace('<span class=author_image></span>', '<span class=author_image>' . $htmlThumbnailLink . '</span>', $template);
 	} else {
 		# nothing needed, we can leave the span empty
 	}

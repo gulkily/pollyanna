@@ -10,6 +10,8 @@ sub GetQueryAsDialog { # $query, $title, $columns, \%param
 #todo this should report query error
 #todo this should take @queryArgs
 #todo document no_empty flag
+# $flags{'no_empty'}
+#todo move columns to params
 
 # sub GetQueryDialog {
 # sub GetDialogFromQuery {
