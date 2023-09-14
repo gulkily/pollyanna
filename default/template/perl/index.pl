@@ -478,12 +478,16 @@ while (my $arg1 = shift @argsFound) {
 			PutConfig('setting/admin/token/hike_set', $hikeSet);
 			PutConfig('setting/admin/token/operator_please', $operatorPlease);
 
+			print "\n";
 			print "=========================\n";
 			print "index.pl: --all finished!\n";
 			print "=========================\n";
 		}
 		if ($arg1 eq '--sweep') {
 			# sweep deleted files
+			# checks for:
+			# * items which no longer have a .txt file supporting them
+			# * items which have been added to deleted.log
 			print "index.pl: --sweep\n";
 			SweepDeleted();
 		}
