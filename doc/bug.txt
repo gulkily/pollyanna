@@ -1,3 +1,9 @@
+/p.gif is served with text/html header for some reason:
+HTTP warning: 'http://localhost:2784/p.gif' cannot be displayed as image; has media type 'text/html'
+	seems to be an intermittent issue, cause unknown
+
+===
+
 menubar is kind of big in netscape 9.0.0.6
 
 ===
