@@ -19,7 +19,7 @@ if (!empty($_FILES['uploaded_file'])) {
 	if ($_FILES['uploaded_file']['error'] && !is_array($_FILES['uploaded_file']['error'])) {
 		// check for errors, one file
 		// See https://www.php.net/manual/en/features.file-upload.errors.php
-		echo "There was an error uploading the file.";
+		echo "<p>There was an error uploading the file: " . $_FILES['uploaded_file']['error'] . '</p>';
 		#if ($_FILES['uploaded_file']['error'] == 1) {
 		#	echo "The problem may be related to the file's size";
 		#}
@@ -105,7 +105,7 @@ if (!empty($_FILES['uploaded_file'])) {
 
 				if (!$moveFileResult) {
 					WriteLog("There was an error uploading the file, please try again! move_uploaded_file() returned: [$moveFileResult]");
-					echo "There was a problem uploading the file, please try again!";
+					echo "<p>There was a problem uploading the file.<br> \$moveFileResult = $moveFileResult<br>\$_FILES['uploaded_file']['tmp_name'] = " . $_FILES['uploaded_file']['tmp_name'] . "</p>";
 				} else {
 					# remember current working directory, we'll need it later
 					$pwd = getcwd();
