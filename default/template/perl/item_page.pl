@@ -652,6 +652,8 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			||
 			(index($file{'tags_list'}, ',python3,') != -1 && GetConfig('setting/admin/python3/enable'))
 			||
+			(index($file{'tags_list'}, ',py,') != -1 && GetConfig('setting/admin/python3/enable'))
+			||
 			(index($file{'tags_list'}, ',perl,') != -1 && GetConfig('setting/admin/perl/enable'))
 			||
 			(index($file{'tags_list'}, ',zip,') != -1 && GetConfig('setting/admin/zip/enable'))

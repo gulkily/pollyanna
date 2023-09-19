@@ -61,10 +61,11 @@ sub RunItem {
 				# 	$pythonCommand = `which python2`;
 				# }
 				if (!$pythonCommand) {
-					WriteLog('warning: $pythonCommand was FALSE');
+					WriteLog('RunFile: warning: $pythonCommand was FALSE');
 					return '';
 				}
-				if ($pythonCommand =~ m/^([\/a-z]+)$/) {
+				chomp $pythonCommand;
+				if ($pythonCommand =~ m/^([\/a-z3]+)$/) {
 					$pythonCommand = $1;
 
 					`chmod +x $filePath`;
@@ -75,14 +76,17 @@ sub RunItem {
 					DBAddItemAttribute($item, 'python_run_start', $runStart);
 					DBAddItemAttribute($item, 'python_run_finish', $runFinish);
 
+					WriteLog('RunFile: $pythonCommand was run with $filePath = ' . $filePath . '; about to save output to $runLog = ' . $runLog);
+
 					PutCache($runLog, $result);
 					return 1;
-				} else {
-					WriteLog('RunFile: $pythonCommand failed sanity check');
+				} # if ($pythonCommand =~ m/^([\/a-z3]+)$/)
+				else {
+					WriteLog('RunFile: $pythonCommand failed sanity check; $pythonCommand = "' . $pythonCommand . '"');
 				}
-			}
-		}
-	}
+			} # if ($filePath =~ m/^([0-9a-zA-Z\/\._\-]+)$/)
+		} # if (-e $filePath)
+	} # if ($itemType eq 'py')
 
 	if ($itemType eq 'cpp') {
 		my $fileBinaryPath = $filePath . '.out';
