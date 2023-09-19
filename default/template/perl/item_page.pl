@@ -420,12 +420,14 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		WriteLog('GetItemPage: found thread_listing = TRUE');
 		require_once('widget/thread_listing.pl');
 
-		my $threadListingDialog = GetThreadListingDialog($file{'file_hash'});
+		my $fileHash = $file{file_hash};
+
+		my $threadListingDialog = GetThreadListingDialog($fileHash);
 		#$threadListingDialog .= '<span class=advanced>' . $threadListingDialog . '</span>';
 		if ($threadListingDialog) {
 			$txtIndex .= $threadListingDialog;
 		} else {
-			WriteLog('GetItemPage: thread_listing: warning: tried to find a listing, but failed')
+			WriteLog('GetItemPage: thread_listing: warning: tried to find a listing, but failed; $fileHash = ' . $fileHash);
 			#todo warning
 		}
 	}
