@@ -831,7 +831,12 @@ function HideDialog (dialog) { // takes dialog element as reference
 	}
 } // HideDialog()
 
-function UpdateDialogList () { // DialogListDialog () dialog_list.template
+function UpdateDialogList () {
+// function DialogListDialog () {
+// function UpdateListDialog () {
+// dialog_list.template
+// #todo put this in a separate template that doesn't get injected unless dialog_list_dialog is on
+
 	var lstDialog = document.getElementById('lstDialog');
 	if (lstDialog) {
 		var allOpenDialogs = document.getElementsByClassName('dialog');
