@@ -27,6 +27,7 @@ sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 	my %scriptsDone = ();  # hash to keep track of scripts we've already injected, to avoid duplicates
 
 	if (GetConfig('setting/admin/js/profile_auto_register')) {
+		# #autoreg
 		push @scriptNames, 'profile_auto_register';
 	}
 
