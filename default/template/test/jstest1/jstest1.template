@@ -101,6 +101,11 @@
 			</p>
 
 			<p>
+				<input type=text name=txtWindowJSON size=11>
+				window.JSON
+			</p>
+
+			<p>
 				<input type=text name=txtWindowPromise size=11>
 				window.Promise
 			</p>
