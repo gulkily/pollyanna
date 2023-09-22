@@ -915,6 +915,10 @@ sub GetNextPreviousDialog {
 			attribute IN ('chain_next', 'chain_previous')
 	";
 
+	#todo #bug if the next or previous item is missing, the link goes to a 404
+	#todo 1. the attribute value should match an item in item_flat
+	#todo 2. it should really look for the next available item
+
 	my %params;
 	$params{'no_heading'} = 1;
 	$params{'no_status'} = 1;

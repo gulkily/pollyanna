@@ -96,6 +96,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		} # $pageType eq 'author'
 
 		if ($pageType eq 'date') {
+			#sub GetDatePage {
 			$pageParam = shift;
 			my $pageDate = $pageParam; # example: '2022-10-07'
 			chomp($pageDate);
@@ -108,20 +109,20 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 
 			#todo parametrize
 			$queryParams{'where_clause'} = "
+		WHERE
+			file_hash IN (
+				SELECT file_hash
+				FROM item_flat
 				WHERE
-					file_hash IN (
-						SELECT file_hash
-						FROM item_flat
-						WHERE
-							item_score >= 0 AND
-							(
-								SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 11) = '$pageDate'
-								OR
-								file_hash IN (
-									SELECT file_hash FROM item_attribute where attribute = 'date' AND value = '$pageDate'
-								)
-							)
+					item_score >= 0 AND
+					(
+						SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 11) = '$pageDate'
+						OR
+						file_hash IN (
+							SELECT file_hash FROM item_attribute where attribute = 'date' AND value = '$pageDate'
 						)
+					)
+				)
 			";
 			#todo optimize this query
 			@files = DBGetItemList(\%queryParams);

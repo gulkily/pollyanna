@@ -315,6 +315,8 @@ sub GetCalendarPage { # returns calendar page
 		}
 
 		if (0) {
+			# this would display the next or previous month from current
+			# if it is early or late in the current month
 			if ($curDay < 7) {
 				if ($curMonth == 1) {
 					$html .= GetMonthTable($curYear - 1, 12, \%fillDates);

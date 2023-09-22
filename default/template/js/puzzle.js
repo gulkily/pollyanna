@@ -165,7 +165,7 @@ function solvePuzzle (t) { // t = button pressed ; begins puzzle solving process
 		t.value = 'Solving...';
 	}
 
-	// set timeout to solve puzzle
+	// set timeout to solve puzzle... i forget why it has to be done this way, but this should be documented #todo
 	var timeoutSolvePuzzle = setTimeout('doSolvePuzzle()', 500);
 
 	return false; // do not let the calling form submit, doSolvePuzzle() will do it
