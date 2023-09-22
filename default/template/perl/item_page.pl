@@ -904,19 +904,22 @@ sub GetNextPreviousDialog {
 		return '';
 	}
 
+	WriteLog('GetNextPreviousDialog: $fileHash = ' . $fileHash . '; caller = ' . join(',', caller));
+
 	my $query = "
 		SELECT
 			attribute,
 			value
 		FROM
 			item_attribute
+			JOIN item_flat ON (item_attribute.value = item_flat.file_hash)
 		WHERE
-			file_hash = '$fileHash' AND
+			item_attribute.file_hash = '$fileHash' AND
 			attribute IN ('chain_next', 'chain_previous')
 	";
 
 	#todo #bug if the next or previous item is missing, the link goes to a 404
-	#todo 1. the attribute value should match an item in item_flat
+	#todo 1. the attribute value should match an item in item_flat x
 	#todo 2. it should really look for the next available item
 
 	my %params;
