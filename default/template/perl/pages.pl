@@ -1444,6 +1444,8 @@ sub GetQuerySqlDialog { # $pageQuery ; displays query for user to see
 # sub QuerySqlDialog {
 # sub GetSqlQueryDialog {
 # sub GetQueryDialog { #GetQuerySqlDialog()
+# sub GetQueryForDisplay {
+# sub GetDisplayQuery {
 	# display query used to generate the listing
 	#my $displayQuery = TextartForWeb(SqliteGetQueryTemplate($pageQuery));
 	my $pageQuery = shift;
