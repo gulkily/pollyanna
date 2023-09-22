@@ -180,7 +180,9 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache
 						# sub DBAddVoteRecord() { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; Adds a new vote (tag) record to an item based on vote/ token
 
 						DBAddItemAttribute($fileHash, 'gpg_alias', $aliasReturned);
-						DBAddItemAttribute($fileHash, 'title', "$aliasReturned has registered (public key)"); #todo templatize
+						#DBAddItemAttribute($fileHash, 'title', "$aliasReturned has registered (public key)"); #todo templatize
+						DBAddItemAttribute($fileHash, 'title', "Public Key for $aliasReturned"); #todo templatize
+						# this is changed because anyone can publish a public key, and this does not necessarily map to "has registered"
 
 						if (GetConfig('admin/index/create_system_tags')) {
 							DBAddVoteRecord($fileHash, 0, 'pubkey');

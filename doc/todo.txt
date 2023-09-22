@@ -1,5 +1,11 @@
 there should not be orphaned items in item_attribute table
 
+there needs to be a way to upgrade an instance using the web ui
+	typical process via ssh goes like this:
+		git pull
+		hike refresh
+		hike build
+
 demo
 ====
 	with c++, run sample code file, post the output
