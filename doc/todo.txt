@@ -1,3 +1,5 @@
+there should not be orphaned items in item_attribute table
+
 demo
 ====
 	with c++, run sample code file, post the output
