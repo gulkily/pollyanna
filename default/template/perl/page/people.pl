@@ -40,9 +40,12 @@ sub GetPeoplePage {
 		$guests = GetQueryAsDialog('people_guest', 'Guests', '', \%params);
 	}
 
+	my $queryTextDialog = GetQuerySqlDialog('people');
+
 	$html =
 		GetPageHeader('people') .
 		$people .
+		$queryTextDialog .
 		'<hr>' .
 		$pending .
 		$guests .

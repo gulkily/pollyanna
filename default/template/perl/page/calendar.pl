@@ -339,6 +339,10 @@ sub GetCalendarPage { # returns calendar page
 		$html .= GetDialogX('<p>There is nothing in the calendar at this time.</p>', 'Calendar Empty');
 	}
 
+	$html .= '<hr>';
+	$html .= GetQuerySqlDialog('calendar_months');
+	$html .= GetQuerySqlDialog('calendar_days');
+
 	$html .= GetPageFooter('calendar');
 	
 	$html = InjectJs($html, qw(settings voting timestamp utils profile));

@@ -127,6 +127,8 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 			#todo optimize this query
 			@files = DBGetItemList(\%queryParams);
 
+			$queryDisplay = DBGetItemListQuery(\%queryParams);
+
 			$zipName = "$pageDate.zip";
 		} # $pageType eq 'date'
 
