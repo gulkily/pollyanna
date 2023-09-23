@@ -5,7 +5,7 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub RunItem {
+sub RunItem { # $item ; calls 'run' action on specified item
 # sub RunFile {
 # sub RunCppFile {
 # sub RunPyFile {
@@ -33,6 +33,9 @@ sub RunItem {
 		if (-e $filePath) {
 			if ($filePath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
 				$filePath = $1;
+
+				WriteLog('RunItem: perl: $filePath = ' . $filePath);
+
 				`chmod +x $filePath`;
 				my $runStart = time();
 				my $result = `perl $filePath`;
@@ -80,21 +83,23 @@ sub RunItem {
 
 					PutCache($runLog, $result); # store the result in cache
 
-					my $newItem = "
-						>>$item
-						start: $runStart
-						finish: $runFinish
-						===
-					";
-					$newItem = trim($newItem);
-					$newItem = str_replace("\t", "", $newItem);
-					$newItem = $newItem . "\n" . $result;
+					{
+						my $newItem = "
+							>>$item
+							start: $runStart
+							finish: $runFinish
+							===
+						";
+						$newItem = trim($newItem);
+						$newItem = str_replace("\t", "", $newItem);
+						$newItem = $newItem . "\n" . $result;
 
-					my $TXTDIR = GetDir('txt');
-					my $newHash = sha1_hex($newItem);
-					my $newPath = substr($newHash, 0, 2) . '/' . substr($newHash, 2, 2) . '/' . $newHash . '.txt';
-					PutFile("$TXTDIR/$newPath", $newItem);
-					IndexFile("$TXTDIR/$newPath");
+						my $TXTDIR = GetDir('txt');
+						my $newHash = sha1_hex($newItem);
+						my $newPath = substr($newHash, 0, 2) . '/' . substr($newHash, 2, 2) . '/' . $newHash . '.txt';
+						PutFile("$TXTDIR/$newPath", $newItem);
+						IndexFile("$TXTDIR/$newPath");
+					}
 
 					return 1;
 				} # if ($pythonCommand =~ m/^([\/a-z3]+)$/)
@@ -111,6 +116,9 @@ sub RunItem {
 		if (-e $fileBinaryPath) {
 			if ($fileBinaryPath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
 				$fileBinaryPath = $1;
+
+				WriteLog('RunItem: cpp: $fileBinaryPath = ' . $fileBinaryPath);
+
 				`chmod +x $fileBinaryPath`;
 				my $runStart = time();
 				my $result = `$fileBinaryPath`;
@@ -131,6 +139,10 @@ sub RunItem {
 			return 1;
 		}
 	} # if ($itemType eq 'cpp')
+
+	{
+		WriteLog('RunItem: warning: fallthrough, no handler found for $item = ' . $item . '; caller = ' . join(',', caller));
+	}
 } # RunItem()
 
 1;
