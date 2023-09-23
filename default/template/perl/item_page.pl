@@ -921,6 +921,7 @@ sub GetNextPreviousDialog {
 	#todo #bug if the next or previous item is missing, the link goes to a 404
 	#todo 1. the attribute value should match an item in item_flat x
 	#todo 2. it should really look for the next available item
+	#todo 3. if this item is first in chain, make this known
 
 	my %params;
 	$params{'no_heading'} = 1;
