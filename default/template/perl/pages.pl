@@ -1479,6 +1479,9 @@ sub MakeWritePage {
 
 	if (GetConfig('admin/php/enable')) {
 		# create write_post.html for longer messages if admin/php/enable
+		# this is a bit hacky, but it works for now
+		# the template used here is html/form/write/write.template
+
 		$submitPage =~ s/method=get/method=post/g;
 		if (index(lc($submitPage), 'method=post') == -1) {
 			$submitPage =~ s/\<form /<form method=post /g;
@@ -1486,9 +1489,11 @@ sub MakeWritePage {
 		if (index(lc($submitPage), 'method=post') == -1) {
 			$submitPage =~ s/\<form/<form method=post /g;
 		}
+
 		$submitPage =~ s/cols=32/cols=50/g;
 		$submitPage =~ s/rows=9/rows=15/g;
 		$submitPage =~ s/please click here/you're in the right place/g;
+
 		PutHtmlFile("write_post.html", $submitPage);
 	}
 } # MakeWritePage()
