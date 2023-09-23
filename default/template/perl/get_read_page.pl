@@ -24,6 +24,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	# sub GetHashtagPage {
 	# sub GetUserPage {
 	# sub GetDatePage {
+	# sub GetTagListing {
 	# sub GetApprovePage { # /tag/approve.html
 
 	my $title; # plain-text title for <title>
