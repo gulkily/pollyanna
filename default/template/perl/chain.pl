@@ -266,4 +266,6 @@ sub SquashChain { # compresses chain by removing references to removed items
 
 } # SquashChain()
 
+# sub GetChainDialog { # see item_page.pl GetNextPreviousDialog()
+
 1;
