@@ -553,6 +553,9 @@ sub ProcessAccessLog { # $logfile, $vhostParse ; reads an access log and writes 
 
 					# Try to write to the file, exit if we can't
 					if (PutFile($pathedFilename, $message)) {
+					# sub CreateFile {
+					# sub CreateItem {
+					# sub CreateTextFile {
 						WriteLog('ProcessAccessLog: PutFile(' . $pathedFilename . ') returned true!');
 						if (GetConfig('admin/organize_files')) {
 							WriteLog('ProcessAccessLog: admin/organize_files was true');
@@ -713,12 +716,19 @@ sub ProcessAccessLog { # $logfile, $vhostParse ; reads an access log and writes 
 						}
 					}
 					else {
-						WriteLog("WARNING: Could not open text file to write to: ' . $filename");
+						WriteLog("ProcessAccessLog: warning: Could not open text file to write to: ' . $filename");
 					}
+				} # if ($message) {
+				else {
+					WriteLog('ProcessAccessLog: warning: $message was FALSE');
 				}
+			} # if (substr($file, 0, length($submitPrefix)) eq $submitPrefix)
+			else {
+				WriteLog('ProcessAccessLog: $submitPrefix was not in $file; $file = ' . $file);
 			}
-		} else {
-			WriteLog('ProcessAccessLog: $submitPrefix NOT FOUND');
+		} # if ($submitPrefix)
+		else {
+			WriteLog('ProcessAccessLog: warning: $submitPrefix was FALSE');
 		}
 
 		{

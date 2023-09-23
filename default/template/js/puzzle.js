@@ -115,7 +115,11 @@ window.getUserFp() is used to get user's fingerprint
 		txtComment = document.compose.comment;
 	}
 
-	var puzzleResult = getSolvedPuzzle(fp, '1337', 10, 1000000);
+	var lookingFor = '1337'; // this line is updated by InjectJs()
+	var cycleLimit = 1000000; // this line is updated by InjectJs()
+	var secondsLimit = 10; // this line is updated by in InjectJs()
+
+	var puzzleResult = getSolvedPuzzle(fp, lookingFor, secondsLimit, cycleLimit); // #todo this should be templated?
 
 	// add to compose form, sign, and submit
 	//var txtComment = document.compose.comment; // dupe from above
@@ -161,7 +165,7 @@ function solvePuzzle (t) { // t = button pressed ; begins puzzle solving process
 		t.value = 'Solving...';
 	}
 
-	// set timeout to solve puzzle
+	// set timeout to solve puzzle... i forget why it has to be done this way, but this should be documented #todo
 	var timeoutSolvePuzzle = setTimeout('doSolvePuzzle()', 500);
 
 	return false; // do not let the calling form submit, doSolvePuzzle() will do it

@@ -315,6 +315,8 @@ sub GetCalendarPage { # returns calendar page
 		}
 
 		if (0) {
+			# this would display the next or previous month from current
+			# if it is early or late in the current month
 			if ($curDay < 7) {
 				if ($curMonth == 1) {
 					$html .= GetMonthTable($curYear - 1, 12, \%fillDates);
@@ -336,6 +338,10 @@ sub GetCalendarPage { # returns calendar page
 	} else {
 		$html .= GetDialogX('<p>There is nothing in the calendar at this time.</p>', 'Calendar Empty');
 	}
+
+	$html .= '<hr>';
+	$html .= GetQuerySqlDialog('calendar_months');
+	$html .= GetQuerySqlDialog('calendar_days');
 
 	$html .= GetPageFooter('calendar');
 	

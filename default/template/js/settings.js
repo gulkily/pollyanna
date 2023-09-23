@@ -394,7 +394,8 @@ function GetPrefs (prefKey, storeName) { // get prefs value from localstorage
 	}
 
 	//alert('DEBUG: GetPrefs(' + prefKey + ')');
-	if (window.localStorage) {
+	if (window.localStorage && window.JSON) {
+		// #todo workaround for when there is no localStorage or no JSON
 		var currentPrefs = localStorage.getItem(storeName);
 
 		var prefsObj;

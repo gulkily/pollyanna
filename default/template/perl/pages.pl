@@ -1438,10 +1438,14 @@ require_once('dialog/settings.pl');
 
 require_once('dialog/reply.pl');
 
-sub GetQuerySqlDialog { # $pageQuery ;
+sub GetQuerySqlDialog { # $pageQuery ; displays query for user to see
 # sub DisplayQueryDialog {
 # sub GetSqlDialog {
 # sub QuerySqlDialog {
+# sub GetSqlQueryDialog {
+# sub GetQueryDialog { #GetQuerySqlDialog()
+# sub GetQueryForDisplay {
+# sub GetDisplayQuery {
 	# display query used to generate the listing
 	#my $displayQuery = TextartForWeb(SqliteGetQueryTemplate($pageQuery));
 	my $pageQuery = shift;
@@ -1449,7 +1453,7 @@ sub GetQuerySqlDialog { # $pageQuery ;
 
 	my $queryDisplayName = $pageQuery . '.sql';
 
-	my $displayQuery = '<pre>' . HtmlEscape(SqliteGetQueryTemplate($pageQuery)) . '<br></pre>'; #todo templatify
+	my $displayQuery = '<pre class=sql contenteditable>' . HtmlEscape(SqliteGetQueryTemplate($pageQuery)) . '</pre>'; #todo templatify
 	my $dialog = '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName) . '</span>';
 
 	return $dialog;

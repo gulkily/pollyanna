@@ -90,7 +90,9 @@ function MakeKey (t, callback = '') { //makes key using default settings
 		// 'curve25519' 'ed25519' 'p256' 'p384' 'p521' 'secp256k1'
 
 		var username = 'Guest'; //#guest...
-		//username = prompt('Choose your handle:', username);
+		//username = prompt('Choose your handle:', username); // ATTENTION: this line is uncommented from pages.pl
+		// #todo make this better architected, like have a flag variable
+		// #todo this needs to not happen if we're auto-registering profile_auto_register
 
 		//alert('DEBUG: MakeKey: username: ' + username);
 
@@ -100,6 +102,7 @@ function MakeKey (t, callback = '') { //makes key using default settings
 			//alert('DEBUG: MakeKey: username == null is false');
 
 			if (!username || !username.trim()) {
+				//alert('DEBUG: MakeKey: warning: username was FALSE, setting to Guest');
 				username = 'Guest'; //#guest...
 			}
 

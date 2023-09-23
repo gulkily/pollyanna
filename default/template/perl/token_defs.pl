@@ -92,7 +92,8 @@ sub GetTokenDefs {
 			'mask'    => '^(date)(\W+)([0-9]{4}\-[0-9]{2}\-[0-9]{2})',
 			'mask_params'    => 'mgi',
 			'message' => '[Date]',
-			'apply_to_self' => 1
+			'apply_to_self' => 1,
+			'apply_to_parent' => 1
 		},
 		{ # time in epoch
 			'token'   => 'time',

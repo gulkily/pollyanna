@@ -1,5 +1,10 @@
-#bug /p.gif is served with text/html header for some reason:
-HTTP warning: 'http://localhost:2784/p.gif' cannot be displayed as image; has media type 'text/html'
+there should not be orphaned items in item_attribute table
+
+there needs to be a way to upgrade an instance using the web ui
+	typical process via ssh goes like this:
+		git pull
+		hike refresh
+		hike build
 
 demo
 ====

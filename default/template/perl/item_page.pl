@@ -420,12 +420,14 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		WriteLog('GetItemPage: found thread_listing = TRUE');
 		require_once('widget/thread_listing.pl');
 
-		my $threadListingDialog = GetThreadListingDialog($file{'file_hash'});
+		my $fileHash = $file{file_hash};
+
+		my $threadListingDialog = GetThreadListingDialog($fileHash);
 		#$threadListingDialog .= '<span class=advanced>' . $threadListingDialog . '</span>';
 		if ($threadListingDialog) {
 			$txtIndex .= $threadListingDialog;
 		} else {
-			WriteLog('GetItemPage: thread_listing: warning: tried to find a listing, but failed')
+			WriteLog('GetItemPage: thread_listing: warning: tried to find a listing, but failed; $fileHash = ' . $fileHash);
 			#todo warning
 		}
 	}
@@ -651,6 +653,8 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			(index($file{'tags_list'}, ',cpp,') != -1 && GetConfig('setting/admin/cpp/enable'))
 			||
 			(index($file{'tags_list'}, ',python3,') != -1 && GetConfig('setting/admin/python3/enable'))
+			||
+			(index($file{'tags_list'}, ',py,') != -1 && GetConfig('setting/admin/python3/enable'))
 			||
 			(index($file{'tags_list'}, ',perl,') != -1 && GetConfig('setting/admin/perl/enable'))
 			||
@@ -900,16 +904,23 @@ sub GetNextPreviousDialog {
 		return '';
 	}
 
+	WriteLog('GetNextPreviousDialog: $fileHash = ' . $fileHash . '; caller = ' . join(',', caller));
+
 	my $query = "
 		SELECT
 			attribute,
 			value
 		FROM
 			item_attribute
+			JOIN item_flat ON (item_attribute.value = item_flat.file_hash)
 		WHERE
-			file_hash = '$fileHash' AND
+			item_attribute.file_hash = '$fileHash' AND
 			attribute IN ('chain_next', 'chain_previous')
 	";
+
+	#todo #bug if the next or previous item is missing, the link goes to a 404
+	#todo 1. the attribute value should match an item in item_flat x
+	#todo 2. it should really look for the next available item
 
 	my %params;
 	$params{'no_heading'} = 1;

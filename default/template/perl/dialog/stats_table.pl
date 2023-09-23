@@ -35,6 +35,11 @@ sub GetStatsTable { # $templateName = 'html/stats.template' ; returns Stats dial
 		$authorCount = SqliteGetCount('authors');
 	}
 
+	state $peopleCount;
+	if (!$peopleCount && (!defined($peopleCount))) {
+		$peopleCount = SqliteGetCount('people');
+	}
+
 	state $itemsDeleted;
 	if (!$itemsDeleted && (!defined($itemsDeleted))) {
 		$itemsDeleted = SqliteGetCount('deleted');
@@ -190,6 +195,7 @@ sub GetStatsTable { # $templateName = 'html/stats.template' ; returns Stats dial
 	$statsTable =~ s/\$imagesCount/$imagesCount/;
 	$statsTable =~ s/\$itemsDeleted/$itemsDeleted/;
 	$statsTable =~ s/\$authorCount/$authorCount/;
+	$statsTable =~ s/\$peopleCount/$peopleCount/;
 	$statsTable =~ s/\$filesTotal/$filesTotal/;
 	$statsTable =~ s/\$chainLogLength/$chainLogLength/;
 

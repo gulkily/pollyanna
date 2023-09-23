@@ -133,7 +133,7 @@ item_attribute.value
 FROM (
 SELECT file_hash, attribute, MAX(epoch) AS epoch FROM item_attribute
 GROUP BY
-file_hash, attribute, value
+file_hash, attribute
 ORDER BY epoch DESC
 ) AS item_attribute_latest_timestamp
 JOIN item_attribute ON (

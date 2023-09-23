@@ -7,7 +7,7 @@ use utf8;
 
 #todo this is the first version, and is sub-optimal
 
-sub GetThreadListingDialog {
+sub GetThreadListingDialog { # $fileHash ; get dialog listing all thread items
 	my $fileHash = shift;
 	chomp $fileHash;
 

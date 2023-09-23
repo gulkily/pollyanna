@@ -44,6 +44,9 @@ function RunTest() {
 	//alert('DEBUG: Looking for window.localStorage...');
 	document.frmTest.txtWindowLocalStorage.value = !!window.localStorage;
 
+	//alert('DEBUG: Looking for window.JSON...');
+	document.frmTest.txtWindowJSON.value = !!window.JSON;
+
 	//alert('DEBUG: Looking for window.Promise...');
 	document.frmTest.txtWindowPromise.value = !!window.Promise;
 

@@ -12,7 +12,9 @@ FROM (
     SELECT
         value AS date,
         COUNT(file_hash) AS item_count
-    FROM item_attribute
+    FROM
+    	item_attribute
+    	JOIN item_flat USING (file_hash)
     WHERE attribute = 'date'
     GROUP BY date
 )

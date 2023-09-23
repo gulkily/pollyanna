@@ -27,6 +27,7 @@ sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 	my %scriptsDone = ();  # hash to keep track of scripts we've already injected, to avoid duplicates
 
 	if (GetConfig('setting/admin/js/profile_auto_register')) {
+		# #autoreg
 		push @scriptNames, 'profile_auto_register';
 	}
 
@@ -282,19 +283,19 @@ sub GetScriptTemplate { # $script ; returns script based on name
 
 	if ($script eq 'easyreg') {
 		# for easyreg script/theme, set the default proof of work puzzle prefix
-		# setting/admin/puzzle/prefix
-		my $puzzlePrefix = GetConfig('setting/admin/puzzle/prefix');
+		# setting/puzzle/prefix
+		my $puzzlePrefix = GetConfig('setting/puzzle/prefix');
 		if ($puzzlePrefix) {
 			$scriptTemplate = str_replace("var puzzlePrefix = '1337';", "var puzzlePrefix = '" . $puzzlePrefix . "';", $scriptTemplate);
 		}
 	}
 
-	if ($script eq 'puzzle') {
+	if ($script eq 'puzzle') { # puzzle.js
 		# for puzzle.js we need to fill in default puzzle prefix, cycle limit, and time limit
 
-		my $puzzlePrefix = GetConfig('setting/admin/puzzle/prefix');;
-		my $puzzleCycleLimit = GetConfig('setting/admin/puzzle/cycle_limit');
-		my $puzzleSecondsLimit = GetConfig('setting/admin/puzzle/seconds_limit');
+		my $puzzlePrefix = GetConfig('setting/puzzle/prefix');
+		my $puzzleCycleLimit = GetConfig('setting/puzzle/cycle_limit');
+		my $puzzleSecondsLimit = GetConfig('setting/puzzle/seconds_limit');
 
 		WriteLog('InjectJs: puzzle: $puzzlePrefix = ' . $puzzlePrefix);
 		WriteLog('InjectJs: puzzle: $puzzleCycleLimit = ' . $puzzleCycleLimit);

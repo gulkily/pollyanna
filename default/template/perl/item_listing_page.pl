@@ -276,12 +276,10 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 	} else {
 		# no items returned by database
 		my $pageNoContent = '';
-		my $queryDisplayName = $pageQuery . '.sql';
 		$pageNoContent .= GetPageHeader($pageQuery);
-		$pageNoContent .= GetDialogX('This page reserved for future content.');
+		$pageNoContent .= GetDialogX('<fieldset><p>This page reserved for future content.</p></fieldset>', 'No Results');
 
-		my $displayQuery = '<pre>' . HtmlEscape(SqliteGetQueryTemplate($pageQuery)) . '<br></pre>'; #todo templatify
-		$pageNoContent .= '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName) . '</span>'; #todo should have <pre> like in GetItemListingPage()
+		$pageNoContent .= GetQuerySqlDialog($pageQuery);
 
 		if ($pageQuery eq 'boxes') { #banana theme
 			$pageNoContent .= GetDialogX(GetTemplate('html/dialog/new_box_count.template'), 'Add');

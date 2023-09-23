@@ -113,11 +113,13 @@ sub GetPersonPage { # $personName
 	# COLLECT LIST OF ITEMS BY APPROVED AUTHORS
 	my $itemList = '';
 	{
+		# #todo templatize this in default/template/query
 		my $queryItemList = "
 			SELECT
 				file_hash,
 				item_title,
 				add_timestamp,
+				person_author.author_key AS author_id,
 				'' AS cart
 			FROM
 				item_flat

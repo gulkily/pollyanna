@@ -9,7 +9,9 @@ FROM (
     UNION ALL
     SELECT
         SUBSTR(value, 0, 8) AS year_month
-    FROM item_attribute
+    FROM
+    	item_attribute
+    	JOIN item_flat USING (file_hash)
     WHERE attribute = 'date'
     GROUP BY year_month
 )

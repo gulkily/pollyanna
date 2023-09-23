@@ -6,6 +6,8 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 // function AddItem () {}
 // function InsertItem () {}
 // function StoreNewItem () {}
+// function CreateItem () {}
+// function CreateTextFile () {}
 	$hash = ''; // hash of new comment's contents
 	$scriptDir = GetScriptDir();
 

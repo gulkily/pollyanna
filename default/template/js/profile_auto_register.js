@@ -6,7 +6,7 @@
 function ForceLogin () {
 	if (window.MakeKey && window.getPublicKey) {
 		if (!getPublicKey()) {
-			MakeKey();
+			MakeKey(); // #todo this should not prompt for a username
 			SetPrefs('sign_by_default', 1);
 			PubKeyPing();
 		} else {
