@@ -1,4 +1,5 @@
 <!-- write.template -->
+<!-- ATTENTION: this template is updated by MakeWritePage() -->
 <fieldset>
     <form action="/post.html" method=GET id=compose class=submit name=compose target=_top>
         <span id=writeintro></span>
