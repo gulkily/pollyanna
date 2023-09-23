@@ -921,15 +921,24 @@ sub MakeHtAccessPages {
 
 sub MakeMenuPages {
 # sub MenuPages {
+# pre-make all the pages referenced by the menu list
 	WriteLog('MakeMenuPages()');
 	my @menuPages = split("\n", GetTemplate('list/menu'));
 	foreach my $menu (@menuPages) {
 		WriteLog('MakeSystemPages: $menu = ' . $menu);
 		MakePage($menu);
 	}
-}
+} # MakeMenuPages()
 
 sub MakeSystemPages {
+# pre-make all the "system" pages:
+# welcome.html - the welcome page (also index.html by default)
+# cookie.html - page which tells users they need a cookie
+# index.php, utils.php, post.php, write.php, upload.php, search.php, cookie.php, cookietest.php, route.php, quick.php
+# (if php module is enabled)
+# 404.html - the 404, page not found page
+# write.html - the write / compose / create thread page
+# #todo add others
 	state $HTMLDIR = GetDir('html');
 
 	WriteLog('MakeSystemPages: $HTMLDIR = ' . $HTMLDIR . '; caller = ' . join(',', caller));
@@ -1026,7 +1035,6 @@ sub MakeSystemPages {
 	}
 
 	#MakePage('read');
-
 } # MakeSystemPages()
 
 sub MakeListingPages {
