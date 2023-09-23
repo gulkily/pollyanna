@@ -68,9 +68,9 @@ sub RunItem {
 				if ($pythonCommand =~ m/^([\/a-z3]+)$/) {
 					$pythonCommand = $1;
 
-					`chmod +x $filePath`;
+					`chmod +x $filePath`; # make file executable
 					my $runStart = time();
-					my $result = `$pythonCommand $filePath`;
+					my $result = `$pythonCommand $filePath`; # run and collect the result
 					my $runFinish = time();
 
 					DBAddItemAttribute($item, 'python_run_start', $runStart);
@@ -78,7 +78,24 @@ sub RunItem {
 
 					WriteLog('RunFile: $pythonCommand was run with $filePath = ' . $filePath . '; about to save output to $runLog = ' . $runLog);
 
-					PutCache($runLog, $result);
+					PutCache($runLog, $result); # store the result in cache
+
+					my $newItem = "
+						>>$item
+						start: $runStart
+						finish: $runFinish
+						===
+					";
+					$newItem = trim($newItem);
+					$newItem = str_replace("\t", "", $newItem);
+					$newItem = $newItem . "\n" . $result;
+
+					my $TXTDIR = GetDir('txt');
+					my $newHash = sha1_hex($newItem);
+					my $newPath = substr($newHash, 0, 2) . '/' . substr($newHash, 2, 2) . '/' . $newHash . '.txt';
+					PutFile("$TXTDIR/$newPath", $newItem);
+					IndexFile("$TXTDIR/$newPath");
+
 					return 1;
 				} # if ($pythonCommand =~ m/^([\/a-z3]+)$/)
 				else {
