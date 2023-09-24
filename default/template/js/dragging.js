@@ -671,6 +671,7 @@ function DraggingInit (doPosition) { // initialize all class=dialog elements on 
 	//	return '';
 	//}
 
+	// also so that we can pass it on to DraggingInitDialog()
 	var doPosition = GetPrefs('draggable_restore');
 
 	UnhideHiddenElements();
@@ -1034,6 +1035,7 @@ function InsertFetchedDialog () {
 // inserts dialog at the top of the document, before the first child
 // function InjectDialog () { // InsertFetchedDialog()
 // function InsertDialog () {
+// function SpawnDialog () {
 	//debug document.title = 'InsertFetchedDialog';
 
 	var xmlhttp = window.xmlhttp2;
@@ -1260,7 +1262,7 @@ function CloseDialog(t) {
 	return false;
 } // CloseDialog()
 
-function FetchDialogFromUrl (url) {
+function FetchDialogFromUrl (url) { // url example: /dialog/help.html
 // function InjectDialog () {
 // function FetchDialogFromUrl () {
 // function SpawnDialog () {
@@ -1291,6 +1293,8 @@ function FetchDialogFromUrl (url) {
 		// this is the main reason for the 'too fast' message
 		// which appears if you try to vote when already waiting
 		// for a vote request to return
+
+		// #todo it needs to be async now, because we want to use it to restore previously opened dialogs
 
 		if (window.displayNotification) {
 			displayNotification('Meditate...');
