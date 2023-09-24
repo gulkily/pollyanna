@@ -1506,6 +1506,19 @@ sub MakeWritePage {
 	}
 } # MakeWritePage()
 
+sub GetIntroDialog { # $pageName
+	my $pageName = shift;
+	chomp $pageName;
+
+	#todo sanity
+
+	my $introText = GetString('page_intro/' . $pageName);
+	my $introDialogContents = '<fieldset><p>' . FormatForWeb($introText) . '</p></fieldset>';
+	my $introDialog = GetDialogX($introDialogContents, 'Welcome to ' . ucfirst($pageName));
+
+	return $introDialog;
+} # GetIntroDialog()
+
 while (my $arg1 = shift @foundArgs) {
 	# evaluate each argument, fuzzy matching it, and generate requested pages
 

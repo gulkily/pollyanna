@@ -11,6 +11,7 @@ sub GetHelpPage { # returns html for help page (/help.html)
 	$txtIndex =
 		GetPageHeader('help') .
 		GetTemplate('html/maincontent.template') .
+		GetIntroDialog('help') .
 		GetDialogX(GetTemplate('html/page/help.template'), 'Help') .
 		GetDialogX(GetTemplate('html/page/help_diagnostics.template'), 'Toys') .
 		GetDialogX(GetTemplate('html/page/help_views.template'), 'Views') .
