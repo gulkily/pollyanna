@@ -32,7 +32,7 @@ sub GetUploadDialog { # upload dialog for upload page
 		# both forms
 		$uploadForm = AddAttributeToTag($uploadForm, 'input name=submit', 'onclick', "this.value='Meditate...';");
 	}
-	my $allowFiles = GetConfig('admin/image/allow_files');
+	my $allowFiles = GetConfig('admin/image/allow_files'); #imagetypes
 
 	$allowFiles = str_replace("\n", ' ', $allowFiles);
 

@@ -216,6 +216,7 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 		$ext eq 'tff' &&
 		GetConfig('admin/image/enable')
 	) {
+		#imagetypes
 		WriteLog('IndexFile: calling IndexImageFile()');
 		$indexSuccess = IndexImageFile($file);
 	}

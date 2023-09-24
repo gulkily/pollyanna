@@ -1981,6 +1981,7 @@ sub IsImageFile { # $file ; returns 1 if image file, 0 if not
 			substr(lc($file), length($file) -5, 5) eq ".webp"
 		)
 	) {
+		#imagetypes
 		return 1;
 	} else {
 		return 0;
