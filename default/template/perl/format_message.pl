@@ -33,7 +33,7 @@ sub SurveyForWeb { # replaces some spaces with &nbsp; to preserve text-based lay
 	#));?><?=$tt_c?></description>
 
 	return $text;
-}
+} # SurveyForWeb()
 
 sub AddressForWeb {
 	my $text = shift;

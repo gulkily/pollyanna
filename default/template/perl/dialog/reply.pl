@@ -6,18 +6,20 @@ use warnings;
 use 5.010;
 
 sub GetReplyForm { # $replyTo ; returns reply form for specified item
+# sub GetReplyDialog {
+# sub GetCommentDialog {
 	my $replyTo = shift;
 	chomp $replyTo;
 
 	state $accessKey;
 	if (!$accessKey) {
 		$accessKey = GetAccessKey('write');
-	}
+	} # if (!$accessKey)
 
 	if (!$replyTo || !IsItem($replyTo)) {
 		WriteLog('GetReplyForm: warning: sanity check failed');
 		return '';
-	}
+	} # if (!$replyTo || !IsItem($replyTo))
 
 	WriteLog('GetReplyForm: $replyTo = ' . $replyTo);
 

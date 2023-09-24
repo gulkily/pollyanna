@@ -202,6 +202,9 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache
 							}
 						}
 
+						#todo gpg --list-packets --keyid-format=long <public_key.txt>
+						# this will give us the keygen time
+
 						# DBAddKeyAlias($authorKey, $tokenFound{'param'}, $fileHash);
 						# DBAddKeyAlias('flush');
 

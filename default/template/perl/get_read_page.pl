@@ -133,7 +133,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 			$zipName = "$pageDate.zip";
 		} # $pageType eq 'date'
 
-		if ($pageType eq 'tag') { #'/tag/tag.html' #'/tag/tag.html' '/tag/'
+		if ($pageType eq 'tag') { #'/tag/tag.html' #'/tag/tag.html' '/tag/' GetTagPage GetTagListing {
 			# TAG PAGE ##############################################################
 			#todo tell user how many items we found
 

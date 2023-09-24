@@ -47,6 +47,7 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 	if (!$introText) {
 		$introText = trim(GetString('page_intro/default'));
 	}
+	#todo this should actually be used
 
 	# Get the HTML page template
 	my $htmlStart = GetTemplate('html/htmlstart.template');
