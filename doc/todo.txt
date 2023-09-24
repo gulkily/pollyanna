@@ -1,3 +1,9 @@
+more screenreader testing
+
+redo the inconspicuous design feature
+
+encode zip files in html to make it more friendly to archivers
+
 there should not be orphaned items in item_attribute table
 
 there needs to be a way to upgrade an instance using the web ui
