@@ -3,6 +3,8 @@ SELECT
 	author_key AS author_id,
 	author_key,
 	author_seen,
+	'' AS tagset_flag,
+	'' AS cart
 	item_count
 FROM author_flat
 WHERE

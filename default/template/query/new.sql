@@ -1,11 +1,11 @@
 SELECT
 	file_hash,
 	item_title,
+	'' AS cart,
 	item_type,
 	child_count,
 	add_timestamp,
-	tags_list,
-	'' AS cart
+	tags_list
 FROM
 	item_flat
 WHERE

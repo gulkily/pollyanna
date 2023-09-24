@@ -3,6 +3,7 @@ SELECT
 	author_key AS author_id,
 	add_timestamp,
 	'' AS tagset_pending,
+	'' AS cart,
 	author_key
 FROM item_flat
 WHERE
