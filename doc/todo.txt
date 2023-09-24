@@ -1,3 +1,26 @@
+allowed and supported image file types
+	should have a central config
+	currently defined several times separately, all marked with #imagetypes tag
+
+shortcut command to add admin user
+	workaround: insert into ..
+
+
+code actions
+	refactor
+	generate testcase
+	document
+	summarize
+	run
+	normalize
+	extract concepts
+
+
+it should be possible to get multiple dialogs in one http request
+	idea: /dialog/settings,help,write.html
+
+topics dialog returns error page #bug
+
 there should not be orphaned items in item_attribute table
 
 there needs to be a way to upgrade an instance using the web ui
