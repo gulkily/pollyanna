@@ -1,3 +1,19 @@
+Next to "sign as ilyag" checkbox there should be another one called "sign with cookie"
+
+#todo
+	if there are pending user keys
+		there should be a server-wide notification
+			displayed only to already approved users
+	pending keys for new usernames should be distinguished from pending keys for existing usernames
+
+
+author/person concept
+	if author is approved,
+		the avatar link should go to the person page
+	if author is not approved
+		the avatar should go to the author page
+		AND on the author page, it should say "author is not yet approved"
+
 allowed and supported image file types
 	should have a central config
 	currently defined several times separately, all marked with #imagetypes tag
