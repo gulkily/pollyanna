@@ -9,6 +9,8 @@
 		SetPrefs('draggable_spawn_focus', 0);
 		SetPrefs('draggable', 0);
 		SetPrefs('draggable_restore', 0);
+		SetPrefs('draggable_reopen', 0);
+		SetPrefs('opened_dialogs', 0);
 		SetPrefs('draggable_scale', 0);
 		SetPrefs('draggable_restore_collapsed', 0);
 		DraggingReset();

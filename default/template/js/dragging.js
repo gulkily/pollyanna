@@ -1222,11 +1222,13 @@ function FetchDialog (dialogName) {
 	}
 
 	//alert(dialogName);
-	var openDialogs = GetPrefs('open_dialogs');
+	var openDialogs = GetPrefs('opened_dialogs'); // FetchDialog()
+	//alert('DEBUG: FetchDialog: openDialogs = ' + openDialogs);
 	if (openDialogs && openDialogs.indexOf(dialogId) != -1) {
 		//
 	} else {
-		SetPrefs('open_dialogs', openDialogs + ',' + dialogId);
+		SetPrefs('opened_dialogs', openDialogs + ',' + dialogId); // FetchDialog()
+		//SetPrefs('opened_dialogs', ((openDialogs && openDialogs != '0') ? openDialogs + ',' : '') + dialogId); // FetchDialog()
 	}
 	//alert(openDialogs);
 
@@ -1243,10 +1245,10 @@ function CloseDialog(t) {
 		var dialogId = GetDialogId(parentDialog);
 
 		//alert(dialogName);
-		var openDialogs = GetPrefs('open_dialogs');
+		var openDialogs = GetPrefs('opened_dialogs'); // CloseDialog()
 		if (openDialogs && openDialogs.indexOf(dialogId) != -1) {
 			var withoutDialog = openDialogs.replace(',' + dialogId, '');
-			SetPrefs('open_dialogs', withoutDialog);
+			SetPrefs('opened_dialogs', withoutDialog); // CloseDialog()
 		} else {
 			//don't need to do anything
 		}

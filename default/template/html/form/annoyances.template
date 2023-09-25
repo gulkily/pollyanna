@@ -34,6 +34,13 @@
 	</p>
 
 	<p>
+		<label for=chkDraggableReopen>
+			<input id=chkDraggableReopen name=chkDraggableReopen type=checkbox onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'draggable_reopen'); }">
+			Reopen dialogs on new page<noscript><b>*</b></noscript>
+		</label>
+	</p>
+
+	<p>
 		<label for=chkDraggableRestore>
 			<input id=chkDraggableRestore name=chkDraggableRestore type=checkbox onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'draggable_restore'); }">
 			Restore dialog positions<noscript><b>*</b></noscript>

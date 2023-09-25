@@ -55,7 +55,7 @@ else {
 	if (isset($_COOKIE['test']) && $_COOKIE['test']) {
 		WriteLog('cookie.php: test cookie found');
 
-		$validCookies = array('cookie', 'checksum', 'test', 'light', 'show_advanced', 'beginner', 'show_admin');
+		$validCookies = array('cookie', 'checksum', 'test', 'light', 'show_advanced', 'beginner', 'show_admin', 'opened_dialogs');
 		foreach ($_COOKIE as $cookieKey => $cookieValue) {
 			if (in_array($cookieKey, $validCookies)) {
 				// is ok

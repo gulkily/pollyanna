@@ -487,6 +487,15 @@ function SetPrefs (prefKey, prefValue, storeName) { // set prefs key prefKey to 
 		}
 	}
 
+	if (prefKey == 'opened_dialogs') { // SetPrefs()
+		//alert('DEBUG: SetPrefs: setting cookie to match LocalStorage');
+		if (window.SetCookie) {
+			SetCookie(prefKey, (prefValue ? prefValue : ''));
+		} else {
+			//alert('DEBUG: warning: window.SetCookie missing');
+		}
+	}
+
 	if (prefKey == 'performance_optimization') {
 		window.performanceOptimization = prefValue;
 		//alert('DEBUG: SetPrefs: setting cookie to match LocalStorage');
@@ -729,6 +738,7 @@ function LoadCheckboxValues () {
 
 	LoadCheckbox(document.getElementById('chkDraggable'), 'draggable');
 	LoadCheckbox(document.getElementById('chkDraggableRestore'), 'draggable_restore');
+	LoadCheckbox(document.getElementById('chkDraggableReopen'), 'draggable_reopen');
 	LoadCheckbox(document.getElementById('chkDraggableRestoreCollapsed'), 'draggable_restore_collapsed');
 	LoadCheckbox(document.getElementById('chkDraggableScale'), 'draggable_scale');
 	LoadCheckbox(document.getElementById('chkArrangeViewportResize'), 'draggable_arrange_viewport_resize');
