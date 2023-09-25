@@ -1,3 +1,10 @@
+fix links so that wget -r gets a useful archive instead of a bunch of extra stuff
+
+this needs to be implemented better:
+For users with limited network access, reliant on public WiFi service, we engineered capabilities for offline browsing and content preservation, ensuring offline drafts for later submission retained composition and timestamp.
+
+checkbox or button for private mode which switches to gmail or gdocs looking design
+
 Next to "sign as ilyag" checkbox there should be another one called "sign with cookie"
 
 #todo
