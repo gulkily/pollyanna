@@ -1,3 +1,16 @@
+
+			if ($tagName eq 'todo') {
+				$queryParams{'where_clause'} = $queryParams{'where_clause'} . " AND item_flat.tags_list NOT LIKE '%,done,%' ";
+			}
+
+	if ($pageType eq 'tag' && $pageParam eq 'todo') {
+		# for todo items, list items that are todo+done at the bottom
+		my $queryDone = "SELECT file_hash, item_title FROM item_flat WHERE tags_list LIKE '%,todo,%' AND tags_list LIKE '%,done,%'";
+		$txtIndex .= GetQueryAsDialog($queryDone, 'Completed');
+	}
+
+
+
 	WriteLog('DBGetItemList: scalar(@resultsArray) = ' . scalar(@resultsArray));
 
 
