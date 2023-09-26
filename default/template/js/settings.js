@@ -400,7 +400,12 @@ function GetPrefs (prefKey, storeName) { // get prefs value from localstorage
 
 		var prefsObj;
 		if (currentPrefs) {
-			prefsObj = JSON.parse(currentPrefs);
+			try {
+				prefsObj = JSON.parse(currentPrefs);
+			}
+			catch (e) {
+				alert(e);
+			}
 		} else {
 			prefsObj = Object();
 		}
@@ -509,11 +514,17 @@ function SetPrefs (prefKey, prefValue, storeName) { // set prefs key prefKey to 
 		}
 	}
 
-	if (window.localStorage) {
+	if (window.localStorage && window.JSON) {
 		var currentPrefs = localStorage.getItem(storeName);
 		var prefsObj;
 		if (currentPrefs) {
-			prefsObj = JSON.parse(currentPrefs);
+			try {
+				prefsObj = JSON.parse(currentPrefs);
+			}
+			catch (e) {
+				alert(e); // error encountered
+				prefsObj = Object();
+			}
 		} else {
 			prefsObj = Object();
 		}
