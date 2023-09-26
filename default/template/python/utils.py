@@ -16,7 +16,7 @@ def GetCache():
 def DBAddItemAttribute(*args):
     raise NotImplementedError
 
-def DBAddVoteRecord(*args):
+def DBAddLabel(*args):
     raise NotImplementedError
 
 def GetTime(*args):

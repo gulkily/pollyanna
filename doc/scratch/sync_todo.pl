@@ -38,7 +38,7 @@ require_once('index.pl');
 		PutFile("html/txt/todo/$i.txt", $fileContent);
 		$newFileHash = IndexFile("html/txt/todo/$i.txt");
 		if ($newFileHash) {
-			DBAddVoteRecord($newFileHash, 0, 'todo');
+			DBAddLabel($newFileHash, 0, 'todo');
 			print $newFileHash;
 		} else {
 			exit;

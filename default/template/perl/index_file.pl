@@ -146,7 +146,7 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 					$dirTag = trim($dirTag);
 					if ($dirTag =~ m/([0-9a-zA-Z_-]+)/ && length($dirTag) > 2) {
 						$dirTag = $1;
-						DBAddVoteRecord($fileHash, 0, $dirTag);
+						DBAddLabel($fileHash, 0, $dirTag);
 					} else {
 						WriteLog('IndexFile: warning: $dirTag failed sanity check; $dirTag = ' . $dirTag);
 					}

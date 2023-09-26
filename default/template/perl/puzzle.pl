@@ -64,7 +64,7 @@ sub IndexPuzzle {
 					DBAddItemAttribute($fileHash, 'puzzle_input', $puzzleAuthorKey . ' ' . $mintedAt . ' ' . $checksum);
 					DBAddItemAttribute($fileHash, 'puzzle_result', $hash);
 					DBAddItemAttribute($fileHash, 'puzzle_prefix', $puzzlePrefix);
-					DBAddVoteRecord($fileHash, $mintedAt, 'puzzle');
+					DBAddLabel($fileHash, $mintedAt, 'puzzle');
 
 					$detokenedMessage = str_replace($puzzleAuthorKey . ' ' . $mintedAt . ' ' . $checksum, '', $detokenedMessage);
 					$puzzleAccepted = 1;

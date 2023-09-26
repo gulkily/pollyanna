@@ -90,7 +90,7 @@
 								foreach my $itemParent (@itemParents) {
 									DBAddItemAttribute($itemParent, 'title', $titleGiven, $addedTime, $fileHash);
 
-									DBAddVoteRecord($itemParent, $addedTime, 'hastitle');
+									DBAddLabel($itemParent, $addedTime, 'hastitle');
 
 									DBAddPageTouch('item', $itemParent);
 
@@ -104,7 +104,7 @@
 
 								WriteLog('Item has no parent, adding title to itself');
 
-								DBAddVoteRecord($fileHash, $addedTime, 'hastitle');
+								DBAddLabel($fileHash, $addedTime, 'hastitle');
 								DBAddItemAttribute($fileHash, 'title', $titleGiven, $addedTime);
 							}
 
@@ -118,7 +118,7 @@
 								foreach my $itemParent (@itemParents) {
 									DBAddItemAttribute($itemParent, 'title', $titleGiven, $addedTime, $fileHash);
 
-									DBAddVoteRecord($itemParent, $addedTime, 'hastitle');
+									DBAddLabel($itemParent, $addedTime, 'hastitle');
 
 									DBAddPageTouch('item', $itemParent);
 
@@ -132,7 +132,7 @@
 
 								WriteLog('Item has no parent, adding title to itself');
 
-								DBAddVoteRecord($fileHash, $addedTime, 'hastitle');
+								DBAddLabel($fileHash, $addedTime, 'hastitle');
 								DBAddItemAttribute($fileHash, 'title', $titleGiven, $addedTime);
 							}
 
@@ -188,7 +188,7 @@
 								foreach my $itemParent (@itemParents) {
 									DBAddItemAttribute($itemParent, 'title', $titleGiven, $addedTime, $fileHash);
 
-									DBAddVoteRecord($itemParent, $addedTime, 'hastitle');
+									DBAddLabel($itemParent, $addedTime, 'hastitle');
 
 									DBAddPageTouch('item', $itemParent);
 
@@ -202,7 +202,7 @@
 
 								WriteLog('Item has no parent, adding title to itself');
 
-								DBAddVoteRecord($fileHash, $addedTime, 'hastitle');
+								DBAddLabel($fileHash, $addedTime, 'hastitle');
 								DBAddItemAttribute($fileHash, 'title', $titleGiven, $addedTime);
 							}
 
@@ -265,7 +265,7 @@
 								foreach my $itemParent (@itemParents) {
 									DBAddItemAttribute($itemParent, 'title', $titleGiven, $addedTime, $fileHash);
 
-									DBAddVoteRecord($itemParent, $addedTime, 'hastitle');
+									DBAddLabel($itemParent, $addedTime, 'hastitle');
 
 									DBAddPageTouch('item', $itemParent);
 
@@ -279,7 +279,7 @@
 
 								WriteLog('Item has no parent, adding title to itself');
 
-								DBAddVoteRecord($fileHash, $addedTime, 'hastitle');
+								DBAddLabel($fileHash, $addedTime, 'hastitle');
 								DBAddItemAttribute($fileHash, 'title', $titleGiven, $addedTime);
 							}
 
@@ -402,7 +402,7 @@
 								foreach my $itemParent (@itemParents) {
 									DBAddItemAttribute($itemParent, 'title', $titleGiven, $addedTime, $fileHash);
 
-									DBAddVoteRecord($itemParent, $addedTime, 'hastitle');
+									DBAddLabel($itemParent, $addedTime, 'hastitle');
 
 									DBAddPageTouch('item', $itemParent);
 
@@ -416,7 +416,7 @@
 
 								WriteLog('Item has no parent, adding title to itself');
 
-								DBAddVoteRecord($fileHash, $addedTime, 'hastitle');
+								DBAddLabel($fileHash, $addedTime, 'hastitle');
 								DBAddItemAttribute($fileHash, 'title', $titleGiven, $addedTime);
 							}
 

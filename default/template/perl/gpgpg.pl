@@ -175,9 +175,9 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache
 						$message =~ s/\$name/$aliasReturned/g;
 						$message =~ s/\$fingerprint/$gpgKeyPub/g;
 
-						DBAddVoteRecord($fileHash, GetTime(), 'pubkey', $gpgKeyPub, $fileHash);
+						DBAddLabel($fileHash, GetTime(), 'pubkey', $gpgKeyPub, $fileHash);
 
-						# sub DBAddVoteRecord() { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; Adds a new vote (tag) record to an item based on vote/ token
+						# sub DBAddLabel() { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; Adds a new vote (tag) record to an item based on vote/ token
 
 						DBAddItemAttribute($fileHash, 'gpg_alias', $aliasReturned);
 						#DBAddItemAttribute($fileHash, 'title', "$aliasReturned has registered (public key)"); #todo templatize
@@ -185,7 +185,7 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache
 						# this is changed because anyone can publish a public key, and this does not necessarily map to "has registered"
 
 						if (GetConfig('admin/index/create_system_tags')) {
-							DBAddVoteRecord($fileHash, 0, 'pubkey');
+							DBAddLabel($fileHash, 0, 'pubkey');
 						}
 
 						#todo add message to index_log
@@ -198,7 +198,7 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache
 							}
 							else {
 								#todo should apply to fingerprint?
-								DBAddVoteRecord($fileHash, GetTime(), 'approve', $gpgKeyPub, $fileHash);
+								DBAddLabel($fileHash, GetTime(), 'approve', $gpgKeyPub, $fileHash);
 							}
 						}
 
@@ -256,7 +256,7 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache
 					## GOOD SIGNATURE
 					DBAddItemAttribute($fileHash, 'gpg_timestamp', $signTimestampEpoch);
 					if (GetConfig('admin/index/create_system_tags')) {
-						DBAddVoteRecord($fileHash, 0, 'signed');
+						DBAddLabel($fileHash, 0, 'signed');
 					}
 				}
 			}

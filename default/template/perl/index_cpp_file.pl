@@ -24,7 +24,7 @@ sub IndexCppFile { # $file | 'flush' ; indexes one text file into database
 	if ($file eq 'flush') {
 		DBAddItem('flush');
 		DBGetAddedTime('flush');
-		DBAddVoteRecord('flush');
+		DBAddLabel('flush');
 		DBAddItemAttribute('flush');
 		WriteLog('IndexCppFile: flush');
 		return 1;
@@ -49,7 +49,7 @@ sub IndexCppFile { # $file | 'flush' ; indexes one text file into database
 	}
 
 	DBAddItem($file, $itemName, '', $fileHash, 'cpp', 0);
-	DBAddVoteRecord($fileHash, 0, 'cpp');
+	DBAddLabel($fileHash, 0, 'cpp');
 
 	# my $compileLog = `gcc -v $file -o $file.out 2>&1`;
 	my $compileCommand = "g++ -v $file -o $file.out 2>&1";
