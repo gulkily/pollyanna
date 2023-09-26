@@ -1743,18 +1743,19 @@ sub DBAddLocationRecord { # $itemHash, $latitude, $longitude, $signedBy ; Adds n
 	push @queryParams, $fileHash, $latitude, $longitude, $signedBy;
 } # DBAddLocationRecord()
 
-sub DBAddVoteRecord { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; Adds a new vote (tag) record to an item based on vote/ token
+sub DBAddLabel { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; Adds a new vote (tag) record to an item based on vote/ token
 # sub DBAddVote {
 # sub DBAddItemVote {
+# sub DBAddVoteRecord {
 	state $query;
 	state @queryParams;
 
-	WriteLog("DBAddVoteRecord()");
+	WriteLog("DBAddLabel()");
 
 	my $fileHash = shift;
 
 	if ($fileHash eq 'flush') {
-		WriteLog("DBAddVoteRecord(flush)");
+		WriteLog("DBAddLabel(flush)");
 
 		if ($query) {
 			$query .= ';';
@@ -1769,12 +1770,12 @@ sub DBAddVoteRecord { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHa
 	}
 
 	if (!$fileHash) {
-		WriteLog('DBAddVoteRecord: warning: called without $fileHash');
+		WriteLog('DBAddLabel: warning: called without $fileHash');
 		return '';
 	}
 
 	if ($query && (length($query) > DBMaxQueryLength() || scalar(@queryParams) > DBMaxQueryParams())) {
-		DBAddVoteRecord('flush');
+		DBAddLabel('flush');
 		DBAddPageTouch('flush');
 		$query = '';
 	}
@@ -1785,14 +1786,14 @@ sub DBAddVoteRecord { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHa
 	my $ballotHash = shift;
 
 	if (!$ballotTime) {
-		WriteLog('DBAddVoteRecord: warning: missing $ballotTime; caller: ' . join(',', caller));
+		WriteLog('DBAddLabel: warning: missing $ballotTime; caller: ' . join(',', caller));
 		$ballotTime = 0;
 		#$ballotTime = time();
 		#return '';
 	}
 
 	#if (!$signedBy) {
-	#	WriteLog("DBAddVoteRecord() called without \$signedBy! Returning.");
+	#	WriteLog("DBAddLabel() called without \$signedBy! Returning.");
 	#}
 
 	chomp $fileHash;
@@ -1811,7 +1812,7 @@ sub DBAddVoteRecord { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHa
 		$ballotHash = '';
 	}
 
-	WriteLog('DBAddVoteRecord: ' . $fileHash . ', $ballotTime=' . $ballotTime . ', $voteValue=' . $voteValue . ', $signedBy = ' . $signedBy . ', $ballotHash = ' . $ballotHash . '; caller = ' . join(',', caller));
+	WriteLog('DBAddLabel: ' . $fileHash . ', $ballotTime=' . $ballotTime . ', $voteValue=' . $voteValue . ', $signedBy = ' . $signedBy . ', $ballotHash = ' . $ballotHash . '; caller = ' . join(',', caller));
 
 	if (!$query) {
 		$query = "INSERT OR REPLACE INTO vote(file_hash, ballot_time, vote_value, author_key, ballot_hash) VALUES ";
@@ -1824,7 +1825,7 @@ sub DBAddVoteRecord { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHa
 
 	DBAddPageTouch('tag', $voteValue);
 	DBAddPageTouch('item', $fileHash);
-} # DBAddVoteRecord()
+} # DBAddLabel()
 
 sub DBGetItemAttributes { # $fileHash ; returns reference to hash of attributes
 	my $fileHash = shift;

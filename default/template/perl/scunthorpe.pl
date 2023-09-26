@@ -59,7 +59,7 @@ sub IndexScunthorpe { # $textRef ; adds to vote table, returns same hash plus in
 				WriteLog('IndexScunthorpe: $cussWordCount = ' . $cussWordCount);
 
 				push @indexMessageLog, '#scunthorpe matches found: ' . $cussWordCount;
-				DBAddVoteRecord($fileHash, 0, 'scunthorpe');
+				DBAddLabel($fileHash, 0, 'scunthorpe');
 			}
 		} # @cussWord
 	} # if ($cussWords)

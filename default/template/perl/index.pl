@@ -135,7 +135,7 @@ sub IndexImageFile { # $file ; indexes one image file into database
 		WriteLog("IndexImageFile(flush)");
 		DBAddItemAttribute('flush');
 		DBAddItem('flush');
-		DBAddVoteRecord('flush');
+		DBAddLabel('flush');
 		DBAddPageTouch('flush');
 
 		return 1;
@@ -202,11 +202,11 @@ sub IndexImageFile { # $file ; indexes one image file into database
 		}
 		DBAddItemAttribute($fileHash, 'title', $imageTitle, time()); #todo time should come from actual file time #todo re-add this
 
-		DBAddVoteRecord($fileHash, $addedTime, 'image'); # add image tag
+		DBAddLabel($fileHash, $addedTime, 'image'); # add image tag
 
 		if (@tagFromPath) {
 			foreach my $tag (@tagFromPath) {
-				DBAddVoteRecord($fileHash, $addedTime, $tag);
+				DBAddLabel($fileHash, $addedTime, $tag);
 			}
 		}
 

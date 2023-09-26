@@ -62,7 +62,7 @@ sub IndexPerlFile { # $file | 'flush' ; indexes one text file into database
 	if ($file eq 'flush') {
 		DBAddItem('flush');
 		DBGetAddedTime('flush');
-		DBAddVoteRecord('flush');
+		DBAddLabel('flush');
 		DBAddItemAttribute('flush');
 		WriteLog('IndexPerlFile: flush');
 		return 1;
@@ -81,7 +81,7 @@ sub IndexPerlFile { # $file | 'flush' ; indexes one text file into database
 	my $fileHash = GetFileHash($file);
 
 	DBAddItem($file, $itemName, '', $fileHash, 'perl', 0);
-	DBAddVoteRecord($fileHash, 0, 'perl');
+	DBAddLabel($fileHash, 0, 'perl');
 
 	if (0) {
 		my $compileCommand = "perl -c $file";

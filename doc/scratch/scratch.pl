@@ -6097,16 +6097,16 @@ sub DBAddLocationRecord { # $itemHash, $latitude, $longitude, $signedBy ; Adds n
 
 ###
 
-sub DBAddVoteRecord { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; Adds a new vote (tag) record to an item based on vote/ token
+sub DBAddLabel { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; Adds a new vote (tag) record to an item based on vote/ token
 	state $query;
 	state @queryParams;
 
-	WriteLog("DBAddVoteRecord()");
+	WriteLog("DBAddLabel()");
 
 	my $fileHash = shift;
 
 	if ($fileHash eq 'flush') {
-		WriteLog("DBAddVoteRecord(flush)");
+		WriteLog("DBAddLabel(flush)");
 
 		if ($query) {
 			$query .= ';';
@@ -6121,12 +6121,12 @@ sub DBAddVoteRecord { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHa
 	}
 
 	if (!$fileHash) {
-		WriteLog('DBAddVoteRecord: warning: called without $fileHash');
+		WriteLog('DBAddLabel: warning: called without $fileHash');
 		return '';
 	}
 
 	if ($query && (length($query) > DBMaxQueryLength() || scalar(@queryParams) > DBMaxQueryParams())) {
-		DBAddVoteRecord('flush');
+		DBAddLabel('flush');
 		DBAddPageTouch('flush');
 		$query = '';
 	}
@@ -6137,12 +6137,12 @@ sub DBAddVoteRecord { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHa
 	my $ballotHash = shift;
 
 	if (!$ballotTime) {
-		WriteLog('DBAddVoteRecord: warning: missing $ballotTime');
+		WriteLog('DBAddLabel: warning: missing $ballotTime');
 		return '';
 	}
 
 #	if (!$signedBy) {
-#		WriteLog("DBAddVoteRecord() called without \$signedBy! Returning.");
+#		WriteLog("DBAddLabel() called without \$signedBy! Returning.");
 #	}
 
 	chomp $fileHash;
@@ -6846,7 +6846,7 @@ sub DBGetItemVoteTotals { # get tag counts for specified item, returned as hash 
 		DBAddPageTouch('item', $fileHash);
 		if ($isSigned && $gpgKey && IsAdmin($gpgKey)) {
 			$isAdmin = 1;
-			DBAddVoteRecord($fileHash, 0, 'admin');
+			DBAddLabel($fileHash, 0, 'admin');
 			DBAddPageTouch('tag', 'admin');
 		}
 		if ($isSigned) {
@@ -6914,13 +6914,13 @@ sub DBGetItemVoteTotals { # get tag counts for specified item, returned as hash 
 
 				if ($isSigned) {
 					# include author's key if message is signed
-					DBAddVoteRecord($fileHash, $addedTime, $hashTag, $gpgKey, $fileHash);
+					DBAddLabel($fileHash, $addedTime, $hashTag, $gpgKey, $fileHash);
 				}
 				else {
 					if ($hasCookie) {
-						DBAddVoteRecord($fileHash, $addedTime, $hashTag, $hasCookie, $fileHash);
+						DBAddLabel($fileHash, $addedTime, $hashTag, $hasCookie, $fileHash);
 					} else {
-						DBAddVoteRecord($fileHash, $addedTime, $hashTag, '', $fileHash);
+						DBAddLabel($fileHash, $addedTime, $hashTag, '', $fileHash);
 					}
 				}
 			}
@@ -7033,7 +7033,7 @@ sub DBGetItemVoteTotals { # get tag counts for specified item, returned as hash 
 					# no parents, ignore
 					WriteLog('IndexTextFile: AccessLogHash: Item has no parent, ignoring');
 
-					# DBAddVoteRecord($fileHash, $addedTime, 'hasAccessLogHash');
+					# DBAddLabel($fileHash, $addedTime, 'hasAccessLogHash');
 					# DBAddItemAttribute($fileHash, 'AccessLogHash', $titleGiven, $addedTime);
 				}
 			} #reddit
@@ -7077,7 +7077,7 @@ sub DBGetItemVoteTotals { # get tag counts for specified item, returned as hash 
 					# no parents, ignore
 					WriteLog('IndexTextFile: AccessLogHash: Item has no parent, ignoring');
 
-					# DBAddVoteRecord($fileHash, $addedTime, 'hasAccessLogHash');
+					# DBAddLabel($fileHash, $addedTime, 'hasAccessLogHash');
 					# DBAddItemAttribute($fileHash, 'AccessLogHash', $titleGiven, $addedTime);
 				}
 			} # twitter
@@ -7120,7 +7120,7 @@ sub DBGetItemVoteTotals { # get tag counts for specified item, returned as hash 
 					# no parents, ignore
 					WriteLog('IndexTextFile: AccessLogHash: Item has no parent, ignoring');
 
-					# DBAddVoteRecord($fileHash, $addedTime, 'hasAccessLogHash');
+					# DBAddLabel($fileHash, $addedTime, 'hasAccessLogHash');
 					# DBAddItemAttribute($fileHash, 'AccessLogHash', $titleGiven, $addedTime);
 				}
 			} #instagram
@@ -7217,7 +7217,7 @@ sub DBGetItemVoteTotals { # get tag counts for specified item, returned as hash 
 
 								if ($canConfig)	{
 									# checks passed, we're going to update/reset a config entry
-									DBAddVoteRecord($fileHash, $addedTime, 'config');
+									DBAddLabel($fileHash, $addedTime, 'config');
 
 									$reconLine = quotemeta($reconLine);
 

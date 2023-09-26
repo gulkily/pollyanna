@@ -36,7 +36,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 		WriteLog("IndexTextFile(flush)");
 		DBAddKeyAlias('flush');
 		DBAddItem('flush');
-		DBAddVoteRecord('flush');
+		DBAddLabel('flush');
 		DBAddItemParent('flush');
 		DBAddPageTouch('flush');
 		DBAddTask('flush');
@@ -477,7 +477,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 		if ($hasToken{'example'}) {
 			push @tokenMessages, 'Token #example was found, other tokens will be ignored.';
-			DBAddVoteRecord($fileHash, 0, 'example');
+			DBAddLabel($fileHash, 0, 'example');
 			
 			push @indexMessageLog, 'found token: #example; other tokens will be ignored.';
 		} # #example
@@ -689,9 +689,9 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						WriteLog('IndexTextFile: $voteTime = ' . $voteTime);
 
 						if ($tokenFound{'hashtag'}) {
-							DBAddVoteRecord($fileHash, $voteTime, $tokenFound{'hashtag'}); # 'hashtag'
+							DBAddLabel($fileHash, $voteTime, $tokenFound{'hashtag'}); # 'hashtag'
 						} else {
-							DBAddVoteRecord($fileHash, $voteTime, $tokenFound{'token'}); # not 'hashtag'
+							DBAddLabel($fileHash, $voteTime, $tokenFound{'token'}); # not 'hashtag'
 						}
 					} # title, access_log_hash, http, https, alt, name, self_timestamp, operator_please
 					else {
@@ -718,7 +718,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									}
 									else {
 										#todo approve should generally apply to fingerprint instead of item
-										DBAddVoteRecord($fileHash, GetTime(), 'approve', $authorKey, $fileHash);
+										DBAddLabel($fileHash, GetTime(), 'approve', $authorKey, $fileHash);
 									}
 								}
 
@@ -883,7 +883,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 									if ($approveStatus) {
 										WriteLog('IndexTextFile: permissioned: Found seemingly valid request');
-										DBAddVoteRecord($itemParent, 0, $hashTag, $authorKey, $fileHash);
+										DBAddLabel($itemParent, 0, $hashTag, $authorKey, $fileHash);
 
 										my $authorGpgFingerprint = DBGetItemAttribute($itemParent, 'gpg_fingerprint');
 
@@ -905,7 +905,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 											WriteLog('IndexTextFile: permissioned: did NOT find $authorGpgFingerprint');
 										}
 
-										DBAddVoteRecord('flush');
+										DBAddLabel('flush');
 
 										DBAddPageTouch('stats', 0);
 
@@ -918,8 +918,8 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										push @indexMessageLog, 'allowed: #' . $tokenFound{'param'} . '; reason: ' . $approveReason;
 
 										if (GetConfig('admin/index/create_system_tags')) {
-											DBAddVoteRecord($fileHash, 0, 'hastag');
-											DBAddVoteRecord('flush');
+											DBAddLabel($fileHash, 0, 'hastag');
+											DBAddLabel('flush');
 										}
 
 										if ($hashTag eq 'run') {
@@ -935,8 +935,8 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 											$titleCandidate = '[declined: #' . $tokenFound{'param'} . ']';
 										}
 										if (GetConfig('admin/index/create_system_tags')) {
-											DBAddVoteRecord($fileHash, 0, 'declined');
-											DBAddVoteRecord('flush');
+											DBAddLabel($fileHash, 0, 'declined');
+											DBAddLabel('flush');
 										}
 									}
 								} # foreach my $itemParent (@itemParents)
@@ -955,11 +955,11 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										if ($authorKey) {
 											WriteLog('IndexTextFile: $authorKey = ' . $authorKey);
 											# include author's key if message is signed
-											DBAddVoteRecord($itemParentHash, 0, $hashTag, $authorKey, $fileHash);
+											DBAddLabel($itemParentHash, 0, $hashTag, $authorKey, $fileHash);
 										}
 										else {
 											WriteLog('IndexTextFile: $authorKey was FALSE');
-											DBAddVoteRecord($itemParentHash, 0, $hashTag, '', $fileHash);
+											DBAddLabel($itemParentHash, 0, $hashTag, '', $fileHash);
 										}
 										DBAddPageTouch('item', $itemParentHash);
 										push @hashTagsAppliedToParent, $hashTag;
@@ -970,17 +970,17 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									if ($authorKey) {
 										WriteLog('IndexTextFile: $authorKey = ' . $authorKey);
 										# include author's key if message is signed
-										DBAddVoteRecord($fileHash, 0, $hashTag, $authorKey, $fileHash);
+										DBAddLabel($fileHash, 0, $hashTag, $authorKey, $fileHash);
 									}
 									else {
 										WriteLog('IndexTextFile: $authorKey was FALSE');
-										DBAddVoteRecord($fileHash, 0, $hashTag, '', $fileHash);
+										DBAddLabel($fileHash, 0, $hashTag, '', $fileHash);
 									}
 								}
 							} # valid hashtag
 
 							if (GetConfig('admin/index/create_system_tags')) {
-								DBAddVoteRecord($fileHash, 0, 'hasvote');
+								DBAddLabel($fileHash, 0, 'hasvote');
 							}
 						} # non-permissioned hashtags
 
@@ -1044,7 +1044,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 			# add #notext label/tag
 			WriteLog('IndexTextFile: no $detokenedMessage, setting #notext; $fileHash = ' . $fileHash);
 			if (GetConfig('admin/index/create_system_tags')) {
-				DBAddVoteRecord($fileHash, 0, 'notext');
+				DBAddLabel($fileHash, 0, 'notext');
 			}
 			#DBAddItemAttribute($fileHash, 'all_tokens_no_text', 1);
 
@@ -1082,15 +1082,15 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 					DBAddItemAttribute($fileHash, 'title', $title, 0);
 
 					if (GetConfig('admin/index/create_system_tags')) {
-						#DBAddVoteRecord($fileHash, 0, GetString('hastitle'));
-						#DBAddVoteRecord($fileHash, 0, GetString('hastitle'));
-						DBAddVoteRecord($fileHash, 0, 'hastitle');
+						#DBAddLabel($fileHash, 0, GetString('hastitle'));
+						#DBAddLabel($fileHash, 0, GetString('hastitle'));
+						DBAddLabel($fileHash, 0, 'hastitle');
 					}
 				}
 			}
 
 			if (GetConfig('admin/index/create_system_tags')) {
-				DBAddVoteRecord($fileHash, 0, 'hastext');
+				DBAddLabel($fileHash, 0, 'hastext');
 			}
 			#DBAddPageTouch('tag', 'hastext');
 

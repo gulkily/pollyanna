@@ -13,7 +13,7 @@ from utils import GetFile
 from utils import GetFileMessageCachePath
 from utils import GetCache
 from utils import DBAddItemAttribute
-from utils import DBAddVoteRecord
+from utils import DBAddLabel
 from utils import DBAddItemAttribute
 from utils import ExpireAvatarCache
 from utils import DBAddKeyAlias
@@ -170,9 +170,9 @@ def GpgParse(filePath): # { # $filePath ; parses file and stores gpg response in
 						message = re.sub('\$name', aliasReturned, message)
 						message = re.sub('\'$fingerprint', gpgKeyPub, message)
 
-						DBAddVoteRecord(fileHash, GetTime(), 'pubkey', gpgKeyPub, fileHash)
+						DBAddLabel(fileHash, GetTime(), 'pubkey', gpgKeyPub, fileHash)
 
-						# sub DBAddVoteRecord { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; Adds a new vote (tag) record to an item based on vote/ token
+						# sub DBAddLabel { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; Adds a new vote (tag) record to an item based on vote/ token
 
 						DBAddItemAttribute(fileHash, 'gpg_alias', aliasReturned)
 						#

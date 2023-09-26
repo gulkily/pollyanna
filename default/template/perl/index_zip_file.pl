@@ -24,7 +24,7 @@ sub IndexZipFile { # $file | 'flush' ; indexes one text file into database
 	if ($file eq 'flush') {
 		DBAddItem('flush');
 		DBGetAddedTime('flush');
-		DBAddVoteRecord('flush');
+		DBAddLabel('flush');
 		DBAddItemAttribute('flush');
 		WriteLog('IndexZipFile: flush');
 		return 1;
@@ -49,7 +49,7 @@ sub IndexZipFile { # $file | 'flush' ; indexes one text file into database
 	}
 
 	DBAddItem($file, $itemName, '', $fileHash, 'zip', 0);
-	DBAddVoteRecord($fileHash, 0, 'zip');
+	DBAddLabel($fileHash, 0, 'zip');
 
 	my $unzipCommand = "unzip -o $file '*.txt' -d $TXTDIR 2>&1";
 	WriteLog('IndexZipFile: $unzipCommand = ' . $unzipCommand);
