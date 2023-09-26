@@ -1550,6 +1550,36 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			}
 		}
 
+
+		if (1) { # multiple dialogs requested allowed
+			if (substr($path, 0, 8) == '/dialog/') {
+				/* my */ $dialogList = substr($path, 8);
+				if (index($dialogList, ',') != -1) {
+					/* my */ $dialogsTogether = '';
+					if (substr($dialogList, -5) == '.html') {
+						$dialogList = substr($dialogList, 0, strlen($dialogList) - 5);
+						#print($dialogList);
+						$dialogListArray = explode(',', $dialogList);
+						for (/* my */ $i = 0; $i < count($dialogListArray); $i++) {
+							/* my */ $htmlDir = GetDir('html');
+							/* my */ $dialogName = $dialogListArray[$i];
+							if ($dialogName == 'undefined') {
+								continue;
+							}
+							if (file_exists("$htmlDir/dialog/" . $dialogName . '.html')) {
+								# cool
+							} else {
+								HandleNotFound("/dialog/" . $dialogName . ".html", '');
+							}
+							$dialogsTogether .= GetFile("$htmlDir/dialog/" . $dialogName . '.html');
+						}
+					}
+					$html = $dialogsTogether;
+				}
+			}
+		}
+
+
 		////////////////////////////
 		if (!$html) {
 			// MISSING HTML ERROR PAGE

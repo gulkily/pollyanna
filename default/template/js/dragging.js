@@ -678,6 +678,45 @@ function DraggingInit (doPosition) { // initialize all class=dialog elements on 
 
 	// ReopenDialogs();
 
+	if (GetPrefs('draggable_reopen')) {
+		//alert(1);
+		var openDialogs = GetPrefs('opened_dialogs'); // DraggingInit()
+		if (openDialogs) {
+			var dialogsToOpen = openDialogs.split(',');
+			openDialogs = '';
+			if (dialogsToOpen.length) {
+				for (var i = 0; i < dialogsToOpen.length; i++) {
+					var dialogName = dialogsToOpen[i];
+					if (dialogName) {
+						if (dialogName == 0) {
+							// skip
+						}
+						else if (document.getElementById(dialogName)) {
+							// skip
+						}
+						else {
+							if (openDialogs) {
+								openDialogs = openDialogs + ',' + dialogName;
+							} else {
+								openDialogs = dialogName;
+							}
+						}
+					}
+				}
+			}
+			if (openDialogs) {
+				// still something left to do after filtering
+				var dialogUrl = '/dialog/' + openDialogs + '.html';
+				FetchDialogFromUrl(dialogUrl);
+			}
+
+			// #todo 1: InsertFetchedDialog() should skip activating these dialogs
+			// #todo 2: InsertFetchedDialog() should initialize all new dialogs, not just the first one
+			// #todo 3: should skip all existing dialogs on page x
+			// #todo 4: php should also be able to inject new dialogs
+		}
+	}
+
 	// find all class=dialog elements and walk through them
 	var elements = document.getElementsByClassName('dialog');
 	for (var i = elements.length - 1; 0 <= i; i--) { // walk backwards for positioning reasons
@@ -1102,12 +1141,16 @@ function InsertFetchedDialog () {
 		}
 		if ((window.DraggingInit) && (window.GetPrefs) && GetPrefs('draggable')) {
 			//DraggingInit(0);
-			DraggingInitDialog(newDialog[0], 1); // InsertFetchedDialog()
+			if (newDialog.length) {
+				for (var iDialog = 0; iDialog < newDialog.length; iDialog++) {
+					DraggingInitDialog(newDialog[iDialog], 1); // InsertFetchedDialog()
+				}
+			}
 			//document.title = 'asdf';
 		} else {
 			//document.title = 'qwer';
 		}
-		if (newDialog.length) {
+		if (newDialog.length == 1) {
 			// new dialog was found in page, and is referenced by newDialog
 
 			if (GetPrefs('draggable_spawn_focus')) {
