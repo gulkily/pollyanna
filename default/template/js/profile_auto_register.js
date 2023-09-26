@@ -3,7 +3,12 @@
 // quick and dirty auto-register
 // should check for if user previously signed out
 
-function ForceLogin () {
+function ForceLogin () { // attempts to create a registration
+	if (window.ForceLoginTried) {
+		return '';
+		// already tried it once
+	}
+	window.ForceLoginTried = 1;
 	if (window.MakeKey && window.getPublicKey) {
 		if (!getPublicKey()) {
 			MakeKey(); // #todo this should not prompt for a username
@@ -15,6 +20,6 @@ function ForceLogin () {
 	}
 } // ForceLogin()
 
-setTimeout('ForceLogin()', 5000);
+setTimeout('ForceLogin()', 1000);
 
 // / profile_auto_register.js
