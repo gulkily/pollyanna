@@ -15,6 +15,7 @@ sub IndexZipFile { # $file | 'flush' ; indexes one text file into database
 	state $SCRIPTDIR = GetDir('script');
 	state $HTMLDIR = GetDir('html');
 	state $TXTDIR = GetDir('txt');
+	state $IMAGEDIR = GetDir('image');
 
 	my $file = shift;
 	chomp($file);
@@ -51,17 +52,30 @@ sub IndexZipFile { # $file | 'flush' ; indexes one text file into database
 	DBAddItem($file, $itemName, '', $fileHash, 'zip', 0);
 	DBAddVoteRecord($fileHash, 0, 'zip');
 
-	my $unzipCommand = "unzip -o $file '*.txt' -d $TXTDIR 2>&1";
-	WriteLog('IndexZipFile: $unzipCommand = ' . $unzipCommand);
-	#
 	my $unzipStart = time();
-	my $unzipLog = `$unzipCommand`;
+	my $unzipLog = '';
+
+	if (GetConfig('setting/admin/image/enable')) {
+		#image files
+		my $unzipCommand = "unzip -o $file '*.jpg' '*.jpeg' '*.gif' '*.bmp' '*.jfif' '*.webp' '*.svg' -d $IMAGEDIR 2>&1";
+		WriteLog('IndexZipFile: $unzipCommand = ' . $unzipCommand);
+		$unzipLog .= `$unzipCommand` . "\n";
+		#imagetypes
+	}
+
+	if (1) {
+		#text files only
+		my $unzipCommand = "unzip -o $file '*.txt' -d $TXTDIR 2>&1";
+		WriteLog('IndexZipFile: $unzipCommand = ' . $unzipCommand);
+		$unzipLog .= `$unzipCommand` . "\n";
+	}
+
 	my $unzipFinish = time();
-	#
+
 	DBAddItemAttribute($fileHash, 'unzip_start', $unzipStart);
 	DBAddItemAttribute($fileHash, 'unzip_finish', $unzipFinish);
 
-	if ($unzipCommand) {
+	if ($unzipLog) {
 		PutCache('compile_log/' . $fileHash, $unzipLog); # parse_log parse.log ParseLog
 	}
 
