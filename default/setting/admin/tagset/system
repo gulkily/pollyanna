@@ -1,7 +1,10 @@
 admin
+hastext
 notext
 hasvote
+hasnotext
+haslabel
 hastext
-device
+isdevice
 timestamp
 changelog
