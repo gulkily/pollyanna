@@ -106,11 +106,11 @@
     <a href="/post.html" onclick="return hi('0');" ondblclick="return hi('0');" style="color:purple">0</a>
     <a href="/post.html" onclick="return hi('-');" ondblclick="return hi('-');" style="color:purple">-</a>
     <a href="/post.html" onclick="return hi('=');" ondblclick="return hi('=');" style="color:purple">=</a>
-    <a href="/post.html" onclick="return hi('Back');" ondblclick="return hi('Back');" style="color:purple">Back</a>
+    <a href="/write.html" target="_top" onclick="if (parent && parent.frames[0] && parent.frames[0].location && parent.frames[0].location.href ) { parent.location = parent.frames[0].location.href; return false; } else { return true }" ondblclick="return false;" style="color:purple"><small>CLOSE</small></a>
     <br>
 </td></tr>
 <tr><td>
-    <a href="/post.html" onclick="return hi('Tag');" ondblclick="return hi('Tag');" style="color:red">Tag</a>
+    <a href="/post.html" onclick="return hi('Tag');" ondblclick="return hi('Tag');" style="color:red"><small>TAG</small></a>
     <a href="/post.html" onclick="return hi('Q');" ondblclick="return hi('Q');" style="color:red">Q</a>
     <a href="/post.html" onclick="return hi('W');" ondblclick="return hi('W');" style="color:green">W</a>
     <a href="/post.html" onclick="return hi('E');" ondblclick="return hi('E');" style="color:blue">E</a>
@@ -127,7 +127,7 @@
     <br>
 </td></tr>
 <tr><td>
-    <a href="/post.html" onclick="return hi('Copy');" ondblclick="return hi('Copy');" style="color:red">Copy</a>
+    <a href="/post.html" onclick="return hi('Copy');" ondblclick="return hi('Copy');" style="color:red"><small>COPY</small></a>
     <a href="/post.html" onclick="return hi('A');" ondblclick="return hi('A');" style="color:red">A</a>
     <a href="/post.html" onclick="return hi('S');" ondblclick="return hi('S');" style="color:green">S</a>
     <a href="/post.html" onclick="return hi('D');" ondblclick="return hi('D');" style="color:blue">D</a>
@@ -139,11 +139,11 @@
     <a href="/post.html" onclick="return hi('L');" ondblclick="return hi('L');" style="color:blue">L</a>
     <a href="/post.html" onclick="return hi(';');" ondblclick="return hi(';');" style="color:purple">;</a>
     <a href="/post.html" onclick="return hi('\'');" ondblclick="return hi('\'');" style="color:purple">'</a>
-    <a href="/post.html" onclick="return hi('Enter');" ondblclick="return hi('Enter');" style="color:purple">Enter</a>
+    <a href="/post.html" onclick="return hi('Enter');" ondblclick="return hi('Enter');" style="color:purple"><small>ENTER</small></a>
     <br>
 </td></tr>
 <tr><td>
-    <a href="/post.html" onclick="return hi('Space');" ondblclick="return hi('Space');">Space</a>
+    <a href="/post.html" onclick="return hi('Space');" ondblclick="return hi('Space');"><small>SPACE</small></a>
     <a href="/post.html" onclick="return hi('Z');" ondblclick="return hi('Z');" style="color:red">Z</a>
     <a href="/post.html" onclick="return hi('X');" ondblclick="return hi('X');" style="color:green">X</a>
     <a href="/post.html" onclick="return hi('C');" ondblclick="return hi('C');" style="color:blue">C</a>
@@ -154,7 +154,7 @@
     <a href="/post.html" onclick="return hi(',');" ondblclick="return hi(',');" style="color:green">,</a>
     <a href="/post.html" onclick="return hi('.');" ondblclick="return hi('.');" style="color:blue">.</a>
     <a href="/post.html" onclick="return hi('/');" ondblclick="return hi('/');" style="color:purple">/</a>
-    <a href="/post.html" onclick="return hi('Space');" ondblclick="return hi('Space');">Space</a>
+    <a href="/post.html" onclick="return hi('Space');" ondblclick="return hi('Space');"><small>SPACE</small></a>
     <br>
 </td></tr>
 </table>
