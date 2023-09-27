@@ -3876,3 +3876,8 @@ need to restart server if php flag changes
 Archive dialog should be moved to a separate module out of default/template/perl/get_read_page.pl
 	This is complicated by needing to check the file count,
 		which I guess can be passed in, as it's only true/false
+
+===
+
+when running as user, `hike stop` should not try to kill other users' processes (like port 80)
+
