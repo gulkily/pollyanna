@@ -1,3 +1,178 @@
+<html xmlns="http://www.w3.org/1999/html">
+<!-- keyboard_a.template -->
+<!-- keyboard implemented with a elements -->
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>keyboard</title>
+</head>
+
+<body>
+<style type="text/css">
+    <!--
+        a {
+            font-family: monospace;
+            font-size: larger;
+        }
+        button {
+        	color: inherit;
+        	background-color: inherit;
+        	border-color: #808080;
+        }
+    -->
+</style>
+<script>
+<!--
+	function hi (letter) {
+		var text = letter;
+		//alert('DEBUG: "' + text + '"');
+
+		for (var i = 0; i < text.length; i++) {
+			//alert('DEBUG: i = ' + i);
+			if (text.substr(i, 1) != ' ') {
+				// ok
+			} else {
+				if (i == 0) {
+					text = text.substr(i + 1);
+				} else {
+					text = text.substr(0, i) + '' + text.substr(i + 1);
+				}
+				i = i - 1;
+			}
+		}
+
+		if (text == 'Enter') {
+			text = "\n";
+		}
+
+		if (text == 'Space') {
+			text = " ";
+		}
+		if (text == 'Tag') {
+			text = "#";
+		}
+
+		var parentFrames = parent.frames;
+		if (parentFrames) {
+			var parentFramesMain = parent.frames['main'];
+			if (parentFramesMain) {
+				var documentCompose = parentFramesMain.document.compose;
+				if (documentCompose) {
+					var txtComment = documentCompose.comment;
+					if (txtComment) {
+						if (text == 'Back') {
+							// backspace
+							if (txtComment.value.length) {
+								txtComment.value = txtComment.value.substr(0, txtComment.value.length - 1);
+							}
+						} else {
+							txtComment.value += '' + text;
+						}
+					}
+				}
+			}
+		}
+
+		var frmKbd = document.compose;
+		if (frmKbd) {
+			var kbdText = frmKbd.kbdText;
+			if (kbdText) {
+				if (text == 'Back') {
+					// backspace
+					if (kbdText.value.length) {
+						kbdText.value = kbdText.value.substr(0, kbdText.value.length - 1);
+					}
+				} else {
+					kbdText.value += '' + text;
+				}
+			}
+		}
+
+		//alert('DEBUG: "' + text + '"');
+
+		return false;
+	}
+// -->
+</script>
+
+<table bgcolor="$colorWindow" cellpadding=4 cellspacing=0 border=0>
+
+	<tr><td>
+		&nbsp;
+		<a href="/post.html" onclick="return hi('`');" ondblclick="return hi('`');" style="color:red"><button>`</button></a>
+		<a href="/post.html" onclick="return hi('1');" ondblclick="return hi('1');" style="color:red"><button>1</button></a>
+		<a href="/post.html" onclick="return hi('2');" ondblclick="return hi('2');" style="color:green"><button>2</button></a>
+		<a href="/post.html" onclick="return hi('3');" ondblclick="return hi('3');" style="color:blue"><button>3</button></a>
+		<a href="/post.html" onclick="return hi('4');" ondblclick="return hi('4');" style="color:purple"><button>4</button></a>
+		<a href="/post.html" onclick="return hi('5');" ondblclick="return hi('5');" style="color:purple"><button>5</button></a>
+		<a href="/post.html" onclick="return hi('6');" ondblclick="return hi('6');" style="color:red"><button>6</button></a>
+		<a href="/post.html" onclick="return hi('7');" ondblclick="return hi('7');" style="color:red"><button>7</button></a>
+		<a href="/post.html" onclick="return hi('8');" ondblclick="return hi('8');" style="color:green"><button>8</button></a>
+		<a href="/post.html" onclick="return hi('9');" ondblclick="return hi('9');" style="color:blue"><button>9</button></a>
+		<a href="/post.html" onclick="return hi('0');" ondblclick="return hi('0');" style="color:purple"><button>0</button></a>
+		<a href="/post.html" onclick="return hi('-');" ondblclick="return hi('-');" style="color:purple"><button>-</button></a>
+		<a href="/post.html" onclick="return hi('=');" ondblclick="return hi('=');" style="color:purple"><button>=</button></a>
+		<a href="/write.html" target="_top" onclick="if (parent && parent.frames[0] && parent.frames[0].location && parent.frames[0].location.href ) { parent.location = parent.frames[0].location.href; return false; } else { return true }" ondblclick="return false;" style="color:purple"><button><button>X</button></button></a>
+		<br>
+	</td></tr>
+	<tr><td>
+		<a href="/post.html" onclick="return hi('Tag');" ondblclick="return hi('Tag');" style="color:red"><button>Tag</button></a>
+		<a href="/post.html" onclick="return hi('Q');" ondblclick="return hi('Q');" style="color:red"><button>Q</button></a>
+		<a href="/post.html" onclick="return hi('W');" ondblclick="return hi('W');" style="color:green"><button>W</button></a>
+		<a href="/post.html" onclick="return hi('E');" ondblclick="return hi('E');" style="color:blue"><button>E</button></a>
+		<a href="/post.html" onclick="return hi('R');" ondblclick="return hi('R');" style="color:purple"><button>R</button></a>
+		<a href="/post.html" onclick="return hi('T');" ondblclick="return hi('T');" style="color:purple"><button>T</button></a>
+		<a href="/post.html" onclick="return hi('Y');" ondblclick="return hi('Y');" style="color:red"><button>Y</button></a>
+		<a href="/post.html" onclick="return hi('U');" ondblclick="return hi('U');" style="color:red"><button>U</button></a>
+		<a href="/post.html" onclick="return hi('I');" ondblclick="return hi('I');" style="color:green"><button>I</button></a>
+		<a href="/post.html" onclick="return hi('O');" ondblclick="return hi('O');" style="color:blue"><button>O</button></a>
+		<a href="/post.html" onclick="return hi('P');" ondblclick="return hi('P');" style="color:purple"><button>P</button></a>
+		<a href="/post.html" onclick="return hi('[');" ondblclick="return hi('[');" style="color:purple"><button>[</button></a>
+		<a href="/post.html" onclick="return hi(']');" ondblclick="return hi(']');" style="color:purple"><button>]</button></a>
+		<a href="/post.html" onclick="return hi('\ ');" ondblclick="return hi('\ ');" style="color:purple"><button>\ </button></a>
+		<br>
+	</td></tr>
+	<tr><td>
+		<a href="/post.html" onclick="return hi('Copy');" ondblclick="return hi('Copy');" style="color:red"><button>Copy</button></a>
+		<a href="/post.html" onclick="return hi('A');" ondblclick="return hi('A');" style="color:red"><button>A</button></a>
+		<a href="/post.html" onclick="return hi('S');" ondblclick="return hi('S');" style="color:green"><button>S</button></a>
+		<a href="/post.html" onclick="return hi('D');" ondblclick="return hi('D');" style="color:blue"><button>D</button></a>
+		<a href="/post.html" onclick="return hi('F');" ondblclick="return hi('F');" style="color:purple"><button>F</button></a>
+		<a href="/post.html" onclick="return hi('G');" ondblclick="return hi('G');" style="color:purple"><button>G</button></a>
+		<a href="/post.html" onclick="return hi('H');" ondblclick="return hi('H');" style="color:red"><button>H</button></a>
+		<a href="/post.html" onclick="return hi('J');" ondblclick="return hi('J');" style="color:red"><button>J</button></a>
+		<a href="/post.html" onclick="return hi('K');" ondblclick="return hi('K');" style="color:green"><button>K</button></a>
+		<a href="/post.html" onclick="return hi('L');" ondblclick="return hi('L');" style="color:blue"><button>L</button></a>
+		<a href="/post.html" onclick="return hi(';');" ondblclick="return hi(';');" style="color:purple"><button>;</button></a>
+		<a href="/post.html" onclick="return hi('\'');" ondblclick="return hi('\'');" style="color:purple"><button>'</button></a>
+		<a href="/post.html" onclick="return hi('Enter');" ondblclick="return hi('Enter');" style="color:purple"><button>Enter</button></a>
+		<br>
+	</td></tr>
+	<tr><td>
+		<a href="/post.html" onclick="return hi('Space');" ondblclick="return hi('Space');"><button>Space</button></a>
+		<a href="/post.html" onclick="return hi('Z');" ondblclick="return hi('Z');" style="color:red"><button>Z</button></a>
+		<a href="/post.html" onclick="return hi('X');" ondblclick="return hi('X');" style="color:green"><button>X</button></a>
+		<a href="/post.html" onclick="return hi('C');" ondblclick="return hi('C');" style="color:blue"><button>C</button></a>
+		<a href="/post.html" onclick="return hi('V');" ondblclick="return hi('V');" style="color:purple"><button>V</button></a>
+		<a href="/post.html" onclick="return hi('B');" ondblclick="return hi('B');" style="color:purple"><button>B</button></a>
+		<a href="/post.html" onclick="return hi('N');" ondblclick="return hi('N');" style="color:red"><button>N</button></a>
+		<a href="/post.html" onclick="return hi('M');" ondblclick="return hi('M');" style="color:red"><button>M</button></a>
+		<a href="/post.html" onclick="return hi(',');" ondblclick="return hi(',');" style="color:green"><button>,</button></a>
+		<a href="/post.html" onclick="return hi('.');" ondblclick="return hi('.');" style="color:blue"><button>.</button></a>
+		<a href="/post.html" onclick="return hi('/');" ondblclick="return hi('/');" style="color:purple"><button>/</button></a>
+		<a href="/post.html" onclick="return hi('Space');" ondblclick="return hi('Space');"><button>Space</button></a>
+		<br>
+	</td></tr>
+</table>
+
+<!-- / keyboard_a.template -->
+</body></html>
+
+
+
+
+
+
+
 <html>
 <body onunload="document.a.b.value=document.a.b.value+'onunload'" onbeforeunload="document.a.b.value=document.a.b.value+'onbeforeunload'">
 <a href="/">go home</a>

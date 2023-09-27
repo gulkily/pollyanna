@@ -1,3 +1,20 @@
+$pid = pcntl_fork();
+if ($pid == -1) {
+	// something went wrong
+} elseif ($pid == 0) {
+	// continue
+} else {
+	// print placeholder page and also return it
+	/* my */ $htmlPlaceholder = '<html><head><meta http-equiv="refresh" content="1"></head><body>Meditate...</body></html>';
+	PutFile($path, $htmlPlaceholder);
+	header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+	header("Cache-Control: post-check=0, pre-check=0", false);
+	header("Pragma: no-cache");
+	print($htmlPlaceholder);
+	exit;
+}
+
+
 
 // this was in route.php, but i am not sure why
 // it returns a 404 error for a.gif and p.gif with a 50% probability
