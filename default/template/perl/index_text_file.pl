@@ -858,7 +858,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 											int(DBGetAuthorScore($authorKey)) >= int(GetConfig('setting/admin/self_admin_minimum_score'))
 										) {
 											$approveStatus = 2;
-											$approveReason = 'self-admin when adminless is allowed';
+											$approveReason = 'self-admin when adminless is allowed. ONLY DO THIS ON LOCALHOST!';
 										}
 										elsif (
 											$hashTag eq 'admin' &&
@@ -866,7 +866,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 											int(DBGetAuthorScore($authorKey)) >= int(GetConfig('setting/admin/self_admin_minimum_score'))
 										) {
 											$approveStatus = 3;
-											$approveReason = 'self-admin whenever is allowed';
+											$approveReason = 'self-admin whenever is allowed. ONLY DO THIS ON LOCALHOST!';
 										}
 										else {
 											WriteLog('IndexTextFile: permissioned: $authorKey = ' . $authorKey);
