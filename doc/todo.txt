@@ -1,3 +1,36 @@
+web archive link to current page
+
+hypercode v1
+	solution page
+		problem
+		code
+		run log (if has been run)
+			otherwise "has not been run yet"
+		stats
+			run start
+			run finish
+			timestamp
+			(these are fur the run log item)
+
+	problem page
+		lists problem at the top (text)
+		if solutions exist
+			solutions listing
+				tag: solution + approved
+		if proposed solutions exist
+			proposed solutions listing
+				tag: solution - approved
+
+	problems listing
+		problem (label: problem)
+			links to problem page
+		best solution
+			links to solution page
+			solution by
+
+allow user to set one or more bitcoin address
+	this should require approval
+
 fix links so that wget -r gets a useful archive instead of a bunch of extra stuff
 
 this needs to be implemented better:
