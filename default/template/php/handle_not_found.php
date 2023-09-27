@@ -7,7 +7,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 // for searching:
 // thanks.html welcome.html help.html settings.html profile.html
 
-	if (GetConfig('setting/admin/php/handle_404_fork')) {
+	if (GetConfig('setting/admin/php/regrow_404_fork')) {
 		$pid = pcntl_fork();
 		if ($pid == -1) {
 			// something went wrong
