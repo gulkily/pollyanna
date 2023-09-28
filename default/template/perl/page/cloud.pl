@@ -8,20 +8,20 @@ sub GetCloudPage { # print list of tag pairs
 # rough draft
 	my $cloudPage;
 
-	my @tags = SqliteGetColumnArray('SELECT DISTINCT vote_value FROM vote');
+	my @tags = SqliteGetColumnArray('SELECT DISTINCT label FROM item_label');
 
 	my @tagPairs;
 
 	foreach my $tag (@tags) {
 		my $tagsPairedQuery = "
 			SELECT
-				DISTINCT vote_value AS vote_value
+				DISTINCT label AS label
 			FROM
-				vote
+				item_label
 			WHERE
-				vote_value != '$tag' AND
+				label != '$tag' AND
 				file_hash IN (
-					SELECT file_hash FROM vote WHERE vote_value = '$tag'
+					SELECT file_hash FROM item_label WHERE label = '$tag'
 				)
 		";
 
@@ -48,8 +48,8 @@ sub GetCloudPage { # print list of tag pairs
 				SELECT COUNT(file_hash) AS count
 				FROM item_flat
 				WHERE
-					tags_list LIKE '%,$tag1,%' AND
-					tags_list LIKE '%,$tag2,%'
+					labels_list LIKE '%,$tag1,%' AND
+					labels_list LIKE '%,$tag2,%'
 			");
 			$dialogContent .= "<tr><td>$tag1</td><td>$tag2</td><td>$count</td></tr>\n";
 		}

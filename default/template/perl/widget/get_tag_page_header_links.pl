@@ -4,85 +4,84 @@ use strict;
 use warnings;
 use 5.010;
 
-sub GetTagPageHeaderLinks { # $tagSelected ; returns html-formatted links to existing tags in system
+sub GetTagPageHeaderLinks { # $labelSelected ; returns html-formatted links to existing labels in system
 # used for the header at the top of tag listings pages
-# 'tag_wrapper.template', 'tag.template'
-# sub GetTagsDialog {
+# 'tag_wrapper.template', 'tag.template'# sub GetTagsDialog {
 # sub GetDialogTags {
 # sub GetTags {
 # GetDialog(..., 'Tags');
 
-	my $tagSelected = shift;
+	my $labelSelected = shift;
 
-	if (!$tagSelected) {
-		$tagSelected = '';
+	if (!$labelSelected) {
+		$labelSelected = '';
 	} else {
-		chomp $tagSelected;
+		chomp $labelSelected;
 	}
 
 	my $minimumTagCount = 1; # don't display if fewer than this, unless it is selected
 
-	WriteLog("GetTagPageHeaderLinks($tagSelected)");
+	WriteLog("GetTagPageHeaderLinks($labelSelected)");
 
-	my @voteCountsArray = DBGetVoteCounts();
+	my @voteCountsArray = DBGetLabelCounts();
 
-	my $voteItemsWrapper = GetTemplate('html/tag_wrapper.template');
+	my $labelItemsWrapper = GetTemplate('html/tag_wrapper.template');
 
-	my $voteItems = '';
+	my $labelItems = '';
 
-	my $voteItemTemplateTemplate = GetTemplate('html/tag.template');
+	my $labelItemTemplateTemplate = GetTemplate('html/tag.template');
 
 	shift @voteCountsArray;
 
 	while (@voteCountsArray) {
-		my $voteItemTemplate = $voteItemTemplateTemplate;
+		my $labelItemTemplate = $labelItemTemplateTemplate;
 
-		my $tagHashRef = shift @voteCountsArray;
-		my %tagHash = %{$tagHashRef};
+		my $labelHashRef = shift @voteCountsArray;
+		my %labelHash = %{$labelHashRef};
 
-		my $tagName = $tagHash{'vote_value'};
-		my $tagCount = $tagHash{'vote_count'};
+		my $labelName = $labelHash{'label'};
+		my $labelCount = $labelHash{'label_count'};
 
-		if ($tagCount >= $minimumTagCount || $tagName eq $tagSelected) {
-			my $voteItemLink = "/tag/" . $tagName . ".html";
+		if ($labelCount >= $minimumTagCount || $labelName eq $labelSelected) {
+			my $labelItemLink = "/tag/" . $labelName . ".html";
 
-			if ($tagName eq $tagSelected) {
+			if ($labelName eq $labelSelected) {
 				#todo template this
-				$voteItems .= "<b>#$tagName</b>\n";
+				$labelItems .= "<b>#$labelName</b>\n";
 			}
 			else {
-				if (lc($tagName) eq $tagName) {
+				if (lc($labelName) eq $labelName) {
 					# skip
 					# next;
 				}
 				else {
-					$voteItemTemplate =~ s/\$link/$voteItemLink/g;
-					$voteItemTemplate =~ s/\$tagName/$tagName/g;
-					$voteItemTemplate =~ s/\$tagCount/$tagCount/g;
+					$labelItemTemplate =~ s/\$link/$labelItemLink/g;
+					$labelItemTemplate =~ s/\$labelName/$labelName/g;
+					$labelItemTemplate =~ s/\$labelCount/$labelCount/g;
 
 					if (0 && GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
 						#todo improve this (e.g. don't hard-code the url)
-						$voteItemTemplate = AddAttributeToTag(
-							$voteItemTemplate,
+						$labelItemTemplate = AddAttributeToTag(
+							$labelItemTemplate,
 							'a ',
 							'onclick',
-							"if ((window.GetPrefs) && GetPrefs('draggable_spawn') && window.FetchDialogFromUrl) { return FetchDialogFromUrl('/dialog" . $voteItemLink . "'); }"
+							"if ((window.GetPrefs) && GetPrefs('draggable_spawn') && window.FetchDialogFromUrl) { return FetchDialogFromUrl('/dialog" . $labelItemLink . "'); }"
 						);
 					}
 
-					$voteItems .= $voteItemTemplate;
+					$labelItems .= $labelItemTemplate;
 				}
 			}
 		}
 	}
 
-	if (!$voteItems) {
-		# $voteItems = GetTemplate('html/tag_listing_empty.template');
+	if (!$labelItems) {
+		# $labelItems = GetTemplate('html/tag_listing_empty.template');
 	}
 
-	$voteItemsWrapper =~ s/\$tagLinks/$voteItems/g;
+	$labelItemsWrapper =~ s/\$labelLinks/$labelItems/g;
 
-	return $voteItemsWrapper;
+	return $labelItemsWrapper;
 } # GetTagPageHeaderLinks()
 
 1;

@@ -110,10 +110,10 @@ sub GetItemListing { # $fileHash ; returns listing of items based on topic
 			$itemTemplate =~ s/\$rowBgColor/$rowBgColor/g;
 
 			# if ($listingType eq 'replies') {
-			# 	if (index($item{'tags_list'}, 'notext') != -1) {
+			# 	if (index($item{'labels_list'}, 'notext') != -1) {
 			# 		$itemTemplate .= '<span class=advanced>' . $itemTemplate . '</span>';
 			# 	}
-			# 	$itemTemplate .= $item{'tags_list'};
+			# 	$itemTemplate .= $item{'labels_list'};
 			# }
 
 			# add to main html

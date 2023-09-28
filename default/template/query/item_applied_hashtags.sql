@@ -1,4 +1,4 @@
-SELECT vote_value
-FROM vote
-WHERE ballot_hash = ?
-GROUP BY vote_value
+SELECT label
+FROM item_label
+WHERE source_hash = ?
+GROUP BY label

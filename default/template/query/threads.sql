@@ -10,8 +10,8 @@ WHERE
 	item_flat.parent_count = 0 AND
 	item_flat.child_count > 0 AND
 	item_flat.item_score >= 0 AND
-	item_flat.tags_list NOT LIKE '%,hide,%' AND
-	item_flat.tags_list NOT LIKE '%,pubkey,%'
+	item_flat.labels_list NOT LIKE '%,hide,%' AND
+	item_flat.labels_list NOT LIKE '%,pubkey,%'
 ORDER BY
 	item_flat.child_count DESC,
 	item_flat.item_score DESC

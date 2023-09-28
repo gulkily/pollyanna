@@ -46,7 +46,7 @@ sub SqliteIndexTagsets {
 
 			if (@tag) {
 				for my $t (@tag) {
-					my $query = "insert into tag_parent(tag, tag_parent) values(?, ?)";
+					my $query = "insert into label_parent(label, label_parent) values(?, ?)";
 					my @queryParams;
 					push @queryParams, $t;
 					push @queryParams, $tagSet;
@@ -72,7 +72,7 @@ sub SqliteMakeTables { # creates sqlite schema
 	}
 
 	my $schemaQueries = GetTemplate('sqlite3/schema.sql');
-	$schemaQueries .= "\n;\n" . GetTemplate('sqlite3/vote_value.sql');
+	$schemaQueries .= "\n;\n" . GetTemplate('sqlite3/label_weight.sql');
 
 	$schemaQueries =~ s/^#.+$//mg; # remove sh-style comments (lines which begin with #)
 
@@ -522,11 +522,11 @@ sub SqliteQueryCachedShell { # $query, @queryParams ; performs sqlite query via 
 	}
 } # SqliteQueryCachedShell()
 
-sub DBGetVotesForItem { # Returns all votes (weighed) for item
+sub DBGetLabelsForItem { # Returns all labels (weighed) for item
 	my $fileHash = shift;
 
 	if (!IsItem($fileHash)) {
-		WriteLog('DBGetVotesTable: warning: $fileHash failed sanity check; caller = ' . join(',', caller));
+		WriteLog('DBGetLabelsForItem: warning: $fileHash failed sanity check; caller = ' . join(',', caller));
 		return '';
 	}
 
@@ -536,10 +536,10 @@ sub DBGetVotesForItem { # Returns all votes (weighed) for item
 	$query = '
 		SELECT
 			file_hash,
-			ballot_time,
-			vote_value,
+			label_time,
+			label,
 			author_key
-		FROM vote
+		FROM label
 		WHERE file_hash = ?
 	';
 	@queryParams = ($fileHash);
@@ -547,10 +547,10 @@ sub DBGetVotesForItem { # Returns all votes (weighed) for item
 	my @result = SqliteQueryHashRef($query, @queryParams);
 
 	return @result;
-} # DBGetVotesForItem()
+} # DBGetLabelsForItem()
 #
 sub DBGetAuthorFriends { # Returns list of authors which $authorKey has tagged as friend
-# Looks for vote_value = 'friend' and items that contain 'pubkey' tag
+# Looks for label = 'friend' and items that contain 'pubkey' tag
 	my $authorKey = shift;
 	chomp $authorKey;
 	if (!$authorKey) {
@@ -564,12 +564,12 @@ sub DBGetAuthorFriends { # Returns list of authors which $authorKey has tagged a
 		SELECT
 			DISTINCT item_flat.author_key
 		FROM
-			vote
-			LEFT JOIN item_flat ON (vote.file_hash = item_flat.file_hash)
+			item_label
+			LEFT JOIN item_flat ON (item_label.file_hash = item_flat.file_hash)
 		WHERE
-			vote.author_key = ?
-			AND vote_value = 'friend'
-			AND ',' || item_flat.tags_list || ',' LIKE '%,pubkey,%'
+			item_label.author_key = ?
+			AND label = 'friend'
+			AND ',' || item_flat.labels_list || ',' LIKE '%,pubkey,%'
 		;
 	";
 
@@ -668,11 +668,11 @@ sub DBGetItemReplies { # Returns replies for item (actually returns all child it
 
 	my %queryParams;
 	if (GetConfig('admin/expo_site_mode') && !GetConfig('admin/expo_site_edit')) {
-		$queryParams{'where_clause'} = "WHERE ','||tags_list||',' NOT LIKE '%,notext,%' AND file_hash IN(SELECT item_hash FROM item_parent WHERE parent_hash = '$itemHash')";
+		$queryParams{'where_clause'} = "WHERE ','||labels_list||',' NOT LIKE '%,notext,%' AND file_hash IN(SELECT item_hash FROM item_parent WHERE parent_hash = '$itemHash')";
 	} else {
 		$queryParams{'where_clause'} = "WHERE file_hash IN (SELECT item_hash FROM item_parent WHERE parent_hash = '$itemHash')";
 	}
-	$queryParams{'order_clause'} = "ORDER BY (tags_list NOT LIKE '%hastext%'), add_timestamp DESC";
+	$queryParams{'order_clause'} = "ORDER BY (labels_list NOT LIKE '%hastext%'), add_timestamp DESC";
 
 	return DBGetItemList(\%queryParams);
 } # DBGetItemReplies()
@@ -1106,7 +1106,7 @@ sub DBDeleteItemReferences { # delete all references to item from tables
 	}
 
 	{ #dupe of below? #todo
-		my $query = "DELETE FROM vote WHERE ballot_hash IN ($queryPlaceholders)";
+		my $query = "DELETE FROM item_label WHERE source_hash IN ($queryPlaceholders)";
 		SqliteQuery($query, @hashesToDelete);
 	}
 
@@ -1115,10 +1115,10 @@ sub DBDeleteItemReferences { # delete all references to item from tables
 		SqliteQuery($query, @hashesToDelete);
 	}
 
-	#ballot_hash
-	my @tables3 = qw(vote);
+	#source_hash
+	my @tables3 = qw(item_label);
 	foreach (@tables3) {
-		my $query = "DELETE FROM $_ WHERE ballot_hash IN ($queryPlaceholders)";
+		my $query = "DELETE FROM $_ WHERE source_hash IN ($queryPlaceholders)";
 		SqliteQuery($query, @hashesToDelete);
 	}
 
@@ -1326,51 +1326,51 @@ sub DBAddPageTouch { # $pageName, $pageParam; Adds or upgrades in priority an en
 	push @queryParams, 'page', $pageName, $pageParam, $touchTime;
 } # DBAddPageTouch()
 
-sub DBGetVoteCounts { # Get total vote counts by tag value
-# Takes $orderBy as parameter, with vote_count being default;
+sub DBGetLabelCounts { # Get total label counts by tag value
+# Takes $orderBy as parameter, with label_count being default;
 #todo can probably be converted to parameterized query
 	my $orderBy = shift;
 	if ($orderBy) {
 	} else {
-		$orderBy = 'ORDER BY vote_count DESC';
+		$orderBy = 'ORDER BY label_count DESC';
 	}
 
 	my $query = "
 		SELECT
-			vote_value,
-			vote_count
+			label,
+			label_count
 		FROM (
 			SELECT
-				vote_value,
-				COUNT(vote_value) AS vote_count
+				label,
+				COUNT(label) AS label_count
 			FROM
-				vote
+				item_label
 			WHERE
 				file_hash IN (SELECT file_hash FROM item_score WHERE item_score >= 0)
 			GROUP BY
-				vote_value
+				label
 		)
 		WHERE
-			vote_count >= 1
+			label_count >= 1
 		$orderBy;
 	";
 
 	my @result = SqliteQueryHashRef($query);
 
 	return @result;
-} # DBGetVoteCounts()
+} # DBGetLabelCounts()
 
-sub DBGetTagCount { # Gets number of distinct tag/vote values
+sub DBGetTagCount { # Gets number of distinct label values
 	my $query = "
 		SELECT
-			COUNT(vote_value) AS vote_count
+			COUNT(label) AS label_count
 		FROM (
 			SELECT
-				DISTINCT vote_value
+				DISTINCT label
 			FROM
-				vote
+				item_label
 			GROUP BY
-				vote_value
+				label
 		)
 		LIMIT 1
 	";
@@ -1460,7 +1460,7 @@ sub DBAddKeyAlias { # adds new author-alias record $key, $alias, $pubkeyFileHash
 } # DBAddKeyAlias()
 
 sub DBAddItemParent { # $itemHash, $parentItemHash ; Add item parent record.
-# Usually this is when item references parent item, by being a reply or a vote, etc.
+# Usually this is when item references parent item, by being a reply or a label, etc.
 #todo replace with item_attribute
 	state $query;
 	state @queryParams;
@@ -1743,7 +1743,7 @@ sub DBAddLocationRecord { # $itemHash, $latitude, $longitude, $signedBy ; Adds n
 	push @queryParams, $fileHash, $latitude, $longitude, $signedBy;
 } # DBAddLocationRecord()
 
-sub DBAddLabel { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; Adds a new vote (tag) record to an item based on vote/ token
+sub DBAddLabel { # $fileHash, $labelTime, $labelValue, $signedBy, $sourceHash ; Adds a new label to an item
 # sub DBAddVote {
 # sub DBAddItemVote {
 # sub DBAddVoteRecord {
@@ -1780,15 +1780,15 @@ sub DBAddLabel { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; 
 		$query = '';
 	}
 
-	my $ballotTime = shift;
-	my $voteValue = shift;
+	my $labelTime = shift;
+	my $labelValue = shift;
 	my $signedBy = shift;
-	my $ballotHash = shift;
+	my $sourceHash = shift;
 
-	if (!$ballotTime) {
-		WriteLog('DBAddLabel: warning: missing $ballotTime; caller: ' . join(',', caller));
-		$ballotTime = 0;
-		#$ballotTime = time();
+	if (!$labelTime) {
+		WriteLog('DBAddLabel: warning: missing $labelTime; caller: ' . join(',', caller));
+		$labelTime = 0;
+		#$labelTime = time();
 		#return '';
 	}
 
@@ -1797,8 +1797,8 @@ sub DBAddLabel { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; 
 	#}
 
 	chomp $fileHash;
-	chomp $ballotTime;
-	chomp $voteValue;
+	chomp $labelTime;
+	chomp $labelValue;
 
 	if ($signedBy) {
 		chomp $signedBy;
@@ -1806,24 +1806,24 @@ sub DBAddLabel { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; 
 		$signedBy = '';
 	}
 
-	if ($ballotHash) {
-		chomp $ballotHash;
+	if ($sourceHash) {
+		chomp $sourceHash;
 	} else {
-		$ballotHash = '';
+		$sourceHash = '';
 	}
 
-	WriteLog('DBAddLabel: ' . $fileHash . ', $ballotTime=' . $ballotTime . ', $voteValue=' . $voteValue . ', $signedBy = ' . $signedBy . ', $ballotHash = ' . $ballotHash . '; caller = ' . join(',', caller));
+	WriteLog('DBAddLabel: ' . $fileHash . ', $labelTime=' . $labelTime . ', $labelValue=' . $labelValue . ', $signedBy = ' . $signedBy . ', $sourceHash = ' . $sourceHash . '; caller = ' . join(',', caller));
 
 	if (!$query) {
-		$query = "INSERT OR REPLACE INTO vote(file_hash, ballot_time, vote_value, author_key, ballot_hash) VALUES ";
+		$query = "INSERT OR REPLACE INTO item_label(file_hash, label_time, label, author_key, source_hash) VALUES ";
 	} else {
 		$query .= ",";
 	}
 
 	$query .= '(?, ?, ?, ?, ?)';
-	push @queryParams, $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash;
+	push @queryParams, $fileHash, $labelTime, $labelValue, $signedBy, $sourceHash;
 
-	DBAddPageTouch('tag', $voteValue);
+	DBAddPageTouch('tag', $labelValue);
 	DBAddPageTouch('item', $fileHash);
 } # DBAddLabel()
 
@@ -2082,12 +2082,12 @@ sub DBGetItemListByTagList { #get list of items by taglist (as array)
 		WHERE file_hash IN (
 			SELECT file_hash FROM (
 				SELECT
-					COUNT(id) AS vote_count,
+					COUNT(id) AS label_count,
 						file_hash
-				FROM vote
-				WHERE vote_value IN ($tagListArrayText)
+				FROM item_label
+				WHERE label IN ($tagListArrayText)
 				GROUP BY file_hash
-			) WHERE vote_count >= $tagListCount
+			) WHERE label_count >= $tagListCount
 		)
 	";
 
@@ -2212,8 +2212,8 @@ sub SqliteGetColumnArray { # $query, $columnName ; gets column as array
 
 sub DBGetAllAppliedTags { # return all tags that have been used at least once
 	my $query = "
-		SELECT DISTINCT vote_value FROM vote
-		JOIN item ON (vote.file_hash = item.file_hash)
+		SELECT DISTINCT label FROM item_label
+		JOIN item ON (item_label.file_hash = item.file_hash)
 	";
 	#todo i'm not sure why this join is necessary, but i guess it should be a valid item?
 	#todo it should join together different-case tags into the nicest looking version
@@ -2225,7 +2225,7 @@ sub DBGetAllAppliedTags { # return all tags that have been used at least once
 
 	for my $rowRef (@result) {
 		my %row = %{$rowRef};
-		push @ary, $row{'vote_value'}
+		push @ary, $row{'label'}
 	}
 
 	WriteLog('DBGetAllAppliedTags: scalar(@ary) = ' . scalar(@ary));
@@ -2371,7 +2371,7 @@ sub DBGetAuthorSeen { # return timestamp of most recent item attributed to autho
 	$key = SqliteEscape($key);
 
 	if ($key) { #todo fix non-param sql
-		my $query = "SELECT MAX(item_flat.add_timestamp) AS author_seen FROM item_flat WHERE tags_list NOT LIKE '%,pubkey,%' AND author_key = '$key'";
+		my $query = "SELECT MAX(item_flat.add_timestamp) AS author_seen FROM item_flat WHERE labels_list NOT LIKE '%,pubkey,%' AND author_key = '$key'";
 		$lastSeenCache{$key} = SqliteGetValue($query);
 		return $lastSeenCache{$key};
 	} else {
@@ -2428,8 +2428,8 @@ sub DBGetAdminCount { # ; returns number of admins in system
 			author_flat
 			LEFT JOIN item_flat ON (author_flat.file_hash = item_flat.file_hash)
 		WHERE
-			','||item_flat.tags_list||',' LIKE '%,admin,%' AND
-			','||item_flat.tags_list||',' LIKE '%,pubkey,%'
+			','||item_flat.labels_list||',' LIKE '%,admin,%' AND
+			','||item_flat.labels_list||',' LIKE '%,pubkey,%'
 	";
 
 	my $adminCount = SqliteGetValue($query);
@@ -2453,7 +2453,15 @@ sub DBGetAdminKey { # Returns the pubkey id of the top-scoring admin (or nothing
 	my $key = 1;
 
 	if ($key) { #todo fix non-param sql
-		my $query = "SELECT MAX(author_flat.author_key) AS author_key FROM author_flat WHERE file_hash in (SELECT file_hash FROM item_flat WHERE ',' || tags_list || ',' LIKE '%,admin,%') LIMIT 1";
+		my $query = "
+			SELECT
+				MAX(author_flat.author_key) AS author_key
+			FROM
+				author_flat
+			WHERE
+				file_hash in (SELECT file_hash FROM item_flat WHERE ',' || labels_list || ',' LIKE '%,admin,%')
+			LIMIT 1
+		";
 		my $valueReturned = SqliteQueryCachedShell($query);
 		if ($valueReturned) {
 			$memoHash{$memoKey} = SqliteQueryCachedShell($query);
@@ -2483,7 +2491,7 @@ sub DBGetItemFields { # Returns fields we typically need to request from item_fl
 		item_flat.add_timestamp add_timestamp,
 		item_flat.item_title item_title,
 		item_flat.item_score item_score,
-		item_flat.tags_list tags_list,
+		item_flat.labels_list labels_list,
 		item_flat.item_type item_type,
 		item_flat.item_order item_order,
 		item_flat.item_sequence item_sequence
@@ -2586,37 +2594,38 @@ sub DBGetItemsByPrefix { # $prefix ; get items whose hash begins with $prefix
 	return @resultsArray;
 } # DBGetItemsByPrefix()
 
-sub DBGetItemVoteTotals2 { # $fileHash ; get tag counts for specified item, returned as hash of [tag] -> count
+sub DBGetItemLabelTotals2 { # $fileHash ; get label counts for specified item, returned as hash of [label] -> count
+# sub DBGetItemVoteTotals2 {
 # sub DBGetItemTagsList {
 # sub DBGetItemVotes {
 # sub DBGetItemTagList {
 	my $fileHash = shift;
 	if (!$fileHash) {
-		WriteLog('DBGetItemVoteTotals: warning: $fileHash missing, returning');
+		WriteLog('DBGetItemLabelTotals2: warning: $fileHash missing, returning');
 		return 0;
 	}
 
 	chomp $fileHash;
 
 	if (!IsItem($fileHash)) {
-		WriteLog('DBGetItemVoteTotals: warning: sanity check failed, returned');
+		WriteLog('DBGetItemLabelTotals2: warning: sanity check failed, returned');
 		return 0;
 	}
 
-	WriteLog("DBGetItemVoteTotals2($fileHash)");
+	WriteLog("DBGetItemLabelTotals2($fileHash)");
 
 	my $query = "
 		SELECT
-			vote_value,
-			COUNT(vote_value) AS vote_count
+			label,
+			COUNT(label) AS label_count
 		FROM
-			vote
+			item_label
 		WHERE
 			file_hash = ?
 		GROUP BY
-			vote_value
+			label
 		ORDER BY
-			vote_count DESC;
+			label_count DESC;
 	";
 
 	my @queryParams;
@@ -2626,18 +2635,18 @@ sub DBGetItemVoteTotals2 { # $fileHash ; get tag counts for specified item, retu
 
 	shift @result; # remove headers
 
-	my %voteTotals;
+	my %labelTotals;
 
 	while (@result) {
 		my $rowReference = shift @result;
 		my %row = %{$rowReference};
-		if ($row{'vote_value'}) {
-			$voteTotals{$row{'vote_value'}} = $row{'vote_count'};
+		if ($row{'label'}) {
+			$labelTotals{$row{'label'}} = $row{'label_count'};
 		}
 	}
 
-	return \%voteTotals;
-} # DBGetItemVoteTotals2()
+	return \%labelTotals;
+} # DBGetItemLabelTotals2()
 
 sub PrintBanner2 {
 	my $string = shift; #todo sanity checks

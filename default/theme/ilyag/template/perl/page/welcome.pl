@@ -8,7 +8,7 @@ sub GetWelcomePage {
 	WriteLog('GetWelcomePage: ilyag theme');
 ## this welcome page displays all items which have a tag of 'approve' and a score of greater than 0
 #	my %params;
-#	$params{'where_clause'} = "WHERE tags_list LIKE '%approve%' AND item_score > 0";
+#	$params{'where_clause'} = "WHERE labels_list LIKE '%approve%' AND item_score > 0";
 #	my @files = DBGetItemList(\%params);
 #
 #	my $welcomePage =

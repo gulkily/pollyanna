@@ -36,7 +36,7 @@ FROM
 			)
 		) AS related_list ON (item_flat.file_hash = related_list.file_hash)
 WHERE
-	tags_list NOT LIKE '%notext%'
+	labels_list NOT LIKE '%notext%'
 GROUP BY
 	item_title, add_timestamp, this_row, item_flat.file_hash
 ORDER BY

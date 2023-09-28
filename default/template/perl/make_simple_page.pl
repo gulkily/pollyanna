@@ -120,7 +120,7 @@ sub MakeSimplePage { # given page name, makes page
 
 			if (index($html, $itemListPlaceholder) != -1) {
 				my %queryParams;
-				$queryParams{'where_clause'} = "WHERE ','||item_flat.tags_list||',' LIKE '%," . $pageName . ",%' AND item_flat.item_score > 0"; #loose match #todo
+				$queryParams{'where_clause'} = "WHERE ','||item_flat.labels_list||',' LIKE '%," . $pageName . ",%' AND item_flat.item_score > 0"; #loose match #todo
 				$queryParams{'order_clause'} = "ORDER BY item_flat.add_timestamp DESC"; #order by timestamp desc
 				$queryParams{'limit_clause'} = "LIMIT 100";
 				my @files = DBGetItemList(\%queryParams);

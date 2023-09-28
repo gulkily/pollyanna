@@ -9,7 +9,7 @@
 
 		<tr class=body>
 			<td class=content>
-				<p class=pagination>$tagLinks</p>
+				<p class=pagination>$labelLinks</p>
 			</td>
 		</tr>
 	</table>

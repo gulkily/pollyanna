@@ -1,24 +1,24 @@
 SELECT
-	vote_value,
-	vote_count
+	label,
+	label_count
 FROM
 	(
 		SELECT
-			vote_value,
-			COUNT(vote_value) AS vote_count
+			label,
+			COUNT(label) AS label_count
 		FROM
-			vote
+			item_label
 		GROUP BY
-			vote_value
+			label
 	)
 WHERE
-	vote_value NOT IN (
+	label NOT IN (
 		'hastext',
 		'notext',
 		'hastitle',
 		'hasvote',
 		'changelog'
 	) AND
-	vote_count >= 2
+	label_count >= 2
 ORDER BY
-	vote_count DESC;
+	label_count DESC;

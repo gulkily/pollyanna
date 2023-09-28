@@ -2,7 +2,7 @@
 #
 # widget.pl
 # returns widget html 
-# GetItemTagButtons: voting buttons for an item
+# GetItemLabelButtons3: voting buttons for an item
 # to come: clock, etc
 
 use strict;
@@ -77,7 +77,7 @@ sub FormatDate { # $epoch, $showSeconds = 1 ; formats date depending on how long
 	return $formattedDate;
 } # FormatDate()
 
-require_once('widget/item_tag_buttons.pl');
+require_once('widget/item_label_buttons.pl');
 
 sub GetFileSizeWidget { # $fileSize ; takes file size as number, and returns html-formatted human-readable size
 	my $fileSize = shift;

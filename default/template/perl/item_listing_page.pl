@@ -28,7 +28,8 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 # sub GetImagePage {
 # sub GetListingPage {
 # sub ImagePage {
-# sub GetTagsPage {
+# sub GetTagsPage { ItemListingPage()
+# sub GetLabelsPage {
 # sub GetListing {
 # sub GetListByTag {
 # sub GetItemTagListing {
@@ -92,7 +93,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 	$html .= GetPageHeader($pageQuery);
 
 	if (GetConfig('setting/html/page_intro') && $pageQuery =~ m/[^\s]+/) {
-		# $pageQuery does not have any spaces, so it's a page name, like 'top' or 'read' or 'tags'
+		# $pageQuery does not have any spaces, so it's a page name, like 'top' or 'read' or 'tags' or 'labels'
 		# page_info/
 		my $pageDescription = GetStringNoFallback('page_intro/' . $pageQuery);
 		if ($pageDescription) {

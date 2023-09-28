@@ -45,28 +45,28 @@ sub GetItemTemplateBody {
 	if ($file{'item_type'} eq 'txt') {
 		WriteLog('GetItemTemplateBody: item_type = txt');
 
-		if (!$file{'tags_list'}) {
-			$file{'tags_list'} = '';
-			WriteLog('GetItemTemplateBody: warning: $file{tags_list} is FALSE');
+		if (!$file{'labels_list'}) {
+			$file{'labels_list'} = '';
+			WriteLog('GetItemTemplateBody: warning: $file{labels_list} is FALSE');
 		}
 
 		my $isTextart = 0;
 		if (GetConfig('html/format_item/textart')) {
-			if (-1 != index(','.$file{'tags_list'}.',', ',textart,')) {
+			if (-1 != index(','.$file{'labels_list'}.',', ',textart,')) {
 				WriteLog('GetItemTemplateBody: $isTextart = 1');
 				$isTextart = 1;
 			}
 		}
 
 		my $isPubKey = 0;
-		if (-1 != index(','.$file{'tags_list'}.',', ',pubkey,')) {
+		if (-1 != index(','.$file{'labels_list'}.',', ',pubkey,')) {
 			$isPubKey = 1;
 			WriteLog('GetItemTemplateBody: $isPubKey = 1');
 		}
 
 		my $isPhone = 0;
 		if (GetConfig('html/format_item/phone')) {
-			if (-1 != index(','.$file{'tags_list'}.',', ',phone,')) {
+			if (-1 != index(','.$file{'labels_list'}.',', ',phone,')) {
 				WriteLog('GetItemTemplateBody: $isPhone = 1');
 				$isPhone = 1;
 			}
@@ -74,7 +74,7 @@ sub GetItemTemplateBody {
 
 		my $isAddress = 0;
 		if (GetConfig('html/format_item/address')) {
-			if (-1 != index(','.$file{'tags_list'}.',', ',address,')) {
+			if (-1 != index(','.$file{'labels_list'}.',', ',address,')) {
 				$isAddress = 1;
 				WriteLog('GetItemTemplateBody: $isAddress = 1');
 			}
@@ -301,7 +301,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 	# show_quick_vote = displays quick vote buttons
 	# item_title = override title
 	# item_statusbar = override statusbar
-	# tags_list = comma-separated list of tags the item has
+	# labels_list = comma-separated list of tags the item has
 	# is_textart = set <tt><code> tags for the message itself
 	# no_permalink = do not link to item's permalink page
 
@@ -426,10 +426,10 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			# TAGS LIST AKA HEADING
 			# TAGS LIST AKA HEADING
 			# TAGS LIST AKA HEADING
-			if ($file{'tags_list'}) { # GetItemTemplate() -- tags list
-				my $headings = GetTagsListAsHtmlWithLinks($file{'tags_list'});
+			if ($file{'labels_list'}) { # GetItemTemplate() -- tags list
+				my $headings = GetTagsListAsHtmlWithLinks($file{'labels_list'});
 				$windowParams{'headings'} = $headings;
-			} # $file{'tags_list'}
+			} # $file{'labels_list'}
 
 			# STATUS BAR
 			# STATUS BAR
@@ -631,7 +631,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 		# if show_vote_summary is set, show a count of all the tags the item has
 		if ($file{'show_vote_summary'}) {
 			#this displays the vote summary (tags applied and counts)
-			my $voteTotalsRef = DBGetItemVoteTotals2($file{'file_hash'});
+			my $voteTotalsRef = DBGetItemLabelTotals2($file{'file_hash'});
 			my %voteTotals = %{$voteTotalsRef};
 			my $votesSummary = '';
 			foreach my $voteTag (keys %voteTotals) {
@@ -650,10 +650,10 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 		my $itemFlagButton = '';
 		if (defined($file{'vote_return_to'}) && $file{'vote_return_to'}) {
 			WriteLog('GetItemTemplate: $file{\'vote_return_to\'} = ' . $file{'vote_return_to'});
-			$itemFlagButton = GetItemTagButtons($file{'file_hash'}, 'all', $file{'vote_return_to'}); #todo refactor to take vote totals directly
+			$itemFlagButton = GetItemLabelButtons($file{'file_hash'}, 'all', $file{'vote_return_to'}); #todo refactor to take vote totals directly
 		} else {
 			# WriteLog('GetItemTemplate: $file{\'vote_return_to\'} = ' . $file{'vote_return_to'});
-			$itemFlagButton = GetItemTagButtons($file{'file_hash'}, 'all'); #todo refactor to take vote totals directly
+			$itemFlagButton = GetItemLabelButtons($file{'file_hash'}, 'all'); #todo refactor to take vote totals directly
 		}
 
 		$itemTemplate =~ s/\$itemFlagButton/$itemFlagButton/g;

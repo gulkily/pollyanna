@@ -44,6 +44,12 @@
 		</a>
 	</p>
 	<p class=advanced>
+		<a href="/labels.html">
+			<b>$labelsTotal labels</b>
+			<span class=advanced><span class=beginner><br>applied to items to add meaning</span></span>
+		</a>
+	</p>
+	<p class=advanced>
 		<a href="/authors.html">
 			<b>$authorCount authors</b>
 			<span class=advanced><span class=beginner><br>shared their names or public keys</span></span>

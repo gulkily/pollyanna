@@ -8,7 +8,7 @@ SELECT
 FROM
 	item_flat
 WHERE
-	tags_list like '%,image,%' AND
+	labels_list like '%,image,%' AND
 	item_type = 'image' AND
 	item_score >= 0
 ORDER BY

@@ -61,7 +61,7 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 	$txtIndex .= GetContentFilterDialog();
 
 	#todo add dialog for voting options
-	#add option to use a "cart" for voting, submitting all the votes at once
+	#add option to use a "cart" for voting, submitting all the labels at once
 	#this would require some server-side additions too, unless we use the old-style pipe-separated syntax
 
 	if (GetConfig('admin/js/enable')) {

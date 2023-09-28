@@ -5,7 +5,7 @@ SELECT
 FROM
 	item_flat
 WHERE
-	','||tags_list||',' LIKE ? AND
+	','||labels_list||',' LIKE ? AND
 	item_score >= 0
 ORDER BY
 	item_score DESC

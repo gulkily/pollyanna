@@ -47,8 +47,8 @@ item_parent
 GROUP BY
 parent_hash;
 
-CREATE TABLE vote(id INTEGER PRIMARY KEY AUTOINCREMENT, file_hash, ballot_time, vote_value, author_key, ballot_hash);
-CREATE UNIQUE INDEX vote_unique ON vote (file_hash, ballot_time, vote_value, author_key);
+CREATE TABLE item_label(id INTEGER PRIMARY KEY AUTOINCREMENT, file_hash, label_time, label, author_key, source_hash);
+CREATE UNIQUE INDEX item_label_unique ON item_label (file_hash, label_time, label, author_key);
 
 CREATE TABLE item_page(item_hash, page_name, page_param);
 CREATE UNIQUE INDEX item_page_unique ON item_page(item_hash, page_name, page_param);
@@ -82,28 +82,28 @@ GROUP BY
 item_hash
 ;
 
-CREATE TABLE vote_value(vote, value);
+CREATE TABLE label_weight(label, weight);
 
-CREATE TABLE tag_parent(tag, tag_parent);
+CREATE TABLE label_parent(label, label_parent);
 
-CREATE VIEW item_tags_list
+CREATE VIEW item_labels_list
 AS
 SELECT
 file_hash,
-GROUP_CONCAT(DISTINCT vote_value) AS tags_list
-FROM vote
+GROUP_CONCAT(DISTINCT label) AS labels_list
+FROM item_label
 GROUP BY file_hash
 ;
 
-CREATE VIEW item_vote_count
+CREATE VIEW item_label_count
 AS
 SELECT
 file_hash,
-vote_value AS vote_value,
-COUNT(file_hash) AS vote_count
-FROM vote
-GROUP BY file_hash, vote_value
-ORDER BY vote_count DESC
+label AS label,
+COUNT(file_hash) AS label_count
+FROM item_label
+GROUP BY file_hash, label
+ORDER BY label_count DESC
 ;
 
 
@@ -112,13 +112,13 @@ CREATE VIEW item_score
 AS
 SELECT
 item.file_hash AS file_hash,
-IFNULL(SUM(vote_value.value), 0) AS item_score
+IFNULL(SUM(label_weight.weight), 0) AS item_score
 FROM
-vote
+item_label
 LEFT JOIN item
-ON (vote.file_hash = item.file_hash)
-LEFT JOIN vote_value
-ON (vote.vote_value = vote_value.vote)
+ON (item_label.file_hash = item.file_hash)
+LEFT JOIN label_weight
+ON (item_label.label = label_weight.label)
 GROUP BY
 item.file_hash
 ;
@@ -228,7 +228,7 @@ IFNULL(item_sequence.item_sequence, '') AS item_sequence,
 IFNULL(item_title.title, '') AS item_title,
 IFNULL(item_score.item_score, 0) AS item_score,
 item.item_type AS item_type,
-','||tags_list||',' AS tags_list,
+','||labels_list||',' AS labels_list,
 item.file_name AS file_name,
 CAST(item_order.item_order AS INTEGER) AS item_order
 FROM
@@ -241,7 +241,7 @@ LEFT JOIN item_name ON ( item.file_hash = item_name.file_hash )
 LEFT JOIN item_order ON ( item.file_hash = item_order.file_hash )
 LEFT JOIN item_author ON ( item.file_hash = item_author.file_hash )
 LEFT JOIN item_score ON ( item.file_hash = item_score.file_hash)
-LEFT JOIN item_tags_list ON ( item.file_hash = item_tags_list.file_hash )
+LEFT JOIN item_labels_list ON ( item.file_hash = item_labels_list.file_hash )
 LEFT JOIN item_sequence ON ( item.file_hash = item_sequence.file_hash )
 ;
 
@@ -259,7 +259,7 @@ IFNULL(item_sequence.item_sequence, '') AS item_sequence,
 IFNULL(item_title.title, '') AS item_title,
 IFNULL(item_score.item_score, 0) AS item_score,
 item.item_type AS item_type,
-','||tags_list||',' AS tags_list,
+','||labels_list||',' AS labels_list,
 item.file_name AS file_name,
 CAST(item_order.item_order AS INTEGER) AS item_order
 FROM
@@ -272,7 +272,7 @@ LEFT JOIN item_name ON ( item.file_hash = item_name.file_hash )
 LEFT JOIN item_order ON ( item.file_hash = item_order.file_hash )
 LEFT JOIN item_author ON ( item.file_hash = item_author.file_hash )
 LEFT JOIN item_score ON ( item.file_hash = item_score.file_hash)
-LEFT JOIN item_tags_list ON ( item.file_hash = item_tags_list.file_hash )
+LEFT JOIN item_labels_list ON ( item.file_hash = item_labels_list.file_hash )
 LEFT JOIN item_sequence ON ( item.file_hash = item_sequence.file_hash )
 ;
 
@@ -291,16 +291,16 @@ CREATE VIEW item_score_weighed
 AS
 SELECT
 item.file_hash AS file_hash,
-IFNULL(SUM(vote_value.value), 0) AS item_score,
-IFNULL(SUM(vote_value.value), 0) * IFNULL(SUM(author_score), 0) AS item_score_weighed
+IFNULL(SUM(label_weight.weight), 0) AS item_score,
+IFNULL(SUM(label_weight.weight), 0) * IFNULL(SUM(author_score), 0) AS item_score_weighed
 FROM
-vote
+item_label
 LEFT JOIN item
-ON (vote.file_hash = item.file_hash)
-LEFT JOIN vote_value
-ON (vote.vote_value = vote_value.vote)
+ON (item_label.file_hash = item.file_hash)
+LEFT JOIN label_weight
+ON (item_label.label = label_weight.label)
 LEFT JOIN author_score
-ON (vote.author_key = author_score.author_key)
+ON (item_label.author_key = author_score.author_key)
 GROUP BY
 item.file_hash
 ;
@@ -355,7 +355,7 @@ author_key,
 author_alias
 FROM author_flat
 WHERE author_alias != ''
-AND file_hash IN (SELECT file_hash FROM item_flat WHERE tags_list LIKE '%,approve,%')
+AND file_hash IN (SELECT file_hash FROM item_flat WHERE labels_list LIKE '%,approve,%')
 ;
 
 CREATE VIEW item_score_relative AS
@@ -397,7 +397,7 @@ author_alias
 WHERE
 file_hash IN (
 SELECT file_hash
-FROM vote
-WHERE vote_value IN ('approve', 'vouch')
+FROM item_label
+WHERE label IN ('approve', 'vouch')
 )
 ;

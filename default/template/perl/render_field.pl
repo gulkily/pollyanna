@@ -106,9 +106,9 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 	}
 
 	elsif (
-		$fieldName eq 'vote_value'
+		$fieldName eq 'label'
 	) {
-		# vote_value field should contain one tag
+		# label field should contain one tag
 		# example: good
 		#todo redo and sanity check
 
@@ -239,7 +239,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 	}
 
 	elsif (
-		$fieldName eq 'tags_list'
+		$fieldName eq 'labels_list'
 	) {
 		# list of tags, to be displayed as links to tag pages
 		# preceding and trailing commas are ignored
@@ -359,16 +359,16 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 			if (GetTemplate('tagset/' . $tagsetName)) {
 				if ($tagsetName eq 'inbox') {
 					# special case for inbox button, which would hide the row
-					# but it currently keeps the actual vote from happening, so that's why
+					# but it currently keeps the actual labeling from happening, so that's why
 					# the AddAttributeToTag() below is commented out
 					#todo make this dependent on the inbox feature
-					my $voteButton = GetItemTagButtons($itemRow{'file_hash'}, $tagsetName);
-					#$voteButton = AddAttributeToTag($voteButton, 'a', 'onmouseup', "if (window.GetParentElement) { var pe = GetParentElement(this, 'TR'); if (pe) { pe.remove() } }");
+					my $tagButton = GetItemLabelButtons($itemRow{'file_hash'}, $tagsetName);
+					#$tagButton = AddAttributeToTag($tagButton, 'a', 'onmouseup', "if (window.GetParentElement) { var pe = GetParentElement(this, 'TR'); if (pe) { pe.remove() } }");
 					#this works, but keeps the actual voting from firing
-					$fieldValue .= $voteButton;
+					$fieldValue .= $tagButton;
 				} else {
 					if ($itemRow{'file_hash'} && IsItem($itemRow{'file_hash'})) {
-						$fieldValue .= GetItemTagButtons($itemRow{'file_hash'}, $tagsetName);
+						$fieldValue .= GetItemLabelButtons($itemRow{'file_hash'}, $tagsetName);
 						if (GetConfig('setting/html/reply_cart')) {
 							#require_once('widget/add_to_reply_cart.pl');
 							#$fieldValue .= '; ';
@@ -416,10 +416,10 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		#
 		# in the query, it looks like this:
 		#    SELECT
-		#		'' AS special_title_tags_list, <-- special field
+		#		'' AS special_title_labels_list, <-- special field
 		#		file_hash, <-- used for populating special field
 		#		item_title, <-- used for populating special field
-		#		tags_list, <-- used for populating special field
+		#		labels_list, <-- used for populating special field
 		#		author_id <-- used for populating special field
 		#	FROM
 		#		item_flat
@@ -431,9 +431,9 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 			my $specialName = substr($fieldName, 8); # remove 'special_' prefix from field name
 
 			if (0) {} # placeholder to make all other elsif statements consistent
-			elsif ($specialName eq 'title_tags_list') {
+			elsif ($specialName eq 'title_labels_list') {
 				# title, tags list, and author avatar (if any)
-				# special_title_tags_list
+				# special_title_labels_list
 				# this should become a template
 
 				#todo sanity check for all required fields being present
@@ -442,18 +442,18 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 					'<b>' .
 						GetItemHtmlLink($itemRow{'file_hash'}, $itemRow{'item_title'}) .
 					'</b>' .
-					($itemRow{'tags_list'} ? # only print this part if there's something in tags_list
+					($itemRow{'labels_list'} ? # only print this part if there's something in labels_list
 						'<br>'.
 						'<span style="float:right">' .
-							GetTagsListAsHtmlWithLinks($itemRow{'tags_list'}) .
+							GetTagsListAsHtmlWithLinks($itemRow{'labels_list'}) .
 						'</span>'
 						:'' # otherwise print nothing
 					)
 				;
 			}
-			elsif ($specialName eq 'title_tags_list_author') {
+			elsif ($specialName eq 'title_labels_list_author') {
 				# title, tags list, and author avatar (if any)
-				# special_title_tags_list_author
+				# special_title_labels_list_author
 				# this should become a template
 
 				#todo sanity check for all required fields being present
@@ -463,10 +463,10 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 					'<b>' .
 						GetItemHtmlLink($itemRow{'file_hash'}, $itemRow{'item_title'}) .
 					'</b>' .
-					($itemRow{'tags_list'} ? # only print this part if there's something in tags_list
+					($itemRow{'labels_list'} ? # only print this part if there's something in labels_list
 						'<br>'.
 						'<span style="float:right">' .
-							GetTagsListAsHtmlWithLinks($itemRow{'tags_list'}) .
+							GetTagsListAsHtmlWithLinks($itemRow{'labels_list'}) .
 							($itemRow{'author_id'} ? '; ' . GetAuthorLink($itemRow{'author_id'}) : '') .
 						'</span>'
 						:'' # otherwise print nothing
@@ -483,13 +483,13 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 	#
 	#	if ($fieldName eq 'tagset_compost') {
 	#		if (%itemRow && $itemRow{'file_hash'}) {
-	#			$fieldValue .= GetItemTagButtons($itemRow{'file_hash'}, 'compost');
+	#			$fieldValue .= GetItemLabelButtons($itemRow{'file_hash'}, 'compost');
 	#		}
 	#	}
 	#
 	#	if ($fieldName eq 'tagset_author') {
 	#		if (%itemRow && $itemRow{'file_hash'}) {
-	#			$fieldValue .= GetItemTagButtons($itemRow{'file_hash'}, 'author');
+	#			$fieldValue .= GetItemLabelButtons($itemRow{'file_hash'}, 'author');
 	#		}
 	#	}
 
@@ -506,7 +506,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fieldName eq 'this_row' || # RenderField() not to be confused with field_advanced
 		$fieldName eq 'title' || # RenderField() not to be confused with field_advanced
 		$fieldName eq 'url_domain' || # RenderField() not to be confused with field_advanced
-		$fieldName eq 'vote_count' || # RenderField() not to be confused with field_advanced
+		$fieldName eq 'label_count' || # RenderField() not to be confused with field_advanced
 		$fieldName eq 'author_score' || # RenderField() not to be confused with field_advanced
 		$fieldName eq 'chain_checksum_good' || # RenderField() not to be confused with field_advanced
 		$fieldName eq 'boxes' || # RenderField() not to be confused with field_advanced (this is for banana theme)

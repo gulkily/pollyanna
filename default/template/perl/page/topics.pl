@@ -17,7 +17,7 @@ sub GetTopicsPage {
 	state $topicsPage = 
 		GetPageHeader('topics') .
 		GetQueryAsDialog('topics', 'Tags') .
-		GetQueryAsDialog("SELECT item_title, file_hash FROM item_flat WHERE tags_list LIKE '%topic%'", 'Threads', '', \%flags) .
+		GetQueryAsDialog("SELECT item_title, file_hash FROM item_flat WHERE labels_list LIKE '%topic%'", 'Threads', '', \%flags) .
 		$explainDialog .
 		GetPageFooter('topics')
 	;

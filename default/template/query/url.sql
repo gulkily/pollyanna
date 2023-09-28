@@ -3,7 +3,7 @@ SELECT
 	value AS url,
 	author_key AS author_id,
 	item_title,
-	tags_list,
+	labels_list,
 	item_flat.item_score AS item_score,
 	item_flat.file_hash AS file_hash
 FROM

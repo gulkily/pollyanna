@@ -9,10 +9,10 @@ FROM
 	item_flat
 WHERE 1
 	AND item_score > 0
-	AND tags_list NOT LIKE '%pubkey%'
-	AND tags_list NOT LIKE '%puzzle%'
-	AND tags_list NOT LIKE '%notext%'
-	AND tags_list NOT LIKE '%http%'
+	AND labels_list NOT LIKE '%pubkey%'
+	AND labels_list NOT LIKE '%puzzle%'
+	AND labels_list NOT LIKE '%notext%'
+	AND labels_list NOT LIKE '%http%'
 ORDER BY
 	RANDOM(),
 	item_score DESC

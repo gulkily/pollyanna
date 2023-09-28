@@ -81,9 +81,9 @@ sub GetAuthorInfoBox { # $authorKey ; returns author info box
 	}
 	$authorDescription .= GetItemTagsSummary($publicKeyHash);
 
-	my $profileVoteButtons = GetItemTagButtons($publicKeyHash, 'pubkey');
-	if (!$profileVoteButtons) {
-		$profileVoteButtons = '*';
+	my $profileLabelButtons = GetItemLabelButtons($publicKeyHash, 'pubkey');
+	if (!$profileLabelButtons) {
+		$profileLabelButtons = '*';
 	}
 
 	$authorSeen = GetTimestampWidget($authorSeen) || '*';
@@ -112,7 +112,7 @@ sub GetAuthorInfoBox { # $authorKey ; returns author info box
 	$authorInfoTemplate =~ s/\$itemCount/$itemCount/;
 	$authorInfoTemplate =~ s/\$authorDescription/$authorDescription/;
 	$authorInfoTemplate =~ s/\$authorSeen/$authorSeen/g;
-	$authorInfoTemplate =~ s/\$profileVoteButtons/$profileVoteButtons/g;
+	$authorInfoTemplate =~ s/\$profileLabelButtons/$profileLabelButtons/g;
 	if ($publicKeyHashHtml) {
 		$authorInfoTemplate =~ s/\$publicKeyHash/$publicKeyHashHtml/g;
 	} else {

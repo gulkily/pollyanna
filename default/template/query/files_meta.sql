@@ -1,1 +1,1 @@
-select file_path from item_flat where ','||tags_list||',' like '%,meta,%';
+select file_path from item_flat where ','||labels_list||',' like '%,meta,%';

@@ -1,2 +1,2 @@
-select vote_value, count(vote_value) vote_count from vote group by vote_value order by vote_count desc;
+select label, count(label) label_count from item_label group by label order by label_count desc;
 

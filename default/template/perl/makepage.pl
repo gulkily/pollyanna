@@ -23,7 +23,8 @@ require_once('dialog.pl');
 sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it into $HTMLDIR directory; $pageType, $pageParam
 # sub makepage {
 # sub getpage {
-# sub GetTagsPage {
+# sub GetTagsPage { MakePage()
+# sub GetLabelsPage { MakePage()
 # sub GetPage {
 # sub MakeProfilePage {
 
@@ -37,6 +38,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 # prefix
 # summary (deprecated)
 # tags
+# labels
 # stats
 # index
 # compost
@@ -44,7 +46,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 
 	state $HTMLDIR = GetDir('html');
 
-	# $pageType = author, item, tags, etc.
+	# $pageType = author, item, tags, labels, etc.
 	# $pageParam = author_id, item_hash, etc.
 	my $pageType = shift;
 	my $pageParam = shift;
@@ -69,11 +71,12 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	WriteMessage('MakePage(' . $pageType . ', ' . $pageParam . ')');
 	WriteLog('MakePage(' . $pageType . ', ' . $pageParam . '); caller = ' . join(',', caller));
 
-	my @listingPages = qw(child chain url deleted compost new raw picture image read authors scores tags threads boxes tasks active);
+	my @listingPages = qw(child chain url deleted compost new raw picture image read authors scores tags labels threads boxes tasks active);
 	push @listingPages, qw(browse); # shadowme
 	#chain.html #new.html #boxes.html #tasks.html
 	# sub GetChainPage {
-	# sub GetTagsPage { # tags.html
+	# sub GetTagsPage { # tags.html MakePage()
+	# sub GetLabelsPage { # labels.html MakePage()
 
 	# my @validPages =
 	# valid pages
@@ -96,11 +99,11 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 
 		if ($pageType eq 'chain') { # chain.html
 			# sub GetChainPage {
-			$params{'dialog_columns'} = 'special_title_tags_list,chain_order,chain_timestamp,file_hash,tagset_chain,cart';
+			$params{'dialog_columns'} = 'special_title_labels_list,chain_order,chain_timestamp,file_hash,tagset_chain,cart';
 		}
-		if ($pageType eq 'tags') {
+		if ($pageType eq 'tags' || $pageType eq 'labels') {
 			#todo does this need to happen every time a listing page is generated?
-			# for the tags page, look at template/query/tags
+			# for the tags page, look at template/query/tags.sql
 			my $tagsHorizontal = GetTagPageHeaderLinks();
 			PutHtmlFile('tags-horizontal.html', $tagsHorizontal);
 		}
@@ -172,6 +175,16 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		}
 	} #random
 
+	# label page, get the label name from $pageParam
+	elsif ($pageType eq 'label') {
+		my $labelName = $pageParam;
+		my $targetPath = "label/$labelName.html";
+		WriteLog('MakePage: label: $labelName = ' . $labelName);
+
+		my $labelPage = GetReadPage('label', $labelName);
+		PutHtmlFile($targetPath, $labelPage);
+	}
+
 	# tag page, get the tag name from $pageParam
 	elsif ($pageType eq 'tag') {
 		my $tagName = $pageParam;
@@ -186,7 +199,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 			#$queryParams{'limit_clause'} = "LIMIT 1000"; #todo fix hardcoded limit #todo pagination
 			$queryParams{'order_clause'} = "ORDER BY item_score DESC, item_flat.add_timestamp DESC";
 			my $scoreThreshold = 0;
-			$queryParams{'where_clause'} = "WHERE ','||tags_list||',' LIKE '%,$tagName,%' AND item_score >= $scoreThreshold";
+			$queryParams{'where_clause'} = "WHERE ','||labels_list||',' LIKE '%,$tagName,%' AND item_score >= $scoreThreshold";
 
 			$params{'query'} = DBGetItemListQuery(\%queryParams);
 			$params{'query_params'} = \%queryParams;
@@ -197,6 +210,8 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 
 		my $tagPage = GetReadPage('tag', $tagName);
 		PutHtmlFile($targetPath, $tagPage);
+
+		MakePage('label', $tagName); #todo this is a shim
 	}
 	
 	elsif ($pageType eq 'date') {
@@ -220,9 +235,9 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		$speakersPage = GetPageHeader('speakers');
 
 		my %queryParams;
-		$queryParams{'where_clause'} = "WHERE ','||tags_list||',' LIKE '%,speaker,%'";
+		$queryParams{'where_clause'} = "WHERE ','||labels_list||',' LIKE '%,speaker,%'";
 		$queryParams{'order_clause'} = "ORDER BY file_name";
-		#$queryParams{'where_clause'} = "WHERE ','||tags_list||',' LIKE '%,speaker,%'";
+		#$queryParams{'where_clause'} = "WHERE ','||labels_list||',' LIKE '%,speaker,%'";
 
 		my @itemSpeakers = DBGetItemList(\%queryParams);
 		foreach my $itemSpeaker (@itemSpeakers) {
@@ -247,7 +262,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		$committeePage = GetPageHeader('committee');
 
 		my %queryParams;
-		$queryParams{'where_clause'} = "WHERE ','||tags_list||',' LIKE '%,committee,%'";
+		$queryParams{'where_clause'} = "WHERE ','||labels_list||',' LIKE '%,committee,%'";
 		$queryParams{'order_clause'} = "ORDER BY item_order";
 
 		my @itemCommittee = DBGetItemList(\%queryParams);
@@ -279,7 +294,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 
 		foreach my $sponsorLevel (qw(gold silver)) {
 			my %queryParams;
-			$queryParams{'where_clause'} = "WHERE ','||tags_list||',' LIKE '%,sponsor,%' AND ','||tags_list||',' LIKE '%,$sponsorLevel,%'";
+			$queryParams{'where_clause'} = "WHERE ','||labels_list||',' LIKE '%,sponsor,%' AND ','||labels_list||',' LIKE '%,$sponsorLevel,%'";
 			$queryParams{'order_clause'} = "ORDER BY file_name";
 
 			my $sponsorsImages = '';

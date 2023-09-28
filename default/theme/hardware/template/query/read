@@ -2,14 +2,14 @@ SELECT
 	item_title,
 	item_flat.author_key AS author_id,
 	add_timestamp,
-	tags_list,
+	labels_list,
 	file_hash
 FROM
 	item_flat
 WHERE
 	item_score >= 0 AND
 	parent_count = 0 AND
-	tags_list NOT LIKE '%pubkey%' AND
-	tags_list NOT LIKE '%changelog%'
+	labels_list NOT LIKE '%pubkey%' AND
+	labels_list NOT LIKE '%changelog%'
 ORDER BY
 	add_timestamp DESC

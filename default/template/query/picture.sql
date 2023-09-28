@@ -6,4 +6,4 @@ SELECT
 FROM
 	item_flat
 WHERE
-	tags_list like '%,image,%'
+	labels_list like '%,image,%'

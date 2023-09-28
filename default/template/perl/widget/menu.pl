@@ -334,10 +334,10 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 		#todo this also needs relativize support
 	}
 
-	if (in_array($menuName, qw(threads tags authors active people new image topics))) {
+	if (in_array($menuName, qw(threads tags authors active people new image topics labels))) {
 		# counter counters #counter
 		# sum counters like this:
-		#Threads(5) Tags(3) People(7)
+		#Threads(5) Tags(3) People(7) Labels(5)
 		# topics counter
 		#todo this should be a list instead of hard-coded
 		my $itemCount = SqliteGetCount($menuName);

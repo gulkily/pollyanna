@@ -8,7 +8,7 @@ FROM
 WHERE
 	(author_score > 0 OR item_score > 0)
 		AND
-	tags_list LIKE '%,hastext,%'
+	labels_list LIKE '%,hastext,%'
 ORDER BY
 	add_timestamp DESC
 LIMIT 25;

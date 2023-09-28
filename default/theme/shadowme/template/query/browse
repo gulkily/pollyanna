@@ -1,7 +1,7 @@
 SELECT
 	author_flat.file_hash AS file_hash,
 	author_flat.author_key AS author_id,
-	item_flat.tags_list AS tags_list
+	item_flat.labels_list AS labels_list
 FROM
 	author_flat
 	JOIN item_flat ON (author_flat.file_hash = item_flat.file_hash)

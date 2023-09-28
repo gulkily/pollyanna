@@ -177,7 +177,7 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache
 
 						DBAddLabel($fileHash, GetTime(), 'pubkey', $gpgKeyPub, $fileHash);
 
-						# sub DBAddLabel() { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; Adds a new vote (tag) record to an item based on vote/ token
+						# sub DBAddLabel() { # $fileHash, $ballotTime, $voteValue, $signedBy, $sourceHash ; Adds a new vote (tag) record to an item based on vote/ token
 
 						DBAddItemAttribute($fileHash, 'gpg_alias', $aliasReturned);
 						#DBAddItemAttribute($fileHash, 'title', "$aliasReturned has registered (public key)"); #todo templatize

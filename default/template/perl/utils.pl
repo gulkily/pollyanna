@@ -1876,7 +1876,7 @@ sub AuthorHasTag { # $key ; returns 1 if user is admin, otherwise 0
 	if ($pubKeyHash) {
 		WriteLog('AuthorHasTag: $pubKeyHash = ' . $pubKeyHash);
 
-		my $pubKeyVoteTotalsRef = DBGetItemVoteTotals2($pubKeyHash);
+		my $pubKeyVoteTotalsRef = DBGetItemLabelTotals2($pubKeyHash);
 		my %pubKeyVoteTotals = %{$pubKeyVoteTotalsRef};
 		WriteLog('AuthorHasTag: join(",", keys(%pubKeyVoteTotals)) = ' . join(",", keys(%pubKeyVoteTotals)));
 

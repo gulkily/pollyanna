@@ -15,13 +15,13 @@ WHERE
 				SELECT alias FROM author_alias
 				WHERE
 					key = ?
-					AND file_hash IN (SELECT file_hash FROM item_flat WHERE tags_list LIKE '%,approve,%')
+					AND file_hash IN (SELECT file_hash FROM item_flat WHERE labels_list LIKE '%,approve,%')
 			)
 			AND file_hash IN (
 				SELECT file_hash
 				FROM item_flat
 				WHERE (
-					tags_list NOT LIKE '%,approve,%' AND tags_list NOT LIKE '%,flag,%'
+					labels_list NOT LIKE '%,approve,%' AND labels_list NOT LIKE '%,flag,%'
 				)
 			)
 	)

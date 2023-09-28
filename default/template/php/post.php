@@ -546,7 +546,7 @@ if (isset($comment) && $comment) {
 
 				RedirectWithResponse($returnToUrlPath, "Success! Reply posted. <small>in $finishTime"."s</small>");
 				// #todo add anchorto support ?
-				// #todo it would be nice if this differentiated between text reply and hashtag vote
+				// #todo it would be nice if this differentiated between text reply and hashtag label
 				// issue #2: ie does not like redirecting to a url with an anchor tag, because it tries to include that in the request
 				// issue #3: mosaic doesn't like relative redirects, need to include own domain in return url
 				// a few other browsers, like early ie versions, also don't like relative redirects

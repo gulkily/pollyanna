@@ -11,7 +11,7 @@ FROM
 	item_flat
 	LEFT JOIN author_score ON (item_flat.author_key = author_score.author_key)
 WHERE
-	tags_list NOT LIKE '%notext%'
+	labels_list NOT LIKE '%notext%'
 ORDER BY
 	child_count ASC,
 	add_timestamp DESC

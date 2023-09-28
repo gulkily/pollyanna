@@ -9,6 +9,6 @@ WHERE
 		FROM
 			item_flat
 		WHERE
-			','||tags_list||',' LIKE '%,admin,%'
+			','||labels_list||',' LIKE '%,admin,%'
 	)
 ;

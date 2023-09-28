@@ -1,12 +1,12 @@
 <!-- item/classify.template -->
 <fieldset>
-	<legend><b>Existing Tags</b><br></legend>
-	<span id=itemTagsList></span>
+	<legend><b>Existing Labels:</b><br></legend>
+	<span id=itemLabelsList></span>
 </fieldset>
 <br>
 <fieldset>
 	<legend><b>Add:</b><br></legend>
-	<span id=itemAddTagButtons></span>
+	<span id=itemAddLabelButtons></span>
 </fieldset>
 <br>
 <fieldset class=advanced>

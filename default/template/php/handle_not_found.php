@@ -316,6 +316,14 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		) {
 			WriteLog('HandleNotFound: found tags page');
 			$pagesPlArgument = '--tags';
+			#$canPlaceholder = 1;
+		}
+
+		if ($path == '/labels.html') {
+			#todo this may not be needed?
+			WriteLog('HandleNotFound: found labels page');
+			$pagesPlArgument = '--labels';
+			$canPlaceholder = 1;
 		}
 
 		if (isset($pagesPlArgument) && $pagesPlArgument) {

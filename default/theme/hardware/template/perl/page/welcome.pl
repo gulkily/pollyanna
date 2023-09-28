@@ -12,20 +12,20 @@ sub GetTagCategoriesDialog { # $rootTag ; traverses all tagsets under a tag and 
 
 	my $somethingWasFound = 0;
 
-	my @tagCountsArray = SqliteQueryHashRef("SELECT vote_value, COUNT(*) vote_count FROM vote GROUP BY vote_value");
+	my @tagCountsArray = SqliteQueryHashRef("SELECT label, COUNT(*) label_count FROM item_label GROUP BY label");
 	shift @tagCountsArray; # remove the first array item, which contains header
 	my %tagCounts;
 	for my $tagCount (@tagCountsArray) {
 		my %tagCount = %{$tagCount};
-		$tagCounts{$tagCount{'vote_value'}} = $tagCount{'vote_count'};
+		$tagCounts{$tagCount{'label'}} = $tagCount{'label_count'};
 	}
 
 	for my $tagset (@tagsets) {
 		my $queryTagsetCount = "
 			SELECT
-				COUNT(file_hash) FROM vote
+				COUNT(file_hash) FROM item_label
 			WHERE
-				vote_value IN(
+				label IN(
 					SELECT tag FROM tag_parent WHERE tag_parent = ?
 				)
 			GROUP BY

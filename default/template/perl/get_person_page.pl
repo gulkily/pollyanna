@@ -24,8 +24,8 @@ sub GetPersonPage { # $personName
 		#my %params;
 		#		$params{'where_clause'} = "
 		#			WHERE
-		#				tags_list LIKE '%,pubkey,%' AND
-		#				tags_list LIKE '%,approve,%' AND
+		#				labels_list LIKE '%,pubkey,%' AND
+		#				labels_list LIKE '%,approve,%' AND
 		#				file_hash IN (
 		#					SELECT file_hash
 		#					FROM item_flat
@@ -48,17 +48,17 @@ sub GetPersonPage { # $personName
 				'' AS tagset_pubkey
 			FROM item_flat
 			WHERE
-            				tags_list LIKE '%,pubkey,%' AND
-            				tags_list LIKE '%,approve,%' AND
-            				file_hash IN (
-            					SELECT file_hash
-            					FROM item_flat
-            					WHERE author_key IN(
-            						SELECT author_key
-            						FROM author_flat
-            						WHERE author_alias = '$personName'
-            					)
-            				)
+				(labels_list LIKE '%,pubkey,%' OR labels_list LIKE '%,my_name_is,%') AND
+				labels_list LIKE '%,approve,%' AND
+				file_hash IN (
+					SELECT file_hash
+					FROM item_flat
+					WHERE author_key IN(
+						SELECT author_key
+						FROM author_flat
+						WHERE author_alias = '$personName'
+					)
+				)
 		";
 		$keyList = GetQueryAsDialog($queryApprovedKeys, 'Approved Keys');
 	}
@@ -69,8 +69,8 @@ sub GetPersonPage { # $personName
 		#		my %params;
 		#		$params{'where_clause'} = "
 		#			WHERE
-		#				tags_list LIKE '%,pubkey,%' AND
-		#				tags_list NOT LIKE '%,approve,%' AND
+		#				labels_list LIKE '%,pubkey,%' AND
+		#				labels_list NOT LIKE '%,approve,%' AND
 		#				file_hash IN (
 		#					SELECT file_hash
 		#					FROM item_flat
@@ -94,17 +94,17 @@ sub GetPersonPage { # $personName
         				'' AS cart
         			FROM item_flat
         			WHERE
-                    				tags_list LIKE '%,pubkey,%' AND
-                    				tags_list NOT LIKE '%,approve,%' AND
-                    				file_hash IN (
-                    					SELECT file_hash
-                    					FROM item_flat
-                    					WHERE author_key IN(
-                    						SELECT author_key
-                    						FROM author_flat
-                    						WHERE author_alias = '$personName'
-                    					)
-                    				)
+						(labels_list LIKE '%,pubkey,%' OR labels_list LIKE '%,my_name_is,%') AND
+						labels_list NOT LIKE '%,approve,%' AND
+						file_hash IN (
+							SELECT file_hash
+							FROM item_flat
+							WHERE author_key IN(
+								SELECT author_key
+								FROM author_flat
+								WHERE author_alias = '$personName'
+							)
+						)
 		";
 		$pendingKeyList = GetQueryAsDialog($queryPendingKeys, 'Pending Keys');
 

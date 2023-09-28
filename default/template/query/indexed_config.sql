@@ -7,6 +7,6 @@ FROM
 	config
 	LEFT JOIN item_flat ON (config.file_hash = item_flat.file_hash)
 WHERE
-	(','||tags_list||',' like '%,admin,%')
+	(','||labels_list||',' like '%,admin,%')
 ORDER BY
 	add_timestamp DESC

@@ -7,8 +7,8 @@ WHERE
 		SELECT item_hash FROM item_parent 
 		WHERE parent_hash IN (
 			SELECT file_hash FROM item_flat 
-			WHERE tags_list LIKE '%,keep,%'
+			WHERE labels_list LIKE '%,keep,%'
 		)
 	) AND 
-	tags_list NOT LIKE '%keep%'
+	labels_list NOT LIKE '%keep%'
 ;

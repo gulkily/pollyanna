@@ -76,7 +76,7 @@ sub GetRssFile { # returns rss feed for current site
 		#item_flat.add_timestamp add_timestamp,
 		#item_flat.item_title item_title,
 		#item_flat.item_score item_score,
-		#item_flat.tags_list tags_list";
+		#item_flat.labels_list labels_list";
 
 
 		my $feedItem = GetTemplate('rss/feed.item.xml.template');

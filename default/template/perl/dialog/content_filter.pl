@@ -9,10 +9,10 @@ sub GetContentFilterDialog { # ; returns thermostat / content filter dialog
 
 	my $list = '';
 	for my $item (@list) {
-		my $itemTemplate = GetTemplate('html/widget/vote_value_item.template');
+		my $itemTemplate = GetTemplate('html/widget/label_item.template');
 		$itemTemplate = str_replace('$tagName', $item, $itemTemplate);
 
-		my $currentValue = SqliteGetValue("select value from vote_value where vote='$item'");
+		my $currentValue = SqliteGetValue("select weight from label_weight where label='$item'");
 		if (!$currentValue || $currentValue eq 1) {
 			$itemTemplate = str_replace('title=Low', 'title=Low checked', $itemTemplate);
 		}

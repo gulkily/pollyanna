@@ -1,20 +1,20 @@
 SELECT
-	vote_value,
-	vote_count
+	label,
+	label_count
 FROM (
 	SELECT
-		vote_value,
-		COUNT(vote_value) AS vote_count
+		label,
+		COUNT(label) AS label_count
 	FROM
-		vote
+		item_label
 	WHERE
 		file_hash IN (SELECT file_hash FROM item)
 	GROUP BY
-		vote_value
+		label
 	)
 WHERE
-	vote_count >= 1
+	label_count >= 1
 GROUP BY
-	vote_value
+	label
 ORDER BY
-	vote_value
+	label

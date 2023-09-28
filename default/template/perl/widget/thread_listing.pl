@@ -82,7 +82,13 @@ sub GetThreadListing { # $topLevel, $selectedItem, $indentLevel, $itemsListRefer
 	if (GetConfig('setting/html/item_page/include_notext_in_thread_list')) {
 		@itemChildren = SqliteQueryHashRef("SELECT item_hash FROM item_parent WHERE parent_hash = '$topLevel'");
 	} else {
-		my @itemChildren = SqliteQueryHashRef("SELECT item_hash FROM item_parent WHERE parent_hash = '$topLevel' AND item_hash NOT IN (SELECT file_hash FROM item_flat WHERE tags_list LIKE '%,notext,%')");
+		my @itemChildren = SqliteQueryHashRef("
+			SELECT item_hash
+			FROM item_parent
+			WHERE
+				parent_hash = '$topLevel' AND
+				item_hash NOT IN (SELECT file_hash FROM item_flat WHERE labels_list LIKE '%,notext,%')
+		");
 	}
 	shift @itemChildren;
 

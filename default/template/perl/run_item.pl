@@ -20,7 +20,7 @@ sub RunItem { # $item ; calls 'run' action on specified item
 	my $itemType = DBGetItemType($item);
 	#todo optimize this to reduce database queries
 
-	my $voteTotalsRef = DBGetItemVoteTotals2($item);
+	my $voteTotalsRef = DBGetItemLabelTotals2($item);
 	my %voteTotals = %{$voteTotalsRef};
 	if ($voteTotals{'python3'}) {
 		$itemType = 'py';

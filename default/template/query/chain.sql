@@ -1,8 +1,8 @@
 SELECT
-	'' AS special_title_tags_list_author,
+	'' AS special_title_labels_list_author,
 	item_flat.item_title item_title,
 	item_flat.author_key AS author_id,
-	item_flat.tags_list tags_list,
+	item_flat.labels_list labels_list,
 	item_attribute.value AS chain_order,
 	item_attribute.epoch chain_timestamp,
 	item_attribute.file_hash AS file_hash,

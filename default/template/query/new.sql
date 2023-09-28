@@ -5,12 +5,12 @@ SELECT
 	item_type,
 	child_count,
 	add_timestamp,
-	tags_list
+	labels_list
 FROM
 	item_flat
 WHERE
 	item_score >= 0 AND
 	add_timestamp >= strftime('%s', 'now', '-3 day') AND
-	tags_list NOT LIKE '%,notext,%'
+	labels_list NOT LIKE '%,notext,%'
 ORDER BY
 	add_timestamp DESC

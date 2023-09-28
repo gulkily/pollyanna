@@ -171,6 +171,12 @@ sub GetStatsTable { # $templateName = 'html/stats.template' ; returns Stats dial
 		$tagsTotal = 0;
 	}
 
+	my $labelsTotal = SqliteGetCount('labels');
+	if (!$labelsTotal) {
+		WriteLog('GetStatsTable: warning: $labelsTotal was FALSE');
+		$labelsTotal = 0;
+	}
+
 	#my $newLength = SqliteGetValue('SELECT COUNT(file_hash) FROM item_flat WHERE item_score >= 0');
 	my $newLength = SqliteGetCount('new');
 	if (!$newLength) {
@@ -186,6 +192,7 @@ sub GetStatsTable { # $templateName = 'html/stats.template' ; returns Stats dial
 	$statsTable =~ s/\$lastBuildTime/$lastBuildTime/;
 
 	$statsTable =~ s/\$tagsTotal/$tagsTotal/;
+	$statsTable =~ s/\$labelsTotal/$labelsTotal/;
 	$statsTable =~ s/\$versionFull/$versionFull/;
 	$statsTable =~ s/\$versionSuccinct/$versionSuccinct/;
 	$statsTable =~ s/\$versionSequence/$versionSequence/;

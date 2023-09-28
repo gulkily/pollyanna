@@ -1,4 +1,4 @@
-<!-- vote_value_item.template -->
+<!-- label_item.template -->
 <fieldset>
 <label for=$tagName value=$tagName>
 $tagName
@@ -7,4 +7,4 @@ $tagName
 <input type=radio id=$tagNameLow name=$tagName value=11 title=High>
 </label>
 </fieldset>
-<!-- / vote_value_item.template -->
+<!-- / label_item.template -->

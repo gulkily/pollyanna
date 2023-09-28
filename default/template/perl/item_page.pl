@@ -50,7 +50,7 @@ sub GetHtmlToolboxes {
 		$urlParam = str_replace('#', '%23', $urlParam);
 	}
 
-	if ((index($file{'tags_list'}, ',search,') != -1) && GetConfig('html/item_page/toolbox_search') && $urlParam) {
+	if ((index($file{'labels_list'}, ',search,') != -1) && GetConfig('html/item_page/toolbox_search') && $urlParam) {
 		#todo 'notext' items should also not get a search toolbox
 		#sub SearchToolbox {
 		#sub SearchDialog {
@@ -374,13 +374,13 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	my $addMermaid = 0; #todo refactor
 
 	my $itemTemplate = '';
-	if (index(',' . $file{'tags_list'} . ',', ',pubkey,') != -1) {
+	if (index(',' . $file{'labels_list'} . ',', ',pubkey,') != -1) {
 		#$itemTemplate = GetAuthorInfoBox($file{'file_hash'});
 		#this is missing a link to the profile, so remove it for now
 		$itemTemplate = GetItemTemplate(\%file); # GetItemPage()
 	}
 	elsif (
-		index(',' . $file{'tags_list'} . ',', ',mavo,') != -1 &&
+		index(',' . $file{'labels_list'} . ',', ',mavo,') != -1 &&
 		GetConfig('setting/admin/js/mavo')
 	) {
 		$itemTemplate = GetMavoItemTemplate(\%file);
@@ -432,7 +432,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		}
 	}
 
-	if (index($file{'tags_list'}, 'pubkey') != -1) {
+	if (index($file{'labels_list'}, 'pubkey') != -1) {
 		my $pubKeyFingerprint = $file{'author_key'};
 		my $pubKeyHash = $file{'file_hash'};
 
@@ -496,9 +496,9 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 #			# VOTE  BUTTONS
 #			# Vote buttons depend on reply functionality, so they are also in here
 #			$voteButtons .=
-#				GetItemTagButtons($file{'file_hash'}) .
+#				GetItemLabelButtons($file{'file_hash'}) .
 #				'<hr>' .
-#				GetTagsListAsHtmlWithLinks($file{'tags_list'}) .
+#				GetTagsListAsHtmlWithLinks($file{'labels_list'}) .
 #				'<hr>' .
 #				GetString('item_attribute/item_score') . $file{'item_score'}
 #			;
@@ -506,15 +506,15 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			if (GetConfig('html/item_page/toolbox_classify')) {
 				my $classifyForm = GetTemplate('html/item/classify.template');
 				$classifyForm = str_replace(
-					'<span id=itemTagsList></span>',
-					'<span id=itemTagsList>' . (GetTagsListAsHtmlWithLinks($file{'tags_list'}) || '(none)') . '</span>',
+					'<span id=itemLabelsList></span>',
+					'<span id=itemLabelsList>' . (GetTagsListAsHtmlWithLinks($file{'labels_list'}) || '(none)') . '</span>',
 					$classifyForm
 				);
-				WriteLog('GetItemPage: toolbox_classify: $file{\'tags_list\'} = ' . $file{'tags_list'});
+				WriteLog('GetItemPage: toolbox_classify: $file{\'labels_list\'} = ' . $file{'labels_list'});
 
 				$classifyForm = str_replace(
-					'<span id=itemAddTagButtons></span>',
-					'<span id=itemAddTagButtons>' . GetItemTagButtons($file{'file_hash'}) . '</span>',
+					'<span id=itemAddLabelButtons></span>',
+					'<span id=itemAddLabelButtons>' . GetItemLabelButtons($file{'file_hash'}) . '</span>',
 					$classifyForm
 				);
 
@@ -547,11 +547,11 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		foreach my $itemReply (@itemReplies) {
 			WriteLog('GetItemPage: $itemReply = ' . $itemReply);
 
-			if ($itemReply->{'tags_list'} && index($itemReply->{'tags_list'}, 'hide') != -1) {
+			if ($itemReply->{'labels_list'} && index($itemReply->{'labels_list'}, 'hide') != -1) {
 				next;
 			}
 
-			if ($itemReply->{'tags_list'} && index($itemReply->{'tags_list'}, 'notext') != -1) {
+			if ($itemReply->{'labels_list'} && index($itemReply->{'labels_list'}, 'notext') != -1) {
 				my $itemReplyTemplate = GetItemTemplate($itemReply); # GetItemPage() reply #notext
 				$txtIndex .= '<span class=advanced>' . $itemReplyTemplate . '</span>';
 			} else {
@@ -572,7 +572,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 
 		# RELATED LIST
 		my $showRelated = GetConfig('setting/html/item_page/toolbox_related');
-		if (index(',' . $file{'tags_list'} . ',', ',pubkey,') != -1) {
+		if (index(',' . $file{'labels_list'} . ',', ',pubkey,') != -1) {
 			$showRelated = 0;
 		}
 		if ($showRelated) {
@@ -623,7 +623,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$param{'no_empty'} = 1;
 		$param{'no_heading'} = 1;
 		$param{'no_status'} = 1;
-		$txtIndex .= GetQueryAsDialog($query, 'Applied Hashtags', 0, \%param);
+		$txtIndex .= GetQueryAsDialog($query, 'Applied Labels', 0, \%param);
 	}
 
 	if (GetConfig('setting/html/item_page/attributes_list')) {
@@ -650,24 +650,24 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	if (GetConfig('html/item_page/parse_log')) {
 		$txtIndex .= GetItemIndexLog($file{'file_hash'});
 		if (
-			(index($file{'tags_list'}, ',cpp,') != -1 && GetConfig('setting/admin/cpp/enable'))
+			(index($file{'labels_list'}, ',cpp,') != -1 && GetConfig('setting/admin/cpp/enable'))
 			||
-			(index($file{'tags_list'}, ',python3,') != -1 && GetConfig('setting/admin/python3/enable'))
+			(index($file{'labels_list'}, ',python3,') != -1 && GetConfig('setting/admin/python3/enable'))
 			||
-			(index($file{'tags_list'}, ',py,') != -1 && GetConfig('setting/admin/python3/enable'))
+			(index($file{'labels_list'}, ',py,') != -1 && GetConfig('setting/admin/python3/enable'))
 			||
-			(index($file{'tags_list'}, ',perl,') != -1 && GetConfig('setting/admin/perl/enable'))
+			(index($file{'labels_list'}, ',perl,') != -1 && GetConfig('setting/admin/perl/enable'))
 			||
-			(index($file{'tags_list'}, ',zip,') != -1 && GetConfig('setting/admin/zip/enable'))
+			(index($file{'labels_list'}, ',zip,') != -1 && GetConfig('setting/admin/zip/enable'))
 		) {
 			# cpp / py / perl / zip file
 			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'run_log');
 			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'compile_log');
 		}
-		if (index($file{'tags_list'}, ',python3,') != -1 && !GetConfig('setting/admin/python3/enable')) {
+		if (index($file{'labels_list'}, ',python3,') != -1 && !GetConfig('setting/admin/python3/enable')) {
 			$txtIndex .= GetDialogX('Note: Python module is off, this file was not parsed.', 'Notice');
 		}
-		if (index($file{'tags_list'}, ',perl,') != -1 && !GetConfig('setting/admin/perl/enable')) {
+		if (index($file{'labels_list'}, ',perl,') != -1 && !GetConfig('setting/admin/perl/enable')) {
 			$txtIndex .= GetDialogX('Note: Perl module is off, this file was not parsed.', 'Notice');
 		}
 		#todo same as above for zip
@@ -1071,11 +1071,11 @@ sub GetItemAttributesDialog2 {
 			}
 		}
 
-		if (defined($file{'tags_list'})) { # bolt on tags list as an attribute
+		if (defined($file{'labels_list'})) { # bolt on tags list as an attribute
 			$itemAttributesTable .= '<tr><td>';
-			$itemAttributesTable .= GetString('item_attribute/tags_list');
+			$itemAttributesTable .= GetString('item_attribute/labels_list');
 			$itemAttributesTable .= '</td><td>';
-			$itemAttributesTable .= GetTagsListAsHtmlWithLinks($file{'tags_list'});
+			$itemAttributesTable .= GetTagsListAsHtmlWithLinks($file{'labels_list'});
 			$itemAttributesTable .= '</td></tr>';
 		}
 

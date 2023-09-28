@@ -14,6 +14,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	#		tag, tag name/value
 	#		date, date in YYYY-MM-DD format
 	#		random, (none)
+	#		label, label name
 
 	# sub MakeAuthorPage {
 	# sub GetAuthorPage {
@@ -21,6 +22,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	# sub MakeReadPage {
 	# sub PrintReadPage {
 	# sub GetTagPage {
+	# sub GetLabelPage {
 	# sub GetHashtagPage {
 	# sub GetUserPage {
 	# sub GetDatePage {
@@ -133,6 +135,88 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 			$zipName = "$pageDate.zip";
 		} # $pageType eq 'date'
 
+		if ($pageType eq 'label') { #'/label/label.html' #'/label/' GetLabelPage { GetLabelListing {
+			# LABEL PAGE ############################################################
+			#todo tell user how many items we found
+
+			$pageParam = shift;
+			my $labelName = $pageParam;
+			chomp($labelName);
+
+			if ($labelName =~ m/[^a-zA-Z0-9_]/) { #labelName
+				WriteLog('GetReadPage: warning: sanity check failed on $labelName');
+				return '';
+			}
+
+
+			$title = "$labelName, posts with label";
+			$titleHtml = $title;
+
+			my %queryParams;
+
+
+			$queryParams{'where_clause'} = "
+		WHERE
+			item_flat.file_hash IN (
+				SELECT
+					file_hash
+				FROM
+					item_label
+				WHERE
+					label = '$labelName' OR
+					label IN (
+						SELECT label
+						FROM label_parent
+						WHERE label_parent = '$labelName'
+				)
+			)
+			AND item_flat.item_score >= 0
+			";
+			$queryParams{'order_clause'} = "ORDER BY item_flat.add_timestamp DESC";
+			$queryParams{'limit_clause'} = "LIMIT 100"; #todo fix hardcoded limit #todo pagination
+			#todo this code is old-style and should be replaced
+			#it should use a query template in ../template/query/
+
+			$queryDisplay = DBGetItemListQuery(\%queryParams);
+
+			@files = DBGetItemList(\%queryParams);
+
+			if (GetConfig('setting/zip/label')) {
+				$zipName = "label/$labelName.zip";
+				#todo move this somewhere else
+				if ($zipName) {
+					require_once('make_zip.pl');
+					my %zipOptions;
+					$zipOptions{'where_clause'} = "
+						WHERE
+							item_flat.file_hash IN (
+								SELECT
+									file_hash
+								FROM
+									item_label
+								WHERE
+									label = '$labelName' OR
+									label IN (
+										SELECT label
+										FROM label_parent
+										WHERE label_parent = '$labelName'
+								)
+							)
+					";
+					my @zipFiles = DBGetItemList(\%zipOptions);
+					MakeZipFromItemList($zipName, \@zipFiles);
+				} # if ($zipName)
+			} # if (GetConfig('setting/zip/label'))
+
+
+
+
+
+
+
+		} # if ($pageType eq 'label')
+
+
 		if ($pageType eq 'tag') { #'/tag/tag.html' #'/tag/tag.html' '/tag/' GetTagPage GetTagListing {
 			# TAG PAGE ##############################################################
 			#todo tell user how many items we found
@@ -150,12 +234,12 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 			$titleHtml = $title;
 
 			my %queryParams;
-			#$queryParams{'join_clause'} = "JOIN vote ON (item_flat.file_hash = vote.file_hash)";
-			#$queryParams{'group_by_clause'} = "GROUP BY vote.file_hash";
-			#$queryParams{'where_clause'} = "WHERE vote.vote_value = '$tagName'";
+			#$queryParams{'join_clause'} = "JOIN item_label ON (item_flat.file_hash = item_label.file_hash)";
+			#$queryParams{'group_by_clause'} = "GROUP BY item_label.file_hash";
+			#$queryParams{'where_clause'} = "WHERE item_label.label = '$tagName'";
 
 			# if (GetConfig('admin/expo_site_mode') && !GetConfig('admin/expo_site_edit')) {
-			# 	$queryParams{'where_clause'} = "WHERE ','||tags_list||',' LIKE '%,$tagName,%'";
+			# 	$queryParams{'where_clause'} = "WHERE ','||labels_list||',' LIKE '%,$tagName,%'";
 			# } else {
 			# 	my $scoreThreshold = -100;
 			# 	if ($tagName eq 'flag' || $tagName eq 'scunthorpe') {
@@ -163,9 +247,9 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 			# 		# all other pages should have a filter
 			# 		$scoreThreshold = -100;
 			# 	}
-			# 	#$queryParams{'where_clause'} = "WHERE ','||tags_list||',' LIKE '%,$tagName,%' AND item_score > 0";
-			# 	#$queryParams{'where_clause'} = "WHERE ','||tags_list||',' LIKE '%,$tagName,%' AND item_score >= 0";
-			# 	$queryParams{'where_clause'} = "WHERE ','||tags_list||',' LIKE '%,$tagName,%' AND item_score >= $scoreThreshold";
+			# 	#$queryParams{'where_clause'} = "WHERE ','||labels_list||',' LIKE '%,$tagName,%' AND item_score > 0";
+			# 	#$queryParams{'where_clause'} = "WHERE ','||labels_list||',' LIKE '%,$tagName,%' AND item_score >= 0";
+			# 	$queryParams{'where_clause'} = "WHERE ','||labels_list||',' LIKE '%,$tagName,%' AND item_score >= $scoreThreshold";
 			# }
 
 			#weird indentation here because we want it to look nice in the query dialog on the page
@@ -175,19 +259,19 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 				SELECT
 					file_hash
 				FROM
-					vote
+					item_label
 				WHERE
-					vote_value = '$tagName' OR
-					vote_value IN (
-						SELECT tag
-						FROM tag_parent
-						WHERE tag_parent = '$tagName'
+					label = '$tagName' OR
+					label IN (
+						SELECT label
+						FROM label_parent
+						WHERE label_parent = '$tagName'
 				)
 			)
 			AND item_flat.item_score >= 0
 			";
 			$queryParams{'order_clause'} = "ORDER BY item_flat.add_timestamp DESC";
-			$queryParams{'limit_clause'} = "LIMIT 1000"; #todo fix hardcoded limit #todo pagination
+			$queryParams{'limit_clause'} = "LIMIT 100"; #todo fix hardcoded limit #todo pagination
 			#todo this code is old-style and should be replaced
 			#it should use a query template in ../template/query/
 
@@ -207,13 +291,13 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 								SELECT
 									file_hash
 								FROM
-									vote
+									item_label
 								WHERE
-									vote_value = '$tagName' OR
-									vote_value IN (
-										SELECT tag
-										FROM tag_parent
-										WHERE tag_parent = '$tagName'
+									label = '$tagName' OR
+									label IN (
+										SELECT label
+										FROM label_parent
+										WHERE label_parent = '$tagName'
 								)
 							)
 					";
@@ -373,10 +457,10 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 								file_hash,
 								ballot_time
 							FROM
-								vote
+								item_label
 							WHERE
-								vote.author_key = '$authorKey'
-								AND vote_value = 'like'
+								item_label.author_key = '$authorKey'
+								AND label = 'like'
 						) AS like
 					WHERE
 						item_flat.file_hash = like.file_hash
@@ -397,7 +481,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 			} else {
 				#todo fix this
 				#my $query = "select file_hash, item_title from
-				#		item_flat where file_hash in (select file_hash from vote where vote.author_key = '$authorKey' AND vote = 'flag');";
+				#		item_flat where file_hash in (select file_hash from item_label where item_label.author_key = '$authorKey' AND label = 'flag');";
 				#$txtIndex .= GetQueryAsDialog($query
 				#	,
 				#	'Posts Flagged By Author',

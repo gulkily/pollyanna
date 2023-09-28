@@ -2,7 +2,7 @@ SELECT
 	item_title,
 	item_flat.author_key AS author_id,
 	add_timestamp,
-	tags_list,
+	labels_list,
 	file_hash,
 	file_path,
 	item_type

@@ -360,7 +360,7 @@ sub GetItemTagsSummary { # returns html with list of tags applied to item, and t
 	}
 
 	WriteLog("GetItemTagsSummary($fileHash)");
-	my $voteTotalsRef = DBGetItemVoteTotals2($fileHash);
+	my $voteTotalsRef = DBGetItemLabelTotals2($fileHash);
 	my %voteTotals = %{$voteTotalsRef};
 
 	my $votesSummary = '';
@@ -382,9 +382,9 @@ sub GetQuickVoteButtonGroup {
 	my $quickVotesButtons = '';
 	if ($returnTo) {
 		WriteLog('GetQuickVoteButtonGroup: $returnTo = ' . $returnTo);
-		$quickVotesButtons = GetItemTagButtons($fileHash, $returnTo); #todo refactor to take vote totals directly
+		$quickVotesButtons = GetItemLabelButtons($fileHash, $returnTo); #todo refactor to take vote totals directly
 	} else {
-		$quickVotesButtons = GetItemTagButtons($fileHash); #todo refactor to take vote totals directly
+		$quickVotesButtons = GetItemLabelButtons($fileHash); #todo refactor to take vote totals directly
 	}
 
 	my $quickVoteButtonGroup = GetTemplate('vote/votequick2.template');
@@ -1598,6 +1598,10 @@ while (my $arg1 = shift @foundArgs) {
 		elsif ($arg1 eq '--tags') {
 			WriteMessage("recognized --tags\n");
 			MakePage('tags');
+		}
+		elsif ($arg1 eq '--labels') {
+			WriteMessage("recognized --labels\n");
+			MakePage('labels');
 		}
 		elsif ($arg1 eq '--write') {
 			WriteMessage("recognized --write, you can use -M write now\n");
