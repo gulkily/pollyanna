@@ -14,9 +14,9 @@ my @files = SqliteQueryHashRef("
 		item_flat 
 	WHERE
 		( 
-			tags_list LIKE '%,meta,%' OR
-			tags_list LIKE '%,todo,%' OR
-			tags_list LIKE '%,bug,%'
+			labels_list LIKE '%,meta,%' OR
+			labels_list LIKE '%,todo,%' OR
+			labels_list LIKE '%,bug,%'
 		)
 		AND
 		item_score > 0

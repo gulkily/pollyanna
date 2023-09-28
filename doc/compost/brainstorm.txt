@@ -951,7 +951,7 @@ List file type
 	Each item is separate and part of the list
 
 select * from author_flat where file_hash in
-(select distinct file_hash from vote where vote_value = 'vouch' and author_key = 'D17F2F5762A4573D')
+(select distinct file_hash from item_label where label = 'vouch' and author_key = 'D17F2F5762A4573D')
 --vouch tree beginnings
 
 insec auth
@@ -2597,11 +2597,11 @@ Loop through all titlebar elements on page
 	added to by post.php
 
 select * from item_flat 
-where (',' || item_flat.tags_list || ',')  not like '%,vote,%'  
-and (',' || item_flat.tags_list || ',')  not like '%,keep,%'  
-and (',' || item_flat.tags_list || ',')  not like '%,accept,%' 
-and (',' || item_flat.tags_list || ',')  not like '%,pubkey,%' 
-and (',' || item_flat.tags_list || ',')  not like '%,reply,%';
+where (',' || item_flat.labels_list || ',')  not like '%,vote,%'
+and (',' || item_flat.labels_list || ',')  not like '%,keep,%'
+and (',' || item_flat.labels_list || ',')  not like '%,accept,%'
+and (',' || item_flat.labels_list || ',')  not like '%,pubkey,%'
+and (',' || item_flat.labels_list || ',')  not like '%,reply,%';
 
 Installer/dependency installer
 	which apt-get

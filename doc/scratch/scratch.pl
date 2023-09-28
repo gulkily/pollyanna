@@ -1,11 +1,11 @@
 
 			if ($tagName eq 'todo') {
-				$queryParams{'where_clause'} = $queryParams{'where_clause'} . " AND item_flat.tags_list NOT LIKE '%,done,%' ";
+				$queryParams{'where_clause'} = $queryParams{'where_clause'} . " AND item_flat.labels_list NOT LIKE '%,done,%' ";
 			}
 
 	if ($pageType eq 'tag' && $pageParam eq 'todo') {
 		# for todo items, list items that are todo+done at the bottom
-		my $queryDone = "SELECT file_hash, item_title FROM item_flat WHERE tags_list LIKE '%,todo,%' AND tags_list LIKE '%,done,%'";
+		my $queryDone = "SELECT file_hash, item_title FROM item_flat WHERE labels_list LIKE '%,todo,%' AND labels_list LIKE '%,done,%'";
 		$txtIndex .= GetQueryAsDialog($queryDone, 'Completed');
 	}
 
@@ -2094,7 +2094,7 @@ sub AuthorHasTag { # $key ; returns 1 if user is admin, otherwise 0
 	if ($pubKeyHash) {
 		WriteLog('AuthorHasTag: $pubKeyHash = ' . $pubKeyHash);
 
-		my $pubKeyVoteTotalsRef = DBGetItemVoteTotals2($pubKeyHash);
+		my $pubKeyVoteTotalsRef = DBGetItemLabelTotals2($pubKeyHash);
 		my %pubKeyVoteTotals = %{$pubKeyVoteTotalsRef};
 		WriteLog('AuthorHasTag: join(",", keys(%pubKeyVoteTotals)) = ' . join(",", keys(%pubKeyVoteTotals)));
 
@@ -3443,11 +3443,11 @@ if (GetConfig('setting/html/menu_advanced')) {
 #	my $isSurvey = 0;
 #	my $isTooLong = 0;
 #
-#	if ($file{'tags_list'}) {
+#	if ($file{'labels_list'}) {
 #		# if there is a list of tags, check to see if there is a 'textart' tag
 #
 #		# split the tags list into @itemTags array
-#		my @itemTags = split(',', $file{'tags_list'});
+#		my @itemTags = split(',', $file{'labels_list'});
 #
 #		# loop through all the tags in @itemTags
 #		while (scalar(@itemTags)) {
@@ -3538,13 +3538,13 @@ if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging
 
 
 
-# if (!$statusBar && index($file{'tags_list'}, 'speaker') != -1) {
+# if (!$statusBar && index($file{'labels_list'}, 'speaker') != -1) {
 # 	#$statusBar = $file{'item_title'};
 # }
 
 
 
-if (GetConfig('admin/expo_site_mode') && $file{'tags_list'} && index($file{'tags_list'}, 'sponsor') != -1) {
+if (GetConfig('admin/expo_site_mode') && $file{'labels_list'} && index($file{'labels_list'}, 'sponsor') != -1) {
 	$statusBar = '<a href="' . $file{'item_title'} . '" target=_blank>' . $file{'item_title'} . '</a>';
 }
 
@@ -4226,11 +4226,11 @@ sub DBCheckItemSurpass2 { # $a, $b
 			$isSigned = 0;
 		}
 
-		if ($file{'tags_list'}) {
+		if ($file{'labels_list'}) {
 			# if there is a list of tags, check to see if there is a 'textart' tag
 
 			# split the tags list into @itemTags array
-			my @itemTags = split(',', $file{'tags_list'});
+			my @itemTags = split(',', $file{'labels_list'});
 
 			# loop through all the tags in @itemTags
 			while (scalar(@itemTags)) {
@@ -4246,11 +4246,11 @@ sub DBCheckItemSurpass2 { # $a, $b
 				}
 			}
 		}
-		if ($file{'tags_list'}) {
+		if ($file{'labels_list'}) {
 			# if there is a list of tags, check to see if there is a 'textart' tag
 
 			# split the tags list into @itemTags array
-			my @itemTags = split(',', $file{'tags_list'});
+			my @itemTags = split(',', $file{'labels_list'});
 
 			# loop through all the tags in @itemTags
 			while (scalar(@itemTags)) {
@@ -4282,11 +4282,11 @@ sub DBCheckItemSurpass2 { # $a, $b
 			$isSigned = 0;
 		}
 
-		if ($file{'tags_list'}) {
+		if ($file{'labels_list'}) {
 			# if there is a list of tags, check to see if there is a 'textart' tag
 
 			# split the tags list into @itemTags array
-			my @itemTags = split(',', $file{'tags_list'});
+			my @itemTags = split(',', $file{'labels_list'});
 
 			# loop through all the tags in @itemTags
 			while (scalar(@itemTags)) {
@@ -4396,7 +4396,7 @@ sub DBCheckItemSurpass2 { # $a, $b
 #			# trim long text items
 #			$$replyItem{'trim_long_text'} = 1;
 ##
-##			if (index(','.$$replyItem{'tags_list'}.',', ','.'notext'.',') != -1) {
+##			if (index(','.$$replyItem{'labels_list'}.',', ','.'notext'.',') != -1) {
 ##				$$replyItem{'template_name'} = 'html/item/item.template';
 ##			} else {
 ##				$$replyItem{'template_name'} = 'html/item/item.template';
@@ -4421,7 +4421,7 @@ sub DBCheckItemSurpass2 { # $a, $b
 #				foreach my $subReplyItem (@subReplies) {
 #					DBAddItemPage($$subReplyItem{'file_hash'}, 'item', $file{'file_hash'});
 ##
-##					if (index(','.$$subReplyItem{'tags_list'}.',', ','.'notext'.',') != -1) {
+##					if (index(','.$$subReplyItem{'labels_list'}.',', ','.'notext'.',') != -1) {
 ##						$$subReplyItem{'template_name'} = 'html/item/item.template';
 ##						# $$subReplyItem{'template_name'} = 'html/item/item-mini.template';
 ##					} else {
@@ -4487,7 +4487,7 @@ sub DBCheckItemSurpass2 { # $a, $b
 #			# add reply form if no existing replies
 #
 #			{
-#				my $voteButtons = GetItemTagButtons($file{'file_hash'});
+#				my $voteButtons = GetItemLabelButtons($file{'file_hash'});
 #				$allReplies .= '<hr>'.GetDialogX($voteButtons, 'Add Tags').'<hr>';
 #			}
 #
@@ -4662,7 +4662,7 @@ sub SqliteMakeTables { # creates sqlite schema
 #	SqliteQuery("CREATE UNIQUE INDEX tag_unique ON tag(vote_value);");
 
 	# vote
-	SqliteQuery("CREATE TABLE vote(id INTEGER PRIMARY KEY AUTOINCREMENT, file_hash, ballot_time, vote_value, author_key, ballot_hash);");
+	SqliteQuery("CREATE TABLE vote(id INTEGER PRIMARY KEY AUTOINCREMENT, file_hash, ballot_time, vote_value, author_key, source_hash);");
 	SqliteQuery("CREATE UNIQUE INDEX vote_unique ON vote (file_hash, ballot_time, vote_value, author_key);");
 
 	# item_page
@@ -4731,11 +4731,11 @@ sub SqliteMakeTables { # creates sqlite schema
 
 	SqliteQuery("
 		CREATE VIEW
-			item_tags_list
+			item_labels_list
 		AS
 		SELECT
 			file_hash,
-			GROUP_CONCAT(DISTINCT vote_value) AS tags_list
+			GROUP_CONCAT(DISTINCT vote_value) AS labels_list
 		FROM vote
 		GROUP BY file_hash
 	");
@@ -4753,7 +4753,7 @@ sub SqliteMakeTables { # creates sqlite schema
 				IFNULL(item_title.title, '') AS item_title,
 				IFNULL(item_score.item_score, 0) AS item_score,
 				item.item_type AS item_type,
-				tags_list AS tags_list
+				labels_list AS labels_list
 			FROM
 				item
 				LEFT JOIN child_count ON ( item.file_hash = child_count.parent_hash )
@@ -4762,7 +4762,7 @@ sub SqliteMakeTables { # creates sqlite schema
 				LEFT JOIN item_title ON ( item.file_hash = item_title.file_hash )
 				LEFT JOIN item_author ON ( item.file_hash = item_author.file_hash )
 				LEFT JOIN item_score ON ( item.file_hash = item_score.file_hash )
-				LEFT JOIN item_tags_list ON ( item.file_hash = item_tags_list.file_hash )
+				LEFT JOIN item_labels_list ON ( item.file_hash = item_labels_list.file_hash )
 	");
 	SqliteQuery("
 		CREATE VIEW event_future AS
@@ -5002,7 +5002,7 @@ sub SqliteQuery3 { # performs sqlite query via sqlite3 command
 #	return $result;
 #}
 
-sub DBGetVotesForItem { # Returns all votes (weighed) for item
+sub DBGetLabelsForItem { # Returns all votes (weighed) for item
 	my $fileHash = shift;
 
 	if (!IsSha1($fileHash)) {
@@ -5085,7 +5085,7 @@ sub DBGetAuthorFriends { # Returns list of authors which $authorKey has tagged a
 		WHERE
 			vote.author_key = ?
 			AND vote_value = 'friend'
-			AND ',' || item_flat.tags_list || ',' LIKE '%,pubkey,%'
+			AND ',' || item_flat.labels_list || ',' LIKE '%,pubkey,%'
 		;
 	";
 
@@ -5228,8 +5228,8 @@ sub DBGetItemReplies { # Returns replies for item (actually returns all child it
 	WriteLog("DBGetItemReplies($itemHash)");
 
 	my %queryParams;
-	$queryParams{'where_clause'} = "WHERE file_hash IN(SELECT item_hash FROM item_parent WHERE parent_hash = '$itemHash') AND ','||tags_list||',' NOT LIKE '%,meta,%'";
-	$queryParams{'order_clause'} = "ORDER BY (tags_list NOT LIKE '%hastext%'), add_timestamp";
+	$queryParams{'where_clause'} = "WHERE file_hash IN(SELECT item_hash FROM item_parent WHERE parent_hash = '$itemHash') AND ','||labels_list||',' NOT LIKE '%,meta,%'";
+	$queryParams{'order_clause'} = "ORDER BY (labels_list NOT LIKE '%hastext%'), add_timestamp";
 
 	return DBGetItemList(\%queryParams);
 }
@@ -5513,7 +5513,7 @@ sub DBDeleteItemReferences { # delete all references to item from tables
 	}
 
 	{
-		my $query = "DELETE FROM vote WHERE ballot_hash = '$hash'";
+		my $query = "DELETE FROM vote WHERE source_hash = '$hash'";
 		SqliteQuery($query);
 	}
 
@@ -5523,10 +5523,10 @@ sub DBDeleteItemReferences { # delete all references to item from tables
 	}
 
 
-	#ballot_hash
+	#source_hash
 	my @tables3 = qw(vote);
 	foreach (@tables3) {
-		my $query = "DELETE FROM $_ WHERE ballot_hash = '$hash'";
+		my $query = "DELETE FROM $_ WHERE source_hash = '$hash'";
 		SqliteQuery($query);
 	}
 
@@ -5675,7 +5675,7 @@ sub DBAddPageTouch { # $pageName, $pageParam; Adds or upgrades in priority an en
 	push @queryParams, $pageName, $pageParam, $touchTime;
 } # DBAddPageTouch()
 
-sub DBGetVoteCounts { # Get total vote counts by tag value
+sub DBGetLabelCounts { # Get total vote counts by tag value
 # Takes $orderBy as parameter, with vote_count being default;
 #todo can probably be converted to parameterized query
 	my $orderBy = shift;
@@ -6110,7 +6110,7 @@ sub DBAddLocationRecord { # $itemHash, $latitude, $longitude, $signedBy ; Adds n
 
 ###
 
-sub DBAddLabel { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; Adds a new vote (tag) record to an item based on vote/ token
+sub DBAddLabel { # $fileHash, $ballotTime, $voteValue, $signedBy, $sourceHash ; Adds a new label record to an item based on vote/ token
 	state $query;
 	state @queryParams;
 
@@ -6144,13 +6144,13 @@ sub DBAddLabel { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; 
 		$query = '';
 	}
 
-	my $ballotTime = shift;
+	my $labelTime = shift;
 	my $voteValue = shift;
 	my $signedBy = shift;
-	my $ballotHash = shift;
+	my $sourceHash = shift;
 
-	if (!$ballotTime) {
-		WriteLog('DBAddLabel: warning: missing $ballotTime');
+	if (!$labelTime) {
+		WriteLog('DBAddLabel: warning: missing $labelTime');
 		return '';
 	}
 
@@ -6159,7 +6159,7 @@ sub DBAddLabel { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; 
 #	}
 
 	chomp $fileHash;
-	chomp $ballotTime;
+	chomp $labelTime;
 	chomp $voteValue;
 
 	if ($signedBy) {
@@ -6168,20 +6168,20 @@ sub DBAddLabel { # $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash ; 
 		$signedBy = '';
 	}
 
-	if ($ballotHash) {
-		chomp $ballotHash;
+	if ($sourceHash) {
+		chomp $sourceHash;
 	} else {
-		$ballotHash = '';
+		$sourceHash = '';
 	}
 
 	if (!$query) {
-		$query = "INSERT OR REPLACE INTO vote(file_hash, ballot_time, vote_value, author_key, ballot_hash) VALUES ";
+		$query = "INSERT OR REPLACE INTO vote(file_hash, label_time, vote_value, author_key, source_hash) VALUES ";
 	} else {
 		$query .= ",";
 	}
 
 	$query .= '(?, ?, ?, ?, ?)';
-	push @queryParams, $fileHash, $ballotTime, $voteValue, $signedBy, $ballotHash;
+	push @queryParams, $fileHash, $labelTime, $voteValue, $signedBy, $sourceHash;
 
 	DBAddPageTouch('tag', $voteValue);
 	DBAddPageTouch('item', $fileHash);
@@ -6677,7 +6677,7 @@ sub DBGetItemFields { # Returns fields we typically need to request from item_fl
 		item_flat.add_timestamp add_timestamp,
 		item_flat.item_title item_title,
 		item_flat.item_score item_score,
-		item_flat.tags_list tags_list,
+		item_flat.labels_list labels_list,
 		item_flat.item_type item_type";
 
 	return $itemFields;
@@ -7295,13 +7295,13 @@ sub RemoveOldItems {
 		SELECT * FROM item_flat WHERE file_hash NOT IN (
 			SELECT file_hash FROM item_flat
 			WHERE
-				',' || tags_list || ',' like '%approve%'
+				',' || labels_list || ',' like '%approve%'
 					OR
 				file_hash IN (
 					SELECT item_hash
 					FROM item_parent
 					WHERE parent_hash IN (
-						SELECT file_hash FROM item_flat WHERE ',' || tags_list || ',' LIKE '%approve%'
+						SELECT file_hash FROM item_flat WHERE ',' || labels_list || ',' LIKE '%approve%'
 					)
 				)
 		)
@@ -7366,7 +7366,7 @@ sub RemoveOldItems {
 #					$statusBar .= '</a>; ';
 #				}
 #
-#				$statusBar .= GetItemTagButtons($file{'file_hash'}, 'all');
+#				$statusBar .= GetItemLabelButtons($file{'file_hash'}, 'all');
 #				$windowParams{'status'} = $statusBar;
 #			}
 #

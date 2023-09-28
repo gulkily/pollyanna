@@ -15,19 +15,19 @@ sqlite3 -cmd ".headers off" -cmd ".timeout 500" cache/*/index.sqlite3 "
   WHERE file_hash NOT IN (
     SELECT file_hash FROM item_flat
     WHERE
-      ','||tags_list||',' LIKE '%,keep,%' OR
-      ','||tags_list||',' LIKE '%,puzzle,%' OR
-      ','||tags_list||',' LIKE '%,admin,%' OR
-      ','||tags_list||',' LIKE '%,pubkey,%'
+      ','||labels_list||',' LIKE '%,keep,%' OR
+      ','||labels_list||',' LIKE '%,puzzle,%' OR
+      ','||labels_list||',' LIKE '%,admin,%' OR
+      ','||labels_list||',' LIKE '%,pubkey,%'
     UNION
     SELECT item_hash AS file_hash FROM item_parent
     WHERE parent_hash IN (
       SELECT file_hash FROM item_flat
       WHERE
-        ','||tags_list||',' LIKE '%,keep,%' OR
-        ','||tags_list||',' LIKE '%,puzzle,%' OR
-        ','||tags_list||',' LIKE '%,admin,%' OR
-        ','||tags_list||',' LIKE '%,pubkey,%'
+        ','||labels_list||',' LIKE '%,keep,%' OR
+        ','||labels_list||',' LIKE '%,puzzle,%' OR
+        ','||labels_list||',' LIKE '%,admin,%' OR
+        ','||labels_list||',' LIKE '%,pubkey,%'
     )
     UNION
     SELECT item_hash AS file_hash FROM item_parent
@@ -36,10 +36,10 @@ sqlite3 -cmd ".headers off" -cmd ".timeout 500" cache/*/index.sqlite3 "
       WHERE parent_hash IN (
         SELECT file_hash FROM item_flat
         WHERE
-          ','||tags_list||',' LIKE '%,keep,%' OR
-          ','||tags_list||',' LIKE '%,puzzle,%' OR
-          ','||tags_list||',' LIKE '%,admin,%' OR
-          ','||tags_list||',' LIKE '%,pubkey,%'
+          ','||labels_list||',' LIKE '%,keep,%' OR
+          ','||labels_list||',' LIKE '%,puzzle,%' OR
+          ','||labels_list||',' LIKE '%,admin,%' OR
+          ','||labels_list||',' LIKE '%,pubkey,%'
       )
     )
   )

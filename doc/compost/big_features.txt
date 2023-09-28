@@ -22,8 +22,8 @@ import rss
 
 ability to add more usernames/passwords for first login
 
-*buttons to insert hash tags into textarea
- (sort of, there are buttons to insta-vote)
+*buttons to insert labels into textarea
+ (sort of, there are buttons to insta-label)
 
 flush (by filter, typically #approve)
 

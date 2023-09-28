@@ -11,6 +11,8 @@ hypercode v1
 			run finish
 			timestamp
 			(these are fur the run log item)
+		better solutions, if exist
+		worse solutions, if exist
 
 	problem page
 		lists problem at the top (text)
@@ -1130,7 +1132,7 @@ how to leave controls window when siwtching to light mode
 
 all scoring tags should be permissioned?
 	setting/admin/scoring_tags_are_permissioned
-	get them from vote_value table
+	get them from label_weight table
 
 ===
 
@@ -1139,11 +1141,6 @@ pagehistory
 	if more than one page, display dialog
 		dialog has a elements with url and title
 	...?
-
-===
-
-#todo rename vote.vote_value to vote.vote
-	(vote_value in lookup table should stay?)
 
 ===
 
@@ -3080,11 +3077,11 @@ Item page :
 ===
 
 select * from item_flat 
-where (',' || item_flat.tags_list || ',')  not like '%,vote,%'  
-and (',' || item_flat.tags_list || ',')  not like '%,keep,%'  
-and (',' || item_flat.tags_list || ',')  not like '%,accept,%' 
-and (',' || item_flat.tags_list || ',')  not like '%,pubkey,%' 
-and (',' || item_flat.tags_list || ',')  not like '%,reply,%';
+where (',' || item_flat.labels_list || ',')  not like '%,vote,%'
+and (',' || item_flat.labels_list || ',')  not like '%,keep,%'
+and (',' || item_flat.labels_list || ',')  not like '%,accept,%'
+and (',' || item_flat.labels_list || ',')  not like '%,pubkey,%'
+and (',' || item_flat.labels_list || ',')  not like '%,reply,%';
 
 ===
 

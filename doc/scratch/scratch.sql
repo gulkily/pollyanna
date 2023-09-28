@@ -15,13 +15,13 @@ WHERE
 				SELECT alias FROM author_alias
 				WHERE
 					key = ?
-					AND file_hash IN (SELECT file_hash FROM item_flat WHERE tags_list LIKE '%,approve,%')
+					AND file_hash IN (SELECT file_hash FROM item_flat WHERE labels_list LIKE '%,approve,%')
 			)
 			AND file_hash IN (
 				SELECT file_hash
 				FROM item_flat
 				WHERE (
-					tags_list NOT LIKE '%,approve,%' AND tags_list NOT LIKE '%,flag,%'
+					labels_list NOT LIKE '%,approve,%' AND labels_list NOT LIKE '%,flag,%'
 				)
 			)
 	)
@@ -39,13 +39,13 @@ WHERE
 					SELECT alias FROM author_alias
 					WHERE
 						key = ?
-						AND file_hash IN (SELECT file_hash FROM item_flat WHERE tags_list LIKE '%,approve,%')
+						AND file_hash IN (SELECT file_hash FROM item_flat WHERE labels_list LIKE '%,approve,%')
 				)
 				AND file_hash IN (
 					SELECT file_hash
 					FROM item_flat
 					WHERE (
-						tags_list NOT LIKE '%,approve,%' AND tags_list NOT LIKE '%,flag,%'
+						labels_list NOT LIKE '%,approve,%' AND labels_list NOT LIKE '%,flag,%'
 					)
 				)
 		)
@@ -62,8 +62,8 @@ FROM
 	item_flat
 	JOIN author_flat USING (author_key)
 WHERE
-	tags_list LIKE '%,pubkey,%'
-	AND (tags_list NOT LIKE '%,approve,%' AND tags_list NOT like '%,person,%')
+	labels_list LIKE '%,pubkey,%'
+	AND (labels_list NOT LIKE '%,approve,%' AND labels_list NOT like '%,person,%')
 	AND author_key IN (SELECT author_key FROM author_flat WHERE author_alias = 'Guest')
 ORDER BY
 	add_timestamp DESC
@@ -82,9 +82,9 @@ SELECT author_alias, c.file_hash from
 JOIN
 (
 	SELECT * FROM vote) b
-	ON (a.file_hash = b.ballot_hash)
+	ON (a.file_hash = b.source_hash)
 	join (select * from item_flat) c
-	on (b.ballot_hash = c.file_hash)
+	on (b.source_hash = c.file_hash)
 JOIN author_flat ON (author_flat.author_key = a.author_key)
 where
 	b.vote_value = 'avatar'

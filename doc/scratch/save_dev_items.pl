@@ -25,7 +25,7 @@ my $todoPath = "$SCRIPTDIR/doc/todo.txt";
 my $todoContents = GetFile($todoPath);
 
 my %queryParams;
-$queryParams{'where_clause'} = "WHERE (tags_list LIKE '%,bug,%' OR tags_list LIKE '%,todo,%')";
+$queryParams{'where_clause'} = "WHERE (labels_list LIKE '%,bug,%' OR labels_list LIKE '%,todo,%')";
 my @files = DBGetItemList(\%queryParams);
 
 my $itemsAdded = 0;

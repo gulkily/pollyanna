@@ -77,7 +77,7 @@ ADMINISTERING THROUGH WEB INTERFACE
 In order to do this, you first need to give yourself #admin tag.
 
 $ ./_dev_sqlite3.sh
-sqlite> INSERT INTO vote(file_hash, vote_value) VALUES('02985c8b2452789a12f5ec8f14235a067f14f78c', 'admin');
+sqlite> INSERT INTO item_label(file_hash, label) VALUES('02985c8b2452789a12f5ec8f14235a067f14f78c', 'admin');
 
 (Substitute of the hash of your public key for mine.)
 (To get yours, go to your profile, and look in Item Attributes.)

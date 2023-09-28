@@ -58,4 +58,4 @@ If they were assigned separately, you can remove that item.
 
 If they were assigned together, you have to remove the assignment and then re-add the people you want to remain moderators.
 
-In the future, there may be a way to negate existing tags, in case you want to preserve the previous relationships. I have not yet decided if this is necessary.
+In the future, there may be a way to negate existing labels, in case you want to preserve the previous relationships. I have not yet decided if this is necessary.
