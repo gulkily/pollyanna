@@ -71,7 +71,7 @@ sub GetString { # $stringKey, $language, $noSubstitutions ; Returns string from 
 		#if current theme has this string, override default
 		$string = GetThemeAttribute('string/' . $language . '/' . $stringKey);
 	} else {
-		WriteLog('GetString: NOT found in GetThemeAttribute');
+		WriteLog('GetString: NOT found in GetThemeAttribute; $language/$stringKey = ' . "$language/$stringKey" . '; caller = ' . join(',', caller));
 		#otherwise use regular string
 		$string = GetConfig('string/' . $language . '/' . $stringKey);
 	}
