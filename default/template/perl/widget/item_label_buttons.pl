@@ -5,7 +5,8 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons for item in html form
+sub GetItemLabelButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons for item in html form
+	# sub GetItemTagButtons {
 	# sub GetItemVoteButtons {
 	# sub GetVoteButtons {
 	# sub GetVoteLinks {
@@ -15,33 +16,33 @@ sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons f
 	my $fileHash = shift; # item's file hash
 	my $tagSet = shift;   # (optional) use a particular tagset instead of item's default
 	my $returnTo = shift; # (optional) what page to return to instead of current (for use by post.php)
-	WriteLog('GetItemTagButtons(' . ($fileHash ? $fileHash : '-') . ', ' . ($tagSet ? $tagSet : '-') . '); caller = ' . join(',', caller));
+	WriteLog('GetItemLabelButtons(' . ($fileHash ? $fileHash : '-') . ', ' . ($tagSet ? $tagSet : '-') . '); caller = ' . join(',', caller));
 
 	if (!IsItem($fileHash)) {
-		WriteLog('GetItemTagButtons: warning: sanity check failed: $fileHash = ' . $fileHash . '; caller = ' . join(',', caller));
+		WriteLog('GetItemLabelButtons: warning: sanity check failed: $fileHash = ' . $fileHash . '; caller = ' . join(',', caller));
 		return '';
 	}
 
 	my @quickVotesList; # this will hold all the tag buttons we want to display
-	my $voteTotalsRef = DBGetItemVoteTotals2($fileHash);
+	my $voteTotalsRef = DBGetItemLabelTotals2($fileHash);
 	my %voteTotals = %{$voteTotalsRef};
-	WriteLog('GetItemTagButtons: scalar(%voteTotals) = ' . scalar(%voteTotals));
+	WriteLog('GetItemLabelButtons: scalar(%voteTotals) = ' . scalar(%voteTotals));
 
 	if ($tagSet) {
 		# if $tagSet is specified, just use that list of tags
 		my $quickVotesForTagSet = GetTemplate('tagset/' . $tagSet);
 		if ($quickVotesForTagSet) {
-			WriteLog('GetItemTagButtons: tagset found: ' . $tagSet . '; caller = ' . join(',', caller));
+			WriteLog('GetItemLabelButtons: tagset found: ' . $tagSet . '; caller = ' . join(',', caller));
 			push @quickVotesList, split("\n", $quickVotesForTagSet);
 		}
 		else {
 			# no tagset?
-			WriteLog('GetItemTagButtons: warning: tagset not found: ' . $tagSet . '; caller = ' . join(',', caller));
+			WriteLog('GetItemLabelButtons: warning: tagset not found: ' . $tagSet . '; caller = ' . join(',', caller));
 			return '';
 		}
 	} # $tagSet
 	else {
-		WriteLog('GetItemTagButtons: tagset not specified; caller = ' . join(',', caller));
+		WriteLog('GetItemLabelButtons: tagset not specified; caller = ' . join(',', caller));
 
 		# need to look up item's default tagset
 		my $quickVotesForTags;
@@ -69,7 +70,7 @@ sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons f
 	my $doVoteButtonStyles = GetConfig('html/style_vote_buttons');
 	my $jsEnabled = GetConfig('admin/js/enable');
 
-	WriteLog('GetItemTagButtons: scalar(@quickVotesList) = ' . scalar(@quickVotesList));
+	WriteLog('GetItemLabelButtons: scalar(@quickVotesList) = ' . scalar(@quickVotesList));
 
 	my $commaCount = scalar(@quickVotesList) - 1; # actually semicolons
 
@@ -103,7 +104,7 @@ sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons f
 			}
 
 			my $quickTagCaption = GetString($quickTagValue);
-			WriteLog('GetItemTagButtons: $quickTagCaption = ' . $quickTagCaption . '; $quickTagValue = ' . $quickTagValue);
+			WriteLog('GetItemLabelButtons: $quickTagCaption = ' . $quickTagCaption . '; $quickTagValue = ' . $quickTagValue);
 			if ($voteTotals{$quickTagCaption}) {
 				# $voteTotals{$quickTagCaption} is the number of tags of this type item has
 
@@ -136,9 +137,9 @@ sub GetItemTagButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons f
 		} # if ($fileHash && $ballotTime)
 	} # foreach my $quickTagValue (@quickVotesList)
 
-	WriteLog('GetItemTagButtons: returning $tagButtons; length($tagButtons) = ' . length($tagButtons));
+	WriteLog('GetItemLabelButtons: returning $tagButtons; length($tagButtons) = ' . length($tagButtons));
 
 	return $tagButtons;
-} # GetItemTagButtons()
+} # GetItemLabelButtons()
 
 1;
