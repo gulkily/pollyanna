@@ -232,11 +232,6 @@ if [ $1 = sweep ]
 		time perl -T ./config/template/perl/index.pl --sweep
 fi
 
-if [ $1 = flush ]
-	then
-		time ./default/template/sh/flush_votes.sh
-fi
-
 if [ $1 = open ]
 	then
 		time ./default/template/perl/browser_open.pl
@@ -274,7 +269,6 @@ if [ $1 = help ]
 		echo hike help = see more commands
 		echo hike db = open sqlite3 command line
 		echo hike guidb = open sqlitebrowser
-		echo hike flush = flush unsigned votes
 		echo hike sweep = sweep deleted items
 		echo hike open = open browser
 		echo hike rebuild = clean, build, and index
