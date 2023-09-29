@@ -1,5 +1,5 @@
 <!-- window/status.template -->
-<tr class="statusbar advanced">
+<tr class="statusbar">
 	<td colspan=$contentColumnCount>
 		$windowStatus
 	</td>
