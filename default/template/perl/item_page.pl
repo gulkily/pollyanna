@@ -410,6 +410,13 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$txtIndex .= GetReplyForm($file{'file_hash'});
 	}
 
+	if (GetConfig('setting/admin/token/problem')) {
+		if (index($file{'labels_list'}, ',problem,') != -1) {
+			require_once('dialog/upload.pl');
+			$txtIndex .= GetUploadDialog('html/form/upload_reply.template', $file{'file_hash'});
+		}
+	}
+
 	# REPLY CART
 	#if (GetConfig('setting/html/reply_cart')) {
 	#	require_once('dialog/reply_cart.pl');
