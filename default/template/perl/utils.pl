@@ -1302,8 +1302,8 @@ sub str_replace { # $replaceWhat, $replaceWith, $string ; emulates some of str_r
 #props http://www.bin-co.com/perl/scripts/str_replace.php
 	# fourth $count parameter not implemented yet
 	my $replace_this = shift;
-	my $with_this  = shift;
-	my $string   = shift;
+	my $with_this = shift;
+	my $string = shift;
 
 	my $stringLength = length($string);
 
@@ -1314,15 +1314,20 @@ sub str_replace { # $replaceWhat, $replaceWith, $string ; emulates some of str_r
 		return "";
 	}
 
+	if (!defined($replace_this)) {
+		WriteLog('str_replace: warning: sanity check failed, missing $replace_this; caller = ' . join(',', caller));
+		return $string;
+	}
+
+	if (!defined($with_this)) {
+		WriteLog('str_replace: warning: sanity check failed, missing $with_this; caller = ' . join(',', caller));
+		return $string;
+	}
+
 	if (length($replace_this) < 32 && length($with_this) < 32) {
 		WriteLog("str_replace($replace_this, $with_this, ($stringLength)); caller = " . join(',', caller));
 	} else {
 		WriteLog('str_replace($replace_this = ' . length($replace_this) . 'b, $with_this = ' . length($with_this) . 'b , ($stringLength = ' . $stringLength . ')); caller = ' . join (',', caller));
-	}
-
-	if (!defined($replace_this) || !defined($with_this)) {
-		WriteLog('str_replace: warning: sanity check failed, missing $replace_this or $with_this');
-		return $string;
 	}
 
 	if ($replace_this eq $with_this) {
