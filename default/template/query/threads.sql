@@ -13,5 +13,4 @@ WHERE
 	item_flat.labels_list NOT LIKE '%,hide,%' AND
 	item_flat.labels_list NOT LIKE '%,pubkey,%'
 ORDER BY
-	item_flat.child_count DESC,
-	item_flat.item_score DESC
+	add_timestamp DESC
