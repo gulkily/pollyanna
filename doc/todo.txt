@@ -1,3 +1,5 @@
+config/setting/admin/token/avatar should toggle availability of avatar feature
+
 web archive link to current page
 
 hypercode v1
@@ -3910,4 +3912,9 @@ Archive dialog should be moved to a separate module out of default/template/perl
 ===
 
 when running as user, `hike stop` should not try to kill other users' processes (like port 80)
+
+===
+
+changing this setting should not need to rebuild the frontend:
+config/setting/admin/php/regrow_404_fork=1
 
