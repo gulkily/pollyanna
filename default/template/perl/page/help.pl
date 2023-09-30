@@ -6,16 +6,17 @@ use 5.010;
 
 sub GetHelpPage { # returns html for help page (/help.html)
 # sub GetHelpDialog()
+# sub GetMenuPage()
 	my $txtIndex = "";
 
 	$txtIndex =
 		GetPageHeader('help') .
 		GetTemplate('html/maincontent.template') .
-		GetIntroDialog('help') .
 		GetDialogX(GetTemplate('html/page/help.template'), 'Help') .
 		GetDialogX(GetTemplate('html/page/help_diagnostics.template'), 'Toys') .
 		GetDialogX(GetTemplate('html/page/help_views.template'), 'Views') .
 		GetStatsTable() .
+		GetIntroDialog('help') .
 		GetPageFooter('help')
 	;
 
