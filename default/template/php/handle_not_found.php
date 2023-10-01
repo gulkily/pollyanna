@@ -193,7 +193,8 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'tasks', #dev tasks.html
 			'browse', #shadowme browse.html
 			'donate', #donate donate.html
-			'topics' #topics topics.html
+			'topics', #topics topics.html
+			'judge', #judge judge.html
 		); # $validViews
 		#todo make this nicer and configurable etc
 		# validRoutes
