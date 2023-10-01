@@ -151,6 +151,15 @@ sub GetTokenDefs {
 			'apply_to_self' => 0,
 			'message' => '[Title]'
 		},
+		{ # child token, for creating a join item that links a child item to a parent item
+			# example: child: abcdef012346789abcdef012346789abcdef0
+			'token' => 'child',
+			'mask'  => '^(child)(\W)(.+)$', #todo should just allow hashes
+			'mask_params' => 'mg',
+			'apply_to_parent' => 1,
+			'apply_to_self' => 0,
+			'message' => '[Child]'
+		},
 		{ # title of item, either self or parent. used for display when title is needed #title title:
 			'token'   => 'boxes',
 			'mask'    => '^(boxes)(\W)(.+)$',
