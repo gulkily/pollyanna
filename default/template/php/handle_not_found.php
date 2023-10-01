@@ -7,29 +7,6 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 // for searching:
 // thanks.html welcome.html help.html settings.html profile.html
 
-	if (GetConfig('setting/admin/php/regrow_404_fork')) {
-		$pid = pcntl_fork();
-		if ($pid == -1) {
-			// something went wrong
-		} elseif ($pid == 0) {
-			// continue
-		} else {
-			// print placeholder page and also return it
-
-			/* my */ $textColor = '#c0c0c0'; #todo
-			/* my */ $bodyColor = '#202020'; #todo
-			/* my */ $htmlPlaceholder = '<html><head><meta http-equiv="refresh" content="1"></head><body text="$textColor" bgcolor="$bodyColor">Meditate...</body></html>';
-			$htmlPlaceholder = str_replace('$textColor', $textColor, $htmlPlaceholder);
-			$htmlPlaceholder = str_replace('$bodyColor', $bodyColor, $htmlPlaceholder);
-
-			PutFile($path, $htmlPlaceholder);
-			print($htmlPlaceholder);
-
-			#todo ensure there is no caching, and at route.php too
-			exit;
-		}
-	}
-
 	WriteLog("HandleNotFound($path, $pathRel) BEGIN");
 
 	if (GetConfig('admin/php/regrow_404_pages')) {
@@ -37,6 +14,8 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		$SCRIPTDIR = GetScriptDir();
 		WriteLog('HandleNotFound: $SCRIPTDIR = ' . $SCRIPTDIR);
 		WriteLog('HandleNotFound: about to do lookup and call pages.pl. $path = ' . $path);
+
+		/* my */ $canPlaceholder = 0;
 
 		### aliases begin
 		if (GetConfig('admin/php/url_alias_friendly')) {
@@ -52,27 +31,32 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			WriteLog('HandleNotFound: found item hash');
 			$itemHash = $itemHashMatch[1];
 			$pagesPlArgument = $itemHash;
+			$canPlaceholder = 1;
 		}
 		if (preg_match('/^\/author\/([A-F0-9]{16})/', $path, $itemHashMatch)) {
 			WriteLog('HandleNotFound: found author fingerprint');
 			$authorFingerprint = $itemHashMatch[1];
 			$pagesPlArgument = $authorFingerprint;
+			$canPlaceholder = 1;
 		}
 		if (preg_match('/^\/person\/([A-Za-z0-9]+)/', $path, $itemHashMatch)) {
 			WriteLog('HandleNotFound: found person name');
 			$personName = $itemHashMatch[1];
 			$pagesPlArgument = "-M person $personName";
+			$canPlaceholder = 1;
 		}
 		if (preg_match('/^\/tag\/([a-zA-Z0-9_]+)\.html/', $path, $hashTagMatch)) { #tagName
 		# Item URL in the form: /tag/nice.html
 			WriteLog('HandleNotFound: found hashtag');
 			$hashTag = $hashTagMatch[1];
 			$pagesPlArgument = '\#' . $hashTag;
+			$canPlaceholder = 1;
 		}
 		if (preg_match('/^\/date\/([0-9]{4}-[0-9]{2}-[0-9]{2})\.html/', $path, $dateMatch)) { #date
 			WriteLog('HandleNotFound: found date');
 			$pageDate = $dateMatch[1];
 			$pagesPlArgument = $pageDate;
+			$canPlaceholder = 1;
 		}
 		#todo
 		#		if (
@@ -101,12 +85,14 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		) {
 			WriteLog('HandleNotFound: warning: found a --listing page, this may cause slowness');
 			$pagesPlArgument = '--listing';
+			$canPlaceholder = 1;
 		}
 
 		if (
 			$path == '/bookmark.html'
 		) {
 			$pagesPlArgument = '-M bookmark';
+			$canPlaceholder = 1;
 		}
 
 		if (
@@ -115,6 +101,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		) {
 			WriteLog('HandleNotFound: found index page');
 			$pagesPlArgument = '-M welcome';
+			$canPlaceholder = 1;
 		}
 
 		if (
@@ -122,26 +109,31 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		) {
 			WriteLog('HandleNotFound: found cookie page');
 			$pagesPlArgument = '-M cookie';
+			$canPlaceholder = 1;
 		}
 
 		if ($path == '/stats.html' || $path == '/engine.html') {
 			WriteLog('HandleNotFound: found stats page');
 			$pagesPlArgument = '-M stats';
+			$canPlaceholder = 1;
 		}
 
 		if ($path == '/cloud.html') {
 			WriteLog('HandleNotFound: found cloud page');
 			$pagesPlArgument = '-M cloud';
+			$canPlaceholder = 1;
 		}
 
 		if ($path == '/random.html') {
 			WriteLog('HandleNotFound: found random page');
 			$pagesPlArgument = '-M random';
+			$canPlaceholder = 1;
 		}
 
 		if ($path == '/desktop.html') {
 			WriteLog('HandleNotFound: found desktop page');
 			$pagesPlArgument = '--desktop';
+			$canPlaceholder = 1;
 		}
 
 		$validMakePageNames = array(
@@ -173,6 +165,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		if (in_array($path, $validMakePageNames)) {
 			WriteLog('HandleNotFound: found ' . $path);
 			$pagesPlArgument = '-M ' . substr($path, 1, length($path) - 6);
+			$canPlaceholder = 1;
 		}
 
 		$validViews = array(
@@ -215,6 +208,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 				WriteLog('HandleNotFound: warning: view NOT FOUND in $validViews: $pathView = ' . $pathView);
 				// #todo should be possible to recover if in dev mode
 			}
+			$canPlaceholder = 1;
 		} else {
 			WriteLog('HandleNotFound: no match in $validViews');
 		}
@@ -228,6 +222,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		if (in_array($path, $validJsPage)) {
 			WriteLog('HandleNotFound: found js: ' . $path);
 			$pagesPlArgument = '--js';
+			$canPlaceholder = 0;
 		}
 
 
@@ -236,6 +231,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		) {
 			WriteLog('HandleNotFound: found settings page');
 			$pagesPlArgument = '--settings';
+			$canPlaceholder = 1;
 		}
 
 ########### DIALOGS BEGIN
@@ -271,6 +267,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 				) {
 					WriteLog('HandleNotFound: found ' . $basicDialog . ' dialog');
 					$pagesPlArgument = '-D ' . $basicDialog;
+					$canPlaceholder = 0;
 					break;
 				}
 			}
@@ -282,6 +279,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 					WriteLog('HandleNotFound: found dialog / item hash');
 					$itemHash = $itemHashMatch[1];
 					$pagesPlArgument = '-D ' . $itemHash;
+					$canPlaceholder = 1;
 				}
 
 				if (preg_match('/^\/dialog\/tag\/([a-zA-Z0-9_-]+)\.html/', $path, $itemTagMatch)) {
@@ -289,6 +287,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 					WriteLog('HandleNotFound: found dialog / tag');
 					$tagName = $itemTagMatch[1];
 					$pagesPlArgument = '-D \#' . $tagName;
+					$canPlaceholder = 1;
 				}
 			}
 		} # /dialog/...
@@ -301,6 +300,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		) {
 			WriteLog('HandleNotFound: found data page');
 			$pagesPlArgument = '--data';
+			$canPlaceholder = 0;
 		}
 
 		if (
@@ -309,12 +309,14 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		) {
 			WriteLog('HandleNotFound: found write page');
 			$pagesPlArgument = '--write';
+			$canPlaceholder = 1;
 		}
 
 		if (
 			$path == '/tags.html' ||
 			$path == '/votes.html'
 		) {
+			#todo this may not be needed?
 			WriteLog('HandleNotFound: found tags page');
 			$pagesPlArgument = '--tags';
 			#$canPlaceholder = 1;
@@ -369,6 +371,38 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 						# ok
 					}
 				} else {
+					if (GetConfig('setting/admin/php/regrow_404_fork')) {
+						if ($canPlaceholder) {
+							$pid = pcntl_fork();
+							if ($pid == -1) {
+								// something went wrong
+							} elseif ($pid == 0) {
+								// continue
+							} else {
+								// print placeholder page and also return it
+
+								/* my */ $textColor = '#c0c0c0'; #todo
+								/* my */ $bodyColor = '#202020'; #todo
+								/* my */ $htmlPlaceholder = '<html><head><meta http-equiv="refresh" content="1"></head><body text="$textColor" bgcolor="$bodyColor">Meditate...</body></html>';
+								$htmlPlaceholder = str_replace('$textColor', $textColor, $htmlPlaceholder);
+								$htmlPlaceholder = str_replace('$bodyColor', $bodyColor, $htmlPlaceholder);
+
+								PutFile($path, $htmlPlaceholder);
+								print($htmlPlaceholder);
+
+								#todo ensure there is no caching, and at route.php too
+								exit;
+							}
+						} else {
+							if (0) { // for debugging
+								print($path);
+								print('<br>');
+								print($pagesPlArgument);
+								exit;
+							}
+						}
+					}
+
 					#todo use GetDir() and not ./pages.pl
 					/* my */ $pagesPlCommand = 'cd "' . $SCRIPTDIR . '" ; ./pages.pl ' . $pagesPlArgument;
 					WriteLog('HandleNotFound: $pagesPlCommand = ' . $pagesPlCommand);
