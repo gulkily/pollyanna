@@ -8,6 +8,7 @@ use utf8;
 #todo this is the first version, and is sub-optimal
 
 sub GetThreadListingDialog { # $fileHash ; get dialog listing all thread items
+#todo refactor this to be more efficient
 	my $fileHash = shift;
 	chomp $fileHash;
 
@@ -35,7 +36,7 @@ sub GetThreadListingDialog { # $fileHash ; get dialog listing all thread items
 		my $threadListingDialog .= GetDialogX($threadListing, 'Thread', 'item_title,add_timestamp');
 		return $threadListingDialog;
 	} else {
-		WriteLog('GetThreadListingDialog: warning: $threadListing returned FALSE');
+		WriteLog('GetThreadListingDialog: warning: $threadListing is FALSE');
 	}
 
 	return '';
