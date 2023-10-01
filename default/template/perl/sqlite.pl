@@ -630,24 +630,39 @@ sub DBGetItemParents {# Returns all item's parents
 } # DBGetItemParents()
 
 sub DBGetTopLevelItem { # $item ; traverse parents until top-level item is reached
-	#todo this can be a recursive sqlite query
+	#todo this can be a recursive sqlite query and view
 
 	#todo sanity
 	#todo immutable things?
 
 	my $item = shift;
 
+	#state %memo;
+	#if (defined($memo{$item}) && exists($memo{$item})) {
+	#	WriteLog('DBGetTopLevelItem: memo hit: $item = ' . $item);
+	#	return $memo{$item};
+	#}
+
+	#WriteLog('DBGetTopLevelItem: memo miss: $item = ' . $item);
+	WriteLog('DBGetTopLevelItem(' . $item . ')');
+
 	my $firstParent = $item;
 	my $newParent = $firstParent;
 
 	while ($newParent) {
-		$newParent = SqliteGetValue("SELECT parent_hash FROM item_parent WHERE item_hash = '$firstParent' LIMIT 1"); #todo parameterize ORDER BY score DESC?
+		my $query = "SELECT parent_hash FROM item_parent WHERE item_hash = '$firstParent' LIMIT 1";
+		$newParent = SqliteGetValue($query); #todo parameterize ORDER BY score DESC?
+		# only considers the first returned parent
+		WriteLog('DBGetTopLevelItem: $query = ' . $query);
+
 		if ($newParent) {
 			$firstParent = $newParent;
 		} else {
 			$newParent = 0;
 		}
 	}
+
+	#$memo{$item} = $firstParent;
 
 	return $firstParent;
 } # DBGetTopLevelItem()
