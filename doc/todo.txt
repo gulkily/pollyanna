@@ -1,3 +1,7 @@
+child item should be an attribute?
+
+item_parent should have a constraint that parent != item
+
 config/setting/admin/token/avatar should toggle availability of avatar feature
 
 web archive link to current page
