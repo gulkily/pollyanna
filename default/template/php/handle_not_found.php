@@ -46,9 +46,16 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			$canPlaceholder = 1;
 		}
 		if (preg_match('/^\/tag\/([a-zA-Z0-9_]+)\.html/', $path, $hashTagMatch)) { #tagName
-		# Item URL in the form: /tag/nice.html
+			# Item URL in the form: /tag/nice.html
 			WriteLog('HandleNotFound: found hashtag');
 			$hashTag = $hashTagMatch[1];
+			$pagesPlArgument = '\#' . $hashTag;
+			$canPlaceholder = 1;
+		}
+		if (preg_match('/^\/label\/([a-zA-Z0-9_]+)\.html/', $path, $labelMatch)) { #labelName
+			# Item URL in the form: /label/nice.html
+			WriteLog('HandleNotFound: found label');
+			$hashTag = $labelMatch[1];
 			$pagesPlArgument = '\#' . $hashTag;
 			$canPlaceholder = 1;
 		}
@@ -279,7 +286,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 					WriteLog('HandleNotFound: found dialog / item hash');
 					$itemHash = $itemHashMatch[1];
 					$pagesPlArgument = '-D ' . $itemHash;
-					$canPlaceholder = 1;
+					$canPlaceholder = 0;
 				}
 
 				if (preg_match('/^\/dialog\/tag\/([a-zA-Z0-9_-]+)\.html/', $path, $itemTagMatch)) {
@@ -287,7 +294,14 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 					WriteLog('HandleNotFound: found dialog / tag');
 					$tagName = $itemTagMatch[1];
 					$pagesPlArgument = '-D \#' . $tagName;
-					$canPlaceholder = 1;
+					$canPlaceholder = 0;
+				}
+				if (preg_match('/^\/dialog\/label\/([a-zA-Z0-9_-]+)\.html/', $path, $itemLabelMatch)) {
+					# Item URL in the form: /label/nice.html
+					WriteLog('HandleNotFound: found dialog / label');
+					$labelName = $itemLabelMatch[1];
+					$pagesPlArgument = '-D \#' . $labelName;
+					$canPlaceholder = 0;
 				}
 			}
 		} # /dialog/...
