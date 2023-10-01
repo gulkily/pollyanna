@@ -265,7 +265,8 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 				'upload',
 				'write',
 				'access',
-				'annoyances'
+				'annoyances',
+				'labels'
 			); # /dialog/
 
 			foreach ($basicDialogs as $basicDialog) {
