@@ -210,7 +210,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			}
 			$canPlaceholder = 1;
 		} else {
-			WriteLog('HandleNotFound: no match in $validViews');
+			WriteLog('HandleNotFound: warning: no match in $validViews for $path = ' . $path);
 		}
 
 		$validJsPage = array(
