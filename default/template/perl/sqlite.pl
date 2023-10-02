@@ -522,7 +522,7 @@ sub SqliteQueryCachedShell { # $query, @queryParams ; performs sqlite query via 
 	}
 } # SqliteQueryCachedShell()
 
-sub DBGetLabelsForItem { # Returns all labels (weighed) for item
+sub DBGetLabelsForItem { # $fileHash ; Returns all labels (weighed) for item
 	my $fileHash = shift;
 
 	if (!IsItem($fileHash)) {

@@ -5002,7 +5002,7 @@ sub SqliteQuery3 { # performs sqlite query via sqlite3 command
 #	return $result;
 #}
 
-sub DBGetLabelsForItem { # Returns all votes (weighed) for item
+sub DBGetLabelsForItem { # $fileHash ; Returns all labels (weighed) for item
 	my $fileHash = shift;
 
 	if (!IsSha1($fileHash)) {

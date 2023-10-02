@@ -89,6 +89,7 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 
 	my $isVerified = 0;
 	my $redditUsername = '';
+	my $isApproved = 0;
 
 	if ($authorKey) {
 		WriteLog('GetAvatar: $authorKey = ' . $authorKey);
@@ -100,6 +101,12 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 		my %authorItemAttributes;
 		if ($authorItemAttributesRef) {
 			%authorItemAttributes = %{$authorItemAttributesRef};
+		}
+
+		if (GetConfig('setting/html/avatar_link_to_person_when_approved')) {
+    		if (SqliteGetValue("SELECT COUNT(label) FROM item_label WHERE label = 'approve' AND file_hash = '$authorPubKeyHash'")) {
+    			$isApproved = 1;
+    		}
 		}
 
 		my $alias = '';
@@ -210,20 +217,26 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 	$avatar =~ s/\$alias/$aliasHtmlEscaped/g; #todo use str_replace()
 
 	my $colorUsername = '';
-	if (IsAdmin($authorKey)) {
-		$colorUsername = GetThemeColor('admin_text');
-		WriteLog('GetAvatar: $colorUsername reason is admin');
+
+
+	if ($isApproved) {
+		$avatar = '<b>' . GetAlias($authorKey) . '</b>';
+	} else {
+		if (IsAdmin($authorKey)) {
+			$colorUsername = GetThemeColor('admin_text');
+			WriteLog('GetAvatar: $colorUsername reason is admin');
+		}
+		elsif ($isVerified) {
+			$colorUsername = GetThemeColor('verified_text');
+			WriteLog('GetAvatar: $colorUsername reason is verified');
+		}
+		else {
+			$colorUsername = GetThemeColor('author_text');
+			WriteLog('GetAvatar: $colorUsername reason is basic');
+		}
+		WriteLog('GetAvatar: $colorUsername = ' . $colorUsername);
+		$avatar =~ s/\$colorUsername/$colorUsername/g;
 	}
-	elsif ($isVerified) {
-		$colorUsername = GetThemeColor('verified_text');
-		WriteLog('GetAvatar: $colorUsername reason is verified');
-	}
-	else {
-		$colorUsername = GetThemeColor('author_text');
-		WriteLog('GetAvatar: $colorUsername reason is basic');
-	}
-	WriteLog('GetAvatar: $colorUsername = ' . $colorUsername);
-	$avatar =~ s/\$colorUsername/$colorUsername/g;
 
 	# save to memo cache
 	$avatarCache{$authorKey} = $avatar;

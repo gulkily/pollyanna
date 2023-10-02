@@ -29,13 +29,19 @@ sub GetAuthorLink { # $fingerprint, $showPlain ; returns avatar'ed link for an a
 		return 'Guest'; #guest...
 	}
 
+	WriteLog("GetAuthorLink($fingerprint, $showPlain)");
+
 	my $authorUrl;
-	if (1) {
-		$authorUrl = "/author/$fingerprint/index.html";
-	}
-	else {
-		#todo
-		#$authorUrl = "/person/$authorName/index.html"
+	$authorUrl = "/author/$fingerprint/index.html";
+	if (GetConfig('setting/html/avatar_link_to_person_when_approved')) {
+		my $authorPubKeyHash = DBGetAuthorPublicKeyHash($fingerprint) || '';
+
+		if (SqliteGetValue("SELECT COUNT(label) FROM item_label WHERE label = 'approve' AND file_hash = '$authorPubKeyHash'")) {
+			my $alias = GetAlias($fingerprint);
+			my $aliasEscaped = UriEscape($alias);
+
+			$authorUrl = "/person/$aliasEscaped/index.html";
+		}
 	}
 
 	my $authorAvatar = '';
