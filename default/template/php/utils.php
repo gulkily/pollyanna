@@ -1297,7 +1297,7 @@ function GetClockFormattedTime () { // returns current time in appropriate forma
 	return GetTime();
 } # GetClockFormattedTime()
 
-function IsItem ($string) { # returns 1 if parameter is in item hash format (40 or 8 lowercase hex chars), 0 otherwise
+function IsItem ($string) { # $string ; returns hash if parameter is in item hash format (40 or 8 lowercase hex chars), 0 otherwise
 	WriteLog("IsItem($string)");
 
 	if (!$string) {
