@@ -5,18 +5,10 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub GetAuthorLink { # $fingerprint, $showPlain ; returns avatar'ed link for an author id
+sub GetAuthorLink { # $fingerprint ; returns avatar'ed link for an author id
 	my $fingerprint = shift; # author's fingerprint
-	my $showPlain = shift; # 1 to display avatar without colors
 
 	require_once('widget/avatar.pl');
-
-	# sanitize $showPlain
-	if (!$showPlain) {
-		$showPlain = 0;
-	} else {
-		$showPlain = 1;
-	}
 
 	if (!$fingerprint) {
 		WriteLog('GetAuthorLink: warning: $fingerprint is missing; caller = ' . join(',', caller));
@@ -29,7 +21,7 @@ sub GetAuthorLink { # $fingerprint, $showPlain ; returns avatar'ed link for an a
 		return 'Guest'; #guest...
 	}
 
-	WriteLog("GetAuthorLink($fingerprint, $showPlain)");
+	WriteLog("GetAuthorLink($fingerprint)");
 
 	my $authorUrl;
 	$authorUrl = "/author/$fingerprint/index.html";
@@ -45,11 +37,6 @@ sub GetAuthorLink { # $fingerprint, $showPlain ; returns avatar'ed link for an a
 	}
 
 	my $authorAvatar = '';
-	if ($showPlain) {
-		$authorAvatar = GetAvatar($fingerprint);
-	} else {
-		$authorAvatar = GetAvatar($fingerprint);
-	}
 
 	my $authorLink = GetTemplate('html/authorlink.template');
 
