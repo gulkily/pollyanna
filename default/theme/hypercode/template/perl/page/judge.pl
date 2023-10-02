@@ -9,7 +9,7 @@ sub GetJudgePage {
 		GetPageHeader('judge') .
 
 		GetDialogX(GetTemplate('html/page/judge.template'), 'Judge') .
-		GetQueryAsDialog("SELECT file_hash, item_title FROM item_flat WHERE labels_list LIKE '%,problem,%'", 'Problems') .
+		GetQueryAsDialog('judge', 'Problems') .
 		GetPageFooter('judge')
 	;
 
