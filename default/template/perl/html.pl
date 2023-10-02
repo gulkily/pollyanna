@@ -8,6 +8,7 @@ use utf8;
 sub UriEscape {
 # sub UrlEncode {
 # sub EscapeUrl {
+# sub UrlEscape {
 
 	my $string = shift;
 
