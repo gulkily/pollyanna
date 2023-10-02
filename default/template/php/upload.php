@@ -136,14 +136,38 @@ if (!empty($_FILES['uploaded_file'])) {
 						WriteLog("cd $scriptDir ; ./pages.pl \"$hash\"");
 						WriteLog(`cd $scriptDir ; ./pages.pl "$hash"`);
 
-						if (isset($replyTo) && $replyTo) {
-							WriteLog("\$replyTo = $replyTo");
-							if (IsItem($replyTo)) {
+						$replyTo = '';
+						if ($_POST && $_POST['replyto']) {
+							# if file was posted as reply to something, create another item to attach them together
+							# this creates an item with a >> reference and a child: token
+
+							$replyTo = $_POST['replyto'];
+							$replyTo = IsItem($replyTo);
+							if ($replyTo) {
+								$linkItem = ">>$replyTo" . "\n" . "Child: $hash";
+								$linkItemHash = sha1($linkItem);
+								$txtDir = GetDir('txt');
+								$linkItemPath = substr($linkItemHash, 0, 2) . "/" . substr($linkItemHash, 2, 2) . "$linkItemHash.txt";
+								PutFile("$txtDir/$linkItemPath", $linkItem);
+
+								if ($pwd) {
+									WriteLog("cd $pwd");
+									WriteLog(`cd $pwd`);
+								}
+
+								WriteLog("cd $scriptDir ; ./index.pl \"$txtDir/$linkItemPath\"");
+								WriteLog(`cd $scriptDir ; ./index.pl "$txtDir/$linkItemPath"`);
+
 								WriteLog("cd $scriptDir ; ./pages.pl \"$replyTo\"");
 								WriteLog(`cd $scriptDir ; ./pages.pl "$replyTo"`);
+
+								if ($pwd) {
+									WriteLog("cd $pwd");
+									WriteLog(`cd $pwd`);
+								}
+							} else {
+								WriteLog('upload.php: warning: $_POST[replyto] was passed, but $replyTo failed sanity check');
 							}
-						} else {
-							WriteLog("\$replyTo not found");
 						}
 
 						if ($pwd) {
