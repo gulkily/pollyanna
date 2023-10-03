@@ -1475,6 +1475,8 @@ sub DBAddKeyAlias { # adds new author-alias record $key, $alias, $pubkeyFileHash
 } # DBAddKeyAlias()
 
 sub DBAddItemParent { # $itemHash, $parentItemHash ; Add item parent record.
+# sub DBAddChild {
+# sub DBAddParent {
 # Usually this is when item references parent item, by being a reply or a label, etc.
 #todo replace with item_attribute
 	state $query;
