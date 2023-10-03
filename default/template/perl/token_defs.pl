@@ -146,7 +146,7 @@ sub GetTokenDefs {
 		{ # title of item, either self or parent. used for display when title is needed #title title:
 			'token'   => 'title',
 			'mask'    => '^(title)(\W)(.+)$',
-			'mask_params'    => 'mg',
+			'mask_params'    => 'mgi',
 			'apply_to_parent' => 1,
 			'apply_to_self' => 0,
 			'message' => '[Title]'
@@ -154,8 +154,8 @@ sub GetTokenDefs {
 		{ # child token, for creating a join item that links a child item to a parent item
 			# example: child: abcdef012346789abcdef012346789abcdef0
 			'token' => 'child',
-			'mask'  => '^(child)(\W)(.+)$', #todo should just allow hashes
-			'mask_params' => 'mg',
+			'mask'  => '^(child)(\W+)([0-9a-f]{40})$', #todo should just allow hashes
+			'mask_params' => 'mgi',
 			'apply_to_parent' => 1,
 			'apply_to_self' => 0,
 			'message' => '[Child]'
@@ -163,7 +163,7 @@ sub GetTokenDefs {
 		{ # title of item, either self or parent. used for display when title is needed #title title:
 			'token'   => 'boxes',
 			'mask'    => '^(boxes)(\W)(.+)$',
-			'mask_params'    => 'mg',
+			'mask_params'    => 'mgi',
 			'apply_to_parent' => 0,
 			'apply_to_self' => 1,
 			'message' => '[BoxCount]'
@@ -171,27 +171,27 @@ sub GetTokenDefs {
 		{ # begin time, self only:
 			'token'   => 'begin',
 			'mask'    => '^(begin)(\W)(.+)$',
-			'mask_params'    => 'mg',
+			'mask_params'    => 'mgi',
 			'message' => '[Begin]',
 			'apply_to_self' => 1
 		},
 		{ # duration, self only:
 			'token'   => 'duration',
 			'mask'    => '^(duration)(\W)(.+)$',
-			'mask_params'    => 'mg',
+			'mask_params'    => 'mgi',
 			'message' => '[Duration]',
 			'apply_to_self' => 1
 		},
 		# { # track: self only:
 		# 	'token'   => 'track',
 		# 	'mask'    => '^(track)(\W)(.+)$',
-		# 	'mask_params'    => 'mg',
+		# 	'mask_params'    => 'mgi',
 		# 	'message' => '[Track]'
 		# },
 		{ # name of item, either self or parent. used for display when title is needed #title title:
 			'token'   => 'name',
 			'mask'    => '^(name)(\W)(.+)$',
-			'mask_params'    => 'mg',
+			'mask_params'    => 'mgi',
 			'apply_to_parent' => 1,
 			'apply_to_self' => 1,
 			'message' => '[Name]'
@@ -199,7 +199,7 @@ sub GetTokenDefs {
 		{ # order of item, either self or parent. used for ordering things
 			'token'   => 'order',
 			'mask'    => '^(order)(\W)(.+)$',
-			'mask_params'    => 'mg',
+			'mask_params'    => 'mgi',
 			'apply_to_parent' => 1,
 			'apply_to_self' => 0,
 			'message' => '[Order]'
@@ -207,7 +207,7 @@ sub GetTokenDefs {
 		{ # used for image alt tags #todo
 			'token'   => 'alt',
 			'mask'    => '^(alt)(\W+)(.+)$',
-			'mask_params'    => 'mg',
+			'mask_params'    => 'mgi',
 			'apply_to_parent' => 1,
 			'message' => '[Alt]'
 		},
