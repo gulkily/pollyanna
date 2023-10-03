@@ -32,7 +32,7 @@ function btnSignOut_Click (t) { // event for 'Sign Out' button's click
 	//alert('DEBUG: btnSignOut_Click() begin');
 
 	if (window.localStorage) {
-		//alert('DEBUG: btnSignOut_Click: localStorage is true');
+		//alert('DEBUG: btnSignOut_Click: window.localStorage is true, removing preferences');
 
 		var ls = window.localStorage;
 		ls.removeItem('privatekey');
@@ -48,12 +48,14 @@ function btnSignOut_Click (t) { // event for 'Sign Out' button's click
 	}
 
 	if (window.SetCookie) {
+		//alert('DEBUG: btnSignOut_Click: window.SetCookie is true, removing cookies');
 		SetCookie('cookie', 0);
 		SetCookie('checksum', 0);
 	}
 
 	if (0) { //#todo
 		// postmessage
+		// this would announce the user's exit
 
 		var form = document.createElement('form');
 		form.setAttribute("action", "/post.html");
