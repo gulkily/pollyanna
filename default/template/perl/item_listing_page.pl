@@ -145,7 +145,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 
 	if ($pageQuery eq 'chain') {
 		#special case hack for chain page
-		if (0) {
+		if (1) {
 			$html .= GetDialogX('<a href="/chain.log">chain.log</a>', 'Log');
 		} else {
 			$html .= GetDialogX('<a href="/chain.log">chain.log</a><br><iframe height=300 width=700 src="/chain.log"></iframe>', 'Log');
