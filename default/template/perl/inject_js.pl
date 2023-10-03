@@ -84,7 +84,7 @@ sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 
 		if ($script eq 'translit') {
 			if (!GetConfig('admin/js/translit')) {
-				WriteLog('InjectJs: warning: translit requested, but admin/js/translit is off');
+				WriteLog('InjectJs: warning: translit requested, but admin/js/translit is off; caller = ' . join(',', caller));
 				next;
 			}
 		}
