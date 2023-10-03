@@ -103,6 +103,7 @@ if [ $1 = reindex ]
     sleep 3
     sqlite3 cache/b/index.sqlite3 "delete from item_attribute";
     rm -v cache/b/indexed/*
+    time perl -T ./config/template/perl/index.pl --chain
     time perl -T ./config/template/perl/index.pl --all
 fi
 
