@@ -26,7 +26,7 @@ epoch,
 source
 );
 
-CREATE TABLE item_parent(item_hash, parent_hash);
+CREATE TABLE item_parent(item_hash, parent_hash, CONSTRAINT item_hash_not_equal_parent_hash CHECK (item_hash <> parent_hash));
 CREATE UNIQUE INDEX item_parent_unique ON item_parent(item_hash, parent_hash);
 
 CREATE TABLE author_alias(
