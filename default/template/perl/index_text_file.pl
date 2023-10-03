@@ -512,29 +512,32 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 					#todo put into config
 					my @validTokens = qw(
-						hashtag
-						title 
-						name 
-						order 
-						alt 
 						access_log_hash
-						self_timestamp
-						received
+						alt
 						begin
-						duration
-						track
-						host
-						date
-						https
-						http
 						boxes
+						child
+						client
+						cookie
+						date
+						duration
+						hashtag
+						hike_set
+						host
+						http
+						https
+						my_name_is
+						name
+						operator_please
+						order
+						parent
+						received
+						s_replace
+						self_timestamp
 						surpass
 						time
-						hashtag
-						s_replace
-						operator_please
-						hike_set
-						my_name_is
+						title
+						track
 					); #tokenSanityCheck
 					#### TODO #TODO there should really really be a warning when this doesn't pan out, because ...
 
@@ -543,7 +546,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						# these tokens are applied to:
 						# 	if item has parent, then to the parent
 						# 		otherwise: to self
-						WriteLog('IndexTextFile: token_found: ' . $tokenFound{'recon'});
+						WriteLog('IndexTextFile: token found in @validTokens: ' . $tokenFound{'token'});
 
 						push @indexMessageLog, 'valid: ' . $tokenFound{'token'};
 
@@ -696,7 +699,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						}
 					} # title, access_log_hash, http, https, alt, name, self_timestamp, operator_please
 					else {
-						WriteLog('IndexTextFile: warning: token not found in @validTokens, sanity check failed; caller = ' . join(',', caller));
+						WriteLog('IndexTextFile: warning: token not found in @validTokens, sanity check failed; $tokenFound{token} = ' . $tokenFound{token} . '; caller = ' . join(',', caller));
 					}
 
 					if ($tokenFound{'token'} eq 'my_name_is') { # my_name_is
