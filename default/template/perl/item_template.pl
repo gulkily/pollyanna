@@ -374,13 +374,18 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 		my $fileHash = '';
 		if ($file{'file_path'}) {
 			$fileHash = GetFileHash($file{'file_path'}); # get file's hash
-		} else {
+			if (!$fileHash) {
+				WriteLog('GetItemTemplate: warning: GetFileHash($file{file_path}) returned FALSE');
+			}
+		}
+		if (!$fileHash) {
 			if ($itemHash) {
 				$fileHash = $itemHash;
-			} else {
-				WriteLog('GetItemTemplate: warning: cannot get a $fileHash');
-				return '';
 			}
+		}
+		if (!$fileHash) {
+			WriteLog('GetItemTemplate: warning: could not find a $fileHash; caller = ' . join(',', caller));
+			return '';
 		}
 
 		# initialize $itemTemplate for storing item output
@@ -578,7 +583,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 		my $borderColor = '#' . substr($fileHash, 0, 6); # item's border color
 		my $addedTime = DBGetAddedTime($fileHash);
 		if (!$addedTime) {
-			WriteLog('GetItemTemplate: warning: $addedTime was FALSE');
+			WriteLog('GetItemTemplate: warning: $addedTime was FALSE; $fileHash = ' . $fileHash . '; caller = ' . join(',', caller));
 			$addedTime = 0;
 		}
 		$addedTime = ceil($addedTime);
