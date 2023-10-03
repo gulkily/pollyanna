@@ -137,7 +137,7 @@ if (!empty($_FILES['uploaded_file'])) {
 						WriteLog(`cd $scriptDir ; ./pages.pl "$hash"`);
 
 						$replyTo = '';
-						if ($_POST && $_POST['replyto']) {
+						if ($_POST && isset($_POST['replyto'])) {
 							# if file was posted as reply to something, create another item to attach them together
 							# this creates an item with a >> reference and a child: token
 
