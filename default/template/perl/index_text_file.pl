@@ -316,6 +316,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							$newTokenFound{'recon'} = $reconLine;
 							$newTokenFound{'message'} = $tokenMessage;
 							$newTokenFound{'apply_to_parent'} = $tokenDef{'apply_to_parent'};
+							$newTokenFound{'apply_to_self'} = $tokenDef{'apply_to_self'};
 							$newTokenFound{'target_attribute'} = $tokenDef{'target_attribute'};
 							$newTokenFound{'hashtag'} = $tokenDef{'hashtag'};
 							push(@tokensFound, \%newTokenFound);
