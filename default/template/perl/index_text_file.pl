@@ -584,6 +584,14 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									} else {
 										DBAddItemAttribute($itemParent, $targetAttribute, $tokenFound{'param'}, $itemTimestamp, $fileHash);
 									}
+
+									if (GetConfig('setting/admin/token/child') && $tokenFound{'token'} eq 'child') {
+										if (IsItem($tokenFound{'param'})) {
+											my $newChild = IsItem($tokenFound{'param'});
+											DBAddItemParent($newChild, $itemParent);
+											push @indexMessageLog, 'adding child ' . $newChild . ' to item ' . $itemParent;
+										}
+									}
 								}
 							}
 							if ($tokenFound{'apply_to_self'} || !($tokenFound{'apply_to_parent'} && @itemParents)) {
