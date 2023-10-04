@@ -4,7 +4,55 @@ use strict;
 use warnings;
 use 5.010;
 
+sub MakePollyannaPages {
+	#hack
+	my $pollyannaPageTemplate = GetTemplate('html/page/pollyanna/index.html');
+	if ($pollyannaPageTemplate) {
+		PutFile(GetDir('html') . '/pollyanna/index.html', $pollyannaPageTemplate);
+
+		my $pollyannaScreenshotPageTemplate = GetTemplate('html/page/pollyanna/screenshot.html');
+
+		if ($pollyannaScreenshotPageTemplate) {
+			PutFile(GetDir('html') . '/pollyanna/screenshot.html', GetTemplate('html/page/pollyanna/screenshot.html'));
+		}
+
+		my @filesToCopy = qw(
+			doc/screenshot/16964/netscape3.png
+			doc/screenshot/16964/lynx.png
+			doc/screenshot/16964/firefox.png
+			doc/screenshot/16964/brave.png
+			doc/screenshot/16964/ie6.png
+			doc/screenshot/16964/floorp.png
+			doc/screenshot/16964/safari5.png
+			doc/screenshot/16964/seamonkey.png
+			doc/screenshot/16964/tor.png
+			doc/screenshot/16964/opera12-presto.png
+			doc/screenshot/16964/msedge.png
+			doc/screenshot/16964/netscape4.png
+			doc/screenshot/16964/chrome.png
+			doc/screenshot/16964/palemoon.png
+			doc/screenshot/16964/w3m.png
+			doc/screenshot/16964/netscape9.png
+			doc/screenshot/16964/links2.png
+			doc/screenshot/16964/links.png
+			doc/screenshot/16964/yandex.png
+			doc/screenshot/16964/vivaldi.png
+			doc/screenshot/pollyanna/github.png
+			doc/screenshot/pollyanna/screenshot.png
+			doc/screenshot/pollyanna/whitepaper.png
+			doc/whitepaper-pollyanna.pdf
+		);
+
+		for my $file (@filesToCopy) {
+			my $targetName = TrimPathLeaveExtension($file);
+			copy($file, GetDir('html') . '/pollyanna/' . $targetName);
+		}
+	}
+}
+
 sub GetWelcomePage {
+	MakePollyannaPages(); #hack
+
 	my $html =
 		GetPageHeader('welcome') .
 		GetDialogX(GetTemplate('html/page/welcome.template'), 'Welcome') .
