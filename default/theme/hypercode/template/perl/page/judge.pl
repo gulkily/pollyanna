@@ -10,6 +10,7 @@ sub GetJudgePage {
 
 		GetDialogX(GetTemplate('html/page/judge.template'), 'Judge') .
 		GetQueryAsDialog('judge', 'Problems') .
+		GetQuerySqlDialog('judge') .
 		GetPageFooter('judge')
 	;
 
