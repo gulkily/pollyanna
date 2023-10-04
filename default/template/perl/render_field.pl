@@ -30,11 +30,13 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		WriteLog('RenderField: $fieldName = ' . $fieldName);
 	} else {
 		WriteLog('RenderField: warning: $fieldName NOT DEFINED; caller = ' . join(', ', caller));
+		$fieldName = '';
 	}
 	if (defined($fieldValue)) {
 		WriteLog('RenderField: $fieldValue = ' . $fieldValue);
 	} else {
 		WriteLog('RenderField: warning: $fieldValue NOT DEFINED; caller = ' . join(', ', caller));
+		$fieldValue = '';
 	}
 
 	WriteLog("RenderField($fieldName, $fieldValue, [%rowData])");
