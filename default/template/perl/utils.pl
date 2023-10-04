@@ -1948,6 +1948,18 @@ sub TrimPath { # $string ; Trims the directories AND THE FILE EXTENSION from a f
 	return $string;
 } # TrimPath()
 
+sub TrimPathLeaveExtension { # $string ; Trims the directories
+# sub GetFileName {
+# sub RemovePath {
+# sub StripPath {
+
+	my $string = shift;
+	while (index($string, "/") >= 0) {
+		$string = substr($string, index($string, "/") + 1);
+	}
+	return $string;
+} # TrimPathLeaveExtension()
+
 sub IsSha1 { # returns 1 if parameter is in sha1 hash format, 0 otherwise
 	my $string = shift;
 
