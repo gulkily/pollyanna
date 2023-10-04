@@ -21,7 +21,7 @@ print(`$pullCommand`);
 my $versionAfter = GetMyVersion(1);
 
 if ($versionBefore ne $versionAfter) {
-	my $cleanCommand = "time ./clean.sh >> $upgradeLogFilename";
+	my $cleanCommand = "time ./default/template/sh/clean.sh >> $upgradeLogFilename";
 	print(`$cleanCommand`);
 
 	my $buildCommand = "time ./build.sh >> $upgradeLogFilename";

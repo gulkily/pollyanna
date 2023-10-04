@@ -1,7 +1,7 @@
 #!/bin/sh
 
 txtCount=$(find html/txt -type f | wc -l) #Count files and store in a variable
-if [ "$txtCount" -ge 20 ] && [ -e cache/b/index.sqlite ] ;
+if [ "$txtCount" -ge 20 ] && [ -e cache/b/index.sqlite3 ] ;
 	then
 		echo =======================================================
 		echo ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION!
@@ -15,9 +15,9 @@ if [ "$txtCount" -ge 20 ] && [ -e cache/b/index.sqlite ] ;
 		exit 1
 fi
 
-./clean.sh
+./default/template/sh/clean.sh
 sleep 1
-./build.sh
+./default/template/sh/build.sh
 echo Indexing chain...
 sleep 1
 ./index.pl --chain

@@ -70,7 +70,7 @@ fi
 
 if [ $1 = build ] # hike build
 	then
-		time ./build.sh
+		time ./default/template/sh/build.sh
 		echo
 		echo "                            ==============="
 		echo "                            build complete!"
@@ -82,7 +82,7 @@ fi
 
 if [ $1 = clean ] # hike clean
 	then
-		time ./clean.sh
+		time ./default/template/sh/clean.sh
 		echo ""
 		echo "==============="
 		echo "clean complete!"
@@ -92,7 +92,7 @@ fi
 
 if [ $1 = rebuild ]
 	then
-		time ./rebuild.sh
+		time ./default/template/sh/rebuild.sh
 fi
 
 if [ $1 = reindex ]
@@ -185,7 +185,7 @@ if [ $1 = start ] # hike start
 	then
 		if [ ! -e config/template/perl/server_local_lighttpd.pl ]
 			then
-				/bin/sh ./build.sh
+				/bin/sh ./default/template/sh/build.sh
 		fi
 		echo 1 > config/setting/admin/lighttpd/server_started
 		time perl -T config/template/perl/server_local_lighttpd.pl
@@ -196,7 +196,7 @@ if [ $1 = startpython ] # hike startpython
 	then
 		if [ ! -e config/template/perl/server_local_python.pl ]
 			then
-				/bin/sh ./build.sh
+				/bin/sh ./default/template/sh/build.sh
 		fi
 		#todo echo 1 > config/setting/admin/lighttpd/server_started
 		time perl -T config/template/perl/server_local_python.pl
