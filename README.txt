@@ -21,10 +21,10 @@ Yb,  88      `8b      IP'`Yb IP'`Yb
 
 CONSENT:
 
-For operators and administrators, thankyou supports every released software
+For operators and administrators, Pollyanna supports every released software
 version indefinitely, forgoing forced updates or any coersion.
 
-For users and clients, thankyou facilitates full account and data ownership
+For users and clients, Pollyanna facilitates full account and data ownership
 and accessibility. Users should be able to access or not access the service as
 they see fit and in whatever way they see fit, as long as it is with the consent
 of the operator. Users should be able to see, with full transparency, all the
@@ -32,21 +32,21 @@ data and information contained in the service.
 
 ACCESSIBILITY:
 
-thankyou bends over backwards to accommodate every user and client,
+Pollyanna bends over backwards to accommodate every user and client,
 regardless of their access method of choice, browser and configuration,
 connection speed, device type, abilities, and situation.
 
-thankyou tries to perpetuate the Any Browser philosophy, and is regularly
-tested with a variety of browsers and configurations. In particular, thankyou
+Pollyanna tries to perpetuate the Any Browser philosophy, and is regularly
+tested with a variety of browsers and configurations. In particular, Pollyanna
 has been tested with popular versions of Lynx, Mosaic, Netscape, Internet Explorer,
 Opera, Firefox, Brave, Safari, and even Google Chrome.
 
 WHY USE THIS?
 =============
-Below is an outline of reasons you would want to use thankyou.
+Below is an outline of reasons you would want to use Pollyanna.
 
 Respectful:
-thankyou aims to display your content as close to your intention as possible.
+Pollyanna aims to display your content as close to your intention as possible.
 It will not clip it. It will not remove line breaks. It will not alter spacing.
 Unless you ask.
 
