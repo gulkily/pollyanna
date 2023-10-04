@@ -5,9 +5,10 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, using avatar.template
+sub GetAvatar { # $authorKey, $noCache ; returns HTML avatar based on author key, using avatar.template
 # sub GetAvatarCache {
 # affected by config/html/avatar_icons
+# affected by setting/html/avatar_link_to_person_when_approved
 
 	WriteLog("GetAvatar(...)");
 	my $aliasHtmlEscaped = '';
@@ -218,7 +219,6 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 
 	my $colorUsername = '';
 
-
 	if ($isApproved) {
 		$avatar = '<b>' . GetAlias($authorKey) . '</b>';
 	} else {
@@ -243,6 +243,13 @@ sub GetAvatar { # $key, $noCache ; returns HTML avatar based on author key, usin
 
 	if ($avatar) {
 		PutCache("$avatarCachePrefix/$authorKey", $avatar);
+	}
+
+	if (!$avatar) {
+		WriteLog('GetAvatar: warning: $avatar is FALSE before return; caller = ' . join(',', caller));
+		if (IsFingerprint($authorKey)) {
+			$avatar = '(' . $authorKey . ')';
+		}
 	}
 
 	return $avatar;

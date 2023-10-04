@@ -5,38 +5,51 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub GetAuthorLink { # $fingerprint ; returns avatar'ed link for an author id
-	my $fingerprint = shift; # author's fingerprint
+sub GetAuthorLink { # $authorKey ; returns avatar'ed link for an author id
+	my $authorKey = shift; # author's fingerprint
 
 	require_once('widget/avatar.pl');
 
-	if (!$fingerprint) {
-		WriteLog('GetAuthorLink: warning: $fingerprint is missing; caller = ' . join(',', caller));
+	if (!$authorKey) {
+		WriteLog('GetAuthorLink: warning: $authorKey is missing; caller = ' . join(',', caller));
 		return '';
 	}
 
-	# verify $fingerprint is valid
-	if (!IsFingerprint($fingerprint)) {
-		WriteLog('GetAuthorLink: warning: sanity check failed on $fingerprint = ' . ($fingerprint ? $fingerprint : 'FALSE') . '; caller: ' . join(',', caller));
+	# verify $authorKey is valid
+	if (!IsFingerprint($authorKey)) {
+		WriteLog('GetAuthorLink: warning: sanity check failed on $authorKey = ' . ($authorKey ? $authorKey : 'FALSE') . '; caller: ' . join(',', caller));
 		return 'Guest'; #guest...
 	}
 
-	WriteLog("GetAuthorLink($fingerprint)");
+	WriteLog("GetAuthorLink($authorKey)");
 
 	my $authorUrl;
-	$authorUrl = "/author/$fingerprint/index.html";
+	$authorUrl = "/author/$authorKey/index.html";
+
+	my $authorAvatar = '';
+
 	if (GetConfig('setting/html/avatar_link_to_person_when_approved')) {
-		my $authorPubKeyHash = DBGetAuthorPublicKeyHash($fingerprint) || '';
+		WriteLog('GetAuthorLink: avatar_link_to_person_when_approved is TRUE');
+
+		my $authorPubKeyHash = DBGetAuthorPublicKeyHash($authorKey) || '';
 
 		if (SqliteGetValue("SELECT COUNT(label) FROM item_label WHERE label = 'approve' AND file_hash = '$authorPubKeyHash'")) {
-			my $alias = GetAlias($fingerprint);
+			my $alias = GetAlias($authorKey);
 			my $aliasEscaped = UriEscape($alias);
+			$authorAvatar = $alias;
 
 			$authorUrl = "/person/$aliasEscaped/index.html";
 		}
 	}
 
-	my $authorAvatar = '';
+	if (!$authorAvatar) {
+		$authorAvatar = GetAvatar($authorKey);
+	}
+
+	if (!$authorAvatar || trim($authorAvatar) eq '') {
+		WriteLog('GetAuthorLink: warning: $avatar is FALSE; $authorKey = ' . $authorKey . '; caller = ' . join(',', caller));
+		$authorAvatar = '(' . $authorKey . ')';
+	}
 
 	my $authorLink = GetTemplate('html/authorlink.template');
 
