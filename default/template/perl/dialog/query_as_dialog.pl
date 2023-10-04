@@ -13,7 +13,7 @@ sub GetQueryAsDialog { # $query, $title, $columns, \%param ; returns dialog with
 # $flags{'no_empty'}
 #todo move columns to params
 
-# sub GetQueryDialog { #GetQueryAsDialog()
+# sub GetQueryDialog { #GetQueryAsDialog() # display result set to user
 # sub GetDialogFromQuery {
 # sub GetQueryFromDialog {
 	my $query = shift;

@@ -1451,7 +1451,7 @@ sub GetQuerySqlDialog { # $pageQuery ; displays query for user to see
 # sub GetSqlDialog {
 # sub QuerySqlDialog {
 # sub GetSqlQueryDialog {
-# sub GetQueryDialog { #GetQuerySqlDialog()
+# sub GetQueryDialog { #GetQuerySqlDialog() # display sql query to user
 # sub GetQueryForDisplay {
 # sub GetDisplayQuery {
 	# display query used to generate the listing

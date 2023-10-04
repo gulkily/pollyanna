@@ -19,7 +19,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 
 	#todo if special_* is present, then the included fields should not be printed by default
 
-	WriteLog('RenderField()');
+	#WriteLog('RenderField()');
 
 	if (!defined($fieldName) || !defined(!$fieldValue)) {
 		WriteLog('RenderField: warning: missing $fieldName or $fieldValue; caller = ' . join(',', caller));
@@ -36,6 +36,8 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 	} else {
 		WriteLog('RenderField: warning: $fieldValue NOT DEFINED; caller = ' . join(', ', caller));
 	}
+
+	WriteLog("RenderField($fieldName, $fieldValue, [%rowData])");
 
 	#todo more sanity
 
