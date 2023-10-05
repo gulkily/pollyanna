@@ -22,7 +22,7 @@ Yb,  88      `8b      IP'`Yb IP'`Yb
 CONSENT:
 
 For operators and administrators, Pollyanna supports every released software
-version indefinitely, forgoing forced updates or any coersion.
+version indefinitely, forgoing forced updates or any coercion.
 
 For users and clients, Pollyanna facilitates full account and data ownership
 and accessibility. Users should be able to access or not access the service as
