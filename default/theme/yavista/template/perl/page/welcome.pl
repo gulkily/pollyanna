@@ -20,6 +20,11 @@ sub MakePollyannaPages {
 			PutFile(GetDir('html') . '/pollyanna/instance.html', GetTemplate('html/page/pollyanna/instance.html'));
 		}
 
+		my $pollyannaVideoPageTemplate = GetTemplate('html/page/pollyanna/video.html');
+		if ($pollyannaVideoPageTemplate) {
+			PutFile(GetDir('html') . '/pollyanna/video.html', GetTemplate('html/page/pollyanna/video.html'));
+		}
+
 		my @filesToCopy = qw(
 			doc/screenshot/16964/netscape3.png
 			doc/screenshot/16964/lynx.png
@@ -41,10 +46,12 @@ sub MakePollyannaPages {
 			doc/screenshot/16964/links.png
 			doc/screenshot/16964/yandex.png
 			doc/screenshot/16964/vivaldi.png
+
 			doc/screenshot/pollyanna/github.png
 			doc/screenshot/pollyanna/screenshot.png
 			doc/screenshot/pollyanna/instance.png
 			doc/screenshot/pollyanna/whitepaper.png
+			doc/screenshot/pollyanna/video.png
 
 			doc/screenshot/instance/yavista.com.png
 			doc/screenshot/instance/jawstest.yavista.com.png
@@ -65,6 +72,10 @@ sub MakePollyannaPages {
 			doc/screenshot/instance/carlostiresandautorepair.com.png
 			doc/screenshot/instance/26-110.com.png
 			doc/screenshot/instance/21h205.click.png
+
+			doc/screenshot/video/network_activity_comparison.png
+			doc/screenshot/video/interface_basics.png
+			doc/screenshot/video/authentication_basics.png
 
 			doc/whitepaper-pollyanna.pdf
 		);
