@@ -1,7 +1,7 @@
 #!/bin/sh
 
 txtCount=$(find html/txt -type f | wc -l) #Count files and store in a variable
-if [ "$txtCount" -ge 20 ] && [ -e cache/b/index.sqlite3 ] ;
+if [ "$txtCount" -ge 200 ] && [ -e cache/b/index.sqlite3 ] ;
 	then
 		echo =======================================================
 		echo ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION!
