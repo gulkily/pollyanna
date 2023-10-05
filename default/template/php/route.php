@@ -911,6 +911,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						$path == '/keyboard_android.html' ||
 						$path == '/index.html' ||
 						$path == '/' ||
+						substr($path, 0, 11) == '/pollyanna/' ||
 						(index($html, 'Message received, and scheduled to be posted.') != -1)
 					) {
 						$skipPrintedNotice = 1;

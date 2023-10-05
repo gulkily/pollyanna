@@ -6,6 +6,8 @@ use 5.010;
 
 sub MakePollyannaPages {
 	#hack
+	# this mini-site is a hacked together thing for a deadline that should get refactored.
+
 	my $pollyannaPageTemplate = GetTemplate('html/page/pollyanna/index.html');
 	if ($pollyannaPageTemplate) {
 		PutFile(GetDir('html') . '/pollyanna/index.html', $pollyannaPageTemplate);
@@ -23,6 +25,11 @@ sub MakePollyannaPages {
 		my $pollyannaVideoPageTemplate = GetTemplate('html/page/pollyanna/video.html');
 		if ($pollyannaVideoPageTemplate) {
 			PutFile(GetDir('html') . '/pollyanna/video.html', GetTemplate('html/page/pollyanna/video.html'));
+		}
+
+		my $pollyannaSponsorPageTemplate = GetTemplate('html/page/pollyanna/sponsor.html');
+		if ($pollyannaSponsorPageTemplate) {
+			PutFile(GetDir('html') . '/pollyanna/sponsor.html', GetTemplate('html/page/pollyanna/sponsor.html'));
 		}
 
 		my @filesToCopy = qw(
