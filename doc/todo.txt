@@ -1,27 +1,25 @@
-in token_defs, most tokens should be 'mgi' instead of 'mg' so that they are case-insensitive
-
 config/setting/admin/token/avatar should toggle availability of avatar feature
 
 web archive link to current page
 
 hypercode v1
 	solution page
-		problem
-		code
-		run log (if has been run)
-			otherwise "has not been run yet"
+		problem x
+		code x
+		run log (if has been run) x
+			otherwise "has not been run yet" x
 		stats
-			run start
-			run finish
-			timestamp
+			run start x
+			run finish x
+			timestamp x
 			(these are fur the run log item)
 		better solutions, if exist
 		worse solutions, if exist
 
 	problem page
-		lists problem at the top (text)
-		if solutions exist
-			solutions listing
+		lists problem at the top (text) x
+		if solutions exist x
+			solutions listing x
 				tag: solution + approved
 		if proposed solutions exist
 			proposed solutions listing
@@ -124,6 +122,7 @@ how to encourage users to make backups?
 Traditionally, a FILE_ID.DIZ should be "up to 10 lines of text, each line being no more than 45 characters long",
 according to v.1.9 of the specification.[3] The concept of .DIZ files was to allow for a concise description of
 uploaded files to be automatically applied.
+FILE_ID stands for "file identification". DIZ stands for "description in zipfile".[2]
 
 ===
 
@@ -177,7 +176,7 @@ should be a warning if reply_cart.js is not included while reply cart buttons ar
 
 ===
 
-add person_name to item_flat table
+add person_name to item_flat view
 
 ===
 
