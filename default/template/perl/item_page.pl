@@ -246,6 +246,10 @@ sub GetItemIndexLog { # $itemHash, $logType = index_log
 			$logWindow = '<span class=advanced>' . $logWindow . '</span>';
 		}
 		return $logWindow;
+	} else {
+		if ($logType eq 'run_log') {
+			return GetDialogX('<fieldset><p>This code has not been run yet.</p></fieldset>', 'Information');
+		}
 	}
 
 	return '';
