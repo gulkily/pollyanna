@@ -683,8 +683,9 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									}
 								}
 							}
-						} else {
-							push @indexMessageLog, 'warning, token not valid @validTokens IndexTextFile: ' . $tokenFound{'token'};
+						}
+						else {
+							push @indexMessageLog, 'warning, token missing parameter: ' . $tokenFound{'token'};
 							WriteLog('IndexTextFile: warning: ' . $tokenFound{'token'} . ' (generic): sanity check failed');
 						}
 
