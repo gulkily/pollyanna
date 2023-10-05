@@ -11,9 +11,13 @@ sub MakePollyannaPages {
 		PutFile(GetDir('html') . '/pollyanna/index.html', $pollyannaPageTemplate);
 
 		my $pollyannaScreenshotPageTemplate = GetTemplate('html/page/pollyanna/screenshot.html');
-
 		if ($pollyannaScreenshotPageTemplate) {
 			PutFile(GetDir('html') . '/pollyanna/screenshot.html', GetTemplate('html/page/pollyanna/screenshot.html'));
+		}
+
+		my $pollyannaInstancePageTemplate = GetTemplate('html/page/pollyanna/instance.html');
+		if ($pollyannaInstancePageTemplate) {
+			PutFile(GetDir('html') . '/pollyanna/instance.html', GetTemplate('html/page/pollyanna/instance.html'));
 		}
 
 		my @filesToCopy = qw(
@@ -39,7 +43,29 @@ sub MakePollyannaPages {
 			doc/screenshot/16964/vivaldi.png
 			doc/screenshot/pollyanna/github.png
 			doc/screenshot/pollyanna/screenshot.png
+			doc/screenshot/pollyanna/instance.png
 			doc/screenshot/pollyanna/whitepaper.png
+
+			doc/screenshot/instance/yavista.com.png
+			doc/screenshot/instance/jawstest.yavista.com.png
+			doc/screenshot/instance/pdubclub.yavista.com.png
+			doc/screenshot/instance/jetlag.shitmyself.com.png
+			doc/screenshot/instance/snow.qdb.us.png
+			doc/screenshot/instance/sharmenhope.qdb.us.png
+			doc/screenshot/instance/noisebridge.qdb.us.png
+			doc/screenshot/instance/kliment.qdb.us.png
+			doc/screenshot/instance/hike.qdb.us.png
+			doc/screenshot/instance/qdb.us.png
+			doc/screenshot/instance/maddielam.net.png
+			doc/screenshot/instance/ilyagulko.com.png
+			doc/screenshot/instance/hike.geekissues.org.png
+			doc/screenshot/instance/geekissues.org-threads.png
+			doc/screenshot/instance/geekissues.org.png
+			doc/screenshot/instance/geekissues.net.png
+			doc/screenshot/instance/carlostiresandautorepair.com.png
+			doc/screenshot/instance/26-110.com.png
+			doc/screenshot/instance/21h205.click.png
+
 			doc/whitepaper-pollyanna.pdf
 		);
 
