@@ -16,7 +16,5 @@ FROM (
 	GROUP BY
 		item_label.label
 	)
-WHERE
-	label = LOWER(label)
 ORDER BY
 	label_count DESC
