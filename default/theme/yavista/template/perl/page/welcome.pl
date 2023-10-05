@@ -84,6 +84,7 @@ sub MakePollyannaPages {
 			doc/screenshot/video/network_activity_comparison.png
 			doc/screenshot/video/interface_basics.png
 			doc/screenshot/video/authentication_basics.png
+			doc/screenshot/video/portable_profile.png
 
 			doc/whitepaper-pollyanna.pdf
 		);
