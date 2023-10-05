@@ -59,6 +59,7 @@ sub MakePollyannaPages {
 			doc/screenshot/pollyanna/instance.png
 			doc/screenshot/pollyanna/whitepaper.png
 			doc/screenshot/pollyanna/video.png
+			doc/screenshot/pollyanna/sponsor.png
 
 			doc/screenshot/instance/yavista.com.png
 			doc/screenshot/instance/jawstest.yavista.com.png
