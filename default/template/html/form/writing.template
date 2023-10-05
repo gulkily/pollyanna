@@ -20,12 +20,5 @@
 			Sign messages by default<noscript><b>*</b></noscript>
 		</label>
 	</p>
-
-	<p>
-		<label for=chkUncheckSignWhenPasting>
-			<input type=checkbox id=chkUncheckSignWhenPasting name=chkUncheckSignWhenPasting onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'uncheck_sign_when_pasting'); }">
-			Uncheck sign option when pasting<noscript><b>*</b></noscript>
-		</label>
-	</p>
 </fieldset>
 <!-- / writing.template -->
