@@ -1,16 +1,8 @@
 #!/bin/bash
 
-#if [ $1 = sql ]
-#	then
-#		#sqlite3 cache/b/index.sqlite3 "${@:2}"
-#		#sqlite3 cache/b/index.sqlite3 "${*:2}"
-#		exit
-#fi
-
-# sanity checks for git and cut
-# check that git command exists
-# check that cut command exists
-# check that git rev-parse HEAD returns a string
+# hike.sh is the script that lets you do most things
+# if using bash, run `source hike.sh` to activate the "hike" command
+# run `hike help` to see available commands
 
 
 echo ==================
@@ -261,6 +253,12 @@ fi
 
 if [ $1 = help ]
 	then
+		echo source hike.sh = enable these commands
+		echo hike clean = clean including templates
+		echo hike build = build base
+		echo hike start = start local server
+		echo hike archive = archive all content
+		echo hike help = see more commands
 		echo hike index = index chain and data
 		echo hike reindex = reindex all data
 		echo hike info = info on item by hash
