@@ -257,6 +257,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 	}
 
 	elsif (
+		$fieldName eq 'parent' ||
 		$fieldName eq 'chain_next' ||
 		$fieldName eq 'chain_previous'
 	) {
