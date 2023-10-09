@@ -1,3 +1,10 @@
+#bug
+	when running reindex, the same system labels get added twice
+		probably needs to be a constraint on item+label+source
+
+#bug
+	links to parent items with >> tags have gone away because of the recent bugfix with other tokens
+
 config/setting/admin/token/avatar should toggle availability of avatar feature
 
 web archive link to current page
@@ -61,6 +68,8 @@ author/person concept
 allowed and supported image file types
 	should have a central config
 	currently defined several times separately, all marked with #imagetypes tag
+		the extra challenge is lighttpd config, which also needs mime types
+			(but this isn't really relevant and doesn't need to be included)
 
 shortcut command to add admin user
 	workaround: insert into ..
@@ -105,12 +114,6 @@ feeds/sync
 	read a feed list, save locally
 		save to file named after source server
 	figure out which items need to be pulled from host
-
-===
-
-tags page should include capitalized hashtags, just like the horizontal bar x
-	should be a separate dialog for system hashtags (lowercase)
-		this can be on a separate page/dialog for now
 
 ===
 

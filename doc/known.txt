@@ -1,6 +1,9 @@
 Known Issues
 ============
 
+sometimes when modifying utils.pl/index.pl/pages.pl, if the modified version has an error
+	hike refresh no longer works, and hike rebuild must be run
+
 "source hike.sh" only been tested in bash
 	does not work in other shells like tcsh for some reason
 	workaround: use "./hike.sh [command]"
