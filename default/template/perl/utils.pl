@@ -1986,10 +1986,18 @@ sub IsImageFile { # $file ; returns 1 if image file, 0 if not
 
 	if (-e $file) {
 		#imagetypes
-		return 1;
-	} else {
-		return 0;
+		my @allowedImageTypes = qw(jpg jpeg gif png bmp svg jfif webp);
+		for my $imageType (@allowedImageTypes) {
+			my $extLength = length($imageType) + 1;
+			if (substr(lc($file), length($file) - $extLength, $extLength) eq ".$imageType") {
+				WriteLog('IsImageFile: $file = ' . $file . '; TRUE; caller = ' . join(',', caller));
+				return 1;
+			}
+		}
 	}
+
+	WriteLog('IsImageFile: $file = ' . $file . '; FALSE; caller = ' . join(',', caller));
+
 	return 0;
 } # IsImageFile()
 
