@@ -121,8 +121,17 @@ sub GetStatsTable { # $templateName = 'html/stats.template' ; returns Stats dial
 		state $IMAGEDIR = GetDir('image');
 		if ($IMAGEDIR =~ m/^([^\s]+)$/) { #security #taint
 			$IMAGEDIR = $1;
-			my $imagesFindResults = `find $IMAGEDIR -name \\\*.png -o -name \\\*.jpg -o -name \\\*.jpeg -o -name \\\*.gif -o -name \\\*.bmp -o -name \\\*.jfif -o -name \\\*.webp -o -name \\\*.svg | wc -l`;
+
 			#imagetypes
+			my @imageTypes = qw(png jpg jpeg gif bmp jfif webp svg);
+			my $findParam = '';
+			for my $imageType (@imageTypes) {
+				$findParam .= ($findParam ? ' -o' : '') . " -name \\\*.$imageType";
+			}
+
+			my $imagesFindResultsCommand = "find $IMAGEDIR $findParam | wc -l";
+
+			my $imagesFindResults = `$imagesFindResultsCommand`;
 			chomp $imagesFindResults;
 			if ($imagesFindResults =~ m/^[0-9]+$/) {
 				my $filesImage =  GetCache('count_image') || trim($imagesFindResults);

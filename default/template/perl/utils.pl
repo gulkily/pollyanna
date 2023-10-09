@@ -1984,20 +1984,7 @@ sub IsImageFile { # $file ; returns 1 if image file, 0 if not
 		return 0;
 	}
 
-	if (
-		-e $file
-			&&
-		(
-			substr(lc($file), length($file) -4, 4) eq ".jpg" ||
-			substr(lc($file), length($file) -5, 5) eq ".jpeg" ||
-			substr(lc($file), length($file) -4, 4) eq ".gif" ||
-			substr(lc($file), length($file) -4, 4) eq ".png" ||
-			substr(lc($file), length($file) -4, 4) eq ".bmp" ||
-			substr(lc($file), length($file) -4, 4) eq ".svg" ||
-			substr(lc($file), length($file) -5, 5) eq ".jfif" ||
-			substr(lc($file), length($file) -5, 5) eq ".webp"
-		)
-	) {
+	if (-e $file) {
 		#imagetypes
 		return 1;
 	} else {

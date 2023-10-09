@@ -203,22 +203,16 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 		}
 	} # if ($ext eq 'pl')
 
-	if (
-		$ext eq 'png' ||
-		$ext eq 'gif' ||
-		$ext eq 'jpg' ||
-		$ext eq 'jpeg' ||
-		$ext eq 'bmp' ||
-		$ext eq 'svg' ||
-		$ext eq 'webp' ||
-		$ext eq 'jfif' ||
-		$ext eq 'tiff' ||
-		$ext eq 'tff' &&
-		GetConfig('admin/image/enable')
-	) {
+	if (GetConfig('admin/image/enable')) {
 		#imagetypes
-		WriteLog('IndexFile: calling IndexImageFile()');
-		$indexSuccess = IndexImageFile($file);
+		my @allowedImages = qw(png gif jpg jpeg bmp svg webp jfif tiff tff);
+		for my $allowedImage (@allowedImages) {
+			if ($ext eq $allowedImage) {
+				WriteLog('IndexFile: calling IndexImageFile()');
+				$indexSuccess = IndexImageFile($file);
+				last;
+			}
+		}
 	}
 
 	if ($indexSuccess) {

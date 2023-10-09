@@ -57,10 +57,18 @@ sub IndexZipFile { # $file | 'flush' ; indexes one text file into database
 
 	if (GetConfig('setting/admin/image/enable')) {
 		#image files
-		my $unzipCommand = "unzip -o $file '*.jpg' '*.jpeg' '*.gif' '*.bmp' '*.jfif' '*.webp' '*.svg' -d $IMAGEDIR 2>&1";
+		#imagetypes
+
+		my @imageTypes = qw(jpg jpeg gif png bmp svg jfif webp tiff tff);
+		my $unzipCommand = "unzip -o $file";
+		for my $imageType (@imageTypes) {
+			$unzipCommand .= " '*.$imageType'";
+		}
+		$unzipCommand .= " -d $IMAGEDIR 2>&1";
+
+		#my $unzipCommand = "unzip -o $file '*.jpg' '*.jpeg' '*.gif' '*.bmp' '*.jfif' '*.webp' '*.svg' -d $IMAGEDIR 2>&1";
 		WriteLog('IndexZipFile: $unzipCommand = ' . $unzipCommand);
 		$unzipLog .= `$unzipCommand` . "\n";
-		#imagetypes
 	}
 
 	if (1) {
