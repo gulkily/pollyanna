@@ -179,7 +179,7 @@ function OnLoadEverything () { // checks for each onLoad function and calls it
 function OnUnloadEverything () { // does all the things that should happen when onunload is triggered
 	// ATTENTION: this may not work on current browsers
 	if (window.ShowPreNavigateNotification) {
-		ShowPreNavigateNotification();
+		ShowPreNavigateNotification(); // OnUnloadEverything()
 	}
 	if (document.getElementById && document.getElementById('iospaste')) {
 		// upload field
@@ -278,7 +278,7 @@ function EventLoop () { // for calling things which need to happen on a regular 
 			// show loading indicator if user has started navigating away from page
 			// window.flagUnloaded is set by OnUnload event
 			if (window.ShowPreNavigateNotification) {
-				ShowPreNavigateNotification();
+				ShowPreNavigateNotification(); // EventLoop()
 			}
 		}
 
