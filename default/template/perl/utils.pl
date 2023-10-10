@@ -1986,7 +1986,8 @@ sub IsImageFile { # $file ; returns 1 if image file, 0 if not
 
 	if (-e $file) {
 		#imagetypes
-		my @allowedImageTypes = qw(jpg jpeg gif png bmp svg jfif webp);
+		my @allowedImageTypes = GetConfigValueAsArray('setting/admin/image/allow_files');
+		#my @allowedImageTypes = qw(jpg jpeg gif png bmp svg jfif webp);
 		for my $imageType (@allowedImageTypes) {
 			my $extLength = length($imageType) + 1;
 			if (substr(lc($file), length($file) - $extLength, $extLength) eq ".$imageType") {

@@ -123,10 +123,17 @@ sub GetStatsTable { # $templateName = 'html/stats.template' ; returns Stats dial
 			$IMAGEDIR = $1;
 
 			#imagetypes
-			my @imageTypes = qw(png jpg jpeg gif bmp jfif webp svg);
+			my @imageTypes = GetConfigValueAsArray('setting/admin/image/allow_files');
+			#my @imageTypes = qw(png jpg jpeg gif bmp jfif webp svg);
 			my $findParam = '';
 			for my $imageType (@imageTypes) {
-				$findParam .= ($findParam ? ' -o' : '') . " -name \\\*.$imageType";
+				if ($imageType =~ m/([a-z]+)/) {
+					$imageType = $1;
+					$findParam .= ($findParam ? ' -o' : '') . " -name \\\*.$imageType";
+				}
+				else {
+					WriteLog('GetStatsTable: warning: $imageType sanity check failed while building $findParam');
+				}
 			}
 
 			my $imagesFindResultsCommand = "find $IMAGEDIR $findParam | wc -l";

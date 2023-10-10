@@ -205,7 +205,8 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 
 	if (GetConfig('admin/image/enable')) {
 		#imagetypes
-		my @allowedImages = qw(png gif jpg jpeg bmp svg webp jfif tiff tff);
+		my @allowedImages = GetConfigValueAsArray('setting/admin/image/allow_files');
+		#my @allowedImages = qw(png gif jpg jpeg bmp svg webp jfif tiff tff);
 		for my $allowedImage (@allowedImages) {
 			if ($ext eq $allowedImage) {
 				WriteLog('IndexFile: calling IndexImageFile()');

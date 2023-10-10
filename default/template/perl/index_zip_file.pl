@@ -59,7 +59,8 @@ sub IndexZipFile { # $file | 'flush' ; indexes one text file into database
 		#image files
 		#imagetypes
 
-		my @imageTypes = qw(jpg jpeg gif png bmp svg jfif webp tiff tff);
+		#my @imageTypes = qw(jpg jpeg gif png bmp svg jfif webp tiff tff);
+		my @imageTypes = GetConfigValueAsArray('setting/admin/image/allow_files');
 		my $unzipCommand = "unzip -o $file";
 		for my $imageType (@imageTypes) {
 			$unzipCommand .= " '*.$imageType'";
