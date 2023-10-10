@@ -232,6 +232,25 @@ if (isset($boxesCount) && $boxesCount && !$comment) {
 	$comment = 'Box count at ' . time();
 }
 
+if (GetConfig('setting/admin/php/post/handle_browser_test') && isset($comment) && $comment) {
+	if (preg_match('/(E[0-9]{13})\W+(E[0-9]{13})/', $comment, $browserTestMatches)) {
+		if (isset($browserTestMatches[1]) && isset($browserTestMatches[2])) {
+			if ($_GET) {
+				$comment .= "\n\n";
+				foreach($_GET as $getName => $getValue) {
+					if ($getName == 'comment') {
+						# skip, it's already added
+					}
+					else {
+						$comment .= $getName . ": " . $getValue . "\n";
+					}
+				}
+				$comment .= "\n\n" . '#BrowserTest';
+			}
+		}
+	}
+}
+
 {
 	if (isset($comment) && $comment && GetConfig('setting/admin/php/post/require_cookie')) {
 		if ((!isset($_COOKIE['cookie']) || !isset($_COOKIE['checksum'])) && index($comment, 'SIGNED') == -1 && index($comment, 'PUBLIC') == -1) {
