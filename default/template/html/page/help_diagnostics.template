@@ -2,16 +2,6 @@
 
 <fieldset>
 
-<p class=advanced>
-    <a
-        title="Reset interface to beginner mode"
-        onclick="if (window.SetInterfaceMode) { SetInterfaceMode('beginner', this); }"
-        href="/settings.html?ui=beginner"
-    >
-        Click here for <b>beginner mode</b>.
-    </a>
-</p>
-
 <p><a href="/bookmark.html">Bookmarklets</a></p>
 
 <p>
