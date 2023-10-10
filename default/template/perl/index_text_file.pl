@@ -572,7 +572,24 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							# }
 
 							#$message = str_replace($tokenFound{'recon'}, $newMessage, $message);
-							$message = str_replace($tokenFound{'recon'}, $tokenFound{'message'}, $message);
+							if ($tokenFound{'token'} eq 'parent') {
+# make an exception for the parent tag, otherwise we remove the >> link
+								#$message = str_replace($tokenFound{'recon'}, 'hi', $message);
+							} else {
+								$message = str_replace($tokenFound{'recon'}, $tokenFound{'message'}, $message);
+							}
+# this would be nice but doesn't work atm
+#							if (index($tokenFound{'message'}, '$') != -1) {
+#								if ($tokenFound{'token'} eq 'parent') {
+#									$message = str_replace($tokenFound{'recon'}, 'hi', $message);
+#								} else {
+#									$message = str_replace($tokenFound{'recon'}, $tokenFound{'message'}, $message);
+#								}
+#							} else {
+#								$message = str_replace($tokenFound{'recon'}, $tokenFound{'message'}, $message);
+#							}
+
+							#$message = str_replace($tokenFound{'recon'}, $tokenFound{'message'}, $message);
 
 							WriteLog('IndexTextFile: %tokenFound: ' . Dumper(%tokenFound));
 
