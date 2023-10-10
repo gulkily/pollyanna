@@ -128,7 +128,8 @@ sub GetTokenDefs {
 			'token'   => 'parent',
 			'mask'    => '^(\>\>)(\W?)([0-9a-f]{40})', # >>
 			'mask_params' => 'mg',
-			'message' => '[Parent]',
+			#'message' => '[Parent]', #old
+			#'message' => '>>$3', #todo
 			'apply_to_self' => 1
 		},
 		{ # parent of item (to which item is replying)
