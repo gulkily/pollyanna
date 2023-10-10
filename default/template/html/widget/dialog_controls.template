@@ -55,6 +55,7 @@
 		SetPrefs('draggable_restore_collapsed', 0);
 		SetPrefs('draggable_arrange_viewport_resize', 0);
 		DraggingReset();
+		return false;
 	}
 " title="Reset">Reset</a>
 
