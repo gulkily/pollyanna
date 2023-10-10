@@ -391,7 +391,7 @@ sub PutConfig { # $configName, $configValue ; writes config value to config stor
 	return $putFileResult;
 } # PutConfig()
 
-sub GetConfigListAsArray { # $listName ; returns an array from a config value treated as a whitespace-separated list
+sub GetConfigListAsArray { # $listName ; returns an array from a config list template treated as a whitespace-separated list
 	my $listName = shift;
 	chomp $listName;
 
@@ -419,6 +419,36 @@ sub GetConfigListAsArray { # $listName ; returns an array from a config value tr
 	#
 	#	return @listClean;
 } # GetConfigListAsArray()
+
+sub GetConfigValueAsArray { # $listName ; returns an array from a config value treated as a whitespace-separated list
+# this should probably be merged with GetConfigListAsArray(), but i'm not sure how yet
+	my $listName = shift;
+	chomp $listName;
+
+	#todo sanity checks
+
+	my @listRaw = split("\n", trim(GetConfig($listName)));
+	WriteLog('GetConfigValueAsArray: $listName = ' . $listName . '; scalar(@listRaw) = ' . scalar(@listRaw));
+
+	return @listRaw;
+
+	#todo sanity checks and etc
+	#	my @listClean;
+	#	for(my $i = 0; $i < scalar(@listRaw); $i++) {
+	#		if (trim($listRaw[$i]) eq '') {
+	#			# nothing, it's blank
+	#		} else {
+	#			if ($listRaw[$i] =~ m/^([0-9a-zA-Z_])$/) {
+	#				my $newItem = $1;
+	#				push @listClean, $newItem;
+	#			} else {
+	#				# nothing, it fails sanity check
+	#			}
+	#		}
+	#	}
+	#
+	#	return @listClean;
+} # GetConfigValueAsArray()
 
 sub GetActiveThemes { # return list of active themes (config/setting/theme)
 # sub GetThemes {
