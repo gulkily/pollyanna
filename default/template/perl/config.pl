@@ -391,7 +391,7 @@ sub PutConfig { # $configName, $configValue ; writes config value to config stor
 	return $putFileResult;
 } # PutConfig()
 
-sub GetConfigListAsArray { # $listName
+sub GetConfigListAsArray { # $listName ; returns an array from a config value treated as a whitespace-separated list
 	my $listName = shift;
 	chomp $listName;
 
