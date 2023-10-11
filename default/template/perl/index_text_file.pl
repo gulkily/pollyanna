@@ -555,7 +555,15 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							$itemTimestamp = GetTime(); #todo #fixme #stupid
 						}
 
-						if ($tokenFound{'recon'} && $tokenFound{'message'} && $tokenFound{'param'}) {
+						if (!$tokenFound{'recon'}) {
+							push @indexMessageLog, 'warning, token missing original string: ' . $tokenFound{'token'};
+							WriteLog('IndexTextFile: warning: found token ' . $tokenFound{'token'} . ' missing recon field');
+						}
+						elsif (!$tokenFound{'param'}) {
+							push @indexMessageLog, 'warning, token missing parameter: ' . $tokenFound{'token'};
+							WriteLog('IndexTextFile: warning: found token ' . $tokenFound{'token'} . ' missing parameter');
+						}
+						else {
 							push @indexMessageLog, 'token found: ' . $tokenFound{'token'};
 							my $newMessage = $tokenFound{'message'};
 							# if ($tokenFound{'token'} eq 'http' || $tokenFound{'token'} eq 'https') {
@@ -700,10 +708,6 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									}
 								}
 							}
-						}
-						else {
-							push @indexMessageLog, 'warning, token missing parameter: ' . $tokenFound{'token'};
-							WriteLog('IndexTextFile: warning: ' . $tokenFound{'token'} . ' (generic): sanity check failed');
 						}
 
 						my $voteTime = 0;
