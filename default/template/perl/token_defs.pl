@@ -128,7 +128,7 @@ sub GetTokenDefs {
 			'token'   => 'parent',
 			'mask'    => '^(\>\>)(\W?)([0-9a-f]{40})', # >>
 			'mask_params' => 'mg',
-			#'message' => '[Parent]', #old
+			'message' => '[Parent]', #old
 			#'message' => '>>$3', #todo
 			'apply_to_self' => 1
 		},
@@ -230,7 +230,7 @@ sub GetTokenDefs {
 			'token' => 'footer_separator',
 			'mask' => '^-- $',
 			'mask_params' => 'mgi',
-			'message' => ''
+			'message' => '-- '
 		},
 		{
 			# s/// regex basic
@@ -251,8 +251,8 @@ sub GetTokenDefs {
 			'token' => 'hashtag',
 			'mask'  => '(\#)()([a-zA-Z0-9_]{1,32})',
 			'mask_params' => 'mgi',
-			'message' => '',
-			#'message' => '[HashTag]',
+			#'message' => '',
+			'message' => '[HashTag]',
 			'apply_to_parent' => 1,
 			'apply_to_self' => 1
 			#'require_spacer' => 0
@@ -268,7 +268,7 @@ sub GetTokenDefs {
 			'token' => 'attrib_tag',
 			'mask'  => '(\(c\))()([a-zA-Z0-9_]{1,32})',
 			'mask_params' => 'mgi',
-			'message' => '', #retain original ?
+			'message' => '[Attrib]', #retain original ?
 			'apply_to_parent' => 1,
 			'apply_to_self' => 1
 		},
