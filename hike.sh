@@ -20,35 +20,35 @@ alias hike='./hike.sh'
 alias clean='hike clean'
 alias build='hike build'
 
-if [ ! $1 ]
+if [[ ! $1 ]]
 	then
 		set 1=help
 fi
 
 # hike set
-if [ $1 = set ]
+if [[ $1 = set ]]
 	then
 		default/template/perl/script/set.pl $2 $3
 		exit
 fi
 
-if [ $1 = test ]
+if [[ $1 = test ]]
 	then
 		echo testing 1 2 3
 fi
 
-if [ $1 = stats ]
+if [[ $1 = stats ]]
 	then
 		echo text files: `find html/txt -type f -name '*.txt' | wc -l`
 		echo ==================
 fi
 
-if [ $1 = status ]
+if [[ $1 = status ]]
 	then
 		ps aux | grep lighttpd
 fi
 
-if [ $1 = version ]
+if [[ $1 = version ]]
 	then
 		sqlite3 --version
 		git --version
@@ -60,7 +60,7 @@ if [ $1 = version ]
 		git rev-parse HEAD
 fi
 
-if [ $1 = build ] # hike build
+if [[ $1 = build ]] # hike build
 	then
 		time ./default/template/sh/build.sh
 		echo
@@ -72,7 +72,7 @@ if [ $1 = build ] # hike build
 		echo "build complete!"
 fi
 
-if [ $1 = clean ] # hike clean
+if [[ $1 = clean ]] # hike clean
 	then
 		time ./default/template/sh/clean.sh
 		echo ""
@@ -82,12 +82,12 @@ if [ $1 = clean ] # hike clean
 		echo "                            clean complete!"
 fi
 
-if [ $1 = rebuild ]
+if [[ $1 = rebuild ]]
 	then
 		time ./default/template/sh/rebuild.sh
 fi
 
-if [ $1 = reindex ]
+if [[ $1 = reindex ]]
   # remove all 'file has been indexed' flags in cache/b/indexed/
   # reindex all data files
   then
@@ -99,14 +99,14 @@ if [ $1 = reindex ]
     time perl -T ./config/template/perl/index.pl --all
 fi
 
-if [ $1 = index ]
+if [[ $1 = index ]]
   # if a parameter is specified, it looks for that file/data
 	then
-		if [ $2 ]
+		if [[ $2 ]]
 			then
 				time perl -T ./config/template/perl/index.pl $2
 		fi
-		if [ ! $2 ]
+		if [[ ! $2 ]]
 		  # if no parameter is specified, it does a full index
 			then
 				time perl -T ./config/template/perl/index.pl --chain
@@ -115,33 +115,33 @@ if [ $1 = index ]
 		fi
 fi
 
-if [ $1 = refresh ] # hike refresh
+if [[ $1 = refresh ]] # hike refresh
 	then
 		perl -T default/template/perl/script/template_refresh.pl
 
-		if [ ! -e config/template/perl/pages.pl ]
+		if [[ ! -e config/template/perl/pages.pl ]]
 			then
 				cp -v default/template/perl/pages.pl config/template/perl/pages.pl
 		fi
-		if [ ! -e pages.pl ]
+		if [[ ! -e pages.pl ]]
 			then
 				ln -sv config/template/perl/pages.pl pages.pl
 		fi
 
-		if [ ! -e config/template/perl/index.pl ]
+		if [[ ! -e config/template/perl/index.pl ]]
 			then
 				cp -v default/template/perl/index.pl config/template/perl/index.pl
 		fi
-		if [ ! -e index.pl ]
+		if [[ ! -e index.pl ]]
 			then
 				ln -sv config/template/perl/index.pl index.pl
 		fi
 
-		if [ ! -e config/template/perl/utils.pl ]
+		if [[ ! -e config/template/perl/utils.pl ]]
 			then
 				cp -v default/template/perl/utils.pl config/template/perl/utils.pl
 		fi
-		if [ ! -e utils.pl ]
+		if [[ ! -e utils.pl ]]
 			then
 				ln -sv config/template/perl/utils.pl utils.pl
 		fi
@@ -150,32 +150,32 @@ if [ $1 = refresh ] # hike refresh
 		./pages.pl --php #todo this should not be necessary
 fi
 
-if [ $1 = frontend ]
+if [[ $1 = frontend ]]
 	then
 		default/template/sh/_dev_clean_html.sh
 		time ./config/template/perl/pages.pl --system
 		#todo every item in the menu should be built here
 fi
 
-if [ $1 = pages ]
+if [[ $1 = pages ]]
 	then
 		perl -T ./config/template/perl/pages.pl --all
 		# should it be config? #todo
 fi
 
-if [ $1 = page ] # hike page
+if [[ $1 = page ]] # hike page
 	then
 		time ./config/template/perl/pages.pl -M $2 $3
 fi
 
-if [ $1 = info ]
+if [[ $1 = info ]]
   then
     find . | grep $2 | xargs cat | less
 fi
 
-if [ $1 = start ] # hike start
+if [[ $1 = start ]] # hike start
 	then
-		if [ ! -e config/template/perl/server_local_lighttpd.pl ]
+		if [[ ! -e config/template/perl/server_local_lighttpd.pl ]]
 			then
 				/bin/sh ./default/template/sh/build.sh
 		fi
@@ -184,9 +184,9 @@ if [ $1 = start ] # hike start
 		rm config/setting/admin/lighttpd/server_started
 fi
 
-if [ $1 = startpython ] # hike startpython
+if [[ $1 = startpython ]] # hike startpython
 	then
-		if [ ! -e config/template/perl/server_local_python.pl ]
+		if [[ ! -e config/template/perl/server_local_python.pl ]]
 			then
 				/bin/sh ./default/template/sh/build.sh
 		fi
@@ -195,12 +195,12 @@ if [ $1 = startpython ] # hike startpython
 		#todo rm config/setting/admin/lighttpd/server_started
 fi
 
-if [ $1 = stop ]
+if [[ $1 = stop ]]
 	then
 		killall -v lighttpd
 fi
 
-if [ $1 = alog ]
+if [[ $1 = alog ]]
 	then
 		time ./default/template/perl/script/access_log_read.pl --all
 		echo About to index and build pages...
@@ -209,29 +209,29 @@ if [ $1 = alog ]
 		./config/template/perl/pages.pl --all
 fi
 
-if [ $1 = db ]
+if [[ $1 = db ]]
 	then
 		sqlite3 -echo -cmd ".headers on" -cmd ".timeout 500" -cmd ".mode column" -cmd ".tables" cache/b/index.sqlite3
 fi
 
-if [ $1 = guidb ]
+if [[ $1 = guidb ]]
 	then
 		echo 'Opening database browser...'
 		sqlitebrowser cache/b/index.sqlite3
 fi
 
-if [ $1 = sweep ]
+if [[ $1 = sweep ]]
 	then
 		time perl -T ./config/template/perl/index.pl --sweep
 fi
 
-if [ $1 = open ]
+if [[ $1 = open ]]
 	then
 		time ./default/template/perl/browser_open.pl
 		#todo reduce hard-coding
 fi
 
-if [ $1 = archive ]
+if [[ $1 = archive ]]
 	then
 		time ./default/template/perl/script/_dev_archive.pl
 		sleep 1
@@ -241,7 +241,7 @@ if [ $1 = archive ]
 		./hike.sh frontend
 fi
 
-if [ ! $1 ]
+if [[ ! $1 ]]
 	then
 		echo source hike.sh = enable these commands
 		echo hike clean = clean including templates
@@ -251,7 +251,7 @@ if [ ! $1 ]
 		echo hike help = see more commands
 fi
 
-if [ $1 = help ]
+if [[ $1 = help ]]
 	then
 		echo source hike.sh = enable these commands
 		echo hike clean = clean including templates
