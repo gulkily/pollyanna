@@ -1159,14 +1159,6 @@ pagehistory
 
 ===
 
-#bug tcsh doesn't like something about hike.sh
-
-===
-
-#bug "0 seconds from now" is sometimes displayed in timestamp widget (should be "just now")
-
-===
-
 if dragging is enabled
 	do not try to make floating tooltip
 		instead insert it in place
