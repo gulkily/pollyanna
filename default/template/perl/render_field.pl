@@ -290,7 +290,8 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 	}
 
 	elsif (
-		$fieldName eq 'puzzle_result'
+		$fieldName eq 'puzzle_result' ||
+		$fieldName eq 'puzzle_input'
 	) {
 		# a long hash (sha256) which is an output of #puzzle
 		# example: 1337637046590d5f91d11066214346e8c660b91ef173858830fe2155a271ae6ef5e4c478dffe7c3fdf54c473f0572dd2cfe8335dbe6715a59a08e265d4f0f79e
