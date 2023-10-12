@@ -369,7 +369,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	my $needUploadJs = 0;
 	if ($pageType eq 'tag') {
 		# add tag buttons with selected tag emphasized
-		$txtIndex .= GetTagPageHeaderLinks($pageParam);
+		$txtIndex .= '<span class=advanced>' . GetTagPageHeaderLinks($pageParam) . '</span>';
 
 		my $tagInfo = GetString('tag_info/' . $pageParam);
 		if ($tagInfo && ($tagInfo ne $pageParam)) {
@@ -507,7 +507,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	my $itemComma = '';
 
 	if (scalar(@files) > 0) {
-		$txtIndex .= GetDialogX('Items on page: ' . scalar(@files), 'Count');
+		$txtIndex .= '<span class=advanced>' . GetDialogX('Items on page: ' . scalar(@files), 'Count') . '</span>';
 	}
 	WriteLog('GetReadPage: scalar(@files) = ' . scalar(@files));
 
