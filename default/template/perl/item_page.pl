@@ -462,6 +462,8 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			$pubKeyMessage,
 			'Information'
 		);
+
+		$txtIndex .= GetAuthorInfoBox($file{'author_key'});
 		#todo templatify + use GetString()
 	}
 
