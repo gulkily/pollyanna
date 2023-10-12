@@ -55,7 +55,12 @@
 		SetPrefs('draggable_restore_collapsed', 0);
 		SetPrefs('draggable_arrange_viewport_resize', 0);
 		DraggingReset();
-		return false;
+		if (window.displayNotification) {
+			displayNotification('Settings have been reset. You may now reload the page.');
+			return false;
+		} else {
+			window.location.reload();
+		}
 	}
 " title="Reset">Reset</a>
 
