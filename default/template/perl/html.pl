@@ -201,10 +201,12 @@ sub AddAttributeToTag { # $html, $tag, $attributeName, $attributeValue; adds att
 } # AddAttributeToTag()
 
 sub RemoveHtmlFile { # $file ; removes existing html file
+# example: RemoveHtmlFile('people.html')
 # sub RemoveHtmlPage {
 # sub DeleteHtml {
 # sub DeleteHtmlFile {
 # sub DeleteItemPage {
+# sub ExpirePage {
 
 # returns 1 if file was removed
 	my $file = shift;
