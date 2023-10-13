@@ -971,6 +971,11 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 											push @indexMessageLog, 'calling run on parent item';
 											RunItem($itemParent);
 										}
+
+										if ($hashTag eq 'approve') {
+											#todo should only happen if not static site
+											RemoveHtmlFile('people.html');
+										}
 									} # $approveStatus is true
 									else {
 										WriteLog('IndexTextFile: Request to admin file was not found to be valid');
