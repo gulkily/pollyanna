@@ -19,6 +19,7 @@ while (my $argFound = shift) {
 
 require_once('item_list_as_gallery.pl');
 require_once('dialog.pl');
+require_once('make_simple_page.pl');
 
 sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it into $HTMLDIR directory; $pageType, $pageParam
 # sub makepage {
