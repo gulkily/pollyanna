@@ -222,7 +222,7 @@ sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 	return $html;
 } # InjectJs()
 
-sub GetScriptTemplate { # $script ; returns script based on name
+sub GetScriptTemplate { # $script, \%data ; returns script based on name
 # fills in theme colors and server-side settings
 # uses GetTemplate(), so theme-based overlays apply:
 #   config/theme/.../template/js/$script.js
@@ -244,6 +244,12 @@ sub GetScriptTemplate { # $script ; returns script based on name
 	}
 
 	WriteLog('GetScriptTemplate: $script = ' . $script);
+
+	my %data;
+	my $dataPointer = shift;
+	if ($dataPointer) {
+		%data = %{$dataPointer};
+	}
 
 	my $stringMeditate = GetString('meditate'); # default is 'Meditate...'
 	my $scriptTemplate = GetTemplate("js/$script.js");
