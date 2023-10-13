@@ -150,6 +150,7 @@ sub GetDialogX2 { # \%paramHash ; returns window
 	my $windowTitle = $param{'title'};
 	my $dialogAnchor = $param{'anchor'};
 	my $columnHeadings = $param{'headings'};
+	my $columnHeadingsAdvanced = $param{'headings_advanced'}; # add class=advanced to headings
 	my $columnHeadingsLookup = $param{'columns_lookup'};
 	my $windowStatus =  $param{'status'};
 	my $windowMenubarContent = $param{'menu'};
@@ -319,6 +320,10 @@ sub GetDialogX2 { # \%paramHash ; returns window
 		my @fieldAdvanced = split("\n", GetTemplate('list/field_advanced'));
 		my @fieldAdmin = split("\n", GetTemplate('list/field_admin'));
 		# fields_advanced advanced_fields advancedfields
+
+		if ($columnHeadingsAdvanced) {
+			$windowHeaderTemplate = str_replace('<tr class="heading">', '<tr class="heading advanced">', $windowHeaderTemplate);
+		}
 
 		foreach my $columnCaption (@columnsArray) {
 			$printedColumnsCount++;
