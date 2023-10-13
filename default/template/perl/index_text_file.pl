@@ -868,6 +868,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							$tokenFound{'param'} eq 'vouch' || #vouch token needs permission
 							$tokenFound{'param'} eq 'mavo' || #mavo token needs permission
 							$tokenFound{'param'} eq 'run' || #run token needs permission
+							$tokenFound{'param'} eq 'avatar' || #avatar token needs permission
 							0
 						) { # permissioned token
 							my $hashTag = $tokenFound{'hashtag'} || $tokenFound{'param'};
@@ -902,12 +903,22 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 											$approveStatus = 3;
 											$approveReason = 'self-admin whenever is allowed. ONLY DO THIS ON LOCALHOST!';
 										}
+										elsif (
+											$hashTag eq 'avatar' &&
+											AuthorHasTag($authorKey, 'approve')
+										) {
+											WriteLog('IndexTextFile: permissioned: approve also allows avatar');
+											#todo this should probably be handled via tagset/approve
+											push @indexMessageLog, 'author: '. $authorKey;
+											$approveStatus = 4;
+											$approveReason = 'avatar is allowed when author has approve';
+										}
 										else {
 											WriteLog('IndexTextFile: permissioned: $authorKey = ' . $authorKey);
 											push @indexMessageLog, 'author: ' . $authorKey;
 
 											if (AuthorHasTag($authorKey, $tokenFound{'param'})) {
-												$approveStatus = 4;
+												$approveStatus = 999;
 												$approveReason = 'author possesses tag';
 											} else {
 												# todo tagset lookup
