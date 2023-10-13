@@ -1006,6 +1006,8 @@ sub MakeSystemPages {
 
 	MakeSimplePage('post');
 
+	MakeSimplePage('nocookie');
+
 	# Blank page
 	PutHtmlFile("blank.html", "");
 
