@@ -360,7 +360,7 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 		if ($charPrefix eq '') {
 			$charPrefix = '$';
 		}
-		if (1) {
+		if (GetConfig('debug_verbose')) {
 			#fully verbose
 			AppendFile("log/log.log", $timestamp . " " . $charPrefix . " " . $text);
 		} else {
