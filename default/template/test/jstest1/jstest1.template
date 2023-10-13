@@ -49,7 +49,7 @@
 			<input type=submit value="2. Share With Operator" onclick="this.value='Meditate...'; return true;">
 
 			<p>
-				Comments:<br>
+				<b>Please tell us what kind of browser and device you're using:</b><br>
 				<input name=comment type=text size=80>
 			</p>
 
