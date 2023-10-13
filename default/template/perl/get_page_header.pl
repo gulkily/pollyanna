@@ -166,10 +166,26 @@ sub GetPageHeaderWithoutMenu { # $pageType, $title ; returns html for page heade
 	my $title = shift;
 	#todo sanity checks
 
+	if (!$title) {
+		# if title is not provided, come up with one
+		$title = GetString("menu/$pageType"); # look up in strings first
+		if (!$title) {
+			# if still no title, use the page type with capitalization
+			$title = ucfirst($pageType);
+		} # if (!$title)
+	} # if (!$title)
+
+	if (defined($title)) {
+		chomp $title;
+	} else {
+		$title = '';
+	}
+
+	my $titleHtml = $title;
+
 	my $styleSheet = GetHeaderStylesheet($pageType); #todo also pass parameter
 
 	my $htmlStart = GetTemplate('html/htmlstart.template');
-	my $titleHtml = $title;
 
 	$htmlStart =~ s/\$topMenu//g;
 	$htmlStart = str_replace('$titleHtml', $titleHtml, $htmlStart);
