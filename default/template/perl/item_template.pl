@@ -434,6 +434,11 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			if ($file{'labels_list'}) { # GetItemTemplate() -- tags list
 				my $headings = GetTagsListAsHtmlWithLinks($file{'labels_list'});
 				$windowParams{'headings'} = $headings;
+
+				if (GetConfig('setting/html/item_template/heading_advanced')) {
+					# this is such a hack
+					$windowParams{'headings_advanced'} = 1;
+				}
 			} # $file{'labels_list'}
 
 			# STATUS BAR
