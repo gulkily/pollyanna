@@ -186,4 +186,10 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 	return $txtFooter;
 } # GetPageFooter()
 
+sub GetPageFooterWithoutMenu { # $pageType ; returns html for page footer
+	my $txtFooter = GetTemplate('html/htmlend.template');
+	$txtFooter = FillThemeColors($txtFooter);
+	return $txtFooter;
+}
+
 1;

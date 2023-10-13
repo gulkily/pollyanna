@@ -161,4 +161,22 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 	return $pageHeaderHtml ;
 } # GetPageHeader()
 
+sub GetPageHeaderWithoutMenu { # $pageType, $title ; returns html for page header
+	my $pageType = shift;
+	my $title = shift;
+	#todo sanity checks
+
+	my $styleSheet = GetHeaderStylesheet($pageType); #todo also pass parameter
+
+	my $htmlStart = GetTemplate('html/htmlstart.template');
+	my $titleHtml = $title;
+
+	$htmlStart =~ s/\$topMenu//g;
+	$htmlStart = str_replace('$titleHtml', $titleHtml, $htmlStart);
+	$htmlStart = str_replace('$title', $title, $htmlStart);
+	$htmlStart =~ s/\$styleSheet/$styleSheet/g;
+
+	return $htmlStart;
+}
+
 1;
