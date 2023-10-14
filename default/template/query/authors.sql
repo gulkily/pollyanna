@@ -9,5 +9,6 @@ SELECT
 FROM
 	author_flat
 ORDER BY
+	author_seen DESC,
 	item_count DESC
 
