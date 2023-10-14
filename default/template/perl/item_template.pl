@@ -472,6 +472,16 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 						$statusBar .= '<!-- add_to_reply_cart button requires js, but it is not enabled -->';
 					}
 				}
+
+				if (GetConfig('setting/html/item_template/statusbar_has_advanced_layer')) {
+					# this is such a hack
+					my $statusBarLengthBefore = length($statusBar);
+					$statusBar = str_replace('<tr class="statusbar">', '<tr class="statusbar advanced">', $statusBar);
+					my $statusBarLengthAfter = length($statusBar);
+					if ($statusBarLengthBefore == $statusBarLengthAfter) {
+						WriteLog('GetItemTemplate: statusbar_has_advanced_layer: warning: $statusBarLengthBefore == $statusBarLengthAfter');
+					}
+				}
 			} # if (GetConfig('setting/html/item_dialog_status_bar')
 
 			#$statusBar = s/\$permalinkHtml/$permalinkHtml/g;
