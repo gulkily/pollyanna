@@ -5,7 +5,8 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub MakeZipFromItemList {
+sub MakeZipFromItemList { # $zipName, \@refItems ; create a zip file from item list
+# sub MakeZip {
 	my $zipName = shift;
 	my $refItems = shift;
 	my @items = @{$refItems};
