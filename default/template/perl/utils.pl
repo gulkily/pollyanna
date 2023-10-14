@@ -32,6 +32,7 @@ use Digest::SHA qw( sha1_hex );
 use File::Spec qw( abs2rel );
 use Time::HiRes qw(time);
 use POSIX qw(strftime);
+use Encode;
 
 sub trim { # trims whitespace from beginning and end of $string
 	my $s = shift;
@@ -692,13 +693,15 @@ sub GetFileHash { # $fileName ; returns hash of file contents
 
 sub GetSHA1 {
 	my $string = shift;
-	my $hash = sha1_hex(Encode::encode_utf8($string));
+	#my $hash = sha1_hex(Encode::encode_utf8($string));
+	my $hash = sha1_hex(Encode::encode_utf8(utf8::is_utf8($string) ? Encode::encode_utf8($string) : $string));
 	return $hash;
 } # GetSHA1()
 
 sub GetMD5 {
 	my $string = shift;
-	my $hash = md5_hex(Encode::encode_utf8($string));
+	#my $hash = md5_hex(Encode::encode_utf8($string));
+	my $hash = md5_hex(Encode::encode_utf8(utf8::is_utf8($string) ? Encode::encode_utf8($string) : $string));
 	return $hash;
 } # GetMD5()
 
@@ -1461,7 +1464,8 @@ sub ReplaceStrings { # automatically replaces strings in html with looked up val
 	foreach my $string (@contentStrings) {
 		$string = trim($string);
 		if ($string && length($string) >= 5) {
-			my $stringHash = md5_hex($string);
+			my $stringHash = GetMD5($string);#
+			#my $stringHash = md5_hex($string);#
 			WriteLog('ReplaceStrings, replacing ' . length($string) . '-char-long string (' . $stringHash . ')');
 			#WriteLog('ReplaceStrings, replacing ' . $string . ' (' . $stringHash . ')');
 			my $newString = GetConfig('string/' . $newLanguage . '/' . $stringHash);
