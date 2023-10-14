@@ -564,7 +564,7 @@ function DraggingInitDialog (el, doPosition) {
 			RestoreDialogPosition(el, elId);
 		}
 
-		if (GetPrefs('draggable_restore_collapsed')) {
+		if (GetPrefs('draggable_restore_collapsed')) { // chkDraggableRestore
 			if (GetPrefs(elId + '.collapse', 'dialogPosition') == 'none') {
 				CollapseWindow(el, 'none'); // DraggingInitDialog() // #meh
 			} else {
