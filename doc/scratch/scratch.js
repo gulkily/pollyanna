@@ -1,3 +1,32 @@
+	function resetButtonOnMouseOut () {
+		if (document.getElementById) {
+			var btnReset = document.getElementById('btnReset');
+			if (btnReset) {
+				btnReset.innerHTML = 'RESET'
+			}
+		}
+	}
+
+
+	if (document.getElementById && this.innerHTML) {
+		if (this.innerHTML.indexOf('YES') != -1) {
+			// let it happen
+			if (window.resetButtonOnClick) {
+				document.getElementById('aButtonReset').onclick = window.resetButtonOnClick; // setAttribute?
+				window.resetButtonOnClick = '';
+			}
+		} else {
+			window.resetButtonOnClick = document.getElementById('aButtonReset').onclick; // getAttribute?
+			document.getElementById('aButtonReset').onclick = '' // setAttribute?
+			this.innerHTML = '<font color=#606060>R</font><font color=#00c000>YES</font><font color=#606060>T</font>';
+			this.setAttribute('onmouseout', 'resetButtonOnMouseOut');
+			return false;
+		}
+	} else {
+		// todo
+	}
+
+
 
 			var walkUp = comment;
 			while (walkUp != document.body) {
@@ -21,22 +50,22 @@
 
 
 module.exports = function toUTCString() {
-        thisTimeValue(this); // to brand check
+		thisTimeValue(this); // to brand check
 
-        var day = $getUTCDay(this);
-        var date = $getUTCDate(this);
-        var month = $getUTCMonth(this);
-        var year = $getUTCFullYear(this);
-        var hour = $getUTCHours(this);
-        var minute = $getUTCMinutes(this);
-        var second = $getUTCSeconds(this);
-        return dayNames[day] + ', '
-                + (date < 10 ? '0' + date : date) + ' '
-                + monthNames[month] + ' '
-                + year + ' '
-                + (hour < 10 ? '0' + hour : hour) + ':'
-                + (minute < 10 ? '0' + minute : minute) + ':'
-                + (second < 10 ? '0' + second : second) + ' GMT';
+		var day = $getUTCDay(this);
+		var date = $getUTCDate(this);
+		var month = $getUTCMonth(this);
+		var year = $getUTCFullYear(this);
+		var hour = $getUTCHours(this);
+		var minute = $getUTCMinutes(this);
+		var second = $getUTCSeconds(this);
+		return dayNames[day] + ', '
+				+ (date < 10 ? '0' + date : date) + ' '
+				+ monthNames[month] + ' '
+				+ year + ' '
+				+ (hour < 10 ? '0' + hour : hour) + ':'
+				+ (minute < 10 ? '0' + minute : minute) + ':'
+				+ (second < 10 ? '0' + second : second) + ' GMT';
 
 
 
@@ -67,11 +96,15 @@ myFunction();
 function selectLoadKey (keyName) {
 	var newKey = GetPrefs(keyName, 'PrivateKey1');
 	if (newKey) {
-		 setPrivateKeyFromTxt(newKey);
-		 if (document.compose.comment) {
-		 	document.compose.comment.value = newKey;
-		 	document.compose.submit();
-		 }
+		setPrivateKeyFromTxt(newKey);
+		// #todo: if author name is not already stored in PrivateKeyName, store it:
+		//if (!GetPrefs(keyName, 'PrivateKeyName')) {
+		//	var authorName = window.localStorage.getItem('authorName');
+		//}
+		if (document.compose.comment) {
+			document.compose.comment.value = newKey;
+			document.compose.submit();
+		}
 	}
 }
 
@@ -247,45 +280,45 @@ function selectLoadKey (keyName) {
 
 
 TagCloud = {
-    //Color hues
-    ca: [51,102,102],
-    cz: [0,102,255],
+	//Color hues
+	ca: [51,102,102],
+	cz: [0,102,255],
 
-    min_font_size: 12,
-    max_font_size: 35,
+	min_font_size: 12,
+	max_font_size: 35,
 
-    generate: function(all_tags, all_words) {
-        var self = this, colors=[], font_size;
+	generate: function(all_tags, all_words) {
+		var self = this, colors=[], font_size;
 
-        var ul = UL({c: 'plurk-cloud'});
+		var ul = UL({c: 'plurk-cloud'});
 
-        map(all_words, function(t)  {
-            for (var i=0; i<3; i++)
-                colors[i] = self._score(self.ca[i], self.cz[i], all_tags[t]);
+		map(all_words, function(t)  {
+			for (var i=0; i<3; i++)
+				colors[i] = self._score(self.ca[i], self.cz[i], all_tags[t]);
 
-            font_size = self._score(self.min_font_size, self.max_font_size, all_tags[t]);
+			font_size = self._score(self.min_font_size, self.max_font_size, all_tags[t]);
 
-            var color_attr = 'color:rgb('+colors[0]+','+colors[1]+','+colors[2]+')';
-            var li = LI({s: 'font-size:'+ font_size + 'px'},
-                SPAN({s: color_attr}, t)
-            );
+			var color_attr = 'color:rgb('+colors[0]+','+colors[1]+','+colors[2]+')';
+			var li = LI({s: 'font-size:'+ font_size + 'px'},
+				SPAN({s: color_attr}, t)
+			);
 
-            ACN(ul, li, ' ');
-        });
+			ACN(ul, li, ' ');
+		});
 
-        return DIV({c: 'plurk-tags'}, ul);
-    },
+		return DIV({c: 'plurk-tags'}, ul);
+	},
 
-    _score: function(a, b, counts) {
-        //reducer impacts color and font size, choosing a bigger will make the font smaller
-        var reducer = 11;
-        var m = Math.abs(a-b) / Math.log(reducer);
+	_score: function(a, b, counts) {
+		//reducer impacts color and font size, choosing a bigger will make the font smaller
+		var reducer = 11;
+		var m = Math.abs(a-b) / Math.log(reducer);
 
-        if(a > b)
-            return a - Math.floor(Math.log(counts) * m);
-        else
-            return Math.floor(Math.log(counts) * m + a);
-    }
+		if(a > b)
+			return a - Math.floor(Math.log(counts) * m);
+		else
+			return Math.floor(Math.log(counts) * m + a);
+	}
 }
 
 var TAGS = ${ json(tags) };
@@ -309,13 +342,13 @@ RCN($('tags'), TagCloud.generate(TAGS, WORDS));
 
 /*
 		#mydiv {
-    	  	position: absolute;
-     		z-index: 9;
-    	}
+			position: absolute;
+			z-index: 9;
+		}
 
-    	#mydivheader {
-    		this is just the titlebar
-    	}
+		#mydivheader {
+			this is just the titlebar
+		}
 */
 
 window.draggingZ = 0;
@@ -337,7 +370,7 @@ function dragElement (elmnt, header) {
 	elmnt.style.top = (rect.top) + "px";
 	elmnt.style.left = (rect.left) + "px";
 
-    //console.log(rect.top, rect.right, rect.bottom, rect.left);
+	//console.log(rect.top, rect.right, rect.bottom, rect.left);
 	//elmnt.style.position = 'absolute';
 	//elmnt.style.z-index = '9';
 }
@@ -506,17 +539,17 @@ function DraggingInit (doPosition) {
 JS:
 
  function handleFileInput(fileList: FileList) {
-        const preview = document.getElementById('photos-preview');
-        Array.from(fileList).forEach((file: File) => {
-            const reader = new FileReader();
-            reader.onload = () => {
-              var image = new Image();
-              image.src = String(reader.result);
-              preview.appendChild(image);
-            }
-            reader.readAsDataURL(file);
-        });
-    }
+		const preview = document.getElementById('photos-preview');
+		Array.from(fileList).forEach((file: File) => {
+			const reader = new FileReader();
+			reader.onload = () => {
+			  var image = new Image();
+			  image.src = String(reader.result);
+			  preview.appendChild(image);
+			}
+			reader.readAsDataURL(file);
+		});
+	}
 
 
 
@@ -526,27 +559,27 @@ function previewImages() {
   var preview = document.querySelector('#preview');
 
   if (this.files) {
-    [].forEach.call(this.files, readAndPreview);
+	[].forEach.call(this.files, readAndPreview);
   }
 
   function readAndPreview(file) {
 
-    // Make sure `file.name` matches our extensions criteria
-    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
-      return alert(file.name + " is not an image");
-    } // else...
+	// Make sure `file.name` matches our extensions criteria
+	if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+	  return alert(file.name + " is not an image");
+	} // else...
 
-    var reader = new FileReader();
+	var reader = new FileReader();
 
-    reader.addEventListener("load", function() {
-      var image = new Image();
-      image.height = 100;
-      image.title  = file.name;
-      image.src    = this.result;
-      preview.appendChild(image);
-    });
+	reader.addEventListener("load", function() {
+	  var image = new Image();
+	  image.height = 100;
+	  image.title  = file.name;
+	  image.src    = this.result;
+	  preview.appendChild(image);
+	});
 
-    reader.readAsDataURL(file);
+	reader.readAsDataURL(file);
 
   }
 
@@ -576,94 +609,94 @@ var cid,lid,sp,et,pint=6E4,pdk=1.2,pfl=20,mb=0,mdrn=1,fixhead=0,dmcss='//d217i26
 
 export default function potpack(boxes) {
 
-    // calculate total box area and maximum box width
-    let area = 0;
-    let maxWidth = 0;
+	// calculate total box area and maximum box width
+	let area = 0;
+	let maxWidth = 0;
 
-    for (const box of boxes) {
-        area += box.w * box.h;
-        maxWidth = Math.max(maxWidth, box.w);
-    }
+	for (const box of boxes) {
+		area += box.w * box.h;
+		maxWidth = Math.max(maxWidth, box.w);
+	}
 
-    // sort the boxes for insertion by height, descending
-    boxes.sort((a, b) => b.h - a.h);
+	// sort the boxes for insertion by height, descending
+	boxes.sort((a, b) => b.h - a.h);
 
-    // aim for a squarish resulting container,
-    // slightly adjusted for sub-100% space utilization
-    const startWidth = Math.max(Math.ceil(Math.sqrt(area / 0.95)), maxWidth);
+	// aim for a squarish resulting container,
+	// slightly adjusted for sub-100% space utilization
+	const startWidth = Math.max(Math.ceil(Math.sqrt(area / 0.95)), maxWidth);
 
-    // start with a single empty space, unbounded at the bottom
-    const spaces = [{x: 0, y: 0, w: startWidth, h: Infinity}];
+	// start with a single empty space, unbounded at the bottom
+	const spaces = [{x: 0, y: 0, w: startWidth, h: Infinity}];
 
-    let width = 0;
-    let height = 0;
+	let width = 0;
+	let height = 0;
 
-    for (const box of boxes) {
-        // look through spaces backwards so that we check smaller spaces first
-        for (let i = spaces.length - 1; i >= 0; i--) {
-            const space = spaces[i];
+	for (const box of boxes) {
+		// look through spaces backwards so that we check smaller spaces first
+		for (let i = spaces.length - 1; i >= 0; i--) {
+			const space = spaces[i];
 
-            // look for empty spaces that can accommodate the current box
-            if (box.w > space.w || box.h > space.h) continue;
+			// look for empty spaces that can accommodate the current box
+			if (box.w > space.w || box.h > space.h) continue;
 
-            // found the space; add the box to its top-left corner
-            // |-------|-------|
-            // |  box  |       |
-            // |_______|       |
-            // |         space |
-            // |_______________|
-            box.x = space.x;
-            box.y = space.y;
+			// found the space; add the box to its top-left corner
+			// |-------|-------|
+			// |  box  |       |
+			// |_______|       |
+			// |         space |
+			// |_______________|
+			box.x = space.x;
+			box.y = space.y;
 
-            height = Math.max(height, box.y + box.h);
-            width = Math.max(width, box.x + box.w);
+			height = Math.max(height, box.y + box.h);
+			width = Math.max(width, box.x + box.w);
 
-            if (box.w === space.w && box.h === space.h) {
-                // space matches the box exactly; remove it
-                const last = spaces.pop();
-                if (i < spaces.length) spaces[i] = last;
+			if (box.w === space.w && box.h === space.h) {
+				// space matches the box exactly; remove it
+				const last = spaces.pop();
+				if (i < spaces.length) spaces[i] = last;
 
-            } else if (box.h === space.h) {
-                // space matches the box height; update it accordingly
-                // |-------|---------------|
-                // |  box  | updated space |
-                // |_______|_______________|
-                space.x += box.w;
-                space.w -= box.w;
+			} else if (box.h === space.h) {
+				// space matches the box height; update it accordingly
+				// |-------|---------------|
+				// |  box  | updated space |
+				// |_______|_______________|
+				space.x += box.w;
+				space.w -= box.w;
 
-            } else if (box.w === space.w) {
-                // space matches the box width; update it accordingly
-                // |---------------|
-                // |      box      |
-                // |_______________|
-                // | updated space |
-                // |_______________|
-                space.y += box.h;
-                space.h -= box.h;
+			} else if (box.w === space.w) {
+				// space matches the box width; update it accordingly
+				// |---------------|
+				// |      box      |
+				// |_______________|
+				// | updated space |
+				// |_______________|
+				space.y += box.h;
+				space.h -= box.h;
 
-            } else {
-                // otherwise the box splits the space into two spaces
-                // |-------|-----------|
-                // |  box  | new space |
-                // |_______|___________|
-                // | updated space     |
-                // |___________________|
-                spaces.push({
-                    x: space.x + box.w,
-                    y: space.y,
-                    w: space.w - box.w,
-                    h: box.h
-                });
-                space.y += box.h;
-                space.h -= box.h;
-            }
-            break;
-        }
-    }
+			} else {
+				// otherwise the box splits the space into two spaces
+				// |-------|-----------|
+				// |  box  | new space |
+				// |_______|___________|
+				// | updated space     |
+				// |___________________|
+				spaces.push({
+					x: space.x + box.w,
+					y: space.y,
+					w: space.w - box.w,
+					h: box.h
+				});
+				space.y += box.h;
+				space.h -= box.h;
+			}
+			break;
+		}
+	}
 
-    return {
-        w: width, // container width
-        h: height, // container height
-        fill: (area / (width * height)) || 0 // space utilization
-    };
+	return {
+		w: width, // container width
+		h: height, // container height
+		fill: (area / (width * height)) || 0 // space utilization
+	};
 }
