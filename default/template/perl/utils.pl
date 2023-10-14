@@ -361,7 +361,9 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 		if ($charPrefix eq '') {
 			$charPrefix = '$';
 		}
-		if (GetConfig('debug_verbose')) {
+		# DON'T DO THIS, causes endless loop
+		#if (GetConfig('debug_verbose')) {
+		if (1) {
 			#fully verbose
 			AppendFile("log/log.log", $timestamp . " " . $charPrefix . " " . $text);
 		} else {
