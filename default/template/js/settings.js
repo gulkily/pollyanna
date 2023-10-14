@@ -377,15 +377,15 @@ function GetPrefs (prefKey, storeName) { // get prefs value from localstorage
 // function GetSetting () {
 
 	if (!storeName) {
-        // settings beginning with gtgt go into separate container
-        // this is a local record of the user's votes and
-        // is used to avoid attempting to double-vote
-        var gt = unescape('%3E');
-        if (prefKey.substr(0, 2) == gt+gt) {
-            storeName = 'voted';
-        } else {
-    		storeName = 'settings';
-        }
+		// settings beginning with gtgt go into separate container
+		// this is a local record of the user's votes and
+		// is used to avoid attempting to double-vote
+		var gt = unescape('%3E');
+		if (prefKey.substr(0, 2) == gt+gt) {
+			storeName = 'voted';
+		} else {
+			storeName = 'settings';
+		}
 	}
 
 	if (!prefKey) {
@@ -477,8 +477,8 @@ function SetPrefs (prefKey, prefValue, storeName) { // set prefs key prefKey to 
 		if (prefKey.substr(0, 2) == gt+gt) {
 			storeName = 'voted';
 		} else {
-		    storeName = 'settings';
-        }
+			storeName = 'settings';
+		}
 	}
 
 	//alert('DEBUG: SetPrefs(' + prefKey + ', ' + prefValue + ', ' + storeName + ')');
