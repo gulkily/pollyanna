@@ -37,7 +37,8 @@ sub GetItemTemplateBody {
 
 	if ($file{'item_type'} eq 'image') {
 		WriteLog('GetItemTemplateBody: item_type = ' . $file{'item_type'});
-		my $imageContainer = GetImageContainer($file{'file_hash'}, $file{'item_name'}, 1);
+		my $imageAlt = ($file{'item_name'} ? $file{'item_name'} : 'image');
+		my $imageContainer = GetImageContainer($file{'file_hash'}, $imageAlt, 1);
 		$itemTemplateBody = GetTemplate('html/item/item.template'); # GetItemTemplate()
 		$itemTemplateBody = str_replace('$itemText', $imageContainer, $itemTemplateBody); #todo #bug $itemText is always empty here
 	}
