@@ -134,7 +134,7 @@ function MakeKey (t, callback = '') { //makes key using default settings
 					var pubkey = key.publicKeyArmored;   // '-----BEGIN PGP PUBLIC KEY BLOCK ... '
 					var revocationCertificate = key.revocationCertificate; // '-----BEGIN PGP PUBLIC KEY BLOCK ... '
 
-					openpgp.key.readArmored(privkey);
+					openpgp.key.readArmored(privkey);// #todo is this really necessary to do here, if we do it again below?
 
 					// read it into pgp object
 					var privKeyObj = openpgp.key.readArmored(privkey);;
