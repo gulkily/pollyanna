@@ -587,11 +587,16 @@ function selectKeyPopulate () {
 		} else { // #todo put this in event loop?
 			if ((window.SetPrefs) && (window.GetPrefs)) {
 				var iPrivKey = 0;
+				var currentKey = window.localStorage.getItem('privatekey'); // #todo this should use GetPrefs() instead of using localStorage directly
 				while (GetPrefs('pk' + iPrivKey, 'PrivateKey1')) {
 					//if (GetPrefs('pk' + iPrivKey, 'PrivateKey1') == keyArmored) {
 					//	return 1; // already stored
 					//}
 					var o = new Option('pk' + iPrivKey, 'pk' + iPrivKey);
+					// it should also add selected attribute to the option if it is the one matching the private key in the 'privatekey' localstorage entry:
+					if (currentKey == GetPrefs('pk' + iPrivKey, 'PrivateKey1')) {
+						o.setAttribute('selected', 'selected');
+					}
 					document.formSelectKey.selectKey.add(o);
 					iPrivKey++;
 				}
