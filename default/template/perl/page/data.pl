@@ -107,9 +107,11 @@ sub MakeDataZips {
 	}
 } # MakeDataZips()
 
-sub GetDataPage { # writes /data.html (and zip files if needed) # MakeZip txt.zip
+sub GetDataPage { # writes /data.html (and zip files if needed)
+	# sub MakeZip {
 	# sub MakeDataPage {
 	# sub WriteDataPage {
+	# txt.zip
 	#This makes the zip file as well as the data.html page that lists its size
 	WriteLog('GetDataPage() called');
 
