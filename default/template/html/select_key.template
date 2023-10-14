@@ -2,7 +2,7 @@
 <!-- keychain.template -->
 <fieldset>
     <label for=selectKey>
-        Restore stored key:<br>
+        Selected key:<br>
         <select name=selectKey id=selectKey onchange="selectLoadKey(this.value)">
             <option value=0>[No selection]</option>
         </select>
