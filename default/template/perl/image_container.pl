@@ -25,7 +25,7 @@ sub GetImageContainer { # $fileHash, $imageAlt, $boolLinkToItemPage = 1
 	#$fileHash = SqliteGetValue("SELECT file_hash FROM item_flat WHERE file_hash LIKE '$fileHash%'");
 	#todo this is a hack
 
-	WriteLog('GetImageContainer: $fileHash = ' . $fileHash . '; $imageAlt = ' . $imageAlt . '; $boolLinkToItemPage = ' . ($boolLinkToItemPage ? 'TRUE' : 'FALSE') . '; caller = ' . join(',', caller));
+	WriteLog('GetImageContainer: $fileHash = ' . $fileHash . '; $imageAlt = ' . ($imageAlt ? $imageAlt : 'FALSE') . '; $boolLinkToItemPage = ' . ($boolLinkToItemPage ? 'TRUE' : 'FALSE') . '; caller = ' . join(',', caller));
 
 	my $permalinkHtml = '';
 	if (!$permalinkHtml) {
