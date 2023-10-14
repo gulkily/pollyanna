@@ -592,7 +592,8 @@ function selectKeyPopulate () {
 					//if (GetPrefs('pk' + iPrivKey, 'PrivateKey1') == keyArmored) {
 					//	return 1; // already stored
 					//}
-					var o = new Option('pk' + iPrivKey, 'pk' + iPrivKey);
+					var keyLabel = GetPrefs('pk' + iPrivKey, 'PrivateKeyName') || 'pk' + iPrivKey;
+					var o = new Option(keyLabel, 'pk' + iPrivKey);
 					// it should also add selected attribute to the option if it is the one matching the private key in the 'privatekey' localstorage entry:
 					if (currentKey == GetPrefs('pk' + iPrivKey, 'PrivateKey1')) {
 						o.setAttribute('selected', 'selected');

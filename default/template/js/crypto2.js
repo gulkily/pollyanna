@@ -156,7 +156,7 @@ function MakeKey (t, callback = '') { //makes key using default settings
 
 					var avatar = escapeHTML(myUsername);
 
-					AddPrivateKey(privkey);
+					AddPrivateKey(privkey, myUsername);
 
 					window.localStorage.setItem('privatekey', privkey);
 					window.localStorage.setItem('publickey', pubkey);
@@ -257,7 +257,7 @@ function getPublicKey () { // get public key from local storage
 	}
 } // getPublicKey()
 
-function AddPrivateKey (keyArmored) {
+function AddPrivateKey (keyArmored, authorName = '') {
 	//alert('DEBUG: AddPrivateKey()');
 
 	var gt = unescape('%3E');
@@ -274,6 +274,9 @@ function AddPrivateKey (keyArmored) {
 			iPrivKey++;
 		}
 		SetPrefs('pk' + iPrivKey, keyArmored, 'PrivateKey1');
+		if (authorName) {
+			SetPrefs('pk' + iPrivKey, authorName, 'PrivateKeyName');
+		}
 	}
 } // AddPrivateKey()
 
