@@ -192,7 +192,7 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache
 						if (GetConfig('setting/admin/auto_approve_first_user')) {
 							#todo optimize below
 							my $existingAuthors = SqliteGetValue("SELECT COUNT(key) AS author_count FROM author_alias WHERE alias = '$aliasReturned'"); #todo parameterize
-							WriteLog('GpgParse: $existingAuthors = ' . $existingAuthors);
+							WriteLog('GpgParse: auto_approve_first_user: $existingAuthors = ' . $existingAuthors);
 							if ($existingAuthors) {
 								# do not auto-approve
 								RemoveHtmlFile('people.html'); #todo this should only happen if dynamic mode is on
