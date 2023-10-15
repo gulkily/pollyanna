@@ -71,9 +71,16 @@ function WriteOnload () { // onload handler for write page
 							var btnSolvePuzzle = document.createElement('input');
 							btnSolvePuzzle.setAttribute('id', 'btnSolvePuzzle');
 							btnSolvePuzzle.setAttribute('type', 'button');
-							btnSolvePuzzle.setAttribute('value', 'Solve Puzzle');
+							btnSolvePuzzle.setAttribute('value', 'Solve Puzzle:');
 							btnSolvePuzzle.setAttribute('onclick',	"if (window.solvePuzzle) { return solvePuzzle(this); } else { return true; }");
 							spanWriteAdvanced.appendChild(btnSolvePuzzle);
+
+							var btnPuzzlePrefix = document.createElement('input');
+							btnPuzzlePrefix.setAttribute('id', 'btnPuzzlePrefix');
+							btnPuzzlePrefix.setAttribute('type', 'input');
+							btnPuzzlePrefix.setAttribute('size', '5');
+							btnPuzzlePrefix.setAttribute('value', '');
+							spanWriteAdvanced.appendChild(btnPuzzlePrefix);
 
 							var br = document.createElement('br');
 							spanWriteAdvanced.appendChild(br);
