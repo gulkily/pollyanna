@@ -414,6 +414,10 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$txtIndex .= GetReplyForm($file{'file_hash'});
 	}
 
+	if (GetConfig('setting/html/item_page/attributes_list')) {
+		$txtIndex .= GetItemAttributesDialog(\%file);
+	}
+
 	if (GetConfig('setting/admin/token/problem')) {
 		if (index($file{'labels_list'}, ',problem,') != -1) {
 			require_once('dialog/upload.pl');
@@ -637,10 +641,6 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$param{'no_heading'} = 1;
 		$param{'no_status'} = 1;
 		$txtIndex .= GetQueryAsDialog($query, 'Applied Labels', 0, \%param);
-	}
-
-	if (GetConfig('setting/html/item_page/attributes_list')) {
-		$txtIndex .= GetItemAttributesDialog(\%file);
 	}
 
 	if (GetConfig('setting/html/item_page/toolbox_next_previous')) {
