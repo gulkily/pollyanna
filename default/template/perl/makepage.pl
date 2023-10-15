@@ -26,6 +26,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 # sub getpage {
 # sub GetTagsPage { MakePage()
 # sub GetLabelsPage { MakePage()
+# sub GetLabelsDialog {
 # sub GetPage {
 # sub MakeProfilePage {
 
@@ -508,6 +509,9 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	#
 	# fallthrough
 	else {
+		# hi, friend. if you're here, you should probably look for this: 	# my @validPages =
+                                                                         	# valid pages
+
 		WriteMessage('Warning: did not recognize that page type: ' . $pageType);
 		WriteLog('MakePage: warning: did not recognize that page type: ' . $pageType . '; caller = ' . join(',', caller));
 		WriteMessage('=========================================');

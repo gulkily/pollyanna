@@ -1,20 +1,23 @@
 Creating a new page
 
-template/html/page/example.template
-	skip
+default/template/html/page/example.template (or default/theme/yourname/template/html/page/example.template
+	you can skip this if you're making a listing page
+	otherwise, this is the content of the "main" dialog of the page.
 
-template/perl/page/example.pl
+default/template/perl/page/example.pl (or default/theme/yourname/template/perl/page/example.pl
 - needs to have GetExamplePage()
 	need to create a query template if using GetQueryAsDialog()
+- error reporting could be better right now. to rebuild this file, you need to:
+	a) run `hike refresh` to propagate the change from default to config
+	b) run `hike make example` to rebuild the html page (this is where you would see your error)
 
-makepage.pl: add to valid pages
-    may be unclear, but comment added #todo
+makepage.pl: add to valid pages (search for @validPages or @simplePages)
 
-test: `hike page example` should work
-    #check
+TEST 1:
+	when you fist go to http://localhost:2784/example.html, it will show a page missing
+	but after you run `hike page example`, the page should work
 
-route.php: add to valid routes
-    look for "validRoutes"
+route.php: look for validRoutes and add "example" to the list
 
 handle_not_found.php: add to $validMakePageNames
     
