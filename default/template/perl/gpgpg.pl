@@ -204,6 +204,21 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache
 							}
 						}
 
+						#todo add message to index_log
+						if (GetConfig('setting/admin/auto_admin_first_author')) { #
+							#todo optimize below
+							my $existingAuthors = SqliteGetValue("SELECT COUNT(key) FROM author");
+							WriteLog('GpgParse: auto_admin_first_author: $existingAuthors = ' . $existingAuthors);
+							if ($existingAuthors) {
+								# do not auto-approve
+								RemoveHtmlFile('people.html'); #todo this should only happen if dynamic mode is on
+							}
+							else {
+								#todo should apply to fingerprint?
+								DBAddLabel($fileHash, GetTime(), 'admin', $gpgKeyPub, $fileHash);
+							}
+						}
+
 						#todo gpg --list-packets --keyid-format=long <public_key.txt>
 						# this will give us the keygen time
 
