@@ -10,7 +10,7 @@ sub GetPersonLink { # $alias, $fingerprint
 	my $alias = shift;
 	chomp $alias;
 
-	if ($alias =~ m/^([A-Za-z0-9]+)$) {
+	if ($alias =~ m/^([A-Za-z0-9]+)$/) {
 		$alias = $1;
 	}
 	else {
