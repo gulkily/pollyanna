@@ -95,8 +95,9 @@ sub MakeSimplePage { # given page name, makes page
 		my $pageContent = GetTemplate("html/page/$pageName.template");
 		if (trim($pageContent) eq '') {
 			WriteLog('MakeSimplePage: warning: $pageContent was empty; caller = ' . join(',', caller));
+			$pageContent = 'Coming Soon..';
+			# hi, friend. if you're here, you may want to look here: @validRoutes
 			# this can be a symptom of out of disk space
-			$pageContent = 'Coming Soon...';
 		}
 		my $contentWindow = GetDialogX(
 			$pageContent,
@@ -134,7 +135,7 @@ sub MakeSimplePage { # given page name, makes page
 		if (trim($pageContent) eq '') {
 			WriteLog('MakeSimplePage: warning: $pageContent was empty; caller = ' . join(',', caller));
 			# this can be a symptom of out of disk space
-			$pageContent = 'Coming Soon...';
+			$pageContent = 'Coming Soon....';
 		}
 
 		$html .= $contentWindow;
