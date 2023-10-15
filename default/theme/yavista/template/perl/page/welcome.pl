@@ -27,10 +27,10 @@ sub MakePollyannaPages {
 			PutFile(GetDir('html') . '/pollyanna/video.html', GetTemplate('html/page/pollyanna/video.html'));
 		}
 
-		my $pollyannaSponsorPageTemplate = GetTemplate('html/page/pollyanna/sponsor.html');
-		if ($pollyannaSponsorPageTemplate) {
-			PutFile(GetDir('html') . '/pollyanna/sponsor.html', GetTemplate('html/page/pollyanna/sponsor.html'));
-		}
+		#my $pollyannaSponsorPageTemplate = GetTemplate('html/page/pollyanna/sponsor.html');
+		#if ($pollyannaSponsorPageTemplate) {
+		#	PutFile(GetDir('html') . '/pollyanna/sponsor.html', GetTemplate('html/page/pollyanna/sponsor.html'));
+		#}
 
 		my @filesToCopy = qw(
 			doc/screenshot/16964/netscape3.png
