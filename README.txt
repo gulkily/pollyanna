@@ -1,6 +1,3 @@
-  Pollyanna is a framework for building community websites
-  with an emphasis on consent and accessibility.
-
 
  ,ggggggggggg,
 dP"""88""""""Y8,      ,dPYb, ,dPYb,
@@ -19,138 +16,115 @@ Yb,  88      `8b      IP'`Yb IP'`Yb
                                       `8, ,8I
                                        `Y8P"
 
-CONSENT:
+Pollyanna is a web framework that prioritizes consent and accessibility.
+It is designed to be respectful of user content, empowering to users, provable in its reliability, portable,
+customizable, durable, accessible, secure, and convenient to install.
 
-For operators and administrators, Pollyanna supports every released software
-version indefinitely, forgoing forced updates or any coercion.
+Reasons to use Pollyanna:
 
-For users and clients, Pollyanna facilitates full account and data ownership
-and accessibility. Users should be able to access or not access the service as
-they see fit and in whatever way they see fit, as long as it is with the consent
-of the operator. Users should be able to see, with full transparency, all the
-data and information contained in the service.
-
-ACCESSIBILITY:
-
-Pollyanna bends over backwards to accommodate every user and client,
-regardless of their access method of choice, browser and configuration,
-connection speed, device type, abilities, and situation.
-
-Pollyanna tries to perpetuate the Any Browser philosophy, and is regularly
-tested with a variety of browsers and configurations. In particular, Pollyanna
-has been tested with popular versions of Lynx, Mosaic, Netscape, Internet Explorer,
-Opera, Firefox, Brave, Safari, and even Google Chrome.
-
-WHY USE THIS?
-=============
-Below is an outline of reasons you would want to use Pollyanna.
-
-Respectful:
+* Respectful:
 Pollyanna aims to display your content as close to your intention as possible.
-It will not clip it. It will not remove line breaks. It will not alter spacing.
-Unless you ask.
+It will not clip it, remove line breaks, or alter spacing unless you ask.
 
-Empowering:
-User "account", aka private key, remains in user's possession and control.
+* Empowering:
+User accounts are private keys that remain in the user's possession and control.
 Identity can be used across multiple servers without "federation".
 Registration is not required, and registering does not require email.
-Designed to allow the user to know who is operating the site.
-Users can easily export their own contributions in comfortable formats.
+Pollyanna is designed to allow the user to know who is operating the site,
+and users can easily export their own contributions in comfortable formats.
 
-Provable:
-Provable reliability of information integrity with digital signatures.
-Provable consensus and voting results -- full transparency.
-Provable privacy by allowing end user to control physical access to data.
+* Provable:
+Pollyanna offers provable reliability of information integrity with digital signatures,
+provable consensus and voting results,
+and provable privacy by allowing end users to control physical access to data.
 
-Portable:
-All forum text is stored as text files, improving ability to archive.
-Data is housed by service provider without lock-down and is always exportable.
+* Portable:
+All forum text is stored as text files, improving the ability to archive.
+Data is housed by the service provider without lock-down and is always exportable.
 
-Customizable:
-Custom themes and appearance using simple commands (like Myspace or Tumblr)
+* Customizable:
+Custom themes and appearance can be created using simple commands, similar to Myspace or Tumblr.
+Appearance, layout, and features can be customized by the user, and the user can choose to use a different server.
 
-Durable/Decentralized:
+* Durable/Decentralized:
 All data can be downloaded and replicated, in entirety or in segments.
-Can be cloned and re-hosted, with portable user accounts usable across all copies.
+Pollyanna can be cloned and re-hosted, with portable user accounts usable across all copies.
 
-Accessible:
-Tries very hard to accommodate every known and testable client.
-Tested with hundreds of different browsers, devices, and configurations.
-Full support for text-mode, no-JS, screen-readers, mouse-free, etc.
-Allows registration to be optional, if operator wants to allow it.
-Easier to access via telnet or text-mode than most websites.
-Attempts universal accessibility for all anticipated scenarios.
+* Accessible:
+Pollyanna tries very hard to accommodate every known and testable client,
+and has been tested with hundreds of different browsers, devices, and configurations.
+It offers full support for text-mode, no-JS, screen-readers, mouse-free, etc.
+Registration can be made optional, if the operator wants to allow it.
+Pollyanna is easier to access via telnet or text-mode than most websites,
+and attempts universal accessibility for all anticipated scenarios.
 
-Securable:
-Can be operated as static HTML for a smaller attack surface.
+* Securable:
+Pollyanna can be operated as static HTML for a smaller attack surface.
 JavaScript is also an optional module and optional for clients.
 
-Convenient Installation:
-Uses the most stable technologies, and compatible with most Web servers
-Optional PHP and SSI modules for more convenient usage.
-Optional client-side JS module for easier client signatures.
+* Convenient Installation:
+Pollyanna uses the most stable technologies, and is compatible with most web servers.
+Optional PHP and SSI modules are available for more convenient usage,
+and an optional client-side JS module is available for easier client signatures.
 
-Friendly, Compatible, Accessible:
-Modular interface shows only the basics for beginners, more options later.
-Tested thoroughly by many devices, configurations, platforms, browsers, users.
-Tested for accessibility by vision, mobility, and connectivity impaired users.
-Tested with Mosaic, Netscape, IE, Opera, iOS, Android, Lynx, w3m, and more.
-Supports all web servers which can write standard access.log format.
+* Friendly, Compatible, Accessible:
+Pollyanna has a modular interface that shows only the basics for beginners, with more options available later.
+It has been tested thoroughly by many devices, configurations, platforms, browsers, and users.
+Pollyanna has also been tested for accessibility by vision, mobility, and connectivity impaired users,
+and with a variety of browsers and devices, including Mosaic, Netscape, IE, Opera, iOS, Android, Lynx, w3m, and more.
+Pollyanna supports all web servers which can write standard access.log format.
 
-Art-Friendly:
+* Art-Friendly:
 Text-art is accommodated with a monospace font and preserving whitespace layout.
-Compatible with historic browsers to allow time-period-accurate installations.
+Pollyanna is also compatible with historic browsers to allow time-period-accurate installations.
 
-Transparent:
-Everything posted to community is viewable and verifiable.
-Voting logs are transparent, auditable, and trustable (Kevin Bacon)
-Meta-moderation is possible by voting on votes, and so on.
-Best content (and friends) for each user can be found with vote comparison.
+* Transparent:
+Everything posted to a Pollyanna community is viewable and verifiable.
+Voting logs are transparent, auditable, and trustable.
+Meta-moderation is possible by voting and commenting on votes, and so on.
+The best content (and friends) for each user can be found with vote comparison.
 Ballot stuffing and other abuse is detectable with data analysis.
-Validation chain prevents tampering with item posting timestamps.
-Items can be deleted by operator, but trace remains in timestamp log.
+A validation chain prevents tampering with item posting timestamps.
+Items can be deleted by the operator, but a trace remains in the timestamp log.
 
-Resilient:
-Avoid being a spam target by fine-tuning access.
-Avoid advertising by avoiding community over-growth.
-User-centric operation allows easy migration in case of instance changes.
+* Resilient:
+Pollyanna can avoid being a spam target by fine-tuning access, and avoid advertising by avoiding community over-growth.
+Its user-centric operation allows easy migration in case of instance changes.
 
-TESTED AND SUPPORTED BROWSERS AND CLIENTS:
+Tested and supported browsers and clients:
+The list below is by no means extensive, and is growing often. In no particular order:
 
-The list below is by no means extensive, and is growing often.
-In no particular order.
-
-Safari 1.0+ (iOS, Mac, and Windows)
-Netscape 2.0+
-Internet Explorer 3.0+
-Mozilla SeaMonkey 1.0+
-Firefox 1.0+
-Lynx
-Links (GUI and console)
-w3m
-qutebrowser
-Luakit
-LibreWolf
-Pale Moon
-Waterfox
-Waterfox Classic
-Microsoft Edge
-Dillo
-Liferea
-OffByOne
-Brave
-Falkon
-Camino
-Beacon
-Vivaldi
-Opera 2.0+
-Samsung Internet (Android)
-Samsung TV (name unknown)
-Kindle
-Google Translate (requires skilled operator for some features)
-Tor Browser
-Chromium
-wget
-curl
-NCSA Mosaic (requires accommodations)
-QuiteRSS
+* Safari 1.0+ (iOS, Mac, and Windows)
+* Netscape 2.0+
+* Internet Explorer 3.0+
+* Mozilla SeaMonkey 1.0+
+* Firefox 1.0+
+* Lynx
+* Links (GUI and console)
+* w3m
+* qutebrowser
+* Luakit
+* LibreWolf
+* Pale Moon
+* Waterfox
+* Waterfox Classic
+* Microsoft Edge
+* Dillo
+* Liferea
+* OffByOne
+* Brave
+* Falkon
+* Camino
+* Beacon
+* Vivaldi
+* Opera 2.0+
+* Samsung Internet (Android)
+* Samsung TV (name unknown)
+* Kindle
+* Google Translate (requires skilled operator for some features)
+* Tor Browser
+* Chromium
+* wget
+* curl
+* NCSA Mosaic (requires accommodations)
+* QuiteRSS
