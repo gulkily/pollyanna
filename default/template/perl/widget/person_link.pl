@@ -5,12 +5,32 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub GetPersonLink { # $alias
+sub GetPersonLink { # $alias, $fingerprint
+# fingerprint is optional, but providing fingerprint will show checkmark (and cost a db query atm)
 	my $alias = shift;
 	chomp $alias;
 
+	if ($alias =~ m/^([A-Za-z0-9]+)$) {
+		$alias = $1;
+	}
+	else {
+		$alias = 'Guest';
+	}
 	#todo sanity
-	return '<a href="/person/' . $alias . '/index.html">' . HtmlEscape($alias) . '</a>';
+
+	my $fingerprint = shift;
+
+	if ($fingerprint) {
+		my $authorIsApproved = AuthorHasTag($fingerprint, 'approve');
+		if ($authorIsApproved) {
+			return '<a href="/person/' . UriEscape($alias) . '/index.html">' . HtmlEscape($alias) . '&check;' . '</a>';
+		} else {
+			return '<a href="/person/' . UriEscape($alias) . '/index.html">' . HtmlEscape($alias) . '</a>';
+		}
+	}
+	else {
+		return '<a href="/person/' . UriEscape($alias) . '/index.html">' . HtmlEscape($alias) . '&check;' . '</a>';
+	}
 
 #	my $fingerprint = shift; # author's fingerprint
 #	my $showPlain = shift; # 1 to display avatar without colors
