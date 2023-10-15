@@ -128,6 +128,7 @@ sub GetPersonPage { # $personName
 			ORDER BY add_timestamp DESC
 			LIMIT 15
 		";
+		#todo remove hard-coded limit of 15 itesm
 		$itemList = GetQueryAsDialog($queryItemList, 'Recent Activity');
 		#todo templatize the query, use parameter injection
 	}
@@ -136,11 +137,22 @@ sub GetPersonPage { # $personName
 
 	my $personDialog = GetDialogX('<fieldset><p>This page is about a person named ' . HtmlEscape($personName) . '.</p></fieldset>', HtmlEscape($personName));
 
+	my $zipDialog = '';
+	if (GetConfig('setting/zip/person')) {
+		#todo sanity checks, make sure zip file name has no spaces
+		my $zipName = $personName . '.zip';
+
+		#MakeZipFromItemList($zipName, \@itemList); #todo
+		$zipDialog = GetDialogX('<fieldset><p><a href="/zip/person/' . HtmlEscape($personName) . '.zip">' . HtmlEscape($personName) . '.zip' . '</a><br>(Under Construction)</p></fieldset>', 'Archive');
+
+	}
+
 	# BUILD HTML PAGE OUT OF ABOVE UNITS
 	my $html =
 		GetPageHeader('person', HtmlEscape($personName)) .
 		$personDialog .
 		$itemList .
+		$zipDialog .
 		#"\n<hr>\n" .
 		#GetDialogX('<p>Approved Keys</p>') .
 		$keyList .
