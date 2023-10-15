@@ -119,6 +119,11 @@ window.getUserFp() is used to get user's fingerprint
 	var cycleLimit = 1000000; // this line is updated by InjectJs()
 	var secondsLimit = 10; // this line is updated by in InjectJs()
 
+	var userPrefix = prompt('Prefix:', (lookingFor ? lookingFor : ''));
+	if (userPrefix) { // #todo sanity check
+		lookingFor = userPrefix;
+	}
+
 	var puzzleResult = getSolvedPuzzle(fp, lookingFor, secondsLimit, cycleLimit); // #todo this should be templated?
 
 	// add to compose form, sign, and submit
