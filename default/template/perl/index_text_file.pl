@@ -763,6 +763,11 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 								if (!$titleCandidate) {
 									$titleCandidate = $tokenFound{'param'} . ' has self-identified';
 								}
+
+								#if (!$titleCandidate || $titleCandidate eq '-') {
+								#	$titleCandidate = 'my name is: ' . $tokenFound{'param'};
+								#}
+								#todo
 							} # if ($authorKey)
 						} else {
 							WriteLog('IndexTextFile: warning: my_name_is: sanity check FAILED');
