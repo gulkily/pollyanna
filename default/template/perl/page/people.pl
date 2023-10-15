@@ -30,7 +30,7 @@ sub GetPeoplePage {
 	{
 		my %params;
 		$params{'no_empty'} = 1;
-		$pending = GetQueryAsDialog('people_pending', 'Awaiting Approval', '', \%params);
+		$pending = '<span class="admin">' . GetQueryAsDialog('people_pending', 'Awaiting Approval', '', \%params) . '</span>';
 	}
 
 	my $guests = '';
