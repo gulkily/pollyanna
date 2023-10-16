@@ -1,3 +1,8 @@
+needs to be a 'paste' page and menu item
+
+#todo
+	this shouldn't be necessary: GetQueryAsDialog('labels', 'Labels') . # GetLabelsDialog() .
+
 #bug
 	when running reindex, the same system labels get added twice
 		probably needs to be a constraint on item+label+source
