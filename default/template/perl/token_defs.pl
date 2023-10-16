@@ -252,7 +252,7 @@ sub GetTokenDefs {
 			'mask'  => '(\#)()([a-zA-Z0-9_]{1,32})',
 			'mask_params' => 'mgi',
 			#'message' => '',
-			'message' => '[HashTag]',
+			#'message' => '[HashTag]',
 			'apply_to_parent' => 1,
 			'apply_to_self' => 1
 			#'require_spacer' => 0
