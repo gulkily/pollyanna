@@ -5,6 +5,7 @@ use warnings;
 use 5.010;
 
 sub GetPersonPage { # $personName
+# sub MakePersonPage {
 	my $personName = shift;
 
 	if ($personName =~ m/^([a-zA-Z0-9]+)$/) { # #todo use a validator function instead of regex
