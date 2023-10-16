@@ -1864,50 +1864,49 @@ sub AppendFile { # appends something to a file; $file, $content to append
 	}
 } # AppendFile()
 
-sub AuthorHasTag { # $key, $tagInQuestion ; returns 1 if user has label/tag, otherwise 0
-#todo rename to AuthorHasLabel()
-# sub AuthorHasLabel {
+sub AuthorHasLabel { # $key, $tagInQuestion ; returns 1 if user has label/tag, otherwise 0
+# sub AuthorHasTag {
 	# will probably be redesigned in the future
 	my $key = shift;
 	my $tagInQuestion = shift;
 
 	if (!IsFingerprint($key)) {
-		WriteLog('AuthorHasTag: warning: $key failed sanity check, returning 0; caller = ' . join(',', caller));
+		WriteLog('AuthorHasLabel: warning: $key failed sanity check, returning 0; caller = ' . join(',', caller));
 		return 0;
 	}
 
 	if (!trim($tagInQuestion)) {
-		WriteLog('AuthorHasTag: warning: $tagInQuestion failed sanity check, returning 0; caller = ' . join(',', caller));
+		WriteLog('AuthorHasLabel: warning: $tagInQuestion failed sanity check, returning 0; caller = ' . join(',', caller));
 		return 0;
 	}
 
 	#todo $tagInQuestion sanity check
 
-	WriteLog("AuthorHasTag($key, $tagInQuestion)");
+	WriteLog("AuthorHasLabel($key, $tagInQuestion)");
 
 	my $pubKeyHash = DBGetAuthorPublicKeyHash($key);
 	if ($pubKeyHash) {
-		WriteLog('AuthorHasTag: $pubKeyHash = ' . $pubKeyHash);
+		WriteLog('AuthorHasLabel: $pubKeyHash = ' . $pubKeyHash);
 
 		my $pubKeyVoteTotalsRef = DBGetItemLabelTotals2($pubKeyHash);
 		my %pubKeyVoteTotals = %{$pubKeyVoteTotalsRef};
-		WriteLog('AuthorHasTag: join(",", keys(%pubKeyVoteTotals)) = ' . join(",", keys(%pubKeyVoteTotals)));
+		WriteLog('AuthorHasLabel: join(",", keys(%pubKeyVoteTotals)) = ' . join(",", keys(%pubKeyVoteTotals)));
 
 		if ($pubKeyVoteTotals{$tagInQuestion}) {
-			WriteLog('AuthorHasTag: $tagInQuestion FOUND, return 1');
+			WriteLog('AuthorHasLabel: $tagInQuestion FOUND, return 1');
 			return 1;
 		} else {
-			WriteLog('AuthorHasTag: $tagInQuestion NOT found, return 0');
+			WriteLog('AuthorHasLabel: $tagInQuestion NOT found, return 0');
 			return 0;
 		}
 	} else {
-		WriteLog('AuthorHasTag: warning, no $pubKeyHash, how did we even get here? caller = ' . join(',', caller));
+		WriteLog('AuthorHasLabel: warning, no $pubKeyHash, how did we even get here? caller = ' . join(',', caller));
 		return 0;
 	}
 
-	WriteLog('AuthorHasTag: warning: unreachable fallthrough');
+	WriteLog('AuthorHasLabel: warning: unreachable fallthrough');
 	return 0;
-} # AuthorHasTag()
+} # AuthorHasLabel()
 
 sub IsAdmin { # $key ; returns 1 if user is admin, otherwise 0
 # sub UserIsAdmin {
@@ -1931,7 +1930,7 @@ sub IsAdmin { # $key ; returns 1 if user is admin, otherwise 0
 	} else {
 		if (GetConfig('admin/allow_admin_permissions_tag_lookup')) {
 			WriteLog('IsAdmin: not root admin, checking tags');
-			return AuthorHasTag($key, 'admin');
+			return AuthorHasLabel($key, 'admin');
 		} else {
 			WriteLog('IsAdmin: allow_admin_permissions_tag_lookup is false, stopping here');
 			return 0;

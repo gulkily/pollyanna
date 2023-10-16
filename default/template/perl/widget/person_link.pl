@@ -21,7 +21,7 @@ sub GetPersonLink { # $alias, $fingerprint
 	my $fingerprint = shift;
 
 	if ($fingerprint) {
-		my $authorIsApproved = AuthorHasTag($fingerprint, 'approve');
+		my $authorIsApproved = AuthorHasLabel($fingerprint, 'approve');
 		if ($authorIsApproved) {
 			return '<a href="/person/' . UriEscape($alias) . '/index.html">' . HtmlEscape($alias) . '&check;' . '</a>';
 		} else {

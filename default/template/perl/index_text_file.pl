@@ -910,7 +910,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										}
 										elsif (
 											$hashTag eq 'avatar' &&
-											AuthorHasTag($authorKey, 'approve')
+											AuthorHasLabel($authorKey, 'approve')
 										) {
 											WriteLog('IndexTextFile: permissioned: approve also allows avatar');
 											#todo this should probably be handled via tagset/approve
@@ -922,7 +922,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 											WriteLog('IndexTextFile: permissioned: $authorKey = ' . $authorKey);
 											push @indexMessageLog, 'author: ' . $authorKey;
 
-											if (AuthorHasTag($authorKey, $tokenFound{'param'})) {
+											if (AuthorHasLabel($authorKey, $tokenFound{'param'})) {
 												$approveStatus = 999;
 												$approveReason = 'author possesses tag';
 											} else {
