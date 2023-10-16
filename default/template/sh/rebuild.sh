@@ -6,8 +6,8 @@ if [ "$txtCount" -ge 200 ] && [ -e cache/b/index.sqlite3 ] ;
 		echo =======================================================
 		echo ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION!
 		echo Refusing to rebuild because more than 100 files of data
-		echo Use --override or -O to override, NOT IMPLEMENTED YET
-		echo or increase the number in the line above this message
+		echo Use these: \`hike clean\; hike build\; hike index\'
+		echo If this is what you really want to do.
 		echo =======================================================
 		echo \$ find html/txt -type f \| wc -l
 		find html/txt -type f | wc -l
