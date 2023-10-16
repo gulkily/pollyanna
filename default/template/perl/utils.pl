@@ -1864,7 +1864,9 @@ sub AppendFile { # appends something to a file; $file, $content to append
 	}
 } # AppendFile()
 
-sub AuthorHasTag { # $key ; returns 1 if user is admin, otherwise 0
+sub AuthorHasTag { # $key, $tagInQuestion ; returns 1 if user has label/tag, otherwise 0
+#todo rename to AuthorHasLabel()
+# sub AuthorHasLabel {
 	# will probably be redesigned in the future
 	my $key = shift;
 	my $tagInQuestion = shift;
