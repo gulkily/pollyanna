@@ -141,10 +141,18 @@ sub GetPersonPage { # $personName
 	my $zipDialog = '';
 	if (GetConfig('setting/zip/person')) {
 		#todo sanity checks, make sure zip file name has no spaces
-		my $zipName = $personName . '.zip';
+		my $zipName = "/person/$personName/$personName.zip";
+
+		if ($zipName) {
+			require_once('make_zip.pl');
+			my %zipOptions;
+			$zipOptions{'where_clause'} = "WHERE author_key IN (SELECT author_key FROM person_author WHERE author_alias = '$personName')"; #todo use parameter injection
+			my @zipFiles = DBGetItemList(\%zipOptions);
+			MakeZipFromItemList($zipName, \@zipFiles);
+		}
 
 		#MakeZipFromItemList($zipName, \@itemList); #todo
-		$zipDialog = GetDialogX('<fieldset><p><a href="/zip/person/' . HtmlEscape($personName) . '.zip">' . HtmlEscape($personName) . '.zip' . '</a><br>(Under Construction)</p></fieldset>', 'Archive');
+		$zipDialog = GetDialogX('<fieldset><p><a href="/person/' . HtmlEscape($personName) . '/' . HtmlEscape($personName) . '.zip">' . HtmlEscape($personName) . '.zip' . '</a><br>(Under Construction)</p></fieldset>', 'Archive');
 
 	}
 
