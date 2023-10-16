@@ -231,14 +231,28 @@ if [ $1 = open ]
 		#todo reduce hard-coding
 fi
 
-if [ $1 = archive ]
+if [ $1 = 'archive' ]
 	then
-		time ./default/template/perl/script/_dev_archive.pl
-		sleep 1
-		time perl -T ./config/template/perl/index.pl --sweep
-		time perl -T ./config/template/perl/index.pl --all
-		time perl -T ./config/template/perl/index.pl --all
-		./hike.sh frontend
+	  if [ "$2" = all ] # archive all
+      then
+        time ./default/template/perl/script/_dev_archive.pl
+        sleep 1
+        time perl -T ./config/template/perl/index.pl --sweep
+        time perl -T ./config/template/perl/index.pl --all
+        time perl -T ./config/template/perl/index.pl --all
+        ./hike.sh frontend
+    fi
+
+    if [ "$2" = list ] # archive list
+      then
+        time mc ./archive html/txt
+    fi
+
+    if [ ! "$2" ]
+      then
+        echo archive all = archive all
+        echo archive list = list archive
+    fi
 fi
 
 if [ ! $1 ]
@@ -247,7 +261,7 @@ if [ ! $1 ]
 		echo hike clean = clean including templates
 		echo hike build = build base
 		echo hike start = start local server
-		echo hike archive = archive all content
+		echo hike archive = display archiving commands
 		echo hike help = see more commands
 fi
 
@@ -257,7 +271,7 @@ if [ $1 = help ]
 		echo hike clean = clean including templates
 		echo hike build = build base
 		echo hike start = start local server
-		echo hike archive = archive all content
+		echo hike archive = display archiving commands
 		echo hike help = see more commands
 		echo hike index = index chain and data
 		echo hike reindex = reindex all data
