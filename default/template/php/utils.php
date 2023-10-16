@@ -1474,11 +1474,11 @@ function GetItemPlaceholderPage ($comment, $hash, $fileUrlPath, $filePath) { # g
 
 		#todo sanity checks
 
-		#$fileTxtPath = str_replace(GetDir('txt'), '', $filePath); #my
+		$fileTxtPath = str_replace(GetDir('txt'), '', $filePath); #my
 
 		$commentInfo .= 'Hash: ' . $hash . '(' . substr($hash, 0, 8) . ')' . '<br>';
 		$commentInfo .= 'URL: ' . '<a href="' . $fileUrlPath . '">' . $fileUrlPath . '</a>' . '<br>';
-		#$commentInfo .= 'Text: ' . '<a href="/txt/' . $fileTxtPath . '">/txt/' . $fileTxtPath . '</a>' . '<br>';
+		$commentInfo .= 'Text: ' . '<a href="/txt' . $fileTxtPath . '">/txt' . $fileTxtPath . '</a>' . '<br>';
 
 		$commentHtmlTemplate = str_replace('<span id=commentInfo></span>', '<span id=commentInfo>' . $commentInfo . '</span>', $commentHtmlTemplate);
 	}
