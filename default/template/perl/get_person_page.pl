@@ -127,9 +127,9 @@ sub GetPersonPage { # $personName
 				JOIN person_author ON (person_author.author_key = item_flat.author_key)
 			WHERE person_author.author_alias = '$personName'
 			ORDER BY add_timestamp DESC
-			LIMIT 15
+			LIMIT 30
 		";
-		#todo remove hard-coded limit of 15 itesm
+		#todo remove hard-coded limit of 30 itesm
 		$itemList = GetQueryAsDialog($queryItemList, 'Recent Activity');
 		#todo templatize the query, use parameter injection
 	}
