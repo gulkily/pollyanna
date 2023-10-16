@@ -363,7 +363,7 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 		}
 		# DON'T DO THIS, causes endless loop
 		#if (GetConfig('debug_verbose')) {
-		if (1) {
+		if (0) {
 			#fully verbose
 			AppendFile("log/log.log", $timestamp . " " . $charPrefix . " " . $text);
 		} else {
