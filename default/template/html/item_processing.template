@@ -8,13 +8,31 @@
 <table bgcolor="$colorWindow">
 <tr><td>
 <p>
-    Message received, and scheduled to be posted.<br>
+    Your message has been received!<br>
     <br>
-    You may be seeing this message if the server is busy.
+    You are seeing this placeholder page because the server is still processing your submission.<br>
 </p>
+<hr>
+<p>
+	<span id=commentText></span>
+</p>
+<hr>
 <p>
 	<span id=commentInfo></span>
 </p>
+<hr>
+<p>
+	<b>Technical explanation:</b><br>
+	<br>
+	The submission has been saved to the server, and you can view its text file. <br>
+	However, something has stalled the process of creating the full page, <br>
+	which is why you are seeing this placeholder page. <br>
+	<br>
+	The usual cause of this is that the text file has not been indexed yet, <br>
+	which can happen intentionally, if post/index_file_on_post = 0, or <br>
+	if something fails in the full page generation.
+</p>
+<hr>
 <p>
     <a href="/">Return Home</a>
 </p>
