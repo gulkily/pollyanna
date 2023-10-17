@@ -3,7 +3,7 @@
 	<span class=beginner>
 		Q: When was this page printed?<br>
 	</span>
-	Printed: <span class=timestamp epoch=$printedEpoch>$printedHuman</span>
+	Printed: <span id=timePrinted class=timestamp epoch=$printedEpoch>$printedHuman</span>
 	<br>
 	<span class=beginner><br>
 		Q: How old was the page when downloaded?<br>
