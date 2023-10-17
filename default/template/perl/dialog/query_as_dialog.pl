@@ -5,6 +5,10 @@ use warnings;
 use 5.010;
 
 sub GetQueryAsDialog { # $query, $title, $columns, \%param ; returns dialog with resultset from query
+# sub GetQueryDialog { #GetQueryAsDialog() # display result set to user
+# sub GetDialogFromQuery {
+# sub GetQueryFromDialog {
+
 # runs specified query and returns it as a dialog using GetResultSetAsDialog()
 # this has some special conditions for GetAttributesDialog()
 #todo this should report query error
@@ -13,9 +17,6 @@ sub GetQueryAsDialog { # $query, $title, $columns, \%param ; returns dialog with
 # $flags{'no_empty'}
 #todo move columns to params
 
-# sub GetQueryDialog { #GetQueryAsDialog() # display result set to user
-# sub GetDialogFromQuery {
-# sub GetQueryFromDialog {
 	my $query = shift;
 	my $title = shift;
 	my $columns = shift; # optional, default is to use all the columns from the query
