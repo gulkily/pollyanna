@@ -1,6 +1,6 @@
 <!-- write_options.template ; additional controls for js-enhanced write form -->
 <hr class=advanced>
-<span id=spanInputOptions class=advanced>
+<span id=spanInputOptions>
 	<p>
 		<a href=/upload.html>Upload</a><br>
 		Image, Photo, or File
@@ -14,7 +14,8 @@
 		<a href="/frame2.html" target=_top>iPad</a><br>
 		<a href="/frame3.html" target=_top>Netscape</a><br>
 	</p>
-
+</span>
+<span id=spanInputOptionsAdvanced class="advanced">
 	<p>
 		Transliterated Keyboard Layouts: <noscript>*</noscript><br>
 		<a href=#>Russian/Ukrainian/Cyrillic</a>: Ctrl+R, Alt+R, Meta+R<br>
