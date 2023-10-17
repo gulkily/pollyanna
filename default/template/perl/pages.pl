@@ -1449,6 +1449,8 @@ require_once('dialog/settings.pl');
 require_once('dialog/reply.pl');
 
 sub GetQuerySqlDialog { # $pageQuery ; displays query for user to see
+# sub GetQueryDialog { # sub GetQuerySqlDialog {
+# sub GetQueryListing {
 # sub DisplayQueryDialog {
 # sub GetSqlDialog {
 # sub QuerySqlDialog {
