@@ -1,3 +1,9 @@
 <!-- judge.template -->
-Welcome to the Judge page!
+<p>
+	Welcome to the Judge page!
+</p>
+
+<p>
+	This page lists all <b>#problem</b> items with and without <b>#solution</b> items connected to them.
+</p>
 <!-- / judge.template -->
