@@ -215,6 +215,8 @@ sub OrganizeFile { # $file ; renames file based on hash of its contents
 	# organize files aka rename to hash-based path
 	my $fileHashPath = GetFileHashPath($file);
 
+	#my $fileHash = GetFileHash($file);
+
 	# turns out this is actually the opposite of what needs to happen
 	# but this code snippet may come in handy
 	# if (index($fileHashPath, $SCRIPTDIR) == 0) {
@@ -248,6 +250,7 @@ sub OrganizeFile { # $file ; renames file based on hash of its contents
 				#todo this should be sanity-checked way before here
 				if ($fileHashPath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
 					$fileHashPath = $1;
+					WriteLog('OrganizeFile: warning: $fileHashPath passed sanity check; $fileHashPath = ' . $fileHashPath);
 				} else {
 					WriteLog('OrganizeFile: warning: $fileHashPath failed sanity check');
 					return '';
@@ -268,7 +271,7 @@ sub OrganizeFile { # $file ; renames file based on hash of its contents
 					WriteLog('OrganizeFile: warning: $mergedName failed sanity check');
 					return '';
 				}
-				
+
 				RenameFile($mergedName, $fileHashPath);
 			} # -e $fileHashPath
 			else {
