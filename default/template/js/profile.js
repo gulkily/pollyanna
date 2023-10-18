@@ -29,6 +29,8 @@ if (!(window.MakeKey) && document.head && document.head.appendChild && document.
 }
 
 function btnSignOut_Click (t) { // event for 'Sign Out' button's click
+// function btnExit_Click () {
+// function btnLogOut_Click () {
 	//alert('DEBUG: btnSignOut_Click() begin');
 
 	if (window.localStorage) {
