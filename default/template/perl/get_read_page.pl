@@ -552,6 +552,9 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	if ($pageType eq 'tag') {
 		$params{'vote_return_to'} = '/tag/' . $pageParam . '.html'; #todo unhardcode
 	}
+	if ($pageType eq 'label') {
+		$params{'vote_return_to'} = '/label/' . $pageParam . '.html'; #todo unhardcode
+	}
 
 	$txtIndex .= GetItemListHtml(\@files, \%params);
 
