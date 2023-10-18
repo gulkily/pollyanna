@@ -107,7 +107,10 @@ sub GetPersonPage { # $personName
 							)
 						)
 		";
-		$pendingKeyList = GetQueryAsDialog($queryPendingKeys, 'Pending Keys');
+		$pendingKeyList = GetQueryAsDialog($queryPendingKeys, 'PendingKeys');
+		#if (!$pendingKeyList) {
+		#	$pendingKeyList = GetDialogX('<fieldset><p>There are no authors awaiting approval.</p></fieldset>', 'Notice');
+		#}
 
 	}
 

@@ -640,7 +640,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$param{'no_empty'} = 1;
 		$param{'no_heading'} = 1;
 		$param{'no_status'} = 1;
-		$txtIndex .= GetQueryAsDialog($query, 'Applied Labels', 0, \%param);
+		$txtIndex .= GetQueryAsDialog($query, 'AppliedLabels', 0, \%param);
 	}
 
 	if (GetConfig('setting/html/item_page/toolbox_next_previous')) {
