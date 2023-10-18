@@ -658,11 +658,11 @@ sub FillThemeColors { # $html ; fills in templated theme colors in provided html
 	my $colorTopMenuTitlebar = GetThemeColor('top_menu_titlebar');
 	$html =~ s/\$colorTopMenuTitlebar/$colorTopMenuTitlebar/g;
 
-	my $colorTitlebar = GetThemeColor('titlebar');
-	$html =~ s/\$colorTitlebar/$colorTitlebar/g;
-
 	my $colorTitlebarText = GetThemeColor('titlebar_text');
 	$html =~ s/\$colorTitlebarText/$colorTitlebarText/g;
+
+	my $colorTitlebar = GetThemeColor('titlebar');
+	$html =~ s/\$colorTitlebar/$colorTitlebar/g;
 
 	my $colorHighlightReady = GetThemeColor('highlight_ready');
 	$html =~ s/\$colorHighlightReady/$colorHighlightReady/g;

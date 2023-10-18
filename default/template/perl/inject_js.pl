@@ -397,9 +397,9 @@ sub GetScriptTemplate { # $script, \%data ; returns script based on name
 
 		$scriptTemplate = str_replace("var colorWindow = '';", "var colorWindow = '$colorWindow';", $scriptTemplate);
 		$scriptTemplate = str_replace("var colorTitlebarInactive = '';", "var colorTitlebarInactive = '$colorTitlebarInactive';", $scriptTemplate);
+		$scriptTemplate = str_replace("var colorTitlebarText = '';", "var colorTitlebarText = '$colorTitlebarText';", $scriptTemplate);
 		$scriptTemplate = str_replace("var colorTitlebar = '';", "var colorTitlebar = '$colorTitlebar';", $scriptTemplate);
 		$scriptTemplate = str_replace("var colorSecondary = '';", "var colorSecondary = '$colorSecondary';", $scriptTemplate);
-		$scriptTemplate = str_replace("var colorTitlebarText = '';", "var colorTitlebarText = '$colorTitlebarText';", $scriptTemplate);
 	} # dragging
 
 	if ($stringMeditate ne 'Meditate...') {
