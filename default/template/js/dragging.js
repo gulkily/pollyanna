@@ -941,7 +941,15 @@ function UpdateDialogList () {
 			for (var iDialog = 0; iDialog < allOpenDialogs.length; iDialog++) {
 				var dialogTitle = GetDialogTitle(allOpenDialogs[iDialog]);
 				var dialogId = GetDialogId(allOpenDialogs[iDialog]);
-				allOpenDialogs[iDialog].setAttribute('id', 'd' + dialogId);
+
+				if (!dialogId) {
+					if (dialogTitle) {
+						var newDialogId = dialogTitle.replace(' ', '');
+						allOpenDialogs[iDialog].setAttribute('id', newDialogId);
+						dialogId = newDialogId;
+					}
+				}
+
 				var gt = unescape('%3E');
 
 				if (24 < dialogTitle.length) {
