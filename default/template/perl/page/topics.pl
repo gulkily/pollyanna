@@ -19,6 +19,7 @@ sub GetTopicsPage {
 		GetQueryAsDialog('topics', 'Tags') .
 		GetQueryAsDialog("SELECT item_title, file_hash FROM item_flat WHERE labels_list LIKE '%topic%'", 'Threads', '', \%flags) .
 		$explainDialog .
+		GetQuerySqlDialog('topics') . 
 		GetPageFooter('topics')
 	;
 
