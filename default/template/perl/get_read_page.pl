@@ -513,6 +513,35 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	}
 	WriteLog('GetReadPage: scalar(@files) = ' . scalar(@files));
 
+
+	if ($pageType eq 'date') {
+		# on date page, add a list of all the items on the page at the top
+		#todo they should link to the item's dialog on the page
+
+		my $pageDate = $pageParam;
+		my $queryDateList = "
+			SELECT
+				file_hash,
+				item_title,
+				author_key AS author_id,
+				'' AS cart
+			FROM item_flat
+			WHERE
+				item_score >= 0 AND (
+					SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 11) = '$pageDate'
+					OR file_hash IN (
+						SELECT file_hash
+						FROM item_attribute
+						WHERE
+							attribute = 'date'
+							AND value = '$pageDate'
+					)
+				)
+			LIMIT 25
+		";
+		$txtIndex .= GetQueryAsDialog($queryDateList, $pageDate);
+	}
+
 	# LISTING ITEMS BEGINS HERE
 	# LISTING ITEMS BEGINS HERE
 	# LISTING ITEMS BEGINS HERE
