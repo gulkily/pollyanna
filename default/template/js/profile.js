@@ -590,6 +590,7 @@ function selectKeyPopulate () {
 			if ((window.SetPrefs) && (window.GetPrefs)) {
 				var iPrivKey = 0;
 				var currentKey = window.localStorage.getItem('privatekey'); // #todo this should use GetPrefs() instead of using localStorage directly
+//				var foundSelected = 0;
 				while (GetPrefs('pk' + iPrivKey, 'PrivateKey1')) {
 					//if (GetPrefs('pk' + iPrivKey, 'PrivateKey1') == keyArmored) {
 					//	return 1; // already stored
@@ -599,24 +600,40 @@ function selectKeyPopulate () {
 					// it should also add selected attribute to the option if it is the one matching the private key in the 'privatekey' localstorage entry:
 					if (currentKey == GetPrefs('pk' + iPrivKey, 'PrivateKey1')) {
 						o.setAttribute('selected', 'selected');
+//						foundSelected = 1;
 					}
 					document.formSelectKey.selectKey.add(o);
 					iPrivKey++;
 				}
+//				if (foundSelected) {
+//					var o = new Option('[LogOut]', 2);
+//					document.formSelectKey.selectKey.add(o);
+//				} else {
+//					var o = new Option('[NewAuthor]', 1);
+//					document.formSelectKey.selectKey.add(o);
+//				}
 				//SetPrefs('pk' + iPrivKey, keyArmored, 'PrivateKey1');
 			}
 		}
 	}
 
 	//alert(document.formSelectKey.selectKey.value);
-}
+} // selectKeyPopulate()
 
-function selectLoadKey (keyName) {
-	var newKey = GetPrefs(keyName, 'PrivateKey1');
-	if (newKey) {
-		 setPrivateKeyFromTxt(newKey);
-	}
-}
+function selectLoadKey (t) {
+	var keyName = t.value;
+//	if (keyName == 1) {
+//		// #todo
+//		btnRegister_Click();
+//	} else if (keyName == 2) {
+//		btnSignOut_Click();
+//	} else {
+		var newKey = GetPrefs(keyName, 'PrivateKey1');
+		if (newKey) {
+			 setPrivateKeyFromTxt(newKey);
+		}
+//	}
+} // selectLoadKey()
 
 function ProfileOnLoad () { // onload event for profile page
 	//alert('DEBUG: ProfileOnLoad() begin');

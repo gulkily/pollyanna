@@ -3,7 +3,7 @@
 <fieldset>
     <label for=selectKey>
         Select key:<br>
-        <select name=selectKey id=selectKey onchange="selectLoadKey(this.value)">
+        <select name=selectKey id=selectKey onchange="if (window.selectLoadKey) { selectLoadKey(this) }">
             <option value=0>[No selection]</option>
         </select>
     </label>
