@@ -189,6 +189,8 @@ sub TextartForWeb { # replaces some spaces with &nbsp; to preserve text-based la
 
 sub FormatForWeb { # $text ; replaces some spaces with &nbsp; to preserve text-based layout for html display; $text
 # sub GetItemText {
+# sub GetItemFormattedText {
+
 	my $text = shift;
 
 	if (!$text) {
