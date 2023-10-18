@@ -29,6 +29,8 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 # sub GetLabelsDialog {
 # sub GetPage {
 # sub MakeProfilePage {
+# sub GetHelpPage { # sub MakePage {
+# sub MakeHelpPage { # sub MakePage {
 
 # supported page types so far:
 # tag, #hashtag

@@ -114,6 +114,9 @@ sub ensure_module { # $path ; ensures module is available under config/
 sub require_once { # $path ; use require() unless already done
 # sub RequireOnce {
 # styled after PHP's require_once()
+
+#todo, it should error if fails
+
 	my $module = shift;
 	chomp $module;
 
@@ -1866,6 +1869,7 @@ sub AppendFile { # appends something to a file; $file, $content to append
 
 sub AuthorHasLabel { # $key, $tagInQuestion ; returns 1 if user has label/tag, otherwise 0
 # sub AuthorHasTag {
+# sub AuthorHasAttribute {
 	# will probably be redesigned in the future
 	my $key = shift;
 	my $tagInQuestion = shift;

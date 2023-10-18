@@ -17,6 +17,8 @@ sub MakeSimplePage { # given page name, makes page
 # than to use this sub
 
 # help.html
+# sub MakeHelpPage { # sub MakeSimplePage {
+# sub GetHelpPage { # sub MakeSimplePage {
 	my $pageName = shift;
 	if (!$pageName) {
 		return;

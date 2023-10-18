@@ -25,7 +25,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	# sub GetLabelPage {
 	# sub GetHashtagPage {
 	# sub GetUserPage {
-	# sub GetDatePage {
+	# sub GetDatePage { # sub GetReadPage {
 	# sub GetTagListing {
 	# sub GetApprovePage { # /tag/approve.html
 
@@ -99,7 +99,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		} # $pageType eq 'author'
 
 		if ($pageType eq 'date') {
-			#sub GetDatePage {
+			#sub GetDatePage { # if ($pageType eq 'date') {
 			$pageParam = shift;
 			my $pageDate = $pageParam; # example: '2022-10-07'
 			chomp($pageDate);
@@ -358,6 +358,8 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		$htmlStart =~ s/\$tagSelected/$pageParam/;
 
 		# $pageParam is the chosen tag for this page
+
+		# is this still needed?
 	}
 
 	$txtIndex .= $htmlStart;

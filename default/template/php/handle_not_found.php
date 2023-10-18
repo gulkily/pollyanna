@@ -144,6 +144,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		}
 
 		# @validRoutes = # $validRoutes = # handle_not_found.php = # $validRoutes = # @validRoutes = # handle_not_found.php
+		# $validMakePageNames # $validMakePageNames # $validMakePageNames # $validMakePageNames # $validMakePageNames
 
 		$validMakePageNames = array(
 			'/calendar.html',

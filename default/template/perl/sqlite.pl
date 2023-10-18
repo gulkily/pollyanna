@@ -1531,7 +1531,8 @@ sub DBAddItemParent { # $itemHash, $parentItemHash ; Add item parent record.
 	DBAddPageTouch('item', $parentHash);
 } # DBAddItemParent()
 
-sub DBAddItem2 {
+sub DBAddItem2 { # $filePath, $fileHash, $itemType ; Adds a new item to database
+# i don't know why this needs to be here but it's here
 	my $filePath = shift;
 	my $fileHash = shift;
 	my $itemType = shift;

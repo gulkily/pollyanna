@@ -960,6 +960,7 @@ sub MakeSystemPages {
 		PutHtmlFile("404.html", $fourOhFourPage);
 		PutHtmlFile("error/error-404.html", $fourOhFourPage);
 	}
+
 	# Submit page
 	require_once('page/write.pl');
 	my $submitPage = GetWritePage();
