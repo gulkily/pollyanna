@@ -1421,6 +1421,9 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			$html = StripHeavyTags($html);
 			$html = TranslateEmoji($html);
 
+			// this is a hack
+			$html = preg_replace('/<span class=titlebarButtons>.+?<\/span>/', '', $html);
+
 			if (function_exists('mb_convert_encoding')) {
 				$html = mb_convert_encoding($html, 'UTF-8', 'US-ASCII');
 			} else {
