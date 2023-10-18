@@ -167,6 +167,22 @@ function OnLoadEverything () { // checks for each onLoad function and calls it
 		}
 	}
 
+	if (window.btnReprint) {
+		//alert('DEBUG: OnLoadEverything: btnReprint()');
+		if (document.getElementById) {
+			var timePrinted = document.getElementById('timePrinted');
+			if (timePrinted) {
+				var timePrintedEpoch = timePrinted.getAttribute('epoch');
+
+				if (timePrintedEpoch) {
+					if (100 < GetTime() - timePrintedEpoch) {
+						btnReprint.style.color = 'orange';
+					}
+				}
+			}
+		}
+	}
+
 	if (window.HideLoadingIndicator) {
 		//alert('DEBUG: OnLoadEverything: HideLoadingIndicator()');
 		HideLoadingIndicator();
