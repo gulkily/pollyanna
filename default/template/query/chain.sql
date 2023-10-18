@@ -5,6 +5,7 @@ SELECT
 	item_flat.labels_list labels_list,
 	item_attribute.value AS chain_order,
 	item_attribute.epoch chain_timestamp,
+	item_flat.add_timestamp AS add_timestamp,
 	item_attribute.file_hash AS file_hash,
 	'' AS tagset_chain,
 	'' AS cart
