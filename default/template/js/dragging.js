@@ -853,12 +853,51 @@ function SpotlightDialog (dialogId) {
 	var dialog = document.getElementById(dialogId);
 	//alert('DEBUG: SpotlightDialog(' + dialogId + ',' + dialog + ')');
 	if (dialog) {
-		var dialogDisplay = dialog.style.display;
-		if (dialogDisplay == 'none') {
-			dialog.style.display = 'inline';
-		} else {
-			dialog.style.display = 'none';
+
+		// #todo if dialog itself has class=advanced, remove it
+		//alert(dialog.className);
+		// but also, move upwards, and check that any spans it's inside of have class=advanced, remove advanced from the class names of those spans
+		var element = dialog;
+		while (element.parentElement) {
+			//alert(element.tagName + ',' + element.className);
+			if (element.className == 'advanced') {
+				//alert('advanced found');
+				element.className = '';
+				if (element.style.display == 'none') {
+					element.style.display = '';
+				}
+				ShowAdvanced(1);
+				// #todo multiple class names
+			}
+			if (element.className == 'admin') {
+				//alert('admin found');
+				element.className = '';
+				if (element.style.display == 'none') {
+					element.style.display = '';
+				}
+				ShowAdvanced(1);
+				// #todo multiple class names
+			}
+			element = element.parentElement;
 		}
+
+		//if (event && event.clientX && event.clientY) {
+		//	//alert(event.clientX);
+		//	//alert(event.clientY);
+		//	dialog.style.left = clientX + 'px';
+		//	dialog.style.top = clientY + 'px';
+		//} else {
+		//	//alert();
+		//}
+
+		SetActiveDialog(dialog);
+
+		//console.log(dialog.style);
+		// dialog.style.top = event.clientX;
+		// dialog.style.left = event.clientY;
+		dialog.style.top = '200px';
+		dialog.style.left = '200px';
+
 	} else {
 		//alert('DEBUG: SpotlightDialog: warning: dialog not found');
 
