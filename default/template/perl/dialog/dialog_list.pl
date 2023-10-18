@@ -6,15 +6,16 @@ use 5.010;
 
 sub GetDialogListDialog {
 # sub GetDialogsDialog {
+# sub dialogslist {
+# sub dialogslistdialog {
+# sub DetDialogList {
+# sub GetDialogMenu {
 	WriteLog('GetDialogListDialog()');
 
-	my $dialogContent =
-		GetTemplate('html/widget/dialog_list.template') .
-		# GetTemplate('html/form/settings.template')
-	;
-	my $dialog = GetDialogX($dialogContent, 'Dialogs');
+	my $dialogContent = GetTemplate('html/widget/dialog_list.template');
+	my $dialog = GetDialogX($dialogContent, 'PageMap');
 
 	return $dialog;
-} GetDialogListDialog()
+} # GetDialogListDialog()
 
 1;
