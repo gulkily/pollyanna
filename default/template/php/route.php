@@ -1596,8 +1596,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			$html = '<title>System Message: Engine requires attention. Please remain calm.</title>';
 			$html = '<meta http-equiv=refresh content=5>';
 			$html = '</head>';
-			$html = '<body bgcolor="#808080" onclick="if (this.style && this.style.display) { this.style.display=\'none\'; }">';
-			$html .= '<center><table bgcolor="#c0e0e0" border=10 bordercolor="#ffe0c0" width=99%><tr><td align=center valign=middle>';
+			$html = '<body bgcolor="#808080" text="#000000" onclick="if (this.style && this.style.display) { this.style.display=\'none\'; }">';
+			$html .= '<center><table bgcolor="#808080" border=10 bordercolor="#c0c0c0" width=99%><tr><td align=center valign=middle>';
 			$html .= '<h2>System Message: <br>Engine requires attention.</h2>';
 			$html .= '<h1>Please forgive inconvenience. <br>Remain calm.</h1>';
 			$html .= '<hr>';
