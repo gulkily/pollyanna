@@ -849,7 +849,9 @@ function GetDialogId (win) { // returns dialog id (based on id= or title bar cap
 
 function SpotlightDialog (dialogId) {
 // should actually be called ToggleDialog()
-	var dialog = document.getElementById('d' + dialogId);
+	//alert(dialogId);
+	var dialog = document.getElementById(dialogId);
+	//alert('DEBUG: SpotlightDialog(' + dialogId + ',' + dialog + ')');
 	if (dialog) {
 		var dialogDisplay = dialog.style.display;
 		if (dialogDisplay == 'none') {
@@ -859,7 +861,20 @@ function SpotlightDialog (dialogId) {
 		}
 	} else {
 		//alert('DEBUG: SpotlightDialog: warning: dialog not found');
+
 	}
+
+//	var dialog = document.getElementById('d' + dialogId);
+//	if (dialog) {
+//		var dialogDisplay = dialog.style.display;
+//		if (dialogDisplay == 'none') {
+//			dialog.style.display = 'inline';
+//		} else {
+//			dialog.style.display = 'none';
+//		}
+//	} else {
+//		//alert('DEBUG: SpotlightDialog: warning: dialog not found');
+//	}
 	return false;
 } // SpotlightDialog()
 
