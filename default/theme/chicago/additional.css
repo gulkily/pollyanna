@@ -84,4 +84,11 @@ button:hover {
 .titlebar .right {
 	/* todo fix the border corners */
 }
+.titlebarButtons {
+	float: right;
+}
+button.close, button.skip {
+	border: 0;
+	margin: 0;
+}
 /* / theme/chicago/additional.css */
