@@ -373,7 +373,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		# add tag buttons with selected tag emphasized
 		$txtIndex .= '<span class=advanced>' . GetTagPageHeaderLinks($pageParam) . '</span>';
 
-		my $tagInfo = GetString('tag_info/' . $pageParam);
+		my $tagInfo = GetString('label_info/' . $pageParam);
 		if ($tagInfo && ($tagInfo ne $pageParam)) {
 			# don't show tag info if it matches page param
 			# as that provides no additional useful information
