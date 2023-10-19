@@ -515,6 +515,11 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		MakeSummaryPages();
 	}
 	#
+	# system pages
+	elsif ($pageType eq 'system') {
+		MakeSystemPages();
+	}
+	#
 	# item identifier or prefix
 	elsif (IsItem($pageType)) {
 	    WriteMessage("recognized item identifier\n");
