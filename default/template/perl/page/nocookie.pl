@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use utf8;
 
-sub GetNoCookiePage {
+sub GetNocookiePage {
 	my $html =
 		GetPageHeader('nocookie') .
 		GetTemplate('html/maincontent.template') .
@@ -18,6 +18,6 @@ sub GetNoCookiePage {
 	}
 
 	return $html;
-} # sub GetNoCookiePage()
+} # sub GetNocookiePage()
 
 1;
