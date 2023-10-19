@@ -1,3 +1,17 @@
+
+		if (
+			t.textContent &&
+			(
+				t.textContent == 'cart'
+			)
+		) {
+			sortMethod = 4; // perform add all to cart #todo
+		}
+
+
+
+
+
 	function resetButtonOnMouseOut () {
 		if (document.getElementById) {
 			var btnReset = document.getElementById('btnReset');

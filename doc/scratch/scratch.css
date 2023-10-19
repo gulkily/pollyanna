@@ -1,3 +1,43 @@
+.titlebar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  background-color: #222;
+  color: #fff;
+}
+
+.titlebar .segment {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  height: 100%;
+  background-color: #111;
+  border-right: 1px solid #333;
+}
+
+.titlebar .segment:last-child {
+  border-right: none;
+}
+
+.titlebar .segment:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -1px;
+  width: 1px;
+  background-color: #333;
+}
+
+
+
+
+
+
 .titlebar * {
 	cursor: drag; /* #todo */
 	cursor: pointer; /* #todo */
