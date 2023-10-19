@@ -417,6 +417,40 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		else { # no @files
 			#PutHtmlFile($targetPath, 'I looked for that, but could not find it (2)');
 			WriteLog('MakePage: warning: Item not in database; $fileHash = ' . $fileHash . '; caller = ' . join(',', caller));
+
+			my $queryAltHash = "SELECT file_hash FROM item_attribute WHERE attribute = 'alt_hash' AND value LIKE '$fileHash%'";
+			WriteLog('MakePage: $queryAltHash = ' . $queryAltHash);
+			my $altHash = SqliteGetValue($queryAltHash);
+			if ($altHash) {
+				if (IsItem($altHash)) {
+					WriteLog('MakePage: $altHash = ' . $altHash);
+
+					my @altFiles = DBGetItemList({'where_clause' => "WHERE file_hash LIKE '$altHash%'"});
+					if (scalar(@altFiles)) {
+						my $altFile = $altFiles[0];
+						if ($altFile) {
+							if ($HTMLDIR =~ m/^(^\s+)$/) { #security #taint #todo
+								$HTMLDIR = $1; # untaint
+								# create a subdir for the first 2 characters of its hash if it doesn't exist already
+								if (!-e ($HTMLDIR . '/' . substr($altHash, 0, 2))) {
+									mkdir(($HTMLDIR . '/' . substr($altHash, 0, 2)));
+								}
+								if (!-e ($HTMLDIR . '/' . substr($altHash, 0, 2) . '/' . substr($altHash, 2, 2))) {
+									mkdir(($HTMLDIR . '/' . substr($altHash, 0, 2) . '/' . substr($altHash, 2, 2)));
+								}
+							}
+
+							WriteLog('MakePage: my $filePage = GetItemPage($altFile = "' . $altFile . '")');
+							my $altFilePage = GetItemPage($altFile);
+							WriteLog('PutHtmlFile($targetPath = ' . $targetPath . ', $altFilePage = ' . length($altFilePage) . ' bytes)');
+							PutHtmlFile($targetPath, $altFilePage);
+						}
+					} else {
+						WriteLog('MakePage: scalar(@altFiles) was FALSE');
+					}
+				}
+			}
+			# item not found in database
 			# my $query = GetTemplate('query/new') . " LIMIT 12";
 			# my $queryDialog = GetQueryAsDialog($query, 'Newest');
 			# my $page =
