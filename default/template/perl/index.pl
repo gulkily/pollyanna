@@ -202,7 +202,7 @@ sub IndexImageFile { # $file ; indexes one image file into database
 		}
 		DBAddItemAttribute($fileHash, 'title', $imageTitle, time()); #todo time should come from actual file time #todo re-add this
 
-		DBAddLabel($fileHash, $addedTime, 'image'); # add image tag
+		DBAddLabel($fileHash, $addedTime, 'image'); # add image label
 
 		if (@tagFromPath) {
 			foreach my $tag (@tagFromPath) {
