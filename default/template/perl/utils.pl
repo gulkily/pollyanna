@@ -1831,7 +1831,7 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 			$file =~ m/help/
 		) {
 			WriteLog('PutHtmlFile: warning: index.html was missing, fixing it with $file = ' . $file);
-			my $putIndexFileName = PutHtmlFile("$HTMLDIR/index.html", $content);
+			my $putIndexFileName = PutHtmlFile("index.html", $content);
 			WriteLog('PutHtmlFile: $putIndexFileName = ' . $putIndexFileName);
 		}
 	} # missing /index.html
