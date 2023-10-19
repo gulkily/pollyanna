@@ -1466,7 +1466,8 @@ function GetItemPlaceholderPage ($comment, $hash, $fileUrlPath, $filePath) { # g
 	$commentHtml = '<pre>' . "\n" . $commentHtml . "\n" . '</pre>';
 
 	// insert html-ized comment into template
-	$commentHtmlTemplate = str_replace('</body>', $commentHtml . '</body>', $commentHtmlTemplate);
+	//$commentHtmlTemplate = str_replace('</body>', $commentHtml . '</body>', $commentHtmlTemplate);
+	$commentHtmlTemplate = str_replace('<span id=commentText></span>', '<span id=commentText>' . $commentHtml . '</span>', $commentHtmlTemplate);
 
 	if ($hash && $fileUrlPath) {
 		#my
