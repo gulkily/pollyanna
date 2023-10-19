@@ -530,6 +530,19 @@ while (my $arg1 = shift @argsFound) {
 
 			my $indexFileResult = IndexFile($arg1);
 
+			if ($arg1 =~ m/([0-9a-f]{40})/) {
+				my $fileHashFromFilename = $1;
+				if ($indexFileResult ne $fileHashFromFilename) {
+					if ($fileHashFromFilename && ($fileHash ne $fileHashFromFilename)) {
+						AppendFile("log/rename.log", $indexFileResult . "|" . $fileHashFromFilename); #todo proper path
+						DBAddItemAttribute($indexFileResult, 'alt_hash', $fileHashFromFilename);
+					}
+				}
+			}
+			else {
+				WriteLog('IndexFile: $fileHashFromFilename was FALSE; caller = ' . join(',', caller));
+			}
+
 			WriteMessage("IndexFile($arg1) result: $indexFileResult");
 
 			#my $htmlFilename = GetHtmlFilename($indexFileResult); # IndexFile()
