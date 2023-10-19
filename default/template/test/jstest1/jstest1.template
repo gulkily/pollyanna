@@ -32,6 +32,8 @@
 		<form name=frmTest id=frmTest action="/post.html">
 			<p>
 				<big>
+					<b>CONSENT NOTICE!</b> <br>
+					<br>
 					Attention! You are about to share information about your device. <br>
 					This form's purpose is to help with troubleshooting. <br>
 					It may also be used for a survey to help improve browser support. <br>
@@ -42,11 +44,17 @@
 
 			<input
 				type=button
-				onclick="if(window.RunTest || RunTest) { return RunTest() } else { alert('window.RunTest was FALSE. You may be using Netscape 2.01 or Opera 3.62?'); return false; }"
-				value="1. Run Tests"
+				onclick="alert('Thank you for your trust.');"
+				value="I Consent"
 			>
 
-			<input type=submit value="2. Share With Operator" onclick="this.value='Meditate...'; return true;">
+			<input
+				type=button
+				onclick="if(window.RunTest || RunTest) { return RunTest() } else { alert('window.RunTest was FALSE. You may be using Netscape 2.01 or Opera 3.62?'); return false; }"
+				value="Run Tests"
+			>
+
+			<input type=submit value="Send to Operator" onclick="this.value='Meditate...'; return true;">
 
 			<p>
 				<b>Please tell us what kind of browser and device you're using:</b><br>
