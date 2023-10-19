@@ -473,7 +473,8 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 		WriteLog('IndexTextFile: %hasToken: ' . join(',', keys(%hasToken)));
 
 		DBAddItem2($file, $fileHash, 'txt');
-
+		#DBAddItem($file, $fileHash, 'txt'); # for searchability
+		
 		push @indexMessageLog, '---';
 
 		if ($hasToken{'example'}) {
