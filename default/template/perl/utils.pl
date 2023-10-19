@@ -1867,7 +1867,24 @@ sub AppendFile { # appends something to a file; $file, $content to append
 	}
 } # AppendFile()
 
-sub AuthorHasLabel { # $key, $tagInQuestion ; returns 1 if user has label/tag, otherwise 0
+sub ItemHasLabel { # $hash, $label
+	my $fileHash = shift;
+	my $labelInQuestion = shift;
+	#todo sanity
+
+	WriteLog('ItemHasLabel: $fileHash = ' . $fileHash);
+
+	my $query = "SELECT COUNT(label) FROM item_label WHERE file_hash = '$fileHash'";
+	if (SqliteGetValue($query)) {
+		WriteLog('ItemHasLabel: $labelInQuestion FOUND, return 1');
+		return 1;
+	} else {
+		WriteLog('ItemHasLabel: $labelInQuestion NOT found, return 0');
+		return 0;
+	}
+} # ItemHasLabel()
+
+sub AuthorHasLabel { # $key, $labelInQuestion ; returns 1 if user has label, otherwise 0
 # sub AuthorHasTag {
 # sub AuthorHasAttribute {
 	# will probably be redesigned in the future
@@ -1904,7 +1921,7 @@ sub AuthorHasLabel { # $key, $tagInQuestion ; returns 1 if user has label/tag, o
 			return 0;
 		}
 	} else {
-		WriteLog('AuthorHasLabel: warning, no $pubKeyHash, how did we even get here? caller = ' . join(',', caller));
+		WriteLog('AuthorHasLabel: no $pubKeyHash; caller = ' . join(',', caller));
 		return 0;
 	}
 
@@ -1918,7 +1935,7 @@ sub IsAdmin { # $key ; returns 1 if user is admin, otherwise 0
 
 	my $key = shift;
 	if (!$key || !IsFingerprint($key)) {
-		WriteLog('IsAdmin: warning: $key failed sanity check, returning 0');
+		WriteLog('IsAdmin: warning: $key failed sanity check, returning 0; caller = ' . join(',', caller));
 		return 0;
 	}
 	WriteLog("IsAdmin($key)");
