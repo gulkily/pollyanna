@@ -1,26 +1,82 @@
 Creating a new page
 
-default/template/html/page/example.template (or default/theme/yourname/template/html/page/example.template
-	you can skip this if you're making a listing page
-	otherwise, this is the content of the "main" dialog of the page.
+this process could use some improvement but it's not too bad
 
-default/template/perl/page/example.pl (or default/theme/yourname/template/perl/page/example.pl
-- needs to have GetExamplePage()
-	need to create a query template if using GetQueryAsDialog()
+1) create a new page template:
+
+vim default/template/html/page/example.template
+-or-
+vim default/theme/yourname/template/html/page/example.template
+
+you can skip this if you're making a listing page
+otherwise, this is the content of the "main" dialog of the page.
+
+2) create a new perl page handler:
+vim default/template/perl/page/example.pl
+- or -
+vim default/theme/yourname/template/perl/page/example.pl
+
+example.pl should look like this :
+
+=================
+
+#!/usr/bin/perl -T
+
+use strict;
+use warnings;
+use 5.010;
+
+sub GetExamplePage { # returns example page
+	require_once('dialog/query_as_dialog.pl');
+	#todo if this fails, it is only a warning in log.log/
+
+	$html =
+		GetPageHeader('example') .
+		GetQueryAsDialog('example') .
+		GetQueryAsDialog('example') .
+		GetPageFooter('example');
+
+	# add InjectJs(...) #todo
+}
+
+return 1;
+=================
+
+
+
+2a) if you're making a listing page or using GetQueryAsDialog(), you also need to create the query template:
+vim default/template/query/example.sql
+
 - error reporting could be better right now. to rebuild this file, you need to:
 	a) run `hike refresh` to propagate the change from default to config
 	b) run `hike make example` to rebuild the html page (this is where you would see your error)
 
+3) add to valid pages filter/sanity check:
 makepage.pl: add to valid pages (search for @validPages or @simplePages)
 
 TEST 1:
 	when you fist go to http://localhost:2784/example.html, it will show a page missing
 	but after you run `hike page example`, the page should work
 
+IF YOUR QUERY HAS ERRORS:
+	YOU WILL NOT KNOW ABOUT IT UNLESS YOU RE-CHECK THE QUERY TEMPLATE
+	That is, it will look like there are no results, and say:
+	"This space reserved for future content."
+	#todo: fix this
+	#todo you will see a page with the error message
+	#todo you can fix the error and run `hike page example` again to rebuild the page
+
+4) add to valid routes filter/sanity check in route.php:
+
 route.php: look for validRoutes and add "example" to the list
 
+4a) add to valid make page names filter/sanity check in makepage.pl:
+
 handle_not_found.php: add to $validMakePageNames
-    
+
+5) ???
+
+6) profit
 
 ===
 
