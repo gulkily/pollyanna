@@ -36,6 +36,13 @@ sub MakeSimplePage { # given page name, makes page
 
 	my $perlTemplate = GetTemplate('perl/page/' . $pageName . '.pl');
 
+	if ($pageName eq 'help') {
+		# shim
+		my $jsTest1 = GetTemplate('test/jstest1/jstest1.template'); # Browser Test
+		$jsTest1 = InjectJs($jsTest1, qw(jstest1));
+		PutHtmlFile("jstest1.html", $jsTest1);
+	}
+
 	if ($perlTemplate && trim($perlTemplate)) {
 		#todo this is a hack, it shouldn't patch it into config but instead use the actual theme path
 		#it's ok for now though, except when we change the theme, which requires a recompile
