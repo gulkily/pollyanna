@@ -14,9 +14,15 @@ sub GetQueuePage {
 		GetPageFooter('queue')
 	;
 
-	return $html;
+	if (GetConfig('admin/js/enable')) {
+		my @js = qw(avatar puzzle settings profile utils timestamp clock fresh table_sort voting write);
+		if (GetConfig('admin/php/enable')) {
+			push @js, 'write_php';
+		}
+		$html = InjectJs($html, @js);
+	}
 
-	#todo js inject, etc
-}
+	return $html;
+} # GetQueuePage()
 
 return 1;
