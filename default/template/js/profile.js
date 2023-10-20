@@ -630,7 +630,14 @@ function selectLoadKey (t) {
 //	} else {
 		var newKey = GetPrefs(keyName, 'PrivateKey1');
 		if (newKey) {
-			 setPrivateKeyFromTxt(newKey);
+			setPrivateKeyFromTxt(newKey);
+			var authorName = window.localStorage.getItem('avatar');
+			if (keyName && authorName) {
+				if (authorName) {
+					// save author name from key in preferences
+					SetPrefs(keyName, authorName, 'PrivateKeyName');
+				}
+			}
 		}
 //	}
 } // selectLoadKey()
