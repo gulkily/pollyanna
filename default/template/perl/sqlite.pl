@@ -469,6 +469,8 @@ sub SqliteGetPopulatedQuery { # $query, @queryParams ; look up query and populat
 sub SqliteQueryCachedShell { # $query, @queryParams ; performs sqlite query via sqlite3 command
 # uses cache with query text's hash as key
 # sub CacheSqliteQuery {
+# sub SqliteGetQuery {
+# sub SqliteGetPSV {
 	WriteLog('SqliteQueryCachedShell: caller: ' . join(', ', caller));
 
 	my $withHeader = 1;
