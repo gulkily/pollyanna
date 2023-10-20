@@ -9,7 +9,7 @@ sub GetQueuePage {
 
 	my $html =
 		GetPageHeader('queue') .
-		GetQueryAsDialog('queue') .
+		GetQueryAsDialog('queue', 'Queue') .
 		GetQuerySqlDialog('queue') .
 		GetPageFooter('queue')
 	;
