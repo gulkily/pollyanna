@@ -643,7 +643,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$txtIndex .= GetQueryAsDialog($query, 'AppliedLabels', 0, \%param);
 	}
 
-	if (GetConfig('setting/html/item_page/toolbox_next_previous')) {
+	if (GetConfig('setting/html/item_page/toolbox_chain_next_previous')) {
 		#todo optimize by joining with above
 		$txtIndex .= GetNextPreviousDialog($file{'file_hash'});
 	}
