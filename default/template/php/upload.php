@@ -84,7 +84,7 @@ if (!empty($_FILES['uploaded_file'])) {
 								IndexImageFile($path);
 							}
 
-							RedirectWithResponse('/write.html', 'Thank you! Upload received and processing.');
+							RedirectWithResponse('/write.html', 'Thank you! Upload received and processing. (1)');
 						}
 					}
 				}
@@ -220,7 +220,7 @@ if (!empty($_FILES['uploaded_file'])) {
 						}
 					} else {
 						// good enough for now, eventually would be nice if it went to the actual item #todo
-						RedirectWithResponse('/write.html', 'Thank you! Upload received and processing.');
+						RedirectWithResponse('/write.html', 'Thank you! Upload received and processing. (2)');
 					}
 				}
 
