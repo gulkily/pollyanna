@@ -179,6 +179,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 } # GetItemListingPage()
 
 sub MakeFeed { # writes a bare-bones txt file with items list
+# sub PutFeed {
 	my $feed = shift;
 	chomp $feed;
 
@@ -187,22 +188,30 @@ sub MakeFeed { # writes a bare-bones txt file with items list
 	my $plaintextList = '';
 	if ($feed eq 'new') {
 		$plaintextList = SqliteQuery("SELECT file_hash, CAST (add_timestamp AS INT) AS add_timestamp, file_path FROM item_flat ORDER BY add_timestamp DESC LIMIT 20");
-	} else {
+	}
+	elsif (GetTemplate("query/$feed.sql")) {
+		$plaintextList = SqliteQuery($feed);
+	}
+	else {
 		WriteLog('MakeFeed: warning: $feed unrecognized; caller = ' . join(',', caller));
 	}
 	$plaintextList =~ s/^[^\n]+\n//s;
 
-	if ($plaintextList) {
-		my $htmlPath = GetDir('html');
-		$plaintextList = str_replace($htmlPath, '', $plaintextList); # this is a horrible hack #todo
+	WriteLog('MakeFeed: length($plaintextList) = ' . length($plaintextList));
 
-		PutFile(GetDir('html').'/'.$feed.'.txt', $plaintextList);
+	if ($plaintextList) {
+		my $htmlDir = GetDir('html');
+		$plaintextList = str_replace($htmlDir, '', $plaintextList); # this is a horrible hack #todo
+		my $fileOut = "$htmlDir/$feed.txt";
+		WriteLog('MakeFeed: $fileOut = ' . $fileOut);
+		PutFile($fileOut, $plaintextList);
 	} else {
 		WriteLog('MakeFeed: warning: $plaintextList is FALSE; caller = ' . join(',', caller));
 	}
 } # MakeFeed()
 
 sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
+# sub MakeListingPages {
 	my $pageQuery = shift; # example: 'chain', 'select ...'
 	# if it has no spaces, a template lookup is attmpted in e.g. template/query/chain
 	my $pageMode = shift; # example: dialog_list, 'full_items', 'image_gallery'
