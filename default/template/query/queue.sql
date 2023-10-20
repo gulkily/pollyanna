@@ -2,6 +2,7 @@ SELECT
 	author_key AS author_id,
 	file_hash,
 	item_title,
+	add_timestamp,
 	item_score,
 	'' AS tagset_queue
 FROM
