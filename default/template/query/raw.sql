@@ -2,6 +2,7 @@ SELECT
 	'' AS tagset_compost,
 	file_hash,
 	item_title,
+	labels_list,
 	item_score,
 	item_flat.author_key AS author_key,
 	author_score,
