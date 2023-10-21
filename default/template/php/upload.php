@@ -21,11 +21,10 @@ if (!empty($_FILES['uploaded_file'])) {
 	if ($_FILES['uploaded_file']['error'] && !is_array($_FILES['uploaded_file']['error'])) {
 		// check for errors, one file
 		// See https://www.php.net/manual/en/features.file-upload.errors.php
-		echo "<p>There was an error uploading the file: " . $_FILES['uploaded_file']['error'] . '</p>';
 		echo "<p>[1]There was an error uploading the file: " . $_FILES['uploaded_file']['error'] . '</p>';
-		#if ($_FILES['uploaded_file']['error'] == 1) {
-		#	echo "The problem may be related to the file's size";
-		#}
+		if ($_FILES['uploaded_file']['error'] == 1) {
+			echo "<p>The problem may be related to the file's size</p>";
+		}
 	}
 	if ($_FILES['uploaded_file']['error'] && is_array($_FILES['uploaded_file']['error'])) {
 		// check for errors, multiple files #untested
