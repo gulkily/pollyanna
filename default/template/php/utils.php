@@ -320,7 +320,7 @@ function GetFileHash ($fileName) { // returns hash of file contents
 	/*my*/ $fileHash = sha1_file($fileName);
 
 	if (GetConfig('setting/admin/php/debug')) {
-		/*my*/ $fileHash2 = `sha1sum "$fileName" | cut -d ' ' -f 1`;
+		/*my*/ $fileHash2 = trim(`sha1sum "$fileName" | cut -d ' ' -f 1`);
 
 		WriteLog('GetFileHash: $fileHash = ' . $fileHash);
 		WriteLog('GetFileHash: $fileHash2 = ' . $fileHash2);
