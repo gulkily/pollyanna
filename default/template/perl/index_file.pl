@@ -78,6 +78,7 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 	}
 
 	my $fileHash = GetFileHash($file);
+	WriteLog('IndexFile: $fileHash = ' . $fileHash);
 
 	if (0) {
 		# this never seems to get called, so disabling it for now
