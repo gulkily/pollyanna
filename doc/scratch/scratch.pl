@@ -1,3 +1,7 @@
+	if ($address eq '/write.html' && GetConfig('setting/admin/js/translit')) {
+		#todo make it more clear how to change this
+		$address = '/frame.html';
+	}
 
 			if ($tagName eq 'todo') {
 				$queryParams{'where_clause'} = $queryParams{'where_clause'} . " AND item_flat.labels_list NOT LIKE '%,done,%' ";
@@ -2071,48 +2075,48 @@ sub AppendFile { # appends something to a file; $file, $content to append
 	}
 } # AppendFile()
 
-sub AuthorHasTag { # $key ; returns 1 if user is admin, otherwise 0
+sub AuthorHasLabel { # $key ; returns 1 if user is admin, otherwise 0
 	# will probably be redesigned in the future
 	my $key = shift;
 	my $tagInQuestion = shift;
 
 	if (!IsFingerprint($key)) {
-		WriteLog('AuthorHasTag: warning: $key failed sanity check, returning 0; caller = ' . join(',', caller));
+		WriteLog('AuthorHasLabel: warning: $key failed sanity check, returning 0; caller = ' . join(',', caller));
 		return 0;
 	}
 
 	if (!trim($tagInQuestion)) {
-		WriteLog('AuthorHasTag: warning: $tagInQuestion failed sanity check, returning 0; caller = ' . join(',', caller));
+		WriteLog('AuthorHasLabel: warning: $tagInQuestion failed sanity check, returning 0; caller = ' . join(',', caller));
 		return 0;
 	}
 
 	#todo $tagInQuestion sanity check
 
-	WriteLog("AuthorHasTag($key, $tagInQuestion)");
+	WriteLog("AuthorHasLabel($key, $tagInQuestion)");
 
 	my $pubKeyHash = DBGetAuthorPublicKeyHash($key);
 	if ($pubKeyHash) {
-		WriteLog('AuthorHasTag: $pubKeyHash = ' . $pubKeyHash);
+		WriteLog('AuthorHasLabel: $pubKeyHash = ' . $pubKeyHash);
 
 		my $pubKeyVoteTotalsRef = DBGetItemLabelTotals2($pubKeyHash);
 		my %pubKeyVoteTotals = %{$pubKeyVoteTotalsRef};
-		WriteLog('AuthorHasTag: join(",", keys(%pubKeyVoteTotals)) = ' . join(",", keys(%pubKeyVoteTotals)));
+		WriteLog('AuthorHasLabel: join(",", keys(%pubKeyVoteTotals)) = ' . join(",", keys(%pubKeyVoteTotals)));
 
 		if ($pubKeyVoteTotals{$tagInQuestion}) {
-			WriteLog('AuthorHasTag: $tagInQuestion FOUND, return 1');
+			WriteLog('AuthorHasLabel: $tagInQuestion FOUND, return 1');
 			return 1;
 		} else {
-			WriteLog('AuthorHasTag: $tagInQuestion NOT found, return 0');
+			WriteLog('AuthorHasLabel: $tagInQuestion NOT found, return 0');
 			return 0;
 		}
 	} else {
-		WriteLog('AuthorHasTag: warning, no $pubKeyHash, how did we even get here? caller = ' . join(',', caller));
+		WriteLog('AuthorHasLabel: warning, no $pubKeyHash, how did we even get here? caller = ' . join(',', caller));
 		return 0;
 	}
 
-	WriteLog('AuthorHasTag: warning: unreachable fallthrough');
+	WriteLog('AuthorHasLabel: warning: unreachable fallthrough');
 	return 0;
-} # AuthorHasTag()
+} # AuthorHasLabel()
 
 sub IsAdmin { # $key ; returns 1 if user is admin, otherwise 0
 # sub UserIsAdmin {
@@ -2136,7 +2140,7 @@ sub IsAdmin { # $key ; returns 1 if user is admin, otherwise 0
 	} else {
 		if (GetConfig('admin/allow_admin_permissions_tag_lookup')) {
 			WriteLog('IsAdmin: not root admin, checking tags');
-			return AuthorHasTag($key, 'admin');
+			return AuthorHasLabel($key, 'admin');
 		} else {
 			WriteLog('IsAdmin: allow_admin_permissions_tag_lookup is false, stopping here');
 			return 0;
@@ -6912,7 +6916,7 @@ sub DBGetItemVoteTotals { # get tag counts for specified item, returned as hash 
 		my $hashTag = shift @hashTags;
 		$hashTag = trim($hashTag);
 
-		if ($hashTag && (IsAdmin($gpgKey) || $authorHasTag{'admin'} || $authorHasTag{$hashTag})) {
+		if ($hashTag && (IsAdmin($gpgKey) || $authorHasLabel{'admin'} || $authorHasLabel{$hashTag})) {
 			#if ($hashTag) {
 			WriteLog('IndexTextFile: $hashTag = ' . $hashTag);
 
@@ -6958,18 +6962,18 @@ sub DBGetItemVoteTotals { # get tag counts for specified item, returned as hash 
 
 	my @tagsAppliedToAuthor = DBGetAllAppliedTags(DBGetAuthorPublicKeyHash($gpgKey));
 	foreach my $tagAppliedToAuthor (@tagsAppliedToAuthor) {
-		$authorHasTag{$tagAppliedToAuthor} = 1;
+		$authorHasLabel{$tagAppliedToAuthor} = 1;
 		my $tagsInTagSet = GetTemplate('tagset/' . $tagAppliedToAuthor);
 		# if ($tagsInTagSet) {
 		# 	foreach my $tagInTagSet (split("\n", $tagsInTagSet)) {
 		# 		if ($tagInTagSet) {
-		# 			$authorHasTag{$tagInTagSet} = 1;
+		# 			$authorHasLabel{$tagInTagSet} = 1;
 		# 		}
 		# 	}
 		# }
 	}
 }
-#DBAddItemAttribute($fileHash, 'x_author_tags', join(',', keys %authorHasTag));
+#DBAddItemAttribute($fileHash, 'x_author_tags', join(',', keys %authorHasLabel));
 
 
 
@@ -7268,24 +7272,24 @@ sub DBGetItemVoteTotals { # get tag counts for specified item, returned as hash 
 
 
 		if (0) {
-			my %authorHasTag;
+			my %authorHasLabel;
 			{
 				# look up author's tags
 
 				my @tagsAppliedToAuthor = DBGetAllAppliedTags(DBGetAuthorPublicKeyHash($gpgKey));
 				foreach my $tagAppliedToAuthor (@tagsAppliedToAuthor) {
-					$authorHasTag{$tagAppliedToAuthor} = 1;
+					$authorHasLabel{$tagAppliedToAuthor} = 1;
 					my $tagsInTagSet = GetTemplate('tagset/' . $tagAppliedToAuthor);
 					# if ($tagsInTagSet) {
 					# 	foreach my $tagInTagSet (split("\n", $tagsInTagSet)) {
 					# 		if ($tagInTagSet) {
-					# 			$authorHasTag{$tagInTagSet} = 1;
+					# 			$authorHasLabel{$tagInTagSet} = 1;
 					# 		}
 					# 	}
 					# }
 				}
 			}
-			#DBAddItemAttribute($fileHash, 'x_author_tags', join(',', keys %authorHasTag));
+			#DBAddItemAttribute($fileHash, 'x_author_tags', join(',', keys %authorHasLabel));
 		}
 
 
