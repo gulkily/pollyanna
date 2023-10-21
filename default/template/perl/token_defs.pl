@@ -325,6 +325,14 @@ sub GetTokenDefs {
 			'mask_params' => 'mgi',
 			'message' => '[hike addmenu]',
 			'apply_to_parent' => 0
+		},
+		{
+			'token' => 'c_assign',
+			'mask' => '^(\(c\))(\W?)(.+)$',
+			'mask_params' => 'mgi',
+			'message' => '',
+			'apply_to_parent' => 1,
+			'apply_to_self' => 1,
 		}
 	);
 

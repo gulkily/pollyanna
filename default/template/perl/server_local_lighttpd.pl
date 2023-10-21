@@ -6,7 +6,7 @@ use warnings;
 use 5.010;
 use utf8;
 
-require './utils.pl';
+require './config/template/perl/utils.pl';
 
 sub GetYes { # $message, $defaultYes ; print $message, and get Y response from the user
 	# $message is printed to output
