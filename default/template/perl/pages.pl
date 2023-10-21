@@ -1532,8 +1532,14 @@ while (my $arg1 = shift @foundArgs) {
 		if ($arg1 =~ m/\r/) {
 			# sanity check on $arg1 to get rid of this:
 			# Unsuccessful stat on filename containing newline at ./pages.pl line 1532.
-			WriteLog('pages.pl: warning: $argq contained newline(s), removing');
+			WriteLog('pages.pl: warning: $arg1 contained return, removing');
 			$arg1 =~ s/\r//;
+		}
+		if ($arg1 =~ m/\n/) {
+			# sanity check on $arg1 to get rid of this:
+			# Unsuccessful stat on filename containing newline at ./pages.pl line 1532.
+			WriteLog('pages.pl: warning: $arg1 contained newline, removing');
+			$arg1 =~ s/\n//;
 		}
 
 		if (-e $arg1 && -f $arg1) {
