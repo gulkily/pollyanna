@@ -517,6 +517,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						alt
 						begin
 						boxes
+						c_assign
 						child
 						client
 						cookie
