@@ -26,6 +26,11 @@ if (!-e './config/template/perl/utils.pl') {
 	system('cp default/template/perl/utils.pl ./config/template/perl/utils.pl');
 }
 
+if (!-e './config/template/perl/config.pl') {
+	BuildMessage "config.pl missing, copying from default...";
+	system('cp default/template/perl/config.pl ./config/template/perl/config.pl');
+}
+
 BuildMessage "Require ./utils.pl...";
 require('./config/template/perl/utils.pl');
 
