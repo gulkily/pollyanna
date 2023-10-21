@@ -180,7 +180,7 @@
 					if ($titleGiven) {
 						$hasToken{'title'} = 1;
 
-						# if (($authorHasTag{'admin'} == 1 || $authorHasTag{'title'} == 1)) {
+						# if (($authorHasLabel{'admin'} == 1 || $authorHasLabel{'title'} == 1)) {
 						if (1) {
 							chomp $titleGiven;
 							if ($hasParent) {
@@ -257,7 +257,7 @@
 					if ($titleGiven) {
 						$hasToken{'title'} = 1;
 
-						# if (($authorHasTag{'admin'} == 1 || $authorHasTag{'title'} == 1)) {
+						# if (($authorHasLabel{'admin'} == 1 || $authorHasLabel{'title'} == 1)) {
 						if (1) {
 							chomp $titleGiven;
 							if ($hasParent) {
@@ -394,7 +394,7 @@
 					if ($titleGiven) {
 						$hasToken{'title'} = 1;
 
-						# if (($authorHasTag{'admin'} == 1 || $authorHasTag{'title'} == 1)) {
+						# if (($authorHasLabel{'admin'} == 1 || $authorHasLabel{'title'} == 1)) {
 						if (1) {
 							chomp $titleGiven;
 							if ($hasParent) {
