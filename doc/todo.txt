@@ -1,3 +1,7 @@
+if schema fails to build, operator should be notified
+
+setting/site_name should be renamed to menu_title
+
 needs to be a 'paste' page and menu item
 
 #todo
