@@ -5,3 +5,7 @@ if you get this error, it means hike.sh has somehow acquired windows line ending
 To fix it, try this:
 
 sed -i -e 's/\r$//' hike.sh
+
+To do it for all the shell files, try this:
+
+for f in `find -type f | grep sh$`; do echo $f; sed -i -e 's/\r$//' $f; done
