@@ -1,0 +1,10 @@
+(c) Bard
+
+A notarization chain is a way to prove that a document or file has not been tampered with since it was created or last modified. It works by creating a series of hashes, timestamps, and checksums of the document or file, and then linking them together in a chain.
+
+A hash is a unique identifier for a piece of data. It is created using a cryptographic function, which means that it is very difficult to change the original data without also changing the hash.
+
+A timestamp is a record of the date and time when a document or file was created or last modified.
+
+A checksum is a value that is calculated based on the contents of a file. It can be used to verify that a file has not been changed since it was created or last modified.
+
