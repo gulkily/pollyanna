@@ -1,3 +1,9 @@
+add hike.pl to take over if hike.sh doesn't work
+
+how to heal from \r ^M extra characters caused by windows?
+	bad_interpreter.txt has instructions
+	needs automation
+
 needs to be a 'paste' page and menu item
 
 #todo
