@@ -687,7 +687,21 @@ sub GetFileHash { # $fileName ; returns hash of file contents
 		# }
 		# $memoFileHash{$fileName} = sha1_hex(GetFile($fileName));
 		# $memoFileHash{$fileName} = sha1_hex(Encode::encode_utf8($fileContent));
-		$memoFileHash{$fileName} = GetSHA1(GetFile($fileName));
+
+		$fileName = IsSaneFilename($fileName);
+
+		my $fileHash = GetSHA1(GetFile($fileName));
+		if (GetConfig('debug')) {
+			my $fileHash2 = trim(`sha1sum "$fileName" | cut -d ' ' -f 1`);
+			if ($fileHash ne $fileHash2) {
+				WriteLog('GetFileHash: $fileHash = ' . $fileHash);
+				WriteLog('GetFileHash: $fileHash2 = ' . $fileHash2);
+				WriteLog('GetFileHash: warning: $fileHash ne $fileHash2');
+				$fileHash = $fileHash2;
+			}
+		}
+
+		$memoFileHash{$fileName} = $fileHash;
 		return $memoFileHash{$fileName};
 	} else {
 		return '';
