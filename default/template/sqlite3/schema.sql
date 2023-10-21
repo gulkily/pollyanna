@@ -93,6 +93,7 @@ file_hash,
 GROUP_CONCAT(DISTINCT label) AS labels_list
 FROM item_label
 GROUP BY file_hash
+ORDER BY label
 ;
 
 CREATE VIEW item_label_count
