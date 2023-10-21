@@ -1,3 +1,44 @@
+/* Apply styles to the titlebar with class .titlebar */
+.titlebar {
+  background-color: #333; /* Dark background color */
+  color: #fff; /* Text color */
+
+  /* Add a subtle box shadow for depth */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Style individual titlebar segments (table cells) */
+.titlebar td {
+  padding: 10px; /* Adjust the padding for spacing */
+  border-right: 1px solid #555; /* Add vertical dividers between segments */
+  text-align: center; /* Center-align the text */
+
+  /* Create a gradient effect for the segments */
+  background: linear-gradient(135deg, #333, #444);
+}
+
+/* Style the last segment to remove the right border */
+.titlebar td:last-child {
+  border-right: none;
+}
+
+/* Hover effect for segments */
+.titlebar td:hover {
+  background: linear-gradient(135deg, #555, #666);
+  cursor: pointer; /* Change cursor on hover */
+}
+
+/* Active/focused segment effect (optional) */
+.titlebar td:focus,
+.titlebar td:active {
+  background: linear-gradient(135deg, #666, #777);
+  outline: none; /* Remove default focus outline */
+}
+
+
+
+
+
 .titlebar {
   position: relative;
   display: flex;
