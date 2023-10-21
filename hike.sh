@@ -246,6 +246,10 @@ if [ $1 = 'archive' ]
     if [ "$2" = list ] # archive list
       then
         time mc ./archive html/txt
+        echo Indexing new items...
+        sleep 1
+        time perl -T ./config/template/perl/index.pl --all
+        time perl -T ./config/template/perl/index.pl --all
     fi
 
     if [ ! "$2" ]
