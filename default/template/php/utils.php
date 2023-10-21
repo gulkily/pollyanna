@@ -317,7 +317,21 @@ function GetFileHash ($fileName) { // returns hash of file contents
 		return '';
 	}
 
-	return sha1_file($fileName);
+	/*my*/ $fileHash = sha1_file($fileName);
+
+	if (GetConfig('setting/admin/php/debug')) {
+		/*my*/ $fileHash2 = `sha1sum "$fileName" | cut -d ' ' -f 1`;
+
+		WriteLog('GetFileHash: $fileHash = ' . $fileHash);
+		WriteLog('GetFileHash: $fileHash2 = ' . $fileHash2);
+
+		if ($fileHash != $fileHash2) {
+			WriteLog('GetFileHash: warning: $fileHash did not match $fileHash2');
+			$fileHash = $fileHash2;
+		}
+	}
+
+	return $fileHash;
 } # GetFileHash()
 
 // function GetFileHash ($fileName) { // returns hash of file contents
