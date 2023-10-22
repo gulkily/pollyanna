@@ -200,7 +200,25 @@ sub AddAttributeToTag { # $html, $tag, $attributeName, $attributeValue; adds att
 	return $html;
 } # AddAttributeToTag()
 
+sub ExpireHtmlFile { # $file
+	#todo sanity
+	my $file = shift;
+	WriteLog("ExpireHtmlFile($file) caller = " . join(',', caller));
+	my $dirHtml = GetDir('html');
+	my $filePath = "$dirHtml/$file";
+	if (index(' ', $filePath) != -1) {
+		WriteLog('ExpireHtmlFile: warning: $filePath contains space; caller = ' . join(',', caller));
+		return '';
+	}
+	my $command = "touch -t 197001010000 '$filePath'";
+	WriteLog('ExpireHtmlFile: $command = ' . $command);
+	my $touchResult = `$command`;
+	WriteLog('ExpireHtmlFile: $touchResult = ' . $touchResult);
+	return ($touchResult ? 1 : 0);
+} # ExpireHtmlFile()
+
 sub RemoveHtmlFile { # $file ; removes existing html file
+# consider using ExpireHtmlFile()
 # example: RemoveHtmlFile('people.html')
 # sub RemoveHtmlPage {
 # sub DeleteHtml {

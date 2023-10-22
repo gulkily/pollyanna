@@ -195,12 +195,12 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache
 							WriteLog('GpgParse: auto_approve_first_user: $existingAuthors = ' . $existingAuthors);
 							if ($existingAuthors) {
 								# do not auto-approve
-								RemoveHtmlFile('people.html'); #todo this should only happen if dynamic mode is on
+								ExpireHtmlFile('people.html');
 							}
 							else {
 								#todo should apply to fingerprint?
 								DBAddLabel($fileHash, GetTime(), 'approve', $gpgKeyPub, $fileHash);
-								RemoveHtmlFile('people.html'); #todo this should only happen if dynamic mode is on
+								ExpireHtmlFile('people.html');
 							}
 						}
 
@@ -211,7 +211,7 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache
 							WriteLog('GpgParse: auto_admin_first_author: $existingAuthors = ' . $existingAuthors);
 							if ($existingAuthors) {
 								# do not auto-approve
-								RemoveHtmlFile('people.html'); #todo this should only happen if dynamic mode is on
+								ExpireHtmlFile('people.html');
 							}
 							else {
 								#todo should apply to fingerprint?

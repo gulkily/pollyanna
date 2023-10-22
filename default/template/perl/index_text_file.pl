@@ -980,8 +980,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										}
 
 										if ($hashTag eq 'approve') {
-											#todo should only happen if not static site
-											RemoveHtmlFile('people.html');
+											ExpireHtmlFile('people.html');
 										}
 									} # $approveStatus is true
 									else {
