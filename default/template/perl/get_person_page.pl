@@ -61,7 +61,8 @@ sub GetPersonPage { # $personName
 					)
 				)
 		";
-		$keyList = GetQueryAsDialog($queryApprovedKeys, 'Approved Keys');
+		$keyList = GetQueryAsDialog($queryApprovedKeys, 'ApprovedKeys');
+		#$keyList = GetQueryAsDialog($queryApprovedKeys, 'Approved Keys');
 	}
 
 	# COLLECT LIST OF PENDING (NOT APPROVED) KEYS
@@ -133,7 +134,7 @@ sub GetPersonPage { # $personName
 			LIMIT 30
 		";
 		#todo remove hard-coded limit of 30 itesm
-		$itemList = GetQueryAsDialog($queryItemList, 'Recent Activity');
+		$itemList = GetQueryAsDialog($queryItemList, 'RecentActivity');
 		#todo templatize the query, use parameter injection
 	}
 
