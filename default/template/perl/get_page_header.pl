@@ -45,7 +45,8 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 
 	my $introText = trim(GetString('page_intro/' . $pageType));
 	if (!$introText) {
-		$introText = trim(GetString('page_intro/default'));
+		# sub GetPageIntro {
+		$introText = trim(GetString('page_intro/default'), 'Introduction');
 	}
 	#todo this should actually be used
 
