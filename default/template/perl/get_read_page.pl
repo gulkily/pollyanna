@@ -499,7 +499,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 				$zipLink = '<fieldset>' . $zipLink . '</fieldset>';
 				$txtIndex .= GetDialogX($zipLink, 'Archive'); # author.zip
 			} else {
-				$txtIndex .= GetDialogX('This author has not posted anything yet, <br>so no archive is available.', 'Archive');
+				$txtIndex .= GetDialogX('<fieldset><p>This author has not posted anything yet, <br>so no archive is available.</p></fieldset>', 'Archive');
 			}
 		}
 
