@@ -24,7 +24,12 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template'; ret
 	}
 	chomp $templateName;
 
-	WriteLog('GetMenuFromList: $listName = ' . $listName . ', $templateName = ' . $templateName);
+	my $pageType = shift;
+	if (!$pageType) {
+		$pageType = '';
+	}
+
+	WriteLog('GetMenuFromList: $listName = ' . $listName . ', $templateName = ' . $templateName . '; caller = ' . join(',', caller));
 
 	my $listText = GetTemplate('list/' . $listName);
 
@@ -129,7 +134,13 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template'; ret
 				$menuComma = GetTemplate('html/menu_separator.template');
 			}
 
-			$menuItems .= GetMenuItem($menuItemUrl, $menuItemCaption, $templateName);
+			my $menuItemComposed = GetMenuItem($menuItemUrl, $menuItemCaption, $templateName);
+			WriteLog('GetMenuFromList: checking for $menuItemName eq $pageType: ' . $menuItemName . ', ' . $pageType . '; caller = ' . join(',', caller));
+			if ($menuItemName eq $pageType) {
+				## menu item is for current page
+				#todo $menuItemComposed = '<span style="font-variant: small-caps; background-color: ' . GetThemeColor('highlight_ready') . ';">' . $menuItemComposed . '</span>';
+			}
+			$menuItems .= $menuItemComposed;
 			if (0 && $boolExtUrl) {
 				#mark the url as external #todo
 			}
@@ -189,7 +200,7 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 	#	}
 
 	my $selfLink = '/access.html';
-	my $menuItems = GetMenuFromList('menu'); # GetMenuTemplate()
+	my $menuItems = GetMenuFromList('menu', '', $pageType); # GetMenuTemplate()
 
 	#WriteLog('GetMenuTemplate: $menuItems = ' . $menuItems);
 
@@ -200,9 +211,9 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 	if (GetConfig('admin/expo_site_mode')) {
 		#do nothing
 	} else {
-		my $menuItemsTag = GetMenuFromList('menu_tag'); # GetMenuTemplate()
-		my $menuItemsAdvanced = GetMenuFromList('menu_advanced'); # GetMenuTemplate()
-		my $menuItemsAdmin = GetMenuFromList('menu_admin'); # GetMenuTemplate()
+		my $menuItemsTag = GetMenuFromList('menu_tag', '', $pageType); # GetMenuTemplate()
+		my $menuItemsAdvanced = GetMenuFromList('menu_advanced', '', $pageType); # GetMenuTemplate()
+		my $menuItemsAdmin = GetMenuFromList('menu_admin', '', $pageType); # GetMenuTemplate()
 	}
 
 	if (!$menuItems || trim($menuItems) eq '') {
