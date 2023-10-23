@@ -35,7 +35,7 @@ sub GetProfilePage { # returns profile page (allows sign in/out)
 	if (GetConfig('admin/js/enable') || GetConfig('admin/php/enable')) {
 		# js or php is required for profiles to work
 
-		$txtIndex = GetPageHeader('identity');
+		$txtIndex = GetPageHeader('profile');
 
 		if (0) { # shadowme
 			my $pageIntro = GetString('page_intro/identity');
@@ -74,7 +74,7 @@ sub GetProfilePage { # returns profile page (allows sign in/out)
 		}
 
 		#$txtIndex .= $tosWindow;
-		$txtIndex .= GetPageFooter('identity');
+		$txtIndex .= GetPageFooter('profile');
 
 		if (GetConfig('admin/js/enable')) {
 			$txtIndex = InjectJs($txtIndex, qw(avatar settings utils profile timestamp));
