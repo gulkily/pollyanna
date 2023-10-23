@@ -542,6 +542,11 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		$txtIndex .= GetQueryAsDialog($queryDateList, $pageDate);
 	}
 
+	if ($pageType eq 'label' && $pageParam eq 'bug') { # GetReadPage()
+		# if it is #bug page, add a second list with in progress bugs
+		$txtIndex .= GetQueryAsDialog("SELECT file_hash, item_title, child_count FROM item_flat WHERE labels_list LIKE '%,bug,%' AND child_count > 0", 'BugsInProgress');
+	}
+
 	# LISTING ITEMS BEGINS HERE
 	# LISTING ITEMS BEGINS HERE
 	# LISTING ITEMS BEGINS HERE
