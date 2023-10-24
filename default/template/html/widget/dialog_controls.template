@@ -56,7 +56,7 @@
 		SetPrefs('draggable_arrange_viewport_resize', 0);
 		DraggingReset();
 		if (window.displayNotification) {
-			displayNotification('Settings have been reset. <a href=# onclick=\'window.location.reload(); return false;\'>Reload to apply changes.</a>');
+			window.location.reload();
 			return false;
 		} else {
 			window.location.reload();
