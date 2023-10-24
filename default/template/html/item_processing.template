@@ -30,7 +30,9 @@
 	<br>
 	The usual cause of this is that the text file has not been indexed yet, <br>
 	which can happen intentionally, if post/index_file_on_post = 0, or <br>
-	if something fails in the full page generation.
+	if something fails in the full page generation. <br>
+	<br>
+	If you are developing, it probably means that index.pl failed to run.
 </p>
 <hr>
 <p>
