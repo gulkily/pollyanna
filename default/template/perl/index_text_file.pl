@@ -876,6 +876,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 							$tokenFound{'param'} eq 'mavo' || #mavo token needs permission
 							$tokenFound{'param'} eq 'run' || #run token needs permission
 							$tokenFound{'param'} eq 'avatar' || #avatar token needs permission
+							$tokenFound{'param'} eq 'llm' || #avatar token needs permission
 							0
 						) { # permissioned token
 							my $hashTag = $tokenFound{'hashtag'} || $tokenFound{'param'};
@@ -975,8 +976,22 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										}
 
 										if ($hashTag eq 'run') {
-											push @indexMessageLog, 'calling run on parent item';
-											RunItem($itemParent);
+											if (GetConfig('setting/admin/token/run')) {
+												push @indexMessageLog, 'calling run on parent item';
+												RunItem($itemParent);
+											} else {
+												push @indexMessageLog, 'run token is turned off, ignoring';
+											}
+										}
+
+										if ($hashTag eq 'llm') {
+											if (GetConfig('setting/admin/token/llm')) {
+												require_once('run_llm.pl');
+												push @indexMessageLog, 'calling llm on parent item';
+												RunLlm($itemParent);
+											} else {
+												push @indexMessageLog, 'llm token is turned off, ignoring';
+											}
 										}
 
 										if ($hashTag eq 'approve') {
