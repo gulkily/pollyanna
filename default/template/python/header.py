@@ -1,6 +1,8 @@
 import pickle
 import threading
 import time
+
+import fire as fire
 from tiktoken import get_encoding
 
 import openai
@@ -116,3 +118,12 @@ class PromptRunner:
                 print("[run_prompt] trying again, attempt", attempt_id + 1)
         assert False, f"Failed to get a completion in {max_num_attempts} attempts."
 
+
+def run_prompt(file_path):
+    with open(file_path, "r") as file:
+        txt = file.read()
+    PromptRunner("[run_prompt]").run_prompt(txt)
+
+
+if __name__ == "__main__":
+    fire.Fire(run_prompt)
