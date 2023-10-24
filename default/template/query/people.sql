@@ -12,3 +12,4 @@ SELECT * FROM (
 WHERE
 	author_alias != ''
 	AND author_key_count >= 1
+	AND author_score >= 0
