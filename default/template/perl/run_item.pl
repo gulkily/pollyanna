@@ -64,7 +64,7 @@ sub RunItem { # $item ; calls 'run' action on specified item
 				# 	$pythonCommand = `which python2`;
 				# }
 				if (!$pythonCommand) {
-					WriteLog('RunFile: warning: $pythonCommand was FALSE');
+					WriteLog('RunItem: warning: $pythonCommand was FALSE');
 					return '';
 				}
 				chomp $pythonCommand;
@@ -79,7 +79,7 @@ sub RunItem { # $item ; calls 'run' action on specified item
 					DBAddItemAttribute($item, 'python_run_start', $runStart);
 					DBAddItemAttribute($item, 'python_run_finish', $runFinish);
 
-					WriteLog('RunFile: $pythonCommand was run with $filePath = ' . $filePath . '; about to save output to $runLog = ' . $runLog);
+					WriteLog('RunItem: $pythonCommand was run with $filePath = ' . $filePath . '; about to save output to $runLog = ' . $runLog);
 
 					PutCache($runLog, $result); # store the result in cache
 
@@ -104,7 +104,7 @@ sub RunItem { # $item ; calls 'run' action on specified item
 					return 1;
 				} # if ($pythonCommand =~ m/^([\/a-z3]+)$/)
 				else {
-					WriteLog('RunFile: $pythonCommand failed sanity check; $pythonCommand = "' . $pythonCommand . '"');
+					WriteLog('RunItem: $pythonCommand failed sanity check; $pythonCommand = "' . $pythonCommand . '"');
 				}
 			} # if ($filePath =~ m/^([0-9a-zA-Z\/\._\-]+)$/)
 		} # if (-e $filePath)
