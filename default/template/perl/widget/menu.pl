@@ -137,8 +137,11 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template'; ret
 			my $menuItemComposed = GetMenuItem($menuItemUrl, $menuItemCaption, $templateName);
 			WriteLog('GetMenuFromList: checking for $menuItemName eq $pageType: ' . $menuItemName . ', ' . $pageType . '; caller = ' . join(',', caller));
 			if ($menuItemName eq $pageType) {
-				## menu item is for current page
-				#todo $menuItemComposed = '<span style="font-variant: small-caps; background-color: ' . GetThemeColor('highlight_ready') . ';">' . $menuItemComposed . '</span>';
+				if (GetConfig('setting/html/menu_highlight_selected')) {
+					## menu item is for current page
+					$menuItemComposed = '<span style="background-color: ' . GetThemeColor('highlight_ready') . ';">' . $menuItemComposed . '</span>';
+					#$menuItemComposed = '<span style="font-variant: small-caps; background-color: ' . GetThemeColor('highlight_ready') . ';">' . $menuItemComposed . '</span>';
+				}
 			}
 			$menuItems .= $menuItemComposed;
 			if (0 && $boolExtUrl) {
