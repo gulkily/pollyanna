@@ -220,7 +220,8 @@ sub GetAvatar { # $authorKey, $noCache ; returns HTML avatar based on author key
 	my $colorUsername = '';
 
 	if ($isApproved) {
-		$avatar = '<b>' . GetAlias($authorKey) . '&check;' . '</b>';
+		my $checkmark = GetString('widget/checkmark');
+		$avatar = '<b>' . GetAlias($authorKey) . $checkmark . '</b>';
 	} else {
 		if (IsAdmin($authorKey)) {
 			$colorUsername = GetThemeColor('admin_text');

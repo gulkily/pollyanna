@@ -36,7 +36,8 @@ sub GetAuthorLink { # $authorKey ; returns avatar'ed link for an author id
 		if (SqliteGetValue("SELECT COUNT(label) FROM item_label WHERE label = 'approve' AND file_hash = '$authorPubKeyHash'")) {
 			my $alias = GetAlias($authorKey);
 			my $aliasEscaped = UriEscape($alias);
-			$authorAvatar = $alias;
+			#$authorAvatar = $alias;
+			$authorAvatar = GetAvatar($authorKey);
 
 			$authorUrl = "/person/$aliasEscaped/index.html";
 		}

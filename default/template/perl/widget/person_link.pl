@@ -23,13 +23,15 @@ sub GetPersonLink { # $alias, $fingerprint
 	if ($fingerprint) {
 		my $authorIsApproved = AuthorHasLabel($fingerprint, 'approve');
 		if ($authorIsApproved) {
-			return '<a href="/person/' . UriEscape($alias) . '/index.html">' . HtmlEscape($alias) . '&check;' . '</a>';
+			my $checkmark = GetString('widget/checkmark');
+			return '<a href="/person/' . UriEscape($alias) . '/index.html">' . HtmlEscape($alias) . $checkmark . $checkmark . '</a>';
 		} else {
 			return '<a href="/person/' . UriEscape($alias) . '/index.html">' . HtmlEscape($alias) . '</a>';
 		}
 	}
 	else {
-		return '<a href="/person/' . UriEscape($alias) . '/index.html">' . HtmlEscape($alias) . '&check;' . '</a>';
+		my $checkmark = GetString('widget/checkmark');
+		return '<a href="/person/' . UriEscape($alias) . '/index.html">' . HtmlEscape($alias) . $checkmark . '</a>';
 	}
 
 #	my $fingerprint = shift; # author's fingerprint
