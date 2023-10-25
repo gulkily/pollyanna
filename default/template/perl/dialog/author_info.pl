@@ -6,6 +6,8 @@ use 5.010;
 
 sub GetAuthorInfoBox { # $authorKey ; returns author info box
 # sub GetAuthorDialog {
+# sub GetAuthorInfo {
+# sub GetAuthorInfoDialog {
 	my $authorKey = shift;
 	chomp $authorKey;
 
