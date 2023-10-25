@@ -1410,7 +1410,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 		} // footer stats
 
-		if ($lightMode) {
+		if ($lightMode) { # $lightMode $lightMode $lightMode $lightMode $lightMode
 			// light mode #lightmode
 			WriteLog('route.php: $lightMode is true!');
 

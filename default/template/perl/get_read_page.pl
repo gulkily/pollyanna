@@ -99,7 +99,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		} # $pageType eq 'author'
 
 		if ($pageType eq 'date') {
-			#sub GetDatePage { # if ($pageType eq 'date') {
+			#sub GetDatePage { # if ($pageType eq 'date') { # setup
 			$pageParam = shift;
 			my $pageDate = $pageParam; # example: '2022-10-07'
 			chomp($pageDate);
@@ -515,7 +515,9 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 
 
 	if ($pageType eq 'date') {
+		#sub GetDatePage { # if ($pageType eq 'date') { # before listing
 		# on date page, add a list of all the items on the page at the top
+
 		#todo they should link to the item's dialog on the page
 
 		my $pageDate = $pageParam;
@@ -569,7 +571,9 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	# LISTING ITEMS ENDS HERE
 	# LISTING ITEMS ENDS HERE
 
-	if ($pageType eq 'tag' && $pageParam eq 'image') { # GetReadPage()
+# sub GetTagPage { # special instructions for particular labels here
+# sub GetLabelPage { # special instructions for particular labels here
+	if ($pageType eq 'label' && $pageParam eq 'image') { # GetReadPage()
 		# a special case for the #image page
 		# include upload dialog
 		require_once('page/upload.pl');
