@@ -1,0 +1,31 @@
+<!-- date_comment.template -->
+
+<a name=reply></a>
+<form class=reply action="/post.html" id=compose name=compose>
+	<textarea
+		class=txtarea
+		wrap=soft
+		rows=7
+		cols=32
+		style="min-width: 360px; height: 80px;"
+		id=comment
+		name=comment
+	></textarea>
+	<br>
+	<input id=btnSendReply type=submit value="Send Reply">
+	<span id=spanSignAs></span>
+	<span class=advanced>
+		<hr>
+		<span class=beginner>
+			<label for=replyto>Date:</label>
+			<br>
+		</span>
+		<input type=text name=replyto id=replyto value="$replyTo" size=45>
+		<span class=beginner>
+			<br>
+			Clear this field to post a new thread.
+		</span>
+	</span>
+</form>
+
+<!-- / date_comment.template -->
