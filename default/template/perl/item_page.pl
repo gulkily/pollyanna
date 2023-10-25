@@ -821,7 +821,8 @@ sub GetSimilarTimestampsListing { # $fileHash, [$existingTimestamp] ; returns di
 } # GetSimilarTimestampsListing()
 
 sub GetRelatedListing { # $fileHash
-
+# sub GetRelated {
+# sub GetRelatedDialog {
 	my $fileHash = shift;
 	if (!$fileHash) {
 		WriteLog('GetRelatedListing: warning: $fileHash was FALSE');
