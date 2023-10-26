@@ -542,6 +542,15 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 			LIMIT 25
 		";
 		$txtIndex .= GetQueryAsDialog($queryDateList, $pageDate);
+
+		if (GetConfig('setting/html/date_page_comment_form')) { # #todo GetConfig()
+			#my $dialogDateComment = GetDialogX(GetTemplate('date_comment.template'), 'Comment');
+			my $commentDate = GetTemplate('html/form/date_comment.template');
+			$commentDate = str_replace('$replyTo', $pageDate, $commentDate);
+			my $dialogCommentDate = GetDialogX($commentDate, 'Comment');
+
+			$txtIndex .= $dialogCommentDate;
+		}
 	}
 
 	if ($pageType eq 'label' && $pageParam eq 'bug') { # GetReadPage()
