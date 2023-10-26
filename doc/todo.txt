@@ -1,3 +1,19 @@
+date page should have a comment field which automatically appends date: tag
+
+item_type should be called file_type
+
+
+sub-frameworks, configuration modes, or concepts
+	pillbox
+		static html only
+		rolling access.log file
+		no javascript
+	local friends
+		fully dynamic
+		custom js and stylesheets
+		self-admin with a secret knock
+
+
 if schema fails to build, operator should be notified
 
 setting/site_name should be renamed to menu_title
