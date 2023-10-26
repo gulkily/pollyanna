@@ -81,7 +81,6 @@ if ($_POST) { // if POST request, populate variables from $_POST
 
 	if (isset($_POST['replyto']) && $_POST['replyto']) {
 		$replyTo = $_POST['replyto'];
-		$replyToToken = '>>' . $replyTo;
 	}
 	if (isset($_POST['boxes']) && $_POST['boxes']) {
 		$boxesCount = $_POST['boxes'];
@@ -96,7 +95,6 @@ if ($_POST) { // if POST request, populate variables from $_POST
 
 	if (isset($_POST['replyto']) && $_POST['replyto']) {
 		$replyTo = $_POST['replyto'];
-		$replyToToken = '>>' . $replyTo;
 	}
 
 	if (isset($_POST['returnto']) && $_POST['returnto']) {
@@ -149,7 +147,6 @@ elseif ($_GET) { // if GET request, populate variables from $_GET
 
 	if (isset($_GET['replyto']) && $_GET['replyto']) {
 		$replyTo = $_GET['replyto'];
-		$replyToToken = '>>' . $replyTo;
 	}
 	if (isset($_GET['boxes']) && $_GET['boxes']) {
 		$boxesCount = $_GET['boxes'];
@@ -200,7 +197,6 @@ elseif ($_REQUEST) { // if HEAD request, populate variables from $_REQUEST
 
 	if (isset($_REQUEST['replyto']) && $_REQUEST['replyto']) {
 		$replyTo = $_REQUEST['replyto'];
-		$replyToToken = '>>' . $replyTo;
 	}
 
 	if (isset($_REQUEST['boxes']) && $_REQUEST['boxes']) {
@@ -223,6 +219,10 @@ elseif ($_REQUEST) { // if HEAD request, populate variables from $_REQUEST
 	}
 } # $_REQUEST
 
+$replyToToken = '';
+if (IsItem($replyTo)) {
+	$replyToToken = '>>' . $replyTo;
+}
 
 #################################################################
 # END OF LOOKING FOR ARGUMENTS
