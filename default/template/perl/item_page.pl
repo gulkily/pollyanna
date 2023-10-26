@@ -411,7 +411,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	}
 
 	# REPLY FORM
-	if (GetConfig('reply/enable')) {
+	if (GetConfig('setting/reply/enable')) {
 		$txtIndex .= GetReplyForm($file{'file_hash'});
 	}
 
@@ -499,10 +499,10 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	#VOTE BUTTONS are below, inside replies
 
 
-	if (GetConfig('reply/enable')) {
+	if (GetConfig('setting/reply/enable')) {
 		my $voteButtons = '';
-		if (GetConfig('admin/expo_site_mode')) {
-			if (GetConfig('admin/expo_site_edit')) {
+		if (GetConfig('setting/admin/expo_site_mode')) {
+			if (GetConfig('setting/admin/expo_site_edit')) {
 				#$txtIndex .= GetReplyForm($file{'file_hash'});
 			}
 			# do nothing
@@ -863,6 +863,7 @@ sub GetRelatedListing { # $fileHash
 
 		if (scalar(@result) > 2) { # first row is column headers; related
 			my $listing = GetResultSetAsDialog(\@result, 'Related', 'item_title, add_timestamp, file_hash, attribute_list, attribute_count');
+			$listing = AddAttributeToTag($listing, 'table', 'id', 'Related');
 			return $listing;
 		} else {
 			return '';
