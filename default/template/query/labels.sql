@@ -1,20 +1,22 @@
 SELECT
-	label,
-	label_count
+    label,
+    COUNT(DISTINCT file_hash) AS label_count
 FROM (
-	SELECT
-		label,
-		COUNT(label) AS label_count
-	FROM
-		item_label
-	WHERE
-		file_hash IN (
-			SELECT file_hash
-			FROM item_flat
-			WHERE item_score >= 0
-		)
-	GROUP BY
-		item_label.label
-	)
+    SELECT
+       label,
+       file_hash
+    FROM
+       item_label
+    WHERE
+       file_hash IN (
+          SELECT file_hash
+          FROM item_flat
+          WHERE item_score >= 0
+       )
+    GROUP BY
+       label, file_hash
+    )
+GROUP BY
+    label
 ORDER BY
-	label_count DESC
+    label_count DESC
