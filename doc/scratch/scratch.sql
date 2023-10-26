@@ -1,3 +1,26 @@
+					SELECT
+        				file_hash,
+        				add_timestamp,
+        				author_key AS author_id,
+        				author_key,
+        				'' AS tagset_pending,
+        				'' AS cart
+        			FROM item_flat
+        			WHERE
+						(labels_list LIKE '%,pubkey,%' OR labels_list LIKE '%,my_name_is,%') AND
+						labels_list NOT LIKE '%,approve,%' AND
+						file_hash IN (
+							SELECT file_hash
+							FROM item_flat
+							WHERE author_key IN(
+								SELECT author_key
+								FROM author_flat
+								WHERE author_alias = '$personName'
+							)
+						)
+
+
+
 SELECT
 	item_title,
 	file_hash,
