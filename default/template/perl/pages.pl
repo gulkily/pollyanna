@@ -1449,7 +1449,7 @@ require_once('dialog/settings.pl');
 
 require_once('dialog/reply.pl');
 
-sub GetQuerySqlDialog { # $pageQuery ; displays query for user to see
+sub GetQuerySqlDialog { # $pageQuery, $titleDialog ; displays query for user to see
 # sub GetQueryDialog { # sub GetQuerySqlDialog {
 # sub GetQueryListing {
 # sub DisplayQueryDialog {
@@ -1464,13 +1464,24 @@ sub GetQuerySqlDialog { # $pageQuery ; displays query for user to see
 	my $pageQuery = shift;
 	#todo sanity checks
 
-	my $queryDisplayName = $pageQuery . '.sql';
+	my $queryDisplayName = '';
+	if (index($pageQuery, ' ') != -1) {
+		my $titleDialog = shift;
+		if ($titleDialog) {
+			#todo sanity
+			$queryDisplayName = "$titleDialog.sql";
+		} else {
+			$queryDisplayName = 'query.sql';
+		}
+	} else {
+		$queryDisplayName = $pageQuery . '.sql';
+	}
 
 	my $displayQuery = '<pre class=sql contenteditable>' . HtmlEscape(SqliteGetQueryTemplate($pageQuery)) . '</pre>'; #todo templatify
 	my $dialog = '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName) . '</span>';
 
 	return $dialog;
-}
+} # GetQuerySqlDialog()
 
 sub PrintBanner {
 	my $string = shift; #todo sanity checks
