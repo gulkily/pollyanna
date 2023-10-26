@@ -1414,6 +1414,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			// light mode #lightmode
 			WriteLog('route.php: $lightMode is true!');
 
+			$html = AddAttributeToTag($html, 'input name=btnLightOn', 'style', 'border: 5pt solid green; border-radius: 5pt;');
+
 			// #lightmode options
 			$html = StripComments($html);
 			$html = StripWhitespace($html);
@@ -1440,16 +1442,6 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			//  '<p>(Using site in lightweight mode. If you want, <a href="' . $pathSelf . '?light=0">switch to full mode</a>.)</p></body>',
 			// 	$html
 			// );
-			$html = str_replace(
-				'>Accessibility mode<',
-				'><font color=orange>Light Mode is ON</font><',
-				$html
-			);
-			$html = str_replace(
-				'>Turn On<',
-				'>Is ON<',
-				$html
-			);
 			//
 			//	$html = str_replace(
 			//		'<main id=maincontent>',
@@ -1459,11 +1451,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 			//#todo perhaps strip onclick, onkeypress, etc., and style
 		} else {
-			$html = str_replace(
-				'>Turn Off<',
-				'>Is OFF<',
-				$html
-			);
+			$html = AddAttributeToTag($html, 'input name=btnLightOff', 'style', 'border: 5pt solid green; border-radius: 5pt;');
 		} // light mode
 
 		if (GetConfig('setting/admin/php/assist_show_advanced')) {
