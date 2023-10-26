@@ -237,6 +237,7 @@ sub GetItemIndexLog { # $itemHash, $logType = index_log
 		if ($logType eq 'index_log') {
 			$log = str_replace('declined:', '<font color=red>declined:</font>', $log);
 			$log = str_replace('allowed:', '<font color=green>allowed:</font>', $log);
+			$log = str_replace('removing item:', '<font color=orange>removing item:</font>', $log);
 		}
 
 		#my $logWindow = GetDialogX($log, 'Log');
