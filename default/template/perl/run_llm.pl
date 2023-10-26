@@ -31,7 +31,7 @@ sub RunLlm { # $item ; calls 'run' action on specified item
 				# 	$pythonCommand = `which python2`;
 				# }
 				if (!$pythonCommand) {
-					WriteLog('RunFile: warning: $pythonCommand was FALSE');
+					WriteLog('RunLlm: warning: $pythonCommand was FALSE');
 					return '';
 				}
 				chomp $pythonCommand;
@@ -74,7 +74,7 @@ sub RunLlm { # $item ; calls 'run' action on specified item
 					return 1;
 				} # if ($pythonCommand =~ m/^([\/a-z3]+)$/)
 				else {
-					WriteLog('RunFile: $pythonCommand failed sanity check; $pythonCommand = "' . $pythonCommand . '"');
+					WriteLog('RunLlm: $pythonCommand failed sanity check; $pythonCommand = "' . $pythonCommand . '"');
 				}
 			} # if ($filePath =~ m/^([0-9a-zA-Z\/\._\-]+)$/)
 		} # if (-e $filePath)
@@ -83,6 +83,6 @@ sub RunLlm { # $item ; calls 'run' action on specified item
 	{
 		WriteLog('RunLlm: warning: fallthrough, no handler found for $item = ' . $item . '; caller = ' . join(',', caller));
 	}
-} # RunItem()
+} # RunLlm()
 
 1;
