@@ -2016,6 +2016,11 @@ sub IsSha1 { # returns 1 if parameter is in sha1 hash format, 0 otherwise
 	}
 } # IsSha1()
 
+sub IsVideoFile { # $file; #todo
+	WriteLog('IsVideoFile() = true');
+	return 1;
+}
+
 sub IsImageFile { # $file ; returns 1 if image file, 0 if not
 	my $file = shift;
 	if (!$file) {

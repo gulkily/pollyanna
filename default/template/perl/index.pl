@@ -101,79 +101,7 @@ sub uniq { # @array ; return array without duplicate elements
 
 require_once('index_image_file.pl');
 
-		if (GetCache('indexed/'.$fileHash)) {
-			WriteLog('IndexImageFile: skipping because of flag: indexed/'.$fileHash);
-			return $fileHash;
-		}
-
-		WriteLog('IndexImageFile: $fileHash = ' . ($fileHash ? $fileHash : '--'));
-
-		$addedTime = DBGetAddedTime($fileHash);
-		# get the file's added time.
-
-		# debug output
-		WriteLog('IndexImageFile: $file = ' . ($file?$file:'false'));
-		WriteLog('IndexImageFile: $fileHash = ' . ($fileHash?$fileHash:'false'));
-		WriteLog('IndexImageFile: $addedTime = ' . ($addedTime?$addedTime:'false'));
-
-		# if the file is present in deleted.log, get rid of it and its page, return
-		if (IsFileDeleted($file, $fileHash)) {
-			# write to log
-			WriteLog('IndexImageFile: IsFileDeleted() returned true, returning');
-			return 0;
-		}
-
-		if (!$addedTime) {
-			WriteLog('IndexImageFile: file missing $addedTime');
-			if (GetConfig('admin/logging/write_chain_log')) {
-				$addedTime = AddToChainLog($fileHash);
-			} else {
-				$addedTime = GetTime();
-			}
-			if (!$addedTime) {
-				# sanity check
-				WriteLog('IndexImageFile: warning: sanity check failed for $addedTime');
-				$addedTime = GetTime();
-			}
-		}
-
-		my $itemName = TrimPath($file);
-
-		require_once('image_thumbnail.pl');
-		ImageMakeThumbnails($file);
-
-		DBAddItem($file, $itemName, '', $fileHash, 'image', 0);
-		DBAddItem('flush');
-		#DBAddItemAttribute($fileHash, 'title', $itemName, $addedTime);
-
-		my $imageTitle = $itemName;
-		while (length($imageTitle) > 0 && $imageTitle =~ m/[0-9\.]+$/) {
-			$imageTitle = substr($imageTitle, 0, length($imageTitle) - 1);
-		}
-		DBAddItemAttribute($fileHash, 'title', $imageTitle, time()); #todo time should come from actual file time #todo re-add this
-
-		DBAddLabel($fileHash, $addedTime, 'image'); # add image label
-
-		if (@tagFromPath) {
-			foreach my $tag (@tagFromPath) {
-				DBAddLabel($fileHash, $addedTime, $tag);
-			}
-		}
-
-		DBAddPageTouch('read');
-		DBAddPageTouch('tag', 'image');
-		DBAddPageTouch('item', $fileHash);
-		DBAddPageTouch('stats');
-		DBAddPageTouch('rss');
-		DBAddPageTouch('index');
-		DBAddPageTouch('flush');
-		DBAddPageTouch('compost');
-		DBAddPageTouch('chain');
-
-		return $fileHash;
-	}
-} # IndexImageFile()
-#todo this should be in its own module/file
+require_once('index_video_file.pl');
 
 sub MakeIndex { # indexes all available text files, and outputs any config found
 # sub IndexFiles {
@@ -224,6 +152,27 @@ sub MakeIndex { # indexes all available text files, and outputs any config found
 
 		IndexImageFile('flush');
 	} # admin/image/enable
+
+	if (GetConfig('admin/video/enable')) {
+		state $HTMLDIR = GetDir('html');
+
+		my $videoFilesCommand = "find $HTMLDIR/image -type f -name '*.mp4'";
+		WriteLog('MakeIndex: $videoFilesCommand = ' . $videoFilesCommand);
+		my @videoFiles = split("\n", `$videoFilesCommand`);
+		my $videoFilesCount = scalar(@videoFiles);
+		my $currentVideoFile = 0;
+		WriteLog('MakeIndex: $videoFilesCount = ' . $videoFilesCount);
+
+		foreach my $videoFile (@videoFiles) {
+			$currentVideoFile++;
+			my $percentVideoFiles = floor($currentVideoFile / $videoFilesCount * 100);
+			WriteMessage("[$percentVideoFiles%] $currentVideoFile/$videoFilesCount  $videoFile");
+			#WriteMessage("*** MakeIndex: $currentVideoFile/$videoFilesCount ($percentVideoFiles %) $videoFile");
+			IndexVideoFile($videoFile);
+		}
+
+		IndexVideoFile('flush');
+	} # admin/video/enable
 
 	if (GetConfig('admin/cpp/enable')) {
 		state $HTMLDIR = GetDir('html');

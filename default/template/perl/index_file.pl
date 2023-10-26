@@ -217,6 +217,19 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 		}
 	}
 
+	if (GetConfig('admin/video/enable')) {
+		#videotypes
+		my @allowedVideos = qw(mp4);
+
+		for my $allowedVideo (@allowedVideos) {
+			if ($ext eq $allowedVideo) {
+				WriteLog('IndexFile: calling IndexVideoFile()');
+				$indexSuccess = IndexVideoFile($file);
+				last;
+			}
+		}
+	}
+
 	if ($indexSuccess) {
 		WriteLog('IndexFile: $indexSuccess = ' . $indexSuccess);
 	} else {
