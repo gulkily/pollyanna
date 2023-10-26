@@ -590,10 +590,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	}
 
 	if ($queryDisplay) {
-		my $queryWindowContents .= '<pre>' . HtmlEscape($queryDisplay) . '<br></pre>'; #todo templatify
-		my $queryDisplayDialog = GetDialogX($queryWindowContents, 'Query');
-		$queryDisplayDialog = '<span class=advanced>' . $queryDisplayDialog . '</span>';
-		$txtIndex .= $queryDisplayDialog;
+		$txtIndex .= GetQuerySqlDialog($queryDisplay);
 	}
 
 	if (GetConfig('admin/js/enable') && GetConfig('setting/html/reply_cart')) {
