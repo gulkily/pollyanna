@@ -99,57 +99,7 @@ sub uniq { # @array ; return array without duplicate elements
 	grep !$seen{$_}++, @_;
 }
 
-sub IndexImageFile { # $file ; indexes one image file into database
-	# Reads a given $file, gets its attributes, puts it into the index database
-	# If ($file eq 'flush), flushes any queued queries
-	# Also sets appropriate task entries
-
-	if (!GetConfig('setting/admin/convert/enable')) {
-		WriteLog('IndexImageFile: warning: called when convert/enable is false');
-		#todo deal with it better
-	}
-
-	my $file = shift;
-	chomp($file);
-
-	if ($file =~ m/\s/) {
-		WriteLog('IndexImageFile: warning: sanity check failed, $file contains space character, which is not allowed');
-		return 0;
-	}
-
-	if ($file =~ m/^([0-9a-zA-Z.\/_\-:]+)$/) { #todo bug here?
-		if ($1 eq $file) {
-			$file = $1;
-		} else {
-			WriteLog('IndexImageFile: warning: sanity check 2 failed on $file: ' . $file);
-			return 0;
-		}
-	} else {
-		WriteLog('IndexImageFile: warning: sanity check 1 failed on $file: ' . $file);
-		return 0;
-	}
-
-	WriteLog("IndexImageFile($file)");
-
-	if ($file eq 'flush') {
-		WriteLog("IndexImageFile(flush)");
-		DBAddItemAttribute('flush');
-		DBAddItem('flush');
-		DBAddLabel('flush');
-		DBAddPageTouch('flush');
-
-		return 1;
-	}
-
-	#my @tagFromFile;
-	#my @tagsFromFile;
-	my @tagFromPath;
-
-	my $addedTime;          # time added, epoch format
-	my $fileHash;            # git's hash of file blob, used as identifier
-
-	if (IsImageFile($file)) {
-		my $fileHash = GetFileHash($file);
+require_once('index_image_file.pl');
 
 		if (GetCache('indexed/'.$fileHash)) {
 			WriteLog('IndexImageFile: skipping because of flag: indexed/'.$fileHash);
