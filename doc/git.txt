@@ -6,6 +6,8 @@ git config --global --unset credential.helper
 git config --global credential.helper store
 git config --global pull.rebase false
 
+git config --global core.autocrlf false
+
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 
