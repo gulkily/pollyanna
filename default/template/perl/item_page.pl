@@ -928,11 +928,13 @@ sub GetNextPreviousDialog {
 			value
 		FROM
 			item_attribute
-			JOIN item_flat ON (item_attribute.value = item_flat.file_hash)
+			JOIN item_flat ON (item_attribute.file_hash = item_flat.file_hash)
 		WHERE
 			item_attribute.file_hash = '$fileHash' AND
-			attribute IN ('chain_next', 'chain_previous')
-	";
+			attribute IN ('chain_next', 'chain_previous', 'chain_sequence')
+		ORDER BY
+			NOT (attribute = 'chain_sequence')
+	"; # the resason for the ORDER BY being this way is to put the chain_sequence field first
 
 	#todo #bug if the next or previous item is missing, the link goes to a 404
 	#todo 1. the attribute value should match an item in item_flat x
