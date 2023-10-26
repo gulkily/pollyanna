@@ -953,7 +953,7 @@ sub GetItemAttributesDialog { # %file
 # sub GetAttributesDialog {
 # sub GetItemAttributesWindow {
 	my $itemInfoTemplate = '';
-	WriteLog('GetItemAttributesDialog: my $itemInfoTemplate; ');
+	WriteLog('GetItemAttributesDialog: my $itemInfoTemplate; caller = ' . join(',', caller));
 
 	my $fileRef = shift;
 	my %file = %{$fileRef};
