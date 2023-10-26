@@ -968,7 +968,8 @@ sub GetItemAttributesDialog { # %file
 		#push @queryArguments, $fileHash;
 		#===
 		my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE file_hash LIKE '$fileHash%' ORDER BY attribute";
-		$itemInfoTemplate = GetQueryAsDialog($query, 'Item Attributes'); # GetResultSetAsDialog() --> RenderField()
+		$itemInfoTemplate = GetQueryAsDialog($query, 'ItemAttributes'); # GetResultSetAsDialog() --> RenderField()
+		$itemInfoTemplate = AddAttributeToTag($itemInfoTemplate, 'table', 'id', 'ItemAttributes');
 		$itemInfoTemplate = '<span class=advanced>' . $itemInfoTemplate . '</span>';
 		return $itemInfoTemplate;
 		#for debug/compare
@@ -1107,10 +1108,10 @@ sub GetItemAttributesDialog2 {
 
 		$itemAttributesTable = '<tbody class=content>' . $itemAttributesTable . '</tbody>';
 
-		my $itemAttributesWindow = GetDialogX($itemAttributesTable, 'Item Attributes', 'attribute,value'); #deprecated
+		my $itemAttributesWindow = GetDialogX($itemAttributesTable, 'ItemAttributes2', 'attribute,value'); #deprecated
 		$itemAttributesWindow = '<span class=advanced>' . $itemAttributesWindow . '</span>';
 
-		my $accessKey = GetAccessKey('Item Attributes');
+		my $accessKey = GetAccessKey('ItemAttributes');
 		if ($accessKey) {
 			$itemAttributesWindow = AddAttributeToTag($itemAttributesWindow, 'a href=#', 'accesskey', $accessKey);
 			$itemAttributesWindow = AddAttributeToTag($itemAttributesWindow, 'a href=#', 'name', 'ia');
