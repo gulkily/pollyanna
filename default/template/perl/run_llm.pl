@@ -53,15 +53,16 @@ sub RunLlm { # $item ; calls 'run' action on specified item
 					PutCache($runLog, $result); # store the result in cache
 
 					{
-						my $newItem = "
+						my $newItemFooter = "
+							--
 							>>$item
 							start: $runStart
 							finish: $runFinish
-							===
 						";
-						$newItem = trim($newItem);
-						$newItem = str_replace("\t", "", $newItem);
-						$newItem = $newItem . "\n" . $result;
+``						$newItemFooter = trim($newItem);
+						$newItemFooter = str_replace("\t", "", $newItem);
+
+						my $newItem = $result . "\n" . $newItemFooter;
 
 						my $TXTDIR = GetDir('txt');
 						my $newHash = sha1_hex($newItem);
