@@ -31,15 +31,23 @@
 
 		<form name=frmTest id=frmTest action="/post.html">
 			<p>
+				<table bgcolor="#ffd0b0" border=3 bordercolor=red style="background-image: linear-gradient(to right, orange, #ffa500)"><tr><td>
 				<big>
-					<b>CONSENT NOTICE!</b> <br>
+					<center>
+						<b>BROWSER TEST PAGE CONSENT NOTICE</b><br>
+						<br>
+						<b>Please read carefully before continuing.</b><br>
+					</center>
 					<br>
-					Attention! You are about to share information about your device. <br>
-					This form's purpose is to help with troubleshooting. <br>
-					It may also be used for a survey to help improve browser support. <br>
+					This browser test page collects information about your device, such as your browser version
+					and supported features, operating system, and screen resolution. This information is for
+					helping us troubleshoot any problems you may be having and to help improve compatibility. <br>
 					<br>
-					To continue, please follow the steps below:
-				</big>
+					By continuing, you consent to us collecting and using this information.<br>
+					<br>
+					If you do not consent, please close this page.<br>
+				</b></big>
+				</td></tr></table>
 			</p>
 
 			<input
