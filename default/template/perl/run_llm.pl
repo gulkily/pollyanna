@@ -59,7 +59,7 @@ sub RunLlm { # $item ; calls 'run' action on specified item
 							start: $runStart
 							finish: $runFinish
 						";
-``						$newItemFooter = trim($newItem);
+						$newItemFooter = trim($newItem);
 						$newItemFooter = str_replace("\t", "", $newItem);
 
 						my $newItem = $result . "\n" . $newItemFooter;
