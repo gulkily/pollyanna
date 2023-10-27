@@ -92,17 +92,17 @@ UpdateUpdateTime();
 
 PutFile('config/setting/admin/build_end', GetTime());
 
-if (!GetConfig('admin/secret')) {
+if (!GetConfig('setting/admin/secret')) {
 	PutConfig('admin/secret', md5_hex(time()));
 	#todo improve security
 }
 
-if (GetConfig('admin/dev/launch_browser_after_build')) {
+if (GetConfig('setting/admin/dev/launch_browser_after_build')) {
 	WriteLog('build.pl: xdg-open http://localhost:2784/ &');
 	WriteLog(`xdg-open http://localhost:2784/ &`);
 }
 
-if (GetConfig('admin/ssi/enable') && GetConfig('admin/php/enable')) {
+if (GetConfig('setting/admin/ssi/enable') && GetConfig('setting/admin/php/enable')) {
 	BuildMessage('build.pl: warning: ssi/enable and php/enable are both true');
 }
 
