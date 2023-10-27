@@ -27,7 +27,7 @@ sub PullFeedFromHost { # connects to $host with http and downloads any new items
 
 	$hostFeedUrl = $hostFeedUrl . '?you=' . uri_escape($host);
 
-	my @myHosts = split("\n", GetConfig('system/my_hosts'));
+	my @myHosts = split("\n", GetConfig('system/my_hosts')); #todo create default
 	my $myHostUrl = $myHosts[rand @myHosts];
 
 	$hostFeedUrl .= '&me=' . uri_escape($myHostUrl);
@@ -51,7 +51,7 @@ sub PullFeedFromHost { # connects to $host with http and downloads any new items
 
 		WriteLog("Items found: " . scalar @items);
 
-		my $pullItemLimit = GetConfig('admin/pull_item_limit');
+		my $pullItemLimit = GetConfig('setting/admin/pull_item_limit');
 		my $itemsPulledCounter = 0;
 
 		foreach my $item (@items) {
