@@ -165,7 +165,7 @@ sub GetHtmlToolboxes {
 	} # if ($file{'item_title'})
 
 
-	if (GetConfig('html/item_page/toolbox_publish') && $file{'file_path'} && $file{'item_type'} eq 'txt') {
+	if (GetConfig('setting/html/item_page/toolbox_publish') && $file{'file_path'} && $file{'item_type'} eq 'txt') {
 		require_once('dialog/toolbox_item_publish.pl');
 		my $dialogToolboxPublish = GetDialogToolboxItemPublish($file{'file_path'}, $file{'file_hash'});
 		if ($dialogToolboxPublish) {
@@ -174,7 +174,7 @@ sub GetHtmlToolboxes {
 		}
 	}
 
-	if (GetConfig('html/item_page/toolbox_share')) {
+	if (GetConfig('setting/html/item_page/toolbox_share')) {
 		my $htmlToolbox = '';
 
 		$htmlToolbox .= "<p>";
@@ -202,7 +202,7 @@ sub GetHtmlToolboxes {
 
 		my $htmlToolboxWindow = '<span class=advanced>' . GetDialogX($htmlToolbox, 'Share') . '</span>';
 		$html .= $htmlToolboxWindow;
-	} # if (GetConfig('show_share_options'))
+	} # if (GetConfig('toolbox_share'))
 
 
 
@@ -363,7 +363,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	# Get the HTML page template
 	my $htmlStart = GetPageHeader('item', $title);
 	$txtIndex .= $htmlStart;
-	if (GetConfig('admin/expo_site_mode')) {
+	if (GetConfig('setting/admin/expo_site_mode')) {
 		#$txtIndex .= GetMenuTemplate(); # menu at the top on item page
 	}
 	$txtIndex .= GetTemplate('html/maincontent.template');
@@ -432,7 +432,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	#	$txtIndex .= GetReplyCartDialog(); # GetItemPage()
 	#}
 
-	if (GetConfig('html/item_page/thread_listing')) {
+	if (GetConfig('setting/html/item_page/thread_listing')) {
 		WriteLog('GetItemPage: found thread_listing = TRUE');
 		require_once('widget/thread_listing.pl');
 
@@ -521,7 +521,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 #				GetString('item_attribute/item_score') . $file{'item_score'}
 #			;
 
-			if (GetConfig('html/item_page/toolbox_classify')) {
+			if (GetConfig('setting/html/item_page/toolbox_classify')) {
 				my $classifyForm = GetTemplate('html/item/classify.template');
 				$classifyForm = str_replace(
 					'<span id=itemLabelsList></span>',
