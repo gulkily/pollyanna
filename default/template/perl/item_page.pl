@@ -50,7 +50,7 @@ sub GetHtmlToolboxes {
 		$urlParam = str_replace('#', '%23', $urlParam);
 	}
 
-	if ((index($file{'labels_list'}, ',search,') != -1) && GetConfig('html/item_page/toolbox_search') && $urlParam) {
+	if ((index($file{'labels_list'}, ',search,') != -1) && GetConfig('setting/html/item_page/toolbox_search') && $urlParam) {
 		#todo 'notext' items should also not get a search toolbox
 		#sub SearchToolbox {
 		#sub SearchDialog {
