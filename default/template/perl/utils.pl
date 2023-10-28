@@ -711,6 +711,12 @@ sub GetFileHash { # $fileName ; returns hash of file contents
 		my $fileHash = GetSHA1(GetFile($fileName));
 		if (GetConfig('debug')) {
 			my $fileHash2 = trim(`sha1sum "$fileName" | cut -d ' ' -f 1`);
+
+			if (!$fileHash2) {
+				WriteLog('GetFileHash: warning: $fileHash2 is FALSE');
+				$fileHash2 = '';
+			}
+
 			if ($fileHash ne $fileHash2) {
 				WriteLog('GetFileHash: $fileHash = ' . $fileHash);
 				WriteLog('GetFileHash: $fileHash2 = ' . $fileHash2);
