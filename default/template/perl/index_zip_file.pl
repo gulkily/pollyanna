@@ -63,11 +63,18 @@ sub IndexZipFile { # $file | 'flush' ; indexes one text file into database
 		my @imageTypes = GetConfigValueAsArray('setting/admin/image/allow_files');
 		my $unzipCommand = "unzip -o $file";
 		for my $imageType (@imageTypes) {
+			if ($imageType =~ m/^([0-9a-z]+)$/) {
+				$imageType = $1;
+			} else {
+				WriteLog('IndexZipFile: warning: sanity check failed on $imageType!');
+				return '';
+			}
 			$unzipCommand .= " '*.$imageType'";
 		}
 		$unzipCommand .= " -d $IMAGEDIR 2>&1";
 
 		#my $unzipCommand = "unzip -o $file '*.jpg' '*.jpeg' '*.gif' '*.bmp' '*.jfif' '*.webp' '*.svg' -d $IMAGEDIR 2>&1";
+
 		WriteLog('IndexZipFile: $unzipCommand = ' . $unzipCommand);
 		$unzipLog .= `$unzipCommand` . "\n";
 	}
