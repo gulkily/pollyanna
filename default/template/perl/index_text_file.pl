@@ -1207,7 +1207,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 		}
 	}
 
-	if (GetConfig('admin/index/expire_html_when_indexing')) {
+	if (GetConfig('admin/index/expire_html_when_indexing') && !$flags{'skip_pages'}) {
 		#uncache
 		if ($authorKey) {
 			RemoveHtmlFile('author/' . $authorKey . '/index.html');
