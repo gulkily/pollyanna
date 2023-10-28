@@ -468,6 +468,8 @@ function ReopenDialogs () {
 } // ReopenDialogs()
 
 function DraggingCascade () {
+// function CascadeDialogs () {
+// function CascadeAll () {
 	//alert('DEBUG: DraggingCascade()');
 	
 	var titlebarHeight = 0;
@@ -852,6 +854,17 @@ function SpotlightDialog (dialogId) {
 	//alert(dialogId);
 	var dialog = document.getElementById(dialogId);
 	//alert('DEBUG: SpotlightDialog(' + dialogId + ',' + dialog + ')');
+
+	/* #todo
+			titlebarHeight = 30;
+
+							curTop += titlebarHeight;
+							curLeft += titlebarHeight;
+
+		var curTop = 55;
+		var curLeft = 5;
+	*/
+
 	if (dialog) {
 
 		// #todo if dialog itself has class=advanced, remove it
