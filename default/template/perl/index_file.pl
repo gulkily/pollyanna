@@ -5,7 +5,12 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFile() based on extension ;
+sub IndexFile { # $file, \%flags ; calls IndexTextFile() or IndexImageFile() based on extension ;
+# \%flags should be either FALSE or a reference to a hash of flags
+# flags:
+# skip_organize - skips OrganizeFile() call
+# skip_pages - skips ReplaceMenuInAllPages() call and all other html output
+
 # returns TRUE when success, FALSE when failure
 # sub IndexItem {
 

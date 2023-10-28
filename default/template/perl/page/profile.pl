@@ -25,6 +25,8 @@ sub GetProfileDialog {
 } # GetProfileDialog()
 
 sub GetProfilePage { # returns profile page (allows sign in/out)
+# sub GetIdentityPage {
+# sub GetSessionPage {
 #not the author page
 
 #called by page.pl
@@ -65,11 +67,9 @@ sub GetProfilePage { # returns profile page (allows sign in/out)
 			GetConfig('setting/admin/js/openpgp_keychain')
 		) {
 			$txtIndex .=
-				#'<span class=advanced>' . 
 				'<form name=formSelectKey>' .
 				GetDialogX(GetTemplate('html/select_key.template'), 'Keychain') .
-				#'</form>' . 
-				'</span>'
+				'</form>'
 			;
 		}
 

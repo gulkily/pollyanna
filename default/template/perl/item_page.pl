@@ -967,8 +967,11 @@ sub GetItemAttributesDialog { # %file
 		#my @queryArguments; #todo
 		#push @queryArguments, $fileHash;
 		#===
+		#todo: my $query = "SELECT DISTINCT attribute, value, source FROM item_attribute WHERE file_hash LIKE '$fileHash%' ORDER BY attribute";
 		my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE file_hash LIKE '$fileHash%' ORDER BY attribute";
 		$itemInfoTemplate = GetQueryAsDialog($query, 'ItemAttributes'); # GetResultSetAsDialog() --> RenderField()
+		#note: GetResultSetAsDialog() has some special conditions for GetAttributesDialog()
+
 		$itemInfoTemplate = AddAttributeToTag($itemInfoTemplate, 'table', 'id', 'ItemAttributes');
 		$itemInfoTemplate = '<span class=advanced>' . $itemInfoTemplate . '</span>';
 		return $itemInfoTemplate;
