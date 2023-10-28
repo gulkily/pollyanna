@@ -336,4 +336,17 @@ sub GetTargetPath { # $target ; gets the target url for an action
 	return $returnValue{$target};
 } # GetTargetPath()
 
+sub RemoveHtmlEnvelope { # $html ; removes html envelope
+	my $html = shift;
+	#todo sanity checks
+
+	WriteLog('RemoveHtmlEnvelope: called from ' . join(',', caller));
+
+	$html = str_replace('<!DOCTYPE html>', '', $html);
+	$html = str_replace('<html>', '', $html);
+	$html =~ s/<head>.*<\/head>//s;
+
+	return $html;
+}
+
 1;
