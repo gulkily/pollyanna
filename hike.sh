@@ -37,7 +37,7 @@ if [ $1 = test ]
 		echo testing 1 2 3
 fi
 
-if [ $1 = stats ]
+if [ $1 = stats ] # hike stats
 	then
 		echo text files: `find html/txt -type f -name '*.txt' | wc -l`
 		echo ==================
