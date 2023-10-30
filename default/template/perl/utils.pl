@@ -2774,6 +2774,130 @@ sub ProcessTextFile { # $file ; add new text file to index
 
 } # ProcessTextFile()
 
+sub AttachLogToItem { # $itemHash, $result, $runStart, $runFinish ; attaches log to item
+	my $itemHash = shift;
+	my $result = shift;
+	my $runStart = shift;
+	my $runFinish = shift;
+
+	if (!$itemHash) {
+		WriteLog('AttachLogToItem: warning: $itemHash is FALSE; caller = ' . join(',', caller));
+		return;
+	}
+
+	if (!IsItem($itemHash)) {
+		WriteLog('AttachLogToItem: warning: $itemHash failed sanity check; caller = ' . join(',', caller));
+		return;
+	}
+	$itemHash = IsItem($itemHash);
+
+	WriteLog("AttachLogToItem($itemHash,...); caller = " . join(',', caller));
+
+	#todo sanity checks
+
+	{
+		my $newItem = "
+			>>$itemHash
+			start: $runStart
+			finish: $runFinish
+			===
+		";
+		$newItem = trim($newItem);
+		$newItem = str_replace("\t", "", $newItem);
+		$newItem = $newItem . "\n" . $result;
+
+		my $TXTDIR = GetDir('txt');
+		my $newHash = sha1_hex($newItem);
+		my $newPath = substr($newHash, 0, 2) . '/' . substr($newHash, 2, 2) . '/' . $newHash . '.txt';
+		PutFile("$TXTDIR/$newPath", $newItem);
+		IndexFile("$TXTDIR/$newPath");
+
+		my %return = {
+			'hash' => $newHash,
+			'path' => $newPath
+		};
+
+		return \%return;
+	}
+} # AttachLogToItem()
+
+
+#
+#	if (!$itemHash) {
+#		WriteLog('AttachLogToItem: warning: $itemHash is false');
+#		return;
+#	}
+#
+#	if (!$logText) {
+#		WriteLog('AttachLogToItem: warning: $logText is false');
+#		return;
+#	}
+#
+#	if (!IsItem($itemHash)) {
+#		WriteLog('AttachLogToItem: warning: $itemHash failed sanity check');
+#		return;
+#	}
+#
+#	if ($logText =~ m/^([0-9a-zA-Z\.\-_\/\s]+)$/) {
+#		$logText = $1;
+#	} else {
+#		WriteLog('AttachLogToItem: warning: $logText failed sanity check');
+#		return;
+#	}
+#
+#	my $logTextHash = GetFileHash($logText);
+#
+#	if (!$logTextHash) {
+#		WriteLog('AttachLogToItem: warning: $logTextHash is false');
+#		return;
+#	}
+#
+#	if (!IsItem($logTextHash)) {
+#		WriteLog('AttachLogToItem: warning: $logTextHash failed sanity check');
+#		return;
+#	}
+#
+#	my $logTextPath = GetPathFromHash($logTextHash);
+#
+#	if (!$logTextPath) {
+#		WriteLog('AttachLogToItem: warning: $logTextPath is false');
+#		return;
+#	}
+#
+#	if (!-e $logTextPath) {
+#		WriteLog('AttachLogToItem: warning: $logTextPath does not exist');
+#		return;
+#	}
+#
+#	my $logTextMessage = GetFile($logTextPath);
+#
+#	if (!$logTextMessage) {
+#		WriteLog('AttachLogToItem: warning: $logTextMessage is false');
+#		return;
+#	}
+#
+#	my $itemMessage = GetItemDetokenedMessage($itemHash);
+#
+#	if (!$itemMessage) {
+#		WriteLog('AttachLogToItem: warning: $itemMessage is false');
+#		return;
+#	}
+#
+#	$itemMessage .= "\n\n" . $logTextMessage;
+#
+#	my $itemMessageHash = GetFileHash($itemMessage);
+#
+#	if (!$itemMessageHash) {
+#		WriteLog('AttachLogToItem: warning: $itemMessageHash is false');
+#		return;
+#	}
+#
+#	if (!IsItem($itemMessageHash)) {
+#		WriteLog('AttachLogToItem: warning: $itemMessageHash failed sanity
+
+
+###### ADD STUFF ABOVE HERE ######
+
 sub EnsureDirsThatShouldExist { # creates directories expected later
 # sub EnsureDirs {
 	WriteLog('EnsureDirsThatShouldExist() begin');
