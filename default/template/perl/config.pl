@@ -61,6 +61,10 @@ sub FixConfigName { # $configName ; prepend 'setting/' to config paths as approp
 } # FixConfigName()
 
 sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configuration value based for $key
+# sub GetThemeTemplate {
+# sub GetThemeSetting {
+# sub GetThemeValue {
+
 	# $token eq 'unmemo'
 	#    removes memo entry for $token from %configLookup
 

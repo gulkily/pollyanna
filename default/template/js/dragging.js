@@ -850,6 +850,8 @@ function GetDialogId (win) { // returns dialog id (based on id= or title bar cap
 } // GetDialogId()
 
 function SpotlightDialog (dialogId) {
+// pagemap, page map,
+// <!-- dialoglist.js
 // should actually be called ToggleDialog()
 	//alert(dialogId);
 	var dialog = document.getElementById(dialogId);
@@ -939,6 +941,9 @@ function HideDialog (dialog) { // takes dialog element as reference
 } // HideDialog()
 
 function UpdateDialogList () {
+// pagemap dialog list
+// pagemap.js
+// dialoglist.js
 // function DialogListDialog () {
 // function UpdateListDialog () {
 // dialog_list.template
