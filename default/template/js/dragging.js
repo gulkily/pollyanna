@@ -977,6 +977,11 @@ function UpdateDialogList () {
 				if (24 < dialogTitle.length) {
 					dialogTitle = dialogTitle.substr(0, 24);
 				}
+				if (dialogTitle == '') {
+					//alert('DEBUG: UpdateDialogList: warning: dialogTitle is empty');
+					dialogTitle = dialogId || 'Untitled';
+				}
+
 
 				listContent = listContent + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { return SpotlightDialog(\'' + dialogId + '\'); }"' + gt + dialogTitle + '</a' + gt + '<br' + gt;
 				//listContent = listContent + '<label for="c' + dialogId + '"' + gt + '<input type=checkbox name="c' + dialogId + '" id="c' + dialogId + '"' + gt + dialogId + '</label' + gt + '<br' + gt;
