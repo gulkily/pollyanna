@@ -89,6 +89,11 @@ sub GetDialogX { # $body, $title, $headings, $status, $menu ; returns html with 
 		$param{'title'} = '';
 	}
 
+	if (!$param{'id'}) {
+		WriteLog('GetDialogX: warning: id missing, setting to title = ' . $param{'title'} . '; caller = ' . join(',', caller));
+		$param{'id'} = $param{'title'};
+	}
+
 	if (GetConfig('debug')) {
 		$param{'debug_message'} = 'GetDialogX: caller = ' . join(',', caller);
 	}
