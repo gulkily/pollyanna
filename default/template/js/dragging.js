@@ -910,8 +910,12 @@ function SpotlightDialog (dialogId) {
 		//console.log(dialog.style);
 		// dialog.style.top = event.clientX;
 		// dialog.style.left = event.clientY;
-		dialog.style.top = '200px';
-		dialog.style.left = '200px';
+		// there is an issue with this for some reason
+		var dialogTop = event.clientY + 'px';
+		var dialogLeft = event.clientX + 'px';
+
+		dialog.style.top = dialogTop;
+		dialog.style.left = dialogLeft;
 
 	} else {
 		//alert('DEBUG: SpotlightDialog: warning: dialog not found');
