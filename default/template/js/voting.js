@@ -29,7 +29,7 @@ function PingUrlCallback () {
 		// this is very basic, jarring, and unfriendly, but it is better than failing silently
 		// relative links setting should also be taken into account
 		// #todo
-		window.location = '/profile.html'; // #todo relativize
+		window.location = '/session.html'; // #todo relativize
 	} else {
 		//alert('DEBUG: PingUrlCallback: warning: unrecognized: xmlhttp.status = ' + xmlhttp.status + '; xmlhttp.readyState = ' + xmlhttp.readyState);
 	}
