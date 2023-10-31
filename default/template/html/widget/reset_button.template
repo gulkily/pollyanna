@@ -27,7 +27,6 @@
 		if (winLoc.indexOf('?')) {
 			winLoc = winLoc.substr(0, winLoc.indexOf('?'));
 		}
-		winLoc = winLoc + '?time=9999999999';
 		window.location = winLoc;
 		return false;
 	}
