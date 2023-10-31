@@ -576,7 +576,7 @@ function DraggingInitDialog (el, doPosition) {
 			// cool
 		}
 	} else {
-		//alert('DEBUG: DraggingInitDialog: warning: elId is false 2' + elements[i].innerHTML);
+		//alert('DEBUG: DraggingInitDialog: warning: elId is false 2');
 	}
 //
 	//alert('DEBUG: DraggingInitDialog: finished');
