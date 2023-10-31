@@ -8,9 +8,9 @@
 <table bgcolor="$colorWindow">
 <tr><td>
 <p>
-	<h1>Your message has been received!</h1><br>
+	<b>Your message has been received!</b><br>
 	<br>
-	<h2>You are seeing this placeholder page because the server is still processing your submission.</h2><br>
+	You are seeing this placeholder page because the server is still processing your submission.<br>
 </p>
 <hr>
 <p>
