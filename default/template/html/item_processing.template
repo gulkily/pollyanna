@@ -8,9 +8,9 @@
 <table bgcolor="$colorWindow">
 <tr><td>
 <p>
-    Your message has been received!<br>
-    <br>
-    You are seeing this placeholder page because the server is still processing your submission.<br>
+	<h1>Your message has been received!</h1><br>
+	<br>
+	<h2>You are seeing this placeholder page because the server is still processing your submission.</h2><br>
 </p>
 <hr>
 <p>
@@ -36,7 +36,7 @@
 </p>
 <hr>
 <p>
-    <a href="/">Return Home</a>
+	<a href="/">Return Home</a>
 </p>
 </td></tr>
 </table>

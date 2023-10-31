@@ -1459,12 +1459,13 @@ function GetItemPlaceholderPage ($comment, $hash, $fileUrlPath, $filePath) { # g
 	WriteLog('$themeName = ' . $themeName);
 
 	{ // color values
-		$colorBackground = GetConfig('theme/' . $themeName . '/color/background');
-		$colorWindow = GetConfig('theme/' . $themeName . '/color/window');
-		$colorText = GetConfig('theme/' . $themeName . '/color/text');
-		$colorLink = GetConfig('theme/' . $themeName . '/color/text');
-		$colorVlink = GetConfig('theme/' . $themeName . '/color/text');
+		$colorBackground = GetConfig('html/color/background');
+		$colorWindow = GetConfig('html/color/window');
+		$colorText = GetConfig('html/color/text');
+		$colorLink = GetConfig('html/color/link_text');
+		$colorVlink = GetConfig('html/color/vlink_text');
 
+		WriteLog('GetItemPlaceholderPage: $colorBackground = ' . $colorBackground);
 		WriteLog('GetItemPlaceholderPage: $colorWindow = ' . $colorWindow);
 		WriteLog('GetItemPlaceholderPage: $colorText = ' . $colorText);
 
