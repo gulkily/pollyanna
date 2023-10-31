@@ -2775,6 +2775,10 @@ sub ProcessTextFile { # $file ; add new text file to index
 } # ProcessTextFile()
 
 sub AttachLogToItem { # $itemHash, $result, $runStart, $runFinish ; attaches log to item
+# sub AttachRunLog {
+# sub AttachCompileLog {
+# sub AddRunLog {
+# sub AddCompileLog {
 	my $itemHash = shift;
 	my $result = shift;
 	my $runStart = shift;
@@ -2793,7 +2797,19 @@ sub AttachLogToItem { # $itemHash, $result, $runStart, $runFinish ; attaches log
 
 	WriteLog("AttachLogToItem($itemHash,...); caller = " . join(',', caller));
 
-	#todo sanity checks
+	# sanity checks:
+	if (!$result) {
+		WriteLog('AttachLogToItem: warning: $result is FALSE; caller = ' . join(',', caller));
+		return;
+	}
+	if (!$runStart) {
+		WriteLog('AttachLogToItem: warning: $runStart is FALSE; caller = ' . join(',', caller));
+		$runStart = 'unspecified';
+	}
+	if (!$runFinish) {
+		WriteLog('AttachLogToItem: warning: $runFinish is FALSE; caller = ' . join(',', caller));
+		$runFinish = 'unspecified';
+	}
 
 	{
 		my $newItem = "
