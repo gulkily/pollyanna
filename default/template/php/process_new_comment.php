@@ -109,6 +109,8 @@ function ProcessNewComment ($comment, $replyTo) { // saves new comment to .txt f
 		if (GetConfig('admin/php/post/index_file_on_post') && isset($filePathNew)) { # ProcessNewComment()
 			WriteLog('ProcessNewComment: index_file_on_post TRUE');
 			$newFileHash = IndexTextFile($filePathNew);
+			$newFileHash = IndexTextFile($filePathNew); #doing it twice gets it unstuck sometimes
+				#todo fix this
 			if ($newFileHash) {
 				MakePage($newFileHash);
 			} else {
