@@ -92,7 +92,8 @@ sub IndexZipFile { # $file | 'flush' ; indexes one text file into database
 	DBAddItemAttribute($fileHash, 'unzip_finish', $unzipFinish);
 
 	if ($unzipLog) {
-		PutCache('compile_log/' . $fileHash, $unzipLog); # parse_log parse.log ParseLog
+		#PutCache('compile_log/' . $fileHash, $unzipLog); # parse_log parse.log ParseLog
+		AttachLogToItem($fileHash, $unzipLog, $unzipStart, $unzipFinish);
 	}
 
 	my $addedTime = DBGetAddedTime($fileHash);
