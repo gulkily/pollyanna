@@ -1,3 +1,30 @@
+refactor idea:
+	./default/theme --> ./module
+	./default/template --> ./module/default
+	./config now overlays ./module/ ???
+
+needs to be a procedure to "strip" an html page of its "envelope" of html, head, and opening/closing body tags
+	so that it can be included in another page
+	look at internet archive for example
+
+Dialogs which don't respond to PageMap (missing id=)
+Inbox
+Threads
+Introduction
+Chain (listing)
+Labels
+
+Pages which have dialogs without title
+
+
+youtube embed implementation
+	a) create token in token_defs.pl
+	b) create renderer for the youtube embed
+		b1) not sure if this is currently supported
+
+AttachLog() procedure
+	should do what RunPy does now, attach an item with the log
+
 date page should have a comment field which automatically appends date: tag
 
 item_type should be called file_type
