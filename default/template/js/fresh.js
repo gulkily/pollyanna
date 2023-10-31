@@ -67,18 +67,18 @@ function freshCallback() { // callback for requesting HEAD for current page
 
 		if (!eTag) {
 			if (window.myOwnETag) {
-				//alert('DEBUG: fresh.js: warning: eTag is FALSE; setting to equal myOwnETag');
+				//alert('DEBUG: fresh.js: freshCallback: warning: eTag is FALSE; setting to equal myOwnETag');
 				eTag = window.myOwnETag;
 			} else {
-				//alert('DEBUG: fresh.js: warning: eTag is FALSE; and myOwnETag is also FALSE');
+				//alert('DEBUG: fresh.js: freshCallback: warning: eTag is FALSE; and myOwnETag is also FALSE');
 			}
 		}
 
-		//alert('DEBUG: fresh.js: eTag = ' + eTag);
+		//alert('DEBUG: fresh.js: freshCallback: eTag = ' + eTag);
 
 		if (eTag) { // if ETag header has a value
 			if (window.myOwnETag) {
-				//alert('DEBUG: fresh.js:  eTag = ' + eTag + '; window.myOwnETag = ' + window.myOwnETag);
+				//alert('DEBUG: fresh.js: freshCallback: eTag = ' + eTag + '; window.myOwnETag = ' + window.myOwnETag);
 				if (eTag != window.myOwnETag) {
 					if (eTag == window.lastEtag) { // if it's equal to the one we saved last time
 						// no new change change
@@ -88,18 +88,18 @@ function freshCallback() { // callback for requesting HEAD for current page
 
 						if (freshUserWantsReload) {
 							// user wants reload
-							//alert('DEBUG: user wants automatic page reload');
+							//alert('DEBUG: fresh.js: freshCallback: user wants automatic page reload');
 							location.reload();
 						} else {
 							// user doesn't want reload, just show notification
-							//alert('DEBUG: user does not want automatic page reload, notify');
+							//alert('DEBUG: fresh.js: freshCallback: user does not want automatic page reload, notify');
 							window.lastEtag = eTag;
 
 							var ariaAlert;
 							ariaAlert = document.getElementById('ariaAlert');
 
 							if (!ariaAlert) {
-								//alert('DEBUG: ariaAlert created successfully');
+								//alert('DEBUG: fresh.js: freshCallback: ariaAlert created successfully');
 								ariaAlert = document.createElement('p');
 								ariaAlert.setAttribute('role', 'alert');
 								ariaAlert.setAttribute('id', 'ariaAlert');
@@ -161,10 +161,11 @@ function freshCallback() { // callback for requesting HEAD for current page
 		} // if (eTag) // ETag header has value
 	} // status == 200
 	if (this.status == 404 && document.getElementById) {
-		//alert('DEBUG: page has gone away on server (404)');
+		//alert('DEBUG: fresh.js: freshCallback: page has gone away on server (404)');
 		var ariaAlert;
 		ariaAlert = document.getElementById('ariaAlert');
 		if (!ariaAlert) {
+			//alert('DEBUG: fresh.js: freshCallback: ariaAlert not found on page, creating...');
 			ariaAlert = document.createElement('p');
 			ariaAlert.setAttribute('role', 'alert');
 			ariaAlert.setAttribute('id', 'ariaAlert');
@@ -178,7 +179,7 @@ function freshCallback() { // callback for requesting HEAD for current page
 	} // status == 404
 
 	return true;
-} //freshCallback()
+} // freshCallback()
 
 function CheckIfFresh () {
 	var d = new Date();
