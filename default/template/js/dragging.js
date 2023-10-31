@@ -849,7 +849,7 @@ function GetDialogId (win) { // returns dialog id (based on id= or title bar cap
 	return '';
 } // GetDialogId()
 
-function SpotlightDialog (dialogId) {
+function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was clicked
 // pagemap, page map,
 // <!-- dialoglist.js
 // should actually be called ToggleDialog()
@@ -870,11 +870,11 @@ function SpotlightDialog (dialogId) {
 	if (dialog) {
 
 		// #todo if dialog itself has class=advanced, remove it
-		//alert(dialog.className);
+		//alert('DEBUG: SpotlightDialog: dialog.className = ' + dialog.className);
 		// but also, move upwards, and check that any spans it's inside of have class=advanced, remove advanced from the class names of those spans
 		var element = dialog;
 		while (element.parentElement) {
-			//alert(element.tagName + ',' + element.className);
+			//alert('DEBUG: SpotlightDialog: element.tagName + element.className = ' + element.tagName + ',' + element.className);
 			if (element.className == 'advanced') {
 				//alert('advanced found');
 				element.className = '';
@@ -983,7 +983,7 @@ function UpdateDialogList () {
 				}
 
 
-				listContent = listContent + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { return SpotlightDialog(\'' + dialogId + '\'); }"' + gt + dialogTitle + '</a' + gt + '<br' + gt;
+				listContent = listContent + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { return SpotlightDialog(\'' + dialogId + '\', this); }"' + gt + dialogTitle + '</a' + gt + '<br' + gt;
 				//listContent = listContent + '<label for="c' + dialogId + '"' + gt + '<input type=checkbox name="c' + dialogId + '" id="c' + dialogId + '"' + gt + dialogId + '</label' + gt + '<br' + gt;
 				lstDialog.innerHTML = lstDialog.innerHTML + iDialog;
 
