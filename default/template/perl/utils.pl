@@ -709,7 +709,7 @@ sub GetFileHash { # $fileName ; returns hash of file contents
 		$fileName = IsSaneFilename($fileName);
 
 		my $fileHash = GetSHA1(GetFile($fileName));
-		if (GetConfig('debug')) {
+		if (1) {
 			my $fileHash2 = trim(`sha1sum "$fileName" | cut -d ' ' -f 1`);
 
 			if (!$fileHash2) {
