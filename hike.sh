@@ -42,6 +42,7 @@ if [ $1 = stats ] # hike stats
 		echo text files: `find html/txt -type f -name '*.txt' | wc -l`
 		echo item table: `sqlite3 ./cache/b/index.sqlite3 "select count(*) from item"`
 		echo chain log: `wc -l html/chain.log`
+		echo space usage: `du -sh .`
 		#echo chain table: `count(*) from item_attribute where attribute = 'chain_sequence';` entries
 		echo ==================
 fi
