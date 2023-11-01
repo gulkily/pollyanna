@@ -124,6 +124,11 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		MakeWritePage();
 	}
 
+	elsif ($pageType eq 'js') {
+		WriteLog('MakePage: js');
+		MakeJsPages();
+	}
+
 	elsif ($pageType eq 'settings') {
 		WriteLog('MakePage: settings');
 
