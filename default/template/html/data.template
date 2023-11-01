@@ -12,11 +12,6 @@
 </p>
 
 <p>
-    <a href="/image.zip">/image.zip</a> (<span id=sizeImageZip></span>) <br>
-    Contains all image files <br>
-</p>
-
-<p>
     <a href="/index.sqlite3.zip">/index.sqlite3.zip</a> (<span id=sizeSqliteZip></span>) <br>
     Contains index of items in SQLite database <br>
 </p>
