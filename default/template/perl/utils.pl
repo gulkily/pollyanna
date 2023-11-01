@@ -2775,10 +2775,17 @@ sub ProcessTextFile { # $file ; add new text file to index
 } # ProcessTextFile()
 
 sub AttachLogToItem { # $itemHash, $result, $runStart, $runFinish ; attaches log to item
+# sub AttachFile {
 # sub AttachRunLog {
 # sub AttachCompileLog {
 # sub AddRunLog {
 # sub AddCompileLog {
+	my $globalFeatureFlag = GetConfig('setting/admin/perl/attach_log_to_item');
+	if (!$globalFeatureFlag) {
+		WriteLog('AttachLogToItem: attach_log_to_item is FALSE, returning; caller = ' . join(',', caller));
+		return '';
+	}
+
 	my $itemHash = shift;
 	my $result = shift;
 	my $runStart = shift;
