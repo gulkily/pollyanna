@@ -88,8 +88,14 @@ sub MakeDataZips {
 		}
 
 		if ($zipExists) {
-			system("zip -qr $HTMLDIR/image.tmp.zip $HTMLDIR/image/");
-			rename("$HTMLDIR/image.tmp.zip", "$HTMLDIR/image.zip");
+			if (GetConfig('setting/zip/image')) {
+				system("zip -qr $HTMLDIR/image.tmp.zip $HTMLDIR/image/"); #image.zip
+				rename("$HTMLDIR/image.tmp.zip", "$HTMLDIR/image.zip");
+				#system("zip -qr $HTMLDIR/image.tmp.zip $HTMLDIR/image/"); #image.zip
+				#rename("$HTMLDIR/image.tmp.zip", "$HTMLDIR/image.zip");
+			} else {
+				#WriteLog('MakeDataZips: warning: GetConfig("setting/zip/image") was FALSE; caller = ' . join(',', caller));
+			}
 
 			system("zip -qr $HTMLDIR/txt.tmp.zip $HTMLDIR/txt/ $HTMLDIR/chain.log");
 			rename("$HTMLDIR/txt.tmp.zip", "$HTMLDIR/txt.zip");
