@@ -78,9 +78,19 @@ route.php: look for $validRoutes and add "example" to the list
 
 handle_not_found.php: add to $validMakePageNames
 
-5) ???
+5) add dialog version of the page, if it's going to be linked from the menu:
 
-6) profit
+5a) add GetExampleDialog() to dialog/example.pl
+
+5b) add to validDialogs in pages.pl
+
+5c) add to validDialogs in route.php
+
+5d) add handler in pages.pl -D
+
+6) ???
+
+7) profit
 
 ===
 
