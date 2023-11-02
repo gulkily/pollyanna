@@ -9,6 +9,8 @@ sub GetQueryAsDialog { # $query, $title, $columns, \%param ; returns dialog with
 # sub GetDialogFromQuery {
 # sub GetQueryFromDialog {
 
+# $param{'id'} = dialog id
+
 # runs specified query and returns it as a dialog using GetResultSetAsDialog()
 # note: GetResultSetAsDialog() called below has some special conditions for GetAttributesDialog()
 #todo this should report query error
