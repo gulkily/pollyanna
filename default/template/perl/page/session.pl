@@ -37,6 +37,8 @@ sub GetSessionPage { # returns session page
 		$requirementsMessage = GetDialogX('js or php is required for profiles to work');
 	}
 
+	my $introText = trim(GetDialogX(GetString('page_intro/session'), 'Introduction'));
+
 	my $html =
 		GetPageHeader('session') .
 		GetTemplate('html/maincontent.template') .
@@ -44,6 +46,7 @@ sub GetSessionPage { # returns session page
 		GetKeychainDialog() .
 		GetQueryAsDialog('session', 'ActiveSessions') .
 		GetQuerySqlDialog('session') .
+		$introText .
 		GetPageFooter('session')
 	;
 
