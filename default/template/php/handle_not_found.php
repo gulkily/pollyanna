@@ -395,7 +395,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 						# ok
 					}
 				} else {
-					if (GetConfig('setting/admin/php/regrow_404_fork')) {
+					if (GetConfig('setting/admin/php/regrow_404_fork')) { # placeholder page
 						if ($canPlaceholder) {
 							$pid = pcntl_fork();
 							if ($pid == -1) {
