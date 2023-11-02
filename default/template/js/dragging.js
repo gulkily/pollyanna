@@ -409,6 +409,21 @@ function GetParentDialog (el) {
 	return '';
 } // GetParentDialog()
 
+function DialogIsVisible (el) {
+	if (el) {
+		while (el) {
+			elDisplay = el.style.display;
+			//alert('DEBUG: DialogIsVisible: el = ' + el.tagName + ', elDisplay = ' + elDisplay);
+			if (elDisplay == 'none') {
+				return 0;
+			}
+			el = el.parentElement;
+		}
+		return 1;
+	}
+	return 0;
+} // DialogIsVisible()
+
 function SetContainingDialogActive (ths) { // sets active dialog based on control which received focus
 //setfocus
 	if (ths) {
