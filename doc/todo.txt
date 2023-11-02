@@ -1,3 +1,58 @@
+Reference found where even-sized list expected at ./config/template/perl/utils.pl line 2838.
+
+
+
+1698874799.99864 Deep recursion on subroutine "main::IndexFile" at ./config/template/perl/utils.pl line 2830.
+Deep recursion on subroutine "main::IndexTextFile" at /home/wsl/pollyanna/config/template/perl/index_file.pl line 133.
+Deep recursion on subroutine "main::AttachLogToItem" at /home/wsl/pollyanna/config/template/perl/index_text_file.pl line 1011.
+^C
+
+
+
+2023-11-01 17:36:37: (mod_fastcgi.c.451) FastCGI-stderr:PHP Fatal error:  Uncaught TypeError: preg_match(): Argument #2 ($subject) must be of type string, array given in /home/wsl/pollyanna/html/post.php:236
+
+
+if (GetConfig('setting/admin/php/post/handle_browser_test') && isset($comment) && $comment) {
+	if (preg_match('/(E[0-9]{13})\W+(E[0-9]{13})/', $comment, $browserTestMatches)) { # line 236
+		if (isset($browserTestMatches[1]) && isset($browserTestMatches[2])) {
+			if ($_GET) {
+				$comment .= "\n\n";
+				foreach($_GET as $getName => $getValue) {
+					if ($getName == 'comment') {
+						# skip, it's already added
+					}
+					else {
+						$comment .= $getName . ": " . $getValue . "\n";
+					}
+				}
+				$comment .= "\n\n" . '#BrowserTest';
+			}
+		}
+	}
+}
+
+
+
+
+
+
+how to import images
+	background: text is pushed to the other server with a GET request
+	this is not possible with most images
+	easy alternative:
+		request target server to pull it from source server
+		concept: pull request
+			if
+				label = pull
+				and there is a url in the item
+			then
+				pull the url
+				and index it
+		implementation:
+			token_defs.pl:
+				add pull token
+					do not look at 'verify' for reference, it is an old implementation method
+
 refactor idea:
 	./default/theme --> ./module
 	./default/template --> ./module/default
