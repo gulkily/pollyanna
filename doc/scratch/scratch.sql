@@ -1,3 +1,25 @@
+WITH RECURSIVE ApprovalHierarchy AS (
+  -- Initial query to get items labeled 'approve'
+  SELECT il.file_hash AS file_hash
+  FROM item_label il
+  WHERE il.label = 'approve'
+
+  UNION ALL
+
+  -- Recursive query to get items connected through item_parent
+  SELECT ip.item_hash AS file_hash
+  FROM item_parent ip
+  JOIN ApprovalHierarchy ah ON ip.parent_hash = ah.file_hash
+)
+
+-- Final query to select all items in the hierarchy
+SELECT DISTINCT file_hash
+FROM ApprovalHierarchy;
+
+
+
+
+
 					SELECT
         				file_hash,
         				add_timestamp,

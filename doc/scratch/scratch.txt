@@ -1,3 +1,14 @@
+	if (1) {
+		#my $replyStack = WalkReplyTree($file{'file_hash'});
+		my $replyStack = WalkComments($file{'file_hash'});
+		$replyStack = HtmlEscape($replyStack);
+		#$txtIndex .= GetDialogX($replyStack, 'ReplyStack');
+	}
+
+
+
+
+
 # skip_index_text - skips IndexTextFile() call
 # skip_index_image - skips IndexImageFile() call
 # skip_index_html - skips IndexHtmlFile() call
