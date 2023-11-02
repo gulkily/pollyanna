@@ -1783,6 +1783,12 @@ while (my $arg1 = shift @foundArgs) {
 					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/help.html', $dialog);
 				}
+				elsif ($makeDialogArg eq 'session') {
+					require_once('page/profile.pl');
+					my $dialog = GetSessionDialog();
+					WriteMessage("-D $makeDialogArg\n");
+					PutHtmlFile('dialog/session.html', $dialog);
+				}
 				elsif ($makeDialogArg eq 'welcome') {
 					my $dialog = GetSimpleDialog('welcome');
 					WriteMessage("-D $makeDialogArg\n");
