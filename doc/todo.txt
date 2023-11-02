@@ -1,3 +1,8 @@
+Inbox dialog should have id=
+	looks like there is also a bug with colspan= value missing in GetDialogX() in php version
+
+`hike refresh` should look for new orphaned config/ files
+
 Reference found where even-sized list expected at ./config/template/perl/utils.pl line 2838.
 
 
