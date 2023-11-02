@@ -3,6 +3,11 @@
 use strict;
 use warnings;
 
+sub GetSessionDialog {
+	#todo
+	return GetProfileDialog();
+}
+
 sub GetProfileDialog {
 # sub GetProfileForm {
 	my $profileWindowContents = GetTemplate('html/form/profile.template');
@@ -18,7 +23,7 @@ sub GetProfileDialog {
 
 	my $profileWindow = GetDialogX(
 		$profileWindowContents,
-		'Profile',
+		'Session',
 	);
 
 	return $profileWindow;
