@@ -1,3 +1,57 @@
+sub WalkComments { # $fileHash, $currentStack ; walks up parent comments, combining the series of responses into one flat text file, with timestamps, separators between items, and user names
+# sub ThreadSummaryUpwardsFromChildComment {
+# takes a comment and walks up parent comments,
+#combining the series of responses into one flat text file,
+#with timestamps, separators between items, and user names
+#recursively implemented
+
+	my $fileHash = shift;
+	my $currentStack = shift;
+
+	if (!$fileHash) {
+		WriteLog('WalkComments: warning: $fileHash is FALSE; caller = ' . join(',', caller));
+		return '';
+	}
+
+	if (!$currentStack) {
+		$currentStack = '';
+	}
+
+	if (!IsItem($fileHash)) {
+		WriteLog('WalkComments: warning: $fileHash failed sanity check; caller = ' . join(',', caller));
+		return '';
+	}
+
+	my $message = GetItemDetokenedMessage($fileHash);
+
+	if (!$message) {
+		WriteLog('WalkComments: warning: $message is FALSE; caller = ' . join(',', caller));
+		return '';
+	}
+
+	$currentStack = $message . "\n---\n" . $currentStack;
+
+	#my $parentHash = DBGetItemAttributeValue($fileHash, 'parent_hash');
+	my $parentHash = SqliteGetValue("SELECT parent_hash FROM item WHERE hash = '$fileHash' LIMIT 1");
+
+	if (!$parentHash) {
+		WriteLog('WalkComments: warning: $parentHash is FALSE; caller = ' . join(',', caller));
+		return $currentStack;
+	} else {
+		return WalkComments($parentHash, $currentStack);
+	}
+}
+
+
+
+
+#for author_replies GetAuthorReplies:
+	#if ($dialog) {
+	#	$dialog = AddAttributeToTag($dialog, 'table', 'class', 'Inbox');
+	#}
+
+
+
 
 #sub RunPyItem {
 ## sub RunFile {
