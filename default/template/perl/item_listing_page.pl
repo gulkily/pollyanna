@@ -17,7 +17,7 @@ while (my $argFound = shift) {
 
 require_once('pagination_links.pl');
 
-sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialog_list), $pageNumber ;
+sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, image_gallery), $pageNumber ;
 # sub GetListingPage {
 # sub MakeListingPage {
 # sub GetAuthorsPage {
@@ -95,6 +95,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 	if (GetConfig('setting/html/page_intro') && $pageQuery =~ m/[^\s]+/) {
 		# $pageQuery does not have any spaces, so it's a page name, like 'top' or 'read' or 'tags' or 'labels'
 		# page_info/
+		# sub GetPageIntro {
 		my $pageDescription = GetStringNoFallback('page_intro/' . $pageQuery);
 		if ($pageDescription) {
 			$pageDescription = str_replace("\n", "<br>\n", $pageDescription);
@@ -218,7 +219,7 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 # sub MakeListingPages {
 	my $pageQuery = shift; # example: 'chain', 'select ...'
 	# if it has no spaces, a template lookup is attmpted in e.g. template/query/chain
-	my $pageMode = shift; # example: dialog_list, 'full_items', 'image_gallery'
+	my $pageMode = shift; # example: 'dialog_list', 'full_items', 'image_gallery',
 	my $refParams = shift; # reference to %params hash
 	# example: $params{'query'} (overrides $pageQuery, but not the page name)
 	# example: $params{'query_params'} reference to query's params
