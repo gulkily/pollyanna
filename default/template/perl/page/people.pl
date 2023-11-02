@@ -42,8 +42,13 @@ sub GetPeoplePage {
 
 	my $queryTextDialog = GetQuerySqlDialog('people');
 
+	my $pageIntro = GetString('page_intro/people');
+	$pageIntro = str_replace('Authors page', '<a href="/authors.html">Authors page</a>', $pageIntro);
+	my $pageIntroDialog = trim(GetDialogX($pageIntro, 'Introduction'));
+
 	$html =
 		GetPageHeader('people') .
+		$pageIntroDialog .
 		$people .
 		$queryTextDialog .
 		'<hr>' .
