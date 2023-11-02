@@ -962,7 +962,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						$printedNotice = str_replace('$hashSetting', $hashSetting, $printedNotice);
 						#$printedNotice
 
-						$printedNotice = '<span class=advanced>' . GetDialogX($printedNotice, 'Information', '', '', '') . '</span>';
+						$printedNotice = '<span class=advanced>' . AddAttributeToTag(GetDialogX($printedNotice, 'Information', '', '', ''), 'table', 'id', 'Information') . '</span>';
 
 						if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
 							#$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onmousedown', 'this.style.zIndex = ++window.draggingZ;');
@@ -1585,7 +1585,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			$html = '<meta http-equiv=refresh content=5>';
 			$html = '</head>';
 			$html = '<body bgcolor="#808080" text="#000000" onclick="if (this.style && this.style.display) { this.style.display=\'none\'; }">';
-			$html .= '<center><table bgcolor="#808080" border=10 bordercolor="#c0c0c0" width=99%><tr><td align=center valign=middle>';
+			$html .= '<center><table class=dialog bgcolor="#808080" border=10 bordercolor="#c0c0c0" width=99%><tr><td align=center valign=middle>';
 			$html .= '<h2>System Message: <br>Engine requires attention.</h2>';
 			$html .= '<h1>Please forgive inconvenience. <br>Remain calm.</h1>';
 			$html .= '<hr>';
