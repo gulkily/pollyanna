@@ -4,18 +4,19 @@ use strict;
 use warnings;
 use 5.010;
 
-sub GetDialogListDialog {
+sub GetPageMapDialog {
 # sub GetDialogsDialog {
+# sub GetDialogListDialog {
 # sub dialogslist {
 # sub dialogslistdialog {
 # sub DetDialogList {
 # sub GetDialogMenu {
-	WriteLog('GetDialogListDialog()');
+	WriteLog('GetPageMapDialog()');
 
-	my $dialogContent = GetTemplate('html/widget/dialog_list.template');
+	my $dialogContent = GetTemplate('html/widget/page_map.template');
 	my $dialog = GetDialogX($dialogContent, 'PageMap');
 
 	return $dialog;
-} # GetDialogListDialog()
+} # GetPageMapDialog()
 
 1;

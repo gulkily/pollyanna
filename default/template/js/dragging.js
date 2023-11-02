@@ -945,13 +945,14 @@ function HideDialog (dialog) { // takes dialog element as reference
 } // HideDialog()
 
 function UpdateDialogList () {
-// pagemap dialog list
+// PageMap pagemap dialog list
 // pagemap.js
 // dialoglist.js
 // function DialogListDialog () {
 // function UpdateListDialog () {
 // dialog_list.template
-// #todo put this in a separate template that doesn't get injected unless dialog_list_dialog is on
+// page_map.template
+// #todo put this in a separate template that doesn't get injected unless html/page_map is on
 
 	var lstDialog = document.getElementById('lstDialog');
 	if (lstDialog) {
