@@ -106,8 +106,9 @@ function ProcessNewComment ($comment, $replyTo) { // saves new comment to .txt f
 // 			file_put_contents($fileHtmlPath, $commentHtmlTemplate);
 		}
 
-		if (GetConfig('setting/admin/php/post/add_task') {
-			SqliteQueryBasic("INSERT INTO task(task_type, task_name, task_param, touch_time, priority) VALUES('index', 'index', '$filePathNew', " . time() . ", 1);");
+		if (GetConfig('setting/admin/php/post/add_task')) {
+			$addTaskQuery = "INSERT INTO task(task_type, task_name, task_param, touch_time, priority) VALUES('index', 'index', '$filePathNew', strftime('%s', 'now'), 1)"; #todo fix this
+			SqliteQueryBasic($addTaskQuery);
 		}
 		if (GetConfig('admin/php/post/index_file_on_post') && isset($filePathNew)) { # ProcessNewComment()
 			WriteLog('ProcessNewComment: index_file_on_post TRUE');
