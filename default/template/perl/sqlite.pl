@@ -15,6 +15,15 @@ while (my $argFound = shift) {
 }
 
 sub GetSqliteDbName {
+# sub GetIndexPath {
+# sub GetDatabase {
+# sub GetDatabasePath {
+# sub GetDatabaseFilename {
+# sub GetDbFilename {
+# sub GetDbPath {
+# sub GetDbName {
+# sub GetSqliteDbName {
+
 	state $cacheDir = GetDir('cache');
 	state $cacheVersion = GetMyCacheVersion();
 	my $SqliteDbName = "$cacheDir/$cacheVersion/index.sqlite3"; # path to sqlite db
