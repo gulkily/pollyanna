@@ -945,6 +945,7 @@ sub GetNextPreviousDialog {
 	$params{'no_heading'} = 1;
 	$params{'no_status'} = 1;
 	$params{'no_no_results'} = 1;
+	$params{'id'} = 'Chain';
 
 	return GetQueryAsDialog($query, 'Chain', '', \%params);
 } # GetNextPreviousDialog()
