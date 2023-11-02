@@ -585,7 +585,7 @@ if (isset($comment) && $comment) {
 if (isset($filePath) && $filePath) {
 	WriteLog('post.php: $filePath = ' . ($filePath ? $filePath : 'FALSE') . '; index_file_on_post = ' . GetConfig('admin/php/post/index_file_on_post'));
 } else {
-	WriteLog('post.php: warning: $filePath is FALSE');
+	WriteLog('post.php: warning: $filePath is FALSE; index_file_on_post = ' . GetConfig('admin/php/post/index_file_on_post'));
 }
 
 WriteLog('post.php: about to look for post.php; `pwd` = ' . `pwd`);
