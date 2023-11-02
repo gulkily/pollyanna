@@ -40,6 +40,7 @@ fi
 if [ $1 = stats ] # hike stats
 	then
 		echo text files: `find html/txt -type f -name '*.txt' | wc -l`
+		echo image files: `find html/image -type f | wc -l`
 		echo item table: `sqlite3 ./cache/b/index.sqlite3 "select count(*) from item"`
 		echo chain log: `wc -l html/chain.log`
 		echo space usage: `du -sh .`
