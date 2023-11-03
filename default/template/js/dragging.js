@@ -409,6 +409,21 @@ function GetParentDialog (el) {
 	return '';
 } // GetParentDialog()
 
+function DialogIsVisible (el) {
+	if (el) {
+		while (el) {
+			elDisplay = el.style.display;
+			//alert('DEBUG: DialogIsVisible: el = ' + el.tagName + ', elDisplay = ' + elDisplay);
+			if (elDisplay == 'none') {
+				return 0;
+			}
+			el = el.parentElement;
+		}
+		return 1;
+	}
+	return 0;
+} // DialogIsVisible()
+
 function SetContainingDialogActive (ths) { // sets active dialog based on control which received focus
 //setfocus
 	if (ths) {
@@ -468,6 +483,8 @@ function ReopenDialogs () {
 } // ReopenDialogs()
 
 function DraggingCascade () {
+// function CascadeDialogs () {
+// function CascadeAll () {
 	//alert('DEBUG: DraggingCascade()');
 	
 	var titlebarHeight = 0;
@@ -574,7 +591,7 @@ function DraggingInitDialog (el, doPosition) {
 			// cool
 		}
 	} else {
-		//alert('DEBUG: DraggingInitDialog: warning: elId is false 2' + elements[i].innerHTML);
+		//alert('DEBUG: DraggingInitDialog: warning: elId is false 2');
 	}
 //
 	//alert('DEBUG: DraggingInitDialog: finished');
@@ -847,56 +864,87 @@ function GetDialogId (win) { // returns dialog id (based on id= or title bar cap
 	return '';
 } // GetDialogId()
 
-function SpotlightDialog (dialogId) {
+function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was clicked
+// pagemap, page map,
+// <!-- dialoglist.js
 // should actually be called ToggleDialog()
 	//alert(dialogId);
 	var dialog = document.getElementById(dialogId);
 	//alert('DEBUG: SpotlightDialog(' + dialogId + ',' + dialog + ')');
+
+	/* #todo
+			titlebarHeight = 30;
+
+							curTop += titlebarHeight;
+							curLeft += titlebarHeight;
+
+		var curTop = 55;
+		var curLeft = 5;
+	*/
+
 	if (dialog) {
+		//alert('DEBUG: DialogIsVisible(dialog):' + DialogIsVisible(dialog));
 
-		// #todo if dialog itself has class=advanced, remove it
-		//alert(dialog.className);
-		// but also, move upwards, and check that any spans it's inside of have class=advanced, remove advanced from the class names of those spans
-		var element = dialog;
-		while (element.parentElement) {
-			//alert(element.tagName + ',' + element.className);
-			if (element.className == 'advanced') {
-				//alert('advanced found');
-				element.className = '';
-				if (element.style.display == 'none') {
-					element.style.display = '';
+		if (DialogIsVisible(dialog)) {
+			//alert('DEBUG: SpotlightDialog: DialogIsVisible(dialog) was TRUE');
+
+			dialog.style.display = 'none';
+			t.style.opacity = "100%"; // #todo classes
+		} else {
+			// #todo if dialog itself has class=advanced, remove it
+			//alert('DEBUG: SpotlightDialog: dialog.className = ' + dialog.className);
+			// but also, move upwards, and check that any spans it's inside of have class=advanced, remove advanced from the class names of those spans
+			var element = dialog;
+			while (element.parentElement) {
+				//alert('DEBUG: SpotlightDialog: element.tagName + element.className = ' + element.tagName + ',' + element.className);
+				if (element.className == 'advanced') {
+					//alert('advanced found');
+					element.className = '';
+					if (element.style.display == 'none') {
+						element.style.display = '';
+					}
+					ShowAdvanced(1);
+					// #todo multiple class names
 				}
-				ShowAdvanced(1);
-				// #todo multiple class names
-			}
-			if (element.className == 'admin') {
-				//alert('admin found');
-				element.className = '';
-				if (element.style.display == 'none') {
-					element.style.display = '';
+				if (element.className == 'admin') {
+					//alert('admin found');
+					element.className = '';
+					if (element.style.display == 'none') {
+						element.style.display = '';
+					}
+					ShowAdvanced(1);
+					// #todo multiple class names
 				}
-				ShowAdvanced(1);
-				// #todo multiple class names
+				if (element.style && element.style.display && element.style.display == 'none') {
+					element.style.display = '';
+					ShowAdvanced(1);
+				}
+				element = element.parentElement;
 			}
-			element = element.parentElement;
+
+			//if (event && event.clientX && event.clientY) {
+			//	//alert(event.clientX);
+			//	//alert(event.clientY);
+			//	dialog.style.left = clientX + 'px';
+			//	dialog.style.top = clientY + 'px';
+			//} else {
+			//	//alert();
+			//}
+
+			SetActiveDialog(dialog);
+
+			//console.log(dialog.style);
+			// dialog.style.top = event.clientX;
+			// dialog.style.left = event.clientY;
+			// there is an issue with this for some reason
+			var dialogTop = (event.clientY - 5) + 'px';
+			var dialogLeft = (event.clientX - 5) + 'px';
+
+			dialog.style.top = dialogTop;
+			dialog.style.left = dialogLeft;
+
+			t.style.opacity = "80%"; // #todo classes
 		}
-
-		//if (event && event.clientX && event.clientY) {
-		//	//alert(event.clientX);
-		//	//alert(event.clientY);
-		//	dialog.style.left = clientX + 'px';
-		//	dialog.style.top = clientY + 'px';
-		//} else {
-		//	//alert();
-		//}
-
-		SetActiveDialog(dialog);
-
-		//console.log(dialog.style);
-		// dialog.style.top = event.clientX;
-		// dialog.style.left = event.clientY;
-		dialog.style.top = '200px';
-		dialog.style.left = '200px';
 
 	} else {
 		//alert('DEBUG: SpotlightDialog: warning: dialog not found');
@@ -926,10 +974,14 @@ function HideDialog (dialog) { // takes dialog element as reference
 } // HideDialog()
 
 function UpdateDialogList () {
+// PageMap pagemap dialog list
+// pagemap.js
+// dialoglist.js
 // function DialogListDialog () {
 // function UpdateListDialog () {
 // dialog_list.template
-// #todo put this in a separate template that doesn't get injected unless dialog_list_dialog is on
+// page_map.template
+// #todo put this in a separate template that doesn't get injected unless html/page_map is on
 
 	var lstDialog = document.getElementById('lstDialog');
 	if (lstDialog) {
@@ -938,6 +990,7 @@ function UpdateDialogList () {
 //			var gt = unescape('%3E');
 //			var listContent = '<form' + gt; // id=formListDialog name=formListDialog
 			var listContent = ''; // id=formListDialog name=formListDialog
+			var comma = '';
 			for (var iDialog = 0; iDialog < allOpenDialogs.length; iDialog++) {
 				var dialogTitle = GetDialogTitle(allOpenDialogs[iDialog]);
 				var dialogId = GetDialogId(allOpenDialogs[iDialog]);
@@ -950,13 +1003,32 @@ function UpdateDialogList () {
 					}
 				}
 
+				if (dialogId == 'PageMap') {
+					continue;
+				}
+
 				var gt = unescape('%3E');
 
 				if (24 < dialogTitle.length) {
 					dialogTitle = dialogTitle.substr(0, 24);
 				}
+				if (dialogTitle == '') {
+					//alert('DEBUG: UpdateDialogList: warning: dialogTitle is empty');
+					dialogTitle = dialogId || 'Untitled';
+				}
 
-				listContent = listContent + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { return SpotlightDialog(\'' + dialogId + '\'); }"' + gt + dialogTitle + '</a' + gt + '<br' + gt;
+				/* #todo https://stackoverflow.com/questions/70956665/how-do-i-break-html-lists-in-columns-honoring-alphabetical-order-in-column-dire */
+
+				var displayTitle = '<b' + gt + dialogTitle.substring(0, 1) + '</b' + gt + dialogTitle.substring(1);
+				if (DialogIsVisible(allOpenDialogs[iDialog])) {
+					listContent = listContent + comma + '<a style="opacity: 80%" href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { return SpotlightDialog(\'' + dialogId + '\', this); }"' + gt + displayTitle + '</a' + gt;
+					// #todo classes and createElement
+				} else {
+					listContent = listContent + comma + '<a style="opacity: 100%" href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { return SpotlightDialog(\'' + dialogId + '\', this); }"' + gt + displayTitle + '</a' + gt;
+					// #todo classes and createElement
+				}
+				comma = ' ; ';
+
 				//listContent = listContent + '<label for="c' + dialogId + '"' + gt + '<input type=checkbox name="c' + dialogId + '" id="c' + dialogId + '"' + gt + dialogId + '</label' + gt + '<br' + gt;
 				lstDialog.innerHTML = lstDialog.innerHTML + iDialog;
 

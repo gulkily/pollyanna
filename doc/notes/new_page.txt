@@ -1,4 +1,4 @@
-Creating a new page
+Creating a new page new_page.txt newpage.txt
 
 this process could use some improvement but it's not too bad
 
@@ -30,13 +30,16 @@ sub GetExamplePage { # returns example page
 	require_once('dialog/query_as_dialog.pl');
 	#todo if this fails, it is only a warning in log.log/
 
-	$html =
+	my $html =
 		GetPageHeader('example') .
+		GetTemplate('html/maincontent.template') .
 		GetQueryAsDialog('example') .
 		GetQueryAsDialog('example') .
 		GetPageFooter('example');
 
 	# add InjectJs(...) #todo
+
+	return $html;
 }
 
 return 1;
@@ -55,6 +58,7 @@ vim default/template/query/example.sql
 makepage.pl: add to valid pages (search for @validPages or @simplePages)
 
 TEST 1:
+	ATTENTION: REMEMBER TO RUN `hike refresh` AFTER YOU MAKE THIS CHANGE
 	when you fist go to http://localhost:2784/example.html, it will show a page missing
 	but after you run `hike page example`, the page should work
 
@@ -68,15 +72,25 @@ IF YOUR QUERY HAS ERRORS:
 
 4) add to valid routes filter/sanity check in route.php:
 
-route.php: look for validRoutes and add "example" to the list
+route.php: look for $validRoutes and add "example" to the list
 
 4a) add to valid make page names filter/sanity check in makepage.pl:
 
 handle_not_found.php: add to $validMakePageNames
 
-5) ???
+5) add dialog version of the page, if it's going to be linked from the menu:
 
-6) profit
+5a) add GetExampleDialog() to dialog/example.pl
+
+5b) add to validDialogs in pages.pl
+
+5c) add to validDialogs in route.php
+
+5d) add handler in pages.pl -D
+
+6) ???
+
+7) profit
 
 ===
 

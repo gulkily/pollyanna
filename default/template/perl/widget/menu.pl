@@ -338,6 +338,7 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
 		if ($menuName ne 'help' && $menuName ne 'people') {
+			$dialogName = trim($dialogName);
 			$menuItem = AddAttributeToTag(
 				$menuItem,
 				'a ',

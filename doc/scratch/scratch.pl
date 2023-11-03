@@ -1,3 +1,99 @@
+sub WalkComments { # $fileHash, $currentStack ; walks up parent comments, combining the series of responses into one flat text file, with timestamps, separators between items, and user names
+# sub ThreadSummaryUpwardsFromChildComment {
+# takes a comment and walks up parent comments,
+#combining the series of responses into one flat text file,
+#with timestamps, separators between items, and user names
+#recursively implemented
+
+	my $fileHash = shift;
+	my $currentStack = shift;
+
+	if (!$fileHash) {
+		WriteLog('WalkComments: warning: $fileHash is FALSE; caller = ' . join(',', caller));
+		return '';
+	}
+
+	if (!$currentStack) {
+		$currentStack = '';
+	}
+
+	if (!IsItem($fileHash)) {
+		WriteLog('WalkComments: warning: $fileHash failed sanity check; caller = ' . join(',', caller));
+		return '';
+	}
+
+	my $message = GetItemDetokenedMessage($fileHash);
+
+	if (!$message) {
+		WriteLog('WalkComments: warning: $message is FALSE; caller = ' . join(',', caller));
+		return '';
+	}
+
+	$currentStack = $message . "\n---\n" . $currentStack;
+
+	#my $parentHash = DBGetItemAttributeValue($fileHash, 'parent_hash');
+	my $parentHash = SqliteGetValue("SELECT parent_hash FROM item WHERE hash = '$fileHash' LIMIT 1");
+
+	if (!$parentHash) {
+		WriteLog('WalkComments: warning: $parentHash is FALSE; caller = ' . join(',', caller));
+		return $currentStack;
+	} else {
+		return WalkComments($parentHash, $currentStack);
+	}
+}
+
+
+
+
+#for author_replies GetAuthorReplies:
+	#if ($dialog) {
+	#	$dialog = AddAttributeToTag($dialog, 'table', 'class', 'Inbox');
+	#}
+
+
+
+
+#sub RunPyItem {
+## sub RunFile {
+## sub RunPyFile {
+## sub RunPythonFile {
+#
+#	my $item = shift;
+#
+#	WriteLog("RunPyItem($item)");
+#
+#	my $runLog = 'run_log/' . $item;
+#
+#	my $filePath = DBGetItemFilePath($item);
+#	my $fileBinaryPath = $filePath;
+#
+#	if (-e $fileBinaryPath) {
+#		if ($fileBinaryPath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
+#			$fileBinaryPath = $1;
+#			`chmod +x $fileBinaryPath`;
+#			my $runStart = time();
+#			my $result = `$fileBinaryPath`;
+#			my $runFinish = time();
+#
+#			DBAddItemAttribute($item, 'run_start', $runStart);
+#			DBAddItemAttribute($item, 'run_finish', $runFinish);
+#
+#			PutCache($runLog, $result);
+#			return 1;
+#		} else {
+#			WriteLog('RunPyItem: warning: $fileBinaryPath failed sanity check');
+#			return '';
+#		}
+#	} else {
+#		PutCache($runLog, 'error: run failed, file not found: ' . $fileBinaryPath);
+#		return 1;
+#	}
+#} # RunPyItem()
+
+
+
+
+
 	if ($address eq '/write.html' && GetConfig('setting/admin/js/translit')) {
 		#todo make it more clear how to change this
 		$address = '/frame.html';

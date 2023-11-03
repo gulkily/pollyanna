@@ -5,7 +5,12 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFile() based on extension ;
+sub IndexFile { # $file, \%flags ; calls IndexTextFile() or IndexImageFile() based on extension ;
+# \%flags should be either FALSE or a reference to a hash of flags
+# flags:
+# skip_organize - skips OrganizeFile() call
+# skip_pages - skips ReplaceMenuInAllPages() call and all other html output
+
 # returns TRUE when success, FALSE when failure
 # sub IndexItem {
 
@@ -125,7 +130,7 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 			$indexSuccess = 1;
 			#todo this should return file hash
 		} else {
-			$indexSuccess = IndexTextFile($file); #IndexFile()
+			$indexSuccess = IndexTextFile($file, \%flags); #IndexFile()
 			if (!$indexSuccess) {
 				WriteLog('IndexFile: warning: IndexTextFile() returned FALSE');
 				$indexSuccess = 0;
@@ -285,7 +290,7 @@ sub IndexFile { # $file, $flagsReference ; calls IndexTextFile() or IndexImageFi
 	if ($indexSuccess) {
 		PutCache('indexed/' . $indexSuccess, $file);
 
-		if (GetConfig('setting/admin/index/rewrite_menu_after_index')) {
+		if (GetConfig('setting/admin/index/rewrite_menu_after_index') && !$flags{'skip_pages'}) {
 			# rewrites all the menubars in all the existing pages
 			require_once('pages.pl');
 			ReplaceMenuInAllPages();

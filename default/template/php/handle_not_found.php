@@ -171,7 +171,8 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'/network.html', # ilyag
 			'/people.html', #ilyag
 			'/menu.html',
-			'/queue.html'
+			'/queue.html',
+			'/session.html'
 		);
 
 		if (in_array($path, $validMakePageNames)) {
@@ -248,6 +249,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 
 ########### DIALOGS BEGIN
 		if (substr($path, 0, 8) == '/dialog/') {
+			# $validDialogs handle_not_found.php
 			$basicDialogs = array(
 				'threads',
 				'stats',
@@ -272,7 +274,8 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 				'access',
 				'annoyances',
 				'labels',
-				'topics'
+				'topics',
+				'session'
 			); # /dialog/
 
 			foreach ($basicDialogs as $basicDialog) {
@@ -392,7 +395,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 						# ok
 					}
 				} else {
-					if (GetConfig('setting/admin/php/regrow_404_fork')) {
+					if (GetConfig('setting/admin/php/regrow_404_fork')) { # placeholder page
 						if ($canPlaceholder) {
 							$pid = pcntl_fork();
 							if ($pid == -1) {

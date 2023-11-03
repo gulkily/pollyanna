@@ -1,4 +1,70 @@
 
+// SpotlightDialog :
+
+		if (t) {
+			//alert('DEBUG: SpotlightDialog: t found');
+			if (GetParentDialog(t)) {
+				if (window.GetPrefs && window.SetPrefs) {
+					if (!GetPrefs('draggable')) {
+						SetPrefs('draggable', '1');
+					}
+				}
+				//alert('DEBUG: SpotlightDialog: GetParentDialog(t) found');
+				var tParent = GetParentDialog(t);
+				if (tParent && tParent.getClientBoundingRect) {
+					//alert('DEBUG: SpotlightDialog: tParent.getClientBoundingRect found');
+					var tRect = tParent.getClientBoundingRect();
+					var tTop = tRect.top;
+					var tLeft = tRect.left;
+					var tHeight = tRect.height;
+					var tWidth = tRect.width;
+					var tBottom = tTop + tHeight;
+					var tRight = tLeft + tWidth;
+
+					var dRect = dialog.getClientBoundingRect();
+					var dTop = dRect.top;
+					var dLeft = dRect.left;
+					var dHeight = dRect.height;
+					var dWidth = dRect.width;
+					var dBottom = dTop + dHeight;
+					var dRight = dLeft + dWidth;
+
+					var dialogTop = (tTop - 5) + 'px';
+					var dialogLeft = (tLeft - 5) + 'px';
+
+					dialog.style.top = dialogTop;
+					dialog.style.left = dialogLeft;
+
+					//alert('DEBUG: SpotlightDialog: dialogTop = ' + dialogTop + ', dialogLeft = ' + dialogLeft);
+				} else {
+					// #todo
+				}
+			} else {
+				// #todo
+			}
+		} else {
+			//alert('DEBUG: SpotlightDialog: t not found');
+
+			var dialogTop = (event.clientY - 5) + 'px';
+			var dialogLeft = (event.clientX - 5) + 'px';
+
+			dialog.style.top = dialogTop;
+			dialog.style.left = dialogLeft;
+		}
+
+		/////////////////////////////////////
+
+		var dialogTop = (event.clientY - 5) + 'px';
+		var dialogLeft = (event.clientX - 5) + 'px';
+
+		dialog.style.top = dialogTop;
+		dialog.style.left = dialogLeft;
+
+
+
+
+
+
 		if (
 			t.textContent &&
 			(

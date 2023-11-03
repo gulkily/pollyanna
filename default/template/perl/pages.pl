@@ -1450,6 +1450,7 @@ require_once('dialog/settings.pl');
 require_once('dialog/reply.pl');
 
 sub GetQuerySqlDialog { # $pageQuery, $titleDialog ; displays query for user to see
+# sub GetQueryAsDialog { # GetQuerySqlDialog {
 # sub GetQueryDialog { # sub GetQuerySqlDialog {
 # sub GetQueryListing {
 # sub DisplayQueryDialog {
@@ -1781,6 +1782,12 @@ while (my $arg1 = shift @foundArgs) {
 					my $dialog = GetSimpleDialog('help');
 					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/help.html', $dialog);
+				}
+				elsif ($makeDialogArg eq 'session') {
+					require_once('page/profile.pl');
+					my $dialog = GetSessionDialog();
+					WriteMessage("-D $makeDialogArg\n");
+					PutHtmlFile('dialog/session.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'welcome') {
 					my $dialog = GetSimpleDialog('welcome');

@@ -1,7 +1,7 @@
-<!-- dialog_list.template -->
+<!-- page_map.template -->
 <fieldset>
     <noscript>*</noscript>
     <span id=lstDialog>
     </span>
 </fieldset>
-<!-- / dialog_list.template -->
+<!-- / page_map.template -->

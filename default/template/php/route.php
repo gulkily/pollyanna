@@ -962,7 +962,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						$printedNotice = str_replace('$hashSetting', $hashSetting, $printedNotice);
 						#$printedNotice
 
-						$printedNotice = '<span class=advanced>' . GetDialogX($printedNotice, 'Information', '', '', '') . '</span>';
+						$printedNotice = '<span class=advanced>' . AddAttributeToTag(GetDialogX($printedNotice, 'Information', '', '', ''), 'table', 'id', 'Information') . '</span>';
 
 						if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
 							#$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onmousedown', 'this.style.zIndex = ++window.draggingZ;');
@@ -1235,8 +1235,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 		#if ($path == '/profile.html' || $path == '/welcome.html' || $path == '/desktop.html') {
 		#if ($path) { #todo #bug
-		if (index($html, 'frmProfile') != -1) {
-			// special handling for frmProfile (usually in /profile.html, /welcome.html, or /desktop.html
+		if ((index($html, 'frmProfile') != -1) || (index($html, 'frmSession') != -1)) { //
+			// special handling for frmProfile (usually in /profile.html, /session.html, /welcome.html, or /desktop.html
 			WriteLog('route.php: frmProfile handler activated');
 
 			// we need cookies
@@ -1274,8 +1274,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 				$html = str_replace('<span id=lblFingerprint></span>', "<span id=lblFingerprint>$fingerprint</span>", $html);
 
 				$html = str_replace(
-					'<span id=spanUsernameProfileLink></span>',
-					'<span id=spanUsernameProfileLink><a href="/author/' .
+					'<span id=spanUsernameSessionLink></span>',
+					'<span id=spanUsernameSessionLink><a href="/author/' .
 						$cookie .
 						'/index.html" onclick="if (window.sharePubKey) { return sharePubKey(this); }">' .
 						$handle .
@@ -1300,12 +1300,12 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			} else {
 
 				$html = str_replace(
-					'<span id=spanUsernameProfileLink></span>',
+					'<span id=spanUsernameSessionLink></span>',
 					'<span><a href="/profile.html">Register or Sign In</a></span>',
 					$html
 				);
 			}
-		} # /profile.html
+		} # /session.html # /profile.html
 
 		if (GetConfig('setting/admin/php/route_insert_cookie_fingerprint')) {
 			if (index($html, '1337133713371337') != -1) { # shadowme
@@ -1585,7 +1585,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			$html = '<meta http-equiv=refresh content=5>';
 			$html = '</head>';
 			$html = '<body bgcolor="#808080" text="#000000" onclick="if (this.style && this.style.display) { this.style.display=\'none\'; }">';
-			$html .= '<center><table bgcolor="#808080" border=10 bordercolor="#c0c0c0" width=99%><tr><td align=center valign=middle>';
+			$html .= '<center><table class=dialog bgcolor="#808080" border=10 bordercolor="#c0c0c0" width=99%><tr><td align=center valign=middle>';
 			$html .= '<h2>System Message: <br>Engine requires attention.</h2>';
 			$html .= '<h1>Please forgive inconvenience. <br>Remain calm.</h1>';
 			$html .= '<hr>';

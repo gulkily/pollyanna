@@ -1,3 +1,78 @@
+
+Sessions <br>
+<br>
+Sessions allow you to log in without having to enter a password or any other credentials! <br>
+This is done by using session cookie, a client-stored private key, or a client fingerprint. <br>
+<br>
+In every case, you have the option to remain anonymous or to use a name of your choosing. <br>
+<br>
+Unless you choose to reveal it of your own volition, your private information is not required. <br>
+This includes your phone number, email address, name, or any other personally identifiable information. <br>
+<br>
+We hope you find this place welcoming and safe.
+
+
+If you are new to the concept of a cryptographic web of trust, here is a simple explanation:
+
+    Everyone has two cryptographic keys: a public key and a private key.
+    Your public key is like a mailbox address. Anyone can send you a message encrypted with your public key, but only you can decrypt it with your private key.
+    Your private key is like the key to your mailbox. Only you should have it, and you should never share it with anyone.
+
+In a cryptographic web of trust, people sign each other's public keys. This means that they are vouching for the identity of the person who owns the key.
+
+When you verify someone's public key, you are essentially saying, "I trust that this key belongs to the person who says it does."
+
+The more people who sign a person's public key, the more trustworthy it is. This is because it is unlikely that a large group of people would all be fooled by the same scammer.
+
+If you have any questions about the cryptographic web of trust, please do not hesitate to ask.
+
+Here is a simpler explanation for laypeople who don't know what a hash, a private key, or a graph are:
+
+Imagine a group of friends. Each friend has a unique secret code. When a friend wants to send a message to another friend, they encrypt the message with the recipient's secret code. Only the recipient can decrypt the message with their secret code.
+
+In a cryptographic web of trust, people verify each other's identities by signing each other's secret codes. This means that they are vouching for the identity of the person who owns the code.
+
+When you verify someone's secret code, you are essentially saying, "I trust that this code belongs to the person who says it does."
+
+The more people who sign someone's secret code, the more trustworthy it is. This is because it is unlikely that a large group of people would all be fooled by the same scammer.
+
+I hope this helps!
+
+
+
+
+	if (1) {
+		#my $replyStack = WalkReplyTree($file{'file_hash'});
+		my $replyStack = WalkComments($file{'file_hash'});
+		$replyStack = HtmlEscape($replyStack);
+		#$txtIndex .= GetDialogX($replyStack, 'ReplyStack');
+	}
+
+
+
+
+
+# skip_index_text - skips IndexTextFile() call
+# skip_index_image - skips IndexImageFile() call
+# skip_index_html - skips IndexHtmlFile() call
+# skip_index_zip - skips IndexZipFile() call
+# skip_index_cpp - skips IndexCppFile() call
+# skip_index_py - skips IndexPyFile() call
+# skip_index_pl - skips IndexPerlFile() call
+# skip_index_video - skips IndexVideoFile() call
+# skip_index_audio - skips IndexAudioFile() call
+# skip_index_pdf - skips IndexPdfFile() call
+# skip_index_doc - skips IndexDocFile() call
+# skip_index_xls - skips IndexXlsFile() call
+# skip_index_ppt - skips IndexPptFile() call
+# skip_index_ods - skips IndexOdsFile() call
+# skip_index_odt - skips IndexOdtFile() call
+# skip_index_odp - skips IndexOdpFile() call
+# skip_index_odb - skips IndexOdbFile() call
+# skip_index_odg - skips IndexOdgFile() call
+
+
+
 					CONSENT NOTICE! <br>
 					<br>
 					Attention! You are about to share information about your device. <br>

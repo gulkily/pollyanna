@@ -1459,12 +1459,13 @@ function GetItemPlaceholderPage ($comment, $hash, $fileUrlPath, $filePath) { # g
 	WriteLog('$themeName = ' . $themeName);
 
 	{ // color values
-		$colorBackground = GetConfig('theme/' . $themeName . '/color/background');
-		$colorWindow = GetConfig('theme/' . $themeName . '/color/window');
-		$colorText = GetConfig('theme/' . $themeName . '/color/text');
-		$colorLink = GetConfig('theme/' . $themeName . '/color/text');
-		$colorVlink = GetConfig('theme/' . $themeName . '/color/text');
+		$colorBackground = GetConfig('html/color/background');
+		$colorWindow = GetConfig('html/color/window');
+		$colorText = GetConfig('html/color/text');
+		$colorLink = GetConfig('html/color/link_text');
+		$colorVlink = GetConfig('html/color/vlink_text');
 
+		WriteLog('GetItemPlaceholderPage: $colorBackground = ' . $colorBackground);
 		WriteLog('GetItemPlaceholderPage: $colorWindow = ' . $colorWindow);
 		WriteLog('GetItemPlaceholderPage: $colorText = ' . $colorText);
 
@@ -1826,3 +1827,22 @@ function GetItemHtmlLink ($hash, $linkCaption, $hashAnchor) { # $hash, [link cap
 //
 //     return $txtIndex;
 // } # GetPageHeader()
+
+function SqliteQueryBasic ($query) {
+    if (!class_exists('SQLite3') || !extension_loaded('sqlite3')) {
+        // The SQLite3 class or the SQLite extension is not available.
+        // You can issue a warning or handle this situation as needed.
+        // For example, you can log a message or throw an exception.
+        WriteLog('SqliteQueryBasic: warning: SQLite3 class or SQLite extension is not available!');
+        return '';
+    }
+
+	#todo more sanity
+
+	$CACHEDIR = GetDir('cache');
+	$DB = "$CACHEDIR/b/index.sqlite3";
+
+	$db = new SQLite3($DB);
+	$result = $db->query($query);
+	$db->close();
+} # SqliteQueryBasic()

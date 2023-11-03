@@ -26,6 +26,7 @@
 			if (window.SetPrefs) {
 				SetPrefs('show_advanced', 0);
 				SetPrefs('admin', 0);
+				SetPrefs('beginner', 0);
 			}
 			if (window.ShowAdvanced) {
 				ShowAdvanced(0, 0);

@@ -1,5 +1,5 @@
 <!-- form/profile.template -->
-<form action="/profile.html" name=frmProfile class=frmProfile>
+<form action="/session.html" name=frmProfile class=frmProfile>
 	<fieldset id=fldRegistration>
 		<p id=pRegButton>
 			<input id=btnRegister

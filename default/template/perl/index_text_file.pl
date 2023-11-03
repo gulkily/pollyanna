@@ -7,7 +7,10 @@ use utf8;
 
 require_once('token_defs.pl');
 
-sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
+sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into database
+# sub IndexText {
+# $file can be 'flush' as a special directive to flush all query queues
+# \%flags should be either FALSE or a reference to a hash of flags
 # Reads a given $file, parses it, and puts it into the index database
 # If ($file eq 'flush'), flushes any queued queries
 # Also sets appropriate task entries
@@ -583,21 +586,21 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 
 							#$message = str_replace($tokenFound{'recon'}, $newMessage, $message);
 							if ($tokenFound{'token'} eq 'parent') {
-# make an exception for the parent tag, otherwise we remove the >> link
+								# make an exception for the parent tag, otherwise we remove the >> link
 								#$message = str_replace($tokenFound{'recon'}, 'hi', $message);
 							} else {
 								$message = str_replace($tokenFound{'recon'}, $tokenFound{'message'}, $message);
 							}
-# this would be nice but doesn't work atm
-#							if (index($tokenFound{'message'}, '$') != -1) {
-#								if ($tokenFound{'token'} eq 'parent') {
-#									$message = str_replace($tokenFound{'recon'}, 'hi', $message);
-#								} else {
-#									$message = str_replace($tokenFound{'recon'}, $tokenFound{'message'}, $message);
-#								}
-#							} else {
-#								$message = str_replace($tokenFound{'recon'}, $tokenFound{'message'}, $message);
-#							}
+							# this would be nice but doesn't work atm
+							#							if (index($tokenFound{'message'}, '$') != -1) {
+							#								if ($tokenFound{'token'} eq 'parent') {
+							#									$message = str_replace($tokenFound{'recon'}, 'hi', $message);
+							#								} else {
+							#									$message = str_replace($tokenFound{'recon'}, $tokenFound{'message'}, $message);
+							#								}
+							#							} else {
+							#								$message = str_replace($tokenFound{'recon'}, $tokenFound{'message'}, $message);
+							#							}
 
 							#$message = str_replace($tokenFound{'recon'}, $tokenFound{'message'}, $message);
 
@@ -1005,6 +1008,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										if (!$titleCandidate) {
 											$titleCandidate = '[declined: #' . $tokenFound{'param'} . ']';
 										}
+										#AttachLogToItem($fileHash, 'declined: ' . $tokenFound{'param'} . '; reason: ' . $approveReason);
 										if (GetConfig('admin/index/create_system_tags')) {
 											DBAddLabel($fileHash, 0, 'declined');
 											DBAddLabel('flush');
@@ -1204,7 +1208,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 		}
 	}
 
-	if (GetConfig('admin/index/expire_html_when_indexing')) {
+	if (GetConfig('admin/index/expire_html_when_indexing') && !$flags{'skip_pages'}) {
 		#uncache
 		if ($authorKey) {
 			RemoveHtmlFile('author/' . $authorKey . '/index.html');

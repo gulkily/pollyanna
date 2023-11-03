@@ -1,11 +1,11 @@
 <!-- identity.template -->
 <p>
-	<span id=spanUsernameProfileLink><a href="/profile.html">Profile</a></span>
+	<span id=spanUsernameSessionLink><a href="/session.html">Session</a></span>
 </p>
 <p>
-	<span><a href="/profile.html">Register</a></span>
+	<span><a href="/session.html">Register</a></span>
 </p>
 <p>
-	<span><a href="/profile.html">Sign In</a></span>
+	<span><a href="/session.html">Sign In</a></span>
 </p>
 <!-- / identity.template -->

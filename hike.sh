@@ -5,20 +5,20 @@
 # run `hike help` to see available commands
 
 
-#echo ==================
-#echo Rejoice always
-#echo Pray without ceasing
-#echo Give thanks in all circumstances
-#echo ==================
+echo ==================
+echo Rejoice always
+echo Pray without ceasing
+echo Give thanks in all circumstances
+echo ==================
 echo "pollyanna" `git rev-parse HEAD | cut -c 1-8`
 echo ==================
 
 #Matthew 5:37
 #Let what you say be simply ‘Yes’ or ‘No’; anything more than this comes from evil.
 
-alias hike='./hike.sh'
-alias clean='hike clean'
-alias build='hike build'
+alias hike='bash hike.sh'
+alias clean='bash hike.sh clean'
+alias build='bash hike.sh build'
 
 if [ ! $1 ]
 	then
@@ -37,9 +37,14 @@ if [ $1 = test ]
 		echo testing 1 2 3
 fi
 
-if [ $1 = stats ]
+if [ $1 = stats ] # hike stats
 	then
 		echo text files: `find html/txt -type f -name '*.txt' | wc -l`
+		echo image files: `find html/image -type f | wc -l`
+		echo item table: `sqlite3 ./cache/b/index.sqlite3 "select count(*) from item"`
+		echo chain log: `wc -l html/chain.log`
+		echo space usage: `du -sh .`
+		#echo chain table: `count(*) from item_attribute where attribute = 'chain_sequence';` entries
 		echo ==================
 fi
 

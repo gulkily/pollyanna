@@ -116,8 +116,9 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		# example: good
 		#todo redo and sanity check
 
+		#todo sub GetLabelLink {
 		my $tagColor = GetStringHtmlColor($fieldValue);
-		my $link = "/tag/" . $fieldValue . ".html";
+		my $link = "/label/" . $fieldValue . ".html";
 		my $linkText = '<font color="' . $tagColor . '">#</font>' . $fieldValue;
 		$fieldValue = RenderLink($link, $linkText);
 	}
