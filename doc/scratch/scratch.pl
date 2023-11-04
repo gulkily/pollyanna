@@ -1,3 +1,81 @@
+
+#
+#	if (!$itemHash) {
+#		WriteLog('AttachLogToItem: warning: $itemHash is false');
+#		return;
+#	}
+#
+#	if (!$logText) {
+#		WriteLog('AttachLogToItem: warning: $logText is false');
+#		return;
+#	}
+#
+#	if (!IsItem($itemHash)) {
+#		WriteLog('AttachLogToItem: warning: $itemHash failed sanity check');
+#		return;
+#	}
+#
+#	if ($logText =~ m/^([0-9a-zA-Z\.\-_\/\s]+)$/) {
+#		$logText = $1;
+#	} else {
+#		WriteLog('AttachLogToItem: warning: $logText failed sanity check');
+#		return;
+#	}
+#
+#	my $logTextHash = GetFileHash($logText);
+#
+#	if (!$logTextHash) {
+#		WriteLog('AttachLogToItem: warning: $logTextHash is false');
+#		return;
+#	}
+#
+#	if (!IsItem($logTextHash)) {
+#		WriteLog('AttachLogToItem: warning: $logTextHash failed sanity check');
+#		return;
+#	}
+#
+#	my $logTextPath = GetPathFromHash($logTextHash);
+#
+#	if (!$logTextPath) {
+#		WriteLog('AttachLogToItem: warning: $logTextPath is false');
+#		return;
+#	}
+#
+#	if (!-e $logTextPath) {
+#		WriteLog('AttachLogToItem: warning: $logTextPath does not exist');
+#		return;
+#	}
+#
+#	my $logTextMessage = GetFile($logTextPath);
+#
+#	if (!$logTextMessage) {
+#		WriteLog('AttachLogToItem: warning: $logTextMessage is false');
+#		return;
+#	}
+#
+#	my $itemMessage = GetItemDetokenedMessage($itemHash);
+#
+#	if (!$itemMessage) {
+#		WriteLog('AttachLogToItem: warning: $itemMessage is false');
+#		return;
+#	}
+#
+#	$itemMessage .= "\n\n" . $logTextMessage;
+#
+#	my $itemMessageHash = GetFileHash($itemMessage);
+#
+#	if (!$itemMessageHash) {
+#		WriteLog('AttachLogToItem: warning: $itemMessageHash is false');
+#		return;
+#	}
+#
+#	if (!IsItem($itemMessageHash)) {
+#		WriteLog('AttachLogToItem: warning: $itemMessageHash failed sanity
+
+
+###### ADD STUFF ABOVE HERE ######
+
+
 sub WalkComments { # $fileHash, $currentStack ; walks up parent comments, combining the series of responses into one flat text file, with timestamps, separators between items, and user names
 # sub ThreadSummaryUpwardsFromChildComment {
 # takes a comment and walks up parent comments,

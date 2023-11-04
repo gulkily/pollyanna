@@ -1540,6 +1540,66 @@ sub IsUrl { # add basic isurl()
 	return 1;
 } # IsUrl()
 
+sub RelativizeUrls { # $content, $fileProvided
+# sub RelativizeLinks {
+
+	WriteLog('RelativizeUrls(...); caller = ' . join(',', caller));
+
+	my $content = shift;
+	my $fileProvided = shift;
+
+	# only the following *exact* formats are converted
+	# thus it is important to maintain this exact format throughout the html and js templates
+	# src="/
+	# href="/
+	# .src = '/
+	# .location = '/
+
+	# first we determine how many levels deep our current file is
+	# we do this by counting slashes in $file
+	my $count = ($fileProvided =~ s/\//\//g) + 1;
+
+	# then we build the path prefix.
+	# the same prefix is used on all links
+	# this can be done more efficiently on a per-link basis
+	# but most subdirectory-located files are of the form /aa/bb/aabbcc....html anyway
+	my $subDir;
+	if ($count == 1) {
+		$subDir = './';
+	} else {
+		if ($count < 1) {
+			WriteLog('PutHtmlFile: relativize_urls: sanity check failed, $count is < 1');
+		} else {
+			# $subDir = '../' x ($count - 1);
+			$subDir = str_repeat('../', ($count - 1));
+		}
+	}
+
+	# here is where we do substitutions
+	# it may be wiser to use str_replace() here
+	#todo test this more
+
+	# html
+	$content =~ s/src="\//src="$subDir/ig;
+	$content =~ s/href="\//href="$subDir/ig;
+	$content =~ s/background="\//background="$subDir/ig;
+	$content =~ s/action="\//action="$subDir/ig;
+	$content =~ s/src=\//src=$subDir/ig;
+	$content =~ s/href=\//href=$subDir/ig;
+	$content =~ s/background=\//background=$subDir/ig;
+	$content =~ s/action=\//action=$subDir/ig;
+
+	# javascript
+	$content =~ s/\.src = '\//.src = '$subDir/ig;
+	$content =~ s/\.location = '\//.location = '$subDir/ig;
+
+	# css
+	$content =~ s/url\(\/\//url=$subDir/ig;
+
+	return $content;
+
+}
+
 sub PutHtmlFile { # $file, $content ; writes content to html file, with special rules; parameters: $file, $content
 # sub WriteHtmlFile {
 
@@ -1677,53 +1737,8 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 	# convert urls to relative if $relativizeUrls is set
 	if ($relativizeUrls == 1) {
 		WriteLog('PutHtmlFile: $relativizeUrls == 1, relativizing urls');
-		# only the following *exact* formats are converted
-		# thus it is important to maintain this exact format throughout the html and js templates
-		# src="/
-		# href="/
-		# .src = '/
-		# .location = '/
+		$content = RelativizeUrls($content, $fileProvided);
 
-		# first we determine how many levels deep our current file is
-		# we do this by counting slashes in $file
-		my $count = ($fileProvided =~ s/\//\//g) + 1;
-
-		# then we build the path prefix.
-		# the same prefix is used on all links
-		# this can be done more efficiently on a per-link basis
-		# but most subdirectory-located files are of the form /aa/bb/aabbcc....html anyway
-		my $subDir;
-		if ($count == 1) {
-			$subDir = './';
-		} else {
-			if ($count < 1) {
-				WriteLog('PutHtmlFile: relativize_urls: sanity check failed, $count is < 1');
-			} else {
-				# $subDir = '../' x ($count - 1);
-				$subDir = str_repeat('../', ($count - 1));
-			}
-		}
-
-		# here is where we do substitutions
-		# it may be wiser to use str_replace() here
-		#todo test this more
-
-		# html
-		$content =~ s/src="\//src="$subDir/ig;
-		$content =~ s/href="\//href="$subDir/ig;
-		$content =~ s/background="\//background="$subDir/ig;
-		$content =~ s/action="\//action="$subDir/ig;
-		$content =~ s/src=\//src=$subDir/ig;
-		$content =~ s/href=\//href=$subDir/ig;
-		$content =~ s/background=\//background=$subDir/ig;
-		$content =~ s/action=\//action=$subDir/ig;
-
-		# javascript
-		$content =~ s/\.src = '\//.src = '$subDir/ig;
-		$content =~ s/\.location = '\//.location = '$subDir/ig;
-
-		# css
-		$content =~ s/url\(\/\//url=$subDir/ig;
 	} # if ($relativizeUrls)
 
 	# fill in colors
@@ -2844,83 +2859,6 @@ sub AttachLogToItem { # $itemHash, $result, $runStart, $runFinish ; attaches log
 		return \%return;
 	}
 } # AttachLogToItem()
-
-
-#
-#	if (!$itemHash) {
-#		WriteLog('AttachLogToItem: warning: $itemHash is false');
-#		return;
-#	}
-#
-#	if (!$logText) {
-#		WriteLog('AttachLogToItem: warning: $logText is false');
-#		return;
-#	}
-#
-#	if (!IsItem($itemHash)) {
-#		WriteLog('AttachLogToItem: warning: $itemHash failed sanity check');
-#		return;
-#	}
-#
-#	if ($logText =~ m/^([0-9a-zA-Z\.\-_\/\s]+)$/) {
-#		$logText = $1;
-#	} else {
-#		WriteLog('AttachLogToItem: warning: $logText failed sanity check');
-#		return;
-#	}
-#
-#	my $logTextHash = GetFileHash($logText);
-#
-#	if (!$logTextHash) {
-#		WriteLog('AttachLogToItem: warning: $logTextHash is false');
-#		return;
-#	}
-#
-#	if (!IsItem($logTextHash)) {
-#		WriteLog('AttachLogToItem: warning: $logTextHash failed sanity check');
-#		return;
-#	}
-#
-#	my $logTextPath = GetPathFromHash($logTextHash);
-#
-#	if (!$logTextPath) {
-#		WriteLog('AttachLogToItem: warning: $logTextPath is false');
-#		return;
-#	}
-#
-#	if (!-e $logTextPath) {
-#		WriteLog('AttachLogToItem: warning: $logTextPath does not exist');
-#		return;
-#	}
-#
-#	my $logTextMessage = GetFile($logTextPath);
-#
-#	if (!$logTextMessage) {
-#		WriteLog('AttachLogToItem: warning: $logTextMessage is false');
-#		return;
-#	}
-#
-#	my $itemMessage = GetItemDetokenedMessage($itemHash);
-#
-#	if (!$itemMessage) {
-#		WriteLog('AttachLogToItem: warning: $itemMessage is false');
-#		return;
-#	}
-#
-#	$itemMessage .= "\n\n" . $logTextMessage;
-#
-#	my $itemMessageHash = GetFileHash($itemMessage);
-#
-#	if (!$itemMessageHash) {
-#		WriteLog('AttachLogToItem: warning: $itemMessageHash is false');
-#		return;
-#	}
-#
-#	if (!IsItem($itemMessageHash)) {
-#		WriteLog('AttachLogToItem: warning: $itemMessageHash failed sanity
-
-
-###### ADD STUFF ABOVE HERE ######
 
 sub EnsureDirsThatShouldExist { # creates directories expected later
 # sub EnsureDirs {
