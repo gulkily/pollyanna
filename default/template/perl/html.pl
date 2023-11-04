@@ -349,4 +349,25 @@ sub RemoveHtmlEnvelope { # $html ; removes html envelope
 	return $html;
 }
 
+sub GetFileLink { # \%file, [$linkTitle]
+# $file{'file_path'}
+# $file{'item_title'}
+
+	my $fileHashRef = shift;
+	my %file = %{$fileHashRef};
+
+	my $linkTitle = shift;
+	if (!$linkTitle) {
+		$linkTitle = $file{'item_title'};
+	}
+
+	my $HTMLDIR = GetDir('html');
+	my $fileWebPath = str_replace($HTMLDIR, '', $file{'file_path'});
+	my $linkContent = HtmlEscape($linkTitle);
+
+	my $link = '<a href="' . $fileWebPath . '">' . $linkContent . '</a>';
+
+	return $link;
+} # GetFileLink()
+
 1;
