@@ -9,8 +9,6 @@
 <tr><td>
 <p>
 	<b>Your message has been received!</b><br>
-	<br>
-	You are seeing this placeholder page because the server is still processing your submission.<br>
 </p>
 <hr>
 <p>
@@ -24,6 +22,8 @@
 <p>
 	<b>Technical explanation:</b><br>
 	<br>
+	You are seeing this placeholder page because the server is still processing your submission.<br>
+	<br>
 	The submission has been saved to the server, and you can view its text file. <br>
 	However, something has stalled the process of creating the full page, <br>
 	which is why you are seeing this placeholder page. <br>
@@ -32,8 +32,15 @@
 	which can happen intentionally, if post/index_file_on_post = 0, or <br>
 	if something fails in the full page generation. <br>
 	<br>
-	If you are developing, it probably means that index.pl failed to run.
-</p>
+	If you see this page, you can run `perl -T index.pl [filename]` to index the file, <br>
+	or `perl -T index.pl --all` to index all files. <br>
+	<br>
+	If you see this page, there may be something wrong with the hashing, such as <br>
+	an item's hash changing after it is indexed, or a file being renamed incorrectly. <br>
+	<br>
+	As a workaround, you can run `hike index` to reindex all files, or `hike index <filename>` <br>
+	to index one file. <br>
+
 <hr>
 <p>
 	<a href="/">Return Home</a>
