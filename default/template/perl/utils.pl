@@ -2335,6 +2335,8 @@ sub CheckForInstalledVersionChange {
 
 		PutConfig('current_version', $currVersion);
 
+		IndexFile($newChangelogFile);
+
 		return $currVersion;
 	} else {
 		return 0;
