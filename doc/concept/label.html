@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 7.6.2.1 (Windows)"/>
+	<meta name="created" content="2023-10-10T23:06:58.385000000"/>
+	<meta name="changed" content="2023-10-10T23:06:59.962000000"/>
+	<style type="text/css">
+		@page { size: 8.5in 11in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		strong { font-weight: bold }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><p><strong>Concept:</strong>
+Label</p>
+<p><strong>Purpose:</strong> To provide a way to attach labels to
+items in a secure and verifiable manner.</p>
+<p><strong>State:</strong> A label is an item that contains a
+reference to one or more parent items, which are the subjects of the
+label, and one or more labels. Labels are enclosed in a PGP enveloped
+and signed to match the public key of the user who created the label.</p>
+<p><strong>Actions:</strong></p>
+<ul>
+	<li><p style="margin-bottom: 0in">Create label: Creates a new label
+	and assigns it a hash. 
+	</p></li>
+	<li><p style="margin-bottom: 0in">Get label: Retrieves a label by
+	its hash. 
+	</p></li>
+	<li><p style="margin-bottom: 0in">Update label: Updates an existing
+	label. 
+	</p></li>
+	<li><p>Delete label: Deletes a label. 
+	</p></li>
+</ul>
+<p><strong>Operational Principle:</strong></p>
+<ul>
+	<li><p style="margin-bottom: 0in">Labels are identified by their
+	hash. 
+	</p></li>
+	<li><p style="margin-bottom: 0in">Labels contain a reference to one
+	or more parent items and one or more labels. 
+	</p></li>
+	<li><p>Labels are enclosed in a PGP enveloped and signed to match
+	the public key of the user who created the label. 
+	</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<p>A user could create a label for a public key to indicate that the
+public key is owned by a trusted friend. The label would contain a
+reference to the public key and a label indicating that the public
+key is trusted.</p>
+<p>A user could also create a label for a user post to indicate that
+the post is about a particular topic. The label would contain a
+reference to the user post and a label indicating the topic of the
+post.</p>
+<p>Labels can be used to categorize and organize items in a system.
+They can also be used to provide additional information about items.
+For example, a label could be used to indicate that an item is
+sensitive or confidential.</p>
+<p>The use of PGP enveloped and signed labels ensures that labels are
+secure and verifiable. Only the user who created a label can update
+or delete the label. Only users with the public key of the user who
+created a label can verify the label.</p>
+<p><strong>Benefits of the label concept:</strong></p>
+<ul>
+	<li><p style="margin-bottom: 0in">Labels provide a secure and
+	verifiable way to attach labels to items. 
+	</p></li>
+	<li><p style="margin-bottom: 0in">Labels can be used to categorize
+	and organize items in a system. 
+	</p></li>
+	<li><p style="margin-bottom: 0in">Labels can be used to provide
+	additional information about items. 
+	</p></li>
+	<li><p>Labels can be used to implement a variety of features, such
+	as access control, content moderation, and social networking. 
+	</p></li>
+</ul>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+</body>
+</html>

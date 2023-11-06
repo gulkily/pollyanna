@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 7.6.2.1 (Windows)"/>
+	<meta name="created" content="2023-10-11T10:40:32.544000000"/>
+	<meta name="changed" content="2023-10-26T23:13:43.199000000"/>
+	<style type="text/css">
+		@page { size: 8.5in 11in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		strong { font-weight: bold }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><p><strong>Concept:</strong>
+Chain</p>
+<p><strong>Purpose:</strong> To provide an auditable and validatable
+log of all posted items, using hashes and timestamps to ensure
+integrity and prevent tampering.</p>
+<p><strong>State:</strong> A chain is a linked list of items, where
+each item contains the following fields:</p>
+<ul>
+	<li><p style="margin-bottom: 0in">Hash of the item 
+	</p></li>
+	<li><p style="margin-bottom: 0in">Timestamp 
+	</p></li>
+	<li><p>Hash of the current line with the previous line (checksum) 
+	</p></li>
+</ul>
+<p><strong>Actions:</strong></p>
+<ul>
+	<li><p style="margin-bottom: 0in">Add item to chain: Adds an item
+	hash and timestamp to the chain. 
+	</p></li>
+	<li><p style="margin-bottom: 0in">Get item from chain: Retrieves an
+	item’s timestamp from the chain by its hash. 
+	</p></li>
+	<li><p>Get all items from chain: Retrieves all items from the chain
+	as sequence-hash-timestamp tuples. 
+	</p></li>
+</ul>
+<p><strong>Operational Principle:</strong></p>
+<ul>
+	<li><p style="margin-bottom: 0in">A chain is a linked list of items,
+	where each item contains a hash of the previous item in the list, as
+	well as a timestamp and a checksum of the current line with the
+	previous line. 
+	</p></li>
+	<li><p style="margin-bottom: 0in">To add an item to the chain, the
+	hash of the previous item in the list is calculated and stored in
+	the new item. The timestamp and checksum are also calculated and
+	stored in the new item. The new item is then added to the end of the
+	list. 
+	</p></li>
+	<li><p style="margin-bottom: 0in">To retrieve an item from the
+	chain, the hash of the item is used to find the item in the list. 
+	</p></li>
+	<li><p>To retrieve all items from the chain, the list is traversed
+	from beginning to end. 
+	</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<p>A new item is posted to the system. The hash of the item, the
+timestamp, and the checksum are calculated and stored in the item.
+The item is then added to the end of the chain.</p>
+<p>To verify the authenticity of an item, the hash of the item is
+calculated and compared to the hash of the item in the chain. The
+timestamp and checksum are also verified. If the hash, timestamp, and
+checksum all match, then the item is authentic.</p>
+<p><strong>Benefits of the chain concept:</strong></p>
+<ul>
+	<li><p style="margin-bottom: 0in">Chains provide an auditable and
+	validatable log of all posted items. 
+	</p></li>
+	<li><p style="margin-bottom: 0in">Chains can be used to detect and
+	prevent tampering with posted items. 
+	</p></li>
+	<li><p>Chains can be used to implement a variety of features, such
+	as version control and content provenance. 
+	</p></li>
+</ul>
+</body>
+</html>
