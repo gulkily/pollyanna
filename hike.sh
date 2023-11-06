@@ -162,9 +162,9 @@ if [ $1 = frontend ]
 		#todo every item in the menu should be built here
 fi
 
-if [ $1 = pages ]
+if [ $1 = pages ] # hike pages
 	then
-		perl -T ./config/template/perl/pages.pl --all
+		perl -T ./config/template/perl/pages.pl --queue
 		# should it be config? #todo
 fi
 
