@@ -897,17 +897,8 @@ function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was
 			var element = dialog;
 			while (element.parentElement) {
 				//alert('DEBUG: SpotlightDialog: element.tagName + element.className = ' + element.tagName + ',' + element.className);
-				if (element.className == 'advanced') {
+				if (element.className == 'advanced' || element.className == 'beginner' || element.className == 'admin') {
 					//alert('advanced found');
-					element.className = '';
-					if (element.style.display == 'none') {
-						element.style.display = '';
-					}
-					ShowAdvanced(1);
-					// #todo multiple class names
-				}
-				if (element.className == 'admin') {
-					//alert('admin found');
 					element.className = '';
 					if (element.style.display == 'none') {
 						element.style.display = '';
@@ -937,8 +928,8 @@ function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was
 			// dialog.style.top = event.clientX;
 			// dialog.style.left = event.clientY;
 			// there is an issue with this for some reason
-			var dialogTop = (event.clientY - 5) + 'px';
-			var dialogLeft = (event.clientX - 5) + 'px';
+			var dialogTop = (event.clientY - 35) + 'px';
+			var dialogLeft = (event.clientX - 15) + 'px';
 
 			dialog.style.top = dialogTop;
 			dialog.style.left = dialogLeft;
