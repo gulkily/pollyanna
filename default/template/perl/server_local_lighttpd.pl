@@ -125,6 +125,17 @@ sub FindBinPath { # $binName, $configPath ; tries to figure out local path for a
 } # FindBinPath()
 
 sub StartLighttpd { # run command to start local lighttpd instance
+# `hike.sh start` `hike start` `hike.sh start` `hike start` `hike.sh start` `hike start` `hike.sh start` `hike start`
+# `hike.sh start`                                                                        `hike.sh start` `hike start`
+# `hike.sh start`              if you're looking for the `hike start command             `hike.sh start` `hike start`
+# `hike.sh start`                          look here                                     `hike.sh start` `hike start`
+# `hike.sh start`                                                                        `hike.sh start` `hike start`
+# `hike.sh start` `hike start` `hike.sh start` `hike start` `hike.sh start` `hike start` `hike.sh start` `hike start`
+#
+#todo this should try to recover from `lighttpd` command being unavailable,
+# by looking for apt/yum/brew/etc
+# and offering to install lighttpd
+
 	WriteLog('StartLighttpd() BEGIN');
 	if (!-e './log') {
 		mkdir('./log');

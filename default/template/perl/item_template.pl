@@ -9,7 +9,7 @@ require_once('dialog.pl');
 
 sub GetItemTemplateBody {
 # sub FormatItem {
-# sub EscapeHtml {
+# sub EscapeHtml { # GetItemTemplateBody()
 # sub FormatHtml {
 # sub FormatAsHtml {
 # sub GetItemBody {

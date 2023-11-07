@@ -725,7 +725,7 @@ sub SqliteGetCount {
 	#todo params
 
 	my $queryText = SqliteGetNormalizedQueryString($query);
-	WriteLog('SqliteGetCount: $queryText = ' . $queryText);
+	WriteLog('SqliteGetCount: $queryText = ' . $queryText . '; caller = ' . join(',', caller));
 
 	my $queryItemCount = "SELECT COUNT(*) AS item_count FROM ($queryText) LIMIT 1";
 	my $rowCount = SqliteGetValue($queryItemCount);

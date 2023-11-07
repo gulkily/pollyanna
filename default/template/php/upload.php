@@ -118,7 +118,8 @@ if (!empty($_FILES['uploaded_file'])) {
 					WriteLog('$scriptDir = ' . $scriptDir);
 
 					if (GetConfig('admin/php/post/index_file_on_post') && $path) { # upload.php
-						// #todo still BROKEN
+						// #todo this should be its own feature flag, post/ is for post.php (and should be called this?)
+						// #todo still BROKEN sometimes
 						if ($pwd) {
 							WriteLog("cd $pwd");
 							WriteLog(`cd $pwd`);

@@ -1024,7 +1024,9 @@ sub MakeSystemPages {
 
 	{
 		# p.gif
-		WriteLog('making p.gif');
+		WriteLog('making p.gif'); # p.gif
+
+		#todo the gif file should be stored in default/res/
 
 		if (!-e './config/template/html/p.gif.template') {
 			if (-e 'default/template/html/p.gif.template') {
@@ -1338,7 +1340,7 @@ sub BuildTouchedPages { # $timeLimit, $startTime ; builds pages returned by DBGe
 #				# 404 pages and thsu lazy page gen
 #				if (GetConfig('admin/php/rewrite')) {
 #					# rewrite is also required for this to work
-#					if (GetConfig('admin/php/regrow_404_pages')) {
+#					if (GetConfig('admin/php/regrow_404_pages')) { # lazy_page_generation
 #						WriteLog('BuildTouchedPages: $isLazy conditions met, setting $isLazy = 1');
 #						$isLazy = 1;
 #					}
@@ -1760,6 +1762,7 @@ while (my $arg1 = shift @foundArgs) {
 					# /dialog/authors.html
 					# /dialog/people.html
 					# /dialog/threads.html
+					# /dialog/judge.html
 
 					my $dialogTitle = $makeDialogArg; #todo make nicer
 					my $dialog = GetQueryAsDialog($makeDialogArg, $dialogTitle);

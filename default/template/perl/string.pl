@@ -118,6 +118,7 @@ sub htmlspecialchars { # $text, encodes supplied string for html output
 } # htmlspecialchars()
 
 sub HtmlEscape { # encodes supplied string for html output
+# sub EscapeHtml { # HtmlEscape()
 	my $text = shift;
 
 	if (defined($text)) {

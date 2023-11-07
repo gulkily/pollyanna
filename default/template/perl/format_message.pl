@@ -158,7 +158,7 @@ sub ZipForWeb { # replaces some spaces with &nbsp; to preserve text-based layout
 } # ZipForWeb()
 
 sub TextartForWeb { # replaces some spaces with &nbsp; to preserve text-based layout for html display; $text
-	# sub EscapeHtml {
+	# sub EscapeHtml { # TextartForWeb()
 	# sub FormatHtml {
 	# sub FormatAsHtml {
 	my $text = shift;

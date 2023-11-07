@@ -372,7 +372,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 
 
 	# ITEM TEMPLATE
-	# item tempalte #searchable
+	# item template #searchable
 	# item body #searchable
 
 	my $addMavo = 0; #todo refactor
@@ -398,6 +398,8 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		#			my $imageLink = '';
 		#		}
 		#
+
+		#todo if it is item page, it should link to full image, not itself?
 		$itemTemplate = GetItemTemplate(\%file); # GetItemPage()
 	}
 	WriteLog('GetItemPage: child_count: ' . $file{'file_hash'} . ' = ' . $file{'child_count'});

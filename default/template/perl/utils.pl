@@ -535,6 +535,7 @@ sub MakePath { # $newPath ; ensures all subdirs for path exist
 } # MakePath()
 
 sub EnsureSubdirs { # $fullPath ; ensures that subdirectories for a file exist
+# sub EnsureDir {
 	# takes file's path as argument
 	# returns 0 for failure, 1 for success
 	my $fullPath = shift;

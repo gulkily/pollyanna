@@ -116,7 +116,7 @@ function ProcessNewComment ($comment, $replyTo) { // saves new comment to .txt f
 			$newFileHash = IndexTextFile($filePathNew); #doing it twice gets it unstuck sometimes
 				#todo fix this
 			if ($newFileHash) {
-				if (GetConfig('setting/admin/php/regrow_404_fork')) {
+				if (GetConfig('setting/admin/php/regrow_404_fork')) { # exception to MakePage()
 					#do not pre-make the page
 				} else {
 					MakePage($newFileHash);

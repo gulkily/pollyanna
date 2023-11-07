@@ -435,15 +435,15 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 
 				/* #todo
 				$command = 'timeout 5 ls';
-                $output = exec($command);
-                $return_code = $output[0];
+				$output = exec($command);
+				$return_code = $output[0];
 
-                if ($return_code == 124) {
-                  echo 'The command timed out.';
-                } else {
-                  echo 'The command completed successfully.';
-                }
-                */
+				if ($return_code == 124) {
+				  echo 'The command timed out.';
+				} else {
+				  echo 'The command completed successfully.';
+				}
+				*/
 
 				WriteLog("HandleNotFound: cd $pwd");
 				WriteLog('HandleNotFound: cd $pwd = ' . `cd $pwd`);
