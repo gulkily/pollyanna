@@ -554,6 +554,7 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 } # GetThemeAttribute()
 
 sub GetThemeColor { # returns theme color based on setting/theme
+# sub GetColor {
 	my $colorName = shift;
 	chomp $colorName;
 

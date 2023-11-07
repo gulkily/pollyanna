@@ -1139,6 +1139,7 @@ function GetThemeAttribute ($attributeName) { // returns a config overlay value 
 } # GetThemeAttribute()
 
 function GetThemeColor ($colorName) { // returns theme color based on setting/theme
+# function GetColor () {}
 	WriteLog('GetThemeColor: $colorName = ' . $colorName);
 	
 	if (GetConfig('html/monochrome')) { # GetThemeColor()
