@@ -49,6 +49,9 @@ function PasteEvent (e) {
 
 				// submit the form to begin upload process
 				form1.submit();
+
+				// #todo change page to loading indicator (but it should change back if returning to page)
+				//document.body.innerHTML = '<table border=0 cellpadding=5 cellspacing=5><tr valign=middle><td><img src=/loading.gif height=48 width=48></td><td><font size=7 face=arial>Meditate...</font></td></tr></table>';
 			}
 		}
 	}
