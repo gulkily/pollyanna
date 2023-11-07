@@ -100,8 +100,16 @@ sub MakeDataZips {
 			system("zip -qr $HTMLDIR/txt.tmp.zip $HTMLDIR/txt/ $HTMLDIR/chain.log");
 			rename("$HTMLDIR/txt.tmp.zip", "$HTMLDIR/txt.zip");
 
-			system("zip -qr $HTMLDIR/index.sqlite3.zip.tmp cache/" . GetMyCacheVersion() . "/index.sqlite3");
-			rename("$HTMLDIR/index.sqlite3.zip.tmp", "$HTMLDIR/index.sqlite3.zip");
+			{ #with zip
+				system("zip -qrj $HTMLDIR/index.sqlite3.zip.tmp cache/" . GetMyCacheVersion() . "/index.sqlite3");
+				rename("$HTMLDIR/index.sqlite3.zip.tmp", "$HTMLDIR/index.sqlite3.zip");
+			}
+
+			{ #without zip
+				#my $CACHEDIR = GetDir('cache');
+				#WriteLog('MakeDataZips: copy(' . "$CACHEDIR/b/index.sqlite3" . ', ' . "$HTMLDIR/index.sqlite3" . ')');
+				#copy("$CACHEDIR/b/index.sqlite3", "$HTMLDIR/index.sqlite3");
+			}
 
 			PutCache('touch/zip', GetTime());
 		} else {
