@@ -395,28 +395,10 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 						# ok
 					}
 				} else {
-					if (GetConfig('setting/admin/php/regrow_404_fork')) { # placeholder page
+					if (GetConfig('setting/admin/php/regrow_404_fork')) { # create placeholder page and fork
 						if ($canPlaceholder) {
-							$pid = pcntl_fork();
-							if ($pid == -1) {
-								// something went wrong
-							} elseif ($pid == 0) {
-								// continue
-							} else {
-								// print placeholder page and also return it
-
-								/* my */ $textColor = '#c0c0c0'; #todo
-								/* my */ $bodyColor = '#202020'; #todo
-								/* my */ $htmlPlaceholder = '<html><head><meta http-equiv="refresh" content="1"></head><body text="$textColor" bgcolor="$bodyColor">Meditate...</body></html>';
-								$htmlPlaceholder = str_replace('$textColor', $textColor, $htmlPlaceholder);
-								$htmlPlaceholder = str_replace('$bodyColor', $bodyColor, $htmlPlaceholder);
-
-								PutFile($path, $htmlPlaceholder);
-								print($htmlPlaceholder);
-
-								#todo ensure there is no caching, and at route.php too
-								exit;
-							}
+							WriteLog('HandleNotFound: $canPlaceholder was TRUE, calling ForkWithLoadingPage(); $path = ' . $path . '; $pagesPlArgument = ' . $pagesPlArgument);
+							ForkWithLoadingPage($path);
 						} else {
 							if (0) { // for debugging
 								print($path);

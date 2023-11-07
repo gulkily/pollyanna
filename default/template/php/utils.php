@@ -1829,6 +1829,44 @@ function GetItemHtmlLink ($hash, $linkCaption, $hashAnchor) { # $hash, [link cap
 //     return $txtIndex;
 // } # GetPageHeader()
 
+
+function ForkWithLoadingPage ($path) {
+	WriteLog('ForkWithLoadingPage(' . $path . ')');
+
+	$pid = pcntl_fork();
+	if ($pid == -1) {
+		// something went wrong
+	} elseif ($pid == 0) {
+		// continue
+	} else {
+		// print placeholder page and also return it
+
+		/* my */ $textColor = GetThemeColor('text'); #todo
+		/* my */ $bodyColor = GetThemeColor('background'); #todo
+
+		if (1) { # with spinner image, todo: check for /loading.gif exists
+			/* my */ $htmlPlaceholder = '<html><head><title>Loading...</title><meta http-equiv="refresh" content="1;"></head><body text="$textColor" bgcolor="$bodyColor"><table border=0 cellpadding=5 cellspacing=5><tr valign=middle><td><img src=/loading.gif height=48 width=48></td><td><font size=7 face=arial>Meditate...</font></td></tr></table></body></html>';
+		} else {
+			/* my */ $htmlPlaceholder = '<html><head><title>Loading...</title><meta http-equiv="refresh" content="1;"></head><body text="$textColor" bgcolor="$bodyColor">Meditate...</body></html>';
+		}
+
+		if (GetConfig('setting/admin/js/enable')) {
+			# this is necessary for at least safari 5.1.7
+			# maybe should even do it always regardless of js setting?
+			$htmlPlaceholder = AddAttributeToTag($htmlPlaceholder, 'body', 'onload', "setTimeout('window.location.reload()',900)");
+		}
+
+		$htmlPlaceholder = str_replace('$textColor', $textColor, $htmlPlaceholder);
+		$htmlPlaceholder = str_replace('$bodyColor', $bodyColor, $htmlPlaceholder);
+
+		PutFile($path, $htmlPlaceholder);
+		print($htmlPlaceholder);
+
+		#todo ensure there is no caching, and at route.php too
+		exit;
+	}
+} // ForkWithLoadingPage()
+
 function SqliteQueryBasic ($query) {
     if (!class_exists('SQLite3') || !extension_loaded('sqlite3')) {
         // The SQLite3 class or the SQLite extension is not available.
