@@ -693,7 +693,7 @@ sub ProcessAccessLog { # $logfile, $vhostParse ; reads an access log and writes 
 								$addedMessage .= "SHA512: $fileSha512\n";
 							}
 
-							if (GetConfig('setting/admin/access_log/write_addendum') && $addedMessage) {
+							if (GetConfig('setting/admin/access_log/write_addendum') && $addedMessage) { #todo does this still do anything?
 								$addedMessage = '#addendum' . "\n----- \n" . '>>' . $fileHash . "\n" . $addedMessage; #addendum
 
 								PutFile($addedFilename, $addedMessage);
@@ -711,7 +711,7 @@ sub ProcessAccessLog { # $logfile, $vhostParse ; reads an access log and writes 
 						}
 
 						if (GetConfig('admin/access_log/call_index')) {
-							WriteLog('access.pl: access_log_call_index is true, therefore IndexFile(' . $pathedFilename . ')');
+							WriteLog('ProcessAccessLog: access_log_call_index is true, therefore IndexFile(' . $pathedFilename . ')');
 							#IndexFile($pathedFilename);
 						}
 					}
