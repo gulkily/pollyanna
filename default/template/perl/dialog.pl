@@ -69,7 +69,8 @@ sub GetDialogX { # $body, $title, $headings, $status, $menu ; returns html with 
 		$id eq 'profile' ||
 		$id eq 'tags' ||
 		$id eq 'authors' ||
-		$id eq 'upload'
+		$id eq 'upload' ||
+		$id eq 'introduction'
 	) {
 		$param{'id'} = $id;
 	} else {
