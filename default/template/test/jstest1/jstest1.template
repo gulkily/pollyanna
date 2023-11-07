@@ -146,6 +146,11 @@
 			</p>
 
 			<p>
+				<input type=text name=txtWindowInnerHeight size=11>
+				window.innerHeight
+			</p>
+
+			<p>
 				<input type=text name=txtWindowXmlHttpRequest size=11>
 				window.XMLHttpRequest
 			</p>

@@ -59,6 +59,9 @@ function RunTest() {
 	//alert('DEBUG: Looking for window.document.body.textContent...');
 	document.frmTest.txtBodyTextContent.value = (!!window.document && !!window.document.body && !!window.document.body.textContent);
 
+	//alert('DEBUG: Looking for window.innerHeight...');
+	document.frmTest.txtWindowInnerHeight.value = (!!window && !!window.innerWidth);
+
 	//alert('DEBUG: Looking for window.XMLHttpRequest...');
 	document.frmTest.txtWindowXmlHttpRequest.value = !!window.XMLHttpRequest;
 
