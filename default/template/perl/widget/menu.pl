@@ -350,6 +350,7 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 	}
 
 	if (in_array($menuName, qw(threads tags authors active people new image topics labels))) {
+		WriteLog('GetMenuItem: counter: $menuName = ' . $menuName . '; caller = ' . join(',', caller));
 		# counter counters #counter
 		# sum counters like this:
 		#Threads(5) Tags(3) People(7) Labels(5)
@@ -360,6 +361,8 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 		if ($itemCount) {
 			$caption .= '(' . $itemCount . ')';
 		}
+	} else {
+		WriteLog('GetMenuItem: no counter: $menuName = ' . $menuName . '; caller = ' . join(',', caller));
 	}
 
 	$menuItem =~ s/\$address/$address/g;
