@@ -32,14 +32,14 @@ sub UpdateSetting {
 		print `sh hike.sh frontend`;
 	}
 
-	if ($settingKeySanitized =~ m|config/setting/admin/php|) {
-		print "Setting changed for PHP module, rebuild frontend\n";
+	if ($settingKeySanitized =~ m|config/setting/admin/php/enable|) {
+		print "Setting changed for php/enable, rebuild frontend\n";
 		sleep 2;
 		`sh hike.sh frontend`; # rebuild frontend
-		if (0) {
-			#todo this should only happen when it's a lighttpd installation
-			`sh hike.sh stop`; #todo restart lighttpd if that module is enabled
-			`sh hike.sh start`; #todo restart lighttpd if that module is enabled
+		if (GetConfig('setting/admin/lighttpd/enable')) {
+			# restart lighttpd
+			`sh hike.sh stop`;
+			`sh hike.sh start`;
 		}
 	}
 } # UpdateSetting()
