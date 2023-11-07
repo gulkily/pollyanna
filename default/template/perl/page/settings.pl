@@ -28,6 +28,7 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 
 	# $txtIndex .= GetStatsTable();  # GetSettingsPage()
 
+	#frontend:
 	my @settingsVisible1 = qw(
 		theme
 		html/clock
@@ -42,6 +43,7 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 		admin/js/table_sort
 	);
 
+	#backend:
 	my @settingsVisible2 = qw(
 		current_version
 		admin/http_auth/enable
@@ -50,6 +52,7 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 		admin/php/enable
 		admin/php/debug
 		admin/php/route_notify_printed_time
+		admin/php/post/index_file_on_post
 		admin/php/post/use_return_to
 		admin/php/footer_stats
 	);
