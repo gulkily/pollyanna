@@ -5,9 +5,10 @@ use warnings;
 use 5.010;
 
 sub GetUploadDialog { # $template, $replyTo ; upload dialog for upload page
+# sub GetUploadForm {
 	if (!GetConfig('admin/upload/enable')) {
-	WriteLog('GetUploadDialog: warning: called while admin/upload/enable was false');
-	return '';
+		WriteLog('GetUploadDialog: warning: called while admin/upload/enable was FALSE; caller = ' . join(' ', caller));
+		return '';
 	}
 
 	#todo rename $template to $templatePath or $templateName
