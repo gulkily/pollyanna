@@ -1022,6 +1022,40 @@ sub MakeSystemPages {
 
 	PutHtmlFile("favicon.ico", '');
 
+	if (GetConfig('admin/php/regrow_404_fork')) { # make loading.gif
+        WriteLog('MakeSystemPages: regrow_404_fork is TRUE, so making loading.gif'); # Debug message
+
+        my $CONFIGDIR = GetDir('config');
+        my $DEFAULTDIR = GetDir('default');
+        my $HTMLDIR = GetDir('html'); # Make sure to define $HTMLDIR if it's not defined elsewhere.
+
+        # Debug: Print directories
+        WriteLog("MakeSystemPages: \$CONFIGDIR = $CONFIGDIR; \$DEFAULTDIR = $DEFAULTDIR; \$HTMLDIR = $HTMLDIR");
+
+        if (!file_exists("$CONFIGDIR/res/image/loading.gif")) {
+            WriteLog('MakeSystemPages: loading.gif does not exist in $CONFIGDIR');
+
+            if (file_exists("$DEFAULTDIR/res/image/loading.gif")) {
+                WriteLog('MakeSystemPages: copying loading.gif from default to config');
+                if (copy("$DEFAULTDIR/res/image/loading.gif", "$CONFIGDIR/res/image/loading.gif")) {
+                    WriteLog('MakeSystemPages: Copy successful');
+                } else {
+                    WriteLog('MakeSystemPages: Copy failed');
+                }
+            }
+        }
+
+        if (file_exists("$CONFIGDIR/res/image/loading.gif")) {
+            WriteLog('MakeSystemPages: loading.gif exists in $CONFIGDIR');
+
+            if (copy("$CONFIGDIR/res/image/loading.gif", "$HTMLDIR/loading.gif")) {
+                WriteLog('MakeSystemPages: Copy to HTMLDIR successful');
+            } else {
+                WriteLog('MakeSystemPages: Copy to HTMLDIR failed');
+            }
+        }
+    }
+
 	{
 		# p.gif
 		WriteLog('making p.gif'); # p.gif
