@@ -105,11 +105,11 @@ sub MakeDataZips {
 				rename("$HTMLDIR/index.sqlite3.zip.tmp", "$HTMLDIR/index.sqlite3.zip");
 			}
 
-			{ #without zip
+			#{ #without zip
 				#my $CACHEDIR = GetDir('cache');
 				#WriteLog('MakeDataZips: copy(' . "$CACHEDIR/b/index.sqlite3" . ', ' . "$HTMLDIR/index.sqlite3" . ')');
 				#copy("$CACHEDIR/b/index.sqlite3", "$HTMLDIR/index.sqlite3");
-			}
+			#}
 
 			PutCache('touch/zip', GetTime());
 		} else {
