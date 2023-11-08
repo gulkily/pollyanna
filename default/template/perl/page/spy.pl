@@ -12,7 +12,7 @@ sub GetInspectorPage { # returns html for settings page (/settings.html)
 
 	$txtIndex .= GetPageFooter('inspector');
 
-	if (GetConfig('admin/js/enable')) {
+	if (GetConfig('setting/admin/js/enable')) {
 		$txtIndex = InjectJs($txtIndex, qw(settings dragging utils));
 	}
 

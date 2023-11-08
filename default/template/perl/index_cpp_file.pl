@@ -76,7 +76,7 @@ sub IndexCppFile { # $file | 'flush' ; indexes one text file into database
 
 	if (!$addedTime) {
 		WriteLog('IndexCppFile: file missing $addedTime');
-		if (GetConfig('admin/logging/write_chain_log')) {
+		if (GetConfig('setting/admin/logging/write_chain_log')) {
 			$addedTime = AddToChainLog($fileHash);
 		} else {
 			$addedTime = GetTime();

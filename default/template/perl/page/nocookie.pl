@@ -13,7 +13,7 @@ sub GetNocookiePage {
 		GetPageFooter('nocookie')
 	;
 
-	if (GetConfig('admin/js/enable')) {
+	if (GetConfig('setting/admin/js/enable')) {
 		$html = InjectJs($html, qw(utils settings avatar profile upload paste));
 	}
 

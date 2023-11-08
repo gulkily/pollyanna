@@ -38,7 +38,7 @@ sub GetMenuPage { # /menu.html
 		GetPageFooter('menu')
 	;
 
-	if (GetConfig('admin/js/enable')) {
+	if (GetConfig('setting/admin/js/enable')) {
 		$txtIndex = InjectJs($txtIndex, qw(settings avatar profile timestamp pingback utils clock));
 	}
 

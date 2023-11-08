@@ -23,8 +23,8 @@ sub GetDesktopPage { # returns html for desktop page (/desktop.html)
 	$html .= GetStatsTable(); # GetDesktopPage()
 
 
-	# if (GetConfig('admin/php/enable')) {
-	# 	if (GetConfig('admin/upload/enable')) {
+	# if (GetConfig('setting/admin/php/enable')) {
+	# 	if (GetConfig('setting/admin/upload/enable')) {
 	# 		require_once('page/upload.pl');
 	# 		$html .= GetUploadDialog('html/form/upload.template');
 	# 	}
@@ -32,15 +32,15 @@ sub GetDesktopPage { # returns html for desktop page (/desktop.html)
 
 	$html .= GetPageFooter('desktop');
 
-	if (GetConfig('admin/js/enable')) {
+	if (GetConfig('setting/admin/js/enable')) {
 		my @scripts = qw(settings avatar profile timestamp pingback utils voting);
 		push @scripts, 'desktop';
-		if (GetConfig('admin/js/dragging')) {
+		if (GetConfig('setting/admin/js/dragging')) {
 			push @scripts, 'dragging'; # GetDesktopPage()
 		}
 
-		if (GetConfig('admin/php/enable')) {
-			if (GetConfig('admin/upload/enable')) {
+		if (GetConfig('setting/admin/php/enable')) {
+			if (GetConfig('setting/admin/upload/enable')) {
 				push @scripts, 'upload';
 			}
 		}

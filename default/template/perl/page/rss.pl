@@ -23,19 +23,19 @@ sub GetRssFile { # returns rss feed for current site
 	my @files = DBGetItemList(\%queryParams);
 
 	my $feedContainerTemplate = GetTemplate('rss/feed.xml.template');;
-	if (GetConfig('admin/html/ascii_only')) {
+	if (GetConfig('setting/admin/html/ascii_only')) {
 		my $unicodeHeader = GetTemplate('rss/feed_header_utf8.xml.template');
 		my $asciiHeader = GetTemplate('rss/feed_header_ascii.xml.template');
 
 		$feedContainerTemplate = $asciiHeader . substr($feedContainerTemplate, length($unicodeHeader));
 	}
 
-	my $myHost = GetConfig('admin/rss_host');
+	my $myHost = GetConfig('setting/admin/rss_host');
 
 	my $baseUrl = $urlProtocol . '://' . $myHost . '/';
 
-	my $feedTitle = GetConfig('html/home_title');
-	my $feedLink = GetConfig('admin/my_domain'); # default = http://localhost:2784/
+	my $feedTitle = GetConfig('setting/html/home_title');
+	my $feedLink = GetConfig('setting/admin/my_domain'); # default = http://localhost:2784/
 	my $feedDescription = GetString('site_description');
 	my $aboutUrl = $baseUrl;
 

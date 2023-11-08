@@ -1,4 +1,4 @@
-#!/usr/bin/perl -T
+f!/usr/bin/perl -T
 
 use strict;
 use warnings;
@@ -41,7 +41,7 @@ sub GetWritePage { # returns html for write page
 		$writePageHtml .= $writeOptions;
 	}
 
-	#if (GetConfig('admin/js/enable')) {
+	#if (GetConfig('setting/admin/js/enable')) {
 	#	$writePageHtml .= GetDialogX(GetTemplate('html/form/writing.template'), 'Options');
 	#}
 	#
@@ -50,7 +50,7 @@ sub GetWritePage { # returns html for write page
 	# 	$writePageHtml .= GetReplyCartDialog(); # GetWriteDialog()
 	# } # if (GetConfig('setting/html/reply_cart'))
 
-	if (GetConfig('admin/js/enable') && GetConfig('admin/js/zalgo')) {
+	if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/zalgo')) {
 		$writePageHtml .= GetDialogX(GetTemplate('html/form/write/write_zalgo_button.template'), 'Zalgo');
 	}
 
@@ -61,14 +61,14 @@ sub GetWritePage { # returns html for write page
 	#	}
 	#
 
-	if (GetConfig('admin/js/enable') && GetConfig('setting/html/reply_cart')) {
+	if (GetConfig('setting/admin/js/enable') && GetConfig('setting/html/reply_cart')) {
 		require_once('dialog/reply_cart.pl');
 		$writePageHtml .= GetReplyCartDialog();
 	}
 
 	$writePageHtml .= GetPageFooter('write');
 
-	if (GetConfig('admin/js/enable')) {
+	if (GetConfig('setting/admin/js/enable')) {
 		# $writePageHtml = str_replace(
 		# 	'<span id=spanInputOptions></span>',
 		# 	'<span id=spanInputOptions>
@@ -81,19 +81,19 @@ sub GetWritePage { # returns html for write page
 		# would exclude many browsers who would otherwise support keyboard
 
 		my @js = qw(settings avatar write profile utils timestamp);
-		if (GetConfig('admin/php/enable')) {
+		if (GetConfig('setting/admin/php/enable')) {
 			push @js, 'write_php'; # write.html
 		}
-		#if (GetConfig('admin/upload/enable')) {
+		#if (GetConfig('setting/admin/upload/enable')) {
 		#	push @js, 'upload';
 		#	push @js, 'paste';
 		#}
-		if (GetConfig('admin/token/puzzle')) {
+		if (GetConfig('setting/admin/token/puzzle')) {
 			push @js, 'puzzle';
 			# push @js, 'puzzle', 'sha512';
 		}
-		if (GetConfig('admin/js/translit')) {
-			if (GetConfig('admin/html/ascii_only')) {
+		if (GetConfig('setting/admin/js/translit')) {
+			if (GetConfig('setting/admin/html/ascii_only')) {
 				WriteLog('GetWritePage: warning: admin/js/translit conflicts with admin/html/ascii_only');
 			} else {
 				push @js, 'translit';
@@ -104,12 +104,12 @@ sub GetWritePage { # returns html for write page
 			push @js, 'voting';
 		}
 
-		if (GetConfig('html/reply_cart')) {
+		if (GetConfig('setting/html/reply_cart')) {
 			push @js, 'reply_cart';
 		}
 
-		if (GetConfig('admin/js/zalgo')) {
-			if (GetConfig('admin/html/ascii_only')) {
+		if (GetConfig('setting/admin/js/zalgo')) {
+			if (GetConfig('setting/admin/html/ascii_only')) {
 				WriteLog('GetWritePage: warning: admin/js/zalgo conflicts with admin/html/ascii_only');
 			} else {
 				push @js, 'lib/zalgo';
@@ -117,7 +117,7 @@ sub GetWritePage { # returns html for write page
 		}
 
 		$writePageHtml = InjectJs($writePageHtml, @js);
-	} # GetConfig('admin/js/enable')
+	} # GetConfig('setting/	admin/js/enable')
 
 	return $writePageHtml;
 } # GetWritePage()
