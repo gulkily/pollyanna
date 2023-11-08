@@ -572,6 +572,8 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		$params{'vote_return_to'} = '/label/' . $pageParam . '.html'; #todo unhardcode
 	}
 
+	$params{'item_limit'} = 100; #todo fix hardcoded limit #todo pagination
+
 	$txtIndex .= GetItemListHtml(\@files, \%params);
 
 	# LISTING ITEMS ENDS HERE
