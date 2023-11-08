@@ -12,7 +12,7 @@ sub GetPostPage { # Target page for the submit page
 
 	$postPage = InjectJs($postPage, qw(settings avatar post));
 
-	if (GetConfig('admin/js/enable')) {
+	if (GetConfig('setting/admin/js/enable')) {
 		$postPage =~ s/<body /<body onload="makeRefLink();" /;
 		$postPage =~ s/<body>/<body onload="makeRefLink();">/;
 	}
