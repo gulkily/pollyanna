@@ -12,7 +12,7 @@ sub GetProfileDialog {
 # sub GetProfileForm {
 	my $profileWindowContents = GetTemplate('html/form/profile.template');
 
-	if (GetConfig('admin/js/enable') && GetConfig('admin/js/openpgp')) {
+	if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/openpgp')) {
 		#my $gpg2Choices = GetTemplate('html/gpg2.choices.template');
 		#$profileWindowContents =~ s/\$gpg2Algochoices/$gpg2Choices/;
 
@@ -39,7 +39,7 @@ sub GetProfilePage { # returns profile page (allows sign in/out)
 	my $title = "Profile";
 	my $titleHtml = "Profile";
 
-	if (GetConfig('admin/js/enable') || GetConfig('admin/php/enable')) {
+	if (GetConfig('setting/admin/js/enable') || GetConfig('setting/admin/php/enable')) {
 		# js or php is required for profiles to work
 
 		$txtIndex = GetPageHeader('profile');
@@ -55,7 +55,7 @@ sub GetProfilePage { # returns profile page (allows sign in/out)
 
 		# my $profileWindowContents = GetTemplate('html/form/profile.template');
 		#
-		# if (GetConfig('admin/gpg/use_gpg2')) {
+		# if (GetConfig('setting/admin/gpg/use_gpg2')) {
 		# 	my $gpg2Choices = GetTemplate('html/gpg2.choices.template');
 		# 	$profileWindowContents =~ s/\$gpg2Algochoices/$gpg2Choices/;
 		# } else {
@@ -81,7 +81,7 @@ sub GetProfilePage { # returns profile page (allows sign in/out)
 		#$txtIndex .= $tosWindow;
 		$txtIndex .= GetPageFooter('profile');
 
-		if (GetConfig('admin/js/enable')) {
+		if (GetConfig('setting/admin/js/enable')) {
 			$txtIndex = InjectJs($txtIndex, qw(avatar settings utils profile timestamp));
 		} else {
 			# js is disabled
