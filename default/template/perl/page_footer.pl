@@ -123,6 +123,12 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 		WriteLog('GetPageFooter: NOT adding css textarea');
 	}
 
+	if (GetConfig('html/page_map_bottom')) {
+		require_once('dialog/page_map.pl');
+		$txtFooter = str_replace('</body>', '<br>' . GetPageMapDialog() . '</body>', $txtFooter);
+	}
+
+
 	if (
 		GetConfig('html/menu_bottom') ||
 		(
