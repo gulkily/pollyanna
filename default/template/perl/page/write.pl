@@ -1,4 +1,4 @@
-f!/usr/bin/perl -T
+#!/usr/bin/perl -T
 
 use strict;
 use warnings;
@@ -117,7 +117,7 @@ sub GetWritePage { # returns html for write page
 		}
 
 		$writePageHtml = InjectJs($writePageHtml, @js);
-	} # GetConfig('setting/	admin/js/enable')
+	} # GetConfig('setting/admin/js/enable')
 
 	return $writePageHtml;
 } # GetWritePage()
