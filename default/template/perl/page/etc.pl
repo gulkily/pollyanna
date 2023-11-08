@@ -34,7 +34,7 @@ sub GetEtcPage { # returns html for etc page (/etc.html)
 #	my $scriptsInclude = '<script src="/openpgp.js"></script><script src="/crypto.js"></script>';
 #	$txtIndex =~ s/<\/body>/$scriptsInclude<\/body>/;
 
-	# if (GetConfig('admin/js/enable')) {
+	# if (GetConfig('setting/admin/js/enable')) {
 	#	$txtIndex =~ s/<body /<body onload="SettingsOnload();" /;
 	# }
 
