@@ -28,9 +28,9 @@ system('time find html/txt -cmin -100 | grep \\\\.txt$ | head -n 5 | xargs ./ind
 #
 # # rebuild static html files if necessary
 # if (
-# 	GetConfig('admin/pages/lazy_page_generation') &&
-# 	GetConfig('admin/pages/rewrite') eq 'all' &&
-# 	GetConfig('admin/php/enable')
+# 	GetConfig('setting/admin/pages/lazy_page_generation') &&
+# 	GetConfig('setting/admin/pages/rewrite') eq 'all' &&
+# 	GetConfig('setting/admin/php/enable')
 # ) {
 # 	system('./pages.pl --system');
 # } else {

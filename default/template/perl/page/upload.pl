@@ -7,12 +7,12 @@ require_once('dialog/upload.pl');
 
 sub GetPasteDialog { # paste dialog for upload page
 #todo what about text pasting?
-	if (!GetConfig('admin/upload/enable')) {
+	if (!GetConfig('setting/admin/upload/enable')) {
 		WriteLog('GetPasteDialog: warning: called while admin/upload/enable was false');
 		return '';
 	}
 
-	if (!GetConfig('admin/js/enable')) {
+	if (!GetConfig('setting/admin/js/enable')) {
 		WriteLog('GetPasteDialog: warning: called while admin/js/enable was false');
 		return '';
 	}
@@ -33,7 +33,7 @@ sub GetUploadPage { # returns html for upload page
 	my $html = '';
 	my $title = 'Upload';
 
-	if (GetConfig('admin/php/enable') && GetConfig('admin/upload/enable')) {
+	if (GetConfig('setting/admin/php/enable') && GetConfig('setting/admin/upload/enable')) {
 		my $template = shift;
 		if (!$template) {
 			$template = 'html/form/upload.template';
@@ -44,7 +44,7 @@ sub GetUploadPage { # returns html for upload page
 		$html .= GetPasteDialog();
 		$html .= GetPageFooter('upload');
 
-		if (GetConfig('admin/js/enable')) {
+		if (GetConfig('setting/admin/js/enable')) {
 			$html = InjectJs($html, qw(utils settings avatar profile upload paste));
 		}
 
@@ -54,7 +54,7 @@ sub GetUploadPage { # returns html for upload page
 		$html .= GetDialogX(GetTemplate('html/form/upload_no.template'), $title);
 		# $html .= GetDialogX('<p>Upload feature is not available. Apologies.</p>', $title);
 		$html .= GetPageFooter('upload');
-		if (GetConfig('admin/js/enable')) {
+		if (GetConfig('setting/admin/js/enable')) {
 			$html = InjectJs($html, qw(utils settings avatar profile));
 		}
 	}
