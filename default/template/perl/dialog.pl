@@ -113,7 +113,7 @@ sub GetDialogX3 { # $body $title \%param
 		%param = %{$paramHashRef};
 	}
 
-	WriteLog('GetDialogX3($body = ' . $body . '; $title = ' . $title . '; %param has ' . length(keys(%param)) . ')');
+	WriteLog('GetDialogX3(length($body) = (' . length($body) . '); $title = ' . $title . '; %param has ' . length(keys(%param)) . '); caller = ' . join(',', caller));
 
 	$param{'body'} = $body;
 	$param{'title'} = $title;
