@@ -1,4 +1,4 @@
-#!/usr/bin/perl -T
+in#!/usr/bin/perl -T
 
 use strict;
 use warnings;
@@ -13,7 +13,7 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 
 	$txtIndex .= GetAccessDialog();
 
-	#if (GetConfig('admin/logging/write_chain_log')) {
+	#if (GetConfig('setting/admin/logging/write_chain_log')) {
 	#	$txtIndex .= GetChainLogAsDialog();
 	#}
 
@@ -22,7 +22,7 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 
 	#$txtIndex .= GetQueryAsDialog('admin_list', 'Operators');
 
-	if (GetConfig('admin/js/enable')) {
+	if (GetConfig('setting/admin/js/enable')) {
 		$txtIndex .= GetSettingsDialog();
 	}
 
@@ -67,7 +67,7 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 	#add option to use a "cart" for voting, submitting all the labels at once
 	#this would require some server-side additions too, unless we use the old-style pipe-separated syntax
 
-	if (GetConfig('admin/js/enable')) {
+	if (GetConfig('setting/admin/js/enable')) {
 		$txtIndex .= GetDialogX(GetTemplate('html/form/writing.template'), 'Writing');
 	}
 
@@ -75,7 +75,7 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 
 	$txtIndex .= '<span class=admin>' . GetDialogX('<form action=/post.html><input type=submit name=btnUpgrade value=Upgrade></form>', 'Developer') . '</span>';
 
-	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
+	if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
 		# $txtIndex .= '<span class=advanced>' . GetDialogX(GetTemplate('html/form/annoyances.template'), 'Annoyances') . '</span>';
 		$txtIndex .= GetDialogX(GetTemplate('html/form/annoyances.template'), 'Annoyances');
 	}
@@ -83,7 +83,7 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 
 	$txtIndex .= GetPageFooter('settings');
 
-	if (GetConfig('admin/js/enable')) {
+	if (GetConfig('setting/admin/js/enable')) {
 		$txtIndex = InjectJs($txtIndex, qw(settings avatar profile timestamp pingback utils clock));
 	}
 
