@@ -35,6 +35,7 @@ sub GetWriteForm2 { # $dialogTitle ; returns write form (for composing text mess
 
 	#my $writeForm = GetDialogX(GetTemplate('html/form/write/write.template'), $dialogTitle);
 	my $writeForm = GetTemplate('html/form/write/write.template');
+	$writeForm = str_replace('<!-- ATTENTION: this template is updated by MakeWritePage() -->', '', $writeForm);
 	# my $writeForm = GetDialogX(GetTemplate('html/form/write/write.template'), 'Write');
 	#WriteLog('GetWriteForm: $dialogTitle = ' . $dialogTitle . '; caller = ' . join(',', caller));
 
