@@ -1,3 +1,18 @@
+to count forms:
+
+hash(a) = 1
+hash(hash(a)) = 2
+hash(hash(hash(a))) = 3
+
+store intermediate values in table
+store the number in table when it is used
+
+???
+
+profit
+
+===
+
 what to do about the duplicate items bug?
 	options
 		remove all -- and --- lines from item when saving new item
@@ -10,76 +25,6 @@ what to do about the duplicate items bug?
 			there are several ways where an item is hashed, and they all have to be changed
 
 	challenges
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
