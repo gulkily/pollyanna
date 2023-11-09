@@ -1,0 +1,23 @@
+<form action="./?" name="tsearch">
+<center>
+<table cellpadding="2" cellspacing="0" width="80%" border="0">
+	<tr>
+		<td bgcolor="#c08000" align="left">
+			<font size="+1"><b><i>QDB</i></b></font>
+		<a href="./?admin"><font size="-1" color="#c08000">Admin</font></a></td>
+		
+		<td bgcolor="#c08000" align="right">
+			<font face="arial" size="+1"><b>Quote Database Home</b></font><br></td>
+	</tr></table>
+	<table cellpadding="2" cellspacing="0" width="80%" border="0">
+	<tr>
+		<td align="right" bgcolor="#f0f0f0" class="toplinks" colspan="2">
+ <a href="./">Home</a> / <a href="./?latest">Latest</a> / <a href="./?browse">Browse</a>
+ / <a href="./?random">Random</a> <a href="./?random1">&gt;0</a>
+ / <a href="./?top">Top 100</a><a href="./?top2">-200</a> / <a href="./?add"><b>Add Quote</b></a>
+ / <a href="modapp/">ModApp</a> / <a href="./?search">Search</a> / <font class="topnum">#</font> <input type="text" name="quote" class="smalltext" size="4">
+		</td>
+	</tr>
+</table>
+</form>
+</center><p>

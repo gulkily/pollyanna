@@ -1,0 +1,12 @@
+<table cellpadding="0" cellspacing="0" width="80%" border="0">
+<tr><td class="bodytext" align="center">
+<a href="http://web.archive.org/web/20230719194509/https://www.paypal.com/xclick/business=donate@bash.org&amp;item_name=Bash.org+Donation">
+<img src="/web/20230719194509im_/http://bash.org/images/paypal.gif" border="0" width="62" height="31"></a>
+</td></tr>
+<tr><td class="footertext" align="center"><font size="1" class="footertext">
+</td></tr></table>
+<p>
+<center>
+<table border="0" cellpadding="2" cellspacing="0" width="80%" bgcolor="#c08000"><tr><td class="footertext" align="right"> 21096 quotes approved; 2079 quotes pending</td>
+</tr>
+</table>
