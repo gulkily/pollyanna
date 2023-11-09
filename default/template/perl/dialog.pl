@@ -282,6 +282,7 @@ sub GetDialogX2 { # \%paramHash ; returns window
 			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$dialogAnchor', 'onclick', 'document.title=this.innerHTML;');
 			#			}
 			#
+			$windowTitlebar = str_replace('<!-- note: dragging.js looks for a "b" inside of a class=titlebar -->', '', $windowTitlebar); #UtilityComment
 			$windowTitlebar =~ s/\$windowTitle/$windowTitle/g;
 			$windowTitlebar =~ s/\$dialogAnchor/$dialogAnchor/g;
 			$windowTemplate =~ s/\$windowTitlebar/$windowTitlebar/g;
