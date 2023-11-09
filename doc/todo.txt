@@ -1,3 +1,18 @@
+titlebar.template should include this comment:
+		<!-- note: dragging.js looks for a "b" inside of a class=titlebar -->
+
+
+
+<!--
+    #todo redo this whole template
+    the js should be added with AddAttributeToTag, not hard-coded into the template
+        there can also be templates for each js, so that they can be reused elsewhere
+            for example, there is also a standalone reset button
+-->
+<!-- / dialog_controls.template -->
+
+
+
 Inbox dialog should have id=
 	looks like there is also a bug with colspan= value missing in GetDialogX() in php version
 
