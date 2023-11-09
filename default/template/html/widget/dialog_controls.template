@@ -64,10 +64,4 @@
 	}
 " title="Reset">Reset</a>
 
-<!--
-    #todo redo this whole template
-    the js should be added with AddAttributeToTag, not hard-coded into the template
-        there can also be templates for each js, so that they can be reused elsewhere
-            for example, there is also a standalone reset button
--->
 <!-- / dialog_controls.template -->
