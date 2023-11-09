@@ -1,5 +1,10 @@
-Sessions allow you to log in without having to enter a password or any other credentials. This is done by using a <br>
-session cookie, a client-stored private key, or a client fingerprint.<br>
+Log in without a password or any other credentials. <br>
+Just enter your "handle", the name you want to be known by, and you're in.<br>
+<br>
+From any other device, do the same thing! You will be logged in automatically.<br>
+<br>
+This is done by using a combination of session cookies, client-stored private keys,
+and hash-based client fingerprints. <!-- and operator oversight --><br>
 <br>
 In every case, you have the option to remain anonymous or to use a name of your choosing. Your private information, <br>
 such as your phone number, email address, and name, is not required unless you choose to reveal it of your own volition.<br>
