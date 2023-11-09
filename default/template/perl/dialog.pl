@@ -200,7 +200,7 @@ sub GetDialogX2 { # \%paramHash ; returns window
 	# base template
 	my $windowTemplate = GetTemplate('html/window/standard.template');
 
-	if (GetConfig('debug')) { #todo separate debug setting for html templating
+	if (GetConfig('setting/html/debug')) { #todo separate debug setting for html templating
 		my $debugComment = '<!-- GetDialogX2: caller = ' . join(',', caller) . ' -->';
 
 		#todo go 2 levels up, since this is probably called from GetDialogX()
