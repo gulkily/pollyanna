@@ -130,6 +130,7 @@ function btnRegister_Click (t) { // event for 'Register' button's click
 } // btnRegister_Click()
 
 function getUserFp () { // retrieve stored user fingerprint from LocalStorage
+// function getFp () {
 	//alert('DEBUG: getUserFp() begin');
 
 	if (window.localStorage) {
@@ -152,6 +153,7 @@ function getUserFp () { // retrieve stored user fingerprint from LocalStorage
 } // getUserFp()
 
 function sharePubKey (t) { // shares current user's public key via injected form and iframe
+// function sendPubKey () {
 	// t is the clicked link's "this", which is used to display a notification next to it
 
 	//alert('DEBUG: profile.js: sharePubKey() begins');
