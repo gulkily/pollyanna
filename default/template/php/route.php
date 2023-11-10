@@ -1332,6 +1332,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						$cookieInboxDialogPath = $htmlDir . '/dialog/replies/' . $authorCookie . '.html';
 						WriteLog('route.php: cookie_inbox: $cookieInboxDialogPath = ' . $cookieInboxDialogPath);
 						if (file_exists($cookieInboxDialogPath)) {
+							# this means there are messages waiting for this user
 							WriteLog('route.php: cookie_inbox: file_exists($cookieInboxDialogPath) is TRUE');
 							$cookieInboxDialog = GetFile($cookieInboxDialogPath);
 
@@ -1348,9 +1349,11 @@ if (GetConfig('setting/admin/php/route_enable')) {
 								WriteLog('route.php: cookie_inbox: warning: $html lacks placeholder');
 							}
 						} else {
-							# shadowme
+							# this means there are no messages waiting for the user
+							# shadowme (developed for shadowme project, thanks william)
 							WriteLog('route.php: cookie_inbox: file_exists($cookieInboxDialogPath) is FALSE');
 							$cookieInboxDialog = GetDialogX('<fieldset><p>No messages at this time.</p></fieldset>', 'Inbox');
+							$cookieInboxDialog = AddAttributeToTag($cookieInboxDialog, 'table', 'id', 'Inbox');
 							$html = str_ireplace('<span id=messages></span>', '<span id=messages>' . $cookieInboxDialog . '</span>', $html);
 						}
 					} else {
