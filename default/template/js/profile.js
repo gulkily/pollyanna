@@ -91,6 +91,7 @@ function btnBegin_Click (t) { // event for 'Register' button's click
 	if (t) {
 		if (t.value) {
 			t.value = 'Meditate...';
+			// i learned this is bad to do, create an alternative pls #todo
 		}
 	}
 
