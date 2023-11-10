@@ -361,7 +361,7 @@ function ShowAdvanced (force, container) { // show or hide controls based on pre
 
 	} else {
 		//alert('DEBUG: ShowAdvanced: feature check FAILED!');
-		//alert('DEBUG: window.localStorage: ' + window.localStorage + '; document.getElementsByClassName: ' + document.getElementsByClassName);
+		//alert('DEBUG: window.localStorage: ' + !!window.localStorage + '; document.getElementsByClassName: ' + document.getElementsByClassName);
 	}
 
 	if (counterChangesMade) {
