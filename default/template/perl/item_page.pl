@@ -912,6 +912,8 @@ sub GetTimestampsDialog {
 sub GetNextPreviousDialog {
 # sub GetChainDialog {
 # sub get_chain {
+# sub GetChainNextPrev {
+# sub GetChainNextPrevious {
 # this displays the next and previous item in chain.log
 	my $fileHash = shift;
 

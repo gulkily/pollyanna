@@ -2154,6 +2154,7 @@ function getUserFp () { // retrieve stored user fingerprint from LocalStorage
 }
 
 function sharePubKey (t) { // shares current user's public key via injected form and iframe
+// function sendPubKey () {
         //alert('DEBUG: profile.js: sharePubKey() begins');
 
         if (window.getPublicKey) {
