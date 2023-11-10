@@ -342,7 +342,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 			WriteLog('IndexTextFile: scalar(@tokensFound) = ' . scalar(@tokensFound));
 			###################################################
 
-			if (GetConfig('setting/admin/token/http')) { # 'http:// |http:// index_link indexlink
+			if (GetConfig('setting/admin/token/http')) { # 'http:// |http:// index_link indexlink #http #https 'http'
 				my @httpMatches = ($detokenedMessage =~ m/(http:\S+)/mg);
 
 				while (@httpMatches) {
@@ -361,7 +361,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 					push @indexMessageLog, 'found http address';
 				}
 			} # http token
-			if (GetConfig('setting/admin/token/https')) {
+			if (GetConfig('setting/admin/token/https')) { # 'https:// |https:// index_link indexlink #http #https 'https'
 				my @httpMatches = ($detokenedMessage =~ m/(https:\S+)/mg);
 
 				while (@httpMatches) {
