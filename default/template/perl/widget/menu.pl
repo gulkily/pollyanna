@@ -353,6 +353,7 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 		WriteLog('GetMenuItem: counter: $menuName = ' . $menuName . '; caller = ' . join(',', caller));
 		# counter counters #counter
 		# sum counters like this:
+		# menu counters
 		#Threads(5) Tags(3) People(7) Labels(5)
 		# topics counter
 		#todo this should be a list instead of hard-coded
