@@ -6,6 +6,7 @@ use 5.010;
 use utf8;
 
 sub GetAuthorLink { # $authorKey ; returns avatar'ed link for an author id
+# sub GetAuthorUrl {
 	my $authorKey = shift; # author's fingerprint
 
 	require_once('widget/avatar.pl');
