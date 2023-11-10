@@ -34,8 +34,8 @@ if (isset($_GET['btnSignOut'])) {
 	$_GET['request'] = 'Sign Out';
 }
 
-if (isset($_GET['btnRegister'])) {
-	$_GET['request'] = 'Register';
+if (isset($_GET['btnBegin'])) {
+	$_GET['request'] = 'Begin';
 }
 
 if (isset($_GET['btnSignOut']) && $_GET['btnSignOut']) {
@@ -47,7 +47,7 @@ if (isset($_GET['btnSignOut']) && $_GET['btnSignOut']) {
 	unsetcookie2('checksum');
 
 	// redirect with signed out message
-	RedirectWithResponse('/profile.html', 'Goodbye! You have signed out!');
+	RedirectWithResponse('/session.html', 'Goodbye! You have signed out!');
 
 	WriteLog('cookie.php: all cookies unset');
 } # btnSignOut handler
@@ -118,7 +118,8 @@ else {
 			unsetcookie2('checksum');
 			unsetcookie2('test');
 
-			RedirectWithResponse('/profile.html', 'You have been logged out! Press Register button to log in again. <span class=advanced>Technical: Checksum mismatch detected. Please notify operator.</span>');
+			RedirectWithResponse('/session.html', 'You have been signed out! Press Begin button to start a new session. <span class=advanced>Technical: Checksum mismatch detected. Please notify operator.</span>');
+			#todo write a nicer version of this
 		}
 
 		if ($responseSignedIn) {
@@ -140,7 +141,7 @@ else {
 		}
 	} // if (isset($_COOKIE['test']) && $_COOKIE['test'])
 	else {
-		if (isset($_GET['request']) && ($_GET['request'] == 'Register')) { // caution: $_GET['request'] may be set by code above
+		if (isset($_GET['request']) && ($_GET['request'] == 'Begin')) { // ATTENTION: $_GET['request'] may be set by code above
 			setcookie2('test', '1');
 			header('Location: /profile.html?' . time());
 		}

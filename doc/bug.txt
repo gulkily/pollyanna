@@ -186,7 +186,7 @@ author's page does not seem to display all items
 
 profile.html does not redirect after logging in
 
-url retains original parameters like btnRegister=...
+url retains original parameters like btnBegin=...
 
 ===
 

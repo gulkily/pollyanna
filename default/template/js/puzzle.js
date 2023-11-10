@@ -79,7 +79,7 @@ depends on the following:
 window.WriteSubmit() is called after
 document.getElementById('btnSolvePuzzle') caption is changed
 document.compose is a form
-	if it is not found, looks for frmProfile
+	if it is not found, looks for frmSession
 document.compose.comment is a textarea that's appended to
 window.getUserFp() is used to get user's fingerprint
 

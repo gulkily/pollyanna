@@ -1284,8 +1284,8 @@ function InsertFetchedDialog () {
 			}
 
 			// if it is profile dialog, call ProfileOnLoad()
-			var frmProfile = newDialog[0].getElementsByClassName('frmProfile');
-			if (frmProfile) {
+			var frmSession = newDialog[0].getElementsByClassName('frmSession');
+			if (frmSession) {
 				if (window.ProfileOnLoad) {
 					ProfileOnLoad();
 				}

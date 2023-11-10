@@ -5,8 +5,8 @@
 	</p>
 	<p align=center>
 		<noscript><font color=red>*</font></noscript>
-		<input id=member name=btnRegister type=submit value="Member">
-		<!-- name=btnRegister is used by server when user doesn't have js enabled -->
+		<input id=member name=btnBegin type=submit value="Member">
+		<!-- name=btnBegin is used by server when user doesn't have js enabled #todo remove this comment from the html template? -->
 	</p>
 </form>
 <!-- / enter.template -->

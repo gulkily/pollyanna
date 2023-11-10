@@ -1,11 +1,12 @@
-<!-- form/profile.template -->
-<form action="/session.html" name=frmProfile class=frmProfile>
+<!-- form/session.template -->
+<form action="/session.html" name=frmSession class=frmSession>
 	<fieldset id=fldRegistration>
-		<p id=pRegButton>
-			<input id=btnRegister
+		<p class=beginner>🔓📱💻🔑🔒🤝😊</p>
+		<p id=pBeginButton>
+			<input id=btnBegin
 				type=submit
-				name=btnRegister
-				value="Register"
+				name=btnBegin
+				value="Begin"
 			>
 			<span class=beginner>
 				<br>Register; Sign In; Create Profile.<br>
@@ -50,4 +51,4 @@
 		</p>
 	</fieldset>
 </form>
-<!-- / form/profile.template -->
+<!-- / form/session.template -->

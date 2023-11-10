@@ -3960,7 +3960,7 @@ message is included when signing proof of work puzzle from welcome page
 ===
 
 profile.html should redirect to referring page logging in
-	url retains original parameters like btnRegister=...
+	url retains original parameters like btnBegin=...
 		this doesn't always happen
 
 ===

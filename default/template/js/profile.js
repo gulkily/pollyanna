@@ -85,9 +85,9 @@ function btnSignOut_Click (t) { // event for 'Sign Out' button's click
 	return true;
 } // btnSignOut_Click()
 
-function btnRegister_Click (t) { // event for 'Register' button's click
+function btnBegin_Click (t) { // event for 'Register' button's click
 // t is clicked button's "this" object
-	//alert('DEBUG: btnRegister_Click() begin');
+	//alert('DEBUG: btnBegin_Click() begin');
 	if (t) {
 		if (t.value) {
 			t.value = 'Meditate...';
@@ -96,15 +96,15 @@ function btnRegister_Click (t) { // event for 'Register' button's click
 
 	//if (window.localStorage && window.Promise) { // this extra check is disabled for some reason, I think IE?
 	if (window.localStorage && document.getElementById) {
-		//alert('DEBUG: btnRegister_Click: localStorage and Promise feature check pass');
+		//alert('DEBUG: btnBegin_Click: localStorage and Promise feature check pass');
 		if (window.MakeKey) {
-			//alert('DEBUG: btnRegister_Click: window.MakeKey exists, calling MakeKey()');
+			//alert('DEBUG: btnBegin_Click: window.MakeKey exists, calling MakeKey()');
 
 			var chkEnablePGP = document.getElementById('chkEnablePGP');
 			if (chkEnablePGP && chkEnablePGP.checked) {
 				//alert('DEBUG: chkEnablePGP is present and checked');
 				var intKeyGenResult = MakeKey(t);
-				//alert('DEBUG: btnRegister_Click: intKeyGenResult = ' + intKeyGenResult);
+				//alert('DEBUG: btnBegin_Click: intKeyGenResult = ' + intKeyGenResult);
 				SetPrefs('latest_pubkey_ping', 1);
 				//alert('DEBUG: returning intKeyGenResult = ' + intKeyGenResult);
 				myFingerprint = window.localStorage.getItem('fingerprint');
@@ -127,7 +127,7 @@ function btnRegister_Click (t) { // event for 'Register' button's click
 	}
 
 	return true;
-} // btnRegister_Click()
+} // btnBegin_Click()
 
 function getUserFp () { // retrieve stored user fingerprint from LocalStorage
 // function getFp () {
@@ -626,7 +626,7 @@ function selectLoadKey (t) {
 	var keyName = t.value;
 //	if (keyName == 1) {
 //		// #todo
-//		btnRegister_Click();
+//		btnBegin_Click();
 //	} else if (keyName == 2) {
 //		btnSignOut_Click();
 //	} else {
@@ -687,9 +687,9 @@ function ProfileOnLoad () { // onload event for profile page
 						}
 						AddPrivateKeyLinks(); // ProfileOnLoad()
 
-						var pRegButton = document.getElementById('pRegButton');
-						if (pRegButton) {
-							pRegButton.style.display = 'none';
+						var pBeginButton = document.getElementById('pBeginButton');
+						if (pBeginButton) {
+							pBeginButton.style.display = 'none';
 						}
 					} else {
 						//alert('DEBUG: lblSigningIndicator FALSE');

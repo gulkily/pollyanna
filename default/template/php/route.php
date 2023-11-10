@@ -378,7 +378,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			if (preg_match( '/([0-9A-F]{16})/', $keyGet, $matches)) {
 				/* my */ $getFp = $matches[0];
 				WriteLog('route.php: found user-provided fingerprint: ' . $keyGet . ' => ' . $valueGet . '; $getFp = ' . $getFp);
-				RedirectWithResponse('/profile.html', 'Welcome!'); #todo expand message
+				RedirectWithResponse('/session.html', 'Welcome! You have signed in!');
 				# #todo actually make note of client id by storing a new item
 				# /* my */ $fileName = StoreNewComment($getFp, 0, 1);
 			}
@@ -533,9 +533,9 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							$redirectPath = $redirectPath . '?origin=' . urlencode($path);
 						}
 
-						RedirectWithResponse($redirectPath, 'Please create profile to continue.'); # /profile.html /welcome.html
+						RedirectWithResponse($redirectPath, 'Please begin session to continue.'); # /session.html /profile.html /welcome.html
 						if (! GetConfig('setting/admin/php/force_profile_fallthrough')) {
-							exit; // #todo this is bad to have here
+							exit; // #todo this is bad to have here from a code readability perspective
 						}
 					} # if ($clientHasCookie)
 				} # else (NOT $path == '/profile.html')
@@ -1235,9 +1235,11 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 		#if ($path == '/profile.html' || $path == '/welcome.html' || $path == '/desktop.html') {
 		#if ($path) { #todo #bug
-		if ((index($html, 'frmProfile') != -1) || (index($html, 'frmSession') != -1)) { //
+		#if ((index($html, 'frmProfile') != -1) || (index($html, 'frmSession') != -1)) { //
+		if ((index($html, 'frmSession') != -1)) { //
 			// special handling for frmProfile (usually in /profile.html, /session.html, /welcome.html, or /desktop.html
-			WriteLog('route.php: frmProfile handler activated');
+			// special handling for frmSession (usually in /profile.html, /session.html, /welcome.html, or /desktop.html
+			WriteLog('route.php: frmSession handler activated');
 
 			// we need cookies
 			include_once('cookie.php');
@@ -1257,8 +1259,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 				// $html = str_replace('<span id=spanSignedInStatus></span>', '<span id=spanSignedInStatus class=beginner><p><b>Status: You are signed in</b></p></span>', $html);
 				// #todo get this from template
 				// #todo add the same logic to javascript frontend
-				#$html = preg_replace('/pRegButton/', 'asdfadfd', $html);
-				$html = preg_replace('/<p id=pRegButton>.*?<\/p>/s', '', $html);
+				$html = preg_replace('/<p id=pBeginButton>.*?<\/p>/s', '', $html);
 			} else {
 				$handle = '';
 				$fingerprint = '';
