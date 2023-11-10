@@ -27,7 +27,6 @@
 		SetPrefs('draggable_spawn', 1);
 		SetPrefs('draggable_spawn_focus', 1);
 		SetPrefs('draggable', 1);
-		SetPrefs('draggable_reopen', 1);
 		SetPrefs('draggable_restore', 1);
 		SetPrefs('draggable_restore_collapsed', 1);
 		SetPrefs('draggable_arrange_viewport_resize', 1);
