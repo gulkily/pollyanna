@@ -4047,3 +4047,6 @@ when running as user, `hike stop` should not try to kill other users' processes 
 changing this setting should not need to rebuild the frontend:
 config/setting/admin/php/regrow_404_fork=1
 
+===
+
+`hike page ...` should support dialogs, such as authors
