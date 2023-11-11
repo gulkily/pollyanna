@@ -644,7 +644,9 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$param{'no_empty'} = 1;
 		$param{'no_heading'} = 1;
 		$param{'no_status'} = 1;
-		$txtIndex .= GetQueryAsDialog($query, 'AppliedLabels', 0, \%param);
+		my $dialogAppliedLabels = GetQueryAsDialog($query, 'AppliedLabels', 0, \%param);
+		$dialogAppliedLabels = AddAttributeToTag($dialogAppliedLabels, 'table', 'id', 'AppliedLabels');
+		$txtIndex .= $dialogAppliedLabels;
 	}
 
 	if (GetConfig('setting/html/item_page/toolbox_chain_next_previous')) {
