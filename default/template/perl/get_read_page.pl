@@ -126,7 +126,16 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 						)
 					)
 				)
-			";
+				AND (
+					file_hash NOT IN (
+						SELECT file_hash FROM item_attribute WHERE attribute = 'date' AND value <> '$pageDate'
+					)
+					OR
+					file_hash IN (
+						SELECT file_hash FROM item_attribute WHERE attribute = 'date' AND value = '$pageDate'
+					)
+				);
+			"; #todo should be date.sql template
 			#todo optimize this query
 			@files = DBGetItemList(\%queryParams);
 
@@ -539,6 +548,15 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 							AND value = '$pageDate'
 					)
 				)
+				AND (
+					file_hash NOT IN (
+						SELECT file_hash FROM item_attribute WHERE attribute = 'date' AND value <> '$pageDate'
+					)
+					OR
+					file_hash IN (
+						SELECT file_hash FROM item_attribute WHERE attribute = 'date' AND value = '$pageDate'
+					)
+				);
 			LIMIT 25
 		";
 		$txtIndex .= GetQueryAsDialog($queryDateList, $pageDate);
