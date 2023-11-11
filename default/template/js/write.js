@@ -234,8 +234,10 @@ function WriteSubmit (t) { // called when user submits write form //signMessage 
 						}
 						// once the message is signed, callback will submit the form
 						if (signMessageResult) {
+							// #todo there's a bug here where this is reached when it shouldn't be, and form fails to submit
 							return false; // uncomment this for duplicate unsigned messages feature
 						} else {
+							// #todo: if GetPrefs('draggable_spawn') is set, it should try to spawn item in new dialog instead of going to a new page
 							return true;
 						}
 					}
