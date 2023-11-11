@@ -976,7 +976,8 @@ sub GetItemAttributesDialog { # %file
 		#push @queryArguments, $fileHash;
 		#===
 		#todo: my $query = "SELECT DISTINCT attribute, value, source FROM item_attribute WHERE file_hash LIKE '$fileHash%' ORDER BY attribute";
-		my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE file_hash LIKE '$fileHash%' ORDER BY attribute";
+		my $query = "SELECT DISTINCT attribute, value FROM item_attribute WHERE attribute not in ('cookie', 'client') AND file_hash LIKE '$fileHash%' ORDER BY attribute";
+		#todo there shouldn't be duplicate items, maybe?
 		$itemInfoTemplate = GetQueryAsDialog($query, 'ItemAttributes'); # GetResultSetAsDialog() --> RenderField()
 		#note: GetResultSetAsDialog() has some special conditions for GetAttributesDialog()
 
