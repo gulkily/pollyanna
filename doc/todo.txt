@@ -12,6 +12,26 @@ titlebar.template should include this comment:
 <!-- / dialog_controls.template -->
 
 
+read-only mode for non-registered users
+
+
+add document.body.clientWidth and document.documentElement.clientWidth to jstest1.html
+
+index.sqlite3 should not always be zipped
+	when it is not zipped, demo is much smoother
+	also, when zipped, there should not be subdirectories inside zip file
+		the zip command flag is -j
+	relevant lines:
+		my $sizeSqliteZip = -s "$HTMLDIR/index.sqlite3.zip";
+		<a href="/index.sqlite3.zip">/index.sqlite3.zip</a> (<span id=sizeSqliteZip></span>) <br>
+		{ #without zip
+
+
+resultset dialogs should link to the full page and list total number of items
+
+
+feature check for window.event (or whatever it is) before using "event."
+	one browser where it causes problems: firefox 2.x (netscape 9)
 
 Inbox dialog should have id=
 	looks like there is also a bug with colspan= value missing in GetDialogX() in php version
