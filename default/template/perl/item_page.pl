@@ -563,27 +563,28 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 #
 #		my @itemReplies = SqliteQueryHashRef($query);
 
-		WriteLog('GetItemPage: scalar(@itemReplies) = ' . scalar(@itemReplies));
-		foreach my $itemReply (@itemReplies) {
-			WriteLog('GetItemPage: $itemReply = ' . $itemReply);
 
-			if ($itemReply->{'labels_list'} && index($itemReply->{'labels_list'}, 'hide') != -1) {
-				next;
-			}
+		if (GetConfig('setting/html/item_page/replies_list')) {
+			WriteLog('GetItemPage: replies_list: scalar(@itemReplies) = ' . scalar(@itemReplies));
+			# REPLIES LIST
+			foreach my $itemReply (@itemReplies) {
+				WriteLog('GetItemPage: replies_list: $itemReply = ' . $itemReply);
 
-			if ($itemReply->{'labels_list'} && index($itemReply->{'labels_list'}, 'notext') != -1) {
-				my $itemReplyTemplate = GetItemTemplate($itemReply); # GetItemPage() reply #notext
-				$txtIndex .= '<span class=advanced>' . $itemReplyTemplate . '</span>';
-			} else {
-				# does not #hastext
-				my $itemReplyTemplate = GetItemTemplate($itemReply); # GetItemPage() reply not #notext
-				#$itemReplyTemplate = '<span class=advanced>' . $itemReplyTemplate . '</span>';
-				$txtIndex .= $itemReplyTemplate;
+				if ($itemReply->{'labels_list'} && index($itemReply->{'labels_list'}, 'hide') != -1) {
+					next;
+				}
+
+				if ($itemReply->{'labels_list'} && index($itemReply->{'labels_list'}, 'notext') != -1) {
+					my $itemReplyTemplate = GetItemTemplate($itemReply); # GetItemPage() reply #notext
+					$txtIndex .= '<span class=advanced>' . $itemReplyTemplate . '</span>';
+				} else {
+					# does not #hastext
+					my $itemReplyTemplate = GetItemTemplate($itemReply); # GetItemPage() reply not #notext
+					#$itemReplyTemplate = '<span class=advanced>' . $itemReplyTemplate . '</span>';
+					$txtIndex .= $itemReplyTemplate;
+				}
 			}
 		}
-
-		# REPLIES LIST
-		#$txtIndex .= GetReplyListing($file{'file_hash'});
 
 		# REPLY FORM
 		#if (GetConfig('reply/enable')) {
