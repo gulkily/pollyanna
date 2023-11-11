@@ -21,6 +21,7 @@ sub GetPersonPage { # $personName
 
 	# COLLECT LIST OF APPROVED KEYS
 	my $keyList = '';
+	my $keyListQuery = '';
 	{
 		#my %params;
 		#		$params{'where_clause'} = "
@@ -62,6 +63,9 @@ sub GetPersonPage { # $personName
 				)
 		";
 		$keyList = GetQueryAsDialog($queryApprovedKeys, 'ApprovedKeys');
+		#todo templatize the query, use parameter injection
+		$keyListQuery = $queryApprovedKeys;
+
 		#$keyList = GetQueryAsDialog($queryApprovedKeys, 'Approved Keys');
 	}
 
@@ -169,6 +173,7 @@ sub GetPersonPage { # $personName
 		#"\n<hr>\n" .
 		#GetDialogX('<p>Approved Keys</p>') .
 		$keyList .
+		GetQuerySqlDialog($keyListQuery, 'ApprovedKeys') . #todo actually create template for the query etc
 		#"\n<hr>\n" .
 		#GetDialogX('<p>Pending Approval</p>') .
 		$pendingKeyList .
