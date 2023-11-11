@@ -97,7 +97,8 @@ sub GetItemHtmlLink { # $hash, [link caption], [#anchor] ; returns <a href=...
 					if (
 						(!(window.GetPrefs) || GetPrefs('draggable_spawn')) &&
 						(window.FetchDialogFromUrl) &&
-						document.getElementById
+						document.getElementById &&
+						!this.getAttribute('new_page')
 					) {
 						if (document.getElementById('$shortHash')) {
 							SetActiveDialog(document.getElementById('$shortHash'));
