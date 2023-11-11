@@ -270,6 +270,16 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		if ($fieldValue) {
 			my $itemHash = substr($fieldValue, 0, 40); #todo unhack
 			$fieldValue = GetItemHtmlLink($itemHash, DBGetItemTitle($itemHash, 16));
+
+			#kludge
+			#for chain_next and chain_previous fields, add new_page attribute to the a tag
+			#this is used in GetItemHtmlLink()
+			if (
+				$fieldName eq 'chain_next' ||
+				$fieldName eq 'chain_previous'
+			) {
+				$fieldValue = AddAttributeToTag($fieldValue, 'a', 'new_page', 1);
+			}
 		} else {
 			$fieldValue = '';
 		}
