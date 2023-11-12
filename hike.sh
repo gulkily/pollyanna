@@ -4,6 +4,8 @@
 # if using bash, run `source hike.sh` to activate the "hike" command
 # run `hike help` to see available commands
 
+# set -x
+# uncomment for debugging
 
 echo ==================
 echo Rejoice always
