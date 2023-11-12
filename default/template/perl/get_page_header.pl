@@ -109,7 +109,7 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 		}
 	}
 
-	if (GetConfig('setting/html/page_map_top')) {
+	if (GetConfig('setting/html/page_map_top') || GetConfig('setting/html/page_map')) {
 		require_once('dialog/page_map.pl');
 		$topMenuTemplate .= GetPageMapDialog();
 	}
