@@ -2336,6 +2336,7 @@ sub CheckForInstalledVersionChange {
 
 		PutConfig('current_version', $currVersion);
 
+		require_once('index_file.pl');
 		IndexFile($newChangelogFile);
 
 		return $currVersion;
