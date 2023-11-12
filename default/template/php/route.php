@@ -533,7 +533,15 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							$redirectPath = $redirectPath . '?origin=' . urlencode($path);
 						}
 
+						#todo
+						# this actually happens after a user generates a private key
+						# this can also cause a redirect loop,
+						# sometimes it can be due to a browser bug where a cached request is requested with the same cookie jar instead of the new cookie jar
+						# sometimes it can be due to a browser not allowing or supporting cookies
+						# but this can also happen when force_profile is on and the user does not have a cookie
+
 						RedirectWithResponse($redirectPath, 'Please begin session to continue.'); # /session.html /profile.html /welcome.html
+						#RedirectWithResponse($redirectPath, 'Welcome! Would you like a cookie?'); # /session.html /profile.html /welcome.html
 						if (! GetConfig('setting/admin/php/force_profile_fallthrough')) {
 							exit; // #todo this is bad to have here from a code readability perspective
 						}
