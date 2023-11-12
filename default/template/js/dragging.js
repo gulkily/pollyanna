@@ -1012,15 +1012,9 @@ function UpdateDialogList () {
 
 				/* #todo https://stackoverflow.com/questions/70956665/how-do-i-break-html-lists-in-columns-honoring-alphabetical-order-in-column-dire */
 
-				var displayTitle = '<b' + gt + dialogTitle.substring(0, 1) + '</b' + gt + dialogTitle.substring(1);
-				if (DialogIsVisible(allOpenDialogs[iDialog])) {
-					listContent = listContent + comma + '<a style="opacity: 80%" href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { return SpotlightDialog(\'' + dialogId + '\', this); }"' + gt + displayTitle + '</a' + gt;
-					// #todo classes and createElement
-				} else {
-					listContent = listContent + comma + '<a style="opacity: 100%" href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { return SpotlightDialog(\'' + dialogId + '\', this); }"' + gt + displayTitle + '</a' + gt;
-					// #todo classes and createElement
-				}
-				comma = ' ; ';
+				var displayTitle = dialogTitle;
+				listContent = listContent + comma + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { return SpotlightDialog(\'' + dialogId + '\', this); }"' + gt + displayTitle + '</a' + gt;
+				comma = ' ;<br> ';
 
 				//listContent = listContent + '<label for="c' + dialogId + '"' + gt + '<input type=checkbox name="c' + dialogId + '" id="c' + dialogId + '"' + gt + dialogId + '</label' + gt + '<br' + gt;
 				lstDialog.innerHTML = lstDialog.innerHTML + iDialog;
