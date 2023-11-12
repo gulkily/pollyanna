@@ -504,9 +504,14 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 
 		if (GetConfig('setting/zip/author')) {
 			if (scalar(@files) > 0) {
-				my $zipLink = '<a href="/author/' . $authorKey . '.zip">' . $authorKey . '.zip</a>'; #todo use RenderLink()
-				$zipLink = '<fieldset>' . $zipLink . '</fieldset>';
-				$txtIndex .= GetDialogX($zipLink, 'Archive'); # author.zip
+				my $zipPath = '/author/' . $authorKey . '.zip'; #todo use RenderLink()
+				my $zipLink = '<a href="' . $zipPath . '">' . $authorKey . '.zip</a>'; #todo use RenderLink()
+				my $HTMLDIR = GetDir('html');
+				my $zipSize = -s "$HTMLDIR/$zipPath"; #todo GetFileSize()
+				my $zipSizeWidget = GetFileSizeWidget($zipSize);
+				#my $zipSize = GetFileSizeWidget(GetFileSize($zipPath)); #todo
+				$zipLink = '<fieldset>' . $zipLink . ' (' . $zipSizeWidget . ')' . '</fieldset>';
+				$txtIndex .= GetDialogX($zipLink, 'Archive'); # author.zip GetArchiveDialog {}
 			} else {
 				$txtIndex .= GetDialogX('<fieldset><p>This author has not posted anything yet, <br>so no archive is available.</p></fieldset>', 'Archive');
 			}
