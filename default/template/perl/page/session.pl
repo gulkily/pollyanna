@@ -45,6 +45,7 @@ sub GetSessionPage { # returns session page
 		GetTemplate('html/maincontent.template') .
 		GetProfileDialog() .
 		GetKeychainDialog() .
+		#todo simplify session page and make these dialogs accessible via links
 		GetQueryAsDialog('session', 'ActiveSessions') .
 		GetQuerySqlDialog('session') .
 		$introDialog .
