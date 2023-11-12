@@ -801,7 +801,7 @@ sub GetSimilarTimestampsListing { # $fileHash, [$existingTimestamp] ; returns di
 		$query =~ s/\?/'$existingTimestamp'/;
 		$query =~ s/\?/'$existingTimestamp'/;
 
-		WriteLog('GetSimilarTimestampsListing: $query = ' . $query);
+		WriteLog('GetSimilarTimestampsListing: $query = ' . SqliteGetNormalizedQueryString($query));
 
 		my @result = SqliteQueryHashRef($query);
 
