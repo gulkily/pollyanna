@@ -97,6 +97,9 @@ sub SqliteMakeTables { # creates sqlite schema
 } # SqliteMakeTables()
 
 sub SqliteGetNormalizedQueryString { # $query ; returns normalized query string
+# sub SqliteNormalizeQuery {
+# sub NormalizeQuery {
+# sub NormalizedQuery {
 # sub SqliteGetFormattedQuery {
 	my $query = shift;
 	chomp $query;
