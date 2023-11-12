@@ -1,3 +1,5 @@
+why doesn't php InjectJs() use GetScriptTemplate() ?
+
 titlebar.template should include this comment:
 		<!-- note: dragging.js looks for a "b" inside of a class=titlebar -->
 

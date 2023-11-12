@@ -1,3 +1,27 @@
+//for route.php:
+
+			<p id=insPubKey onclick="
+				if (window.sharePubKey && window.getUserFp) {
+					var authorKey = getUserFp();
+					if (authorKey) {
+						sharePubKey();
+						window.location = '/author/' + authorKey + '/index.html';
+						return false;
+					}
+					/* else go to /write.html#inspubkey */
+					else {
+						return true;
+					}
+				}
+				else {
+					return true;
+				}
+			"><a href="/write.html#inspubkey">Join session</a></p>
+<!-- #todo verify that relativize_links works in above line -->
+
+
+
+
 $pid = pcntl_fork();
 if ($pid == -1) {
 	// something went wrong

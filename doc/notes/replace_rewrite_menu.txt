@@ -1,0 +1,9 @@
+config/setting/admin/index/rewrite_menu_after_index
+
+this makes the indexer go through all the existing templates under html/ and replace the menubar with an updated version.
+
+it is good for keeping the number counts like "Threads(123)" consistent in the menubar.
+
+it is not good to leave on while running `hike index` because it will slow it down.
+
+

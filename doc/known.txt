@@ -1,6 +1,13 @@
 Known Issues
 ============
 
+
+2023-11-07 22:08:13: (mod_fastcgi.c.451) FastCGI-stderr:PHP Warning:  mkdir(): Permission denied in /home/wsl/pollyanna/html/utils.php on line 653
+2023-11-07 22:08:13: (mod_fastcgi.c.451) FastCGI-stderr:PHP Warning:  mkdir(): No such file or directory in /home/wsl/pollyanna/html/utils.php on line 653
+2023-11-07 22:08:13: (mod_fastcgi.c.451) FastCGI-stderr:PHP Warning:  file_put_contents(/ff/09/ff096cfd.html.tmp): Failed to open stream: No such file or directory in /home/wsl/pollyanna/html/utils.php on line 665
+not sure what the cause is here, but it doesn't seem to affect anything
+	it might be that the subdirectory doesn't exist?
+
 sometimes when modifying utils.pl/index.pl/pages.pl, if the modified version has an error
 	hike refresh no longer works, and hike rebuild must be run
 

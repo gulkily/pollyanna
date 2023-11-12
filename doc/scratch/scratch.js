@@ -1,3 +1,75 @@
+				var displayTitle = '<b' + gt + dialogTitle.substring(0, 1) + '</b' + gt + dialogTitle.substring(1);
+				if (DialogIsVisible(allOpenDialogs[iDialog])) {
+					listContent = listContent + comma + '<a style="opacity: 80%" href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { return SpotlightDialog(\'' + dialogId + '\', this); }"' + gt + displayTitle + '</a' + gt;
+					// #todo classes and createElement
+				} else {
+					listContent = listContent + comma + '<a style="opacity: 100%" href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { return SpotlightDialog(\'' + dialogId + '\', this); }"' + gt + displayTitle + '</a' + gt;
+					// #todo classes and createElement
+				}
+				comma = ' ; ';
+
+
+
+// Assuming you have a reference to your dialog element as 'dialog'
+var dialogTop = 0;
+var dialogLeft = 0;
+
+if (window.innerHeight && window.innerWidth) {
+  // Use more standard methods to get the window dimensions
+  if (window.innerHeight / 2 < event.clientY) {
+    // If the mouse cursor is below the middle, position the dialog mostly above the cursor
+    dialogTop = (event.clientY - dialog.clientHeight) + 'px';
+  } else {
+    // Otherwise, position it below the mouse cursor
+    dialogTop = (event.clientY) + 'px';
+  }
+
+  if (window.innerWidth / 2 < event.clientX) {
+    // If the mouse cursor is to the right of center, position dialog mostly to the left of the cursor
+    dialogLeft = (event.clientX - dialog.clientWidth) + 'px';
+  } else {
+    // Otherwise, position it to the right of the mouse cursor
+    dialogLeft = (event.clientX) + 'px';
+  }
+} else {
+  dialogTop = (event.clientY) + 'px';
+  dialogLeft = (event.clientX) + 'px';
+}
+
+dialog.style.top = dialogTop;
+dialog.style.left = dialogLeft;
+
+
+
+
+
+
+			var dialogTop = 0;
+			var dialogLeft = 0;
+
+			if (window.innerHeight && window.innerHeight) { // #todo use more standard methods
+				//alert('DEBUG: SpotlightDialog: window.innerWidth = ' + window.innerWidth + '; window.innerHeight = ' + window.innerHeight);
+
+				if (window.innerHeight / 2 < event.clientY) {
+				// if mouse cursor is below middle, position dialog mostly above cursor
+					dialogTop = (event.clientY - dialog.style.height) + 'px';
+				} else {
+				// else, position it below mouse cursor
+					dialogTop = (event.clientY + 35) + 'px';
+				}
+
+
+				// if mouse cursor is to the right of center, position dialog mostly to the left of cursor
+				// else, position it to the right of mouse cursor
+			} else {
+				var dialogTop = (event.clientY - 35) + 'px';
+				var dialogLeft = (event.clientX - 15) + 'px';
+			}
+
+			dialog.style.top = dialogTop;
+			dialog.style.left = dialogLeft;
+
+
 
 // SpotlightDialog :
 

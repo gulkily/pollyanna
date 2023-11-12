@@ -87,6 +87,10 @@ handle_not_found.php: add to $validMakePageNames
 5c) add to validDialogs in route.php
 
 5d) add handler in pages.pl -D
+look for @queryDialogs
+
+5e) add handler in handle_not_found.php
+look for $basicDialogs
 
 6) ???
 
