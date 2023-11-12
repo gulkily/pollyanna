@@ -965,6 +965,8 @@ function HideDialog (dialog) { // takes dialog element as reference
 } // HideDialog()
 
 function UpdateDialogList () {
+// function UpdatePageMap () {
+// #todo finish renaming "dialog list" to "page map"
 // PageMap pagemap dialog list
 // pagemap.js
 // dialoglist.js
