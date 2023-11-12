@@ -7,5 +7,9 @@
             <option value=0>[No selection]</option>
         </select>
     </label>
+    <p class=beginner>
+    	These keys are stored on <br>
+    	your phone or computer. <br>
+    </p>
 </fieldset>
 <!-- / select_key.template -->
