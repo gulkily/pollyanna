@@ -275,8 +275,9 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 				'annoyances',
 				'labels',
 				'topics',
-				'session'
-			); # /dialog/
+				'session',
+				'judge'
+			); # /dialog/ # $basicDialogs
 
 			foreach ($basicDialogs as $basicDialog) {
 				if (
