@@ -508,10 +508,6 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			# 	}
 			# }
 
-			if (defined($file{'show_quick_vote'})) {
-				$windowParams{'menu'} = GetQuickVoteButtonGroup($file{'file_hash'}, $file{'vote_return_to'});
-			}
-
 			$windowParams{'id'} = substr($file{'file_hash'}, 0, 8);
 			$windowParams{'table_sort'} = 0; #disable table sort
 
