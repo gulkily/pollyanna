@@ -1868,13 +1868,13 @@ function ForkWithLoadingPage ($path) {
 } // ForkWithLoadingPage()
 
 function SqliteQueryBasic ($query) {
-    if (!class_exists('SQLite3') || !extension_loaded('sqlite3')) {
-        // The SQLite3 class or the SQLite extension is not available.
-        // You can issue a warning or handle this situation as needed.
-        // For example, you can log a message or throw an exception.
-        WriteLog('SqliteQueryBasic: warning: SQLite3 class or SQLite extension is not available!');
-        return '';
-    }
+	if (!class_exists('SQLite3') || !extension_loaded('sqlite3')) {
+		// The SQLite3 class or the SQLite extension is not available.
+		// You can issue a warning or handle this situation as needed.
+		// For example, you can log a message or throw an exception.
+		WriteLog('SqliteQueryBasic: warning: SQLite3 class or SQLite extension is not available!');
+		return '';
+	}
 
 	#todo more sanity
 
