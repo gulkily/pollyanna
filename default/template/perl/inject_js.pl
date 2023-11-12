@@ -235,7 +235,7 @@ sub GetScriptTemplate { # $script, \%data ; returns script based on name
 
 	my $script = shift;
 
-	if ($script =~ m/^([0-9a-z_]+)$/) {
+	if ($script =~ m/^([0-9a-z_\/]+)$/) {
 		$script = $1;
 		# passed sanity check
 	} else {
