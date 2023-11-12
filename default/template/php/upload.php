@@ -137,8 +137,17 @@ if (!empty($_FILES['uploaded_file'])) {
 
 						WriteLog("GetFileHash($path) returned $hash");
 
-						WriteLog("cd $scriptDir ; ./pages.pl \"$hash\"");
-						WriteLog(`cd $scriptDir ; ./pages.pl "$hash"`);
+						if (GetConfig('admin/php/regrow_404_fork')) {
+							#hack
+							$fileHtmlPath = './' . GetHtmlFilename($hash); // path for new html file
+							PutFile($fileHtmlPath, GetItemPlaceholderPage('image', $hash, GetHtmlFilename($hash), $path));
+							WriteLog('upload.php: regrow_404_fork: do nothing');
+
+						} else {
+							WriteLog('upload.php: regrow_404_fork was FALSE: call pages.pl');
+							WriteLog("cd $scriptDir ; ./pages.pl \"$hash\"");
+							WriteLog(`cd $scriptDir ; ./pages.pl "$hash"`);
+						}
 
 						if (isset($replyTo) && $replyTo) {
 							WriteLog("\$replyTo = $replyTo");
