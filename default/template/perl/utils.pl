@@ -2445,10 +2445,13 @@ sub file_exists { # $file ; port of php file_exists()
 		return 0;
 	}
 	if (-e $file && -f $file && !-d $file) {
+		WriteLog('file_exists: $file = ' . $file . '; TRUE');
 		return 1;
 	} else {
+		WriteLog('file_exists: $file = ' . $file . '; TRUE');
 		return 0;
 	}
+	WriteLog('file_exists: warning: unreachable reached; caller = ' . join(',', caller));
 	return 0; #unreachable code
 } # file_exists()
 
