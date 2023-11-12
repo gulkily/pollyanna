@@ -412,6 +412,11 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$itemTemplate = '';
 	}
 
+	if ($file{'item_type'} eq 'image' && GetConfig('setting/html/item_page/image_full_size_link')) { # todo feature flag using GetConfig()
+		my $linkToFullImage = GetFileLink(\%file, 'Image');
+		$txtIndex .= GetDialogX($linkToFullImage, 'Full Image'); # full size image
+	}
+
 	# REPLY FORM
 	if (GetConfig('setting/reply/enable')) {
 		$txtIndex .= GetReplyForm($file{'file_hash'});
