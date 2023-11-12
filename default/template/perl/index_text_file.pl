@@ -121,6 +121,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 
 	WriteLog('IndexTextFile: $fileHash = ' . $fileHash);
 	if (GetConfig('admin/logging/write_chain_log')) {
+		require_once('chain.pl');
 		$addedTime = AddToChainLog($fileHash); # IndexTextFile();
 		WriteLog('IndexTextFile: $addedTime from AddToChainLog($fileHash) = ' . $addedTime);
 	} else {
