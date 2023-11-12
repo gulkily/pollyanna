@@ -778,6 +778,8 @@ sub GetSimilarTimestampsListing { # $fileHash, [$existingTimestamp] ; returns di
 	}
 	chomp $fileHash;
 
+	WriteLog("GetSimilarTimestampsListing($fileHash)");
+
 	if (IsItem($fileHash)) {
 		# ok
 	} else {
