@@ -35,12 +35,34 @@ sub GetItemListHtml { # @files(array of hashes) ; takes @files, returns html lis
 
 	my $itemList = '';
 	my $itemComma = '';
+	my $itemLimit = 0; # implemented by counting items rather than using LIMIT in SQL
+
+	if ($flags{'item_limit'}) {
+		WriteLog('GetItemListHtml: $flags{item_limit} = ' . $flags{'item_limit'});
+		$itemLimit = $flags{'item_limit'};
+		if ($itemLimit !~ m/^\d+$/) {
+			$itemLimit = int($itemLimit);
+		} else {
+			WriteLog('GetItemListHtml: warning: $itemLimit failed sanity check');
+			$itemLimit = 0;
+		}
+		#todo more sanity checks
+	}
 
 	my $itemListTemplate = GetTemplate('html/widget/item_list.template');
 
 	#shift @files;
 
+	my $itemCount = 0;
+
 	foreach my $rowHashRef (@files) { # loop through each file
+		if ($itemLimit) {
+			if ($itemCount >= $itemLimit) {
+				WriteLog('GetItemListHtml: $itemCount >= $itemLimit; breaking');
+				last;
+			}
+		}
+
 		my %row = %{$rowHashRef};
 
 		$row{'vote_buttons'} = 1;
