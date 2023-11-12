@@ -31,7 +31,7 @@ button, input {
 }
 #serverResponse {
 /* responses from server */
-    background-color: $colorWindow;
+    background-color: $colorHighlightReady;
     color: $colorText;
     padding: 5pt;
     spacing: 5pt;
@@ -49,5 +49,10 @@ a:focus, a:active {
 }
 input:focus, textarea:focus, button:focus, *:focus {
     background-color: orange !important;
+}
+.titlebarButtons {
+	float: right;
+	border: 0;
+	font-size: x-small;
 }
 /* / theme/union/additional.css */
