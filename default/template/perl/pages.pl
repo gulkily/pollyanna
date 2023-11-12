@@ -1801,7 +1801,11 @@ while (my $arg1 = shift @foundArgs) {
 					# /dialog/judge.html
 
 					my $dialogTitle = $makeDialogArg; #todo make nicer
-					my $dialog = GetQueryAsDialog($makeDialogArg, $dialogTitle);
+					my $columns = '';
+					if ($makeDialogArg eq 'chain') {
+						$columns = 'special_title_labels_list_author,chain_order,chain_timestamp,add_timestamp,file_hash,tagset_chain,cart';
+					}
+					my $dialog = GetQueryAsDialog($makeDialogArg, $dialogTitle, $columns);
 					WriteMessage("-D $makeDialogArg\n");
 					my $dialogOutputPath = 'dialog/' . $makeDialogArg . '.html';
 					PutHtmlFile($dialogOutputPath, $dialog);
