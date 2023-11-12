@@ -2897,8 +2897,11 @@ sub EnsureDirsThatShouldExist { # creates directories expected later
 		"$HTMLDIR/action",
 		"$HTMLDIR/tag", #tag items for tags
 		"$CONFIGDIR",
+		"$CONFIGDIR/res",
+		"$CONFIGDIR/res/image",
 		"$CONFIGDIR/template",
 		"$CONFIGDIR/setting/admin",
+		"$CONFIGDIR/setting/admin/token",
 		"$CONFIGDIR/setting/admin/php",
 		"$CONFIGDIR/setting/admin/php/post",
 		"$CONFIGDIR/setting/admin/php/upload",
