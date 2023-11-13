@@ -163,7 +163,7 @@ sub GetHtmlToolboxes {
 		;
 
 		my $htmlToolboxWindow = GetDialogX($htmlToolbox, 'Search');
-		# $htmlToolboxWindow = '<span class=advanced>' . $htmlToolboxWindow . '</span>';
+		$htmlToolboxWindow = '<span class=advanced>' . $htmlToolboxWindow . '</span>';
 		$html .= $htmlToolboxWindow;
 	} # if ($file{'item_title'})
 
