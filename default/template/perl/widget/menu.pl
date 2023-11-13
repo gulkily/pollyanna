@@ -33,8 +33,12 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template'; ret
 
 	my $listText = GetTemplate('list/' . $listName);
 
+	if (index($listText, "\r") != -1) {
+		WriteLog('GetMenuFromList: warning: $listText contains carriage return; caller = ' . join(',', caller));
+	}
 
 	#	$listText = str_replace(' ', "\n", $listText);
+	$listText = str_replace("\r", "\n", $listText);
 	$listText = str_replace("\n\n", "\n", $listText);
 
 	#WriteLog('GetMenuFromList: $listText = ' . $listText);
@@ -132,6 +136,11 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template'; ret
 				$menuItems .= $menuComma;
 			} else {
 				$menuComma = GetTemplate('html/menu_separator.template');
+			}
+
+			if (index($menuItemUrl, "\r") != -1 || index($menuItemCaption, "\r") != -1 || index($templateName, "\r") != -1) {
+				WriteLog('GetMenuFromList: warning: $menuItemUrl or $menuItemCaption or $templateName failed sanity check; caller = ' . join(',', caller));
+				return '';
 			}
 
 			my $menuItemComposed = GetMenuItem($menuItemUrl, $menuItemCaption, $templateName);
@@ -275,6 +284,21 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 	my $address = shift;
 	my $caption = shift;
 
+	chomp $address;
+	chomp $caption;
+
+	if (!$address) {
+		return '';
+	}
+	if (!$caption) {
+		return '';
+	}
+
+	if (index($address, "\r") != -1 || index($caption, "\r") != -1) {
+		WriteLog('GetMenuItem: warning: $address or $caption failed sanity check; caller = ' . join(',', caller));
+		return '';
+	}
+
 	#todo more sanity
 
 	WriteLog('GetMenuItem: $address = ' . $address . '; $caption = ' . $caption);
@@ -356,7 +380,7 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 		# menu counters
 		#Threads(5) Tags(3) People(7) Labels(5)
 		# topics counter
-		#todo this should be a list instead of hard-coded
+		#todo this should be a list instead of hard-coded (or automatically look for template/query/foo)
 		my $itemCount = SqliteGetCount($menuName);
 		# my $threadCount = SqliteGetValue('thread_count');
 		if ($itemCount) {
@@ -370,6 +394,8 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 	$menuItem =~ s/\$caption/$caption/g;
 
 	if ($address eq '/frame.html') {
+		# frame.html displays the keyboard frame
+		# doing this prevents frame re-nesting
 		$menuItem = AddAttributeToTag($menuItem, 'a ', 'target', '_top');
 	}
 
