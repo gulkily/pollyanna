@@ -7,6 +7,8 @@ use 5.010;
 sub GetHelpPage { # returns html for help page (/help.html)
 # sub GetHelpDialog()
 # sub GetMenuPage()
+	WriteLog('GetHelpPage()');
+
 	my $txtIndex = "";
 
 	$txtIndex =
