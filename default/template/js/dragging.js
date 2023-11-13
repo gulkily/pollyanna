@@ -885,7 +885,7 @@ function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was
 	if (dialog) {
 		//alert('DEBUG: DialogIsVisible(dialog):' + DialogIsVisible(dialog));
 
-		if (DialogIsVisible(dialog)) {
+		if (0 && DialogIsVisible(dialog)) {
 			//alert('DEBUG: SpotlightDialog: DialogIsVisible(dialog) was TRUE');
 
 			dialog.style.display = 'none';
