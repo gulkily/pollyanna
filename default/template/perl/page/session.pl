@@ -12,7 +12,9 @@ sub GetKeychainDialog { # returns empty string if requirements not met
 	) {
 		my $html =
 			'<form name=formSelectKey>' .
+			'<span class=advanced>' .
 			GetDialogX(GetTemplate('html/select_key.template'), 'Keychain') .
+			'</span>' .
 			'</form>'
 		;
 		return $html;
@@ -20,7 +22,7 @@ sub GetKeychainDialog { # returns empty string if requirements not met
 
 	#return '<!-- GetKeychainDialog: warning: requirements not met -->'; #todo
 	return '<!-- GetKeychainDialog: warning: requirements not met -->'; #todo
-}
+} # GetKeychainDialog()
 
 sub GetSessionPage { # returns session page
 	#require_once('dialog/query_as_dialog.pl');
@@ -46,7 +48,7 @@ sub GetSessionPage { # returns session page
 		GetProfileDialog() .
 		GetKeychainDialog() .
 		#todo simplify session page and make these dialogs accessible via links
-		GetQueryAsDialog('session', 'ActiveSessions') .
+		'<span class=advanced>' . GetQueryAsDialog('session', 'ActiveSessions') . '</span>' .
 		GetQuerySqlDialog('session') .
 		$introDialog .
 		GetPageFooter('session')
