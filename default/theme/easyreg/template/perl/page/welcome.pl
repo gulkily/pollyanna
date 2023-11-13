@@ -7,7 +7,7 @@ use 5.010;
 sub GetWelcomePage {
 	my $html =
 		GetPageHeader('welcome') .
-		GetDialogX(GetTemplate('html/page/welcome.template'), ' ') . # this is a bit of a hack, should really not be a titlebar
+		GetDialogX(GetTemplate('html/page/welcome.template'), 'Welcome') . # this is a bit of a hack, should really not be a titlebar
 		GetDialogX(GetTemplate('html/page/content.template'), 'Please Share') .
 		GetDialogX(GetTemplate('html/page/rules.template'), 'Ground Rules') .
 		GetDialogX(GetTemplate('html/page/privacy.template'), 'Privacy') .
