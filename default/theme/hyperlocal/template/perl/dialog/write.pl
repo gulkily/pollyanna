@@ -17,7 +17,7 @@ sub GetWriteDialog {
 		#todo sanity check
 	}
 
-	my $formWrite = GetWriteForm2();
+	my $formWrite = GetWriteForm();
 
 	my $dialog = GetDialogX($formWrite, $dialogTitle);
 
@@ -28,7 +28,7 @@ sub GetWriteDialog {
 	return $dialog;
 } # GetWriteDialog()
 
-sub GetWriteForm2 { # $dialogTitle ; returns write form (for composing text message)
+sub GetWriteForm { # $dialogTitle ; returns write form (for composing text message)
 # sub GetWriteForm {
 	# renamed so that old references which assumed it is a dialog break and can be fixed
 

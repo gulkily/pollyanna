@@ -14,14 +14,14 @@ sub GetWriteDialog {
 		#todo sanity check
 	}
 
-	my $formWrite = GetWriteForm2();
+	my $formWrite = GetWriteForm();
 
 	my $dialog = GetDialogX($formWrite, $dialogTitle);
 
 	return $dialog;
 } # GetWriteDialog()
 
-sub GetWriteForm2 { # $dialogTitle ; returns write form (for composing text message)
+sub GetWriteForm { # $dialogTitle ; returns write form (for composing text message)
 # sub GetWriteForm {
 	# renamed so that old references which assumed it is a dialog break and can be fixed
 
@@ -82,6 +82,8 @@ sub GetWriteForm2 { # $dialogTitle ; returns write form (for composing text mess
 	$writeForm =~ s/\$initText/$initText/g;
 
 	if (GetConfig('admin/js/enable')) {
+		WriteLog('GetWriteForm: js is ON, write_form_optimize_for_delivery = ' . GetConfig('admin/js/write_form_optimize_for_delivery'));
+
 		# javascript is enabled, add event hooks
 		my $writeOnChange = "if (window.CommentOnChange) { return CommentOnChange(this, 'compose'); } else { return true; }";
 		$writeForm = AddAttributeToTag($writeForm, 'textarea', 'onchange', $writeOnChange);
@@ -96,6 +98,7 @@ sub GetWriteForm2 { # $dialogTitle ; returns write form (for composing text mess
 		}
 
 		if (GetConfig('admin/js/write_form_optimize_for_delivery')) {
+			# this makes onclick return true, allowing the form to submit immediately, before attempting to sign the message
 			$writeForm = AddAttributeToTag(
 				$writeForm,
 				'input type=submit',
@@ -103,6 +106,7 @@ sub GetWriteForm2 { # $dialogTitle ; returns write form (for composing text mess
 				"this.value = 'Meditate...'; if (window.WriteSubmit) { setTimeout('WriteSubmit();', 100); return true; } else { return true; }" #write #optimize_for_delivery = true
 			);
 		} else {
+			# this attempts to sign the message before sending, which has some edge cases where it breaks the send button
 			$writeForm = AddAttributeToTag(
 				$writeForm,
 				'input type=submit',
