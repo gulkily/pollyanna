@@ -1845,15 +1845,15 @@ function ForkWithLoadingPage ($path) {
 		/* my */ $bodyColor = GetThemeColor('background'); #todo
 
 		if (1) { # with spinner image, todo: check for /loading.gif exists
-			/* my */ $htmlPlaceholder = '<html><head><title>Loading...</title><meta http-equiv="refresh" content="1;"></head><body text="$textColor" bgcolor="$bodyColor"><table border=0 cellpadding=5 cellspacing=5><tr valign=middle><td><img src=/loading.gif height=48 width=48></td><td><font size=7 face=arial>Meditate...</font></td></tr></table></body></html>';
+			/* my */ $htmlPlaceholder = '<html><head><title>Loading...</title><meta http-equiv="refresh" content="3;"></head><body text="$textColor" bgcolor="$bodyColor"><table border=0 cellpadding=5 cellspacing=5><tr valign=middle><td><img src=/loading.gif height=48 width=48></td><td><font size=7 face=arial>Meditate...</font></td></tr></table></body></html>';
 		} else {
-			/* my */ $htmlPlaceholder = '<html><head><title>Loading...</title><meta http-equiv="refresh" content="1;"></head><body text="$textColor" bgcolor="$bodyColor">Meditate...</body></html>';
+			/* my */ $htmlPlaceholder = '<html><head><title>Loading...</title><meta http-equiv="refresh" content="3;"></head><body text="$textColor" bgcolor="$bodyColor">Meditate...</body></html>';
 		}
 
 		if (GetConfig('setting/admin/js/enable')) {
 			# this is necessary for at least safari 5.1.7
 			# maybe should even do it always regardless of js setting?
-			$htmlPlaceholder = AddAttributeToTag($htmlPlaceholder, 'body', 'onload', "setTimeout('window.location.reload()',900)");
+			$htmlPlaceholder = AddAttributeToTag($htmlPlaceholder, 'body', 'onload', "setTimeout('window.location.reload()',3000)");
 		}
 
 		$htmlPlaceholder = str_replace('$textColor', $textColor, $htmlPlaceholder);
