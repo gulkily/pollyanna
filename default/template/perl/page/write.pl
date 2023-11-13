@@ -38,8 +38,11 @@ sub GetWritePage { # returns html for write page
 	$writePageHtml .= $writeForm;
 
 	if (GetConfig('setting/html/write_options')) {
+		#todo should be called tools, maybe?
 		$writePageHtml .= $writeOptions;
 	}
+
+	$writePageHtml .= '<span class=advanced>' . GetDialogX(GetTemplate('html/form/writing.template'), 'Settings') . '</span>'; # write_settings
 
 	#if (GetConfig('setting/admin/js/enable')) {
 	#	$writePageHtml .= GetDialogX(GetTemplate('html/form/writing.template'), 'Options');
