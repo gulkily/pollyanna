@@ -78,9 +78,16 @@ sub GetTokenDefs {
 		},
 		{ # server receipt time of message
 			'token'   => 'received',
-			'mask'    => '^(received)(\W+)([0-9]{10})',
+			'mask'    => '^(received)(\W+)([0-9]{10})', # Received:
 			'mask_params'    => 'mgi',
 			'message' => '[Received]',
+			'apply_to_self' => 1
+		},
+		{ # server receipt time of message
+			'token'   => 'sent',
+			'mask'    => '^(sent)(\W+)([0-9]{10})', # Sent:
+			'mask_params'    => 'mgi',
+			'message' => '[Sent]',
 			'apply_to_self' => 1
 		},
 		{ # date in yyyy-mm-dd format

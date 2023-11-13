@@ -544,6 +544,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 						time
 						title
 						track
+						sent
 					); #tokenSanityCheck
 					#### TODO #TODO there should really really be a warning when this doesn't pan out, because ...
 
