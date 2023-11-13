@@ -896,12 +896,13 @@ sub GetHashComparisonDialog {
 	my %params;
 	$params{'no_heading'} = 1;
 	$params{'no_status'} = 1;
+	$params{'id'} = 'Hashes';
 
 	my $dialog = GetQueryAsDialog($query, 'Hashes', '', \%params);
 	$dialog = '<span class=advanced>' . $dialog . '</span>';
 
 	return $dialog;
-}
+} # GetHashComparisonDialog()
 
 sub GetTimestampsDialog {
 	my $fileHash = shift;
@@ -912,12 +913,13 @@ sub GetTimestampsDialog {
 	my %params;
 	$params{'no_heading'} = 1;
 	$params{'no_status'} = 1;
+	$params{'id'} = 'Timestamps';
 
 	my $dialog = GetQueryAsDialog($query, 'Timestamps', '', \%params);
 	$dialog = '<span class=advanced>' . $dialog . '</span>';
 
 	return $dialog;
-}
+} # GetTimestampsDialog()
 
 sub GetNextPreviousDialog {
 # sub GetChainDialog {
