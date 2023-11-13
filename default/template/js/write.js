@@ -251,9 +251,27 @@ function WriteSubmit (t) { // called when user submits write form //signMessage 
 			//alert('DEBUG: no private key, basic submit');
 		}
 	} else {
-		//alert('DEBUG: Test Failed: window.getPrivateKey: ' + !!window.getPrivateKey + '; window.signMessage: ' + !!window.signMessage);
-	}
+		// #todo add featureflag
+		if (0) {
+			//alert('DEBUG: window.getPrivateKey && window.signMessage test failed, falling back to Sent: footnote');
+			var d = new Date();
+			var n = d.getTime();
+			n = Math.ceil(n / 1000);
 
+			var textbox = document.getElementById('comment');
+			var composeForm = document.getElementById('compose');
+
+			if (textbox && composeForm) {
+				var message = textbox.value;
+				message = message + '\n-- \nSent: ' + n + '\n';
+				//textbox.value = message; #todo polish and uncomment this
+				composeForm.submit();
+			}
+		} else {
+			// chose not to add client-side timestamp
+			return true;
+		}
+	}
 	window.eventLoopFresh = 0; // disables fresh.js. may not be a wise move here.
 
 	//alert('DEBUG: WriteSubmit: about to return true');
