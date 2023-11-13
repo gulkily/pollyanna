@@ -852,3 +852,9 @@ export default function potpack(boxes) {
 		fill: (area / (width * height)) || 0 // space utilization
 	};
 }
+
+
+var d = new Date();// # js time() cheatsheet
+var n = d.getTime();// # js time() cheatsheet
+n = Math.ceil(n / 1000);// # js time() cheatsheet
+
