@@ -68,7 +68,7 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 	#this would require some server-side additions too, unless we use the old-style pipe-separated syntax
 
 	if (GetConfig('setting/admin/js/enable')) {
-		$txtIndex .= GetDialogX(GetTemplate('html/form/writing.template'), 'Writing');
+		$txtIndex .= GetDialogX(GetTemplate('html/form/writing.template'), 'Writing'); # write_settings
 	}
 
 	$txtIndex .= GetOperatorDialog();
