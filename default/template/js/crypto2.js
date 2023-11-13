@@ -487,14 +487,16 @@ function signMessage () { // find the compose textbox and sign whatever is in it
 
 			openpgp.config.show_version = false; // don't add openpgp version message to output
 			openpgp.config.show_comment = false; // don't add comment to output
-			openpgp.sign(options).then(function(signed) {
-				// begin signing process
+			openpgp.sign(options).then(
+				function(signed) {
+					// begin signing process
 
-				// put the signed data into th textbox when it's done
-				textbox.value = signed.data;
-				// submit the form
-				composeForm.submit();
-			});
+					// put the signed data into th textbox when it's done
+					textbox.value = signed.data;
+					// submit the form
+					composeForm.submit();
+				}
+			);
 			return false; // don't submit the form yet, will submit after signed
 		}
 		return true; // let the form submit
