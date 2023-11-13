@@ -87,7 +87,7 @@ sub ensure_module { # $path ; ensures module is available under config/
 		return 0;
 	}
 
-	WriteLog('ensure_module(' . $module . ')');
+	WriteLog('ensure_module(' . $module . '); caller = ' . join(',', caller));
 
 	state $path = GetDir('config') . '/template/perl/' . $module;
 	my $localPath = './' . $module;
