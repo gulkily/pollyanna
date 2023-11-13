@@ -14,6 +14,7 @@ sub GetDataDialog {
 	state $HTMLDIR = GetDir('html');
 	my $sizeTxtZip = -s "$HTMLDIR/txt.zip";
 	my $sizeImageZip = -s "$HTMLDIR/image.zip";
+	my $sizeSqlite = -s "$HTMLDIR/index.sqlite3";
 	my $sizeSqliteZip = -s "$HTMLDIR/index.sqlite3.zip";
 	my $sizeTreeZip = -s "$HTMLDIR/tree.zip";
 
@@ -32,6 +33,11 @@ sub GetDataDialog {
 		$sizeSqliteZip = 0;
 	}
 
+	$sizeSqlite = GetFileSizeWidget($sizeSqlite);
+	if (!$sizeSqlite) {
+		$sizeSqlite = 0;
+	}
+
 	$sizeTreeZip = GetFileSizeWidget($sizeTreeZip);
 	if (!$sizeTreeZip) {
 		$sizeTreeZip = 0;
@@ -39,6 +45,7 @@ sub GetDataDialog {
 
 	$dialog = str_replace('<span id=sizeTxtZip></span>', '<span id=sizeTxtZip>' . $sizeTxtZip . '</span>', $dialog);
 	$dialog = str_replace('<span id=sizeImageZip></span>', '<span id=sizeImageZip>' . $sizeImageZip . '</span>', $dialog);
+	$dialog = str_replace('<span id=sizeSqlite></span>', '<span id=sizeSqlite>' . $sizeSqlite . '</span>', $dialog);
 	$dialog = str_replace('<span id=sizeSqliteZip></span>', '<span id=sizeSqliteZip>' . $sizeSqliteZip . '</span>', $dialog);
 	$dialog = str_replace('<span id=sizeTreeZip></span>', '<span id=sizeTreeZip>' . $sizeTreeZip . '</span>', $dialog);
 	$dialog = str_replace('<span id=sizeTreeZip></span>', '<span id=sizeTreeZip>' . $sizeTreeZip . '</span>', $dialog);
@@ -105,11 +112,11 @@ sub MakeDataZips {
 				rename("$HTMLDIR/index.sqlite3.zip.tmp", "$HTMLDIR/index.sqlite3.zip");
 			}
 
-			#{ #without zip
-				#my $CACHEDIR = GetDir('cache');
-				#WriteLog('MakeDataZips: copy(' . "$CACHEDIR/b/index.sqlite3" . ', ' . "$HTMLDIR/index.sqlite3" . ')');
-				#copy("$CACHEDIR/b/index.sqlite3", "$HTMLDIR/index.sqlite3");
-			#}
+			{ #without zip
+				my $CACHEDIR = GetDir('cache');
+				WriteLog('MakeDataZips: copy(' . "$CACHEDIR/b/index.sqlite3" . ', ' . "$HTMLDIR/index.sqlite3" . ')');
+				copy("$CACHEDIR/b/index.sqlite3", "$HTMLDIR/index.sqlite3");
+			}
 
 			PutCache('touch/zip', GetTime());
 		} else {

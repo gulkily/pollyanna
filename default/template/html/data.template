@@ -12,6 +12,7 @@
 </p>
 
 <p>
+    <a href="/index.sqlite3">/index.sqlite3</a> (<span id=sizeSqlite></span>) <br>
     <a href="/index.sqlite3.zip">/index.sqlite3.zip</a> (<span id=sizeSqliteZip></span>) <br>
     Contains index of items in SQLite database <br>
 </p>

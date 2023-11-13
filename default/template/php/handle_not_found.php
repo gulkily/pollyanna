@@ -322,6 +322,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			$path == '/data.html' ||
 			$path == '/txt.zip' ||
 			$path == '/tree.zip' ||
+			$path == '/index.sqlite3' ||
 			$path == '/index.sqlite3.zip'
 		) {
 			WriteLog('HandleNotFound: found data page');
