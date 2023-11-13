@@ -11,6 +11,7 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 # $columns = comma-separated column names. use '' if you don't want to specify
 # %flags = flags
 # no_no_results = returns empty string if no results
+# query_sql = prints query in dialog (advanced layer) #todo
 #
 # ATTENTION: the first member of the @result array is the list of columns
 # this list (and order) of columns is used if $columns parameter is not specified
@@ -225,7 +226,7 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 			$param{'id'} = $flags{'id'};
 		}
 
-		if (0) {
+		if (0) { #todo pagination
 			$flags{'page_query'} = 'compost';
 			$flags{'page_current'} = 1;
 			$flags{'page_item_count'} = 500;
