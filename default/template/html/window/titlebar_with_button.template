@@ -2,7 +2,7 @@
 <tr bgcolor="$colorTitlebar" class=titlebar>
 	<td colspan=$contentColumnCount>
 		<span class=titlebarButtons>
-			<button title=skip class=skip>$btnCloseCaption</button>
+			<button title=expand class=expand>#</button>
 			<button title=close class=close>x</button>
 		</span>
 		<font color="$colorTitlebarText"><b>$windowTitle</b></font>

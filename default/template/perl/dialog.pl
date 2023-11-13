@@ -254,11 +254,18 @@ sub GetDialogX2 { # \%paramHash ; returns window
 			my $windowTitlebar = GetTemplate('html/window/titlebar_with_button.template'); #window_titlebar_buttons
 
 			if (GetConfig('setting/admin/js/enable')) {
-				$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=skip', 'onclick', "if (window.CollapseWindowFromButton) { return !CollapseWindowFromButton(this); } return false;");
-				#todo
-				#$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=skip', 'onclick', "if (window.ShowAll && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;"); #todo add colla
+				#$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=skip', 'onclick', "if (window.CollapseWindowFromButton) { return !CollapseWindowFromButton(this); } return false;");
+				#skip button
+
+				$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=expand', 'onclick', "if (window.ShowAll && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;"); #todo add colla
+				#expand button
+
 				$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=close', 'onclick', "if (window.CloseDialog) { return CloseDialog(this) }");
+				#close button
+
 				# $windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=close', 'onclick', "if (window.GetParentDialog) { GetParentDialog(this).remove(); if (window.UpdateDialogList) { UpdateDialogList(); } }");
+				#old close button
+
 				$windowTitlebar = AddAttributeToTag($windowTitlebar, 'td', 'ondblclick', "
 					if (window.CollapseWindowFromButton) {
 						var button = this.getElementsByClassName('skip');
