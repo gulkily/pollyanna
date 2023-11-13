@@ -1,0 +1,13 @@
+concept: write
+
+purpose: let user write things to others
+
+state: no states
+
+actions:
+	write (t: comment)
+		store new message as text file
+		optionally: index text file, integrate into website
+
+operational principle:
+	offer a text field to the user with a send button, accept input
