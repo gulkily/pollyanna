@@ -81,12 +81,29 @@ fi
 
 if [ $1 = clean ] # hike clean
 	then
-		time ./default/template/sh/clean.sh
-		echo ""
-		echo "==============="
-		echo "clean complete!"
-		echo "                            ==============="
-		echo "                            clean complete!"
+	  if [ "$2" = all ] # hike clean all
+	    then
+        time ./default/template/sh/clean.sh
+        echo ""
+        echo "==============="
+        echo "clean complete!"
+        echo "                            ==============="
+        echo "                            clean complete!"
+    fi
+	  if [ "$2" = html ] # hike clean all
+	    then
+        time ./default/template/sh/_dev_clean_html.sh
+        echo ""
+        echo "==============="
+        echo "clean html complete!"
+        echo "                            ===================="
+        echo "                            clean html complete!"
+    fi
+    if [ ! "$2" ]
+      then
+        echo clean all = clean all
+        echo clean html = clean html
+    fi
 fi
 
 if [ $1 = rebuild ]

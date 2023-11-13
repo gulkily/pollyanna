@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#./_dev_clean_html
+#./_dev_clean_html.sh
 
 # this script will clean html to make room for new html
 
