@@ -652,14 +652,14 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$param{'no_empty'} = 1;
 		$param{'no_heading'} = 1;
 		$param{'no_status'} = 1;
-		my $dialogAppliedLabels = GetQueryAsDialog($query, 'AppliedLabels', 0, \%param);
+		my $dialogAppliedLabels = '<span class=advanced>' . GetQueryAsDialog($query, 'AppliedLabels', 0, \%param) . '</span>';
 		$dialogAppliedLabels = AddAttributeToTag($dialogAppliedLabels, 'table', 'id', 'AppliedLabels');
 		$txtIndex .= $dialogAppliedLabels;
 	}
 
 	if (GetConfig('setting/html/item_page/toolbox_chain_next_previous')) {
 		#todo optimize by joining with above
-		$txtIndex .= GetNextPreviousDialog($file{'file_hash'});
+		$txtIndex .= '<span class=advanced>' . GetNextPreviousDialog($file{'file_hash'}) . '</span>';
 	}
 
 	if (GetConfig('setting/html/item_page/toolbox_timestamps')) {
