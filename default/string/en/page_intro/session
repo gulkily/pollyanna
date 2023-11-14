@@ -1,12 +1,14 @@
 Log in without a password or any other credentials. <br>
 <br>
 You can do this from any phone, any computer, any other device. <br>
-<br>
-This is done with a combination of session cookies, client-stored private keys, <br>
-and hash-based anonymous client fingerprints. <!-- and operator oversight --><br>
-<br>
-Your private information, such as your phone number, email address, and name, is not <br>
-required unless you choose to reveal it of your own volition.<br>
-<br>
-We hope you find this place welcoming and safe.<br>
-<br>
+<span class=advanced>
+	<br>
+	This is done with a combination of session cookies, client-stored private keys, <br>
+	and hash-based anonymous client fingerprints. <!-- and operator oversight --><br>
+	<br>
+	Your private information, such as your phone number, email address, and name, is not <br>
+	required unless you choose to reveal it of your own volition.<br>
+	<br>
+	We hope you find this place welcoming and safe.<br>
+	<br>
+</span>
