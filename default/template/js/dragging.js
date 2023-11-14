@@ -1014,7 +1014,7 @@ function UpdateDialogList () {
 
 				var displayTitle = dialogTitle;
 				listContent = listContent + comma + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { return SpotlightDialog(\'' + dialogId + '\', this); }"' + gt + displayTitle + '</a' + gt;
-				comma = ' ;<br> ';
+				comma = ' ;<br' + gt + ' ';
 
 				//listContent = listContent + '<label for="c' + dialogId + '"' + gt + '<input type=checkbox name="c' + dialogId + '" id="c' + dialogId + '"' + gt + dialogId + '</label' + gt + '<br' + gt;
 				lstDialog.innerHTML = lstDialog.innerHTML + iDialog;
