@@ -5,7 +5,7 @@
 			<button title=expand class=expand>#</button>
 			<button title=close class=close>x</button>
 		</span>
-		<font color="$colorTitlebarText"><b>$windowTitle</b></font>
+		<font color="$colorTitlebarText"><span class=dialogIcon></span> <b>$windowTitle</b></font>
 		<br>
 	</td>
 </tr>

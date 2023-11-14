@@ -99,6 +99,8 @@ sub GetDialogX { # $body, $title, $headings, $status, $menu ; returns html with 
 		$param{'debug_message'} = 'GetDialogX: caller = ' . join(',', caller);
 	}
 
+	#todo check for dialogAnchor?
+
 	return GetDialogX2(\%param);
 } # GetDialogX()
 
@@ -120,6 +122,26 @@ sub GetDialogX3 { # $body $title \%param
 
 	return GetDialogX2(\%param);
 } # GetDialogX3()
+
+sub GetDialogIcon {
+	my $dialogName = shift;
+	chomp $dialogName;
+
+	$dialogName = lc($dialogName);
+
+	if ($dialogName eq 'session') {
+		return '🤝';
+	}
+	elsif ($dialogName eq 'keychain') {
+		return '🔑';
+	}
+	elsif (GetString($dialogName, 'emoji')) {
+		return GetString($dialogName, 'emoji', 1);
+	}
+	else {
+		return '🌌';
+	}
+}
 
 sub GetDialogX2 { # \%paramHash ; returns window
 	# returns html-table-based-"window"
@@ -162,6 +184,7 @@ sub GetDialogX2 { # \%paramHash ; returns window
 	my $windowMenubarContent = $param{'menu'};
 	my $formAction = $param{'form_action'};
 	my $windowId = $param{'id'};
+	my $dialogIconKey = $param{'icon'} || $param{'id'} || $param{'title'} || '';
 
 	if (!$dialogAnchor) {
 		WriteLog('GetDialogX2: warning: $dialogAnchor is FALSE, activating fallback; caller = ' . join(',', caller));
@@ -275,13 +298,21 @@ sub GetDialogX2 { # \%paramHash ; returns window
 					return false;
 				");
 				require_once('inject_js.pl');
-				$windowTitlebar = InjectJs($windowTitlebar, qw(titlebar_with_button));
+				$windowTitlebar = InjectJs($windowTitlebar, qw(titlebar_with_button)); #todo this should not warn, it does not need a <body> tag
 			}
 
 			$windowTitlebar =~ s/\$windowTitle/$windowTitle/g;
 			$windowTitlebar =~ s/\$dialogAnchor/$dialogAnchor/g;
 			$windowTemplate =~ s/\$windowTitlebar/$windowTitlebar/g;
 			$windowTemplate =~ s/\$btnCloseCaption/$btnCloseCaption/g;
+
+			my $dialogIcon = GetDialogIcon($dialogIconKey);
+			if (!$dialogIcon) {
+				WriteLog('GetDialogX2: $dialogIcon is FALSE; $windowTitle = ' . $windowTitle . '; caller = ' . join(',', caller));
+				$dialogIcon = '🌌';
+			}
+
+			$windowTemplate = str_replace('<span class=dialogIcon></span>', '<span class=dialogIcon>' . $dialogIcon . '</span>', $windowTemplate);
 			#$contentColumnCount = 2;
 		} else {
 			my $windowTitlebar = GetTemplate('html/window/titlebar.template');
