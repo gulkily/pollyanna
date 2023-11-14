@@ -1514,7 +1514,8 @@ sub GetQuerySqlDialog { # $pageQuery, $titleDialog ; displays query for user to 
 		$queryDisplayName = $pageQuery . '.sql';
 	}
 
-	my $displayQuery = '<pre class=sql contenteditable>' . HtmlEscape(SqliteGetQueryTemplate($pageQuery)) . '</pre>'; #todo templatify
+	#my $displayQuery = '<pre class=sql contenteditable>' . HtmlEscape(SqliteGetQueryTemplate($pageQuery)) . '</pre>'; #todo templatify
+	my $displayQuery = '<pre class=sql contenteditable>' . SqlForWeb(SqliteGetQueryTemplate($pageQuery)) . '</pre>'; #todo templatify
 	my $dialog = '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName) . '</span>';
 	#my $dialog = '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName, '', '<a href="/index.sqlite3">index.sqlite3</a>') . '</span>';
 	#todo add link to copy query to query runner with one click

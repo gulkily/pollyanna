@@ -157,6 +157,26 @@ sub ZipForWeb { # replaces some spaces with &nbsp; to preserve text-based layout
 	return $container;
 } # ZipForWeb()
 
+sub SqlForWeb { # replaces some spaces with &nbsp; to preserve text-based layout for html display; $text
+	my $text = shift;
+
+	if (!$text) {
+		return '';
+	}
+
+	$text = HtmlEscape($text);
+
+	my @sqlKeywords = qw(SELECT FROM SELECT COUNT AS MAX AS SUM AS SUM AS FROM WHERE IN SELECT FROM GROUP BY WHERE AND LIKE ORDER BY DESC LIMIT);
+	for my $sqlKeyword (@sqlKeywords) {
+		$text =~ s/$sqlKeyword/<b>$sqlKeyword<\/b>/g;
+	}
+
+	my $container = GetTemplate('html/item/container/sql.template');
+	$container = str_replace('$text', $text, $container);
+
+	return $container;
+} # SqlForWeb()
+
 sub TextartForWeb { # replaces some spaces with &nbsp; to preserve text-based layout for html display; $text
 	# sub EscapeHtml { # TextartForWeb()
 	# sub FormatHtml {

@@ -117,4 +117,7 @@ pre.sql:focus {
 	background-color: $colorInputBackground;
 	border: inset 3px $colorWindow;
 }
+code.sql b {
+	color: green;
+}
 /* end css/default.css */
