@@ -373,7 +373,7 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 		#todo this also needs relativize support
 	}
 
-	if (in_array($menuName, qw(threads tags authors active people new image topics labels))) {
+	if (in_array($menuName, qw(chain threads tags authors active people new image topics labels))) {
 		WriteLog('GetMenuItem: counter: $menuName = ' . $menuName . '; caller = ' . join(',', caller));
 		# counter counters #counter
 		# sum counters like this:
