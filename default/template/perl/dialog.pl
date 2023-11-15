@@ -135,6 +135,9 @@ sub GetDialogIcon {
 	elsif ($dialogName eq 'keychain') {
 		return '🔑';
 	}
+	elsif ($dialogName =~ m/sql$/) {
+		return '🔍';
+	}
 	elsif (GetString($dialogName, 'emoji')) {
 		return GetString($dialogName, 'emoji', 1);
 	}
