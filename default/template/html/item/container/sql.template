@@ -1,0 +1,3 @@
+<!-- sql.template -->
+<tt><code class=sql>$text</code></tt>
+<!-- / sql.template -->
