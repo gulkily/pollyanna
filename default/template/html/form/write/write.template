@@ -21,12 +21,6 @@
         <p>
             <span id=spanEncrypt></span>
             <p id=spanWriteAdvanced class=advanced></p>
-            <span class=advanced>
-                <label for=recfing>
-                    <input name=recfing id=recfing type=checkbox>
-                    Identify with device
-                </label>
-            </span>
         </p>
         <span id=writefooter></span>
     </form>
