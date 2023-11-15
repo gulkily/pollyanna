@@ -510,6 +510,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 
 			$windowParams{'id'} = substr($file{'file_hash'}, 0, 8);
 			$windowParams{'table_sort'} = 0; #disable table sort
+			$windowParams{'icon'} = 'item'; #disable table sort
 
 			$itemTemplate = GetDialogX2(\%windowParams);
 			$itemTemplate .= '<replies></replies>';
