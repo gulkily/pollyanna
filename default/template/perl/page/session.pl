@@ -46,7 +46,7 @@ sub GetSessionPage { # returns session page
 		GetPageHeader('session') .
 		GetTemplate('html/maincontent.template') .
 		GetProfileDialog() .
-		GetKeychainDialog() .
+		'<span class=advanced>' . GetKeychainDialog() . '</span>' .
 		#todo simplify session page and make these dialogs accessible via links
 		'<span class=advanced>' . GetQueryAsDialog('session', 'ActiveSessions') . '</span>' .
 		GetQuerySqlDialog('session') .
