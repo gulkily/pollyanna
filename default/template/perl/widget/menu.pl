@@ -362,6 +362,9 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
 		if ($menuName ne 'help' && $menuName ne 'people') {
+			# todo also need some kind of special handling
+			# if it is an item page, otherwise we run into an
+			# issue with relativize_urls
 			$dialogName = trim($dialogName);
 			$menuItem = AddAttributeToTag(
 				$menuItem,
