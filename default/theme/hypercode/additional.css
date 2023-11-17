@@ -31,5 +31,12 @@ input, textarea {
 	border-radius: 5pt;
 	text-align: center;
 }
+#about p {
+	font-family: sans-serif, helvetica, arial;
+	font-size: 12pt;
+}
+#about {
+	max-width: 30em;
+}
 
 /* / theme/hypercode/additional.css */
