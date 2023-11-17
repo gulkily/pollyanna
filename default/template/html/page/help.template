@@ -34,6 +34,10 @@
 	<a href="/stats.html">Stats</a>
 </p>
 
+<p>
+	<a href="/about.html">About</a>
+</p>
+
 </fieldset>
 
 <!-- / help.template -->
