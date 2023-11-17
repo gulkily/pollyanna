@@ -663,8 +663,23 @@ function PutFile ($file, $content) { // puts file contents
 	$fileTemp = $file . ".tmp"; # my
 	WriteLog('PutFile: $fileTemp = ' . $fileTemp);
 
-	$putFileResult = file_put_contents($fileTemp, $content);
-	WriteLog('PutFile: $putFileResult = ' . $putFileResult);
+	if (is_writable($file)) {
+		if (is_writable($fileTemp)) {
+			try {
+				$putFileResult = file_put_contents($fileTemp, $content);
+				WriteLog('PutFile: $putFileResult = ' . $putFileResult);
+			} catch (Exception $e) {
+				WriteLog('PutFile: warning: $e->getMessage() = ' . $e->getMessage());
+				return '';
+			}
+		} else {
+			WriteLog('PutFile: warning: is_writable($fileTemp) is FALSE');
+			return '';
+		}
+	} else {
+		WriteLog('PutFile: warning: is_writable($file) is FALSE');
+		return '';
+	}
 
 	if (file_exists($fileTemp)) {
 		#bug sometimes the file goes away between the if statement check and the rename
