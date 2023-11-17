@@ -1,26 +1,25 @@
 <!-- template/html/page/about.template --> 
 
 <p>
-    Hypercode is an experiment in <br>
-    accessible and compatible websites. <br>
-    <br>
-    What does that mean? <br>
-    <br>
-    Hypercode wants to create a space where discussion can take place <br>
-    in a safe, transparent, and efficient space and manner.
+	Welcome to Hypercode, where we prioritize accessibility and compatibility to reshape the web. Imagine effortlessly navigating any website, regardless of your device. That's our vision.
 </p>
-
 <p>
-    Technically speaking, Hypercode is designed to <br>
-    "make the easy things easy, and the hard things possible".
+	At Hypercode, it's about collaboration, ideas, and creating a web that works for everyone. We're building an inclusive digital space without unnecessary jargon—just a community united by a common goal.
 </p>
-
 <p>
-    Source: <a href="/tree.zip">/tree.zip</a>
+	Join us on this straightforward yet monumental journey. Whether you have coding expertise, a passion for accessibility, or simply care about digital equality, we need you. With your support, our vision becomes reality.
 </p>
-
 <p>
-    GitHub: <a href="https://www.github.com/gulkily/pollyanna">gulkily/pollyanna</a>
+	Picture a web that's open and inclusive, where participation is seamless. That's what we're creating, but we can't do it alone. Your assistance makes it possible. Whether you contribute code, share insights, or support us financially, you're a crucial part of this movement.
+</p>
+<p>
+	Why Hypercode? Because we simplify complexities, enabling barrier-free experiences. We align websites with accessibility standards and compatibility guidelines so everyone can connect.
+</p>
+<p>
+	You've made a positive impact through donations. Now channel that impact into the web itself. Regardless of size, your contribution propels this movement—an investment in a boundless web where all engage and thrive.
+</p>
+<p>
+	Let's shape a better web, one accessible and compatible site at a time. Join us and create something truly meaningful. The future of the web depends on it.
 </p>
 
 <!-- / template/html/page/about.template --> 
