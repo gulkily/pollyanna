@@ -576,9 +576,10 @@ function GetConfig ($configKey, $token = 0) { // get value for config value $con
 		// WriteLog('GetConfig: warning: else, fallthrough, for ' . $configKey);
 		$configValue = '';
 	}
-//
-// 	// store in memo
-// 	$configLookup[$configKey] = $configValue;
+
+	// #todo
+	// 	// store in memo
+	// 	$configLookup[$configKey] = $configValue;
 
 	WriteLog('GetConfig: $configValue: ' . $configValue);
 	$configValue = trim($configValue); // remove trailing \n and any other whitespace
