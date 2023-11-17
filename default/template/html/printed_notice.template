@@ -3,15 +3,13 @@
 	<span class=beginner>
 		Q: When was this page printed?<br>
 	</span>
-	Printed: <span id=timePrinted class=timestamp epoch=$printedEpoch>$printedHuman</span>
-	<br>
+	Printed: <span id=timePrinted class=timestamp epoch=$printedEpoch>$printedHuman</span><br>
 	<span class=beginner><br>
 		Q: How old was the page when downloaded?<br>
 	</span>
 	Age: $printedAgeSeconds
 	<br>
 	pollyanna: <span title="`git rev-parse HEAD`">$versionSuccinct</span></a><br>
-	<br>
 	<span class=beginner><br>
 		Q: How can I get a fresher copy?<br>
 		A: Ask the server to
