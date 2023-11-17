@@ -651,7 +651,12 @@ function PutFile ($file, $content) { // puts file contents
 		if ($pathArray) {
 			if ($filePath && ! file_exists($filePath)) {
 				WriteLog("PutFile: mkdir($filePath)");
-				mkdir($filePath);
+				if (is_writable($filePath)) {
+					mkdir($filePath);
+				} else {
+					WriteLog('PutFile: warning: is_writable($filePath) is FALSE');
+					return '';
+				}
 			}
 		}
 
