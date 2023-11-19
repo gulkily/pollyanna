@@ -480,6 +480,21 @@ if (isset($comment) && $comment) {
 		}
 
 		$newFileHash = ProcessNewComment($comment, $replyTo); // post.php // PutFile()
+
+		if ($newFileHash) {
+		    #ok
+		} else {
+		    WriteLog('post.php: warning: ProcessNewComment() returned FALSE');
+		    if ($_GET) {
+		        print("please forgive this inconvenience, something went wrong. here is everything you sent: " . htmlspecialchars(print_r($_GET, 1)));
+		        exit;
+            }
+            if ($_POST) {
+                print("please forgive this inconvenience, something went wrong. here is everything you sent: " . htmlspecialchars(print_r($_POST, 1)));
+                exit;
+		    }
+		    print("please forgive this inconvenience, something went wrong.");
+        }
 		$fileUrlPath = '/' . GetHtmlFilename($newFileHash); // path for client's (browser's) path to html file
 
 		if (isset($replyTo) && $replyTo) {
