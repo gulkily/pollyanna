@@ -16,6 +16,12 @@ function ProcessNewComment ($comment, $replyTo) { // saves new comment to .txt f
 	}
 
 	if ($fileName) {
+	    #todo fix and enable this sanity check
+		#if (!file_exists($fileName)) {
+		#    WriteLog('ProcessNewComment: warning: file_exists($fileName) was FALSE');
+		#    return '';
+		#}
+
 		// remember current working directory, we'll need it later
 		$pwd = getcwd(); #my
 		WriteLog('ProcessNewComment: $pwd = ' . $pwd);

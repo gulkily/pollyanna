@@ -651,12 +651,14 @@ function PutFile ($file, $content) { // puts file contents
 		if ($pathArray) {
 			if ($filePath && ! file_exists($filePath)) {
 				WriteLog("PutFile: mkdir($filePath)");
-				if (is_writable($filePath)) {
-					mkdir($filePath);
-				} else {
-					WriteLog('PutFile: warning: is_writable($filePath) is FALSE');
-					return '';
-				}
+				mkdir($filePath);
+				#todo add this sanity check
+				#if (is_writable($filePath)) {
+				#	mkdir($filePath);
+				#} else {
+				#	WriteLog('PutFile: warning: is_writable($filePath) is FALSE');
+				#	return '';
+				#}
 			}
 		}
 
@@ -668,23 +670,26 @@ function PutFile ($file, $content) { // puts file contents
 	$fileTemp = $file . ".tmp"; # my
 	WriteLog('PutFile: $fileTemp = ' . $fileTemp);
 
-	if (is_writable($file)) {
-		if (is_writable($fileTemp)) {
-			try {
-				$putFileResult = file_put_contents($fileTemp, $content);
-				WriteLog('PutFile: $putFileResult = ' . $putFileResult);
-			} catch (Exception $e) {
-				WriteLog('PutFile: warning: $e->getMessage() = ' . $e->getMessage());
-				return '';
-			}
-		} else {
-			WriteLog('PutFile: warning: is_writable($fileTemp) is FALSE');
-			return '';
-		}
-	} else {
-		WriteLog('PutFile: warning: is_writable($file) is FALSE');
-		return '';
-	}
+	$putFileResult = file_put_contents($fileTemp, $content);
+
+    #todo fix these sanity checks and error handling
+	#if (is_writable($file)) {
+	#	if (is_writable($fileTemp)) {
+	#		try {
+	#			$putFileResult = file_put_contents($fileTemp, $content);
+	#			WriteLog('PutFile: $putFileResult = ' . $putFileResult);
+	#		} catch (Exception $e) {
+	#			WriteLog('PutFile: warning: $e->getMessage() = ' . $e->getMessage());
+	#			return '';
+	#		}
+	#	} else {
+	#		WriteLog('PutFile: warning: is_writable($fileTemp) is FALSE');
+	#		return '';
+	#	}
+	#} else {
+	#	WriteLog('PutFile: warning: is_writable($file) is FALSE');
+	#	return '';
+	#}
 
 	if (file_exists($fileTemp)) {
 		#bug sometimes the file goes away between the if statement check and the rename
