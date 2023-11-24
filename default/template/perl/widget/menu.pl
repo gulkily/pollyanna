@@ -146,7 +146,8 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template'; ret
 			my $menuItemComposed = GetMenuItem($menuItemUrl, $menuItemCaption, $templateName);
 			WriteLog('GetMenuFromList: checking for $menuItemName eq $pageType: ' . $menuItemName . ', ' . $pageType . '; caller = ' . join(',', caller));
 			if ($menuItemName eq $pageType) {
-				if (GetConfig('setting/html/menu_highlight_selected')) {
+				if (GetConfig('setting/css/enable') && GetConfig('setting/html/menu_highlight_selected')) {
+                    #todo should be under css/
 					## menu item is for current page
 					$menuItemComposed = '<span style="background-color: ' . GetThemeColor('highlight_ready') . ';">' . $menuItemComposed . '</span>';
 					#$menuItemComposed = '<span style="font-variant: small-caps; background-color: ' . GetThemeColor('highlight_ready') . ';">' . $menuItemComposed . '</span>';
@@ -175,6 +176,7 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 # sub GetMenu {
 	my $topMenuTemplate = GetTemplate('html/topmenu2.template');
 
+    #todo this requires setting/css/enable
 	if (GetConfig('setting/html/menu_layer_controls')) {
 		#todo separate the js out ...
 		my $dialogControls = GetTemplate('html/widget/layer_controls.template');

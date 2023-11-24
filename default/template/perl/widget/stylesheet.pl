@@ -9,6 +9,13 @@ sub GetHeaderStylesheet { # $pageType ; returns base stylesheet, plus extra styl
 # can be called without parameter
 # sub GetPageStylesheet {
 # sub GetPageCss {
+	if (GetConfig('setting/css/enable')) {
+		# ok
+	} else {
+		# css feature is disabled
+		WriteLog('GetHeaderStylesheet: warning: css/enable was FALSE; caller = ' . join(',', caller));
+		return '';
+	}
 	state $baseStylesheet = GetStylesheet();
 
 	my $pageType = shift;
@@ -51,6 +58,7 @@ sub GetPageStylesheet {
 } # GetPageStylesheet()
 
 sub GetBaseStylesheet {
+    #todo is this used anywhere?
 	return GetStylesheet();
 }
 
