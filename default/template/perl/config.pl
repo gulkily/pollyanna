@@ -40,6 +40,12 @@ sub GetDefault { # $configName
 
 sub FixConfigName { # $configName ; prepend 'setting/' to config paths as appropriate
 	my $configName = shift;
+	chomp $configName;
+
+	if (!$configName) {
+        WriteLog('FixConfigName: warning: $configName was FALSE; caller = ' . join(',', caller));
+        return '';
+    }
 
 	$configName = trim($configName);
 
@@ -88,7 +94,19 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 # new "method": get_memo, returns the whole thing for debug output
 
 	my $configName = shift;
+
+	if (!defined($configName)) {
+        WriteLog('GetConfig: warning: $configName was undefined; caller = ' . join(',', caller));
+        return '';
+    }
+
 	chomp $configName;
+
+	if (!$configName) {
+        WriteLog('GetConfig: warning: $configName was FALSE; caller = ' . join(',', caller));
+        return '';
+    }
+
 	my $token = shift;
 	if ($token) {
 		chomp $token;
