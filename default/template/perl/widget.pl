@@ -215,6 +215,9 @@ sub GetClockWidget {
 		else {
 			# default clock
 			$clock = GetTemplate('html/widget/clock.template');
+			if (GetConfig('setting/css/enable')) {
+			    $clock = AddAttributeToTag($clock, 'input', 'style', 'text-align: center; float: right;');
+			}
 			$clock =~ s/\$currentTime/$currentTime/;
 
 			my $sizeConfig = GetConfig('html/clock_format');
