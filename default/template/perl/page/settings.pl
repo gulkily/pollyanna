@@ -33,8 +33,8 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 		theme
 		html/clock
 		html/clock_format
-		html/css_inline_block
-		html/css_shimmer
+		html/css/inline_block
+		html/css/shimmer
 		admin/js/enable
 		admin/js/debug
 		admin/js/dragging

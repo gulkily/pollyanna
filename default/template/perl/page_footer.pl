@@ -85,7 +85,7 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 		WriteLog('GetPageFooter: ssi footer conditions NOT met!');
 	}
 
-	if (GetConfig('setting/html/css_footer')) { #todo setting/html/css_footer
+	if (GetConfig('setting/html/css/footer_edit')) { #todo setting/html/css/footer_edit
 		WriteLog('GetPageFooter: adding css textarea');
 
 		my $pageStylesheet = GetPageStylesheet($pageType);

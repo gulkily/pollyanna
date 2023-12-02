@@ -9,7 +9,7 @@ sub GetHeaderStylesheet { # $pageType ; returns base stylesheet, plus extra styl
 # can be called without parameter
 # sub GetPageStylesheet {
 # sub GetPageCss {
-	if (GetConfig('setting/css/enable')) {
+	if (GetConfig('setting/html/css/enable')) {
 		# ok
 	} else {
 		# css feature is disabled
@@ -81,16 +81,20 @@ sub GetStylesheet { # ; returns common stylesheet template based on config
 		# add style for color avatars if that's the setting
 	}
 
-	if (GetConfig('admin/js/dragging') || GetConfig('html/css_inline_block')) {
+	if (GetConfig('admin/js/dragging') || GetConfig('html/css/inline_block')) {
 		$style .= "\n" . GetTemplate('css/dragging.css');
 		$style .= "\n" . GetTemplate('css/width.css');
 	}
 
-	if (GetConfig('html/css_inbox_top')) {
+	if (GetConfig('html/css/blink')) {
+		$style .= "\n" . GetTemplate('css/blink.css');
+	}
+
+	if (GetConfig('html/css/inbox_top')) {
 		$style .= "\n" . GetTemplate('css/inbox_top.css');
 	}
 
-	if (GetConfig('html/css_shimmer')) {
+	if (GetConfig('html/css/shimmer')) {
 		$style .= "\n" . GetTemplate('css/shimmer.css');
 	}
 

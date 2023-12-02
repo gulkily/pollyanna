@@ -114,12 +114,12 @@ sub GetOperatorResponse {
 		return 'ok, I made the site less colorful';
 	}
 	if ($query =~ m/inbox+.top/) {
-		PutConfig('setting/html/css_inbox_top', 1);
+		PutConfig('setting/html/css/inbox_top', 1);
 		#`bash hike.sh refresh`;
 		return 'ok, I put the inbox dialog at the top of the page';
 	}
 	if ($query eq 'add inline-block to dialogs') {
-		PutConfig('setting/html/css_inline_block', 1);
+		PutConfig('setting/html/css/inline_block', 1);
 		#`bash hike.sh refresh`;
 		return 'ok, I added display: inline-block to the dialog class';
 	}
