@@ -41,50 +41,50 @@ sub GetDialogToolboxItemPublish { # $filePath, $fileHash = '' ; returns dialog w
 
 	#$htmlToolbox = GetPublishButton('localhost:2784', $file{'file_path'});
 
-	$htmlToolbox .=
-		'<a href="http://localhost:2784/post.html?comment=' .
-			$urlParamFullText .
-			'">' .
-			'localhost:2784' .
-			'</a><br>' . "\n";
+	my @neighbors = qw(localhost:2784 localhost:31337 www.hypercode.com www.rocketscience.click www.yavista.com qdb.us ilyagulko.com);
 
-	$htmlToolbox .=
-		'<a href="http://localhost:31337/post.html?comment=' .
-			$urlParamFullText .
-			'">' .
-			'diary' .
-			'</a><br>' . "\n";
+	for my $neighbor (@neighbors) {
+		my $neighborUrl = 'http://' . $neighbor . '/post.html?comment=' . $urlParamFullText;
+		my $neighborName = $neighbor;
+		if (index($neighborName, ':') != -1) {
+			# if no other neighbor has the same hostname, remove the port number, otherwise leave it alone
+			my $otherNeighborHasSameHostname = 0;
+			for (@neighbors) {
+                if (index($_, $neighborName) != -1) {
+                    # do nothing
+                } else {
+                    $otherNeighborHasSameHostname = 1;
+                }
+            }
+            if ($otherNeighborHasSameHostname) {
+                # do nothing
+            } else {
+                $neighborName = substr($neighborName, 0, index($neighborName, ':'));
+            }
 
-	$htmlToolbox .=
-		'<a href="http://www.hypercode.com/post.html?comment=' .
-			$urlParamFullText .
-			'">' .
-			'Hypercode' .
-			'</a><br>' . "\n";
 
-	$htmlToolbox .=
-		'<a href="http://www.rocketscience.click/post.html?comment=' .
-			$urlParamFullText .
-			'">' .
-			'RocketScience' .
-			'</a><br>' . "\n";
+		} else {
+			$neighborName = $neighborName;
+		}
+		if (index($neighborName, 'www.') == 0) {
+			$neighborName = substr($neighborName, 4);
+		} else {
+			# do nothing
+		}
 
-	$htmlToolbox .=
-		'<a href="http://www.yavista.com/post.html?comment=' .
-			$urlParamFullText .
-			'">' .
-			'Yavista' .
-			'</a><br>' . "\n";
-
-	$htmlToolbox .=
-		'<a href="http://qdb.us/post.html?comment=' .
-			$urlParamFullText .
-			'">' .
-			'qdb.us' .
-			'</a><br>' . "\n";
-	;
+		$htmlToolbox .=
+			'<a href="http://' .
+				$neighbor .
+				'/post.html?comment=' .
+				$urlParamFullText .
+				'">' .
+				$neighborName .
+				'</a><br>' . "\n"
+		;
+	}
 
 	my $htmlToolboxDialog = GetDialogX($htmlToolbox, 'Publish');
+	# publishtoolbox toolbox
 
 	return $htmlToolboxDialog;
 } # GetDialogToolboxItemPublish()
