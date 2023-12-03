@@ -52,6 +52,9 @@ sub GetPaginationLink { # returns one pagination link as html, used by GetPageLi
 } # GetPaginationLink()
 
 sub GetPaginationLinks { # $pageQuery, $currentPageNumber, $itemCount, $perPage
+# sub GetPageButtons {
+# sub GetPaginationButtons {
+
 	my $pageQuery = shift;
 	my $currentPageNumber = shift; #
 	my $itemCount = shift;
