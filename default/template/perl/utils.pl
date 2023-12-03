@@ -904,9 +904,21 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 		}
 	}
 
+	my $isPerlTemplate = 0;
+	if (index($filename, 'perl/') != -1 && index($filename, '.pl') != -1) {
+        $isPerlTemplate = 1;
+    }
+	if ($isPerlTemplate) {
+		WriteLog('GetTemplate: $isPerlTemplate is TRUE, calling BakePerlTemplate()');
+        $template = BakePerlTemplate($template);
+	} else {
+	    #WriteLog('not perl template: ' . $filename);
+	}
+
 	if ($template) {
 		#if template contains something, cache it
 		$templateMemo{$filename} = $template;
+
 		return $template;
 	} else {
 		if (index($filename, 'query') != -1) {
@@ -927,6 +939,21 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 		return '';
 	}
 } # GetTemplate()
+
+sub BakePerlTemplate {
+	WriteLog('BakePerlTemplate()');
+
+	my $template = shift;
+	chomp $template;
+
+	#$template = str_replace("GetDir('html')", "'" . GetDir('html') . "'", $template);
+	#$template = str_replace('\QGetDir(\'html\')\E', "'" . GetDir('html') . "'", $template);
+	#$template = str_replace("GetDir", "", $template);
+	#$template = 'fuckyou';
+	#$template =~ s/GetDir\('html'\)/GetDir('html')/e;
+
+	return $template;
+}
 
 sub GetList { # $listName ; reads a list from a template and returns it as an array
 # GetTagSet {
