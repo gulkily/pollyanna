@@ -41,7 +41,12 @@ sub GetDialogToolboxItemPublish { # $filePath, $fileHash = '' ; returns dialog w
 
 	#$htmlToolbox = GetPublishButton('localhost:2784', $file{'file_path'});
 
-	my @neighbors = qw(localhost:2784 localhost:31337 www.hypercode.com www.rocketscience.click www.yavista.com qdb.us ilyagulko.com);
+	my @neighbors = GetConfigListAsArray('neighbor');
+
+	if (!@neighbors) {
+		WriteLog('GetDialogToolboxItemPublish: warning: @neighbors is empty! using default hard-coded list; caller = ' . join(',', caller));
+		@neighbors = qw(localhost:2784 localhost:31337 www.hypercode.com www.rocketscience.click www.yavista.com qdb.us ilyagulko.com shitmyself.com);
+	}
 
 	for my $neighbor (@neighbors) {
 		my $neighborUrl = 'http://' . $neighbor . '/post.html?comment=' . $urlParamFullText;
