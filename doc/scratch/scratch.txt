@@ -1,3 +1,55 @@
+$pathArray = explode('/', $file);
+$filePath = '';
+while ($pathArray) {
+    WriteLog('PutFile: $pathArray = ' . print_r($pathArray, 1));
+    $filePath .= array_shift($pathArray);
+    WriteLog('PutFile: $filePath = ' . $filePath);
+
+    if ($pathArray) {
+        $directoryToCheck = rtrim($filePath, '/');
+        if ($directoryToCheck && !file_exists($directoryToCheck)) {
+            WriteLog("PutFile: mkdir($directoryToCheck)");
+            if (is_writable(dirname($directoryToCheck))) {
+                # sanity check
+                mkdir($directoryToCheck);
+            } else {
+                WriteLog('PutFile: warning: is_writable(dirname($directoryToCheck)) is FALSE');
+                return '';
+            }
+        }
+        $filePath .= '/';
+    }
+}
+
+
+	$pathArray = explode('/', $file);
+	$filePathComma = '';
+	$filePath = '';
+	while ($pathArray) {
+		WriteLog('PutFile: $pathArray = ' . print_r($pathArray, 1));
+		$filePath .= $filePathComma . array_shift($pathArray);
+		WriteLog('PutFile: $filePath = ' . $filePath);
+
+		if ($pathArray) {
+			if ($filePath && ! file_exists($filePath)) {
+				WriteLog("PutFile: mkdir($filePath)");
+				if (is_writable($filePath)) {
+				    # sanity check
+					mkdir($filePath);
+				} else {
+					WriteLog('PutFile: warning: is_writable($filePath) is FALSE');
+					return '';
+				}
+			}
+		}
+
+		$filePath .= $filePathComma;
+		WriteLog('PutFile: $filePathComma = ' . $filePathComma);
+		$filePathComma = '/';
+	}
+
+
+
 
 Sessions <br>
 <br>
