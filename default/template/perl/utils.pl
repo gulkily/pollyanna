@@ -823,7 +823,7 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 # GetTemplate() needs to be in utils.pl, because you can't require_once() without GetTemplate()
 # don't try this: require_once('get_template.pl');
 # ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION
-# returns empty string if template not found
+# returns empty string if template not found (and issues a warning)
 # here is how the template file is chosen:
 # 1. template's existence is checked in config/template/ or default/template/
 #    a. if it is found, it is THEN looked up in the config/theme/template/ and default/theme/template/
