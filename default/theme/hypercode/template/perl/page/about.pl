@@ -5,10 +5,12 @@ use warnings;
 use 5.010;
 
 sub GetAboutPage {
+# about page hypercode
 	require_once('page/data.pl');
 	my $html = 
 		GetPageHeader('about') .
-		GetDialogX(GetTemplate('html/page/about.template'), 'About') .
+		GetDialogX(GetTemplate('html/page/about.template'), 'About') . # theme/hypercode/template/html/page/about.template
+		GetDialogX(GetTemplate('html/page/donate.template'), 'Donate') .
 		GetDataDialog() .
 		GetDialogX('DALL-E, <br>"hypercode.com nice website tileable image, cosmic latte", <br>2023', 'Image Credit') .
 		GetPageFooter('welcome')
