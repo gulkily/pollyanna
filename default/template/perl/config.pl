@@ -414,6 +414,8 @@ sub PutConfig { # $configName, $configValue ; writes config value to config stor
 } # PutConfig()
 
 sub GetConfigListAsArray { # $listName ; returns an array from a config list template treated as a whitespace-separated list
+# sub GetConfigAsArray {
+# sub GetList {
 	my $listName = shift;
 	chomp $listName;
 
