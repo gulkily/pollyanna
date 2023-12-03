@@ -18,26 +18,30 @@ if ($result) {
 	# challenge: how to detect this?
 
 	my $os = '';
-	if (1) {
-	    $os = 'windows';
-	} elsif (0) {
-	    $os = 'gnu';
-	} elsif (0) {
-	    $os = 'mac';
-    } elsif (0) {
-        $os = 'solaris';
-    } elsif (0) {
-        $os = 'freebsd';
+
+	# Determine which type of os we are using:
+
+	if ($^O eq 'MSWin32' or $^O eq 'cygwin') {
+		$os = 'windows';
+	} elsif ($^O eq 'linux' or $^O eq 'darwin') {
+		$os = 'gnu';
+	} elsif ($^O eq 'darwin') {
+		$os = 'mac';
+	} elsif ($^O eq 'solaris') {
+		$os = 'solaris';
+	} elsif ($^O eq 'freebsd') {
+		$os = 'freebsd';
 	} else {
-	    $os = 'unknown';
+		$os = 'unknown';
 	}
+
 	if ($os eq 'gnu' || $os eq 'mac' || $os eq 'freebsd' || $os eq 'solaris') { # 2)
 		# if the library is missing, we can try to fill it in from the one we brought with us in the repo:
 		system("mkdir lib; mkdir lib/URI; cp default/template/perl/lib/URI/Encode.pm lib/URI/Encode.pm");
 	} elsif ($os eq 'windows') {
-	    system("mkdir lib; mkdir lib/URI; copy default\\template\\perl\\lib\\URI\\Encode.pm lib\\URI\\Encode.pm");
+		system("mkdir lib; mkdir lib/URI; copy default\\template\\perl\\lib\\URI\\Encode.pm lib\\URI\\Encode.pm");
 	} else {
-	    #todo
+		#todo
 	}
 } else {
 	# 0 means it is ok
