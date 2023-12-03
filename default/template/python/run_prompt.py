@@ -64,8 +64,9 @@ class PromptRunner:
 			print(f"[run_prompt] used saved prompts: # {self.used_saved_prompts=}")
 			completion = self.prompts_to_completions[prompt]
 		else:
-			print(f"[run_prompt] running openai.ChatCompletion.create("
-				  f"prompt s.t. {len(prompt)=}, model='{model_name}'); {get_stat_str()}")
+			if do_print:
+				print(f"[run_prompt] running openai.ChatCompletion.create("
+					  f"prompt s.t. {len(prompt)=}, model='{model_name}'); {get_stat_str()}")
 			# if len(prompt) >= 6000:
 			#     breakpoint()  # todo: you sure?
 			completion = openai.ChatCompletion.create(
@@ -87,8 +88,8 @@ class PromptRunner:
 			print(completion)
 			print(
 				f"[run_prompt] done print completion;  s.t. {len(prompt)=}, model='{model_name}'); {get_stat_str()}")
-		print(f"[run_prompt] done")
-		print("####################################################")
+			print(f"[run_prompt] done")
+			print("####################################################")
 
 		return completion
 
@@ -144,7 +145,9 @@ def run_prompt(file_path):
 	with open(output_file_path, "w") as output_file:
 		output_file.write(f">>{sha1_hash}\n")
 		output_file.write(completion)
-		print(output_file_path)
+		#print(output_file_path)
+
+	print(completion)
 
 
 if __name__ == "__main__":
