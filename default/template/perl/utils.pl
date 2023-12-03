@@ -974,7 +974,11 @@ sub GetList { # $listName ; reads a list from a template and returns it as an ar
 	WriteLog('GetList(' . $listName . '); caller = ' . join(',', caller));
 
 	my $templateContents = GetTemplate($listName);
-	#todo sanity
+
+	if (!$templateContents) {
+		WriteLog('GetList: warning $templateContents was FALSE for $listName = ' . $listName . '; caller = ' . join(',', caller));
+		return '';
+	}
 
 	my @arrayReturn = split("\n", $templateContents);
 
