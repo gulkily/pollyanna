@@ -315,7 +315,11 @@ sub GetDialogX2 { # \%paramHash ; returns window
 				$dialogIcon = '🌌';
 			}
 
-			$windowTemplate = str_replace('<span class=dialogIcon></span>', '<span class=dialogIcon>' . $dialogIcon . '</span>', $windowTemplate);
+			if (GetConfig('setting/html/dialog_emoji_icon')) {
+				$windowTemplate = str_replace('<span class=dialogIcon></span>', '<span class=dialogIcon>' . $dialogIcon . '</span>', $windowTemplate);
+			} else {
+				$windowTemplate = str_replace('<span class=dialogIcon></span>', '', $windowTemplate);
+			}
 			#$contentColumnCount = 2;
 		} else {
 			my $windowTitlebar = GetTemplate('html/window/titlebar.template');
