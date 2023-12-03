@@ -881,7 +881,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 							$tokenFound{'param'} eq 'mavo' || #mavo token needs permission
 							$tokenFound{'param'} eq 'run' || #run token needs permission
 							$tokenFound{'param'} eq 'avatar' || #avatar token needs permission
-							$tokenFound{'param'} eq 'llm' || #avatar token needs permission
+							$tokenFound{'param'} eq 'llm' || #llm token needs permission
 							0
 						) { # permissioned token
 							my $hashTag = $tokenFound{'hashtag'} || $tokenFound{'param'};
