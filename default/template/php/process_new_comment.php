@@ -50,7 +50,12 @@ function ProcessNewComment ($comment, $replyTo) { // saves new comment to .txt f
 		// #todo this is wrong
 		// this $hash is used below to generate things which should be under hte original file's hash which should equal this filename?
 		// #debugtheory
-		WriteLog('ProcessNewComment: $hash = ' . $hash);
+		if ($hash) {
+		    WriteLog('ProcessNewComment: $hash = ' . $hash);
+        } else {
+            WriteLog('ProcessNewComment: warning: $hash was FALSE');
+            return '';
+        }
 
 		// hash-named files are stored under /ab/cd/ two-level directory prefix
 		{ // create prefix subdirectories under txt/
