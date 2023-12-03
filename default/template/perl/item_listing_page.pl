@@ -108,9 +108,10 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, image
 
 	my $paginationLinks = GetPaginationLinks($pageQuery, $pageNumber, $totalItemCount, $perPage);
 
-	if ($needPagination) {
-		$html .= GetDialogX($paginationLinks, 'Pages');
-	}
+	#top of page
+	#if ($needPagination) {
+	#	$html .= GetDialogX($paginationLinks, 'Pages');
+	#}
 
 	#$html .= $totalItemCount;
 
@@ -139,6 +140,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, image
 		WriteLog('GetItemListingPage: warning: $itemListing is FALSE');
 	}
 
+	#bottom of page
 	if ($needPagination) {
 		$html .= '<br>';
 		$html .= GetDialogX($paginationLinks, 'Pages');
