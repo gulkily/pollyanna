@@ -1838,6 +1838,11 @@ while (my $arg1 = shift @foundArgs) {
 					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/welcome.html', $dialog);
 				}
+				elsif ($makeDialogArg eq 'about') {
+					my $dialog = GetSimpleDialog('about');
+					WriteMessage("-D $makeDialogArg\n");
+					PutHtmlFile('dialog/about.html', $dialog);
+				}
 				elsif ($makeDialogArg =~ m/([0-9a-f]{8})/) {
 					WriteMessage("-D (item_prefix)\n");
 					my $dialog = GetItemTemplateFromHash($makeDialogArg);
