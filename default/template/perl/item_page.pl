@@ -644,10 +644,10 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	## FINISHED REPLIES
 	## FINISHED REPLIES
 
-	if (GetConfig('setting/html/item_page/applied_hashtags')) {
+	if (GetConfig('setting/html/item_page/applied_labels')) {
 		my @parameters;
 		push @parameters, $file{'file_hash'}; #it's an item, it's a file
-		my $query = SqliteGetNormalizedQueryString('item_applied_hashtags', @parameters);
+		my $query = SqliteGetNormalizedQueryString('item_applied_labels', @parameters);
 		my %param;
 		$param{'no_empty'} = 1;
 		$param{'no_heading'} = 1;
