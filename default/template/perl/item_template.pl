@@ -433,12 +433,14 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			# TAGS LIST AKA HEADING
 			# TAGS LIST AKA HEADING
 			if ($file{'labels_list'}) { # GetItemTemplate() -- tags list
-				my $headings = GetTagsListAsHtmlWithLinks($file{'labels_list'});
-				$windowParams{'headings'} = $headings;
+				if (GetConfig('setting/html/item_template/heading_labels_list')) {
+					my $headings = GetTagsListAsHtmlWithLinks($file{'labels_list'});
+					$windowParams{'headings'} = $headings;
 
-				if (GetConfig('setting/html/item_template/heading_advanced')) {
-					# this is such a hack
-					$windowParams{'headings_advanced'} = 1;
+					if (GetConfig('setting/html/item_template/heading_advanced')) {
+						# this is such a hack
+						$windowParams{'headings_advanced'} = 1;
+					}
 				}
 			} # $file{'labels_list'}
 
