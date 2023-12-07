@@ -36,3 +36,14 @@ INSERT INTO label_weight(label, weight) VALUES('hide', -1023);
 
 INSERT INTO label_weight(label, weight) VALUES('report', -1023);
 
+
+INSERT INTO label_weight(label, weight) VALUES('author', 10);
+
+INSERT INTO label_weight(label, weight) VALUES('chain', 15);
+
+INSERT INTO label_weight(label, weight) VALUES('tags', 15);
+
+INSERT INTO label_weight(label, weight) VALUES('tag', 10);
+
+INSERT INTO label_weight(label, weight) VALUES('tag', 10);
+

@@ -1354,7 +1354,7 @@ sub BuildTouchedPages { # $timeLimit, $startTime ; builds pages returned by DBGe
 
 	# get a list of pages that have been touched since touch git_flow
 	# this is from the task table
-	my @pages = SqliteQueryHashRef("SELECT task_name, task_param FROM task WHERE priority > 0 AND task_type = 'page' ORDER BY priority DESC;");
+	my @pages = SqliteQueryHashRef("SELECT task_name, task_param FROM task LEFT JOIN label_weight ON (task.task_name = label_weight.label) WHERE priority > 0 AND task_type = 'page' ORDER BY (priority * weight) DESC");
 	#todo templatize
 
 	shift @pages; #remove header row
