@@ -48,7 +48,7 @@ sub GetSessionPage { # returns session page
 		GetProfileDialog() .
 		'<span class=advanced>' . GetKeychainDialog() . '</span>' .
 		#todo simplify session page and make these dialogs accessible via links
-		'<span class=advanced>' . GetQueryAsDialog('session', 'ActiveSessions') . '</span>' .
+		'<span class=advanced>' . GetQueryAsDialog('session', 'ActiveSessions') . '</span>' . #todo rename query to session_active
 		GetQuerySqlDialog('session') .
 		$introDialog .
 		GetPageFooter('session')
