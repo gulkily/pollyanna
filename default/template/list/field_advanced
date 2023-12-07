@@ -3,6 +3,7 @@ attribute_list
 author_key
 author_key_count
 author_score
+author_alias
 cart
 chain_checksum_good
 chain_order
