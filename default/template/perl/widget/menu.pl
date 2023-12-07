@@ -278,6 +278,13 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 		}
 	}
 
+	#require_once('page/profile.pl');
+	#if ($pageType ne 'profile' && $pageType ne 'identity' && $pageType ne 'session') {
+	#	#todo make this work (currently appends multiple times on some pages)
+	#	#$topMenuTemplate .= GetProfileDialog();
+	#	$topMenuTemplate .= GetSessionDialog();
+	#}
+
 	return $topMenuTemplate;
 } # GetMenuTemplate()
 
