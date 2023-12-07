@@ -895,6 +895,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 									my $approveReason = '';
 
 									if ($authorKey) {
+										WriteLog('IndexTextFile: permissioned: $authorKey = ' . $authorKey);
 										if (IsAdmin($authorKey)) {
 											$approveStatus = 1;
 											$approveReason = 'author is admin';
@@ -938,6 +939,10 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 											}
 										}
 									} # if ($authorKey)
+									else {
+										WriteLog('IndexTextFile: warning: permissioned: $authorKey was FALSE');
+										push @indexMessageLog, 'author: NONE';
+									}
 
 									if ($approveStatus) {
 										WriteLog('IndexTextFile: permissioned: Found seemingly valid request');
@@ -992,7 +997,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 										if ($hashTag eq 'llm') {
 											if (GetConfig('setting/admin/token/llm')) {
 												require_once('run_llm.pl');
-												push @indexMessageLog, 'calling llm on parent item';
+												push @indexMessageLog, 'calling llm on item after creating prompt';
 												RunLlm($itemParent);
 											} else {
 												push @indexMessageLog, 'llm token is turned off, ignoring';
