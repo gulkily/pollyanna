@@ -198,7 +198,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		# when there is a long list of results
 
 		if ($fieldValue) {
-			$fieldValue = substr($fieldValue, 0, 8);
+			$fieldValue = '<tt>' . substr($fieldValue, 0, 8) . '</tt>';
 		} else {
 			$fieldValue = '';
 		}
@@ -509,6 +509,12 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 	#			$fieldValue .= GetItemLabelButtons($itemRow{'file_hash'}, 'author');
 	#		}
 	#	}
+
+	elsif (
+		$fieldName eq 'author_key'
+	) {
+		$fieldValue = '<tt>' . $fieldValue . '</tt>';
+	}
 
 	elsif (
 		# these are just valid fields which can be displayed as is
