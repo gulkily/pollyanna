@@ -1870,9 +1870,10 @@ function ForkWithLoadingPage ($path) {
 		/* my */ $textColor = GetThemeColor('text'); #todo
 		/* my */ $bodyColor = GetThemeColor('background'); #todo
 
+		#todo this should be a feature flag for the spinner image, and there should be two templates
 		if (1) { # with spinner image, todo: check for /loading.gif exists
 			/* my */ $htmlPlaceholder = '<html><head><title>Loading...</title><meta http-equiv="refresh" content="3;"></head><body text="$textColor" bgcolor="$bodyColor"><table border=0 cellpadding=5 cellspacing=5><tr valign=middle><td><img src=/loading.gif height=48 width=48></td><td><font size=7 face=arial>Meditate...</font></td></tr></table></body></html>';
-		} else {
+		} else { # no spinner image, only 'meditate...' message
 			/* my */ $htmlPlaceholder = '<html><head><title>Loading...</title><meta http-equiv="refresh" content="3;"></head><body text="$textColor" bgcolor="$bodyColor">Meditate...</body></html>';
 		}
 
