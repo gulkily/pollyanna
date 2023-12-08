@@ -492,7 +492,7 @@ function SetPrefs (prefKey, prefValue, storeName) { // set prefs key prefKey to 
 		}
 	}
 
-	if (prefKey == 'opened_dialogs') { // SetPrefs()
+	if (prefKey == 'opened_dialogs') { // copying to cookie in SetPrefs()
 		//alert('DEBUG: SetPrefs: setting cookie to match LocalStorage');
 		if (window.SetCookie) {
 			SetCookie(prefKey, (prefValue ? prefValue : ''));
