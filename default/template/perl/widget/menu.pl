@@ -289,6 +289,10 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 } # GetMenuTemplate()
 
 sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for a menu item (used for both top and footer menus)
+# $address example: '/foo.html'
+# $caption example: 'Foo'
+# $templateName example: 'html/menuitem.template'
+
 # sub GetMenuButton {
 	my $address = shift;
 	my $caption = shift;
@@ -310,8 +314,6 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 
 	#todo more sanity
 
-	WriteLog('GetMenuItem: $address = ' . $address . '; $caption = ' . $caption);
-
 	my $menuName = lc($caption);
 	my $dialogName = substr($address, 1, length($address) - 6); # '/foo.html' ==> 'foo'
 
@@ -326,6 +328,9 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 	}
 	chomp $templateName;
 
+	WriteLog('GetMenuItem: $address = ' . $address . '; $caption = ' . $caption . '; $templateName = ' . $templateName . '; caller = ' . join(',', caller));
+
+	#state $menuItemTemplate = GetTemplate($templateName);
 	my $menuItem = '';
 	$menuItem = GetTemplate($templateName);
 
