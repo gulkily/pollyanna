@@ -1,10 +1,5 @@
 why doesn't php InjectJs() use GetScriptTemplate() ?
 
-titlebar.template should include this comment:
-		<!-- note: dragging.js looks for a "b" inside of a class=titlebar -->
-
-
-
 <!--
     #todo redo this whole template
     the js should be added with AddAttributeToTag, not hard-coded into the template
@@ -13,9 +8,7 @@ titlebar.template should include this comment:
 -->
 <!-- / dialog_controls.template -->
 
-
 read-only mode for non-registered users
-
 
 add document.body.clientWidth and document.documentElement.clientWidth to jstest1.html
 
@@ -31,7 +24,6 @@ index.sqlite3 should not always be zipped
 
 resultset dialogs should link to the full page and list total number of items
 
-
 feature check for window.event (or whatever it is) before using "event."
 	one browser where it causes problems: firefox 2.x (netscape 9)
 
@@ -42,14 +34,10 @@ Inbox dialog should have id=
 
 Reference found where even-sized list expected at ./config/template/perl/utils.pl line 2838.
 
-
-
 1698874799.99864 Deep recursion on subroutine "main::IndexFile" at ./config/template/perl/utils.pl line 2830.
 Deep recursion on subroutine "main::IndexTextFile" at /home/wsl/pollyanna/config/template/perl/index_file.pl line 133.
 Deep recursion on subroutine "main::AttachLogToItem" at /home/wsl/pollyanna/config/template/perl/index_text_file.pl line 1011.
 ^C
-
-
 
 2023-11-01 17:36:37: (mod_fastcgi.c.451) FastCGI-stderr:PHP Fatal error:  Uncaught TypeError: preg_match(): Argument #2 ($subject) must be of type string, array given in /home/wsl/pollyanna/html/post.php:236
 
@@ -105,14 +93,10 @@ needs to be a procedure to "strip" an html page of its "envelope" of html, head,
 	look at internet archive for example
 
 Dialogs which don't respond to PageMap (missing id=)
-Inbox
-Threads
 Introduction
 Chain (listing)
-Labels
 
 Pages which have dialogs without title
-
 
 youtube embed implementation
 	a) create token in token_defs.pl
