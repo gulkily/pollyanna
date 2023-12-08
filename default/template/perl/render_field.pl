@@ -519,7 +519,6 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 	elsif (
 		# these are just valid fields which can be displayed as is
 		$fieldName eq 'attribute' || # RenderField() not to be confused with field_advanced
-		$fieldName eq 'author_key' || # RenderField() not to be confused with field_advanced
 		$fieldName eq 'chain_order' || # RenderField() not to be confused with field_advanced
 		$fieldName eq 'chain_sequence' || # RenderField() not to be confused with field_advanced
 		$fieldName eq 'gpg_alias' || # RenderField() not to be confused with field_advanced
