@@ -8,6 +8,7 @@ cart
 chain_checksum_good
 chain_order
 child_count
+chain_hash
 file_hash
 file_path
 item_count
