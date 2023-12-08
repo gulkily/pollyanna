@@ -487,7 +487,9 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	if (scalar(@result) > 1) { # urls
 		my %flags;
 		$flags{'no_heading'} = 1;
-		$txtIndex .= GetResultSetAsDialog(\@result, 'Links', 'value', \%flags);
+		my $linksToolbox = GetResultSetAsDialog(\@result, 'Links', 'value', \%flags);
+		$linksToolbox = AddAttributeToTag($linksToolbox, 'table', 'id', 'Links');
+		$txtIndex .= $linksToolbox;
 	}
 
 
