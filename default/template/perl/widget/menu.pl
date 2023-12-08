@@ -329,28 +329,25 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 	my $menuItem = '';
 	$menuItem = GetTemplate($templateName);
 
-	# my $color = GetThemeColor('link');
-	# my $colorSourceHash = md5_hex($caption);
-	# my $menuColorMode = GetThemeAttribute('menu_color_mode') ? 1 : 0;
-	# for (my $colorSelectorI = 0; $colorSelectorI < 6; $colorSelectorI++) {
-	# 	my $char = substr($colorSourceHash, $colorSelectorI, 1);
-	# 	if (!$menuColorMode) {
-	# 		if ($char eq 'd' || $char eq 'e' || $char eq 'f') {
-	# 			$char = 'c';
-	# 		}
-	# 	}
-	# 	if ($menuColorMode) {
-	# 		if ($char eq '0' || $char eq '1' || $char eq '2') {
-	# 			$char = '3';
-	# 		}
-	# 	}
-	# 	$color .= $char;
-	# }
+	my $color = '';
+	if (GetConfig('setting/html/menu_color_code')) { #todo should be under css/
+		my $colorSourceHash = md5_hex($caption);
+		for (my $colorSelectorI = 0; $colorSelectorI < 6; $colorSelectorI++) {
+			#this is a hack to make sure the color is not too dark
+		 	my $char = substr($colorSourceHash, $colorSelectorI, 1);
+			if ($char eq 'd' || $char eq 'e' || $char eq 'f') {
+				$char = 'c';
+			}
+	 		if ($char eq '0' || $char eq '1' || $char eq '2') {
+	 			$char = '3';
+	 		}
+		 	$color .= $char;
+		}
 
-	# my $firstLetter = substr($caption, 0, 1);
-	# $caption = substr($caption, 1);
-
-	#my $color = substr(md5_hex($caption), 0, 6);
+		$color = substr(md5_hex($caption), 0, 6);
+	} else {
+		$color = GetThemeColor('link');
+	}
 
 	if (GetConfig('html/accesskey')) {
 		my $accessKey = GetAccessKey($caption);
@@ -411,7 +408,11 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 		$menuItem = AddAttributeToTag($menuItem, 'a ', 'target', '_top');
 	}
 
-	# $menuItem =~ s/\$color/$color/g;
+	if (GetConfig('setting/html/menu_color_code')) { #todo should be under css/
+		$menuItem = AddAttributeToTag($menuItem, 'a ', 'style', 'border-bottom: #$color 3px solid;');
+		$menuItem =~ s/\$color/$color/g;
+	}
+
 	# $menuItem =~ s/\$firstLetter/$firstLetter/g;
 
 	return $menuItem;
