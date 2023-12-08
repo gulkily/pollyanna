@@ -697,7 +697,7 @@ function DraggingInit (doPosition) { // initialize all class=dialog elements on 
 
 	if (GetPrefs('draggable_reopen')) {
 		//alert(1);
-		var openDialogs = GetPrefs('opened_dialogs'); // DraggingInit()
+		var openDialogs = GetPrefs('opened_dialogs'); // reopening in DraggingInit()
 		if (openDialogs) {
 			var dialogsToOpen = openDialogs.split(',');
 			openDialogs = '';
@@ -709,7 +709,9 @@ function DraggingInit (doPosition) { // initialize all class=dialog elements on 
 							// skip
 						}
 						else if (document.getElementById(dialogName)) {
-							// skip
+							// #todo this should make dialog visible,
+							// but not via SpotlightDialog(),
+							// because we want it to stay in its saved position
 						}
 						else {
 							if (openDialogs) {
@@ -965,6 +967,7 @@ function HideDialog (dialog) { // takes dialog element as reference
 } // HideDialog()
 
 function UpdateDialogList () {
+// page_map.js
 // function UpdatePageMap () {
 // #todo finish renaming "dialog list" to "page map"
 // PageMap pagemap dialog list
@@ -1267,9 +1270,8 @@ function InsertFetchedDialog () {
 					DraggingInitDialog(newDialog[iDialog], 1); // InsertFetchedDialog()
 				}
 			}
-			//document.title = 'asdf';
 		} else {
-			//document.title = 'qwer';
+			// do nothing
 		}
 		if (newDialog.length == 1) {
 			// new dialog was found in page, and is referenced by newDialog
@@ -1347,7 +1349,7 @@ function InsertFetchedDialog () {
 } // InsertFetchedDialog()
 
 function FetchDialog (dialogName) {
-// function InjectDialog () { // FetchDialog
+// function InjectDialog () { // FetchDialog()
 	if ((window.GetPrefs) && !GetPrefs('draggable_spawn')) {
 		//alert('DEBUG: FetchDialog: warning: draggable_spawn is FALSE');
 		return true; // #todo..
@@ -1386,13 +1388,13 @@ function FetchDialog (dialogName) {
 	}
 
 	//alert(dialogName);
-	var openDialogs = GetPrefs('opened_dialogs'); // FetchDialog()
+	var openDialogs = GetPrefs('opened_dialogs'); // adding via FetchDialog()
 	//alert('DEBUG: FetchDialog: openDialogs = ' + openDialogs);
 	if (openDialogs && openDialogs.indexOf(dialogId) != -1) {
 		//
 	} else {
-		SetPrefs('opened_dialogs', openDialogs + ',' + dialogId); // FetchDialog()
-		//SetPrefs('opened_dialogs', ((openDialogs && openDialogs != '0') ? openDialogs + ',' : '') + dialogId); // FetchDialog()
+		SetPrefs('opened_dialogs', openDialogs + ',' + dialogId); // adding in FetchDialog()
+		//SetPrefs('opened_dialogs', ((openDialogs && openDialogs != '0') ? openDialogs + ',' : '') + dialogId); // adding in FetchDialog()
 	}
 	//alert(openDialogs);
 
@@ -1409,10 +1411,10 @@ function CloseDialog(t) {
 		var dialogId = GetDialogId(parentDialog);
 
 		//alert(dialogName);
-		var openDialogs = GetPrefs('opened_dialogs'); // CloseDialog()
+		var openDialogs = GetPrefs('opened_dialogs'); // removing in CloseDialog()
 		if (openDialogs && openDialogs.indexOf(dialogId) != -1) {
 			var withoutDialog = openDialogs.replace(',' + dialogId, '');
-			SetPrefs('opened_dialogs', withoutDialog); // CloseDialog()
+			SetPrefs('opened_dialogs', withoutDialog); // removing in CloseDialog()
 		} else {
 			//don't need to do anything
 		}
@@ -1429,8 +1431,7 @@ function CloseDialog(t) {
 } // CloseDialog()
 
 function FetchDialogFromUrl (url) { // url example: /dialog/help.html
-// function InjectDialog () {
-// function FetchDialogFromUrl () {
+// function InjectDialog () { // FetchDialogFromUrl()
 // function SpawnDialog () {
 	if ((window.GetPrefs) && !window.GetPrefs('draggable_spawn')) {
 		// #should be one layer above #todo
