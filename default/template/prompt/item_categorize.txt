@@ -1,0 +1,11 @@
+Hi, friend. The following message, everything that follows the divider line, was posted to my forum.  Please help me classify it:
+
+* Provide up to seven hashtags to add to the post;
+* Add a title for the post, prepending it with "title:";
+* If you think you can identify the post’s author, please provide it, prepending with "author:";
+* If you detect any mention of a date, such as "tomorrow" or "August 29", please add it with a "date:" prefix in YYYY-MM-DD format.
+* Provide a short summary of the post
+
+Thank you very much for your help.
+
+=== message follows below ===
