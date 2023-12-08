@@ -67,7 +67,7 @@ input:focus {
 .titlebarButtons {
 	float: right;
 }
-button.close, button.skip {
+button.close, button.skip, button.expand {
 	border: 0;
 	margin: 0;
 	font-weight: bold;
@@ -86,9 +86,5 @@ button:hover {
 }
 .titlebarButtons {
 	float: right;
-}
-button.close, button.skip {
-	border: 0;
-	margin: 0;
 }
 /* / theme/chicago/additional.css */

@@ -72,7 +72,7 @@ fieldset {
 .titlebarButtons {
 	float: right;
 }
-button.close, button.skip {
+button.close, button.skip, button.expand {
 	border: 0;
 	margin: 0;
 }
