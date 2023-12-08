@@ -279,6 +279,12 @@ sub GetDialogX2 { # \%paramHash ; returns window
 			my $btnCloseCaption = '#'; # needs to match one other place in dragging.js #collapseButton
 			my $windowTitlebar = GetTemplate('html/window/titlebar_with_button.template'); #window_titlebar_buttons
 
+			if (index($windowTitlebar, '<b>') != -1) {
+				# ok, sanity check passed
+			} else {
+				WriteLog('GetDialogX2: warning: $windowTitlebar was missing <b>; caller = ' . join(',', caller));
+			}
+
 			if (GetConfig('setting/admin/js/enable')) {
 				#$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=skip', 'onclick', "if (window.CollapseWindowFromButton) { return !CollapseWindowFromButton(this); } return false;");
 				#skip button
@@ -323,13 +329,21 @@ sub GetDialogX2 { # \%paramHash ; returns window
 			#$contentColumnCount = 2;
 		} else {
 			my $windowTitlebar = GetTemplate('html/window/titlebar.template');
+
+			if (index($windowTitlebar, '<b>') != -1) {
+				# ok, sanity check passed
+			} else {
+				WriteLog('GetDialogX2: warning: $windowTitlebar was missing <b>; caller = ' . join(',', caller));
+			}
+
 			#
 			#			if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
 			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$dialogAnchor', 'onfocus', 'document.title=this.innerHTML;');
 			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$dialogAnchor', 'onclick', 'document.title=this.innerHTML;');
 			#			}
 			#
-			$windowTitlebar = str_replace('<!-- note: dragging.js looks for a "b" inside of a class=titlebar -->', '', $windowTitlebar); #UtilityComment
+			#$windowTitlebar = str_replace('<!-- note: dragging.js looks for a "b" inside of a class=titlebar -->', '', $windowTitlebar); #UtilityComment
+
 			$windowTitlebar =~ s/\$windowTitle/$windowTitle/g;
 			$windowTitlebar =~ s/\$dialogAnchor/$dialogAnchor/g;
 			$windowTemplate =~ s/\$windowTitlebar/$windowTitlebar/g;
