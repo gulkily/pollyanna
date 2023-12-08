@@ -134,6 +134,10 @@ sub HtmlEscape { # encodes supplied string for html output
 sub GetStringHtmlColor {
 # sub GetColorFromHash {
 # sub GetHashColor {
+# sub GetStringHashedColor {
+# sub GetHashedColor {
+# sub GetColorFromHash {
+# sub GetColorFromString {
 	my $string = shift;
 	
 	#todo dark/light or color(s) to match
