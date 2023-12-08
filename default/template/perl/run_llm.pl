@@ -12,8 +12,22 @@ sub RunLlm { # $item ; calls 'run' action on specified item
 
 	my $runLog = 'run_log/' . $item;
 
-	my $filePath = DBGetItemFilePath($item);
-	my $itemType = DBGetItemType($item);
+	my $promptText = '';
+	$promptText .= ">>$item";
+	$promptText .= "\n\n";
+	$promptText .= GetTemplate('prompt/item_categorize.txt');
+	$promptText .= "\n\n";
+	$promptText .= GetFileMessage($item);
+	$promptText .= "\n\n";
+
+	my $promptHash = sha1_hex($promptText);
+	my $promptFile = substr($promptHash, 0, 2) . '/' . substr($promptHash, 2, 2) . '/' . $promptHash . '.txt';
+	my $TXTDIR = GetDir('txt');
+	PutFile("$TXTDIR/$promptFile", $promptText);
+	$promptHash = IndexFile("$TXTDIR/$promptFile");
+	my $filePath = GetFilePath($item);
+
+	my $itemType = DBGetItemType($promptHash);
 	my $scriptPath = 'default/template/python/run_prompt.py';
 	#my $scriptPath = 'default/template/python/llm.py';
 	#todo optimize this to reduce database queries
