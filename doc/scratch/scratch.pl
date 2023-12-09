@@ -1,3 +1,83 @@
+sub GetAuthorPage {
+#    my ($authorKey, $otherParams) = @_;
+#
+#    # Existing author-specific code
+#
+#    if (!IsFingerprint($authorKey)) {
+#        WriteLog('GetAuthorPage called with invalid parameter');
+#        return;
+#    }
+#
+#    my $whereClause = "WHERE author_key = '$authorKey' AND item_score >= 0";
+#
+#    my $authorAliasHtml = GetAlias($authorKey);
+#
+#    #require_once('widget/avatar.pl');
+#
+#    my $authorAvatarHtml = GetAvatar($authorKey);
+#
+#    if (IsAdmin($authorKey)) {
+#		$title = "Admin's Blog (Posts by or for $authorAliasHtml)";
+#		$titleHtml = "Admin's Blog ($authorAvatarHtml)";
+#	} else {
+#		if (!$authorAliasHtml) {
+#			WriteLog('GetAuthorPage: warning: $authorAliasHtml is FALSE, substituting Guest');
+#			$authorAliasHtml = 'Guest';
+#		}
+#		$title = "Posts by or for $authorAliasHtml";
+#		$titleHtml = "$authorAvatarHtml";
+#	}
+#
+#	my %queryParams;
+#
+#	$queryParams{'where_clause'} = $whereClause;
+#	$queryParams{'order_clause'} = 'ORDER BY add_timestamp DESC';
+#
+#	#todo fix hardcoded limit #todo pagination
+#	$queryParams{'limit_clause'} = "LIMIT 100";
+#
+#	@files = DBGetItemList(\%queryParams); #used below in listing
+#
+#	if (GetConfig('setting/zip/author')) {
+#		$zipName = "author/$authorKey.zip";
+#		#todo move this somewhere else
+#		if ($zipName) {
+#			require_once('make_zip.pl');
+#			my %zipOptions;
+#			$zipOptions{'where_clause'} = "WHERE author_key = '$authorKey'";
+#			my @zipFiles = DBGetItemList(\%zipOptions);
+#			MakeZipFromItemList($zipName, \@zipFiles);
+#		}
+#	}
+#
+#	# Generate page
+#
+#	my $txtIndex = ""; # contains html output
+#
+#	# this will hold the title of the page
+#
+#	if (!$title) {
+#		$title = GetConfig('html/home_title');
+#	}
+#
+#	chomp $title;
+#
+#	$title = HtmlEscape($title);
+#
+#	my $htmlStart = '';
+#
+#	#require_once('get_page_header.pl');
+#
+#	#$htmlStart .= GetPageHeader('read_' . $pageType);
+
+}
+
+
+
+
+
+
+
 
 #
 #	if (!$itemHash) {
