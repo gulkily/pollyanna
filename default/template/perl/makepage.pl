@@ -31,6 +31,7 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 # sub MakeProfilePage {
 # sub GetHelpPage { # sub MakePage {
 # sub MakeHelpPage { # sub MakePage {
+# sub GetScoresPage { # sub MakePage {
 
 # supported page types so far:
 # tag, #hashtag
