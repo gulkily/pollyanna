@@ -176,6 +176,9 @@ sub GetHtmlToolboxes {
 			$html .= $dialogToolboxPublish;
 		}
 	}
+	#elsif (GetConfig('setting/html/item_page/toolbox_publish') && $file{'file_path'} && $file{'item_type'} eq 'image') {
+		# include image_publish.js
+	#} #todo
 
 	if (GetConfig('setting/html/item_page/toolbox_share')) {
 		my $htmlToolbox = '';
