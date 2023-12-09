@@ -112,6 +112,8 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 	if (GetConfig('setting/html/page_map_top') || GetConfig('setting/html/page_map')) {
 		require_once('dialog/page_map.pl');
 		$topMenuTemplate .= GetPageMapDialog();
+		#$topMenuTemplate .= '<span class=advanced>' . GetPageMapDialog() . '</span>';
+		#todo this can be changed once pagemap is accessible from the main menu
 	}
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/dialog_properties')) {
