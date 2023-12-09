@@ -147,6 +147,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 		# $validMakePageNames # $validMakePageNames # $validMakePageNames # $validMakePageNames # $validMakePageNames
 
 		$validMakePageNames = array(
+			'/history.html',
 			'/calendar.html',
 			'/upload.html',
 			'/help.html',
