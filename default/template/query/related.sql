@@ -2,6 +2,7 @@ SELECT
 	COALESCE(NULLIF(item_title,''), 'Untitled') AS item_title,
 	item_flat.add_timestamp AS add_timestamp,
 	(item_flat.file_hash = ?) AS this_row,
+	'' AS cart,
 	item_flat.file_hash AS file_hash,
 	GROUP_CONCAT(related_list.attribute) AS attribute_list,
 	COUNT(attribute) AS attribute_count
