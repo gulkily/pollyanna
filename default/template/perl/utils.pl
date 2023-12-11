@@ -1909,12 +1909,16 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 
 	if (!-e ($HTMLDIR . '/index.html')) {
 		# if index is missing replace it with anything that comes along
+		# this is an edge case that rarely happens
 		if (
-			$file =~ m/profile/ ||
-			$file =~ m/welcome/ ||
-			$file =~ m/read/ ||
-			$file =~ m/write/ ||
-			$file =~ m/help/
+			index($file, 'dialog') != -1 && # don't replace it with a dialog
+			(
+				$file =~ m/profile/ ||
+				$file =~ m/welcome/ ||
+				$file =~ m/read/ ||
+				$file =~ m/write/ ||
+				$file =~ m/help/
+			)
 		) {
 			WriteLog('PutHtmlFile: warning: index.html was missing, fixing it with $file = ' . $file);
 			my $putIndexFileName = PutHtmlFile("index.html", $content);
