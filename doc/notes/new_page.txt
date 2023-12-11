@@ -3,15 +3,18 @@ Creating a new page new_page.txt newpage.txt
 this process could use some improvement but it's not too bad
 
 1) create a new page template:
+==============================
+you can skip this if you're making a listing page
+otherwise, this is the content of the "main" dialog of the page.
 
 vim default/template/html/page/example.template
 -or-
 vim default/theme/yourname/template/html/page/example.template
 
-you can skip this if you're making a listing page
-otherwise, this is the content of the "main" dialog of the page.
-
 2) create a new perl page handler:
+==================================
+see example below
+
 vim default/template/perl/page/example.pl
 - or -
 vim default/theme/yourname/template/perl/page/example.pl
@@ -19,7 +22,8 @@ vim default/theme/yourname/template/perl/page/example.pl
 example.pl should look like this :
 
 =================
-
+example.pl file:
+=================
 #!/usr/bin/perl -T
 
 use strict;
@@ -43,11 +47,13 @@ sub GetExamplePage { # returns example page
 }
 
 return 1;
-=================
+===================
+end of example file
+===================
 
-
-
-2a) if you're making a listing page or using GetQueryAsDialog(), you also need to create the query template:
+2a) if you're making a listing page or using GetQueryAsDialog(),
+you also need to create the query template:
+================================================================
 vim default/template/query/example.sql
 
 - error reporting could be better right now. to rebuild this file, you need to:
@@ -55,6 +61,7 @@ vim default/template/query/example.sql
 	b) run `hike make example` to rebuild the html page (this is where you would see your error)
 
 3) add to valid pages filter/sanity check:
+==========================================
 makepage.pl: add to valid pages (search for @validPages or @simplePages)
 
 TEST 1:
@@ -71,30 +78,40 @@ IF YOUR QUERY HAS ERRORS:
 	#todo you can fix the error and run `hike page example` again to rebuild the page
 
 4) add to valid routes filter/sanity check in route.php:
+========================================================
 
 route.php: look for $validRoutes and add "example" to the list
 
 4a) add to valid make page names filter/sanity check in makepage.pl:
+====================================================================
 
 handle_not_found.php: add to $validMakePageNames
 
 5) add dialog version of the page, if it's going to be linked from the menu:
+============================================================================
 
 5a) add GetExampleDialog() to dialog/example.pl
+===============================================
 
 5b) add to validDialogs in pages.pl
+===================================
 
 5c) add to validDialogs in route.php
+====================================
 
 5d) add handler in pages.pl -D
+==============================
 look for @queryDialogs
 
 5e) add handler in handle_not_found.php
+=======================================
 look for $basicDialogs
 
 6) ???
+======
 
 7) profit
+=========
 
 ===
 
