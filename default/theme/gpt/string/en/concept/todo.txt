@@ -1,0 +1,24 @@
+concept todo
+  purpose keep track of tasks
+
+  state
+    done, pending: set Task
+
+  actions
+    add (t: Task)
+      when t not in done or pending
+      add t to pending
+
+    delete (t: Task)
+      when t in done or pending
+      remove t from done and pending
+
+    complete (t: Task)
+      when t in pending
+      move t from pending to done
+
+  operational principle
+    after add (t) until delete (t) or complete (t), t in pending
+    after complete (t) until delete (t), t in done
+
+FIG. 6.2 The todo concept defined.

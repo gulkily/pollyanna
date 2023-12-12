@@ -1,0 +1,17 @@
+app todo-label-syn
+
+include
+	todo
+	label [todo. Task]
+
+sync todo.delete (t)
+	label.clear (t)
+
+sync todo.add (t)
+	label.affix (t, ‘pending’)
+
+sync todo.complete (t)
+	label.detach (t, ‘pending’)
+
+sync label.detach (t, ‘pending’)
+	todo.complete (t)

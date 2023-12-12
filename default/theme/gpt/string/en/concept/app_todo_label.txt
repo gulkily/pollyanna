@@ -1,0 +1,8 @@
+app todo-label
+
+include
+	todo
+	label [todo. Task]
+
+sync todo.delete (t)
+	label.clear (t)

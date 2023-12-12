@@ -1,0 +1,28 @@
+concept email
+  purpose communicate with private messages
+
+  state
+    inbox: User -> set Message
+    from, to: Message -> User
+    content: Message -> Content
+
+  actions
+    send (by, for: User, m: Message, c: Content)
+      when m is a fresh message not in a user's inbox
+      store c as content of m
+      store ‘by’ as user m is from, and ‘for’ as user m is to
+
+    receive (by: User, m: Message)
+      when m is to user ‘by’ and not in inbox of ‘by’
+      add m to inbox of by
+
+    delete (m: Msg)
+      when m belongs to some user's inbox
+      remove m from that inbox
+      forget from, to, and content of m
+
+  operational principle
+    after send (by, for, m, c) can receive (by, m),
+    and m in inbox of by and has content c
+
+FIG. 6.5 The email concept defined.

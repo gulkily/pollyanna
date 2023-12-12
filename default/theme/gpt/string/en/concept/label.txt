@@ -1,0 +1,24 @@
+concept label [Item]
+  purpose organize items into overlapping categories
+
+  state
+    labels: Item -> set Label
+
+  actions
+    affix (i: Item, |: Label)
+      add | to the labels of i
+
+    detach (i: Item, |: Label)
+      remove | from the labels of i
+
+    find (I: Label): set Item
+      return the items labeled with |
+
+    clear (i: Item)
+      remove item i with all its labels
+
+  operational principle
+    after affix (i, |) and no detach (i, |), i in find (I)
+    if no affix (i, |), or detach (i, |), i not in find (I)
+
+FIG. 6.3 The label concept defined.
