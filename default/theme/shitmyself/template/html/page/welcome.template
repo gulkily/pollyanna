@@ -1,41 +1,9 @@
 <!-- welcome.template -->
 
 <p>
-	Welcome to sHiTMyseLf.com, an experimental Web space.
+	Welcome to [this site], <br>
+	the Alliance of White Thrones. <br>
+	You know what to do.
 </p>
-
-<p>
-	<b>Experimental Message Board</b> <br>
-	Discuss computers and other topics. <br>
-	Changes often, and there are bugs. <br>
-</p>
-
-<p>
-	<b>Trust and Consensus</b> <br>
-	Find people you agree with. <br>
-	Fully auditable reputation system. <br>
-	Self-moderated.
-</p>
-
-<p>
-	<b>Portable and Compatible</b> <br>
-	Compatible with most browsers and devices. <br>
-	Can be cloned and ported. <br>
-</p>
-
-<p>
-	<b>Interactive Immersive Learning Experience</b> <br>
-	Teaches you about programming and cryptography. <br>
-	Helps you learn to use the command line. <br>
-	Helps develop structured understanding of complex systems. <br>
-</p>
-
-<p>
-	<b>Features You May Recognize</b> <br>
-	Write messages anonymously and under a profile <br>
-	Read messages others have already posted</li> <br>
-	Vote on posted messages to improve quality</li> <br>
-</ul>
-
 
 <!-- / welcome.template -->
