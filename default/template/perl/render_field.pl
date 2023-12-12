@@ -222,9 +222,10 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 				# includes small thumbnail of image
 				if ($itemRow{'item_type'} && ($itemRow{'item_type'} eq 'image')) {
 					if ($fieldValue) {
+						my $thumbnailExtension = GetConfig('setting/admin/image/thumbnail_extension'); # '.gif'
 						#todo use GetImageContainer()
 						my $fileHash = $itemRow{'file_hash'};
-						my $imageSmallUrl = "/thumb/thumb_42_$fileHash.gif";
+						my $imageSmallUrl = "/thumb/thumb_42_$fileHash" . $thumbnailExtension;
 						my $imageContainer = "<img border=1 src=$imageSmallUrl style=height:1em;vertical-align:middle;margin-right:0.3em>";
 						#todo remove hardcoding of this style, etc
 						$fieldValue = $imageContainer . HtmlEscape($fieldValue);

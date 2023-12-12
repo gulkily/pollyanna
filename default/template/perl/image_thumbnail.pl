@@ -15,6 +15,8 @@ sub ImageMakeThumbnails { # $file
 		return '';
 	}
 
+	my $thumbnailExtension = GetConfig('setting/admin/image/thumbnail_extension'); # .gif
+
 	my $fileShellEscaped = EscapeShellChars($file); #todo this is still a hack, should rename file if it has shell chars?
 
 	if ($fileShellEscaped =~ m/(.+)/) { #todo #security
@@ -44,8 +46,8 @@ sub ImageMakeThumbnails { # $file
 	#imagemagick
 
 	#my @res = qw(800 512 42);
-	if (!-e "$HTMLDIR/thumb/thumb_800_$fileHash.gif") {
-		my $convertCommand = "convert \"$fileShellEscaped\" -auto-orient -thumbnail 800x800 -strip $HTMLDIR/thumb/thumb_800_$fileHash.gif";
+	if (!-e "$HTMLDIR/thumb/thumb_800_$fileHash" . $thumbnailExtension) {
+		my $convertCommand = "convert \"$fileShellEscaped\" -auto-orient -thumbnail 800x800 -strip $HTMLDIR/thumb/thumb_800_$fileHash" . $thumbnailExtension;
 		WriteLog('ImageMakeThumbnails: ' . $convertCommand);
 
 		my $convertCommandResult = `$convertCommand`;
@@ -54,23 +56,23 @@ sub ImageMakeThumbnails { # $file
 		#sub DBAddTask { # $taskType, $taskName, $taskParam, $touchTime # make new task
 
 	}
-	if (!-e "$HTMLDIR/thumb/thumb_512_g_$fileHash.gif") {
-		my $convertCommand = "convert \"$fileShellEscaped\" -auto-orient -thumbnail 512x512 -colorspace Gray -blur 0x16 -strip $HTMLDIR/thumb/thumb_512_g_$fileHash.gif";
-		#my $convertCommand = "convert \"$fileShellEscaped\" -scale 5% -blur 0x25 -resize 5000% -colorspace Gray -blur 0x8 -thumbnail 512x512 -strip $HTMLDIR/thumb/thumb_512_$fileHash.gif";
+	if (!-e "$HTMLDIR/thumb/thumb_512_g_$fileHash" . $thumbnailExtension) {
+		my $convertCommand = "convert \"$fileShellEscaped\" -auto-orient -thumbnail 512x512 -colorspace Gray -blur 0x16 -strip $HTMLDIR/thumb/thumb_512_g_$fileHash" . $thumbnailExtension;
+		#my $convertCommand = "convert \"$fileShellEscaped\" -scale 5% -blur 0x25 -resize 5000% -colorspace Gray -blur 0x8 -thumbnail 512x512 -strip $HTMLDIR/thumb/thumb_512_$fileHash" . $thumbnailExtension;
 		WriteLog('ImageMakeThumbnails: ' . $convertCommand);
 
 		my $convertCommandResult = `$convertCommand`;
 		WriteLog('ImageMakeThumbnails: convert result: ' . $convertCommandResult);
 	}
-	if (!-e "$HTMLDIR/thumb/thumb_512_$fileHash.gif") {
-		my $convertCommand = "convert \"$fileShellEscaped\" -auto-orient -thumbnail 512x512 -strip $HTMLDIR/thumb/thumb_512_$fileHash.gif";
+	if (!-e "$HTMLDIR/thumb/thumb_512_$fileHash" . $thumbnailExtension) {
+		my $convertCommand = "convert \"$fileShellEscaped\" -auto-orient -thumbnail 512x512 -strip $HTMLDIR/thumb/thumb_512_$fileHash" . $thumbnailExtension;
 		WriteLog('ImageMakeThumbnails: ' . $convertCommand);
 
 		my $convertCommandResult = `$convertCommand`;
 		WriteLog('ImageMakeThumbnails: convert result: ' . $convertCommandResult);
 	}
-	if (!-e "$HTMLDIR/thumb/thumb_42_$fileHash.gif") {
-		my $convertCommand = "convert \"$fileShellEscaped\" -auto-orient -thumbnail 42x42 -strip $HTMLDIR/thumb/thumb_42_$fileHash.gif";
+	if (!-e "$HTMLDIR/thumb/thumb_42_$fileHash" . $thumbnailExtension) {
+		my $convertCommand = "convert \"$fileShellEscaped\" -auto-orient -thumbnail 42x42 -strip $HTMLDIR/thumb/thumb_42_$fileHash" . $thumbnailExtension;
 		WriteLog('ImageMakeThumbnails: ' . $convertCommand);
 
 		my $convertCommandResult = `$convertCommand`;

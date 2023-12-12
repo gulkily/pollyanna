@@ -24,6 +24,8 @@ sub VideoMakeThumbnails { # $file
 		return '';
 	}
 
+	my $thumbnailExtension = GetConfig('setting/admin/image/thumbnail_extension'); # .gif
+
 	# make 800x800 thumbnail
 	state $HTMLDIR = GetDir('html');
 
@@ -43,8 +45,8 @@ sub VideoMakeThumbnails { # $file
 
 	#ffmpeg
 
-	if (!-e "$HTMLDIR/thumb/thumb_video_$fileHash.gif") {
-		my $ffmpegCommand = "ffmpeg -i \"$fileShellEscaped\" -ss 00:00:01.000 -vframes 1 $HTMLDIR/thumb/thumb_800_$fileHash.gif";
+	if (!-e "$HTMLDIR/thumb/thumb_video_$fileHash" . $thumbnailExtension) {
+		my $ffmpegCommand = "ffmpeg -i \"$fileShellEscaped\" -ss 00:00:01.000 -vframes 1 $HTMLDIR/thumb/thumb_800_$fileHash" . $thumbnailExtension;
 
 		WriteLog('VideoMakeThumbnails: ' . $ffmpegCommand);
 
@@ -54,10 +56,10 @@ sub VideoMakeThumbnails { # $file
 
 	#imagemagick
 
-	if (!-e "$HTMLDIR/thumb/thumb_video_$fileHash.gif") {
+	if (!-e "$HTMLDIR/thumb/thumb_video_$fileHash" . $thumbnailExtension) {
 		#my @res = qw(800 512 42);
-		if (!-e "$HTMLDIR/thumb/thumb_800_$fileHash.gif") {
-			my $convertCommand = "convert \"$HTMLDIR/thumb/thumb_video_$fileHash.gif\" -auto-orient -thumbnail 800x800 -strip $HTMLDIR/thumb/thumb_800_$fileHash.gif";
+		if (!-e "$HTMLDIR/thumb/thumb_800_$fileHash" . $thumbnailExtension) {
+			my $convertCommand = "convert \"$HTMLDIR/thumb/thumb_video_$fileHash" . $thumbnailExtension . ""\" -auto-orient -thumbnail 800x800 -strip $HTMLDIR/thumb/thumb_800_$fileHash" . $thumbnailExtension . "";
 			WriteLog('VideoMakeThumbnails: ' . $convertCommand);
 
 			my $convertCommandResult = `$convertCommand`;
@@ -66,23 +68,23 @@ sub VideoMakeThumbnails { # $file
 			#sub DBAddTask { # $taskType, $taskName, $taskParam, $touchTime # make new task
 
 		}
-		if (!-e "$HTMLDIR/thumb/thumb_512_g_$fileHash.gif") {
-			my $convertCommand = "convert \"$HTMLDIR/thumb/thumb_video_$fileHash.gif\" -auto-orient -thumbnail 512x512 -colorspace Gray -blur 0x16 -strip $HTMLDIR/thumb/thumb_512_g_$fileHash.gif";
-			#my $convertCommand = "convert \"$fileShellEscaped\" -scale 5% -blur 0x25 -resize 5000% -colorspace Gray -blur 0x8 -thumbnail 512x512 -strip $HTMLDIR/thumb/thumb_512_$fileHash.gif";
+		if (!-e "$HTMLDIR/thumb/thumb_512_g_$fileHash" . $thumbnailExtension) {
+			my $convertCommand = "convert \"$HTMLDIR/thumb/thumb_video_$fileHash" . $thumbnailExtension . "\" -auto-orient -thumbnail 512x512 -colorspace Gray -blur 0x16 -strip $HTMLDIR/thumb/thumb_512_g_$fileHash" . $thumbnailExtension;
+			#my $convertCommand = "convert \"$fileShellEscaped\" -scale 5% -blur 0x25 -resize 5000% -colorspace Gray -blur 0x8 -thumbnail 512x512 -strip $HTMLDIR/thumb/thumb_512_$fileHash" . $thumbnailExtension;
 			WriteLog('VideoMakeThumbnails: ' . $convertCommand);
 
 			my $convertCommandResult = `$convertCommand`;
 			WriteLog('VideoMakeThumbnails: convert result: ' . $convertCommandResult);
 		}
-		if (!-e "$HTMLDIR/thumb/thumb_512_$fileHash.gif") {
-			my $convertCommand = "convert \"$HTMLDIR/thumb/thumb_video_$fileHash.gif\" -auto-orient -thumbnail 512x512 -strip $HTMLDIR/thumb/thumb_512_$fileHash.gif";
+		if (!-e "$HTMLDIR/thumb/thumb_512_$fileHash" . $thumbnailExtension) {
+			my $convertCommand = "convert \"$HTMLDIR/thumb/thumb_video_$fileHash" . $thumbnailExtension . "\" -auto-orient -thumbnail 512x512 -strip $HTMLDIR/thumb/thumb_512_$fileHash" . $thumbnailExtension;
 			WriteLog('VideoMakeThumbnails: ' . $convertCommand);
 
 			my $convertCommandResult = `$convertCommand`;
 			WriteLog('VideoMakeThumbnails: convert result: ' . $convertCommandResult);
 		}
-		if (!-e "$HTMLDIR/thumb/thumb_42_$fileHash.gif") {
-			my $convertCommand = "convert \"$HTMLDIR/thumb/thumb_video_$fileHash.gif\" -auto-orient -thumbnail 42x42 -strip $HTMLDIR/thumb/thumb_42_$fileHash.gif";
+		if (!-e "$HTMLDIR/thumb/thumb_42_$fileHash" . $thumbnailExtension) {
+			my $convertCommand = "convert \"$HTMLDIR/thumb/thumb_video_$fileHash" . $thumbnailExtension . "\" -auto-orient -thumbnail 42x42 -strip $HTMLDIR/thumb/thumb_42_$fileHash" . $thumbnailExtension;
 			WriteLog('VideoMakeThumbnails: ' . $convertCommand);
 
 			my $convertCommandResult = `$convertCommand`;
