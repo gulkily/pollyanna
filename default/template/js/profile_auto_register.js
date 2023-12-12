@@ -11,9 +11,10 @@ function ForceLogin () { // attempts to create a registration
 	window.ForceLoginTried = 1;
 	if (window.MakeKey && window.getPublicKey) {
 		if (!getPublicKey()) {
-			MakeKey(); // #todo this should not prompt for a username
+			MakeKey(); // # this may prompt for a username
 			SetPrefs('sign_by_default', 1);
 			PubKeyPing();
+			// todo: should reload page and/or update dialog
 		} else {
 			// already logged in
 		}
