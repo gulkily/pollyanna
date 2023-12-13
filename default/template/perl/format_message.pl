@@ -177,6 +177,32 @@ sub SqlForWeb { # replaces some spaces with &nbsp; to preserve text-based layout
 	return $container;
 } # SqlForWeb()
 
+sub ConceptForWeb { # $text ; for formatting software concept definitions
+	my $text = shift;
+
+	if (!$text) {
+		return '';
+	}
+
+	$text = HtmlEscape($text);
+	$text =~ s/\n /<br>&nbsp;/g;
+	$text =~ s/^ /&nbsp;/g;
+	$text =~ s/  / &nbsp;/g;
+	$text =~ s/\n/<br>\n/g;
+
+	my @conceptKeywords = qw(^concept ^actions ^where ^state ^where);
+	push @conceptKeywords, "operational principle";
+
+	for my $conceptKeyword (@conceptKeywords) {
+		$text =~ s/$conceptKeyword/<b>$conceptKeyword<\/b>/gm;
+	}
+
+	my $container = GetTemplate('html/item/container/sql.template');
+	$container = str_replace('$text', str_replace('^', '', $text), $container);
+
+	return $container;
+} # ConceptForWeb()
+
 sub TextartForWeb { # replaces some spaces with &nbsp; to preserve text-based layout for html display; $text
 	# sub EscapeHtml { # TextartForWeb()
 	# sub FormatHtml {
