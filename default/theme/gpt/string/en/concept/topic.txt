@@ -1,0 +1,18 @@
+concept Topic
+
+state
+  label: String
+  label_count: Integer
+
+actions
+  retrieveTopic()
+    pre true
+    // Additional logic to retrieve a specific topic based on the label
+    set label, label_count from selectTopic()
+
+operational principle
+  after retrieveTopic(), label and label_count are populated with data for the specific topic
+
+where
+  selectTopic(): (String, Integer)
+    // Additional logic to execute the SQL query and retrieve data for a specific topic
