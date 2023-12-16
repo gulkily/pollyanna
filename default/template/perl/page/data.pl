@@ -104,7 +104,14 @@ sub MakeDataZips {
 				WriteLog('MakeDataZips: warning: GetConfig("setting/zip/image") was FALSE; caller = ' . join(',', caller));
 			}
 
-			system("zip -qr $HTMLDIR/txt.tmp.zip $HTMLDIR/txt/ $HTMLDIR/chain.log");
+			my $pwd = `pwd`;
+			if ($pwd =~ m/^([a-zA-Z0-9\/]+)$/) {
+				$pwd = $1;
+			} else {
+				WriteLog('MakeDataZips: warning: sanity check failed on $pwd');
+				return '';
+			}
+			system("cd $HTMLDIR; zip -qr ./txt.tmp.zip ./txt/ ./chain.log ; cd $pwd"); # #txtzip '/txt.zip' 'txt.zip'
 			rename("$HTMLDIR/txt.tmp.zip", "$HTMLDIR/txt.zip");
 
 			{ #with zip
