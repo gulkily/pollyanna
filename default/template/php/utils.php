@@ -1521,7 +1521,7 @@ function GetItemPlaceholderPage ($comment, $hash, $fileUrlPath, $filePath) { # g
 		#$fileTxtPath = str_replace(GetDir('txt'), '', $filePath); #my
 		#$fileTxtPath = GetFile #my
 
-		if (!$fileTxtPath) {
+		if (!defined($fileTxtPath) || !$fileTxtPath) {
 			$caller = isset($dbt[1]['function']) ? $dbt[1]['function'] : 'caller_missing';
 			WriteLog('GetItemPlaceholderPage: warning: $fileTxtPath is FALSE; caller = ' . $caller);
 			$fileTxtPath = '';
