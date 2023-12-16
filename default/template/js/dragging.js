@@ -931,7 +931,7 @@ function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was
 			// dialog.style.left = event.clientY;
 			// there is an issue with this for some reason
 			var dialogTop = (event.clientY - 35) + 'px';
-			var dialogLeft = (event.clientX - 15) + 'px';
+			var dialogLeft = (event.clientX + 100) + 'px';
 
 			dialog.style.top = dialogTop;
 			dialog.style.left = dialogLeft;
