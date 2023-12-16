@@ -21,3 +21,12 @@ var ls = window.localStorage;
 ls.setItem('key', value);
 var retrieve = ls.getItem('key');
 ls.removeItem('key');
+
+PHP cheatsheet
+==============
+$caller = isset($dbt[1]['function']) ? $dbt[1]['function'] : 'caller_missing';
+
+Bash cheatsheet
+===============
+# fix line endings
+for f in `find -type f | grep sh$`; do echo $f; sed -i -e 's/\r$//' $f; done
