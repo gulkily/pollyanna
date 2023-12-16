@@ -1,13 +1,13 @@
-/bin/bash^M: bad interpreter: No such file or directory
+# if you get this error, it means hike.sh has somehow acquired windows line endings.
+#
+# /bin/bash^M: bad interpreter: No such file or directory
+#
+# bad_interpreter.txt
 
-bad_interpreter.txt
-
-if you get this error, it means hike.sh has somehow acquired windows line endings.
-
-To fix it, try this:
+# To fix it, try this:
 
 sed -i -e 's/\r$//' hike.sh
 
-To do it for all the shell files, try this:
+# To do it for all the shell files, try this:
 
 for f in `find -type f | grep sh$`; do echo $f; sed -i -e 's/\r$//' $f; done
