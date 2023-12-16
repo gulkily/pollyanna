@@ -514,6 +514,9 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 		my @rssFiles = DBGetItemList(\%queryParams);
 
 		PutFile("$HTMLDIR/rss.xml", GetRssFile(@rssFiles));
+		# /rss.xml /rss.xml /rss.xml /rss.xml /rss.xml /rss.xml /rss.xml /rss.xml /rss.xml
+		# /rss.xml /rss.xml /rss.xml /rss.xml /rss.xml /rss.xml /rss.xml /rss.xml /rss.xml
+		# /rss.xml /rss.xml /rss.xml /rss.xml /rss.xml /rss.xml /rss.xml /rss.xml /rss.xml
 	}
 	#
 	# summary pages
