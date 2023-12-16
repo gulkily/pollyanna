@@ -1,3 +1,17 @@
+refactor GetImageContainer() to use \%file instead of $fileHash as parameter
+	allow for old style calls as well?
+
+how to rechain / multiple chain?
+
+	a) get hash of current chain
+	b) create new chain with announcement of previous chain's hash as the first item
+	c) add all valid items in current chain to new chain
+	d) replace current chain with new chain
+	e) ???
+	f) profit
+
+===
+
 why doesn't php InjectJs() use GetScriptTemplate() ?
 
 <!--
@@ -3895,11 +3909,6 @@ have an alternative to lighttpd (which takes longer) for when it is missing
 		file:// url instructions
 		python3 -m http.server
 make sure everything under default/ has a trailing \n
-
-===
-
-how to rechain / multiple chain?
-	store chain as item
 
 ===
 
