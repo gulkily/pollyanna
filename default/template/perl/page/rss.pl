@@ -31,6 +31,16 @@ sub GetRssFile { # returns rss feed for current site
 	}
 
 	my $myHost = GetConfig('setting/admin/rss_host');
+	if ($myHost eq 'localhost:2784') {
+		WriteLog('GetRssFile: warning: rss_host has not been changed from default');
+	}
+	if (!$myHost) {
+		#todo WriteLog('GetRssFile: ')
+		$myHost = GetConfig('setting/admin/my_domain');
+		if ($myHost eq 'localhost:2784') {
+			WriteLog('GetRssFile: warning: my_domain has not been changed from default');
+		}
+	}
 
 	my $baseUrl = $urlProtocol . '://' . $myHost . '/';
 
