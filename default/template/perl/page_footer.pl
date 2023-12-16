@@ -123,12 +123,6 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 		WriteLog('GetPageFooter: NOT adding css textarea');
 	}
 
-	if (GetConfig('html/page_map_bottom')) { #todo js and dragging checks
-		require_once('dialog/page_map.pl');
-		$txtFooter = str_replace('</body>', '<br>' . GetPageMapDialog() . '</body>', $txtFooter);
-	}
-
-
 	if (
 		GetConfig('html/menu_bottom') ||
 		(
@@ -168,14 +162,25 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 		$noJsInfo = '<noscript>' . $noJsInfo . '</noscript>';
 		$txtFooter = str_replace(
 			'</body>',
-			'<br>' . $noJsInfo . '</body>',
+			$noJsInfo . '</body>',
 			$txtFooter
 		);
 	}
 
 	if (GetConfig('html/recent_items_footer')) {
 		require_once('widget/recent_items.pl');
-		$txtFooter = GetRecentItemsDialog() . $txtFooter;
+		#$txtFooter = $txtFooter . GetRecentItemsDialog();
+		$txtFooter = str_replace(
+			'</body>',
+			GetRecentItemsDialog() . '</body>',
+			$txtFooter
+		);
+	}
+
+
+	if (GetConfig('html/page_map_bottom')) { #todo js and dragging checks
+		require_once('dialog/page_map.pl');
+		$txtFooter = str_replace('</body>', GetPageMapDialog() . '</body>', $txtFooter);
 	}
 
 	# if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/controls_footer')) {
