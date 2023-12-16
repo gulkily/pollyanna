@@ -15,6 +15,13 @@ sub GetRssFile { # returns rss feed for current site
 # sub GetRss {
 # sub MakeFeed {
 
+# Resultset needs to have the following fields:
+# file_path
+# item_title
+# add_timestamp
+
+#todo it should also display and authors and link to author pages
+
 	my %queryParams;
 
 	my $urlProtocol = 'http';
