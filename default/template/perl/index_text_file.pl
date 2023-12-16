@@ -1019,10 +1019,12 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 										if (!$titleCandidate) {
 											$titleCandidate = '[declined: #' . $tokenFound{'param'} . ']';
 										}
-										#AttachLogToItem($fileHash, 'declined: ' . $tokenFound{'param'} . '; reason: ' . $approveReason);
 										if (GetConfig('admin/index/create_system_tags')) {
 											DBAddLabel($fileHash, 0, 'declined');
 											DBAddLabel('flush');
+										}
+										if (GetConfig('admin/index/log_declined')) {
+											AttachLogToItem($fileHash, 'declined: ' . $tokenFound{'param'} . '; reason: ' . $approveReason);
 										}
 									}
 								} # foreach my $itemParent (@itemParents)
