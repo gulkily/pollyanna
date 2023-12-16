@@ -358,6 +358,8 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 					$newTokenFound{'recon'} = $httpMatch;
 					$newTokenFound{'message'} = '[http]';
 					$newTokenFound{'target_attribute'} = 'http';
+					$newTokenFound{'apply_to_parent'} = '1';
+					#$newTokenFound{'apply_to_self'} = '1';
 					push(@tokensFound, \%newTokenFound);
 					push @indexMessageLog, 'found http address';
 				}
@@ -377,10 +379,12 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 					$newTokenFound{'recon'} = $httpMatch;
 					$newTokenFound{'message'} = '[https]';
 					$newTokenFound{'target_attribute'} = 'https';
+					$newTokenFound{'apply_to_parent'} = '1';
+					#$newTokenFound{'apply_to_self'} = '1';
 					push(@tokensFound, \%newTokenFound);
 					push @indexMessageLog, 'found https address';
 				}
-			} # http token
+			} # https token
 
 			push @indexMessageLog, 'finished finding tokens';
 		} #tokenize into @tokensFound
