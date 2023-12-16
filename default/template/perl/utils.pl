@@ -737,6 +737,10 @@ sub GetFileHash { # $fileName ; returns hash of file contents
 
 sub GetSHA1 {
 	my $string = shift;
+	if (!$string) {
+		WriteLog('GetSHA1: warning: $string is FALSE; caller = ' . join(',', caller));
+		return '';
+	}
 	#todo fix this whole mess
 	#my $hash = sha1_hex(Encode::encode_utf8($string));
 	my $hash = sha1_hex(Encode::encode_utf8(utf8::is_utf8($string) ? Encode::encode_utf8($string) : $string));
