@@ -50,6 +50,13 @@ sub ImageMakeThumbnails { # $file
 		my $convertCommand = "convert \"$fileShellEscaped\" -auto-orient -thumbnail 800x800 -strip $HTMLDIR/thumb/thumb_800_$fileHash" . $thumbnailExtension;
 		WriteLog('ImageMakeThumbnails: ' . $convertCommand);
 
+		if ($convertCommand =~ m/(.+)/) { #todo #security
+			$convertCommand = $1;
+		} else {
+			WriteLog('ImageMakeThumbnails: warning: sanity check failed on $convertCommand');
+			return '';
+		}
+
 		my $convertCommandResult = `$convertCommand`;
 		WriteLog('ImageMakeThumbnails: convert result: ' . $convertCommandResult);
 
@@ -61,6 +68,13 @@ sub ImageMakeThumbnails { # $file
 		#my $convertCommand = "convert \"$fileShellEscaped\" -scale 5% -blur 0x25 -resize 5000% -colorspace Gray -blur 0x8 -thumbnail 512x512 -strip $HTMLDIR/thumb/thumb_512_$fileHash" . $thumbnailExtension;
 		WriteLog('ImageMakeThumbnails: ' . $convertCommand);
 
+		if ($convertCommand =~ m/(.+)/) { #todo #security
+			$convertCommand = $1;
+		} else {
+			WriteLog('ImageMakeThumbnails: warning: sanity check failed on $convertCommand');
+			return '';
+		}
+
 		my $convertCommandResult = `$convertCommand`;
 		WriteLog('ImageMakeThumbnails: convert result: ' . $convertCommandResult);
 	}
@@ -68,12 +82,26 @@ sub ImageMakeThumbnails { # $file
 		my $convertCommand = "convert \"$fileShellEscaped\" -auto-orient -thumbnail 512x512 -strip $HTMLDIR/thumb/thumb_512_$fileHash" . $thumbnailExtension;
 		WriteLog('ImageMakeThumbnails: ' . $convertCommand);
 
+		if ($convertCommand =~ m/(.+)/) { #todo #security
+			$convertCommand = $1;
+		} else {
+			WriteLog('ImageMakeThumbnails: warning: sanity check failed on $convertCommand');
+			return '';
+		}
+
 		my $convertCommandResult = `$convertCommand`;
 		WriteLog('ImageMakeThumbnails: convert result: ' . $convertCommandResult);
 	}
 	if (!-e "$HTMLDIR/thumb/thumb_42_$fileHash" . $thumbnailExtension) {
 		my $convertCommand = "convert \"$fileShellEscaped\" -auto-orient -thumbnail 42x42 -strip $HTMLDIR/thumb/thumb_42_$fileHash" . $thumbnailExtension;
 		WriteLog('ImageMakeThumbnails: ' . $convertCommand);
+
+		if ($convertCommand =~ m/(.+)/) { #todo #security
+			$convertCommand = $1;
+		} else {
+			WriteLog('ImageMakeThumbnails: warning: sanity check failed on $convertCommand');
+			return '';
+		}
 
 		my $convertCommandResult = `$convertCommand`;
 		WriteLog('ImageMakeThumbnails: convert result: ' . $convertCommandResult);
