@@ -189,10 +189,50 @@ sub GetHtmlToolboxes {
 		$htmlToolbox .=
 			# http://twitter.com/share?text=text goes here&url=http://url goes here&hashtags=hashtag1,hashtag2,hashtag3
 			# https://stackoverflow.com/questions/6208363/sharing-a-url-with-a-query-string-on-twitter
+			'<a href="http://mastodon.social/share?text=' .
+			$urlParam .
+			'">' .
+			'Mastodon' .
+			'</a><br>' . "\n"
+		;
+
+		$htmlToolbox .=
+			# http://twitter.com/share?text=text goes here&url=http://url goes here&hashtags=hashtag1,hashtag2,hashtag3
+			# https://stackoverflow.com/questions/6208363/sharing-a-url-with-a-query-string-on-twitter
+			'<a href="http://kik.com/share?text=' .
+			$urlParam .
+			'">' .
+			'Kik' .
+			'</a><br>' . "\n"
+		;
+
+		$htmlToolbox .=
+			# http://twitter.com/share?text=text goes here&url=http://url goes here&hashtags=hashtag1,hashtag2,hashtag3
+			# https://stackoverflow.com/questions/6208363/sharing-a-url-with-a-query-string-on-twitter
+			'<a href="http://instagram.com/share?text=' .
+			$urlParam .
+			'">' .
+			'Instagram' .
+			'</a><br>' . "\n"
+		;
+
+		$htmlToolbox .=
+			# http://twitter.com/share?text=text goes here&url=http://url goes here&hashtags=hashtag1,hashtag2,hashtag3
+			# https://stackoverflow.com/questions/6208363/sharing-a-url-with-a-query-string-on-twitter
+			'<a href="http://tiktok.com/share?text=' .
+			$urlParam .
+			'">' .
+			'TikTok' .
+			'</a><br>' . "\n"
+		;
+
+		$htmlToolbox .=
+			# http://twitter.com/share?text=text goes here&url=http://url goes here&hashtags=hashtag1,hashtag2,hashtag3
+			# https://stackoverflow.com/questions/6208363/sharing-a-url-with-a-query-string-on-twitter
 			'<a href="http://twitter.com/share?text=' .
 			$urlParam .
 			'">' .
-			'Twitter' .
+			'X/Twitter' .
 			'</a><br>' . "\n"
 		;
 
@@ -209,8 +249,6 @@ sub GetHtmlToolboxes {
 		my $htmlToolboxWindow = '<span class=advanced>' . GetDialogX($htmlToolbox, 'Share') . '</span>';
 		$html .= $htmlToolboxWindow;
 	} # if (GetConfig('toolbox_share'))
-
-
 
 	if ($html) {
 		return $html;
