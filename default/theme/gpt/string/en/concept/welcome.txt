@@ -1,0 +1,13 @@
+concept Welcome_Page
+
+state
+  welcome_message: String
+
+actions
+  displayWelcomeMessage()
+    pre true
+    // Additional logic to display a welcome message to the user
+    set welcome_message to generateWelcomeMessage()
+
+operational principle
+  after displayWelcomeMessage(), the welcome message is presented to the user
