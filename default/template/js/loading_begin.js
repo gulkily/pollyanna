@@ -64,7 +64,7 @@ function ShowPreNavigateNotification () { // displays 'Meditate...' message
 	}
 
 	//document.body.style.opacity="0.8";
-	if (event.target == location.href) {
+	if (event && event.target && event.target == location.href) {
 		// ignore
 	} else if (event.target.getAttribute('class') == 'dialogAnchor' || (event.target.className && event.target.className == 'dialogAnchor')) {
 		// ignore
