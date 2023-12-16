@@ -1517,11 +1517,19 @@ function GetItemPlaceholderPage ($comment, $hash, $fileUrlPath, $filePath) { # g
 
 		#todo sanity checks
 
-		$fileTxtPath = str_replace(GetDir('txt'), '', $filePath); #my
+		#todo this doesn't work with image files
+		#$fileTxtPath = str_replace(GetDir('txt'), '', $filePath); #my
+		#$fileTxtPath = GetFile #my
+
+		if (!$fileTxtPath) {
+			$caller = isset($dbt[1]['function']) ? $dbt[1]['function'] : 'caller_missing';
+			WriteLog('GetItemPlaceholderPage: warning: $fileTxtPath is FALSE; caller = ' . $caller);
+			$fileTxtPath = '';
+		}
 
 		$commentInfo .= 'Hash: ' . $hash . '(' . substr($hash, 0, 8) . ')' . '<br>';
 		$commentInfo .= 'URL: ' . '<a href="' . $fileUrlPath . '">' . $fileUrlPath . '</a>' . '<br>';
-		$commentInfo .= 'Text: ' . '<a href="/txt' . $fileTxtPath . '">/txt' . $fileTxtPath . '</a>' . '<br>';
+		$commentInfo .= 'File: ' . '<a href="/' . $fileTxtPath . '">' . $fileTxtPath . '</a>' . '<br>';
 
 		$commentHtmlTemplate = str_replace('<span id=commentInfo></span>', '<span id=commentInfo>' . $commentInfo . '</span>', $commentHtmlTemplate);
 	}
