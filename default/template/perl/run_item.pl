@@ -83,23 +83,8 @@ sub RunItem { # $item ; calls 'run' action on specified item
 
 					PutCache($runLog, $result); # store the result in cache
 
-					{
-						my $newItem = "
-							>>$item
-							start: $runStart
-							finish: $runFinish
-							===
-						";
-						$newItem = trim($newItem);
-						$newItem = str_replace("\t", "", $newItem);
-						$newItem = $newItem . "\n" . $result;
-
-						my $TXTDIR = GetDir('txt');
-						my $newHash = sha1_hex($newItem);
-						my $newPath = substr($newHash, 0, 2) . '/' . substr($newHash, 2, 2) . '/' . $newHash . '.txt';
-						PutFile("$TXTDIR/$newPath", $newItem);
-						IndexFile("$TXTDIR/$newPath");
-					}
+					#sub AttachLogToItem { # $itemHash, $result, $runStart, $runFinish ; attaches log to item
+					AttachLogToItem($item, $result, $runStart, $runFinish);
 
 					return 1;
 				} # if ($pythonCommand =~ m/^([\/a-z3]+)$/)
@@ -128,6 +113,10 @@ sub RunItem { # $item ; calls 'run' action on specified item
 				DBAddItemAttribute($item, 'cpp_run_finish', $runFinish);
 
 				PutCache($runLog, $result);
+
+				#sub AttachLogToItem { # $itemHash, $result, $runStart, $runFinish ; attaches log to item
+				AddLogToItem($item, $result, $runStart, $runFinish);
+
 				return 1;
 			} else {
 				WriteLog('RunItem: cpp: warning: $fileBinaryPath failed sanity check');
