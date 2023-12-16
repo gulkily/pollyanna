@@ -183,7 +183,7 @@ sub GetHtmlToolboxes {
 	if (GetConfig('setting/html/item_page/toolbox_share')) {
 		my $htmlToolbox = '';
 
-		$htmlToolbox .= "<p>";
+		#$htmlToolbox .= "<p>";
 		#$htmlToolbox .= "<b>Share:</b><br>";
 
 		$htmlToolbox .=
@@ -245,6 +245,18 @@ sub GetHtmlToolboxes {
 			'Facebook' .
 			'</a><br>' . "\n"
 		;
+
+		$htmlToolbox .=
+			# https://www.facebook.com/sharer/sharer.php?u=http://example.com?share=1&cup=blue&bowl=red&spoon=green
+			# https://stackoverflow.com/questions/19100333/facebook-ignoring-part-of-my-query-string-in-share-url
+			'<a href="https://www.snapchat.com/sharer/sharer.php?u=' . # what does deprecated mean?
+			$urlParam .
+			'">' .
+			'Snapchat' .
+			'</a><br>' . "\n"
+		;
+
+		$htmlToolbox = '<fieldset>' . $htmlToolbox . '</fieldset>';
 
 		my $htmlToolboxWindow = '<span class=advanced>' . GetDialogX($htmlToolbox, 'Share') . '</span>';
 		$html .= $htmlToolboxWindow;
