@@ -177,6 +177,34 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 		);
 	}
 
+	if (GetConfig('setting/html/footer_page_concept')) {
+#		# concept dialog
+#		require_once('dialog/concept.pl');
+#		my $conceptDialog = GetConceptDialog($pageType);
+#		if ($conceptDialog) {
+#			$txtFooter = str_replace(
+#				'</body>',
+#				$conceptDialog . '</body>',
+#				$txtFooter
+#			);
+#		}
+
+
+		my $conceptString = '';
+		$conceptString = GetString('concept/' . $pageType . '.txt', '', 1);
+		if (!$conceptString) {
+			$conceptString = GetString('concept/' . substr($pageType, 0, length($pageType) - 1) . '.txt', '', 1);
+		}
+		if ($conceptString) {
+			# sub GetConceptDialog {
+			my $conceptDialog = GetDialogX(ConceptForWeb($conceptString), 'Concept: ' . $pageType);
+			$txtFooter = str_replace(
+				'</body>',
+				$conceptDialog . '</body>',
+				$txtFooter
+			);
+		}
+	}
 
 	if (GetConfig('html/page_map_bottom')) { #todo js and dragging checks
 		require_once('dialog/page_map.pl');
