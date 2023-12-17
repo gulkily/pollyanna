@@ -1521,10 +1521,21 @@ function GetItemPlaceholderPage ($comment, $hash, $fileUrlPath, $filePath) { # g
 		#$fileTxtPath = str_replace(GetDir('txt'), '', $filePath); #my
 		#$fileTxtPath = GetFile #my
 
-		if (!defined($fileTxtPath) || !$fileTxtPath) {
+		if (!defined($fileTxtPath)) {
+			# sanity check #1
 			$caller = isset($dbt[1]['function']) ? $dbt[1]['function'] : 'caller_missing';
-			WriteLog('GetItemPlaceholderPage: warning: $fileTxtPath is FALSE; caller = ' . $caller);
+			WriteLog('GetItemPlaceholderPage: warning: $fileTxtPath is not defined; caller = ' . $caller);
 			$fileTxtPath = '';
+		} else {
+			if (!$fileTxtPath) {
+				# sanity check #2
+				$caller = isset($dbt[1]['function']) ? $dbt[1]['function'] : 'caller_missing';
+				WriteLog('GetItemPlaceholderPage: warning: $fileTxtPath is FALSE ' . $fileTxtPath . '; caller = ' . $caller);
+				$fileTxtPath = '';
+			} else {
+				# sanity checks passed
+				WriteLog('GetItemPlaceholderPage: $fileTxtPath = ' . $fileTxtPath);
+			}
 		}
 
 		$commentInfo .= 'Hash: ' . $hash . '(' . substr($hash, 0, 8) . ')' . '<br>';
