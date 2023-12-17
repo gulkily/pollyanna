@@ -1,0 +1,22 @@
+concept Help_Page
+purpose help user find what they are looking for.
+
+state
+  page_name: String
+  features_links: set String
+  basic_information: String
+
+actions
+  displayPageContent()
+    pre true
+    // Additional logic to display the content of the help page
+    set page_name, features_links, basic_information to generatePageContent()
+
+operational principle
+  after displayPageContent(), the help page content is presented to the user
+
+where
+  generatePageContent(): (String, set String, String)
+    pre true
+    // Additional logic to generate content for the help page
+    return ("Help Page", {"Feature 1", "Feature 2", ...}, "Version: 1.0\nTotal Items: 1000\nTotal Users: 500")
