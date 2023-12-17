@@ -12,7 +12,7 @@ sub RunPerlItem {
 
 	WriteLog("RunPerlItem($item)");
 
-	my $runLog = 'run_log/' . $item;
+	#my $runLog = 'run_log/' . $item;
 
 	my $filePath = DBGetItemFilePath($item);
 	my $fileBinaryPath = $filePath;
@@ -29,14 +29,16 @@ sub RunPerlItem {
 			DBAddItemAttribute($item, 'run_start', $runStart);
 			DBAddItemAttribute($item, 'run_finish', $runFinish);
 
-			PutCache($runLog, $result);
+			AddLogToItem($item, $result, $runStart, $runFinish);
+
+			#PutCache($runLog, $result);
 			return 1;
 		} else {
 			WriteLog('RunPerlItem: warning: $fileBinaryPath failed sanity check');
 			return '';
 		}
 	} else {
-		PutCache($runLog, 'error: run failed, file not found: ' . $fileBinaryPath);
+		#PutCache($runLog, 'error: run failed, file not found: ' . $fileBinaryPath);
 		return 1;
 	}
 } # RunPerlItem()
