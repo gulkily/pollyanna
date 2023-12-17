@@ -14,7 +14,7 @@ sub RunItem { # $item ; calls 'run' action on specified item
 	my $item = shift;
 	WriteLog("RunItem($item)");
 
-	my $runLog = 'run_log/' . $item;
+	#my $runLog = 'run_log/' . $item;
 
 	my $filePath = DBGetItemFilePath($item);
 	my $itemType = DBGetItemType($item);
@@ -44,7 +44,9 @@ sub RunItem { # $item ; calls 'run' action on specified item
 				DBAddItemAttribute($item, 'perl_run_start', $runStart);
 				DBAddItemAttribute($item, 'perl_run_finish', $runFinish);
 
-				PutCache($runLog, $result);
+				AddLogToItem($item, $result, $runStart, $runFinish);
+
+				#PutCache($runLog, $result);
 				return 1;
 			}
 		}
@@ -79,9 +81,9 @@ sub RunItem { # $item ; calls 'run' action on specified item
 					DBAddItemAttribute($item, 'python_run_start', $runStart);
 					DBAddItemAttribute($item, 'python_run_finish', $runFinish);
 
-					WriteLog('RunItem: $pythonCommand was run with $filePath = ' . $filePath . '; about to save output to $runLog = ' . $runLog);
+					WriteLog('RunItem: $pythonCommand was run with $filePath = ' . $filePath . '; about to save output');
 
-					PutCache($runLog, $result); # store the result in cache
+					#PutCache($runLog, $result); # store the result in cache
 
 					#sub AttachLogToItem { # $itemHash, $result, $runStart, $runFinish ; attaches log to item
 					AttachLogToItem($item, $result, $runStart, $runFinish);
@@ -112,7 +114,7 @@ sub RunItem { # $item ; calls 'run' action on specified item
 				DBAddItemAttribute($item, 'cpp_run_start', $runStart);
 				DBAddItemAttribute($item, 'cpp_run_finish', $runFinish);
 
-				PutCache($runLog, $result);
+				#PutCache($runLog, $result);
 
 				#sub AttachLogToItem { # $itemHash, $result, $runStart, $runFinish ; attaches log to item
 				AddLogToItem($item, $result, $runStart, $runFinish);
@@ -124,7 +126,7 @@ sub RunItem { # $item ; calls 'run' action on specified item
 			}
 		} # if (-e $fileBinaryPath)
 		else {
-			PutCache($runLog, 'error: run failed, file not found: ' . $fileBinaryPath);
+			#PutCache($runLog, 'error: run failed, file not found: ' . $fileBinaryPath);
 			return 1;
 		}
 	} # if ($itemType eq 'cpp')

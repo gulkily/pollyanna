@@ -10,7 +10,7 @@ sub RunLlm { # $item ; calls 'run' action on specified item
 	my $item = shift;
 	WriteLog("RunLlm($item)");
 
-	my $runLog = 'run_log/' . $item;
+	#my $runLog = 'run_log/' . $item;
 
 	my $promptText = '';
 	$promptText .= ">>$item";
@@ -63,28 +63,12 @@ sub RunLlm { # $item ; calls 'run' action on specified item
 					DBAddItemAttribute($item, 'llm_run_start', $runStart);
 					DBAddItemAttribute($item, 'llm_run_finish', $runFinish);
 
-					WriteLog('RunLlm: $pythonCommand was run with $filePath = ' . $filePath . '; about to save output to $runLog = ' . $runLog);
+					#WriteLog('RunLlm: $pythonCommand was run with $filePath = ' . $filePath . '; about to save output to $runLog = ' . $runLog);
 
-					PutCache($runLog, $result); # store the result in cache
+					#PutCache($runLog, $result); # store the result in cache
 
-					{
-						my $newItemFooter = "
-							--
-							>>$item
-							start: $runStart
-							finish: $runFinish
-						";
-						$newItemFooter = trim($newItemFooter);
-						$newItemFooter = str_replace("\t", "", $newItemFooter);
-
-						my $newItem = $result . "\n" . $newItemFooter;
-
-						my $TXTDIR = GetDir('txt');
-						my $newHash = sha1_hex($newItem);
-						my $newPath = substr($newHash, 0, 2) . '/' . substr($newHash, 2, 2) . '/' . $newHash . '.txt';
-						PutFile("$TXTDIR/$newPath", $newItem);
-						IndexFile("$TXTDIR/$newPath");
-					}
+					#sub AttachLogToItem { # $itemHash, $result, $runStart, $runFinish ; attaches log to item
+					AddLogToItem($item, $result, $runStart, $runFinish);
 
 					return 1;
 				} # if ($pythonCommand =~ m/^([\/a-z3]+)$/)
