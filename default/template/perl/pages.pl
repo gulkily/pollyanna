@@ -1858,7 +1858,7 @@ while (my $arg1 = shift @foundArgs) {
 				# 	WriteMessage("recognized author fingerprint\n");
 				# 	MakePage('author', $arg1, 1);
 				# }
-				elsif (substr($makeDialogArg, 0, 1) eq '#') { #hashtag tag/like.html
+				elsif (substr($makeDialogArg, 0, 1) eq '#') { #hashtag tag/like.html label/like.html
 					#todo sanity checks here
 					WriteMessage("-D hashtag $makeDialogArg\n");
 					my $hashTag = substr($makeDialogArg, 1);
@@ -1877,12 +1877,16 @@ while (my $arg1 = shift @foundArgs) {
 							$query,
 							$queryDialogTitle
 						); #todo sanity
-						my $dialogPath = 'tag/' . $hashTag . '.html';
 
 						$dialog = AddAttributeToTag($dialog, 'table', 'id', 'top_' . $hashTag);
 
+            my $dialogPath = 'tag/' . $hashTag . '.html';
+
 						if ($dialog && $dialogPath) {
 							PutHtmlFile('dialog/' . $dialogPath, $dialog);
+
+  						my $dialogPath2 = 'label/' . $hashTag . '.html';
+							PutHtmlFile('dialog/' . $dialogPath2, $dialog);
 						} else {
 							WriteLog('pages.pl: warning: dialog: nothing returned for #' . $makeDialogArg);
 						}
