@@ -184,18 +184,20 @@ sub ConceptForWeb { # $text ; for formatting software concept definitions
 		return '';
 	}
 
+	my @conceptKeywords = qw(concept actions where state where purpose references state actions);
+	push @conceptKeywords, "operational principle";
+
 	$text = HtmlEscape($text);
+
+	for my $conceptKeyword (@conceptKeywords) {
+		$text =~ s/^$conceptKeyword/<b>$conceptKeyword<\/b>/gm;
+		$text =~ s/^(\s+)$conceptKeyword/$1<b>$conceptKeyword<\/b>/gm;
+	}
+
 	$text =~ s/\n /<br>&nbsp;/g;
 	$text =~ s/^ /&nbsp;/g;
 	$text =~ s/  / &nbsp;/g;
 	$text =~ s/\n/<br>\n/g;
-
-	my @conceptKeywords = qw(^concept ^actions ^where ^state ^where);
-	push @conceptKeywords, "operational principle";
-
-	for my $conceptKeyword (@conceptKeywords) {
-		$text =~ s/$conceptKeyword/<b>$conceptKeyword<\/b>/gm;
-	}
 
 	my $container = GetTemplate('html/item/container/sql.template');
 	$container = str_replace('$text', str_replace('^', '', $text), $container);
