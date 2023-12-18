@@ -21,4 +21,3 @@ concept label [Item]
     after affix (i, |) and no detach (i, |), i in find (I)
     if no affix (i, |), or detach (i, |), i not in find (I)
 
-FIG. 6.3 The label concept defined.

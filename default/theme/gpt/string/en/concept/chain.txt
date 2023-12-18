@@ -1,27 +1,26 @@
 concept Chain_Page
+  purpose allow user to verify that they're seeing all the same information as someone else on their network.
 
-purpose allow user to verify that they're seeing all the same information as someone else on their network.
+  state
+    chain_items: set Item
 
-state
-  chain_items: set Item
+  actions
+    displayChainItems()
+      pre true
+      // Additional logic to display items in a chain on the Chain page
+      set chain_items to generateChainItems()
 
-actions
-  displayChainItems()
-    pre true
-    // Additional logic to display items in a chain on the Chain page
-    set chain_items to generateChainItems()
+  accessChainLog()
+      pre true
+      // Additional logic to provide access to the "chain.log" file
+      openFile("chain.log")
 
-accessChainLog()
-    pre true
-    // Additional logic to provide access to the "chain.log" file
-    openFile("chain.log")
+  operational principle
+    after displayChainItems(), the Chain page showcases items organized in a chain according to the sequence in "chain.log"
+    after accessChainLog(), users can access the "chain.log" file for additional information
 
-operational principle
-  after displayChainItems(), the Chain page showcases items organized in a chain according to the sequence in "chain.log"
-  after accessChainLog(), users can access the "chain.log" file for additional information
-
-where
-  generateChainItems(): set Item
-    pre true
-    // Additional logic to generate items organized in a chain for the Chain page based on the sequence in "chain.log"
-    return items_sorted_by_chain_sequence
+  where
+    generateChainItems(): set Item
+      pre true
+      // Additional logic to generate items organized in a chain for the Chain page based on the sequence in "chain.log"
+      return items_sorted_by_chain_sequence

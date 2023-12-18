@@ -1,30 +1,29 @@
 concept Public_Key
+  purpose provide a publicly verifiable cryptographic identifier for secure communication and verification.
 
-purpose provide a publicly verifiable cryptographic identifier for secure communication and verification.
+  dependencies
+    Private_Key
 
-dependencies
-  Private_Key
+  state
+    user_handle: String
+    public_key: String
 
-state
-  user_handle: String
-  public_key: String
+  actions
+    generatePublicKey(private_key: String)
+      pre true
+      // Additional logic to generate a public key from the provided private key
+      set public_key to generatedPublicKey(private_key)
 
-actions
-  generatePublicKey(private_key: String)
-    pre true
-    // Additional logic to generate a public key from the provided private key
-    set public_key to generatedPublicKey(private_key)
+    retrievePublicKey()
+      pre true
+      // Additional logic to retrieve the user's public key
+      set public_key to storedPublicKey()
 
-  retrievePublicKey()
-    pre true
-    // Additional logic to retrieve the user's public key
-    set public_key to storedPublicKey()
+    storePublicKey()
+      pre true
+      // Additional logic to store the user's public key securely
 
-  storePublicKey()
-    pre true
-    // Additional logic to store the user's public key securely
-
-operational principle
-  after generatePublicKey(private_key), a public key is generated from the provided private key
-  after retrievePublicKey(), the user's public key is retrieved
-  after storePublicKey(), the user's public key is securely stored
+  operational principle
+    after generatePublicKey(private_key), a public key is generated from the provided private key
+    after retrievePublicKey(), the user's public key is retrieved
+    after storePublicKey(), the user's public key is securely stored

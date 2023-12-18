@@ -1,42 +1,43 @@
 concept PKIApplication
+  purpose secure communication through the use of Public Key Infrastructure (PKI) principles.
 
-state
-  users: set User
-  keys: User -> set KeyPair
-  approvedKeys: User -> set KeyPair
+  state
+    users: set User
+    keys: User -> set KeyPair
+    approvedKeys: User -> set KeyPair
 
-actions
-  createUser(u: User)
-    add u to users
-    // Additional initialization steps if needed
+  actions
+    createUser(u: User)
+      add u to users
+      // Additional initialization steps if needed
 
-  generateKeyPair(u: User)
-    pre u in users
-    let newKeyPair = generateDisposableKeyPair()
-    add newKeyPair to keys[u]
+    generateKeyPair(u: User)
+      pre u in users
+      let newKeyPair = generateDisposableKeyPair()
+      add newKeyPair to keys[u]
 
-  approveKey(u: User, keyPair: KeyPair)
-    pre u in users and keyPair in keys[u]
-    add keyPair to approvedKeys[u]
+    approveKey(u: User, keyPair: KeyPair)
+      pre u in users and keyPair in keys[u]
+      add keyPair to approvedKeys[u]
 
-  signMessage(u: User, message: Message)
-    pre u in users
-    let keyPair = selectKeyPair(u)
-    let signature = sign(message, keyPair)
-    // Additional steps to handle the signature
+    signMessage(u: User, message: Message)
+      pre u in users
+      let keyPair = selectKeyPair(u)
+      let signature = sign(message, keyPair)
+      // Additional steps to handle the signature
 
-  verifySignature(message: Message)
-    pre message is signed
-    let signer = extractSigner(message)
-    let signature = extractSignature(message)
-    assert signature is valid for signer's approved keys
+    verifySignature(message: Message)
+      pre message is signed
+      let signer = extractSigner(message)
+      let signature = extractSignature(message)
+      assert signature is valid for signer's approved keys
 
-  buildWebOfTrust(u: User)
-    pre u in users
-    let userKeys = keys[u]
-    let webOfTrustTree = buildHashTree(userKeys)
-    // Additional steps to manage the web of trust structure
+    buildWebOfTrust(u: User)
+      pre u in users
+      let userKeys = keys[u]
+      let webOfTrustTree = buildHashTree(userKeys)
+      // Additional steps to manage the web of trust structure
 
-operational principle
-  after approveKey(u, keyPair), keyPair in approvedKeys[u]
-  after buildWebOfTrust(u), u's web of trust is established
+  operational principle
+    after approveKey(u, keyPair), keyPair in approvedKeys[u]
+    after buildWebOfTrust(u), u's web of trust is established

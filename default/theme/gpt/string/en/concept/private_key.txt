@@ -1,27 +1,26 @@
 concept Private_Key
+  purpose provide secure control and ownership of a public key, enabling the creation of digital signatures.
 
-purpose provide secure control and ownership of a public key, enabling the creation of digital signatures.
+  state
+    user_handle: String
+    private_key: String
 
-state
-  user_handle: String
-  private_key: String
+  actions
+    generatePrivateKey()
+      pre true
+      // Additional logic to generate a private key
+      set private_key to generatedPrivateKey()
 
-actions
-  generatePrivateKey()
-    pre true
-    // Additional logic to generate a private key
-    set private_key to generatedPrivateKey()
+    retrievePrivateKey()
+      pre true
+      // Additional logic to retrieve the user's private key
+      set private_key to storedPrivateKey()
 
-  retrievePrivateKey()
-    pre true
-    // Additional logic to retrieve the user's private key
-    set private_key to storedPrivateKey()
+    storePrivateKey()
+      pre true
+      // Additional logic to store the user's private key securely
 
-  storePrivateKey()
-    pre true
-    // Additional logic to store the user's private key securely
-
-operational principle
-  after generatePrivateKey(), a private key is generated and associated with the user
-  after retrievePrivateKey(), the user's private key is retrieved
-  after storePrivateKey(), the user's private key is securely stored
+  operational principle
+    after generatePrivateKey(), a private key is generated and associated with the user
+    after retrievePrivateKey(), the user's private key is retrieved
+    after storePrivateKey(), the user's private key is securely stored

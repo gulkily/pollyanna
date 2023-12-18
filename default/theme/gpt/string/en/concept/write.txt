@@ -1,42 +1,41 @@
 concept Writing
+  references
+    Public_Key
+    Session
 
-references
-  Public_Key
-  Session
+  state
+    user_handle: String
+    has_key_pair: Boolean
+    message: String
+    signed_message: String
+    proof_of_work_solved: Boolean
 
-state
-  user_handle: String
-  has_key_pair: Boolean
-  message: String
-  signed_message: String
-  proof_of_work_solved: Boolean
+  actions
+    writeSomething(message: String)
+      pre true
+      set message to the provided message
 
-actions
-  writeSomething(message: String)
-    pre true
-    set message to the provided message
+    signAsUser()
+      pre has_key_pair
+      set signed_message to sign(message, selectPrivateKey())
 
-  signAsUser()
-    pre has_key_pair
-    set signed_message to sign(message, selectPrivateKey())
+    solvePuzzle()
+      pre true
+      // Additional logic to solve the proof of work puzzle
+      set proof_of_work_solved to true
 
-  solvePuzzle()
-    pre true
-    // Additional logic to solve the proof of work puzzle
-    set proof_of_work_solved to true
+    sendNow()
+      pre true
+      // Additional logic to send the message
+      // This may involve utilizing the signed message, user handle, etc.
 
-  sendNow()
-    pre true
-    // Additional logic to send the message
-    // This may involve utilizing the signed message, user handle, etc.
+  operational principle
+    after writeSomething(message), the message is set
+    after signAsUser(), the message is signed using the user's private key
+    after solvePuzzle(), the proof of work puzzle is solved
+    after sendNow(), the message is sent
 
-operational principle
-  after writeSomething(message), the message is set
-  after signAsUser(), the message is signed using the user's private key
-  after solvePuzzle(), the proof of work puzzle is solved
-  after sendNow(), the message is sent
-
-where
-  selectPrivateKey(): PrivateKey
-    pre has_key_pair
-    // Additional logic to select the user's private key
+  where
+    selectPrivateKey(): PrivateKey
+      pre has_key_pair
+      // Additional logic to select the user's private key

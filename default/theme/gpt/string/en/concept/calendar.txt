@@ -1,34 +1,33 @@
 concept Calendar_Page
+  purpose allow users to navigate and view items associated with specific days.
 
-purpose allow users to navigate and view items associated with specific days.
+  state
+    selected_date: Date
+    items_for_selected_date: set Item
 
-state
-  selected_date: Date
-  items_for_selected_date: set Item
+  actions
+    displayCalendar()
+      pre true
+      // Additional logic to display the calendar page
+      // Organize and display items based on notarization dates and user-claimed dates.
+      set selected_date, items_for_selected_date to generateCalendarContent()
 
-actions
-  displayCalendar()
-    pre true
-    // Additional logic to display the calendar page
-    // Organize and display items based on notarization dates and user-claimed dates.
-    set selected_date, items_for_selected_date to generateCalendarContent()
+  viewItemsForDate(clicked_date: Date)
+      pre true
+      // Additional logic to retrieve and display items associated with the clicked date
+      set selected_date, items_for_selected_date to viewItemsForDate(clicked_date)
 
-viewItemsForDate(clicked_date: Date)
-    pre true
-    // Additional logic to retrieve and display items associated with the clicked date
-    set selected_date, items_for_selected_date to viewItemsForDate(clicked_date)
+  operational principle
+    after displayCalendar(), the calendar page is presented to the user with the selected date and associated items
+    after viewItemsForDate(clicked_date), items for the clicked date are displayed on the calendar page
 
-operational principle
-  after displayCalendar(), the calendar page is presented to the user with the selected date and associated items
-  after viewItemsForDate(clicked_date), items for the clicked date are displayed on the calendar page
+  where
+    generateCalendarContent(): (Date, set Item)
+      pre true
+      // Additional logic to generate content for the calendar page
+      return (current_date, items_for_current_date)
 
-where
-  generateCalendarContent(): (Date, set Item)
-    pre true
-    // Additional logic to generate content for the calendar page
-    return (current_date, items_for_current_date)
-
-  viewItemsForDate(clicked_date: Date): (Date, set Item)
-    pre true
-    // Additional logic to retrieve and display items for the clicked date
-    return (clicked_date, items_for_clicked_date)
+    viewItemsForDate(clicked_date: Date): (Date, set Item)
+      pre true
+      // Additional logic to retrieve and display items for the clicked date
+      return (clicked_date, items_for_clicked_date)

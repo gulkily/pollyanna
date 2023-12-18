@@ -1,0 +1,3 @@
+concept Random_Page
+  purpose
+    Display a collection of random items along with associated statistics.

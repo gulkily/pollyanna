@@ -1,25 +1,24 @@
 concept Newest_Content_Page
+  purpose provide users with the latest and relevant content on the New Items page.
 
-purpose provide users with the latest and relevant content on the New Items page.
+  state
+    time_frame: Time
+    displayed_items: set Item
 
-state
-  time_frame: Time
-  displayed_items: set Item
+  actions
+    displayNewestContent()
+      pre true
+      // Additional logic to display the newest content on the page
+      // Display items posted in the past 3 minutes with positive scores, excluding operator commands.
+      set time_frame, displayed_items to generateNewestContent()
 
-actions
-  displayNewestContent()
-    pre true
-    // Additional logic to display the newest content on the page
-    // Display items posted in the past 3 minutes with positive scores, excluding operator commands.
-    set time_frame, displayed_items to generateNewestContent()
+  operational principle
+    after displayNewestContent(), the page shows items from the past 3 minutes with positive scores and excludes operator commands
 
-operational principle
-  after displayNewestContent(), the page shows items from the past 3 minutes with positive scores and excludes operator commands
-
-where
-  generateNewestContent(): (Time, set Item)
-    pre true
-    // Additional logic to generate content for the newest content page
-    return (current_time - 3 minutes, items_within_time_frame_with_positive_scores)
+  where
+    generateNewestContent(): (Time, set Item)
+      pre true
+      // Additional logic to generate content for the newest content page
+      return (current_time - 3 minutes, items_within_time_frame_with_positive_scores)
 
 

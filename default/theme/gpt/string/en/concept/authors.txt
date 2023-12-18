@@ -1,0 +1,21 @@
+concept Authors_Page
+  purpose
+    Display a list of authors with their unique identifiers, seen status, item count, author score, and associated file hashes.
+
+  state
+    author_list: set Author
+
+  actions
+    displayAuthors()
+      pre true
+      // Additional logic to display authors on the Authors page
+      set author_list to generateAuthorList()
+
+  operational principle
+    after displayAuthors(), the Authors page showcases a list of authors with their unique identifiers, seen status, item count, author score, and associated file hashes
+
+  where
+    generateAuthorList(): set Author
+      pre true
+      // Additional logic to generate the list of authors for the Authors page
+      return authors_ordered_by_seen_and_item_count

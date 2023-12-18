@@ -1,21 +1,20 @@
 concept Read_Page
+  purpose provide users with moderated content to read, including item details and author information.
 
-purpose provide users with moderated content to read, including item details and author information.
+  state
+    displayed_items: set Item
 
-state
-  displayed_items: set Item
+  actions
+    displayReadContent()
+      pre true
+      // Additional logic to display moderated content on the Read page
+      set displayed_items to generateReadContent()
 
-actions
-  displayReadContent()
-    pre true
-    // Additional logic to display moderated content on the Read page
-    set displayed_items to generateReadContent()
+  operational principle
+    after displayReadContent(), the page presents moderated items for users to read
 
-operational principle
-  after displayReadContent(), the page presents moderated items for users to read
-
-where
-  generateReadContent(): set Item
-    pre true
-    // Additional logic to generate moderated content for the Read page
-    return items_matching_read_criteria
+  where
+    generateReadContent(): set Item
+      pre true
+      // Additional logic to generate moderated content for the Read page
+      return items_matching_read_criteria
