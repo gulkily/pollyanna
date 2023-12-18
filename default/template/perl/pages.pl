@@ -104,7 +104,7 @@ sub RenderLink {
 	$link = AddAttributeToTag($link, 'a', 'href', $url);
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
-		if ($url =~ m/\/tag\//) {
+		if ($url =~ m/\/tag\// || $url =~ m/\/label\//) {
 			$link = AddAttributeToTag($link, 'a ', 'onclick', "if ((window.GetPrefs) && GetPrefs('draggable_spawn') && window.FetchDialogFromUrl) { return FetchDialogFromUrl('/dialog" . $url . "'); }");
 			#bughere #todo this is where needs fix for duplicate hashtag listing dialogs #duplicatedialogs
 			#todo this may not be the right place for this at all
