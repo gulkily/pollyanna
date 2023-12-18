@@ -1,0 +1,21 @@
+concept Compost_Page
+
+purpose allow moderators to see content which is most in need of moderation
+
+state
+  compost_items: set Item
+
+actions
+  displayCompostItems()
+    pre true
+    // Additional logic to display items on the Compost page
+    set compost_items to generateCompostItems()
+
+operational principle
+  after displayCompostItems(), the Compost page showcases items prioritized by user-driven actions, providing options to approve, flag, or view meta information
+
+where
+  generateCompostItems(): set Item
+    pre true
+    // Additional logic to generate items for the Compost page based on user-driven actions
+    return items_filtered_for_compost_page

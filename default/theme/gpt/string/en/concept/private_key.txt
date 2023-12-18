@@ -1,5 +1,7 @@
 concept Private_Key
 
+purpose provide secure control and ownership of a public key, enabling the creation of digital signatures.
+
 state
   user_handle: String
   private_key: String

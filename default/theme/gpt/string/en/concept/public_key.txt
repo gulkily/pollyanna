@@ -1,5 +1,7 @@
 concept Public_Key
 
+purpose provide a publicly verifiable cryptographic identifier for secure communication and verification.
+
 dependencies
   Private_Key
 

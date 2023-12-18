@@ -1,8 +1,6 @@
 concept Calendar_Page
 
-purpose
-  Organize and display items based on notarization dates and user-claimed dates.
-  Allow users to navigate and view items associated with specific days.
+purpose allow users to navigate and view items associated with specific days.
 
 state
   selected_date: Date
@@ -12,6 +10,7 @@ actions
   displayCalendar()
     pre true
     // Additional logic to display the calendar page
+    // Organize and display items based on notarization dates and user-claimed dates.
     set selected_date, items_for_selected_date to generateCalendarContent()
 
 viewItemsForDate(clicked_date: Date)
