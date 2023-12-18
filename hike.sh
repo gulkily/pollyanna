@@ -18,9 +18,7 @@ echo ==================
 #Matthew 5:37
 #Let what you say be simply ‘Yes’ or ‘No’; anything more than this comes from evil.
 
-alias hike='bash hike.sh'
-alias clean='bash hike.sh clean'
-alias build='bash hike.sh build'
+alias hike='cd ~/pollyanna/ ; bash hike.sh'
 
 if [ ! $1 ]
 	then
