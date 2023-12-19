@@ -201,19 +201,29 @@ sub GetMonthTable { # $year, $month, \%fillDates ; return html table with links 
 					$indicator = '::';
 				}
 			}
+			if (1) {
+				$indicator = '<small>' . '(' . ($numItems ? $numItems : '0') . ')' . '</small>';
+			}
 			
 			$html .= '<td>';
 			$html .= '<a href="/date/' . $thisDate .'.html">';
-			$html .= '<div>';
+			#$html .= '<div>';
 			
+			$html .= '<big><b>' . $day . '</b></big>';
 			$html .= $indicator;
-			$html .= $day;
-			
-			$html .= '</div>';
+
+			#$html .= '</div>';
 			$html .= '</a>';
 			$html .= '</td>';
 		} else {
-			$html .= '<td>' . $day . '</td>';
+		  my $numItems = 0;
+
+		  my $indicator = '<small><font color="#808080">' . '(' . $numItems . ')' . '</font></small>';
+
+			$html .= '<td>';
+			$html .= '<big><b>' . $day . '</b></big>';
+			$html .= $indicator;
+			$html .= '</td>';
 		}
 
 		if ($dayOfWeek == 6) {
