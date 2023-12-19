@@ -194,6 +194,10 @@ sub ConceptForWeb { # $text ; for formatting software concept definitions
 		$text =~ s/^(\s+)$conceptKeyword/$1<b>$conceptKeyword<\/b>/gm;
 	}
 
+	$text =~ s/^(\s+?)([a-zA-Z]+)\(/$1<b class=function>$2<\/b>(/gm;
+	$text =~ s/^(\s+?)([a-z_]+):/$1<b class=variable>$2<\/b>:/gm;
+	#$text =~ s/a/b/g;
+
 	$text =~ s/\n /<br>&nbsp;/g;
 	$text =~ s/^ /&nbsp;/g;
 	$text =~ s/  / &nbsp;/g;
