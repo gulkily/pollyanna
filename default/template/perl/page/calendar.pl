@@ -210,10 +210,9 @@ sub GetMonthTable { # $year, $month, \%fillDates ; return html table with links 
 			#$html .= '<div>';
 			
 			$html .= '<big><b>' . $day . '</b></big>';
-			$html .= $indicator;
-
 			#$html .= '</div>';
 			$html .= '</a>';
+			$html .= $indicator;
 			$html .= '</td>';
 		} else {
 		  my $numItems = 0;
