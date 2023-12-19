@@ -4,20 +4,20 @@ use strict;
 use warnings;
 use 5.010;
 
-sub GetTopicsPage {
+sub GetTopicsPage { # /topics.html
 	my %flags;
 	$flags{'no_empty'} = 1;
 
-	my $explainDialog = GetStringNoFallback('page_intro/topics');
-	if ($explainDialog) {
-		$explainDialog = '<fieldset><p>' . FormatForWeb($explainDialog) . '</fieldset></p>';
-		$explainDialog = GetDialogX($explainDialog, 'Topics');
+	my $introDialog = GetStringNoFallback('page_intro/topics');
+	if ($introDialog) {
+		$introDialog = '<fieldset><p>' . FormatForWeb($introDialog) . '</fieldset></p>';
+		$introDialog = GetDialogX($introDialog, 'Introduction');
 	}
 
 	state $topicsPage = 
 		GetPageHeader('topics') .
 		GetQueryAsDialog('topics', 'Topics') .
-		$explainDialog .
+		$introDialog .
 		GetQuerySqlDialog('topics') .
 		GetPageFooter('topics')
 	;
