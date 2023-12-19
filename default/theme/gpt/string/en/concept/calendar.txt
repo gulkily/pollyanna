@@ -12,7 +12,7 @@ concept Calendar_Page
       // Organize and display items based on notarization dates and user-claimed dates.
       set selected_date, items_for_selected_date to generateCalendarContent()
 
-  viewItemsForDate(clicked_date: Date)
+    viewItemsForDate(clicked_date: Date)
       pre true
       // Additional logic to retrieve and display items associated with the clicked date
       set selected_date, items_for_selected_date to viewItemsForDate(clicked_date)
