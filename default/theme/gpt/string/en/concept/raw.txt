@@ -1,0 +1,26 @@
+concept Raw_Page
+  purpose display a detailed output of recent server activity for the operator.
+
+  state
+    item_result: Resultset of items
+      file_hash: String
+      item_title: String
+      labels_list: String (comma-separated List)
+      item_score: Integer
+      author_key: String
+      author_score: Integer
+      parent_count: Integer
+      child_count: Integer
+      add_timestamp: Timestamp
+      item_sequence: Integer
+
+  operational principle
+    Retrieve data from the "item_flat" table with details on recent server activity.
+    Join the "author_score" table to fetch additional author-related information.
+    Order the results by the timestamp of item addition in descending order.
+
+  Additional Considerations:
+  - The Raw Page is designed to present detailed information about recent server activity.
+  - Attributes include information about the item, author, and related metrics.
+  - The SQL query performs a LEFT JOIN with the "author_score" table to enrich the data.
+  - Results are ordered based on the timestamp of item addition in descending order.

@@ -1,0 +1,24 @@
+concept Date_Page
+  purpose display items associated with a specific date as indicated by various timestamps.
+
+  state
+    date_entities: set Item
+      item_id: String  // Unique identifier for the item
+      item_type: Enum(...)  // Specify the possible item types (e.g., notarization, signature, etc.)
+      timestamps: set Timestamp  // Set of timestamps associated with the item
+      // Include other relevant attributes related to items
+
+  actions
+    None explicitly specified for the Date Page.
+
+  operational principle
+    Retrieve and display items that have the specified date in any of their timestamps.
+    Timestamps may include notarization time, signature time, filesystem time, self-specified time inside the item, EXIF extracted timestamp, etc.
+
+  where
+    Include items where the specified date matches any of their timestamps.
+
+  Additional Considerations:
+  - The Date Page aims to show items associated with a specific date, considering various timestamps.
+  - The state includes key details such as the item's unique identifier, type, and set of timestamps.
+  - Results are filtered based on the specified date in any of the timestamps.

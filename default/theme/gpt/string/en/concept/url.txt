@@ -1,0 +1,21 @@
+concept URL_Links_Page
+  purpose display URLs or links with associated information, filtered by specified criteria.
+
+  state
+    url_entities: set URLLink
+      url: String  // Represents the URL or link
+      author_id: String  // Unique identifier of the author associated with the link
+      item_title: String  // Title or description associated with the link
+      labels_list: String (comma-separated List)  // List of labels/tags associated with the link
+      item_score: Integer  // Score indicating the popularity or interest level of the link
+      file_hash: String  // Represents the file hash associated with the link
+
+  operational principle
+    Retrieve and display URLs or links with associated information, filtered by specified criteria.
+    Criteria include attributes such as the attribute being 'http' or 'https' and a positive item score.
+    Include links with the attributes 'http' or 'https' and a positive item score.
+
+  Additional Considerations:
+  - The URL/Links Page aims to showcase URLs or links with associated information.
+  - The state includes key details such as the link, author identifier, title, labels, score, and file hash.
+  - Results are filtered based on specific criteria, including the attribute being 'http' or 'https' and a positive item score.

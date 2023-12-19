@@ -1,0 +1,22 @@
+concept Deleted_Page
+  purpose display file hashes associated with items marked as deleted or archived, along with links to their children.
+
+  state
+    deleted_archived_entities: set FileHashWithChildren
+      file_hash: String  // Represents the unique identifier for the file hash
+      children_file_hashes: String (comma-separated List)  // Represents file hashes of the item's children
+
+  actions
+    None explicitly specified for the Deleted/Archived Page.
+
+  operational principle
+    Retrieve and display file hashes associated with items marked as deleted or archived.
+    Include a column that lists the file hashes of the item's children.
+
+  where
+    Include file hashes where the attribute is 'chain_timestamp,' and the corresponding file hash is not present in the "item" table.
+
+  Additional Considerations:
+  - The Deleted/Archived Page aims to showcase file hashes associated with items marked as deleted or archived.
+  - The state includes the unique identifier for the file hash and a column listing the file hashes of the item's children.
+  - Results are determined based on the presence of the attribute 'chain_timestamp' and the absence of the corresponding file hash in the "item" table.

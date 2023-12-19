@@ -1,0 +1,23 @@
+concept Active_Page
+  purpose display a list of authors or people who have been active on the resource recently.
+
+  state
+    active_entities: set AuthorPerson
+      key: String  // Represents the key associated with an Author or Person
+      type: Enum(Author, Person)  // Indicates whether it's an Author or Person
+      item_score: Integer  // Combined item score of the Author or Person
+      last_activity_timestamp: Timestamp  // Timestamp of the last activity
+
+  actions
+    None explicitly specified for the Active Page.
+
+  operational principle
+    Retrieve and display a list of authors or people who have been active on the resource recently.
+    Active entities may include both Authors and People.
+    The list is sorted based on the timestamp of their last activity in descending order.
+
+  Additional Considerations:
+  - The Active Page aims to show a dynamic list of active entities on the resource.
+  - Active entities can be either Authors or People.
+  - The state includes key details such as the entity's key, type, item score, and last activity timestamp.
+  - Results are ordered based on the timestamp of the last activity in descending order.

@@ -1,0 +1,26 @@
+concept Image_Page
+  purpose display the most recent and/or most interesting images on the resource, excluding those with a negative score or a 'hide' tag.
+
+  state
+    image_entities: set Image
+    file_hash: String  // Represents the unique identifier for the image file
+    item_title: String  // Title or description associated with the image
+    item_score: Integer  // Score indicating the popularity or interest level of the image
+    labels_list: String (comma-separated List)  // List of labels/tags associated with the image
+    add_timestamp: Timestamp  // Timestamp of when the image was added
+    // Include other relevant attributes related to images
+
+  actions
+    None explicitly specified for the Image Page.
+
+  operational principle
+    Retrieve and display a set of images, filtering out those with a negative score or a 'hide' tag.
+    Images are sorted based on their score in descending order.
+
+  where
+    Exclude images with a negative score or a 'hide' tag.
+
+  Additional Considerations:
+  - The Image Page aims to showcase the most recent and/or most interesting images on the resource.
+  - The state includes key details such as the image file's unique identifier, title, score, labels, and timestamp of addition.
+  - Results are sorted based on the score in descending order.
