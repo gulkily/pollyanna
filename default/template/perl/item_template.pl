@@ -426,6 +426,11 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 				$windowParams{'title'} = HtmlEscape($file{'item_title'});
 			}
 
+			if (length($windowParams{'title'}) > 24) {
+				#todo this is a band-aid for the unicode decode bug
+				$windowParams{'title'} = substr($windowParams{'title'}, 0, 24);
+			}
+
 			# GUID
 			$windowParams{'guid'} = substr(sha1_hex($file{'file_hash'}), 0, 8);
 
