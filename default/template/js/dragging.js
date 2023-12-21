@@ -495,7 +495,7 @@ function DraggingCascade () {
 	var curLeft = 5;
 	var curZ = 0;
 
-	var maxLeft = document.documentElement.clientWidth / 2;
+	//var maxLeft = document.documentElement.clientWidth / 2;
 
 	var elements = document.getElementsByClassName('dialog');
 	for (var i = 0; i < elements.length; i++) {
@@ -527,6 +527,8 @@ function DraggingCascade () {
 						curZ++;
 						curTop += titlebarHeight;
 						curLeft += titlebarHeight;
+
+						var maxLeft = document.documentElement.clientWidth - elements[i].offsetWidth - 5;
 
 						if (maxLeft < curLeft) {
 							curLeft = 5;
@@ -874,6 +876,8 @@ function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was
 // <!-- dialoglist.js
 // should actually be called ToggleDialog()
 	//alert(dialogId);
+	//DraggingInit(0);
+
 	var dialog = document.getElementById(dialogId);
 	//alert('DEBUG: SpotlightDialog(' + dialogId + ',' + dialog + ')');
 
@@ -931,17 +935,80 @@ function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was
 
 			SetActiveDialog(dialog);
 
-			//console.log(dialog.style);
-			// dialog.style.top = event.clientX;
-			// dialog.style.left = event.clientY;
-			// there is an issue with this for some reason
-			var dialogTop = (event.clientY - 35) + 'px';
-			var dialogLeft = (event.clientX + 100) + 'px';
+			// #todo this should be done via SetPrefs() ?
 
-			dialog.style.top = dialogTop;
-			dialog.style.left = dialogLeft;
+			if (t) {
+				var tParent = GetParentDialog(t);
+				if (tParent) {
+					var tParentStyle = tParent.style;
+					var viewportWidth = document.documentElement.clientWidth;
+					var viewportHeight = document.documentElement.clientHeight;
 
-			t.style.opacity = "80%"; // #todo classes
+					var tParentLeft = tParentStyle.left ? parseInt(tParentStyle.left) : 0;
+					//var tParentRight = tParentStyle.right ? parseInt(tParentStyle.right) : 0;
+					var tParentWidth = tParentStyle.width ? parseInt(tParentStyle.width) : 0;
+					var tParentHeight = tParentStyle.height ? parseInt(tParentStyle.height) : 0;
+					var tParentTop = tParentStyle.top ? parseInt(tParentStyle.top) : 0;
+					//var tParentBottom = tParentStyle.bottom ? parseInt(tParentStyle.bottom) : 0;
+
+					var RoomToTheRight = viewportWidth - tParentLeft - tParentWidth;
+					var RoomToTheLeft = tParentLeft;
+					var RoomAbove = tParentTop;
+					var RoomBelow = viewportHeight - tParentTop - tParentHeight;
+
+					if (RoomToTheRight < RoomToTheLeft) {
+						// position dialog to the right of the tParent
+						dialog.style.left = (tParentLeft + tParentWidth + 10) + 'px';
+					} else if (RoomToTheLeft < RoomToTheRight) {
+						// position dialog to the left of the tParent
+						dialog.style.left = (tParentLeft - 10) + 'px';
+					} else if (RoomAbove < RoomBelow) {
+						// position dialog above the tParent
+						dialog.style.top = (tParentTop - 10) + 'px';
+					} else if (RoomBelow < RoomAbove) {
+						// position dialog below the tParent
+						dialog.style.top = (tParentTop + tParentHeight + 10) + 'px';
+					} else {
+						// fallback, position dialog to the right of the mouse cursor
+						var dialogTop = (event.clientY - 35) + 'px';
+						var dialogLeft = (event.clientX + 100) + 'px';
+
+						dialog.style.top = dialogTop;
+						dialog.style.left = dialogLeft;
+
+						t.style.opacity = "80%"; // #todo classes
+					}
+				}
+			}
+
+//
+//			if (0) {
+//				// position dialog to the right of the pagemap dialog
+//			}
+//			else if (0) {
+//				// position dialog to the left of the pagemap dialog
+//			}
+//			else if (0) {
+//				// position dialog above the pagemap dialog
+//			}
+//			else if (0) {
+//				// position dialog below the pagemap dialog
+//			}
+//			else {
+//				// fallback, position dialog to the right of the mouse cursor
+//
+//				//console.log(dialog.style);
+//				// dialog.style.top = event.clientX;
+//				// dialog.style.left = event.clientY;
+//				// there is an issue with this for some reason
+//				var dialogTop = (event.clientY - 35) + 'px';
+//				var dialogLeft = (event.clientX + 100) + 'px';
+//
+//				dialog.style.top = dialogTop;
+//				dialog.style.left = dialogLeft;
+//
+//				t.style.opacity = "80%"; // #todo classes
+//			}
 		}
 
 	} else {
@@ -1010,8 +1077,8 @@ function UpdateDialogList () {
 
 				var gt = unescape('%3E');
 
-				if (24 < dialogTitle.length) {
-					dialogTitle = dialogTitle.substr(0, 24);
+				if (16 < dialogTitle.length) {
+					dialogTitle = dialogTitle.substr(0, 16);
 				}
 				if (dialogTitle == '') {
 					//alert('DEBUG: UpdateDialogList: warning: dialogTitle is empty');
@@ -1273,6 +1340,23 @@ function InsertFetchedDialog () {
 			if (newDialog.length) {
 				for (var iDialog = 0; iDialog < newDialog.length; iDialog++) {
 					DraggingInitDialog(newDialog[iDialog], 1); // InsertFetchedDialog()
+
+					// position the dialog below the menubar
+					// #todo this should be done via css
+					// #todo this should be done via a separate function
+					var menu = document.getElementById('topmenu');
+					var menuHeight = 0;
+					if (menu) {
+						menuHeight = menu.offsetHeight;
+					}
+					var menuTop = 0;
+					if (menu) {
+						menuTop = menu.offsetTop;
+					}
+					var dialogTop = menuTop + menuHeight;
+					newDialog[iDialog].style.top = dialogTop + 'px';
+					var dialogLeft = 0;
+					newDialog[iDialog].style.left = dialogLeft + 'px';
 				}
 			}
 		} else {
@@ -1284,9 +1368,13 @@ function InsertFetchedDialog () {
 			if (GetPrefs('draggable_spawn_focus')) {
 				// focus newly inserted dialog
 				SetActiveDialog(newDialog[0]); // InsertFetchedDialog()
+				if (newDialog[0].getAttribute('id')) {
+					window.history.pushState('Object', 'Title', '/' + newDialog[0].getAttribute('id') + '.html');
+				}
 			}
 
-			// if it is profile dialog, call ProfileOnLoad()
+			// if it is session dialog, call ProfileOnLoad()
+			// ProfileOnLoad() should be renamed to match the new language of session
 			var frmSession = newDialog[0].getElementsByClassName('frmSession');
 			if (frmSession) {
 				if (window.ProfileOnLoad) {
