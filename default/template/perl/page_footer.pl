@@ -191,25 +191,35 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 
 
 		my $conceptString = '';
+		#$conceptString = GetString('concept/' . $pageType . '.txt', '', 0);
 		$conceptString = GetString('concept/' . $pageType . '.txt', '', 1);
 		if (!$conceptString) {
+			#$conceptString = GetString('concept/' . substr($pageType, 0, length($pageType) - 1) . '.txt', '', 0);
 			$conceptString = GetString('concept/' . substr($pageType, 0, length($pageType) - 1) . '.txt', '', 1);
 		}
 		if ($conceptString) {
 			# sub GetConceptDialog {
 			my $conceptDialog = GetDialogX(ConceptForWeb($conceptString), 'Concept');
 			#my $conceptDialog = GetDialogX(ConceptForWeb($conceptString), 'Concept: ' . $pageType);
+			#$conceptDialog = '<span class=advanced>' . $conceptDialog . '</span>';
 			$txtFooter = str_replace(
 				'</body>',
-				'<span class=advanced>' . $conceptDialog . '</span></body>',
+				$conceptDialog . '</body>',
 				$txtFooter
 			);
+		} else {
+			WriteLog('GetPageFooter: warning: $conceptString is FALSE; $pageType = ' . $pageType . '; caller = ' . join(',', caller));
 		}
-	}
+	} # if (GetConfig('setting/html/footer_page_concept'))
 
-	if (GetConfig('html/page_map_bottom')) { #todo js and dragging checks
-		require_once('dialog/page_map.pl');
-		$txtFooter = str_replace('</body>', GetPageMapDialog() . '</body>', $txtFooter);
+	if (GetConfig('setting/html/page_map_bottom')) { #todo js and dragging checks #pagemap_bottom
+		if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
+			require_once('dialog/page_map.pl');
+			$txtFooter = str_replace('</body>', GetPageMapDialog() . '</body>', $txtFooter);
+		} else {
+			#todo
+
+		}
 	}
 
 	# if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/controls_footer')) {
