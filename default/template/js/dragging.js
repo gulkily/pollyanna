@@ -466,6 +466,7 @@ function DraggingReset () {
 } // DraggingReset()
 
 function ReopenDialogs () {
+// called when page is first opened (and maybe sometimes from event loop?)
 	//alert('DEBUG: ReopenDialogs()');
 
 	// stored dialogs are stored as a JSON string in localStorage
@@ -477,7 +478,8 @@ function ReopenDialogs () {
 	// then we can walk through the object and recreate the dialogs
 	// #todo this should be done via SetPrefs()
 
-
+	// some dialogs may already be on the current page and should be shown
+	// look at SpotlightDialog() for how to do this
 
 	return '';
 } // ReopenDialogs()
@@ -673,6 +675,7 @@ function UnhideHiddenElements () {
 function DraggingInit (doPosition) { // initialize all class=dialog elements on the page to be draggable
 // InitDrag {
 // DragInit {
+// InitDragging {
 // initialize all class=dialog elements on the page to be draggable
 
 	//alert('DEBUG: DraggingInit()');
@@ -889,6 +892,8 @@ function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was
 
 		if (0 && DialogIsVisible(dialog)) {
 			//alert('DEBUG: SpotlightDialog: DialogIsVisible(dialog) was TRUE');
+
+			// SpotlightDialog() should never hide the dialog
 
 			dialog.style.display = 'none';
 			t.style.opacity = "100%"; // #todo classes

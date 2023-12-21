@@ -146,7 +146,7 @@ function OnLoadEverything () { // checks for each onLoad function and calls it
 
 	// FetchDialog('help');
 
-	if (window.DraggingInit && GetPrefs('draggable')) {
+	if ((window.DraggingInit) && GetPrefs('draggable')) {
 		//alert('DEBUG: OnLoadEverything: DraggingInit()');
 		if (window.location.href.indexOf('settings') != -1) {
 			// exclude settings page to avoid difficult situations

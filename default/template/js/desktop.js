@@ -2,7 +2,7 @@
 function DesktopOnLoad () {
 	//alert('DEBUG: DesktopOnLoad()');
 	if (window.location.href.indexOf('desktop') != -1) {
-		if (window.DraggingInit && window.DraggingMakeFit && window.SetActiveDialog && window.GetParentDialog && window.displayNotification) {
+		if ((window.DraggingInit) && (window.DraggingMakeFit) && (window.SetActiveDialog) && (window.GetParentDialog) && (window.displayNotification)) {
 			if (! GetPrefs('draggable')) {
 				SetPrefs('draggable', 1);
 				SetPrefs('draggable_activate', 1);
