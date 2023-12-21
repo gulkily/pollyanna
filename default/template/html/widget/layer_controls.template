@@ -45,8 +45,11 @@
 		n = Math.ceil(n / 1000);
 		n = n + 86400;
 		winLoc = winLoc + '?time=' + n;
-		window.location = winLoc;
-		return false;
+		if (window.PingUrl) {;
+			return PingUrl(winLoc);
+		} else {
+			window.location = winLoc;
+		}
 	" title="Reprint">Reprint</a>;
 
 </span>
