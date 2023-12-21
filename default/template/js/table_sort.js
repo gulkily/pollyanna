@@ -136,14 +136,17 @@ function SortTable (t, sortOrder) {
 				var yValue = 0;
 
 				if (sortMethod == 0) {
+					// this is the default and fallthrough
 					xValue = x.innerHTML;
 					yValue = y.innerHTML;
 				}
-				if (sortMethod == 1) {
+				if (sortMethod == 1) { // textContent
+					// title, author_key, author_id
 					xValue = x.textContent; // #todo lowercase
 					yValue = y.textContent; // #todo lowercase
 				}
-				if (sortMethod == 2) {
+				if (sortMethod == 2) { // parseInt(innerHTML)
+					// numeric: count order sequence score
 					if (x.textContent == '-') {
 						xValue = 0;
 					} else {
@@ -155,7 +158,8 @@ function SortTable (t, sortOrder) {
 						yValue = parseInt(y.innerHTML);
 					}
 				}
-				if (sortMethod == 3) {
+				if (sortMethod == 3) { // timestamp inside timestamp widget
+					// epoch timestamp
 					var xWidget = x.getElementsByClassName('timestamp');
 					xValue = xWidget[0].getAttribute('datetime');
 					var yWidget = y.getElementsByClassName('timestamp');
@@ -193,11 +197,14 @@ function SortTable (t, sortOrder) {
 	} // while (switching)
 
 	if (!anyChanges) {
-		sortOrder++
+		// if the table was already sorted, that means it should be reversed
+		// to make the code simpler, we just recurse into SortTable() again
+		sortOrder = (sortOrder ? 0 : 1);
 		return SortTable(tOrig, sortOrder);
 	}
 
 	if (anyChanges) {
+		// if there have been any changes, we have to re-do the alternating row colors
 		rows = table.rows;
 		var rowsLength = rows.length;
 
