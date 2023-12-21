@@ -538,8 +538,11 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	my @result = SqliteQueryHashRef('item_url', $fileHash);
 	#todo move to default/query
 	if (scalar(@result) > 1) { # urls
+		my $queryText = SqliteGetNormalizedQueryString('item_url', $fileHash);
 		my %flags;
 		$flags{'no_heading'} = 1;
+		$flags{'query'} = $queryText;
+
 		my $linksToolbox = GetResultSetAsDialog(\@result, 'Links', 'value', \%flags);
 		$linksToolbox = AddAttributeToTag($linksToolbox, 'table', 'id', 'Links');
 		$txtIndex .= $linksToolbox;
@@ -932,7 +935,9 @@ sub GetRelatedListing { # $fileHash
 		# }
 
 		if (scalar(@result) > 2) { # first row is column headers; related
-			my $listing = GetResultSetAsDialog(\@result, 'Related', 'item_title, add_timestamp, file_hash, attribute_list, attribute_count');
+			my %flags;
+			$flags{'query'} = $query;
+			my $listing = GetResultSetAsDialog(\@result, 'Related', 'item_title, add_timestamp, file_hash, attribute_list, attribute_count', \%flags);
 			$listing = AddAttributeToTag($listing, 'table', 'id', 'Related');
 			return $listing;
 		} else {
