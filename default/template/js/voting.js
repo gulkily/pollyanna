@@ -18,19 +18,35 @@ function PingUrlCallback () {
 			xmlhttpElement.setAttribute('disabled', true);
 			xmlhttpElement.appendChild(elemOK);
 		}
-		// window.location.replace(xmlhttp.responseURL);
+
+		//if (xmlhttp.responseURL.indexOf('message') != -1) {
+			// this works, but is not always desirable.
+			// it should happen from a page reprint request #todo
+			//window.location.replace(xmlhttp.responseURL);
+		//}
+
+		//if (xmlhttp.responseUrl.indexOf('message') != -1) {
+			//window.location.replace(xmlhttp.responseURL);
+		//}
+
+		// this is very janky but has potential
 		// document.open();
 		// document.write(xmlhttp.responseText);
 		// document.close();
+
 		window.xmlhttp = 0;
-	} else if (xmlhttp.readyState == 4 && xmlhttp.status == 401) {
+	}
+	//else if (xmlhttp.readyState == 4 && xmlhttp.status == 303) {
+	//} // could be useful in the future
+	else if (xmlhttp.readyState == 4 && xmlhttp.status == 401) {
 		// server returned 401, which most likely means that we need a cookie
 		// redirect user to profile.html page so that they can register
 		// this is very basic, jarring, and unfriendly, but it is better than failing silently
 		// relative links setting should also be taken into account
 		// #todo
 		window.location = '/session.html'; // #todo relativize
-	} else {
+	}
+	else {
 		//alert('DEBUG: PingUrlCallback: warning: unrecognized: xmlhttp.status = ' + xmlhttp.status + '; xmlhttp.readyState = ' + xmlhttp.readyState);
 	}
 }
