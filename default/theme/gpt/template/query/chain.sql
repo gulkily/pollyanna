@@ -19,5 +19,4 @@ LEFT JOIN
 WHERE
     item_attribute_chain.attribute = 'chain_sequence'
 ORDER BY
-    chain_timestamp DESC;
-
+    chain_timestamp DESC
