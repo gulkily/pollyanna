@@ -426,9 +426,15 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 				$windowParams{'title'} = HtmlEscape($file{'item_title'});
 			}
 
-			if (length($windowParams{'title'}) > 24) {
-				#todo this is a band-aid for the unicode decode bug
-				$windowParams{'title'} = substr($windowParams{'title'}, 0, 24);
+			if ($windowParams{'title'}) {
+				if (length($windowParams{'title'}) > 24) {
+					#todo this is a band-aid for the unicode decode bug
+					$windowParams{'title'} = substr($windowParams{'title'}, 0, 24);
+				}
+			} else {
+				WriteLog('GetItemTemplate: warning: $windowParams{title} is FALSE; caller = ' . join(',', caller));
+				# should dialogs always have a title? maybe?
+				$windowParams{'title'} = 'Untitled';
 			}
 
 			# GUID
