@@ -1751,7 +1751,7 @@ while (my $arg1 = shift @foundArgs) {
 			if ($makeDialogArg) {
 				my @validDialogs = qw(settings access upload data search profile);
 				my @needRequire = qw(profile upload);
-				my @queryDialogs = qw(read image url chain new tags scores active authors people threads labels topics judge);
+				my @queryDialogs = qw(read image url chain new tags scores active authors people threads labels topics judge calendar);
 				my @simpleDialogs = qw(help );
 
 				if (0) { }
@@ -1800,6 +1800,7 @@ while (my $arg1 = shift @foundArgs) {
 					# /dialog/people.html
 					# /dialog/threads.html
 					# /dialog/judge.html
+					# /dialog/calendar.html
 
 					my $dialogTitle = $makeDialogArg; #todo make nicer
 					my $columns = '';
