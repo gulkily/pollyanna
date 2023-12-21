@@ -200,8 +200,8 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 		if ($flags{'query'} && GetConfig('setting/html/resultset_dialog_print_query')) {
 			my $columnsCount = scalar(@columnsArray);
 			my $query = SqliteGetQueryTemplate($flags{'query'});
-			$content .= '<tr class=advanced><td colspan=' . $columnsCount . '>';
-			$content .= HtmlEscape($query) . '<br>';
+			$content .= '<tr class=advanced><td class=sql colspan=' . $columnsCount . '>';
+			$content .= SqlForWeb($query) . '<br>';
 			#$content .= '<pre>' . HtmlEscape($query) . '<br></pre>';
 			$content .= '</td></tr>';
 		}
