@@ -1,3 +1,63 @@
+		if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
+			if ($hashAnchor) {
+				WriteLog('GetItemHtmlLink: $hashAnchor is TRUE; caller = ' . join(',', caller));
+				$itemLink = AddAttributeToTag(
+					$itemLink,
+					'a ',
+					'onclick',
+					"
+						//* if current page has a dialog with that id, then
+						// use SpotlightDialog */
+						if (document.getElementById('$linkCaption')) {
+							/* SetActiveDialog(document.getElementById('$shortHash')); */
+							SpotlightDialog('$linkCaption'));
+							return false;
+						}
+
+						//* else
+						// return true to allow the link to go to a new page */
+						return true;
+
+
+					"
+				);
+			}
+			else {
+				WriteLog('GetItemHtmlLink: $hashAnchor is FALSE; caller = ' . join(',', caller));
+				#$itemLink = AddAttributeToTag($itemLink, 'a ', 'onclick', '');
+				$itemLink = AddAttributeToTag(
+					$itemLink,
+					'a ',
+					'onclick',
+					"
+						if (
+							(!(window.GetPrefs) || GetPrefs('draggable_spawn')) &&
+							(window.FetchDialogFromUrl) &&
+							document.getElementById &&
+							!this.getAttribute('new_page')
+						) {
+							if (document.getElementById('$shortHash')) {
+								SetActiveDialog(document.getElementById('$shortHash'));
+								return false;
+							} else {
+								return FetchDialogFromUrl('/dialog/$htmlFilename');
+							}
+						}
+					"
+				);
+			}
+		}
+
+
+
+
+k
+	if ($script eq 'dragging') {
+		$scriptTemplate .= "\n" . GetTemplate("js/dragging_spotlight_dialog.js");
+		#todo unhack
+	}
+
+
 sub GetAuthorPage {
 #    my ($authorKey, $otherParams) = @_;
 #

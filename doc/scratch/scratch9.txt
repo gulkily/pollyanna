@@ -1169,7 +1169,7 @@ function OnLoadEverything () { // checks for each onLoad function and calls it
                 //alert('DEBUG: OnLoadEverything: document.search.q.focus()');
                 document.search.q.focus();
         }
-        if (window.DraggingInit && GetPrefs('draggable')) {
+        if ((window.DraggingInit) && GetPrefs('draggable')) {
                 //alert('DEBUG: OnLoadEverything: DraggingInit()');
                 if (window.location.href.indexOf('desktop') != -1) {
                         DraggingInit(1);
