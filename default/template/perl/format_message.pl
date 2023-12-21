@@ -158,6 +158,7 @@ sub ZipForWeb { # replaces some spaces with &nbsp; to preserve text-based layout
 } # ZipForWeb()
 
 sub SqlForWeb { # replaces some spaces with &nbsp; to preserve text-based layout for html display; $text
+#sub QueryForWeb {
 	my $text = shift;
 
 	if (!$text) {
