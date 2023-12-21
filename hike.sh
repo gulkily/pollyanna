@@ -99,8 +99,16 @@ if [ $1 = clean ] # hike clean
     fi
     if [ ! "$2" ]
       then
-        echo clean all = clean all
-        echo clean html = clean html
+        echo "########################################################## "
+        #echo "AAAAA TTTTT TTTTT EEEEE N   N TTTTT IIIII OOOOO N   N !!!  "
+        #echo "A   A   T     T   E     NN  N   T     I   O   O NN  N !!!  "
+        #echo "AAAAA   T     T   EEEEE N N N   T     I   O   O N N N !!!  "
+        #echo "A   A   T     T   E     N  NN   T     I   O   O N  NN      "
+        #echo "A   A   T     T   EEEEE N   N   T   IIIII OOOOO N   N !!!  "
+        #echo "########################################################## "
+        echo clean all = clean entire installation, including log files
+        echo clean html = clean html frontend files only
+        echo "########################################################## "
     fi
 fi
 
