@@ -129,6 +129,108 @@ function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was
 
 /* / dragging.js */
 
+//			if (t) {
+//				var tParent = GetParentDialog(t);
+//				if (tParent) {
+//					// there is more room to the right of the tParent than there is to its left
+//					var tParentLeft = tParent.style.left;
+//					var tParentRight = tParent.style.right;
+//					var tParentWidth = tParent.style.width;
+//					var tParentHeight = tParent.style.height;
+//					var tParentTop = tParent.style.top;
+//					var tParentBottom = tParent.style.bottom;
+//					var viewportWidth = document.documentElement.clientWidth;
+//					var viewportHeight = document.documentElement.clientHeight;
+//					if (tParentLeft) {
+//						tParentLeft = parseInt(tParentLeft);
+//					}
+//					if (tParentRight) {
+//						tParentRight = parseInt(tParentRight);
+//					}
+//					if (tParentWidth) {
+//						tParentWidth = parseInt(tParentWidth);
+//					}
+//					if (tParentHeight) {
+//						tParentHeight = parseInt(tParentHeight);
+//					}
+//					if (tParentTop) {
+//						tParentTop = parseInt(tParentTop);
+//					}
+//					if (tParentBottom) {
+//						tParentBottom = parseInt(tParentBottom);
+//					}
+//					if (viewportWidth) {
+//						viewportWidth = parseInt(viewportWidth);
+//					}
+//					if (viewportHeight) {
+//						viewportHeight = parseInt(viewportHeight);
+//					}
+//					var RoomToTheRight = viewportWidth - tParentLeft - tParentWidth;
+//					var RoomToTheLeft = tParentLeft;
+//					var RoomAbove = tParentTop;
+//					var RoomBelow = viewportHeight - tParentTop - tParentHeight;
+//					//alert('DEBUG: SpotlightDialog: RoomToTheRight = ' + RoomToTheRight);
+//					//alert('DEBUG: SpotlightDialog: RoomToTheLeft = ' + RoomToTheLeft);
+//					//alert('DEBUG: SpotlightDialog: RoomAbove = ' + RoomAbove);
+//					//alert('DEBUG: SpotlightDialog: RoomBelow = ' + RoomBelow);
+//					if (RoomToTheRight < RoomToTheLeft) {
+//						//alert('DEBUG: SpotlightDialog: RoomToTheRight < RoomToTheLeft');
+//						// position dialog to the right of the tParent
+//						dialog.style.left = (tParentLeft + tParentWidth + 10) + 'px';
+//					}
+//					else if (RoomToTheLeft < RoomToTheRight) {
+//						//alert('DEBUG: SpotlightDialog: RoomToTheLeft < RoomToTheRight');
+//						// position dialog to the left of the tParent
+//						dialog.style.left = (tParentLeft - 10) + 'px';
+//					}
+//					else if (RoomAbove < RoomBelow) {
+//						//alert('DEBUG: SpotlightDialog: RoomAbove < RoomBelow');
+//						// position dialog above the tParent
+//						dialog.style.top = (tParentTop - 10) + 'px';
+//					}
+//					else if (RoomBelow < RoomAbove) {
+//						//alert('DEBUG: SpotlightDialog: RoomBelow < RoomAbove');
+//						// position dialog below the tParent
+//						dialog.style.top = (tParentTop + tParentHeight + 10) + 'px';
+//					}
+//					else {
+//						//alert('DEBUG: SpotlightDialog: fallback');
+//						// fallback, position dialog to the right of the mouse cursor
+//
+//						//console.log(dialog.style);
+//						// dialog.style.top = event.clientX;
+//						// dialog.style.left = event.clientY;
+//						// there is an issue with this for some reason
+//						var dialogTop = (event.clientY - 35) + 'px';
+//						var dialogLeft = (event.clientX + 100) + 'px';
+//
+//						dialog.style.top = dialogTop;
+//						dialog.style.left = dialogLeft;
+//
+//						t.style.opacity = "80%"; // #todo classes
+//					}
+//
+//				}
+//			}
+
+
+
+// Convert NodeList to array for easier iteration
+const childNodesArray = Array.from(document.body.childNodes);
+
+for (let i = 0; i < childNodesArray.length; i++) {
+    // Save the child node in a variable for easy referencing
+    let e = childNodesArray[i];
+
+    if (e.nodeType === 8) { // We found a comment!
+        // Increment the accumulator
+        accumulator += 1;
+
+        // Show the comments section
+        comments_section.style.display = "block";
+    }
+}
+
 
 				var displayTitle = '<b' + gt + dialogTitle.substring(0, 1) + '</b' + gt + dialogTitle.substring(1);
 				if (DialogIsVisible(allOpenDialogs[iDialog])) {
