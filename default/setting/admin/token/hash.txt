@@ -1,0 +1,1 @@
+This refers to the item or file hash, not a hash symbol.
