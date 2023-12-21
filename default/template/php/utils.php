@@ -816,7 +816,7 @@ function StoreServerResponse ($message) { // adds server response message and re
 	return $messageId;
 } # StoreServerResponse()
 
-function RetrieveServerResponse ($messageId) { // retrieves response message for display by client and deletes it
+function RetrieveServerResponse ($messageId, $erase = 1) { // retrieves response message for display by client and deletes it
 	WriteLog("RetrieveServerResponse($messageId)");
 	$message = GetCache('response/' . $messageId);
 	if ($message) {
@@ -824,7 +824,9 @@ function RetrieveServerResponse ($messageId) { // retrieves response message for
 			WriteLog("RetrieveServerResponse: Message found, removing.");
 			// message was found, remove it
 			// remove stored message if not in debug mode
-			UnlinkCache('response/' . $messageId);
+			if ($erase) {
+				UnlinkCache('response/' . $messageId);
+			}
 		} else {
 			WriteLog("RetrieveServerResponse: Message found, not deleting because debug mode.");
 			// $message .= '<font size="-2" title="This response message is sticky because admin/php/debug is true">*</font>';
