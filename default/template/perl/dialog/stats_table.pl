@@ -164,7 +164,14 @@ sub GetStatsTable { # $templateName = 'html/stats.template' ; returns Stats dial
 		#todo move to sqlite.pl
 	}
 
-	if (abs($itemsIndexed - $filesTotal) > 3) { # GetStatsTable() -- Check Engine indicator
+	my $checkEngineStatus = GetConfig('setting/admin/check_engine_status');
+
+	#if (abs($itemsIndexed - $filesTotal) > 3) { # GetStatsTable() -- Check Engine indicator
+	if ($checkEngineStatus) {
+		if (!-e GetDir('html') .'/'. 'engine.html') {
+			WriteLog('GetStatsTable: warning: engine.html does not exist');
+			PutHtmlFile('engine.html', '<h1>Check Engine indicator is on.</h1><p>Please check the logs.</p>');
+		}
 		if (GetConfig('html/mourn') || GetConfig('html/monochrome')) {
 			$statsTable = str_replace(
 				'<p id=diagnostics></p>',
