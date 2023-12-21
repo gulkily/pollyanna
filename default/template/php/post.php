@@ -264,7 +264,14 @@ if (GetConfig('setting/admin/php/post/handle_browser_test') && isset($comment) &
             	$returnMessage = file_get_contents('./nocookie.html');
             }
             if (!$returnMessage) {
-				$returnMessage = '<html><body>';
+            	WriteLog('post.php; warning: could not find nocookie.html, using fallback markup');
+
+				/*my*/ $bgColor = GetThemeColor('background') || '#c0c0c0';
+				/*my*/ $textColor = GetThemeColor('text') || '#000000';
+				/*my*/ $linkColor = GetThemeColor('link_text') || '#000080';
+				/*my*/ $vlinkColor = GetThemeColor('vlink_text') || '#800080';
+
+				$returnMessage = '<html><body bgcolor="' . $bgColor . '" text="' . $textColor . '" vlink="' . $vlinkColor . '" link="' . $linkColor . '">';
 				$returnMessage .= GetDialogX(
 					"<p>Please forgive me, friend, <br>but you must <a href=/profile.html>register</a> first, <br>before you do that</p>",
 					'No Cookie Haiku'
