@@ -57,10 +57,21 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 		admin/php/footer_stats
 	);
 
+	#zip module:
+	my @settingsVisible3 = qw(
+		admin/zip/enable
+		zip/tag
+		zip/label
+		zip/author
+		zip/person
+		zip/image
+	);
+
 	require_once('dialog/server_config.pl');
 
 	$txtIndex .= GetServerConfigDialog('Frontend', @settingsVisible1); # >frontend< #for searches
 	$txtIndex .= GetServerConfigDialog('Backend', @settingsVisible2); # >backend< #for searches
+	$txtIndex .= GetServerConfigDialog('ZipFiles', @settingsVisible3); # >zip< >archiving< #for searches
 	$txtIndex .= GetContentFilterDialog();
 
 	#todo add dialog for voting options
