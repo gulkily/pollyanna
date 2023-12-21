@@ -1,5 +1,6 @@
 // profile_auto_register.js
 
+// #autoreg
 // quick and dirty auto-register
 // should check for if user previously signed out
 
