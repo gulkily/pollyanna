@@ -5,7 +5,7 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template'; returns html menu based on referenced list
+sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pageType ; returns html menu based on referenced list
 # $listName is reference to a list in config/list, e.g. config/list/menu
 # $separator is what is inserted between menu items
 # sub GetMenuList {
@@ -24,7 +24,7 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template'; ret
 	}
 	chomp $templateName;
 
-	my $pageType = shift;
+	my $pageType = shift; # which menu item is selected
 	if (!$pageType) {
 		$pageType = '';
 	}
@@ -150,6 +150,8 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template'; ret
                     #todo should be under css/
 					## menu item is for current page
 					$menuItemComposed = '<span style="background-color: ' . GetThemeColor('highlight_ready') . ';">' . $menuItemComposed . '</span>';
+					#todo $menuItemComposed = '<span style="border: dotted 2pt gray; background-color: ' . GetThemeColor('highlight_ready') . ';">' . $menuItemComposed . '</span>';
+					#todo add a class=selected
 					#$menuItemComposed = '<span style="font-variant: small-caps; background-color: ' . GetThemeColor('highlight_ready') . ';">' . $menuItemComposed . '</span>';
 				}
 			}
@@ -169,6 +171,7 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template'; ret
 } # GetMenuFromList()
 
 sub GetMenuTemplate { # $pageType ; returns menubar
+# sub GetMenuDialog {
 # sub GetMenubarTemplate {
 # sub GetMenubar {
 # sub GetMenuBar {
