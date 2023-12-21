@@ -73,7 +73,7 @@
 	<p>
 		<label for=optPerformanceQuicker>
 			<input type=radio id=optPerformanceQuicker name=optPerformanceOptimization value=quicker onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'performance_optimization'); }">
-			Quicker<noscript><b>*</b></noscript><span class=beginner> (computer works harder)<br></span>
+			Quicker<noscript><b>*</b></noscript><span class=beginner> (more bugs)<br></span>
 		</label>
 		<label for=optPerformanceFaster>
 			<input type=radio id=optPerformanceFaster name=optPerformanceOptimization value=faster onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'performance_optimization'); }">
