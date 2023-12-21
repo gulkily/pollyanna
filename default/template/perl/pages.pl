@@ -1881,7 +1881,7 @@ while (my $arg1 = shift @foundArgs) {
 
 						$dialog = AddAttributeToTag($dialog, 'table', 'id', 'top_' . $hashTag);
 
-            my $dialogPath = 'tag/' . $hashTag . '.html';
+						my $dialogPath = 'tag/' . $hashTag . '.html';
 
 						if ($dialog && $dialogPath) {
 							PutHtmlFile('dialog/' . $dialogPath, $dialog);
