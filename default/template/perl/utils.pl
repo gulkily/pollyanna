@@ -1012,11 +1012,16 @@ sub RenameFile { # $filePrevious, $fileNew, $hashNew ; renames file with a bit o
 	my $hashPrevious = SqliteGetValue("SELECT file_hash FROM item WHERE file_path = '$filePrevious'"); #todo safety
 
 	if ($hashPrevious) {
-		WriteLog('RenameFile: $hashPrevious = ' . $hashPrevious . '; $hashNew = ' . $hashNew);
-		#todo sanity check on $hashPrevious
-		DBAddItemParent($hashNew, $hashPrevious);
-		AppendFile("log/rename.log", $hashNew . "|" . $hashPrevious); #todo proper path
-		#todo log and sanity check on $renameResult
+		if ($hashPrevious eq $hashNew) {
+			WriteLog('RenameFile: $hashPrevious eq $hashNew');
+			#return '';
+		} else {
+			WriteLog('RenameFile: $hashPrevious = ' . $hashPrevious . '; $hashNew = ' . $hashNew);
+			#todo sanity check on $hashPrevious
+			DBAddItemParent($hashNew, $hashPrevious);
+			AppendFile("log/rename.log", $hashNew . "|" . $hashPrevious); #todo proper path
+			#todo log and sanity check on $renameResult
+		}
 	} else {
 		WriteLog('RenameFile: warning: $hashPrevious was FALSE');
 		#return '';
