@@ -270,11 +270,16 @@ sub GetHtmlToolboxes {
 } # GetHtmlToolboxes()
 
 sub GetItemIndexLog { # $itemHash, $logType = index_log
+# $logType = gpg_stderr
 	my $itemHash = shift;
 
 	my $logType = shift;
 	if (!$logType) {
 		$logType = 'index_log'
+	}
+	my $logSuffix = '';
+	if ($logType eq 'gpg_stderr') {
+		$logSuffix = '.txt';
 	}
 
 	if (!IsItem($itemHash)) {
@@ -285,7 +290,7 @@ sub GetItemIndexLog { # $itemHash, $logType = index_log
 	my $shortHash = substr($itemHash, 0, 8);
 	
 	my $logPath = $logType . '/' . $itemHash;
-	my $log = GetCache($logPath);
+	my $log = GetCache($logPath . $logSuffix);
 	if ($log) {
 		$log = HtmlEscape($log);
 
@@ -756,6 +761,19 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			$txtIndex .= GetDialogX('Note: Perl module is off, this file was not parsed.', 'Notice');
 		}
 		#todo same as above for zip
+	}
+
+	if (GetConfig('setting/html/item_page/gpg_stderr_log')) {
+		$txtIndex .= GetItemIndexLog($file{'file_hash'});
+		if (
+			index($file{'labels_list'}, ',gpg,') != -1
+			||
+			index($file{'labels_list'}, ',pubkey,') != -1
+			||
+			index($file{'labels_list'}, ',signed,') != -1
+		) {
+			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'gpg_stderr');
+		}
 	}
 
 	if (GetConfig('admin/js/enable') && GetConfig('setting/html/reply_cart')) {
