@@ -1,5 +1,12 @@
 <?php
 
+//error_reporting(E_ALL);
+#set_ini('display_errors', '0');
+// set_ini('display_startup_errors', '0');
+// set_ini('log_errors', '0');
+// set_ini('error_log', '0');
+//
+
 //Header('Content-type: text/html');
 
 function GetScriptDir () { // returns base script directory.
@@ -333,6 +340,17 @@ function GetFileHash ($fileName) { // returns hash of file contents
 
 	return $fileHash;
 } # GetFileHash()
+//
+// if (GetConfig('setting/admin/php/debug')) {
+// 	WriteLog('utils.php: warning: debug mode is enabled');
+// } else {
+// 	WriteLog('utils.php: debug mode is disabled');
+// 	# disable writing of warnings or errors to stderr with ini_set()
+// 	ini_set('display_errors', '0');
+// 	#ini_set('display_startup_errors', '0');
+// 	#ini_set('log_errors', '0');
+// 	#ini_set('error_log', '0');
+// }
 
 // function GetFileHash ($fileName) { // returns hash of file contents
 // // GetItemHash GetHash

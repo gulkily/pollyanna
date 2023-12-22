@@ -294,7 +294,7 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 		# no items returned by database
 		my $pageNoContent = '';
 		$pageNoContent .= GetPageHeader($pageQuery);
-		$pageNoContent .= GetDialogX('<fieldset><p>This page reserved for future content.</p></fieldset>', 'No Results');
+		$pageNoContent .= GetDialogX('<fieldset><p>This page reserved for future content (2)</p></fieldset>', 'No Results');
 
 		$pageNoContent .= GetQuerySqlDialog($pageQuery);
 

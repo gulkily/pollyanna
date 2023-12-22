@@ -481,7 +481,9 @@ if (GetConfig('setting/admin/php/route_enable')) {
 					if (isset($cookie) && $cookie) {
 						#ok
 					} else {
-						$path = '/profile.html';
+						#$path = '/session.html';
+						#$path = '/profile.html';
+						RedirectWithResponse('/session.html', 'Please begin session to access upload page.');
 					}
 				}
 			} # if ($path == '/upload.html')
@@ -490,7 +492,9 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			#if (GetConfig('setting/admin/php/force_profile') || ($hostAccessCount > $hostRequestLimit)) { #todo add feature flag and uncomment
 				$redirectPath = GetConfig('setting/admin/php/force_profile_redirect_path');
 				if (!$redirectPath) {
-					$redirectPath = '/profile.html'; # is often /welcome.html
+					$redirectPath = '/session.html'; # is often /welcome.html
+					#$redirectPath = '/profile.html'; # is often /welcome.html
+					#$redirectPath = '/profile.html'; # is often /welcome.html
 				}
 
 				$pathWithoutArgs = $path;

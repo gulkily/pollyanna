@@ -8,6 +8,8 @@ use utf8;
 
 require './config/template/perl/utils.pl';
 
+# server_local_lighttpd.pl
+
 sub GetYes { # $message, $defaultYes ; print $message, and get Y response from the user
 	# $message is printed to output
 	# $defaultYes true:  allows pressing enter
@@ -169,7 +171,17 @@ sub StartLighttpd { # run command to start local lighttpd instance
 
 	if ($insanityLevel == 0) {
 		print "\n";
+		# EXECUTE LIGHTTPD COMMAND HERE ##############################
+		# EXECUTE LIGHTTPD COMMAND HERE ##############################
+		# EXECUTE LIGHTTPD COMMAND HERE ##############################
+		# EXECUTE LIGHTTPD COMMAND HERE ##############################
+		# EXECUTE LIGHTTPD COMMAND HERE ##############################
 		system("$pathLighttpd -D -f config/lighttpd/lighttpd.conf");
+		# EXECUTE LIGHTTPD COMMAND HERE ##############################
+		# EXECUTE LIGHTTPD COMMAND HERE ##############################
+		# EXECUTE LIGHTTPD COMMAND HERE ##############################
+		# EXECUTE LIGHTTPD COMMAND HERE ##############################
+		# EXECUTE LIGHTTPD COMMAND HERE ##############################
 		#todo background it if opening browser
 	} # if ($insanityLevel == 0)
 	else {

@@ -205,6 +205,15 @@ sub SqliteQueryHashRef { # $query, @queryParams; calls sqlite with query, and re
 	if ($queryWithParams) {
 		#my $resultString = SqliteQueryCachedShell($queryWithParams);
 		my $resultString = SqliteQuery($queryWithParams);
+		#my $queryBegin = GetTime();
+		#my $resultString = SqliteQuery($queryWithParams);
+		#my $resultRef = SqliteQueryWithTime($queryWithParams);
+		#my %resultHash = %{$resultRef};
+		#my $resultString = %resultHash{'results'};
+		#my $queryBegin = $resultRef->{'time_begin'};
+		#my $queryFinish = $resultRef->{'time_finish'};
+		#my $queryDuration = $resultRef->{'duration'};
+		#my $queryFinish = GetTime();
 
 		WriteLog('SqliteQueryHashRef: $resultString is ' . ($resultString ? 'TRUE' : 'FALSE') . '; $queryWithParams = ' . $queryWithParams);
 		#WriteLog('SqliteQueryHashRef: $resultString = ' . ($resultString ? $resultString : 'FALSE'));
@@ -346,6 +355,10 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 
 		my $timeBefore = GetTime();
 
+		###########################################################################
+		###########################################################################
+		### RUN QUERY VIA SHELL ###################################################
+		### RUN QUERY VIA SHELL ###################################################
 		$results = `$shCommand`;
 
 		my $timeAfter = GetTime();

@@ -202,6 +202,7 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 			my $conceptDialog = GetDialogX(ConceptForWeb($conceptString), 'Concept');
 			#my $conceptDialog = GetDialogX(ConceptForWeb($conceptString), 'Concept: ' . $pageType);
 			#$conceptDialog = '<span class=advanced>' . $conceptDialog . '</span>';
+			# my $conceptDialog = GetDialogX(ConceptForWeb($conceptString), 'Concept: ' . $pageType);
 			$txtFooter = str_replace(
 				'</body>',
 				$conceptDialog . '</body>',

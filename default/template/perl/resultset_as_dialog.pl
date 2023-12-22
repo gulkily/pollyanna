@@ -212,6 +212,16 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 		}
 
 		my $statusText = $resultCount . ' item(s)';
+		#if ($flags{'query'}) {
+		#	$statusText .= ' (query: ' . $flags{'query'} . ')';
+		#}
+		#if ($flags{'page_current'}) {
+		#	$statusText .= ' (page ' . $flags{'page_current'} . ' of ' . $flags{'page_item_count'} . ')';
+		#} #todo
+
+		if (0) { #todo link to full results page
+			#$statusText .= '; <a href="';
+		}
 
 		#return GetDialogX($content, $title, $columnsDisplay, $statusText);
 
