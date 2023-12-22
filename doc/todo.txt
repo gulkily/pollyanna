@@ -1,3 +1,7 @@
+there should be a warning for the operator when using cookie-required features
+	for example: require_cookie and force_profile (which should be called auto_session)
+		these will block users who do not support cookies or have cookie issues
+
 refactor all the mentions of opened_dialogs into ReopenDialogs()
 
 backtick execute feature
