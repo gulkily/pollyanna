@@ -265,7 +265,10 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 		} else {
 			WriteLog('GetResultSetAsDialog: no_results: returning space reserved for future content dialog; caller = ' . join(',', caller));
 			require_once('dialog.pl');
-			return GetDialogX('<fieldset><p>This space reserved for future content.</p></fieldset>', $title); # GetResultSetAsDialog()
+			my %flagsNoResults = (
+				'status' => '<fieldset><description>Query took 2 second(s)<span class=advanced>:</span></description><span class=advanced><br><code class=sql><tt>' . SqlForWeb($flags{'query'}) . '</tt></code></span></fieldset>'
+			);
+			return GetDialogX3('<fieldset><p>This space reserved for future content...</p></fieldset>', $title, \%flagsNoResults); # GetResultSetAsDialog()
 		}
 	}
 } # GetResultSetAsDialog()
