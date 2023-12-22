@@ -662,10 +662,10 @@ if (GetConfig('setting/admin/php/route_enable')) {
 					}
 
 					if (
-						!$cacheOverrideFlag &&
-						$path != '/404.html' &&
-						file_exists($pathRel) &&
-						($fileCacheTime < $cacheTimeLimit)
+						!$cacheOverrideFlag && # we haven't been asked to not use the cache
+						$path != '/404.html' && # it's not the 404 page
+						file_exists($pathRel) && # the cached html file exists
+						($fileCacheTime < $cacheTimeLimit) # the cache is new enough
 					) {
 						# ok to use cache
 						if (GetConfig('setting/admin/php/route_stale_page_notice') && $fileCacheTime > 360) {
