@@ -1321,7 +1321,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 				$html = str_replace(
 					'<span id=spanUsernameSessionLink></span>',
-					'<span><a href="/profile.html">Register or Sign In</a></span>',
+					'<span><a href="/session.html">Register or Sign In</a></span>',
 					$html
 				);
 			}
