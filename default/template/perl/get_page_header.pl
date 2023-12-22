@@ -116,6 +116,13 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 		#todo this can be changed once pagemap is accessible from the main menu
 	}
 
+	if (GetConfig('setting/html/neighbor_list')) {
+		require_once('dialog/neighbor.pl');
+		my $neighboringInstances = GetNeighborDialog($pageType, $title);
+		$topMenuTemplate .= $neighboringInstances;
+
+	}
+
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/dialog_properties')) {
 		my $dialogStyle = GetTemplate('html/widget/dialog_style.template'); # GetPageHeader()
 		$dialogStyle = GetDialogX($dialogStyle, 'Dialog');
