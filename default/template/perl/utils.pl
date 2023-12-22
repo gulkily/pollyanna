@@ -1908,6 +1908,12 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 		}
 	} # html/generator_meta
 
+	#if (GetConfig('html/debug')) {
+	#	$content = $content . '<hr><table></table>HTML Debugger Output:<hr><plaintext>' . $content;
+	#}
+	#todo this has issues, and should only apply to html files, but it's an interesting tag and technique
+	#
+
 	#############################################
 	## WRITE TO FILE ############################
 	#############################################
