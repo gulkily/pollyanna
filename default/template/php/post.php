@@ -475,7 +475,9 @@ if (isset($comment) && $comment) {
 
 		if (isset($allParameters)) {
 			#todo this could use more sanity and cleanness
-			$comment = $comment . "\n-- \n";
+			if (index($comment, "\n-- \n") == -1) {
+				$comment = $comment . "\n-- \n";
+			}
 			foreach ($allParameters as $paramKey => $paramValue) {
 				#todo sanity checks
 				if ($paramKey == 'comment') {
