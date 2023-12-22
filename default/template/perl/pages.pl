@@ -109,6 +109,10 @@ sub RenderLink {
 			#bughere #todo this is where needs fix for duplicate hashtag listing dialogs #duplicatedialogs
 			#todo this may not be the right place for this at all
 		}
+		else {
+			#todo
+			#$link = AddAttributeToTag($link, 'a ', 'onclick', "if ((window.GetPrefs) && GetPrefs('draggable_spawn') && window.FetchDialogFromUrl) { return FetchDialogFromUrl('/dialog" . $url . "'); }");
+		}
 	}
 
 	return $link;
