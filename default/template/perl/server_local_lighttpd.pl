@@ -169,6 +169,16 @@ sub StartLighttpd { # run command to start local lighttpd instance
 	WriteLog('StartLighttpd: $pathLighttpd = ' . $pathLighttpd);
 	WriteLog('StartLighttpd: $insanityLevel = ' . $insanityLevel);
 
+	# redirect std_err so that console is not spammed
+	#my $errorLogRedirector = '';
+	#if (1) {
+	#	# debug mode is on
+	#	$errorLogRedirector = '2>>./log/error.log';
+	#} else {
+	#	# debug mode is off
+	#	$errorLogRedirector = '2>./log/error.log';
+	#}
+
 	if ($insanityLevel == 0) {
 		print "\n";
 		# EXECUTE LIGHTTPD COMMAND HERE ##############################
