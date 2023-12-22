@@ -395,9 +395,13 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 			if (scalar(@files) > 0) {
 				my $zipLink = '<a href="/tag/' . $pageParam . '.zip">' . $pageParam . '.zip</a>'; #todo use RenderLink()
 				$zipLink = '<fieldset>' . $zipLink . '</fieldset>';
-				$txtIndex .= '<span class=advanced>' . GetDialogX($zipLink, 'Archive') . '</span>'; # tag.zip
+				my $zipDialog .= GetDialogX($zipLink, 'Archive'); # tag.zip
+				$zipDialog = '<span class=advanced>' . $zipDialog . '</span>'; # tag.zip
+				$txtIndex .= $zipDialog; # tag.zip
 			} else {
-				$txtIndex .= GetDialogX('This tag has no items yet, <br>so no archive is available.', 'Archive');
+				my $noArchiveDialog = GetDialogX('This tag has no items yet, <br>so no archive is available.', 'Archive');
+				$noArchiveDialog = '<span class=advanced>' . $noArchiveDialog . '</span>';
+				$txtIndex .= $noArchiveDialog;
 			}
 		}
 
