@@ -73,31 +73,34 @@ sub PhoneForWeb {
 	return $html;
 } # PhoneForWeb()
 
-sub CppForWeb { # replaces some spaces with &nbsp; to preserve text-based layout for html display; $text
-	my $text = shift;
+sub CppForWeb {
+    my $text = shift;
 
-	if (!$text) {
-		return '';
-	}
+    if (!$text) {
+        return '';
+    }
 
-	$text = HtmlEscape($text);
-	#$text =~ s/\n /<br>&nbsp;/g;
-	#$text =~ s/^ /&nbsp;/g;
-	#$text =~ s/  / &nbsp;/g;
-	#$text =~ s/\n/<br>\n/g;
+    $text = HtmlEscape($text);
 
-	#htmlspecialchars(
-	## nl2br(
-	## str_replace(
-	## '  ', ' &nbsp;',
-	# htmlspecialchars(
-	## $quote->quote))))?><? if ($quote->comment) echo(htmlspecialchars('<br><i>Comment:</i> '.htmlspecialchars($quote->comment)
-	#));?><?=$tt_c?></description>
+    my @cppKeywords; # = qw(#include <iostream> int main for if else std cout return);
+    push @cppKeywords, "include";
+    push @cppKeywords, "int";
+    push @cppKeywords, "main";
+    push @cppKeywords, "for";
+    push @cppKeywords, "if";
+    push @cppKeywords, "else";
+    push @cppKeywords, "std";
+    push @cppKeywords, "cout";
+    push @cppKeywords, "return";
 
-	my $container = GetTemplate('html/item/container/cpp.template');
-	$container = str_replace('$text', $text, $container);
+    for my $cppKeyword (@cppKeywords) {
+        $text =~ s/\b$cppKeyword\b/<b>$cppKeyword<\/b>/g;
+    }
 
-	return $container;
+    my $container = GetTemplate('html/item/container/cpp.template');
+    $container = str_replace('$text', $text, $container);
+
+    return $container;
 } # CppForWeb()
 
 sub PyForWeb { # replaces some spaces with &nbsp; to preserve text-based layout for html display; $text
