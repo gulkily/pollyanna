@@ -1863,6 +1863,19 @@ while (my $arg1 = shift @foundArgs) {
 				# 	WriteMessage("recognized author fingerprint\n");
 				# 	MakePage('author', $arg1, 1);
 				# }
+				elsif ($makeDialogArg =~ m/^([0-9]{4}-[0-9]{2}-[0-9]{2})$/) { # -D 2018-01-01 dialog/date/2018-01-01.html
+					# how to test:
+					# ./pages.pl -D 2023-11-11
+					WriteMessage("-D (date)\n");
+					my $dialog = GetDialogX('<fieldset>This is where the results would go.</fieldset>', $makeDialogArg); #todo GetDateDialog($makeDialogArg);
+					my $dialogPath = 'date/' . $makeDialogArg . '.html';
+
+					if ($dialog && $dialogPath) {
+						PutHtmlFile('dialog/' . $dialogPath, $dialog);
+					} else {
+						WriteLog('pages.pl: warning: $dialog or $dialogPath is FALSE');
+					}
+				}
 				elsif (substr($makeDialogArg, 0, 1) eq '#') { #hashtag tag/like.html label/like.html
 					#todo sanity checks here
 					WriteMessage("-D hashtag $makeDialogArg\n");
