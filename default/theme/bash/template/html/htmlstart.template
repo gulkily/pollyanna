@@ -1,0 +1,35 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>$title</title>
+<style type="text/css">
+<!--
+$styleSheet
+-->
+</style>
+</head>
+<body>
+<b>$topMenu</b>
+<p>
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<title>QDB: Quote Database Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="x-ua-compatible" content="IE=edge">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<link rel="alternate" title="RSS" href="/rss.xml" type="application/rss+xml"></link>
+	<style type="text/css">
+	<!--
+		$styleSheet
+
+	-->
+	</style>
+
+
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#c08000" vlink="#c08000" alink="#c08000">
