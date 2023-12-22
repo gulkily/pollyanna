@@ -134,6 +134,12 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 			}
 		}
 
+		if (GetConfig('setting/admin/logging/record_comment_hash') {
+			// record hash of comment before signature added
+			$signatureContent .= 'Hash: ' . $hash;
+			$signatureContent .= "\n";
+		}
+
 		if (strpos($comment, 'PUBLIC KEY BLOCK') && GetConfig('setting/admin/php/post/skip_footer_when_pubkey')) {
 			// skip adding footer
 		} else {
