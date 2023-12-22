@@ -171,7 +171,13 @@ sub SqlForWeb { # replaces some spaces with &nbsp; to preserve text-based layout
 
 	$text = HtmlEscape($text);
 
-	my @sqlKeywords = qw(SELECT FROM SELECT COUNT AS MAX AS SUM AS SUM AS FROM WHERE JOIN DISTINCT IN SELECT FROM GROUP BY WHERE RANDOM AND LIKE ORDER BY DESC LIMIT SUBSTR DATETIME UNION ON ALL LOWER UPPER);
+	#todo
+	#my @newLineKeywords = qw(SELECT FROM WHERE JOIN GROUP ORDER);
+	#for my $newLineKeyword (@newLineKeywords) {
+	#	$text =~ s/$newLineKeyword/\n$newLineKeyword/g;
+	#}
+
+	my @sqlKeywords = qw(SELECT FROM SELECT COUNT AS MAX AS SUM AS SUM AS FROM WHERE JOIN DISTINCT USING IN SELECT FROM GROUP BY WHERE RANDOM AND LIKE ORDER BY DESC LIMIT SUBSTR DATETIME UNION ON ALL LOWER UPPER);
 	for my $sqlKeyword (@sqlKeywords) {
 		$text =~ s/$sqlKeyword/<b>$sqlKeyword<\/b>/g;
 	}
