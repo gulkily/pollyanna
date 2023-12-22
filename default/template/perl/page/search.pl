@@ -10,6 +10,7 @@ sub GetSearchPage {# returns html for search page
 	$html .= GetPageHeader('search');
 	$html .= GetTemplate('html/maincontent.template');
 	$html .= GetSearchDialog();
+	$html .= GetQueryAsDialog("SELECT file_hash, item_title FROM item_flat WHERE labels_list like '%,search,%' ORDER BY add_timestamp DESC LIMIT 100", 'Searches');
 	$html .= GetPageFooter('search');
 
 	if (GetConfig('setting/admin/js/enable')) {
