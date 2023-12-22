@@ -1,5 +1,5 @@
 concept Newest_Content_Page
-  purpose provide users with the latest and relevant content on the New Items page.
+  purpose provide users with the latest content on the New Items page.
 
   state
     time_frame: Time
@@ -13,7 +13,10 @@ concept Newest_Content_Page
       set time_frame, displayed_items to generateNewestContent()
 
   operational principle
-    after displayNewestContent(), the page shows items from the past 3 minutes with positive scores and excludes operator commands
+    after displayNewestContent(), the page shows items:
+    	from the past 3 minutes,
+    	with positive scores,
+    	excludes operator commands
 
   where
     generateNewestContent(): (Time, set Item)

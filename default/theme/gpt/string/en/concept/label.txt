@@ -1,23 +1,23 @@
-concept label [Item]
-  purpose organize items into overlapping categories
+concept Labels_Page
 
-  state
-    labels: Item -> set Label
+purpose provide a view of labels and their counts, organizing items based on overlapping categories.
 
-  actions
-    affix (i: Item, |: Label)
-      add | to the labels of i
+state
+  label_details: set LabelDetails
+    label: String  // Represents a specific label or category
+    label_count: Integer  // Count of distinct items associated with the label
 
-    detach (i: Item, |: Label)
-      remove | from the labels of i
+operational principle
+  Compile and display information about labels and their counts:
+  1. Identify distinct items with positive scores in the "item_flat" table.
+  2. Group items by label and file_hash in the "item_label" table.
+  3. Count the number of distinct items associated with each label.
+  4. Provide a view of labels and their associated counts, ordered by count in descending order.
 
-    find (I: Label): set Item
-      return the items labeled with |
+where
+  Labels are counted based on distinct items with positive scores.
 
-    clear (i: Item)
-      remove item i with all its labels
-
-  operational principle
-    after affix (i, |) and no detach (i, |), i in find (I)
-    if no affix (i, |), or detach (i, |), i not in find (I)
-
+Additional Considerations:
+- The Labels Page offers insights into item categorization by displaying labels and their respective counts.
+- State attributes include labels and their associated counts.
+- The operational principle involves aggregating label information from the "item_label" table.

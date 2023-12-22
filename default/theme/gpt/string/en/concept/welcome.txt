@@ -1,5 +1,5 @@
 concept Welcome_Page
-  purpose introduction to the application, display important information, provide navigation options.
+  purpose introduction to the application, provide navigation options.
 
   state
     welcome_message: String

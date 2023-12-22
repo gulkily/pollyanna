@@ -19,4 +19,3 @@ concept Help_Page
     generatePageContent(): (String, set String, String)
       pre true
       // Additional logic to generate content for the help page
-      return ("Help Page", {"Feature 1", "Feature 2", ...}, "Version: 1.0\nTotal Items: 1000\nTotal Users: 500")

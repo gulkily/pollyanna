@@ -1,0 +1,32 @@
+concept Upload_Page
+
+purpose Enable users to upload files, including images, with a preview feature. The page supports standard file selection and pasting images via a focusable textbox.
+
+state
+  upload_settings: UploadSettings
+    allowed_file_types: set FileType  // Set of allowed file types for upload
+    preview_enabled: Boolean  // Indicates whether the preview feature is enabled
+
+actions
+  uploadFile(file: File)
+    pre file.type in upload_settings.allowed_file_types
+    // Additional logic to handle the upload of the selected file
+
+  pasteImage(imageData: String)
+    pre upload_settings.preview_enabled
+    // Additional logic to handle pasting an image via a focusable textbox
+
+operational principle
+  Enable users to upload files:
+  1. Users can select files using the standard browser file selector.
+  2. Images selected for upload are previewed.
+  3. Users can press the "Upload" button to initiate the upload process.
+  4. Users can paste images into a focusable textbox for upload.
+
+where
+  File uploads are subject to the allowed file types specified in upload_settings.
+
+Additional Considerations:
+- The Upload Page provides a user-friendly interface for file uploads, including image previews.
+- State attributes include allowed file types and the status of the preview feature.
+- Actions include uploading selected files and pasting images for upload.

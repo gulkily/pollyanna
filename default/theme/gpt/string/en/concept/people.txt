@@ -1,0 +1,26 @@
+concept People_Page
+
+purpose display a list of verified participants in the community, indicating individuals with confirmed identities through a cryptographic web of trust.
+
+state
+  people_entities: set Person
+    author_alias: String  // Represents the alias or name of the verified participant
+    author_key_count: Integer  // Count of unique author keys associated with the participant
+    author_seen: Timestamp  // Timestamp of the last activity seen from the participant
+    author_score: Integer  // Combined item score of the participant
+    item_count: Integer  // Total count of items associated with the participant
+
+actions
+  None explicitly specified for the People Page.
+
+operational principle
+  Retrieve and display a list of verified participants in the community.
+  Participants are identified based on their presence in the "person_author" table, indicating that their identities have been confirmed through a cryptographic web of trust.
+
+where
+  Include participants with a non-empty author_alias, at least one associated author key, and a non-negative author score.
+
+Additional Considerations:
+- The People Page lists individuals who have been verified through a cryptographic web of trust, providing a higher level of confidence in their identities.
+- The state includes key details such as the participant's alias, the count of associated author keys, last seen timestamp, author score, and item count.
+- Criteria for inclusion involve a non-empty author_alias, at least one associated author key, and a non-negative author score.

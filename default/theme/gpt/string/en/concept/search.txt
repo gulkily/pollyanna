@@ -1,0 +1,39 @@
+concept Collaborative_Search
+
+purpose facilitate searching by allowing users to submit public search queries and get notified of updates.
+
+state
+  search_queue: set SearchQuery
+    query_id: String  // Unique identifier for the search query
+    user: Person  // User who submitted the search query
+    query_text: String  // Text of the search query
+    results: set SearchResult  // Set of results contributed by other users
+    user_notifications: set Person  // Set of users notified about updates
+
+actions
+  submitSearchQuery(user: Person, query_text: String)
+    pre true
+    // Additional logic to handle the submission of a search query to the public queue
+
+  contributeSearchResults(query_id: String, user: Person, results: set SearchResult)
+    pre query_id in search_queue
+    // Additional logic to handle the contribution of search results to a query
+
+  notifyUserOfUpdates(query_id: String, user: Person)
+    pre query_id in search_queue
+    // Additional logic to handle notifying the user about updates to their search query
+
+operational principle
+  Facilitate collaborative searching:
+  1. Users can submit public search queries to the search queue.
+  2. Other users can contribute search results to queries in the queue.
+  3. Users who submitted a search query are notified when new information is added.
+
+where
+  Search queries are identified by a unique query_id.
+  Results are associated with a specific search query.
+
+Additional Considerations:
+- The Collaborative Search feature enhances searching by involving multiple users in building search results.
+- State attributes include unique query identifiers, users, query text, results, and user notifications.
+- Actions include submitting search queries, contributing search results, and notifying users of updates.
