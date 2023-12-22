@@ -17,15 +17,33 @@ sub ReplaceMenuInAllPages {
 		return '';
 	}
 
+	state $beenRun = 0;
+	$beenRun++;
+	if ($beenRun > 1) {
+		WriteLog('ReplaceMenuInAllPages: warning: $beenRun > 1');
+		return '';
+	}
+
 	require_once('widget/menu.pl');
 
 	my @pages = `grep "topmenu2.template" "$HTMLDIR" -rl`;
 	WriteLog('ReplaceMenuInAllPages: scalar(@pages) = ' . scalar(@pages));
 
+	my $pageCount = 0;
+
 	for my $page (@pages) {
+		$pageCount++;
+		if ($pageCount > 1000) {
+			WriteLog('ReplaceMenuInAllPages: warning: $pageCount > 1000');
+			last;
+		}
 		chomp $page;
 		if ($page =~ m/\.html$/) {
 			my $html = GetFile($page);
+			if (!$html) {
+				WriteLog('ReplaceMenuInAllPages: warning: $html was FALSE');
+				next;
+			}
 			my $lengthBefore = length($html);
 			#$html =~ s/<\!-- template\/topmenu2.template -->.+<\!-- \/ template\/topmenu2.template -->//gs;
 			#$html =~ s/<\!\-\- template\/topmenu2\.template//gs;
@@ -34,7 +52,7 @@ sub ReplaceMenuInAllPages {
 			$menu = FillThemeColors($menu);
 			$html =~ s/<!-- template\/topmenu2.template -->.+<!-- \/ topmenu2.template -->/$menu/gs;
 			my $lengthAfter = length($html);
-			WriteLog('ReplaceMenuInAllPages: $page = ' . $page . '; $lengthBefore = ' . $lengthBefore . '; $lengthAfter = ' . $lengthAfter);
+			WriteLog('ReplaceMenuInAllPages: $page = ' . $page . '; $lengthBefore = ' . ($lengthBefore ? $lengthBefore : 'FALSE') . '; $lengthAfter = ' . ($lengthAfter ? $lengthAfter : 'FALSE'));
 			PutFile($page, $html);
 		}
 	}
