@@ -206,7 +206,15 @@ sub GetMonthTable { # $year, $month, \%fillDates ; return html table with links 
 			}
 			
 			$html .= '<td>';
-			$html .= '<a href="/date/' . $thisDate .'.html">';
+
+			my $a = '<a href="/date/' . $thisDate . '.html">';
+
+			#if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
+				#$a = AddAttributeToTag($a, 'a', 'onclick', ''
+				#todo use FetchDialog to open a dialog instead
+			#}
+
+			$html .= $a;
 			#$html .= '<div>';
 			
 			$html .= '<big><b>' . $day . '</b></big>';
