@@ -162,6 +162,7 @@ sub GetPersonPage { # $personName
 		#todo add size of zip file
 		#MakeZipFromItemList($zipName, \@itemList); #todo
 		$zipDialog = GetDialogX('<fieldset><p><a href="/person/' . HtmlEscape($personName) . '/' . HtmlEscape($personName) . '.zip">' . HtmlEscape($personName) . '.zip' . '</a>' . '</p></fieldset>', 'Archive');
+		$zipDialog = '<span class=advanced>' . $zipDialog . '</span>';
 	}
 
 	# BUILD HTML PAGE OUT OF ABOVE UNITS
