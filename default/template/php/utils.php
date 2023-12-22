@@ -688,7 +688,13 @@ function PutFile ($file, $content) { // puts file contents
 	$fileTemp = $file . ".tmp"; # my
 	WriteLog('PutFile: $fileTemp = ' . $fileTemp);
 
-	$putFileResult = file_put_contents($fileTemp, $content);
+	try {
+		$putFileResult = @file_put_contents($fileTemp, $content);
+	} catch (Exception $e) {
+		// Handle the exception here
+		// echo 'Caught exception: ',  $e->getMessage(), "\n";
+		$putFileResult = 0;
+	}
 
     #todo fix these sanity checks and error handling
 	#if (is_writable($file)) {
@@ -1541,7 +1547,7 @@ function GetItemPlaceholderPage ($comment, $hash, $fileUrlPath, $filePath) { # g
 		#$fileTxtPath = str_replace(GetDir('txt'), '', $filePath); #my
 		#$fileTxtPath = GetFile #my
 
-		if (!defined($fileTxtPath)) {
+		if (!isset($fileTxtPath)) {
 			# sanity check #1
 			$caller = isset($dbt[1]['function']) ? $dbt[1]['function'] : 'caller_missing';
 			WriteLog('GetItemPlaceholderPage: warning: $fileTxtPath is not defined; caller = ' . $caller);
