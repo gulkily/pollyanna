@@ -69,6 +69,14 @@ sub GetTokenDefs {
 			'message' => '[Cookie]',
 			'apply_to_self' => 1
 		},
+		{ # hash self-specified by the item (e.g. pre-signature hash)
+			'token'   => 'hash',
+			'mask'    => '^(hash)(\W+)([0-9A-F]{16})',
+			'mask_params'    => 'mgi',
+			'message' => '[Hash]',
+			'apply_to_self' => 1,
+			'apply_to_parent' => 1
+		},
 		{ # client id of user who posted the message
 			'token'   => 'client',
 			'mask'    => '^(client)(\W+)([0-9A-F]{16})',
