@@ -5,8 +5,14 @@ use warnings;
 use 5.010;
 
 sub GetNeighborDialog { # $pageName, $pageArgument ; displays links to same resource on other instances
+# sub GetNeighborsDialog {
+
 	my $pageName = shift;
 	my $pageArgument = shift;
+
+	#todo sanity checks
+
+	WriteLog('GetNeighborDialog: $pageName = ' . $pageName . '; $pageArgument = ' . $pageArgument . '; caller = ' . join(',', caller));
 
 	my @neighbors = GetConfigListAsArray('neighbor');
 	my $linkTemplate = '<a href="http://$host/$pageName.html">$host</a>';
@@ -27,8 +33,10 @@ sub GetNeighborDialog { # $pageName, $pageArgument ; displays links to same reso
 		$link =~ s/\$pageName/$pageName/g;
 		$dialog .= $link . '<br/>';
 	}
+
 	$dialog = GetDialogX($dialog, 'Neighbors');
 	return $dialog;
+
 } # GetNeighborDialog()
 
 1;
