@@ -1442,6 +1442,10 @@ function InsertFetchedDialog () {
 } // InsertFetchedDialog()
 
 function FetchDialog (dialogName) {
+// checks if dialog is already on current page,
+// if so, focuses it using SetActiveDialog(), otherwise
+// calls FetchDialogFromUrl() to fetch it from server
+// example: dialogName = 'float'
 // function InjectDialog () { // FetchDialog()
 	if ((window.GetPrefs) && !GetPrefs('draggable_spawn')) {
 		//alert('DEBUG: FetchDialog: warning: draggable_spawn is FALSE');
