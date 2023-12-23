@@ -15,7 +15,7 @@ function DesktopOnLoad () {
 				DraggingInit(0);
 				DraggingMakeFit(0);
 				DraggingInit(0);
-				displayNotification('Annoying mode activated.');
+				displayNotification('Float mode activated.');
 			}
 		}
 	}

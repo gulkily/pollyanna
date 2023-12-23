@@ -1103,8 +1103,8 @@ sub MakeListingPages {
 		$dialog = GetSettingsDialog();
 		PutHtmlFile('dialog/settings.html', $dialog);
 
-		$dialog = GetAnnoyancesDialog();
-		PutHtmlFile('dialog/annoyances.html', $dialog);
+		$dialog = GetFloatDialog();
+		PutHtmlFile('dialog/float.html', $dialog);
 
 		$dialog = GetStatsTable();
 		PutHtmlFile('dialog/stats.html', $dialog);
@@ -1481,7 +1481,7 @@ require_once('dialog/access.pl');
 require_once('dialog/tos.pl');
 require_once('dialog/write.pl');
 require_once('dialog/puzzle.pl');
-require_once('dialog/annoyances.pl');
+require_once('dialog/float.pl');
 require_once('dialog/operator.pl');
 require_once('dialog/search.pl');
 require_once('dialog/simple.pl');

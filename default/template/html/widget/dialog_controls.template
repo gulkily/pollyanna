@@ -20,7 +20,7 @@
 	}
 " title=Arrange>Arrange</a>;
 
-<a id=btnAnnoy href=# onclick="
+<a id=btnFloat href=# onclick="
 	if (window.DraggingRetile) {
 		SetPrefs('draggable', 1);
 		SetPrefs('draggable_activate', 1);
@@ -36,7 +36,7 @@
 		DraggingMakeFit(0);
 		DraggingInit(0);
 	}
-" title=Annoy>Annoy</a>;
+" title=Float>Float</a>;
 
 <a id=btnDraggingReset href=# onclick="
 	if (window.DraggingReset && window.SetPrefs) {

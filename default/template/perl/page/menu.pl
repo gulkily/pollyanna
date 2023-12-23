@@ -25,7 +25,7 @@ sub GetMenuPage { # /menu.html
 		# GetIntroDialog('menu') .
 		# GetWelcomeDialog() .
 		GetSettingsDialog() .
-		GetAnnoyancesDialog() .
+		GetFloatDialog() .
 		# GetProfileDialog() .
 		GetQueryAsDialog('random', 'Random') . # GetLabelsDialog() .
 		GetQueryAsDialog('people', 'People') . # GetLabelsDialog() .
