@@ -1061,6 +1061,14 @@ function UpdateDialogList () {
 // page_map.template
 // #todo put this in a separate template that doesn't get injected unless html/page_map is on
 
+	var reopen = 0;
+	if (!window.PageMapReopenHasBeenRun) {
+		if (GetPrefs('draggable_reopen')) { // #todo make this a separate option?
+			reopen = 1;
+		}
+		window.PageMapReopenHasBeenRun = 1;
+	}
+
 	var lstDialog = document.getElementById('lstDialog');
 	if (lstDialog) {
 		var allOpenDialogs = document.getElementsByClassName('dialog');
@@ -1103,6 +1111,14 @@ function UpdateDialogList () {
 
 				//listContent = listContent + '<label for="c' + dialogId + '"' + gt + '<input type=checkbox name="c' + dialogId + '" id="c' + dialogId + '"' + gt + dialogId + '</label' + gt + '<br' + gt;
 				lstDialog.innerHTML = lstDialog.innerHTML + iDialog;
+
+				if (reopen) {
+					//alert('DEBUG: UpdateDialogList: reopening dialog ' + dialogId);
+					var openDialogs = GetPrefs('opened_dialogs');
+					if (openDialogs && openDialogs.indexOf(dialogId) != -1) {
+						SpotlightDialog(dialogId);
+					}
+				}
 
 				/* #todo
 				var newLink = document.createElement('a');
