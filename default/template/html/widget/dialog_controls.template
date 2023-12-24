@@ -35,7 +35,6 @@
 		DraggingInit(0);
 		DraggingMakeFit(0);
 		DraggingInit(0);
-        FetchDialog('float');
 	}
 " title=Float>Float</a>;
 
