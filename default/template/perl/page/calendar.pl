@@ -89,6 +89,8 @@ use Time::Local;
 #$time = timegm($sec,$min,$hours,$mday,$mon,$year);
 
 sub GetMonthTable { # $year, $month, \%fillDates ; return html table with links for dates in %fillDates
+# sub GetMonthDialog {
+# sub GetCalendarMonth {}
 # dates in %fillDates should be in format 'yyyy-mm-dd' => integer
 # example: '2022-10-07' => 1
 # SUBSTR(DATETIME(add_timestamp, 'unixepoch', 'localtime'), 0, 11) AS date,

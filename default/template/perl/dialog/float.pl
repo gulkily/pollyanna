@@ -6,7 +6,8 @@ use 5.010;
 use utf8;
 
 sub GetFloatDialog { # returns settings dialog
-	# sub GetFloatWindow {
+# sub FloatSettings {
+# sub GetFloatWindow {
 	WriteLog('GetFloatDialog() BEGIN');
 	return '<form>' . GetDialogX(GetTemplate('html/form/float.template'), 'Float') . '</form>';
 } # GetFloatDialog()

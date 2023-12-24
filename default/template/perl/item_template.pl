@@ -409,14 +409,25 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 			{
 				# WINDOW BODY / ITEM CONTENT
 				# WINDOW BODY / ITEM CONTENT
+				# WINDOW BODY / ITEM CONTENT
+				# WINDOW BODY / ITEM CONTENT
+				# WINDOW BODY / ITEM CONTENT
+				# WINDOW BODY / ITEM CONTENT
+				# WINDOW BODY / ITEM CONTENT
 				my $windowBody = '';
 				$windowBody = GetItemTemplateBody(\%file);
+				#if (!$windowBody) {
+				#	$windowBody = '<fieldset><p>Item body is or missing empty.</p></fieldset>';
+				#}
 				$windowParams{'body'} = $windowBody;
 				#$windowParams{'body'} = htmlspecialchars($windowBody);
 				#$windowParams{'body'} = $windowBody;
 				#$windowParams{'body'} = 'fuck you';
 			}
 
+			# TITLE
+			# TITLE
+			# TITLE
 			# TITLE
 			# TITLE
 			if (GetConfig('admin/expo_site_mode')) { #todo #debug #expo

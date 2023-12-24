@@ -99,7 +99,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		} # $pageType eq 'author'
 
 		if ($pageType eq 'date') {
-			#sub GetDatePage { # if ($pageType eq 'date') { # setup
+			#sub GetDatePage { # if ($pageType eq 'date') { # setup, page title, and WHERE clause
 			$pageParam = shift;
 			my $pageDate = $pageParam; # example: '2022-10-07'
 			chomp($pageDate);
@@ -533,7 +533,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 
 
 	if ($pageType eq 'date') {
-		#sub GetDatePage { # if ($pageType eq 'date') { # before listing
+		#sub GetDatePage { # if ($pageType eq 'date') { # before listing and special dialog
 		# on date page, add a list of all the items on the page at the top
 
 		#todo they should link to the item's dialog on the page

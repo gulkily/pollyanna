@@ -94,6 +94,7 @@ sub GetDialogPage { # $pageName, $pageTitle, $windowContents ; returns html page
 } # GetDialogPage()
 
 sub RenderLink {
+# sub GetLink {
 	my $url = shift;
 	my $title = shift;
 
