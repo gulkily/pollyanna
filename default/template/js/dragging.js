@@ -894,6 +894,16 @@ function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was
 	if (dialog) {
 		//alert('DEBUG: DialogIsVisible(dialog):' + DialogIsVisible(dialog));
 
+		// store this dialog in list of dialogs opened, so that
+		// they can be re-opened in the next page
+		var openDialogs = GetPrefs('opened_dialogs'); // adding via SpotlightDialog()
+		//alert('DEBUG: SpotlightDialog: openDialogs = ' + openDialogs);
+		if (openDialogs && openDialogs.indexOf(dialogId) != -1) {
+			//
+		} else {
+			SetPrefs('opened_dialogs', openDialogs + ',' + dialogId); // adding in SpotlightDialog()
+		}
+
 		if (0 && DialogIsVisible(dialog)) {
 			//alert('DEBUG: SpotlightDialog: DialogIsVisible(dialog) was TRUE');
 
