@@ -16,6 +16,16 @@ sub GetNeighborDialog { # $pageName, $pageArgument ; displays links to same reso
 
 	my @neighbors = GetConfigListAsArray('neighbor');
 	my $linkTemplate = '<a href="http://$host/$pageName.html">$host</a>';
+	$linkTemplate =~ s/\$pageName/$pageName/g;
+
+	#if ($pageName eq 'item') {
+	#	my $itemHash = $pageArgument;
+	#	my $itemPath = substr($itemHash, 0, 2) . '/' . substr($itemHash, 2, 2) . '/' . substr($itemHash, 0, 8);
+	#	$linkTemplate = '<a href="http://$host/$pageName/$itemPath/$itemHash.html">$host</a>';
+	#	$linkTemplate =~ s/\$pageName/$pageName/g;
+	#	$linkTemplate =~ s/\$itemHash/$itemHash/g;
+	#	$linkTemplate =~ s/\$itemPath/$itemPath/g;
+	#}
 
 	my $dialog = '';
 	for my $neighbor (@neighbors) {
@@ -30,11 +40,11 @@ sub GetNeighborDialog { # $pageName, $pageArgument ; displays links to same reso
 
 		my $link = $linkTemplate;
 		$link =~ s/\$host/$neighbor/g;
-		$link =~ s/\$pageName/$pageName/g;
 		$dialog .= $link . '<br/>';
 	}
 
 	$dialog = GetDialogX($dialog, 'Neighbors');
+	$dialog = '<span class=advanced>' . $dialog . '</span>';
 	return $dialog;
 
 } # GetNeighborDialog()
