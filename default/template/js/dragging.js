@@ -1381,7 +1381,9 @@ function InsertFetchedDialog () {
 					}
 					var dialogTop = menuTop + menuHeight;
 					newDialog[iDialog].style.top = dialogTop + 'px';
-					var dialogLeft = 0;
+					//var dialogLeft = 0;
+					var dialogLeft = (document.documentElement.clientWidth / 2) - (newDialog[iDialog].offsetWidth / 2);
+					// half of the viewport width minus half of the dialog width
 					newDialog[iDialog].style.left = dialogLeft + 'px';
 				}
 			}
