@@ -1394,10 +1394,16 @@ function InsertFetchedDialog () {
 			if (GetPrefs('draggable_spawn_focus')) {
 				// focus newly inserted dialog
 				SetActiveDialog(newDialog[0]); // InsertFetchedDialog()
-				if (newDialog[0].getAttribute('id')) {
-					window.history.pushState('Object', 'Title', '/' + newDialog[0].getAttribute('id') + '.html');
+				if (newDialog[0] && newDialog[0].getAttribute) {
+					if (newDialog[0].getAttribute('id')) {
+						window.history.pushState('Object', 'Title', '/' + newDialog[0].getAttribute('id') + '.html');
+					} else {
+						// dialog has no id
+					}
+				} else {
+					// dialog has no getAttribute method
 				}
-			}
+			} // if (GetPrefs('draggable_spawn_focus'))
 
 			// if it is session dialog, call ProfileOnLoad()
 			// ProfileOnLoad() should be renamed to match the new language of session
