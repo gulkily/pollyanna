@@ -470,8 +470,10 @@ function ReopenDialogs () {
 	//alert('DEBUG: ReopenDialogs()');
 
 	// stored dialogs are stored as a JSON string in localStorage
-
-	var dialogPosition = window.localStorage.getItem('dialogPosition');
+	
+	if (window.localStorage) {
+		var dialogPosition = window.localStorage.getItem('dialogPosition');
+	}
 	//alert('DEBUG: dialogPosition.length = ' + dialogPosition.length);
 
 	// we need to parse that string into an object
