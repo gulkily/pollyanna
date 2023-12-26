@@ -198,7 +198,7 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 			$conceptString = GetString('concept/' . substr($pageType, 0, length($pageType) - 1) . '.txt', '', 1);
 		}
 		if ($conceptString) {
-			# sub GetConceptDialog {
+			# sub GetConceptDialog { #TODO, CURRENTLY USED LOOK HERE
 			my $conceptDialog = GetDialogX('<fieldset>'.ConceptForWeb($conceptString).'</fieldset>', 'Concept');
 			#my $conceptDialog = GetDialogX(ConceptForWeb($conceptString), 'Concept: ' . $pageType);
 			#$conceptDialog = '<span class=advanced>' . $conceptDialog . '</span>';
@@ -210,6 +210,12 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 			);
 		} else {
 			WriteLog('GetPageFooter: warning: $conceptString is FALSE; $pageType = ' . $pageType . '; caller = ' . join(',', caller));
+			my $noConceptDialog = GetDialogX('<fieldset>Concept for this page is not defined yet.</fieldset>', 'Concept');
+			$txtFooter = str_replace(
+			    '</body>',
+			    $noConceptDialog . '</body>',
+			    $txtFooter
+			);
 		}
 	} # if (GetConfig('setting/html/footer_page_concept'))
 

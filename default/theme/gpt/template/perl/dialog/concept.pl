@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use 5.010;
 
-sub GetConceptDialog {
+sub GetConceptDialog { ## not used
 	my $pageType = shift; # type of page
 
 	my $conceptDialog = '';
