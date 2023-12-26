@@ -199,7 +199,7 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 		}
 		if ($conceptString) {
 			# sub GetConceptDialog {
-			my $conceptDialog = GetDialogX(ConceptForWeb($conceptString), 'Concept');
+			my $conceptDialog = GetDialogX('<fieldset>'.ConceptForWeb($conceptString).'</fieldset>', 'Concept');
 			#my $conceptDialog = GetDialogX(ConceptForWeb($conceptString), 'Concept: ' . $pageType);
 			#$conceptDialog = '<span class=advanced>' . $conceptDialog . '</span>';
 			# my $conceptDialog = GetDialogX(ConceptForWeb($conceptString), 'Concept: ' . $pageType);
