@@ -1,14 +1,15 @@
 concept Welcome_Page
   purpose introduction to the application, provide navigation options.
 
-  state
-    welcome_message: String
-
   actions
-    displayWelcomeMessage()
-      pre true
-      // Additional logic to display a welcome message to the user
-      set welcome_message to generateWelcomeMessage()
+    GetWelcomePage() {
+        GetPageHeader('welcome')
+        GetDialog(GetTemplate('html/page/welcome.template'), 'Welcome')
+        GetPageFooter('welcome')
+    }
+    if (GetConfig('setting/admin/js/enable')) { //# should be called maybe html/js/enable
+        InjectJs( ... list of enabled js modules ... )
+    }
 
   operational principle
-    after displayWelcomeMessage(), the welcome message is presented to the user
+    after GetWelcomePage() is run (and saved), the welcome page is available to the user
