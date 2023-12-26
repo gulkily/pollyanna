@@ -42,14 +42,15 @@ sub GetPeoplePage {
 
 	my $queryTextDialog = GetQuerySqlDialog('people');
 
-	my $pageIntro = GetString('page_intro/people');
-	$pageIntro = str_replace('Authors page', '<a href="/authors.html">Authors page</a>', $pageIntro);
-	my $pageIntroDialog = trim(GetDialogX($pageIntro, 'Introduction'));
-	$pageIntroDialog = '<span class=beginner>' . $pageIntroDialog . '</span>';
+    #PageIntro
+	#my $pageIntro = GetString('page_intro/people');
+	#$pageIntro = str_replace('Authors page', '<a href="/authors.html">Authors page</a>', $pageIntro);
+	#my $pageIntroDialog = trim(GetDialogX($pageIntro, 'Introduction'));
+	#$pageIntroDialog = '<span class=beginner>' . $pageIntroDialog . '</span>';
 
 	$html =
 		GetPageHeader('people') .
-		$pageIntroDialog .
+		#$pageIntroDialog . #PageIntro
 		$people .
 		$queryTextDialog .
 		'<hr>' .
