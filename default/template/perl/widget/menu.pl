@@ -79,7 +79,19 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 		}
 
 		if ($menuItemName) {
+			# note, /tag/FooTag.html and /tag/FooLabel.html are automatic
 			my $menuItemUrl = '/' . $menuItemName . '.html';
+
+			if (GetConfig('setting/html/menu_expand_address')) {
+				if (substr($menuItemName, 0, 1) eq '#') {
+					# special case
+					$menuItemUrl = '/label/' . substr($menuItemName, 1) . '.html';
+				} else {
+					#default
+					# $menuItemUrl = '/' . $menuItemName . '.html';
+				}
+			} # if (GetConfig('setting/html/menu_expand_address'))
+
 			# capitalize caption
 			my $menuItemCaption = uc(substr($menuItemName, 0, 1)) . substr($menuItemName, 1);
 
