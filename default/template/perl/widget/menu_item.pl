@@ -112,6 +112,7 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 	}
 
 	if (in_array($menuName, qw(chain threads tags authors active people new image topics labels))) {
+		#todo allow/include label/tag/hashtag items
 		WriteLog('GetMenuItem: counter: $menuName = ' . $menuName . '; caller = ' . join(',', caller));
 		# counter counters #counter
 		# sum counters like this:
