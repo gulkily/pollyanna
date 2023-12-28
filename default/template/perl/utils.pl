@@ -1582,12 +1582,16 @@ sub IsUrl { # add basic isurl()
 } # IsUrl()
 
 sub RelativizeUrls { # $content, $fileProvided
-# sub RelativizeLinks {
+# sub RelativizeLinks { # relativize_urls # sub RelativizeLinks { # relativize_urls
+# sub RelativizeLinks { # relativize_urls # sub RelativizeLinks { # relativize_urls
+# sub RelativizeLinks { # relativize_urls # sub RelativizeLinks { # relativize_urls
 
 	WriteLog('RelativizeUrls(...); caller = ' . join(',', caller));
 
 	my $content = shift;
 	my $fileProvided = shift;
+
+	#todo dialog urls
 
 	# only the following *exact* formats are converted
 	# thus it is important to maintain this exact format throughout the html and js templates
