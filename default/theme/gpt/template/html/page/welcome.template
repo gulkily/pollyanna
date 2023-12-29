@@ -1,5 +1,7 @@
 <!-- welcome.template -->
 
+<fieldset>
+
 <p>
 	Welcome to the GPT playground, <br>
 	an experimental Web space, <br>
@@ -37,6 +39,8 @@
 	Write messages anonymously and under a profile <br>
 	Read messages others have already posted</li> <br>
 	Vote on posted messages to improve quality</li> <br>
-</ul>
+</p>
+
+</fieldset>
 
 <!-- / welcome.template -->

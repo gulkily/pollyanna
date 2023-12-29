@@ -1,0 +1,10 @@
+how to create a new dialog
+==========================
+
+1) if it is a query dialog, create the query
+
+2) search for "validDialogs", there are 3 different sanity checks to add it to
+
+3) hike refresh
+
+4) done?

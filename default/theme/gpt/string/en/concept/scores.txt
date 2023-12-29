@@ -1,0 +1,23 @@
+concept Scores_Page
+
+purpose present a leaderboard-style page displaying the scores of authors based on their contributions.
+
+state
+  author_scores: set AuthorScore
+    author_id: String  // Unique identifier for an author (public key)
+    score: Integer  // Numerical score representing the author's contribution level
+    file_hash: String  // Unique identifier for the author's associated data
+
+operational principle
+  Showcase author scores and rankings:
+  1. Retrieve and display scores of authors with a positive score.
+  2. Order authors based on their scores in descending order.
+  3. Present a leaderboard-style format for easy reference.
+
+where
+  Author scores are identified by unique author IDs.
+
+Additional Considerations:
+- The Scores Page provides users with a glimpse of author contributions and engagement levels.
+- State attributes include author scores with their respective scores and associated data.
+- The operational principle involves presenting an organized and visually appealing leaderboard of author scores.

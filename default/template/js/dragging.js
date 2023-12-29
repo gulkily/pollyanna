@@ -470,8 +470,10 @@ function ReopenDialogs () {
 	//alert('DEBUG: ReopenDialogs()');
 
 	// stored dialogs are stored as a JSON string in localStorage
-
-	var dialogPosition = window.localStorage.getItem('dialogPosition');
+	
+	if (window.localStorage) {
+		var dialogPosition = window.localStorage.getItem('dialogPosition');
+	}
 	//alert('DEBUG: dialogPosition.length = ' + dialogPosition.length);
 
 	// we need to parse that string into an object
@@ -1396,14 +1398,17 @@ function InsertFetchedDialog () {
 			if (GetPrefs('draggable_spawn_focus')) {
 				// focus newly inserted dialog
 				SetActiveDialog(newDialog[0]); // InsertFetchedDialog()
-				if (newDialog[0] && newDialog[0].getAttribute) {
-					if (newDialog[0].getAttribute('id')) {
-						window.history.pushState('Object', 'Title', '/' + newDialog[0].getAttribute('id') + '.html');
+				if (0) { // change url in address bar to active dialog
+					// this is a cool feature, but very buggy as currently implemented
+					if (newDialog[0] && newDialog[0].getAttribute) {
+						if (newDialog[0].getAttribute('id')) {
+							window.history.pushState('Object', 'Title', '/' + newDialog[0].getAttribute('id') + '.html');
+						} else {
+							// dialog has no id
+						}
 					} else {
-						// dialog has no id
+						// dialog has no getAttribute method
 					}
-				} else {
-					// dialog has no getAttribute method
 				}
 			} // if (GetPrefs('draggable_spawn_focus'))
 

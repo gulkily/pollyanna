@@ -995,7 +995,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 												push @indexMessageLog, 'calling run on parent item';
 												RunItem($itemParent);
 											} else {
-												push @indexMessageLog, 'run token is turned off, ignoring';
+												push @indexMessageLog, 'warning: run token is turned off, ignoring';
 											}
 										}
 
@@ -1005,7 +1005,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 												push @indexMessageLog, 'calling llm on item after creating prompt';
 												RunLlm($itemParent);
 											} else {
-												push @indexMessageLog, 'llm token is turned off, ignoring';
+												push @indexMessageLog, 'warning: llm token is turned off, ignoring';
 											}
 										}
 

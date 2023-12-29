@@ -102,7 +102,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, image
 			my $dialogContents = '<fieldset>' . $pageDescription . '</fieldset>';
 			my %dialogParam;
 			$dialogParam{'id'} = 'page_intro';
-			$html .= '<span class=beginner>' . GetDialogX3($dialogContents, 'Introduction', \%dialogParam) . '</span>';
+			#$html .= '<span class=beginner>' . GetDialogX3($dialogContents, 'Introduction', \%dialogParam) . '</span>'; #PageIntro
 		} # if ($pageDescription)
 	} # if (GetConfig('setting/html/page_intro') && $pageQuery =~ m/[^\s]+/)
 

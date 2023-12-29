@@ -8,16 +8,17 @@ sub GetTopicsPage { # /topics.html
 	my %flags;
 	$flags{'no_empty'} = 1;
 
-	my $introDialog = GetStringNoFallback('page_intro/topics');
-	if ($introDialog) {
-		$introDialog = '<fieldset><p>' . FormatForWeb($introDialog) . '</fieldset></p>';
-		$introDialog = GetDialogX($introDialog, 'Introduction');
-	}
+    #PageIntro
+	#my $introDialog = GetStringNoFallback('page_intro/topics');
+	#if ($introDialog) {
+	#	$introDialog = '<fieldset><p>' . FormatForWeb($introDialog) . '</fieldset></p>';
+	#	$introDialog = GetDialogX($introDialog, 'Introduction');
+	#}
 
 	state $topicsPage = 
 		GetPageHeader('topics') .
 		GetQueryAsDialog('topics', 'Topics') .
-		$introDialog .
+		#$introDialog . #PageIntro
 		GetQuerySqlDialog('topics') .
 		GetPageFooter('topics')
 	;

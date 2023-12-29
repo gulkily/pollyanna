@@ -1,0 +1,20 @@
+concept Data_Page
+
+purpose enable users with freedom of location, date independence, and portability by providing access to data
+
+state
+  data_files: set DataFile
+    file_name: String  // Name of the data file
+    file_size: String  // Size of the data file
+
+operational principle
+  Provide access to message board data in multiple formats:
+  1. Individual text files (/txt.zip) containing all items.
+  2. SQLite database index (/index.sqlite3) and its compressed version (/index.sqlite3.zip).
+  3. Source tree zip file (/tree.zip) containing the entire source tree.
+  4. Allow users to clone data to a new location of their choosing.
+
+Additional Considerations:
+- The Data Page emphasizes freedom of location, date independence, and portability.
+- State attributes include data files with their names and sizes.
+- The operational principle involves providing access to data in various formats and supporting cloning functionality.

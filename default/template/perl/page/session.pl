@@ -39,8 +39,9 @@ sub GetSessionPage { # returns session page
 		$requirementsMessage = GetDialogX('js or php is required for profiles to work');
 	}
 
-	my $introText = GetString('page_intro/session');#trim(GetDialogX(, 'Introduction'));
-	my $introDialog = '<span class=beginner>' . GetDialogX($introText, 'Introduction') . '</span>';
+    #PageIntro
+	#my $introText = GetString('page_intro/session');#trim(GetDialogX(, 'Introduction'));
+	#my $introDialog = '<span class=beginner>' . GetDialogX($introText, 'Introduction') . '</span>';
 
 	my $html =
 		GetPageHeader('session') .
@@ -50,7 +51,7 @@ sub GetSessionPage { # returns session page
 		#todo simplify session page and make these dialogs accessible via links
 		'<span class=advanced>' . GetQueryAsDialog('session', 'ActiveSessions') . '</span>' . #todo rename query to session_active
 		GetQuerySqlDialog('session') .
-		$introDialog .
+		#$introDialog . #PageIntro
 		GetPageFooter('session')
 	;
 

@@ -207,6 +207,10 @@ sub ConceptForWeb { # $text ; for formatting software concept definitions
 
 	$text =~ s/^(\s+?)([a-zA-Z]+)\(/$1<b class=function>$2<\/b>(/gm;
 	$text =~ s/^(\s+?)([a-z_]+):/$1<b class=variable>$2<\/b>:/gm;
+	#$text =~ s/^(\s+?)(if \()(GetConfig)(\()/$1$2<b class=function>$3</b>$4/gm;
+	#$text =~ s/^(\s+?)(if \((GetConfig)(\()/$1$2<b class=function>$3</b>$4/gm;
+	#$text =~ s/^(\s+?)(if)/$1<b class=conditional>$2<\/b>/gm;
+	$text =~ s/^(\s+?)(if)( \()([A-Za-z]+)(\(\))/$1<b class=conditional>$2<\/b>$3<b class=function>$4<\/b>$5/gm;
 	#$text =~ s/a/b/g;
 
 	$text =~ s/\n /<br>&nbsp;/g;

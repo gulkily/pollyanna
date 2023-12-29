@@ -79,11 +79,24 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 		}
 
 		if ($menuItemName) {
+			# note, /tag/FooTag.html and /tag/FooLabel.html are automatic
 			my $menuItemUrl = '/' . $menuItemName . '.html';
+
+			if (GetConfig('setting/html/menu_expand_address')) {
+				if (substr($menuItemName, 0, 1) eq '#') {
+					# special case
+					$menuItemUrl = '/label/' . substr($menuItemName, 1) . '.html';
+				} else {
+					#default
+					# $menuItemUrl = '/' . $menuItemName . '.html';
+				}
+			} # if (GetConfig('setting/html/menu_expand_address'))
+
 			# capitalize caption
 			my $menuItemCaption = uc(substr($menuItemName, 0, 1)) . substr($menuItemName, 1);
 
 			if ($listName eq 'menu_tag') {
+				#deprecated
 				$menuItemUrl = '/tag/' . $menuItemName . '.html';
 				$menuItemCaption = '#' . $menuItemName;
 			}
@@ -91,6 +104,7 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 			my $boolExtUrl = 0;
 
 			if (GetConfig('admin/expo_site_mode')) {
+				#deprecated, used for mitbtc theme
 
 				#this avoids creating duplicate urls but currently breaks light mode
 				if ($menuItemName eq 'home') {
@@ -127,6 +141,7 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 			} # if (GetConfig('admin/expo_site_mode'))
 
 			if (GetString("menu/$menuItem")) {
+				# change displayed name if a string is available
 				$menuItemCaption = GetString("menu/$menuItem");
 			}
 
@@ -139,6 +154,7 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 			}
 
 			if (index($menuItemUrl, "\r") != -1 || index($menuItemCaption, "\r") != -1 || index($templateName, "\r") != -1) {
+				# sanity check
 				WriteLog('GetMenuFromList: warning: $menuItemUrl or $menuItemCaption or $templateName failed sanity check; caller = ' . join(',', caller));
 				return '';
 			}

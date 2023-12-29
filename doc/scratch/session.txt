@@ -1,0 +1,46 @@
+concept Session
+  purpose a period during which a user interacts with the system
+
+  state
+    logged_in: Boolean
+    user_handle: String
+    create_public_key: Boolean
+    keychain: set KeyPair  // Assuming KeyPair represents a user's key pair
+    active_sessions: set Session  // Assuming Session represents an active session on the server
+
+  actions
+    exit()
+      pre logged_in
+      // Additional logic to handle session exit
+
+    goToProfile()
+      pre logged_in
+      // Additional logic to navigate to the user's profile
+
+    begin()
+      pre !logged_in
+      // Additional logic to handle session initiation
+      promptForHandle()
+
+    toggleCreatePublicKey()
+      // Additional logic to toggle the "Create public key" option
+
+    addToKeychain(keyPair: KeyPair)
+      pre logged_in
+      add keyPair to keychain
+
+    listActiveSessions()
+      // Additional logic to retrieve and display active sessions
+
+    promptForHandle()
+      pre !logged_in
+      // Additional logic to prompt the user for their handle
+
+  operational principle
+    after exit(), the session is terminated
+    after goToProfile(), the user is navigated to their profile
+    after begin(), the user is prompted for their handle
+    after toggleCreatePublicKey(), the "Create public key" option is toggled
+    after addToKeychain(keyPair), keyPair is added to the keychain
+    after listActiveSessions(), active sessions are listed
+    after promptForHandle(), the user is prompted for their handle
