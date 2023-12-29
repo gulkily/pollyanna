@@ -86,7 +86,7 @@ sub GetServerConfigDialog { #$dialogTitle/$formId, $listOfFields# makes a dialog
 	$html = GetDialogX($html, $dialogTitle, 'setting,value');
 
 	my $formId = 'frm' . $dialogTitle; #todo make this smell better
-
+	# frmBackend frmFrontend frmZipFiles frmDebug
 	$html .= '<input type=hidden name=form_id value="' . $formId . '">';
 	$html = '<form class=admin action="/post.html">' . $html . '</form>';
 	#todo move form here
