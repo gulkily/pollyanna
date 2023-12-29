@@ -1,11 +1,15 @@
 concept Data_Page
 
-purpose enable users with freedom of location, date independence, and portability by providing access to data
+purpose enable users with freedom of data portability by providing access to message board data
 
 state
   data_files: set DataFile
     file_name: String  // Name of the data file
     file_size: String  // Size of the data file
+
+actions
+  cloneToNewLocation(destination: String)
+    // Additional logic to facilitate cloning the message board data to the specified destination
 
 operational principle
   Provide access to message board data in multiple formats:
@@ -18,3 +22,7 @@ Additional Considerations:
 - The Data Page emphasizes freedom of location, date independence, and portability.
 - State attributes include data files with their names and sizes.
 - The operational principle involves providing access to data in various formats and supporting cloning functionality.
+
+Media and Visual Elements:
+- Include clear instructions and user-friendly visuals for cloning to a new location.
+- Optionally, provide download links with icons for each data file format to enhance user experience.
