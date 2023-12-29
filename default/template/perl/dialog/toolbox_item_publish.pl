@@ -20,14 +20,23 @@ sub GetDialogToolboxItemPublish { # $filePath, $fileHash = '' ; returns dialog w
 
 	if (!file_exists($filePath)) {
 		WriteLog('GetDialogToolboxItemPublish: warning: $filePath does not exist! caller = ' . join(',', caller));
-		return '';
+		$filePath = '';
+		# just because we don't have a file doesn't mean we can't create a publish link with the title and hash
+		#return '';
 	}
 
 	my $htmlToolbox = '';
 
 	my $urlParamFullText = '';
 
-	$urlParamFullText = GetFile($filePath);
+	if ($filePath) {
+		$urlParamFullText = GetFile($filePath);
+	} else {
+		# this can happen if we migrated our index database from another server
+		# but without also migrating the source data files, so we have the first
+		# line of the file, but not the whole file
+		$urlParamFullText = DBGetItemTitle($fileHash) . "\n-- \n" . "Hash: " . $fileHash . "\n" . 'Time: ' . GetTime() . "\n";
+	}
 	$urlParamFullText = uri_escape_utf8($urlParamFullText);
 	# $urlParamFullText = uri_escape_utf8($urlParamFullText); #todo do this if ascii_only
 	#$urlParamFullText = uri_encode($urlParamFullText);
