@@ -213,7 +213,7 @@ sub GetMonthTable { # $year, $month, \%fillDates ; return html table with links 
 
 			#if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
 				#$a = AddAttributeToTag($a, 'a', 'onclick', ''
-				#todo use FetchDialog to open a dialog instead
+				#todo use FetchDialog() to open a dialog instead
 			#}
 
 			$html .= $a;
