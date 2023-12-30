@@ -1,6 +1,5 @@
 concept Authors_Page
-  purpose
-    Display a list of authors with their unique identifiers, seen status, item count, author score, and associated file hashes.
+  purpose display a list of authors with their unique identifiers, seen status, item count, author score, file hashes.
 
   state
     author_list: set Author
@@ -12,7 +11,8 @@ concept Authors_Page
       set author_list to generateAuthorList()
 
   operational principle
-    after displayAuthors(), the Authors page showcases a list of authors with their unique identifiers, seen status, item count, author score, and associated file hashes
+    after displayAuthors(), the Authors page showcases a list of authors with their unique identifiers, seen status,
+    item count, author score, and associated file hashes
 
   where
     generateAuthorList(): set Author

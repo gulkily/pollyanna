@@ -1,6 +1,6 @@
 concept Upload_Page
 
-purpose Enable users to upload files, including images, with a preview feature. The page supports standard file selection and pasting images via a focusable textbox.
+purpose Enable users to upload files, including images, with a preview feature.
 
 state
   upload_settings: UploadSettings
@@ -30,3 +30,4 @@ Additional Considerations:
 - The Upload Page provides a user-friendly interface for file uploads, including image previews.
 - State attributes include allowed file types and the status of the preview feature.
 - Actions include uploading selected files and pasting images for upload.
+- The page supports standard file selection and pasting images via a focusable textbox.

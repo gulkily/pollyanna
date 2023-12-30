@@ -1,5 +1,5 @@
 concept Chain_Page
-  purpose allow user to verify that they're seeing all the same information as someone else on their network.
+  purpose allow user to verify that they're seeing all the same information as someone else.
 
   state
     chain_items: set Item
