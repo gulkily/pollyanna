@@ -1822,6 +1822,13 @@ while (my $arg1 = shift @foundArgs) {
 					# /dialog/judge.html
 					# /dialog/calendar.html
 
+					#todo this needs pagination,
+					# for pagination, we need to refactor GetQueryAsDialog() to return an array of dialogs?
+					# look at how the main pages are paginated, and do the same thing
+					# and that sort of needs refactoring too :(
+					# but the ideal is to have /dialog/new.html point to /new2.html
+					# and for them to stay on the same page and scroll down
+
 					my $dialogTitle = $makeDialogArg; #todo make nicer
 					my $columns = '';
 					if ($makeDialogArg eq 'chain') {
