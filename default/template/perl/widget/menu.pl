@@ -11,6 +11,7 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 # sub GetMenuList {
 # sub GetPageMenu {
 # sub GetMenu {
+# sub GetMenuBar {
 	my $listName = shift;
 	chomp $listName;
 	if (!$listName) {
@@ -147,10 +148,14 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 
 			$menuItemCaption = ucfirst($menuItemCaption);
 
+			# this separator is inserted BEFORE the menu entry
 			if ($menuComma) {
 				$menuItems .= $menuComma;
 			} else {
-				$menuComma = GetTemplate('html/menu_separator.template');
+				$menuComma = GetTemplate('html/menu_separator.template'); # ' ; '
+				# $menuComma = $menuComma . ' ; ';
+				# $menuComma .= ' ; ';
+				# menu separator
 			}
 
 			if (index($menuItemUrl, "\r") != -1 || index($menuItemCaption, "\r") != -1 || index($templateName, "\r") != -1) {
