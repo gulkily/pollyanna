@@ -43,6 +43,8 @@ if [ $1 = stats ] # hike stats
 		echo image files: `find html/image -type f | wc -l`
 		echo item table: `sqlite3 ./cache/b/index.sqlite3 "select count(*) from item"`
 		echo chain log: `wc -l html/chain.log`
+		echo "commit: $(git log -1 --format=%cd)"
+		echo "age: $(( ($(date +%s) - $(git log -1 --format=%at)) / 86400 )) days"
 		echo space usage: `du -sh .`
 		#echo chain table: `count(*) from item_attribute where attribute = 'chain_sequence';` entries
 		echo ==================
