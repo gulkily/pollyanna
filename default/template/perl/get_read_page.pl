@@ -477,7 +477,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 						(
 							SELECT
 								file_hash,
-								ballot_time
+								label_time
 							FROM
 								item_label
 							WHERE
