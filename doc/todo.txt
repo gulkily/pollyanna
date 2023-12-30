@@ -1,3 +1,16 @@
+there should be a warning when 'hike refresh' would update some config items
+
+fix 'hike pages' command
+	currently prints 0 pages
+	it's using ./pages.pl --queue, and the queue is empty for some reason
+		select * from task; -- returns 0 rows
+
+for write form, there should be a checkbox that tells the server not to add anything to the text file
+            <br>
+            <input type=checkbox>Do not stamp
+            <br>
+            <span id=spanWriteAdvanced class=advanced></span>
+
 there should be a warning for the operator when using cookie-required features
 	for example: require_cookie and force_profile (which should be called auto_session)
 		these will block users who do not support cookies or have cookie issues
