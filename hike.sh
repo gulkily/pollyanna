@@ -203,7 +203,7 @@ if [ $1 = info ]
     find . | grep $2 | xargs cat | less
 fi
 
-if [ $1 = start ] # hike start
+if [ $1 = start ] # hike start #
 	then
 		if [ ! -e config/template/perl/server_local_lighttpd.pl ]
 			then
