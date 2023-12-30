@@ -66,7 +66,7 @@ sub GetStatsTable { # $templateName = 'html/stats.template' ; returns Stats dial
 	}
 
 	my $versionFull = GetMyVersion();
-	my $versionSuccinct = substr($versionFull, 0, 8);
+	my $versionSuccinct = substr($versionFull, 0, 7);
 	my $versionSequence = `git log --oneline | wc -l`; #todo don't shell
 
 	UpdateUpdateTime();
