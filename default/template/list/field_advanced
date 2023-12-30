@@ -23,5 +23,6 @@ labels_list
 tagset_author
 tagset_url
 tagset_pubkey
+tagset_flag
 this_row
 url
