@@ -279,6 +279,7 @@ sub GetItemIndexLog { # $itemHash, $logType = index_log
 	}
 	my $logSuffix = '';
 	if ($logType eq 'gpg_stderr') {
+		WriteLog('GetItemIndexLog: $logType = gpg_stderr; setting $logSuffix = .txt');
 		$logSuffix = '.txt';
 	}
 
@@ -289,8 +290,11 @@ sub GetItemIndexLog { # $itemHash, $logType = index_log
 
 	my $shortHash = substr($itemHash, 0, 8);
 	
-	my $logPath = $logType . '/' . $itemHash;
-	my $log = GetCache($logPath . $logSuffix);
+	my $logPath = $logType . '/' . $itemHash . $logSuffix;
+	my $log = GetCache($logPath);
+
+	WriteLog('GetItemIndexLog: $itemHash = ' . $itemHash . '; $logPath = ' . $logPath . '; $log is ' . ($log ? 'TRUE' : 'FALSE') . '; caller = ' . join(',', caller));
+
 	if ($log) {
 		$log = HtmlEscape($log);
 
@@ -311,6 +315,8 @@ sub GetItemIndexLog { # $itemHash, $logType = index_log
 	} else {
 		if ($logType eq 'run_log') {
 			return GetDialogX('<fieldset><p>This code has not been run yet.</p></fieldset>', 'Information');
+		} else {
+			#todo what to do here?
 		}
 	}
 
@@ -763,8 +769,8 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		#todo same as above for zip
 	}
 
-	if (GetConfig('setting/html/item_page/gpg_stderr_log')) {
-		$txtIndex .= GetItemIndexLog($file{'file_hash'});
+	if (GetConfig('setting/html/item_page/gpg_stderr')) {
+		#$txtIndex .= GetItemIndexLog($file{'file_hash'});
 		if (
 			index($file{'labels_list'}, ',gpg,') != -1
 			||
@@ -772,6 +778,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			||
 			index($file{'labels_list'}, ',signed,') != -1
 		) {
+			#WriteLog("GetItemIndexLog($file{'file_hash'}, 'gpg_stderr') abcdefghijklmnopqr");
 			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'gpg_stderr');
 		}
 	}
