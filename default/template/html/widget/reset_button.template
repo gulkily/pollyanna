@@ -42,7 +42,7 @@
 			}
 		} else {
 			window.resetButtonOnClick = document.getElementById('aButtonReset').onclick; // getAttribute?
-			document.getElementById('aButtonReset').onclick = '' // setAttribute?
+			document.getElementById('aButtonReset').onclick = ''; // setAttribute?
 			this.innerHTML = '<font color=#606060>R</font><font color=#00c000>YES</font><font color=#606060>T</font>';
 			return false;
 		}
