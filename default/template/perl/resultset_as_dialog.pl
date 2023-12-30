@@ -211,7 +211,10 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 			WriteLog('GetResultSetAsDialog: warning: number of printed row-columns does not evenly divide into number of columns');
 		}
 
-		my $statusText = $resultCount . ' item(s)';
+		#todo
+		#my $resultsUrl = "/" . lc($title) . ".html";
+		#my $resultsLink = RenderLink($resultsUrl, $title);
+		#my $statusText = $resultCount . ' item(s); full results: ' . $resultsLink;
 		#if ($flags{'query'}) {
 		#	$statusText .= ' (query: ' . $flags{'query'} . ')';
 		#}
