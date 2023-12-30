@@ -358,7 +358,14 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 
 	#require_once('get_page_header.pl');
 	#$htmlStart .= GetPageHeader('read_' . $pageType);
-	$htmlStart = GetPageHeader($title);
+
+	if ($pageType eq 'author') {
+		$htmlStart = GetPageHeader($pageType);
+	}
+	#todo add more cases here?
+	else {
+		$htmlStart = GetPageHeader($title);
+	}
 
 	if ($pageType eq 'tag') {
 		# fill in tag placeholder at top of page
@@ -509,13 +516,19 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 		if (GetConfig('setting/zip/author')) {
 			if (scalar(@files) > 0) {
 				my $zipPath = '/author/' . $authorKey . '.zip'; #todo use RenderLink()
-				my $zipLink = '<a href="' . $zipPath . '">' . $authorKey . '.zip</a>'; #todo use RenderLink()
 				my $HTMLDIR = GetDir('html');
-				my $zipSize = -s "$HTMLDIR/$zipPath"; #todo GetFileSize()
-				my $zipSizeWidget = GetFileSizeWidget($zipSize);
-				#my $zipSize = GetFileSizeWidget(GetFileSize($zipPath)); #todo
-				$zipLink = '<fieldset>' . $zipLink . ' (' . $zipSizeWidget . ')' . '</fieldset>';
-				$txtIndex .= GetDialogX($zipLink, 'Archive'); # author.zip GetArchiveDialog {}
+				if (file_exists("$HTMLDIR/$zipPath")) {
+					# only advertise the file if it exists
+					my $zipLink = '<a href="' . $zipPath . '">' . $authorKey . '.zip</a>'; #todo use RenderLink()
+					my $zipSize = -s "$HTMLDIR/$zipPath"; #todo GetFileSize()
+					my $zipSizeWidget = GetFileSizeWidget($zipSize);
+					#my $zipSize = GetFileSizeWidget(GetFileSize($zipPath)); #todo
+					$zipLink = '<fieldset>' . $zipLink . ' (' . $zipSizeWidget . ')' . '</fieldset>';
+					$txtIndex .= GetDialogX($zipLink, 'Archive'); # author.zip GetArchiveDialog {}
+				} else {
+					$txtIndex .= GetDialogX('<fieldset><p>There is no archive available.</p></fieldset>', 'Archive');
+					# no source data?
+				}
 			} else {
 				$txtIndex .= GetDialogX('<fieldset><p>This author has not posted anything yet, <br>so no archive is available.</p></fieldset>', 'Archive');
 			}
@@ -628,7 +641,14 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	}
 
 	# Close html
-	$txtIndex .= GetPageFooter('read_' . $pageType);
+
+	if ($pageType eq 'author') {
+		$txtIndex .= GetPageFooter($pageType);
+	}
+	else {
+		$txtIndex .= GetPageFooter('read_' . $pageType);
+	}
+
 
 	my @jsToInject = qw(settings timestamp voting utils profile);
 	if ($pageType eq 'author') {
