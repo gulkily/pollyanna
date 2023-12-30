@@ -209,7 +209,7 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 		if ($checkColumnCount % scalar(@columnsArray)) {
 			WriteLog('GetResultSetAsDialog: warning: column count sanity check failed; $columnsParam = ' . ($columnsParam ? $columnsParam : 'FALSE'));
 			WriteLog('GetResultSetAsDialog: warning: number of printed row-columns does not evenly divide into number of columns');
-		}
+		} # if ($checkColumnCount % scalar(@columnsArray))
 
 		#todo
 		my $statusText = ''; #todo
