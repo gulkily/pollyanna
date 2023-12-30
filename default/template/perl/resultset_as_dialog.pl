@@ -197,7 +197,7 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 			$content .= "\n";
 		} # foreach $row (@result)
 
-		if ($flags{'query'} && GetConfig('setting/html/resultset_dialog_print_query')) {
+		if ($flags{'query'} && GetConfig('setting/html/debug_resultset_dialog_print_query')) {
 			my $columnsCount = scalar(@columnsArray);
 			my $query = SqliteGetQueryTemplate($flags{'query'});
 			$content .= '<tr class=advanced><td class=sql colspan=' . $columnsCount . '>';
