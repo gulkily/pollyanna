@@ -8,6 +8,7 @@
 	}
 	if (window.DraggingReset && window.SetPrefs) {
 		SetPrefs('beginner', 1);
+		SetPrefs('timestamps_format', 'adjusted');
 		SetPrefs('show_advanced', 0);
 		SetPrefs('show_admin', 0);
 		SetPrefs('draggable_activate', 0);
