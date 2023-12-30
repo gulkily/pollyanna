@@ -118,10 +118,14 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 	}
 
 	if (GetConfig('setting/html/neighbor_list')) {
-		require_once('dialog/neighbor.pl');
-		my $neighboringInstances = GetNeighborDialog($pageType, $title);
-		$topMenuTemplate .= $neighboringInstances;
-
+		if ($pageType eq 'item') {
+			#exception, this doesn't work here yet
+		} else {
+			#todo this needs a lot of improvement, does not work on all pages
+			require_once('dialog/neighbor.pl');
+			my $neighboringInstances = GetNeighborDialog($pageType, $title);
+			$topMenuTemplate .= $neighboringInstances;
+		}
 	}
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/dialog_properties')) {
