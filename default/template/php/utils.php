@@ -415,17 +415,18 @@ function DoConfigDump () { // #todo #untested
 
 function DoUpgrade () {
 	$pwd = getcwd();
-	WriteLog('$pwd = ' . $pwd);
+	WriteLog('DoUpgrade: $pwd = ' . $pwd);
 	$scriptDir = GetScriptDir();
-	WriteLog('$scriptDir = ' . $scriptDir);
+	WriteLog('DoUpgrade: $scriptDir = ' . $scriptDir);
 
-	if (file_exists($scriptDir . '/upgrade.pl')) {
-		WriteLog('upgrade.pl found, calling upgrade.pl');
-		WriteLog('cd "' . $scriptDir . '" ; perl ./upgrade.pl');
-		WriteLog(`cd "$scriptDir" ; perl ./upgrade.pl`);
-		WriteLog('cd "' . $pwd . '"');
-		WriteLog(`cd "$pwd"`);
-	}
+	#todo
+	#if (file_exists($scriptDir . '/upgrade.pl')) {
+	#	WriteLog('upgrade.pl found, calling upgrade.pl');
+	#	WriteLog('cd "' . $scriptDir . '" ; perl ./upgrade.pl');
+	#	WriteLog(`cd "$scriptDir" ; perl ./upgrade.pl`);
+	#	WriteLog('cd "' . $pwd . '"');
+	#	WriteLog(`cd "$pwd"`);
+	#}
 } # DoUpgrade()
 
 function DoReindex () {

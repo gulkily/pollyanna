@@ -749,6 +749,25 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						}
 
 						if (
+							isset($_GET['chkUpgrade']) &&
+							isset($_GET['btnUpgrade'])
+						) {
+                            #$refreshFrontendStartTime = time();
+                            #$refreshFrontendLog = DoRefreshFrontend();
+                            #$refreshFrontendFinishTime = time();
+                            #$refreshFrontendDuration = $reindexFinishTime - $reindexStartTime;
+
+                            WriteLog('route.php: upgrade = 1');
+
+                            #/* my */ $refreshFrontendLogSaved = ProcessNewComment($refreshFrontendLog, '');
+                            #ProcessNewComment("Rebuild Frontend log metadata\n-- \n>>$reindexLogSaved\n#textart\ntitle: Rebuild Frontend finished at $refreshFrontendFinishTime", '');
+                            #RedirectWithResponse(GetHtmlFilename($refreshFrontendLogSaved), "Rebuild Frontend finished! <small>in $refreshFrontendDuration"."s</small>");
+						}
+						else {
+							# nothing
+						}
+
+						if (
 							isset($_GET['chkConfigDump']) &&
 							isset($_GET['btnConfigDump'])
 						) {
@@ -779,6 +798,23 @@ if (GetConfig('setting/admin/php/route_enable')) {
 								RedirectWithResponse(GetHtmlFilename($reindexLogSaved), "Reindex finished! <small>in $reindexDuration"."s</small>");
 							} else {
 								RedirectWithResponse('/settings.html', 'You pressed the Reindex button, but did not check the checkbox. Please try again!');
+							}
+						}
+
+						if ( isset($_GET['btnUpgrade']) ) {
+							if ( isset($_GET['chkUpgrade']) ) {
+								$upgradeStartTime = time();
+								$upgradeLog = DoUpgrade();
+								$upgradeFinishTime = time();
+								$upgradeDuration = $upgradeFinishTime - $upgradeStartTime;
+
+								WriteLog('route.php: upgradeLog = ' . $upgradeLog);
+
+								$upgradeLogSaved = ProcessNewComment($upgradeLog, ''); # my
+								ProcessNewComment("Upgrade log metadata\n-- \n>>$upgradeLogSaved\n#textart\ntitle: Upgrade log finished at $upgradeFinishTime", '');
+								RedirectWithResponse(GetHtmlFilename($upgradeLogSaved), "Upgrade finished! <small>in $upgradeDuration"."s</small>");
+							} else {
+								RedirectWithResponse('/settings.html', 'You pressed the Upgrade button, but did not check the checkbox. Please try again!');
 							}
 						}
 
