@@ -4,7 +4,7 @@ SELECT
 	author_key,
 	author_seen,
 	'' AS tagset_flag,
-	'' AS cart
+	'' AS cart,
 	item_count
 FROM author_flat
 WHERE
