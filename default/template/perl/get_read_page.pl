@@ -578,7 +578,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 					file_hash IN (
 						SELECT file_hash FROM item_attribute WHERE attribute = 'date' AND value = '$pageDate'
 					)
-				);
+				)
 			LIMIT 25
 		";
 		$txtIndex .= GetQueryAsDialog($queryDateList, $pageDate);
