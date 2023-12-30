@@ -60,15 +60,19 @@ sub GetServerConfigDialog { #$dialogTitle/$formId, $listOfFields# makes a dialog
 			$html .= '</select>';
 			#$html .= '<input name="' . $setting . '" type=text size=10 value="' . GetConfig($setting) . '">';
 		} else {
-			if (
-				$defaultValue eq '0' ||
-				$defaultValue eq '1'
-			) {
-				#checkbox
-				$html .= '<input id="'. $setting . '" name="' . $setting . '" type=checkbox' . (GetConfig($setting) ? ' checked' : '') . '>';
+			if (defined($defaultValue)) {
+				if (
+					$defaultValue eq '0' ||
+					$defaultValue eq '1'
+				) {
+					#checkbox
+					$html .= '<input id="'. $setting . '" name="' . $setting . '" type=checkbox' . (GetConfig($setting) ? ' checked' : '') . '>';
+				} else {
+					#textbox
+					$html .= '<input id="'. $setting . '" name="' . $setting . '" type=text size=10 value="' . GetConfig($setting) . '">';
+				}
 			} else {
-				#textbox
-				$html .= '<input id="'. $setting . '" name="' . $setting . '" type=text size=10 value="' . GetConfig($setting) . '">';
+				WriteLog('GetServerConfigDialog: warning: $defaultValue was not defined; caller = ' . join(',', caller));
 			}
 		}
 		$html .= '</td>';
