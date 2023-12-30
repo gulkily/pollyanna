@@ -150,7 +150,13 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 
 			# this separator is inserted BEFORE the menu entry
 			if ($menuComma) {
-				$menuItems .= $menuComma;
+				if ($menuItem eq '-200') {
+					# don't add separator
+					#special hack for bash theme
+				}
+				else {
+					$menuItems .= $menuComma;
+				}
 			} else {
 				$menuComma = GetTemplate('html/menu_separator.template'); # ' ; '
 				# $menuComma = $menuComma . ' ; ';
