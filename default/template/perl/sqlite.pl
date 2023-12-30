@@ -72,11 +72,14 @@ sub SqliteMakeTables { # creates sqlite schema
 	# sub SqliteMakeSchema {
 	# sub DBMakeTables {
 
-	WriteLog('SqliteMakeTables()');
+	WriteLog('SqliteMakeTables: begin');
 
 	my $existingTables = SqliteQueryCachedShell('.tables');
 	if ($existingTables) {
 		WriteLog('SqliteMakeTables: warning: tables already exist');
+
+		#todo verify it is the same schema
+
 		return '';
 	}
 
@@ -188,6 +191,7 @@ sub SqliteQueryHashRef { # $query, @queryParams; calls sqlite with query, and re
 #sub SqliteGetQuery {
 #sub GetQuery {
 #sub GetQueryAsHash {
+#sub DBGetQueryResult {
 #sub GetQueryAsArray {
 #sub GetQueryAsArrayOfHashRefs {
 
