@@ -950,6 +950,7 @@ function RedirectWithResponse ($url, $message) { // redirects to page with serve
 		if (!headers_sent()) {
 			// #warning, this is not a good pattern, don't copy this code. the html will be printed unescaped.
 			// doing it in this case because we want to make a clickable link
+			#WriteLog( '<a href="' . $redirectUrl . '" name=redirect>' . $redirectUrl . '</a>' . '<font color=red>' . '(redirect paused because admin/php/debug or admin/php/debug_server_response is true)' . '</font>' , 1 );
 			WriteLog( '<a href="' . $redirectUrl . '">' . $redirectUrl . '</a>' . '<font color=red>' . '(redirect paused because admin/php/debug or admin/php/debug_server_response is true)' . '</font>' , 1 );
 
 			// not templated because it is a debugging thing
@@ -966,6 +967,8 @@ function RedirectWithResponse ($url, $message) { // redirects to page with serve
 			print 	'Message: <b>' . htmlspecialchars($message) . '</b>'; #todo remove dep
 			print 	'<br>';
 			print 	'Method: ' . ($_GET ? 'GET' : ($_POST ? 'POST' : 'OTHER??'));
+			#print 	'<br>';
+			#print 	'Location: ' . '<a href=#redirect>' . time() . '</a>';  #todo GetTime();
 			print 	'<br><hr>';
 			print 	'<tt>';
 			print 	'admin/php/debug=' . GetConfig('admin/php/debug') . '; <br>'; #todo remove dep
