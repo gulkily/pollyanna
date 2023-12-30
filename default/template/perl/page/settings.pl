@@ -97,8 +97,7 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 	$txtIndex .= '<span class=admin>' . GetDialogX('<form action=/post.html><input type=hidden name=comment value=1><span class=advanced><input type=checkbox name=chkUpgrade></span><input type=submit name=btnUpgrade value=Upgrade></form>', 'Developer') . '</span>';
 
 	if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
-		# $txtIndex .= '<span class=advanced>' . GetDialogX(GetTemplate('html/form/annoyances.template'), 'Annoyances') . '</span>';
-		$txtIndex .= GetDialogX(GetTemplate('html/form/annoyances.template'), 'Annoyances');
+		$txtIndex .= GetDialogX(GetTemplate('html/form/float.template'), 'Float');
 	}
 	#$txtIndex .= GetMenuTemplate();
 
