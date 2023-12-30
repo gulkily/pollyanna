@@ -1769,7 +1769,7 @@ while (my $arg1 = shift @foundArgs) {
 			my $makeDialogArg = shift @foundArgs;
 			#todo sanity check of $makeDialogArg
 			if ($makeDialogArg) {
-				my @validDialogs = qw(settings access upload data search profile);
+				my @validDialogs = qw(settings float access upload data search profile);
 				my @needRequire = qw(profile upload);
 				my @queryDialogs = qw(read image url chain new tags scores active authors people threads labels topics judge calendar);
 				my @simpleDialogs = qw(help );
