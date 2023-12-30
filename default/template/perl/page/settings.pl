@@ -67,11 +67,21 @@ sub GetSettingsPage { # returns html for settings page (/settings.html)
 		zip/image
 	);
 
+	#debuggers:
+	my @settingsDebugger = qw(
+		config/debug
+		config/setting/admin/js/debug
+		config/setting/admin/php/debug
+		config/setting/admin/html/debug
+		config/setting/admin/perl/debug
+	);
+
 	require_once('dialog/server_config.pl');
 
 	$txtIndex .= GetServerConfigDialog('Frontend', @settingsVisible1); # >frontend< #for searches
 	$txtIndex .= GetServerConfigDialog('Backend', @settingsVisible2); # >backend< #for searches
 	$txtIndex .= GetServerConfigDialog('ZipFiles', @settingsVisible3); # >zip< >archiving< #for searches
+	$txtIndex .= GetServerConfigDialog('Debug', @settingsDebugger); # debug 'debug' >debug<
 	$txtIndex .= GetContentFilterDialog();
 
 	#todo add dialog for voting options
