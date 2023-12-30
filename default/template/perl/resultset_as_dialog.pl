@@ -212,6 +212,7 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 		}
 
 		#todo
+		my $statusText = ''; #todo
 		#my $resultsUrl = "/" . lc($title) . ".html";
 		#my $resultsLink = RenderLink($resultsUrl, $title);
 		#my $statusText = $resultCount . ' item(s); full results: ' . $resultsLink;
