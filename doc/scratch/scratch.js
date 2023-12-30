@@ -1,3 +1,18 @@
+		if (newDialog.getAttribute('id')) {
+			alert(1);
+			// check for existing dialog in the document already
+			// #todo this should be done via GetDialogId()
+			var existingDialog = document.getElementById(newDialog.getAttribute('id'));
+			if (existingDialog) {
+				//alert('DEBUG: InsertFetchedDialog: warning: existingDialog found, removing');
+				existingDialog.remove();
+			}
+		} else {
+			alert(2);
+		}
+
+
+
 /* dragging_spotlight_dialog.js */
 
 function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was clicked
@@ -693,7 +708,7 @@ function selectLoadKey (keyName) {
 				if (window.DraggingMakeFit) {
 					DraggingMakeFit();
 				}
-				if (window.SetActiveDialog && window.GetParentDialog) {
+				if ((window.SetActiveDialog) && (window.GetParentDialog)) {
 					SetActiveDialog(GetParentDialog(this));
 				}
 				return false;

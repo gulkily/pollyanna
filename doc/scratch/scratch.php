@@ -1,3 +1,32 @@
+// function GetNeighborDialog($pageName, $pageArgument) {
+//     // todo sanity checks
+//
+//     WriteLog('GetNeighborDialog: $pageName = ' . $pageName . '; $pageArgument = ' . $pageArgument . '; caller = ' . implode(',', debug_backtrace()));
+//
+//     $neighbors = GetConfigListAsArray('neighbor');
+//     $linkTemplate = '<a href="http://$host/$pageName.html">$host</a>';
+//
+//     $dialog = '';
+//     foreach ($neighbors as $neighbor) {
+//         $neighbor = trim($neighbor);
+//         if (preg_match('/^([0-9a-z:\.]+)$/', $neighbor, $matches)) {
+//             $neighbor = $matches[1];
+//         } else {
+//             // todo
+//             continue;
+//         }
+//
+//         $link = str_replace('$host', $neighbor, $linkTemplate);
+//         $link = str_replace('$pageName', $pageName, $link);
+//         $dialog .= $link . '<br/>';
+//     }
+//
+//     $dialog = GetDialogX($dialog, 'Neighbors');
+//     return $dialog;
+// }
+
+
+
 //for route.php:
 
 			<p id=insPubKey onclick="

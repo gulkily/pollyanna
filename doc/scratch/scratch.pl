@@ -1,3 +1,11 @@
+		";
+		$keyList = GetQueryAsDialog($queryApprovedKeys, 'ApprovedKeys');
+		#todo templatize the query, use parameter injection
+		$keyListQuery = $queryApprovedKeys;
+
+
+
+
 		if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
 			if ($hashAnchor) {
 				WriteLog('GetItemHtmlLink: $hashAnchor is TRUE; caller = ' . join(',', caller));
