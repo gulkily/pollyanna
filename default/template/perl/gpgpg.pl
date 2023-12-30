@@ -140,6 +140,8 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache
 		$gpgCommand .= "2>$cachePathStderr/$fileHash.txt "; # capture stdeerr
 		WriteLog('GpgParse: ' . $fileHash . '; $gpgCommand = ' . $gpgCommand);
 		system($gpgCommand);
+		#todo append command user can run to revalidate this
+		#AppendFile("$cachePathStderr/$fileHash.txt", "# " . ??? . "\n");
 	}
 
 	my $gpgStderrOutput = GetCache("gpg_stderr/$fileHash.txt");
