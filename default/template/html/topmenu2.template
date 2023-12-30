@@ -1,4 +1,4 @@
-<!-- template/topmenu2.template -->
+<!-- topmenu2.template -->
 <table cellspacing=0 cellpadding=3 border=0 bgcolor="$colorWindow" class=dialog id=topmenu>
 	<tr bgcolor="$colorWindow" class=topmenubar>
 		<td colspan=2>
