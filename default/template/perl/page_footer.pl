@@ -178,30 +178,16 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 	}
 
 	if (GetConfig('setting/html/footer_page_concept')) {
-#		# concept dialog
-#		require_once('dialog/concept.pl');
-#		my $conceptDialog = GetConceptDialog($pageType);
-#		if ($conceptDialog) {
-#			$txtFooter = str_replace(
-#				'</body>',
-#				$conceptDialog . '</body>',
-#				$txtFooter
-#			);
-#		}
-
-
 		my $conceptString = '';
-		#$conceptString = GetString('concept/' . $pageType . '.txt', '', 0);
 		$conceptString = GetString('concept/' . $pageType . '.txt', '', 1);
 		if (!$conceptString) {
-			#$conceptString = GetString('concept/' . substr($pageType, 0, length($pageType) - 1) . '.txt', '', 0);
 			$conceptString = GetString('concept/' . substr($pageType, 0, length($pageType) - 1) . '.txt', '', 1);
 		}
 		if ($conceptString) {
-			# sub GetConceptDialog { #TODO, CURRENTLY USED LOOK HERE
+			# sub GetConceptDialog { #TODO, CURRENTLY USED LOOK HERE, #todo: factor out to its own procedure
 			my $conceptDialog = GetDialogX('<fieldset>'.ConceptForWeb($conceptString).'</fieldset>', 'Concept');
 			#my $conceptDialog = GetDialogX(ConceptForWeb($conceptString), 'Concept: ' . $pageType);
-			#$conceptDialog = '<span class=advanced>' . $conceptDialog . '</span>';
+			$conceptDialog = '<span class=advanced>' . $conceptDialog . '</span>';
 			# my $conceptDialog = GetDialogX(ConceptForWeb($conceptString), 'Concept: ' . $pageType);
 			$txtFooter = str_replace(
 				'</body>',
