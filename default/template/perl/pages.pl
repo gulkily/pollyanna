@@ -793,7 +793,22 @@ sub MakeJsPages {
 	}
 	my $promptForUsername = GetConfig('admin/js/openpgp_keygen_prompt_for_username');
 	if ($promptForUsername) {
-		$crypto2JsTemplate = str_replace('//username = prompt', 'username = prompt', $crypto2JsTemplate);
+		if (GetConfig('profile_auto_register')) {
+			# together, these two features can create a repeating "choose a handle" dialog on every page load
+			# it is bad enough that they should not be user together until it is fixed,
+			# and we refuse to do so here
+			# this is a bug in the javascript, which should be fixed eventually
+			# reproducing: iOS and Mac Safari, javascript on, openpgp on
+			# expected: prompted for username once per session
+			# actual: prompted for username once every time a new page loads
+			# workaround for demos: focus on using in-page dialogs, which do not cause the issue
+			WriteLog('MakeJsPages: warning: openpgp_keygen_prompt_for_username and profile_auto_register should not be used together due to bugs;');
+			if (GetConfig('debug_error')) { #todo
+				#todo
+			}
+		} else {
+			$crypto2JsTemplate = str_replace('//username = prompt', 'username = prompt', $crypto2JsTemplate);
+		}
 	}
 	PutHtmlFile("crypto2.js", $crypto2JsTemplate);
 
