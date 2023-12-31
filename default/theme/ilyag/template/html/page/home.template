@@ -102,6 +102,8 @@ fieldset p {
 				<a href="/url.html">Links</a>
 				&middot;
 				<a href="/calendar.html">Calendar</a>
+				&middot;
+				<a href="/session.html">Session</a>
 			</p>
 		</fieldset>
 	</p>
