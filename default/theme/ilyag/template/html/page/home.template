@@ -35,16 +35,6 @@ fieldset p {
 	</p>
 	<p>
 		<fieldset>
-			<h3>Site:</h3>
-			<p>
-				<a href="/image.html">Pictures</a>
-				&middot;
-				<a href="/label/blog.html">Blog</a>
-			</p>
-		</fieldset>
-	</p>
-	<p>
-		<fieldset>
 			<h3>Web:</h3>
 			<p>
 				I like to make things for the web, and this is some of them:
@@ -103,9 +93,38 @@ fieldset p {
 	</p>
 	<p>
 		<fieldset>
-			<h3>Social:</h3>
-			<p><a href="http://www.github.com/gulkily">GitHub</a></p>
-			<p><a href="https://mastodon.mit.edu/@ilyag"><small>Mastodon</small></a></p>
+			<h3>More on this site:</h3>
+			<p>
+				<a href="/image.html">Pictures</a>
+				&middot;
+				<a href="/label/blog.html">Blog</a>
+				&middot;
+				<a href="/url.html">Links</a>
+				&middot;
+				<a href="/calendar.html">Calendar</a>
+			</p>
+		</fieldset>
+	</p>
+	<p>
+		<fieldset>
+			<h3>Social things:</h3>
+			<p>
+				<a href="http://www.github.com/gulkily">GitHub</a>
+				&middot;
+				<a href="https://mastodon.mit.edu/@ilyag">Mastodon</a>
+				&middot;
+				<a href="https://www.facebook.com/">Facebook</a>
+				&middot;
+				<a href="https://www.linkedin.com/">LinkedIn</a>
+				&middot;
+				<a href="https://www.twitter.com/">Twitter</a>
+				&middot;
+				<a href="https://www.instagram.com/">Instagram</a>
+				&middot;
+				<a href="https://www.youtube.com/">YouTube</a>
+				&middot;
+				<a href="https://www.reddit.com/">Reddit</a>
+			</p>
 		</fieldset>
 	</p>
 </td></tr></table>
