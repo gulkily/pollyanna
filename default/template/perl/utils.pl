@@ -2852,6 +2852,7 @@ sub ProcessTextFile { # $file ; add new text file to index
 } # ProcessTextFile()
 
 sub AttachLogToItem { # $itemHash, $result, $runStart, $runFinish ; attaches log to item
+# sub AttachLog {
 # sub AttachFile {
 # sub AttachRunLog {
 # sub AttachCompileLog {
