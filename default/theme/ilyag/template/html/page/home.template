@@ -30,7 +30,7 @@ fieldset {
 	<fieldset>
 		<h3>Site:</h3>
 		<p><a href="/image.html">Pictures</a></p>
-		<p><a href="/tag/approve.html">Blog</a></p>
+		<p><a href="/label/blog.html">Blog</a></p>
 	</fieldset>
 	<p></p>
 	<fieldset>
