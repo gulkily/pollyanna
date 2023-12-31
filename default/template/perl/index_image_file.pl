@@ -4,6 +4,33 @@ use strict;
 use warnings;
 use 5.010;
 
+sub IndexExif { # $file, $fileHash ; indexes image's exif and stores it as an attached log
+	my $file = shift;
+	my $fileHash = shift;
+
+	#todo sanity checks
+
+	if (index($file, ' ') != -1) {
+		WriteLog('IndexExif: warning: sanity check failed, $file contains space character, which is not allowed; caller = ' . join(', ', caller));
+		return 0;
+	}
+
+	my $startTime = GetTime();
+	my $command = "identify -format '%[EXIF:*]'";
+	my $exifResult = `$command "$file"`;
+	my $doneTime = GetTime();
+
+	WriteLog('IndexExif: $file = ' . $file . '; $exifResult = ' . ($exifResult ? 'YES' : 'NO') . '; caller = ' . join(', ', caller));
+
+	if ($exifResult) {
+		AttachLogToItem($fileHash, $exifResult, $startTime, $doneTime);
+	}
+
+	#my $exifTool = new Image::ExifTool;
+	#$exifTool->Options(Unknown => 1);
+	#$exifTool->ExtractInfo($file);
+	#my $exif = $exifTool->GetInfo('Group0');
+} # IndexExif()
 
 sub IndexImageFile { # $file ; indexes one image file into database and makes thumbnails
 	# Reads a given $file, gets its attributes, puts it into the index database
@@ -115,6 +142,10 @@ sub IndexImageFile { # $file ; indexes one image file into database and makes th
 			foreach my $tag (@tagFromPath) {
 				DBAddLabel($fileHash, $addedTime, $tag);
 			}
+		}
+
+		if (GetConfig('setting/admin/index/image_index_exif')) { #exif
+			IndexExif($file, $fileHash);
 		}
 
 		DBAddPageTouch('read');
