@@ -1229,41 +1229,45 @@ function CollapseWindowFromButton (t) { // collapses or expands window based on 
 // and then hiding the first class=content element within
 // presumably a TR but doesn't matter really because SetElementVisible() is used
 // pretty basic, but it works.
-	if (t.innerHTML && t.firstChild) {
-		if (t.firstChild.nodeName == 'FONT') {
-			// small hack in case link has a font tag inside
-			// the font tag is typically used to style the link a different color for older browsers
-			t = t.firstChild;
-		}
-		var newVisible = 'initial';
-		if (t.innerHTML == '~') { //#collapseButton
-			//currently collapsed, expand
-			t.innerHTML = '#'; // //#collapseButton
-		} else {
-			// currently expanded, collapse
-			t.innerHTML = '~'; //#collapseButton
-			newVisible = 'none';
-		}
-		if (t.parentElement) {
-			//hide content elements
-			var p = t;
-
-			var sanityCounter = 20;
-
-			while (p.nodeName != 'TABLE') {
-				p = p.parentElement;
-				sanityCounter--;
-				if (sanityCounter < 1) {
-					//alert('DEBUG: CollapseWindowFromButton: warning: sanity check failed');
-					return '';
-				}
+	if (t) {
+		if (t.innerHTML && t.firstChild) {
+			if (t.firstChild.nodeName == 'FONT') {
+				// small hack in case link has a font tag inside
+				// the font tag is typically used to style the link a different color for older browsers
+				t = t.firstChild;
 			}
+			var newVisible = 'initial';
+			if (t.innerHTML == '~') { //#collapseButton
+				//currently collapsed, expand
+				t.innerHTML = '#'; // //#collapseButton
+			} else {
+				// currently expanded, collapse
+				t.innerHTML = '~'; //#collapseButton
+				newVisible = 'none';
+			}
+			if (t.parentElement) {
+				//hide content elements
+				var p = t;
 
-			var winId = GetDialogId(p);
-			SetPrefs(winId + '.collapse', newVisible, 'dialogPosition');
+				var sanityCounter = 20;
 
-			return CollapseWindow(p, newVisible); // CollapseWindowFromButton()
+				while (p.nodeName != 'TABLE') {
+					p = p.parentElement;
+					sanityCounter--;
+					if (sanityCounter < 1) {
+						//alert('DEBUG: CollapseWindowFromButton: warning: sanity check failed');
+						return '';
+					}
+				}
+
+				var winId = GetDialogId(p);
+				SetPrefs(winId + '.collapse', newVisible, 'dialogPosition');
+
+				return CollapseWindow(p, newVisible); // CollapseWindowFromButton()
+			}
 		}
+	} else {
+		//alert('DEBUG: CollapseWindowFromButton: warning: t is FALSE');
 	}
 
 	return true;
