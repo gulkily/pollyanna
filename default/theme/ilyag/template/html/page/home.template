@@ -106,6 +106,8 @@ fieldset p {
 				<a href="/session.html">Session</a>
 				&middot;
 				<a href="/settings.html">Settings</a>
+				&middot;
+				<a href="/write.html">Write</a>
 			</p>
 		</fieldset>
 	</p>
