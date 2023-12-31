@@ -11,19 +11,48 @@ a {
 	font-weight: bold;
 	font-size: default;
 }
+* {
+	border-radius: 1vw;
+}
+fieldset {
+	background: linear-gradient(to bottom, #e0e0e0, #ffffff);
+}
 // -->
 </style>
 </head>
 <body>
 <table height="99%" width="99%" border="0"><tr><td valign=middle align=center>
-<h1>Ilya Gulko</h1>
-<p><a href="/tag/approve.html">Blog</a></p>
-<p><a href="http://qdb.us/image.html">qdb.us</a></p>
-<p><a href="http://www.yavista.com/">Yavista</a></p>
-<p><a href="http://www.github.com/gulkily">GitHub</a></p>
-<p></p><a href="/photos/">Photos</a></p>
-<p><a href="http://stackoverflow.com/users/128947/i-g">StackO</a></p>
-<p><a href="https://mastodon.mit.edu/@ilyag"><small>Mastodon</small></a></p>
+	<fieldset>
+		<h1>Ilya Gulko</h1>
+		<span id=home_image></span>
+	</fieldset>
+	<p></p>
+	<fieldset>
+		<h3>Site:</h3>
+		<p><a href="/image.html">Pictures</a></p>
+		<p><a href="/tag/approve.html">Blog</a></p>
+	</fieldset>
+	<p></p>
+	<fieldset>
+		<h3>Web:</h3>
+		<p>
+			<a href="http://www.github.com/gulkily/pollyanna">Pollyanna</a>
+		</p>
+
+		<p>
+			<a href="http://qdb.us/image.html">qdb.us</a>
+		</p>
+
+		<p>
+			<a href="http://www.yavista.com/">Yavista</a>
+		</p>
+	</fieldset>
+	<p></p>
+	<fieldset>
+		<h3>Social:</h3>
+		<p><a href="http://www.github.com/gulkily">GitHub</a></p>
+		<p><a href="https://mastodon.mit.edu/@ilyag"><small>Mastodon</small></a></p>
+	</fieldset>
 </td></tr></table>
 </body>
 </html>
