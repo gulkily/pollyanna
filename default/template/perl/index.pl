@@ -276,7 +276,12 @@ sub DeindexMissingFiles { # remove from index data for files which have been rem
 
 require_once('index_file.pl');
 
-sub SweepDeleted {
+sub SweepDeleted { # cleans up files which have been deleted or marked deleted
+# looks for files in the index database which have gone away
+# also looks for files which have been added to deleted.log and sweeps them
+# #todo also sweeps html files which reference the deleted items with grep
+# takes no parameters
+
 	my %queryParams;
 	my @files = DBGetItemList(\%queryParams);
 
