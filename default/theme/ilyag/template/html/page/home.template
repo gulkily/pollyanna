@@ -16,43 +16,98 @@ a {
 }
 fieldset {
 	background: linear-gradient(to bottom, #e0e0e0, #ffffff);
+	text-align: left;
+	display: inline-block;
+}
+fieldset p {
+	max-width: 45ex;
 }
 // -->
 </style>
 </head>
 <body>
 <table height="99%" width="99%" border="0"><tr><td valign=middle align=center>
-	<fieldset>
-		<h1>Ilya Gulko</h1>
-		<span id=home_image></span>
-	</fieldset>
-	<p></p>
-	<fieldset>
-		<h3>Site:</h3>
-		<p><a href="/image.html">Pictures</a></p>
-		<p><a href="/label/blog.html">Blog</a></p>
-	</fieldset>
-	<p></p>
-	<fieldset>
-		<h3>Web:</h3>
-		<p>
-			<a href="http://www.github.com/gulkily/pollyanna">Pollyanna</a>
-		</p>
+	<p>
+		<fieldset>
+			<h1>Ilya Gulko</h1>
+			<span id=home_image></span>
+		</fieldset>
+	</p>
+	<p>
+		<fieldset>
+			<h3>Site:</h3>
+			<p>
+				<a href="/image.html">Pictures</a>
+				&middot;
+				<a href="/label/blog.html">Blog</a>
+			</p>
+		</fieldset>
+	</p>
+	<p>
+		<fieldset>
+			<h3>Web:</h3>
+			<p>
+				I like to make things for the web, and this is some of them:
+			</p>
+			<p>
+				<a href="http://www.github.com/gulkily/pollyanna">Pollyanna</a>
+				is a framework for making websites like this one, with a focus on
+				being easy to use and easy to maintain.
+			</p>
 
-		<p>
-			<a href="http://qdb.us/image.html">qdb.us</a>
-		</p>
+			<p>
+				<a href="http://qdb.us/image.html">qdb.us</a>
+				is a collection of QDB websites from around the Web.
+				Quote Database is a genre of website design I invented.
+			</p>
 
-		<p>
-			<a href="http://www.yavista.com/">Yavista</a>
-		</p>
-	</fieldset>
-	<p></p>
-	<fieldset>
-		<h3>Social:</h3>
-		<p><a href="http://www.github.com/gulkily">GitHub</a></p>
-		<p><a href="https://mastodon.mit.edu/@ilyag"><small>Mastodon</small></a></p>
-	</fieldset>
+			<p>
+				<a href="http://www.yavista.com/">Yavista</a>
+				is an experimental web forum primarily about spirituality,
+				prayer, meditation, manifestation, and the like.
+			</p>
+		</fieldset>
+	</p>
+	<p>
+		<fieldset>
+			<h3>Writing:</h3>
+			<p>
+				<a>Joey</a>
+				is a story about a mouse who goes on to study at
+				a great university and achieve her dream of a
+				PhD in computer science.
+			</p>
+			<p>
+				<a>Hacker's Guide to Spiritual Computing</a>
+				is a book about applying spiritual techniques to
+				computing. I co-wrote this book with Bard, ChatGPT,
+				and Claude. Print copies should be available on
+				January 2, 2024!
+			</p>
+			<p>
+				<a>Gaining Advantage in Information Society</a>
+				is a whitepaper about how to get better information
+				sooner and how to take advantage of it.
+			</p>
+			<p>
+				<a>Three Peppers</a>
+				is a story written in Russian about three peppers
+				who grow up in Mexico and go on to travel to the
+				United States.
+			</p>
+			<p>
+				<a>Pollyanna whitepaper</a>
+				is a document explaining the design of Pollyanna.
+			</p>
+		</fieldset>
+	</p>
+	<p>
+		<fieldset>
+			<h3>Social:</h3>
+			<p><a href="http://www.github.com/gulkily">GitHub</a></p>
+			<p><a href="https://mastodon.mit.edu/@ilyag"><small>Mastodon</small></a></p>
+		</fieldset>
+	</p>
 </td></tr></table>
 </body>
 </html>
