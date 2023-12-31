@@ -27,6 +27,21 @@ sub GetWelcomePage {
 #	return $welcomePage
 
 	my $html = GetTemplate('html/page/home.template');
+
+	if (1) {
+		my $image = SqliteGetValue("SELECT file_hash FROM item_flat WHERE item_type = 'image' AND labels_list LIKE '%,welcome,%' AND item_score > 0 ORDER BY RANDOM() LIMIT 1");
+		if ($image) {
+			my $imageTemplate = GetImageContainer($image);
+			if ($imageTemplate) {
+				$html = str_replace('<span id=home_image></span>', '<span class=image>' . $imageTemplate . '</span>', $html);
+			} else {
+				$html = str_replace('<span id=home_image></span>', 'x', $html);
+			}
+		} else {
+			$html = str_replace('<span id=home_image></span>', 'y', $html);
+		}
+	}
+
 	return $html;
 }
 
