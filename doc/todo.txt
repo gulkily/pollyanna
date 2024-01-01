@@ -4086,3 +4086,7 @@ config/setting/admin/php/regrow_404_fork=1
 ===
 
 `hike page ...` should support dialogs, such as authors
+===
+
+detect if server is fresh built and nothing indexed yet and inform user
+
