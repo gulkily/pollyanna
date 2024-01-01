@@ -174,6 +174,22 @@ sub SqliteGetNormalizedQueryString { # $query ; returns normalized query string
 	return $queryWithParams;
 } # SqliteGetNormalizedQueryString()
 
+sub SqliteGetRow { # $query, @queryParams ; returns first row of query result as array
+	#todo sanity
+	my @array = SqliteQueryHashRef(@_);
+	WriteLog('SqliteGetRow: scalar(@array) = ' . scalar(@array) . '; caller = ' . join(', ', caller));
+
+	shift @array; # the headers list
+	my $firstRowRef = shift @array;
+	my %firstRow;
+
+	if ($firstRowRef && ref($firstRowRef) eq 'HASH') {
+		%firstRow = %{$firstRowRef};
+	}
+
+	return \%firstRow;
+} # SqliteGetRow()
+
 sub SqliteQueryHashRef { # $query, @queryParams; calls sqlite with query, and returns result as array of hashrefs
 # NOTE, THIS RETURNS A REFERENCE TO AN ARRAY OF HASHES, NOT A HASH, DESPITE THE NAME
 
