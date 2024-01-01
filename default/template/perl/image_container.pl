@@ -5,7 +5,7 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub GetImageContainer2 { # $fileHash, $imageAlt, $linkUrl
+sub GetImageContainer2 { # $fileHash, $imageAlt, $linkUrl, $thumbnailSize
 # $linkUrl = '' means no link
 # $linkUrl = 'item' means link to item page
 
@@ -20,6 +20,7 @@ sub GetImageContainer2 { # $fileHash, $imageAlt, $linkUrl
 	my $fileHash = shift;
 	my $imageAlt = shift;
 	my $linkUrl = shift;
+	my $thumbnailSize = shift;
 
 	if (!defined($imageAlt) || !$imageAlt) {
 		$imageAlt = '';
@@ -27,6 +28,16 @@ sub GetImageContainer2 { # $fileHash, $imageAlt, $linkUrl
 
 	if (!defined($linkUrl) || !$linkUrl) {
 		$linkUrl = '';
+	}
+
+	if (!defined($thumbnailSize) || !$thumbnailSize) {
+		$thumbnailSize = '800';
+	}
+
+	my @thumbnailSizes = qw(42 512 800);
+	if (!in_array($thumbnailSize, @thumbnailSizes)) {
+		WriteLog('GetImageContainer2: warning: $thumbnailSize = ' . $thumbnailSize . ' is not valid; caller = ' . join(',', caller));
+		$thumbnailSize = '800';
 	}
 
 	#todo sanity
@@ -50,7 +61,10 @@ sub GetImageContainer2 { # $fileHash, $imageAlt, $linkUrl
 		#todo fix this
 	}
 
-	my $imageUrl = "/thumb/thumb_800_$fileHash" . $thumbnailExtension; #todo hardcoding no
+	#todo this is a hack and should be fixed
+	my $imageUrl = "/thumb/thumb_${thumbnailSize}_$fileHash" . $thumbnailExtension; #todo hardcoding no
+
+	#my $imageUrl = "/thumb/thumb_800_$fileHash" . $thumbnailExtension; #todo hardcoding no
 	# my $imageUrl = "/thumb/thumb_420_$fileHash" . $thumbnailExtension; #todo hardcoding no
 	my $imageSmallUrl = "/thumb/thumb_42_$fileHash" . $thumbnailExtension; #todo hardcoding no
 	#my $imageAlt = $itemTitle;
