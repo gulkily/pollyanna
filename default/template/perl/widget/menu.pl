@@ -198,6 +198,7 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 } # GetMenuFromList()
 
 sub GetMenuTemplate { # $pageType ; returns menubar
+# $pageType is the name of the current page, e.g. 'read'
 # sub GetMenuDialog {
 # sub GetMenubarTemplate {
 # sub GetMenubar {
