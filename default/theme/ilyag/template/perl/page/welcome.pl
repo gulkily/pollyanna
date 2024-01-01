@@ -31,7 +31,7 @@ sub GetWelcomePage {
 	if (1) {
 		my $image = SqliteGetValue("SELECT file_hash FROM item_flat WHERE item_type = 'image' AND labels_list LIKE '%,welcome,%' AND item_score > 0 ORDER BY RANDOM() LIMIT 1");
 		if ($image) {
-			my $imageTemplate = GetImageContainer($image);
+			my $imageTemplate = GetImageContainer2($image, 'ilya', '/image.html');
 			if ($imageTemplate) {
 				$html = str_replace('<span id=home_image></span>', '<span class=image>' . $imageTemplate . '</span>', $html);
 			} else {
