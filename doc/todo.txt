@@ -1,3 +1,7 @@
+i think the cause of netscape displaying very small thumbnails is lowsrc= being used
+	https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-lowsrc
+	we can probably just remove it
+
 there should be a warning when 'hike refresh' would update some config items
 
 fix 'hike pages' command
