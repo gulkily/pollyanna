@@ -1425,10 +1425,10 @@ function IndexTextFile ($filePath) {
 	}
 
 	if (file_exists($filePath)) {
-		WriteLog("IndexTextFile: cd $scriptDir ; ./index.pl \"$filePath\"");
-		WriteLog(`cd $scriptDir ; ./index.pl "$filePath"`);
+		WriteLog("IndexTextFile: cd $scriptDir ; perl -T ./index.pl \"$filePath\"");
+		WriteLog(`cd $scriptDir ; perl -T ./index.pl "$filePath"`);
 
-		#WriteLog(`find html/txt -printf '%C@ %p\n' | grep "\.txt$" | sort | tail -n 5 | cut -d ' ' -f 2- | xargs ./index.pl`);
+		#WriteLog(`find html/txt -printf '%C@ %p\n' | grep "\.txt$" | sort | tail -n 5 | cut -d ' ' -f 2- | xargs perl -T ./index.pl`);
 
 		if ($pwd) {
 			WriteLog("IndexTextFile: cd $pwd");
