@@ -16,4 +16,4 @@ git merge --no-edit
 
 ./build.sh
 
-./pages.pl --system
+perl -T ./pages.pl --system

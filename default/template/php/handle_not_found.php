@@ -381,12 +381,12 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 				$pwd = getcwd();
 				WriteLog('HandleNotFound: $pwd = ' . $pwd);
 
-				WriteLog("HandleNotFound: cd $SCRIPTDIR ; ./pages.pl $pagesPlArgument");
+				WriteLog("HandleNotFound: cd $SCRIPTDIR ; perl -T ./pages.pl $pagesPlArgument");
 				/* my */ $pagesPlTimeout = 0;
 				if ($pagesPlTimeout) {
 					#use timeout to give up on html generation after 5 seconds
 					#todo use GetDir() and not ./pages.pl
-					/* my */ $pagesPlCommand = 'cd "' . $SCRIPTDIR . '" ; timeout ' . $pagesPlTimeout . 's ' . './pages.pl ' . $pagesPlArgument;
+					/* my */ $pagesPlCommand = 'cd "' . $SCRIPTDIR . '" ; timeout ' . $pagesPlTimeout . 's ' . 'perl -T ./pages.pl ' . $pagesPlArgument;
 					WriteLog('HandleNotFound: $pagesPlCommand = ' . $pagesPlCommand);
 					/*my*/ $exitCode = exec($pagesPlCommand);
 					WriteLog('HandleNotFound: $exitCode = ' . $exitCode);
@@ -416,7 +416,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 					}
 
 					#todo use GetDir() and not ./pages.pl
-					/* my */ $pagesPlCommand = 'cd "' . $SCRIPTDIR . '" ; ./pages.pl ' . $pagesPlArgument;
+					/* my */ $pagesPlCommand = 'cd "' . $SCRIPTDIR . '" ; perl -T ./pages.pl ' . $pagesPlArgument;
 					WriteLog('HandleNotFound: $pagesPlCommand = ' . $pagesPlCommand);
 					WriteLog('HandleNotFound: ' . `$pagesPlCommand`);
 				}

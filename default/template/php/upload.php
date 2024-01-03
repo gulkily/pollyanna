@@ -145,15 +145,15 @@ if (!empty($_FILES['uploaded_file'])) {
 
 						} else {
 							WriteLog('upload.php: regrow_404_fork was FALSE: call pages.pl');
-							WriteLog("cd $scriptDir ; ./pages.pl \"$hash\"");
-							WriteLog(`cd $scriptDir ; ./pages.pl "$hash"`);
+							WriteLog("cd $scriptDir ; perl -T ./pages.pl \"$hash\"");
+							WriteLog(`cd $scriptDir ; perl -T ./pages.pl "$hash"`);
 						}
 
 						if (isset($replyTo) && $replyTo) {
 							WriteLog("\$replyTo = $replyTo");
 							if (IsItem($replyTo)) {
-								WriteLog("cd $scriptDir ; ./pages.pl \"$replyTo\"");
-								WriteLog(`cd $scriptDir ; ./pages.pl "$replyTo"`);
+								WriteLog("cd $scriptDir ; perl -T ./pages.pl \"$replyTo\"");
+								WriteLog(`cd $scriptDir ; perl -T ./pages.pl "$replyTo"`);
 							}
 						} else {
 							WriteLog("\$replyTo not found");

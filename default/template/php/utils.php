@@ -1448,8 +1448,8 @@ function IndexTextFile ($filePath) {
 	}
 
 	//
-	// 	WriteLog("IndexTextFile: cd $scriptDir ; ./pages.pl \"$hash\"");
-	// 	WriteLog(`cd $scriptDir ; ./pages.pl "$hash"`);
+	// 	WriteLog("IndexTextFile: cd $scriptDir ; perl -T ./pages.pl \"$hash\"");
+	// 	WriteLog(`cd $scriptDir ; perl -T ./pages.pl "$hash"`);
 } # IndexTextFile()
 
 function MakePage ($pageName) {
@@ -1457,16 +1457,16 @@ function MakePage ($pageName) {
 	$scriptDir = GetScriptDir();
 	$pwd = getcwd();
 
-	WriteLog("cd $scriptDir ; ./pages.pl \"$pageName\"");
-	WriteLog(`cd $scriptDir ; ./pages.pl "$pageName"`);
+	WriteLog("cd $scriptDir ; perl -T ./pages.pl \"$pageName\"");
+	WriteLog(`cd $scriptDir ; perl -T ./pages.pl "$pageName"`);
 
 	if ($pwd) {
 		WriteLog("cd $pwd");
 		WriteLog(`cd $pwd`);
 	}
 	//
-	// WriteLog("cd $scriptDir ; ./pages.pl \"$hash\"");
-	// WriteLog(`cd $scriptDir ; ./pages.pl "$hash"`);
+	// WriteLog("cd $scriptDir ; perl -T ./pages.pl \"$hash\"");
+	// WriteLog(`cd $scriptDir ; perl -T ./pages.pl "$hash"`);
 } # MakePage()
 
 require_once('store_new_comment.php');
