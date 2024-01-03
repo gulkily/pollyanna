@@ -20,10 +20,10 @@ sleep 1
 ./default/template/sh/build.sh
 echo Indexing chain...
 sleep 1
-./index.pl --chain
+perl -T ./index.pl --chain
 echo Indexing data...
 sleep 1
-./index.pl --all
+perl -T ./index.pl --all
 echo Making frontend essentials...
 sleep 1
 ./config/template/perl/pages.pl --php -M chain --listing

@@ -1836,7 +1836,7 @@ generate static html {
 	config/admin/expo_mode_edit=0
 	./_dev_clean_ALL.sh
 	time ./build.sh
-	time ./index.pl --all
+	time perl -T ./index.pl --all
 	time ./pages.pl --all
 }
 
