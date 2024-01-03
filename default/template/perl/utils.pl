@@ -2915,6 +2915,9 @@ sub AttachLogToItem { # $itemHash, $result, $runStart, $runFinish ; attaches log
 		PutFile("$TXTDIR/$newPath", $newItem);
 		IndexFile("$TXTDIR/$newPath");
 
+		#todo sanity checks
+		# 1704241676.77062 Reference found where even-sized list expected at ./config/template/perl/utils.pl line 2918.
+
 		my %return = {
 			'hash' => $newHash,
 			'path' => $newPath
