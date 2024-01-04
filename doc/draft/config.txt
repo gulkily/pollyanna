@@ -34,7 +34,7 @@ Here is an example if how a lookup of a template may happen.
 			chicago
 	Now, we are going to try to find a template called html/travel.template
 		This is done using the GetTemplate() procedure
-			GetTemplate will first look up the currently set themes, and then begin checking in the following order:
+			GetTemplate() will first look up the currently set themes, and then begin checking in the following order:
 				config/theme/phoenix/template/html/travel.template
 				default/theme/phoenix/template/html/travel.template
 				config/theme/chicago/template/html/travel.template
