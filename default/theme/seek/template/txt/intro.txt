@@ -1,7 +1,20 @@
+<p>
 Hi, my name is Ilya, and I was inspired to develop this website on the morning of Friday, January 5, 2024.
 As SEEK'24 drew to a close, I felt a surge of gratitude for the incredible experiences and connections we shared.
 I couldn't let those memories fade away, and I wanted to create a space where everyone could relive those
 special moments and keep the spirit of 'Be the Light' burning bright. So, with a heart full of SEEK'24 memories
 and a believer's passion, I built this website. It's a humble offering, but I hope it becomes a beacon of
 inspiration and community for all of us. Welcome, and let's share the light together!
+</p>
+
+<p>
+	Behold, I am doing a new thing; now it springs forth, do you not perceive it? I am making a way in the wilderness and streams in the wasteland.
+	<br>
+	Isaiah 43:19
+
+<p>
+	Therefore, if anyone is in Christ, the new creation has come: The old has passed away; behold, the new is here!
+	<br>
+	2 Corinthians 5:17
+</p>
 
