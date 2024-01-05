@@ -1454,11 +1454,18 @@ function IndexTextFile ($filePath) {
 
 function MakePage ($pageName) {
 	#todo sanity checks
+	WriteLog('MakePage(' . $pageName . ')');
+
 	$scriptDir = GetScriptDir();
 	$pwd = getcwd();
 
-	WriteLog("cd $scriptDir ; perl -T ./pages.pl \"$pageName\"");
-	WriteLog(`cd $scriptDir ; perl -T ./pages.pl "$pageName"`);
+	if ($pageName == 'welcome') { #todo all the other cases
+		WriteLog("cd $scriptDir ; perl -T ./pages.pl -M \"$pageName\"");
+		WriteLog(`cd $scriptDir ; perl -T ./pages.pl -M "$pageName"`);
+	} else {
+		WriteLog("cd $scriptDir ; perl -T ./pages.pl \"$pageName\"");
+		WriteLog(`cd $scriptDir ; perl -T ./pages.pl "$pageName"`);
+	}
 
 	if ($pwd) {
 		WriteLog("cd $pwd");
