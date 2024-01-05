@@ -666,7 +666,13 @@ if (!$redirectUrl && $fileUrlPath) {
 		RedirectWithResponse('/boxes.html', 'Thank you for counting boxes.');
 		#RedirectWithResponse('/boxes.html?time=' . (time()+100), 'Thank you for counting boxes.');
 	} else {
-		RedirectWithResponse($fileUrlPath, $itemPostedServerResponse);
+		if (GetConfig('admin/php/post/redirect_to_new_item')) {
+			RedirectWithResponse($fileUrlPath, $itemPostedServerResponse);
+		} else {
+			#todo this is a bit of a hack, but it works
+			MakePage('welcome');
+			RedirectWithResponse('/welcome.html', $itemPostedServerResponse);
+		}
 	}
 }
 
