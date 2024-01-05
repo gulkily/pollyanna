@@ -202,6 +202,7 @@ sub SqliteQueryHashRef { # $query, @queryParams; calls sqlite with query, and re
 # 	my @allItems = @{$hashRef};
 
 #sub SqliteGetHash {
+#sub SqliteGetResults {
 #sub SqliteGetHashRef {
 #sub SqliteGetQueryHashRef {
 #sub SqliteGetQuery {
