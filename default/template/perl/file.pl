@@ -318,6 +318,9 @@ sub GetFileMessage { # $fileHash ; get file message based on hash
 # caution: may also look up file path in database and read from file
 # sub GetMessage {
 # sub GetItemMessage {
+# sub GetItemBody {
+# sub GetItemMessage {
+# sub GetFileBody {
 	my $fileHash = shift;
 	if (!$fileHash) {
 		return ''; #todo
