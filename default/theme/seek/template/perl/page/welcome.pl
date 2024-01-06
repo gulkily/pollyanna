@@ -7,12 +7,27 @@ use 5.010;
 sub GetWelcomePage {
 	WriteLog('GetWelcomePage: seek theme');
 
-	my $html = GetTemplate('html/page/home.template');
+	my $html = GetTemplate('html/page/home.template'); # template for home page
 
 	if (1) {
-		my @ref = SqliteQueryHashRef("SELECT * FROM item_flat WHERE item_type = 'txt' AND item_score >= 0 ORDER BY add_timestamp DESC LIMIT 50");
-		shift @ref; # remove first element (columns)
-		my $html2 = '';
+		my $fileFields = DBGetItemFields();
+		my @ref = SqliteQueryHashRef("
+			SELECT
+				$fileFields
+			FROM
+				item_flat
+			WHERE
+				item_type = 'txt'
+				AND item_score >= 0
+				AND labels_list NOT LIKE '%changelog%'
+			ORDER BY
+				add_timestamp DESC
+			LIMIT 50
+		");
+
+		shift @ref; # remove first element, which contains the list of columns
+
+		my $html2 = ''; # inner html containing the items
 		foreach my $ref (@ref) {
 			my $replyText = GetFileMessage($ref->{'file_hash'});
 			# trim everything after signature placeholder "-- \n"
