@@ -1518,7 +1518,7 @@ sub GetQuerySqlDialog { # $pageQuery, $titleDialog ; displays query for user to 
 # sub GetDisplayQuery {
 # sub SqliteGetFormattedQuery {
 # sub FormatQuery {
-# sub GetQueryText {
+# sub GetQueryText { # GetQuerySqlDialog()
 
 	# display query used to generate the listing
 	#my $displayQuery = TextartForWeb(SqliteGetQueryTemplate($pageQuery));
@@ -1538,6 +1538,8 @@ sub GetQuerySqlDialog { # $pageQuery, $titleDialog ; displays query for user to 
 		$queryDisplayName = $pageQuery . '.sql';
 	}
 
+	WriteLog('GetQuerySqlDialog: $pageQuery = ' . $pageQuery . '; caller = ' . join(',', caller));
+
 	#my $displayQuery = '<pre class=sql contenteditable>' . HtmlEscape(SqliteGetQueryTemplate($pageQuery)) . '</pre>'; #todo templatify
 	my $displayQuery = '<pre class=sql contenteditable>' . SqlForWeb(SqliteGetQueryTemplate($pageQuery)) . '</pre>'; #todo templatify
 	my $dialog = '';
@@ -1548,6 +1550,10 @@ sub GetQuerySqlDialog { # $pageQuery, $titleDialog ; displays query for user to 
 		my $dialog = '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName) . '</span>';
 	}
 	#todo add link to copy query to query runner with one click
+
+	if (!$dialog) {
+		WriteLog('GetQuerySqlDialog: warning: $dialog is FALSE; caller = ' . join(',', caller));
+	}
 
 	return $dialog;
 } # GetQuerySqlDialog()
