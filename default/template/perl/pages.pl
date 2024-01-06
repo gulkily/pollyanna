@@ -1544,10 +1544,9 @@ sub GetQuerySqlDialog { # $pageQuery, $titleDialog ; displays query for user to 
 	my $displayQuery = '<pre class=sql contenteditable>' . SqlForWeb(SqliteGetQueryTemplate($pageQuery)) . '</pre>'; #todo templatify
 	my $dialog = '';
 	if (GetConfig('setting/html/debug_resultset_link_to_index_sqlite3')) {
-		my $dialog = '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName, '', '<a href="/index.sqlite3">index.sqlite3</a>') . '</span>';
-	}
-	else {
-		my $dialog = '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName) . '</span>';
+		$dialog = '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName, '', '<a href="/index.sqlite3">index.sqlite3</a>') . '</span>';
+	} else {
+		$dialog = '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName) . '</span>';
 	}
 	#todo add link to copy query to query runner with one click
 
