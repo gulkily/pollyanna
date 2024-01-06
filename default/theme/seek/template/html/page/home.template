@@ -18,7 +18,6 @@ $styleSheet
     What is your favorite SEEK '24 memory?
     <br>
     <input type="hidden" name="vote_return_to" value="/welcome.html">
-    <!-- convert comment to textarea -->
     <textarea name="comment" rows="5" cols="40" placeholder="Write here"></textarea>
     <br>
     <input type="submit" value="Praise Be to the Lord">
