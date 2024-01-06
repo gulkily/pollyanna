@@ -2570,6 +2570,9 @@ sub DBGetAdminKey { # Returns the pubkey id of the top-scoring admin (or nothing
 } # DBGetAdminKey()
 
 sub DBGetItemFields { # Returns fields we typically need to request from item_flat table
+# $fileFields
+# sub GetFileFields {
+# sub DBGetFileFields {
 # todo this shouldn't have a DB prefix
 	my $itemFields = "
 		item_flat.file_path file_path,
