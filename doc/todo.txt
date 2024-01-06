@@ -1,13 +1,26 @@
+rename labels_list to label_list ?
+	or list_label?
+	or list_labels?
+
+===
+
 i think the cause of netscape displaying very small thumbnails is lowsrc= being used
 	https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-lowsrc
 	we can probably just remove it
 
+===
+
 there should be a warning when 'hike refresh' would update some config items
+
+===
 
 fix 'hike pages' command
 	currently prints 0 pages
 	it's using ./pages.pl --queue, and the queue is empty for some reason
 		select * from task; -- returns 0 rows
+	(this seems to happen on dreamhost servers, but not in dev environment)
+
+===
 
 for write form, there should be a checkbox that tells the server not to add anything to the text file
             <br>
@@ -15,19 +28,28 @@ for write form, there should be a checkbox that tells the server not to add anyt
             <br>
             <span id=spanWriteAdvanced class=advanced></span>
 
+===
+
 there should be a warning for the operator when using cookie-required features
 	for example: require_cookie and force_profile (which should be called auto_session)
 		these will block users who do not support cookies or have cookie issues
 
+===
+
 refactor all the mentions of opened_dialogs into ReopenDialogs()
 
+===
+
 backtick execute feature
+
+===
 
 refactor GetImageContainer() to use \%file instead of $fileHash as parameter
 	allow for old style calls as well?
 
-how to rechain / multiple chain?
+===
 
+how to rechain / multiple chain?
 	a) get hash of current chain
 	b) create new chain with announcement of previous chain's hash as the first item
 	c) add all valid items in current chain to new chain
