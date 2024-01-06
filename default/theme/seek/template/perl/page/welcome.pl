@@ -10,12 +10,12 @@ sub GetWelcomePage {
 	my $html = GetTemplate('html/page/home.template');
 
 	if (1) {
-		my @ref = SqliteQueryHashRef("SELECT * FROM item_flat WHERE item_type = 'txt' AND item_score >= 0 ORDER BY add_timestamp DESC LIMIT 5");
+		my @ref = SqliteQueryHashRef("SELECT * FROM item_flat WHERE item_type = 'txt' AND item_score >= 0 ORDER BY add_timestamp DESC LIMIT 50");
 		shift @ref; # remove first element (columns)
 		my $html2 = '';
 		foreach my $ref (@ref) {
 			my $replyText = GetFileMessage($ref->{'file_hash'});
-			# trim everything signature placeholder "-- \n"
+			# trim everything after signature placeholder "-- \n"
 			$replyText = substr($replyText, 0, index($replyText, "\n-- \n"));
 			$replyText = FormatForWeb($replyText);
 			my $item = GetTemplate('html/item_flat.template');
