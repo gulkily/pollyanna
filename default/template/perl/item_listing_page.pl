@@ -26,7 +26,6 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, image
 # sub GetItemHtmlListing {
 # sub MakeAuthorsPage {
 # sub GetImagePage {
-# sub GetListingPage {
 # sub ImagePage {
 # sub GetTagsPage { ItemListingPage()
 # sub GetLabelsPage {
