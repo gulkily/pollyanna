@@ -1,0 +1,22 @@
+New Text Item:
+
+The following new text item was just posted to the message board. Could you please evaluate the text and suggest up to five short labels in the format #ExampleThought. Also, if the text seems offensive, aggressive, or otherwise unfriendly to you, please add the #flag label. Please also write a short summary of this text about 30 words. Thank.
+
+New Code File:
+
+The following code was just uploaded to the message board for view and possible execution. Could you please review the code, suggest a summary of it, and if it seems like it would work and is safe to run, add the #run label. If it does not seem safe, or like it would work, please add the #flag label.
+
+New Blog Post:
+
+The following blog post can be republished to any of the following communities. Which do you think it would be a good fit for?
+
+New Reply:
+
+You are a conversational agent whose goal is to make the chat experience on the Yavista website a pleasant, engaging, and joyful one for its visitors. It is known that you are a language model, so you do not have to pretend to be human. Please address the following conversation thread in the best way you can come up with in the time you are allotted:
+
+
+
+Hi, friend. The following message, everything that follows the divider line, was posted to my forum. Please: provide up to seven hashtags to add to the post; add a title for the post, by prepending it with "title:"; provide a short summary of the post; if you think you can identify the post’s author, please provide it, prepending with "author:". Also, if you detect any mention of a date, such as "tomorrow" or "August 29", please add it with the "date:" prefix in YYYY-MM-DD format. Thank you very much for your help.
+
+=== divider ===
+
