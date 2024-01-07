@@ -1,3 +1,14 @@
+fix duplicate pages being generated every time `page \#foo` is called
+	example:
+	1704657676.01219
+    1704657676.42376 MakePage(tag, notext)
+    1704657676.42376 =======================================================
+    1704657676.42376
+    1704657676.84397 MakePage(label, notext)
+    1704657676.84397 =======================================================
+
+===
+
 rename labels_list to label_list ?
 	or list_label?
 	or list_labels?
@@ -15,10 +26,11 @@ there should be a warning when 'hike refresh' would update some config items
 ===
 
 fix 'hike pages' command
-	currently prints 0 pages
-	it's using ./pages.pl --queue, and the queue is empty for some reason
-		select * from task; -- returns 0 rows
-	(this seems to happen on dreamhost servers, but not in dev environment)
+	currently prints 0 pages x
+	it's using ./pages.pl --queue, and the queue is empty for some reason x
+		select * from task; -- returns 0 rows x
+	(this seems to happen on dreamhost servers, but not in dev environment) x
+	this seems fixed
 
 ===
 
