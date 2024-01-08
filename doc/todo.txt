@@ -58,6 +58,7 @@ backtick execute feature
 
 refactor GetImageContainer() to use \%file instead of $fileHash as parameter
 	allow for old style calls as well?
+	currently GetImageContainer2()
 
 ===
 
@@ -71,7 +72,8 @@ how to rechain / multiple chain?
 
 ===
 
-why doesn't php InjectJs() use GetScriptTemplate() ?
+why doesn't php InjectJs() use GetScriptTemplate() ? x
+	it actually does!
 
 ===
 
@@ -86,6 +88,8 @@ why doesn't php InjectJs() use GetScriptTemplate() ?
 ===
 
 read-only mode for non-registered users
+	this can be accomplished with require_cookie,
+		but voting buttons and reply forms are still shown
 
 ===
 
