@@ -2391,9 +2391,11 @@ sub CheckForInstalledVersionChange {
 
 		require_once('index_file.pl');
 		IndexFile($newChangelogFile);
+
 		if (GetConfig('debug')) {
-			WriteLog('CheckForInstalledVersionChange: running _dev_index_new.sh');
+			#WriteLog('CheckForInstalledVersionChange: running _dev_index_new.sh');
 			#WriteLog(`sh /home/wsl/pollyanna/default/template/sh/_dev_index_new.sh`);
+			WriteLog('CheckForInstalledVersionChange: debug mode: redo index');
 			MakeIndex();
 			require_once('makepage.pl');
 			MakePage('new');
