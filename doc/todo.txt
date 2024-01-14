@@ -9,6 +9,8 @@ changelog should appear immediately on New page after `hike refresh` is run
 			cache/b/indexed/... is created, but the file does not exist in index
 				i think it's created before the file is renamed, but then indexing fails because the file was renamed?
 			removing this flag and running hike index fixes the issue
+				part of the problem is that the cache/b/indexed/... cache contains the file path, but it is not checked whether it is the same
+					added IsFileAlreadyIndexed() x
 		even though changelog text file is written, a full `hike rebuild` is required for the changelog to appear on new page
 	new page should be updated
 		MakePage('new') should be called after above works
