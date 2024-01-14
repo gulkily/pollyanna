@@ -328,10 +328,17 @@ sub IsFileAlreadyIndexed { # $file, $fileHash ; returns 1 if file has already be
 	#todo sanity checks
 	#todo perhaps use GetAbsolutePath() ?
 
-	if (GetCache("indexed/$fileHash") eq $file) {
+	my $cacheValue = GetCache("indexed/$fileHash");
+
+	if (!$cacheValue) {
+		WriteLog('IsFileAlreadyIndexed: $file = ' . $file . '; $fileHash = ' . $fileHash . '; return = FALSE; caller = ' . join(',', caller));
+		return 0;
+	}
+	elsif (GetCache("indexed/$fileHash") eq $file) {
 		WriteLog('IsFileAlreadyIndexed: $file = ' . $file . '; $fileHash = ' . $fileHash . '; return = TRUE; caller = ' . join(',', caller));
 		return 1;
-	} else {
+	}
+	else {
 		WriteLog('IsFileAlreadyIndexed: $file = ' . $file . '; $fileHash = ' . $fileHash . '; return = FALSE; caller = ' . join(',', caller));
 		return 0;
 	}
