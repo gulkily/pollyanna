@@ -2399,7 +2399,7 @@ sub CheckForInstalledVersionChange {
 			#my $CACHEDIR = GetDir('cache');
 			WriteLog('CheckForInstalledVersionChange: debug mode: redo index');
 			require_once('index.pl');
-			MakeIndex();
+			#MakeIndex();
 			require_once('makepage.pl');
 			MakePage('new');
 		}
