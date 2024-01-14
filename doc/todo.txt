@@ -1,4 +1,7 @@
 changelog should appear immediately on New page after `hike refresh` is run
+	changelog should be generated x
+	changelog should be indexed
+	new page should be updated
 
 fix duplicate pages being generated every time `page \#foo` is called
 	example:
