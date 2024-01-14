@@ -1,3 +1,5 @@
+changelog should appear immediately on New page after `hike refresh` is run
+
 fix duplicate pages being generated every time `page \#foo` is called
 	example:
 	1704657676.01219
