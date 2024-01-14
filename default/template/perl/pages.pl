@@ -1663,7 +1663,7 @@ while (my $arg1 = shift @foundArgs) {
 			WriteMessage("recognized date\n");
 			MakePage('date', $arg1, 1);
 		}
-		elsif (substr($arg1, 0, 1) eq '#') {
+		elsif (substr($arg1, 0, 1) eq '#') { # #hashtag page
 			#todo sanity checks here
 			WriteMessage("recognized hash tag $arg1\n");
 			MakePage('tag', substr($arg1, 1), 1);
