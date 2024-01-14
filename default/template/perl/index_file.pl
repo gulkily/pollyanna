@@ -329,8 +329,10 @@ sub IsFileAlreadyIndexed { # $file, $fileHash ; returns 1 if file has already be
 	#todo perhaps use GetAbsolutePath() ?
 
 	if (GetCache("indexed/$fileHash") eq $file) {
+		WriteLog('IsFileAlreadyIndexed: $file = ' . $file . '; $fileHash = ' . $fileHash . '; return = TRUE; caller = ' . join(',', caller));
 		return 1;
 	} else {
+		WriteLog('IsFileAlreadyIndexed: $file = ' . $file . '; $fileHash = ' . $fileHash . '; return = FALSE; caller = ' . join(',', caller));
 		return 0;
 	}
 } # IsFileAlreadyIndexed()
