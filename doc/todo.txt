@@ -12,6 +12,7 @@ changelog should appear immediately on New page after `hike refresh` is run
 				part of the problem is that the cache/b/indexed/... cache contains the file path, but it is not checked whether it is the same
 					added IsFileAlreadyIndexed() x
 						is sometimes called without $file or $fileHash?
+							still not clear what it returns, add debug output
 		even though changelog text file is written, a full `hike rebuild` is required for the changelog to appear on new page
 	new page should be updated
 		MakePage('new') should be called after above works
