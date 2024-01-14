@@ -306,4 +306,33 @@ sub IndexFile { # $file, \%flags ; calls IndexTextFile() or IndexImageFile() bas
 	return 0;
 } # IndexFile()
 
+sub IsFileAlreadyIndexed { # $file, $fileHash ; returns 1 if file has already been indexed, 0 if not
+# both hash and path should match what is in GetCache("indexed/$fileHash");
+
+	my $file = shift;
+	my $fileHash = shift;
+
+	if ($file && $fileHash) {
+		# ok
+	} else {
+		if (!$file) {
+			WriteLog('IsFileAlreadyIndexed: warning: $file is FALSE; caller = ' . join(',', caller));
+			return 0;
+		}
+		if (!$fileHash) {
+			WriteLog('IsFileAlreadyIndexed: warning: $fileHash is FALSE; caller = ' . join(',', caller));
+			return 0;
+		}
+	}
+
+	#todo sanity checks
+	#todo perhaps use GetAbsolutePath() ?
+
+	if (GetCache("indexed/$fileHash") eq $file) {
+		return 1;
+	} else {
+		return 0;
+	}
+} # IsFileAlreadyIndexed()
+
 1;
