@@ -27,9 +27,9 @@ while (my $argFound = shift) {
 	push @argsFound, $argFound;
 }
 
-sub GpgParse { # $filePath ; parses file and stores gpg response in cache
-	# PgpParse {
-	# $filePath = path to file containing the text
+sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETURNS AUTHOR'S FINGERPRINT
+# $filePath = path to file containing the text
+# RETURNS AUTHOR'S FINGERPRINT
 	#
 
 	my $filePath = shift;
