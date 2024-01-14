@@ -2393,7 +2393,10 @@ sub CheckForInstalledVersionChange {
 		IndexFile($newChangelogFile);
 		if (GetConfig('debug')) {
 			WriteLog('CheckForInstalledVersionChange: running _dev_index_new.sh');
-			WriteLog(`sh /home/wsl/pollyanna/default/template/sh/_dev_index_new.sh`);
+			#WriteLog(`sh /home/wsl/pollyanna/default/template/sh/_dev_index_new.sh`);
+			MakeIndex();
+			require_once('makepage.pl');
+			MakePage('new');
 		}
 
 		return $currVersion;
