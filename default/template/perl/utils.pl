@@ -2831,15 +2831,17 @@ sub ProcessTextFile { # $file ; add new text file to index
 		WriteLog("ProcessTextFile: organize_files is off, continuing");
 	}
 
-	if (!GetCache('indexed/' . $fileHash)) {
+	#if (!GetCache('indexed/' . $fileHash)) {
+	if (IsFileAlreadyIndexed($file, $fileHash)) {
+		# return 0 so that this file is not counted
+		WriteLog('ProcessTextFile: already indexed ' . $fileHash . ', return 0');
+		return 0;
+	}
+	else {
 		WriteLog('ProcessTextFile: ProcessTextFile(' . $file . ') not in cache/indexed, calling IndexFile');
 
 		IndexFile($file);
 		IndexFile('flush');
-	} else {
-		# return 0 so that this file is not counted
-		WriteLog('ProcessTextFile: already indexed ' . $fileHash . ', return 0');
-		return 0;
 	}
 
 	WriteLog('ProcessTextFile: return ' . $fileHash);

@@ -129,14 +129,19 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 		WriteLog('IndexTextFile: $addedTime from GetTime() = ' . $addedTime);
 	}
 
-	if (GetCache('indexed/' . $fileHash)) {
+	#if (GetCache('indexed/' . $fileHash)) {
+	if (IsFileAlreadyIndexed($file, $fileHash)) {
 		WriteLog('IndexTextFile: already indexed, returning. $fileHash = ' . $fileHash);
 		return $fileHash; # already indexed
+	} else {
+		WriteLog('IndexTextFile: already indexed FALSE, continue. $fileHash = ' . $fileHash);
+		# continue
 	}
 
 	my $authorKey = '';
 
 	if (substr(lc($file), length($file) -4, 4) eq ".txt") {
+		WriteLog('IndexTextFile: text file confirmed');
 		if (GetConfig('admin/gpg/enable')) {
 			$authorKey = GpgParse($file) || '';
 		}

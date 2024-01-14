@@ -425,7 +425,8 @@ while (my $arg1 = shift @argsFound) {
 		if (-e $arg1) {
 			my $fileHash = GetFileHash($arg1);
 			if ($fileHash && $flagNoCache) {
-				if (GetCache('indexed/' . $fileHash)) {
+				#if (GetCache('indexed/' . $fileHash)) {
+				if (IsFileAlreadyIndexed($arg1, $fileHash)) {
 					print "Removing indexed marker\n";
 					#UnlinkCache("indexed/$fileHash");
 				}

@@ -84,7 +84,8 @@ sub IndexImageFile { # $file ; indexes one image file into database and makes th
 	if (IsImageFile($file)) {
 		my $fileHash = GetFileHash($file);
 
-		if (GetCache('indexed/'.$fileHash)) {
+		#if (GetCache('indexed/'.$fileHash)) {
+		if (IsFileAlreadyIndexed($file, $fileHash)) {
 			WriteLog('IndexImageFile: skipping because of flag: indexed/'.$fileHash);
 			return $fileHash;
 		}

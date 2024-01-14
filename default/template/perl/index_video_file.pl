@@ -59,7 +59,8 @@ sub IndexVideoFile { # $file ; indexes one video file into database and makes th
 	if (IsVideoFile($file)) {
 		my $fileHash = GetFileHash($file);
 
-		if (GetCache('indexed/'.$fileHash)) {
+		#if (GetCache('indexed/'.$fileHash)) {
+		if (IsFileAlreadyIndexed($file, $fileHash)) {
 			WriteLog('IndexVideoFile: skipping because of flag: indexed/'.$fileHash);
 			return $fileHash;
 		}

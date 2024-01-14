@@ -66,7 +66,7 @@ sub IndexFile { # $file, \%flags ; calls IndexTextFile() or IndexImageFile() bas
 	my $fileHashFromFilename = '';
 	if ($file =~ m/([0-9a-f]{40})/) {
 		my $simpleHash = $1;
-		my $cachedFilename = GetCache('indexed/' . $1);
+		my $cachedFilename = GetCache('indexed/' . $1); #todo maybe replace with IsFileAlreadyIndexed() ?
 
 		if ($cachedFilename) {
 			WriteLog('IndexFile: found hash in filename; $simpleHash = ' . $simpleHash);
@@ -87,8 +87,8 @@ sub IndexFile { # $file, \%flags ; calls IndexTextFile() or IndexImageFile() bas
 
 	if (0) {
 		# this never seems to get called, so disabling it for now
-		if (GetCache('indexed/' . $fileHash)) {
-			if (trim(GetCache('indexed/' . $fileHash)) eq $file) {
+		if (GetCache('indexed/' . $fileHash)) { # disabled code
+			if (trim(GetCache('indexed/' . $fileHash)) eq $file) { # disabled code
 				WriteLog('IndexFile: already indexed, returning. $fileHash = ' . $fileHash);
 				return $fileHash;
 			} else {

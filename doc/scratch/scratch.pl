@@ -3201,7 +3201,7 @@ sub ProcessTextFile { # $file ; add new text file to index
 		WriteLog("ProcessTextFile: organize_files is off, continuing");
 	}
 
-	if (!GetCache('indexed/' . $fileHash)) {
+	if (!GetCache('indexed/' . $fileHash)) { #todo this should be replaced with IsFileAlreadyIndexed()
 		WriteLog('ProcessTextFile: ProcessTextFile(' . $file . ') not in cache/indexed, calling IndexFile');
 
 		IndexFile($file);
