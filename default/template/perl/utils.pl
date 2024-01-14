@@ -2384,17 +2384,19 @@ sub CheckForInstalledVersionChange {
 			ServerSign($newChangelogFile);
 		}
 
-		#my $changelogIndexResult = IndexFile($newChangelogFile);
+		require_once('index_file.pl');
+		my $changelogIndexResult = IndexFile($newChangelogFile);
+		WriteLog('CheckForInstalledVersionChange: $changelogIndexResult = ' . $changelogIndexResult);
 		#if (!$changelogIndexResult) {
 		#	WriteLog('CheckForInstalledVersionChange: warning: $changelogIndexResult was FALSE');
 		#}
 
-		require_once('index_file.pl');
-		IndexFile($newChangelogFile);
+		#IndexFile($newChangelogFile);
 
 		if (GetConfig('debug')) {
 			#WriteLog('CheckForInstalledVersionChange: running _dev_index_new.sh');
 			#WriteLog(`sh /home/wsl/pollyanna/default/template/sh/_dev_index_new.sh`);
+			#my $CACHEDIR = GetDir('cache');
 			WriteLog('CheckForInstalledVersionChange: debug mode: redo index');
 			require_once('index.pl');
 			MakeIndex();
