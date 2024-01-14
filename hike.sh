@@ -7,17 +7,6 @@
 # set -x
 # uncomment for debugging
 
-echo ==================
-echo Rejoice always
-echo Pray without ceasing
-echo Give thanks in all circumstances
-echo ==================
-echo "pollyanna" `git rev-parse HEAD | cut -c 1-8`
-echo ==================
-
-#Matthew 5:37
-#Let what you say be simply ‘Yes’ or ‘No’; anything more than this comes from evil.
-
 alias hike='cd ~/pollyanna/ ; bash hike.sh'
 
 if [ ! $1 ]
@@ -65,6 +54,9 @@ if [ $1 = version ]
 		#perl -e 'print "Perl " . $^V . "\n"'
 		echo '==='
 		git rev-parse HEAD
+    echo ==================
+    echo "pollyanna" `git rev-parse HEAD | cut -c 1-8`
+    echo ==================
 fi
 
 if [ $1 = build ] # hike build
@@ -303,6 +295,9 @@ fi
 
 if [ $1 = help ]
 	then
+    echo ==================
+    echo "pollyanna" `git rev-parse HEAD | cut -c 1-8`
+    echo ==================
 		echo source hike.sh = enable these commands
 		echo hike clean = clean including templates
 		echo hike build = build base
