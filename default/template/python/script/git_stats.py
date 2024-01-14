@@ -22,4 +22,4 @@ for line in commit_history.splitlines():
 
 # Output the results
 for year_month, count in commit_counts.items():
-    print(f'{year_month}: {count} commits')
+    print(f'{year_month}, {count}')
