@@ -2375,10 +2375,11 @@ sub CheckForInstalledVersionChange {
 		state $TXTDIR = GetDir('txt');
 		my $newChangelogFile = "$TXTDIR/$changeLogFilename";
 
+
+		PutConfig('current_version', $currVersion);
+
 		WriteLog('About to PutFile() to $newChangelogFile = ' . $newChangelogFile);
-
 		PutFile($newChangelogFile, $changeLogMessage);
-
 		if (GetConfig('setting/admin/gpg/sign_git_changelog')) {
 			ServerSign($newChangelogFile);
 		}
@@ -2388,10 +2389,12 @@ sub CheckForInstalledVersionChange {
 		#	WriteLog('CheckForInstalledVersionChange: warning: $changelogIndexResult was FALSE');
 		#}
 
-		PutConfig('current_version', $currVersion);
-
 		require_once('index_file.pl');
 		IndexFile($newChangelogFile);
+		if (GetConfig('debug')) {
+			WriteLog('CheckForInstalledVersionChange: running _dev_index_new.sh');
+			WriteLog(`sh /home/wsl/pollyanna/default/template/sh/_dev_index_new.sh`);
+		}
 
 		return $currVersion;
 	} else {
