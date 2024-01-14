@@ -106,7 +106,7 @@ if [ $1 = clean ] # hike clean
     fi
 fi
 
-if [ $1 = rebuild ]
+if [ $1 = rebuild ] # hike rebuild
 	then
 		time ./default/template/sh/rebuild.sh
 fi
