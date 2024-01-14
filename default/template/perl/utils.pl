@@ -2378,7 +2378,7 @@ sub CheckForInstalledVersionChange {
 
 		PutConfig('current_version', $currVersion);
 
-		WriteLog('About to PutFile() to $newChangelogFile = ' . $newChangelogFile);
+		WriteLog('CheckForInstalledVersionChange: About to PutFile() to $newChangelogFile = ' . $newChangelogFile);
 		PutFile($newChangelogFile, $changeLogMessage);
 		if (GetConfig('setting/admin/gpg/sign_git_changelog')) {
 			ServerSign($newChangelogFile);
