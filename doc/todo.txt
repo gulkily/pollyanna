@@ -3,6 +3,7 @@ changelog should appear immediately on New page after `hike refresh` is run
 		this works ok
 	changelog should be indexed
 		for some !#$%!#@$% reason this does not work until a reindex is done
+		MakeIndex() does not work for some reason
 	new page should be updated
 		MakePage('new') should be called after above works
 
