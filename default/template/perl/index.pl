@@ -97,7 +97,7 @@ sub uniq { # @array ; return array without duplicate elements
 # copied from somewhere like perlmonks
 	my %seen;
 	grep !$seen{$_}++, @_;
-}
+} # uniq()
 
 require_once('index_image_file.pl');
 
@@ -351,7 +351,7 @@ sub PrintHelp {
 	print "index.pl: --sweep\n";
 	print "index.pl: --chain\n";
 	#print "index.pl: --write-indexed-config (-C) calls WriteIndexedConfig\n";
-}
+} # PrintHelp()
 
 while (my $arg1 = shift @argsFound) {
 	WriteLog('index.pl: $arg1 = ' . $arg1);
@@ -454,13 +454,13 @@ while (my $arg1 = shift @argsFound) {
 
 			#WriteMessage("IndexFile($arg1) returned: http://localhost:2784/" . $htmlFilename);
 			IndexFile('flush');
-		}
+		} # if (-e $arg1)
 		else {
 			WriteMessage("index.pl: what is $arg1");
 			PrintHelp();
 		}
 	}
-}
+} # while (my $arg1 = shift @argsFound)
 
 if (!$didSomething) {
 	PrintHelp();
