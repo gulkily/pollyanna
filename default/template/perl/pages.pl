@@ -809,6 +809,9 @@ sub MakeJsPages {
 		} else {
 			$crypto2JsTemplate = str_replace('//username = prompt', 'username = prompt', $crypto2JsTemplate);
 		}
+
+		# the above issue has been remediated by only prompting if page is "session.html" and not on other pages
+		$crypto2JsTemplate = str_replace('//username = prompt', 'username = prompt', $crypto2JsTemplate);
 	}
 	PutHtmlFile("crypto2.js", $crypto2JsTemplate);
 
