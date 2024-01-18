@@ -58,6 +58,7 @@ sub MakePollyannaPages {
 			doc/screenshot/pollyanna/screenshot.png
 			doc/screenshot/pollyanna/instance.png
 			doc/screenshot/pollyanna/whitepaper.png
+			doc/screenshot/pollyanna/consensual.png
 			doc/screenshot/pollyanna/video.png
 			doc/screenshot/pollyanna/sponsor.png
 
@@ -88,6 +89,7 @@ sub MakePollyannaPages {
 			doc/screenshot/video/portable_profile.png
 
 			doc/whitepaper-pollyanna.pdf
+			doc/consensual-accessible.pdf
 		);
 
 		for my $file (@filesToCopy) {
