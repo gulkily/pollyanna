@@ -1568,6 +1568,7 @@ sub ReplaceStrings { # automatically replaces strings in html with looked up val
 } # ReplaceStrings()
 
 sub ServerSign { # $filePath
+	WriteLog('ServerSign: warning: this feature is not finished, exiting; caller = ' . join(',', caller));
 	return '';
 	#todo sanity
 	my $newFilePath = shift;
