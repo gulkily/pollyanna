@@ -1,5 +1,3 @@
-
-
 changelog should appear immediately on New page after `hike refresh` is run
 	changelog should be generated x
 		this works ok
