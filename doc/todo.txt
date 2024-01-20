@@ -12,6 +12,8 @@ changelog should appear immediately on New page after `hike refresh` is run
 				i think it's created before the file is renamed, but then indexing fails because the file was renamed?
 			removing this flag and running hike index fixes the issue
 				part of the problem is that the cache/b/indexed/... cache contains the file path, but it is not checked whether it is the same
+					confirmed this: indexed/... is generated, but the file does not appear in /new.html
+						once i remove the indexed/... entry and reindex, it appears on new page
 					added IsFileAlreadyIndexed() x
 						is sometimes called without $file or $fileHash?
 							still not clear what it returns, add debug output
