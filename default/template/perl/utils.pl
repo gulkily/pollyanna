@@ -2391,6 +2391,11 @@ sub CheckForInstalledVersionChange {
 		#	WriteLog('CheckForInstalledVersionChange: warning: $changelogIndexResult was FALSE');
 		#}
 
+		WriteLog('CheckForInstalledVersionChange: $newChangelogFile = ' . $newChangelogFile);
+		if ($changelogIndexResult) {
+			UnlinkCache("indexed/$changelogIndexResult");
+		}
+
 		#IndexFile($newChangelogFile);
 
 		if (GetConfig('debug')) {
