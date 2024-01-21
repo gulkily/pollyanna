@@ -287,7 +287,7 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 	$topMenuTemplate =~ s/\$selfLink/$selfLink/g;
 	$topMenuTemplate =~ s/\$siteName/$siteName/g;
 
-	if (GetConfig('html/clock')) {
+	if (GetConfig('setting/html/clock')) {
 		my $clockTemplate = GetClockWidget();
 		$topMenuTemplate = '<form action="/stats.html" name=frmTopMenu>' . $topMenuTemplate . '</form>';
 		$topMenuTemplate =~ s/<span id=spnClock><\/span>/$clockTemplate/g;

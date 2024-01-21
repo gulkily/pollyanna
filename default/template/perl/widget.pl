@@ -201,8 +201,8 @@ sub GetTimestampWidget { # $time ; returns timestamp widget
 
 sub GetClockWidget {
 	my $clock = '';
-	if (GetConfig('html/clock')) {
-		WriteLog('GetPageHeader: html/clock is enabled');
+	if (GetConfig('setting/html/clock')) {
+		WriteLog('GetPageHeader: setting/html/clock is enabled');
 		my $currentTime = GetClockFormattedTime();
 		if (GetConfig('admin/ssi/enable') && GetConfig('admin/ssi/clock_enhance')) {
 			# ssi-enhanced clock
@@ -220,7 +220,7 @@ sub GetClockWidget {
 			}
 			$clock =~ s/\$currentTime/$currentTime/;
 
-			my $sizeConfig = GetConfig('html/clock_format');
+			my $sizeConfig = GetConfig('setting/html/clock_format');
 			if ($sizeConfig eq '24hour') {
 				$sizeConfig = 6;
 			} elsif ($sizeConfig eq 'epoch') {

@@ -1162,7 +1162,7 @@ sub GetClockFormattedTime() { # returns current time in appropriate format from 
 	# this formats the user-facing time, like the clock on the pages (if enabled)
 	# formats supported: 24hour, union, epoch (default)
 
-	my $clockFormat = GetConfig('html/clock_format');
+	my $clockFormat = GetConfig('setting/html/clock_format');
 	chomp $clockFormat;
 
 	if ($clockFormat eq '24hour') {

@@ -207,7 +207,7 @@ function InjectJs ($html, $scriptNames, $injectMode = 'before', $htmlTag = '</bo
 
 	$scriptsDone = array();  // array to keep track of scripts we've already injected, to avoid duplicates
 
-//	if (GetConfig('html/clock')) {
+//	if (GetConfig('setting/html/clock')) {
 //		// if clock is enabled, automatically add its js
 //		$scriptNames[] = 'clock';
 //	}
@@ -1065,10 +1065,10 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			$html = HandleNotFound($path, $pathRel); // no $path specified in GET
 		}
 
-		if (GetConfig('html/clock')) {
+		if (GetConfig('setting/html/clock')) {
 			WriteLog('route.php: calling SetHtmlClock()');
 			$html = SetHtmlClock($html);
-		} # if (GetConfig('html/clock'))
+		} # if (GetConfig('setting/html/clock'))
 
 		if ($path == '/jstest1.html' && GetConfig('setting/admin/js/enable')) {
 			WriteLog('route.php: jstest1.html: inject $userAgentValue into /jstest1.html');
@@ -1443,7 +1443,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			}
 		}
 
-		if (GetConfig('html/clock')) {
+		if (GetConfig('setting/html/clock')) {
 			//$html = preg_replace('/id=txtClock value=\".+\"/', 'id=txtClock value="' . GetClockFormattedTime() . '"', $html);
 			$html = SetHtmlClock($html);
 		}

@@ -1306,7 +1306,7 @@ function GetClockFormattedTime () { // returns current time in appropriate forma
 
 	WriteLog("GetClockFormattedTime()");
 
-	$clockFormat = GetConfig('html/clock_format');
+	$clockFormat = GetConfig('setting/html/clock_format');
 
 	if ($clockFormat == '24hour') {
 		$time = GetTime();

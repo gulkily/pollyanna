@@ -37,7 +37,7 @@ sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 		# some hard-coded script additions
 		# these can be more selective in the future
 
-		if (GetConfig('html/clock')) {
+		if (GetConfig('setting/html/clock')) {
 			push @scriptNames, 'clock';
 		}
 
@@ -74,7 +74,7 @@ sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 		# loop through all the scripts #
 		################################
 		if ($script eq 'clock') {
-			my $clockFormat = GetConfig('html/clock_format');
+			my $clockFormat = GetConfig('setting/html/clock_format');
 			if ($clockFormat eq 'epoch' || $clockFormat eq 'union' || $clockFormat eq '24hour') {
 				$script = 'clock/' . $clockFormat;
 			} else {
@@ -474,7 +474,7 @@ sub InjectJs2 { # $html, $injectMode, $htmlTag, @scriptNames, ; inject js templa
 	my %scriptsDone = ();  # hash to keep track of scripts we've already injected, to avoid duplicates
 
 	if (in_array('settings', @scriptNames)) {
-		if (GetConfig('html/clock')) {
+		if (GetConfig('setting/html/clock')) {
 			# if clock is enabled, automatically add its js
 			push @scriptNames, 'clock';
 		}
@@ -490,7 +490,7 @@ sub InjectJs2 { # $html, $injectMode, $htmlTag, @scriptNames, ; inject js templa
 	# loop through all the scripts
 	foreach my $script (@scriptNames) {
 		if ($script eq 'clock') {
-			my $clockFormat = GetConfig('html/clock_format');
+			my $clockFormat = GetConfig('setting/html/clock_format');
 			if ($clockFormat eq 'epoch' || $clockFormat eq 'union' || $clockFormat eq '24hour') {
 				$script = 'clock/' . $clockFormat;
 			}

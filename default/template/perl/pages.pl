@@ -977,7 +977,7 @@ sub MakeSystemPages {
 
 	{
 		my $fourOhFourPage = GetDialogPage('404'); #GetTemplate('html/404.template');
-		if (GetConfig('html/clock')) {
+		if (GetConfig('setting/html/clock')) {
 			$fourOhFourPage = InjectJs($fourOhFourPage, qw(clock fresh utils)); #todo this causes duplicate clock script
 		}
 		PutHtmlFile("404.html", $fourOhFourPage);

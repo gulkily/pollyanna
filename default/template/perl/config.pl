@@ -208,7 +208,7 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 	WriteLog("GetConfig: Looking for config value in $CONFIGDIR/$configName ...");
 
 	my $acceptableValues;
-	if ($configName eq 'html/clock_format') {
+	if ($configName eq 'setting/html/clock_format') {
 		if (substr($configName, -5) ne '.list') {
 			my $configList = GetConfig("$configName.list"); # should this be GetDefault()? arguable
 			if ($configList) {
