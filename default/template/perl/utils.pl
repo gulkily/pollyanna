@@ -1576,18 +1576,17 @@ sub ServerSign { # $filePath
 	`gpg --clearsign $newFilePath`;
 	`mv $newFilePath.asc $newFilePath`;
 	IndexRecentTextFiles();
-}
+} # ServerSign()
 
 sub IsUrl { # add basic isurl()
 	return 1;
 } # IsUrl()
 
 sub RelativizeUrls { # $content, $fileProvided
-# sub RelativizeLinks { # relativize_urls # sub RelativizeLinks { # relativize_urls
-# sub RelativizeLinks { # relativize_urls # sub RelativizeLinks { # relativize_urls
-# sub RelativizeLinks { # relativize_urls # sub RelativizeLinks { # relativize_urls
+	# sub RelativizeLinks {
+	# relativize_urls
 
-	WriteLog('RelativizeUrls(...); caller = ' . join(',', caller));
+	WriteLog('RelativizeUrls: caller = ' . join(',', caller));
 
 	my $content = shift;
 	my $fileProvided = shift;
@@ -1611,6 +1610,7 @@ sub RelativizeUrls { # $content, $fileProvided
 	# but most subdirectory-located files are of the form /aa/bb/aabbcc....html anyway
 	my $subDir;
 	if ($count == 1) {
+		# level one, just add ./
 		$subDir = './';
 	} else {
 		if ($count < 1) {
@@ -1643,8 +1643,7 @@ sub RelativizeUrls { # $content, $fileProvided
 	$content =~ s/url\(\/\//url=$subDir/ig;
 
 	return $content;
-
-}
+} # RelativizeUrls()
 
 sub PutHtmlFile { # $file, $content ; writes content to html file, with special rules; parameters: $file, $content
 # sub WriteHtmlFile {
@@ -3069,7 +3068,7 @@ sub StorePostUrl {
 		WriteLog('StorePostUrl: warning: config/setting/admin/post/post_url did not match GetTargetPath(post), updating it');
 		PutConfig('setting/admin/post/post_url', GetTargetPath('post'));
 	}
-}
+} # StorePostUrl()
 
 StorePostUrl();
 
