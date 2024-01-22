@@ -1614,7 +1614,8 @@ sub RelativizeUrls { # $content, $fileProvided
 		$subDir = './';
 	} else {
 		if ($count < 1) {
-			WriteLog('PutHtmlFile: relativize_urls: sanity check failed, $count is < 1');
+			WriteLog('PutHtmlFile: warning: relativize_urls: sanity check failed, $count is < 1 ; caller = ' . join(',', caller));
+			$subDir = './';
 		} else {
 			# $subDir = '../' x ($count - 1);
 			$subDir = str_repeat('../', ($count - 1));
