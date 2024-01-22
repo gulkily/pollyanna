@@ -210,6 +210,7 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 	my $acceptableValues;
 	if ($configName eq 'setting/html/clock_format') {
 		if (substr($configName, -5) ne '.list') {
+			#todo i don't think this ever happens?
 			my $configList = GetConfig("$configName.list"); # should this be GetDefault()? arguable
 			if ($configList) {
 				$acceptableValues = $configList;
