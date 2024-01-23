@@ -20,16 +20,22 @@ sub GetWelcomePage {
 				item_type = 'txt'
 				AND item_score >= 0
 				AND labels_list NOT LIKE '%changelog%'
+				AND labels_list NOT LIKE '%notext%'
 			ORDER BY
 				add_timestamp DESC
 			LIMIT 50
 		");
+		#todo move query teo template
 
 		shift @ref; # remove first element, which contains the list of columns
 
 		my $html2 = ''; # inner html containing the items
 		foreach my $ref (@ref) {
 			my $replyText = GetFileMessage($ref->{'file_hash'});
+			if (!$replyText) {
+				next;
+				#todo figure out why this happens
+			}
 			# trim everything after signature placeholder "-- \n"
 			$replyText = substr($replyText, 0, index($replyText, "\n-- \n"));
 			$replyText = FormatForWeb($replyText);
