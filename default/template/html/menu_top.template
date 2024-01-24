@@ -1,4 +1,4 @@
-<!-- topmenu2.template -->
+<!-- menu_top.template -->
 <table cellspacing=0 cellpadding=3 border=0 bgcolor="$colorWindow" class=dialog id=topmenu>
 	<tr bgcolor="$colorWindow" class=topmenubar>
 		<td colspan=2>
@@ -24,4 +24,4 @@
 		</td>
 	</tr>
 </table>
-<!-- / topmenu2.template -->
+<!-- / menu_top.template -->

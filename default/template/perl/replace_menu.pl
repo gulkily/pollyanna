@@ -26,7 +26,7 @@ sub ReplaceMenuInAllPages {
 
 	require_once('widget/menu.pl');
 
-	my @pages = `grep "topmenu2.template" "$HTMLDIR" -rl`;
+	my @pages = `grep "menu_top.template" "$HTMLDIR" -rl`;
 	WriteLog('ReplaceMenuInAllPages: scalar(@pages) = ' . scalar(@pages));
 
 	my $pageCount = 0;
@@ -45,12 +45,12 @@ sub ReplaceMenuInAllPages {
 				next;
 			}
 			my $lengthBefore = length($html);
-			#$html =~ s/<\!-- template\/topmenu2.template -->.+<\!-- \/ template\/topmenu2.template -->//gs;
-			#$html =~ s/<\!\-\- template\/topmenu2\.template//gs;
+			#$html =~ s/<\!-- template\/menu_top.template -->.+<\!-- \/ template\/menu_top.template -->//gs;
+			#$html =~ s/<\!\-\- template\/menu_top\.template//gs;
 			my $pageType = TrimPath($page);
 			my $menu = GetMenuTemplate($pageType);
 			$menu = FillThemeColors($menu);
-			$html =~ s/<!-- template\/topmenu2.template -->.+<!-- \/ topmenu2.template -->/$menu/gs;
+			$html =~ s/<!-- template\/menu_top.template -->.+<!-- \/ menu_top.template -->/$menu/gs;
 			my $lengthAfter = length($html);
 			WriteLog('ReplaceMenuInAllPages: $page = ' . $page . '; $lengthBefore = ' . ($lengthBefore ? $lengthBefore : 'FALSE') . '; $lengthAfter = ' . ($lengthAfter ? $lengthAfter : 'FALSE'));
 			PutFile($page, $html);

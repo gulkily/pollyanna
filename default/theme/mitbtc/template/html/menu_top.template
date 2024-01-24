@@ -1,4 +1,4 @@
-<!-- theme/mitbtc/template/topmenu2.template -->
+<!-- theme/mitbtc/template/menu_top.template -->
 <table cellspacing=0 cellpadding=3 border=0 bgcolor="$colorWindow" class=dialog>
 	<tr bgcolor="$colorTopMenuTitlebar">
 		<td>
@@ -18,5 +18,5 @@
 		</td>
 	</tr>
 </table>
-<!-- / mitbtc/template/topmenu2.template -->
+<!-- / mitbtc/template/menu_top.template -->
 

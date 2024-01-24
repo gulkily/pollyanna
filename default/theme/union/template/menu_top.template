@@ -1,4 +1,4 @@
-<!-- theme/union/template/topmenu2.template -->
+<!-- theme/union/template/menu_top.template -->
 <table cellspacing=0 cellpadding=3 border=0 bgcolor="$colorWindow" class=dialog>
 	<tr bgcolor="$colorTitlebar" class=titlebar>
 		<td><small>
@@ -34,4 +34,4 @@
 		</td>
 	</tr>
 </table>
-<!-- / topmenu2.template -->
+<!-- / menu_top.template -->

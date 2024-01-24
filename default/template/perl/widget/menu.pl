@@ -205,7 +205,7 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 # sub GetMenuBar {
 # sub GetTopMenu {
 # sub GetMenu {
-	my $topMenuTemplate = GetTemplate('html/topmenu2.template');
+	my $topMenuTemplate = GetTemplate('html/menu_top.template');
 
     #todo this requires setting/html/css/enable
 	if (GetConfig('setting/html/menu_layer_controls')) {
