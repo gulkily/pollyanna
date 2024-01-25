@@ -26,9 +26,19 @@ sub GetWelcomePage {
 					next;
 					#todo figure out why this happens
 				}
+
 				# trim everything after signature placeholder "-- \n"
 				$replyText = substr($replyText, 0, index($replyText, "\n-- \n"));
+
+				# remove item references like >>[sha1] and replace them with empty string
+				$replyText =~ s/>>[0-9a-f]{40}//g;
+
+				# FormatForWeb() adds <br> tags and escapes html entities
 				$replyText = FormatForWeb($replyText);
+
+				# convert urls to links
+				$replyText =~ s{ (https?://\S+) }{<a href="$1">$1</a>}gx;
+
 				my $item = GetTemplate('html/item_flat.template');
 				$item = str_replace('<span class=text></span>', '<span class=text>' . $replyText . '</span>', $item);
 				$html2 .= $item;
