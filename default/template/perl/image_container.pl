@@ -6,8 +6,11 @@ use 5.010;
 use utf8;
 
 sub GetImageContainer2 { # $fileHash, $imageAlt, $linkUrl, $thumbnailSize
+# $fileHash = '768bc106e30ef173498776242b353540fa2b9083'
+# $imageAlt = 'ilya'
 # $linkUrl = '' means no link
 # $linkUrl = 'item' means link to item page
+# $thumbnailSize = '42' or '512' or '800'
 
 #sub GetThumbnail {
 #sub GetImageThumbnail {
@@ -81,7 +84,7 @@ sub GetImageContainer2 { # $fileHash, $imageAlt, $linkUrl, $thumbnailSize
 
 	#if (file_exists($imageUrl) || file_exists($imageSmallUrl)) { #this doesn't work because paths are wrong
 	if (1) { #todo, see above comment
-		WriteLog('GetImageContainer2: $fileHash = ' . $fileHash . '; $imageAlt = ' . $imageAlt . '; $permalinkHtml = ' . $permalinkHtml);
+		WriteLog('GetImageContainer2: $fileHash = ' . $fileHash . '; $imageAlt = ' . $imageAlt . '; $permalinkHtml = ' . $permalinkHtml . '; $linkUrl = ' . $linkUrl);
 
 		$imageContainer =~ s/\$imageUrl/$imageUrl/g;
 		$imageContainer =~ s/\$imageSmallUrl/$imageSmallUrl/g;
