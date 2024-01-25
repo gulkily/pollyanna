@@ -17,17 +17,27 @@ sub GetWelcomePage {
 
 		my $html2 = ''; # inner html containing the items
 		foreach my $ref (@ref) {
-			my $replyText = GetFileMessage($ref->{'file_hash'});
-			if (!$replyText) {
-				next;
-				#todo figure out why this happens
+			if ($ref->{'item_type'} eq 'txt') {
+				my $replyText = GetFileMessage($ref->{'file_hash'});
+				if (!$replyText) {
+					next;
+					#todo figure out why this happens
+				}
+				# trim everything after signature placeholder "-- \n"
+				$replyText = substr($replyText, 0, index($replyText, "\n-- \n"));
+				$replyText = FormatForWeb($replyText);
+				my $item = GetTemplate('html/item_flat.template');
+				$item = str_replace('<span class=text></span>', '<span class=text>' . $replyText . '</span>', $item);
+				$html2 .= $item;
 			}
-			# trim everything after signature placeholder "-- \n"
-			$replyText = substr($replyText, 0, index($replyText, "\n-- \n"));
-			$replyText = FormatForWeb($replyText);
-			my $item = GetTemplate('html/item_flat.template');
-			$item = str_replace('<span class=text></span>', '<span class=text>' . $replyText . '</span>', $item);
-			$html2 .= $item;
+			if ($ref->{'item_type'} eq 'image') {
+				#my $imageTemplate = GetImageContainer2($ref->{'file_hash'}, $ref->{'file_name'}, '/image.html', 512);
+				#$html2 .= $imageTemplate;
+				my $imageTemplate = GetImageContainer2($ref->{'file_hash'}, $ref->{'file_name'}, '/image.html', 512);
+				my $item = GetTemplate('html/item_flat.template');
+				$item = str_replace('<span class=text></span>', '<span class=text>' . $imageTemplate . '</span>', $item);
+				$html2 .= $imageTemplate;
+			}
 		}
 		$html = str_replace('<div id="item_flat_placeholder"></div>', '<div id="item_flat_placeholder">' . $html2 . '</div>', $html);
 	}
