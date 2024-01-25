@@ -11,21 +11,7 @@ sub GetWelcomePage {
 
 	if (1) {
 		my $fileFields = DBGetItemFields();
-		my @ref = SqliteQueryHashRef("
-			SELECT
-				$fileFields
-			FROM
-				item_flat
-			WHERE
-				item_type = 'txt'
-				AND item_score >= 0
-				AND labels_list NOT LIKE '%changelog%'
-				AND labels_list NOT LIKE '%notext%'
-			ORDER BY
-				add_timestamp DESC
-			LIMIT 50
-		");
-		#todo move query teo template
+		my @ref = SqliteQueryHashRef('welcome');
 
 		shift @ref; # remove first element, which contains the list of columns
 
