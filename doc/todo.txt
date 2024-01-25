@@ -1,3 +1,6 @@
+there should be a clear way to back up an entire server's data
+	and there should be an easy way to validate/test that backup
+
 changelog should appear immediately on New page after `hike refresh` is run
 	changelog should be generated x
 		this works ok
