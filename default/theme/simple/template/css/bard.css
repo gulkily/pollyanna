@@ -50,12 +50,12 @@ input[type="submit"] {
   margin-bottom: 40px;
 }
 
-.reply {
+.item {
   padding: 15px;
   border-bottom: 1px solid #ddd;
 }
 
-.reply:last-child {
+.item:last-child {
   border-bottom: none;
 }
 
