@@ -9,6 +9,9 @@ sub GetWelcomePage {
 
 	my $html = GetTemplate('html/page/home.template'); # template for home page
 
+	my $siteName = GetConfig('setting/site_name');
+	$html = str_replace('<title>Welcome</title>', '<title>' . $siteName . '</title>', $html);
+
 	if (1) {
 		my $fileFields = DBGetItemFields();
 		my @ref = SqliteQueryHashRef('welcome');

@@ -15,10 +15,17 @@ SELECT
 FROM
 	item_flat
 WHERE
-	(item_type = 'txt' OR item_type = 'image')
-	AND item_score >= 0
-	AND labels_list NOT LIKE '%changelog%'
-	AND labels_list NOT LIKE '%notext%'
+	(
+		item_type = 'txt'
+		AND item_score > 0
+		AND labels_list NOT LIKE '%notext%'
+		AND labels_list NOT LIKE '%changelog%'
+	)
+	OR
+	(
+		item_type = 'image'
+		AND item_score >= 0
+	)
 ORDER BY
 	add_timestamp DESC
 LIMIT 100
