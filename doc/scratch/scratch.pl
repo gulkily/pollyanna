@@ -1,3 +1,16 @@
+	if (0 && GetConfig('debug')) {
+		# used to generate a baseline of characters which can be in an sql query
+		my $existingChars = GetFile('temp_sql.sh');
+		for (my $i = 0; $i < length($shCommand); $i++) {
+			my $thisChar = substr($shCommand, $i, 1);
+			if (index($existingChars, $thisChar) == -1) {
+				$existingChars .= $thisChar;
+			}
+		}
+		PutCache('sqlite_encountered_characters', $existingChars);
+	}
+
+
 		";
 		$keyList = GetQueryAsDialog($queryApprovedKeys, 'ApprovedKeys');
 		#todo templatize the query, use parameter injection
