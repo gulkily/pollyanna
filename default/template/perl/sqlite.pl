@@ -334,7 +334,7 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 	#
 
 	my $shCommand = "sqlite3 -header \"$SqliteDbName\" \"$query\" 2>$sqliteErrorLog"; # $sqliteCommand #sqlite3Command
-	#todo send to /dev/null if debug mode is not enabled
+	#todo send to /dev/null if debug mode is not enabled?
 
 	WriteLog('SqliteQuery: ' . $queryId . ' $shCommand = ' . $shCommand);
 	#my $results = `sqlite3 -header "$SqliteDbName" "$query" 2>$sqliteErrorLog`;
@@ -350,7 +350,7 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 		}
 		PutCache('sqlite_encountered_characters', $existingChars);
 	}
-	
+
 	if ($shCommand =~ m/^(.+)$/s) {
 	# if ($shCommand =~ m/^([[:print:]\n\r\s]+)$/s) {
 		# this is only a basic sanity check, but it's better than nothing
@@ -428,6 +428,15 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 		WriteLog('SqliteQuery: ' . $queryId . ' warning: error returned; log = ' . $sqliteErrorLog . '; caller = ' . join(',', caller));
 		AppendFile($sqliteErrorLog, $query);
 		AppendFile($sqliteErrorLog, 'caller: ' . join(',', caller));
+
+		my @caller1 = caller(1);
+		my $caller1string = (@caller1 ? ($caller1[0] . ',' . $caller1[1] . ',' . $caller1[2]) : 'undef');
+		AppendFile($sqliteErrorLog, 'caller: ' . $caller1string);
+
+		my @caller2 = caller(2);
+		my $caller2string = (@caller2 ? ($caller2[0] . ',' . $caller2[1] . ',' . $caller2[2]) : 'undef');
+		AppendFile($sqliteErrorLog, 'caller: ' . $caller2string);
+
 		return '';
 	}
 
