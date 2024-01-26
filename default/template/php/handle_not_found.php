@@ -173,7 +173,8 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'/people.html', #ilyag
 			'/menu.html',
 			'/queue.html',
-			'/session.html'
+			'/session.html',
+			'/paint.html'
 		);
 
 		if (in_array($path, $validMakePageNames)) {
