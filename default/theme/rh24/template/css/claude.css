@@ -1,0 +1,59 @@
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.5;
+}
+
+a {
+  color: #802080;
+}
+
+a:hover {
+  color: #402080;
+}
+
+h1, h2, h3 {
+  font-weight: bold;
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+input, textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+input[type="submit"] {
+  background-color: #802080;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #402080;
+}
+
+.reply {
+  border: 1px solid #eee;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.introduction {
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+.introduction img {
+  float: left;
+  margin-right: 40px;
+}

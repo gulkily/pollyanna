@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Jose Demo</title>
+		<style>
+			body { 
+                background-color: aqua;
+                margin: 0;
+            }
+            #VRButton {
+                font-size: large !important;
+                color: black !important;
+                background-color: blue !important;
+            }
+            /* canvas {
+                background: #eee;
+                display: block;
+                margin: 0 auto;
+            } */
+		</style>
+        <script type="importmap">
+            {
+              "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "VRButton": "https://unpkg.com/three@0.160.0/examples/jsm/webxr/VRButton.js"
+              }
+            }
+          </script>
+	</head>
+	<body>
+        <h1>FINGER PAINTING</h1>
+        <!-- <canvas id="myCanvas" width="480" height="320"></canvas> -->
+		<script type="module" src="/main.js"></script>
+	</body>
+</html>
