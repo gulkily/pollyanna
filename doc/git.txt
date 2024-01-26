@@ -15,3 +15,5 @@ git config merge.defaultToUpstream true
 
 #how to revert most recent commit:
 # git reset HEAD~
+
+# git cheatsheet
