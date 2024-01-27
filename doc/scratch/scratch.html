@@ -1,3 +1,54 @@
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="alternate" title="RSS" href="/rss.xml" type="application/rss+xml"></link>
+	<title>Welcome</title>
+	<style type="text/css">
+<!--
+
+
+-->
+</style>
+</head>
+<body>
+
+<form action="/post.html">
+	Share something you want others to know:
+	<br>
+	<input type="hidden" name="vote_return_to" value="/welcome.html">
+	<textarea name="comment" rows="5" cols="40" placeholder="Write here"></textarea>
+	<br>
+	<input type="submit" value="Send">
+	<input type=hidden name=timestamp value=1706251114><input type=hidden name=origin value="/welcome.html"></form>
+
+<div id="item_flat_placeholder"><div class=item>
+    <span class=text>this is another new item
+<br>
+<br>i'm also writing it so that bard knows what an item looks like.</span>
+</div>
+	<div class=item>
+    <span class=text>this is an example item.
+<br>
+<br>i'm writing it so that i can show bard.</span>
+	</div>
+</div>
+
+<p class="introduction">
+    <span class=text><p>
+	Welcome to this simple website. To write something, use the text box.
+</p>
+</span>
+</p>
+
+</body>
+</html>
+
+
+
 <p class=beginner>
 	<b>Please Pay Attention:</b><br>
 	Search query will be published<br>
@@ -60,49 +111,49 @@ session.template:
 	<p class=beginner>Not signed in.</p>
 	<p class=beginner>To sign in, press Register.</p>
 
-<li>
-	<a href="./sponsor.html">
-		<img alt="sponsor page thumbnail" src="./sponsor.png">
-		Sponsors
-	</a>
-</li>
+	<li>
+		<a href="./sponsor.html">
+			<img alt="sponsor page thumbnail" src="./sponsor.png">
+			Sponsors
+		</a>
+	</li>
 
 
-<p>
-	<label for=chkUncheckSignWhenPasting>
-		<input type=checkbox id=chkUncheckSignWhenPasting name=chkUncheckSignWhenPasting onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'uncheck_sign_when_pasting'); }">
-		Uncheck sign option when pasting<noscript><b>*</b></noscript>
-	</label>
-</p>
+	<p>
+		<label for=chkUncheckSignWhenPasting>
+			<input type=checkbox id=chkUncheckSignWhenPasting name=chkUncheckSignWhenPasting onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'uncheck_sign_when_pasting'); }">
+			Uncheck sign option when pasting<noscript><b>*</b></noscript>
+		</label>
+	</p>
 
 
 
 
-<p>Only images supported, video support later</p>
-<span id=spanStripMetaData class=advanced>
+	<p>Only images supported, video support later</p>
+	<span id=spanStripMetaData class=advanced>
 		<label for=chkStripMetaData>
 			<input type=checkbox name=chkStripMetaData id=chkStripMetaData checked>
 		</label>
 	</span>
 
 
-<span id=spanStripMetaData class=advanced>
+	<span id=spanStripMetaData class=advanced>
 		<label for=chkStripMetaData>
 			<input type=checkbox name=chkStripMetaData id=chkStripMetaData checked>
 		</label>
 	</span>
 
 
-<html xmlns="http://www.w3.org/1999/html">
-<!-- keyboard_a.template -->
-<!-- keyboard implemented with a elements -->
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>keyboard</title>
-</head>
+	<html xmlns="http://www.w3.org/1999/html">
+	<!-- keyboard_a.template -->
+	<!-- keyboard implemented with a elements -->
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>keyboard</title>
+	</head>
 
-<body>
-<style type="text/css">
+	<body>
+	<style type="text/css">
     <!--
         a {
             font-family: monospace;
@@ -115,7 +166,7 @@ session.template:
         }
     -->
 </style>
-<script>
+	<script>
 <!--
 	function hi (letter) {
 		var text = letter;
@@ -189,118 +240,118 @@ session.template:
 // -->
 </script>
 
-<table bgcolor="$colorWindow" cellpadding=4 cellspacing=0 border=0>
+	<table bgcolor="$colorWindow" cellpadding=4 cellspacing=0 border=0>
 
-	<tr><td>
-		&nbsp;
-		<a href="/post.html" onclick="return hi('`');" ondblclick="return hi('`');" style="color:red"><button>`</button></a>
-		<a href="/post.html" onclick="return hi('1');" ondblclick="return hi('1');" style="color:red"><button>1</button></a>
-		<a href="/post.html" onclick="return hi('2');" ondblclick="return hi('2');" style="color:green"><button>2</button></a>
-		<a href="/post.html" onclick="return hi('3');" ondblclick="return hi('3');" style="color:blue"><button>3</button></a>
-		<a href="/post.html" onclick="return hi('4');" ondblclick="return hi('4');" style="color:purple"><button>4</button></a>
-		<a href="/post.html" onclick="return hi('5');" ondblclick="return hi('5');" style="color:purple"><button>5</button></a>
-		<a href="/post.html" onclick="return hi('6');" ondblclick="return hi('6');" style="color:red"><button>6</button></a>
-		<a href="/post.html" onclick="return hi('7');" ondblclick="return hi('7');" style="color:red"><button>7</button></a>
-		<a href="/post.html" onclick="return hi('8');" ondblclick="return hi('8');" style="color:green"><button>8</button></a>
-		<a href="/post.html" onclick="return hi('9');" ondblclick="return hi('9');" style="color:blue"><button>9</button></a>
-		<a href="/post.html" onclick="return hi('0');" ondblclick="return hi('0');" style="color:purple"><button>0</button></a>
-		<a href="/post.html" onclick="return hi('-');" ondblclick="return hi('-');" style="color:purple"><button>-</button></a>
-		<a href="/post.html" onclick="return hi('=');" ondblclick="return hi('=');" style="color:purple"><button>=</button></a>
-		<a href="/write.html" target="_top" onclick="if (parent && parent.frames[0] && parent.frames[0].location && parent.frames[0].location.href ) { parent.location = parent.frames[0].location.href; return false; } else { return true }" ondblclick="return false;" style="color:purple"><button><button>X</button></button></a>
-		<br>
-	</td></tr>
-	<tr><td>
-		<a href="/post.html" onclick="return hi('Tag');" ondblclick="return hi('Tag');" style="color:red"><button>Tag</button></a>
-		<a href="/post.html" onclick="return hi('Q');" ondblclick="return hi('Q');" style="color:red"><button>Q</button></a>
-		<a href="/post.html" onclick="return hi('W');" ondblclick="return hi('W');" style="color:green"><button>W</button></a>
-		<a href="/post.html" onclick="return hi('E');" ondblclick="return hi('E');" style="color:blue"><button>E</button></a>
-		<a href="/post.html" onclick="return hi('R');" ondblclick="return hi('R');" style="color:purple"><button>R</button></a>
-		<a href="/post.html" onclick="return hi('T');" ondblclick="return hi('T');" style="color:purple"><button>T</button></a>
-		<a href="/post.html" onclick="return hi('Y');" ondblclick="return hi('Y');" style="color:red"><button>Y</button></a>
-		<a href="/post.html" onclick="return hi('U');" ondblclick="return hi('U');" style="color:red"><button>U</button></a>
-		<a href="/post.html" onclick="return hi('I');" ondblclick="return hi('I');" style="color:green"><button>I</button></a>
-		<a href="/post.html" onclick="return hi('O');" ondblclick="return hi('O');" style="color:blue"><button>O</button></a>
-		<a href="/post.html" onclick="return hi('P');" ondblclick="return hi('P');" style="color:purple"><button>P</button></a>
-		<a href="/post.html" onclick="return hi('[');" ondblclick="return hi('[');" style="color:purple"><button>[</button></a>
-		<a href="/post.html" onclick="return hi(']');" ondblclick="return hi(']');" style="color:purple"><button>]</button></a>
-		<a href="/post.html" onclick="return hi('\ ');" ondblclick="return hi('\ ');" style="color:purple"><button>\ </button></a>
-		<br>
-	</td></tr>
-	<tr><td>
-		<a href="/post.html" onclick="return hi('Copy');" ondblclick="return hi('Copy');" style="color:red"><button>Copy</button></a>
-		<a href="/post.html" onclick="return hi('A');" ondblclick="return hi('A');" style="color:red"><button>A</button></a>
-		<a href="/post.html" onclick="return hi('S');" ondblclick="return hi('S');" style="color:green"><button>S</button></a>
-		<a href="/post.html" onclick="return hi('D');" ondblclick="return hi('D');" style="color:blue"><button>D</button></a>
-		<a href="/post.html" onclick="return hi('F');" ondblclick="return hi('F');" style="color:purple"><button>F</button></a>
-		<a href="/post.html" onclick="return hi('G');" ondblclick="return hi('G');" style="color:purple"><button>G</button></a>
-		<a href="/post.html" onclick="return hi('H');" ondblclick="return hi('H');" style="color:red"><button>H</button></a>
-		<a href="/post.html" onclick="return hi('J');" ondblclick="return hi('J');" style="color:red"><button>J</button></a>
-		<a href="/post.html" onclick="return hi('K');" ondblclick="return hi('K');" style="color:green"><button>K</button></a>
-		<a href="/post.html" onclick="return hi('L');" ondblclick="return hi('L');" style="color:blue"><button>L</button></a>
-		<a href="/post.html" onclick="return hi(';');" ondblclick="return hi(';');" style="color:purple"><button>;</button></a>
-		<a href="/post.html" onclick="return hi('\'');" ondblclick="return hi('\'');" style="color:purple"><button>'</button></a>
-		<a href="/post.html" onclick="return hi('Enter');" ondblclick="return hi('Enter');" style="color:purple"><button>Enter</button></a>
-		<br>
-	</td></tr>
-	<tr><td>
-		<a href="/post.html" onclick="return hi('Space');" ondblclick="return hi('Space');"><button>Space</button></a>
-		<a href="/post.html" onclick="return hi('Z');" ondblclick="return hi('Z');" style="color:red"><button>Z</button></a>
-		<a href="/post.html" onclick="return hi('X');" ondblclick="return hi('X');" style="color:green"><button>X</button></a>
-		<a href="/post.html" onclick="return hi('C');" ondblclick="return hi('C');" style="color:blue"><button>C</button></a>
-		<a href="/post.html" onclick="return hi('V');" ondblclick="return hi('V');" style="color:purple"><button>V</button></a>
-		<a href="/post.html" onclick="return hi('B');" ondblclick="return hi('B');" style="color:purple"><button>B</button></a>
-		<a href="/post.html" onclick="return hi('N');" ondblclick="return hi('N');" style="color:red"><button>N</button></a>
-		<a href="/post.html" onclick="return hi('M');" ondblclick="return hi('M');" style="color:red"><button>M</button></a>
-		<a href="/post.html" onclick="return hi(',');" ondblclick="return hi(',');" style="color:green"><button>,</button></a>
-		<a href="/post.html" onclick="return hi('.');" ondblclick="return hi('.');" style="color:blue"><button>.</button></a>
-		<a href="/post.html" onclick="return hi('/');" ondblclick="return hi('/');" style="color:purple"><button>/</button></a>
-		<a href="/post.html" onclick="return hi('Space');" ondblclick="return hi('Space');"><button>Space</button></a>
-		<br>
-	</td></tr>
-</table>
+		<tr><td>
+			&nbsp;
+			<a href="/post.html" onclick="return hi('`');" ondblclick="return hi('`');" style="color:red"><button>`</button></a>
+			<a href="/post.html" onclick="return hi('1');" ondblclick="return hi('1');" style="color:red"><button>1</button></a>
+			<a href="/post.html" onclick="return hi('2');" ondblclick="return hi('2');" style="color:green"><button>2</button></a>
+			<a href="/post.html" onclick="return hi('3');" ondblclick="return hi('3');" style="color:blue"><button>3</button></a>
+			<a href="/post.html" onclick="return hi('4');" ondblclick="return hi('4');" style="color:purple"><button>4</button></a>
+			<a href="/post.html" onclick="return hi('5');" ondblclick="return hi('5');" style="color:purple"><button>5</button></a>
+			<a href="/post.html" onclick="return hi('6');" ondblclick="return hi('6');" style="color:red"><button>6</button></a>
+			<a href="/post.html" onclick="return hi('7');" ondblclick="return hi('7');" style="color:red"><button>7</button></a>
+			<a href="/post.html" onclick="return hi('8');" ondblclick="return hi('8');" style="color:green"><button>8</button></a>
+			<a href="/post.html" onclick="return hi('9');" ondblclick="return hi('9');" style="color:blue"><button>9</button></a>
+			<a href="/post.html" onclick="return hi('0');" ondblclick="return hi('0');" style="color:purple"><button>0</button></a>
+			<a href="/post.html" onclick="return hi('-');" ondblclick="return hi('-');" style="color:purple"><button>-</button></a>
+			<a href="/post.html" onclick="return hi('=');" ondblclick="return hi('=');" style="color:purple"><button>=</button></a>
+			<a href="/write.html" target="_top" onclick="if (parent && parent.frames[0] && parent.frames[0].location && parent.frames[0].location.href ) { parent.location = parent.frames[0].location.href; return false; } else { return true }" ondblclick="return false;" style="color:purple"><button><button>X</button></button></a>
+			<br>
+		</td></tr>
+		<tr><td>
+			<a href="/post.html" onclick="return hi('Tag');" ondblclick="return hi('Tag');" style="color:red"><button>Tag</button></a>
+			<a href="/post.html" onclick="return hi('Q');" ondblclick="return hi('Q');" style="color:red"><button>Q</button></a>
+			<a href="/post.html" onclick="return hi('W');" ondblclick="return hi('W');" style="color:green"><button>W</button></a>
+			<a href="/post.html" onclick="return hi('E');" ondblclick="return hi('E');" style="color:blue"><button>E</button></a>
+			<a href="/post.html" onclick="return hi('R');" ondblclick="return hi('R');" style="color:purple"><button>R</button></a>
+			<a href="/post.html" onclick="return hi('T');" ondblclick="return hi('T');" style="color:purple"><button>T</button></a>
+			<a href="/post.html" onclick="return hi('Y');" ondblclick="return hi('Y');" style="color:red"><button>Y</button></a>
+			<a href="/post.html" onclick="return hi('U');" ondblclick="return hi('U');" style="color:red"><button>U</button></a>
+			<a href="/post.html" onclick="return hi('I');" ondblclick="return hi('I');" style="color:green"><button>I</button></a>
+			<a href="/post.html" onclick="return hi('O');" ondblclick="return hi('O');" style="color:blue"><button>O</button></a>
+			<a href="/post.html" onclick="return hi('P');" ondblclick="return hi('P');" style="color:purple"><button>P</button></a>
+			<a href="/post.html" onclick="return hi('[');" ondblclick="return hi('[');" style="color:purple"><button>[</button></a>
+			<a href="/post.html" onclick="return hi(']');" ondblclick="return hi(']');" style="color:purple"><button>]</button></a>
+			<a href="/post.html" onclick="return hi('\ ');" ondblclick="return hi('\ ');" style="color:purple"><button>\ </button></a>
+			<br>
+		</td></tr>
+		<tr><td>
+			<a href="/post.html" onclick="return hi('Copy');" ondblclick="return hi('Copy');" style="color:red"><button>Copy</button></a>
+			<a href="/post.html" onclick="return hi('A');" ondblclick="return hi('A');" style="color:red"><button>A</button></a>
+			<a href="/post.html" onclick="return hi('S');" ondblclick="return hi('S');" style="color:green"><button>S</button></a>
+			<a href="/post.html" onclick="return hi('D');" ondblclick="return hi('D');" style="color:blue"><button>D</button></a>
+			<a href="/post.html" onclick="return hi('F');" ondblclick="return hi('F');" style="color:purple"><button>F</button></a>
+			<a href="/post.html" onclick="return hi('G');" ondblclick="return hi('G');" style="color:purple"><button>G</button></a>
+			<a href="/post.html" onclick="return hi('H');" ondblclick="return hi('H');" style="color:red"><button>H</button></a>
+			<a href="/post.html" onclick="return hi('J');" ondblclick="return hi('J');" style="color:red"><button>J</button></a>
+			<a href="/post.html" onclick="return hi('K');" ondblclick="return hi('K');" style="color:green"><button>K</button></a>
+			<a href="/post.html" onclick="return hi('L');" ondblclick="return hi('L');" style="color:blue"><button>L</button></a>
+			<a href="/post.html" onclick="return hi(';');" ondblclick="return hi(';');" style="color:purple"><button>;</button></a>
+			<a href="/post.html" onclick="return hi('\'');" ondblclick="return hi('\'');" style="color:purple"><button>'</button></a>
+			<a href="/post.html" onclick="return hi('Enter');" ondblclick="return hi('Enter');" style="color:purple"><button>Enter</button></a>
+			<br>
+		</td></tr>
+		<tr><td>
+			<a href="/post.html" onclick="return hi('Space');" ondblclick="return hi('Space');"><button>Space</button></a>
+			<a href="/post.html" onclick="return hi('Z');" ondblclick="return hi('Z');" style="color:red"><button>Z</button></a>
+			<a href="/post.html" onclick="return hi('X');" ondblclick="return hi('X');" style="color:green"><button>X</button></a>
+			<a href="/post.html" onclick="return hi('C');" ondblclick="return hi('C');" style="color:blue"><button>C</button></a>
+			<a href="/post.html" onclick="return hi('V');" ondblclick="return hi('V');" style="color:purple"><button>V</button></a>
+			<a href="/post.html" onclick="return hi('B');" ondblclick="return hi('B');" style="color:purple"><button>B</button></a>
+			<a href="/post.html" onclick="return hi('N');" ondblclick="return hi('N');" style="color:red"><button>N</button></a>
+			<a href="/post.html" onclick="return hi('M');" ondblclick="return hi('M');" style="color:red"><button>M</button></a>
+			<a href="/post.html" onclick="return hi(',');" ondblclick="return hi(',');" style="color:green"><button>,</button></a>
+			<a href="/post.html" onclick="return hi('.');" ondblclick="return hi('.');" style="color:blue"><button>.</button></a>
+			<a href="/post.html" onclick="return hi('/');" ondblclick="return hi('/');" style="color:purple"><button>/</button></a>
+			<a href="/post.html" onclick="return hi('Space');" ondblclick="return hi('Space');"><button>Space</button></a>
+			<br>
+		</td></tr>
+	</table>
 
-<!-- / keyboard_a.template -->
-</body></html>
-
-
+	<!-- / keyboard_a.template -->
+	</body></html>
 
 
 
 
 
-<html>
-<body onunload="document.a.b.value=document.a.b.value+'onunload'" onbeforeunload="document.a.b.value=document.a.b.value+'onbeforeunload'">
-<a href="/">go home</a>
-<form action="/" method=POST name=a>
-	<input name=b id=b value="hi" type=text>
-</form>
-</body>
-</html>
+
+
+	<html>
+	<body onunload="document.a.b.value=document.a.b.value+'onunload'" onbeforeunload="document.a.b.value=document.a.b.value+'onbeforeunload'">
+	<a href="/">go home</a>
+	<form action="/" method=POST name=a>
+		<input name=b id=b value="hi" type=text>
+	</form>
+	</body>
+	</html>
 
 
 
-<p class=advanced>
-	<a
-			title="Reset interface to beginner mode"
-			onclick="if (window.SetInterfaceMode) { SetInterfaceMode('beginner', this); }"
-			href="/settings.html?ui=beginner"
-	>
-		Click here for <b>beginner mode</b>.
-	</a>
-</p>
+	<p class=advanced>
+		<a
+				title="Reset interface to beginner mode"
+				onclick="if (window.SetInterfaceMode) { SetInterfaceMode('beginner', this); }"
+				href="/settings.html?ui=beginner"
+		>
+			Click here for <b>beginner mode</b>.
+		</a>
+	</p>
 
 
 
-<div>
-	<p>Taken from wikpedia</p>
-	<img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
+	<div>
+		<p>Taken from wikpedia</p>
+		<img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
     AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
         9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
-</div>
+	</div>
 
-<form>
-</form>
-<script>
+	<form>
+	</form>
+	<script>
  var imgBase64 = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCA..." //your bse64 image
 
 onSubmit(){
@@ -326,33 +377,33 @@ formData.append('path', 'temp/') //other param
 
 
 
-<form action=/post.html>
-	<input type=submit name=comment value=Yes>
-	<input type=submit name=comment value=No>
-	<input name=replyto value=6954dddeb158acff2ec127bdb817cd839645ae2b type=hidden>
-</form>
+	<form action=/post.html>
+		<input type=submit name=comment value=Yes>
+		<input type=submit name=comment value=No>
+		<input name=replyto value=6954dddeb158acff2ec127bdb817cd839645ae2b type=hidden>
+	</form>
 
 
 
 
-<h3>Latest Developments:</h3>
+	<h3>Latest Developments:</h3>
 
-<ul>
-	<li><a href="/write.html">Writer's Block Cured With New Technology!</a><br><br></li>
-	<li><a href="/compost.html">Study: Can Voting Really Change Things? Results Unclear</a><br><br></li>
-	<li><a href="/manual.html">9 out of 10 Users Found This Manual Confusing</a><br><br></li>
-</ul>
-
-
-
-<meta http-equiv="refresh" content="5">
-
-
-Settings: <span title="`find config/setting -type f | sort | xargs md5sum | md5sum | cut -d ' ' -f 1 > config/hash_setting`">$hashSettingSuccinct</span>
+	<ul>
+		<li><a href="/write.html">Writer's Block Cured With New Technology!</a><br><br></li>
+		<li><a href="/compost.html">Study: Can Voting Really Change Things? Results Unclear</a><br><br></li>
+		<li><a href="/manual.html">9 out of 10 Users Found This Manual Confusing</a><br><br></li>
+	</ul>
 
 
 
-<span class=beginner>
+	<meta http-equiv="refresh" content="5">
+
+
+	Settings: <span title="`find config/setting -type f | sort | xargs md5sum | md5sum | cut -d ' ' -f 1 > config/hash_setting`">$hashSettingSuccinct</span>
+
+
+
+	<span class=beginner>
 				<br>Log out and reset all settings.<br>
 			</span>
 
@@ -363,7 +414,7 @@ Settings: <span title="`find config/setting -type f | sort | xargs md5sum | md5s
 
 
 
-<a id=btnCollapseMost href=# onclick="
+	<a id=btnCollapseMost href=# onclick="
 		if (window.CollapseMost) {
 			if (CollapseMost() < 10) {
 				ExpandAll(document);
@@ -377,11 +428,9 @@ Settings: <span title="`find config/setting -type f | sort | xargs md5sum | md5s
 
 
 
-<form>
+	<form>
 
-</form>
-
-
+	</form>
 
 
 
@@ -415,7 +464,9 @@ Settings: <span title="`find config/setting -type f | sort | xargs md5sum | md5s
 
 
 
-<h1><pre>
+
+
+	<h1><pre>
  sH
  iT
   My
@@ -423,52 +474,52 @@ seLf
    .com
 </pre></h1>
 
-<p>
-	<label for=chkWriteAutoSave>
-		<input type=checkbox id=chkWriteAutoSave name=chkWriteAutoSave onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'write_autosave'); }">
-		Save drafts on device<noscript><b>*</b></noscript>
-	</label>
-</p>
+	<p>
+		<label for=chkWriteAutoSave>
+			<input type=checkbox id=chkWriteAutoSave name=chkWriteAutoSave onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'write_autosave'); }">
+			Save drafts on device<noscript><b>*</b></noscript>
+		</label>
+	</p>
 
 
 
-<!-- reputation.template -->
+	<!-- reputation.template -->
 
-<Agree to terms of service>
+	<Agree to terms of service>
 
 
-</Agree>
+	</Agree>
 
 
-<Solve puzzle>
+	<Solve puzzle>
 
 
-</Solve>
+	</Solve>
 
 
-<Submit device fingerprint>
+	<Submit device fingerprint>
 
 
-</Submit>
+	</Submit>
 
 
-<Create signing key>
+	<Create signing key>
 
 
-</Create>
+	</Create>
 
 
-<Publish profile>
+	<Publish profile>
 
 
-</Publish>
+	</Publish>
 
 
-<Do something useful>
+	<Do something useful>
 
-	Share your opinion about existing content
+		Share your opinion about existing content
 
-</Do>
+	</Do>
 
 
 
@@ -506,45 +557,45 @@ seLf
 
 
 
-<br>
-<a id=replyCartClear href=#>Clear</a>
-<br>
-<a id=replyCartAddAll title="Add all items on page to cart" href=#>AddAll</a>
+	<br>
+	<a id=replyCartClear href=#>Clear</a>
+	<br>
+	<a id=replyCartAddAll title="Add all items on page to cart" href=#>AddAll</a>
 
 
 
-<a href=# onclick="if (window.SetInterfaceMode) { return SetInterfaceMode('beginner', this); }">Beginner</a>;
-<a href=# onclick="if (window.SetInterfaceMode) { return SetInterfaceMode('intermediate', this); }">Intermediate</a>;
-<a href=# onclick="if (window.SetInterfaceMode) { return SetInterfaceMode('expert', this); }">Advanced</a>
-|
-<a href=#>Light</a>;
-<a href=#>Modern</a>;
-|
+	<a href=# onclick="if (window.SetInterfaceMode) { return SetInterfaceMode('beginner', this); }">Beginner</a>;
+	<a href=# onclick="if (window.SetInterfaceMode) { return SetInterfaceMode('intermediate', this); }">Intermediate</a>;
+	<a href=# onclick="if (window.SetInterfaceMode) { return SetInterfaceMode('expert', this); }">Advanced</a>
+	|
+	<a href=#>Light</a>;
+	<a href=#>Modern</a>;
+	|
 
 
-<a href="#ExpandMore" onclick="
+	<a href="#ExpandMore" onclick="
 		if (window.ShowAll) {
 			return ShowAll(this);
 		}
 	" title=ExpandMore accesskey=o>M<u>o</u>re</a>;
 
-|
+	|
 
-<a href="/settings.html" onclick="
+	<a href="/settings.html" onclick="
 		if (document.getElementById && !document.getElementById('settings')) {
 			return FetchDialog('settings');
 		}
 	">Settings</a>;
 
-<a href="/stats.html" onclick="
+	<a href="/stats.html" onclick="
 		if (document.getElementById && !document.getElementById('stats')) {
 			return FetchDialog('stats');
 		}
 	">Stats</a>
 
 
-<label for=tos3 id=tos3label>
-	<input type=checkbox name=tos3 id=tos3 onclick="
+	<label for=tos3 id=tos3label>
+		<input type=checkbox name=tos3 id=tos3 onclick="
 			if (window.displayNotification) {
 				displayNotification('No', this);
 			} else {
@@ -558,24 +609,24 @@ seLf
 			}
 			this.checked=false
 		"> <br>
-	"I agree <br>
-	to invalidate all previous agreements, <br>
-	including this one, <br>
-	as necessary, <br>
-	determined by me." <br>
-</label>
-
-
-
-<!-- create_briefcase.template -->
-<form>
-	<label for=name>
-		Title:
-		<input name=name id=name type=text size=16>
+		"I agree <br>
+		to invalidate all previous agreements, <br>
+		including this one, <br>
+		as necessary, <br>
+		determined by me." <br>
 	</label>
-	<input name=agree value=Agree>
-</form>
-<!-- / create_briefcase.template -->
+
+
+
+	<!-- create_briefcase.template -->
+	<form>
+		<label for=name>
+			Title:
+			<input name=name id=name type=text size=16>
+		</label>
+		<input name=agree value=Agree>
+	</form>
+	<!-- / create_briefcase.template -->
 
 
 
@@ -610,22 +661,22 @@ seLf
 
 
 
-<p>Profile allows you extra features.</p>
+	<p>Profile allows you extra features.</p>
 
-<p>To create profile, press Enter button.</p>
+	<p>To create profile, press Enter button.</p>
 
-<p>To share your profile, press "Go to profile".</p>
+	<p>To share your profile, press "Go to profile".</p>
 
-<p>Advanced: To choose a name, use "my name is ..." command.</p>
+	<p>Advanced: To choose a name, use "my name is ..." command.</p>
 
-<p>To sign out, use the Exit button.</p>
+	<p>To sign out, use the Exit button.</p>
 
-<p>Advanced: To save profile, use "Save as file" button. (uses JavaScript)</p>
+	<p>Advanced: To save profile, use "Save as file" button. (uses JavaScript)</p>
 
-<p>Privacy Help: The top of the page will not show your signed in status.</p>
+	<p>Privacy Help: The top of the page will not show your signed in status.</p>
 
 
-<p>
+	<p>
 		<label for=chkShowPageInfo>
 			<input type=checkbox id=chkShowPageInfo name=chkShowPageInfo onchange="if (window.SaveCheckbox) { SaveCheckbox(this, 'show_page_info'); }">
 			Show page information<noscript><b>*</b></noscript>
@@ -634,15 +685,15 @@ seLf
 
 
 	<p>
-	Cache: $cachedHtmlBytes<br>
-	Generated: $generatedHtmlBytes<br>
-	Added by processing: $addedByProcessingBytes<br>
-	Total: $totalBytes<br>
-</p>
+		Cache: $cachedHtmlBytes<br>
+		Generated: $generatedHtmlBytes<br>
+		Added by processing: $addedByProcessingBytes<br>
+		Total: $totalBytes<br>
+	</p>
 
 
 
-<a href=# onclick="
+	<a href=# onclick="
 			if (window.DraggingInit) {
 				SetPrefs('draggable', 1);
 				SetPrefs('draggable_activate', 1);
@@ -653,7 +704,7 @@ seLf
 		" title=Store>Store</a>;
 
 
-<a href=# id=btnCascadeArrange onclick="
+	<a href=# id=btnCascadeArrange onclick="
 			if (this.getAttribute && window.DraggingCascade) {
 				SetPrefs('draggable', 1);
 				SetPrefs('draggable_activate', 1);
@@ -681,43 +732,43 @@ seLf
 
 
 
-If you're new here, please <br>
-introduce yourself using <br>
-using field and button:<br>
+	If you're new here, please <br>
+	introduce yourself using <br>
+	using field and button:<br>
 
 
-Welcome! Please read this.
-All your interactions with this website may become public.
-We will do our best to keep your IP address private by not letting logs sit around...
-But you know how the Internet works, don't you?
-If you're here to cause trouble, please leave immediately.
-That said...
-What is your dream?
-What are you searching for?
+	Welcome! Please read this.
+	All your interactions with this website may become public.
+	We will do our best to keep your IP address private by not letting logs sit around...
+	But you know how the Internet works, don't you?
+	If you're here to cause trouble, please leave immediately.
+	That said...
+	What is your dream?
+	What are you searching for?
 
 
-<a href="/settings.html"
-   onclick="if (!document.getElementById('settings')) { FetchDialog('settings'); FetchDialog('access'); }">Settings</a>
+	<a href="/settings.html"
+	   onclick="if (!document.getElementById('settings')) { FetchDialog('settings'); FetchDialog('access'); }">Settings</a>
 
 
-<br>
-				<label for=bits title="Algorithm">:
-					<select name=bits id=bits>
-						<option value=0>simple (cookie)</option>
-						<option value=512>fast toy crypto (RSA-512)</option>
-						<option value=1024>slow toy crypto (RSA-1024)</option>
-						<option value=2048>decent (RSA-2048)</option>
-						<option value=4096>stronger (RSA4096)</option>
-						$gpg2Algochoices
-					</select>
-				</label>
+	<br>
+	<label for=bits title="Algorithm">:
+		<select name=bits id=bits>
+			<option value=0>simple (cookie)</option>
+			<option value=512>fast toy crypto (RSA-512)</option>
+			<option value=1024>slow toy crypto (RSA-1024)</option>
+			<option value=2048>decent (RSA-2048)</option>
+			<option value=4096>stronger (RSA4096)</option>
+			$gpg2Algochoices
+		</select>
+	</label>
 
 
 
 
 
-				<p class=advanced>
-					<code><pre>
+	<p class=advanced>
+		<code><pre>
 javascript:
     window.location =
         'http://localhost:2784/post.html' +
@@ -728,4 +779,5 @@ javascript:
             '&s=' +
                 encodeURIComponent(document.location)
             </pre></code>
-				</p>
+	</p>
+
