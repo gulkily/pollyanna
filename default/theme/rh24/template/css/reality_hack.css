@@ -1,62 +1,53 @@
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-			background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGElEQVQoU2NkYGAwZmADYGJgYGBkcABiYGRgYGBkcATOqtEC/zAwgSwGAACXDwf6Z netsAAAAAElFTkSuQmCC");
-            /* Base64 encoded image placeholder, replace with your brick wall image */
-        }
+body {
+	background-color: #3e2295;
+	color: #f2de70;
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+}
 
-        form {
-            max-width: 600px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+form {
+	margin: 20px;
+	max-width: 600px;
+}
 
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            resize: none;
-        }
+input[type="text"],
+textarea {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+	border: 1px solid #35619c;
+	border-radius: 5px;
+	background-color: #eb368b;
+	color: #f2de70;
+}
 
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+input[type="submit"] {
+	background-color: #31e7ba;
+	color: #35619c;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+}
 
-        #item_flat_placeholder {
-            max-width: 600px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+#item_flat_placeholder .item {
+	background-color: #3e2295;
+	color: #eb368b;
+	padding: 10px;
+	margin: 10px 0;
+	border-radius: 5px;
+	border-width: 1px;
+	border-style: dashed;
+	border-color: #31e7ba;
+}
 
-        .item {
-            margin-bottom: 20px;
-        }
-
-        .text {
-            font-size: 16px;
-            line-height: 1.5;
-        }
-
-        .introduction {
-            max-width: 600px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+.introduction {
+	margin: 20px;
+	padding: 20px;
+	background-color: #8372b5;
+	color: #543e68;
+	border-radius: 10px;
+}
