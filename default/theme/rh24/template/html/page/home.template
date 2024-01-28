@@ -14,6 +14,12 @@ $styleSheet
 </head>
 <body>
 
+<!-- right-aligned top corner pi symbol which takes user to the menu page -->
+<div style="position: absolute; top: 0; right: 0; padding: 5px;">
+    <a href="/menu.html" class=pi>π</a>
+</div>
+<!-- / pi symbol -->
+
 <form action="/post.html">
     Share something you want others to know:
     <br>

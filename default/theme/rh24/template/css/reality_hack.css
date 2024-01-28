@@ -51,3 +51,11 @@ input[type="submit"] {
 	color: #543e68;
 	border-radius: 10px;
 }
+
+.pi {
+	color: #00ff00;
+	background-color: #000000;
+	text-decoration: none;
+	margin: 12px;
+	padding: 12px;
+}
