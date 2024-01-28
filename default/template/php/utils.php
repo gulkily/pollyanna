@@ -671,6 +671,9 @@ function PutFile ($file, $content) { // puts file contents
 			if ($filePath && ! file_exists($filePath)) {
 				WriteLog("PutFile: mkdir($filePath)");
 				mkdir($filePath);
+				#todo there should be an error handler for all mkdir(), because
+				# they can trigger a warning, like this:
+				# 2024-01-28 02:49:35: (mod_fastcgi.c.451) FastCGI-stderr:PHP Warning:  mkdir(): No such file or directory in /home/wsl/pollyanna/html/utils.php on line 673
 				#todo add this sanity check
 				#if (is_writable($filePath)) {
 				#	mkdir($filePath);
