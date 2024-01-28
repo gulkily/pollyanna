@@ -68,7 +68,11 @@ sub GetWelcomePage {
 	#$intro = FormatForWeb($intro);
 	$html = str_replace('<span id=intro></span>', '<span class=text>' . $intro . '</span>', $html);
 
-	$html = InjectJs($html, qw(avatar puzzle settings profile utils timestamp clock fresh table_sort voting write));
+	if (GetConfig('setting/admin/js/profile_auto_register')) {
+		$html = InjectJs($html, qw(avatar puzzle settings profile utils timestamp clock fresh table_sort voting write));
+	} else {
+		$html = InjectJs($html, qw(avatar puzzle settings profile utils timestamp clock fresh table_sort voting write profile_auto_register));
+	}
 
 	return $html;
 }
