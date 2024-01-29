@@ -5,7 +5,10 @@ body {
 	margin: 0;
 	padding: 0;
 }
-
+* {
+	font-family: monospace;
+	font-size: 16px;
+}
 form {
 	margin: 20px;
 	max-width: 600px;
