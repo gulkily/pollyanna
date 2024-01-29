@@ -57,7 +57,7 @@ function PingUrlCallback () {
 //}
 
 function signCallback (signed) {
-    var postUrl = '/post.html';
+	var postUrl = '/post.html';
 	var url = postUrl + '?comment=' + encodeURIComponent(signed.data);
 
 	if (PingUrl(url)) {
@@ -126,8 +126,8 @@ function SignVote (t, token) { // signs a vote from referenced vote button
 	) {
 		// removes a notification if it is immediately afer this button
 		if (t.nextSibling.remove) {
-    		// #todo there is a bug here, somehow remove() isn't always there
-		    t.nextSibling.remove();
+			// #todo there is a bug here, somehow remove() isn't always there
+			t.nextSibling.remove();
 		}
 	}
 
@@ -138,8 +138,8 @@ function SignVote (t, token) { // signs a vote from referenced vote button
 		if (GetPrefs('show_admin')) {
 			// user has assumed operator role, continue without check
 		} else {
-		    // user has not assumed operator role,
-		    // show notification and cancel vote
+			// user has not assumed operator role,
+			// show notification and cancel vote
 			if (window.displayNotificationWithTimeout) {
 				displayNotificationWithTimeout('Too fast', t);
 			}
@@ -161,7 +161,7 @@ function SignVote (t, token) { // signs a vote from referenced vote button
 			if (window.displayNotificationWithTimeout) {
 				window.duplicateVoteTries ? window.duplicateVoteTries++ : window.duplicateVoteTries = 1;
 				if (3 <= window.duplicateVoteTries) {
-				    // display alternative message if user has tried to duplicate-vote 3 or more times
+					// display alternative message if user has tried to duplicate-vote 3 or more times
 					displayNotificationWithTimeout('Hey!', t);
 				} else {
 					displayNotificationWithTimeout('Already voted', t);
