@@ -36,9 +36,11 @@ let canvasTexture;
 // connect html canvas element to THREE scene
 {
     whiteboardCanvas = document.createElement("canvas");
+    whiteboardCanvas.setAttribute("id", "whiteboardCanvas");
     whiteboardCanvas.height=640;
     whiteboardCanvas.width=1024;
     window.whiteboardCanvas = whiteboardCanvas;
+    document.body.appendChild(whiteboardCanvas);
     
     ctx = whiteboardCanvas.getContext("2d");
     ctx.beginPath();
@@ -46,7 +48,11 @@ let canvasTexture;
     ctx.fillStyle = "#06A3C5";
     ctx.fill();
     ctx.closePath();
-    
+
+    ctx.font = "30px arial";
+    ctx.fillStyle = "#000000";
+    ctx.strokeText("Hi World", 10, 50);
+
     canvasTexture = new THREE.CanvasTexture(whiteboardCanvas)
     window.canvasTexture = canvasTexture;
 

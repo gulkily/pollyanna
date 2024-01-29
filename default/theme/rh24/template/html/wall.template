@@ -1,36 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Jose Demo</title>
-		<style>
-			body { 
-                background-color: aqua;
-                margin: 0;
-            }
-            #VRButton {
-                font-size: large !important;
-                color: black !important;
-                background-color: blue !important;
-            }
-            /* canvas {
-                background: #eee;
-                display: block;
-                margin: 0 auto;
-            } */
-		</style>
-        <script type="importmap">
-            {
-              "imports": {
-                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-                "VRButton": "https://unpkg.com/three@0.160.0/examples/jsm/webxr/VRButton.js"
-              }
-            }
-          </script>
-	</head>
-	<body>
-        <h1>FINGER PAINTING</h1>
-        <!-- <canvas id="myCanvas" width="480" height="320"></canvas> -->
-		<script type="module" src="/main.js"></script>
-	</body>
+<head>
+	<meta charset="utf-8">
+	<title>Jose Demo</title>
+	<style>
+        body {
+            background-color: aqua;
+            margin: 0;
+        }
+
+        #VRButton {
+            font-size: large !important;
+            color: black !important;
+            background-color: blue !important;
+        }
+    </style>
+	<script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "VRButton": "https://unpkg.com/three@0.160.0/examples/jsm/webxr/VRButton.js"
+          }
+        }
+    </script>
+</head>
+<body>
+<h1>FINGER PAINTING</h1>
+<canvas id="whiteboardCanvas" width="480" height="320"></canvas>
+
+<form enctype="multipart/form-data" action="/upload.php" method="POST" name="upload" id="upload">
+	<p>Upload the canvas image.</p>
+	<p class="beginner">Remember to press Upload button.</p>
+<!--	<input type="file" name="uploaded_file" id="uploaded_file" value="">-->
+	<p><input name="submit" type="submit" value="Upload" id="submit"></p>
+</form>
+
+<button onclick="uploadCanvas()">Upload</button>
+
+<script type="module" src="/main.js"></script>
+
+<script>
+
+	function uploadCanvas() {
+		alert('uploadCanvas');
+
+		// Step 1: Convert canvas content to a data URL
+		var canvas = document.getElementById('whiteboardCanvas');
+		var dataUrl = canvas.toDataURL('image/png');
+
+		alert('dataUrl = ' + dataUrl);
+
+		// Step 2: Create a new FormData object
+		var formData = new FormData();
+
+		alert('formData = ' + formData);
+
+		// Step 3: Append the canvas data URL to the form data
+		formData.append('uploaded_file', dataUrl);
+
+		alert('formData = ' + formData);
+
+		// Step 4: Use XMLHttpRequest or fetch API to send a POST request
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', '/post.php', true);
+
+		alert('xhr = ' + xhr);
+
+		// You may need to set additional headers, depending on your server requirements
+		// xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				// Handle the response from the server if needed
+				console.log(xhr.responseText);
+				alert('xhr.responseText = ' + xhr.responseText);
+			}
+		};
+
+		// Send the request
+		xhr.send(formData);
+	}
+
+</script>
+</body>
 </html>
