@@ -64,5 +64,5 @@ input[type="submit"] {
 }
 
 .voting {
-	float: right
+	margin-left: 20px;
 }
