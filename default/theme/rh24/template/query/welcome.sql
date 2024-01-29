@@ -27,6 +27,7 @@ WHERE
 		AND item_score >= 0
 	)
 ORDER BY
+	((strftime('%s', 'now') - add_timestamp) > 1000) ASC,
 	item_score DESC,
 	RANDOM()
 LIMIT 1337
