@@ -21,6 +21,7 @@ sub GetWelcomePage {
 		my $html2 = ''; # inner html containing the items
 		foreach my $ref (@ref) {
 			if ($ref->{'item_type'} eq 'txt') {
+				# TEXT ITEM # TEXT ITEM # TEXT ITEM # TEXT ITEM # TEXT ITEM # TEXT ITEM # TEXT ITEM
 				my $replyText = GetFileMessage($ref->{'file_hash'});
 				if (!$replyText) {
 					next;
@@ -42,15 +43,18 @@ sub GetWelcomePage {
 				my $item = GetTemplate('html/item_flat.template');
 				$item = str_replace('<span class=text></span>', '<span class=text>' . $replyText . '</span>', $item);
 				$html2 .= $item;
+				# TEXT ITEM # TEXT ITEM # TEXT ITEM # TEXT ITEM # TEXT ITEM # TEXT ITEM # TEXT ITEM
 			}
 			if ($ref->{'item_type'} eq 'image') {
+				# IMAGE ITEM # IMAGE ITEM # IMAGE ITEM # IMAGE ITEM # IMAGE ITEM # IMAGE ITEM # IMAGE ITEM
 				#my $imageTemplate = GetImageContainer2($ref->{'file_hash'}, $ref->{'file_name'}, '/image.html', 512);
 				#$html2 .= $imageTemplate;
 				my $imageTemplate = GetImageContainer2($ref->{'file_hash'}, $ref->{'file_name'}, 'item', 512);
 				my $item = GetTemplate('html/item_flat.template');
 				$item = str_replace('<span class=text></span>', '<span class=text>' . $imageTemplate . '</span>', $item);
 				$html2 .= $imageTemplate;
-			}
+				# IMAGE ITEM # IMAGE ITEM # IMAGE ITEM # IMAGE ITEM # IMAGE ITEM # IMAGE ITEM # IMAGE ITEM
+			}			
 		}
 		$html = str_replace('<div id="item_flat_placeholder"></div>', '<div id="item_flat_placeholder">' . $html2 . '</div>', $html);
 	}
