@@ -42,6 +42,10 @@ sub GetWelcomePage {
 
 				my $item = GetTemplate('html/item_flat.template');
 				$item = str_replace('<span class=text></span>', '<span class=text>' . $replyText . '</span>', $item);
+				
+				my $votingButtons = GetItemLabelButtons($ref->{'file_hash'}, 'item');
+				$item = str_replace('<span class=voting></span>', '<span class=voting>' . $votingButtons . '</span>', $item);
+				
 				$html2 .= $item;
 				# TEXT ITEM # TEXT ITEM # TEXT ITEM # TEXT ITEM # TEXT ITEM # TEXT ITEM # TEXT ITEM
 			}
