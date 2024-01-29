@@ -27,5 +27,6 @@ WHERE
 		AND item_score >= 0
 	)
 ORDER BY
-	add_timestamp DESC
+	item_score DESC,
+	RANDOM()
 LIMIT 1337
