@@ -9,6 +9,7 @@ sub GetItemLabelButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons
 	# sub GetItemTagButtons {
 	# sub GetItemVoteButtons {
 	# sub GetVoteButtons {
+	# sub GetVotingButtons {
 	# sub GetVoteLinks {
 	# sub GetItemVoteLinks
 	# sub GetVoteButton {
