@@ -131,21 +131,22 @@ function SignVote (t, token) { // signs a vote from referenced vote button
 		}
 	}
 
-	if (window.xmlhttp) {
+	//if (window.xmlhttp) {
 		//only allow one vote a time to be happening
 		//unless user is operator
+		// #todo this feature is very broken and causes user inconvenience
 
-		if (GetPrefs('show_admin')) {
-			// user has assumed operator role, continue without check
-		} else {
-			// user has not assumed operator role,
-			// show notification and cancel vote
-			if (window.displayNotificationWithTimeout) {
-				displayNotificationWithTimeout('Too fast', t);
-			}
-			return false;
-		}
-	}
+		//if (GetPrefs('show_admin')) {
+		//	// user has assumed operator role, continue without check
+		//} else {
+		//	// user has not assumed operator role,
+		//	// show notification and cancel vote
+		//	if (window.displayNotificationWithTimeout) {
+		//		displayNotificationWithTimeout('Too fast', t);
+		//	}
+		//	return false;
+		//}
+	//}
 
 
 	if (document.getElementById) {
