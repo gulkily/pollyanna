@@ -62,3 +62,7 @@ input[type="submit"] {
 	margin: 12px;
 	padding: 12px;
 }
+
+.voting {
+	float: right
+}
