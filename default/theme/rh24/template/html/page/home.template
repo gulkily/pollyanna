@@ -26,7 +26,7 @@ $styleSheet
     <input type="hidden" name="vote_return_to" value="/welcome.html">
     <textarea name="comment" rows="5" cols="40" placeholder="Write here"></textarea>
     <br>
-    <input type="submit" value="Send">
+    <input type="submit" value="Send" onclick="this.value='Sending...'">
 </form>
 
 <div id="item_flat_placeholder"></div>
