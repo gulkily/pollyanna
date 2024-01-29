@@ -28,5 +28,4 @@ WHERE
 	)
 ORDER BY
 	add_timestamp DESC
-LIMIT 100
-
+LIMIT 1337
