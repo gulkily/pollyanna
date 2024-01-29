@@ -21,7 +21,7 @@ $styleSheet
 <!-- / pi symbol -->
 
 <form action="/post.html">
-    Share something you want others to know:
+    <span class=instructions>Share something you want others to know:</span>
     <br>
     <input type="hidden" name="vote_return_to" value="/welcome.html">
     <textarea name="comment" rows="5" cols="40" placeholder="Write here"></textarea>
