@@ -97,10 +97,12 @@ sub GetItemLabelButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons
 			if ($doVoteButtonStyles) {
 				# this is a hack, think about replace with config/tag_color
 				if (index($styleSheet, "tag-$quickTagValue") > -1) {
-					$tagButton =~ s/\$class/tag-$quickTagValue/g;
+					#$tagButton =~ s/\$class/tag-$quickTagValue/g;
+					$tagButton = str_replace('$class', '/tag-$quickTagValue', $tagButton);
 				}
 				else {
-					$tagButton =~ s/class="\$class"//g;
+					#$tagButton =~ s/class="\$class"//g;
+					$tagButton = str_replace('$class', '', $tagButton);
 				}
 			}
 
@@ -115,20 +117,28 @@ sub GetItemLabelButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons
 
 			if ($returnTo) {
 				# set value for $returnTo placeholder
-				$tagButton =~ s/\$returnTo/$returnTo/g;
+				#$tagButton =~ s/\$returnTo/$returnTo/g;
+				$tagButton = str_replace('$returnTo', $returnTo, $tagButton);
 			}
 			else {
 				# remove entire returnto= parameter
-				$tagButton =~ s/&returnto=\$returnTo//g;
+				#$tagButton =~ s/&returnto=\$returnTo//g;
+				$tagButton = str_replace('&returnto=$returnTo', '', $tagButton);
 			}
 
-			$tagButton =~ s/\$fileHash/$fileHash/g;
-			$tagButton =~ s/\$ballotTime/$ballotTime/g;
-			$tagButton =~ s/\$voteValue/$quickTagValue/g;
-			$tagButton =~ s/\$voteCaption/$quickTagCaption/g;
+			#$tagButton =~ s/\$fileHash/$fileHash/g;
+			#$tagButton =~ s/\$ballotTime/$ballotTime/g;
+			#$tagButton =~ s/\$voteValue/$quickTagValue/g;
+			#$tagButton =~ s/\$voteCaption/$quickTagCaption/g;
+			$tagButton = str_replace('$fileHash', $fileHash, $tagButton);
+			$tagButton = str_replace('$ballotTime', $ballotTime, $tagButton);
+			$tagButton = str_replace('$voteValue', $quickTagValue, $tagButton);
+			$tagButton = str_replace('$voteCaption', $quickTagCaption, $tagButton);
 
 			if ($commaCount) {
-				$tagButton =~ s|</a>|</a>;|; #it's this way instead of just appending it
+				#$tagButton =~ s|</a>|</a>;|;
+				$tagButton = str_replace('</a>', '</a>;', $tagButton);
+				#it's this way instead of just appending it
 				# because it needs to be right after the tag, and the template has
 				# \n and a comment after it
 				$commaCount--;
