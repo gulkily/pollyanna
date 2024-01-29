@@ -98,7 +98,7 @@ sub GetItemLabelButtons { # $fileHash, [$tagSet], [$returnTo] ; get vote buttons
 				# this is a hack, think about replace with config/tag_color
 				if (index($styleSheet, "tag-$quickTagValue") > -1) {
 					#$tagButton =~ s/\$class/tag-$quickTagValue/g;
-					$tagButton = str_replace('$class', '/tag-$quickTagValue', $tagButton);
+					$tagButton = str_replace('$class', "tag-$quickTagValue", $tagButton);
 				}
 				else {
 					#$tagButton =~ s/class="\$class"//g;
