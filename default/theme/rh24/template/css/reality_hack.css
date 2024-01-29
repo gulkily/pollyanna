@@ -5,8 +5,12 @@ body {
 	margin: 0;
 	padding: 0;
 }
-* {
+.text {
 	font-family: monospace;
+	font-size: 16px;
+}
+.voting {
+	font-family: arial, helvetica, sans-serif;
 	font-size: 16px;
 }
 form {
@@ -55,14 +59,16 @@ input[type="submit"] {
 	border-radius: 10px;
 }
 
+a {
+	color: #c080c0 !important;
+}
 .pi {
-	color: #00ff00;
+	color: #00ff00 !important;
 	background-color: #000000;
 	text-decoration: none;
 	margin: 12px;
 	padding: 12px;
 }
-
 .voting {
 	margin-left: 20px;
 }
