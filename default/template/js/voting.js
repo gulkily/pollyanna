@@ -7,17 +7,18 @@ function PingUrlCallback () {
 	if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 		//alert('DEBUG: PingUrlCallback() found status 200!');
 
-		if (xmlhttpElement) {
-			var elemOK = document.createElement('span');
-			//elemOK.setAttribute('disabled', true);
-			elemOK.innerHTML = '&check;'; // checkmark
-			//#todo: get rect, and check if it is too wide,
-			//   which means escaped char didn't work
-			//   and should be replaced (ff 3.x, camino)
-			//elemOK.innerHTML = 'OK';
-			xmlhttpElement.setAttribute('disabled', true);
-			xmlhttpElement.appendChild(elemOK);
-		}
+		// #todo this feature is broken and is not consistent
+		//if (xmlhttpElement) {
+		//	var elemOK = document.createElement('span');
+		//	//elemOK.setAttribute('disabled', true);
+		//	elemOK.innerHTML = '&check;'; // checkmark
+		//	//#todo: get rect, and check if it is too wide,
+		//	//   which means escaped char didn't work
+		//	//   and should be replaced (ff 3.x, camino)
+		//	//elemOK.innerHTML = 'OK';
+		//	xmlhttpElement.setAttribute('disabled', true);
+		//	xmlhttpElement.appendChild(elemOK);
+		//}
 
 		//if (xmlhttp.responseURL.indexOf('message') != -1) {
 			// this works, but is not always desirable.
