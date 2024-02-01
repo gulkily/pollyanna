@@ -1,12 +1,12 @@
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="alternate" title="RSS" href="/rss.xml" type="application/rss+xml"></link>
-    <title>Welcome</title>
-    <style type="text/css">
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="alternate" title="RSS" href="/rss.xml" type="application/rss+xml"></link>
+	<title>Welcome</title>
+	<style type="text/css">
 <!--
 $styleSheet
 -->
@@ -16,17 +16,32 @@ $styleSheet
 
 <!-- right-aligned top corner pi symbol which takes user to the menu page -->
 <div style="position: absolute; top: 0; right: 0; padding: 5px;">
-    <a href="/menu.html" class=pi>π</a>
+	<a href="#" onclick="
+		if (this.innerHTML) {
+			if (this.innerHTML == '+') {
+				SetPrefs('show_advanced', 1);
+				ShowAdvanced(1);
+				this.innerHTML = '-';
+				return false;
+			} else {
+				SetPrefs('show_advanced', 0);
+				ShowAdvanced(1);
+				this.innerHTML = '+';
+				return false;
+			}
+		}
+	" class=pi id=plus>+</a>
+	<a href="/threads.html" class=pi>π</a>
 </div>
 <!-- / pi symbol -->
 
 <form action="/post.html">
-    <span class=instructions>Share something you want others to know:</span>
-    <br>
-    <input type="hidden" name="vote_return_to" value="/welcome.html">
-    <textarea name="comment" rows="5" cols="40" placeholder="Write here"></textarea>
-    <br>
-    <input type="submit" value="Send" onclick="this.value='Sending...'">
+	<span class=instructions>Share something you want others to know:</span>
+	<br>
+	<input type="hidden" name="vote_return_to" value="/welcome.html">
+	<textarea name="comment" rows="5" cols="40" placeholder="Write here"></textarea>
+	<br>
+	<input type="submit" value="Send" onclick="this.value='Sending...'">
 </form>
 
 <div id="item_flat_placeholder"></div>

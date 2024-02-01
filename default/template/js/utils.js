@@ -188,6 +188,16 @@ function OnLoadEverything () { // checks for each onLoad function and calls it
 		HideLoadingIndicator();
 	}
 
+	if (document.getElementById && document.getElementById('plus')) {
+		// #todo this is only used by rh24 theme
+		//alert('DEBUG: OnLoadEverything: plus()');
+		if (GetPrefs('show_advanced')) {
+			if (document.getElementById('plus').innerHTML) {
+				document.getElementById('plus').innerHTML = '-';
+			}
+		}
+	}
+
 	// everything is set now, start event loop
 	//
 } // OnLoadEverything()

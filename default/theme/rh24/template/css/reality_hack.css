@@ -74,8 +74,13 @@ a {
 	color: #00ff00 !important;
 	background-color: #000000;
 	text-decoration: none;
-	margin: 12px;
+	margin: 2px;
 	padding: 12px;
+}
+
+#plus {
+	text-align: center;
+	width: 1em;
 }
 
 .voting {

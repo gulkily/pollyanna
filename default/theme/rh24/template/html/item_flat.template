@@ -1,3 +1,6 @@
 <div class=item>
     <span class=text></span>
+    <span class=advanced>
+        <span class=voting></span>
+    </span>
 </div>
