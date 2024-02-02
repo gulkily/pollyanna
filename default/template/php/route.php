@@ -1576,6 +1576,14 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			} else {
 				// do nothing
 			}
+
+			# if rh24 theme is selected, and show_advanced is on, change the + to a - in the menu
+			#hack
+			if (index(GetConfig('setting/theme'), 'rh24') != -1) {
+				if (isset($_COOKIE['show_advanced']) && $_COOKIE['show_advanced'] == '1') {
+					$html = str_replace('id=plus>+</a>', 'id=plus>-</a>', $html);
+				}
+			}
 		} # assist_show_advanced
 
 		{ # assist_sequence_counter
