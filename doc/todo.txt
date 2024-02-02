@@ -15,8 +15,8 @@ changelog should appear immediately on New page after `hike refresh` is run
 		this works ok
 	changelog should be indexed
 		for some reason this does not work until a reindex is done
-		MakeIndex() does not work for some reason
-			this was because index.pl was not included
+		MakeIndex() does not work for some reason (fixed)
+			this was because index.pl was not included x
 		also, `hike index` does not add the changelog to the index for some reason
 			cache/b/indexed/... is created, but the file does not exist in index
 				i think it's created before the file is renamed, but then indexing fails because the file was renamed?
