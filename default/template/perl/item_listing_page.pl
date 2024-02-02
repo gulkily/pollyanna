@@ -305,6 +305,9 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 		$pageNoContent .= GetPageFooter($pageQuery);
 		$pageNoContent = InjectJs($pageNoContent, qw(utils settings avatar voting table_sort profile timestamp));
 		my $pageFilename = GetPageFileName($pageQuery, 0);
+
+		WriteLog('WriteItemListingPages: no items returned, putting empty file: $pageFilename = ' . $pageFilename . '; caller = ' . join(',', caller));
+
 		PutHtmlFile($pageFilename, $pageNoContent);
 	}
 } # WriteItemListingPages()
