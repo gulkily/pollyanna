@@ -60,7 +60,7 @@ else {
 			if (in_array($cookieKey, $validCookies)) {
 				// is ok
 			} else {
-				WriteLog('cookie.php: warning: unauthorized cookie was found and unset: ' . $cookieKey . ' = ' . $cookieValue);
+				WriteLog('cookie.php: warning: cookie not in validCookies was found and unset: ' . $cookieKey . ' = ' . $cookieValue);
 				unsetcookie2($cookieKey);
 			}
 		}
