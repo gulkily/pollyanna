@@ -421,6 +421,7 @@ function signMessageBasic (message, messageField = '', callback = '') {
 } // signMessageBasic()
 
 function signMessage () { // find the compose textbox and sign whatever is in it
+// function signMessageInTextarea () { // what this should really be called #todo
 // if message is already signed or is a public key, exit
 // relies on getElementById and localStorage
 // submits the form when finished
