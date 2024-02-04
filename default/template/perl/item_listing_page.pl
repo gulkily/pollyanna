@@ -292,7 +292,7 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 	} else {
 		# no items returned by database
 		my $pageNoContent = '';
-		require_once('get_page_header.pl')
+		require_once('get_page_header.pl');
 		$pageNoContent .= GetPageHeader($pageQuery);
 		$pageNoContent .= GetDialogX('<fieldset><p>This page reserved for future content (2)</p></fieldset>', 'No Results');
 
