@@ -105,7 +105,7 @@ sub MakeDataZips {
 			}
 
 			my $pwd = `pwd`;
-			if ($pwd =~ m/^([a-zA-Z0-9\/]+)$/) {
+			if ($pwd =~ m/^([a-zA-Z0-9\/_]+)$/) {
 				$pwd = $1;
 			} else {
 				WriteLog('MakeDataZips: warning: sanity check failed on $pwd = ' . $pwd . '; caller = ' . join(',', caller));
