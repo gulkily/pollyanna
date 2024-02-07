@@ -108,7 +108,7 @@ sub MakeDataZips {
 			if ($pwd =~ m/^([a-zA-Z0-9\/]+)$/) {
 				$pwd = $1;
 			} else {
-				WriteLog('MakeDataZips: warning: sanity check failed on $pwd');
+				WriteLog('MakeDataZips: warning: sanity check failed on $pwd = ' . $pwd . '; caller = ' . join(',', caller));
 				return '';
 			}
 			system("cd $HTMLDIR; zip -qr ./txt.tmp.zip ./txt/ ./chain.log ; cd $pwd"); # #txtzip '/txt.zip' 'txt.zip'
