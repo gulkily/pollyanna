@@ -122,6 +122,10 @@ The list below is by no means extensive, and is growing often. In no particular 
 * Samsung TV (name unknown)
 * Kindle
 * Google Translate (requires skilled operator for some features)
+
+Example instances:
+
+* [Yavista.com](http://www.yavista.com/)
 * Tor Browser
 * Chromium
 * wget
