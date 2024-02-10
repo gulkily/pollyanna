@@ -4,6 +4,8 @@
 
 mkdir -p config/template/perl
 
+perl default/template/perl/script/lib_heal.pl
+
 #todo these copy procedures below should only happen if the files don't already exist
 
 cp default/template/perl/build.pl config/template/perl/build.pl
