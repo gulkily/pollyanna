@@ -1,3 +1,7 @@
+jstest1 should not assume that document.frmTest exists
+	some browsers do not yet support named forms
+		e.g. Ladybird
+
 to get a new cookie from a public key,
 	the client should send a signed and timestamped request
 		a) client signs the request with their private key
