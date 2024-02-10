@@ -128,3 +128,7 @@ The list below is by no means extensive, and is growing often. In no particular 
 * curl
 * NCSA Mosaic (requires accommodations)
 * QuiteRSS
+
+Example instances:
+
+* [Yavista.com](http://www.yavista.com/)
