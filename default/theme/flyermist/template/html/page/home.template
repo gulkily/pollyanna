@@ -1,0 +1,33 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="alternate" title="RSS" href="/rss.xml" type="application/rss+xml"></link>
+    <title>Welcome</title>
+    <style type="text/css">
+<!--
+$styleSheet
+-->
+</style>
+</head>
+<body>
+
+<form action="/post.html">
+    Share something you want others to know:
+    <br>
+    <input type="hidden" name="vote_return_to" value="/welcome.html">
+    <textarea name="comment" rows="5" cols="40" placeholder="Write here"></textarea>
+    <br>
+    <input type="submit" value="Send">
+</form>
+
+<div id="item_flat_placeholder"></div>
+
+<p class="introduction">
+    <span id=intro></span>
+</p>
+
+</body>
+</html>

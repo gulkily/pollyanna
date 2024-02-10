@@ -1,0 +1,4 @@
+<p>
+	Welcome to this simple website. To write something, use the text box.
+</p>
+
