@@ -23,7 +23,7 @@ if ($^O eq 'MSWin32' or $^O eq 'cygwin') {
 
 
 # test for missing libraries and try to fill them in from default
-my $result = system("perl -e 'use lib qw(lib); use URI::Encode;'");
+my $result = system("perl -e 'use lib qw(lib); use URI::Encode;' >/dev/null 2>&1");
 
 if ($result) {
 	# problem including URI::Encode
@@ -52,7 +52,7 @@ if ($result) {
 }
 
 # test for missing libraries and try to fill them in from default
-my $result = system("perl -e 'use lib qw(lib); use URI::Escape;'");
+my $result = system("perl -e 'use lib qw(lib); use URI::Escape;' >/dev/null 2>&1");
 
 if ($result) {
 	# problem including URI::Escape
