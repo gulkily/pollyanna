@@ -4,6 +4,7 @@
 
 mkdir -p config/template/perl
 
+# check for libraries and copy them to lib/ if needed
 perl default/template/perl/script/lib_heal.pl
 
 #todo these copy procedures below should only happen if the files don't already exist
