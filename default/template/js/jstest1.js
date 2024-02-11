@@ -5,6 +5,13 @@ function RunTest() {
 
 	//alert('DEBUG: Looking for document.getElementById...');
 
+	if (document && document.frmTest) {
+		//alert('DEBUG: document.frmTest was true, sanity check passed');
+	} else {
+		//alert('DEBUG: document.frmTest was false, sanity check failed');
+		alert('ERROR: document.frmTest was false, sanity check failed');
+		return '';
+	}
 
 	if (window.navigator) { // #todo this should come after the timestamp for begin
 		//alert('DEBUG: window.navigator was true, looking for navigator.language and navigator.userAgent');
