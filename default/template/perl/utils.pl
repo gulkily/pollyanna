@@ -1931,7 +1931,7 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 		# if index is missing replace it with anything that comes along
 		# this is an edge case that rarely happens
 		if (
-			index($file, 'dialog') != -1 && # don't replace it with a dialog
+			index($file, 'dialog') == -1 && # don't replace it with a dialog
 			(
 				$file =~ m/profile/ ||
 				$file =~ m/welcome/ ||
