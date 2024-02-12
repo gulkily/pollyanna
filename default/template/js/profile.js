@@ -154,6 +154,7 @@ function getUserFp () { // retrieve stored user fingerprint from LocalStorage
 } // getUserFp()
 
 function sharePubKey (t) { // shares current user's public key via injected form and iframe
+// function sharePubKeyPing () {
 // function sendPubKey () {
 	// t is the clicked link's "this", which is used to display a notification next to it
 
