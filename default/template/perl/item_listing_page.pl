@@ -89,6 +89,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, image
 
 	WriteLog('GetItemListingPage: $pageQuery = ' . $pageQuery . '; $pageMode = ' . $pageMode . '; $pageNumber = ' . $pageNumber . '; scalar(@items) = ' . scalar(@items));
 
+	require_once('get_page_header.pl');
 	$html .= GetPageHeader($pageQuery);
 
 	if (GetConfig('setting/html/page_intro') && $pageQuery =~ m/[^\s]+/) {
