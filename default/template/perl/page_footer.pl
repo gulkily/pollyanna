@@ -67,7 +67,7 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 			$resetButton = FillThemeColors($resetButton);
 			$txtFooter =~ s/\<\/body>/$resetButton<\/body>/i;
 		} else {
-			WriteLog('GetPageFooter: warning: reset_button requires php, js, and draggable. not adding reset button.');
+			WriteLog('GetPageFooter: warning: reset_button requires php, js, and js/dragging. not adding reset button.');
 		}
 	}
 
