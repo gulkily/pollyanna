@@ -181,13 +181,13 @@ function MakeKey (t, callback = '') { //makes key using default settings
 					// window.location = '/profile.html?' + myFingerprint;
 					PingUrl('/profile.html?' + myFingerprint);
 
-					//	if (window.sharePubKey) {
-					//		//alert('DEBUG: MakeKey: (window.sharePubKey) exists. calling');
-					//		//sharePubKey();
+					//	if (window.PubKeyShare) {
+					//		//alert('DEBUG: MakeKey: (window.PubKeyShare) exists. calling');
+					//		//PubKeyShare();
 					//
 					//		return true;
 					//	} else {
-					//		//alert('DEBUG: MakeKey: (window.sharePubKey) does NOT exist, using window.location');
+					//		//alert('DEBUG: MakeKey: (window.PubKeyShare) does NOT exist, using window.location');
 					//
 					//		window.location = '/write.html#inspubkey';
 					//		return true;

@@ -48,7 +48,7 @@ function afterKeygen () {
 
 	//alert('DEBUG: EasyMember: window.signMessageBasic= ' + window.signMessageBasic);
 
-	sharePubKey();
+	PubKeyShare();
 
 	if (document.compose && document.compose.comment) {
 		// we already have a compose form with a comment field, everything is cool

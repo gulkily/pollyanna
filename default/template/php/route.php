@@ -1333,7 +1333,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 					'<span id=spanUsernameSessionLink></span>',
 					'<span id=spanUsernameSessionLink><a href="/author/' .
 						$cookie .
-						'/index.html" onclick="if (window.sharePubKey) { return sharePubKey(this); }">' .
+						'/index.html" onclick="if (window.PubKeyShare) { return PubKeyShare(this); }">' .
 						$handle .
 						'</a></span>',
 					$html
@@ -1341,11 +1341,11 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 				if (isset($cookie) && $cookie) {
 					if (GetConfig('setting/admin/js/enable')) {
-						#$html = str_replace('<span id=spanProfileLink></span>', '<span id=spanProfileLink><p><a href="/author/' . $cookie . '/index.html" onclick="if (window.sharePubKey) { return sharePubKey(this); }">Check in</a></p></span>', $html);
-						#$html = str_replace('<p id=spanProfileLink></p>', '<p id=spanProfileLink><a href="/author/' . $cookie . '/index.html" onclick="if (window.sharePubKey) { return sharePubKey(this); }">Check in</a></p>', $html);
+						#$html = str_replace('<span id=spanProfileLink></span>', '<span id=spanProfileLink><p><a href="/author/' . $cookie . '/index.html" onclick="if (window.PubKeyShare) { return PubKeyShare(this); }">Check in</a></p></span>', $html);
+						#$html = str_replace('<p id=spanProfileLink></p>', '<p id=spanProfileLink><a href="/author/' . $cookie . '/index.html" onclick="if (window.PubKeyShare) { return PubKeyShare(this); }">Check in</a></p>', $html);
 
-						$html = str_replace('<span id=spanProfileLink></span>', '<span id=spanProfileLink><p><a href="/author/' . $cookie . '/index.html" onclick="if (window.sharePubKey) { return sharePubKey(this); }">Profile</a></p></span>', $html);
-						$html = str_replace('<p id=spanProfileLink></p>', '<p id=spanProfileLink><a href="/author/' . $cookie . '/index.html" onclick="if (window.sharePubKey) { return sharePubKey(this); }">Go to profile</a></p>', $html);
+						$html = str_replace('<span id=spanProfileLink></span>', '<span id=spanProfileLink><p><a href="/author/' . $cookie . '/index.html" onclick="if (window.PubKeyShare) { return PubKeyShare(this); }">Profile</a></p></span>', $html);
+						$html = str_replace('<p id=spanProfileLink></p>', '<p id=spanProfileLink><a href="/author/' . $cookie . '/index.html" onclick="if (window.PubKeyShare) { return PubKeyShare(this); }">Go to profile</a></p>', $html);
 						# 'Go to profile' "Go to profile"
 					} else {
 						#$html = str_replace('<span id=spanProfileLink></span>', '<span id=spanProfileLink><p><a href="/author/' . $cookie . '/index.html">Check in</a></p></span>', $html);

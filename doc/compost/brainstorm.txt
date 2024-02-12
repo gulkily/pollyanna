@@ -2520,7 +2520,7 @@ Add simple index page for txt/
 
 Put infobox with all of the item's attributes on item details page
 
-sharePubKey() should not change the current page, if possible
+PubKeyShare() should not change the current page, if possible
 	Make it submit in teh background
 
 Make an archive of 88x31 browser buttons and display ones which test OK

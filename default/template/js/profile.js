@@ -62,19 +62,19 @@ function btnSignOut_Click (t) { // event for 'Sign Out' button's click
 		var form = document.createElement('form');
 		form.setAttribute("action", "/post.html");
 		form.setAttribute("method", "get");
-		//form.setAttribute("target", "ifrSharePubKey");
+		//form.setAttribute("target", "ifrPubKeyShare");
 
-		//alert('DEBUG: sharePubKey: creating input');
+		//alert('DEBUG: PubKeyShare: creating input');
 
 		var txtComment = document.createElement('input');
 		txtComment.setAttribute("type", "hidden");
 		txtComment.setAttribute("value", 'exiting... ' + GetTime());
 		txtComment.setAttribute("name", "comment");
 
-		//alert('DEBUG: sharePubKey: adding txtComment to form');
+		//alert('DEBUG: PubKeyShare: adding txtComment to form');
 
 		form.appendChild(txtComment);
-		//alert('DEBUG: sharePubKey: adding form to body');
+		//alert('DEBUG: PubKeyShare: adding form to body');
 		//document.getElementsByTagName('body')[0].appendChild(form);
 		document.body.appendChild(form);
 		//alert('DEBUG: submitting form');
@@ -153,17 +153,17 @@ function getUserFp () { // retrieve stored user fingerprint from LocalStorage
 	return '';
 } // getUserFp()
 
-function sharePubKey (t) { // shares current user's public key via injected form and iframe
-// function sharePubKeyPing () {
+function PubKeyShare (t) { // shares current user's public key via injected form and iframe
+// function PubKeySharePing () {
 // function sendPubKey () {
 	// t is the clicked link's "this", which is used to display a notification next to it
 
-	//alert('DEBUG: profile.js: sharePubKey() begins');
+	//alert('DEBUG: profile.js: PubKeyShare() begins');
 
 	if (window.getPublicKey) {
 		var pubKey = getPublicKey();
 
-		//alert('DEBUG: sharePubKey: pubKey = ' + (pubKey ? pubKey : '(false)'));
+		//alert('DEBUG: PubKeyShare: pubKey = ' + (pubKey ? pubKey : '(false)'));
 
 		if (pubKey) {
 			if (window.displayNotification) {
@@ -179,25 +179,25 @@ function sharePubKey (t) { // shares current user's public key via injected form
 
 			if (0) {
 
-				//alert('DEBUG: sharePubKey: creating form');
+				//alert('DEBUG: PubKeyShare: creating form');
 
 				var form = document.createElement('form');
 				form.setAttribute("action", "/post.html");
 				form.setAttribute("method", "GET");
-				//form.setAttribute("target", "ifrSharePubKey");
+				//form.setAttribute("target", "ifrPubKeyShare");
 
-				//alert('DEBUG: sharePubKey: creating input');
+				//alert('DEBUG: PubKeyShare: creating input');
 
 				var txtComment = document.createElement('input');
 				txtComment.setAttribute("type", "hidden");
 				txtComment.setAttribute("value", pubKey);
 				txtComment.setAttribute("name", "comment");
 
-				//alert('DEBUG: sharePubKey: adding txtComment to form');
+				//alert('DEBUG: PubKeyShare: adding txtComment to form');
 
 				form.appendChild(txtComment);
 
-				//alert('DEBUG: sharePubKey: adding form to body');
+				//alert('DEBUG: PubKeyShare: adding form to body');
 
 				//document.getElementsByTagName('body')[0].appendChild(form);
 
@@ -215,7 +215,7 @@ function sharePubKey (t) { // shares current user's public key via injected form
 				PingUrl(postPubKeyUrl);
 			}
 		} else {
-			//alert('DEBUG: sharePubKey: pubKey was FALSE');
+			//alert('DEBUG: PubKeyShare: pubKey was FALSE');
 
 			return true;
 		}
@@ -232,7 +232,7 @@ function sharePubKey (t) { // shares current user's public key via injected form
 //	document.body.appendChild(iframe);
 
 	return true;
-} // sharePubKey()
+} // PubKeyShare()
 
 function AddPrivateKeyLinks () { // adds save/load links to profile page if features are available
 // #todo make it so that this can be called repeatedly and hide/show appropriate links
@@ -269,7 +269,7 @@ function AddPrivateKeyLinks () { // adds save/load links to profile page if feat
 					// "Go to profile" link
 					var aProfile = document.createElement('a');
 					aProfile.setAttribute('href', '/author/' + getUserFp() + '/index.html');
-					aProfile.setAttribute('onclick', 'if (window.sharePubKey) { return sharePubKey(this); }');
+					aProfile.setAttribute('onclick', 'if (window.PubKeyShare) { return PubKeyShare(this); }');
 					aProfile.setAttribute('id', 'linkGoToProfile');
 					aProfile.innerHTML = 'Go to profile';
 					// 'Go to profile' "Go to profile"
@@ -563,14 +563,14 @@ function PubKeyPing () { // checks if user's public key is on server
 				if (PubkeyCheckProfileExists(myFingerprint)) {
 					//alert('DEBUG: PubKeyPing: profile already exists');
 				} else {
-					if (window.sharePubKey) {
-						//alert('DEBUG: PubKeyPing: latestPing: (window.sharePubKey) check passed, doing it...');
-						sharePubKey();
+					if (window.PubKeyShare) {
+						//alert('DEBUG: PubKeyPing: latestPing: (window.PubKeyShare) check passed, doing it...');
+						PubKeyShare();
 
 						latestPing = GetTime();
 						SetPrefs('latest_pubkey_ping', latestPing);
 					} else {
-						//alert('DEBUG: PubKeyPing: latestPing: (window.sharePubKey) check FAILED');
+						//alert('DEBUG: PubKeyPing: latestPing: (window.PubKeyShare) check FAILED');
 					}
 				}
 			} else {

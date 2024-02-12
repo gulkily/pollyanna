@@ -30,10 +30,10 @@
 //for route.php:
 
 			<p id=insPubKey onclick="
-				if (window.sharePubKey && window.getUserFp) {
+				if (window.PubKeyShare && window.getUserFp) {
 					var authorKey = getUserFp();
 					if (authorKey) {
-						sharePubKey();
+						PubKeyShare();
 						window.location = '/author/' + authorKey + '/index.html';
 						return false;
 					}

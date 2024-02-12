@@ -3398,7 +3398,7 @@ Put infobox with all of the item's attributes on item details page
 
 ===
 
-sharePubKey() should not change the current page, if possible
+PubKeyShare() should not change the current page, if possible
 	Make it submit in the background
 
 ===
