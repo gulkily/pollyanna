@@ -552,7 +552,7 @@ function PubKeyPing () { // checks if user's public key is on server
 	} else {
 		//alert('DEBUG: PubKeyPing: latestPing was false or stale, doing a check at ' + time());
 
-		if (window.location.href.indexOf('profile') != -1 && window.getUserFp) {
+		if (window.getUserFp) {
 			//alert('DEBUG; PubKeyPing: window.getUserFp check passed');
 
 			var myFingerprint = getUserFp();
