@@ -40,7 +40,8 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 		$title = '';
 	}
 
-	my $pageHeaderHtml = ''; 
+	my $pageHeaderHtml = '';
+	require_once('widget/stylesheet.pl');
 	my $styleSheet = GetHeaderStylesheet($pageType); #todo also pass parameter
 
     #PageIntro
