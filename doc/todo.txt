@@ -1,3 +1,6 @@
+bug in profile_auto_register:
+	public key is not shared until user clicks link on session page
+
 jstest1 should not assume that document.frmTest exists
 	some browsers do not yet support named forms
 		e.g. Ladybird
