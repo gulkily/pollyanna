@@ -158,14 +158,17 @@ function ReplyCartAddAll () {
 		//alert('DEBUG: ReplyCartAddAll: feature check passed');
 
 		var cartButtons = document.getElementsByClassName('replyCartButton');
-		//var existingList = window.localStorage.getItem('replyCart') || '';
+		var existingList = window.localStorage.getItem('replyCart') || '';
 
 		if (cartButtons) {
 			for (var b = 0; b < cartButtons.length; b++) {
 				var fileHash = cartButtons[b].getAttribute('item-id');
 
 				if (fileHash) {
-					addToReplyCartButton(fileHash, cartButtons[b]);
+					//if (cartButtons[b].innerHTML == '+cart') {
+					if (existingList.indexOf(fileHash) == -1) {
+						addToReplyCartButton(fileHash, cartButtons[b]);
+					}
 				}
 			}
 		} // if (cartButtons)
