@@ -5,5 +5,9 @@
 </fieldset>
 <fieldset>
 	<a id=replyCartInsert href=#>Paste</a>
+	<hr>
+	<a id=replyCartClear href=#>Clear</a>
+	<br>
+	<a id=replyCartAddAll href=#>Add All</a>
 </fieldset>
 <!-- / reply_cart.template -->
