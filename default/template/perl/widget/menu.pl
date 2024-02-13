@@ -35,11 +35,11 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 	my $listText = GetTemplate('list/' . $listName);
 
 	if (index($listText, "\r") != -1) {
-		WriteLog('GetMenuFromList: warning: $listText contains carriage return; caller = ' . join(',', caller));
+		WriteLog('GetMenuFromList: warning: $listText contains carriage return(s), replacing with newline(s); caller = ' . join(',', caller));
+		$listText = str_replace("\r", "\n", $listText);
 	}
 
-	#	$listText = str_replace(' ', "\n", $listText);
-	$listText = str_replace("\r", "\n", $listText);
+	$listText = str_replace("\r", "\n", $listText); # this shouldn't really be necessary, since it is covered by the sanity check above
 	$listText = str_replace("\n\n", "\n", $listText);
 
 	#WriteLog('GetMenuFromList: $listText = ' . $listText);
@@ -174,7 +174,7 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 			WriteLog('GetMenuFromList: checking for $menuItemName eq $pageType: ' . $menuItemName . ', ' . $pageType . '; caller = ' . join(',', caller));
 			if ($menuItemName eq $pageType) {
 				if (GetConfig('setting/html/css/enable') && GetConfig('setting/html/menu_highlight_selected')) {
-                    #todo should be under css/
+					#todo should be under css/
 					## menu item is for current page
 					$menuItemComposed = '<span style="background-color: ' . GetThemeColor('highlight_ready') . ';">' . $menuItemComposed . '</span>';
 					#todo $menuItemComposed = '<span style="border: dotted 2pt gray; background-color: ' . GetThemeColor('highlight_ready') . ';">' . $menuItemComposed . '</span>';
@@ -207,7 +207,7 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 # sub GetMenu {
 	my $topMenuTemplate = GetTemplate('html/menu_top.template');
 
-    #todo this requires setting/html/css/enable
+	#todo this requires setting/html/css/enable
 	if (GetConfig('setting/html/menu_layer_controls')) {
 		#todo separate the js out ...
 		my $dialogControls = GetTemplate('html/widget/layer_controls.template');
