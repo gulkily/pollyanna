@@ -65,7 +65,7 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 		if (GetConfig('setting/admin/php/enable') && GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
 			my $resetButton = GetTemplate('html/widget/reset_button.template');
 			$resetButton = FillThemeColors($resetButton);
-			$txtFooter =~ s/\<\/body>/$resetButton<\/body>/i;
+			$txtFooter = str_replace('</body>', $resetButton . '</body>', $txtFooter);
 		} else {
 			WriteLog('GetPageFooter: warning: reset_button requires php, js, and js/dragging. not adding reset button.');
 		}
