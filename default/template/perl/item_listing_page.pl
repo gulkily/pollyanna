@@ -156,6 +156,11 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, image
 		# $html .= '<span class=advanced>' . GetDialogX('<a href="/chain.log">chain.log</a>', 'Log') . '</span>'; #should be called GetDialog? #todo
 	}
 
+	if (GetConfig('setting/html/reply_cart')) {
+		require_once('dialog/reply_cart.pl');
+		$html .= GetReplyCartDialog();
+	}
+
 	$html .= GetQuerySqlDialog($pageQuery);
 
 	if ($pageQuery eq 'boxes') { #banana theme
