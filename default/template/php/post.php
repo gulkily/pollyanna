@@ -233,6 +233,9 @@ if (isset($boxesCount) && $boxesCount && !$comment) {
 }
 
 if (GetConfig('setting/admin/php/post/handle_browser_test') && isset($comment) && $comment) {
+	# if handle_browser_test is on, and comment is not empty,
+	# and comment contains two E[0-9]{13} tokens, add GET parameters to comment
+	# this is used to record browser test results
 	if (preg_match('/(E[0-9]{13})\W+(E[0-9]{13})/', $comment, $browserTestMatches)) {
 		if (isset($browserTestMatches[1]) && isset($browserTestMatches[2])) {
 			if ($_GET) {
@@ -249,9 +252,9 @@ if (GetConfig('setting/admin/php/post/handle_browser_test') && isset($comment) &
 			}
 		}
 	}
-}
+} # handle_browser_test
 
-{
+{ # require_cookie
 	if (isset($comment) && $comment && GetConfig('setting/admin/php/post/require_cookie')) {
 		if ((!isset($_COOKIE['cookie']) || !isset($_COOKIE['checksum'])) && index($comment, 'SIGNED') == -1 && index($comment, 'PUBLIC') == -1) {
 			#todo page does not look right, especially with dark theme
@@ -290,7 +293,7 @@ if (GetConfig('setting/admin/php/post/handle_browser_test') && isset($comment) &
 		} else {
 		}
 	}
-}
+} # require_cookie
 
 if (is_array($comment)) { # comment[]
 	########### BATCH ADD
@@ -377,7 +380,7 @@ if (is_array($comment)) { # comment[]
 	########### BATCH ADD
 	########### BATCH ADD
 	########################################
-} # comment is array
+} # comment[] is array
 
 if (!$comment && $strSourceTitle) {
 	// if there is no comment, but there's a source title, use that as the comment
@@ -402,7 +405,7 @@ if (isset($comment) && $comment) {
 		$updateDuration = $updateFinishTime - $updateStartTime;
 
 		RedirectWithResponse('/stats.html', "Update finished! <small>in $updateDuration"."s</small>");
-	}
+	} # if ($comment == 'Update')
 	elseif (strtolower($comment) == 'stop' && GetConfig('admin/token/stop')) {
 		WriteLog('post.php: found $comment == stop');
 		
