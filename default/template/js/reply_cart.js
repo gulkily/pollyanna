@@ -93,11 +93,11 @@ function addToReplyCartButton (fileHash, ths) { // also removes ;|
 			ReplyCartUpdateCount();
 		}
 
-//		if (ths) {
-//			if (ths.remove) {
-//				ths.remove();
-//			}
-//		}
+		//if (ths) {
+		//	if (ths.remove) {
+		//		ths.remove();
+		//	}
+		//}
 
 		return false;
 	}
