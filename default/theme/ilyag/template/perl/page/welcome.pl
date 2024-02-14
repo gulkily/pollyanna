@@ -38,7 +38,7 @@ sub GetWelcomePage {
 				$html = str_replace('<span id=home_image></span>', 'x', $html);
 			}
 		} else {
-			$html = str_replace('<span id=home_image></span>', 'y', $html);
+			$html = str_replace('<span id=home_image></span>', '', $html);
 		}
 	}
 
