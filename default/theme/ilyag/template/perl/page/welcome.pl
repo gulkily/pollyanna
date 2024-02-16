@@ -28,7 +28,7 @@ sub GetWelcomePage {
 
 	my $html = GetTemplate('html/page/home.template');
 
-	if (1) { # GetConfig('admin/image/enable')) {
+	if (GetConfig('admin/image/enable')) {
 		my $image = SqliteGetValue("SELECT file_hash FROM item_flat WHERE item_type = 'image' AND labels_list LIKE '%,welcome,%' AND item_score > 0 ORDER BY RANDOM() LIMIT 1");
 		# select a random image with a score of greater than 0
 		if ($image) {
@@ -36,13 +36,19 @@ sub GetWelcomePage {
 			my $imageTemplate = GetImageContainer2($image, 'ilya', '/image.html', 512);
 			if ($imageTemplate) {
 				$html = str_replace('<span id=home_image></span>', '<span class=image>' . $imageTemplate . '</span>', $html);
-			} else {
+			}
+			else {
 				$html = str_replace('<span id=home_image></span>', 'x', $html);
 			}
-		} else {
+		}
+		else {
 			# remove the image container
 			$html = str_replace('<span id=home_image></span>', '', $html);
 		}
+	} # if GetConfig('admin/image/enable'))
+	else {
+		# remove the image container
+		$html = str_replace('<span id=home_image></span>', '', $html);
 	}
 
 	return $html;
