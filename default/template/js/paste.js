@@ -17,7 +17,20 @@ function PasteEvent (e) {
 		if (e.clipboardData.files) {
 		    // there were some files in the clipboard
 
-			if (document.createElement) {
+			var foundImage = 0;
+			if (e && e.clipboardData && e.clipboardData.items && e.clipboardData.items.length) {
+        		for (var i = 0; i < e.clipboardData.items.length; i++) {
+					var item = e.clipboardData.items[i];
+
+					// Check if the item is a file and is an image
+					if (item.kind === 'file' && item.type.startsWith('image/')) {
+						foundImage = 1;
+						break;
+					}
+				} // for (var i = 0; i < e.clipboardData.items.length; i++)
+			} // if (e && e.clipboardData && e.clipboardData.items && e.clipboardData.items.length)
+
+			if (foundImage && document.createElement) {
 			    // browser supports basic DOM things, including document.createElement()
 
 			    // create a form
