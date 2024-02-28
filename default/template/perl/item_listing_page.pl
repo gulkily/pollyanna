@@ -17,7 +17,7 @@ while (my $argFound = shift) {
 
 require_once('pagination_links.pl');
 
-sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, image_gallery), $pageNumber ;
+sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, image_gallery), $pageNumber, $refParams ;
 # sub GetListingPage {
 # sub MakeListingPage {
 # sub GetAuthorsPage {
