@@ -1,3 +1,12 @@
+
+
+if (GetConfig('setting/html/item_image_double_click_to_like')) {
+	# i think this should only be if there is no link on the image
+	$imageContainer = AddAttributeToTag($imageContainer, 'a', 'ondblclick', 'alert(); return false;');
+	$imageContainer = AddAttributeToTag($imageContainer, 'a', 'onclick', 'return false;');
+}
+
+
 	if (0 && GetConfig('debug')) {
 		# used to generate a baseline of characters which can be in an sql query
 		my $existingChars = GetFile('temp_sql.sh');
