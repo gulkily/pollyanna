@@ -12,6 +12,7 @@ sub GetItemListHtml { # @files(array of hashes) ; takes @files, returns html lis
 # sub ItemListAsHtml {
 # example: GetItemListHtml(\@files)
 # uses GetItemTemplate()
+# this is called when 'full_items' is used
 	my $filesArrayReference = shift; # array of hash refs which contains items
 	my $flagsHashReference = shift;
 
