@@ -183,6 +183,10 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, image
 		WriteLog('GetItemListingPage: warning: $html is FALSE after InjectJs(); caller = ' . join(',', caller));
 	}
 
+	if (GetConfig('setting/html/debug')) {
+		$html = $html . "\n" . "<!-- GetItemListingPage($pageQuery, $pageMode, $pageNumber, $refParams) -->" . "\n";
+	}
+
 	return $html;
 } # GetItemListingPage()
 
