@@ -310,6 +310,8 @@ sub GetDialogX2 { # \%paramHash ; returns window
 				$windowTitlebar = InjectJs($windowTitlebar, qw(titlebar_with_button)); #todo this should not warn, it does not need a <body> tag
 			}
 
+			#todo this should use str_replace
+			#todo this should use <span id=></span> instead of $ placeholders
 			$windowTitlebar =~ s/\$windowTitle/$windowTitle/g;
 			$windowTitlebar =~ s/\$dialogAnchor/$dialogAnchor/g;
 			$windowTemplate =~ s/\$windowTitlebar/$windowTitlebar/g;
