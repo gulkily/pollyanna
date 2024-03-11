@@ -1,3 +1,8 @@
+bug `hike refresh` fails if existing module has a syntax error
+	even if new version in default/ has been fixed
+	workaround: either remove the module in config/
+		or hike clean, hike build
+
 bug in profile_auto_register:
 	public key is not shared until user clicks link on session page
 
