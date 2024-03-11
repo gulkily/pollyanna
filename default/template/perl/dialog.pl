@@ -343,11 +343,10 @@ sub GetDialogX2 { # \%paramHash ; returns window
 			}
 
 			#
-			#			if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
-			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$dialogAnchor', 'onfocus', 'document.title=this.innerHTML;');
-			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$dialogAnchor', 'onclick', 'document.title=this.innerHTML;');
-			#			}
-			#
+			#if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
+			#	$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$dialogAnchor', 'onfocus', 'document.title=this.innerHTML;');
+			#	$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$dialogAnchor', 'onclick', 'document.title=this.innerHTML;');
+			#}
 			#$windowTitlebar = str_replace('<!-- note: dragging.js looks for a "b" inside of a class=titlebar -->', '', $windowTitlebar); #UtilityComment
 
 			$windowTitlebar =~ s/\$windowTitle/$windowTitle/g;
