@@ -1633,11 +1633,11 @@ if (GetConfig('setting/admin/php/route_enable')) {
 								HandleNotFound("/dialog/" . $dialogName . ".html", '');
 							}
 							$dialogsTogether .= GetFile("$htmlDir/dialog/" . $dialogName . '.html');
-						}
-					}
+						} # for (/* my */ $i = 0; $i < count($dialogListArray); $i++)
+					} # if (substr($dialogList, -5) == '.html')
 					$html = $dialogsTogether;
-				}
-			}
+				} # if (index($dialogList, ',') != -1)
+			} # if (substr($path, 0, 8) == '/dialog/')
 		}
 
 
