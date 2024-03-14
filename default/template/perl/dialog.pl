@@ -325,9 +325,10 @@ sub GetDialogX2 { # \%paramHash ; returns window
 
 			if (GetConfig('setting/html/dialog_emoji_icon')) {
 				my $spanDialogIcon = '<span class=dialogIcon>' . $dialogIcon . '</span>';
-				#todo $spanDialogIcon = AddAttributeToTag($spanDialogIcon, 'span', 'onclick', 'alert()');
-				#todo $spanDialogIcon = AddAttributeToTag($spanDialogIcon, 'span', 'style', 'cursor:pointer');
-
+				if (GetConfig('setting/admin/js/enable')) {
+					#$spanDialogIcon = AddAttributeToTag($spanDialogIcon, 'span', 'onclick', 'alert()');
+					#$spanDialogIcon = AddAttributeToTag($spanDialogIcon, 'span', 'style', 'cursor:pointer');
+				}
 				$windowTemplate = str_replace('<span class=dialogIcon></span>', $spanDialogIcon, $windowTemplate);
 			} else {
 				$windowTemplate = str_replace('<span class=dialogIcon></span>', '', $windowTemplate);
