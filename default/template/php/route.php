@@ -1611,7 +1611,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 		}
 
 
-		if (1) { # multiple dialogs requested allowed
+		if (GetConfig('setting/admin/php/route_dialogs_multi_request')) { # multiple dialogs requested allowed
 			# example: /dialog/help,about,settings.html
 			if (substr($path, 0, 8) == '/dialog/') {
 				/* my */ $dialogList = substr($path, 8);
@@ -1638,7 +1638,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 					$html = $dialogsTogether;
 				} # if (index($dialogList, ',') != -1)
 			} # if (substr($path, 0, 8) == '/dialog/')
-		}
+		} # if (GetConfig('setting/admin/php/route_dialogs_multi_request'))
 
 
 		////////////////////////////
