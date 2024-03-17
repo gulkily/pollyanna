@@ -104,7 +104,7 @@ sub GetAvatar { # $authorKey, $noCache ; returns HTML avatar based on author key
 		}
 
 		if (GetConfig('setting/html/avatar_link_to_person_when_approved')) {
-			if (SqliteGetValue("SELECT COUNT(label) FROM item_label WHERE label = 'approve' AND file_hash = '$authorPubKeyHash'")) {
+			if (SqliteGetValue("SELECT COUNT(label) FROM item_label WHERE label = 'approve' AND file_hash = ?", $authorPubKeyHash)) {
 				$isApproved = 1;
 			}
 		}
