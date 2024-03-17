@@ -168,7 +168,7 @@ function SqliteEscape ($text) { # Escapes supplied text for use in sqlite query
 function SqliteGetValue ($query) { # Returns the first column from the first row returned by sqlite $query
 	# #todo should allow returning columns other than 0
 	# #todo this should use SqliteQuery()
-	# #todo this should allow @queryParams like the other procedures
+	# #todo this should allow @queryParams like the other procedures (note: this is php version, not perl)
 
 	WriteLog("SqliteGetValue($query)");
 
