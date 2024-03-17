@@ -34,7 +34,7 @@ sub GetAuthorLink { # $authorKey ; returns avatar'ed link for an author id
 
 		my $authorPubKeyHash = DBGetAuthorPublicKeyHash($authorKey) || '';
 
-		if (IsItem($authorPubKeyHash)) {
+		if ($authorPubKeyHash = IsItem($authorPubKeyHash)) {
 			# sanity check passed
 
 			if (SqliteGetValue("SELECT COUNT(label) FROM item_label WHERE label = 'approve' AND file_hash = ?", $authorPubKeyHash)) {
