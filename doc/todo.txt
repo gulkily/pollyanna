@@ -1,17 +1,25 @@
 GetAvatar() should differentiate between approve and not approve
 	it currently does, but once it's cached, it does not change
 
+===
+
 bug `hike refresh` fails if existing module has a syntax error
 	even if new version in default/ has been fixed
 	workaround: either remove the module in config/
 		or hike clean, hike build
 
+===
+
 bug in profile_auto_register:
 	public key is not shared until user clicks link on session page
+
+===
 
 jstest1 should not assume that document.frmTest exists
 	some browsers do not yet support named forms
 		e.g. Ladybird
+
+===
 
 to get a new cookie from a public key,
 	the client should send a signed and timestamped request
@@ -22,8 +30,12 @@ to get a new cookie from a public key,
 			which the server must verify with the client's public key
 		d) server sends a new cookie to the client
 
+===
+
 there should be a clear way to back up an entire server's data
 	and there should be an easy way to validate/test that backup
+
+===
 
 changelog should appear immediately on New page after `hike refresh` is run
 	changelog should be generated x
