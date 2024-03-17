@@ -1,6 +1,8 @@
 Known Issues
 ============
 
+`hike refresh` sometimes does not work on the first try
+	workaround: run it again
 
 2023-11-07 22:08:13: (mod_fastcgi.c.451) FastCGI-stderr:PHP Warning:  mkdir(): Permission denied in /home/wsl/pollyanna/html/utils.php on line 653
 2023-11-07 22:08:13: (mod_fastcgi.c.451) FastCGI-stderr:PHP Warning:  mkdir(): No such file or directory in /home/wsl/pollyanna/html/utils.php on line 653
