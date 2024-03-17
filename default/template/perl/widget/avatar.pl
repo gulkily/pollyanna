@@ -71,6 +71,13 @@ sub GetAvatar { # $authorKey, $noCache ; returns HTML avatar based on author key
 
 	my $avatar = GetTemplate($avatarTemplate);
 
+	if (GetConfig('html/avatar_icons')) {
+		my $avatarIconTemplate = GetTemplate('html/avatar-icon.template');
+		$avatar = str_replace('<span class=icon></span>', $avatarIconTemplate, $avatar);
+	} else {
+		$avatar = str_replace('<span class=icon></span>', '', $avatar);
+	}
+
 	{
 		# trim whitespace from avatar template
 		# this trims extra whitespace from avatar template
