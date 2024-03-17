@@ -1845,6 +1845,10 @@ sub DBAddLabel { # $fileHash, $labelTime, $labelValue, $signedBy, $sourceHash ; 
 # sub DBAddVote {
 # sub DBAddItemVote {
 # sub DBAddVoteRecord {
+# sub DBAddHashTag {
+# sub DBApplyHashTag {
+# sub DBApplyTag {
+
 	state $query;
 	state @queryParams;
 
@@ -1886,10 +1890,12 @@ sub DBAddLabel { # $fileHash, $labelTime, $labelValue, $signedBy, $sourceHash ; 
 	if (!$labelTime) {
 		WriteLog('DBAddLabel: warning: missing $labelTime; caller: ' . join(',', caller));
 		$labelTime = 0;
+		# this is also allowed because this is how system labels are added
 		#$labelTime = time();
 		#return '';
 	}
 
+	# this is allowed because this is the mechanism used for system labels
 	#if (!$signedBy) {
 	#	WriteLog("DBAddLabel() called without \$signedBy! Returning.");
 	#}
