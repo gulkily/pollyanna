@@ -1,3 +1,9 @@
+person page should be updated when
+	approve label is added
+	new author is added
+
+===
+
 GetAvatar() should differentiate between approve and not approve
 	it currently does, but once it's cached, it does not change
 
