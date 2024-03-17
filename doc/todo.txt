@@ -418,7 +418,7 @@ author/person concept
 		the avatar link should go to the person pagex
 	if author is not approvedx
 		the avatar should go to the author pagex
-		AND on the author page, it should say "author is not yet approved"
+		AND on the author page, it should say "author is not yet approved"x
 
 ===
 

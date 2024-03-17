@@ -98,8 +98,13 @@ sub GetAuthorInfoBox { # $authorKey ; returns author info box
 		$publicKeyHash = '*';
 	}
 
+	if ($authorDescription) {
+		$authorDescription .= '<br>';
+	}
 	if (index($authorDescription, 'approve') != -1) { #todo do it properly
-		$authorDescription .= '<p>Key is approved.</p>';
+		$authorDescription .= '<b>Key is approved.</b>';
+	} else {
+		$authorDescription .= '<b>Author is not yet approved.</b>';
 	}
 
 	if (IsAdmin($authorKey)) {
