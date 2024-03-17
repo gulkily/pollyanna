@@ -16,7 +16,7 @@ $ENV{PATH}="/bin:/usr/bin"; #this is needed for -T to work
 
 my $argumentKey = shift;
 
-sub UpdateSetting {
+sub UpdateSetting { # $settingKeySanitized, $argumentValueSanitized ; update setting and make needed refreshes
 	my $settingKeySanitized = shift;
 	my $argumentValueSanitized = shift;
 
@@ -25,22 +25,24 @@ sub UpdateSetting {
 	#todo sanity checks
 	`echo "$argumentValueSanitized" > $settingKeySanitized`;
 
-
 	if ($settingKeySanitized eq 'config/setting/theme') {
 		print "Theme changed, about to rebuild frontend...\n";
-		sleep 2;
 		print `sh hike.sh frontend`;
 	}
 
-	if ($settingKeySanitized =~ m|config/setting/admin/php/enable|) {
-		print "Setting changed for php/enable, rebuild frontend\n";
-		sleep 2;
+	if (index($settingKeySanitized, 'php/enable') != -1) {
+		print "Setting changed for php/enable, rebuild frontend and restart\n";
 		`sh hike.sh frontend`; # rebuild frontend
 		if (GetConfig('setting/admin/lighttpd/enable')) {
 			# restart lighttpd
 			`sh hike.sh stop`;
 			`sh hike.sh start`;
 		}
+	}
+
+	if ((index($settingKeySanitized, 'html/') != -1) || (index($settingKeySanitized, 'js/') != -1)) {
+		print "Frontend-related change detected, rebuild frontend\n";
+		`sh hike.sh frontend`; # rebuild frontend
 	}
 } # UpdateSetting()
 
