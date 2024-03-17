@@ -1,4 +1,26 @@
 
+sub GetAvatar2 { # $authorKey
+	WriteLog('GetAvatar2(...)');
+
+	my $authorKey = shift;
+	if (!$authorKey) {
+		WriteLog('GetAvatar2: warning: $authorKey is FALSE, returning empty string; caller = ' . join(',', caller));
+		return '';
+	}
+	chomp $authorKey;
+	if ($authorKey = IsFingerprint($authorKey)) {
+		# sanity check passed
+	} else {
+		WriteLog('GetAvatar2: warning: sanity check failed on $authorKey = ' . $authorKey . '; caller = ' . join(',', caller));
+		return '';
+	}
+
+	my $template = GetTemplate('html/avatar.template');
+	my $alias = GetAlias($authorKey);
+
+	return $alias;
+}
+
 
 if (GetConfig('setting/html/item_image_double_click_to_like')) {
 	# i think this should only be if there is no link on the image
