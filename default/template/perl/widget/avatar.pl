@@ -6,9 +6,9 @@ use 5.010;
 use utf8;
 
 sub GetAvatar { # $authorKey, $noCache ; returns HTML avatar based on author key, using avatar.template
-# sub GetAvatarCache {
-# affected by config/html/avatar_icons
-# affected by setting/html/avatar_link_to_person_when_approved
+	# sub GetAvatarCache {
+	# affected by config/html/avatar_icons
+	# affected by setting/html/avatar_link_to_person_when_approved
 
 	WriteLog("GetAvatar(...)");
 	my $aliasHtmlEscaped = '';
@@ -28,14 +28,6 @@ sub GetAvatar { # $authorKey, $noCache ; returns HTML avatar based on author key
 		}
 		{
 			my $themesValue = GetConfig('theme');
-
-			# this is not entirely correct ... should be based on entire theme value, not just the first line
-			# {
-				# it's a hack to map theme value onto path
-				#$themesValue =~ s/[\s]+/ /g;
-				#my @activeThemes = split(' ', $themesValue);
-				#my $themeName = $activeThemes[0];
-			# }
 
 			$avatarCachePrefix .= '/' . substr(md5_hex($themesValue), 0, 8);
 			# generate cache prefix using hash of all the enabled themes together
@@ -105,9 +97,9 @@ sub GetAvatar { # $authorKey, $noCache ; returns HTML avatar based on author key
 		}
 
 		if (GetConfig('setting/html/avatar_link_to_person_when_approved')) {
-    		if (SqliteGetValue("SELECT COUNT(label) FROM item_label WHERE label = 'approve' AND file_hash = '$authorPubKeyHash'")) {
-    			$isApproved = 1;
-    		}
+			if (SqliteGetValue("SELECT COUNT(label) FROM item_label WHERE label = 'approve' AND file_hash = '$authorPubKeyHash'")) {
+				$isApproved = 1;
+			}
 		}
 
 		my $alias = '';
