@@ -1,3 +1,6 @@
+GetAvatar() should differentiate between approve and not approve
+	it currently does, but once it's cached, it does not change
+
 bug `hike refresh` fails if existing module has a syntax error
 	even if new version in default/ has been fixed
 	workaround: either remove the module in config/
