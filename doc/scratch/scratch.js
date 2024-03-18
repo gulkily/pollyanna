@@ -1,3 +1,49 @@
+// fresh.js
+//function ReplacePageWithNewContent () {
+//	window.location.replace(window.newPageLocation);
+//	document.open();
+//	document.write(window.newPageContent);
+//	document.close();
+//
+//	return 0;
+//}
+//
+//function StoreNewPageContent () {
+//	var xmlhttp = window.xmlhttp2;
+//
+//	if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+//		//alert('DEBUG: PingUrlCallbackReplaceCurrentPage() found status 200');
+//		window.newPageContent = xmlhttp.responseText;
+//		window.newPageLocation = xmlhttp.responseURL;
+//
+//		//window.location.replace(xmlhttp.responseURL);
+////		document.open();
+////		document.write(xmlhttp.responseText);
+////		document.close();
+//	}
+//}
+//
+//function FetchNewPageContent (url) {
+//	if (window.XMLHttpRequest) {
+//		//alert('DEBUG: PingUrl: window.XMLHttpRequest was true');
+//
+//		var xmlhttp;
+//		if (window.xmlhttp2) {
+//			xmlhttp = window.xmlhttp2;
+//		} else {
+//			window.xmlhttp2 = new XMLHttpRequest();
+//			xmlhttp = window.xmlhttp2;
+//		}
+//        xmlhttp.onreadystatechange = window.StoreNewPageContent;
+//        xmlhttp.open("GET", url, true);
+//		  xmlhttp.setRequestHeader('Cache-Control', 'no-cache');
+//        xmlhttp.send();
+//
+//        return false;
+//	}
+//}
+
+
 		if (newDialog.getAttribute('id')) {
 			alert(1);
 			// check for existing dialog in the document already
