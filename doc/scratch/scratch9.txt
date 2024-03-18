@@ -749,8 +749,8 @@ var freshClient;
 //}
 
 
-function freshCallback() { // callback for requesting HEAD for current page
-//alert('DEBUG: freshCallback() this.readyState = ' + this.readyState);
+function FreshCallback() { // callback for requesting HEAD for current page
+//alert('DEBUG: FreshCallback() this.readyState = ' + this.readyState);
 
 //      if (1 || this.readyState == this.HEADERS_RECEIVED) { // headers received -- what we've been waiting for
         if (
@@ -758,7 +758,7 @@ function freshCallback() { // callback for requesting HEAD for current page
                 this.status == 200
         ) { // headers received -- what we've been waiting for
                 // document.title = 'DEBUG: callback received 200';
-            //alert('DEBUG: freshCallback() this.readyState == this.HEADERS_RECEIVED');
+            //alert('DEBUG: FreshCallback() this.readyState == this.HEADERS_RECEIVED');
 
                 var eTag = freshClient.getResponseHeader("ETag"); // etag header contains page 'fingerprint'
 
@@ -833,7 +833,7 @@ function freshCallback() { // callback for requesting HEAD for current page
                                         } // lastEtag also didn't match
                                 } // eTag != window.myOwnETag
                                 else {
-                                        //document.title = 'freshCallback: x ' + window.myOwnETag + ';' + new Date().getTime();
+                                        //document.title = 'FreshCallback: x ' + window.myOwnETag + ';' + new Date().getTime();
                                         if (window.freshTimeoutId) {
                                                 clearTimeout(window.freshTimeoutId);
                                         }
@@ -863,7 +863,7 @@ function freshCallback() { // callback for requesting HEAD for current page
         }
 
         return true;
-} //freshCallback()
+} //FreshCallback()
 
 function CheckIfFresh () {
         var d = new Date();
@@ -912,7 +912,7 @@ function CheckIfFresh () {
 
         //freshClient.timeout = 5000; //#xhr.timeout
                 freshClient.setRequestHeader('Cache-Control', 'no-cache');
-                freshClient.onreadystatechange = freshCallback;
+                freshClient.onreadystatechange = FreshCallback;
 
                 freshClient.send();
         }
@@ -2842,8 +2842,8 @@ var freshClient;
 //}
 
 
-function freshCallback() { // callback for requesting HEAD for current page
-//alert('DEBUG: freshCallback() this.readyState = ' + this.readyState);
+function FreshCallback() { // callback for requesting HEAD for current page
+//alert('DEBUG: FreshCallback() this.readyState = ' + this.readyState);
 
 //      if (1 || this.readyState == this.HEADERS_RECEIVED) { // headers received -- what we've been waiting for
         if (
@@ -2851,7 +2851,7 @@ function freshCallback() { // callback for requesting HEAD for current page
                 this.status == 200
         ) { // headers received -- what we've been waiting for
                 // document.title = 'DEBUG: callback received 200';
-            //alert('DEBUG: freshCallback() this.readyState == this.HEADERS_RECEIVED');
+            //alert('DEBUG: FreshCallback() this.readyState == this.HEADERS_RECEIVED');
 
                 var eTag = freshClient.getResponseHeader("ETag"); // etag header contains page 'fingerprint'
 
@@ -2926,7 +2926,7 @@ function freshCallback() { // callback for requesting HEAD for current page
                                         } // lastEtag also didn't match
                                 } // eTag != window.myOwnETag
                                 else {
-                                        //document.title = 'freshCallback: x ' + window.myOwnETag + ';' + new Date().getTime();
+                                        //document.title = 'FreshCallback: x ' + window.myOwnETag + ';' + new Date().getTime();
                                         if (window.freshTimeoutId) {
                                                 clearTimeout(window.freshTimeoutId);
                                         }
@@ -2956,7 +2956,7 @@ function freshCallback() { // callback for requesting HEAD for current page
         }
 
         return true;
-} //freshCallback()
+} //FreshCallback()
 
 function CheckIfFresh () {
         var d = new Date();
@@ -3005,7 +3005,7 @@ function CheckIfFresh () {
 
         //freshClient.timeout = 5000; //#xhr.timeout
                 freshClient.setRequestHeader('Cache-Control', 'no-cache');
-                freshClient.onreadystatechange = freshCallback;
+                freshClient.onreadystatechange = FreshCallback;
 
                 freshClient.send();
         }
@@ -3324,8 +3324,8 @@ var freshClient;
 //}
 
 
-function freshCallback() { // callback for requesting HEAD for current page
-//alert('DEBUG: freshCallback() this.readyState = ' + this.readyState);
+function FreshCallback() { // callback for requesting HEAD for current page
+//alert('DEBUG: FreshCallback() this.readyState = ' + this.readyState);
 
 //      if (1 || this.readyState == this.HEADERS_RECEIVED) { // headers received -- what we've been waiting for
         if (
@@ -3333,7 +3333,7 @@ function freshCallback() { // callback for requesting HEAD for current page
                 this.status == 200
         ) { // headers received -- what we've been waiting for
                 // document.title = 'DEBUG: callback received 200';
-            //alert('DEBUG: freshCallback() this.readyState == this.HEADERS_RECEIVED');
+            //alert('DEBUG: FreshCallback() this.readyState == this.HEADERS_RECEIVED');
 
                 var eTag = freshClient.getResponseHeader("ETag"); // etag header contains page 'fingerprint'
 
@@ -3408,7 +3408,7 @@ function freshCallback() { // callback for requesting HEAD for current page
                                         } // lastEtag also didn't match
                                 } // eTag != window.myOwnETag
                                 else {
-                                        //document.title = 'freshCallback: x ' + window.myOwnETag + ';' + new Date().getTime();
+                                        //document.title = 'FreshCallback: x ' + window.myOwnETag + ';' + new Date().getTime();
                                         if (window.freshTimeoutId) {
                                                 clearTimeout(window.freshTimeoutId);
                                         }
@@ -3438,7 +3438,7 @@ function freshCallback() { // callback for requesting HEAD for current page
         }
 
         return true;
-} //freshCallback()
+} //FreshCallback()
 
 function CheckIfFresh () {
         var d = new Date();
@@ -3487,7 +3487,7 @@ function CheckIfFresh () {
 
         //freshClient.timeout = 5000; //#xhr.timeout
                 freshClient.setRequestHeader('Cache-Control', 'no-cache');
-                freshClient.onreadystatechange = freshCallback;
+                freshClient.onreadystatechange = FreshCallback;
 
                 freshClient.send();
         }
@@ -3660,8 +3660,8 @@ var freshClient;
 //}
 
 
-function freshCallback() { // callback for requesting HEAD for current page
-//alert('DEBUG: freshCallback() this.readyState = ' + this.readyState);
+function FreshCallback() { // callback for requesting HEAD for current page
+//alert('DEBUG: FreshCallback() this.readyState = ' + this.readyState);
 
 //      if (1 || this.readyState == this.HEADERS_RECEIVED) { // headers received -- what we've been waiting for
         if (
@@ -3669,7 +3669,7 @@ function freshCallback() { // callback for requesting HEAD for current page
                 this.status == 200
         ) { // headers received -- what we've been waiting for
                 // document.title = 'DEBUG: callback received 200';
-            //alert('DEBUG: freshCallback() this.readyState == this.HEADERS_RECEIVED');
+            //alert('DEBUG: FreshCallback() this.readyState == this.HEADERS_RECEIVED');
 
                 var eTag = freshClient.getResponseHeader("ETag"); // etag header contains page 'fingerprint'
 
@@ -3744,7 +3744,7 @@ function freshCallback() { // callback for requesting HEAD for current page
                                         } // lastEtag also didn't match
                                 } // eTag != window.myOwnETag
                                 else {
-                                        //document.title = 'freshCallback: x ' + window.myOwnETag + ';' + new Date().getTime();
+                                        //document.title = 'FreshCallback: x ' + window.myOwnETag + ';' + new Date().getTime();
                                         if (window.freshTimeoutId) {
                                                 clearTimeout(window.freshTimeoutId);
                                         }
@@ -3774,7 +3774,7 @@ function freshCallback() { // callback for requesting HEAD for current page
         }
 
         return true;
-} //freshCallback()
+} //FreshCallback()
 
 function CheckIfFresh () {
         var d = new Date();
@@ -3823,7 +3823,7 @@ function CheckIfFresh () {
 
         //freshClient.timeout = 5000; //#xhr.timeout
                 freshClient.setRequestHeader('Cache-Control', 'no-cache');
-                freshClient.onreadystatechange = freshCallback;
+                freshClient.onreadystatechange = FreshCallback;
 
                 freshClient.send();
         }
