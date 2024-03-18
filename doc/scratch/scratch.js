@@ -1,3 +1,16 @@
+//
+//if (window.GetPrefs) {
+//	var needNotify = (GetPrefs('notify_on_change') ? 1 : 0);
+//	if (needNotify == 1) { // check value of notify_on_change preference
+//		if (window.EventLoop) {
+//			EventLoop();
+//		} else {
+//			CheckIfFresh();
+//		}
+//	}
+//}
+
+
 // fresh.js
 //function ReplacePageWithNewContent () {
 //	window.location.replace(window.newPageLocation);

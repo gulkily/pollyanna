@@ -7,16 +7,13 @@ function GetLatestPostTime () {
 }
 
 function freshCallback() { // callback for requesting HEAD for current page
-//alert('DEBUG: freshCallback() this.readyState = ' + this.readyState);
-//#todo update codestyle/improve smell
+	//alert('DEBUG: freshCallback() this.readyState = ' + this.readyState);
 
-//	if (1 || this.readyState == this.HEADERS_RECEIVED) { // headers received -- what we've been waiting for
 	if (
 		document.getElementById &&
 		this.readyState == this.HEADERS_RECEIVED ||
 		this.status == 200
 	) { // headers received -- what we've been waiting for
-		// document.title = 'DEBUG: callback received 200';
 		//alert('DEBUG: freshCallback() this.readyState == this.HEADERS_RECEIVED');
 
 		var eTag = freshClient.getResponseHeader("ETag"); // etag header contains page 'fingerprint'
@@ -40,7 +37,6 @@ function freshCallback() { // callback for requesting HEAD for current page
 						// no new change change
 					} else {
 						var freshUserWantsReload = 0;  // templated
-						//freshUserWantsReload = GetPrefs('fresh_reload');
 
 						if (freshUserWantsReload) {
 							// user wants reload
@@ -204,20 +200,8 @@ function CheckIfFresh () {
 
 	return true;
 } // CheckIfFresh()
-//
-//if (window.GetPrefs) {
-//	var needNotify = (GetPrefs('notify_on_change') ? 1 : 0);
-//	if (needNotify == 1) { // check value of notify_on_change preference
-//		if (window.EventLoop) {
-//			EventLoop();
-//		} else {
-//			CheckIfFresh();
-//		}
-//	}
-//}
 
 //alert('DEBUG: fresh.js');
-
 
 if (window.EventLoop) {
 	if (!window.GetPrefs) {
