@@ -892,22 +892,6 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							}
 						}
 
-						if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/fresh')) {
-							// because javascript cannot access the page's headers
-							// we will put the ETag value at the end of the page
-							// as window.myOwnETag
-							// this allows the script to compare it to the ETag value
-							// returned by the server when requesting HEAD for current page
-							// fresh_js fresh.js
-							if (index($html, 'CheckIfFresh()') > -1) {
-								// only need to do it if the script is included in page
-								$md5 = md5_file($pathRel);
-								header('ETag: ' . $md5);
-								$html .= "<script><!-- window.myOwnETag = '$md5'; // --></script>";
-								// #todo this should probably be templated and added using InjectJs()
-							}
-						} # GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/fresh')
-
 						$cacheWasUsed = 1;
 					} # it's reasonable to use cache (file exists, is not too old)
 					else { # do not use cache
@@ -934,6 +918,22 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							$fileCacheTime = 0;
 						}
 					} # else, do not use cache
+
+					if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/fresh')) {
+						// because javascript cannot access the page's headers
+						// we will put the ETag value at the end of the page
+						// as window.myOwnETag
+						// this allows the script to compare it to the ETag value
+						// returned by the server when requesting HEAD for current page
+						// fresh_js fresh.js
+						if (index($html, 'CheckIfFresh()') > -1) {
+							// only need to do it if the script is included in page
+							$md5 = md5_file($pathRel);
+							header('ETag: ' . $md5);
+							$html .= "<script><!-- window.myOwnETag = '$md5'; // --></script>";
+							// #todo this should probably be templated and added using InjectJs()
+						}
+					} # GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/fresh')
 
 					//if ($path == '/settings.html') {
 					if (GetConfig('setting/admin/php/form_add_timestamp_input')) {
