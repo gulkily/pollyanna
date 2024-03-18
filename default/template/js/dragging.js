@@ -466,6 +466,9 @@ function DraggingReset () {
 } // DraggingReset()
 
 function ReopenDialogs () {
+//sub RestoreDialog () {
+//sub RestoreDialogs () {
+//sub RequestDialog () {
 // called when page is first opened (and maybe sometimes from event loop?)
 	//alert('DEBUG: ReopenDialogs()');
 
@@ -700,7 +703,7 @@ function DraggingInit (doPosition) { // initialize all class=dialog elements on 
 
 	UnhideHiddenElements();
 
-	// ReopenDialogs();
+	//sub ReopenDialogs () { // #todo
 
 	if (GetPrefs('draggable_reopen')) {
 		//alert(1);
