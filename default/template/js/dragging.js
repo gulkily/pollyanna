@@ -723,6 +723,12 @@ function DraggingInit (doPosition) { // initialize all class=dialog elements on 
 							// but not via SpotlightDialog(),
 							// because we want it to stay in its saved position
 						}
+						else if (dialogName == 'undefined') {
+							// ignore, shouldn't happen
+						}
+						else if (dialogName != dialogName.toLowerCase()) {
+							// probably an in-page dialog, ignore
+						}
 						else {
 							if (openDialogs) {
 								openDialogs = openDialogs + ',' + dialogName;
