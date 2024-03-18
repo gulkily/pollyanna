@@ -1,11 +1,6 @@
 // == begin fresh.js
 var freshClient;
 
-function GetLatestPostTime () {
-	var latestActionTime = 0;
-	return latestActionTime;
-}
-
 function freshCallback() { // callback for requesting HEAD for current page
 	//alert('DEBUG: freshCallback() this.readyState = ' + this.readyState);
 
