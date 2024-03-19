@@ -5,7 +5,7 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub GetAvatar { # $authorKey, $noCache ; returns HTML avatar based on author key, using avatar.template
+sub GetAvatar { # $authorKey ; returns HTML avatar based on author key, using avatar.template
 	# sub GetAvatarCache {
 	# affected by config/html/avatar_icons
 	# affected by setting/html/avatar_link_to_person_when_approved
@@ -38,7 +38,7 @@ sub GetAvatar { # $authorKey, $noCache ; returns HTML avatar based on author key
 
 	WriteLog('GetAvatar: $avatarCachePrefix = ' . $avatarCachePrefix . '; $avatarTemplate = ' . $avatarTemplate);
 
-	state %avatarCache;
+	state %avatarMemo;
 
 	my $authorKey = shift;
 	if (!$authorKey) {
@@ -49,24 +49,18 @@ sub GetAvatar { # $authorKey, $noCache ; returns HTML avatar based on author key
 
 	WriteLog("GetAvatar($authorKey) ; caller = " . join(',', caller));
 
-	my $noCache = shift;
-	$noCache = ($noCache ? 1 : 0);
-
-	if (! $noCache) {
-		# $noCache is FALSE, so use cache!
-		if ($avatarCache{$authorKey}) {
-			WriteLog('GetAvatar: found in %avatarCache');
-			return $avatarCache{$authorKey};
+	if (1) {
+		if ($avatarMemo{$authorKey}) {
+			WriteLog('GetAvatar: found in %avatarMemo');
+			return $avatarMemo{$authorKey};
 		}
 		my $avCacheFile = GetCache("$avatarCachePrefix/$authorKey");
 		if ($avCacheFile) {
-			$avatarCache{$authorKey} = $avCacheFile;
-			WriteLog('GetAvatar: found cache, returning: $avatarCache{$authorKey} = ' . $avatarCache{$authorKey});
-			return $avatarCache{$authorKey};
+			$avatarMemo{$authorKey} = $avCacheFile;
+			WriteLog('GetAvatar: found cache, returning: $avatarMemo{$authorKey} = ' . $avatarMemo{$authorKey});
+			return $avatarMemo{$authorKey};
 		}
-		WriteLog('GetAvatar: not found in cache, continuing');
-	} else {
-		WriteLog('GetAvatar: $noCache is true, ignoring cache');
+		WriteLog('GetAvatar: not found in memo, continuing');
 	}
 
 	my $avatar = GetTemplate($avatarTemplate);
@@ -112,7 +106,8 @@ sub GetAvatar { # $authorKey, $noCache ; returns HTML avatar based on author key
 		my $alias = '';
 
 		if (!$alias) {
-			$alias = GetAlias($authorKey, $noCache);
+			#$alias = GetAlias($authorKey, $noCache);
+			$alias = GetAlias($authorKey);
 			if (!$alias) {
 				#user has no alias for some reason.
 				#not sure how this would happen, except if they generated a key with a blank alias
@@ -238,8 +233,8 @@ sub GetAvatar { # $authorKey, $noCache ; returns HTML avatar based on author key
 		$avatar =~ s/\$colorUsername/$colorUsername/g;
 	}
 
-	# save to memo cache
-	$avatarCache{$authorKey} = $avatar;
+	# save to memo
+	$avatarMemo{$authorKey} = $avatar;
 
 	if ($avatar) {
 		PutCache("$avatarCachePrefix/$authorKey", $avatar);
