@@ -209,7 +209,7 @@ sub GetAvatar { # $authorKey ; returns HTML avatar based on author key, using av
 		#$avatar = '(Guest)';
 	}
 
-	$avatar =~ s/\$alias/$aliasHtmlEscaped/g; #todo use str_replace()
+	$avatar =~ str_replace('$alias', $aliasHtmlEscaped, $avatar);
 
 	my $colorUsername = '';
 
