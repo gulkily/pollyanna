@@ -80,18 +80,20 @@ sub GetThreadListing { # $topLevel, $selectedItem, $indentLevel, $itemsListRefer
 	my $listing = '';
 
 	my @itemChildren;
-	if (1 || GetConfig('setting/html/item_page/include_notext_in_thread_list')) {
+	if (GetConfig('setting/html/item_page/include_notext_in_thread_list')) {
 		@itemChildren = SqliteQueryHashRef("SELECT item_hash FROM item_parent WHERE parent_hash = ?", $topLevel);
 	} else {
+		WriteLog('GetThreadListing: warning: include_notext_in_thread_list=0 does not work right, including all replies');
+		@itemChildren = SqliteQueryHashRef("SELECT item_hash FROM item_parent WHERE parent_hash = ?", $topLevel);
 		# THERE IS A BUG HERE
 		# this setting is disabled;
-		my @itemChildren = SqliteQueryHashRef("
-			SELECT item_hash
-			FROM item_parent
-			WHERE
-				parent_hash = '$topLevel' AND
-				item_hash NOT IN (SELECT file_hash FROM item_flat WHERE labels_list LIKE '%,notext,%')
-		");
+		#my @itemChildren = SqliteQueryHashRef("
+		#	SELECT item_hash
+		#	FROM item_parent
+		#	WHERE
+		#		parent_hash = '$topLevel' AND
+		#		item_hash NOT IN (SELECT file_hash FROM item_flat WHERE labels_list LIKE '%,notext,%')
+		#");
 	}
 	shift @itemChildren;
 
