@@ -54,12 +54,12 @@ sub GetThreadListing { # $topLevel, $selectedItem, $indentLevel, $itemsListRefer
 
 	WriteLog('GetThreadListing: $topLevel = ' . $topLevel);
 
-	my @itemInfo = SqliteQueryHashRef("SELECT * FROM item_flat WHERE file_hash = '$topLevel' LIMIT 1");
+	my @itemInfo = SqliteQueryHashRef('SELECT * FROM item_flat WHERE file_hash = ? LIMIT 1', $topLevel);
 	#todo config/template/query/...
 	shift @itemInfo; # headers
 
 	if (@itemInfo) {
-		#most basic sanity check passed
+		WriteLog('GetThreadListing: @itemInfo passed basic sanity check');
 	} else {
 		# @itemInfo is false
 		WriteLog('GetThreadListing: warning: @itemInfo is FALSE; $topLevel = ' . $topLevel . '; caller = ' . join(',', caller));
@@ -80,9 +80,11 @@ sub GetThreadListing { # $topLevel, $selectedItem, $indentLevel, $itemsListRefer
 	my $listing = '';
 
 	my @itemChildren;
-	if (GetConfig('setting/html/item_page/include_notext_in_thread_list')) {
-		@itemChildren = SqliteQueryHashRef("SELECT item_hash FROM item_parent WHERE parent_hash = '$topLevel'");
+	if (1 || GetConfig('setting/html/item_page/include_notext_in_thread_list')) {
+		@itemChildren = SqliteQueryHashRef("SELECT item_hash FROM item_parent WHERE parent_hash = ?", $topLevel);
 	} else {
+		# THERE IS A BUG HERE
+		# this setting is disabled;
 		my @itemChildren = SqliteQueryHashRef("
 			SELECT item_hash
 			FROM item_parent
