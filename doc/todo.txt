@@ -784,12 +784,8 @@ implement per-page-type css and js
 
 ===
 
-topics page
-	topics are different from threads
-
-===
-
 there's a bug in include_notext_in_thread_list=0
+	i tried to fix it, but have just disabled this setting for now
 
 ===
 
