@@ -110,6 +110,20 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 	}
 
 	elsif (
+		$fieldName eq 'person_name'
+	) {
+		# author alias, linking to person page
+
+		if ($fieldValue) {
+			require_once('widget/person_link.pl');
+			$fieldValue = GetPersonLink($fieldValue);
+		} else {
+			WriteLog('RenderField: warning: $fieldValue was FALSE, not calling GetPersonLink()');
+			$fieldValue = 'Guest'; #todo is this right?
+		}
+	}
+
+	elsif (
 		$fieldName eq 'label'
 	) {
 		# label field should contain one tag
