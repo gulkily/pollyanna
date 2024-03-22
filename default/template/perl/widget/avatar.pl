@@ -62,6 +62,8 @@ sub GetAvatarIcon { # $authorKey ; returns text-based icon for avatar
 
 	if (!$avatarIcon) {
 		WriteLog('GetAvatarIcon: warning: $avatarIcon is FALSE!');
+	} else {
+		WriteLog('GetAvatarIcon: $avatarIcon = ' . length($avatarIcon));
 	}
 
 	return $avatarIcon;
@@ -187,7 +189,7 @@ sub GetAvatar { # $authorKey ; returns HTML avatar based on author key, using av
 
 		if (GetConfig('html/avatar_icons')) {
 			my $avatarIcon = GetAvatarIcon($authorKey);
-			WriteLog('GetAvatar: $avatarIcon = ' . $avatarIcon);
+			WriteLog('GetAvatar: $avatarIcon = ' . length($avatarIcon));
 			$avatar = str_replace('<span class=icon></span>', $avatarIcon, $avatar);
 		} # GetConfig('html/avatar_icons')
 		else {
