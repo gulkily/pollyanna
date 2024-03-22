@@ -52,19 +52,54 @@ sub LogChangesToGit {
 sub GetOperatorResponse {
 	my $query = shift;
 	chomp $query;
+	#implements fake language model integration to demonstrate the concept
+	# available commands which need to be tested #todo:
+
+	# add calendar page
+	# add threads page
+	# add search page
+	# add profile page
+	# add page about the 2023 MIT Bitcoin Expo
+	# add basic OpenPGP.js integration to the profiles
+	# add a keychain for private keys to the profile page
+	# add upload feature with paste option
+	# add notarization chain
+	# add a basic image board
+	# add basic javascript features
+	# add page loading indicator
+	# change appearance to dark theme
+	# reset appearance to default theme
+	# remove javascript
+	# add a message inbox page
+	# add a tags page
+	# add a page for active users
+	# let me download our conversation
+	# accept my gratitude
+	# enable javascript debugging
+	# turn off javascript debugging
+	# create a bookmarklet for scraping hacker news comments
+	# make the interface draggable
+	# add a page for authors
+	# add a page for people
+	# add a page for random items
+	# make a python file
+	# add a Dvorak layout transliteration
+	# add a page for raw items
+	# reset the site
+	# make me admin
+	# make the text more accessible
+	# tell me about compatibility
 
 	#todo need to set client-side flags
-
-#	my $onceLog = GetOnce($query);
-#	if (!$onceLog) {
-#		WriteLog('GetOperatorResponse: warning: encountered previously done task');
-#		return 'I may have done that already';
-#	}
 
 	if (GetConfig('setting/admin/git/operator_please_commit_and_push')) {
 		LogChangesToGit("before $query");
 	}
 
+	if ($query =~ m/settings.+page/) {
+		AddToMenu('settings');
+		return 'ok, I added settings page and a link in the menu.';
+	}
 	if ($query eq 'add calendar page') {
 		AddToMenu('calendar');
 		`bash hike.sh page calendar`;
@@ -81,9 +116,9 @@ sub GetOperatorResponse {
 		return 'ok, I added search page and a link in the menu.';
 	}
 	if ($query eq 'add profile page') {
-		AddToMenu('profile');
+		AddToMenu('session');
 		`bash hike.sh page profile`;
-		return 'ok, I added profile page with basic cookie authentication.';
+		return 'ok, I added SESSION page with basic cookie authentication.';
 	}
 	if ($query =~ m/bitcoin/i) {
 		AddToMenu('tag/BitcoinExpo2023');
@@ -140,7 +175,7 @@ sub GetOperatorResponse {
 		`bash hike.sh page image`;
 		return 'ok, I added a basic image board';
 	}
-	if ($query eq 'add basic javascript' || $query eq 'add javascript support' || $query eq 'enable javascript') {
+	if ($query =~ m/basic.+javascript/ || $query =~ m/add.+javascript.+support/ || $query =~ m/enable.+javascript/) {
 		#AddToMenu('settings');
 		PutConfig('setting/admin/js/enable', 1);
 		`bash hike.sh frontend`;
@@ -155,13 +190,13 @@ sub GetOperatorResponse {
 			return 'would you like to allow javascript in the html templates?';
 		}
 	}
-	if ($query eq 'change appearance to dark theme') {
-		PutConfig('setting/theme', 'hypercode dark');
+	if ($query =~ m/dark.+theme/) {
+		PutConfig('setting/theme', 'dark');
 		#`bash hike.sh refresh`;
 		return 'ok, I changed the theme to hypercode dark';
 	}
-	if ($query eq 'reset appearance to default theme') {
-		PutConfig('setting/theme', 'hypercode chicago');
+	if ($query =~ m/reset.+theme/) {
+		PutConfig('setting/theme', 'chicago');
 		#`bash hike.sh refresh`;
 		return 'ok, I reset the theme to hypercode chicago';
 	}
@@ -181,9 +216,9 @@ sub GetOperatorResponse {
 		}
 	}
 	if ($query eq 'add a tags page' || $query eq 'add tags page') {
-		AddToMenu('tags');
+		AddToMenu('labels');
 		#`bash hike.sh refresh`;
-		return 'ok, I added a basic tags page, including item-descriptive tags and hashtags';
+		return 'ok, I added a basic labels page, including item-descriptive tags and hashtags';
 	}
 	if ($query =~ m/inbox/ && !GetConfig('setting/admin/php/cookie_inbox')) {
 		AddToMenu('active');
@@ -211,33 +246,33 @@ sub GetOperatorResponse {
 		#`bash hike.sh refresh`;
 		return "ok, I turned off javascript debugging";
 	}
-	if ($query =~ /hacker news/) {
+	if ($query =~ m/hacker news/) {
 		my $bookmarkFile = GetTemplate('js/bookmark/scrape_hn_comments.js');
 		return "/* please use this bookmarklet to input the comments */\n\n" . $bookmarkFile . "\n\n/* #example */";
 	}
-	if ($query =~ /interface.+draggable/) {
+	if ($query =~m/interface.+draggable/) {
 		PutConfig('setting/admin/js/dragging', 1);
 		PutConfig('setting/html/menu_layer_controls', 1);
 		#`bash hike.sh refresh`;
 		return "ok, I added some javascript for draggable dialogs.";
 	}
-	if ($query =~ /cryptographic.+attributes/) {
+	if ($query =~ m/cryptographic.+attributes/) {
 		PutConfig('setting/admin/js/dragging', 1);
 		PutConfig('setting/html/menu_layer_controls', 1);
 		#`bash hike.sh refresh`;
 		return "to see more detailed information about items on the current page, please use the Expand menu item in the. use the Minimal menu item to hide the technical details.";
 	}
-	if ($query eq 'add authors page') {
+	if ($query eq 'add authors page' || $query =~ m/authors.+page/ || $query =~ m/page.+authors/) {
 		AddToMenu('authors');
 		`bash hike.sh page authors`;
 		return "ok, I added an authors page. there may not be much on it at first.";
 	}
-	if ($query eq 'add people page') {
+	if ($query =~ m/people.+page/ || $query =~ m/people.+page/) {
 		AddToMenu('people');
 		`bash hike.sh page people`;
 		return "ok, I added a people page. there may not be much on it at first.";
 	}
-	if ($query eq 'add random page' || $query eq 'add a random items page' || $query =~ m/add.+random.+page/) {
+	if ($query eq 'add random page' || $query eq 'add a random items page' || $query =~ m/random.+page/) {
 		AddToMenu('random');
 		`bash hike.sh page random`;
 		return "ok, I added a page with random items";
