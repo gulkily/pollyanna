@@ -42,6 +42,15 @@ a:visited { color:$colorVlink; }
   .txt { max-width: 1130px; overflow: hidden }
 }
 
+.titlebarButtons {
+	float: right;
+}
+.titlebarButtons button {
+	border: 0;
+	border-radius: 2px;
+}
+
+
 /* above this line (c) news.ycombinator.com */
 
 /* theme/news/additional.css */
