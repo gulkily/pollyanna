@@ -158,8 +158,8 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 
 			# row color above
 
-			my @fieldAdvanced = GetConfigListAsArray('field_advanced'); #todo make consistent with the other one?
-			my @fieldAdmin = GetConfigListAsArray('field_admin'); #todo make consistent with the other one?
+			my @fieldAdvanced = GetConfigListAsArray('field_advanced');
+			my @fieldAdmin = GetConfigListAsArray('field_admin');
 			# fields_advanced advanced_fields advancedfields
 
 			foreach my $column (split(',', $columns)) {
