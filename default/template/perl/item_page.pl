@@ -1236,7 +1236,7 @@ sub GetPublishForm {
 
 	my $textEncoded = 'abc';
 
-	$template =~ str_replace('?comment=', '?comment=' . $textEncoded);
+	$template = str_replace('?comment=', '?comment=' . $textEncoded);
 
 	return $template;
 }
