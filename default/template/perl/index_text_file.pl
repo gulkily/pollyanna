@@ -665,6 +665,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 								} # hike_set
 
 								if ($tokenFound{'token'} eq 'operator_please') {
+									# operator_please operator please operator,please operator, please
 									#push @indexMessageLog, 'found veryyy special token';
 									push @indexMessageLog, 'operator, please ' . $tokenFound{'param'};
 
