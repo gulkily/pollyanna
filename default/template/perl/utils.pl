@@ -1425,10 +1425,17 @@ sub str_replace { # $replaceWhat, $replaceWith, $string ; emulates some of str_r
 
 	#WriteLog("str_replace: sanity check passed, proceeding");
 
+	my $stringBefore = $string;
+
 	WriteLog('str_replace: sanity check passed, proceeding');
 	$string =~ s/\Q$replace_this/$with_this/g;
 	WriteLog('str_replace: length($string) = ' . length($string));
 	# WriteLog('str_ireplace: $string = ' . $string);
+
+	if ($string eq $stringBefore) {
+		#WriteLog('str_replace: warning: $string eq $stringBefore; caller: ' . join(', ', caller));
+		#todo eventually uncomment this when it doesn't generate so many warnings
+	}
 
 	# RETURN ###############
 	# RETURN ###############
