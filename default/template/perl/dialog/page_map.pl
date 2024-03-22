@@ -8,15 +8,15 @@ sub GetPageMapDialog {
 # sub GetDialogsDialog {
 # sub GetDialogDialog {
 # sub GetDialogListDialog {
-# sub dialogslist {
-# sub dialogslistdialog {
+# sub DialogsList {
+# sub DialogsListDialog {
 # sub DetDialogList {
 # sub GetDialogMenu {
 	WriteLog('GetPageMapDialog()');
 
     if (GetConfig('setting/js/enable')) {
         #todo make it work without js
-        WriteLog('GetPageMapDialog: warning: called while setting/js/enable was TRUE; caller = ' . join(' ', caller));
+        WriteLog('GetPageMapDialog: warning: called while setting/js/enable was FALSE; caller = ' . join(' ', caller));
         return '';
     }
 
