@@ -545,8 +545,8 @@ sub GetAuthorPendingKeysDialog {
                  	)
                  	AND author_key NOT IN (?)"; #todo template it in template/query
 			#todo properly template the parameters
-			$queryAuthorThreads =~ str_replace('?', "'$authorKey'", $queryAuthorThreads);
-			$queryAuthorThreads =~ str_replace('?', "'$authorKey'", $queryAuthorThreads);
+			$queryAuthorThreads = str_replace('?', "'$authorKey'", $queryAuthorThreads);
+			$queryAuthorThreads = str_replace('?', "'$authorKey'", $queryAuthorThreads);
 			my $sameAliasDialog = GetQueryAsDialog(
 				$queryAuthorThreads,
 				'Other Authors with Alias ' . GetAlias($authorKey),
