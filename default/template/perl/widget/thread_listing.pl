@@ -33,7 +33,8 @@ sub GetThreadListingDialog { # $fileHash ; get dialog listing all thread items
 
 	if ($threadListing) {
 		# sub GetThreadDialog {
-		my $threadListingDialog .= '<span class=advanced>' . GetDialogX($threadListing, 'Thread', 'item_title,add_timestamp') . '</span>';
+		#my $threadListingDialog .= '<span class=advanced>' . GetDialogX($threadListing, 'Thread', 'item_title,add_timestamp') . '</span>';
+		my $threadListingDialog .= GetDialogX($threadListing, 'Thread', 'item_title,add_timestamp');
 		return $threadListingDialog;
 	} else {
 		WriteLog('GetThreadListingDialog: warning: $threadListing is FALSE');
