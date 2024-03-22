@@ -19,10 +19,10 @@ echo 0 > config/setting/admin/php/cookie_inbox
 echo 0 > config/setting/admin/php/route_notify_printed_time
 echo 0 > config/setting/html/css/inline_block
 echo 1 > config/setting/html/css/inbox_top
-echo 1 > config/setting/html/monochrome
 echo 1 > config/setting/html/menu_top
 echo 0 > config/setting/html/menu_bottom
 echo 0 > config/setting/html/item_page_menu_bottom
-echo "hypercode chicago" > config/setting/theme
+echo "news" > config/setting/theme
+echo "write" > config/template/list/menu
 bash hike.sh frontend
 
