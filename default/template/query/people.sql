@@ -1,6 +1,6 @@
 SELECT * FROM (
 	SELECT
-		author_alias,
+		author_alias AS person_name,
 		COUNT(author_key) AS author_key_count,
 		MAX(author_seen) AS author_seen,
 		SUM(author_score) AS author_score,
@@ -10,6 +10,6 @@ SELECT * FROM (
 	GROUP BY author_alias
 )
 WHERE
-	author_alias != ''
+	person_name != ''
 	AND author_key_count >= 1
 	AND author_score >= 0

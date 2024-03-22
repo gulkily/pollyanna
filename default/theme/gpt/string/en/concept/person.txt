@@ -4,7 +4,7 @@ purpose display detailed information about a specific participant, including pen
 
 state
   person_details: PersonDetails
-    author_alias: String  // Represents the alias or name of the participant
+    person_name: String  // Represents the alias or name of the participant
     pending_public_keys: set PublicKey  // Set of pending public keys associated with the participant
     approved_public_keys: set PublicKey  // Set of approved public keys associated with the participant
     recent_activity: set Item  // Set of recent items associated with the participant
@@ -20,4 +20,4 @@ operational principle
 Additional Considerations:
 - The Person Page provides comprehensive details about a specific participant.
 - State attributes include the participant's alias, pending and approved public keys, recent activity, and an activity archive file.
-- The criteria for inclusion involve a non-empty author_alias.
+- The criteria for inclusion involve a non-empty person_name (author_alias).

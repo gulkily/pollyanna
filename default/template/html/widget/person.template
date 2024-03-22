@@ -1,6 +1,6 @@
 <!-- widget/person.template -->
 <span class=author_image></span>
-<pre>Alias: <span class=author_alias></span>
+<pre>Alias: <span class=person_name></span>
  Seen: <span class=author_seen></span><span class=advanced>
  Keys: <span class=author_key_count></span>
 Score: <span class=author_score></span>
