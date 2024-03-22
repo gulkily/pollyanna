@@ -1436,30 +1436,6 @@ sub str_replace { # $replaceWhat, $replaceWith, $string ; emulates some of str_r
 	# RETURN ###############
 	# RETURN ###############
 	return $string;
-
-
-	if (0) { #buggy code, not used
-		my $length = length($string);
-		my $target = length($replace_this);
-
-		for (my $i = 0; $i < $length - $target + 1; $i++) {
-			#todo there is a bug here
-			if (!defined(substr($string, $i, $target))) {
-				WriteLog("str_replace: warning: !defined(substr($string, $i, $target))");
-			}
-			elsif (substr($string, $i, $target) eq $replace_this) {
-				$string = substr ($string, 0, $i) . $with_this . substr($string, $i + $target);
-				$i += length($with_this) - length($replace_this); # when new string contains old string
-				$length += length($with_this) - length($replace_this); # string is getting shorter or longer
-			} else {
-				# do nothing
-			}
-		}
-
-		WriteLog('str_replace: length($string) = ' . length($string));
-
-		return $string;
-	}
 } # str_replace()
 
 sub str_ireplace { # $replaceWhat, $replaceWith, $string ; emulates some of str_ireplace() from php
@@ -1502,36 +1478,7 @@ sub str_ireplace { # $replaceWhat, $replaceWith, $string ; emulates some of str_
 	WriteLog('str_ireplace: length($string) = ' . length($string));
 	# WriteLog('str_ireplace: $string = ' . $string);
 	return $string;
-
-	######## below is old code, not used
-	######## below is old code, not used
-	######## below is old code, not used
-	######## below is old code, not used
-	######## below is old code, not used
-
-	my $length = length($string);
-	my $target = length($replace_this);
-
-	my $loopCounter = 0;
-
-	for (my $i = 0; $i < $length - $target + 1; $i++) {
-		if (lc(substr($string, $i, $target)) eq lc($replace_this)) {
-			$string = substr ($string, 0, $i) . $with_this . substr($string, $i + $target);
-			$i += length($with_this) - length($replace_this); # when new string contains old string
-		}
-
-		$loopCounter++;
-
-		if ($loopCounter > 1000) {
-			WriteLog('str_ireplace: warning: loop has reached 1000 iterations, stopping');
-			last;
-		}
-	}
-
-	WriteLog('str_ireplace: length($result) = ' . length($string));
-
-	return $string;
-} # str_replace()
+} # str_ireplace()
 
 sub ReplaceStrings { # automatically replaces strings in html with looked up values
 #todo finish it
