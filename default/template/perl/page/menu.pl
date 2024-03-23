@@ -16,12 +16,12 @@ sub GetMenuPage { # /menu.html
 	$txtIndex =
 		GetPageHeader('menu') .
 		GetTemplate('html/maincontent.template') . #for accessibility
-		GetQueryAsDialog('labels', 'Labels') . # GetLabelsDialog() .
-		GetQueryAsDialog('people_pending', 'There are new authors awaiting approval...', '') .
 		GetDialogX(GetTemplate('html/page/help.template'), 'Help') .
 		GetDialogX(GetTemplate('html/page/help_diagnostics.template'), 'Toys') .
 		GetDialogX(GetTemplate('html/page/help_views.template'), 'Views') .
 		GetStatsTable() .
+		GetQueryAsDialog('labels', 'Labels') . # GetLabelsDialog() .
+		GetQueryAsDialog('people_pending', 'There are new authors awaiting approval...', '') .
 		# GetIntroDialog('menu') .
 		# GetWelcomeDialog() .
 		GetSettingsDialog() .
