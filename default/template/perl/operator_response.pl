@@ -59,7 +59,6 @@ sub GetOperatorResponse {
 	# add threads page
 	# add search page
 	# add profile page
-	# add page about the 2023 MIT Bitcoin Expo
 	# add basic OpenPGP.js integration to the profiles
 	# add a keychain for private keys to the profile page
 	# add upload feature with paste option
@@ -89,6 +88,9 @@ sub GetOperatorResponse {
 	# make me admin
 	# make the text more accessible
 	# tell me about compatibility
+
+	# add page about the 2023 MIT Bitcoin Expo
+
 
 	#todo need to set client-side flags
 
@@ -124,7 +126,7 @@ sub GetOperatorResponse {
 		AddToMenu('tag/BitcoinExpo2023');
 		return 'ok, I added a page about the 2023 MIT Bitcoin Expo. it may take a minute.';
 	}
-	if ($query =~ m/add.+OpenPGP.+profile/) {
+	if ($query =~ m/add.+openpgp/i) {
 		PutConfig('setting/admin/js/openpgp', 1);
 		PutConfig('setting/admin/js/openpgp_checked', 1);
 		`./pages.pl --js`;
@@ -169,7 +171,7 @@ sub GetOperatorResponse {
 		#`bash hike.sh refresh`;
 		return 'I used SHA1 and MD5 in the notarization chain to make it easier for other computers to audit the data while still retaining reasonable tampering protection';
 	}
-	if ($query eq 'add a basic image board' || $query eq 'add image board') {
+	if ($query =~ m/add.+image.+board/) {
 		AddToMenu('image');
 		PutConfig('setting/admin/image/enable', 1);
 		`bash hike.sh page image`;
@@ -190,7 +192,7 @@ sub GetOperatorResponse {
 			return 'would you like to allow javascript in the html templates?';
 		}
 	}
-	if ($query =~ m/dark.+theme/) {
+	if ($query =~ m/dark.+theme/ || $query =~ m/dark.+mode/) {
 		PutConfig('setting/theme', 'dark');
 		#`bash hike.sh refresh`;
 		return 'ok, I changed the theme to hypercode dark';
@@ -220,13 +222,18 @@ sub GetOperatorResponse {
 		#`bash hike.sh refresh`;
 		return 'ok, I added a basic labels page, including item-descriptive tags and hashtags';
 	}
+	if ($query =~ m/active.+users/) {
+		AddToMenu('active');
+		#`bash hike.sh refresh`;
+		return 'ok, I added an active users page';
+	}
 	if ($query =~ m/inbox/ && !GetConfig('setting/admin/php/cookie_inbox')) {
 		AddToMenu('active');
 		PutConfig('setting/admin/php/cookie_inbox', 1);
 		#`bash hike.sh refresh`;
 		return 'ok, you should see any replies in your inbox, and I added an active users page.';
 	}
-	if ($query eq 'let me download our conversation' || $query =~ m/conversation.+download/i || $query =~ m/download.+conversation/i) {
+	if ($query =~ m/conversation.+download/i || $query =~ m/download.+conversation/i) {
 		AddToMenu('data');
 		`bash hike.sh page data`;
 		return 'ok, I added a data page where you can download our conversation';
@@ -247,7 +254,7 @@ sub GetOperatorResponse {
 		return "ok, I turned off javascript debugging";
 	}
 	if ($query =~ m/hacker news/) {
-		my $bookmarkFile = GetTemplate('js/bookmark/scrape_hn_comments.js');
+		my $bookmarkFile = GetTemplate('js/bookmark/hn_scrape_comments.js');
 		return "/* please use this bookmarklet to input the comments */\n\n" . $bookmarkFile . "\n\n/* #example */";
 	}
 	if ($query =~m/interface.+draggable/) {
@@ -267,12 +274,12 @@ sub GetOperatorResponse {
 		`bash hike.sh page authors`;
 		return "ok, I added an authors page. there may not be much on it at first.";
 	}
-	if ($query =~ m/people.+page/ || $query =~ m/people.+page/) {
+	if ($query =~ m/people.+page/ || $query =~ m/page.+people/) {
 		AddToMenu('people');
 		`bash hike.sh page people`;
 		return "ok, I added a people page. there may not be much on it at first.";
 	}
-	if ($query eq 'add random page' || $query eq 'add a random items page' || $query =~ m/random.+page/) {
+	if ($query =~ m/add.+random/) {
 		AddToMenu('random');
 		`bash hike.sh page random`;
 		return "ok, I added a page with random items";
@@ -306,7 +313,7 @@ sub GetOperatorResponse {
 		return 'In order to become admin, you have to solve a puzzle.';
 		#PutConfig('setting')
 	}
-	if ($query =~ m/make.+accessible.+text/) {
+	if ($query =~ m/make.+accessible/) {
 		PutConfig('setting/admin/php/light_mode_always_on', 1);
 		return 'I switched on light mode. Does that help?';
 	}
