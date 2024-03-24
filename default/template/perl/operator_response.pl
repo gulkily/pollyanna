@@ -55,18 +55,20 @@ sub GetOperatorResponse {
 	#implements fake language model integration to demonstrate the concept
 	# available commands which need to be tested #todo:
 
+	# reset the site
+	# change appearance to dark theme
+	# add notarization chain
+	# add basic javascript features
+	# enable javascript debugging
+	# add search page
 	# add calendar page
 	# add threads page
-	# add search page
 	# add profile page
 	# add basic OpenPGP.js integration to the profiles
 	# add a keychain for private keys to the profile page
 	# add upload feature with paste option
-	# add notarization chain
 	# add a basic image board
-	# add basic javascript features
 	# add page loading indicator
-	# change appearance to dark theme
 	# reset appearance to default theme
 	# remove javascript
 	# add a message inbox page
@@ -74,7 +76,6 @@ sub GetOperatorResponse {
 	# add a page for active users
 	# let me download our conversation
 	# accept my gratitude
-	# enable javascript debugging
 	# turn off javascript debugging
 	# create a bookmarklet for scraping hacker news comments
 	# make the interface draggable
@@ -84,7 +85,6 @@ sub GetOperatorResponse {
 	# make a python file
 	# add a Dvorak layout transliteration
 	# add a page for raw items
-	# reset the site
 	# make me admin
 	# make the text more accessible
 	# tell me about compatibility
@@ -119,7 +119,7 @@ sub GetOperatorResponse {
 	}
 	if ($query eq 'add profile page') {
 		AddToMenu('session');
-		`bash hike.sh page profile`;
+		`bash hike.sh page session`;
 		return 'ok, I added SESSION page with basic cookie authentication.';
 	}
 	if ($query =~ m/bitcoin/i) {
@@ -130,13 +130,13 @@ sub GetOperatorResponse {
 		PutConfig('setting/admin/js/openpgp', 1);
 		PutConfig('setting/admin/js/openpgp_checked', 1);
 		`./pages.pl --js`;
-		`bash hike.sh page profile`;
-		return 'ok, I added basic OpenPGP.js integration to the profiles.';
+		`bash hike.sh page session`;
+		return 'ok, I added basic OpenPGP.js integration to sessions and writing.';
 	}
 	if ($query =~ m/add.+keychain/) {
 		PutConfig('setting/admin/js/openpgp_keychain', 1);
-		`bash hike.sh page profile`;
-		return 'ok, I added a keychain for private keys to the profile page.';
+		`bash hike.sh page session`;
+		return 'ok, I added a keychain for private keys to the session page.';
 	}
 	if ($query eq 'add upload feature with paste option' || $query eq 'add upload page' || $query eq 'add upload') {
 		AddToMenu('upload');
@@ -177,7 +177,12 @@ sub GetOperatorResponse {
 		`bash hike.sh page image`;
 		return 'ok, I added a basic image board';
 	}
-	if ($query =~ m/basic.+javascript/ || $query =~ m/add.+javascript.+support/ || $query =~ m/enable.+javascript/) {
+	if ($query =~ m/enable+javascript.+debugging/) {
+		PutConfig('setting/admin/js/debug', 'console.log');
+		#`bash hike.sh refresh`;
+		return "ok, I enabled javascript debug output to the console";
+	}
+	if ($query =~ m/basic.+javascript/ || $query =~ m/add.+javascript.+support/  || $query =~ m/add.+javascript.+features/ || $query =~ m/enable.+javascript/) {
 		#AddToMenu('settings');
 		PutConfig('setting/admin/js/enable', 1);
 		`bash hike.sh frontend`;
@@ -242,11 +247,6 @@ sub GetOperatorResponse {
 		AddToMenu('tag/gratitude');
 		#`bash hike.sh refresh`;
 		return "you're welcome! I added a gratitude page";
-	}
-	if ($query eq 'enable javascript debugging') {
-		PutConfig('setting/admin/js/debug', 'console.log');
-		#`bash hike.sh refresh`;
-		return "ok, I enabled javascript debug output to the console";
 	}
 	if ($query eq 'turn off javascript debugging') {
 		PutConfig('setting/admin/js/debug', 0);
