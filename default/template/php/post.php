@@ -354,7 +354,7 @@ if (is_array($comment)) { # comment[]
 			WriteLog('post.php: batch mode: $hnMode all done. length($c) = ' . length($c));
 		}
 
-		$c = $c . "\n-- \n#$batchTag"; #\n--
+		$c = $c . "\n-- \n#$batchTag\n"; #\n--
 		$newFileHash = StoreNewComment($c, '', $recordFingerprint); // batch add
 		$allAdded .= ">>" . $newFileHash . "\n";
 	}
