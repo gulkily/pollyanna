@@ -2351,7 +2351,7 @@ add option to rotate/trim access.log
 
 ===
 
-$$ returns current process id (in perl? bash?)
+$$ returns current process id (in both perl and bash)
 	make lock file based on this
 
 ===
