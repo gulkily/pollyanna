@@ -1,3 +1,23 @@
+link items should be handled better
+	link url should be accessible from item dialog displayed on any page
+	should be a summary created by crawling the link, at least the title
+	what else?
+
+===
+
+failure modes which need to be addressed
+	too many processes lock up server
+	too many files
+	too much space used
+	spam/crawler bots hitting the server too much (causing the above)
+
+===
+
+lowsrc thumbnails are too small, should be bigger
+	test in netscape 3 and 4
+
+===
+
 make str_replace() and str_ireplace() consistent and the same implementation other than /i
 
 ===
