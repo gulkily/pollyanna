@@ -159,7 +159,6 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fieldName eq 'sha1sum' ||
 		$fieldName eq 'sha256sum' ||
 		$fieldName eq 'md5' ||
-		$fieldName eq 'chain_hash' ||
 		$fieldName eq 'message_hash'
 	) {
 		# various hashes, displayed in fixed-width font
@@ -195,6 +194,31 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 					) .
 				''
 			;
+		}
+	}
+
+	elsif (
+		$fieldName eq 'chain_hash'
+	) {
+		# chain hash, which should match file_hash
+		#
+		# not sure why this is handled differently from all the other hashes above,
+		# BUT i think it because file_hash is used mainly in tabular listings,
+		# where horizontal space is at a premium, while the above fields are
+		# mainly used in vertical listings in item attributes dialog
+		#
+		# <tt> is not used here because it would add a lot to page weight
+		# when there is a long list of results
+
+		if ($fieldValue) {
+			if ($longMode) {
+				$fieldValue = '<tt>' . $fieldValue . '</tt>';
+			} else {
+				$fieldValue = '<tt>' . substr($fieldValue, 0, 8) . '</tt>';
+
+			}
+		} else {
+			$fieldValue = '';
 		}
 	}
 
