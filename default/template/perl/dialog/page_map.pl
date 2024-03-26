@@ -21,6 +21,7 @@ sub GetPageMapDialog {
     }
 
     #todo it should show up on a page that won't have js required to make it work
+    #todo it should come pre-filled with all the dialogs that are initially on the page
 
 	my $dialogContent = GetTemplate('html/widget/page_map.template');
 	my $dialog = GetDialogX($dialogContent, 'PageMap');
