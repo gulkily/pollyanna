@@ -1,3 +1,35 @@
+elsif (
+	$fieldName eq 'chain_hash'
+) {
+	# chain hash, which should match file_hash
+	#
+	# not sure why this is handled differently from all the other hashes above,
+	# BUT i think it because file_hash is used mainly in tabular listings,
+	# where horizontal space is at a premium, while the above fields are
+	# mainly used in vertical listings in item attributes dialog
+	#
+	# <tt> is not used here because it would add a lot to page weight
+	# when there is a long list of results
+
+	if ($fieldValue) {
+		if ($itemRow{'file_hash'}) {
+			if ($itemRow{'file_hash'} eq $fieldValue) {
+				$fieldValue = '<tt><font color=green>' . substr($fieldValue, 0, 8) . '</font></tt>';
+			}
+			else {
+				$fieldValue = '<tt><font color=red>' . substr($fieldValue, 0, 8) . '</font></tt>';
+			}
+		}
+		else {
+			$fieldValue = '<tt>' . substr($fieldValue, 0, 8) . '</tt>';
+		}
+	} else {
+		$fieldValue = '';
+	}
+}
+
+
+
 # from str_ireplace():
 
 
