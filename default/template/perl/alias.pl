@@ -14,6 +14,13 @@ sub GetAlias { # $fingerprint, $noCache ; Returns alias for an author
 
     chomp $fingerprint;
 
+    if ($fingerprint = IsFingerprint($fingerprint)) {
+        # sanity check passed
+    } else {
+        WriteLog('GetAlias: warning: $fingerprint failed sanity check; caller = ' . join(',', caller));
+        return '';
+    }
+
     WriteLog("GetAlias($fingerprint)");
 
     my $noCache = shift;
