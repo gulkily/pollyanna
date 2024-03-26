@@ -211,15 +211,6 @@ function DraggingRetile2 (ignoreMenu) {
 		//alert('DEBUG: DraggingRetile: document.getElementsByClassName is FALSE');
 		return '';
 	}
-//	for (var i = elements.length - 1; 0 <= i; i--) {
-//		var newTop = elements[i].style.top;
-//		var newLeft = elements[i].style.left;
-//		elements[i].style.position = 'absolute';
-//		elements[i].style.top = newTop;
-//		elements[i].style.left = newLeft;
-//	}
-//
-//	DraggingInit(0);
 } // DraggingRetile2()
 
 function UpdateDialogPropertyDialog (dialog) {
@@ -324,14 +315,6 @@ function SetActiveDialog (ths) {
 		if (ths && elements[i] == ths) {
 			elements[i].setAttribute('imactive', '1');
 			elements[i].style.borderColor = colorTitlebar;
-
-			//var comStyle = window.getComputedStyle(elements[i], null);
-			//var iwidth = parseInt(comStyle.getPropertyValue("width"), 10);
-			//var iheight = parseInt(comStyle.getPropertyValue("height"), 10);
-			////alert('DEBUG: SetActiveDialog: iwidth: ' + document.documentElement.clientWidth + ', iheight:' + iheight);
-			////alert('DEBUG: SetActiveDialog: document.documentElement.clientWidth and .clientHeight: ' + document.documentElement.clientWidth + ',' + document.documentElement.clientHeight);
-			////alert('DEBUG: SetActiveDialog: myScale = ' + myScale);
-
 		} else {
 			elements[i].setAttribute('imactive', '0');
 			elements[i].style.borderColor = colorTitlebarInactive;
@@ -349,16 +332,6 @@ function SetActiveDialog (ths) {
 				elements[i].style.transformOrigin = 'top left';
 
 				var css = window.getComputedStyle(elements[i]);
-//				document.title =
-//					css.getPropertyValue('top') +
-//					',' +
-//					css.getPropertyValue('left') +
-//					',' +
-//					css.getPropertyValue('height') +
-//					',' +
-//					css.getPropertyValue('width') +
-//					'...'
-//				;
 			}
 		} // imactive
 		else {
@@ -609,23 +582,6 @@ function DraggingInitDialog (el, doPosition) {
 
 	return '';
 } // DraggingInitDialog()
-
-function EnsureDialogIsInViewport (el) {
-//	var height = window.innerHeight;
-//	var width = window.innerWidth;
-//
-//	if (el.top + el.height
-//}
-//
-//function IsInViewport(element) {
-//    const rect = element.getBoundingClientRect();
-//    return (
-//        rect.top GT= 0 &&
-//        rect.left GT= 0 &&
-//        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-//        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-//    );
-} // EnsureDialogIsInViewport()
 
 function DraggingMakeFit (doPosition) { // initialize all class=dialog elements on the page to be draggable
 // function DraggableMakeFit () {
@@ -945,15 +901,6 @@ function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was
 				element = element.parentElement;
 			}
 
-			//if (event && event.clientX && event.clientY) {
-			//	//alert(event.clientX);
-			//	//alert(event.clientY);
-			//	dialog.style.left = clientX + 'px';
-			//	dialog.style.top = clientY + 'px';
-			//} else {
-			//	//alert();
-			//}
-
 			SetActiveDialog(dialog);
 
 			// #todo this should be done via SetPrefs() ?
@@ -1001,53 +948,12 @@ function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was
 					}
 				}
 			}
-
-//
-//			if (0) {
-//				// position dialog to the right of the pagemap dialog
-//			}
-//			else if (0) {
-//				// position dialog to the left of the pagemap dialog
-//			}
-//			else if (0) {
-//				// position dialog above the pagemap dialog
-//			}
-//			else if (0) {
-//				// position dialog below the pagemap dialog
-//			}
-//			else {
-//				// fallback, position dialog to the right of the mouse cursor
-//
-//				//console.log(dialog.style);
-//				// dialog.style.top = event.clientX;
-//				// dialog.style.left = event.clientY;
-//				// there is an issue with this for some reason
-//				var dialogTop = (event.clientY - 35) + 'px';
-//				var dialogLeft = (event.clientX + 100) + 'px';
-//
-//				dialog.style.top = dialogTop;
-//				dialog.style.left = dialogLeft;
-//
-//				t.style.opacity = "80%"; // #todo classes
-//			}
 		}
-
 	} else {
 		//alert('DEBUG: SpotlightDialog: warning: dialog not found');
 
 	}
 
-//	var dialog = document.getElementById('d' + dialogId);
-//	if (dialog) {
-//		var dialogDisplay = dialog.style.display;
-//		if (dialogDisplay == 'none') {
-//			dialog.style.display = 'inline';
-//		} else {
-//			dialog.style.display = 'none';
-//		}
-//	} else {
-//		//alert('DEBUG: SpotlightDialog: warning: dialog not found');
-//	}
 	return false;
 } // SpotlightDialog()
 
@@ -1084,8 +990,6 @@ function UpdateDialogList () {
 	if (lstDialog) {
 		var allOpenDialogs = document.getElementsByClassName('dialog');
 		if (allOpenDialogs.length) {
-//			var gt = unescape('%3E');
-//			var listContent = '<form' + gt; // id=formListDialog name=formListDialog
 			var listContent = ''; // id=formListDialog name=formListDialog
 			var comma = '';
 			for (var iDialog = 0; iDialog < allOpenDialogs.length; iDialog++) {
@@ -1130,21 +1034,7 @@ function UpdateDialogList () {
 						SpotlightDialog(dialogId);
 					}
 				}
-
-				/* #todo
-				var newLink = document.createElement('a');
-				newLink.setAttribute('href', '#');
-				newLink.setAttribute('onclick', "if (window.SpotlightDialog) { SpotlightDialog(' + dialogId + '); }");
-				//newLink.innerHTML = dialogTitle;
-				var newText = document.createTextNode(dialogTitle);
-				var newBr = document.createElement('br');
-
-				newLink.appendChild(newText);
-				lstDialog.appendChild(newLink);
-				lstDialog.appendChild(newBr);
-				*/
 			}
-//			listContent = listContent + '</form' + gt;
 
 			if (lstDialog.innerHTML != listContent) {
 				lstDialog.innerHTML = listContent;

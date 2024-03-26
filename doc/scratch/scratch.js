@@ -1,3 +1,120 @@
+//			var gt = unescape('%3E');
+//			var listContent = '<form' + gt; // id=formListDialog name=formListDialog
+
+//			listContent = listContent + '</form' + gt;
+
+
+				/* #todo
+				var newLink = document.createElement('a');
+				newLink.setAttribute('href', '#');
+				newLink.setAttribute('onclick', "if (window.SpotlightDialog) { SpotlightDialog(' + dialogId + '); }");
+				//newLink.innerHTML = dialogTitle;
+				var newText = document.createTextNode(dialogTitle);
+				var newBr = document.createElement('br');
+
+				newLink.appendChild(newText);
+				lstDialog.appendChild(newLink);
+				lstDialog.appendChild(newBr);
+				*/
+
+
+//	var dialog = document.getElementById('d' + dialogId);
+//	if (dialog) {
+//		var dialogDisplay = dialog.style.display;
+//		if (dialogDisplay == 'none') {
+//			dialog.style.display = 'inline';
+//		} else {
+//			dialog.style.display = 'none';
+//		}
+//	} else {
+//		//alert('DEBUG: SpotlightDialog: warning: dialog not found');
+//	}
+
+
+
+			//if (event && event.clientX && event.clientY) {
+			//	//alert(event.clientX);
+			//	//alert(event.clientY);
+			//	dialog.style.left = clientX + 'px';
+			//	dialog.style.top = clientY + 'px';
+			//} else {
+			//	//alert();
+			//}
+
+
+
+function EnsureDialogIsInViewport (el) {
+//	var height = window.innerHeight;
+//	var width = window.innerWidth;
+//
+//	if (el.top + el.height
+//}
+//
+//function IsInViewport(element) {
+//    const rect = element.getBoundingClientRect();
+//    return (
+//        rect.top GT= 0 &&
+//        rect.left GT= 0 &&
+//        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+//        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+//    );
+} // EnsureDialogIsInViewport()
+
+
+
+			//var comStyle = window.getComputedStyle(elements[i], null);
+			//var iwidth = parseInt(comStyle.getPropertyValue("width"), 10);
+			//var iheight = parseInt(comStyle.getPropertyValue("height"), 10);
+			////alert('DEBUG: SetActiveDialog: iwidth: ' + document.documentElement.clientWidth + ', iheight:' + iheight);
+			////alert('DEBUG: SetActiveDialog: document.documentElement.clientWidth and .clientHeight: ' + document.documentElement.clientWidth + ',' + document.documentElement.clientHeight);
+			////alert('DEBUG: SetActiveDialog: myScale = ' + myScale);
+
+
+
+
+//	for (var i = elements.length - 1; 0 <= i; i--) {
+//		var newTop = elements[i].style.top;
+//		var newLeft = elements[i].style.left;
+//		elements[i].style.position = 'absolute';
+//		elements[i].style.top = newTop;
+//		elements[i].style.left = newLeft;
+//	}
+//
+//	DraggingInit(0);
+
+
+
+//
+//			if (0) {
+//				// position dialog to the right of the pagemap dialog
+//			}
+//			else if (0) {
+//				// position dialog to the left of the pagemap dialog
+//			}
+//			else if (0) {
+//				// position dialog above the pagemap dialog
+//			}
+//			else if (0) {
+//				// position dialog below the pagemap dialog
+//			}
+//			else {
+//				// fallback, position dialog to the right of the mouse cursor
+//
+//				//console.log(dialog.style);
+//				// dialog.style.top = event.clientX;
+//				// dialog.style.left = event.clientY;
+//				// there is an issue with this for some reason
+//				var dialogTop = (event.clientY - 35) + 'px';
+//				var dialogLeft = (event.clientX + 100) + 'px';
+//
+//				dialog.style.top = dialogTop;
+//				dialog.style.left = dialogLeft;
+//
+//				t.style.opacity = "80%"; // #todo classes
+//			}
+
+
+
 //
 //if (window.GetPrefs) {
 //	var needNotify = (GetPrefs('notify_on_change') ? 1 : 0);
