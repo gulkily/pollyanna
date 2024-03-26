@@ -191,6 +191,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, image
 } # GetItemListingPage()
 
 sub MakeFeed { # writes a bare-bones txt file with items list
+# sub GetFeed {
 # sub PutFeed {
 	my $feed = shift;
 	chomp $feed;
