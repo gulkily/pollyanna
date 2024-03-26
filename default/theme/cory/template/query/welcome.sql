@@ -17,7 +17,7 @@ FROM
 WHERE
 	(
 		item_type = 'txt'
-		AND item_score > 0
+		AND item_score >= 0
 		AND labels_list NOT LIKE '%notext%'
 		AND labels_list NOT LIKE '%changelog%'
 	)

@@ -1,3 +1,82 @@
-* {
-	border-radius: 7px;
+/* Set the general font and background to match the image */
+body {
+  background-color: #FFA726; /* Orange shade from the image */
+  color: #333; /* Dark gray for text */
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the header to incorporate elements from the image */
+header {
+  background: #FFF3E0; /* Lighter shade of orange for contrast */
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Soft shadow for depth */
+}
+
+/* Make sure links stand out */
+a {
+  color: #EF6C00; /* Darker orange to stand out, yet match the theme */
+}
+
+/* Style the navigation menu */
+nav {
+  background: #FFE0B2; /* A lighter shade for the menu background */
+  padding: 10px 0;
+}
+
+nav ul {
+  list-style: none; /* No bullets */
+  padding: 0;
+  margin: 0;
+  display: flex; /* Align menu items horizontally */
+  justify-content: center; /* Center menu items */
+}
+
+nav ul li {
+  margin: 0 20px; /* Space out the menu items */
+}
+
+/* Style buttons to match the playful theme */
+button {
+  background: #FB8C00; /* A vivid orange that stands out */
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  text-transform: uppercase; /* Make button text uppercase for emphasis */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+button:hover {
+  background: #FFA726; /* Change color on hover to provide feedback */
+}
+
+/* Add a fun footer to match the top of the site */
+footer {
+  background: #FFF3E0;
+  padding: 20px 0;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.2); /* Shadow on the top side */
+}
+
+/* Add specific styles for headings to make them bold and thematic */
+h1, h2, h3, h4, h5, h6 {
+  color: #EF6C00; /* Use the dark orange for headings */
+  text-transform: uppercase; /* Consistency in design with uppercase letters */
+}
+
+/* Style images within content to have a rounded border, reflecting the round elements of the design */
+img {
+  border-radius: 10px; /* Rounded corners for images */
+  max-width: 100%; /* Make images responsive */
+  height: auto;
+}
+
+.titlebarButtons {
+	float: right;
 }

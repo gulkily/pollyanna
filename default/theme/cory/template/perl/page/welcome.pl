@@ -41,6 +41,8 @@ sub GetWelcomePage {
 
 				my $item = GetTemplate('html/item_flat.template');
 				$item = str_replace('<span class=text></span>', '<span class=text>' . $replyText . '</span>', $item);
+				my $itemUrl = GetItemUrl($ref->{'file_hash'});
+				$item = AddAttributeToTag($item, 'a', 'href', $itemUrl);
 				$html2 .= $item;
 			}
 			if ($ref->{'item_type'} eq 'image') {
