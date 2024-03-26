@@ -62,8 +62,8 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		##### this is special hack for item attributes dialog
 		##### this is special hack for item attributes dialog
 		##### this is special hack for item attributes dialog
-
 		# for GetItemAttributesDialog () {
+
 		if ($fieldName eq 'attribute') {
 			$fieldValue = '<span title="' . $itemRow{'attribute'} . '">' . GetString('item_attribute/' . $itemRow{'attribute'}) . '</span>' . ':';
 		}
