@@ -537,7 +537,7 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 			if ($attributeName eq 'additional.css') {
 				$returnValue .= $attributeValue || '';
 				$returnValue .= "\n";
-				if (GetConfig('html/css/theme_concat')) {
+				if (GetConfig('html/css/theme_concat')) { # css_combine css_concat
 					# nothing
 					# concatenate all the selected themes' css together
 				} else {
