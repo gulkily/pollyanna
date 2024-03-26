@@ -1048,49 +1048,7 @@ sub encode_entities2 { # returns $string with html entities <>"& encoded
 	return $string;
 } # encode_entities2()
 
-sub GetAlias { # $fingerprint, $noCache ; Returns alias for an author
-	my $fingerprint = shift;
-
-	if (!$fingerprint) {
-		WriteLog('GetAlias: warning: $fingerprint was missing; caller = ' . join(',', caller));
-		return '';
-	}
-
-	chomp $fingerprint;
-
-	WriteLog("GetAlias($fingerprint)");
-
-	my $noCache = shift;
-	$noCache = ($noCache ? 1 : 0);
-
-	state %aliasCache;
-	if (!$noCache) {
-		if (exists($aliasCache{$fingerprint})) {
-			return $aliasCache{$fingerprint};
-		}
-	}
-
-	my $alias = DBGetAuthorAlias($fingerprint);
-
-	if ($alias) {
-		{ # remove email address, if any
-			$alias =~ s|<.+?>||g;
-			$alias = trim($alias);
-			chomp $alias;
-		}
-
-		if ($alias && length($alias) > 24) {
-			$alias = substr($alias, 0, 24);
-		}
-
-		$aliasCache{$fingerprint} = $alias;
-		return $aliasCache{$fingerprint};
-	} else {
-		#return $fingerprint;
-		return '';
-		#		return 'unregistered';
-	}
-} # GetAlias()
+require_once('alias.pl');
 
 sub GetFileExtension { # $fileName ; returns file extension, naively
 	my $fileName = shift;
