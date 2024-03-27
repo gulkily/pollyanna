@@ -96,6 +96,10 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 					MakeZipFromItemList($zipName, \@zipFiles);
 				}
 			}
+			if (1) {
+				require_once('item_listing_page.pl');
+				MakeFeed('author', $authorKey);
+			}
 		} # $pageType eq 'author'
 
 		if ($pageType eq 'date') {
