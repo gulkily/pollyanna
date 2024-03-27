@@ -42,7 +42,7 @@ nav ul li {
 button {
   background: #FB8C00; /* A vivid orange that stands out */
   border: none;
-  padding: 10px 20px;
+  padding: 5px 10px;
   color: #fff;
   text-transform: uppercase; /* Make button text uppercase for emphasis */
   cursor: pointer;
@@ -86,7 +86,6 @@ img {
   background: #FFF; /* White background for the content */
   padding: 15px;
   margin: 20px auto;
-  border-radius: 8px; /* Soft rounded corners */
   box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
   display: flex; /* Use flexbox for layout */
   align-items: center; /* Center items vertically */
@@ -105,7 +104,6 @@ img {
   background: #EF6C00; /* Dark orange to stand out */
   color: #FFF; /* White text on the button */
   padding: 10px 15px;
-  border-radius: 4px; /* Slightly rounded corners for the link/button */
   text-decoration: none; /* Remove underline from the link */
   font-weight: bold; /* Make link text bold */
   transition: background-color 0.3s ease; /* Transition for hover effect */
@@ -141,8 +139,11 @@ table {
 
 /* Add styling for dialogs if they are within a table */
 .dialog {
-  border-radius: 8px; /* Rounded corners for the dialog */
   background-color: #FFECB3; /* Slightly different shade for dialog background */
   color: #333; /* Darker color for dialog text */
   box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Consistent shadow as other elements */
+}
+
+.titlebar b {
+	margin-right: 3em;
 }

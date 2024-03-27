@@ -29,9 +29,5 @@ $styleSheet
 
 <div id="item_flat_placeholder"></div>
 
-<p class="introduction">
-    <span id=intro></span>
-</p>
-
 </body>
 </html>
