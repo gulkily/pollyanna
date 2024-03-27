@@ -62,7 +62,8 @@ sub GetWelcomePage {
 
 	#my $css = GetTemplate('css/chatgpt.css');
 	#my $css = GetTemplate('css/claude.css');
-	my $css = GetTemplate('css/bard.css');
+	#my $css = GetTemplate('css/bard.css');
+	my $css = GetStylesheet();
 	$html = str_replace('$styleSheet', $css, $html);
 
 	my $intro = GetTemplate('txt/intro.txt');
