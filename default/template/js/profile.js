@@ -507,8 +507,7 @@ function PubkeyCheckProfileExists (fp) { // check if profile exists on server
 
 	//alert('DEBUG: PubkeyCheckProfileExists: fp = ' + fp);
 
-	//var profileUrl = '/author/' + fp + '/';
-	var profileUrl = '/author/' + fp + '.zip';
+	var profileUrl = '/author/' + fp + '.txt'; // this depends on feeds being enabled
 
 	//alert('DEBUG: profileUrl = ' + profileUrl);
 
