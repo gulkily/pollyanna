@@ -51,7 +51,7 @@ sub GetWelcomePage {
 				my $imageTemplate = GetImageContainer2($ref->{'file_hash'}, $ref->{'file_name'}, 'item', 512);
 				my $item = GetTemplate('html/item_flat.template');
 				$item = str_replace('<span class=text></span>', '<span class=text>' . $imageTemplate . '</span>', $item);
-				$html2 .= $imageTemplate;
+				$html2 .= $item;
 			}
 		}
 		$html = str_replace('<div id="item_flat_placeholder"></div>', '<div id="item_flat_placeholder">' . $html2 . '</div>', $html);
@@ -65,10 +65,6 @@ sub GetWelcomePage {
 	#my $css = GetTemplate('css/bard.css');
 	my $css = GetStylesheet();
 	$html = str_replace('$styleSheet', $css, $html);
-
-	my $intro = GetTemplate('txt/intro.txt');
-	#$intro = FormatForWeb($intro);
-	$html = str_replace('<span id=intro></span>', '<span class=text>' . $intro . '</span>', $html);
 
 	$html = InjectJs($html, qw(avatar puzzle settings profile utils timestamp clock fresh table_sort voting write));
 
