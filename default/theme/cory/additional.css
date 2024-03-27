@@ -80,3 +80,69 @@ img {
 .titlebarButtons {
 	float: right;
 }
+
+/* Style the container for the item */
+.item {
+  background: #FFF; /* White background for the content */
+  padding: 15px;
+  margin: 20px auto;
+  border-radius: 8px; /* Soft rounded corners */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Space between the text and the link */
+  max-width: 600px; /* Maximum width of the item */
+}
+
+/* Style the text within the item */
+.item .text {
+  color: #333; /* Dark color for text */
+  font-size: 1rem; /* Default font size */
+}
+
+/* Style the link within the item to look like a button */
+.item a {
+  background: #EF6C00; /* Dark orange to stand out */
+  color: #FFF; /* White text on the button */
+  padding: 10px 15px;
+  border-radius: 4px; /* Slightly rounded corners for the link/button */
+  text-decoration: none; /* Remove underline from the link */
+  font-weight: bold; /* Make link text bold */
+  transition: background-color 0.3s ease; /* Transition for hover effect */
+}
+
+/* Change the link/button appearance on hover */
+.item a:hover {
+  background: #FFA726; /* Lighter orange on hover */
+  text-decoration: none; /* Ensure no underline on hover */
+}
+
+
+/* Style the submit input button */
+input[type="submit"] {
+  background-color: #EF6C00; /* Orange background to stand out */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px; /* Slightly rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth background transition */
+  font-weight: bold;
+}
+
+
+
+
+/* Style the table itself */
+table {
+  background-color: #FFF; /* White background for contrast */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Soft shadow to lift the table off the page */
+}
+
+/* Add styling for dialogs if they are within a table */
+.dialog {
+  border-radius: 8px; /* Rounded corners for the dialog */
+  background-color: #FFECB3; /* Slightly different shade for dialog background */
+  color: #333; /* Darker color for dialog text */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Consistent shadow as other elements */
+}
