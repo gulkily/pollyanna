@@ -635,7 +635,7 @@ dialog.style.left = dialogLeft;
 		if (t) {
 			//alert('DEBUG: SpotlightDialog: t found');
 			if (GetParentDialog(t)) {
-				if (window.GetPrefs && window.SetPrefs) {
+				if ((window.GetPrefs) && (window.SetPrefs)) {
 					if (!GetPrefs('draggable')) {
 						SetPrefs('draggable', '1');
 					}
