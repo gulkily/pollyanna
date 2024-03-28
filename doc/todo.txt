@@ -1,3 +1,8 @@
+write form should be updated when session status changes
+	this happens, e.g., when auto_register is enabled
+
+===
+
 link items should be handled better
 	link url should be accessible from item dialog displayed on any page
 	should be a summary created by crawling the link, at least the title
