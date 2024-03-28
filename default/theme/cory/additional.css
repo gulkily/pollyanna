@@ -91,6 +91,11 @@ img {
   align-items: center; /* Center items vertically */
   justify-content: space-between; /* Space between the text and the link */
   max-width: 600px; /* Maximum width of the item */
+  border-radius: 8pt;
+}
+
+.item a {
+	border-radius: 8pt;
 }
 
 /* Style the text within the item */
