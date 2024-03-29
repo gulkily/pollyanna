@@ -402,14 +402,19 @@ function GetPrefs (prefKey, storeName) { // get prefs value from localstorage
 		if (currentPrefs) {
 			try {
 				prefsObj = JSON.parse(currentPrefs);
+				//alert('DEBUG: GetPrefs: prefsObj = ' + prefsObj);
 			}
 			catch (e) {
-				alert(e);
+				//alert('DEBUG: GetPrefs: error encountered: ' + e);
+				return '';
 			}
 		} else {
 			prefsObj = Object();
+			//alert('DEBUG: GetPrefs: prefsObj = Object()');
 		}
 		var prefValue = prefsObj[prefKey];
+
+		//alert('DEBUG: GetPrefs: prefKey = ' + prefKey + '; prefValue = ' + prefValue);
 
 		if (!prefValue && prefValue != 0 && prefValue != '') {
 			//alert('DEBUG: GetPrefs: prefKey = ' + prefKey + ' not found in prefsObj, getting default');
@@ -684,6 +689,7 @@ function LoadCheckbox (c, prefKey) { // updates checkbox state to reflect settin
 	//alert('DEBUG: LoadCheckbox(..., ' + prefKey + ')');
 
 	if (prefKey == 'timestamps_format') {
+		// it's a radio button group, not a checkbox
 		//alert('DEBUG: LoadCheckbox: timestamps_format');
 		var checkboxState = GetPrefs(prefKey);
 
@@ -692,6 +698,7 @@ function LoadCheckbox (c, prefKey) { // updates checkbox state to reflect settin
 		}
 	}
 	else if (prefKey == 'performance_optimization') {
+		// it's a radio button group, not a checkbox
 		//alert('DEBUG: LoadCheckbox: performance_optimization');
 		var checkboxState = GetPrefs(prefKey);
 
