@@ -37,6 +37,8 @@ sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 		# some hard-coded script additions
 		# these can be more selective in the future
 
+		push @scriptNames, 'settings_default';
+
 		if (GetConfig('setting/html/clock')) {
 			push @scriptNames, 'clock';
 		}

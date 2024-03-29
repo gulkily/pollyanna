@@ -1,4 +1,4 @@
-// == begin settings.js
+// settings.js
 
 var showAdvancedLastAction = '';
 var showBeginnerLastAction = '';
@@ -425,39 +425,6 @@ function GetPrefs (prefKey, storeName) { // get prefs value from localstorage
 	return '';
 } // GetPrefs()
 
-function GetDefault (prefKey) { // get default value of preference
-// function GetSetting () {
-	if (!prefKey) {
-		//alert('DEBUG: GetDefault: warning: missing prefKey');
-		return '';
-	}
-
-
-    // Correctly define the object with key-value pairs
-    var defaultPrefs = {
-        'show_advanced': 0,
-        'beginner': 1,
-        'beginner_highlight': 1,
-        'show_admin': 0,
-        'notify_on_change': 1,
-        'timestamps_format': 'adjusted',
-        'performance_optimization': 'faster',
-        'draggable': 0,
-        'draggable_scale': 0,
-        'draggable_arrange_viewport_resize': 0
-    };
-
-    // Check if the prefKey exists in the defaultPrefs object
-    if (defaultPrefs.hasOwnProperty(prefKey)) {
-        //alert('DEBUG: GetDefault(' + prefKey + ')' + ' = ' + defaultPrefs[prefKey]);
-        return defaultPrefs[prefKey];
-    }
-    else {
-        //alert('DEBUG: GetDefault: warning: prefKey = ' + prefKey + ' not found in defaultPrefs');
-        return '';
-    }
-} // GetDefault()
-
 function SetPrefs (prefKey, prefValue, storeName) { // set prefs key prefKey to value prefValue
 // storeName defaults to 'settings'
 // special case: if prefKey begins with gt+gt, it is 'voted'
@@ -808,4 +775,4 @@ if (window.EventLoop) {
 	ShowAdvanced(0, 0);
 }
 
-// == end settings.js
+// / settings.js
