@@ -412,36 +412,8 @@ function GetPrefs (prefKey, storeName) { // get prefs value from localstorage
 		var prefValue = prefsObj[prefKey];
 
 		if (!prefValue && prefValue != 0 && prefValue != '') {
-			if (
-				prefKey == 'beginner' || // default
-				prefKey == 'beginner_highlight' || // default
-				prefKey == 'notify_on_change' // // default
-			) {
-				// these settings default to 1/true:
-				prefValue = 1;
-			}
-			if (
-				prefKey == 'show_advanced' || // default
-				prefKey == 'show_admin' || // default
-				prefKey == 'draggable' || // default
-				prefKey == 'draggable_scale' || // default
-				prefKey == 'draggable_arrange_viewport_resize' // default
-			) {
-				// these settings default to 0/false:
-				// #todo does this need to be pre-set, if it is 0?
-				// seems to work ok if it is not
-				prefValue = 0;
-			}
-
-			if (prefKey == 'timestamps_format') {
-				// default to 'adjusted' timestamp format
-				prefValue = 'adjusted';
-			}
-
-			if (prefKey == 'performance_optimization') {
-				// default to 'faster' performance optimization
-				prefValue = 'faster';
-			}
+			//alert('DEBUG: GetPrefs: prefKey = ' + prefKey + ' not found in prefsObj, getting default');
+			prefValue = GetDefault(prefKey);
 
 			SetPrefs(prefKey, prefValue);
 		}
@@ -452,6 +424,39 @@ function GetPrefs (prefKey, storeName) { // get prefs value from localstorage
 	//alert('DEBUG: GetPrefs: fallthrough, returning ');
 	return '';
 } // GetPrefs()
+
+function GetDefault (prefKey) { // get default value of preference
+// function GetSetting () {
+	if (!prefKey) {
+		//alert('DEBUG: GetDefault: warning: missing prefKey');
+		return '';
+	}
+
+
+    // Correctly define the object with key-value pairs
+    var defaultPrefs = {
+        'show_advanced': 0,
+        'beginner': 1,
+        'beginner_highlight': 1,
+        'show_admin': 0,
+        'notify_on_change': 1,
+        'timestamps_format': 'adjusted',
+        'performance_optimization': 'faster',
+        'draggable': 0,
+        'draggable_scale': 0,
+        'draggable_arrange_viewport_resize': 0
+    };
+
+    // Check if the prefKey exists in the defaultPrefs object
+    if (defaultPrefs.hasOwnProperty(prefKey)) {
+        //alert('DEBUG: GetDefault(' + prefKey + ')' + ' = ' + defaultPrefs[prefKey]);
+        return defaultPrefs[prefKey];
+    }
+    else {
+        //alert('DEBUG: GetDefault: warning: prefKey = ' + prefKey + ' not found in defaultPrefs');
+        return '';
+    }
+} // GetDefault()
 
 function SetPrefs (prefKey, prefValue, storeName) { // set prefs key prefKey to value prefValue
 // storeName defaults to 'settings'
