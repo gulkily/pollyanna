@@ -7,7 +7,6 @@ function GetDefault (prefKey) { // get default value of preference
 		return '';
 	}
 
-
     // Correctly define the object with key-value pairs
     var defaultPrefs = {
         'show_advanced': 0,
@@ -18,6 +17,7 @@ function GetDefault (prefKey) { // get default value of preference
         'timestamps_format': 'adjusted',
         'performance_optimization': 'faster',
         'draggable': 0,
+        'draggable_restore': 0,
         'draggable_scale': 0,
         'draggable_arrange_viewport_resize': 0
     };
