@@ -166,6 +166,7 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 	# $htmlStart =~ s/\$title/$title/g;
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/loading')) { #begin loading
+		require_once('inject_js.pl');
 		$htmlStart = InjectJs2($htmlStart, 'after', '<body>', qw(loading_begin));
 
 		# # #todo #templatize #hide #loading
