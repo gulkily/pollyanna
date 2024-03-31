@@ -1017,6 +1017,14 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 
 										if ($hashTag eq 'approve') { # apply hashtag approve
 											ExpireHtmlFile('people.html');
+											# if parent item has an author and/or is a public key or other author id
+											# we should remove the avatar cache for the author
+											if ($authorKey) {
+												ExpireAvatarCache(DBGetItemAuthor($itemParent));
+												# quick and dirty, inefficient, #todo
+												# doesn't always need to happen (only if item is pubkey or self-id)
+												# also, should be grouped for all parent items
+											}
 										}
 									} # $approveStatus is true
 									else {
