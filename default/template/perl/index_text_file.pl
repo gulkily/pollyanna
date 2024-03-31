@@ -791,7 +791,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 						}
 					} # my_name_is
 
-					if ($tokenFound{'token'} eq 'hashtag') { #hashtag
+					if ($tokenFound{'token'} eq 'hashtag') { #hashtag # apply hashtag
 						if ($tokenFound{'param'} eq 'remove' && GetConfig('admin/token/remove')) { #remove
 							if (scalar(@itemParents)) {
 								WriteLog('IndexTextFile: Found #remove token, and item has parents');
