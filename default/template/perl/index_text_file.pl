@@ -955,7 +955,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 										push @indexMessageLog, 'author: NONE';
 									}
 
-									if ($approveStatus) {
+									if ($approveStatus) { # apply hashtag (approved)
 										WriteLog('IndexTextFile: permissioned: Found seemingly valid request');
 										DBAddLabel($itemParent, 0, $hashTag, $authorKey, $fileHash);
 
@@ -1015,7 +1015,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 											}
 										}
 
-										if ($hashTag eq 'approve') {
+										if ($hashTag eq 'approve') { # apply hashtag approve
 											ExpireHtmlFile('people.html');
 										}
 									} # $approveStatus is true
