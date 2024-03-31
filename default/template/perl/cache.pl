@@ -165,7 +165,7 @@ sub ExpireAvatarCache { # $fingerprint ; removes all avatar caches
 # sub ExpireAliasCache {
 
 	my $key = shift;
-	WriteLog("ExpireAvatarCache($key)");
+	WriteLog("ExpireAvatarCache($key); caller = " . join(',', caller));
 	if (!IsFingerprint($key) && $key ne '*') {
 		WriteLog('ExpireAvatarCache: warning: sanity check failed');
 		my ($package, $filename, $line) = caller;
