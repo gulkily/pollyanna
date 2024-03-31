@@ -38,3 +38,5 @@ echo 1 > config/setting/admin/auto_approve_first_user
 echo 1 > config/setting/admin/js/openpgp_keygen_prompt_for_username
 echo 1 > config/setting/html/avatar_link_to_person_when_approved
 echo 1 > config/setting/html/avatar_display_approved_status
+echo 1 > config/setting/html/window_titlebar_buttons
+echo 1 > config/setting/html/page_map_bottom
