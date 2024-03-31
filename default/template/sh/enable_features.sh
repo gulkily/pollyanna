@@ -32,3 +32,5 @@ echo 1 > config/setting/admin/token/hike_set
 echo 1 > config/setting/admin/php/cookie_index
 echo 1 > config/setting/admin/php/regrow_404_fork
 echo 1 > config/setting/html/menu_layer_controls
+echo 1 > config/setting/admin/php/post/require_cookie
+echo 1 > config/setting/admin/js/profile_auto_register
