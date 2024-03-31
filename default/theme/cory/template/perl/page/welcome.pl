@@ -37,7 +37,7 @@ sub GetWelcomePage {
 				$replyText = FormatForWeb($replyText);
 
 				# convert urls to links
-				$replyText =~ s{ (https?://[a-zA-Z&./\-=0-9\?#;]+) }{<a href="$1">$1</a>}gx;
+				#$replyText =~ s{ (https?://[a-zA-Z&./\-=0-9\?#;]+) }{<a href="$1">$1</a>}gx;
 
 				my $item = GetTemplate('html/item_flat.template');
 				$item = str_replace('<span class=text></span>', '<span class=text>' . $replyText . '</span>', $item);
