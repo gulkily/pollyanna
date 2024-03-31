@@ -34,3 +34,7 @@ echo 1 > config/setting/admin/php/regrow_404_fork
 echo 1 > config/setting/html/menu_layer_controls
 echo 1 > config/setting/admin/php/post/require_cookie
 echo 1 > config/setting/admin/js/profile_auto_register
+echo 1 > config/setting/admin/auto_approve_first_user
+echo 1 > config/setting/admin/js/openpgp_keygen_prompt_for_username
+echo 1 > config/setting/html/avatar_link_to_person_when_approved
+echo 1 > config/setting/html/avatar_display_approved_status
