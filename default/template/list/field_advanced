@@ -20,6 +20,7 @@ parent_count
 tags_list
 labels_list
 tagset_author
+tagset_guest
 tagset_url
 tagset_pubkey
 tagset_flag
