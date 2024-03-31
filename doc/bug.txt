@@ -1,3 +1,9 @@
+
+avatar_display_approved_status feature works incorrectly when avatar_link_to_person_when_approved is NOT enabled
+	(shows hourglass instead of author avatar)
+
+===
+
 when page reflows due to change of viewport size, dialogs are no longer draggable, even if they were previously
 	repro:
 		1) make page draggable (allow dialog reposition)
