@@ -353,6 +353,11 @@ sub GetDialogX2 { # \%paramHash ; returns window
 			$windowTitlebar =~ s/\$windowTitle/$windowTitle/g;
 			$windowTitlebar =~ s/\$dialogAnchor/$dialogAnchor/g;
 			$windowTemplate =~ s/\$windowTitlebar/$windowTitlebar/g;
+
+			if (GetConfig('setting/admin/js/enable')) {
+				#todo maybe should depend on another setting?
+				$windowTemplate = AddAttributeToTag($windowTemplate, 'a', 'onclick', "if (window.ShowAll && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;");
+			}
 		}
 	} else {
 		$windowTemplate =~ s/\$windowTitlebar//g;

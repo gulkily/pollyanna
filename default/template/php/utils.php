@@ -1049,8 +1049,12 @@ function GetDialogX ( # body, title, headings, status, menu
 		if (1 || $showButtons && GetConfig('admin/js/dragging')) {
 			$windowTitlebar = GetTemplate('html/window/titlebar.template');
 			$windowTitlebar = str_replace('$windowTitle', $windowTitle, $windowTitlebar);
-
 			$windowTemplate = str_replace('$windowTitlebar', $windowTitlebar, $windowTemplate);
+
+			if (GetConfig('setting/admin/js/enable')) {
+				#todo maybe should depend on another setting?
+				$windowTemplate = AddAttributeToTag($windowTemplate, 'a', 'onclick', "if (window.ShowAll && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;");
+			}
 		} else {
 		}
 	} else {
