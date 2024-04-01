@@ -173,26 +173,8 @@ function MakeKey (t, callback = '') { //makes key using default settings
 
 					//alert('DEBUG: MakeKey: about to share public key');
 
-					//if (window.AddLoadingIndicator) {
-					//	AddLoadingIndicator('Creating profile...');
-					//}
-					//PubKeyPing();
-
 					// window.location = '/profile.html?' + myFingerprint;
 					PingUrl('/profile.html?' + myFingerprint);
-
-					//	if (window.PubKeyShare) {
-					//		//alert('DEBUG: MakeKey: (window.PubKeyShare) exists. calling');
-					//		//PubKeyShare();
-					//
-					//		return true;
-					//	} else {
-					//		//alert('DEBUG: MakeKey: (window.PubKeyShare) does NOT exist, using window.location');
-					//
-					//		window.location = '/write.html#inspubkey';
-					//		return true;
-					//	}
-					//alert('done MakeKey; callback = ' + callback);
 
 					if (callback) {
 						setTimeout(callback, 1000);

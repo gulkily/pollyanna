@@ -1,3 +1,26 @@
+
+// below is from crypto2.js
+					//	if (window.PubKeyShare) {
+					//		//alert('DEBUG: MakeKey: (window.PubKeyShare) exists. calling');
+					//		//PubKeyShare();
+					//
+					//		return true;
+					//	} else {
+					//		//alert('DEBUG: MakeKey: (window.PubKeyShare) does NOT exist, using window.location');
+					//
+					//		window.location = '/write.html#inspubkey';
+					//		return true;
+					//	}
+					//alert('done MakeKey; callback = ' + callback);
+
+
+					//if (window.AddLoadingIndicator) {
+					//	AddLoadingIndicator('Creating profile...');
+					//}
+					//PubKeyPing();
+//
+
+
 if (!document.getElementsByClassName) {
     document.getElementsByClassName = function(search) {
         var d = document, elements, pattern, i, results = [];
