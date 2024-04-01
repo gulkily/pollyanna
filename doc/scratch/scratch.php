@@ -1,3 +1,33 @@
+		// from GetDialogX() utils.php
+		//
+		// 		if ($showButtons && GetConfig('admin/js/dragging')) {
+		// 			WriteLog('GetDialogX: $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle . '; dragging = ' . GetConfig('admin/js/dragging'));
+		//
+		// 			$btnCloseCaption = '{-}'; # needs to match one other place in dragging.js #collapseButton
+		// 			$windowTitlebar = GetTemplate('html/window/titlebar_with_button.template'); #window_titlebar_buttons
+		//
+		// 			$windowTitlebar = InjectJs($windowTitlebar, array('titlebar_with_button'));
+		//
+		// 			$windowTitlebar = str_replace('$windowTitle', $windowTitle, $windowTitlebar);
+		// 			#$windowTitlebar = str_replace('$dialogAnchor', $dialogAnchor, $windowTitlebar);
+		// 			$windowTemplate = str_replace('$windowTitlebar', $windowTitlebar, $windowTitlebar);
+		// 			$windowTemplate = str_replace('$btnCloseCaption', $btnCloseCaption, $windowTitlebar);
+		// 			#$contentColumnCount = 2;
+		// 		} else {
+		// 			$windowTitlebar = GetTemplate('html/window/titlebar.template');
+		// 			#
+		// 			#			if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
+		// 			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$dialogAnchor', 'onfocus', 'document.title=this.innerHTML;');
+		// 			#				$windowTitlebar = AddAttributeToTag($windowTemplate, 'a href=#$dialogAnchor', 'onclick', 'document.title=this.innerHTML;');
+		// 			#			}
+		// 			#
+		// 			$windowTitlebar = str_replace('$windowTitle', $windowTitle, $windowTitlebar);
+		// 			$windowTitlebar = str_replace('$dialogAnchor', $dialogAnchor, $windowTitlebar);
+		// 			$windowTemplate = str_replace('$windowTitlebar', $windowTitlebar, $windowTitlebar);
+		// 		}
+
+
+
 // function GetNeighborDialog($pageName, $pageArgument) {
 //     // todo sanity checks
 //
