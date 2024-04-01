@@ -35,7 +35,7 @@
 
 			<p id=spanProfileLink></p>
 
-			<p class=advanced id=insPubKey><a href="/write.html#inspubkey">View public key</a></p>
+			<p id=spanInsPubKey></p>
 
 			<hr id=pCurrentProfileIndicatorSeparator>
 		</span>

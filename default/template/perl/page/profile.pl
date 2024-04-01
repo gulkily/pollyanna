@@ -17,8 +17,12 @@ sub GetProfileDialog {
 		#$profileWindowContents =~ s/\$gpg2Algochoices/$gpg2Choices/;
 
 		$profileWindowContents = AddAttributeToTag($profileWindowContents, 'input id=btnBegin', 'onclick', "if (window.btnBegin_Click) { return btnBegin_Click(this); }");
+
+		$profileWindowContents = str_replace('<p id=spanInsPubKey></p>', '<p id=spanInsPubKey>' . GetTemplate('html/widget/public_key_insert.template') . '</p>', $profileWindowContents);
+		#todo this should also be feature-checked with javascript
 	} else {
 		$profileWindowContents =~ s/\$gpg2Algochoices//;
+		$profileWindowContents = str_replace('<p id=spanInsPubKey></p>', '', $profileWindowContents);
 	}
 
 	my $profileWindow = GetDialogX(
