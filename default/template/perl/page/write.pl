@@ -42,7 +42,7 @@ sub GetWritePage { # returns html for write page
 	}
 
 	if (GetConfig('setting/html/write_settings')) {
-		'<span class=advanced>' . GetDialogX(GetTemplate('html/form/writing.template'), 'Settings') . '</span>'; # write_settings
+		my $writeSettings = '<span class=advanced>' . GetDialogX(GetTemplate('html/form/writing.template'), 'Settings') . '</span>'; # write_settings
 		$writePageHtml .= $writeSettings;
 	}
 
