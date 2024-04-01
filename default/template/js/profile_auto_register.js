@@ -21,7 +21,7 @@ function AutoRegister () { // attempts to create a registration
 
 	// we should also set a cookie so that we don't keep prompting the user every session
 	// this just shouldn't be used with openpgp_keygen_prompt_for_username
-	if (window.MakeKey && window.getPublicKey) {
+	if ((window.MakeKey) && (window.getPublicKey)) {
 		if (!getPublicKey()) {
 			MakeKey(); // # this may prompt for a username
 			SetPrefs('sign_by_default', 1);
