@@ -5,7 +5,8 @@ SELECT
 	item_type,
 	child_count,
 	add_timestamp,
-	labels_list
+	labels_list,
+	'' AS tagset_all
 FROM
 	item_flat
 WHERE
