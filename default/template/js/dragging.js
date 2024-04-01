@@ -1459,8 +1459,13 @@ function CloseDialog(t) {
 		}
 		//alert(openDialogs);
 
-		//GetParentDialog(t).remove();
-		parentDialog.remove();
+		if (parentDialog.remove) {
+			parentDialog.remove();
+		} else {
+			if (parentDialog.parentNode) {
+				parentDialog.parentNode.removeChild(parentDialog);
+			}
+		}
 
 		if (window.UpdateDialogList) {
 			UpdateDialogList();
