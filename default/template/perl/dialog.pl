@@ -334,7 +334,9 @@ sub GetDialogX2 { # \%paramHash ; returns window
 				$windowTemplate = str_replace('<span class=dialogIcon></span>', '', $windowTemplate);
 			}
 			#$contentColumnCount = 2;
-		} else {
+		}
+		else {
+			WriteLog('GetDialogX2: $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle . '; dragging = ' . GetConfig('setting/admin/js/dragging'));
 			my $windowTitlebar = GetTemplate('html/window/titlebar.template');
 
 			if (index($windowTitlebar, '<b>') != -1) {
@@ -355,8 +357,12 @@ sub GetDialogX2 { # \%paramHash ; returns window
 			$windowTemplate =~ s/\$windowTitlebar/$windowTitlebar/g;
 
 			if (GetConfig('setting/admin/js/enable')) {
+				WriteLog('GetDialogX2: calling AddAttributeToTag; $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle . '; dragging = ' . GetConfig('setting/admin/js/dragging'));
 				#todo maybe should depend on another setting?
 				$windowTemplate = AddAttributeToTag($windowTemplate, 'a', 'onclick', "if (window.ShowAll && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;");
+			}
+			else {
+				WriteLog('GetDialogX2: NOT calling AddAttributeToTag; $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle . '; dragging = ' . GetConfig('setting/admin/js/dragging'));
 			}
 		}
 	} else {
