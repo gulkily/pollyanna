@@ -53,7 +53,6 @@ sub GetPeoplePage {
 		#$pageIntroDialog . #PageIntro
 		$people .
 		$queryTextDialog .
-		'<hr>' .
 		$pending .
 		$guests .
 		# GetQuerySqlDialog('people') .
