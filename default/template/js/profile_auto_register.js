@@ -3,6 +3,9 @@
 // #autoreg
 // quick and dirty auto-register
 // should check for if user previously signed out
+//
+// if OpenPGP.js is available, and there is no kaypair already
+// generate a pair, store it, and publish the public key
 
 function AutoRegister () { // attempts to create a registration
 	if (window.AutoRegisterTried) {
@@ -10,10 +13,8 @@ function AutoRegister () { // attempts to create a registration
 		// already tried it once
 	}
 	window.AutoRegisterTried = 1;
-	// should not trigger on session or profile page
 
-	// we should rewrite this using .indexOf
-	//if (window.location.href.match(/\/session\/|\/profile\//)) {
+	// should not trigger on session or profile page
 	if (window.location.href.indexOf('session.html') != -1 || window.location.href.indexOf('profile.html') != -1) {
 		return '';
 	}
