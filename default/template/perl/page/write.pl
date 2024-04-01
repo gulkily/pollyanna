@@ -23,26 +23,28 @@ sub GetWritePage { # returns html for write page
 
 	my $writeForm = GetWriteDialog();
 
-	WriteLog('GetWriteForm: js is on, adding write_options.template');
-	my $writeOptions =
-		'<span class=advanced>' .
-		AddAttributeToTag(
-			GetDialogX(GetTemplate('html/form/write/write_options.template'), 'Options'),
-			'a href="/frame.html"',
-			'accesskey',
-			GetAccessKey('Keyboard')
-		).
-		'</span>'
-	; #todo this is a hack
-
 	$writePageHtml .= $writeForm;
 
 	if (GetConfig('setting/html/write_options')) {
 		#todo should be called tools, maybe?
+		WriteLog('GetWriteForm: js is on, adding write_options.template');
+		my $writeOptions =
+			'<span class=advanced>' .
+				AddAttributeToTag(
+					GetDialogX(GetTemplate('html/form/write/write_options.template'), 'Options'),
+					'a href="/frame.html"',
+					'accesskey',
+					GetAccessKey('Keyboard')
+				).
+				'</span>'
+		; #todo this is a hack
 		$writePageHtml .= $writeOptions;
 	}
 
-	$writePageHtml .= '<span class=advanced>' . GetDialogX(GetTemplate('html/form/writing.template'), 'Settings') . '</span>'; # write_settings
+	if (GetConfig('setting/html/write_settings')) {
+		'<span class=advanced>' . GetDialogX(GetTemplate('html/form/writing.template'), 'Settings') . '</span>'; # write_settings
+		$writePageHtml .= $writeSettings;
+	}
 
 	#if (GetConfig('setting/admin/js/enable')) {
 	#	$writePageHtml .= GetDialogX(GetTemplate('html/form/writing.template'), 'Options');
