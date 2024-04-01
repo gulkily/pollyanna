@@ -21,7 +21,7 @@ $styleSheet
         Share something you want others to know:
         <br>
         <input type="hidden" name="vote_return_to" value="/welcome.html">
-        <textarea name="comment" rows="5" cols="40" placeholder="Write here"></textarea>
+        <textarea name="comment" rows="5" cols="30" placeholder="Write here"></textarea>
         <br>
         <input type="submit" value="Send">
     </form>
