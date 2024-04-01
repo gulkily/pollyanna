@@ -4,12 +4,12 @@
 // quick and dirty auto-register
 // should check for if user previously signed out
 
-function ForceLogin () { // attempts to create a registration
-	if (window.ForceLoginTried) {
+function AutoRegister () { // attempts to create a registration
+	if (window.AutoRegisterTried) {
 		return '';
 		// already tried it once
 	}
-	window.ForceLoginTried = 1;
+	window.AutoRegisterTried = 1;
 	// should not trigger on session or profile page
 
 	// we should rewrite this using .indexOf
@@ -30,8 +30,6 @@ function ForceLogin () { // attempts to create a registration
 			// already logged in
 		}
 	}
-} // ForceLogin()
-
-setTimeout('ForceLogin()', 1000);
+} // AutoRegister()
 
 // / profile_auto_register.js

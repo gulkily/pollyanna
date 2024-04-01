@@ -198,6 +198,10 @@ function OnLoadEverything () { // checks for each onLoad function and calls it
 		}
 	}
 
+	if (window.AutoRegister) {
+		setTimeout('AutoRegister()', 1000);
+	}
+
 	// everything is set now, start event loop
 	//
 } // OnLoadEverything()
