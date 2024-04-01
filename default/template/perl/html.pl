@@ -195,6 +195,7 @@ sub AddAttributeToTag { # $html, $tag, $attributeName, $attributeValue; adds att
 	}
 
 	my $lengthAfter = length($html);
+	WriteLog('AddAttributeToTag: length($html) $lengthAfter: ' . $lengthAfter);
 
 	if ($lengthBefore == $lengthAfter) {
 		WriteLog('AddAttributeToTag: warning: $lengthBefore == $lengthAfter = ' . $lengthAfter . '; caller = ' . join (',', caller));
