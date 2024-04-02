@@ -33,6 +33,11 @@ sub GetWelcomePage {
 				# remove item references like >>[sha1] and replace them with empty string
 				$replyText =~ s/>>[0-9a-f]{40}//g;
 
+				# remove extra line breaks
+				$replyText =~ s/^\n+//g;
+				$replyText =~ s/\n+$//g;
+				$replyText =~ s/\n\n/\n/g;
+
 				# FormatForWeb() adds <br> tags and escapes html entities
 				$replyText = FormatForWeb($replyText);
 
