@@ -252,6 +252,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 ########### DIALOGS BEGIN
 		if (substr($path, 0, 8) == '/dialog/') {
 			# $validDialogs handle_not_found.php
+			# validDialog
 			$basicDialogs = array(
 				'threads',
 				'stats',
