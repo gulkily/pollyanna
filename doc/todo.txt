@@ -2233,7 +2233,7 @@ ARCHITECTURAL PRIORITIES
 
 route.php
 	if the html returning indicates it is the pre-generated version
-		call HandleNotFound ($path, $pathRel)
+		call HandleNotFound($path, $pathRel)
 
 ===
 
