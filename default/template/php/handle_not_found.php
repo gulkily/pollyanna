@@ -203,6 +203,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 			'donate', #donate donate.html
 			'topics', #topics topics.html
 			'judge', #judge judge.html
+			'random', #random random.html
 		); # $validViews
 		#todo make this nicer and configurable etc
 		# validRoutes
@@ -281,7 +282,8 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 				'session',
 				'about',
 				'judge',
-				'calendar'
+				'calendar',
+				'random'
 			); # /dialog/ # $basicDialogs
 
 			foreach ($basicDialogs as $basicDialog) {

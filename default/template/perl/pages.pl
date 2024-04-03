@@ -1788,7 +1788,7 @@ while (my $arg1 = shift @foundArgs) {
 			if ($makeDialogArg) {
 				my @validDialogs = qw(settings float access upload data search profile);
 				my @needRequire = qw(profile upload);
-				my @queryDialogs = qw(read image url chain new tags scores active authors people threads labels topics judge calendar);
+				my @queryDialogs = qw(read image url chain new tags scores active authors people threads labels topics judge calendar random);
 				my @simpleDialogs = qw(help );
 
 				if (0) { }
