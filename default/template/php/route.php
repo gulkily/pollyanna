@@ -1630,6 +1630,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							if (file_exists("$htmlDir/dialog/" . $dialogName . '.html')) {
 								# cool
 							} else {
+							    WriteLog('route.php: calling HandleNotFound(/dialog/'.$dialogName.'.html)');
 								HandleNotFound("/dialog/" . $dialogName . ".html", '');
 							}
 							$dialogsTogether .= GetFile("$htmlDir/dialog/" . $dialogName . '.html');
