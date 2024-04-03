@@ -1,3 +1,14 @@
+ensure that cache and other files are cleaned up regularly
+	write script to remove files more than 24 hours ago
+		cache
+		trim log file
+		cache/b/response/*
+		log/*.sqlerr
+
+	call script regularly from ...?
+
+===
+
 write form should be updated when session status changes
 	this happens, e.g., when auto_register is enabled
 
@@ -615,15 +626,6 @@ Outbox feature
 
 "my name is tag" should by default only work on pubkey items
 	this will also restrict self-naming to key-based accounts
-
-===
-
-ensure that cache and other files are cleaned up regularly
-	write script to remove files more than 24 hours ago
-		cache
-		trim log file
-
-	call script regularly from ...?
 
 ===
 
