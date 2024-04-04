@@ -5,8 +5,8 @@ use warnings;
 use utf8;
 
 sub GetMenuPage { # /menu.html
-# sub GetHelpDialog()
-# sub GetMenuPage()
+# sub GetHelpDialog {
+# sub GetMenuPage {
 	my $txtIndex = "";
 
 	require_once('page/menu.pl');
