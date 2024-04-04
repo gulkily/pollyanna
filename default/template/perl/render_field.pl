@@ -90,6 +90,7 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 	elsif (
 		$fieldName eq 'author_id' ||
 		$fieldName eq 'cookie_id' ||
+		$fieldName eq 'client_id' ||
 		$fieldName eq 'gpg_id'
 	) {
 		# author identifier as 16-character uppercase hexadecimal
