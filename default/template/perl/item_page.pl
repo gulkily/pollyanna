@@ -337,7 +337,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	#		format_avatars = 1 to format fingerprint-looking strings into avatars
 	#		child_count = number of child items for this item
 	#		template_name = name of template to use (item.template is default)
-	#		remove_token = reply token to remove from message (used for displaying replies)
+	#		remove_token = reply token to remove from message (used for displaying replies) #todo this is passed into GetItemTemplate()?
 	#	}
 
 	# we're expecting a reference to a hash as the first parameter
@@ -641,11 +641,11 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 #		my @itemReplies = SqliteQueryHashRef($query);
 
 
-		if (GetConfig('setting/html/item_page/replies_list')) {
-			WriteLog('GetItemPage: replies_list: scalar(@itemReplies) = ' . scalar(@itemReplies));
+		if (GetConfig('setting/html/item_page/replies_listing')) {
+			WriteLog('GetItemPage: replies_listing: scalar(@itemReplies) = ' . scalar(@itemReplies));
 			# REPLIES LIST
 			foreach my $itemReply (@itemReplies) {
-				WriteLog('GetItemPage: replies_list: $itemReply = ' . $itemReply);
+				WriteLog('GetItemPage: replies_listing: $itemReply = ' . $itemReply);
 
 				if ($itemReply->{'labels_list'} && index($itemReply->{'labels_list'}, 'hide') != -1) {
 					next;
