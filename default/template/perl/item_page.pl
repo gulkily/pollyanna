@@ -651,6 +651,10 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 					next;
 				}
 
+				if (GetConfig('setting/html/item_page/replies_listing_remove_tokens')) {
+    				$itemReply->{'remove_token'} = '>>' . $file{'file_hash'};
+                }
+
 				if ($itemReply->{'labels_list'} && index($itemReply->{'labels_list'}, 'notext') != -1) {
 					my $itemReplyTemplate = GetItemTemplate($itemReply); # GetItemPage() reply #notext
 					$txtIndex .= '<span class=advanced>' . $itemReplyTemplate . '</span>';
