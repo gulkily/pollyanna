@@ -10,6 +10,10 @@ sub GetItemListing { # $fileHash ; returns listing of items based on topic
 # sub GetItemListingHtml {
 #
 # ATTENTION: not to be confused with GetItemListingPage()
+#
+# #todo this should be refactored:
+# a) it should not have both reply listings and top listing page
+# document the various options available
 	my $htmlOutput = '';
 
 	my @topItems; #todo rename this
