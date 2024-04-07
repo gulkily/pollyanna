@@ -1,3 +1,11 @@
+Generate zip files for each thread, probably on the fly with PHP, if possible
+    it should happen on top-level item page
+        find all thread children and include them
+        also include all author public keys and self-id items
+        anything else?
+
+===
+
 ensure that cache and other files are cleaned up regularly
 	write script to remove files more than 24 hours ago
 		cache
