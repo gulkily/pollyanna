@@ -655,6 +655,11 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
     				$itemReply->{'remove_token'} = '>>' . $file{'file_hash'};
                 }
 
+				if (GetConfig('setting/html/item_page/replies_listing_no_titles')) {
+    				$itemReply->{'item_title'} = '';
+    				#todo this actually results in 'Untitled' items, which is not right
+                }
+
 				if ($itemReply->{'labels_list'} && index($itemReply->{'labels_list'}, 'notext') != -1) {
 					my $itemReplyTemplate = GetItemTemplate($itemReply); # GetItemPage() reply #notext
 					$txtIndex .= '<span class=advanced>' . $itemReplyTemplate . '</span>';
