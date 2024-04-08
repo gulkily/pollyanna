@@ -129,7 +129,7 @@ sub GetPersonPage { # $personName
 				item_title,
 				add_timestamp,
 				person_author.author_key AS author_id,
-				author_key,
+				item_flat.author_key,
 				'' AS cart
 			FROM
 				item_flat
