@@ -62,7 +62,7 @@ sub GetPersonPage { # $personName
 					)
 				)
 		";
-		$keyList = GetQueryAsDialog($queryApprovedKeys, 'ApprovedKeys');
+		$keyList = GetQueryAsDialog($queryApprovedKeys, 'ApprovedKeys'); # Approved Keys
 		#todo templatize the query, use parameter injection
 		$keyListQuery = $queryApprovedKeys;
 
@@ -112,7 +112,7 @@ sub GetPersonPage { # $personName
 							)
 						)
 		";
-		$pendingKeyList = GetQueryAsDialog($queryPendingKeys, 'PendingKeys');
+		$pendingKeyList = GetQueryAsDialog($queryPendingKeys, 'PendingKeys'); # Pending Keys
 		#if (!$pendingKeyList) {
 		#	$pendingKeyList = GetDialogX('<fieldset><p>There are no authors awaiting approval.</p></fieldset>', 'Notice');
 		#}
@@ -138,7 +138,7 @@ sub GetPersonPage { # $personName
 			LIMIT 30
 		";
 		#todo remove hard-coded limit of 30 itesm
-		$itemList = GetQueryAsDialog($queryItemList, 'RecentActivity');
+		$itemList = GetQueryAsDialog($queryItemList, 'RecentActivity'); # Recent Activity
 		#todo templatize the query, use parameter injection
 	}
 
