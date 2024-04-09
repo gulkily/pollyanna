@@ -476,18 +476,20 @@ if (isset($comment) && $comment) {
 			$comment = 'boxes: ' . $boxesCount . "\n" . $comment;
 		}
 
-		if (isset($allParameters)) {
-			#todo this could use more sanity and cleanness
-			if (index($comment, "\n-- \n") == -1) {
-				$comment = $comment . "\n-- \n";
-			}
+		if (isset($allParameters) && is_array($allParameters) && count($allParameters)) {
+		    /* my */ $footerParameters = '';
 			foreach ($allParameters as $paramKey => $paramValue) {
 				#todo sanity checks
 				if ($paramKey == 'comment') {
 					# comment is already added by default
 				} else {
-					$comment = $comment . $paramKey . ': ' . $paramValue . "\n";
+					$footerParameters = $footerParameters . $paramKey . ': ' . $paramValue . "\n";
 				}
+			}
+			#todo this could use more sanity and cleanness
+			if ($footerParameters && index($comment, "\n-- \n") == -1) {
+				$comment = $comment . "\n-- \n";
+				$comment = $comment . $footerParameters;
 			}
 		}
 

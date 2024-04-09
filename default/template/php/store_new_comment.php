@@ -51,9 +51,7 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 		WriteLog('StoreNewComment: $fileName = ' . $fileName);
 
 		// standard signature separator
-		#$signatureSeparator = "\n--- \n"; #\n--
-		#$signatureSeparator = "\n-- \n"; #\n--
-		$signatureSeparator = '';
+		$signatureSeparator = "\n-- \n"; #\n--
 		$signatureContent = '';
 
 		if (GetConfig('admin/logging/record_http_auth_username')) {
