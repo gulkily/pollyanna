@@ -41,7 +41,7 @@ sub GetPersonPage { # $personName
 		#my @files = DBGetItemList(\%params);
 		#$keyList = GetItemListHtml(\@files); #todo use GetAuthorInfoBox()
 
-		#todo templatize query
+		#todo templatize query, but it keeps failing for some reason
 		my $queryApprovedKeys = "
 			SELECT
 				file_hash,
