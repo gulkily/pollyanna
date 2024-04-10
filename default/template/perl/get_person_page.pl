@@ -23,24 +23,6 @@ sub GetPersonPage { # $personName
 	my $keyList = '';
 	my $keyListQuery = '';
 	{
-		#my %params;
-		#		$params{'where_clause'} = "
-		#			WHERE
-		#				labels_list LIKE '%,pubkey,%' AND
-		#				labels_list LIKE '%,approve,%' AND
-		#				file_hash IN (
-		#					SELECT file_hash
-		#					FROM item_flat
-		#					WHERE author_key IN(
-		#						SELECT author_key
-		#						FROM author_flat
-		#						WHERE author_alias = '$personName'
-		#					)
-		#				)
-		#		";
-		#my @files = DBGetItemList(\%params);
-		#$keyList = GetItemListHtml(\@files); #todo use GetAuthorInfoBox()
-
 		#todo templatize query, but it keeps failing for some reason
 		my $queryApprovedKeys = "
 			SELECT
@@ -72,23 +54,6 @@ sub GetPersonPage { # $personName
 	# COLLECT LIST OF PENDING (NOT APPROVED) KEYS
 	my $pendingKeyList = '';
 	{
-		#		my %params;
-		#		$params{'where_clause'} = "
-		#			WHERE
-		#				labels_list LIKE '%,pubkey,%' AND
-		#				labels_list NOT LIKE '%,approve,%' AND
-		#				file_hash IN (
-		#					SELECT file_hash
-		#					FROM item_flat
-		#					WHERE author_key IN(
-		#						SELECT author_key
-		#						FROM author_flat
-		#						WHERE author_alias = '$personName'
-		#					)
-		#				)
-		#		";
-		#		my @files = DBGetItemList(\%params);
-		#		$pendingKeyList = GetItemListHtml(\@files); #todo use GetAuthorInfoBox()
 		#todo templatize query
 		my $queryPendingKeys = "
 					SELECT
