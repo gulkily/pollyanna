@@ -531,21 +531,6 @@ sub SqliteGetQueryTemplate { # $query ; look up query in templates if necessary 
 	}
 } # SqliteGetQueryTemplate()
 
-sub SqliteGetPopulatedQuery { # $query, @queryParams ; look up query and populate parameters
-	my $query = shift;
-	if (!$query) {
-		WriteLog('SqliteQueryCachedShell: warning: called without $query');
-		return;
-	}
-	chomp $query;
-	my @queryParams = @_;
-
-	#todo count question marks and match with params #sanity
-
-
-
-} # SqliteGetPopulatedQuery()
-
 sub SqliteQueryCachedShell { # $query, @queryParams ; performs sqlite query via sqlite3 command
 # uses cache with query text's hash as key
 # sub CacheSqliteQuery {
