@@ -99,7 +99,7 @@ sub SqliteMakeTables { # creates sqlite schema
 	#todo cache the result so that this can be skipped if building often
 } # SqliteMakeTables()
 
-sub SqliteGetNormalizedQueryString { # $query ; returns normalized query string
+sub SqliteGetNormalizedQueryString { # $query, @queryParams ; returns normalized query string
 # sub SqliteNormalizeQuery {
 # sub NormalizeQuery {
 # sub NormalizedQuery {
@@ -505,22 +505,24 @@ sub SqliteGetQueryTemplate { # $query ; look up query in templates if necessary 
 		(index($query, ' ') == -1) &&  # if it has a space, it's probably already an sql query if it has a space
 		(substr($query, 0, 1) ne '.')  # if it begins with a period, it's probably a query like '.tables'
 	) {
-		if ($query =~ m/^([a-zA-Z0-9\-_.]+)$/) { # sanity check
+		if ($query =~ m/^([a-zA-Z0-9\-_.\/]+)$/) { # sanity check
 			my $querySane = $1;
 			WriteLog('SqliteGetQueryTemplate: looking up query/' . $querySane);
 
 			if (GetTemplate('query/' . $querySane . '.sql')) {
-				$querySane = GetTemplate('query/' . $querySane . '.sql');
-				return $querySane;
+				my $queryTemplate = GetTemplate('query/' . $querySane . '.sql');
+				WriteLog('SqliteGetQueryTemplate: found with added sql: $querySane = ' . $querySane . '; $queryTemplate = ' . length($queryTemplate));
+				return $queryTemplate;
 			} elsif (GetTemplate('query/' . $querySane)) {
-				$querySane = GetTemplate('query/' . $querySane);
-				return $querySane;
+				my $queryTemplate = GetTemplate('query/' . $querySane);
+				WriteLog('SqliteGetQueryTemplate: found without added sql: $querySane = ' . $querySane . '; $queryTemplate = ' . length($queryTemplate));
+				return $queryTemplate;
 			} else {
-				WriteLog('SqliteGetQueryTemplate: warning: query has no spaces, no template found; $query = ' . $query);
+				WriteLog('SqliteGetQueryTemplate: warning: query has no spaces, and no template found; $query = ' . $query . '; caller = ' . join(',', caller));
 				return $querySane;
 			}
 		} else {
-			WriteLog('SqliteGetQueryTemplate: warning: query has no spaces, failed sanity check; $query = ' . $query);
+			WriteLog('SqliteGetQueryTemplate: warning: query has no spaces, failed sanity check; $query = ' . $query . '; caller = ' . join(',', caller));
 			return '';
 		}
 	} else {
