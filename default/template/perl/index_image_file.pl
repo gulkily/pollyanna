@@ -154,7 +154,6 @@ sub IndexImageFile { # $file ; indexes one image file into database and makes th
 		DBAddPageTouch('item', $fileHash);
 		DBAddPageTouch('stats');
 		DBAddPageTouch('rss');
-		DBAddPageTouch('index');
 		DBAddPageTouch('flush');
 		DBAddPageTouch('compost');
 		DBAddPageTouch('chain');

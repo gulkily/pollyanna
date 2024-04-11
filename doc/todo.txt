@@ -1,8 +1,3 @@
-#bug when running `hike pages`, this may appear:
-    Warning: did not recognize that page type: index
-
-===
-
 Generate zip files for each thread, probably on the fly with PHP, if possible
     it should happen on top-level item page
         find all thread children and include them
