@@ -932,6 +932,7 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 			if (index($filename, '.sql') == -1) {
 				$template = GetTemplate($filename . '.sql');
 				if ($template) {
+					WriteLog('GetTemplate: warning: sql template fallback for ' . $filename . '; caller = ' . join(',', caller));
 					$templateMemo{$filename} = $template;
 					return $template;
 				}
