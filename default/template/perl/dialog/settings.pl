@@ -30,8 +30,8 @@ sub GetSettingsDialog { # returns settings dialog
 	my $settingsWindow = GetDialogX($settingsTemplate, 'Settings');
 	$settingsWindow =
 		'<form action="/settings.html" id=frmSettings name=frmSettings>' .
-			GetDialogX($settingsTemplate, 'Settings') .
-			'</form>'
+		GetDialogX($settingsTemplate, 'Settings') .
+		'</form>'
 	;
 	#todo template this, and fill in the current page url
 
