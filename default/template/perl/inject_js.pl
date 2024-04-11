@@ -205,6 +205,9 @@ sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 					);
 				} else {
 					WriteLog('InjectJs: warning: $html does not contain <body; caller = ' . join(',', caller));
+					#todo
+					# this happens all the time when injecting js into partial html, such as titlebar
+					# perhaps there should be some hard-coded exceptions for this warning?
 				}
 			}
 		}
