@@ -7,6 +7,8 @@ use utf8;
 
 sub MakeZipFromItemList { # $zipName, \@refItems ; create a zip file from item list
 # sub MakeZip {
+# sub MakeZipFile {
+# @{$refItems} is an array of hash references, should have at least {'file_path'}
 	my $zipName = shift;
 	my $refItems = shift;
 	my @items = @{$refItems};
