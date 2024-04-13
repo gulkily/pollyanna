@@ -302,7 +302,7 @@ sub GetItemIndexLog { # $itemHash, $logType = index_log
 	my $logPath = $logType . '/' . $itemHash . $logSuffix;
 	my $log = GetCache($logPath);
 
-	WriteLog('GetItemIndexLog: $itemHash = ' . $itemHash . '; $logPath = ' . $logPath . '; $log is ' . ($log ? 'TRUE' : 'FALSE') . '; caller = ' . join(',', caller));
+	WriteLog('GetItemIndexLog: $itemHash = ' . $itemHash . '; $logType = ' . $logType . '; $logPath = ' . $logPath . '; $log is ' . ($log ? 'TRUE' : 'FALSE') . '; caller = ' . join(',', caller));
 
 	if ($log) {
 		$log = HtmlEscape($log);
@@ -333,6 +333,7 @@ sub GetItemIndexLog { # $itemHash, $logType = index_log
 } # GetItemIndexLog()
 
 sub GetItemPage { # %file ; returns html for individual item page. %file as parameter
+# sub GetThreadPage {
 # sub GetPageItem {
 	# %file {
 	#		file_hash = git's file hash
