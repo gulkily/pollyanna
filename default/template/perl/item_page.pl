@@ -72,6 +72,15 @@ sub GetHtmlToolboxes {
 		;
 
 		$htmlToolbox .=
+			'<a href="https://www.perplexity.ai/search?q=' .
+			$urlParam .
+			'"' .
+			'>' .
+			'Perplexity' .
+			'</a><br>' . "\n"
+		;
+
+		$htmlToolbox .=
 			'<a href="http://html.duckduckgo.com/html?q=' .
 			$urlParam .
 			'">' .
