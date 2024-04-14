@@ -43,3 +43,25 @@ echo 1 > config/setting/html/page_map_bottom
 echo 1 > config/setting/admin/js/openpgp_checked
 echo 1 > config/setting/admin/index/create_system_tags
 echo 1 > config/setting/html/item_template/heading_advanced
+
+echo 1 > config/setting/html/item_page_menu_bottom
+echo 1 > config/setting/html/item_page/toolbox_timestamps
+echo 1 > config/setting/html/item_page/include_notext_in_thread_list
+echo 1 > config/setting/html/item_page/toolbox_share
+echo 1 > config/setting/html/item_page/toolbox_publish
+echo 1 > config/setting/html/item_page/applied_labels
+echo 1 > config/setting/html/item_page/toolbox_search
+echo 1 > config/setting/html/item_page/replies_list
+echo 1 > config/setting/html/item_page/attributes_list
+echo 1 > config/setting/html/item_page/parse_log
+echo 1 > config/setting/html/item_page/toolbox_classify
+echo 1 > config/setting/html/item_page/toolbox_similar_timestamp
+echo 1 > config/setting/html/item_page/replies_listing_remove_tokens
+echo 1 > config/setting/html/item_page/toolbox_related
+echo 1 > config/setting/html/item_page/image_full_size_link
+echo 1 > config/setting/html/item_page/replies_listing
+echo 1 > config/setting/html/item_page/toolbox_chain_next_previous
+echo 1 > config/setting/html/item_page/thread_listing
+echo 1 > config/setting/html/item_page/replies_listing_no_titles
+echo 1 > config/setting/html/item_page/gpg_stderr
+echo 1 > config/setting/html/item_page/toolbox_hashes
