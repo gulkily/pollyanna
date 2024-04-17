@@ -2261,6 +2261,7 @@ sub DBGetItemList { # \%params;  get list of items from database. takes referenc
 } # DBGetItemList()
 
 sub SqliteGetColumnArray { # $query, $columnName ; gets column as array
+# sub GetColumn {
 # sub SqliteGetArray {
 	my $query = shift;
 	my $columnName = shift;
