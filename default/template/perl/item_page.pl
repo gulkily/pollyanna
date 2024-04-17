@@ -522,7 +522,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 
 		my $fileHash = $file{file_hash};
 
-		my $threadListingDialog = GetThreadListingDialog($fileHash);
+		my $threadListingDialog = GetThreadListingDialog($fileHash); # 'Thread'
 		#$threadListingDialog .= '<span class=advanced>' . $threadListingDialog . '</span>';
 		if ($threadListingDialog) {
 			$txtIndex .= $threadListingDialog;
