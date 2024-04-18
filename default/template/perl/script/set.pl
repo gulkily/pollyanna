@@ -151,7 +151,7 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 		foreach my $settingKey (@settingArray) {
 			if ($settingKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 				my $settingKeySanitized = $1;
-				if (-f $settingKeySanitized) {
+				if (is_file($settingKeySanitized)) {
 					print "$settingKey = ";
 					my $settingValue = `cat $settingKeySanitized`;
 					chomp $settingValue;
