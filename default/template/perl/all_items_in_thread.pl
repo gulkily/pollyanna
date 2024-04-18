@@ -6,12 +6,20 @@ use 5.010;
 
 sub DBGetAllItemsInThread {
 	my $itemHash = shift;
+	my $recurseLevel = shift;
+
+	if (!$recurseLevel) {
+		$recurseLevel = 0;
+	}
+
+	#todo sanity
 
 	#my $query = "SELECT item_hash FROM item_parent WHERE parent_hash = ? OR item_hash = ?";
 	my $query = "
 		SELECT
 		file_hash,
-		file_path
+		file_path,
+		author_key
 		FROM
 		item_parent
 		JOIN item_flat ON(item_parent.item_hash = item_flat.file_hash)
@@ -19,7 +27,8 @@ sub DBGetAllItemsInThread {
 		UNION ALL
 		SELECT
 		file_hash,
-		file_path
+		file_path,
+		author_key
 		FROM
 		item_flat
 		WHERE
@@ -42,7 +51,7 @@ sub DBGetAllItemsInThread {
 		$return{$key} = \%row;
 
 		if ($key ne $itemHash) {
-			my $subR = DBGetAllItemsInThread($key);
+			my $subR = DBGetAllItemsInThread($key, ($recurseLevel + 1));
 			my %sub = %{$subR};
 
 			WriteLog('DBGetAllItemsInThread: $subR = ' . scalar(keys %{$subR}));
@@ -55,7 +64,27 @@ sub DBGetAllItemsInThread {
 		}
 	}
 
+	#todo
+	# only if $recurseLevel == 0:
+	# collect list of authors and get each author's public key or self-id
+	# select * from item_flat where author_key = ? and (labels_list like 'pubkey' or labels_list like 'my_name_is'
+	# include in return
+
 	return \%return;
+}
+
+sub DBGetAllItemsInThreadAsArray {
+	my $itemHash = shift;
+
+	my $itemsRef = DBGetAllItemsInThread($itemHash);
+	my %items = %{$itemsRef};
+
+	my @ret;
+	for my $key (keys %items) {
+		push @ret, $items{$key};
+	}
+
+	return @ret;
 }
 
 1;
