@@ -532,6 +532,15 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		}
 	}
 
+	if (GetConfig('setting/zip/thread')) {
+		my @itemsInThread = DBGetAllItemsInThreadAsArray($fileHash);
+		# make zip file of all items in thread
+		my $zipFile = "thread_" . $fileHash . ".zip";
+		require_once('make_zip.pl');
+		MakeZipFromItemList($zipFile, \@itemsInThread);
+		$txtIndex .= GetDialogX("<a href='/$zipFile'>$zipFile</a>", 'Thread');
+	}
+
 	if (index($file{'labels_list'}, 'pubkey') != -1) {
 		my $pubKeyFingerprint = $file{'author_key'};
 		my $pubKeyHash = $file{'file_hash'};
