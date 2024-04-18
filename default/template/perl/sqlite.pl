@@ -759,6 +759,8 @@ sub DBGetItemReplies { # Returns replies for item (actually returns all child it
 	return DBGetItemList(\%queryParams);
 } # DBGetItemReplies()
 
+require_once('all_items_in_thread.pl');
+
 sub SqliteEscape { # Escapes supplied text for use in sqlite query
 # Just changes ' to ''
 	my $text = shift;
