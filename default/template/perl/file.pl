@@ -403,4 +403,10 @@ sub PutFileMessage {
 	return PutFile(GetFileMessageCachePath($fileHash), $message);
 } # PutFileMessage()
 
+sub is_file {
+    my ($filename) = @_;
+
+    return -f $filename;
+} # is_file()
+
 1;
