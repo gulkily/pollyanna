@@ -310,7 +310,6 @@ sub OrganizeFile { # $file ; renames file based on hash of its contents
 	return $file;
 } # OrganizeFile()
 
-
 sub GetFileMessage { # $fileHash ; get file message based on hash
 # returns the post-processing and detokened message by file hash
 # reads it from cache
@@ -321,6 +320,7 @@ sub GetFileMessage { # $fileHash ; get file message based on hash
 # sub GetItemBody {
 # sub GetItemMessage {
 # sub GetFileBody {
+# sub GetFileContents {
 	my $fileHash = shift;
 	if (!$fileHash) {
 		return ''; #todo
@@ -376,7 +376,6 @@ sub GetFileMessage { # $fileHash ; get file message based on hash
 		}
 	}
 } # GetFileMessage()
-
 
 #   R        W           R
 # txt --> gpgpg --> cache/message_gpg
