@@ -50,9 +50,10 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 	my $argumentKeySanitized = $1;
 
 	my $setting = `find config/setting -type f | grep \/$argumentKeySanitized\$`; # look for one which matches at both beginning and end
-	if (!$setting) {
-		$setting = `find config/setting -type f | grep $argumentKeySanitized\$`; # look for one which matches at the end
-	}
+	# this should be prioritized, but it should not exclude the other options #todo
+	#if (!$setting) {
+	#	$setting = `find config/setting -type f | grep $argumentKeySanitized\$`; # look for one which matches at the end
+	#}
 	if (!$setting) {
 		$setting = `find config/setting -type f | grep $argumentKeySanitized`; # if not, do general search
 	}
