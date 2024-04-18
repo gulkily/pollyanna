@@ -161,12 +161,16 @@ if ($argumentKey && $argumentKey =~ m/^([0-9a-zA-Z_\/-]+)$/) {
 					}
 					print $settingValue;
 					print "\n";
-				}
-			}
-		}
+				} # if (is_file($settingKeySanitized))
+			} # if ($settingKey =~ m/^([0-9a-zA-Z_\/-]+)$/)
+		} # foreach my $settingKey (@settingArray)
 	}
 } else {
-	#print "ay\n";
+	print "use the `hike set` command to change settings\n";
+	print "hike set <key>\n";
+	print "example: hike set theme\n";
+	print "hike set <key> <value>\n";
+	print "example: hike set theme chicago\n";
 }
 
 1;
