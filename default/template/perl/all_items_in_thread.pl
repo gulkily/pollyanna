@@ -76,29 +76,31 @@ sub DBGetAllItemsInThread { # $itemHash, $recurseLevel = 0
         my @authors = map { $_->{'author_key'} } @result;
 
         for my $author (@authors) {
-        	WriteLog('DBGetAllItemsInThread: author = ' . $author);
+        	WriteLog('DBGetAllItemsInThread: author = ' . ($author ? $author : 'undef'));
 
-            # Prepare and execute the query
-            my $query = "
-                SELECT file_hash, file_path, author_key, labels_list
-                FROM item_flat
-                WHERE author_key = ? AND (labels_list LIKE '%pubkey%' OR labels_list LIKE '%my_name_is%')
-            ";
-            my @author_info = SqliteQueryHashRef($query, $author);
+			if ($author) {
+				# Prepare and execute the query
+				my $query = "
+					SELECT file_hash, file_path, author_key, labels_list
+					FROM item_flat
+					WHERE author_key = ? AND (labels_list LIKE '%pubkey%' OR labels_list LIKE '%my_name_is%')
+				";
+				my @author_info = SqliteQueryHashRef($query, $author);
 
-			shift @author_info; #todo sanity check column names
+				shift @author_info; #todo sanity check column names
 
-            # Include author keys
-            for my $info (@author_info) {
-            	WriteLog('DBGetAllItemsInThread: info = ' . $info);
-                my $key = $info->{'file_hash'};
-                $return{$key} = $info;
-            }
+				# Include author keys
+				for my $info (@author_info) {
+					WriteLog('DBGetAllItemsInThread: info = ' . $info);
+					my $key = $info->{'file_hash'};
+					$return{$key} = $info;
+				}
+			}
         }
     }
 
 	return \%return;
-}
+} # DBGetAllItemsInThread()
 
 sub DBGetAllItemsInThreadAsArray { # $itemHash
 	my $itemHash = shift;
