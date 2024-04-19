@@ -533,12 +533,20 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	}
 
 	if (GetConfig('setting/zip/thread')) {
-		my @itemsInThread = DBGetAllItemsInThreadAsArray($fileHash);
-		# make zip file of all items in thread
-		my $zipFile = "thread_" . substr($fileHash, 0, 8) . ".zip";
-		require_once('make_zip.pl');
-		MakeZipFromItemList($zipFile, \@itemsInThread);
-		$txtIndex .= GetDialogX("<a href='/$zipFile'>$zipFile</a>", 'Thread');
+		#todo should only happen if thread has no parents?
+		my @hasParents = DBGetItemParents($fileHash);
+		WriteLog('GetItemPage: zip/thread: @hasParents = ' . scalar(@hasParents));
+		if (!scalar(@hasParents)) {
+			my @itemsInThread = DBGetAllItemsInThreadAsArray($fileHash);
+			# make zip file of all items in thread
+			my $zipFile = "thread_" . substr($fileHash, 0, 8) . ".zip";
+			require_once('make_zip.pl');
+			MakeZipFromItemList($zipFile, \@itemsInThread);
+			my $HTMLDIR = GetDir('html');
+			my $zipSize = -s "$HTMLDIR/$zipFile"; #todo GetFileSize()
+			my $fileSize = GetFileSizeWidget($zipSize);
+			$txtIndex .= GetDialogX("<fieldset><a href='/$zipFile'>$zipFile</a> $fileSize</fieldset>", 'Thread');
+		}
 	}
 
 	if (index($file{'labels_list'}, 'pubkey') != -1) {
