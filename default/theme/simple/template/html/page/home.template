@@ -7,10 +7,10 @@
     <link rel="alternate" title="RSS" href="/rss.xml" type="application/rss+xml"></link>
     <title>Welcome</title>
     <style type="text/css">
-<!--
-$styleSheet
--->
-</style>
+	<!--
+	$styleSheet
+	-->
+	</style>
 </head>
 <body>
 
