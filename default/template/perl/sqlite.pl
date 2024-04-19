@@ -677,23 +677,31 @@ sub DBGetItemCount { # Returns item count.
 	return $itemCount;
 } # DBGetItemCount()
 
-sub DBGetItemParents {# Returns all item's parents
+sub DBGetItemParents { # $itemHash ; Returns all item's parents
 # $itemHash = item's hash/identifier
 # Sets up parameters and calls DBGetItemList
 	my $itemHash = shift;
 
-	if (!IsItem($itemHash)) {
-		WriteLog('DBGetItemParents called with invalid parameter! returning');
+	if ($itemHash = IsItem($itemHash)) {
+		# sanity check passed
+	} else {
+		WriteLog('DBGetItemParents: warning: $itemHash failed sanity check; caller = ' . join(',', caller));
 		return '';
 	}
+
+	WriteLog('DBGetItemParents: $itemHash = ' . $itemHash . '; caller = ' . join(',', caller));
 
 	$itemHash = SqliteEscape($itemHash);
 
 	my %queryParams;
-	$queryParams{'where_clause'} = "WHERE file_hash IN(SELECT item_hash FROM item_child WHERE item_hash = '$itemHash')";
-	$queryParams{'order_clause'} = "ORDER BY add_timestamp"; #todo this should be by timestamp
+	$queryParams{'where_clause'} = "WHERE file_hash IN(SELECT item_hash FROM item_parent WHERE item_hash = '$itemHash')";
+	$queryParams{'order_clause'} = "ORDER BY add_timestamp";
 
-	return DBGetItemList(\%queryParams);
+	my @itemList = DBGetItemList(\%queryParams);
+
+	WriteLog('DBGetItemParents: @itemList = ' . scalar(@itemList));
+
+	return @itemList;
 } # DBGetItemParents()
 
 sub DBGetTopLevelItem { # $item ; traverse parents until top-level item is reached
