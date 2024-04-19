@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use 5.010;
 
-sub DBGetAllItemsInThread {
+sub DBGetAllItemsInThread { # $itemHash, $recurseLevel = 0
 	my $itemHash = shift;
 	my $recurseLevel = shift;
 
@@ -73,7 +73,7 @@ sub DBGetAllItemsInThread {
 	return \%return;
 }
 
-sub DBGetAllItemsInThreadAsArray {
+sub DBGetAllItemsInThreadAsArray { # $itemHash
 	my $itemHash = shift;
 
 	my $itemsRef = DBGetAllItemsInThread($itemHash);
