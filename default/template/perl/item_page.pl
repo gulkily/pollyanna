@@ -535,7 +535,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	if (GetConfig('setting/zip/thread')) {
 		my @itemsInThread = DBGetAllItemsInThreadAsArray($fileHash);
 		# make zip file of all items in thread
-		my $zipFile = "thread_" . $fileHash . ".zip";
+		my $zipFile = "thread_" . substr($fileHash, 0, 8) . ".zip";
 		require_once('make_zip.pl');
 		MakeZipFromItemList($zipFile, \@itemsInThread);
 		$txtIndex .= GetDialogX("<a href='/$zipFile'>$zipFile</a>", 'Thread');
