@@ -1,5 +1,7 @@
 #!/usr/bin/perl -T
 
+# test that DBGetAllItemsInThread() works
+
 use strict;
 use warnings;
 use 5.010;
