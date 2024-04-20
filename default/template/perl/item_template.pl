@@ -282,8 +282,8 @@ sub GetItemTemplateFromHash { # $ hash
 } # GetItemTemplateFromHash()
 
 sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALOG FRAME
-# for just the message formatter,
-# sub GetItemDialog {
+	# for just the message formatter,
+	# sub GetItemDialog {
 	WriteLog('GetItemTemplate: caller = ' . join(',', caller));
 
 	# returns HTML for outputting one item WITH DIALOG FRAME
