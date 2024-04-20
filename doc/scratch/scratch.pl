@@ -1,3 +1,22 @@
+if ($file{'item_type'} eq 'txt') {
+	# item label has firebase tag
+	if ($file{'labels_list'} && index($file{'labels_list'}, 'firebase') != -1) {
+		#my $imageUrl = trim(GetFile($file{'file_path'}));
+		my $imageUrl = trim(DBGetItemAttribute($file{'file_hash'}, 'https'));
+		$itemTemplateBody = '<img src="' . $imageUrl . '" width="200">'; #todo #fixme #hack
+	}
+	else {
+
+
+
+		# add special token for firebase urls
+					if (index($httpMatch, 'firebasestorage.googleapis.com') != -1) {
+						DBAddLabel($fileHash, $addedTime, 'firebase');
+						#DBAddLabel($fileHash, $addedTime, 'image');
+					}
+
+
+
 elsif (
 	$fieldName eq 'chain_hash'
 ) {
