@@ -5,7 +5,7 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub GetItemHtmlLink { # $hash, [link caption], [#anchor] ; returns <a href=...
+sub GetItemHtmlLink { # $hash, [link caption], [#anchor], [\%flags] ; returns <a href=...
 # sub GetItemLink {
 # sub GetItemPermalink {
 # sub GetLink {
