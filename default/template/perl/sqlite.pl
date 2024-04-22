@@ -2243,6 +2243,7 @@ sub DBGetItemListQuery {
 } # DBGetItemListQuery()
 
 sub DBGetItemList { # \%params;  get list of items from database. takes reference to hash of parameters
+# sub DBGetItemsList {
 	my $paramHashRef = shift;
 	my %params = %{$paramHashRef};
 
