@@ -466,7 +466,7 @@ function DraggingCascade () {
 // function CascadeDialogs () {
 // function CascadeAll () {
 	//alert('DEBUG: DraggingCascade()');
-	
+
 	var titlebarHeight = 0;
 
 	var curTop = 55;
@@ -521,6 +521,66 @@ function DraggingCascade () {
 		}
 	}
 } // DraggingCascade()
+
+function TileDialogs () {
+// by ChatGPT
+    var pageWidth = document.documentElement.clientWidth; // Fixed width of the page
+    var placedDialogs = [];
+    var spots = [{ x: 5, y: 5 }];
+
+    var elements = document.getElementsByClassName('dialog');
+
+    Array.from(elements).forEach(function(dialog) {
+        if (dialog.style.display === 'none' ||
+            dialog.parentElement.style.display === 'none' ||
+            dialog.parentElement.parentElement.style.display === 'none') {
+            return; // Skip hidden dialogs
+        }
+
+        var dialogWidth = dialog.offsetWidth;
+        var dialogHeight = dialog.offsetHeight;
+
+        var bestSpotIndex = -1;
+        var bestFit = Infinity;
+
+        // Evaluate all spots to find the best fit for the current dialog
+        for (var i = 0; i < spots.length; i++) {
+            var spot = spots[i];
+
+            // Check if dialog fits within the page width at this spot
+            if (spot.x + dialogWidth <= pageWidth + 5) {
+                var bottomEdge = spot.y + dialogHeight;
+                var fitScore = 0;
+
+                // Calculate fitScore by checking how much space is left below and to the right
+                if (bottomEdge > pageWidth) {
+                    fitScore += (bottomEdge - pageWidth) * dialogWidth;
+                }
+
+                // Prefer spots that minimize the fit score
+                if (fitScore < bestFit) {
+                    bestFit = fitScore;
+                    bestSpotIndex = i;
+                }
+            }
+        }
+
+        // Place the dialog at the best spot
+        if (bestSpotIndex !== -1) {
+            var chosenSpot = spots[bestSpotIndex];
+            dialog.style.top = chosenSpot.y + 'px';
+            dialog.style.left = chosenSpot.x + 'px';
+            dialog.style.zIndex = 100; // Arbitrary z-index
+
+            // Update spots - add new spots to the right and below the placed dialog
+            spots.push({ x: chosenSpot.x + dialogWidth + 5, y: chosenSpot.y });
+            spots.push({ x: chosenSpot.x, y: chosenSpot.y + dialogHeight + 5 });
+
+            // Remove the spot that has been used
+            spots.splice(bestSpotIndex, 1);
+        }
+    });
+} // TileDialogs()
 
 function DraggingInitDialog (el, doPosition) {
 // function DraggingRestoreDialogPosition () {
