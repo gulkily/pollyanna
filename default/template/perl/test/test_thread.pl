@@ -8,20 +8,36 @@ use 5.010;
 
 require('./utils.pl');
 
-my $item = shift;
-if ($item = IsItem($item)) {
-	# sanity check passed
-} else {
-	print("Need valid item, example: 17c2a8e8745296ee216913ff8dc42f205fa3daeb\n");
-	return;
-}
+my $HTMLDIR = GetDir('html');
+my $TXTDIR = GetDir('txt');
+
+require_once('index_file.pl');
+
+PutFile("$TXTDIR/test.txt", 'test');
+my $fileHash = IndexFile("$TXTDIR/test.txt");
+my $item = $fileHash;
+
+my $reply = ">>$fileHash\ntest1";
+print("\n\n\n" . $reply);
+PutFile("$TXTDIR/test2.txt", $reply);
+my $replyHash = IndexFile("$TXTDIR/test2.txt");
+
+my $reply2 = ">>$replyHash\ntest2";
+print("\n\n\n" . $reply2);
+PutFile("$TXTDIR/test3.txt", $reply2);
+my $reply2Hash = IndexFile("$TXTDIR/test3.txt");
+
+print("\n");
+
+print('$fileHash = ' . $fileHash . "\n");
+
 
 my $resultRef = DBGetAllItemsInThread($item);
 my %result = %{$resultRef};
 
 print("\n");
 
-print(length(%result));
+print(scalar(keys %result));
 
 print("\n");
 
