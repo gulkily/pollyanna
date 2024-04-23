@@ -1,33 +1,23 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="alternate" title="RSS" href="/rss.xml" type="application/rss+xml"></link>
-    <title>afterschool</title>
-    <style type="text/css">
-<!--
-$styleSheet
--->
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idea Submission</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<h1>afterschool</h1>
-
-<div class=item>
-    <form action="/post.html">
-        Share something you want others to know:
-        <br>
-        <input type="hidden" name="vote_return_to" value="/welcome.html">
-        <textarea name="comment" rows="5" cols="30" placeholder="Write here"></textarea>
-        <br>
-        <input type="submit" value="Send">
-    </form>
-</div>
-
-<div id="item_flat_placeholder"></div>
-
+    <header>
+        <h1>Idea Board</h1>
+    </header>
+    <main>
+        <form id="ideaForm" action="/post.html" method="POST">
+            <input type="text" id="ideaInput" name="comment" placeholder="Type your idea here..." required />
+            <button type="submit">Submit</button>
+        </form>
+        <div id="ideasList"></div>
+    </main>
+    <script src="scripts.js"></script>
 </body>
 </html>
+

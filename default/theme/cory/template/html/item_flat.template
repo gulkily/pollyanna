@@ -1,4 +1,4 @@
-<div class=item>
-    <span class=text></span>
-    <a>#</a>
+<div class="idea-card">
+    <div class="idea-content"></div>
+    <div class="idea-time"></div>
 </div>
