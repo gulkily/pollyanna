@@ -1,5 +1,6 @@
 SELECT
 	'' AS tagset_compost,
+	'' AS cart,
 	file_hash,
 	item_title,
 	labels_list,
