@@ -1,4 +1,158 @@
 
+function TileDialogs4() {
+    var pageWidth = document.documentElement.clientWidth; // Fixed width of the page
+    var placedDialogs = [];
+
+    var elements = document.getElementsByClassName('dialog');
+
+    // Function to check if a dialog overlaps with any already placed dialog
+    function doesOverlap(newDialog, newX, newY, newWidth, newHeight) {
+        return placedDialogs.some(dialog => {
+            return !(newX + newWidth + 5 <= dialog.x ||
+                     newX >= dialog.x + dialog.width + 5 ||
+                     newY + newHeight + 5 <= dialog.y ||
+                     newY >= dialog.y + dialog.height + 5);
+        });
+    }
+
+    // Function to find a place for the dialog
+    function findSpotForDialog(dialogWidth, dialogHeight) {
+        for (let y = 5; y < document.documentElement.clientHeight; y += 5) {
+            for (let x = 5; x <= pageWidth - dialogWidth; x += 5) {
+                if (!doesOverlap(dialog, x, y, dialogWidth, dialogHeight)) {
+                    return { x: x, y: y };
+                }
+            }
+        }
+        return null; // If no spot is found
+    }
+
+    Array.from(elements).forEach(function(dialog) {
+        if (dialog.style.display === 'none' ||
+            dialog.parentElement.style.display === 'none' ||
+            dialog.parentElement.parentElement.style.display === 'none') {
+            return; // Skip hidden dialogs
+        }
+
+        var dialogWidth = dialog.offsetWidth;
+        var dialogHeight = dialog.offsetHeight;
+
+        // Find a spot for the dialog
+        var spot = findSpotForDialog(dialogWidth, dialogHeight);
+        if (spot) {
+            // Place the dialog
+            dialog.style.top = spot.y + 'px';
+            dialog.style.left = spot.x + 'px';
+            dialog.style.zIndex = 100; // Arbitrary z-index
+
+            // Save the placement for future overlap checks
+            placedDialogs.push({
+                x: spot.x,
+                y: spot.y,
+                width: dialogWidth,
+                height: dialogHeight
+            });
+        }
+    });
+}
+
+
+
+function TileDialogs() {
+    var pageWidth = document.documentElement.clientWidth; // Fixed width of the page
+    var curTop = 5;
+    var curLeft = 5;
+    var rowHeight = 0;
+
+    var elements = document.getElementsByClassName('dialog');
+    var positionedDialogs = [];
+
+    // First, sort elements by height to place larger ones first (if needed)
+    var sortedElements = Array.from(elements).sort((a, b) => b.offsetHeight - a.offsetHeight);
+
+    sortedElements.forEach(function(dialog) {
+        if (dialog.style.display === 'none' ||
+            dialog.parentElement.style.display === 'none' ||
+            dialog.parentElement.parentElement.style.display === 'none') {
+            return; // Skip hidden dialogs
+        }
+
+        var dialogWidth = dialog.offsetWidth;
+        var dialogHeight = dialog.offsetHeight;
+
+        // Check if the dialog fits in the current row, or if a new row is needed
+        if (curLeft + dialogWidth > pageWidth) {
+            // Start a new row
+            curTop += rowHeight + 5; // Add a small margin between rows
+            curLeft = 5; // Reset left position
+            rowHeight = 0; // Reset row height
+        }
+
+        // Place the dialog
+        dialog.style.top = curTop + 'px';
+        dialog.style.left = curLeft + 'px';
+        dialog.style.zIndex = 100; // Arbitrary z-index
+
+        // Update positions for the next dialog
+        curLeft += dialogWidth + 5; // Add a small margin between dialogs
+        rowHeight = Math.max(rowHeight, dialogHeight); // Update the current row height
+
+        positionedDialogs.push(dialog);
+    });
+
+    // Adjust for the last row height
+    curTop += rowHeight;
+}
+
+function TileDialogs2() {
+    var pageWidth = document.documentElement.clientWidth; // Fixed width of the page
+    var rows = [];
+
+    var elements = document.getElementsByClassName('dialog');
+
+    // Iterate over all dialog elements
+    Array.from(elements).forEach(function(dialog) {
+        if (dialog.style.display === 'none' ||
+            dialog.parentElement.style.display === 'none' ||
+            dialog.parentElement.parentElement.style.display === 'none') {
+            return; // Skip hidden dialogs
+        }
+
+        var dialogWidth = dialog.offsetWidth;
+        var dialogHeight = dialog.offsetHeight;
+        var placed = false;
+
+        // Try to place the dialog in existing rows
+        for (var i = 0; i < rows.length && !placed; i++) {
+            if (rows[i].remainingWidth >= dialogWidth) { // Check if it fits in the remaining width
+                dialog.style.top = rows[i].top + 'px';
+                dialog.style.left = (pageWidth - rows[i].remainingWidth) + 'px';
+                dialog.style.zIndex = 100; // Arbitrary z-index
+
+                // Update row information
+                rows[i].remainingWidth -= dialogWidth + 5; // Update remaining width
+                rows[i].height = Math.max(rows[i].height, dialogHeight); // Possibly update the row height
+                placed = true;
+            }
+        }
+
+        // If it wasn't placed, create a new row
+        if (!placed) {
+            var newTop = rows.length > 0 ? rows[rows.length - 1].top + rows[rows.length - 1].height + 5 : 5;
+            dialog.style.top = newTop + 'px';
+            dialog.style.left = '5px';
+            dialog.style.zIndex = 100; // Arbitrary z-index
+
+            // Create new row
+            rows.push({
+                top: newTop,
+                remainingWidth: pageWidth - dialogWidth - 5,
+                height: dialogHeight
+            });
+        }
+    });
+}
+
 // below is from crypto2.js
 					//	if (window.PubKeyShare) {
 					//		//alert('DEBUG: MakeKey: (window.PubKeyShare) exists. calling');
