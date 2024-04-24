@@ -53,6 +53,6 @@ sub GetWelcomePage {
 	$html = str_replace('<div id="ideasList"></div>', $itemsHtml, $html);
 
 	return $html;
-}
+} # GetWelcomePage()
 
 1;
