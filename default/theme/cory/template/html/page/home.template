@@ -8,7 +8,9 @@
 </head>
 <body>
     <header>
-        <h1>Idea Board</h1>
+        <div class="header-content">
+            <h1>Idea Board</h1>
+        </div>
     </header>
     <main>
         <form id="ideaForm" action="/post.html" method="POST">
