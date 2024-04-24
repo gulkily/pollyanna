@@ -14,8 +14,9 @@ sub GetDonatePage {
 		GetPageFooter('donate')
 	;
 
-	#todo js inject
-	
+	if (GetConfig('setting/admin/js/enable')) {
+		$html = InjectJs($html, qw(settings avatar profile timestamp pingback utils clock));
+	}
 
 	return $html;
 } # GetDonatePage()
