@@ -22,7 +22,7 @@ sub GetWelcomePage {
 	if (file_exists("$IMAGEDIR/spiritual_computing_combined.pdf")) {
 		$html = str_replace('<a>Hacker\'s Guide to Spiritual Computing</a>', '<a href="/image/spiritual_computing_combined.pdf">Hacker\'s Guide to Spiritual Computing</a>', $html);
 	}
-	if (file_exists("$IMAGEDIR/whitepaper-pollyanna.pdf.pdf")) {
+	if (file_exists("$IMAGEDIR/whitepaper-pollyanna.pdf")) {
 		$html = str_replace('<a>Pollyanna whitepaper</a>', '<a href="/image/whitepaper-pollyanna.pdf">Pollyanna whitepaper</a>', $html);
 	}
 
