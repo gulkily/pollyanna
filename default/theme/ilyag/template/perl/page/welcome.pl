@@ -16,6 +16,9 @@ sub GetWelcomePage {
 	if (file_exists("$IMAGEDIR/three_peppers.pdf")) {
 		$html = str_replace('<a>Three Peppers</a>', '<a href="/image/three_peppers.pdf">Three Peppers</a>', $html);
 	}
+	if (file_exists("$IMAGEDIR/Joey.pdf")) {
+		$html = str_replace('<a>Joey</a>', '<a href="/image/Joey.pdf">Joey</a>', $html);
+	}
 
 	if (GetConfig('admin/image/enable')) {
 		my $image = SqliteGetValue("SELECT file_hash FROM item_flat WHERE item_type = 'image' AND labels_list LIKE '%,welcome,%' AND item_score > 0 ORDER BY RANDOM() LIMIT 1");
