@@ -42,6 +42,9 @@ sub GetWelcomePage {
 
 		my $itemTimestampWidget = GetTimestampWidget($item->{'add_timestamp'});
 
+		#my $itemUrl = '/' . GetItemUrl($item->{'file_hash'});
+		#$itemHtml = AddAttributeToTag($itemHtml, 'a', 'href', $itemUrl);
+
 		my %linkFlags;
 		$linkFlags{'do_not_escape_html_characters'} = 1;
 		my $itemLink = GetItemHtmlLink($item->{'file_hash'}, $itemTimestampWidget, '', \%linkFlags);
