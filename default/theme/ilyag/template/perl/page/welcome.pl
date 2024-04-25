@@ -19,6 +19,9 @@ sub GetWelcomePage {
 	if (file_exists("$IMAGEDIR/Joey.pdf")) {
 		$html = str_replace('<a>Joey</a>', '<a href="/image/Joey.pdf">Joey</a>', $html);
 	}
+	if (file_exists("$IMAGEDIR/spiritual_computing_combined.pdf")) {
+		$html = str_replace('<a>Hacker\'s Guide to Spiritual Computing</a>', '<a href="/image/spiritual_computing_combined.pdf">Hacker\'s Guide to Spiritual Computing</a>', $html);
+	}
 
 	if (GetConfig('admin/image/enable')) {
 		my $image = SqliteGetValue("SELECT file_hash FROM item_flat WHERE item_type = 'image' AND labels_list LIKE '%,welcome,%' AND item_score > 0 ORDER BY RANDOM() LIMIT 1");
