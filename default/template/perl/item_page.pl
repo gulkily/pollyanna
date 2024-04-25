@@ -269,6 +269,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	my @result = SqliteQueryHashRef('item_url', $fileHash);
 	#todo move to default/query
 	if (scalar(@result) > 1) { # urls
+		# links toolbox
 		my $queryText = SqliteGetNormalizedQueryString('item_url', $fileHash);
 		my %flags;
 		$flags{'no_heading'} = 1;
