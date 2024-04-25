@@ -13,8 +13,8 @@ sub GetWelcomePage {
 	if (file_exists("$IMAGEDIR/gaining_advantage_orig.pdf")) {
 		$html = str_replace('<a>Gaining Advantage in Information Society</a>', '<a href="/image/gaining_advantage_orig.pdf">Gaining Advantage in Information Society</a>', $html);
 	}
-	else {
-		# it's ok
+	if (file_exists("$IMAGEDIR/three_peppers.pdf")) {
+		$html = str_replace('<a>Three Peppers</a>', '<a href="/image/three_peppers.pdf">Three Peppers</a>', $html);
 	}
 
 	if (GetConfig('admin/image/enable')) {
