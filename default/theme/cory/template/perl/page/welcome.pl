@@ -22,7 +22,7 @@ sub GetWelcomePage {
 	my $html = GetTemplate('html/page/home.template'); # template for home page
 
 	my %queryParams;
-	$queryParams{'where_clause'} = "WHERE labels_list LIKE '%ideas%'";
+	#$queryParams{'where_clause'} = "WHERE labels_list LIKE '%ideas%'";
 	$queryParams{'order_clause'} = 'ORDER BY add_timestamp DESC';
 
 	my @items = DBGetItemList(\%queryParams);
