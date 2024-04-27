@@ -487,9 +487,13 @@ if (isset($comment) && $comment) {
 				}
 			}
 			#todo this could use more sanity and cleanness
+			$footerParameters = trim($footerParameters);
 			if ($footerParameters && index($comment, "\n-- \n") == -1) {
+				WriteLog('post.php: $footerParameters is TRUE, adding to item');
 				$comment = $comment . "\n-- \n";
 				$comment = $comment . $footerParameters;
+			} else {
+				WriteLog('post.php: $footerParameters is FALSE, not adding to item');
 			}
 		}
 
