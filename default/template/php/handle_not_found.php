@@ -259,6 +259,7 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 				'stats',
 				'settings',
 				'help',
+				'donate',
 				'image',
 				'url',
 				'search',
