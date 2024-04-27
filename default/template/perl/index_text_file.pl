@@ -1046,8 +1046,16 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 							} # has parents
 						} # #admin #approve and other permissioned tags
 						else { # non-permissioned hashtags
+							#todo this should work differently for #notext and #hastext items
+							# #notext items should apply hashtags to parent
+							# #hastext items should apply hashtags to self
+							# perhaps there should be some other distinction?
+							# example: if the hashtags are on the first line of the message, they apply to the parent
+
 							WriteLog('IndexTextFile: non-permissioned hashtag');
 							if ($tokenFound{'param'} =~ /^[0-9a-zA-Z_]+$/) { #todo actual hashtag format
+								#todo this should be a config setting?
+								#todo should allow more than just latin/ascii
 								WriteLog('IndexTextFile: hashtag sanity check passed');
 								my $hashTag = $tokenFound{'param'};
 								if (scalar(@itemParents)) { # item has parents to apply tag to
