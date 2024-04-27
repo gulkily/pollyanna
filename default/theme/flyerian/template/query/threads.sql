@@ -1,5 +1,6 @@
 SELECT
 	item_flat.item_title AS item_title,
+	'' AS tagset_threads,
 	item_flat.child_count AS child_count,
 	item_flat.item_score AS item_score,
 	item_flat.file_hash AS file_hash,
