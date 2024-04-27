@@ -126,7 +126,7 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 				if ($menuItem eq 'hackathon') {
 					$boolExtUrl = 1;
 					$menuItemUrl = 'https://mit-bitcoin-expo-hackathon.devfolio.co/';
-					#					$menuItemUrl = 'https://forms.gle/JUvaggfVCNS8P54G7';
+					# $menuItemUrl = 'https://forms.gle/JUvaggfVCNS8P54G7';
 				}
 
 				if ($menuItem eq 'mailinglist') {
