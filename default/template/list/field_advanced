@@ -24,5 +24,6 @@ tagset_guest
 tagset_url
 tagset_pubkey
 tagset_flag
+tagset_threads
 this_row
 url
