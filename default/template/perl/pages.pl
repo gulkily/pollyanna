@@ -1789,7 +1789,7 @@ while (my $arg1 = shift @foundArgs) {
 				my @validDialogs = qw(settings float access upload data search profile);
 				my @needRequire = qw(profile upload);
 				my @queryDialogs = qw(read image url chain new tags scores active authors people threads labels topics judge calendar random);
-				my @simpleDialogs = qw(help );
+				my @simpleDialogs = qw(help donate );
 
 				if (0) { }
 				elsif (in_array($makeDialogArg, @validDialogs)) {
@@ -1871,6 +1871,11 @@ while (my $arg1 = shift @foundArgs) {
 					my $dialog = GetSimpleDialog('help');
 					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/help.html', $dialog);
+				}
+				elsif ($makeDialogArg eq 'donate') {
+					my $dialog = GetSimpleDialog('donate');
+					WriteMessage("-D $makeDialogArg\n");
+					PutHtmlFile('dialog/donate.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'session') {
 					require_once('page/profile.pl');
