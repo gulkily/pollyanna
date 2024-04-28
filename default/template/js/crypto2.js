@@ -218,6 +218,7 @@ function getPrivateKey () { // get private key from local storage
 }
 
 function getPublicKey () { // get public key from local storage
+// function getPubKey () {
 // returns null otherwise
 
 	//alert('DEBUG: getPublicKey() begins');
