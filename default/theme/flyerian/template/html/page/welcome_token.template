@@ -6,7 +6,7 @@
         token, please. Thank you!<br>
 		<br>
 		<input type="hidden" name="comment" value="I minted a posting token! #meta">
-		<input type="button" value="Token" onclick="
+		<input type="submit" value="Token" onclick="
 			if (window.PingUrl) {
 			    var myfp = ''
 				if (window.getUserFp) {
