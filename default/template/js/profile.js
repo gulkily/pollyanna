@@ -132,6 +132,8 @@ function btnBegin_Click (t) { // event for 'Register' button's click
 
 function getUserFp () { // retrieve stored user fingerprint from LocalStorage
 // function getFp () {
+// function GetFingerprint () {
+// function GetUserFingerprint () {
 	//alert('DEBUG: getUserFp() begin');
 
 	if (window.localStorage) {
