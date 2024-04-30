@@ -16,4 +16,4 @@ FROM (
     GROUP BY year_month
 )
 GROUP BY year_month
-
+ORDER BY year_month DESC
