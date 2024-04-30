@@ -233,6 +233,22 @@ function GetAlias($fingerprint, $noCache = 0) { # ; Returns alias for an identif
 	}
 } # GetAlias()
 
+function AppendFile($file, $content) {
+// function AppendFile ($file, $content) {
+// function AppendToLog ($file, $content) {
+// function AppendToFile ($file, $content) {
+// function LogAppend ($file, $content) {
+// function AppendLog ($file, $content) {
+
+    // Mainly used for writing to log files
+
+    $fileHandle = fopen($file, 'a'); // 'a' mode opens the file for writing only and places the file pointer at the end of the file or creates a new file if it doesn't exist
+    if ($fileHandle) {
+        fwrite($fileHandle, $content . "\n"); // Appends content with a newline character at the end
+        fclose($fileHandle);
+    }
+} # AppendFile()
+
 function WriteLog ($text, $dontEscape = 0) { // writes to debug log if enabled
 // the debug log is stored as a static variable in this function
 // when a blank (false) argument is passed, returns entire log as html
