@@ -435,12 +435,12 @@ function signMessage () { // find the compose textbox and sign whatever is in it
 			// #todo change color of textbox when message is properly signed
 
 			if (message.trim().substring(0, 34) == ('-----BEGIN PGP SIGNED MESSAGE-----')) {
-				//alert('DEBUG: signMessage: message is already signed, returning');
+				//alert('DEBUG: signMessage: message is already signed, returning true');
 				return true;
 			}
 
 			if (message.trim().substring(0, 36) == ('-----BEGIN PGP PUBLIC KEY BLOCK-----')) {
-				//alert('DEBUG: signMessage: message contains public key, returning');
+				//alert('DEBUG: signMessage: message contains public key, returning true');
 				return true;
 			}
 
@@ -483,16 +483,23 @@ function signMessage () { // find the compose textbox and sign whatever is in it
 					composeForm.submit();
 				}
 			);
+
+			//alert('DEBUG: signMessage: return false');
 			return false; // don't submit the form yet, will submit after signed
+		} else {
+			//alert('DEBUG: signMessage: (textbox && composeForm && window.openpgp) was FALSE');
 		}
+		//alert('DEBUG: signMessage: return true 1');
 		return true; // let the form submit
 	} else {
 		// this is an edge case
 		// user signed out in another window, but wants to sign in this one
 		// signing is no longer possible, so just submit to be on safe side
+		//alert('DEBUG: signMessage: return true 2');
 		return true;
 	}
 
+	//alert('DEBUG: signMessage: return true 3');
 	return true;
 } // signMessage()
 

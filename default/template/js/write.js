@@ -209,19 +209,19 @@ function CommentMakeWp (comment) { // makes editor textarea larger and gives it 
 function WriteSubmit (t) { // called when user submits write form //signMessage (
 	//alert('DEBUG: WriteSubmit() begin');
 	if (window.localStorage) {
-		//alert('DEBUG: window.localStorage');
+		//alert('DEBUG: WriteSubmit: window.localStorage');
 		if (window.ClearAutoSave) {
 			ClearAutoSave();
 		}
 	} else {
-		//alert('DEBUG: no window.localStorage');
+		//alert('DEBUG: WriteSubmit: no window.localStorage');
 	}
 
 	var configJsOpenPgp = 0; // this is templated from config/setting/admin/js/openpgp
 	if (configJsOpenPgp && window.getPrivateKey && window.signMessage) {
-		//alert('DEBUG: window.getPrivateKey && window.signMessage test passed');
+		//alert('DEBUG: WriteSubmit: window.getPrivateKey && window.signMessage test passed');
 		if (getPrivateKey()) {
-			//alert('DEBUG: getPrivateKey() is true, WriteSubmit() Calling signMessage()');
+			//alert('DEBUG: WriteSubmit: getPrivateKey() is true, calling signMessage()');
 
 			if (document.getElementById) {
 				var chkSignAs = document.getElementById('chkSignAs');
@@ -235,6 +235,7 @@ function WriteSubmit (t) { // called when user submits write form //signMessage 
 						// once the message is signed, callback will submit the form
 						if (signMessageResult) {
 							// #todo there's a bug here where this is reached when it shouldn't be, and form fails to submit
+							//alert('DEBUG: WriteSubmit: signMessageResult is FALSE, returning false');
 							return false; // uncomment this for duplicate unsigned messages feature
 						} else {
 							// #todo: if GetPrefs('draggable_spawn') is set, it should try to spawn item in new dialog instead of going to a new page
@@ -248,12 +249,12 @@ function WriteSubmit (t) { // called when user submits write form //signMessage 
 			}
 		} else {
 			// no private key
-			//alert('DEBUG: no private key, basic submit');
+			//alert('DEBUG: WriteSubmit: no private key, basic submit');
 		}
 	} else {
 		// #todo add featureflag
 		if (0) {
-			//alert('DEBUG: window.getPrivateKey && window.signMessage test failed, falling back to Sent: footnote');
+			//alert('DEBUG: WriteSubmit: window.getPrivateKey && window.signMessage test failed, falling back to Sent: footnote');
 			var d = new Date();
 			var n = d.getTime();
 			n = Math.ceil(n / 1000);
