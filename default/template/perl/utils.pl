@@ -1877,6 +1877,12 @@ sub GetFileAsHashKeys { # returns file as hash of lines
 } # GetFileAsHashKeys()
 
 sub AppendFile { # appends something to a file; $file, $content to append
+# sub AddToLog {
+# sub AppendToLog {
+# sub AppendToFile {
+# sub LogAppend {
+# sub AppendLog {
+
 	# mainly used for writing to log files
 	my $file = shift;
 	my $content = shift;
