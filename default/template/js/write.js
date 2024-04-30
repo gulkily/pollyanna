@@ -206,7 +206,8 @@ function CommentMakeWp (comment) { // makes editor textarea larger and gives it 
 	return '';
 } // CommentMakeWp()
 
-function WriteSubmit (t) { // called when user submits write form //signMessage (
+function WriteSubmit (t) { // called when user submits write form
+// function signMessage () {
 	//alert('DEBUG: WriteSubmit() begin');
 	if (window.localStorage) {
 		//alert('DEBUG: WriteSubmit: window.localStorage');
@@ -219,7 +220,7 @@ function WriteSubmit (t) { // called when user submits write form //signMessage 
 
 	var configJsOpenPgp = 0; // this is templated from config/setting/admin/js/openpgp
 	if (configJsOpenPgp && window.getPrivateKey && window.signMessage) {
-		//alert('DEBUG: WriteSubmit: window.getPrivateKey && window.signMessage test passed');
+		//alert('DEBUG: WriteSubmit: (window.getPrivateKey) && (window.signMessage) test passed');
 		if (getPrivateKey()) {
 			//alert('DEBUG: WriteSubmit: getPrivateKey() is true, calling signMessage()');
 
@@ -254,7 +255,7 @@ function WriteSubmit (t) { // called when user submits write form //signMessage 
 	} else {
 		// #todo add featureflag
 		if (0) {
-			//alert('DEBUG: WriteSubmit: window.getPrivateKey && window.signMessage test failed, falling back to Sent: footnote');
+			//alert('DEBUG: WriteSubmit: (window.getPrivateKey) && (window.signMessage) test failed, falling back to Sent: footnote');
 			var d = new Date();
 			var n = d.getTime();
 			n = Math.ceil(n / 1000);
