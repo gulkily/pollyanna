@@ -40,6 +40,9 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 		$htmlDir = $pwd . '/'; #my
 		WriteLog('StoreNewComment: $htmlDir = ' . $htmlDir);
 
+		// $logDir is where the log files live, in log/
+		$logDir = GetDir('log'); #my
+
 
 		// find hash of the comment text
 		// it will not be the same as sha1 of the file for some mysterious reason, #todo
@@ -123,6 +126,11 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 			} else {
 				WriteLog('StoreNewComment: warning: $recordFingerprint was requested, but admin/logging/record_client is off');
 			}
+		}
+
+		if (GetConfig('admin/logging/log_remote_addr')) {
+			$clientHostname = (array_key_exists('REMOTE_HOST', $_SERVER) ? $_SERVER['REMOTE_HOST'] : $_SERVER['REMOTE_ADDR']);
+			AppendFile("$logDir/remote_addr.log", "$hash|$clientHostname");
 		}
 
 		if (GetConfig('admin/logging/record_http_host')) {
