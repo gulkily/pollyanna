@@ -6,7 +6,7 @@ sub GetWelcomePage {
 		GetPageHeader('welcome') .
 			GetDialogX(GetTemplate('html/page/welcome.template'), 'Welcome') .
 			GetDialogX(GetTemplate('html/page/welcome_token.template'), 'Token') .
-			GetWriteDialog() .
+			#GetWriteDialog() .
 			#GetProfileDialog() .
 			#GetQueryAsDialog('threads', 'Threads') .
 			#GetQueryAsDialog('tags_welcome', 'Tags') .
