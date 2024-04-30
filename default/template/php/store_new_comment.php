@@ -8,6 +8,8 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 // function StoreNewItem () {}
 // function CreateItem () {}
 // function CreateTextFile () {}
+// function CreateComment () {}
+// function CreateNewComment () {}
 	$hash = ''; // hash of new comment's contents
 	$scriptDir = GetScriptDir();
 
