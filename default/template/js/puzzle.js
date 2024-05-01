@@ -116,8 +116,13 @@ function doSolvePuzzle () { // solves puzzle
 	var lookingFor = '1337'; // this line is updated by InjectJs()
 	var cycleLimit = 1000000; // this line is updated by InjectJs()
 	var secondsLimit = 10; // this line is updated by in InjectJs()
+	var promptForPrefix = 0; // this line is templated by InjectJs()
 
-	var userPrefix = prompt('Prefix:', (lookingFor ? lookingFor : ''));
+	if (promptForPrefix) {
+		var userPrefix = prompt('Prefix:', (lookingFor ? lookingFor : ''));
+	} else {
+		var userPrefix = lookingFor;
+	}
 	if (userPrefix) { // #todo sanity check
 		lookingFor = userPrefix;
 	}
