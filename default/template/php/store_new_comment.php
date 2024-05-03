@@ -95,12 +95,12 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 			}
 		}
 
-		if (GetConfig('admin/logging/record_server_time')) {
-			WriteLog('StoreNewComment: record_server_time is TRUE');
+		if (GetConfig('admin/logging/record_server_received_time')) {
+			WriteLog('StoreNewComment: record_server_received_time is TRUE');
 			$serverTime = time(); #my
 
 			if (isset($serverTime) && $serverTime) {
-				WriteLog('StoreNewComment: record_server_time: $serverTime $serverTime = ' . $serverTime);
+				WriteLog('StoreNewComment: record_server_received_time: $serverTime $serverTime = ' . $serverTime);
 				#WriteLog('StoreNewComment: cookie: adding server time to $comment!');
 
 				$signatureContent .= 'Received: ' . $serverTime;
