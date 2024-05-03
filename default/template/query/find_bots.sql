@@ -18,5 +18,5 @@ JOIN
 WHERE
     item_attribute_chain.attribute = 'chain_sequence'
 ORDER BY
-	ABS(add_timestamp - chain_timestamp),
+	ABS(add_timestamp - chain_timestamp) DESC,
     chain_timestamp DESC
