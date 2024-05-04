@@ -360,6 +360,12 @@ function getUsername () { // returns pgp username
 } // getUsername()
 
 function signMessageBasic (message, messageField = '', callback = '') {
+	// like signMessage(), but makes fewer assumptions about the environment
+	// and instead takes the message as an argument
+	// and optionally takes a messageField to put the signed message into
+	// and optionally takes a callback to call after the message is signed
+	// returns the signed message as a string
+
 	var openpgp = window.openpgp;
 
 	//alert('DEBUG: signMessageBasic: openpgp = ' + openpgp);
