@@ -239,6 +239,11 @@ if [ $1 = start ] # hike start #
 		rm config/setting/admin/lighttpd/server_started
 fi
 
+if [ $1 = setup ] # hike setup
+  then
+    /bin/sh ./default/template/sh/enable_features.sh
+fi
+
 if [ $1 = startpython ] # hike startpython
 	then
 		if [ ! -e config/template/perl/server_local_python.pl ]
@@ -332,6 +337,7 @@ if [ $1 = help ]
 		echo source hike.sh = enable these commands
 		echo hike clean = clean including templates
 		echo hike build = build base
+		echo hike setup = enable commonly-used features
 		echo hike start = start local server
 		echo hike archive = display archiving commands
 		echo hike help = see more commands
