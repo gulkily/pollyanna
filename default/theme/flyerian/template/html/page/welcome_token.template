@@ -1,25 +1,11 @@
 <!-- welcome_token.template -->
+<!-- doesn't work for some reason, signMessage() returns false -->
 <form action="/post.html" name="compose" id="compose">
 	<p>
-		Press this button to <br>
-        mint a participation <br>
-        token, please. Thank you!<br>
+		Press this button to mint a participation token, please. Thank you! <br>
 		<br>
 		<input type="hidden" name="comment" value="I minted a posting token! #meta">
-		<input type="submit" value="Token" onclick="
-			if (window.PingUrl) {
-			    var myfp = ''
-				if (window.getUserFp) {
-					myfp = getUserFp();
-				}
-				var newline = '%0A';
-				PingUrl('/post.html?comment=I+minted+a+posting+token!+%23meta' + newline + myfp);
-				alert('Done!');
-				return false;
-			} else {
-				return true;
-			}
-		">
+		<input type="submit" value="Token" id="btnSolvePuzzle" onclick="if (window.solvePuzzle) { return solvePuzzle(this); } else { return true; }">
 	</p>
 </form>
-<!-- welcome_token.template -->
+<!-- / welcome_token.template -->

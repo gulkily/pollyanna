@@ -5,7 +5,7 @@ sub GetWelcomePage {
 	my $welcomePage =
 		GetPageHeader('welcome') .
 			GetDialogX(GetTemplate('html/page/welcome.template'), 'Welcome') .
-			GetDialogX(GetTemplate('html/page/welcome_token.template'), 'Token') .
+			#GetDialogX(GetTemplate('html/page/welcome_token.template'), 'Token') . #todo fix this dialog
 			#GetWriteDialog() .
 			#GetProfileDialog() .
 			#GetQueryAsDialog('threads', 'Threads') .
