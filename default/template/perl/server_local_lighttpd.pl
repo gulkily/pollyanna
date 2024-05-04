@@ -41,12 +41,6 @@ sub GetYes { # $message, $defaultYes ; print $message, and get Y response from t
 	return 0;
 } # GetYes()
 
-if (!GetConfig('admin/lighttpd/enable')) {
-	if (GetConfig('admin/dev/dont_confirm') || GetYes('admin/lighttpd/enable is false, set to true?', 1)) {
-		PutConfig('admin/lighttpd/enable', 1);
-	}
-} # if (!GetConfig('admin/lighttpd/enable'))
-
 sub FindBinPath { # $binName, $configPath ; tries to figure out local path for a binary
 # sub GetBinPath {
 # sub FindBinaryPath {
@@ -288,6 +282,12 @@ sub GetLighttpdConfig { # generate contents for lighttpd.conf file based on sett
 
 	return $conf;
 } # GetLighttpdConfig()
+
+if (!GetConfig('admin/lighttpd/enable')) {
+	if (FindBinPath('lighttpd') || GetConfig('admin/dev/dont_confirm') || GetYes('admin/lighttpd/enable is false, set to true?', 1)) {
+		PutConfig('admin/lighttpd/enable', 1);
+	}
+} # if (!GetConfig('admin/lighttpd/enable'))
 
 if (GetConfig('admin/lighttpd/enable')) {
 	# lighttpd module enabled
