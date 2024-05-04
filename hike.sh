@@ -13,15 +13,16 @@
 # and run the script from there. This is useful for running the script from anywhere on the system.
 # The alias is written to the script itself, so it will be available the next time the script is run.
 # It should also add this command to the .bashrc file so that it is available every time a new terminal is opened.
-
 # Get the current directory
 current_dir=$(pwd)
 
 # Check if HOME variable is set
-if [ -z "$HOME" ]; then
+if [ -n "$HOME" ]; then
   # Replace home directory path with ~ if current directory is under home
-  escaped_home=$(printf '%s\n' "$HOME" | sed 's/[[\.*^$/]/\\&/g')  # Escape special characters in $HOME
-  current_dir="${current_dir/#$escaped_home/~}"
+  current_dir="${current_dir/#$HOME/\~}"
+else
+  echo "HOME variable is not defined. Please make sure it is set."
+  exit 1
 fi
 
 # Remove any line which begins with "alias"
