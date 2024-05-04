@@ -1315,7 +1315,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 				// #todo get this from template
 				// #todo add the same logic to javascript frontend
 				$html = preg_replace('/<p id=pBeginButton>.*?<\/p>/s', '', $html);
-			} else {
+			} # if (isset($cookie) && $cookie)
+			else {
 				$handle = '';
 				$fingerprint = '';
 				// this is a mis-use of the spans... oh well
@@ -1353,7 +1354,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						# 'Go to profile' "Go to profile"
 					}
 				}
-			} else {
+			} # if ($fingerprint)
+			else {
 
 				$html = str_replace(
 					'<span id=spanUsernameSessionLink></span>',
