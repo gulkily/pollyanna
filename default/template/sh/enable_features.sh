@@ -30,7 +30,6 @@ echo 1 > config/setting/admin/allow_self_admin_when_adminless
 echo 1 > config/setting/admin/token/operator_please
 echo 1 > config/setting/admin/token/hike_set
 echo 1 > config/setting/admin/php/cookie_inbox
-echo 1 > config/setting/admin/php/regrow_404_fork
 echo 1 > config/setting/html/menu_layer_controls
 echo 1 > config/setting/admin/php/post/require_cookie
 echo 1 > config/setting/admin/logging/log_remote_addr
