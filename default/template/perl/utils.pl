@@ -2906,6 +2906,9 @@ sub EnsureDirsThatShouldExist { # creates directories expected later
 		"$CONFIGDIR/setting/admin/php",
 		"$CONFIGDIR/setting/admin/php/post",
 		"$CONFIGDIR/setting/admin/php/upload",
+		"$CONFIGDIR/setting/html",
+		"$CONFIGDIR/setting/html/item_page",
+		"$CONFIGDIR/setting/html/item_template",
 		"$HTMLDIR/upload", #uploaded files go here
 		"$HTMLDIR/error", #error pages
 		"$SCRIPTDIR/once" #used for registering things which should only happen once e.g. scraping
