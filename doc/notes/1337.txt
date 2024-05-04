@@ -23,6 +23,7 @@ Basic flow diagram:
 DEPENDENCIES
 ============
 # brew install lighttpd gpg
+# note: this needs to be tested and expanded #todo
 
 # apt install liburi-encode-perl libany-uri-escape-perl libhtml-parser-perl libdbd-sqlite3-perl libdigest-sha-perl sqlite3 gnupg gnupg2 imagemagick zip php-cgi libunicode-string-perl libdbi-perl php-sqlite3
 
