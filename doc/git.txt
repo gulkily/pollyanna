@@ -13,6 +13,8 @@ git config --global user.name "Your Name"
 
 git config merge.defaultToUpstream true
 
+git config --global core.autocrlf false
+
 #how to revert most recent commit:
 # git reset HEAD~
 
