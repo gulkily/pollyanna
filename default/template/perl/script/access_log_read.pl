@@ -710,6 +710,12 @@ sub ProcessAccessLog { # $logfile, $vhostParse ; reads an access log and writes 
 							#DBAddItemAttribute($fileHash, 'access_log_timestamp', $addedTime);
 						}
 
+						# logging of remote address
+						if (GetConfig('admin/logging/record_remote_addr')) {
+							my $logDir = GetDir('log');
+							AppendFile("$logDir/remote_addr.log", "$fileHash|$clientHostname");
+						}
+
 						if (GetConfig('admin/access_log/call_index')) {
 							WriteLog('ProcessAccessLog: access_log_call_index is true, therefore IndexFile(' . $pathedFilename . ')');
 							#IndexFile($pathedFilename);
