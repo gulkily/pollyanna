@@ -1,7 +1,5 @@
 <!-- page_map.template -->
-<fieldset>
     <noscript>*</noscript>
     <span id=lstDialog>
     </span>
-</fieldset>
 <!-- / page_map.template -->
