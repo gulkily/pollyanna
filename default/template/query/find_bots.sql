@@ -6,7 +6,8 @@ SELECT
 	remote_addr_ip_log.remote_addr,
 	remote_addr_ip_log.first_three_octets,
 	remote_addr_ip_log.first_two_octets,
-    item_flat.item_title AS item_title
+    item_flat.item_title AS item_title,
+    ABS(add_timestamp - chain_timestamp) AS time_diff
 FROM
     item_attribute AS item_attribute_chain
 JOIN
@@ -16,7 +17,8 @@ LEFT JOIN
 JOIN
 	remote_addr_ip_log ON (remote_addr_ip_log.file_hash = item_flat.file_hash)
 WHERE
-    item_attribute_chain.attribute = 'chain_sequence'
+    item_attribute_chain.attribute = 'chain_sequence' AND
+    time_diff > 60
 ORDER BY
-	ABS(add_timestamp - chain_timestamp) DESC,
+	time_diff DESC,
     chain_timestamp DESC
