@@ -16,8 +16,13 @@
 
 # Get the current directory
 current_dir=$(pwd)
-# Replace home directory path with ~ if current directory is under home
-current_dir="${current_dir/#$HOME/~}"
+
+# Check if HOME variable is set
+if [ -z "$HOME" ]; then
+  # Replace home directory path with ~ if current directory is under home
+  escaped_home=$(printf '%s\n' "$HOME" | sed 's/[[\.*^$/]/\\&/g')  # Escape special characters in $HOME
+  current_dir="${current_dir/#$escaped_home/~}"
+fi
 
 # Remove any line which begins with "alias"
 sed -i.bak '/^alias/ d' hike.sh
