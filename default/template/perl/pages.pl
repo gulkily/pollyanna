@@ -1544,7 +1544,7 @@ sub GetQuerySqlDialog { # $pageQuery, $titleDialog ; displays query for user to 
 	WriteLog('GetQuerySqlDialog: $pageQuery = ' . $pageQuery . '; caller = ' . join(',', caller));
 
 	#my $displayQuery = '<pre class=sql contenteditable>' . HtmlEscape(SqliteGetQueryTemplate($pageQuery)) . '</pre>'; #todo templatify
-	my $displayQuery = '<pre class=sql contenteditable>' . SqlForWeb(SqliteGetQueryTemplate($pageQuery)) . '</pre>'; #todo templatify
+	my $displayQuery = '<fieldset><pre class=sql contenteditable>' . SqlForWeb(SqliteGetQueryTemplate($pageQuery)) . '</pre></fieldset>'; #todo templatify
 	my $dialog = '';
 	if (GetConfig('setting/html/debug_resultset_link_to_index_sqlite3')) {
 		$dialog = '<span class=advanced>' . GetDialogX($displayQuery, $queryDisplayName, '', '<a href="/index.sqlite3">index.sqlite3</a>') . '</span>';
