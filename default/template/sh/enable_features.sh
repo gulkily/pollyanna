@@ -33,6 +33,7 @@ echo 1 > config/setting/admin/php/cookie_inbox
 echo 1 > config/setting/admin/php/regrow_404_fork
 echo 1 > config/setting/html/menu_layer_controls
 echo 1 > config/setting/admin/php/post/require_cookie
+echo 1 > config/setting/admin/logging/log_remote_addr
 echo 1 > config/setting/admin/js/profile_auto_register
 echo 1 > config/setting/admin/auto_approve_first_user
 echo 1 > config/setting/admin/js/openpgp_keygen_prompt_for_username
@@ -65,3 +66,6 @@ echo 1 > config/setting/html/item_page/thread_listing
 echo 1 > config/setting/html/item_page/replies_listing_no_titles
 echo 1 > config/setting/html/item_page/gpg_stderr
 echo 1 > config/setting/html/item_page/toolbox_hashes
+
+echo 0 > config/setting/admin/http_auth/enable
+echo 0 > config/setting/admin/welcome_install_message

@@ -1,0 +1,6 @@
+<!-- html/page/welcome_install.template -->
+<p>Welcome to Pollyanna! Your install was successful!</p>
+<p>If you're seeing this message, the site is probably in safe mode.</p>
+<p>You should run `hike setup` to enable the most commonly-used features.</p>
+<p>Thank you for installing Pollyanna!</p>
+<!-- / html/page/welcome_install.template -->
