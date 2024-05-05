@@ -1,4 +1,10 @@
+Write link should pull a copy of the write page from local storage and replace local dom with it.
+
+===
+
 invite system for pre-vouching
+
+===
 
 Generate zip files for each thread, probably on the fly with PHP, if possiblex
     it should happen on top-level item pagex
