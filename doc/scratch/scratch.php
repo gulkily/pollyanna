@@ -1,3 +1,39 @@
+		if (GetConfig('setting/admin/php/route_show_active_user')) { #todo config
+			// we need cookies
+			include_once('cookie.php');
+
+			$handle = ''; // will store our handle
+			$fingerprint = ''; // will store our fingerprint
+
+			if (isset($cookie) && $cookie) {
+				$fingerprint = $cookie;
+
+				if (!$handle && GetConfig('setting/admin/php/alias_lookup')) {
+					$handle = GetAlias($fingerprint);
+				} else {
+					$handle = 'Guest'; #todo #guest...
+				}
+
+			} # if (isset($cookie) && $cookie)
+
+
+			if (index($html, '<body>') != -1) {
+				if ($fingerprint) {
+					$html = str_replace('<body>', '<body><span id=lblHandle>' . $handle . '</span>', $html);
+					$html = str_replace('<body>', '<body><span id=lblFingerprint>' . $fingerprint . '</span>', $html);
+				} else {
+					$html = str_replace('<body>', '<body><span id=lblHandle>Guest</span>', $html);
+					$html = str_replace('<body>', '<body><span id=lblFingerprint>(no fingerprint)</span>', $html);
+				}
+			} else {
+				WriteLog('route.php: warning: could not find opening body tag');
+			}
+
+		}
+
+
+
+
 		// from GetDialogX() utils.php
 		//
 		// 		if ($showButtons && GetConfig('admin/js/dragging')) {
