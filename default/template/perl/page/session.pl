@@ -12,9 +12,7 @@ sub GetKeychainDialog { # returns empty string if requirements not met
 	) {
 		my $html =
 			'<form name=formSelectKey>' .
-			'<span class=advanced>' .
 			GetDialogX(GetTemplate('html/select_key.template'), 'Keychain') .
-			'</span>' .
 			'</form>'
 		;
 		return $html;
