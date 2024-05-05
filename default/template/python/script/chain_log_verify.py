@@ -33,3 +33,14 @@ def verify_linked_list(file_path):
 file_path = 'html/chain.log'
 verify_linked_list(file_path)
 
+# ChatGPT4
+#
+# Thanks for sharing your working implementation! It looks like the key change here is that the hash input includes
+# the entire previous line along with the current item's hash and timestamp. This chaining method ensures that each
+# entry in the list is dependent not only on the item and timestamp but also on the complete state of the previous
+# line, which adds an extra layer of integrity to the verification process.
+#
+# This method effectively makes your linked list more secure because any change in an earlier entry would cause a
+# mismatch in all subsequent entries. It's a good strategy for ensuring the authenticity and integrity of the data
+# in a sequential log or chain.
+
