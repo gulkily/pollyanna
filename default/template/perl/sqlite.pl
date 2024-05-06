@@ -14,19 +14,40 @@ while (my $argFound = shift) {
 	push @foundArgs, $argFound;
 }
 
-sub GetSqliteDbName {
-# sub GetIndexPath {
-# sub GetDatabase {
-# sub GetDatabasePath {
-# sub GetDatabaseFilename {
-# sub GetDbFilename {
-# sub GetDbPath {
-# sub GetDbName {
-# sub GetSqliteDbName {
+sub SetSqliteDbName { # $requestedName ; sets path to sqlite db
+	my $requestedName = shift;
+	return GetSqliteDbName($requestedName);
+}
+
+sub GetSqliteDbName { # $requestedName ; returns path to sqlite db
+	# has a default value, but can be overridden with $requestedName
+	# sub GetIndexPath {
+	# sub GetDatabase {
+	# sub GetDatabasePath {
+	# sub GetDatabaseFilename {
+	# sub GetDbFilename {
+	# sub GetDbPath {
+	# sub GetDbName {
+	# sub GetSqliteDbName {
+
+	my $requestedName = shift;
 
 	state $cacheDir = GetDir('cache');
 	state $cacheVersion = GetMyCacheVersion();
-	my $SqliteDbName = "$cacheDir/$cacheVersion/index.sqlite3"; # path to sqlite db
+
+	state $fileName = '';
+	if ($requestedName) {
+		$fileName = $requestedName;
+	}
+	if (!$fileName) {
+		$fileName = 'index.sqlite3';
+	}
+
+	state $SqliteDbName = '';
+	if (!$SqliteDbName) {
+		$SqliteDbName = "$cacheDir/$cacheVersion/$fileName"; # path to sqlite db
+	}
+
 	return $SqliteDbName;
 } # GetSqliteDbName()
 
