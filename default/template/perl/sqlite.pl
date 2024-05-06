@@ -16,6 +16,16 @@ while (my $argFound = shift) {
 
 sub SetSqliteDbName { # $requestedName ; sets path to sqlite db
 	my $requestedName = shift;
+	if (!$requestedName) {
+		WriteLog('SetSqliteDbName: warning: called without $requestedName; caller = ' . join(',', caller));
+		return '';
+	}
+	if ($requestedName =~ m/^([a-zA-Z0-9_\-\/.]+)$/) {
+		$requestedName = $1;
+	} else {
+		WriteLog('SetSqliteDbName: warning: $requestedName failed sanity check; caller = ' . join(',', caller));
+		return '';
+	}
 	return GetSqliteDbName($requestedName);
 }
 
@@ -37,6 +47,12 @@ sub GetSqliteDbName { # $requestedName ; returns path to sqlite db
 
 	state $fileName = '';
 	if ($requestedName) {
+		if ($requestedName =~ m/^([a-zA-Z0-9_\-\/.]+)$/) {
+			$requestedName = $1;
+		} else {
+			WriteLog('SetSqliteDbName: warning: $requestedName failed sanity check; caller = ' . join(',', caller));
+			return '';
+		}
 		$fileName = $requestedName;
 	}
 	if (!$fileName) {
