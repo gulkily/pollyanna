@@ -13,6 +13,8 @@ sub DropTable {
 	print "DropTable: remote_addr_ip_log dropped\n";
 } # DropTable()
 
+SetSqliteDbName('remote.sqlite3');
+
 DropTable();
 
 1;
