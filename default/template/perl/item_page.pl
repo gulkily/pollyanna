@@ -274,7 +274,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			# links toolbox
 			my $queryText = SqliteGetNormalizedQueryString('item_url', $fileHash);
 			my %flags;
-			#$flags{'no_heading'} = 1;
+			$flags{'no_heading'} = 1;
 			$flags{'query'} = $queryText;
 
 			my $linksToolbox = GetResultSetAsDialog(\@result, 'Links', 'value', \%flags);
