@@ -47,6 +47,8 @@ sub LoadIntoDatabase {
 	print "LoadIntoDatabase: $linesLoaded lines loaded into remote_addr_ip_log\n";
 } # LoadIntoDatabase()
 
+SetSqliteDbName('remote.sqlite3');
+
 LoadIntoDatabase();
 
 1;
