@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Item by John</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
+    .dialog {
+        background-color: white;
+        border: none;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .titlebar {
+        background-color: #0056b3;
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+    }
+    .content {
+        padding: 20px;
+    }
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .statusbar {
+        padding: 10px 20px;
+        background-color: #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .topmenubar {
+        background-color: #f8f9fa;
+        padding: 10px 0;
+    }
+    .topmenubar a {
+        padding: 0 10px;
+    }
+
+    /* Dark mode styles */
+    @media (prefers-color-scheme: dark) {
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .dialog {
+            background-color: #242424;
+            box-shadow: 0 2px 10px rgba(255,255,255,0.1);
+        }
+        .titlebar {
+            background-color: #002030;
+        }
+        a {
+            color: #4da3ff;
+        }
+        .statusbar {
+            background-color: #333;
+        }
+        .topmenubar {
+            background-color: #333;
+        }
+        button {
+            background-color: #003040;
+        }
+        button:hover {
+            background-color: #003040;
+        }
+        textarea {
+            background-color: #333;
+            color: #ccc;
+        }
+    }
+</style>
+</head>
+<body>
+<main id="maincontent">
+
+<div class="dialog">
+    <div class="titlebar">This is a Test Item</div>
+    <div class="content">
+        <p>This is a test item.</p>
+        <p>I'm writing another paragraph.</p>
+    </div>
+    <div class="statusbar">
+        <span>Posted by John at 23:48</span>
+        <button>Like</button>
+    </div>
+</div>
+
+<div class="dialog">
+    <div class="titlebar">Comment</div>
+    <div class="content">
+        <form action="/post.html" method="post">
+            <textarea rows="4" cols="50" style="width: 100%;"></textarea>
+            <br>
+            <button type="submit">Send Reply</button>
+        </form>
+    </div>
+</div>
+
+</main>
+</body>
+</html>
