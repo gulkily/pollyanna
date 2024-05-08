@@ -1379,6 +1379,10 @@ if (GetConfig('setting/admin/php/route_enable')) {
 		if (GetConfig('setting/admin/php/cookie_inbox')) {
 			WriteLog('route.php: cookie_inbox is TRUE');
 			if (index($html, '</body>') != -1) {
+				#todo this is written fast and dirty and doesn't use cookie.php
+				# because there may be a conflict due to cookie.php being used via
+				# require_once() while $cookie being in local scope
+				# but eventually this should be rewritten to be less snowflake
 				#if (isset($cookie) && $cookie) {
 				if (isset($_COOKIE['cookie']) && $_COOKIE['cookie']) {
 					WriteLog('route.php: cookie_inbox: $_COOKIE[cookie] is TRUE');
