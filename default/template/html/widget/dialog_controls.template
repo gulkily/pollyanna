@@ -53,6 +53,8 @@
 		SetPrefs('draggable_scale', 0);
 		SetPrefs('draggable_restore_collapsed', 0);
 		SetPrefs('draggable_arrange_viewport_resize', 0);
+		SetPrefs('sign_by_default', 1);
+		SetPrefs('focus_reply', 0);
 		DraggingReset();
 		if (window.displayNotification) {
 			window.location.reload();
