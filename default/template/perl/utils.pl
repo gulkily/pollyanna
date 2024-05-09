@@ -77,8 +77,9 @@ for my $module (@modules) {
 
 sub ensure_module { # $path ; ensures module is available under config/
 # sub EnsureModule {
-# the reason it is not EnsureModule() is to match reuquire_once(), 
+# the reason it is not EnsureModule() is to match require_once(),
 # which is styled after PHP's function of the same name
+#todo should account for themes
 	my $module = shift;
 	chomp $module;
 
@@ -116,6 +117,7 @@ sub require_once { # $path ; use require() unless already done
 # styled after PHP's require_once()
 
 #todo, it should error if fails
+#todo it should account for themes
 
 	my $module = shift;
 	chomp $module;
