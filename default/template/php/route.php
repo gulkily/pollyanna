@@ -974,6 +974,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 					}
 
 					if (GetConfig('setting/admin/php/route_show_cookie') && !$skipPrintedNotice) {
+						# cookie_notice {
 						require_once('cookie.php');
 
 						$currentCookie = ''; #my
