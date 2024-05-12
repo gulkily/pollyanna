@@ -254,10 +254,10 @@ function InjectJs ($html, $scriptNames, $injectMode = 'before', $htmlTag = '</bo
 			$scriptTemplate = str_replace('$colorSuccessVoteUnsigned', $colorSuccessVoteUnsigned, $scriptTemplate);
 			$scriptTemplate = str_replace('$colorSuccessVoteSigned', $colorSuccessVoteSigned, $scriptTemplate);
 
-            $postUrl = GetConfig('setting/admin/post/post_url'); #my
-            if ($postUrl != '/post.html') {
-                $scriptTemplate = str_replace('/post.html', $postUrl, $scriptTemplate);
-            }
+			$postUrl = GetConfig('setting/admin/post/post_url'); #my
+			if ($postUrl != '/post.html') {
+				$scriptTemplate = str_replace('/post.html', $postUrl, $scriptTemplate);
+			}
 		}
 		// #todo finish porting this when GetRootAdminKey() is available in php
 		//		if ($script == 'profile') {
@@ -568,13 +568,13 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			########################################################
 			########################################################
 
-            // 			if ( $path == '/a.gif' || $path == '/p.gif' ) {
-            // 				if (time() % 2) {
-            // 					$html = file_get_contents('404.html');
-            // 					header("HTTP/1.0 404 Not Found");
-            // 					exit;
-            // 				}
-            // 			}
+			// 			if ( $path == '/a.gif' || $path == '/p.gif' ) {
+			// 				if (time() % 2) {
+			// 					$html = file_get_contents('404.html');
+			// 					header("HTTP/1.0 404 Not Found");
+			// 					exit;
+			// 				}
+			// 			}
 
 
 			if (
@@ -736,32 +736,32 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							isset($_GET['chkRefreshFrontend']) &&
 							isset($_GET['btnRefreshFrontend'])
 						) {
-                            $refreshFrontendStartTime = time();
-                            $refreshFrontendLog = DoRefreshFrontend();
-                            $refreshFrontendFinishTime = time();
-                            $refreshFrontendDuration = $reindexFinishTime - $reindexStartTime;
+							$refreshFrontendStartTime = time();
+							$refreshFrontendLog = DoRefreshFrontend();
+							$refreshFrontendFinishTime = time();
+							$refreshFrontendDuration = $reindexFinishTime - $reindexStartTime;
 
-                            WriteLog('route.php: refreshFrontendLog = ' . $refreshFrontendLog);
+							WriteLog('route.php: refreshFrontendLog = ' . $refreshFrontendLog);
 
-                            /* my */ $refreshFrontendLogSaved = ProcessNewComment($refreshFrontendLog, '');
-                            ProcessNewComment("Rebuild Frontend log metadata\n-- \n>>$reindexLogSaved\n#textart\ntitle: Rebuild Frontend finished at $refreshFrontendFinishTime", '');
-                            RedirectWithResponse(GetHtmlFilename($refreshFrontendLogSaved), "Rebuild Frontend finished! <small>in $refreshFrontendDuration"."s</small>");
+							/* my */ $refreshFrontendLogSaved = ProcessNewComment($refreshFrontendLog, '');
+							ProcessNewComment("Rebuild Frontend log metadata\n-- \n>>$reindexLogSaved\n#textart\ntitle: Rebuild Frontend finished at $refreshFrontendFinishTime", '');
+							RedirectWithResponse(GetHtmlFilename($refreshFrontendLogSaved), "Rebuild Frontend finished! <small>in $refreshFrontendDuration"."s</small>");
 						}
 
 						if (
 							isset($_GET['chkUpgrade']) &&
 							isset($_GET['btnUpgrade'])
 						) {
-                            #$refreshFrontendStartTime = time();
-                            #$refreshFrontendLog = DoRefreshFrontend();
-                            #$refreshFrontendFinishTime = time();
-                            #$refreshFrontendDuration = $reindexFinishTime - $reindexStartTime;
+							#$refreshFrontendStartTime = time();
+							#$refreshFrontendLog = DoRefreshFrontend();
+							#$refreshFrontendFinishTime = time();
+							#$refreshFrontendDuration = $reindexFinishTime - $reindexStartTime;
 
-                            WriteLog('route.php: upgrade = 1');
+							WriteLog('route.php: upgrade = 1');
 
-                            #/* my */ $refreshFrontendLogSaved = ProcessNewComment($refreshFrontendLog, '');
-                            #ProcessNewComment("Rebuild Frontend log metadata\n-- \n>>$reindexLogSaved\n#textart\ntitle: Rebuild Frontend finished at $refreshFrontendFinishTime", '');
-                            #RedirectWithResponse(GetHtmlFilename($refreshFrontendLogSaved), "Rebuild Frontend finished! <small>in $refreshFrontendDuration"."s</small>");
+							#/* my */ $refreshFrontendLogSaved = ProcessNewComment($refreshFrontendLog, '');
+							#ProcessNewComment("Rebuild Frontend log metadata\n-- \n>>$reindexLogSaved\n#textart\ntitle: Rebuild Frontend finished at $refreshFrontendFinishTime", '');
+							#RedirectWithResponse(GetHtmlFilename($refreshFrontendLogSaved), "Rebuild Frontend finished! <small>in $refreshFrontendDuration"."s</small>");
 						}
 						else {
 							# nothing
@@ -878,9 +878,9 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						}
 
 						if (index($html, 'You are seeing this placeholder page') != -1) {
-                            // this special string appears in placeholder file generated by post.php
-                            // if string is found, try to call pages.pl to generate file again
-                            // the file is removed first... this is sub-optimal, but works for now
+							// this special string appears in placeholder file generated by post.php
+							// if string is found, try to call pages.pl to generate file again
+							// the file is removed first... this is sub-optimal, but works for now
 							WriteLog('route.php: found placeholder page, trying to replace it. $path = .' . $path);
 
 							#unlink('.' . $path); #todo
@@ -1004,8 +1004,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						#(time() + 10) .
 						# Printed:
 						# show_printed {
-                        # if ($printedNotice) {
-                        # printednotice {
+						# if ($printedNotice) {
+						# printednotice {
 
 						#my
 						$printedEpoch = file_exists($pathRel) ? filemtime($pathRel) : '';
@@ -1569,7 +1569,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 				WriteLog('route.php: $_COOKIE[show_advanced] = ' . ( isset( $_COOKIE['show_advanced']) ? $_COOKIE['show_advanced'] : 'UNDEFINED' ) ) ;
 
 				$assistCss .= ".advanced, .admin { display:none }\n";
-                // $assistCss .= ".advanced, .admin, .heading, .menubar { display:none }\n";
+				// $assistCss .= ".advanced, .admin, .heading, .menubar { display:none }\n";
 				#$assistCss .= ".advanced, .admin{ display: none; background-color: $colorHighlightAdvanced }\n";
 				// #todo templatify
 			}
@@ -1661,7 +1661,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							if (file_exists("$htmlDir/dialog/" . $dialogName . '.html')) {
 								# cool
 							} else {
-							    WriteLog('route.php: calling HandleNotFound(/dialog/'.$dialogName.'.html)');
+								WriteLog('route.php: calling HandleNotFound(/dialog/'.$dialogName.'.html)');
 								HandleNotFound("/dialog/" . $dialogName . ".html", '');
 							}
 							$dialogsTogether .= GetFile("$htmlDir/dialog/" . $dialogName . '.html');
