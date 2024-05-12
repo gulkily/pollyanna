@@ -31,6 +31,7 @@ echo 1 > config/setting/admin/token/operator_please
 echo 1 > config/setting/admin/token/hike_set
 echo 1 > config/setting/admin/php/cookie_inbox
 echo 1 > config/setting/html/menu_layer_controls
+echo 1 > config/setting/admin/php/route_show_cookie
 echo 1 > config/setting/admin/php/post/require_cookie
 echo 1 > config/setting/admin/logging/log_remote_addr
 echo 1 > config/setting/admin/js/profile_auto_register

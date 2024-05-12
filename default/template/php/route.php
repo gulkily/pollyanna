@@ -973,6 +973,27 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						$skipPrintedNotice = 1;
 					}
 
+					if (GetConfig('setting/admin/php/route_show_cookie') && !$skipPrintedNotice) {
+						require_once('cookie.php');
+
+						$currentCookie = ''; #my
+						if (isset($cookie) && $cookie) {
+							$currentCookie = htmlspecialchars($cookie);
+						} else {
+							$currentCookie = 'none';
+						}
+
+						$cookieLookup = '';
+						if ($cookie) {
+							$cookieLookup = ' (' . GetAlias($cookie) . ')';
+						}
+
+						$cookieNotice = 'Cookie: ' . $currentCookie . $cookieLookup;
+						$cookieNotice = AddAttributeToTag(GetDialogX($cookieNotice, 'CookieInfo', '', '', ''), 'table', 'id', 'CookieInfo');
+
+						$html = str_ireplace('</body>', $cookieNotice . '</body>', $html);
+					}
+
 					if (GetConfig('setting/admin/php/route_notify_printed_time') && !$skipPrintedNotice) { # route.php -- page printed time notice
 						# this should be in a template,
 						# but it would be very awkward to make at this time
