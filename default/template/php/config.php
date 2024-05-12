@@ -11,7 +11,7 @@ include_once('utils.php');
 //echo "<br>You can copy and paste this into Write form of your own site, sign it, and post as Operator.";
 //echo "<br><hr><br>";
 
-function WriteConfigDump() {
+function WriteConfigDump () {
 	$TXT = GetDir('txt');
 	$CONF = GetDir('config');
 	$DEF = GetDir('default');

@@ -185,7 +185,7 @@ function SqliteGetValue ($query) { # Returns the first column from the first row
 	return $result;
 } # SqliteGetValue()
 
-function IsFingerprint($key) {
+function IsFingerprint ($key) {
 	if (preg_match('/^([A-F0-9]{16})$/', $key, $itemHashMatch)) {
 		return 1;
 	} else {
@@ -214,7 +214,7 @@ function DBGetAuthorAlias ($key) { # returns author's alias
 	}
 } # DBGetAuthorAlias()
 
-function GetAlias($fingerprint, $noCache = 0) { # ; Returns alias for an identifier
+function GetAlias ($fingerprint, $noCache = 0) { # ; Returns alias for an identifier
 	WriteLog("GetAlias($fingerprint, $noCache)");
 
 	WriteLog('GetAlias: calling DBGetAuthorAlias()');
@@ -233,7 +233,7 @@ function GetAlias($fingerprint, $noCache = 0) { # ; Returns alias for an identif
 	}
 } # GetAlias()
 
-function AppendFile($file, $content) {
+function AppendFile ($file, $content) {
 // function AppendFile ($file, $content) {
 // function AppendToLog ($file, $content) {
 // function AppendToFile ($file, $content) {
