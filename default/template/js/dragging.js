@@ -553,7 +553,7 @@ function TileDialogs () {
                 var fitScore = 0;
 
                 // Calculate fitScore by checking how much space is left below and to the right
-                if (bottomEdge > pageWidth) {
+                if (pageWidth < bottomEdge) {
                     fitScore += (bottomEdge - pageWidth) * dialogWidth;
                 }
 
