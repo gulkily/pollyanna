@@ -986,7 +986,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 						$cookieLookup = '';
 						if ($cookie) {
-							$cookieLookup = ' (' . GetAlias($cookie) . ')';
+							$cookieLookup .= ' (Alias: ' . GetAlias($cookie) . ')';
+							$cookieLookup .= ' (Score: ' . GetScore($cookie) . ')';
 						}
 
 						$cookieNotice = 'Cookie: ' . $currentCookie . $cookieLookup;
