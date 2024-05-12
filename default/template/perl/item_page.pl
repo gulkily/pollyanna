@@ -187,6 +187,13 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		$txtIndex .= GetDialogX($linkToFullImage, 'Full Image'); # full size image
 	}
 
+	# if item has label poetry or poem, put an extra linebreak here
+	# so that the text stands on its own, without the distraction of
+	# threads dialog, comment field, etc.
+	if (index($file{'labels_list'}, 'poetry') != -1 || index($file{'labels_list'}, 'poem') != -1) {
+		$txtIndex .= '<br>';
+	}
+
 	# REPLY FORM
 	if (GetConfig('setting/reply/enable')) {
 		$txtIndex .= GetReplyForm($file{'file_hash'});
