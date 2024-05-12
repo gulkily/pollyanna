@@ -214,6 +214,27 @@ function DBGetAuthorAlias ($key) { # returns author's alias
 	}
 } # DBGetAuthorAlias()
 
+function DBGetAuthorScore ($key) { # returns author's score
+// 	if (!IsFingerprint($key)) {
+// 		WriteLog('DBGetAuthorScore: warning: called with invalid parameter! returning');
+// 		return;
+// 	} #todo re-add this sanity check
+	WriteLog("DBGetAuthorScore($key)");
+
+	$key = SqliteEscape($key);
+
+	if ($key) {
+		$query = "SELECT author_score FROM author_score WHERE author_key = '$key'";
+		$returnValue = SqliteGetValue($query);
+
+		WriteLog('DBGetAuthorScore: $returnValue = ' . $returnValue);
+
+		return $returnValue;
+	} else {
+		return "";
+	}
+} # DBGetAuthorScore()
+
 function GetAlias ($fingerprint, $noCache = 0) { # ; Returns alias for an identifier
 	WriteLog("GetAlias($fingerprint, $noCache)");
 
@@ -232,6 +253,25 @@ function GetAlias ($fingerprint, $noCache = 0) { # ; Returns alias for an identi
 		return $alias;
 	}
 } # GetAlias()
+
+function GetScore ($fingerprint, $noCache = 0) { # ; Returns alias for an identifier
+	WriteLog("GetScore($fingerprint, $noCache)");
+
+	WriteLog('GetScore: calling DBGetAuthorScore()');
+	$score = DBGetAuthorScore($fingerprint);
+
+	if ($score) {
+		$score = trim($score);
+		if ($score && length($score) > 24) {
+			$score = substr($score, 0, 24);
+		}
+
+		return $score;
+	} else {
+		$score = 0;
+		return $score;
+	}
+} # GetScore()
 
 function AppendFile ($file, $content) {
 // function AppendFile ($file, $content) {
