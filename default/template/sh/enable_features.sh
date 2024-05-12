@@ -27,8 +27,11 @@ echo 1 > config/setting/admin/upload/enable
 echo 1 > config/setting/admin/image/enable
 echo 1 > config/setting/admin/allow_admin_permissions_tag_lookup
 echo 1 > config/setting/admin/allow_self_admin_when_adminless
-echo 1 > config/setting/admin/token/operator_please
-echo 1 > config/setting/admin/token/hike_set
+#echo 1 > config/setting/admin/token/operator_please
+#echo 1 > config/setting/admin/token/hike_set
+echo 1 > config/setting/admin/token/http
+echo 1 > config/setting/admin/token/https
+echo 1 > config/setting/admin/token/remove
 echo 1 > config/setting/admin/php/cookie_inbox
 echo 1 > config/setting/html/menu_layer_controls
 echo 1 > config/setting/admin/php/route_show_cookie
