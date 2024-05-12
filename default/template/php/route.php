@@ -981,6 +981,9 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						#($fileCacheTime == 1 ? 's' : 's') .
 						#(time() + 10) .
 						# Printed:
+						# show_printed {
+                        # if ($printedNotice) {
+                        # printednotice {
 
 						#my
 						$printedEpoch = file_exists($pathRel) ? filemtime($pathRel) : '';
