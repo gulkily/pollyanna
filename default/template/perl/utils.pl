@@ -850,6 +850,13 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 
 	WriteLog("GetTemplate($templateName) get_template.pl caller: " . join(', ', caller));
 	state %templateMemo; #stores local memo cache of template
+
+	if ($templateName eq 'unmemo') {
+		WriteLog('GetTemplate: clearing memo');
+		%templateMemo = ();
+		return '';
+	}
+
 	if ($templateMemo{$templateName}) {
 		#if already been looked up, return memo version
 		WriteLog('GetTemplate: returning from memo for $templateName = ' . $templateName);

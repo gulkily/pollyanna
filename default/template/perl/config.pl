@@ -134,7 +134,8 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 
 	if ($configName && ($configName eq 'unmemo')) {
 		WriteLog('GetConfig: FULL UNMEMO requested, removing %configLookup');
-		#unmemo one particular config
+		GetThemeAttribute('unmemo');
+		GetTemplate('unmemo');
 		undef %configLookup;
 		return '';
 	}
@@ -176,7 +177,8 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 		if ($parameter || (defined($parameter) && ($parameter eq '' || $parameter == 0))) {
 			WriteLog('GetConfig: override: setting $configLookup{' . $configName . '} := ' . $parameter);
 			%configLookup = ();
-			GetTemplate('clear_memo');
+			GetTemplate('unmemo');
+			GetThemeAttribute('unmemo');
 			WriteLog('GetConfig: override: %configLookup emptied');
 			$configLookup{$configName} = $parameter;
 
@@ -498,7 +500,8 @@ sub GetActiveThemes { # return list of active themes (config/setting/theme)
 # sub GetThemeList {
 # sub GetThemesList {
 # sub GetActiveThemesList {
-	WriteLog('GetActiveThemes()');
+	WriteLog('GetActiveThemes: caller = ' . join(',', caller));
+	#GetConfig('setting/theme', 'override', 'dark'); # used during testing/dev
 	my $themesValue = GetConfig('setting/theme');
 	if ($themesValue) {
 		$themesValue =~ s/[\s]+/ /g; # strip extra whitespace and convert to spaces
@@ -532,7 +535,9 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 	#$themesValue =~ s/[\s]+/ /g;
 	#my @activeThemes = split(' ', $themesValue);
 	state @activeThemes;
-	if (!@activeThemes) {
+
+	if (!@activeThemes || $attributeName eq 'unmemo') {
+		WriteLog('GetThemeAttribute: @activeThemes is empty or $attributeName = unmemo; calling GetActiveThemes()' . '; caller = ' . join(',', caller));
 		@activeThemes = GetActiveThemes();
 		if (!@activeThemes) {
 			WriteLog('GetThemeAttribute: warning: @activeThemes was FALSE');
