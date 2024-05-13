@@ -33,6 +33,7 @@ sub GetAuthorLink { # $authorKey ; returns avatar'ed link for an author id
 		WriteLog('GetAuthorLink: avatar_link_to_person_when_approved is TRUE');
 
 		my $authorPubKeyHash = DBGetAuthorPublicKeyHash($authorKey) || '';
+		#todo there is a bug here, if pubkey hash is missing, it shows empty
 
 		if ($authorPubKeyHash = IsItem($authorPubKeyHash)) {
 			# sanity check passed
