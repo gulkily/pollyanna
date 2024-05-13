@@ -1319,6 +1319,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			// if we're on the write page, or if the compose form is present
 			// we need to include the javascript for the compose form
 			if (GetConfig('setting/admin/php/route_minimum_score_to_write')) {
+				#todo this should be called ... to_write_notice, and the minimum score should be in setting/admin/php/post/write_minimum_score
 				WriteLog('route.php: minimum score to write is enabled');
 				$minimumScore = GetConfig('setting/admin/php/route_minimum_score_to_write');
 				require_once('cookie.php');
