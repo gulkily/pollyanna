@@ -339,7 +339,7 @@ function InjectJs ($html, $scriptNames, $injectMode = 'before', $htmlTag = '</bo
 	return $html;
 } # InjectJs()
 
-require_once('handle_not_found.php');
+include_once('handle_not_found.php');
 
 function ReadGetParams ($GET) { // does what's needed with $_GET, takes $_GET as parameter
 	#todo
@@ -975,7 +975,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 					if (GetConfig('setting/admin/php/route_show_cookie') && !$skipPrintedNotice) {
 						# cookie_notice {
-						require_once('cookie.php');
+						include_once('cookie.php');
 
 						$currentCookie = ''; #my
 						if (isset($cookie) && $cookie) {
@@ -1322,7 +1322,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 				#todo this should be called ... to_write_notice, and the minimum score should be in setting/admin/php/post/write_minimum_score
 				WriteLog('route.php: minimum score to write is enabled');
 				$minimumScore = GetConfig('setting/admin/php/route_minimum_score_to_write');
-				require_once('cookie.php');
+				include_once('cookie.php');
 				if ($cookie) {
 					WriteLog('route.php: cookie is set');
 					$score = GetScore($cookie);
@@ -1441,7 +1441,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			if (index($html, '</body>') != -1) {
 				#todo this is written fast and dirty and doesn't use cookie.php
 				# because there may be a conflict due to cookie.php being used via
-				# require_once() while $cookie being in local scope
+				# include_once() while $cookie being in local scope
 				# but eventually this should be rewritten to be less snowflake
 				#if (isset($cookie) && $cookie) {
 				if (isset($_COOKIE['cookie']) && $_COOKIE['cookie']) {
