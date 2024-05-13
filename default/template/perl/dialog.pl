@@ -5,6 +5,8 @@ use warnings;
 use 5.010;
 use utf8;
 
+require_once('dialog_builder.pl');
+
 # GetDialogX()
 #	 $body = what's inside the dialog
 # 	$title = title
@@ -133,7 +135,5 @@ sub GetDialogIcon { # $dialogName ; returns emoji-based icon for dialog
 		return '🌌';
 	}
 } # GetDialogIcon()
-
-require_once('dialog_builder.pl');
 
 1;
