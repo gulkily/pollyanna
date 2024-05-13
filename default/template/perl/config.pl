@@ -499,7 +499,7 @@ sub GetActiveThemes { # return list of active themes (config/setting/theme)
 # sub GetThemesList {
 # sub GetActiveThemesList {
 	WriteLog('GetActiveThemes()');
-	my $themesValue = GetConfig('theme');
+	my $themesValue = GetConfig('setting/theme');
 	if ($themesValue) {
 		$themesValue =~ s/[\s]+/ /g; # strip extra whitespace and convert to spaces
 		my @activeThemes = split(' ', $themesValue); # split by spaces
