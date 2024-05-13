@@ -79,19 +79,18 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 	#		overridden value is stored in local sub memo
 	#			this means all subsequent lookups now return $parameter
 	#
-
-#	this is janky, and doesn't work as expected
-#	eventually, it will be nice for dev mode to not rewrite
-#	the entire config tree on every rebuild
-#	and also not require a rebuild after a default change
-#		note: this is already possible, there's a config for it:
-#		$CONFIGDIR/admin/dev/skip_putconfig
-#	#todo
-#
-# CONFUSION WARNING there are two separate "unmemo" features,
-# one for the whole thing, another individual keys
-#
-# new "method": get_memo, returns the whole thing for debug output
+	#	this is janky, and doesn't work as expected
+	#	eventually, it will be nice for dev mode to not rewrite
+	#	the entire config tree on every rebuild
+	#	and also not require a rebuild after a default change
+	#		note: this is already possible, there's a config for it:
+	#		$CONFIGDIR/admin/dev/skip_putconfig
+	#	#todo
+	#
+	# CONFUSION WARNING there are two separate "unmemo" features,
+	# one for the whole thing, another individual keys
+	#
+	# new "method": get_memo, returns the whole thing for debug output
 
 	my $configName = shift;
 
