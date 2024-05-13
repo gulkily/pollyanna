@@ -543,9 +543,9 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 		WriteLog('GetThemeAttribute: @activeThemes is empty or $attributeName = unmemo; calling GetActiveThemes()' . '; caller = ' . join(',', caller));
 		@activeThemes = GetActiveThemes();
 		if (!@activeThemes) {
-			WriteLog('GetThemeAttribute: warning: @activeThemes was FALSE');
+			WriteLog('GetThemeAttribute: warning: after GetActiveThemes() called, @activeThemes was FALSE');
 		} else {
-			WriteLog('GetThemeAttribute: @activeThemes = ' . join(' ', @activeThemes));
+			WriteLog('GetThemeAttribute: after GetActiveThemes() called, @activeThemes = ' . join(' ', @activeThemes));
 		}
 	}
 
