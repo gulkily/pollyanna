@@ -356,6 +356,12 @@ if (GetConfig('setting/admin/php/route_enable')) {
 	$stalePageNotice = 0;
 	#$html = '';
 
+	$cookie = '';
+	if (GetConfig('setting/admin/php/route_cookie_enable')) {
+		# should this be route_cookie_enable?
+		include_once('cookie.php');
+	}
+
 	if (GetConfig('setting/admin/php/debug_do_not_use_cache')) {
 		$cacheOverrideFlag = 1;
 	}
@@ -451,8 +457,6 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			if ($path == '/welcome.html') {
 				if (GetConfig('setting/admin/php/route_welcome_desktop_logged_in')) {
 					// if logged in, replace welcome with desktop page
-					include_once('cookie.php');
-
 					if (isset($cookie) && $cookie) {
 						$path = '/desktop.html';
 					}
@@ -476,8 +480,6 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 			if ($path == '/upload.html') {
 				if (GetConfig('setting/admin/php/route_restrict_upload')) {
-					include_once('cookie.php');
-
 					if (isset($cookie) && $cookie) {
 						#ok
 					} else {
@@ -975,8 +977,6 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 					if (GetConfig('setting/admin/php/route_show_cookie') && !$skipPrintedNotice) {
 						# cookie_notice {
-						include_once('cookie.php');
-
 						$currentCookie = ''; #my
 						if (isset($cookie) && $cookie) {
 							$currentCookie = htmlspecialchars($cookie);
@@ -1322,8 +1322,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 				#todo this should be called ... to_write_notice, and the minimum score should be in setting/admin/php/post/write_minimum_score
 				WriteLog('route.php: minimum score to write is enabled');
 				$minimumScore = GetConfig('setting/admin/php/route_minimum_score_to_write');
-				include_once('cookie.php');
-				if ($cookie) {
+				if (isset($cookie) && $cookie) {
 					WriteLog('route.php: cookie is set');
 					$score = GetScore($cookie);
 					if ($score < $minimumScore) {
@@ -1355,9 +1354,6 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			// special handling for frmProfile (usually in /profile.html, /session.html, /welcome.html, or /desktop.html
 			// special handling for frmSession (usually in /profile.html, /session.html, /welcome.html, or /desktop.html
 			WriteLog('route.php: frmSession handler activated');
-
-			// we need cookies
-			include_once('cookie.php');
 
 			$handle = ''; // will store our handle
 			$fingerprint = ''; // will store our fingerprint
