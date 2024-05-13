@@ -1336,14 +1336,16 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							'<A NAME=maincontent></A>' . $minimumScoreMessage,
 							$html
 						);
-					} else {
+					} # if ($score < $minimumScore)
+					else {
 						WriteLog('route.php: score is greater than or equal to minimum score');
 					}
-				}
-			} else {
+				} # if ($cookie)
+			} # if (GetConfig('setting/admin/php/route_minimum_score_to_write'))
+			else {
 				$minimumScore = 0;
 			}
-		}
+		} # if ($path == '/write.html' || index($html, 'id=compose') != -1)
 
 		#if ($path == '/profile.html' || $path == '/welcome.html' || $path == '/desktop.html') {
 		#if ($path) { #todo #bug
