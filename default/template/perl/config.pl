@@ -140,7 +140,14 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 		return '';
 	}
 
+	#WriteLog('GetConfig: $configName BEFORE FixConfigName() is ' . $configName);
+	$configName = FixConfigName($configName);
+	#WriteLog('GetConfig: $configName AFTER FixConfigName() is ' . $configName);
+
 	if ($token && $token eq 'unmemo') {
+		# not sure if this is every called?
+		# it could be useful for changing config values during runtime
+
 		WriteLog('GetConfig: unmemo token found');
 
 		my $unmemoCount = 0;
@@ -155,22 +162,16 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 				$unmemoCount++;
 				$configLookup{'_unmemo_count'} = $unmemoCount;
 				return '';
-				#we return here because otherwise it calls a recursion loop
+				#we return here because otherwise it causes infinite recursion
 				#todo this should be fixed in the future when unmemo and no recursion flag can be used together
 			} else {
 				WriteLog('GetConfig: warning: unmemo requested for unused key. $configName = ' . $configName);
 			}
-#		} else {
-#			WriteLog('GetConfig: unmemo all!');
-#			%configLookup = ();
-#			$unmemoCount++;
-#			$configLookup{'_unmemo_count'} = $unmemoCount;
+		} # if ($configName)
+		else {
+			WriteLog('GetConfig: warning: unmemo requested for no key. $configName = ' . $configName);
 		}
-	}
-
-	#WriteLog('GetConfig: $configName BEFORE FixConfigName() is ' . $configName);
-	$configName = FixConfigName($configName);
-	#WriteLog('GetConfig: $configName AFTER FixConfigName() is ' . $configName);
+	} # if ($token && $token eq 'unmemo')
 
 	if ($token && ($token eq 'override')) {
 		WriteLog('GetConfig: override token detected');
@@ -182,8 +183,7 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 			WriteLog('GetConfig: override: %configLookup emptied');
 			$configLookup{$configName} = $parameter;
 
-			#test/debug
-			if (0) {
+			if (0) { #test/debug
 				my $testResult = GetConfig($configName);
 				WriteLog('GetConfig: override: testResult = ' . $testResult . '; $parameter = ' . $parameter . '; $configLookup{' . $configName . '} = ' . $configLookup{$configName});
 				if ($testResult ne $parameter) {
@@ -192,8 +192,9 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 				else {
 					WriteLog('GetConfig: override: sanity check PASSED: testResult == $parameter');
 				}
-			}
-		} else {
+			} # test/debug
+		} # if ($parameter || (defined($parameter) && ($parameter eq '' || $parameter == 0)))
+		else {
 			WriteLog('GetConfig: warning: $token was override, but no parameter. sanity check failed.');
 			return '';
 		}
@@ -210,7 +211,7 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 	}
 
 	if ($token ne 'no_theme_lookup') {
-		WriteLog("GetConfig: Trying GetThemeAttribute() first...");
+		WriteLog("GetConfig: no_theme_lookup: Trying GetThemeAttribute() first...");
 		if (
 			$configName ne "setting/theme" &&
 			substr($configName, 0, 6) ne 'theme/'
@@ -245,6 +246,7 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 	}
 
 	if (-e "$CONFIGDIR/$configName") {
+		# found in $CONFIGDIR/
 		# found a match in config directory
 		WriteLog("GetConfig: -e $CONFIGDIR/$configName returned true, proceeding to GetFile(), set \$configLookup{}, and return \$configValue");
 
@@ -286,8 +288,8 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 			$configLookup{$configName} = $configValue;
 			return $configValue;
 		}
-	} # found in $CONFIGDIR/
-	else {
+	} # if (-e "$CONFIGDIR/$configName")
+	else { # not found in $CONFIGDIR/
 		WriteLog("GetConfig: -e $CONFIGDIR/$configName returned false, looking in defaults...");
 
 		if (-e "$DEFAULTDIR/$configName") {
@@ -334,7 +336,7 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 				WriteLog('GetConfig: $tarCommandResult = ' . $tarCommandResult);
 
 				return GetConfig($configName);
-			}
+			} # if (substr($configName, 0, 16) eq 'template/js/lib/')
 
 			if (substr($configName, 0, 6) eq 'theme/' || substr($configName, 0, 7) eq 'string/') {
 				WriteLog('GetConfig: no default; $configName = ' . $configName);
@@ -348,7 +350,7 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 					return '';
 				}
 			}
-		}
+		} # not found in $DEFAULTDIR/
 	} # not found in $CONFIGDIR/
 
 	WriteLog('GetConfig: warning: reached end of function, which should not happen');
@@ -509,6 +511,7 @@ sub GetActiveThemes { # return list of active themes (config/setting/theme)
 		foreach my $themeName (@activeThemes) {
 			#todo some validation
 		}
+		WriteLog('GetActiveThemes: returning @activeThemes = ' . join(' ', @activeThemes));
 		return @activeThemes;
 	} else {
 		WriteLog('GetActiveThemes: warning: $themesValue is FALSE; caller = ' . join(',', caller));
