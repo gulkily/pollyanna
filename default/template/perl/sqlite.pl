@@ -965,7 +965,7 @@ sub DBGetItemType { # get type of item
 	}
 } # DBGetItemType()
 
-sub DBGetItemAuthor { # get author for item ($itemhash)
+sub DBGetItemAuthor { # $itemHash ; get author for item ($itemhash)
 	my $itemHash = shift;
 
 	if (!$itemHash || !IsItem($itemHash)) {
