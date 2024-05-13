@@ -7,6 +7,7 @@ use utf8;
 
 sub GetPageHeader { # $pageType, $title ; returns html for page header
 # sub GetHeader {
+# sub GetHtmlStart {
 	my $pageType = shift; # type of page
 	# my $pageHeaderHtml = '';
 

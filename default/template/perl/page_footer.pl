@@ -7,6 +7,7 @@ use utf8;
 
 sub GetPageFooter { # $pageType ; returns html for page footer
 # sub GetFooter {
+# sub GetHtmlEnd {
 
 # uses html/htmlend.template
 # adds menubar if setting/html/menu_bottom is true
