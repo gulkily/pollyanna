@@ -479,6 +479,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 
 				if ($gpgKey) {
 					# get author link for this gpg key
+					WriteLog('GetItemTemplate: about to call GetAuthorLink(), $gpgKey = ' . $gpgKey);
 					my $authorLink = trim(GetAuthorLink($gpgKey));
 					$statusBar =~ s/\$authorLink/$authorLink/g;
 				} else {
