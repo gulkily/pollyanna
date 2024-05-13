@@ -67,6 +67,14 @@ sub PutAuthorRepliesDialog { # $authorKey
 # sub GetInbox {
 	my $authorKey = shift;
 	#todo sanity
+
+	if ($authorKey = IsFingerprint($authorKey)) {
+		# sanity check passed
+	} else {
+		WriteLog('PutAuthorRepliesDialog: warning: $authorKey failed sanity check; caller = ' . join(',', caller));
+		return '';
+	}
+
 	WriteLog('PutAuthorRepliesDialog: $authorKey = ' . $authorKey . '; caller = ' . join(',', caller));
 
 	# require_once('dialog/author_replies.pl');
