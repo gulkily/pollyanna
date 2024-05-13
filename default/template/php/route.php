@@ -1314,6 +1314,37 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			$html = str_replace('<a id=btnMinimal href=#', '<a id=btnMinimal href="' . $beginnerPath . '"', $html);
 		}
 
+		if ($path == '/write.html' || index($html, 'id=compose') != -1) {
+			WriteLog('route.php: $path == /write.html || index($html, id=compose)');
+			// if we're on the write page, or if the compose form is present
+			// we need to include the javascript for the compose form
+			if (GetConfig('setting/admin/php/route_minimum_score_to_write')) {
+				WriteLog('route.php: minimum score to write is enabled');
+				$minimumScore = GetConfig('setting/admin/php/route_minimum_score_to_write');
+				require_once('cookie.php');
+				if ($cookie) {
+					WriteLog('route.php: cookie is set');
+					$score = GetScore($cookie);
+					if ($score < $minimumScore) {
+						WriteLog('route.php: score is less than minimum score');
+						#todo message should be templated
+						$message = 'Minimum score to write: ' . $minimumScore . '.' . '<br>Your score is ' . $score . '.';
+						$messageWithFieldset = '<fieldset>' . $message . '</fieldset>';
+						$minimumScoreMessage = GetDialogX($messageWithFieldset, 'Notice');
+						$html = str_ireplace(
+							'<A NAME=maincontent></A>',
+							'<A NAME=maincontent></A>' . $minimumScoreMessage,
+							$html
+						);
+					} else {
+						WriteLog('route.php: score is greater than or equal to minimum score');
+					}
+				}
+			} else {
+				$minimumScore = 0;
+			}
+		}
+
 		#if ($path == '/profile.html' || $path == '/welcome.html' || $path == '/desktop.html') {
 		#if ($path) { #todo #bug
 		#if ((index($html, 'frmProfile') != -1) || (index($html, 'frmSession') != -1)) { //
