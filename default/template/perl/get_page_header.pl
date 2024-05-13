@@ -209,7 +209,7 @@ sub GetPageHeaderWithoutMenu { # $pageType, $title ; returns html for page heade
 	$htmlStart =~ s/\$topMenu//g;
 	$htmlStart = str_replace('$titleHtml', $titleHtml, $htmlStart);
 	$htmlStart = str_replace('$title', $title, $htmlStart);
-	$htmlStart =~ s/\$styleSheet/$styleSheet/g;
+	$htmlStart = str_replace('$styleSheet', $styleSheet, $htmlStart);
 
 	return $htmlStart;
 }
