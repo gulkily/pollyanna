@@ -175,7 +175,22 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 		WriteLog('GetConfig: override token detected');
 		if ($parameter || (defined($parameter) && ($parameter eq '' || $parameter == 0))) {
 			WriteLog('GetConfig: override: setting $configLookup{' . $configName . '} := ' . $parameter);
+			%configLookup = ();
+			GetTemplate('clear_memo');
+			WriteLog('GetConfig: override: %configLookup emptied');
 			$configLookup{$configName} = $parameter;
+
+			#test/debug
+			if (0) {
+				my $testResult = GetConfig($configName);
+				WriteLog('GetConfig: override: testResult = ' . $testResult . '; $parameter = ' . $parameter . '; $configLookup{' . $configName . '} = ' . $configLookup{$configName});
+				if ($testResult ne $parameter) {
+					WriteLog('GetConfig: override: warning: testResult != $parameter');
+				}
+				else {
+					WriteLog('GetConfig: override: sanity check PASSED: testResult == $parameter');
+				}
+			}
 		} else {
 			WriteLog('GetConfig: warning: $token was override, but no parameter. sanity check failed.');
 			return '';
