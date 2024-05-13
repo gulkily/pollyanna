@@ -43,9 +43,9 @@ sub FixConfigName { # $configName ; prepend 'setting/' to config paths as approp
 	chomp $configName;
 
 	if (!$configName) {
-        WriteLog('FixConfigName: warning: $configName was FALSE; caller = ' . join(',', caller));
-        return '';
-    }
+		WriteLog('FixConfigName: warning: $configName was FALSE; caller = ' . join(',', caller));
+		return '';
+	}
 
 	$configName = trim($configName);
 
@@ -95,16 +95,16 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 	my $configName = shift;
 
 	if (!defined($configName)) {
-        WriteLog('GetConfig: warning: $configName was undefined; caller = ' . join(',', caller));
-        return '';
-    }
+		WriteLog('GetConfig: warning: $configName was undefined; caller = ' . join(',', caller));
+		return '';
+	}
 
 	chomp $configName;
 
 	if (!$configName) {
-        WriteLog('GetConfig: warning: $configName was FALSE; caller = ' . join(',', caller));
-        return '';
-    }
+		WriteLog('GetConfig: warning: $configName was FALSE; caller = ' . join(',', caller));
+		return '';
+	}
 
 	my $token = shift;
 	if ($token) {
@@ -584,7 +584,7 @@ sub GetThemeColor { # returns theme color based on setting/theme
 	}
 
 	if (GetConfig('html/monochrome')) { # GetThemeColor()
-	    #todo in hypercode theme + monochrome, the page background color should be #e9caad, to match hypercode_bg.jpg
+		#todo in hypercode theme + monochrome, the page background color should be #e9caad, to match hypercode_bg.jpg
 		if (index(lc($colorName), 'text') != -1 || index(lc($colorName), 'link') != -1) {
 			if (index(lc($colorName), 'back') != -1) {
 				return GetConfig('html/color/background'); # #BackgroundColor
