@@ -80,6 +80,9 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 	#			this means all subsequent lookups now return $parameter
 	#
 	#	this is janky, and doesn't work as expected
+	#	this also only works for one value at a time, because it clears
+	#	the entire memo when it's done lol
+	#
 	#	eventually, it will be nice for dev mode to not rewrite
 	#	the entire config tree on every rebuild
 	#	and also not require a rebuild after a default change
