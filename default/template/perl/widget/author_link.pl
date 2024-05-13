@@ -49,11 +49,12 @@ sub GetAuthorLink { # $authorKey ; returns avatar'ed link for an author id
 			} else {
 				WriteLog('GetAuthorLink: approve NOT found for $authorPubKeyHash = ' . $authorPubKeyHash);
 			}
-		} else {
+		} # if ($authorPubKeyHash = IsItem($authorPubKeyHash))
+		else {
 			WriteLog('GetAuthorLink: warning: sanity check failed on $authorPubKeyHash = ' . $authorPubKeyHash . '; caller = ' . join(',', caller));
 			return '';
 		}
-	}
+	} # if (GetConfig('setting/html/avatar_link_to_person_when_approved'))
 
 	if (!$authorAvatar) {
 		$authorAvatar = GetAvatar($authorKey);
