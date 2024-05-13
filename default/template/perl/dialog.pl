@@ -111,7 +111,7 @@ sub GetDialogX3 { # $body $title \%param
 	return GetDialogX2(\%param);
 } # GetDialogX3()
 
-sub GetDialogIcon {
+sub GetDialogIcon { # $dialogName ; returns emoji-based icon for dialog
 	my $dialogName = shift;
 	chomp $dialogName;
 
