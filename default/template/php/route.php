@@ -927,12 +927,16 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						// this allows the script to compare it to the ETag value
 						// returned by the server when requesting HEAD for current page
 						// fresh_js fresh.js
-						if (index($html, 'CheckIfFresh()') > -1) {
-							// only need to do it if the script is included in page
-							$md5 = md5_file($pathRel);
-							header('ETag: ' . $md5);
-							$html .= "<script><!-- window.myOwnETag = '$md5'; // --></script>";
-							// #todo this should probably be templated and added using InjectJs()
+						if (file_exists($pathRel)) {
+							if (index($html, 'CheckIfFresh()') > -1) {
+								// only need to do it if the script is included in page
+								$md5 = md5_file($pathRel);
+								header('ETag: ' . $md5);
+								$html .= "<script><!-- window.myOwnETag = '$md5'; // --></script>";
+								// #todo this should probably be templated and added using InjectJs()
+							}
+						} else {
+                        	WriteLog('route.php: etag: warning: no file at $pathRel = ' . $pathRel);
 						}
 					} # GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/fresh')
 
