@@ -25,6 +25,11 @@ sub GetHeaderStylesheet { # $pageType ; returns base stylesheet, plus extra styl
 	}
 	chomp $pageType;
 
+	if ($pageType eq 'unmemo') {
+		$baseStylesheet = GetStylesheet();
+		return '';
+	}
+
 	WriteLog('GetHeaderStylesheet: $pageType = ' . $pageType);
 
 	if ($pageType) {

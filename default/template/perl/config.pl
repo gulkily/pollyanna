@@ -132,9 +132,10 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 
 	state %configLookup;
 
-	if ($configName && ($configName eq 'unmemo')) {
+	if ($configName && ($configName eq 'unmemo')) { # GetConfig('unmemo')
 		WriteLog('GetConfig: FULL UNMEMO requested, removing %configLookup');
 		GetThemeAttribute('unmemo');
+		GetHeaderStylesheet('unmemo');
 		GetTemplate('unmemo');
 		undef %configLookup;
 		return '';
@@ -539,7 +540,12 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 	#my @activeThemes = split(' ', $themesValue);
 	state @activeThemes;
 
-	if (!@activeThemes || $attributeName eq 'unmemo') {
+	if ($attributeName eq 'unmemo') {
+		@activeThemes = GetActiveThemes();
+		return '';
+	}
+
+	if (!@activeThemes) {
 		WriteLog('GetThemeAttribute: @activeThemes is empty or $attributeName = unmemo; calling GetActiveThemes()' . '; caller = ' . join(',', caller));
 		@activeThemes = GetActiveThemes();
 		if (!@activeThemes) {
