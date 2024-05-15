@@ -34,7 +34,7 @@ sub GetWelcomePage {
 			# 512 is the maximum width of the image
 			# ilya is the alt text
 			# /image.html is the url it links to
-			my $imageTemplate = GetImageContainer2($image, 'ilya', '/image.html', 512);
+			my $imageTemplate = GetImageContainer2($image, 'ilya', '/label/welcome.html', 512);
 			if ($imageTemplate) {
 				$html = str_replace('<span id=home_image></span>', '<span class=image>' . $imageTemplate . '</span>', $html);
 			}

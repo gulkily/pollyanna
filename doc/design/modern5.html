@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Item by John</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
+    table {
+        border-collapse: collapse;
+        background-color: white;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    th {
+        background-color: #0056b3;
+        color: white;
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+    td {
+        padding: 20px;
+    }
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .statusbar {
+        padding: 10px 20px;
+        background-color: #e9ecef;
+    }
+    .topmenubar {
+        background-color: #f8f9fa;
+        padding: 10px 0;
+    }
+    .topmenubar a {
+        padding: 0 10px;
+    }
+    /* Responsive horizontal tiling */
+    @media (min-width: 800px) {
+        .container table {
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+    /* Dark mode styles */
+    @media (prefers-color-scheme: dark) {
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        table {
+            background-color: #242424;
+            box-shadow: 0 2px 10px rgba(255,255,255,0.1);
+        }
+        th {
+            background-color: #003366;
+        }
+        a {
+            color: #4da3ff;
+        }
+        .statusbar {
+            background-color: #333;
+        }
+        .topmenubar {
+            background-color: #333;
+        }
+        button {
+            background-color: #0056b3;
+        }
+        button:hover {
+            background-color: #003366;
+        }
+        textarea {
+            background-color: #333;
+            color: #ccc;
+        }
+    }
+</style>
+</head>
+<body>
+<main id="maincontent" class="container">
+
+<table>
+    <tr><th>This is a Test Item</th></tr>
+    <tr><td>This is a test item.</td></tr>
+    <tr><td>I'm writing another paragraph.</td></tr>
+    <tr class="statusbar">
+        <td>Posted by John at 23:48 <button>Like</button></td>
+    </tr>
+</table>
+
+<table>
+    <tr><th>Comment</th></tr>
+    <tr><td>
+        <form action="/post.html" method="post">
+            <textarea rows="4" cols="50" style="width: 100%;"></textarea>
+            <br>
+            <button type="submit">Send Reply</button>
+        </form>
+    </td></tr>
+</table>
+
+</main>
+</body>
+</html>
+

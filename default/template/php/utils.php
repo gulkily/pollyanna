@@ -129,19 +129,6 @@ function GetDir2 ($dirName) { # returns path to special directory specified
 	return '';
 } # GetDir()
 
-function GetSqliteDbName () {
-	# todo improve on this
-	$cacheDir = GetDir('cache');
-	$cacheVersion = GetMyCacheVersion();
-	if ($cacheDir && file_exists($cacheDir)) {
-		$sqliteDbName = $cacheDir . '/' . $cacheVersion . '/index.sqlite3';
-		return $sqliteDbName;
-	} else {
-		WriteLog('GetSqliteDbName: sanity check FAILED: $cacheDir does not exist');
-		return '';
-	}
-} # GetSqliteDbName()
-
 function uc ($string) { # uppercase, port of perl utility function
 	return strtoupper($string);
 } # uc()
@@ -150,42 +137,7 @@ function lc ($string) { # lowercase, port of perl utility function
 	return strtolower($string);
 } # lc()
 
-function SqliteEscape ($text) { # Escapes supplied text for use in sqlite query
-# Just changes ' to ''
-	WriteLog("SqliteEscape($text)");
-
-	if (isset($text)) {
-		$text = str_replace("'", "''", $text);
-	} else {
-		$text = '';
-	}
-
-	WriteLog('SqliteEscape: return ' . $text);
-
-	return $text;
-} # SqliteEscape()
-
-function SqliteGetValue ($query) { # Returns the first column from the first row returned by sqlite $query
-	# #todo should allow returning columns other than 0
-	# #todo this should use SqliteQuery()
-	# #todo this should allow @queryParams like the other procedures (note: this is php version, not perl)
-
-	WriteLog("SqliteGetValue($query)");
-
-	$sqliteDir = GetSqliteDbName();
-
-	#todo more sanity here
-
-	$command = 'sqlite3 "' . $sqliteDir . '" "' . $query . '"';
-	WriteLog('SqliteGetValue: $command = ' . $command);
-
-	$result = `$command`;
-	WriteLog('SqliteGetValue: $result = ' . $result);
-
-	return $result;
-} # SqliteGetValue()
-
-function IsFingerprint($key) {
+function IsFingerprint ($key) {
 	if (preg_match('/^([A-F0-9]{16})$/', $key, $itemHashMatch)) {
 		return 1;
 	} else {
@@ -193,28 +145,7 @@ function IsFingerprint($key) {
 	}
 } # IsFingerprint()
 
-function DBGetAuthorAlias ($key) { # returns author's alias
-// 	if (!IsFingerprint($key)) {
-// 		WriteLog('DBGetAuthorAlias: warning: called with invalid parameter! returning');
-// 		return;
-// 	} #todo re-add this sanity check
-	WriteLog("DBGetAuthorAlias($key)");
-
-	$key = SqliteEscape($key);
-
-	if ($key) {
-		$query = "SELECT alias FROM author_alias WHERE key = '$key'";
-		$returnValue = SqliteGetValue($query);
-
-		WriteLog('DBGetAuthorAlias: $returnValue = ' . $returnValue);
-
-		return $returnValue;
-	} else {
-		return "";
-	}
-} # DBGetAuthorAlias()
-
-function GetAlias($fingerprint, $noCache = 0) { # ; Returns alias for an identifier
+function GetAlias ($fingerprint, $noCache = 0) { # ; Returns alias for an identifier
 	WriteLog("GetAlias($fingerprint, $noCache)");
 
 	WriteLog('GetAlias: calling DBGetAuthorAlias()');
@@ -233,7 +164,26 @@ function GetAlias($fingerprint, $noCache = 0) { # ; Returns alias for an identif
 	}
 } # GetAlias()
 
-function AppendFile($file, $content) {
+function GetScore ($fingerprint, $noCache = 0) { # ; Returns alias for an identifier
+	WriteLog("GetScore($fingerprint, $noCache)");
+
+	WriteLog('GetScore: calling DBGetAuthorScore()');
+	$score = DBGetAuthorScore($fingerprint);
+
+	if ($score) {
+		$score = trim($score);
+		if ($score && length($score) > 24) {
+			$score = substr($score, 0, 24);
+		}
+
+		return $score;
+	} else {
+		$score = 0;
+		return $score;
+	}
+} # GetScore()
+
+function AppendFile ($file, $content) {
 // function AppendFile ($file, $content) {
 // function AppendToLog ($file, $content) {
 // function AppendToFile ($file, $content) {
@@ -1011,124 +961,7 @@ function RedirectWithResponse ($url, $message) { // redirects to page with serve
 	}
 } # RedirectWithResponse()
 
-function GetDialogX ( # body, title, headings, status, menu
-	$windowBody,
-	$windowTitle = '',
-	$columnHeadings = '',
-	$windowStatus = '',
-	$windowMenubarContent = ''
-) { // returns html for dialog template
-# function GetWindowTemplate {
-// uses template/window/standard.template by default
-
-	// stores number of columns if they exist
-	// if no columns, remains at 0
-	// whether there are columns or not determines:
-	// * column headers
-	// * colspan= in non-column cells
-	$contentColumnCount = 0;
-
-	// base template
-	$windowTemplate = GetTemplate('html/window/standard.template');
-
-	$showButtons = GetConfig('html/window_titlebar_buttons'); # titlebar hide and skip buttons;
-	WriteLog('GetDialogX: $showButtons = ' . $showButtons);
-
-	// titlebar, if there's a title
-	if ($windowTitle) {
-		WriteLog('GetDialogX: $windowTitle = ' . $windowTitle);
-		if (1 || $showButtons && GetConfig('admin/js/dragging')) {
-			WriteLog('GetDialogX: $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle . '; dragging = ' . GetConfig('admin/js/dragging'));
-			$windowTitlebar = GetTemplate('html/window/titlebar.template');
-			$windowTitlebar = str_replace('$windowTitle', $windowTitle, $windowTitlebar);
-			$windowTemplate = str_replace('$windowTitlebar', $windowTitlebar, $windowTemplate);
-
-			if (GetConfig('setting/admin/js/enable')) {
-				#todo maybe should depend on another setting?
-				$windowTemplate = AddAttributeToTag($windowTemplate, 'a', 'onclick', "if (window.ShowAll && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;");
-			}
-		} else {
-			WriteLog('GetDialogX: $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle . '; dragging = ' . GetConfig('admin/js/dragging'));
-		}
-	} else {
-		WriteLog('GetDialogX: warning: $windowTitle is FALSE');
-		$windowTemplate = str_replace('$windowTitlebar', '', $windowTemplate);
-	}
-
-	// menubar, if there is menubar content
-	if ($windowMenubarContent) {
-		$windowMenubar = GetTemplate('html/window/menubar.template');
-		$windowMenubar = str_replace('$windowMenubarContent', $windowMenubarContent, $windowMenubar);
-
-		$windowTemplate = str_replace('$windowMenubar', $windowMenubar, $windowTemplate);
-	} else {
-		$windowTemplate = str_replace('$windowMenubar', '', $windowTemplate);
-		//#todo currently results in an empty menubar
-	}
-
-	// column headings from the $columnHeadings variable
-	if ($columnHeadings) {
-		$windowHeaderTemplate = GetTemplate('html/window/header_wrapper.template');
-		$windowHeaderColumns = '';
-		$columnsArray = explode(',', $columnHeadings);
-
-		$printedColumnsCount = 0;
-		foreach ($columnsArray as $columnCaption) {
-			$printedColumnsCount++;
-
-			$columnHeaderTemplate = GetTemplate('html/window/header_column.template');
-			if ($printedColumnsCount >= count($columnsArray)) {
-				$columnCaption .= '<br>'; //# for no-table browsers
-			}
-
-			$columnHeaderTemplate = str_replace('$headerCaption', $columnCaption, $columnHeaderTemplate);
-			$windowHeaderColumns .= $columnHeaderTemplate;
-		}
-
-		$windowHeaderTemplate = str_replace('$windowHeadings', $windowHeaderColumns, $windowHeaderTemplate);
-		$windowTemplate = str_replace('$windowHeader', $windowHeaderTemplate, $windowTemplate);
-
-		$contentColumnCount = count($columnsArray);
-	} else {
-		$windowTemplate = str_replace('$windowHeader', '', $windowTemplate);
-		$contentColumnCount = 0;
-	}
-
-	// main window content, aka body
-	if ($windowBody) {
-		if (index(strtolower($windowBody), '<tr') == -1) {
-			// put content into a table row and cell if missing
-			$windowBody = '<tr class=content><td>' . $windowBody . '</td></tr>';
-		}
-
-		$windowTemplate = str_replace('$windowBody', $windowBody, $windowTemplate);
-	} else {
-		$windowTemplate = str_replace('$windowBody', '', $windowTemplate);
-	}
-
-	// status bar
-	if ($windowStatus) {
-		$windowStatusTemplate = GetTemplate('html/window/status.template');
-		$windowStatusTemplate = str_replace('$windowStatus', $windowStatus, $windowStatusTemplate);
-		$windowTemplate = str_replace('$windowStatus', $windowStatusTemplate, $windowTemplate);
-	} else {
-		$windowTemplate = str_replace('$windowStatus', '', $windowTemplate);
-	}
-
-	// fill in the column count if necessary
-	if ($contentColumnCount) {
-		$windowTemplate = str_replace('$contentColumnCount', $contentColumnCount, $windowTemplate);
-	} else {
-		$windowTemplate = str_replace('$contentColumnCount', '', $windowTemplate);
-	}
-
-	$windowTemplate = str_replace('$colorWindow', GetThemeColor('window'), $windowTemplate);
-	$windowTemplate = str_replace('$colorTitlebarText', GetThemeColor('titlebar_text'), $windowTemplate);
-	$windowTemplate = str_replace('$colorTitlebar', GetThemeColor('titlebar'), $windowTemplate);
-	$windowTemplate = str_replace('$dialogAnchor', '', $windowTemplate);
-
-	return $windowTemplate;
-} # GetDialogX()
+require_once('dialog.php');
 
 function GetActiveThemes () { # return list of active themes (from config/setting/theme)
 # function GetThemes () {
@@ -1962,21 +1795,4 @@ function ForkWithLoadingPage ($path) {
 	}
 } // ForkWithLoadingPage()
 
-function SqliteQueryBasic ($query) {
-	if (!class_exists('SQLite3') || !extension_loaded('sqlite3')) {
-		// The SQLite3 class or the SQLite extension is not available.
-		// You can issue a warning or handle this situation as needed.
-		// For example, you can log a message or throw an exception.
-		WriteLog('SqliteQueryBasic: warning: SQLite3 class or SQLite extension is not available!');
-		return '';
-	}
-
-	#todo more sanity
-
-	$CACHEDIR = GetDir('cache');
-	$DB = "$CACHEDIR/b/index.sqlite3";
-
-	$db = new SQLite3($DB);
-	$result = $db->query($query);
-	$db->close();
-} # SqliteQueryBasic()
+require_once('sqlite.php');

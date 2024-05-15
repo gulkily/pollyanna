@@ -137,7 +137,8 @@ else {
 			}
 			WriteLog('cookie.php: $originValue = ' . $originValue . '; $redirectPath = ' . $redirectPath);
 
-			RedirectWithResponse($redirectPath, 'Success! You have signed in.');
+			# this caused a bug, where some pages were replaced with the write page. #todo fix
+			#RedirectWithResponse($redirectPath, 'Success! You have signed in.');
 		}
 	} // if (isset($_COOKIE['test']) && $_COOKIE['test'])
 	else {

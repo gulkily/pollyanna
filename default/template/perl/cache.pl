@@ -165,6 +165,13 @@ sub ExpireAvatarCache { # $fingerprint ; removes all avatar caches
 # sub ExpireAliasCache {
 
 	my $key = shift;
+
+	if (!defined($key) || $key eq '' || !$key) {
+		WriteLog('ExpireAvatarCache: warning: sanity check failed on $key; caller = ' . join(',', caller));
+		return 0;
+	}
+	#todo more sanity checks
+
 	WriteLog("ExpireAvatarCache($key); caller = " . join(',', caller));
 	if (!IsFingerprint($key) && $key ne '*') {
 		WriteLog('ExpireAvatarCache: warning: sanity check failed');

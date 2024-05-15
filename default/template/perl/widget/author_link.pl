@@ -33,6 +33,7 @@ sub GetAuthorLink { # $authorKey ; returns avatar'ed link for an author id
 		WriteLog('GetAuthorLink: avatar_link_to_person_when_approved is TRUE');
 
 		my $authorPubKeyHash = DBGetAuthorPublicKeyHash($authorKey) || '';
+		#todo there is a bug here, if pubkey hash is missing, it shows empty
 
 		if ($authorPubKeyHash = IsItem($authorPubKeyHash)) {
 			# sanity check passed
@@ -48,14 +49,17 @@ sub GetAuthorLink { # $authorKey ; returns avatar'ed link for an author id
 			} else {
 				WriteLog('GetAuthorLink: approve NOT found for $authorPubKeyHash = ' . $authorPubKeyHash);
 			}
-		} else {
+		} # if ($authorPubKeyHash = IsItem($authorPubKeyHash))
+		else {
 			WriteLog('GetAuthorLink: warning: sanity check failed on $authorPubKeyHash = ' . $authorPubKeyHash . '; caller = ' . join(',', caller));
-			return '';
+			#todo do something here?
+			#return '';
 		}
-	}
+	} # if (GetConfig('setting/html/avatar_link_to_person_when_approved'))
 
 	if (!$authorAvatar) {
 		$authorAvatar = GetAvatar($authorKey);
+		#todo this should account for an empty avatar
 	}
 
 	if (!$authorAvatar || trim($authorAvatar) eq '') {
@@ -76,8 +80,10 @@ sub GetAuthorLink { # $authorKey ; returns avatar'ed link for an author id
 
 	$authorAvatar = trim($authorAvatar);
 
-	$authorLink =~ s/\$authorUrl/$authorUrl/g;
-	$authorLink =~ s/\$authorAvatar/$authorAvatar/g;
+	#$authorLink =~ s/\$authorUrl/$authorUrl/g;
+	$authorLink = str_replace('$authorUrl', $authorUrl, $authorLink);
+	#$authorLink =~ s/\$authorAvatar/$authorAvatar/g;
+	$authorLink = str_replace('$authorAvatar', $authorAvatar, $authorLink);
 
 	return $authorLink;
 } # GetAuthorLink()

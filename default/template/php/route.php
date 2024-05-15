@@ -254,10 +254,10 @@ function InjectJs ($html, $scriptNames, $injectMode = 'before', $htmlTag = '</bo
 			$scriptTemplate = str_replace('$colorSuccessVoteUnsigned', $colorSuccessVoteUnsigned, $scriptTemplate);
 			$scriptTemplate = str_replace('$colorSuccessVoteSigned', $colorSuccessVoteSigned, $scriptTemplate);
 
-            $postUrl = GetConfig('setting/admin/post/post_url'); #my
-            if ($postUrl != '/post.html') {
-                $scriptTemplate = str_replace('/post.html', $postUrl, $scriptTemplate);
-            }
+			$postUrl = GetConfig('setting/admin/post/post_url'); #my
+			if ($postUrl != '/post.html') {
+				$scriptTemplate = str_replace('/post.html', $postUrl, $scriptTemplate);
+			}
 		}
 		// #todo finish porting this when GetRootAdminKey() is available in php
 		//		if ($script == 'profile') {
@@ -339,7 +339,7 @@ function InjectJs ($html, $scriptNames, $injectMode = 'before', $htmlTag = '</bo
 	return $html;
 } # InjectJs()
 
-require_once('handle_not_found.php');
+include_once('handle_not_found.php');
 
 function ReadGetParams ($GET) { // does what's needed with $_GET, takes $_GET as parameter
 	#todo
@@ -355,6 +355,11 @@ if (GetConfig('setting/admin/php/route_enable')) {
 	$skipPrintedNotice = 0;
 	$stalePageNotice = 0;
 	#$html = '';
+
+	$cookie = '';
+	if (GetConfig('setting/admin/php/route_cookie_enable')) {
+		include_once('cookie.php');
+	}
 
 	if (GetConfig('setting/admin/php/debug_do_not_use_cache')) {
 		$cacheOverrideFlag = 1;
@@ -451,8 +456,6 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			if ($path == '/welcome.html') {
 				if (GetConfig('setting/admin/php/route_welcome_desktop_logged_in')) {
 					// if logged in, replace welcome with desktop page
-					include_once('cookie.php');
-
 					if (isset($cookie) && $cookie) {
 						$path = '/desktop.html';
 					}
@@ -476,8 +479,6 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 			if ($path == '/upload.html') {
 				if (GetConfig('setting/admin/php/route_restrict_upload')) {
-					include_once('cookie.php');
-
 					if (isset($cookie) && $cookie) {
 						#ok
 					} else {
@@ -568,13 +569,13 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			########################################################
 			########################################################
 
-            // 			if ( $path == '/a.gif' || $path == '/p.gif' ) {
-            // 				if (time() % 2) {
-            // 					$html = file_get_contents('404.html');
-            // 					header("HTTP/1.0 404 Not Found");
-            // 					exit;
-            // 				}
-            // 			}
+			// 			if ( $path == '/a.gif' || $path == '/p.gif' ) {
+			// 				if (time() % 2) {
+			// 					$html = file_get_contents('404.html');
+			// 					header("HTTP/1.0 404 Not Found");
+			// 					exit;
+			// 				}
+			// 			}
 
 
 			if (
@@ -736,32 +737,32 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							isset($_GET['chkRefreshFrontend']) &&
 							isset($_GET['btnRefreshFrontend'])
 						) {
-                            $refreshFrontendStartTime = time();
-                            $refreshFrontendLog = DoRefreshFrontend();
-                            $refreshFrontendFinishTime = time();
-                            $refreshFrontendDuration = $reindexFinishTime - $reindexStartTime;
+							$refreshFrontendStartTime = time();
+							$refreshFrontendLog = DoRefreshFrontend();
+							$refreshFrontendFinishTime = time();
+							$refreshFrontendDuration = $reindexFinishTime - $reindexStartTime;
 
-                            WriteLog('route.php: refreshFrontendLog = ' . $refreshFrontendLog);
+							WriteLog('route.php: refreshFrontendLog = ' . $refreshFrontendLog);
 
-                            /* my */ $refreshFrontendLogSaved = ProcessNewComment($refreshFrontendLog, '');
-                            ProcessNewComment("Rebuild Frontend log metadata\n-- \n>>$reindexLogSaved\n#textart\ntitle: Rebuild Frontend finished at $refreshFrontendFinishTime", '');
-                            RedirectWithResponse(GetHtmlFilename($refreshFrontendLogSaved), "Rebuild Frontend finished! <small>in $refreshFrontendDuration"."s</small>");
+							/* my */ $refreshFrontendLogSaved = ProcessNewComment($refreshFrontendLog, '');
+							ProcessNewComment("Rebuild Frontend log metadata\n-- \n>>$reindexLogSaved\n#textart\ntitle: Rebuild Frontend finished at $refreshFrontendFinishTime", '');
+							RedirectWithResponse(GetHtmlFilename($refreshFrontendLogSaved), "Rebuild Frontend finished! <small>in $refreshFrontendDuration"."s</small>");
 						}
 
 						if (
 							isset($_GET['chkUpgrade']) &&
 							isset($_GET['btnUpgrade'])
 						) {
-                            #$refreshFrontendStartTime = time();
-                            #$refreshFrontendLog = DoRefreshFrontend();
-                            #$refreshFrontendFinishTime = time();
-                            #$refreshFrontendDuration = $reindexFinishTime - $reindexStartTime;
+							#$refreshFrontendStartTime = time();
+							#$refreshFrontendLog = DoRefreshFrontend();
+							#$refreshFrontendFinishTime = time();
+							#$refreshFrontendDuration = $reindexFinishTime - $reindexStartTime;
 
-                            WriteLog('route.php: upgrade = 1');
+							WriteLog('route.php: upgrade = 1');
 
-                            #/* my */ $refreshFrontendLogSaved = ProcessNewComment($refreshFrontendLog, '');
-                            #ProcessNewComment("Rebuild Frontend log metadata\n-- \n>>$reindexLogSaved\n#textart\ntitle: Rebuild Frontend finished at $refreshFrontendFinishTime", '');
-                            #RedirectWithResponse(GetHtmlFilename($refreshFrontendLogSaved), "Rebuild Frontend finished! <small>in $refreshFrontendDuration"."s</small>");
+							#/* my */ $refreshFrontendLogSaved = ProcessNewComment($refreshFrontendLog, '');
+							#ProcessNewComment("Rebuild Frontend log metadata\n-- \n>>$reindexLogSaved\n#textart\ntitle: Rebuild Frontend finished at $refreshFrontendFinishTime", '');
+							#RedirectWithResponse(GetHtmlFilename($refreshFrontendLogSaved), "Rebuild Frontend finished! <small>in $refreshFrontendDuration"."s</small>");
 						}
 						else {
 							# nothing
@@ -878,9 +879,9 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						}
 
 						if (index($html, 'You are seeing this placeholder page') != -1) {
-                            // this special string appears in placeholder file generated by post.php
-                            // if string is found, try to call pages.pl to generate file again
-                            // the file is removed first... this is sub-optimal, but works for now
+							// this special string appears in placeholder file generated by post.php
+							// if string is found, try to call pages.pl to generate file again
+							// the file is removed first... this is sub-optimal, but works for now
 							WriteLog('route.php: found placeholder page, trying to replace it. $path = .' . $path);
 
 							#unlink('.' . $path); #todo
@@ -926,12 +927,16 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						// this allows the script to compare it to the ETag value
 						// returned by the server when requesting HEAD for current page
 						// fresh_js fresh.js
-						if (index($html, 'CheckIfFresh()') > -1) {
-							// only need to do it if the script is included in page
-							$md5 = md5_file($pathRel);
-							header('ETag: ' . $md5);
-							$html .= "<script><!-- window.myOwnETag = '$md5'; // --></script>";
-							// #todo this should probably be templated and added using InjectJs()
+						if (file_exists($pathRel)) {
+							if (index($html, 'CheckIfFresh()') > -1) {
+								// only need to do it if the script is included in page
+								$md5 = md5_file($pathRel);
+								header('ETag: ' . $md5);
+								$html .= "<script><!-- window.myOwnETag = '$md5'; // --></script>";
+								// #todo this should probably be templated and added using InjectJs()
+							}
+						} else {
+                        	WriteLog('route.php: etag: warning: no file at $pathRel = ' . $pathRel);
 						}
 					} # GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/fresh')
 
@@ -973,6 +978,27 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						$skipPrintedNotice = 1;
 					}
 
+					if (GetConfig('setting/admin/php/route_show_cookie') && !$skipPrintedNotice) {
+						# cookie_notice {
+						$currentCookie = ''; #my
+						if (isset($cookie) && $cookie) {
+							$currentCookie = htmlspecialchars($cookie);
+						} else {
+							$currentCookie = 'none';
+						}
+
+						$cookieLookup = '';
+						if ($cookie) {
+							$cookieLookup .= '<br>Alias: ' . GetAlias($cookie);
+							$cookieLookup .= '<br>Score: ' . GetScore($cookie);
+						}
+
+						$cookieNotice = 'Cookie: ' . $currentCookie . $cookieLookup;
+						$cookieNotice = AddAttributeToTag(GetDialogX($cookieNotice, 'CookieInfo', '', '', ''), 'table', 'id', 'CookieInfo');
+
+						$html = str_ireplace('</body>', $cookieNotice . '</body>', $html);
+					}
+
 					if (GetConfig('setting/admin/php/route_notify_printed_time') && !$skipPrintedNotice) { # route.php -- page printed time notice
 						# this should be in a template,
 						# but it would be very awkward to make at this time
@@ -981,6 +1007,9 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						#($fileCacheTime == 1 ? 's' : 's') .
 						#(time() + 10) .
 						# Printed:
+						# show_printed {
+						# if ($printedNotice) {
+						# printednotice {
 
 						#my
 						$printedEpoch = file_exists($pathRel) ? filemtime($pathRel) : '';
@@ -1288,6 +1317,39 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			$html = str_replace('<a id=btnMinimal href=#', '<a id=btnMinimal href="' . $beginnerPath . '"', $html);
 		}
 
+		if ($path == '/write.html' || index($html, 'id=compose') != -1) {
+			WriteLog('route.php: $path == /write.html || index($html, id=compose)');
+			// if we're on the write page, or if the compose form is present
+			// we need to include the javascript for the compose form
+			if (GetConfig('setting/admin/php/route_minimum_score_to_write')) {
+				#todo this should be called ... to_write_notice, and the minimum score should be in setting/admin/php/post/write_minimum_score
+				WriteLog('route.php: minimum score to write is enabled');
+				$minimumScore = GetConfig('setting/admin/php/route_minimum_score_to_write');
+				if (isset($cookie) && $cookie) {
+					WriteLog('route.php: cookie is set');
+					$score = GetScore($cookie);
+					if ($score < $minimumScore) {
+						WriteLog('route.php: score is less than minimum score');
+						#todo message should be templated
+						$message = 'Minimum score to write: ' . $minimumScore . '.' . '<br>Your score is ' . $score . '.';
+						$messageWithFieldset = '<fieldset>' . $message . '</fieldset>';
+						$minimumScoreMessage = GetDialogX($messageWithFieldset, 'Notice');
+						$html = str_ireplace(
+							'<A NAME=maincontent></A>',
+							'<A NAME=maincontent></A>' . $minimumScoreMessage,
+							$html
+						);
+					} # if ($score < $minimumScore)
+					else {
+						WriteLog('route.php: score is greater than or equal to minimum score');
+					}
+				} # if ($cookie)
+			} # if (GetConfig('setting/admin/php/route_minimum_score_to_write'))
+			else {
+				$minimumScore = 0;
+			}
+		} # if ($path == '/write.html' || index($html, 'id=compose') != -1)
+
 		#if ($path == '/profile.html' || $path == '/welcome.html' || $path == '/desktop.html') {
 		#if ($path) { #todo #bug
 		#if ((index($html, 'frmProfile') != -1) || (index($html, 'frmSession') != -1)) { //
@@ -1295,9 +1357,6 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			// special handling for frmProfile (usually in /profile.html, /session.html, /welcome.html, or /desktop.html
 			// special handling for frmSession (usually in /profile.html, /session.html, /welcome.html, or /desktop.html
 			WriteLog('route.php: frmSession handler activated');
-
-			// we need cookies
-			include_once('cookie.php');
 
 			$handle = ''; // will store our handle
 			$fingerprint = ''; // will store our fingerprint
@@ -1379,6 +1438,10 @@ if (GetConfig('setting/admin/php/route_enable')) {
 		if (GetConfig('setting/admin/php/cookie_inbox')) {
 			WriteLog('route.php: cookie_inbox is TRUE');
 			if (index($html, '</body>') != -1) {
+				#todo this is written fast and dirty and doesn't use cookie.php
+				# because there may be a conflict due to cookie.php being used via
+				# include_once() while $cookie being in local scope
+				# but eventually this should be rewritten to be less snowflake
 				#if (isset($cookie) && $cookie) {
 				if (isset($_COOKIE['cookie']) && $_COOKIE['cookie']) {
 					WriteLog('route.php: cookie_inbox: $_COOKIE[cookie] is TRUE');
@@ -1540,7 +1603,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 				WriteLog('route.php: $_COOKIE[show_advanced] = ' . ( isset( $_COOKIE['show_advanced']) ? $_COOKIE['show_advanced'] : 'UNDEFINED' ) ) ;
 
 				$assistCss .= ".advanced, .admin { display:none }\n";
-                // $assistCss .= ".advanced, .admin, .heading, .menubar { display:none }\n";
+				// $assistCss .= ".advanced, .admin, .heading, .menubar { display:none }\n";
 				#$assistCss .= ".advanced, .admin{ display: none; background-color: $colorHighlightAdvanced }\n";
 				// #todo templatify
 			}
@@ -1632,7 +1695,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							if (file_exists("$htmlDir/dialog/" . $dialogName . '.html')) {
 								# cool
 							} else {
-							    WriteLog('route.php: calling HandleNotFound(/dialog/'.$dialogName.'.html)');
+								WriteLog('route.php: calling HandleNotFound(/dialog/'.$dialogName.'.html)');
 								HandleNotFound("/dialog/" . $dialogName . ".html", '');
 							}
 							$dialogsTogether .= GetFile("$htmlDir/dialog/" . $dialogName . '.html');

@@ -1,3 +1,25 @@
+
+function DBGetAuthorInfo ($key) { # returns author's alias
+// 	if (!IsFingerprint($key)) {
+// 		WriteLog('DBGetAuthorInfo: warning: called with invalid parameter! returning');
+// 		return;
+// 	} #todo re-add this sanity check
+	WriteLog("DBGetAuthorInfo($key)");
+
+	$key = SqliteEscape($key);
+
+	if ($key) {
+		$query = "SELECT alias FROM author_alias WHERE key = '$key'";
+		$returnValue = SqliteGetValue($query);
+
+		WriteLog('DBGetAuthorInfo: $returnValue = ' . $returnValue);
+
+		return $returnValue;
+	} else {
+		return "";
+	}
+} # DBGetAuthorInfo()
+
 		if (GetConfig('setting/admin/php/route_show_active_user')) { #todo config
 			// we need cookies
 			include_once('cookie.php');

@@ -1,0 +1,6 @@
+<div class="dialog">
+	<div class="titlebar"></div>
+	<div class="content"></div>
+	<div class="statusbar"></div>
+</div>
+

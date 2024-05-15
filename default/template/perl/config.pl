@@ -43,9 +43,9 @@ sub FixConfigName { # $configName ; prepend 'setting/' to config paths as approp
 	chomp $configName;
 
 	if (!$configName) {
-        WriteLog('FixConfigName: warning: $configName was FALSE; caller = ' . join(',', caller));
-        return '';
-    }
+		WriteLog('FixConfigName: warning: $configName was FALSE; caller = ' . join(',', caller));
+		return '';
+	}
 
 	$configName = trim($configName);
 
@@ -79,33 +79,35 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 	#		overridden value is stored in local sub memo
 	#			this means all subsequent lookups now return $parameter
 	#
-
-#	this is janky, and doesn't work as expected
-#	eventually, it will be nice for dev mode to not rewrite
-#	the entire config tree on every rebuild
-#	and also not require a rebuild after a default change
-#		note: this is already possible, there's a config for it:
-#		$CONFIGDIR/admin/dev/skip_putconfig
-#	#todo
-#
-# CONFUSION WARNING there are two separate "unmemo" features,
-# one for the whole thing, another individual keys
-#
-# new "method": get_memo, returns the whole thing for debug output
+	#	this is janky, and doesn't work as expected
+	#	this also only works for one value at a time, because it clears
+	#	the entire memo when it's done lol
+	#
+	#	eventually, it will be nice for dev mode to not rewrite
+	#	the entire config tree on every rebuild
+	#	and also not require a rebuild after a default change
+	#		note: this is already possible, there's a config for it:
+	#		$CONFIGDIR/admin/dev/skip_putconfig
+	#	#todo
+	#
+	# CONFUSION WARNING there are two separate "unmemo" features,
+	# one for the whole thing, another individual keys
+	#
+	# new "method": get_memo, returns the whole thing for debug output
 
 	my $configName = shift;
 
 	if (!defined($configName)) {
-        WriteLog('GetConfig: warning: $configName was undefined; caller = ' . join(',', caller));
-        return '';
-    }
+		WriteLog('GetConfig: warning: $configName was undefined; caller = ' . join(',', caller));
+		return '';
+	}
 
 	chomp $configName;
 
 	if (!$configName) {
-        WriteLog('GetConfig: warning: $configName was FALSE; caller = ' . join(',', caller));
-        return '';
-    }
+		WriteLog('GetConfig: warning: $configName was FALSE; caller = ' . join(',', caller));
+		return '';
+	}
 
 	my $token = shift;
 	if ($token) {
@@ -132,12 +134,20 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 
 	if ($configName && ($configName eq 'unmemo')) {
 		WriteLog('GetConfig: FULL UNMEMO requested, removing %configLookup');
-		#unmemo one particular config
+		GetThemeAttribute('unmemo');
+		GetTemplate('unmemo');
 		undef %configLookup;
 		return '';
 	}
 
+	#WriteLog('GetConfig: $configName BEFORE FixConfigName() is ' . $configName);
+	$configName = FixConfigName($configName);
+	#WriteLog('GetConfig: $configName AFTER FixConfigName() is ' . $configName);
+
 	if ($token && $token eq 'unmemo') {
+		# not sure if this is every called?
+		# it could be useful for changing config values during runtime
+
 		WriteLog('GetConfig: unmemo token found');
 
 		my $unmemoCount = 0;
@@ -152,29 +162,39 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 				$unmemoCount++;
 				$configLookup{'_unmemo_count'} = $unmemoCount;
 				return '';
-				#we return here because otherwise it calls a recursion loop
+				#we return here because otherwise it causes infinite recursion
 				#todo this should be fixed in the future when unmemo and no recursion flag can be used together
 			} else {
 				WriteLog('GetConfig: warning: unmemo requested for unused key. $configName = ' . $configName);
 			}
-#		} else {
-#			WriteLog('GetConfig: unmemo all!');
-#			%configLookup = ();
-#			$unmemoCount++;
-#			$configLookup{'_unmemo_count'} = $unmemoCount;
+		} # if ($configName)
+		else {
+			WriteLog('GetConfig: warning: unmemo requested for no key. $configName = ' . $configName);
 		}
-	}
-
-	#WriteLog('GetConfig: $configName BEFORE FixConfigName() is ' . $configName);
-	$configName = FixConfigName($configName);
-	#WriteLog('GetConfig: $configName AFTER FixConfigName() is ' . $configName);
+	} # if ($token && $token eq 'unmemo')
 
 	if ($token && ($token eq 'override')) {
 		WriteLog('GetConfig: override token detected');
 		if ($parameter || (defined($parameter) && ($parameter eq '' || $parameter == 0))) {
 			WriteLog('GetConfig: override: setting $configLookup{' . $configName . '} := ' . $parameter);
+			%configLookup = ();
+			GetTemplate('unmemo');
+			GetThemeAttribute('unmemo');
+			WriteLog('GetConfig: override: %configLookup emptied');
 			$configLookup{$configName} = $parameter;
-		} else {
+
+			if (0) { #test/debug
+				my $testResult = GetConfig($configName);
+				WriteLog('GetConfig: override: testResult = ' . $testResult . '; $parameter = ' . $parameter . '; $configLookup{' . $configName . '} = ' . $configLookup{$configName});
+				if ($testResult ne $parameter) {
+					WriteLog('GetConfig: override: warning: testResult != $parameter');
+				}
+				else {
+					WriteLog('GetConfig: override: sanity check PASSED: testResult == $parameter');
+				}
+			} # test/debug
+		} # if ($parameter || (defined($parameter) && ($parameter eq '' || $parameter == 0)))
+		else {
 			WriteLog('GetConfig: warning: $token was override, but no parameter. sanity check failed.');
 			return '';
 		}
@@ -191,7 +211,7 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 	}
 
 	if ($token ne 'no_theme_lookup') {
-		WriteLog("GetConfig: Trying GetThemeAttribute() first...");
+		WriteLog("GetConfig: no_theme_lookup: Trying GetThemeAttribute() first...");
 		if (
 			$configName ne "setting/theme" &&
 			substr($configName, 0, 6) ne 'theme/'
@@ -226,6 +246,7 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 	}
 
 	if (-e "$CONFIGDIR/$configName") {
+		# found in $CONFIGDIR/
 		# found a match in config directory
 		WriteLog("GetConfig: -e $CONFIGDIR/$configName returned true, proceeding to GetFile(), set \$configLookup{}, and return \$configValue");
 
@@ -267,8 +288,8 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 			$configLookup{$configName} = $configValue;
 			return $configValue;
 		}
-	} # found in $CONFIGDIR/
-	else {
+	} # if (-e "$CONFIGDIR/$configName")
+	else { # not found in $CONFIGDIR/
 		WriteLog("GetConfig: -e $CONFIGDIR/$configName returned false, looking in defaults...");
 
 		if (-e "$DEFAULTDIR/$configName") {
@@ -315,7 +336,7 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 				WriteLog('GetConfig: $tarCommandResult = ' . $tarCommandResult);
 
 				return GetConfig($configName);
-			}
+			} # if (substr($configName, 0, 16) eq 'template/js/lib/')
 
 			if (substr($configName, 0, 6) eq 'theme/' || substr($configName, 0, 7) eq 'string/') {
 				WriteLog('GetConfig: no default; $configName = ' . $configName);
@@ -329,7 +350,7 @@ sub GetConfig { # $configName || 'unmemo', $token, [$parameter] ;  gets configur
 					return '';
 				}
 			}
-		}
+		} # not found in $DEFAULTDIR/
 	} # not found in $CONFIGDIR/
 
 	WriteLog('GetConfig: warning: reached end of function, which should not happen');
@@ -481,14 +502,16 @@ sub GetActiveThemes { # return list of active themes (config/setting/theme)
 # sub GetThemeList {
 # sub GetThemesList {
 # sub GetActiveThemesList {
-	WriteLog('GetActiveThemes()');
-	my $themesValue = GetConfig('theme');
+	WriteLog('GetActiveThemes: caller = ' . join(',', caller));
+	#GetConfig('setting/theme', 'override', 'dark'); # used during testing/dev
+	my $themesValue = GetConfig('setting/theme');
 	if ($themesValue) {
 		$themesValue =~ s/[\s]+/ /g; # strip extra whitespace and convert to spaces
 		my @activeThemes = split(' ', $themesValue); # split by spaces
 		foreach my $themeName (@activeThemes) {
 			#todo some validation
 		}
+		WriteLog('GetActiveThemes: returning @activeThemes = ' . join(' ', @activeThemes));
 		return @activeThemes;
 	} else {
 		WriteLog('GetActiveThemes: warning: $themesValue is FALSE; caller = ' . join(',', caller));
@@ -515,12 +538,14 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 	#$themesValue =~ s/[\s]+/ /g;
 	#my @activeThemes = split(' ', $themesValue);
 	state @activeThemes;
-	if (!@activeThemes) {
+
+	if (!@activeThemes || $attributeName eq 'unmemo') {
+		WriteLog('GetThemeAttribute: @activeThemes is empty or $attributeName = unmemo; calling GetActiveThemes()' . '; caller = ' . join(',', caller));
 		@activeThemes = GetActiveThemes();
 		if (!@activeThemes) {
-			WriteLog('GetThemeAttribute: warning: @activeThemes was FALSE');
+			WriteLog('GetThemeAttribute: warning: after GetActiveThemes() called, @activeThemes was FALSE');
 		} else {
-			WriteLog('GetThemeAttribute: @activeThemes = ' . join(' ', @activeThemes));
+			WriteLog('GetThemeAttribute: after GetActiveThemes() called, @activeThemes = ' . join(' ', @activeThemes));
 		}
 	}
 
@@ -585,7 +610,7 @@ sub GetThemeColor { # returns theme color based on setting/theme
 	}
 
 	if (GetConfig('html/monochrome')) { # GetThemeColor()
-	    #todo in hypercode theme + monochrome, the page background color should be #e9caad, to match hypercode_bg.jpg
+		#todo in hypercode theme + monochrome, the page background color should be #e9caad, to match hypercode_bg.jpg
 		if (index(lc($colorName), 'text') != -1 || index(lc($colorName), 'link') != -1) {
 			if (index(lc($colorName), 'back') != -1) {
 				return GetConfig('html/color/background'); # #BackgroundColor

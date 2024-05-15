@@ -1020,6 +1020,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 											# if parent item has an author and/or is a public key or other author id
 											# we should remove the avatar cache for the author
 											if ($authorKey) {
+												#todo there is a bug here, which results in warning at ExpireAvatarCache() sanity check
 												ExpireAvatarCache(DBGetItemAuthor($itemParent));
 												# quick and dirty, inefficient, #todo
 												# doesn't always need to happen (only if item is pubkey or self-id)

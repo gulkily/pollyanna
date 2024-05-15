@@ -20,6 +20,8 @@
 		SetPrefs('opened_dialogs', 0);
 		SetPrefs('draggable_scale', 0);
 		SetPrefs('draggable_restore_collapsed', 0);
+		SetPrefs('sign_by_default', 1);
+		SetPrefs('focus_reply', 0);
 		DraggingReset();
 		//window.location.reload();
 

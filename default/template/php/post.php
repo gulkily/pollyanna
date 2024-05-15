@@ -10,7 +10,7 @@ include_once('utils.php');
 include_once('cookie.php');
 
 $AllVars = array();
-function setvar($name, $value) {
+function setvar ($name, $value) {
 	global $AllVars;
 	WriteLog('setvar: ' . $name);
 	if (array_key_exists($name, $AllVars)) {
@@ -20,7 +20,7 @@ function setvar($name, $value) {
 	}
 }
 
-function getvar($name) {
+function getvar ($name) {
 	global $AllVars;
 	WriteLog('getvar: ' . $name);
 	if (array_key_exists($name, $AllVars)) {
@@ -30,7 +30,7 @@ function getvar($name) {
 	}
 }
 
-function makevar($name) {
+function makevar ($name) {
 	global $AllVars;
 	WriteLog('makevar: ' . $name);
 	if (array_key_exists($name, $AllVars)) {

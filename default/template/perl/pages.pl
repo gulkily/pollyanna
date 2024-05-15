@@ -703,18 +703,25 @@ sub MakePhpPages {
 	WriteLog('MakePhpPages() begin');
 
 	if (GetConfig('admin/php/enable')) {
-		# 'post.php'
-		# 'test2.php'
 		# 'config.php'
-		# 'test.php'
-		# 'write.php'
-		# 'upload.php'
-		# 'search.php'
 		# 'cookie.php'
 		# 'cookietest.php'
-		# 'route.php'
+		# 'dialog.php'
+		# 'handle_not_found.php'
+		# 'post.php'
+		# 'process_new_comment.php'
 		# 'quick.php'
-		my @templatePhpSimple = qw(post test2 config test write upload search cookie cookietest utils route handle_not_found process_new_comment store_new_comment);
+		# 'route.php'
+		# 'search.php'
+		# 'sqlite.php'
+		# 'store_new_comment.php'
+		# 'test.php'
+		# 'test2.php'
+		# 'upload.php'
+		# 'utils.php'
+		# 'write.php'
+
+		my @templatePhpSimple = qw(post test2 config test write upload search cookie cookietest utils route handle_not_found process_new_comment store_new_comment dialog sqlite);
 		if (GetConfig('admin/php/quickchat')) {
 			push @templatePhpSimple, 'quick';
 		}
