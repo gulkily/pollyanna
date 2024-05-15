@@ -857,6 +857,11 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 		return '';
 	}
 
+	if ($templateName eq 'memo_count') {
+		WriteLog('GetTemplate: memo count = ' . scalar(keys %templateMemo));
+		return scalar(keys %templateMemo);
+	}
+
 	if ($templateMemo{$templateName}) {
 		#if already been looked up, return memo version
 		WriteLog('GetTemplate: returning from memo for $templateName = ' . $templateName);
@@ -864,6 +869,8 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 			WriteLog('GetTemplate: warning: returning empty string for ' . $filename);
 		}
 		return $templateMemo{$filename};
+	} else {
+		WriteLog('GetTemplate: memo miss for $templateName = ' . $templateName);
 	}
 
 	if (!-e ($CONFIGDIR . '/template/' . $filename) && !-e ($DEFAULTDIR . '/template/' . $filename)) {

@@ -35,6 +35,10 @@ sub GetPageHeader { # $pageType, $title ; returns html for page header
 
 	WriteLog("GetPageHeader($pageType) ; caller = " . join(',', caller));
 
+	WriteLog('GetPageHeader: override test: setting/theme = ' . GetConfig('setting/theme'));
+	WriteLog('GetPageHeader: override test: GetActiveThemes() = ' . join(',', GetActiveThemes()));
+	WriteLog('GetPageHeader: override test: GetTemplate(memo_count) = ' . GetTemplate('memo_count'));
+
 	if (defined($title)) {
 		chomp $title;
 	} else {

@@ -555,6 +555,13 @@ sub GetThemeAttribute { # returns theme color from $CONFIGDIR/theme/
 		}
 	}
 
+
+	WriteLog('GetThemeAttribute: override test: setting/theme = ' . GetConfig('setting/theme'));
+	WriteLog('GetThemeAttribute: override test: GetActiveThemes() = ' . join(',', GetActiveThemes()));
+	WriteLog('GetThemeAttribute: override test: GetTemplate(memo_count) = ' . GetTemplate('memo_count'));
+	WriteLog('GetThemeAttribute: override test: @activeThemes = ' . join(',', @activeThemes));
+
+
 	foreach my $themeName (@activeThemes) {
 		my $attributePath = 'theme/' . $themeName . '/' . $attributeName;
 
@@ -609,6 +616,10 @@ sub GetThemeColor { # returns theme color based on setting/theme
 # sub GetColor {
 	my $colorName = shift;
 	chomp $colorName;
+
+	WriteLog('GetThemeColor: override test: setting/theme = ' . GetConfig('setting/theme'));
+	WriteLog('GetThemeColor: override test: GetActiveThemes() = ' . join(',', GetActiveThemes()));
+	WriteLog('GetThemeColor: override test: GetTemplate(memo_count) = ' . GetTemplate('memo_count'));
 
 	if ($colorName eq 'link' || $colorName eq 'vlink') {
 		WriteLog('GetThemeColor: $colorName = ' . $colorName . ' changed to ' . ($colorName . '_text') . '; caller = ' . join(',', caller));
@@ -681,6 +692,10 @@ sub FillThemeColors { # $html ; fills in templated theme colors in provided html
 #todo think about whether this should be in html.pl? it just does so much more config stuff than html stuff... and it may be used for something other than html
 	my $html = shift;
 	chomp($html);
+
+	WriteLog('FillThemeColors: override test: setting/theme = ' . GetConfig('setting/theme'));
+	WriteLog('FillThemeColors: override test: GetActiveThemes() = ' . join(',', GetActiveThemes()));
+	WriteLog('FillThemeColors: override test: GetTemplate(memo_count) = ' . GetTemplate('memo_count'));
 
 	my $colorTagNegativeText = GetThemeColor('tag_negative_text');
 	$html =~ s/\$colorTagNegativeText/$colorTagNegativeText/g;

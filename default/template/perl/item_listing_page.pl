@@ -89,6 +89,11 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, image
 
 	WriteLog('GetItemListingPage: $pageQuery = ' . $pageQuery . '; $pageMode = ' . $pageMode . '; $pageNumber = ' . $pageNumber . '; scalar(@items) = ' . scalar(@items));
 
+	WriteLog('GetItemListingPage: override test: setting/theme = ' . GetConfig('setting/theme'));
+	WriteLog('GetItemListingPage: override test: GetActiveThemes() = ' . join(',', GetActiveThemes()));
+	WriteLog('GetItemListingPage: override test: GetTemplate(memo_count) = ' . GetTemplate('memo_count'));
+
+
 	require_once('get_page_header.pl');
 	$html .= GetPageHeader($pageQuery);
 
@@ -217,6 +222,11 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 
 	WriteLog('WriteItemListingPages: $pageQuery = ' . $pageQuery . '; caller = ' . join(',', caller));
 
+	WriteLog('WriteItemListingPages: override test: setting/theme = ' . GetConfig('setting/theme'));
+	WriteLog('WriteItemListingPages: override test: GetActiveThemes() = ' . join(',', GetActiveThemes()));
+	WriteLog('WriteItemListingPages: override test: GetTemplate(memo_count) = ' . GetTemplate('memo_count'));
+
+
 	chomp $pageQuery;
 	chomp $pageMode;
 
@@ -258,6 +268,10 @@ sub WriteItemListingPages { # $pageQuery, $pageMode, \%params
 			my $pageContent = GetItemListingPage($pageQuery, $pageMode, $pageNumber, \%params);
 
 			if ($pageContent) {
+				WriteLog('WriteItemListingPages: override test: setting/theme = ' . GetConfig('setting/theme'));
+				WriteLog('WriteItemListingPages: override test: GetActiveThemes() = ' . join(',', GetActiveThemes()));
+				WriteLog('WriteItemListingPages: override test: GetTemplate(memo_count) = ' . GetTemplate('memo_count'));
+
 				PutHtmlFile($pageFilename, $pageContent);
 			} else {
 				WriteLog('WriteItemListingPages: warning: $pageContent was FALSE; caller = ' . join(',', caller));

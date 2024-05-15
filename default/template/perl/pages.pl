@@ -1755,6 +1755,8 @@ while (my $arg1 = shift @foundArgs) {
 			my $makePageArg = shift @foundArgs;
 			#todo sanity check of $makePageArg
 			if ($makePageArg) {
+				WriteMessage("recognized argument for -M: $makePageArg\n");
+				WriteMessage('recognized: setting/theme = ' . GetConfig('setting/theme'));
 				if ($makePageArg eq 'compare') {
 					require_once('page/compare.pl');
 
