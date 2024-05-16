@@ -891,8 +891,8 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 	}
 
 	#information about theme
-#	my $themeName = GetConfig('theme');
-#	my $themePath = 'theme/' . $themeName . '/template/' . $filename;
+	# my $themeName = GetConfig('theme');
+	# my $themePath = 'theme/' . $themeName . '/template/' . $filename;
 
 	my $template = '';
 	if (GetThemeAttribute('template/' . $filename)) {
@@ -926,13 +926,13 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 
 	my $isPerlTemplate = 0;
 	if (index($filename, 'perl/') != -1 && index($filename, '.pl') != -1) {
-        $isPerlTemplate = 1;
-    }
+		$isPerlTemplate = 1;
+	}
 	if ($isPerlTemplate) {
 		WriteLog('GetTemplate: $isPerlTemplate is TRUE, calling BakePerlTemplate()');
-        $template = BakePerlTemplate($template);
+		$template = BakePerlTemplate($template);
 	} else {
-	    #WriteLog('not perl template: ' . $filename);
+		#WriteLog('not perl template: ' . $filename);
 	}
 
 	if ($template) {
