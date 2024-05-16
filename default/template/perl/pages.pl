@@ -1651,10 +1651,17 @@ while (my $arg1 = shift @foundArgs) {
 		if ($arg1 eq '--theme') {
 			#todo this is broken, fix it
 			# override the theme for remaining pages
-			WriteMessage("recognized token --theme");
+			WriteMessage("pages.pl: recognized token --theme, applying override");
 			my $themeArg = shift @foundArgs;
 			chomp $themeArg;
-			GetConfig('theme', 'override', $themeArg);
+			GetConfig('setting/theme', 'override', $themeArg);
+			# test:
+			my $testResult = GetConfig('setting/theme');
+			if ($testResult eq $themeArg) {
+				WriteMessage("pages.pl: override theme: theme set to $themeArg");
+			} else {
+				WriteMessage("pages.pl: override theme: warning: theme not set to $themeArg");
+			}
 		}
 		elsif (IsItem($arg1)) {
 			WriteLog('pages.pl; recognized item identifier; $arg1 = ' . $arg1 . '; caller = ' . join(',', caller));
