@@ -61,6 +61,22 @@ sub MakePage { # $pageType, $pageParam, $htmlRoot ; make a page and write it int
 	$pageParam = trim($pageParam);
 	$htmlRoot = trim($htmlRoot);
 
+	if (0) { # debug
+		WriteLog('MakePage: override test: $pageType = ' . ($pageType ? $pageType : 'FALSE') . '; $pageParam = ' . ($pageParam ? $pageParam : 'FALSE') . '; $htmlRoot = ' . ($htmlRoot ? $htmlRoot : 'FALSE'));
+		if ($pageType eq 'threads' || $pageType eq 'help') {
+			WriteLog('MakePage: testing theme override');
+			# always dark theme
+			GetConfig('setting/theme', 'override', 'dark');
+		} else {
+			WriteLog('MakePage: testing theme override reset');
+			GetConfig('unmemo');
+		}
+
+		WriteLog('MakePage: override test: setting/theme = ' . GetConfig('setting/theme'));
+		WriteLog('MakePage: override test: GetActiveThemes() = ' . join(',', GetActiveThemes()));
+		WriteLog('MakePage: override test: GetTemplate(memo_count) = ' . GetTemplate('memo_count'));
+	}
+
 	if ($htmlRoot) {
 		$HTMLDIR = $htmlRoot;
 	}
