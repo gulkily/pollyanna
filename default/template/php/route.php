@@ -1331,7 +1331,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 					if ($score < $minimumScore) {
 						WriteLog('route.php: score is less than minimum score');
 						#todo message should be templated
-						$message = 'Minimum score to write: ' . $minimumScore . '.' . '<br>Your score is ' . $score . '.';
+						$message = 'You may not be able to write things, <br> because the minimum score to write is ' . $minimumScore . ', <br> ' . 'and your score is ' . $score . '.';
 						$messageWithFieldset = '<fieldset>' . $message . '</fieldset>';
 						$minimumScoreMessage = GetDialogX($messageWithFieldset, 'Notice');
 						$html = str_ireplace(
