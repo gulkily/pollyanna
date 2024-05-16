@@ -1664,7 +1664,7 @@ while (my $arg1 = shift @foundArgs) {
 			}
 		}
 		elsif (IsItem($arg1)) {
-			WriteLog('pages.pl; recognized item identifier; $arg1 = ' . $arg1 . '; caller = ' . join(',', caller));
+			WriteLog('pages.pl: recognized item identifier; $arg1 = ' . $arg1 . '; caller = ' . join(',', caller));
 			WriteMessage("recognized item identifier\n");
 			MakePage('item', $arg1, 1);
 		}
