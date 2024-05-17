@@ -421,7 +421,6 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 						}
 					}
 
-					#todo use GetDir() and not ./pages.pl
 					/* my */ $pagesPlCommand = 'cd "' . $SCRIPTDIR . '" ; perl -T ./pages.pl ' . $pagesPlArgument;
 					WriteLog('HandleNotFound: $pagesPlCommand = ' . $pagesPlCommand);
 					WriteLog('HandleNotFound: ' . `$pagesPlCommand`);
