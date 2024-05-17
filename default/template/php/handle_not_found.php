@@ -419,11 +419,12 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 								exit;
 							}
 						}
-					}
+					} # if (GetConfig('setting/admin/php/regrow_404_fork'))
 
-					/* my */ $pagesPlCommand = 'cd "' . $SCRIPTDIR . '" ; perl -T ./pages.pl ' . $pagesPlArgument;
 					WriteLog('HandleNotFound: $pagesPlCommand = ' . $pagesPlCommand);
-					WriteLog('HandleNotFound: ' . `$pagesPlCommand`);
+					/* my */ $pagesPlCommand = 'cd "' . $SCRIPTDIR . '" ; perl -T ./pages.pl ' . $pagesPlArgument;
+					$pagesPlOutput = `$pagesPlCommand`;
+					WriteLog('HandleNotFound: $pagesPlOutput = ' . $pagesPlOutput);
 				}
 
 				/* #todo
