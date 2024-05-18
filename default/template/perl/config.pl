@@ -754,23 +754,23 @@ sub FillThemeColors { # $html ; fills in templated theme colors in provided html
 	# there are two issues with replacing below with above
 	# a) searching for template token in code wouldn't find this section
 	# b)
-	# my $colorPrimary = GetThemeColor('primary');
-	# $html =~ s/\$colorPrimary/$colorPrimary/g;
+	# my $colorPrimary = GetThemeColor('primary');  # SEE ABOVE # SEE ABOVE # SEE ABOVE
+	# $html =~ s/\$colorPrimary/$colorPrimary/g;  # SEE ABOVE # SEE ABOVE # SEE ABOVE
 	#
-	# my $colorSecondary = GetThemeColor('secondary');
-	# $html =~ s/\$colorSecondary/$colorSecondary/g;
+	# my $colorSecondary = GetThemeColor('secondary');  # SEE ABOVE # SEE ABOVE # SEE ABOVE
+	# $html =~ s/\$colorSecondary/$colorSecondary/g;  # SEE ABOVE # SEE ABOVE # SEE ABOVE
 	#
-	# my $colorBackground = GetThemeColor('background');
-	# $html =~ s/\$colorBackground/$colorBackground/g;
+	# my $colorBackground = GetThemeColor('background');  # SEE ABOVE # SEE ABOVE # SEE ABOVE
+	# $html =~ s/\$colorBackground/$colorBackground/g;  # SEE ABOVE # SEE ABOVE # SEE ABOVE
 	#
-	# my $colorText = GetThemeColor('text');
-	# $html =~ s/\$colorText/$colorText/g;
+	# my $colorText = GetThemeColor('text');  # SEE ABOVE # SEE ABOVE # SEE ABOVE
+	# $html =~ s/\$colorText/$colorText/g;  # SEE ABOVE # SEE ABOVE # SEE ABOVE
 	#
-	# my $colorLink = GetThemeColor('link');
-	# $html =~ s/\$colorLink/$colorLink/g;
+	# my $colorLink = GetThemeColor('link');  # SEE ABOVE # SEE ABOVE # SEE ABOVE
+	# $html =~ s/\$colorLink/$colorLink/g;  # SEE ABOVE # SEE ABOVE # SEE ABOVE
 	#
-	# my $colorVlink = GetThemeColor('vlink');
-	# $html =~ s/\$colorVlink/$colorVlink/g;
+	# my $colorVlink = GetThemeColor('vlink');  # SEE ABOVE # SEE ABOVE # SEE ABOVE
+	# $html =~ s/\$colorVlink/$colorVlink/g;  # SEE ABOVE # SEE ABOVE # SEE ABOVE
 
 	return $html;
 } # FillThemeColors()
