@@ -58,3 +58,6 @@ button:hover {
 .topmenubar a {
 	padding: 0 10px;
 }
+.spanDialogControls a {
+	color: #007bff;
+}
