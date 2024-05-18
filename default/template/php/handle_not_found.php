@@ -1,6 +1,6 @@
 <?php
 
-function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing the missing page
+function HandleNotFound ($path, $pathRel, $theme = '') { // handles 404 error by regrowing the missing page
 // Handle404 (  #todo #DRY
 // $pathRel?? relative path of $path (to current directory, which should be html/)
 
@@ -386,6 +386,11 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 				# call pages.pl to generate the page
 				$pwd = getcwd();
 				WriteLog('HandleNotFound: $pwd = ' . $pwd);
+
+				if ($theme) {
+					WriteLog('HandleNotFound: $theme = ' . $theme);
+					$pagesPlArgument = '--theme ' . $_GET['theme'] . ' ' . $pagesPlArgument;
+				}
 
 				WriteLog("HandleNotFound: cd $SCRIPTDIR ; perl -T ./pages.pl $pagesPlArgument");
 				/* my */ $pagesPlTimeout = 0;
