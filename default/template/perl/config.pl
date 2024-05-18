@@ -627,6 +627,7 @@ sub GetThemeColor { # returns theme color based on setting/theme
 	}
 
 	if (GetConfig('html/monochrome')) { # GetThemeColor()
+		WriteLog('GetThemeColor: html/monochrome; caller = ' . join(',', caller));
 		#todo in hypercode theme + monochrome, the page background color should be #e9caad, to match hypercode_bg.jpg
 		if (index(lc($colorName), 'text') != -1 || index(lc($colorName), 'link') != -1) {
 			if (index(lc($colorName), 'back') != -1) {
@@ -640,6 +641,7 @@ sub GetThemeColor { # returns theme color based on setting/theme
 	}
 
 	if (GetConfig('html/mourn')) { # GetThemeColor()
+		WriteLog('GetThemeColor: html/mourn; caller = ' . join(',', caller));
 		if (index(lc($colorName), 'text') != -1 || index(lc($colorName), 'link') != -1) {
 			if (index(lc($colorName), 'back') != -1) {
 				return '#000000'; # #BackgroundColor
@@ -681,6 +683,8 @@ sub GetThemeColor { # returns theme color based on setting/theme
 		# if it looks like a hex color without '#' prefix, add the prefix
 		$color = '#' . $color;
 	}
+
+	WriteLog('GetThemeColor: $colorName = ' . $colorName . '; $color = ' . $color);
 
 	return $color;
 } # GetThemeColor()
