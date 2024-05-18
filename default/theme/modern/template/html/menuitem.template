@@ -1,0 +1,3 @@
+<!-- theme/modern/template/html/menuitem.template -->
+<a href="$address">$caption</a>
+<!-- / theme/modern/template/html/menuitem.template -->

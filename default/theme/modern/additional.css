@@ -5,24 +5,20 @@ body {
 	margin: 0;
 	padding: 20px;
 }
-.dialog {
+table {
+	width: 100%;
+	border-collapse: collapse;
 	background-color: white;
-	border: none;
-	box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 	margin-bottom: 20px;
-	border-radius: 8px;
-	overflow: hidden;
+	box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
-.titlebar {
+th {
 	background-color: #0056b3;
 	color: white;
 	padding: 10px 20px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 	font-size: 18px;
 }
-.content {
+td {
 	padding: 20px;
 }
 a {
@@ -32,7 +28,13 @@ a {
 a:hover {
 	text-decoration: underline;
 }
-button {
+input[type="text"], textarea {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+button, input[type="submit"] {
 	background-color: #007bff;
 	color: white;
 	border: none;
@@ -47,9 +49,6 @@ button:hover {
 .statusbar {
 	padding: 10px 20px;
 	background-color: #e9ecef;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 }
 .topmenubar {
 	background-color: #f8f9fa;
@@ -58,6 +57,49 @@ button:hover {
 .topmenubar a {
 	padding: 0 10px;
 }
-.spanDialogControls a {
-	color: #007bff;
+/* Responsive horizontal tiling */
+@media (min-width: 800px) {
+	.container {
+		display: table;
+		width: 100%;
+	}
+	.container table {
+		display: table-cell;
+		width: 50%;
+		vertical-align: top;
+	}
+}
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: #121212;
+		color: #e0e0e0;
+	}
+	table {
+		background-color: #242424;
+		box-shadow: 0 2px 10px rgba(255,255,255,0.1);
+	}
+	th {
+		background-color: #003366;
+	}
+	a {
+		color: #4da3ff;
+	}
+	.statusbar {
+		background-color: #333;
+	}
+	.topmenubar {
+		background-color: #333;
+	}
+	button, input[type="submit"] {
+		background-color: #0056b3;
+	}
+	button:hover {
+		background-color: #003366;
+	}
+	input[type="text"],
+	textarea {
+		background-color: #333;
+		color: #ccc;
+	}
 }

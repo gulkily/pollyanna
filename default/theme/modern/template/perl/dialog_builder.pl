@@ -61,24 +61,24 @@ sub GetDialogX2 { # \%paramHash ; returns dialog
 	my $formAction = $param{'form_action'};
 	my $windowId = $param{'id'};
 	my $dialogIconKey = $param{'icon'} || $param{'id'} || $param{'title'} || '';
-#
-#	if (!$dialogAnchor) {
-#		WriteLog('GetDialogX2: warning: $dialogAnchor is FALSE, activating fallback; caller = ' . join(',', caller));
-#		if (!$dialogAnchor && $windowId) {
-#			$dialogAnchor = $windowId;
-#		}
-#		if (!$dialogAnchor && $windowTitle) {
-#			$dialogAnchor = str_replace(' ', '', $windowTitle);
-#			$dialogAnchor =~ s/[^a-zA-Z0-9]//g;
-#			#todo
-#		}
-#		if (!$dialogAnchor && $windowBody) {
-#			$dialogAnchor = substr(md5_hex($windowBody), 0, 8);
-#		}
-#		if (!$dialogAnchor) {
-#			WriteLog('GetDialogX2: warning: $dialogAnchor is FALSE after fallbacks; caller = ' . join(',', caller));
-#		}
-#	}
+
+	if (!$dialogAnchor) {
+		WriteLog('GetDialogX2: warning: $dialogAnchor is FALSE, activating fallback; caller = ' . join(',', caller));
+		if (!$dialogAnchor && $windowId) {
+			$dialogAnchor = $windowId;
+		}
+		if (!$dialogAnchor && $windowTitle) {
+			$dialogAnchor = str_replace(' ', '', $windowTitle);
+			$dialogAnchor =~ s/[^a-zA-Z0-9]//g;
+			#todo
+		}
+		if (!$dialogAnchor && $windowBody) {
+			$dialogAnchor = substr(md5_hex($windowBody), 0, 8);
+		}
+		if (!$dialogAnchor) {
+			WriteLog('GetDialogX2: warning: $dialogAnchor is FALSE after fallbacks; caller = ' . join(',', caller));
+		}
+	}
 
 	my $tableSort; # it is on by default, contingent on settings
 	if (exists $param{'table_sort'}) {

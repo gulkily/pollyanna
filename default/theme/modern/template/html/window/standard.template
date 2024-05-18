@@ -1,0 +1,15 @@
+<!-- theme/modern/template/html/window/standard.template -->
+<font face=arial>
+	<table cellspacing=0 cellpadding=5 border=0 bgcolor="$colorWindow" class=dialog>
+		$windowTitlebar
+
+		$windowMenubar
+
+		$windowHeader
+
+		$windowBody
+
+		$windowStatus
+	</table>
+</font>
+<!-- / theme/modern/template/html/window/standard.template -->

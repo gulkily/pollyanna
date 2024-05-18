@@ -1,0 +1,7 @@
+<!-- theme/modern/template/html/window/titlebar.template -->
+<tr bgcolor="$colorTitlebar" class=titlebar>
+	<td colspan=$contentColumnCount>
+		<font color="$colorTitlebarText"><b>$windowTitle</b></font> <a class=dialogAnchor href=#$dialogAnchor>#</a><a name=$dialogAnchor></a><br>
+	</td>
+</tr>
+<!-- / theme/modern/template/html/window/titlebar.template -->
