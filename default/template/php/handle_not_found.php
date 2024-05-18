@@ -421,8 +421,8 @@ function HandleNotFound ($path, $pathRel) { // handles 404 error by regrowing th
 						}
 					} # if (GetConfig('setting/admin/php/regrow_404_fork'))
 
-					WriteLog('HandleNotFound: $pagesPlCommand = ' . $pagesPlCommand);
 					/* my */ $pagesPlCommand = 'cd "' . $SCRIPTDIR . '" ; perl -T ./pages.pl ' . $pagesPlArgument;
+					WriteLog('HandleNotFound: $pagesPlCommand = ' . $pagesPlCommand);
 					$pagesPlOutput = `$pagesPlCommand`;
 					WriteLog('HandleNotFound: $pagesPlOutput = ' . $pagesPlOutput);
 				}
