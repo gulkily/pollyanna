@@ -12,6 +12,22 @@ if [ ! $1 ]
 		set 1=help
 fi
 
+# if user precedes command with 'debug'
+# set debug flag to 1, so that we can remember to turn it off at the end of this script
+# write a 1 to the config/debug file
+# shift all arguments forward by one
+# if log/log.log exists, rename it to log/log.log.`date +%s`
+if [ $1 = debug ]
+  then
+    debug=1
+    if [ -e log/log.log ]
+      then
+        mv log/log.log log/log.log.`date +%s`
+    fi
+    echo 1 > config/debug
+    shift
+fi
+
 # hike set
 if [ $1 = set ]
 	then
@@ -324,3 +340,8 @@ if [ $1 = help ]
 		echo hike version = show version
 fi
 
+# if debug flag is set, turn it off
+if [ $debug ]
+  then
+    rm config/debug
+fi
