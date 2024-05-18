@@ -1619,6 +1619,22 @@ sub GetIntroDialog { # $pageName
 	return $introDialog;
 } # GetIntroDialog()
 
+sub GetThemeOverride {
+	state $themeOverride = '';
+
+	my $themeArg = shift;
+	chomp $themeArg;
+
+	if ($themeArg) {
+		WriteLog('GetThemeOverride: $themeArg = ' . $themeArg);
+		$themeOverride = $themeArg;
+	}
+
+	WriteLog('GetThemeOverride: $themeOverride = ' . $themeOverride);
+
+	return $themeOverride;
+} # GetThemeOverride()
+
 while (my $arg1 = shift @foundArgs) {
 	# evaluate each argument, fuzzy matching it, and generate requested pages
 
@@ -1662,6 +1678,7 @@ while (my $arg1 = shift @foundArgs) {
 			} else {
 				WriteMessage("pages.pl: override theme: warning: theme not set to $themeArg");
 			}
+			GetThemeOverride($themeArg);
 		}
 		elsif (IsItem($arg1)) {
 			WriteLog('pages.pl: recognized item identifier; $arg1 = ' . $arg1 . '; caller = ' . join(',', caller));
