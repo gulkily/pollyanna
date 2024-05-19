@@ -95,6 +95,7 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 	}
 
 	if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging')) {
+		#todo use RenderLink() here
 		#if ($menuName ne 'help' && $menuName ne 'people') { # DO NOT DO THIS PLEASE, it is jarring and unexpected
 		if (1) {
 			# todo also need some kind of special handling
