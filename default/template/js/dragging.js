@@ -214,6 +214,7 @@ function DraggingRetile2 (ignoreMenu) {
 } // DraggingRetile2()
 
 function UpdateDialogPropertyDialog (dialog) {
+// updates "api spy" dialog which shows properties of what the mouse pointer is on
 	if (dialog && window.getComputedStyle && document.getElementById && document.getElementById('propDisplay')) {
 		var d = new Date();
 		if (
