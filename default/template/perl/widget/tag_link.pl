@@ -8,12 +8,6 @@ use utf8;
 sub GetTagLink { # $tag, $voteCount ; returns html for a tag link
 # sub GetHashTagLink {
 
-# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
-# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
-# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
-# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
-# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
-
 	my $tag = shift;
 	my $voteCount = shift;
 
@@ -21,15 +15,10 @@ sub GetTagLink { # $tag, $voteCount ; returns html for a tag link
 		#sanity check
 		$tag = $1;
 
-		WriteLog('GetTagLink: $tag = ' . $tag);
+		WriteLog('GetTagLink: $tag = ' . $tag . '; caller = ' . join(' ', caller));
 
 		my $tagColor = '';
 		if (GetConfig('html/hash_color_hashtags') && !GetConfig('html/mourn') && !GetConfig('html/monochrome')) { # GetTagLink()
-			# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
-			# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
-			# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
-			# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
-			# NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
 
 			$tagColor = GetStringHtmlColor($tag);
 		} else {
