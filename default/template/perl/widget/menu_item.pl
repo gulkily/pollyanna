@@ -108,6 +108,8 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 				'onclick',
 				"if (!(window.GetPrefs) || GetPrefs('draggable_spawn')) { return FetchDialog('$dialogName'); }"
 			);
+			#todo
+			# "if (!(window.GetPrefs) || GetPrefs('draggable_spawn')) { return FetchDialog('$dialogName', event.clientX, event.clientY); }"
 		}
 		#todo this also needs relativize support
 	}
