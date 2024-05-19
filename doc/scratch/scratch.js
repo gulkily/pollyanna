@@ -1,4 +1,28 @@
 
+		window.injectMouseX = mouseX;
+		window.injectMouseY = mouseY;
+===
+					// position the dialog below the menubar
+					// #todo this should be done via css
+					// #todo this should be done via a separate function
+					var menu = document.getElementById('topmenu');
+					var menuHeight = 0;
+					if (menu) {
+						menuHeight = menu.offsetHeight;
+					}
+					var menuTop = 0;
+					if (menu) {
+						menuTop = menu.offsetTop;
+					}
+					var dialogTop = menuTop + menuHeight;
+					newDialog[iDialog].style.top = dialogTop + 'px';
+					//var dialogLeft = 0;
+					var dialogLeft = (document.documentElement.clientWidth / 2) - (newDialog[iDialog].offsetWidth / 2);
+					// half of the viewport width minus half of the dialog width
+					newDialog[iDialog].style.left = dialogLeft + 'px';
+
+===
+
 function TileDialogs4() {
     var pageWidth = document.documentElement.clientWidth; // Fixed width of the page
     var placedDialogs = [];
