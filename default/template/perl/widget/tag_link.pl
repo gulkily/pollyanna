@@ -5,7 +5,7 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub GetTagLink { # $tag ; returns html for a tag link
+sub GetTagLink { # $tag, $voteCount ; returns html for a tag link
 # sub GetHashTagLink {
 
 # NOTE: THIS IS A VOTING BUTTON, NOT A TAG LINK #todo rename this subprocedure
