@@ -389,10 +389,6 @@ sub GetDialogX2 { # \%paramHash ; returns dialog
 			$windowBody = str_replace('$contentColumnCount', $contentColumnCount, $windowBody);
 		}
 
-		if (index(lc($windowBody), '<tbody') == -1) {
-			$windowBody = '<tbody class=content>' . $windowBody . '</tbody>';
-		}
-
 		$windowTemplate =~ s/\$windowBody/$windowBody/g;
 	} else {
 		$windowTemplate =~ s/\$windowBody//g;
