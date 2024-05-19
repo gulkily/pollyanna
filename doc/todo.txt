@@ -6,14 +6,6 @@ invite system for pre-vouching
 
 ===
 
-Generate zip files for each thread, probably on the fly with PHP, if possiblex
-    it should happen on top-level item pagex
-        find all thread children and include themx
-        also include all author public keys and self-id itemsx
-        anything else?
-
-===
-
 ensure that cache and other files are cleaned up regularly
 	write script to remove files more than 24 hours ago
 		cache
