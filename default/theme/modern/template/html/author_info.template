@@ -1,0 +1,25 @@
+<!-- author_info.template -->
+<table>
+	<tr class=beginner>
+		<td colspan=2>
+			<p id=pUserHint>This page about author listed below.</p>
+			<!-- this text is used by templating engine -->
+		</td>
+	</tr>
+
+	<tr>
+		<th colspan=2 bgcolor="$colorDialogHeading">
+			<font size=5>$avatar</font>
+		</th>
+	</tr>
+
+	<tr><td>seen:</td><td>$authorSeen</td></tr>
+	<tr><td>fingerprint:</td><td><tt>$fingerprint</tt></td></tr>
+	<tr><td>notes:</td><td><b><span id=itsyou>*</span></b></td></tr>
+	<tr><td>score:</td><td>$authorScore</td></tr>
+	<tr class=advanced><td>items:</td><td>$itemCount</td></tr>
+	<tr class=advanced><td>labels:</td><td>$authorDescription <br><span id=profileVoteButtons>$profileLabelButtons</span></td></tr>
+	<tr class=advanced><td>registration:</td><td><b><tt>$publicKeyHash</tt></b></td></tr>
+	<tr><td>write:</td><td><b><tt>$authorMessageLink</tt></b></td></tr>
+</table>
+<!-- / author_info.template -->
