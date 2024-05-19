@@ -47,6 +47,7 @@ sub GetDialogX2 { # \%paramHash ; returns dialog
 
 	# NOT IMPLEMENTED $windowId = if set, id=foo parameter is added to top-level tag
 
+	WriteLog('GetDialogX2: modern theme');
 	WriteLog('GetDialogX2: %param: ' . join(',', keys(%param)));
 	WriteLog('GetDialogX2: caller: ' . join(',', caller));
 
