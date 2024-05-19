@@ -717,7 +717,7 @@ sub GetFileHash { # $fileName ; returns hash of file contents
 			if ($fileHash ne $fileHash2) {
 				WriteLog('GetFileHash: $fileHash = ' . $fileHash);
 				WriteLog('GetFileHash: $fileHash2 = ' . $fileHash2);
-				WriteLog('GetFileHash: warning: $fileHash ne $fileHash2');
+				WriteLog('GetFileHash: warning: $fileHash ne $fileHash2 for $fileName = ' . $fileName);
 				$fileHash = $fileHash2;
 			}
 		}
