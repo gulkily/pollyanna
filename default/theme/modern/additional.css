@@ -50,7 +50,7 @@ button:hover {
 	padding: 10px 20px;
 	background-color: #e9ecef;
 }
-.topmenubar {
+.topmenubar, .titlebar {
 	background-color: #f8f9fa;
 	padding: 10px 0;
 }
@@ -88,7 +88,7 @@ button:hover {
 	.statusbar {
 		background-color: #333;
 	}
-	.topmenubar {
+	.topmenubar, .titlebar {
 		background-color: #333;
 	}
 	button, input[type="submit"] {
