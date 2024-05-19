@@ -90,25 +90,47 @@ sub ensure_module { # $path ; ensures module is available under config/
 
 	WriteLog('ensure_module(' . $module . '); caller = ' . join(',', caller));
 
-	state $path = GetDir('config') . '/template/perl/' . $module;
+	my $path = GetDir('config') . '/template/perl/' . $module;
 	my $localPath = './' . $module;
 	my $moduleContent = GetTemplate("perl/$module");
 
 	if (!-e $path) {
+		WriteLog('ensure_module: warning: $path = ' . $path . ' does not exist');
 		if ($moduleContent) {
-			PutConfig("template/perl/$path", $moduleContent);
+			#PutFile($path, $moduleContent);
+			PutConfig('template/perl/' . $module, $moduleContent);
 		} else {
 			WriteLog('ensure_module: warning: $moduleContent is FALSE; caller = ' . join(',', caller));
 		}
 	}
-
-	if (!-e $localPath) {
-		# PutFile($localPath, $moduleContent);
+	else {
+		WriteLog('ensure_module: $path = ' . $path . ' exists');
 	}
 
-	if (!$path || !-e $path) {
-		WriteLog('ensure_module: warning sanity check failed');
+	if (!-e $localPath) {
+		WriteLog('ensure_module: warning: $localPath = ' . $localPath . ' does not exist');
+		#todo this is a hack, and the module should actually be included from the themed path
+		#todo this should also use PutConfig() instead of PutFile()
+		PutFile($localPath, $moduleContent);
+	}
+	else {
+		WriteLog('ensure_module: $localPath = ' . $localPath . ' exists');
+	}
+
+	if (!$path) {
+		WriteLog('ensure_module: warning: $path is FALSE; caller = ' . join(',', caller));
 		return 0;
+	}
+
+	if (!-e $path) {
+		WriteLog('ensure_module: warning: $path = ' . $path . ' does not exist; $moduleContent = ' . length($moduleContent) . ' bytes; caller = ' . join(',', caller));
+		if ($moduleContent) {
+			WriteLog('ensure_module: writing $moduleContent to $path = ' . $path);
+			#PutFile($path, $moduleContent);
+			PutConfig('template/perl/' . $module, $moduleContent);
+		} else {
+			WriteLog('ensure_module: warning: $moduleContent is FALSE; caller = ' . join(',', caller));
+		}
 	}
 } # ensure_module()
 
