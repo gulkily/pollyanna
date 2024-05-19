@@ -111,7 +111,7 @@ sub ensure_module { # $path ; ensures module is available under config/
 		WriteLog('ensure_module: warning: $localPath = ' . $localPath . ' does not exist');
 		#todo this is a hack, and the module should actually be included from the themed path
 		#todo this should also use PutConfig() instead of PutFile()
-		PutFile($localPath, $moduleContent);
+		#PutFile($localPath, $moduleContent);
 	}
 	else {
 		WriteLog('ensure_module: $localPath = ' . $localPath . ' exists');
