@@ -1,3 +1,22 @@
+#sub sha1_file {
+#    my ($file) = @_;
+#
+#    open my $fh, '<', $file or die "Could not open file: $!";
+#    binmode($fh);
+#
+#    my $sha1 = Digest::SHA->new(1); # 1 indicates SHA-1
+#
+#	my $data
+#    while ($data; read $fh, $data, 8192) {
+#        $sha1->add($data);
+#    }
+#
+#    close $fh;
+#
+#    return $sha1->hexdigest;
+#}
+
+
 if ($file{'item_type'} eq 'txt') {
 	# item label has firebase tag
 	if ($file{'labels_list'} && index($file{'labels_list'}, 'firebase') != -1) {

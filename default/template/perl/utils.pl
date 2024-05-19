@@ -283,16 +283,6 @@ if (!$SCRIPTDIR) {
 	die ('Sanity check failed: $SCRIPTDIR is false!');
 } # (!$SCRIPTDIR)
 
-#my $SCRIPTDIR = cwd();
-#if (!$SCRIPTDIR) {
-#	die ('Sanity check failed: $SCRIPTDIR is false!');
-#} # (!$SCRIPTDIR)
-
-
-#my $HTMLDIR = $SCRIPTDIR . '/html';
-#my $TXTDIR = $HTMLDIR . '/txt';
-#my $IMAGEDIR = $HTMLDIR . '/txt';
-
 sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/log.log
 	my $text = shift;
 	if (!$text) {
@@ -682,24 +672,6 @@ sub GetMyVersion { # Get the currently checked out version (current commit's has
 	chomp($myVersion);
 	return $myVersion;
 } # GetMyVersion()
-
-#sub sha1_file {
-#    my ($file) = @_;
-#
-#    open my $fh, '<', $file or die "Could not open file: $!";
-#    binmode($fh);
-#
-#    my $sha1 = Digest::SHA->new(1); # 1 indicates SHA-1
-#
-#	my $data
-#    while ($data; read $fh, $data, 8192) {
-#        $sha1->add($data);
-#    }
-#
-#    close $fh;
-#
-#    return $sha1->hexdigest;
-#}
 
 sub GetFileHash { # $fileName ; returns hash of file contents
 # sub GetItemHash {
