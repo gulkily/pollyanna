@@ -6,7 +6,7 @@ use 5.010;
 
 require('./utils.pl');
 
-sub LoadIntoDatabase {
+sub LoadIntoDatabase { # Load remote_addr.log into remote_addr_ip_log table
 	my $log = GetFile('log/remote_addr.log');
 	my $linesLoaded = 0;
 
@@ -44,7 +44,7 @@ sub LoadIntoDatabase {
 	}
 
 	WriteLog("LoadIntoDatabase: $linesLoaded lines loaded into remote_addr_ip_log");
-	print "LoadIntoDatabase: $linesLoaded lines loaded into remote_addr_ip_log\n";
+	WriteMessage("LoadIntoDatabase: $linesLoaded lines loaded into remote_addr_ip_log");
 } # LoadIntoDatabase()
 
 SetSqliteDbName('remote.sqlite3');
