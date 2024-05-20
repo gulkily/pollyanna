@@ -252,6 +252,21 @@ if [ $1 = alog ]
 		./config/template/perl/pages.pl --all
 fi
 
+if [ $1 = iplog ]
+  then
+    if [ $2 = load ]
+      then
+        echo loading remote address log into sqlite table
+        perl -T default/template/perl/script/remote_addr_ip_log_load.pl
+        echo use 'hike remote drop' to remove remote address table
+    fi
+    if [ $2 = drop ]
+      then
+        echo dropping remote address table
+        perl -T default/template/perl/script/remote_addr_ip_log_drop.pl
+    fi
+fi
+
 if [ $1 = db ]
 	then
 		sqlite3 -echo -cmd ".headers on" -cmd ".timeout 500" -cmd ".mode column" -cmd ".tables" cache/b/index.sqlite3
