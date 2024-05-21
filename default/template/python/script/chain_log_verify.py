@@ -1,8 +1,16 @@
 import hashlib
 
-# pollyanna chain.log verifier
-# mostly written by chatgpt4
-# minor corrections by ilyag
+# pollyanna chain.log verifier, mostly written by chatgpt4, minor corrections by ilyag
+#
+# The checksum hash input includes the entire previous line along with the current item's hash and timestamp.
+# This chaining method ensures that each entry in the list is dependent not only on the item and timestamp
+# but also on the complete state of the previous line, which adds an extra layer of integrity to the verification
+# process.
+#
+# This method effectively makes your linked list more secure because any change in an earlier entry would cause a
+# mismatch in all subsequent entries. It's a good strategy for ensuring the authenticity and integrity of the data
+# in a sequential log or chain.
+
 
 def compute_md5_hash(input_string):
 	return hashlib.md5(input_string.encode()).hexdigest()
@@ -30,17 +38,6 @@ def verify_linked_list(file_path):
 			previous_line = f"{item_hash}|{timestamp}|{current_checksum}"
 
 # Path to the file containing the linked list
-file_path = 'html/chain.log'
+file_path = 'chain.log'
 verify_linked_list(file_path)
-
-# ChatGPT4
-#
-# Thanks for sharing your working implementation! It looks like the key change here is that the hash input includes
-# the entire previous line along with the current item's hash and timestamp. This chaining method ensures that each
-# entry in the list is dependent not only on the item and timestamp but also on the complete state of the previous
-# line, which adds an extra layer of integrity to the verification process.
-#
-# This method effectively makes your linked list more secure because any change in an earlier entry would cause a
-# mismatch in all subsequent entries. It's a good strategy for ensuring the authenticity and integrity of the data
-# in a sequential log or chain.
 
