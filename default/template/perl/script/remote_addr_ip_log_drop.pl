@@ -10,7 +10,7 @@ sub DropTable {
 	my $query = "DROP TABLE IF EXISTS remote_addr_ip_log";
 	SqliteQuery($query);
 	WriteLog("DropTable: remote_addr_ip_log dropped");
-	print "DropTable: remote_addr_ip_log dropped\n";
+	WriteMessage("DropTable: remote_addr_ip_log dropped");
 } # DropTable()
 
 SetSqliteDbName('remote.sqlite3');
