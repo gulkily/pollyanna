@@ -27,16 +27,7 @@ sub LoadIntoDatabase { # Load remote_addr.log into remote_addr_ip_log table
 			if ($file_hash && $remote_addr) {
 				my $first_three_octets = join('.', (split('\.', $remote_addr))[0..2]);
 				my $first_two_octets = join('.', (split('\.', $remote_addr))[0..1]);
-				$query = "
-					INSERT INTO remote_addr_ip_log (
-						file_hash,
-						remote_addr,
-						first_three_octets,
-						first_two_octets
-					) VALUES (
-						?, ?, ?, ?
-					)
-				";
+				$query = GetTemplate('query/insert/remote_addr_ip_log.sql');
 				SqliteQuery($query, $file_hash, $remote_addr, $first_three_octets, $first_two_octets);
 				$linesLoaded++;
 			}
