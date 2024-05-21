@@ -251,20 +251,22 @@ if [ $1 = alog ]
 		perl -T ./config/template/perl/index.pl --all
 		./config/template/perl/pages.pl --all
 fi
-
-if [ $1 = iplog ]
-  then
-    if [ $2 = load ]
-      then
-        echo loading remote address log into sqlite table
-        perl -T default/template/perl/script/remote_addr_ip_log_load.pl
-        echo use 'hike remote drop' to remove remote address table
+if [ "$1" = iplog ]; then  # Added quotes around $1 for safer comparison and a semicolon
+    if [ -z "$2" ]; then  # Changed !$2 to -z "$2" to check if $2 is empty
+        echo "usage: hike iplog [load|drop]"
+    else
+        if [ "$2" = load ]; then  # Added quotes around $2 and a semicolon
+            echo loading remote address log into sqlite table
+            perl -T default/template/perl/script/remote_addr_ip_log_load.pl
+            echo use 'hike remote drop' to remove remote address table
+        elif [ "$2" = drop ]; then  # Changed second 'if' to 'elif'
+            echo dropping remote address table
+            perl -T default/template/perl/script/remote_addr_ip_log_drop.pl
+        fi  # Added this 'fi' to close the inner 'if/elif' block
     fi
-    if [ $2 = drop ]
-      then
-        echo dropping remote address table
-        perl -T default/template/perl/script/remote_addr_ip_log_drop.pl
-    fi
+else
+    # This part seems to be intentionally left empty to handle cases where $1 is not 'iplog'
+    :  # A null command (colon) can be used as a placeholder if desired
 fi
 
 if [ $1 = db ]
@@ -345,6 +347,7 @@ if [ $1 = help ]
 		echo hike frontend = refresh frontend
 		echo hike refresh = refresh templates
 		echo hike alog = import access log
+		echo hike iplog = import/drop remote ip log
 		echo hike help = see more commands
 		echo hike db = open sqlite3 command line
 		echo hike guidb = open sqlitebrowser
