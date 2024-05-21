@@ -371,26 +371,36 @@ sub GetDialogX2 { # \%paramHash ; returns dialog
 	# the other scenario is if it is not enclosed in tr and td
 	# in this case we need to do it, because the dialog is a table
 	if ($windowBody) {
-		if (
-			!$columnHeadings &&
-				(index(lc($windowBody), '<table') == -1) &&
-				(index(lc($windowBody), '<tr') == -1)
-		) {
-			$windowBody = '<tr class=content><td>' . $windowBody . '</td></tr>';
-		}
-		elsif (index(lc($windowBody), '<tr') == -1) {
-			if ($contentColumnCount > 1) {
-				#todo templatize?
-				$windowBody = '<tr class=content><td colspan=$contentColumnCount>' . $windowBody . '</td></tr>';
-			} else {
-				$windowBody = '<tr class=content><td>' . $windowBody . '</td></tr>';
-			}
+		WriteLog('GetDialogX2: modern: has $windowBody');
+		#if (
+		#	!$columnHeadings &&
+		#		(index(lc($windowBody), '<table') == -1) &&
+		#		(index(lc($windowBody), '<tr') == -1)
+		#) {
+		#	$windowBody = '<tr class=content><td>' . $windowBody . '</td></tr>';
+		#}
+		#elsif (index(lc($windowBody), '<tr') == -1) {
+		#	if ($contentColumnCount > 1) {
+		#		#todo templatize?
+		#		$windowBody = '<tr class=content><td colspan=$contentColumnCount>' . $windowBody . '</td></tr>';
+		#	} else {
+		#		$windowBody = '<tr class=content><td>' . $windowBody . '</td></tr>';
+		#	}
+		#} else {
+		#	$windowBody = str_replace('$contentColumnCount', $contentColumnCount, $windowBody);
+		#}
+
+		# if $windowBody contains table content, add table tags around it
+		if (index($windowBody, '<tr') != -1) {
+			WriteLog('GetDialogX2: modern: $windowBody has <tr');
+			$windowBody = '<table>' . $windowBody . '</table>';
 		} else {
-			$windowBody = str_replace('$contentColumnCount', $contentColumnCount, $windowBody);
+			WriteLog('GetDialogX2: modern: $windowBody does NOT have <tr');
 		}
 
 		$windowTemplate =~ s/\$windowBody/$windowBody/g;
 	} else {
+		WriteLog('GetDialogX2: modern: does NOT have $windowBody');
 		$windowTemplate =~ s/\$windowBody//g;
 	}
 
