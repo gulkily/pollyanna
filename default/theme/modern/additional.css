@@ -28,7 +28,7 @@ a {
 a:hover {
 	text-decoration: underline;
 }
-input[type="text"], textarea {
+input[type="text"], textarea, select {
 	width: 100%;
 	padding: 10px;
 	border: 1px solid #ccc;
@@ -106,8 +106,7 @@ button:hover {
 	button:hover {
 		background-color: #003366;
 	}
-	input[type="text"],
-	textarea {
+	input[type="text"], textarea, select {
 		background-color: #333;
 		color: #ccc;
 	}
