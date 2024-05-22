@@ -51,8 +51,9 @@ button:hover {
 	background-color: #e9ecef;
 }
 .topmenubar, .titlebar {
-	background-color: #f8f9fa;
-	padding: 10px 0;
+	background-color: $colorTitlebar;
+	padding: 10px;
+	font-weight: bold;
 }
 .topmenubar a {
 	padding: 0 10px;
