@@ -611,8 +611,10 @@ function DraggingInitDialog (el, doPosition) {
 		dragElement(el, firstTitlebar);
 		firstTitlebar.style.cursor = 'move';
 		var titleTitle = firstTitlebar.getElementsByTagName('b');
-		if (titleTitle) {
+		if (titleTitle && titleTitle[0]) {
 			titleTitle[0].style.cursor = 'inherit';
+		} else {
+			//alert('DEBUG: DraggingInit: warning: titleTitle[0] was FALSE');
 		}
 	} else {
 		//alert('DEBUG: DraggingInitDialog: titlebar missing');
