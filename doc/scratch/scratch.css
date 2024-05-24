@@ -1,3 +1,18 @@
+/* from Modern theme */
+/* Responsive horizontal tiling */
+@media (min-width: 800px) {
+	.container {
+		display: table;
+		width: 100%;
+	}
+	.container table {
+		display: table-cell;
+		width: 50%;
+		vertical-align: top;
+	}
+}
+
+
 /* Apply styles to the titlebar with class .titlebar */
 .titlebar {
   background-color: #333; /* Dark background color */

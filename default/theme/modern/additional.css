@@ -66,18 +66,6 @@ button:hover {
 .dialog .content {
 	padding: 5px;
 }
-/* Responsive horizontal tiling */
-@media (min-width: 800px) {
-	.container {
-		display: table;
-		width: 100%;
-	}
-	.container table {
-		display: table-cell;
-		width: 50%;
-		vertical-align: top;
-	}
-}
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
 	body {
