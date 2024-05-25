@@ -78,6 +78,25 @@ button:hover {
 .recent {
 	background-color: #f0d0a0;
 }
+.notification {
+	color: black;
+	background-color: white;
+	padding: 3pt;
+	font-weight: bold;
+	padding: 3pt;
+}
+#loadingIndicator, #spanLoadingIndicator, #ariaAlert {
+	color: black;
+	background-color: white;
+	padding: 3pt;
+	position: fixed;
+	top: 0;
+	left: 0;
+	margin: 0;
+	font-family: tahoma, arial, sans-serif;
+	font-weight: bold;
+}
+
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
 	body {
@@ -118,5 +137,13 @@ button:hover {
 	}
 	.recent {
 		background-color: #402000;
+	}
+	.notification {
+		color: white;
+		background-color: black;
+	}
+	#loadingIndicator, #spanLoadingIndicator, #ariaAlert {
+		color: white;
+		background-color: black;
 	}
 }

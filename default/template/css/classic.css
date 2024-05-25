@@ -1,0 +1,34 @@
+/* default/template/css/classic.css */
+#eventLocation {
+/* event form */
+	background-color: $colorRow0Bg;
+	padding: 5pt;
+}
+
+#eventDate {
+/* event form */
+	background-color: $colorRow1Bg;
+	padding: 5pt;
+}
+
+#loadingIndicator, #spanLoadingIndicator, #ariaAlert {
+	color: $colorText;
+	background-color: $colorHighlightBeginner;
+	padding: 3pt;
+	position: fixed;
+	top: 0;
+	left: 0;
+	margin: 0;
+	font-family: tahoma, arial, sans-serif;
+	font-weight: bold;
+}
+
+.notification {
+	color: $colorText;
+	background-color: $colorHighlightBeginner;
+	padding: 3pt;
+	font-weight: bold;
+	padding: 3pt;
+}
+
+/* / default/template/css/classic.css */

@@ -5,6 +5,7 @@ what's left to do on modern theme
 	finish template selection algorithm for perl files
 		(currently dialog_builder.pl still needs to be copied manually to config/template/perl/
 	timestamp widget colorization x
+	notification/alert styling x
 	beginner/advanced/admin layer colorization
 	table/dialog borders in dark mode
 	what to do with <fieldset> tags?

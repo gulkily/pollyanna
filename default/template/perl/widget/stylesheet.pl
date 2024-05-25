@@ -81,6 +81,18 @@ sub GetStylesheet { # ; returns common stylesheet template based on config
 	my $style = GetTemplate('css/default.css');
 	# baseline style
 
+	my $modernMode = 0;
+	if (in_array('modern', GetActiveThemes())) {
+		#todo this is a hard-coded hack, pls fix #hack #fixme
+		#todo this should be memoized, and the memo clearing should be linked to GetActiveThemes()
+		$modernMode = 1;
+	}
+	if ($modernMode) {
+		#no action
+	} else {
+		$style .= "\n" . GetTemplate('css/classic.css');
+	}
+
 	if (GetConfig('html/avatar_icons')) {
 		$style .= "\n" . GetTemplate('css/avatar.css');
 		# add style for color avatars if that's the setting
