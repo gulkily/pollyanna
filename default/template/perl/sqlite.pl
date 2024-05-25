@@ -1251,6 +1251,26 @@ sub DBDeleteItemReferences { # delete all references to item from tables
 		SqliteQuery($query, @hashesToDelete);
 	}
 
+	#todo below should not be in sqlite.pl, but should be in
+	# DeleteItemReferences(), which would call DBDeleteItemReferences()
+
+	#unlink related files from cache, image thumbnails, etc
+	foreach (@hashesToDelete) {
+		my $hash = IsItem($_);
+		my @paths = qw(script txt html image);
+		foreach (@paths) {
+			my $path = GetDir($_);
+
+			my @files = `find $path | grep $hash`;
+			if (@files) {
+				foreach (@files) {
+					my $file = $_;
+					WriteLog('DBDeleteItemReferences: unlink: $file = ' . $file);
+				}
+			}
+		}
+	}
+
 	#todo
 	#item_attribute.source
 	#item_parent (?)
