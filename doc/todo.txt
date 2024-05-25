@@ -1,3 +1,16 @@
+what's left to do on modern theme
+	alternating table row colors x
+	table headers (don't appear at all)
+		this is in GetDialogX2() in dialog_builder.pl
+	finish template selection algorithm for perl files
+		(currently dialog_builder.pl still needs to be copied manually to config/template/perl/
+	timestamp widget colorization
+	beginner/advanced/admin layer colorization
+	table/dialog borders in dark mode
+	what to do with <fieldset> tags?
+
+===
+
 Write link should pull a copy of the write page from local storage and replace local dom with it.
 
 ===
