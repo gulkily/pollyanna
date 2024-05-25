@@ -72,6 +72,12 @@ button:hover {
 .dialog .content {
 	padding: 5px;
 }
+.veryRecent {
+	font-weight: bold;
+}
+.recent {
+	background-color: #f0d0a0;
+}
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
 	body {
@@ -109,5 +115,8 @@ button:hover {
 	input[type="text"], textarea, select {
 		background-color: #333;
 		color: #ccc;
+	}
+	.recent {
+		background-color: #402000;
 	}
 }

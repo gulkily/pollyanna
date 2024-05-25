@@ -222,26 +222,42 @@ function ShowTimestamps () { // finds any class=timestamp, updates its displayed
 				}
 
 				//longAgo = secs;
+				var modernMode = 0; // templated
 
 				if (te[i].innerHTML != longAgo) {
 					// element's content does not already equal what it should equal
 					te[i].innerHTML = longAgo;
-					if ((secs * (-1)) < 3600) {
-						// less than an hour ago = bold
-						te[i].style.fontWeight = 'bold';
-					} else {
-						te[i].style.fontWeight = '';
+
+					if (modernMode) {
+						if ((secs * (-1)) < 3600) {
+							te[i].classList.add('veryRecent');
+						} else {
+							te[i].classList.remove('veryRecent');
+						}
+						if ((secs * (-1)) < 86400) {
+							te[i].classList.add('recent');
+						} else {
+							te[i].classList.remove('recent');
+						}
 					}
-					if ((secs * (-1)) < 86400) {
-						// less than a day ago = highlight
-						var colorHighlightAlert = ''; // templated
-						if (colorHighlightAlert) {
-						    te[i].style.backgroundColor = colorHighlightAlert;
-                        }
-					} else {
-						te[i].style.backgroundColor = '';
+					else {
+						if ((secs * (-1)) < 3600) {
+							// less than an hour ago = bold
+							te[i].style.fontWeight = 'bold';
+						} else {
+							te[i].style.fontWeight = '';
+						}
+						if ((secs * (-1)) < 86400) {
+							// less than a day ago = highlight
+							var colorHighlightAlert = ''; // templated
+							if (colorHighlightAlert) {
+								te[i].style.backgroundColor = colorHighlightAlert;
+							}
+						} else {
+							te[i].style.backgroundColor = '';
+						}
 					}
-					
+
 					//var rect = te[i].getBoundingClientRect();
 					//if (!te[i].getAttribute('maxw') || (te[i].getAttribute('maxw') < rect.width)) {
 					//	te[i].setAttribute('maxw', rect.width);
