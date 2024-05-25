@@ -3006,6 +3006,10 @@ sub StorePostUrl {
 	}
 } # StorePostUrl()
 
+#todo
+#sub DeleteFile {
+#sub RemoveFile {
+
 StorePostUrl();
 
 EnsureDirsThatShouldExist();
