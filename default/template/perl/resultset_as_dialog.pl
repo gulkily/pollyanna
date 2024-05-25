@@ -123,6 +123,13 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 		my $content = '';
 		my $checkColumnCount = 0;
 
+		my $modernMode = 0;
+		if (in_array('modern', GetActiveThemes())) {
+			#todo this is a hard-coded hack, pls fix #hack #fixme
+			#todo this should be memoized, and the memo clearing should be linked to GetActiveThemes()
+			$modernMode = 1;
+		}
+
 		# SETUP ENDS
 		##############################################################
 
@@ -148,12 +155,18 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 				$rowBgColor = '#000000';
 			}
 
-			if (0 && $row->{'this_row'}) {
-				# selected row, highlight it, selected_row, row_selected
-				$content .= '<tr bgcolor="' . GetThemeColor('highlight_alert') . '">';
-			} else {
-				# use specified bg color
-				$content .= '<tr bgcolor="' . $rowBgColor . '">';
+			if ($modernMode) {
+				$content .= '<tr>';
+			}
+			else {
+				if (0 && $row->{'this_row'}) {
+					# selected row, highlight it, selected_row, row_selected
+					$content .= '<tr bgcolor="' . GetThemeColor('highlight_alert') . '">';
+				}
+				else {
+					# use specified bg color
+					$content .= '<tr bgcolor="' . $rowBgColor . '">';
+				}
 			}
 
 			# row color above
