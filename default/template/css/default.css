@@ -1,4 +1,4 @@
-/* begin css/default.css */
+/* default/template/css/default.css */
 .tag-flag,
 .tag-troll,
 .tag-spam,
@@ -129,4 +129,4 @@ code.sql b {
 code.sql i {
 	color: gold;
 }
-/* end css/default.css */
+/* / default/template/css/default.css */
