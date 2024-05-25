@@ -498,6 +498,8 @@ sub GetConfigValueAsArray { # $listName ; returns an array from a config value t
 } # GetConfigValueAsArray()
 
 sub GetActiveThemes { # return list of active themes (config/setting/theme)
+# sub GetTheme {
+# sub GetActiveTheme {
 # sub GetThemes {
 # sub ListThemes {
 # sub GetThemeList {
