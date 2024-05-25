@@ -257,7 +257,7 @@ sub DeindexMissingFiles { # remove from index data for files which have been rem
 				if (!-e $item->{'file_path'}) {
 					# if file does not exist, remove its references
 					WriteLog('DeindexMissingFiles: Found a missing text file, removing references. ' . $item->{'file_path'});
-					DBDeleteItemReferences($item->{'file_hash'});
+					DBDeleteItemReferences($item->{'file_hash'}); # DeindexMissingFiles()
 					$itemsDeletedCount++;
 				}
 			}
@@ -300,7 +300,7 @@ sub SweepDeleted { # cleans up files which have been deleted or marked deleted
 			push @deletedHash, $fileHash;
 			
 			if (scalar(@deletedHash) > 100) {
-				DBDeleteItemReferences(@deletedHash);
+				DBDeleteItemReferences(@deletedHash); # SweepDeleted()
 				@deletedHash = ();
 			}
 			
@@ -308,7 +308,7 @@ sub SweepDeleted { # cleans up files which have been deleted or marked deleted
 		}
 	}
 	if (@deletedHash) {
-		DBDeleteItemReferences(@deletedHash);
+		DBDeleteItemReferences(@deletedHash); # SweepDeleted()
 	}
 	
 	my @attribs = SqliteQueryHashRef(

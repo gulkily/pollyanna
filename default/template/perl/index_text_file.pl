@@ -819,7 +819,7 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 										push @indexMessageLog, 'removing item: ' . $itemParent;
 
 										AppendFile('log/deleted.log', $itemParent);
-										DBDeleteItemReferences($itemParent);
+										DBDeleteItemReferences($itemParent); # IndexTextFile() #remove
 
 										my $htmlFilename = $HTMLDIR . '/' . GetHtmlFilename($itemParent); # IndexTextFile()
 										if (-e $htmlFilename) {
