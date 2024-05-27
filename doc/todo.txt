@@ -1,3 +1,15 @@
+solution to make message posting happen instantly for the user
+	generate dialog with js and inject into page
+		SendMessage()
+		needs implementation of GetDialogX2() in js
+	send request in background
+		SendMessage()
+	also store request in localstorage for backup, in case request doesn't go through
+		SendMessage()
+		need to be able to generate sha1 hash with js
+
+===
+
 what's left to do on modern theme
 	alternating table row colors x
 	table headers (don't appear at all)
