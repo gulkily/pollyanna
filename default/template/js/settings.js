@@ -7,6 +7,8 @@ var showAdminLastAction = '';
 var showTimestampsLastAction = '';
 var showPageInfoLastAction = '';
 
+var modernMode = 0;
+
 var timerShowAdvanced;
 
 function SetElementVisible (element, displayValue, bgColor, borderStyle) { // sets element's visible status based on tag type
@@ -25,7 +27,8 @@ function SetElementVisible (element, displayValue, bgColor, borderStyle) { // se
 
 	//alert('DEBUG: SetElementVisible:' + element.tagName + "; displayValue:" + displayValue + "; bgColor:" + bgColor + "; borderStyle:" + borderStyle + "\n");
 
-	if (bgColor && (element.tagName != 'SPAN')) {
+	if (bgColor && (element.tagName != 'SPAN') && (!modernMode)) {
+		// don't do this in modern mode, because it should be done with css classes instead
 		// background color
 		if (bgColor == 'initial') {
 			bgColor = '$colorWindow';
