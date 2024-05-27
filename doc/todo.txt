@@ -6,7 +6,7 @@ what's left to do on modern theme
 		(currently dialog_builder.pl still needs to be copied manually to config/template/perl/
 	timestamp widget colorization x
 	notification/alert styling x
-	beginner/advanced/admin layer colorization
+	beginner/advanced/admin layer colorization x
 	table/dialog borders in dark mode
 	what to do with <fieldset> tags?
 
