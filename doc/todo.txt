@@ -21,6 +21,7 @@ what's left to do on modern theme
 	beginner/advanced/admin layer colorization x
 	table/dialog borders in dark mode x
 	what to do with <fieldset> tags?
+		probably need to get rid of them, because thye're not styled correctly in dark mode
 
 ===
 
