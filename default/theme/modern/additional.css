@@ -66,7 +66,7 @@ button:hover {
 }
 .dialog {
 	margin-bottom: 5px;
-	border: solid 5px $colorTitlebar;
+	border: solid 5px #e0e0e0;
 	border-radius: 5px;
 }
 .dialog .content {
@@ -118,6 +118,9 @@ button:hover {
 	}
 	a {
 		color: #4da3ff;
+	}
+	.dialog {
+		border: solid 5px #333;
 	}
 	.statusbar {
 		background-color: #333;
