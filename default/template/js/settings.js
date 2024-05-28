@@ -1,4 +1,4 @@
-// settings.js
+/* settings.js */
 
 var showAdvancedLastAction = '';
 var showBeginnerLastAction = '';
@@ -785,4 +785,4 @@ if (window.EventLoop) {
 	ShowAdvanced(0, 0);
 }
 
-// / settings.js
+/* / settings.js */
