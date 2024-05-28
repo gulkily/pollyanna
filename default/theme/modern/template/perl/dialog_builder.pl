@@ -262,11 +262,11 @@ sub GetDialogX2 { # \%paramHash ; returns dialog
 		# (for example, the author information dialog)
 		# in this case, we specify the number of columns as an integer
 		# this allows the title bar and status bar to have the proper value for colspan=
-		WriteLog('GetDialogX: $columnHeadings is NUMERIC');
+		WriteLog('GetDialogX2: $columnHeadings is NUMERIC');
 		$contentColumnCount = int($columnHeadings);
 		$columnHeadings = '';
 	} else {
-		WriteLog('GetDialogX: $columnHeadings is not numeric');
+		WriteLog('GetDialogX2: $columnHeadings is NOT numeric; $columnHeadings = ' . $columnHeadings);
 		#$columnHeadings = '';
 	}
 
