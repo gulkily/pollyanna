@@ -96,6 +96,11 @@ button:hover {
 	font-family: tahoma, arial, sans-serif;
 	font-weight: bold;
 }
+fieldset {
+	border-radius: 5pt;
+	border-style: solid;
+	border-color: #f0f0f0;
+}
 
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
@@ -148,5 +153,8 @@ button:hover {
 	#loadingIndicator, #spanLoadingIndicator, #ariaAlert {
 		color: white;
 		background-color: black;
+	}
+	fieldeset {
+		border-color: #333;
 	}
 }
