@@ -23,6 +23,8 @@ what's left to do on modern theme
 	what to do with <fieldset> tags?
 		probably need to get rid of them, because thye're not styled correctly in dark mode
 	figure out why dialogs have a transparent background
+	dragging
+		activate with pointer doesn't work right
 
 ===
 
