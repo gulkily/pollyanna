@@ -101,6 +101,9 @@ fieldset {
 	border-style: solid;
 	border-color: #f0f0f0;
 }
+th {
+	text-align: left;
+}
 
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {

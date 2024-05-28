@@ -392,7 +392,26 @@ sub GetDialogX2 { # \%paramHash ; returns dialog
 
 		# if $windowBody contains table content, add table tags around it
 		if (index($windowBody, '<tr') != -1) {
+			# this is kind of a hack, but it works
 			WriteLog('GetDialogX2: modern: $windowBody has <tr');
+
+			if ($columnHeadings) {
+				my @columnsArray = split(',', $columnHeadings);
+				my $printedColumnsCount = 0;
+				my @fieldAdvanced = split("\n", GetTemplate('list/field_advanced'));
+				my @fieldAdmin = split("\n", GetTemplate('list/field_admin'));
+
+				my $windowBodyHeading = '';
+
+				for my $column (@columnsArray) {
+					$windowBodyHeading .= '<th>' . $column . '</th>';
+				}
+
+				$windowBodyHeading = '<tr>' . $windowBodyHeading . '</tr>';
+
+				$windowBody = $windowBodyHeading . $windowBody;
+			}
+
 			$windowBody = '<table>' . $windowBody . '</table>';
 		} else {
 			WriteLog('GetDialogX2: modern: $windowBody does NOT have <tr');
