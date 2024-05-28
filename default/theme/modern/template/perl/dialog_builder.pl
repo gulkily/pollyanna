@@ -404,7 +404,44 @@ sub GetDialogX2 { # \%paramHash ; returns dialog
 				my $windowBodyHeading = '';
 
 				for my $column (@columnsArray) {
-					$windowBodyHeading .= '<th>' . $column . '</th>';
+					my $th = '<th>' . $column . '</th>';
+
+
+					if (in_array($column, @fieldAdvanced)) {
+						#todo caption and field name should be different things
+						$th = AddAttributeToTag(
+							$th,
+							'th',
+							'class',
+							'advanced'
+						);
+					}
+					elsif (in_array($column, @fieldAdmin)) {
+						#todo caption and field name should be different things
+						$th = AddAttributeToTag(
+							$th,
+							'th',
+							'class',
+							'admin'
+						);
+					}
+
+					if ($tableSort && GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/table_sort')) {
+						$th = AddAttributeToTag(
+							$th,
+							'th',
+							'onclick',
+							'if (window.SortTable) { SortTable(this); } else { }'
+						);
+						$th = AddAttributeToTag(
+							$th,
+							'th',
+							'style',
+							'cursor: pointer'
+						);
+					}
+
+					$windowBodyHeading .= $th;
 				}
 
 				$windowBodyHeading = '<tr>' . $windowBodyHeading . '</tr>';
