@@ -1,6 +1,6 @@
 /* dialog.js */
 
-function CreateDialog (body, title, headings, status, menu) {
+function CreateDialog (body, title, status) {
 	// #todo sanity checks
 
 	var newDialog = document.createElement('div');
@@ -8,7 +8,7 @@ function CreateDialog (body, title, headings, status, menu) {
 
 	var newTitlebar = document.createElement('div');
 	newTitlebar.setAttribute('class', 'titlebar');
-	var newTitlebarText = document.createTextNode('titlehere');
+	var newTitlebarText = document.createTextNode(title);
 	newTitlebar.appendChild(newTitlebarText);
 	var newTitlebarExpandLink = document.createElement('a');
 	newTitlebarExpandLink.setAttribute('onclick', 'onclick="if (window.ShowAll && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;"');
@@ -18,19 +18,17 @@ function CreateDialog (body, title, headings, status, menu) {
 
 	var newContent = document.createElement('div');
 	newContent.setAttribute('class', 'content');
-	var newContentText = document.createTextNode('contenthere');
-	newContent.appendChild(newContentText);
+	newContent.innerHTML = body;
 
 	var newStatusbar = document.createElement('div');
 	newStatusbar.setAttribute('class', 'statusbar');
-	var newStatusbarText = document.createTextNode('statusbar here');
-	newStatusbar.appendChild(newStatusbarText);
+	newStatusbar.innerHTML = status;
+	//var newStatusbarText = document.createTextNode('statusbar here');
+	//newStatusbar.appendChild(newStatusbarText);
 
 	newDialog.appendChild(newTitlebar);
 	newDialog.appendChild(newContent);
 	newDialog.appendChild(newStatusbar);
-
-	//newDialog.innerHTML = 'hey';
 
 	document.body.appendChild(newDialog);
 } // CreateDialog()
