@@ -22,6 +22,7 @@ what's left to do on modern theme
 	table/dialog borders in dark mode x
 	what to do with <fieldset> tags?
 		probably need to get rid of them, because thye're not styled correctly in dark mode
+	figure out why dialogs have a transparent background
 
 ===
 
