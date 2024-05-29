@@ -8,13 +8,14 @@ function CreateDialog (body, title, status) {
 
 	var newTitlebar = document.createElement('div');
 	newTitlebar.setAttribute('class', 'titlebar');
-	var newTitlebarText = document.createTextNode(title);
+	var newTitlebarText = document.createTextNode(title + ' ');
 	newTitlebar.appendChild(newTitlebarText);
 	var newTitlebarExpandLink = document.createElement('a');
 	newTitlebarExpandLink.setAttribute('onclick', 'onclick="if (window.ShowAll && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;"');
 	newTitlebarExpandLink.setAttribute('href', '#');
 	var newTitlebarExpandLinkText = document.createTextNode('#');
 	newTitlebarExpandLink.appendChild(newTitlebarExpandLinkText);
+	newTitlebar.appendChild(newTitlebarExpandLink);
 
 	var newContent = document.createElement('div');
 	newContent.setAttribute('class', 'content');
