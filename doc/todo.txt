@@ -1,7 +1,11 @@
 solution to make message posting happen instantly for the user
 	generate dialog with js and inject into page
-		SendMessage()
+		in SendMessage()
 		needs implementation of GetDialogX2() in js
+			add CreateDialog() x
+			need CreateItemDialog()
+			need GetTimestampWidget()
+			need GetItemLink()
 	send request in background
 		SendMessage()
 	also store request in localstorage for backup, in case request doesn't go through
