@@ -427,12 +427,14 @@ sub GetDialogX2 { # \%paramHash ; returns dialog
 					}
 
 					if ($tableSort && GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/table_sort')) {
+						# #todo this should probably be done more modern-like with js-based bindings
 						$th = AddAttributeToTag(
 							$th,
 							'th',
 							'onclick',
 							'if (window.SortTable) { SortTable(this); } else { }'
 						);
+						# #todo this should probably be done more modern-like with stylesheet
 						$th = AddAttributeToTag(
 							$th,
 							'th',
