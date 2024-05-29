@@ -545,7 +545,8 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			push @js, 'write_php'; # reply form
 		}
 		$txtIndex = InjectJs($txtIndex, @js);
-	} else {
+	} # if (GetConfig('reply/enable'))
+	else {
 		$txtIndex = InjectJs($txtIndex, qw(settings avatar voting utils profile translit timestamp itsyou));
 	}
 	# FINISH INJECT JS ######
