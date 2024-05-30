@@ -70,7 +70,7 @@ function CreateItemDialog (file) {
 
 	var title = escapeHTML(file.item_title);
 
-	CreateDialog(body, title, status);
+	return CreateDialog(body, title, status);
 }
 
 /*
