@@ -310,62 +310,76 @@ function SetActiveDialog (ths) {
 	// this doesn't work right  yet, but loks promising
 
 	var elements = document.getElementsByClassName('dialog');
-	for (var i = 0; i < elements.length; i++) {
-	// for (var i = elements.length - 1; 0 <= i; i--) { // walk backwards for positioning reasons
-		// walking backwards is necessary to preserve the element positioning on the page
-		// once we remove the element from the page flow, all the other elements reflow to account it
-		// if we walk forwards here, all the elements will end up in the top left corner
-		if (ths && elements[i] == ths) {
-			elements[i].setAttribute('imactive', '1');
-			elements[i].style.borderColor = colorTitlebar;
-		} else {
-			elements[i].setAttribute('imactive', '0');
-			elements[i].style.borderColor = colorTitlebarInactive;
-		}
 
-		if (elements[i].getAttribute('imactive') == 1) {
-			if (doScale) {
-				// this doesn't work yet, and there's no ui for the setting yet
-				//var myScale = 1 + (document.documentElement.clientWidth / (iwidth * 3));
-				var myScale = scaleLarge;
-
-				elements[i].style.transition = 'transform 0.15s';
-				//elements[i].style.transform = 'scale(' + myScale + ')';
-				elements[i].style.transform = 'scale(' + myScale + ')';
-				elements[i].style.transformOrigin = 'top left';
-
-				var css = window.getComputedStyle(elements[i]);
-			}
-		} // imactive
-		else {
-			if (doScale) { // always de-scale window, because it may have been scaled up before user turned off scaling
-				//var myScale =(document.documentElement.clientWidth / (iwidth * 5));
-				var myScale = scaleSmall;
-				elements[i].style.transform = 'scale(' + myScale + ')';
-				elements[i].style.transformOrigin = 'top left';
-
-				//elements[i].style.transform = 'scale(0.5)';
-				//elements[i].style.transformOrigin = 'top center';
-			}
-		} // not imactive
-
-		var allTitlebar = elements[i].getElementsByClassName('titlebar'); // #todo factor out
-		var firstTitlebar = allTitlebar[0];
-
-		if (firstTitlebar && firstTitlebar.getElementsByTagName) {
-			if ((ths && elements[i] == ths) || elements[i].getAttribute('imactive') == 1) {
-				// active
-				firstTitlebar.style.backgroundColor = colorTitlebar;
-				firstTitlebar.style.color = colorTitlebarText;
-				//elements[i].style.boxShadow = '0 0 15pt #335555;';
+	if (modernMode) {
+		for (var i = 0; i < elements.length; i++) {
+			if (ths && elements[i] == ths) {
+				elements[i].setAttribute('imactive', '1');
+				elements[i].classList.add('dialog-active');
 			} else {
-				// inactive
-				firstTitlebar.style.backgroundColor = colorSecondary;
-				firstTitlebar.style.color = colorWindow;
-				//elements[i].style.boxShadow = '';
+				elements[i].setAttribute('imactive', '0');
+				elements[i].classList.remove('dialog-active');
 			}
 		}
 	}
+	else {
+		for (var i = 0; i < elements.length; i++) {
+		// for (var i = elements.length - 1; 0 <= i; i--) { // walk backwards for positioning reasons
+			// walking backwards is necessary to preserve the element positioning on the page
+			// once we remove the element from the page flow, all the other elements reflow to account it
+			// if we walk forwards here, all the elements will end up in the top left corner
+			if (ths && elements[i] == ths) {
+				elements[i].setAttribute('imactive', '1');
+				elements[i].style.borderColor = colorTitlebar;
+			} else {
+				elements[i].setAttribute('imactive', '0');
+				elements[i].style.borderColor = colorTitlebarInactive;
+			}
+
+			if (elements[i].getAttribute('imactive') == 1) {
+				if (doScale) {
+					// this doesn't work yet, and there's no ui for the setting yet
+					//var myScale = 1 + (document.documentElement.clientWidth / (iwidth * 3));
+					var myScale = scaleLarge;
+
+					elements[i].style.transition = 'transform 0.15s';
+					//elements[i].style.transform = 'scale(' + myScale + ')';
+					elements[i].style.transform = 'scale(' + myScale + ')';
+					elements[i].style.transformOrigin = 'top left';
+
+					var css = window.getComputedStyle(elements[i]);
+				}
+			} // imactive
+			else {
+				if (doScale) { // always de-scale window, because it may have been scaled up before user turned off scaling
+					//var myScale =(document.documentElement.clientWidth / (iwidth * 5));
+					var myScale = scaleSmall;
+					elements[i].style.transform = 'scale(' + myScale + ')';
+					elements[i].style.transformOrigin = 'top left';
+
+					//elements[i].style.transform = 'scale(0.5)';
+					//elements[i].style.transformOrigin = 'top center';
+				}
+			} // not imactive
+
+			var allTitlebar = elements[i].getElementsByClassName('titlebar'); // #todo factor out
+			var firstTitlebar = allTitlebar[0];
+
+			if (firstTitlebar && firstTitlebar.getElementsByTagName) {
+				if ((ths && elements[i] == ths) || elements[i].getAttribute('imactive') == 1) {
+					// active
+					firstTitlebar.style.backgroundColor = colorTitlebar;
+					firstTitlebar.style.color = colorTitlebarText;
+					//elements[i].style.boxShadow = '0 0 15pt #335555;';
+				} else {
+					// inactive
+					firstTitlebar.style.backgroundColor = colorSecondary;
+					firstTitlebar.style.color = colorWindow;
+					//elements[i].style.boxShadow = '';
+				}
+			}
+		} // for (var i = 0; i < elements.length; i++)
+	} // else (!modernMode)
 
 	//UpdateDialogPropertyDialog(ths);
 
