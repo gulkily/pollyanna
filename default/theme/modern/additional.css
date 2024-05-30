@@ -104,6 +104,12 @@ fieldset {
 th {
 	text-align: left;
 }
+.dialog-active {
+	border-color: #a0d0ff;
+}
+.dialog-active .titlebar, .dialog-active .statusbar {
+	background-color: #a0d0ff;
+}
 
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
@@ -157,7 +163,10 @@ th {
 		color: white;
 		background-color: black;
 	}
-	fieldeset {
-		border-color: #333;
+	.dialog-active {
+		border-color: #003366;
+	}
+	.dialog-active .titlebar, .dialog-active .statusbar {
+		background-color: #003366;
 	}
 }
