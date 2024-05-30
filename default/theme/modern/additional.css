@@ -97,9 +97,8 @@ button:hover {
 	font-weight: bold;
 }
 fieldset {
-	border-radius: 5pt;
-	border-style: solid;
-	border-color: #f0f0f0;
+	border: 0;
+	/* hide fieldset borders, because they can't be darkmode-styled */
 }
 th {
 	text-align: left;
