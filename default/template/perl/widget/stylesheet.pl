@@ -88,7 +88,9 @@ sub GetStylesheet { # ; returns common stylesheet template based on config
 		$modernMode = 1;
 	}
 	if ($modernMode) {
-		#no action
+		if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/table_sort')) {
+			$style .= "\n" . GetTemplate('css/table_sort.css');
+		}
 	} else {
 		$style .= "\n" . GetTemplate('css/classic.css');
 	}
