@@ -7,7 +7,7 @@ var showAdminLastAction = '';
 var showTimestampsLastAction = '';
 var showPageInfoLastAction = '';
 
-var modernMode = 0;
+var modernMode = 0; // templated
 
 var timerShowAdvanced;
 
