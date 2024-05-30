@@ -3,7 +3,7 @@
 <span
 	id=jsdebug
 	class=dialog
-	style="border: 3pt; padding: 25pt 3pt 3pt 3pt; float:right;"
+	style="border: 3pt; padding: 5pt float:right;"
 >
 
 <button
