@@ -15,6 +15,13 @@ sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 		return '';
 	}
 
+	my $modernMode = 0;
+	if (in_array('modern', GetActiveThemes())) {
+		#todo this is a hard-coded hack, pls fix #hack #fixme
+		#todo this should be memoized, and the memo clearing should be linked to GetActiveThemes()
+		$modernMode = 1;
+	}
+
 	if (!GetConfig('admin/js/enable')) {
 		# if js is disabled globally, abort
 		WriteLog('InjectJs: warning: InjectJs() called when admin/js/enable is false');
@@ -49,6 +56,7 @@ sub InjectJs { # $html, @scriptNames ; inject js template(s) before </body> ;
 
 		if (GetConfig('admin/js/dragging')) {
 			push @scriptNames, 'dragging'; # InjectJs()
+			push @scriptNames, 'dialog'; # InjectJs()
 		}
 
 		if (GetConfig('admin/js/table_sort')) {
