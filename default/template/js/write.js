@@ -110,7 +110,7 @@ function WriteOnload () { // onload handler for write page
 
 					// implied getElementById already been feature checked here
 					//chkSignAs.setAttribute('onclick', "if (document.getElementById('btnSolvePuzzle')) { document.getElementById('btnSolvePuzzle').setAttribute('disabled', !chkSignAs.checked); }");
-					// this checkbox being checked means signMessage() is called in WriteSubmit()
+					// this checkbox being checked means SignMessage() is called in WriteSubmit()
 
 					lblSignAs.innerHTML = 'Sign as ' + getAvatar();
 					lblSignAs.appendChild(chkSignAs);
@@ -207,7 +207,7 @@ function CommentMakeWp (comment) { // makes editor textarea larger and gives it 
 } // CommentMakeWp()
 
 function WriteSubmit (t) { // called when user submits write form
-// function signMessage () {
+// function SignMessage () {
 	//alert('DEBUG: WriteSubmit() begin');
 	if (window.localStorage) {
 		//alert('DEBUG: WriteSubmit: window.localStorage');
@@ -219,17 +219,17 @@ function WriteSubmit (t) { // called when user submits write form
 	}
 
 	var configJsOpenPgp = 0; // this is templated from config/setting/admin/js/openpgp
-	if (configJsOpenPgp && window.getPrivateKey && window.signMessage) {
-		//alert('DEBUG: WriteSubmit: (window.getPrivateKey) && (window.signMessage) test passed');
+	if (configJsOpenPgp && window.getPrivateKey && window.SignMessage) {
+		//alert('DEBUG: WriteSubmit: (window.getPrivateKey) && (window.SignMessage) test passed');
 		if (getPrivateKey()) {
-			//alert('DEBUG: WriteSubmit: getPrivateKey() is true, calling signMessage()');
+			//alert('DEBUG: WriteSubmit: getPrivateKey() is true, calling SignMessage()');
 
 			if (document.getElementById) {
 				var chkSignAs = document.getElementById('chkSignAs');
 				if (!chkSignAs || (chkSignAs && chkSignAs.checked)) {
 					// if there's a "sign as" checkbox, it should be checked
-					if (window.signMessage) {
-						var signMessageResult = signMessage();
+					if (window.SignMessage) {
+						var signMessageResult = SignMessage();
 						if (!signMessageResult) {
 							signMessageResult = 0;
 						}
@@ -255,7 +255,7 @@ function WriteSubmit (t) { // called when user submits write form
 	} else {
 		// #todo add featureflag
 		if (0) {
-			//alert('DEBUG: WriteSubmit: (window.getPrivateKey) && (window.signMessage) test failed, falling back to Sent: footnote');
+			//alert('DEBUG: WriteSubmit: (window.getPrivateKey) && (window.SignMessage) test failed, falling back to Sent: footnote');
 			var d = new Date();
 			var n = d.getTime();
 			n = Math.ceil(n / 1000);

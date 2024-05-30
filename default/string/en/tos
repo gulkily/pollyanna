@@ -1,5 +1,5 @@
-<form action=/post.html id=comment name=comment onsubmit="if (window.signMessage) { return signMessage(); }">
-	<input id=comment name=comment type=submit onclick="if (window.signMessage) { return signMessage() }" value=Agree>
+<form action=/post.html id=comment name=comment onsubmit="if (window.SignMessage) { return SignMessage(); }">
+	<input id=comment name=comment type=submit onclick="if (window.SignMessage) { return SignMessage() }" value=Agree>
 	<br>
 	<label for=tos1>
 		<input type=checkbox name=tos1 id=tos1> <br>

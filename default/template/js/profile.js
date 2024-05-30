@@ -78,7 +78,7 @@ function btnSignOut_Click (t) { // event for 'Sign Out' button's click
 		//document.getElementsByTagName('body')[0].appendChild(form);
 		document.body.appendChild(form);
 		//alert('DEBUG: submitting form');
-		signMessage();
+		SignMessage();
 		//form.submit();
 	}
 

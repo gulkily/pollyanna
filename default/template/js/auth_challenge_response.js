@@ -6,7 +6,7 @@
 var challengeString = '1234567890';
 
 if (challengeString) {
-	if (window.signMessageBasic) {
+	if (window.SignMessageBasic) {
 		alert();
 	}
 }

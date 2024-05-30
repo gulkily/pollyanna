@@ -147,11 +147,11 @@ function doSolvePuzzle () { // solves puzzle
 	}
 
 	var btnSolvePuzzle = document.getElementById('btnSolvePuzzle');
-	if (window.signMessage) {
+	if (window.SignMessage) {
 		if (btnSolvePuzzle) {
 			btnSolvePuzzle.value = 'Signing...';
 		}
-		signMessage();
+		SignMessage();
 	}
 	if (window.WriteSubmit) {
 		WriteSubmit();

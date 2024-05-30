@@ -24,7 +24,7 @@ if (window.getUserFp) {
 			chkSignAs.setAttribute('id', 'chkSignAs');
 			chkSignAs.setAttribute('type', 'checkbox');
 			chkSignAs.setAttribute('checked', 1);
-			// this checkbox being checked means signMessage() is called in WriteSubmit()
+			// this checkbox being checked means SignMessage() is called in WriteSubmit()
 
 			lblSignAs.innerHTML = 'Sign as ' + getAvatar();
 
@@ -36,13 +36,13 @@ if (window.getUserFp) {
 			//	the [button] way, allowing formatting inside button
 			//	if using color avatars, requiring button element instead of submit, would look like this:
 			//			var btnSignReply = document.createElement('button');
-			//			btnSignReply.setAttribute('onclick', "this.innerHTML = 'Meditate...'; if (window.signMessage) { signMessage(); }");
+			//			btnSignReply.setAttribute('onclick', "this.innerHTML = 'Meditate...'; if (window.SignMessage) { SignMessage(); }");
 			//			btnSignReply.innerHTML = actName;
 
 			////
 			//	the <input type=submit way, more compatible
 			//			var btnSignReply = document.createElement('input');
-			//			btnSignReply.setAttribute('onclick', "this.value = 'Meditate...'; if (window.signMessage) { signMessage(); }");
+			//			btnSignReply.setAttribute('onclick', "this.value = 'Meditate...'; if (window.SignMessage) { SignMessage(); }");
 			//			btnSignReply.setAttribute('value', actName);
 			//			btnSignReply.setAttribute('type', 'submit');
 			//

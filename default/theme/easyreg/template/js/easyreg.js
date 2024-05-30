@@ -46,7 +46,7 @@ function afterKeygen () {
 
 	//alert('DEBUG: EasyMember: solvedPuzzle = ' + solvedPuzzle);
 
-	//alert('DEBUG: EasyMember: window.signMessageBasic= ' + window.signMessageBasic);
+	//alert('DEBUG: EasyMember: window.SignMessageBasic= ' + window.SignMessageBasic);
 
 	PubKeyShare();
 
@@ -66,7 +66,7 @@ function afterKeygen () {
 	}
 
 	if (document.compose && document.compose.comment) {
-		var signedPuzzle = signMessageBasic(myMessage, document.compose.comment, 'sendSignedMessage()');
+		var signedPuzzle = SignMessageBasic(myMessage, document.compose.comment, 'sendSignedMessage()');
 		//alert('DEBUG: EasyMember: signedPuzzle = ' + signedPuzzle);
 		//comment.value = signedPuzzle;
 		//compose.submit();

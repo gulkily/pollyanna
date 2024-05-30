@@ -1,5 +1,5 @@
 <!-- welcome_token.template -->
-<!-- doesn't work for some reason, signMessage() returns false -->
+<!-- doesn't work for some reason, SignMessage() returns false -->
 <form action="/post.html" name="compose" id="compose">
 	<p>
 		Press this button to mint a participation token, please. Thank you! <br>

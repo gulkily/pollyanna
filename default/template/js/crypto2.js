@@ -359,9 +359,9 @@ function getUsername () { // returns pgp username
 	return '';
 } // getUsername()
 
-function signMessageBasic (message, messageField = '', callback = '') {
+function SignMessageBasic (message, messageField = '', callback = '') {
 // function WriteMessage () {
-	// like signMessage(), but makes fewer assumptions about the environment
+	// like SignMessage(), but makes fewer assumptions about the environment
 	// and instead takes the message as an argument
 	// and optionally takes a messageField to put the signed message into
 	// and optionally takes a callback to call after the message is signed
@@ -369,14 +369,14 @@ function signMessageBasic (message, messageField = '', callback = '') {
 
 	var openpgp = window.openpgp;
 
-	//alert('DEBUG: signMessageBasic: openpgp = ' + openpgp);
+	//alert('DEBUG: SignMessageBasic: openpgp = ' + openpgp);
 
 	var privkey = getPrivateKey();
 	var privKeyObj = openpgp.key.readArmored(privkey).keys[0];
 	var signedMessage = '';
 
-	//alert('DEBUG: signMessageBasic: privkey = ' + privkey);
-	//alert('DEBUG: signMessageBasic: privKeyObj = ' + privKeyObj);
+	//alert('DEBUG: SignMessageBasic: privkey = ' + privkey);
+	//alert('DEBUG: SignMessageBasic: privKeyObj = ' + privKeyObj);
 
 	// set basic options for signing the message
 	options = {
@@ -384,12 +384,12 @@ function signMessageBasic (message, messageField = '', callback = '') {
 		privateKeys: [privKeyObj]                  // for signing
 	};
 
-	//alert('DEBUG: signMessageBasic: options = ' + options);
+	//alert('DEBUG: SignMessageBasic: options = ' + options);
 
 	openpgp.config.show_version = false; // don't add openpgp version message to output
 	openpgp.config.show_comment = false; // don't add comment to output
 	openpgp.sign(options).then(function(signed) {
-		//alert('DEBUG: signMessageBasic: signed = ' + signed);
+		//alert('DEBUG: SignMessageBasic: signed = ' + signed);
 		//signedMessage = signed.data;
 
 		// #todo figure out how to do sync return in javascript with this
@@ -405,30 +405,30 @@ function signMessageBasic (message, messageField = '', callback = '') {
 		//alert(signed.data);
 	});
 
-	//alert('DEBUG: signMessageBasic: signedMessage = ' + signedMessage);
+	//alert('DEBUG: SignMessageBasic: signedMessage = ' + signedMessage);
 
 	return signedMessage;
-} // signMessageBasic()
+} // SignMessageBasic()
 
-function signMessage () { // find the compose textbox and sign whatever is in it
+function SignMessage () { // find the compose textbox and sign whatever is in it
 // function WriteMessage () {
-// function signMessageInTextarea () { // what this should really be called #todo
+// function SignMessageInTextarea () { // what this should really be called #todo
 // if message is already signed or is a public key, exit
 // relies on getElementById and localStorage
 // submits the form when finished
 
-	//alert('DEBUG: signMessage() begin');
+	//alert('DEBUG: SignMessage() begin');
 
 	var privkey = getPrivateKey();
 	if (document.getElementById && privkey) {
 		// private key exists, can proceed
-		//alert('DEBUG: signMessage: privkey is true');
+		//alert('DEBUG: SignMessage: privkey is true');
 
 		var textbox = document.getElementById('comment');
 		var composeForm = document.getElementById('compose');
 
 		if (textbox && composeForm && window.openpgp) {
-			//alert('DEBUG: signMessage: textbox && composeForm is true');
+			//alert('DEBUG: SignMessage: textbox && composeForm is true');
 
 			// this would change textbox appearance to indicate something happened
 			// textbox.style.color = '#00ff00';
@@ -443,12 +443,12 @@ function signMessage () { // find the compose textbox and sign whatever is in it
 			// #todo change color of textbox when message is properly signed
 
 			if (message.trim().substring(0, 34) == ('-----BEGIN PGP SIGNED MESSAGE-----')) {
-				//alert('DEBUG: signMessage: message is already signed, returning true');
+				//alert('DEBUG: SignMessage: message is already signed, returning true');
 				return true;
 			}
 
 			if (message.trim().substring(0, 36) == ('-----BEGIN PGP PUBLIC KEY BLOCK-----')) {
-				//alert('DEBUG: signMessage: message contains public key, returning true');
+				//alert('DEBUG: SignMessage: message contains public key, returning true');
 				return true;
 			}
 
@@ -492,24 +492,24 @@ function signMessage () { // find the compose textbox and sign whatever is in it
 				}
 			);
 
-			//alert('DEBUG: signMessage: return false');
+			//alert('DEBUG: SignMessage: return false');
 			return false; // don't submit the form yet, will submit after signed
 		} else {
-			//alert('DEBUG: signMessage: (textbox && composeForm && window.openpgp) was FALSE');
+			//alert('DEBUG: SignMessage: (textbox && composeForm && window.openpgp) was FALSE');
 		}
-		//alert('DEBUG: signMessage: return true 1');
+		//alert('DEBUG: SignMessage: return true 1');
 		return true; // let the form submit
 	} else {
 		// this is an edge case
 		// user signed out in another window, but wants to sign in this one
 		// signing is no longer possible, so just submit to be on safe side
-		//alert('DEBUG: signMessage: return true 2');
+		//alert('DEBUG: SignMessage: return true 2');
 		return true;
 	}
 
-	//alert('DEBUG: signMessage: return true 3');
+	//alert('DEBUG: SignMessage: return true 3');
 	return true;
-} // signMessage()
+} // SignMessage()
 
 function cryptoJs () { // used for checking if crypto2.js has been loaded
 	return 1;
