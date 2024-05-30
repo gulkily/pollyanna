@@ -279,7 +279,9 @@ function SetActiveDialog (ths) {
 		return true;
 	}
 
-	//alert('DEBUG: SetActiveDialog: conditions met!');
+	var modernMode = 0; // templated
+
+	//alert('DEBUG: SetActiveDialog: conditions met! modernMode = ' + modernMode);
 
 	window.nextWindowToFocusTo = ths;
 	// window.nextWindowToFocusTo stores the next window to focus to for mouseover

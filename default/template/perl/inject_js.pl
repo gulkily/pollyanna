@@ -348,6 +348,20 @@ sub GetScriptTemplate { # $script, \%data ; returns script based on name
 		$scriptTemplate =~ s/var itemFp = 0;/var itemFp = '$itemFp';/g;
 	}
 
+	if (
+		$script eq 'settings' ||
+		$script eq 'dragging' ||
+		$script eq 'timestamp'
+	) {
+		my $modernMode = 0;
+		if (in_array('modern', GetActiveThemes())) {
+			#todo this is a hard-coded hack, pls fix #hack #fixme
+			#todo this should be memoized, and the memo clearing should be linked to GetActiveThemes()
+			$modernMode = 1;
+		}
+		$scriptTemplate = str_replace('var modernMode = 0;', "var modernMode = $modernMode;", $scriptTemplate);
+	}
+
 	#if ($script eq 'settings' || $script eq 'loading_begin') {
 	if (
 		$script eq 'settings' ||
@@ -376,14 +390,6 @@ sub GetScriptTemplate { # $script, \%data ; returns script based on name
 			$colorRecentTimestamp = '#808000';
 			$scriptTemplate =~ s/\$colorRecentTimestamp/$colorRecentTimestamp/g;
 		}
-
-		my $modernMode = 0;
-		if (in_array('modern', GetActiveThemes())) {
-			#todo this is a hard-coded hack, pls fix #hack #fixme
-			#todo this should be memoized, and the memo clearing should be linked to GetActiveThemes()
-			$modernMode = 1;
-		}
-		$scriptTemplate = str_replace('var modernMode = 0;', "var modernMode = $modernMode;", $scriptTemplate);
 	}
 
 	if ($script eq 'reply_cart') {
