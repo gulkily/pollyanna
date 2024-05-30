@@ -1,4 +1,4 @@
-// == begin write.js
+/* write.js */
 
 function WriteOnload () { // onload handler for write page
 	//alert('DEBUG: WriteOnload() begin');
@@ -347,4 +347,4 @@ function writeAddTag (tag) {
 
 window.eventLoopDoAutoSave = 1;
 
-// == end write.js
+/* / write.js */
