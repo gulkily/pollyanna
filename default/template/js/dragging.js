@@ -48,7 +48,7 @@ function dragElement (elmnt, header) { // initialize draggable state for dialog
 	//elmnt.style.z-index = '9';
 
 	function dragMouseDown (e) {
-		//alert('DEBUG: dragMouseDown');
+		//alert('DEBUG: dragMouseDown()');
 		//SetActiveDialog(elmnt);
 		window.dialogDragInProgress = 1;
 
@@ -249,14 +249,14 @@ function UpdateDialogPropertyDialog (dialog) {
 } // UpdateDialogPropertyDialog();
 
 function SetActiveDialogDelay (ths) {
-	//alert();
-		//set next window to focus to
+	//set next window to focus to
 
-		window.nextWindowToFocusTo = ths;
+	window.nextWindowToFocusTo = ths;
 
-		//set timeout to focus to that window
+	//set timeout to focus to that window
 
-		setTimeout('window.SetActiveDialog(window.nextWindowToFocusTo);', 130);
+	//alert('DEBUG: SetActiveDialogDelay: setting timeout SetActiveDialog()');
+	setTimeout('window.SetActiveDialog(window.nextWindowToFocusTo);', 130);
 } // SetActiveDialogDelay()
 
 function SetActiveDialog (ths) {
@@ -408,6 +408,7 @@ function SetContainingDialogActive (ths) { // sets active dialog based on contro
 			parentDialog = parentDialog.parentElement;
 		}
 		if (parentDialog) {
+			//alert('SetContainingDialogActive: calling SetActiveDialog()');
 			SetActiveDialog(parentDialog); // SetContainingDialogActive()
 		}
 	}
@@ -943,7 +944,8 @@ function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was
 
 			dialog.style.display = 'none';
 			t.style.opacity = "100%"; // #todo classes
-		} else {
+		}
+		else {
 			// #todo if dialog itself has class=advanced, remove it
 			//alert('DEBUG: SpotlightDialog: dialog.className = ' + dialog.className);
 			// but also, move upwards, and check that any spans it's inside of have class=advanced, remove advanced from the class names of those spans
@@ -951,7 +953,7 @@ function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was
 			while (element.parentElement) {
 				//alert('DEBUG: SpotlightDialog: element.tagName + element.className = ' + element.tagName + ',' + element.className);
 				if (element.className == 'advanced' || element.className == 'beginner' || element.className == 'admin') {
-					//alert('advanced found');
+					//alert('DEBUG: SpotlightDialog: advanced found');
 					element.className = '';
 					if (element.style.display == 'none') {
 						element.style.display = '';
@@ -960,19 +962,24 @@ function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was
 					// #todo multiple class names
 				}
 				if (element.style && element.style.display && element.style.display == 'none') {
+					//alert('DEBUG: SpotlightDialog: element.style.display is none, setting to empty');
 					element.style.display = '';
 					ShowAdvanced(1);
 				}
+				//alert('DEBUG: SpotlightDialog: element = element.parentElement');
 				element = element.parentElement;
 			}
 
+			//alert('DEBUG: SpotlightDialog: calling SetActiveDialog(dialog)');
 			SetActiveDialog(dialog);
 
 			// #todo this should be done via SetPrefs() ?
 
 			if (t) {
+				//alert('DEBUG: SpotlightDialog: t is TRUE');
 				var tParent = GetParentDialog(t);
 				if (tParent) {
+					//alert('DEBUG: SpotlightDialog: tParent is TRUE');
 					var tParentStyle = tParent.style;
 					var viewportWidth = document.documentElement.clientWidth;
 					var viewportHeight = document.documentElement.clientHeight;
@@ -1011,7 +1018,13 @@ function SpotlightDialog (dialogId, t) { // t is 'this' of the element which was
 
 						t.style.opacity = "80%"; // #todo classes
 					}
+				} // if (tParent)
+				else {
+					//alert('DEBUG: SpotlightDialog: tParent is FALSE');
 				}
+			} // if (t)
+			else {
+				//alert('DEBUG: SpotlightDialog: t is FALSE');
 			}
 		}
 	} else {
@@ -1366,6 +1379,7 @@ function InsertFetchedDialog () {
 
 			if (GetPrefs('draggable_spawn_focus')) {
 				// focus newly inserted dialog
+				//alert('InsertFetchedDailog: calling SetActiveDialog()');
 				SetActiveDialog(newDialog[0]); // InsertFetchedDialog()
 				if (0) { // change url in address bar to active dialog
 					// this is a cool feature, but very buggy as currently implemented
@@ -1484,6 +1498,7 @@ function FetchDialog (dialogName) {
 				//alert('DEBUG: FetchDialog: dialogExists');
 				if (GetPrefs('draggable_spawn')) {
 					//document.title = !!dialogExists.getAttribute('imactive');
+					//alert('DEBUG: FetchDialog: calling SetActiveDialog()');
 					SetActiveDialog(dialogExists);
 					return false;
 				}
