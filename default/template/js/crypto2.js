@@ -484,6 +484,7 @@ function SignMessage () { // find the compose textbox and sign whatever is in it
 			openpgp.sign(options).then(
 				function(signed) {
 					// begin signing process
+					//alert('DEBUG: SignMessage: function(signed): about to set textbox.value and composeForm.submit()');
 
 					// put the signed data into th textbox when it's done
 					textbox.value = signed.data;
