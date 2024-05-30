@@ -536,13 +536,14 @@ function SaveCheckbox (ths, prefKey) { // saves value of checkbox, toggles affec
 	//alert('DEBUG: SaveCheckbox(' + ths + ',' + prefKey);
 
 	var checkboxState = (ths.checked ? 1 : 0);
-	//alert('DEBUG: checkboxState = ' + checkboxState);
+	//alert('DEBUG: SaveCheckbox: checkboxState = ' + checkboxState);
 
 	///////////////////////////////
 	// BEFORE SAVE ACTIONS BEGIN //
 	//if (prefKey == '' +	'draggable_scale') {
 	if (prefKey == '' +	'draggable_scale') { // this is done in case prefKey is somehow a number
 		if (window.SetActiveDialog) {
+			//alert('DEBUG: SaveCheckbox: calling SetActiveDialog(0)');
 			SetActiveDialog(0);
 		}
 	}
@@ -576,6 +577,7 @@ function SaveCheckbox (ths, prefKey) { // saves value of checkbox, toggles affec
 	// AFTER SAVE ACTIONS BEGIN //
 	if (prefKey == 'draggable_scale' || prefKey == 'draggable_activate') {
 		if (window.SetActiveDialog) {
+			//alert('DEBUG: SaveCheckbox: calling SetActiveDialog(0)');
 			SetActiveDialog(0);
 		}
 	}
