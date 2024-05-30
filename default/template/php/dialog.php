@@ -112,12 +112,27 @@ function GetDialogX ( # body, title, headings, status, menu
 	}
 
 	if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
+		/* my */ $modernMode = 0;
+		if (in_array('modern', GetActiveThemes())) {
+			#todo this is a hard-coded hack, pls fix #hack #fixme
+			#todo this should be memoized, and the memo clearing should be linked to GetActiveThemes()
+			$modernMode = 1;
+		}
+
 		#todo adapt to modern theme also
 
 		#$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onmousedown', 'this.style.zIndex = ++window.draggingZ;');
 
-		$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onmouseenter', 'if (window.SetActiveDialogDelay) { return SetActiveDialogDelay(this); }'); #SetActiveDialog() GetDialogX2()
-		$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onmousedown', 'if (window.SetActiveDialog) { return SetActiveDialog(this); }'); #SetActiveDialog() GetDialogX2()
+		if ($modernMode) {
+			#todo this should be done with js modern-like
+			$windowTemplate = AddAttributeToTag($windowTemplate, 'div class="dialog"', 'onmouseenter', 'if (window.SetActiveDialogDelay) { return SetActiveDialogDelay(this); }'); #SetActiveDialog() GetDialogX2()
+			$windowTemplate = AddAttributeToTag($windowTemplate, 'div class="dialog"', 'onmousedown', 'if (window.SetActiveDialog) { return SetActiveDialog(this); }'); #SetActiveDialog() GetDialogX2()
+
+		}
+		else {
+			$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onmouseenter', 'if (window.SetActiveDialogDelay) { return SetActiveDialogDelay(this); }'); #SetActiveDialog() GetDialogX2()
+			$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onmousedown', 'if (window.SetActiveDialog) { return SetActiveDialog(this); }'); #SetActiveDialog() GetDialogX2()
+		}
 		#$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'ontouchstart', 'if (window.SetActiveDialog) { return SetActiveDialog(this); }'); #SetActiveDialog() GetDialogX2()
 		#$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onfocus', 'if (window.SetActiveDialog) { SetActiveDialog(this); return true; }'); #SetActiveDialog()
 	}
