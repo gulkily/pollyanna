@@ -360,6 +360,7 @@ function getUsername () { // returns pgp username
 } // getUsername()
 
 function signMessageBasic (message, messageField = '', callback = '') {
+// function WriteMessage () {
 	// like signMessage(), but makes fewer assumptions about the environment
 	// and instead takes the message as an argument
 	// and optionally takes a messageField to put the signed message into
@@ -410,6 +411,7 @@ function signMessageBasic (message, messageField = '', callback = '') {
 } // signMessageBasic()
 
 function signMessage () { // find the compose textbox and sign whatever is in it
+// function WriteMessage () {
 // function signMessageInTextarea () { // what this should really be called #todo
 // if message is already signed or is a public key, exit
 // relies on getElementById and localStorage
