@@ -71,7 +71,7 @@ function CreateItemDialog (file) {
 	var title = escapeHTML(file.item_title);
 
 	return CreateDialog(body, title, status);
-}
+} // CreateItemDialog()
 
 /*
 var testItem = {};
