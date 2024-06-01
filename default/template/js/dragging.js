@@ -393,9 +393,11 @@ function GetParentDialog (el) {
 			parentDialog = parentDialog.parentElement;
 		}
 		if (parentDialog) {
+			//alert('DEBUG: GetParentDialog: parentDialog.tagName = ' + parentDialog.tagName);
 			return parentDialog;
 		}
 	}
+	//alert('DEBUG: GetParentDialog: not found');
 	return '';
 } // GetParentDialog()
 
