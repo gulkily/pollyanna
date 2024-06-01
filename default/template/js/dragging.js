@@ -389,7 +389,7 @@ function SetActiveDialog (ths) {
 function GetParentDialog (el) {
 	if (el) {
 		var parentDialog = el;
-		while (parentDialog && (parentDialog.className != 'dialog')) {
+		while (parentDialog && (parentDialog.className != 'dialog') && (parentDialog.className.indexOf('dialog') == -1)) {
 			parentDialog = parentDialog.parentElement;
 		}
 		if (parentDialog) {
