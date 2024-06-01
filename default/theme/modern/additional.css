@@ -109,6 +109,15 @@ th {
 .dialog-active .titlebar, .dialog-active .statusbar {
 	background-color: #a0d0ff;
 }
+.titlebarButtons {
+	float: right;
+}
+.titlebarButtons button {
+	padding: 5pt;
+	border-radius: 0;
+	margin: 0;
+	spacing: 0;
+}
 
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
