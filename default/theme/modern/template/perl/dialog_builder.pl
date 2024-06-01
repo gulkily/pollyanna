@@ -267,7 +267,7 @@ sub GetDialogX2 { # \%paramHash ; returns dialog
 		$contentColumnCount = int($columnHeadings);
 		$columnHeadings = '';
 	} else {
-		WriteLog('GetDialogX2: $columnHeadings is NOT numeric; $columnHeadings = ' . $columnHeadings);
+		WriteLog('GetDialogX2: $columnHeadings is NOT numeric; $columnHeadings = ' . ($columnHeadings ? $columnHeadings : 'FALSE'));
 		#$columnHeadings = '';
 	}
 
