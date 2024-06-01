@@ -320,6 +320,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 			} # if (GetConfig('setting/zip/tag'))
 		} # $pageType eq 'tag'
 		if ($pageType eq 'random') { #'/random.html'
+			# sub GetRandomPage {
 			WriteLog('GetReadPage: random');
 			# RANDOM  PAGE ##############################################################
 
