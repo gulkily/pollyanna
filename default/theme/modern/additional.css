@@ -35,7 +35,6 @@ a:hover {
 	text-decoration: underline;
 }
 input[type="text"], textarea, select {
-	width: 100%;
 	padding: 10px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
@@ -71,6 +70,9 @@ button:hover {
 }
 .dialog .content {
 	padding: 5px;
+}
+.content * {
+	background-color: #f0f0f0;
 }
 .veryRecent {
 	font-weight: bold;
@@ -177,4 +179,7 @@ th {
 	.dialog-active .titlebar, .dialog-active .statusbar {
 		background-color: #003366;
 	}
+	.content * {
+    	background-color: #333;
+    }
 }
