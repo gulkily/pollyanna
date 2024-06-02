@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import hashlib
 
 # pollyanna chain.log verifier, mostly written by chatgpt4, minor corrections by ilyag
