@@ -156,7 +156,7 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, image
 		#special case hack for chain page
 		if (1) {
 			# simple link
-			$html .= GetDialogX('<a href="/chain.log">chain.log</a><br><a href="/chain_log_verify.py">chain_log_verify.py</a>', 'Log');
+			$html .= GetDialogX('<a href="/chain.log">chain.log</a><br><a href="/chain_log_verify.py.txt">chain_log_verify.py</a>', 'Log');
 		} else {
 			# iframe display, has problems
 			$html .= GetDialogX('<a href="/chain.log">chain.log</a><br><iframe height=300 width=700 src="/chain.log"></iframe>', 'Log');
