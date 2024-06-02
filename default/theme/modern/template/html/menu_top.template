@@ -1,17 +1,7 @@
 <!-- theme/modern/template/html/menu_top.template -->
-<div class="dialog">
-	<div class=titlebar>
-		<big>Welcome Modern Theme</big>
-	</div>
-	<div class="content">
-		<big>$menuItems</big>
-		<span class=advanced>$menuItemsAdvanced</span>
-		<span class=admin> $menuItemsAdmin</span>
-		<span id=controls></span>
-		<span id=spnClock></span>
-	</div>
-	<div class="status">
-		<span id=spanDialogControls></span>
-	</div>
-</div>
+<big>$menuItems</big>
+<span class=advanced>$menuItemsAdvanced</span>
+<span class=admin> $menuItemsAdmin</span>
+<span id=controls></span>
+<span id=spnClock></span>
 <!-- / theme/modern/template/html/menu_top.template -->

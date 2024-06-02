@@ -15,7 +15,7 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 	my $listName = shift;
 	chomp $listName;
 	if (!$listName) {
-		WriteLog('GetMenuFromList: warning: $listName failed sanity check');
+		WriteLog('GetMenuFromList: modern: warning: $listName failed sanity check');
 		return;
 	}
 
@@ -30,7 +30,7 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 		$pageType = '';
 	}
 
-	WriteLog('GetMenuFromList: $listName = ' . $listName . ', $templateName = ' . $templateName . '; caller = ' . join(',', caller));
+	WriteLog('GetMenuFromList: modern: $listName = ' . $listName . ', $templateName = ' . $templateName . '; caller = ' . join(',', caller));
 
 	my $listText = GetTemplate('list/' . $listName);
 
@@ -206,6 +206,8 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 # sub GetTopMenu {
 # sub GetMenu {
 	my $topMenuTemplate = GetTemplate('html/menu_top.template');
+	my $title = 'Welcome Modern Theme';
+	my $status = '';
 
 	#todo this requires setting/html/css/enable
 	if (GetConfig('setting/html/menu_layer_controls')) {
@@ -214,11 +216,11 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 		if (GetConfig('setting/admin/js/dragging')) {
 			$dialogControls .= GetTemplate('html/widget/dialog_controls.template');
 		}
-		$topMenuTemplate = str_replace('<span id=spanDialogControls></span>', '<span id=spanDialogControls>' . $dialogControls . '</span>', $topMenuTemplate);
-	} else {
-		# remove extra menu placeholder from template
-		$topMenuTemplate = str_replace('<span id=spanDialogControls></span>', '', $topMenuTemplate);
-		#todo it should remove table cell as well
+		$status = $dialogControls;
+		#$topMenuTemplate = str_replace('<span id=spanDialogControls></span>', '<span id=spanDialogControls>' . $dialogControls . '</span>', $topMenuTemplate);
+	}
+	else {
+		# nothing needed
 	}
 
 	my $pageType = shift;
@@ -234,17 +236,7 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 
 	WriteLog('GetMenuTemplate: $pageType = ' . $pageType . '; caller = ' . join(',', caller));
 
-	#
-	#	if (GetConfig('admin/js/enable')) {
-	#		$topMenuTemplate = AddAttributeToTag(
-	#			$topMenuTemplate,
-	#			'a href="/etc.html"',
-	#			'onclick',
-	#			"if (window.ShowAll) { ShowAll(this); } return false;"
-	#		); # &pi;
-	#	}
-
-	my $selfLink = '/access.html';
+	my $selfLink = '/access.html'; #todo what is this for?
 	my $menuItems = GetMenuFromList('menu', '', $pageType); # GetMenuTemplate()
 
 	#WriteLog('GetMenuTemplate: $menuItems = ' . $menuItems);
@@ -252,14 +244,6 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 	my $menuItemsTag = '';
 	my $menuItemsAdvanced = '';
 	my $menuItemsAdmin = '';
-
-	if (GetConfig('admin/expo_site_mode')) {
-		#do nothing
-	} else {
-		my $menuItemsTag = GetMenuFromList('menu_tag', '', $pageType); # GetMenuTemplate()
-		my $menuItemsAdvanced = GetMenuFromList('menu_advanced', '', $pageType); # GetMenuTemplate()
-		my $menuItemsAdmin = GetMenuFromList('menu_admin', '', $pageType); # GetMenuTemplate()
-	}
 
 	if (!$menuItems || trim($menuItems) eq '') {
 		#fallback menu in case menu config is so jacked the output is empty
@@ -309,14 +293,9 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 		}
 	}
 
-	#require_once('page/profile.pl');
-	#if ($pageType ne 'profile' && $pageType ne 'identity' && $pageType ne 'session') {
-	#	#todo make this work (currently appends multiple times on some pages)
-	#	#$topMenuTemplate .= GetProfileDialog();
-	#	$topMenuTemplate .= GetSessionDialog();
-	#}
+	my $topMenu = GetDialogX($topMenuTemplate, $title, '', $status);
 
-	return $topMenuTemplate;
+	return $topMenu;
 } # GetMenuTemplate()
 
 require_once('widget/menu_item.pl');
