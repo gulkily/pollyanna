@@ -1,22 +1,17 @@
 <!-- theme/modern/template/html/menu_top.template -->
-<table cellspacing=0 cellpadding=3 border=0 bgcolor="$colorWindow" class=dialog id=topmenu>
-	<tr bgcolor="$colorWindow" class=topmenubar>
-		<td colspan=2>
-			<big>
-				<big>$menuItems</big>
-				<span class=advanced>$menuItemsAdvanced</span>
-				<span class=admin> $menuItemsAdmin</span>
-				<span id=controls></span>
-				<span id=spnClock></span>
-			</big>
-		</td>
-	</tr>
-	<tr bgcolor="$colorTopMenuTitlebar" class=titlebar>
-		<td align=right class="topmenubar right">
-			<small>
-				<span id=spanDialogControls></span>
-			</small>
-		</td>
-	</tr>
-</table>
+<div class="dialog">
+	<div class=titlebar>
+		<big>Welcome Modern Theme</big>
+	</div>
+	<div class="content">
+		<big>$menuItems</big>
+		<span class=advanced>$menuItemsAdvanced</span>
+		<span class=admin> $menuItemsAdmin</span>
+		<span id=controls></span>
+		<span id=spnClock></span>
+	</div>
+	<div class="status">
+		<span id=spanDialogControls></span>
+	</div>
+</div>
 <!-- / theme/modern/template/html/menu_top.template -->
