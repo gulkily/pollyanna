@@ -1,3 +1,9 @@
+add setting require_approve_to_vote
+add setting that requires hashtags/votes to be signed
+	these should restrict mass-tagging by crawler bots
+
+===
+
 solution to make message posting happen instantly for the user
 	generate dialog with js and inject into page
 		in SendMessage()
