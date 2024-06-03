@@ -37,7 +37,7 @@ FROM
 				)
 			)
 		) AS related_list ON (item_flat.file_hash = related_list.file_hash)
-		JOIN item_attribute AS item_attribute_chain ON (item_flat.file_hash = item_attribute.file_hash)
+		JOIN item_attribute AS item_attribute_chain ON (item_flat.file_hash = item_attribute_chain.file_hash)
 WHERE
 	labels_list NOT LIKE '%notext%'
 	AND
