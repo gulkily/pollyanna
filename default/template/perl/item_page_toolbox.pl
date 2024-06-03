@@ -110,6 +110,8 @@ sub GetRelatedListing { # $fileHash
 
 	chomp $fileHash;
 
+	WriteLog('GetRelatedListing: $fileHash = ' . $fileHash . '; caller = ' . join(',', caller));
+
 	if ($fileHash) {
 		chomp $fileHash;
 
