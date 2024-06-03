@@ -43,7 +43,10 @@ echo 1 > config/setting/admin/js/openpgp_keygen_prompt_for_username
 echo 1 > config/setting/html/avatar_link_to_person_when_approved
 echo 1 > config/setting/html/avatar_display_approved_status
 echo 1 > config/setting/html/window_titlebar_buttons
-echo 1 > config/setting/html/page_map_bottom
+echo 1 > config/setting/html/format_item/image_reference
+echo 1 > config/setting/html/format_item/address
+echo 1 > config/setting/html/format_item/phone
+echo 1 > config/setting/html/format_item/textart
 echo 1 > config/setting/admin/js/openpgp_checked
 echo 1 > config/setting/admin/index/create_system_tags
 echo 1 > config/setting/html/item_template/heading_advanced
