@@ -264,6 +264,11 @@ sub FormatForWeb { # $text ; replaces some spaces with &nbsp; to preserve text-b
 		return '';
 	}
 
+	if (GetConfig('setting/html/format_item/headers')) {
+		# add header tags for lines which begin with # and contain at least one space and fewer than 80 characters
+		$text =~ s/^(# )(.+)$/<h3\>$2\<\/h3\>/mg;
+	}
+
 	$text = HtmlEscape($text); #todo this needs some improvement
 
 	if (0) {
@@ -300,6 +305,10 @@ sub FormatForWeb { # $text ; replaces some spaces with &nbsp; to preserve text-b
 		# /m = multi-line (changes behavior of ^ and $ to work on lines instead of entire file)
 		# /g = global (all instances)
 		# /i = case-insensitive
+	}
+
+	if (GetConfig('setting/html/format_item/headers')) {
+		$text =~ s/&lt;h3&gt;(.*?)&lt;\/h3&gt;/<h3>$1<\/h3>/msgi;
 	}
 
 	return $text;
