@@ -117,10 +117,11 @@ if ($changesDetectedCount) {
 			}
 		}
 		print "$key";
-		if ($key =~ m/^template\/(js\/.+)/) {
-			my $jsFile = $1;
-			print `grep \"$jsFile\" html -irl`;
-		}
+		#todo finish this
+		#if ($key =~ m/^template\/(js\/.+)/) {
+		#	my $jsFile = $1;
+		#	print `grep \"$jsFile\" html -irl`;
+		#}
 		print("\n");
 	}
 } # if ($changesDetectedCount)
