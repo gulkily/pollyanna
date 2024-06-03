@@ -6,7 +6,7 @@ SELECT
 	'' AS cart,
 	item_flat.file_hash AS file_hash,
 	GROUP_CONCAT(related_list.attribute) AS attribute_list,
-	COUNT(attribute) AS attribute_count
+	COUNT(related_list.attribute) AS attribute_count
 FROM
 	item_flat
 		JOIN
