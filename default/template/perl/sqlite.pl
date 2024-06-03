@@ -326,7 +326,11 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 	my @queryParams = @_; # shift
 
 	my $queryId = substr(md5_hex(GetTime() . $query), 0, 5);
-	#todo $queryId should be output in all debug logging in this sub
+
+	if (GetConfig('debug')) {
+		my $LOGDIR = GetDir('log');
+		PutFile("$LOGDIR/sqlitequery.$queryId", $query);
+	}
 
 	#WriteLog('SqliteQuery: $query = ' . $query);
 	WriteLog('SqliteQuery: ' . $queryId . ' caller = ' . join(',', caller));
