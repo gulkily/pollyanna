@@ -1,6 +1,7 @@
 SELECT
 	COALESCE(NULLIF(item_title,''), 'Untitled') AS item_title,
 	item_flat.add_timestamp AS add_timestamp,
+	item_attribute_chain.value AS chain_timestamp,
 	(item_flat.file_hash = ?) AS this_row,
 	'' AS cart,
 	item_flat.file_hash AS file_hash,
@@ -36,10 +37,13 @@ FROM
 				)
 			)
 		) AS related_list ON (item_flat.file_hash = related_list.file_hash)
+		JOIN item_attribute AS item_attribute_chain ON (item_flat.file_hash = item_attribute.file_hash)
 WHERE
 	labels_list NOT LIKE '%notext%'
+	AND
+	item_attribute_chain.attribute = 'chain_timestamp'
 GROUP BY
 	item_title, add_timestamp, this_row, item_flat.file_hash
 ORDER BY
 	attribute_count DESC, add_timestamp DESC
-LIMIT 5
+LIMIT 25
