@@ -414,6 +414,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			$showRelated = 0;
 		}
 		if ($showRelated) {
+			WriteLog('GetItemPage: toolbox_related: $file{\'file_hash\'} = ' . $file{'file_hash'});
 			my $relatedListing = GetRelatedListing($file{'file_hash'});
 			$relatedListing = '<span class=advanced>' . $relatedListing . '</span>';
 			if ($relatedListing) {
@@ -427,6 +428,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 				}
 			}
 		} else {
+			WriteLog('GetItemPage: toolbox_related: $showRelated = FALSE');
 			# nothing to do
 		}
 
