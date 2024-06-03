@@ -141,9 +141,15 @@ sub GetItemTemplateBody {
 			}
 
 			$itemText = FormatForWeb($itemText);
+			$itemText =~ s/(?<!&lt;)([a-f0-9]{40})(?!&gt;)/GetItemHtmlLink($1, DBGetItemTitle($1, 16))/eg;
 
-			$itemText =~ s/([a-f0-9]{40})/GetItemHtmlLink($1, DBGetItemTitle($1, 16))/eg;
-			#$itemText =~ s/([a-f0-9]{8})/GetItemHtmlLink($1, DBGetItemTitle($1, 16))/eg;
+			# allow 8-character references to items also
+			#todo: $itemText =~ s/([a-f0-9]{40})/GetItemHtmlLink($1, DBGetItemTitle($1, 16))/eg;
+
+			# allow <>-enclosed references to images
+			if (GetConfig('html/format_item/image_reference')) {
+				$itemText =~ s/&lt;([a-f0-9]{40})&gt;/GetImageContainer($1, DBGetItemTitle($1, 16))/eg;
+			}
 
 			if (GetConfig('html/hide_dashdash_signatures')) { # -- \n
 				if (index($itemText, "<br>-- <br>") != -1) {
