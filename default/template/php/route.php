@@ -478,7 +478,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			} # if ($hostRequestLimit)
 
 			if ($path == '/upload.html') {
-				if (GetConfig('setting/admin/php/route_restrict_upload')) {
+				if (GetConfig('setting/admin/php/route_upload_require_cookie')) {
 					if (isset($cookie) && $cookie) {
 						#ok
 					} else {
