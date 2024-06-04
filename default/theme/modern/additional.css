@@ -104,6 +104,7 @@ fieldset {
 }
 th {
 	text-align: left;
+	color: black;
 }
 .dialog-active {
 	border-color: #a0d0ff;
@@ -139,6 +140,7 @@ th {
 	}
 	th {
 		background-color: #003366;
+		color: white;
 	}
 	a {
 		color: #4da3ff;
