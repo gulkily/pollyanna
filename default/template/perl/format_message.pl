@@ -309,6 +309,10 @@ sub FormatForWeb { # $text ; replaces some spaces with &nbsp; to preserve text-b
 
 	if (GetConfig('setting/html/format_item/headers')) {
 		$text =~ s/&lt;h3&gt;(.*?)&lt;\/h3&gt;/<h3>$1<\/h3>/msgi;
+		$text =~ s/<br><h3>/<h3>/msgi;
+		$text =~ s/<br><h3>/<h3>/msgi;
+		$text =~ s/<\/h3><br>/<\/h3>/msgi;
+		$text =~ s/<\/h3><br>/<\/h3>/msgi;
 	}
 
 	return $text;
