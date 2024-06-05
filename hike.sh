@@ -7,6 +7,11 @@
 # set -x
 # uncomment for debugging
 
+if [ ! $1 ]
+	then
+		set 1=help
+fi
+
 # if user precedes command with 'debug'
 # set debug flag to 1, so that we can remember to turn it off at the end of this script
 # write a 1 to the config/debug file
