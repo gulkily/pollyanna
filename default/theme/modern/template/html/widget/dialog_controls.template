@@ -1,0 +1,70 @@
+<!-- dialog_controls.template 'Interface Controls' -->
+
+<a id=btnCascade href=# onclick="
+	if (window.DraggingCascade) {
+		SetPrefs('draggable', 1);
+		DraggingInit(0);
+		DraggingMakeFit(0);
+		DraggingCascade();
+		DraggingInit(0);
+	}
+" class=advanced title=Cascade>Cascade</a>
+
+<a id=btnArrange href=# onclick="
+	if (window.DraggingRetile) {
+		SetPrefs('draggable', 1);
+		DraggingInit(0);
+		DraggingMakeFit(0);
+		DraggingRetile();
+		DraggingInit(0);
+	}
+" class=advanced title=Arrange>Arrange</a>
+
+<a id=btnFloat href=# onclick="
+	if (window.DraggingRetile) {
+		SetPrefs('draggable', 1);
+		SetPrefs('draggable_activate', 1);
+		SetPrefs('draggable_spawn', 1);
+		SetPrefs('draggable_spawn_focus', 1);
+		SetPrefs('draggable', 1);
+		SetPrefs('draggable_restore', 0);
+		SetPrefs('draggable_reopen', 1);
+		SetPrefs('draggable_restore_collapsed', 1);
+		SetPrefs('draggable_arrange_viewport_resize', 1);
+		LoadCheckboxValues();
+		SetActiveDialog(GetParentDialog(this));
+		DraggingInit(0);
+		DraggingMakeFit(0);
+		DraggingInit(0);
+	}
+" title=Float>Float</a>
+
+<a id=btnDraggingReset href=# onclick="
+	if (window.DraggingReset && window.SetPrefs) {
+		SetPrefs('beginner', 1);
+		SetPrefs('timestamps_format', 'adjusted');
+		SetPrefs('show_advanced', 0);
+		SetPrefs('show_admin', 0);
+		SetPrefs('draggable_activate', 0);
+		SetPrefs('draggable_spawn', 0);
+		SetPrefs('draggable_spawn_focus', 0);
+		SetPrefs('draggable', 0);
+		SetPrefs('draggable_reopen', 0);
+		SetPrefs('opened_dialogs', 0);
+		SetPrefs('draggable_restore', 0);
+		SetPrefs('draggable_scale', 0);
+		SetPrefs('draggable_restore_collapsed', 0);
+		SetPrefs('draggable_arrange_viewport_resize', 0);
+		SetPrefs('sign_by_default', 1);
+		SetPrefs('focus_reply', 0);
+		DraggingReset();
+		if (window.displayNotification) {
+			window.location.reload();
+			return false;
+		} else {
+			window.location.reload();
+		}
+	}
+" class=advanced title="Reset">Reset</a>
+
+<!-- / dialog_controls.template -->

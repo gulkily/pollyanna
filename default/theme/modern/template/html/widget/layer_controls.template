@@ -1,0 +1,61 @@
+<!-- layer_controls.template -->
+
+<noscript>*</noscript>
+
+<span>
+	<a id=btnAdvanced href=#
+		accesskey=o
+		onclick="
+			if (window.SetPrefs) {
+				SetPrefs('show_advanced', 1);
+				SetPrefs('advanced_highlight', 1);
+				SetPrefs('beginner', 1);
+				SetPrefs('beginner_highlight', 1);
+				SetPrefs('notify_on_change', 1);
+			}
+			if (window.ShowAdvanced) {
+				ShowAdvanced(0, 0);
+				return false;
+			}
+		"
+	>Expand</a>
+
+	<a id=btnMinimal href=#
+		accesskey=n
+		onclick="
+			if (window.SetPrefs) {
+				SetPrefs('show_advanced', 0);
+				SetPrefs('admin', 0);
+				SetPrefs('beginner', 0);
+			}
+			if (window.ShowAdvanced) {
+				ShowAdvanced(0, 0);
+				return false;
+			}
+		"
+		class=advanced
+	title=Minimal>Minimal</a>
+
+	<a id=btnReprint href=# accesskey=r onclick="
+		var winLoc = window.location.href;
+		if (winLoc.indexOf('?')) {
+			winLoc = winLoc.substr(0, winLoc.indexOf('?'));
+		}
+		var d = new Date();
+		var n = d.getTime();
+		n = Math.ceil(n / 1000);
+		n = n + 86400;
+		winLoc = winLoc + '?time=' + n;
+		if (window.PingUrl) {
+			if (window.displayNotification) {
+				displayNotification('Reprinting...');
+			}
+			return PingUrl(winLoc);
+		} else {
+			window.location = winLoc;
+		}
+	" class=advanced title="Reprint">Reprint</a>
+
+</span>
+
+<!-- / layer_controls.template -->
