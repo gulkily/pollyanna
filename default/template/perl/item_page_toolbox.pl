@@ -504,14 +504,6 @@ sub GetHtmlToolboxes {
 		#				'</a><br>' . "\n"
 		;
 		$htmlToolbox .=
-			'<a href="https://teddit.net/r/all/search?q=' .
-				$urlParam .
-				'&nsfw=on' .
-				'">' .
-				'Teddit' .
-				'</a><br>' . "\n"
-		;
-		$htmlToolbox .=
 			'<a href="http://www.google.com/search?q=' .
 				$urlParam .
 				'+teddit"' .
