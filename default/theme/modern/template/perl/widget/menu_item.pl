@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use 5.010;
 
-# menu_item.pl
+# menu_item.pl ( modern theme )
 # purpose: generate menu items
 # sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for a menu item (used for both top and footer menus)
 # $address example: '/foo.html'
