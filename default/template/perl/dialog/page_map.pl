@@ -5,13 +5,14 @@ use warnings;
 use 5.010;
 
 sub GetPageMapDialog {
-# sub GetDialogsDialog {
-# sub GetDialogDialog {
-# sub GetDialogListDialog {
-# sub DialogsList {
-# sub DialogsListDialog {
-# sub DetDialogList {
-# sub GetDialogMenu {
+	# sub GetDialogsDialog {
+	# sub GetDialogDialog {
+	# sub GetDialogListDialog {
+	# sub DialogsList {
+	# sub DialogsListDialog {
+	# sub DetDialogList {
+	# sub GetDialogMenu {
+	# sub GetPageMap {
 	WriteLog('GetPageMapDialog()');
 
     if (!GetConfig('setting/admin/js/enable')) {
