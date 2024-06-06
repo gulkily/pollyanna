@@ -33,7 +33,6 @@
 				return false;
 			}
 		"
-		class=advanced
 	title=Minimal>Minimal</a>
 
 	<a id=btnReprint href=# accesskey=r onclick="
@@ -54,7 +53,7 @@
 		} else {
 			window.location = winLoc;
 		}
-	" class=advanced title="Reprint">Reprint</a>
+	" title="Reprint">Reprint</a>
 
 </span>
 
