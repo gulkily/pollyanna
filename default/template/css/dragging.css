@@ -3,7 +3,7 @@
 /* should be called inline-block.css ? */
 
 /* makes some dialogs horizontal */
-table.dialog { /* inline-table table-block */
+.dialog { /* inline-table table-block */
 	display: inline-block;
 	vertical-align: top;
 }

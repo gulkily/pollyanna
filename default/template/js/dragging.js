@@ -200,12 +200,13 @@ function DraggingRetile2 (ignoreMenu) {
 		var elements = document.getElementsByClassName('dialog');
 
 		for (var i = elements.length - 1; 0 <= i; i--) {
-			if ((!ignoreMenu) || (elements[i].getAttribute('id') == 'topmenu')) { // controls dialog
-				// do not reposition the controls dialog
-			} else {
-				elements[i].style.position = 'static';
-				elements[i].style.display = 'inline-block';
-			}
+			elements[i].style.position = '';
+			elements[i].style.display = 'inline-block';
+			elements[i].style.top = '';
+			elements[i].style.left = '';
+		}
+		for (var i = elements.length - 1; 0 <= i; i--) {
+			DraggingInitDialog(elements[i], 0);
 		}
 	} else {
 		//alert('DEBUG: DraggingRetile: document.getElementsByClassName is FALSE');

@@ -248,10 +248,10 @@ function EventLoop () { // for calling things which need to happen on a regular 
 			window.rememberInnerHeight = window.innerHeight;
 		}
 		if (window.rememberInnerWidth != window.innerWidth || window.rememberInnerHeight != window.innerHeight) {
-			//alert('DEBUG: window.innerWidth = ' + window.innerWidth + ', window.innerHeight = ' + window.innerHeight);
+			//alert('DEBUG: detected viewport resize: window.innerWidth = ' + window.innerWidth + ', window.innerHeight = ' + window.innerHeight);
 			window.rememberInnerWidth = window.innerWidth;
 			window.rememberInnerHeight = window.innerHeight;
-			if (window.DraggingRetile) {
+			if (GetPrefs('draggable_arrange_viewport_resize') && window.DraggingRetile) {
 				DraggingRetile();
 			}
 		}
