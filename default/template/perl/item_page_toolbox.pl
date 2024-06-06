@@ -699,12 +699,19 @@ sub GetItemIndexLog { # $itemHash, $logType = index_log
 			$log = str_replace('removing item:', '<font color=orange>removing item:</font>', $log);
 		}
 
+		if ($logType eq 'gpg_stderr') {
+			#$log = str_replace('gpg: ', '<font color=red>gpg: </font>', $log);
+			$log = str_replace('gpg: Good signature from ', 'gpg: <font color=green>Good signature</font> from ', $log);
+			#$log = str_replace('gpg: WARNING: This key is not certified with a trusted signature!', '', $log);
+			#$log = str_replace('gpg: There is no indication that the signature belongs to the owner.', '', $log);
+		}
+
 		#my $logWindow = GetDialogX($log, 'Log');
 		my $logWindow = GetDialogX($log, $logType);
 		# my $logWindow = GetDialogX($log, 'IndexFile(' . $shortHash . ')');
-		if ($logType ne 'run_log') {
-			$logWindow = '<span class=advanced>' . $logWindow . '</span>';
-		}
+		#if ($logType ne 'run_log') {
+		#	$logWindow = '<span class=advanced>' . $logWindow . '</span>';
+		#}
 		return $logWindow;
 	} else {
 		if ($logType eq 'run_log') {
