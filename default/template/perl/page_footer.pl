@@ -142,13 +142,6 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 			require_once('widget/menu.pl');
 			my $menuBottom = GetMenuTemplate($pageType); # GetPageFooter()
 
-			# if (GetConfig('admin/js/enable') && GetConfig('admin/js/dragging') && GetConfig('admin/js/controls_footer')) {
-			# 	my $dialogControls = GetTemplate('html/widget/dialog_controls.template'); # GetPageFooter()
-			# 	$dialogControls = GetDialogX($dialogControls, 'Controls'); # GetPageFooter()
-			# 	#$dialogControls = '<span class=advanced>' . $dialogControls . '</span>';
-			# 	$menuBottom .= $dialogControls;
-			# }
-
 			$txtFooter = str_replace(
 				'</body>',
 				'<br>' . $menuBottom . '</body>',
