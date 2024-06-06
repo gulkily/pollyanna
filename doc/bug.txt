@@ -4,16 +4,6 @@ avatar_display_approved_status feature works incorrectly when avatar_link_to_per
 
 ===
 
-when page reflows due to change of viewport size, dialogs are no longer draggable, even if they were previously
-	repro:
-		1) make page draggable (allow dialog reposition)
-		2) resize viewport (zoom in or out will do the trick)
-		3) try to drag a dialog
-		expected: dialog is draggable
-		acctual: dialog is not draggable until page is reloaded
-
-===
-
 /p.gif is served with text/html header for some reason:
 HTTP warning: 'http://localhost:2784/p.gif' cannot be displayed as image; has media type 'text/html'
 	seems to be an intermittent issue, cause unknown
