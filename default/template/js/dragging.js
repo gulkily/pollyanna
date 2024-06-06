@@ -669,6 +669,7 @@ function DraggingMakeFit (doPosition) { // initialize all class=dialog elements 
 // function DraggableMakeFit () {
 // function ArrangeAll () {
 // function DraggingArrange {
+// function ArrangeDialogs {
 
 	//alert('DEBUG: DraggingMakeFit()');
 
