@@ -17,7 +17,7 @@ sub GetPageMapDialog {
 
     if (!GetConfig('setting/admin/js/enable')) {
         #todo make it work without js
-        WriteLog('GetPageMapDialog: warning: called while setting/js/enable was FALSE; caller = ' . join(' ', caller));
+        WriteLog('GetPageMapDialog: warning: called while setting/admin/js/enable was FALSE; caller = ' . join(' ', caller));
         return '';
     }
 
