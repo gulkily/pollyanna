@@ -207,20 +207,6 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 # sub GetMenu {
 	my $topMenuTemplate = GetTemplate('html/menu_top.template');
 
-	#todo this requires setting/html/css/enable
-	if (GetConfig('setting/html/menu_layer_controls')) {
-		#todo separate the js out ...
-		my $dialogControls = GetTemplate('html/widget/layer_controls.template');
-		if (GetConfig('setting/admin/js/dragging')) {
-			$dialogControls .= GetTemplate('html/widget/dialog_controls.template');
-		}
-		$topMenuTemplate = str_replace('<span id=spanDialogControls></span>', '<span id=spanDialogControls>' . $dialogControls . '</span>', $topMenuTemplate);
-	} else {
-		# remove extra menu placeholder from template
-		$topMenuTemplate = str_replace('<span id=spanDialogControls></span>', '', $topMenuTemplate);
-		#todo it should remove table cell as well
-	}
-
 	my $pageType = shift;
 	if (!$pageType) {
 		$pageType = '';

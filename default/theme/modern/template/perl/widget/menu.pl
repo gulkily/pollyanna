@@ -209,20 +209,6 @@ sub GetMenuTemplate { # $pageType ; returns menubar
 	my $title = 'Welcome Modern Theme';
 	my $status = '';
 
-	#todo this requires setting/html/css/enable
-	if (GetConfig('setting/html/menu_layer_controls')) {
-		#todo separate the js out ...
-		my $dialogControls = GetTemplate('html/widget/layer_controls.template');
-		if (GetConfig('setting/admin/js/dragging')) {
-			$dialogControls .= GetTemplate('html/widget/dialog_controls.template');
-		}
-		$status = $dialogControls;
-		#$topMenuTemplate = str_replace('<span id=spanDialogControls></span>', '<span id=spanDialogControls>' . $dialogControls . '</span>', $topMenuTemplate);
-	}
-	else {
-		# nothing needed
-	}
-
 	my $pageType = shift;
 	if (!$pageType) {
 		$pageType = '';
