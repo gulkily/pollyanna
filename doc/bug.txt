@@ -4,12 +4,6 @@ avatar_display_approved_status feature works incorrectly when avatar_link_to_per
 
 ===
 
-/p.gif is served with text/html header for some reason:
-HTTP warning: 'http://localhost:2784/p.gif' cannot be displayed as image; has media type 'text/html'
-	seems to be an intermittent issue, cause unknown
-
-===
-
 menubar is kind of big in netscape 9.0.0.6
 
 ===
@@ -24,14 +18,6 @@ i think this is the cause:
 $ENV{PATH}="/bin:/usr/bin"; #this is needed for -T to work
 $ENV{PATH}="/bin:/usr/bin:/mingw64/bin"; #this is needed for -T to work
 in gitbash, git is located in /mingw64/bin/git
-
-===
-
-not sure why this happens, it works when done manually:
-
-$ hike build
-ln: failed to create symbolic link 'index.pl': No such file or directory
-ln: failed to create symbolic link 'pages.pl': No such file or directory
 
 ===
 
