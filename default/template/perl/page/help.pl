@@ -17,6 +17,7 @@ sub GetHelpPage { # returns html for help page (/help.html)
 		GetDialogX(GetTemplate('html/page/help.template'), 'Help') .
 		GetDialogX(GetTemplate('html/page/help_diagnostics.template'), 'Toys') .
 		GetDialogX(GetTemplate('html/page/help_views.template'), 'Views') .
+		GetDialogX('<a href="https://www.github.com/gulkily/pollyanna">github.com/gulkily/pollyanna</a>', 'Source Code') .
 		GetStatsTable() .
 		GetIntroDialog('help') .
 		GetPageFooter('help')
