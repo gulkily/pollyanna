@@ -1,3 +1,11 @@
+on a fresh install, there's initially an error message about missing chain.log:
+	$ bash hike.sh build
+	1717812514: Require ./utils.pl...
+	grep: /home/dh_kg68r5/pollyanna/html/chain.log: No such file or directory
+	tail: cannot open '/home/dh_kg68r5/pollyanna/html/chain.log' for reading: No such file or directory
+
+===
+
 add setting require_approve_to_vote
 add setting that requires hashtags/votes to be signed
 	these should restrict mass-tagging by crawler bots
