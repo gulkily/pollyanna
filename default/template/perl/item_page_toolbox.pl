@@ -504,15 +504,6 @@ sub GetHtmlToolboxes {
 		#				'</a><br>' . "\n"
 		;
 		$htmlToolbox .=
-			'<a href="http://www.google.com/search?q=' .
-				$urlParam .
-				'+teddit"' .
-				'target=_blank' .
-				'>' .
-				'Google+Teddit' .
-				'</a><br>' . "\n"
-		;
-		$htmlToolbox .=
 			'<a href="https://hn.algolia.com/?q=' .
 				$urlParam .
 				'">' .
