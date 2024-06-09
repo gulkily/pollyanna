@@ -712,10 +712,13 @@ sub GetItemIndexLog { # $itemHash, $logType = index_log
 		#if ($logType ne 'run_log') {
 		#	$logWindow = '<span class=advanced>' . $logWindow . '</span>';
 		#}
+		$logWindow = '<span class=advanced>' . $logWindow . '</span>';
 		return $logWindow;
 	} else {
 		if ($logType eq 'run_log') {
-			return GetDialogX('<fieldset><p>This code has not been run yet.</p></fieldset>', 'Information');
+			my $logWindow = GetDialogX('<fieldset><p>This code has not been run yet.</p></fieldset>', 'Information');
+			$logWindow = '<span class=advanced>' . $logWindow . '</span>';
+			return ;
 		} else {
 			#todo what to do here?
 		}
