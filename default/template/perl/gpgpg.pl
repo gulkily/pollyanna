@@ -274,6 +274,12 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETUR
 					DBAddItemAttribute($fileHash, 'gpg_bad_signature', $signTimestampEpoch);
 				} else {
 					## GOOD SIGNATURE
+
+					# Remove gpg warnings, because we're not using this functionality
+					$gpgStderrOutput =~ s/^\s*gpg:.*not certified.*\n//gm;
+					$gpgStderrOutput =~ s/^\s*gpg:.*no indication.*\n//gm;
+					PutCache("gpg_stderr/$fileHash.txt", $gpgStderrOutput);
+
 					DBAddItemAttribute($fileHash, 'gpg_timestamp', $signTimestampEpoch);
 					if (GetConfig('admin/index/create_system_tags')) {
 						DBAddLabel($fileHash, 0, 'signed');
