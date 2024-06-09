@@ -1,3 +1,59 @@
+#item_page.pl
+
+# REPLY CART
+#if (GetConfig('setting/html/reply_cart')) {
+#	require_once('dialog/reply_cart.pl');
+#	$txtIndex .= GetReplyCartDialog(); # GetItemPage()
+#}
+
+#$threadListingDialog .= '<span class=advanced>' . $threadListingDialog . '</span>';
+
+
+
+# $txtIndex .= '<hr>';
+
+#WriteLog("GetItemIndexLog($file{'file_hash'}, 'gpg_stderr') abcdefghijklmnopqr");
+
+#	my $scriptsInclude = '<script src="/openpgp.js"></script><script src="/crypto2.js"></script>';
+#	$txtIndex =~ s/<\/body>/$scriptsInclude<\/body>/;
+
+
+
+# REPLY FORM
+#if (GetConfig('reply/enable')) {
+#	$txtIndex .= GetReplyForm($file{'file_hash'});
+#}
+
+#
+#		my $query = '';
+#		if (ConfigKeyValid("query/template/related")) {
+#			$query = SqliteGetQueryTemplate("related");
+#			$query =~ s/\?/'$fileHash'/;
+#			$query =~ s/\?/'$fileHash'/;
+#			$query =~ s/\?/'$fileHash'/;
+#		}
+#
+#		my @itemReplies = SqliteQueryHashRef($query);
+
+
+#my @itemReplies = DBGetItemReplies($fileHash);
+
+
+#
+#			# VOTE  BUTTONS
+#			# Vote buttons depend on reply functionality, so they are also in here
+#			$voteButtons .=
+#				GetItemLabelButtons($file{'file_hash'}) .
+#				'<hr>' .
+#				GetTagsListAsHtmlWithLinks($file{'labels_list'}) .
+#				'<hr>' .
+#				GetString('item_attribute/item_score') . $file{'item_score'}
+#			;
+
+
+
+
+
 #sub sha1_file {
 #    my ($file) = @_;
 #

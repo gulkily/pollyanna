@@ -139,8 +139,6 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	$txtIndex .= GetTemplate('html/maincontent.template');
 
 
-
-
 	# ITEM TEMPLATE
 	# item template #searchable
 	# item body #searchable
@@ -210,12 +208,6 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		}
 	}
 
-	# REPLY CART
-	#if (GetConfig('setting/html/reply_cart')) {
-	#	require_once('dialog/reply_cart.pl');
-	#	$txtIndex .= GetReplyCartDialog(); # GetItemPage()
-	#}
-
 	if (GetConfig('setting/html/item_page/thread_listing')) {
 		WriteLog('GetItemPage: found thread_listing = TRUE');
 		require_once('widget/thread_listing.pl');
@@ -223,7 +215,6 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		my $fileHash = $file{file_hash};
 
 		my $threadListingDialog = GetThreadListingDialog($fileHash); # 'Thread'
-		#$threadListingDialog .= '<span class=advanced>' . $threadListingDialog . '</span>';
 		if ($threadListingDialog) {
 			$txtIndex .= $threadListingDialog;
 		} else {
@@ -295,8 +286,6 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	my $htmlToolbox = GetHtmlToolboxes(\%file);
 	$txtIndex .= $htmlToolbox;
 
-	# $txtIndex .= '<hr>';
-
 
 	##
 	##
@@ -318,18 +307,6 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			# do nothing
 		} else { # additional dialogs on items page
 			# REPLY FORM
-			#$txtIndex .= GetReplyForm($file{'file_hash'});
-
-#
-#			# VOTE  BUTTONS
-#			# Vote buttons depend on reply functionality, so they are also in here
-#			$voteButtons .=
-#				GetItemLabelButtons($file{'file_hash'}) .
-#				'<hr>' .
-#				GetTagsListAsHtmlWithLinks($file{'labels_list'}) .
-#				'<hr>' .
-#				GetString('item_attribute/item_score') . $file{'item_score'}
-#			;
 
 			if (GetConfig('setting/html/item_page/toolbox_classify')) {
 				my $classifyForm = GetTemplate('html/item/classify.template');
@@ -357,19 +334,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			}
 		}
 
-		#my @itemReplies = DBGetItemReplies($fileHash);
 		my @itemReplies = DBGetItemReplies($fileHash);
-
-#
-#		my $query = '';
-#		if (ConfigKeyValid("query/template/related")) {
-#			$query = SqliteGetQueryTemplate("related");
-#			$query =~ s/\?/'$fileHash'/;
-#			$query =~ s/\?/'$fileHash'/;
-#			$query =~ s/\?/'$fileHash'/;
-#		}
-#
-#		my @itemReplies = SqliteQueryHashRef($query);
 
 
 		if (GetConfig('setting/html/item_page/replies_listing')) {
@@ -402,11 +367,6 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 				}
 			}
 		}
-
-		# REPLY FORM
-		#if (GetConfig('reply/enable')) {
-		#	$txtIndex .= GetReplyForm($file{'file_hash'});
-		#}
 
 		# RELATED LIST
 		my $showRelated = GetConfig('setting/html/item_page/toolbox_related');
@@ -520,7 +480,6 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			||
 			index($file{'labels_list'}, ',signed,') != -1
 		) {
-			#WriteLog("GetItemIndexLog($file{'file_hash'}, 'gpg_stderr') abcdefghijklmnopqr");
 			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'gpg_stderr');
 		}
 	}
@@ -560,9 +519,6 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	if ($addMermaid) {
 		$txtIndex = str_replace('</head>', '<script src="https://iperez319.github.io/mermaid-js-component/src/LivePreview.js"></script></head>', $txtIndex);
 	}
-
-	#	my $scriptsInclude = '<script src="/openpgp.js"></script><script src="/crypto2.js"></script>';
-#	$txtIndex =~ s/<\/body>/$scriptsInclude<\/body>/;
 
 	return $txtIndex;
 } # GetItemPage()
