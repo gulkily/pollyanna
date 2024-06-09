@@ -1,3 +1,17 @@
+
+#gpg --import someone.asc
+#gpg --list-keys  # Find the KEYID
+#echo "KEYID:6:" > ownertrust.txt
+#gpg --import-ownertrust ownertrust.txt
+
+my $addTrustCommand = '';
+my $gpgStderrOutput = GetCache("gpg_stderr/$fileHash.txt");
+
+$addTrustCommand = "echo 'TRUST:6:' > $cachePathStderr/$fileHash.trust.txt";
+$addTrustCommand .= " && $gpgCommand --import-ownertrust $cachePathStderr/$fileHash.trust.txt";
+WriteLog('GpgParse: ' . $fileHash . '; $addTrustCommand = ' . $addTrustCommand);
+
+
 #item_page.pl
 
 # REPLY CART
