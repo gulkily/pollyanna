@@ -19,6 +19,8 @@ solution to make message posting happen instantly for the user
 			add CreateDialog() x
 			need CreateItemDialog()
 			need GetTimestampWidget()
+				basic version x
+				with full options
 			need GetItemLink()
 	send request in background
 		SendMessage()
