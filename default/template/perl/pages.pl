@@ -1822,7 +1822,7 @@ while (my $arg1 = shift @foundArgs) {
 				my @validDialogs = qw(settings float access upload data search profile);
 				my @needRequire = qw(profile upload);
 				my @queryDialogs = qw(read image url chain new tags scores active authors people threads labels topics judge calendar random);
-				my @simpleDialogs = qw(help donate );
+				my @simpleDialogs = qw(help donate notable);
 
 				if (0) { }
 				elsif (in_array($makeDialogArg, @validDialogs)) {
@@ -1904,6 +1904,11 @@ while (my $arg1 = shift @foundArgs) {
 					my $dialog = GetSimpleDialog('help');
 					WriteMessage("-D $makeDialogArg\n");
 					PutHtmlFile('dialog/help.html', $dialog);
+				}
+				elsif ($makeDialogArg eq 'notable') {
+					my $dialog = GetSimpleDialog('notable');
+					WriteMessage("-D $makeDialogArg\n");
+					PutHtmlFile('dialog/notable.html', $dialog);
 				}
 				elsif ($makeDialogArg eq 'donate') {
 					my $dialog = GetSimpleDialog('donate');

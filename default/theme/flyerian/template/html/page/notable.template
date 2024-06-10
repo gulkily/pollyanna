@@ -1,0 +1,67 @@
+<!-- theme/flyerian/template/html/page/notable.template -->
+
+<h3>Notable Posters</h3>
+
+<p>
+    Some recent guest posters who have written something on Flyerian.
+</p>
+
+<dl>
+    <dt>Adams House Harvard (2 residents)</dt>
+    <dd>One of the twelve undergraduate residential houses at Harvard College.</dd>
+
+    <dt>Baylor Adams</dt>
+    <dd>Chief of Staff at Z Fellows</dd>
+
+    <dt>Chris Dixon</dt>
+    <dd>Author of <i>Read Write Own</i>, General Partner at Andreessen Horowitz, co-founder of Hunch.</dd>
+
+    <dt>Colfax Selby</dt>
+    <dd>Founder of Privy, maintainer of GitPoap, ETH staker.</dd>
+
+    <dt>Cory Levy</dt>
+    <dd>Founder of FirstText.com and ZFellows.com.</dd>
+
+    <dt>Jeremy Ornstein</dt>
+    <dd>Harvard '24, King of Class of '24</dd>
+
+    <dt>Michael Lockshin</dt>
+    <dd>Film director, directed The Master and Margarita (2023)</dd>
+
+    <dt>Nick Rellas</dt>
+    <dd>Co-founder and CEO of Drizly, a mobile app that allows users to order alcohol for delivery.</dd>
+
+    <dt>Nick Rellas' Mom</dt>
+    <dd>Mother of Nick Rellas, the co-founder and CEO of Drizly.</dd>
+
+    <dt>Patrick Chung</dt>
+    <dd>Co-founder of Xfund, a venture capital firm.</dd>
+
+    <dt>Peter Nobel</dt>
+    <dd>Swiss lawyer and the great-grandson of Alfred Nobel, the founder of the Nobel Prize.</dd>
+
+    <dt>Paul Chou</dt>
+    <dd>Co-Founder and CEO of Foundation Coin, Founder of LedgerX, YC '11.</dd>
+
+    <dt>will.i.am</dt>
+    <dd>Founder of FYI.AI. Grammy winner. Member of the Black Eyed Peas.</dd>
+</dl>
+
+<h3>Notable Events</h3>
+
+<p>
+    Some recent events that Flyerian was present at.
+</p>
+
+<dl>
+    <dt>Harvard Blockchain Conference</dt>
+    <dd>Harvard's annual blockchain conference.</dd>
+
+    <dt>Cornell Blockchain Expo</dt>
+    <dd>Cornell's annual blockchain conference.</dd>
+
+    <dt>MIT Bitcoin Expo</dt>
+    <dd>MIT's annual bitcoin conference.</dd>
+</dl>
+
+<!-- / theme/flyerian/template/html/page/notable.template -->

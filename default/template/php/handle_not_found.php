@@ -174,7 +174,8 @@ function HandleNotFound ($path, $pathRel, $theme = '') { // handles 404 error by
 			'/menu.html',
 			'/queue.html',
 			'/session.html',
-			'/paint.html'
+			'/paint.html',
+			'/notable.html' #flyerian
 		);
 
 		if (in_array($path, $validMakePageNames)) {
