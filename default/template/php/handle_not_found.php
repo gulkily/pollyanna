@@ -286,7 +286,8 @@ function HandleNotFound ($path, $pathRel, $theme = '') { // handles 404 error by
 				'judge',
 				'calendar',
 				'random',
-				'menu'
+				'menu',
+				'notable'
 			); # /dialog/ # $basicDialogs
 
 			foreach ($basicDialogs as $basicDialog) {
