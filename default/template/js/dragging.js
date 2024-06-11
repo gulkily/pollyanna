@@ -1074,6 +1074,8 @@ function UpdateDialogList () {
 // page_map.template
 // #todo put this in a separate template that doesn't get injected unless html/page_map is on
 
+	var modernMode = 0; // templated
+
 	var reopen = 0;
 	if (!window.PageMapReopenHasBeenRun) {
 		if (GetPrefs('draggable_reopen')) { // #todo make this a separate option?
@@ -1119,7 +1121,11 @@ function UpdateDialogList () {
 				var displayTitle = dialogTitle;
 				listContent = listContent + comma + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { return SpotlightDialog(\'' + dialogId + '\', this); }"' + gt + displayTitle + '</a' + gt;
 				//comma = ' ;<br' + gt + ' ';
-				comma = '; ';
+				if (modernMode) {
+					comma = '<span></span>';
+				} else {
+					comma = '; ';
+				}
 
 				//listContent = listContent + '<label for="c' + dialogId + '"' + gt + '<input type=checkbox name="c' + dialogId + '" id="c' + dialogId + '"' + gt + dialogId + '</label' + gt + '<br' + gt;
 				lstDialog.innerHTML = lstDialog.innerHTML + iDialog;
