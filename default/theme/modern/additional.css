@@ -146,6 +146,7 @@ th {
 	}
 	.dialog {
 		border: solid 5px #333;
+		background-color: #333;
 	}
 	.statusbar {
 		background-color: #333;
