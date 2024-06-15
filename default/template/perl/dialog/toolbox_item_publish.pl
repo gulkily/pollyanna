@@ -54,7 +54,7 @@ sub GetDialogToolboxItemPublish { # $filePath, $fileHash = '' ; returns dialog w
 
 	if (!@neighbors) {
 		WriteLog('GetDialogToolboxItemPublish: warning: @neighbors is empty! using default hard-coded list; caller = ' . join(',', caller));
-		@neighbors = qw(localhost:2784 localhost:31337 www.hypercode.com www.rocketscience.click www.yavista.com qdb.us ilyagulko.com shitmyself.com);
+		@neighbors = qw(localhost:2784);
 	}
 
 	for my $neighbor (@neighbors) {
