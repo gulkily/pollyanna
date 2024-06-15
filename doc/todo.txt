@@ -1,3 +1,12 @@
+cookie dialog should have these features/information:
+	you are signed in as guest
+		click here to choose a username
+		click here to create a new identity from scratch
+		click here to choose an avatar
+		click here to complete the puzzle-self-approve process
+
+===
+
 on a fresh install, there's initially an error message about missing chain.log:
 	$ bash hike.sh build
 	1717812514: Require ./utils.pl...
