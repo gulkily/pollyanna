@@ -2,7 +2,6 @@
 
 # clean up things that tend to pile up
 # removes things from here which are from more than 24 hours ago:
-#	trim log file
 #	cache/b/response/*
 #	log/*.sqlerr
 
@@ -13,3 +12,43 @@
 #
 # remove old files in log/*.sqlerr
 # 	raise warning if there are a lot of them
+
+use strict;
+use warnings;
+use 5.010;
+
+sub CleanUp {
+	WriteLog('CleanUp()');
+
+	my $cacheDir = GetDir('cache');
+	my $responseDir = "$cacheDir/b/response";
+	if (-d $responseDir) {
+		my @files = glob("$responseDir/*");
+		WriteLog("CleanUp: Found " . scalar(@files) . " response files");
+		foreach my $file (@files) {
+			my $age = -M $file;
+			if ($age > 1) {
+				WriteLog("CleanUp: Removing old response file: $file");
+				unlink($file);
+			}
+		}
+	}
+
+	my $logDir = GetDir('log');
+	my @files = glob("$logDir/*.sqlerr");
+	WriteLog("CleanUp: Found " . scalar(@files) . " sqlerr files");
+	if (scalar(@files) > 100) {
+		WriteLog('CleanUp: Removing old sqlerr files');
+		foreach my $file (@files) {
+			my $age = -M $file;
+			if ($age > 1) {
+				WriteLog("CleanUp: Removing old sqlerr file: $file");
+				unlink($file);
+			}
+		}
+	}
+} # CleanUp()
+
+CleanUp();
+
+1;
