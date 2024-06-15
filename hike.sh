@@ -368,3 +368,5 @@ if [ $debug ]
   then
     rm config/debug
 fi
+
+alias hike='bash hike.sh'
