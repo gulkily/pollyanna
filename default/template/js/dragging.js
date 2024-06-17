@@ -1122,7 +1122,7 @@ function UpdateDialogList () {
 				listContent = listContent + comma + '<a href="#' + dialogId + '" onclick="if (window.SpotlightDialog) { return SpotlightDialog(\'' + dialogId + '\', this); }"' + gt + displayTitle + '</a' + gt;
 				//comma = ' ;<br' + gt + ' ';
 				if (modernMode) {
-					comma = '<span></span>';
+					comma = '<span' + gt + '</span' + gt;
 				} else {
 					comma = '; ';
 				}

@@ -37,7 +37,8 @@ function CreateDialog (body, title, status) {
 function GetTimestampWidget (time) {
 	/* timestamp_time.template */
 
-	return '<time class=timestamp datetime=' + time + ' title="' + 'todo' + '">' + 'todo' + '</time>';
+	var gt = unescape('%3E');
+	return '<time class=timestamp datetime=' + time + ' title="' + 'todo' + '"' + gt + 'todo' + '</time' + gt;
 }
 
 function CreateItemDialog (file) {
@@ -57,7 +58,7 @@ function CreateItemDialog (file) {
 	# item_title = override title
 	# item_statusbar = override statusbar
 	# labels_list = comma-separated list of tags the item has
-	# is_textart = set <tt><code> tags for the message itself
+	# is_textart = set <tt <code  tags for the message itself
 	# no_permalink = do not link to item's permalink page
 	*/
 
@@ -66,7 +67,8 @@ function CreateItemDialog (file) {
 	var status = GetTimestampWidget(testItem.add_timestamp);
 
 	var body = escapeHTML(file.body);
-	body = body.replace("\n", "<br>");
+	var gt = unescape('%3E');
+	body = body.replace("\n", ("<br" + gt));
 
 	var title = escapeHTML(file.item_title);
 
