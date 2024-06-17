@@ -1,3 +1,19 @@
+failure modes which need to be addressed
+	too many processes lock up server
+		how to address?
+	too many files
+		track files in directories
+		create alternative stores for cache
+	too much space used
+		track space used by installation and make visible
+	spam/crawler bots hitting the server too much (causing the above)
+		another captcha method?
+		improve performance of page pre-generation
+		limit compute-intensive actions?
+		track usage by ip range rather than unique ip?
+
+===
+
 cookie dialog should have these features/information:
 	you are signed in as guest
 		click here to choose a username
