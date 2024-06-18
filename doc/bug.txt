@@ -1,3 +1,8 @@
+'Signed in with cookie.' message reappears after exiting session.
+	environment: php, lighttpd, auto registration
+	the session does get changed, so it's just being re-created immediately
+
+===
 
 avatar_display_approved_status feature works incorrectly when avatar_link_to_person_when_approved is NOT enabled
 	(shows hourglass instead of author avatar)
