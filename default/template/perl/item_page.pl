@@ -459,8 +459,12 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			(index($file{'labels_list'}, ',zip,') != -1 && GetConfig('setting/admin/zip/enable'))
 		) {
 			# cpp / py / perl / zip file
-			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'run_log');
-			$txtIndex .= GetItemIndexLog($file{'file_hash'}, 'compile_log');
+
+			my $runLog = GetItemIndexLog($file{'file_hash'}, 'run_log') || '';
+			$txtIndex .= $runLog;
+
+			my $compileLog = GetItemIndexLog($file{'file_hash'}, 'compile_log') || '';
+			$txtIndex .= $compileLog;
 		}
 		if (index($file{'labels_list'}, ',python3,') != -1 && !GetConfig('setting/admin/python3/enable')) {
 			$txtIndex .= GetDialogX('Note: Python module is off, this file was not parsed.', 'Notice');

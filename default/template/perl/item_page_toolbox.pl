@@ -709,7 +709,7 @@ sub GetItemIndexLog { # $itemHash, $logType = index_log
 		if ($logType eq 'run_log') {
 			my $logWindow = GetDialogX('<fieldset><p>This code has not been run yet.</p></fieldset>', 'Information');
 			$logWindow = '<span class=advanced>' . $logWindow . '</span>';
-			return ;
+			return $logWindow;
 		} else {
 			#todo what to do here?
 		}
