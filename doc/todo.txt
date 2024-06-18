@@ -108,14 +108,6 @@ link items should be handled better
 
 ===
 
-failure modes which need to be addressed
-	too many processes lock up server
-	too many files
-	too much space used
-	spam/crawler bots hitting the server too much (causing the above)
-
-===
-
 lowsrc thumbnails are too small, should be bigger
 	test in netscape 3 and 4
 
