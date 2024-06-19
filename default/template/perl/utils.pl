@@ -940,7 +940,7 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 			# this shouldn't be necessary eventually #todo
 			#todo this doesn't seem to work, as with query/tag_dozen
 			if (index($filename, '.sql') == -1) {
-				$template = GetTemplate($filename . '.sql');
+				$template = GetTemplate($templateName . '.sql');
 				if ($template) {
 					WriteLog('GetTemplate: warning: sql template fallback for ' . $filename . '; caller = ' . join(',', caller));
 					$templateMemo{$filename} = $template;
