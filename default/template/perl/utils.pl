@@ -930,11 +930,11 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 	}
 
 	if ($template) {
-		#if template contains something, cache it
+		#if template contains something, memo it
 		$templateMemo{$filename} = $template;
-
 		return $template;
-	} else {
+	}
+	else {
 		if (index($filename, 'query') != -1) {
 			# if template is under template/query and it doesn't have an .sql extension, try it with the sql extension
 			# this shouldn't be necessary eventually #todo
