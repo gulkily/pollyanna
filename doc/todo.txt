@@ -1,3 +1,24 @@
+add option to do facebook and twitter style meta tags, like this:
+	<!-- Facebook Meta Tags -->
+	<meta property="og:url" content="https://ssi.inc">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Safe Superintelligence Inc.">
+	<meta property="og:description"
+		content="The world's first straight-shot SSI lab, with one goal and one product: a safe superintelligence.">
+	<meta property="og:image" content="https://ssi.inc/public/og-preview.jpg">
+
+	<!-- Twitter Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@ssi">
+	<meta property="twitter:domain" content="ssi.inc">
+	<meta property="twitter:url" content="https://ssi.inc">
+	<meta name="twitter:title" content="Safe Superintelligence Inc.">
+	<meta name="twitter:description"
+		content="The world's first straight-shot SSI lab, with one goal and one product: a safe superintelligence.">
+	<meta name="twitter:image" content="https://ssi.inc/public/og-preview.jpg">
+
+===
+
 failure modes which need to be addressed
 	too many processes lock up server
 		how to address?
