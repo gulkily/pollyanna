@@ -32,7 +32,28 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 
 	WriteLog('GetMenuFromList: modern: $listName = ' . $listName . ', $templateName = ' . $templateName . '; caller = ' . join(',', caller));
 
-	my $listText = GetTemplate('list/' . $listName);
+	my $listText = '';
+	if (GetConfig('setting/html/menu_concat')) {
+		# this is broken #todo #fixme
+		WriteLog('GetMenuFromList: menu_concat is TRUE');
+		WriteLog('GetMenuFromList: warning: menu_concat is TRUE, but this feature is broken atm');
+		my @activeThemes = GetActiveThemes();
+		foreach my $themeName (@activeThemes) {
+			my $attributePath = 'theme/' . $themeName . '/template/list/' . $listName;
+			my $attributeValue = GetConfig($attributePath, 'no_theme_lookup');
+
+			WriteLog('GetMenuFromList: $attributePath = ' . $attributePath . '; $attributeValue = ' . $attributeValue);
+
+			if ($attributeValue && trim($attributeValue) ne '') {
+				WriteLog('GetMenuFromList: ' . $listName . ' + ' . $themeName . ' -> ' . $attributePath . ' -> length($attributeValue) = ' . length($attributeValue));
+				$listText .= $attributeValue || '';
+				$listText .= "\n";
+			} # if ($attributeValue && trim($attributeValue) ne '')
+		} # foreach $themeName (@activeThemes)
+	} else {
+		WriteLog('GetMenuFromList: menu_concat is FALSE');
+		$listText = GetTemplate('list/' . $listName);
+	}
 
 	if (index($listText, "\r") != -1) {
 		WriteLog('GetMenuFromList: warning: $listText contains carriage return(s), replacing with newline(s); caller = ' . join(',', caller));
@@ -49,6 +70,8 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 	if (GetConfig('admin/expo_site_mode') && GetConfig('admin/expo_site_edit')) { #todo
 		push @menuList, GetSystemMenuList();
 	}
+
+	@menuList = array_unique(@menuList);
 
 	my $menuItems = ''; # output html which will be returned
 	my $menuComma = '';
