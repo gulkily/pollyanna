@@ -50,6 +50,10 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 				$listText .= "\n";
 			} # if ($attributeValue && trim($attributeValue) ne '')
 		} # foreach $themeName (@activeThemes)
+		if (!$listText) {
+			WriteLog('GetMenuFromList: menu_concat is TRUE, but no theme menu was found, so using default');
+			$listText = GetTemplate('list/' . $listName);
+		}
 	} else {
 		WriteLog('GetMenuFromList: menu_concat is FALSE');
 		$listText = GetTemplate('list/' . $listName);
