@@ -16,7 +16,7 @@ sub GetMenuFromList { # $listName, $templateName = 'html/menuitem.template', $pa
 	chomp $listName;
 	if (!$listName) {
 		WriteLog('GetMenuFromList: modern: warning: $listName failed sanity check');
-		return;
+		return '';
 	}
 
 	my $templateName = shift;
