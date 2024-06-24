@@ -2676,10 +2676,18 @@ sub array_unique { # @array ; returns array of unique items from @array
 # modeled after php's array_unique()
 	my @list = @_;
 	my %finalList;
+	my @output;
 	foreach(@list) {
-		$finalList{$_} = 1; # delete double values
+		if ($finalList{$_}) {
+			# already in array
+		}
+		else {
+			push @output, $_;
+		}
+		#$finalList{$_} = 1; # delete double values
 	}
-	return (keys(%finalList));
+	#return (keys(%finalList));
+	return @output;
 } # array_unique()
 
 sub in_array { # $needle, @haystack ; emulates php's in_array()
