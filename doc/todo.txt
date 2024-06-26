@@ -665,17 +665,6 @@ how to make hash-colored lowercase hashtag links in tags dialog?
 
 ===
 
-daily 1 minute of work
-	hypercode
-	banana
-	lilatom
-	papers
-	phoenix
-	carlos
-	dp
-
-===
-
 recent items page
 
 ===
