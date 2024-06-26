@@ -120,6 +120,25 @@ th {
 	margin: 0;
 	spacing: 0;
 }
+pre.sql {
+	border: solid 3px #a0d0ff;
+}
+pre.sql:focus {
+	background-color: #f0f0f0;
+	border: inset 3px #a0d0ff;
+}
+code.cpp b {
+	color: green;
+}
+code.cpp i {
+	color: gold;
+}
+code.sql b {
+	color: green;
+}
+code.sql i {
+	color: gold;
+}
 
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
@@ -183,5 +202,12 @@ th {
 	}
 	.content * {
     	background-color: #333;
+    }
+    pre.sql {
+    	border: solid 3px #003366;
+    }
+    pre.sql:focus {
+    	background-color: #242424;
+    	border: inset 3px #003366;
     }
 }

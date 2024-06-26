@@ -80,23 +80,4 @@ input[type=button], button, input[type=submit] {
 	color: $colorText;
 	background-color: $colorWindow
 }
-pre.sql {
-	border: solid 3px $colorWindow;
-}
-pre.sql:focus {
-	background-color: $colorInputBackground;
-	border: inset 3px $colorWindow;
-}
-code.cpp b {
-	color: green;
-}
-code.cpp i {
-	color: gold;
-}
-code.sql b {
-	color: green;
-}
-code.sql i {
-	color: gold;
-}
 /* / default/template/css/default.css */
