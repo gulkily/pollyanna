@@ -127,6 +127,13 @@ pre.sql:focus {
 	background-color: #f0f0f0;
 	border: inset 3px #a0d0ff;
 }
+pre.sh {
+	border: solid 3px #a0d0ff;
+}
+pre.sh:focus {
+	background-color: #f0f0f0;
+	border: inset 3px #a0d0ff;
+}
 code.cpp b {
 	color: green;
 }

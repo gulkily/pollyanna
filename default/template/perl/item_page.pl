@@ -475,6 +475,30 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		#todo same as above for zip
 	}
 
+	if (GetConfig('setting/html/item_page/verify_instructions')) {
+		WriteLog('GetItemPage: verify_instructions = TRUE');
+
+		#my $instructions = GetTemplate('template/html/item/verify_instructions.template'); #todo
+		my $instructions = "
+			<p>To verify this item, you can:</p>
+<pre class=sh contenteditable>
+curl -o chain.log http://localhost:2784/chain.log
+curl -o chain_log_verify.py http://localhost:2784/chain_log_verify.txt
+python3 chain_log_verify.py chain.log
+curl -o pubkey.txt http://localhost:2784/author_pubkey.txt
+sha1sum pubkey.txt
+gpg --import pubkey.txt
+curl -o message.txt http://localhost:2784/message.txt
+sha1sum message.txt
+gpg --verify message.txt
+</pre>
+		";
+
+		my $instructionsDialog = GetDialogX($instructions, 'Verify');
+
+		$txtIndex .= $instructionsDialog;
+	}
+
 	if (GetConfig('setting/html/item_page/gpg_stderr')) {
 		#$txtIndex .= GetItemIndexLog($file{'file_hash'});
 		if (
