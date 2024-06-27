@@ -478,6 +478,25 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 	if (GetConfig('setting/html/item_page/verify_instructions')) {
 		WriteLog('GetItemPage: verify_instructions = TRUE');
 
+		#my $authorKey = $file{'author_key'};
+		my $authorKey = DBGetItemAuthor($file{'file_hash'});
+
+
+		WriteLog('GetItemPage: verify_instructions: $authorKey = ' . $authorKey);
+
+		my $authorKeyFileHash = DBGetAuthorPublicKeyHash($authorKey);
+
+		WriteLog('GetItemPage: verify_instructions: $authorKeyFileHash = ' . $authorKeyFileHash);
+
+		my $authorKeyFilePath = DBGetItemFilePath($authorKeyFileHash);
+		my $htmlDir = GetDir('html');
+		$authorKeyFilePath = str_replace($htmlDir, '', $authorKeyFilePath);
+
+		WriteLog('GetItemPage: verify_instructions: $authorKeyFilePath = ' . $authorKeyFilePath);
+
+		my $itemFilePath = DBGetItemFilePath($file{'file_hash'});
+		my $itemFilePathShort = str_replace($htmlDir, '', $itemFilePath);
+
 		#my $instructions = GetTemplate('template/html/item/verify_instructions.template'); #todo
 		my $instructions = "
 			<p>To verify this item, you can:</p>
@@ -493,6 +512,12 @@ sha1sum message.txt
 gpg --verify message.txt
 </pre>
 		";
+
+		#$instructions = str_replace('http://localhost:2784/', GetConfig('site/host') . '/'); #todo
+		#$instructions = str_replace('/author_pubkey.txt', '/hey', $instructions);
+		$instructions = str_replace('/author_pubkey.txt', $authorKeyFilePath, $instructions);
+		$instructions = str_replace('/message.txt', $itemFilePathShort, $instructions);
+		#$instructions = str_replace('a', 'b', $instructions);
 
 		my $instructionsDialog = GetDialogX($instructions, 'Verify');
 
