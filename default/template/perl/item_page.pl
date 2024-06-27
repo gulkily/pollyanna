@@ -501,13 +501,13 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		my $instructions = "
 			<p>To verify this item, you can:</p>
 <pre class=sh contenteditable>
-curl -o chain.log http://localhost:2784/chain.log
-curl -o chain_log_verify.py http://localhost:2784/chain_log_verify.txt
+curl -s -o chain.log http://localhost:2784/chain.log
+curl -s -o chain_log_verify.py http://localhost:2784/chain_log_verify.txt
 python3 chain_log_verify.py chain.log
-curl -o pubkey.txt http://localhost:2784/author_pubkey.txt
+curl -s -o pubkey.txt http://localhost:2784/author_pubkey.txt
 sha1sum pubkey.txt
 gpg --import pubkey.txt
-curl -o message.txt http://localhost:2784/message.txt
+curl -s -o message.txt http://localhost:2784/message.txt
 sha1sum message.txt
 gpg --verify message.txt
 </pre>
