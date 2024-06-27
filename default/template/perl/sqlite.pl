@@ -928,8 +928,11 @@ sub DBGetItemFilePath { # get path for item's source file
 	my $itemHash = shift;
 
 	if (!$itemHash || !IsItem($itemHash)) {
-		return;
+		WriteLog('DBGetItemFilePath: warning: $itemHash failed sanity check; caller = ' . join(',', caller));
+		return '';
 	}
+
+	WriteLog('DBGetItemFilePath(' . $itemHash . ')');
 
 	my $query = 'SELECT file_path FROM item WHERE file_hash = ?';
 	my @queryParams = ();
