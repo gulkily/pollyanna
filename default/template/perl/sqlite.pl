@@ -925,6 +925,8 @@ sub DBGetItemTitle { # $itemHash ; get title for item
 sub DBGetItemFilePath { # get path for item's source file
 # sub GetItemFileName {
 # sub GetItemFile {
+# sub GetAuthorKey {
+# sub GetAuthorPubKey {
 	my $itemHash = shift;
 
 	if (!$itemHash || !IsItem($itemHash)) {
