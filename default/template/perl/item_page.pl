@@ -506,9 +506,11 @@ curl -s -o chain_log_verify.py http://localhost:2784/chain_log_verify.txt
 python3 chain_log_verify.py chain.log
 curl -s -o pubkey.txt http://localhost:2784/author_pubkey.txt
 sha1sum pubkey.txt
+sha1sum pubkey.txt | cut -d ' ' -f 1 | xargs -I {} grep {} chain.log
 gpg --import pubkey.txt
 curl -s -o message.txt http://localhost:2784/message.txt
 sha1sum message.txt
+sha1sum message.txt | cut -d ' ' -f 1 | xargs -I {} grep {} chain.log
 gpg --verify message.txt
 </pre>
 		";
