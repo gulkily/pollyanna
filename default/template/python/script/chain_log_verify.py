@@ -32,12 +32,17 @@ def verify_linked_list(file_path):
 			computed_checksum = compute_md5_hash(hash_input)
 
 			if computed_checksum == current_checksum:
-				print(f"Line {line_number}: OK")
+				# check if file exists in if statement
+				#if os.path.isfile('config/debug'):
+					#print(f"Line {line_number}: OK")
 			else:
 				print(f"Line {line_number}: Error (computed hash does not match)")
+				# exit
+				return
 
 			# Update previous_checksum for the next iteration
 			previous_line = f"{item_hash}|{timestamp}|{current_checksum}"
+	print("Verification complete.")
 
 # Path to the file containing the linked list
 file_path = 'chain.log'
