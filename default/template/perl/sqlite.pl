@@ -2543,7 +2543,7 @@ sub DBGetAuthorSeen { # return timestamp of most recent item attributed to autho
 	}
 } # DBGetAuthorLastSeen()
 
-sub DBGetAuthorPublicKeyHash { # Returns the hash/identifier of the file containing the author's public key
+sub DBGetAuthorPublicKeyHash { # $key ; Returns the hash/identifier of the file containing the author's public key
 # sub GetAuthorPubKey {
 # sub GetAuthorKey {
 # sub GetAuthorHash {
