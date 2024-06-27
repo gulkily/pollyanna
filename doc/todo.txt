@@ -1,3 +1,18 @@
+add dialog and script that explains how to verify an item from scratch
+	should display on item page
+	should have the following commands listed and explained:
+		download /chain.log
+		download /chain_log_verify.txt and save to chain_log_verify.py
+		run chain_log_verify.py
+		download the author's public key
+			verify its hash and that it is in the chain log
+			gpg --import
+		download the item's file
+			verify its hash and that it is in the chain log
+			gpg --verify
+
+===
+
 add option to do facebook and twitter style meta tags, like this:
 	<!-- Facebook Meta Tags -->
 	<meta property="og:url" content="https://ssi.inc">
