@@ -925,8 +925,6 @@ sub DBGetItemTitle { # $itemHash ; get title for item
 sub DBGetItemFilePath { # get path for item's source file
 # sub GetItemFileName {
 # sub GetItemFile {
-# sub GetAuthorKey {
-# sub GetAuthorPubKey {
 	my $itemHash = shift;
 
 	if (!$itemHash || !IsItem($itemHash)) {
@@ -2546,7 +2544,10 @@ sub DBGetAuthorSeen { # return timestamp of most recent item attributed to autho
 } # DBGetAuthorLastSeen()
 
 sub DBGetAuthorPublicKeyHash { # Returns the hash/identifier of the file containing the author's public key
+# sub GetAuthorPubKey {
+# sub GetAuthorKey {
 # sub GetAuthorHash {
+# sub GetPubKey {
 # $key = author's gpg fingerprint
 # cached in hash called %authorPubKeyCache
 
