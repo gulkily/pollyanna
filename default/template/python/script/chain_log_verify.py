@@ -40,8 +40,16 @@ def verify_linked_list(file_path):
 				# exit
 				return
 
+			if timestamp > previous_timestamp:
+				#print(f"Line {line_number}: OK")
+			else:
+				print(f"Line {line_number}: Error (timestamp is not greater than previous timestamp)")
+				# exit
+				return
+
 			# Update previous_checksum for the next iteration
 			previous_line = f"{item_hash}|{timestamp}|{current_checksum}"
+			previous_timestamp = timestamp
 	print("Verification complete.")
 
 # Path to the file containing the linked list
