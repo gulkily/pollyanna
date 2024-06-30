@@ -795,17 +795,6 @@ person page
 
 ===
 
-in hypercode theme, table cell corners need to join up or it looks weird
-	solution (sigh)
-		a) mark outer table cells as left and right
-			ignore language direction for now, please forgive me, father
-		b) mark inner table cells as inner
-		c) create stylesheet rules for inner, left, and right
-			border-radius
-		???
-
-===
-
 page introduction dialog like on the tags page should get a nice frame for the text inside
 
 ===
