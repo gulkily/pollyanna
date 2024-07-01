@@ -1717,12 +1717,12 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			#todo other sanity checks, like "no html tags" or "nothing but html tags"
 			WriteLog('route.php: warning: $html was empty; $path = ' . $path);
 
-			$html = '<html>';
-			$html = '<head>';
-			$html = '<title>System Message: Engine requires attention. Please remain calm.</title>';
-			$html = '<meta http-equiv=refresh content=5>';
-			$html = '</head>';
-			$html = '<body bgcolor="#808080" text="#000000">';
+			$html .= '<html>';
+			$html .= '<head>';
+			$html .= '<title>System Message: Engine requires attention. Please remain calm.</title>';
+			#$html .= '<meta http-equiv=refresh content=5>';
+			$html .= '</head>';
+			$html .= '<body bgcolor="#808080" text="#000000">';
 			#$html = '<body bgcolor="#808080" text="#000000" onclick="if (this.style && this.style.display) { this.style.display=\'none\'; }">';
 			$html .= '<center>';
 			$html .= '<table class=dialog bgcolor="#808080" border=0 bordercolor="#c0c0c0" width=99%>';
