@@ -481,24 +481,24 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 		#my $authorKey = $file{'author_key'};
 		my $authorKey = DBGetItemAuthor($file{'file_hash'});
 
+		if ($authorKey = IsFingerprint($authorKey)) {
+			WriteLog('GetItemPage: verify_instructions: $authorKey = ' . $authorKey);
 
-		WriteLog('GetItemPage: verify_instructions: $authorKey = ' . $authorKey);
+			my $authorKeyFileHash = DBGetAuthorPublicKeyHash($authorKey);
 
-		my $authorKeyFileHash = DBGetAuthorPublicKeyHash($authorKey);
+			WriteLog('GetItemPage: verify_instructions: $authorKeyFileHash = ' . $authorKeyFileHash);
 
-		WriteLog('GetItemPage: verify_instructions: $authorKeyFileHash = ' . $authorKeyFileHash);
+			my $authorKeyFilePath = DBGetItemFilePath($authorKeyFileHash);
+			my $htmlDir = GetDir('html');
+			$authorKeyFilePath = str_replace($htmlDir, '', $authorKeyFilePath);
 
-		my $authorKeyFilePath = DBGetItemFilePath($authorKeyFileHash);
-		my $htmlDir = GetDir('html');
-		$authorKeyFilePath = str_replace($htmlDir, '', $authorKeyFilePath);
+			WriteLog('GetItemPage: verify_instructions: $authorKeyFilePath = ' . $authorKeyFilePath);
 
-		WriteLog('GetItemPage: verify_instructions: $authorKeyFilePath = ' . $authorKeyFilePath);
+			my $itemFilePath = DBGetItemFilePath($file{'file_hash'});
+			my $itemFilePathShort = str_replace($htmlDir, '', $itemFilePath);
 
-		my $itemFilePath = DBGetItemFilePath($file{'file_hash'});
-		my $itemFilePathShort = str_replace($htmlDir, '', $itemFilePath);
-
-		#my $instructions = GetTemplate('template/html/item/verify_instructions.template'); #todo
-		my $instructions = "
+			#my $instructions = GetTemplate('template/html/item/verify_instructions.template'); #todo
+			my $instructions = "
 			<p>To verify this item, you can:</p>
 <pre class=sh contenteditable>
 curl -s -o chain.log http://localhost:2784/chain.log
@@ -515,15 +515,18 @@ gpg --verify message.txt
 </pre>
 		";
 
-		#$instructions = str_replace('http://localhost:2784/', GetConfig('site/host') . '/'); #todo
-		#$instructions = str_replace('/author_pubkey.txt', '/hey', $instructions);
-		$instructions = str_replace('/author_pubkey.txt', $authorKeyFilePath, $instructions);
-		$instructions = str_replace('/message.txt', $itemFilePathShort, $instructions);
-		#$instructions = str_replace('a', 'b', $instructions);
+			#$instructions = str_replace('http://localhost:2784/', GetConfig('site/host') . '/'); #todo
+			#$instructions = str_replace('/author_pubkey.txt', '/hey', $instructions);
+			$instructions = str_replace('/author_pubkey.txt', $authorKeyFilePath, $instructions);
+			$instructions = str_replace('/message.txt', $itemFilePathShort, $instructions);
+			#$instructions = str_replace('a', 'b', $instructions);
 
-		my $instructionsDialog = GetDialogX($instructions, 'Verify');
+			my $instructionsDialog = GetDialogX($instructions, 'Verify');
 
-		$txtIndex .= $instructionsDialog;
+			$txtIndex .= $instructionsDialog;
+		} else {
+			#todo limited verification instructions for items without an author fingerprint
+		}
 	}
 
 	if (GetConfig('setting/html/item_page/gpg_stderr')) {
