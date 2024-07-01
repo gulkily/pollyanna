@@ -66,9 +66,6 @@ div.txt {
 #loadingIndicator a {
 	/* style for links in loading indicator */
 }
-noscript, .noscript {
-	color: red;
-}
 .menubar a, .titlebar a, .topmenubar a {
 	text-decoration: none;
 	color: $colorText;

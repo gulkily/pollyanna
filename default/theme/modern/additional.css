@@ -146,6 +146,9 @@ code.sql b {
 code.sql i {
 	color: gold;
 }
+.noscript, noscript {
+	color: red;
+}
 
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
