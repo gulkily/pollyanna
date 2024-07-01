@@ -12,7 +12,7 @@ require('./utils.pl');
 
 my $todo = GetFile('doc/todo.txt');
 
-my @todoItems = split('===', $todo);
+my @todoItems = split("\n===\n", $todo);
 
 my $i = 0;
 
@@ -35,4 +35,8 @@ for my $todoItem (@todoItems) {
 }
 
 PutFile('doc/todo.txt', $newTodo);
-PutFile('doc/bug.txt', $newBug);
+
+$newBug = trim($newBug);
+if ($newBug) {
+	AppendFile('doc/bug.txt', "\n\n===\n\n" . $newBug);
+}
