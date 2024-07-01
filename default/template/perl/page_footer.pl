@@ -152,8 +152,9 @@ sub GetPageFooter { # $pageType ; returns html for page footer
 
 	if (GetConfig('setting/admin/js/enable')) {
 		require_once('dialog.pl');
-		my $noJsInfo = GetDialogX('<b class=noscript>*</b> Some features may require JavaScript', 'Notice'); # GetDialog()
-		$noJsInfo = '<noscript>' . $noJsInfo . '</noscript>';
+		my $noJsInfo = GetDialogX("<noscript><b class=noscript>*</b> Some features may require JavaScript</noscript><script>document.write('JavaScript is enabled.');</script>", 'JavaScript'); # GetDialog()
+		#$noJsInfo = '<noscript>' . $noJsInfo . '</noscript>';
+		$noJsInfo = '<span class=advanced>' . $noJsInfo . '</span>';
 		$txtFooter = str_replace(
 			'</body>',
 			$noJsInfo . '</body>',
