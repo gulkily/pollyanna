@@ -988,15 +988,17 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						}
 
 						$cookieLookup = '';
+						$cookieAlias = 'Guest';
 						if ($cookie) {
-							$cookieLookup .= '<br>Alias: ' . GetAlias($cookie);
+							$cookieAlias = GetAlias($cookie);
+							$cookieLookup .= '<br>Alias: ' . $cookieAlias;
 							$cookieLookup .= '<br>Score: ' . GetScore($cookie);
 						}
 
 						$cookieNotice = 'Cookie: ' . $currentCookie . $cookieLookup;
 
 						$cookieNotice = '<span class=advanced>' . $cookieNotice . '</span>';
-						$cookieNotice = '<a href="/session.html">You are signed in with a cookie.</a><br>' . "\n" . $cookieNotice;
+						$cookieNotice = '<a href="/session.html">You are signed in as ' . $cookieAlias . '</a><br>' . "\n" . $cookieNotice;
 
 						$cookieNotice = AddAttributeToTag(GetDialogX($cookieNotice, 'CookieInfo', '', '', ''), 'table', 'id', 'CookieInfo');
 
