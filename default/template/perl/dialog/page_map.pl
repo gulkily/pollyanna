@@ -33,7 +33,7 @@ sub GetPageMapDialog {
 
 	my $dialogContent =
 		GetMenuFromList('menu') .
-		'<br>' .
+		'<hr>' .
 		GetTemplate('html/widget/page_map.template')
 	; # id=lstDialog
 
