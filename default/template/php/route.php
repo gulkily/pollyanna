@@ -1719,36 +1719,41 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 			$html = '';
 
-			$html .= '<html>';
-			$html .= '<head>';
-			$html .= '<title>System Message: Engine requires attention. Please remain calm.</title>';
-			#$html .= '<meta http-equiv=refresh content=5>';
-			$html .= '</head>';
-			$html .= '<body bgcolor="#808080" text="#000000">';
-			#$html = '<body bgcolor="#808080" text="#000000" onclick="if (this.style && this.style.display) { this.style.display=\'none\'; }">';
-			$html .= '<center>';
-			$html .= '<table class=dialog bgcolor="#808080" border=0 bordercolor="#c0c0c0" width=99%>';
-			#$html .= '<table class=dialog bgcolor="#808080" border=0 bordercolor="#c0c0c0" width=99% onclick="if (window.CloseDialog) { window.CloseDialog(this) }">';
-			$html .= '<tr><td align=left>x</td><td align=center>x</td><td align=right>x</td></tr>';
-			$html .= '<tr><td>x</td><td align=center valign=middle>';
-			$html .= '<h2>System Message: <br>Engine requires attention.</h2>';
-			$html .= '<h1>Please forgive inconvenience. <br>Remain calm.</h1>';
-			$html .= '<hr>';
-			$html .= '<p>';
-			$html .= '<h3>Try one of these links:<br>';
-			$html .= '<a href="/">Home</a> | ';
-			$html .= '<a href="/help.html">Help</a> | ';
-			$html .= '<a href="/settings.html">Settings</a>';
-			$html .= '</h3>';
-			$html .= '<p>';
-			$html .= '<hr>';
-			$html .= '<form action=/post.html><label>Send Message:</label><br><input type=text size=30 name=comment value="Status?"><input type=submit value=Send></form>';
-			$html .= '</td><td align=right>x</td></tr>';
-			$html .= '<tr><td align=left>x</td><td align=center>x</td><td align=right>x</td></tr>';
-			$html .= '</table>';
-			$html .= '</center>';
-			$html .= '</body>';
-			$html .= '</html>';
+			if (substr($path, 0, 8) == '/dialog/') {
+				$html .= GetDialogX('<fieldset><p>Dialog not found.</p></fieldset>', 'Error');
+			}
+			else {
+				$html .= '<html>';
+				$html .= '<head>';
+				$html .= '<title>System Message: Engine requires attention. Please remain calm.</title>';
+				#$html .= '<meta http-equiv=refresh content=5>';
+				$html .= '</head>';
+				$html .= '<body bgcolor="#808080" text="#000000">';
+				#$html = '<body bgcolor="#808080" text="#000000" onclick="if (this.style && this.style.display) { this.style.display=\'none\'; }">';
+				$html .= '<center>';
+				$html .= '<table class=dialog bgcolor="#808080" border=0 bordercolor="#c0c0c0" width=99%>';
+				#$html .= '<table class=dialog bgcolor="#808080" border=0 bordercolor="#c0c0c0" width=99% onclick="if (window.CloseDialog) { window.CloseDialog(this) }">';
+				$html .= '<tr><td align=left>x</td><td align=center>x</td><td align=right>x</td></tr>';
+				$html .= '<tr><td>x</td><td align=center valign=middle>';
+				$html .= '<h2>System Message: <br>Engine requires attention.</h2>';
+				$html .= '<h1>Please forgive inconvenience. <br>Remain calm.</h1>';
+				$html .= '<hr>';
+				$html .= '<p>';
+				$html .= '<h3>Try one of these links:<br>';
+				$html .= '<a href="/">Home</a> | ';
+				$html .= '<a href="/help.html">Help</a> | ';
+				$html .= '<a href="/settings.html">Settings</a>';
+				$html .= '</h3>';
+				$html .= '<p>';
+				$html .= '<hr>';
+				$html .= '<form action=/post.html><label>Send Message:</label><br><input type=text size=30 name=comment value="Status?"><input type=submit value=Send></form>';
+				$html .= '</td><td align=right>x</td></tr>';
+				$html .= '<tr><td align=left>x</td><td align=center>x</td><td align=right>x</td></tr>';
+				$html .= '</table>';
+				$html .= '</center>';
+				$html .= '</body>';
+				$html .= '</html>';
+			}
 		}
 
 		if (function_exists('WriteLog') && GetConfig('setting/admin/php/debug')) {
