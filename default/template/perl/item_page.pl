@@ -526,6 +526,27 @@ gpg --verify message.txt
 			$txtIndex .= $instructionsDialog;
 		} else {
 			#todo limited verification instructions for items without an author fingerprint
+
+			my $instructions = "
+			<p>
+				This item cannot be fully verified, <br>
+				because it does not have an author fingerprint. <br>
+				For partial verification, do this:
+			</p>
+<pre class=sh contenteditable>
+curl -s -o chain.log http://localhost:2784/chain.log
+curl -s -o chain_log_verify.py http://localhost:2784/chain_log_verify.txt
+python3 chain_log_verify.py chain.log
+sha1sum message.txt
+sha1sum message.txt | cut -d ' ' -f 1 | xargs -I {} grep {} chain.log
+</pre>
+			";
+			my $htmlDir = GetDir('html');
+			my $itemFilePath = DBGetItemFilePath($file{'file_hash'});
+			my $itemFilePathShort = str_replace($htmlDir, '', $itemFilePath);
+			$instructions = str_replace('/message.txt', $itemFilePathShort, $instructions);
+			my $instructionsDialog = GetDialogX($instructions, 'Verify');
+			$txtIndex .= $instructionsDialog;
 		}
 	}
 
