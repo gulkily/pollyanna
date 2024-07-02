@@ -1,3 +1,15 @@
 <!-- template/html/item/verify_instructions.template -->
-Instructions for how to verify item:
+<p>
+    This item cannot be fully verified, <br>
+    because it does not have an author fingerprint. <br>
+    For partial verification, do this:
+</p>
+<pre class=sh contenteditable>
+curl -s -o chain.log http://localhost:2784/chain.log
+curl -s -o chain_log_verify.py http://localhost:2784/chain_log_verify.txt
+python3 chain_log_verify.py chain.log
+curl -s -o message.txt http://localhost:2784/message.txt
+sha1sum message.txt
+sha1sum message.txt | cut -d ' ' -f 1 | xargs -I {} grep {} chain.log
+</pre>
 <!-- / template/html/item/verify_instructions.template -->

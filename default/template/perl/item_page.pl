@@ -497,23 +497,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			my $itemFilePath = DBGetItemFilePath($file{'file_hash'});
 			my $itemFilePathShort = str_replace($htmlDir, '', $itemFilePath);
 
-			#my $instructions = GetTemplate('template/html/item/verify_instructions.template'); #todo
-			my $instructions = "
-			<p>To verify this item, you can:</p>
-<pre class=sh contenteditable>
-curl -s -o chain.log http://localhost:2784/chain.log
-curl -s -o chain_log_verify.py http://localhost:2784/chain_log_verify.txt
-python3 chain_log_verify.py chain.log
-curl -s -o pubkey.txt http://localhost:2784/author_pubkey.txt
-sha1sum pubkey.txt
-sha1sum pubkey.txt | cut -d ' ' -f 1 | xargs -I {} grep {} chain.log
-gpg --import pubkey.txt
-curl -s -o message.txt http://localhost:2784/message.txt
-sha1sum message.txt
-sha1sum message.txt | cut -d ' ' -f 1 | xargs -I {} grep {} chain.log
-gpg --verify message.txt
-</pre>
-		";
+			my $instructions = GetTemplate('html/item/verify_instructions_signed.template'); #todo
 
 			#$instructions = str_replace('http://localhost:2784/', GetConfig('site/host') . '/'); #todo
 			#$instructions = str_replace('/author_pubkey.txt', '/hey', $instructions);
@@ -527,21 +511,8 @@ gpg --verify message.txt
 		} else {
 			#todo limited verification instructions for items without an author fingerprint
 
-			my $instructions = "
-			<p>
-				This item cannot be fully verified, <br>
-				because it does not have an author fingerprint. <br>
-				For partial verification, do this:
-			</p>
-<pre class=sh contenteditable>
-curl -s -o chain.log http://localhost:2784/chain.log
-curl -s -o chain_log_verify.py http://localhost:2784/chain_log_verify.txt
-python3 chain_log_verify.py chain.log
-curl -s -o message.txt http://localhost:2784/message.txt
-sha1sum message.txt
-sha1sum message.txt | cut -d ' ' -f 1 | xargs -I {} grep {} chain.log
-</pre>
-			";
+			my $instructions = GetTemplate('html/item/verify_instructions.template'); #todo
+
 			my $htmlDir = GetDir('html');
 			my $itemFilePath = DBGetItemFilePath($file{'file_hash'});
 			my $itemFilePathShort = str_replace($htmlDir, '', $itemFilePath);
