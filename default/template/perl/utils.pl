@@ -856,6 +856,12 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 		return scalar(keys %templateMemo);
 	}
 
+	# if template name begins with "template/", remove it and issue a warning
+	if (substr($templateName, 0, 9) eq 'template/') {
+		WriteLog('GetTemplate: warning: $templateName = ' . $templateName . ' begins with "template/"; caller = ' . join(',', caller));
+		$templateName = substr($templateName, 9);
+	}
+
 	if ($templateMemo{$templateName}) {
 		#if already been looked up, return memo version
 		WriteLog('GetTemplate: returning from memo for $templateName = ' . $templateName);
