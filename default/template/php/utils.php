@@ -580,13 +580,13 @@ function GetTemplate ($templateKey) { // get template from config tree
 	WriteLog("GetTemplate($templateKey)");
 
 	# if template name begins with "template/", remove it and issue a warning
-	if (substr($templateName, 0, 9) == 'template/') {
+	if (substr($templateKey, 0, 9) == 'template/') {
 		if (GetConfig('debug')) {
 			$dbt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS,2);
 			$caller = isset($dbt[1]['function']) ? $dbt[1]['function'] : 'caller_missing';
-			WriteLog('GetTemplate: warning: $templateName = ' . $templateName . ' begins with "template/"; caller = ' . $caller);
+			WriteLog('GetTemplate: warning: $templateKey = ' . $templateKey . ' begins with "template/"; caller = ' . $caller);
 		}
-		$templateName = substr($templateName, 9);
+		$templateKey = substr($templateKey, 9);
 	}
 
 	$templateContent = GetThemeAttribute("template/$templateKey");
