@@ -273,6 +273,7 @@ sub GetDialogX2 { # \%paramHash ; returns dialog
 
 	# column headings
 	if ($columnHeadings) {
+		WriteLog('GetDialogX2: modern: has $columnHeadings: $columnHeadings = ' . $columnHeadings);
 		my $windowHeaderTemplate = GetTemplate('html/window/header_wrapper.template');
 		my $windowHeaderColumns = '';
 		my @columnsArray = split(',', $columnHeadings);
@@ -353,13 +354,16 @@ sub GetDialogX2 { # \%paramHash ; returns dialog
 		}
 		$windowHeaderTemplate =~ s/\$windowHeadings/$windowHeaderColumns/;
 		if ($param{'no_heading'}) {
+			WriteLog('GetDialogX2: modern: no_heading');
 			$windowTemplate =~ s/\$windowHeader//g;
 		} else {
+			WriteLog('GetDialogX2: modern: has $windowHeader');
 			$windowTemplate =~ s/\$windowHeader/$windowHeaderTemplate/;
 		}
 		$contentColumnCount = scalar(@columnsArray);
 	} # / column headings
 	else {
+		WriteLog('GetDialogX2: modern: does NOT have $columnHeadings');
 		$windowTemplate =~ s/\$windowHeader//g;
 	}
 
