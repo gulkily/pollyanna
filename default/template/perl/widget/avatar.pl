@@ -136,7 +136,6 @@ sub GetAvatar { # $authorKey ; returns HTML avatar based on author key, using av
 	}
 
 	my $isVerified = 0;
-	my $redditUsername = '';
 	my $isApproved = 0;
 
 	if ($authorKey) {
