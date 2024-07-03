@@ -1,5 +1,5 @@
 <!-- template/html/form/developer.template -->
-<form action=/post.html>
+<form action="/settings.html">
 	<input type=hidden name=comment value=1>
 	<span class=advanced>
         <label for="chkUpgrade">
