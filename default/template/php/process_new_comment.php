@@ -10,9 +10,13 @@ function ProcessNewComment ($comment, $replyTo) { // saves new comment to .txt f
 
 	WriteLog('ProcessNewComment: $comment = ' . $comment);
 
+	$fileName = '';
 	if ($comment) {
 		$fileName = StoreNewComment($comment, $replyTo); // ProcessNewComment()
 		WriteLog('ProcessNewComment: StoreNewComment(...) returned $fileName = ' . $fileName);
+	} else {
+		WriteLog('ProcessNewComment: warning: $comment was FALSE');
+		return '';
 	}
 
 	if ($fileName) {
@@ -94,11 +98,11 @@ function ProcessNewComment ($comment, $replyTo) { // saves new comment to .txt f
 		if (!file_exists($filePathNew)) {
 			PutFile($filePathNew, GetFile($fileName)); # PutFile()
 
-// 			WriteLog("ProcessNewComment: file_put_contents($filePathNew, $comment); 1465");
-// 			file_put_contents($filePathNew, $comment);
-// 			// #BUG #todo this is the reason record_cookie doesn't work!
-// 			// this could probably just be a rename() #todo
-// 			// cookie bug #CookieBug
+ 			// WriteLog("ProcessNewComment: file_put_contents($filePathNew, $comment); 1465");
+ 			// file_put_contents($filePathNew, $comment);
+ 			// // #BUG #todo this is the reason record_cookie doesn't work!
+ 			// // this could probably just be a rename() #todo
+ 			// // cookie bug #CookieBug
 		} else {
 			WriteLog("ProcessNewComment: PutFile() skipped, file already exists");
 			//WriteLog("ProcessNewComment: file_put_contents() skipped, file already exists");
@@ -111,10 +115,10 @@ function ProcessNewComment ($comment, $replyTo) { // saves new comment to .txt f
 			// store file
 			WriteLog("ProcessNewComment: PutFile($fileHtmlPath, $commentHtmlTemplate)");
 			PutFile($fileHtmlPath, $commentHtmlTemplate);
-//
-// 			// store file
-// 			WriteLog("ProcessNewComment: file_put_contents($fileHtmlPath, $commentHtmlTemplate)");
-// 			file_put_contents($fileHtmlPath, $commentHtmlTemplate);
+
+ 			// // store file
+ 			// WriteLog("ProcessNewComment: file_put_contents($fileHtmlPath, $commentHtmlTemplate)");
+ 			// file_put_contents($fileHtmlPath, $commentHtmlTemplate);
 		}
 
 		if (GetConfig('setting/admin/php/post/add_task')) {
