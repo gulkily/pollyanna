@@ -1807,4 +1807,20 @@ function ForkWithLoadingPage ($path) {
 	}
 } // ForkWithLoadingPage()
 
+function GetAvatar ($key, $alias) {
+	if (IsFingerprint($key)) {
+		#ok
+	} else {
+		return '';
+	}
+	$alias = htmlspecialchars($alias);
+
+	$avatar = '<a href="/author/012346789ABCDEF/index.html">$alias</a>';
+
+	$avatar = str_replace('012346789ABCDEF', $key, $avatar);
+	$avatar = str_replace('$alias', $alias, $avatar);
+
+	return $avatar;
+} // GetAvatar()
+
 require_once('sqlite.php');
