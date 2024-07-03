@@ -138,6 +138,7 @@ function lc ($string) { # lowercase, port of perl utility function
 } # lc()
 
 function IsFingerprint ($key) {
+#todo should return sanitized fingerprint
 	if (preg_match('/^([A-F0-9]{16})$/', $key, $itemHashMatch)) {
 		return 1;
 	} else {
