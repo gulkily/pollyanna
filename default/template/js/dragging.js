@@ -512,7 +512,7 @@ function DraggingCascade () {
 			if (firstTitlebar && firstTitlebar.getElementsByTagName) {
 				// dragElement(elements[i], firstTitlebar);
 
-				if (elements[i].getAttribute('id') == 'topmenu') {
+				if (elements[i].getAttribute('id') == 'topmenu' || elements[i].getAttribute('id') == 'PageMap') {
 					// ignore the conrols dialog
 				} else {
 					if (
