@@ -993,6 +993,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							$cookieAlias = GetAlias($cookie);
 							$cookieLookup .= '<br>Alias: ' . $cookieAlias;
 							$cookieLookup .= '<br>Score: ' . GetScore($cookie);
+							$cookieLookup .= '<br>Avatar: ' . GetAvatar($cookie, $cookieAlias);
 						}
 
 						$cookieNotice = 'Cookie: ' . $currentCookie . $cookieLookup;
