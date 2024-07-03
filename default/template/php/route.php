@@ -936,7 +936,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 								// #todo this should probably be templated and added using InjectJs()
 							}
 						} else {
-                        	WriteLog('route.php: etag: warning: no file at $pathRel = ' . $pathRel);
+							WriteLog('route.php: etag: warning: no file at $pathRel = ' . $pathRel);
 						}
 					} # GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/fresh')
 
@@ -1089,14 +1089,16 @@ if (GetConfig('setting/admin/php/route_enable')) {
 					$html = HandleNotFound($path, ''); // no $path
 				}
 			// if ($path == '/404.html' || $pathFull && substr($pathFull, 0, strlen($pathValidRoot)) == $pathValidRoot)
-			} else {
+			}
+			else {
 				// #todo when does this actually happen?
 				// smarter 404 handler
 				WriteLog('route.php: smarter 404 handler... activate!');
 				WriteLog('route.php: $path not found, using HandleNotFound()');
 				$html = HandleNotFound($path, ''); // not sure
 			}
-		} else {
+		} # if ($pathFull)
+		else {
 			WriteLog('route.php: no $path specified in GET');
 			$html = HandleNotFound($path, $pathRel); // no $path specified in GET
 		}
