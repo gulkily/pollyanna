@@ -385,6 +385,7 @@ function DoUpgrade () {
 	WriteLog('DoUpgrade: $pwd = ' . $pwd);
 	$scriptDir = GetScriptDir();
 	WriteLog('DoUpgrade: $scriptDir = ' . $scriptDir);
+	WriteLog('DoUpgrade: warning: this feature is not yet finished');
 
 	#todo
 	#if (file_exists($scriptDir . '/upgrade.pl')) {
