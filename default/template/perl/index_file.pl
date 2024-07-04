@@ -296,6 +296,43 @@ sub IndexFile { # $file, \%flags ; calls IndexTextFile() or IndexImageFile() bas
 			ReplaceMenuInAllPages();
 		}
 
+		if (GetConfig('setting/admin/index/expire_html_after_index')) {
+			ExpireHtmlFile('new.html');
+			ExpireHtmlFile('chain.html');
+			ExpireHtmlFile('authors.html');
+			ExpireHtmlFile('tags.html');
+			ExpireHtmlFile('compost.html');
+			ExpireHtmlFile('threads.html');
+			ExpireHtmlFile('dialog/new.html');
+			ExpireHtmlFile('dialog/chain.html');
+			ExpireHtmlFile('dialog/authors.html');
+			ExpireHtmlFile('dialog/tags.html');
+			ExpireHtmlFile('dialog/compost.html');
+			ExpireHtmlFile('dialog/threads.html');
+
+			#get all items in thread and expire them
+			
+			#get previous item in chain and expire it
+
+			#get all hashtags and expire them
+
+			#
+			# what needs to be uncached when a new item is indexed?
+			# 	new
+			# 	chain
+			# 	authors
+			# 	tags
+			# 	entire parent tree
+			# 	author of item
+			# 	affected authors if in parent tree
+			# 	top/ pages for all affected hash tags
+			# 	all dialog versions of above
+			# 	previous item in chain
+			# 	lower priority
+			# 		compost
+			# 		threads
+		}
+
 		WriteLog('IndexFile: returning $fileHash = ' . $fileHash);
 		return $fileHash;
 	} else {
