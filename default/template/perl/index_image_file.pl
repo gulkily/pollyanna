@@ -91,19 +91,19 @@ sub IndexImageFile { # $file ; indexes one image file into database and makes th
 
 		#if (GetCache('indexed/'.$fileHash)) {
 		if (IsFileAlreadyIndexed($file, $fileHash)) {
-			WriteLog('IndexImageFile: skipping because of flag: indexed/'.$fileHash);
+			WriteLog('IndexImageFile: skipping because of flag: indexed/' . $fileHash);
 			return $fileHash;
 		}
 
-		WriteLog('IndexImageFile: $fileHash = ' . ($fileHash ? $fileHash : '--'));
+		WriteLog('IndexImageFile: $fileHash = ' . ($fileHash ? $fileHash : 'FALSE'));
 
 		$addedTime = DBGetAddedTime($fileHash);
 		# get the file's added time.
 
 		# debug output
-		WriteLog('IndexImageFile: $file = ' . ($file?$file:'false'));
-		WriteLog('IndexImageFile: $fileHash = ' . ($fileHash?$fileHash:'false'));
-		WriteLog('IndexImageFile: $addedTime = ' . ($addedTime?$addedTime:'false'));
+		WriteLog('IndexImageFile: $file = ' . ($file ? $file : 'FALSE'));
+		WriteLog('IndexImageFile: $fileHash = ' . ($fileHash ? $fileHash : 'FALSE'));
+		WriteLog('IndexImageFile: $addedTime = ' . ($addedTime ? $addedTime : 'FALSE'));
 
 		# if the file is present in deleted.log, get rid of it and its page, return
 		if (IsFileDeleted($file, $fileHash)) {
@@ -122,8 +122,8 @@ sub IndexImageFile { # $file ; indexes one image file into database and makes th
 			}
 			if (!$addedTime) {
 				# sanity check
-				WriteLog('IndexImageFile: warning: sanity check failed for $addedTime');
 				$addedTime = GetTime();
+				WriteLog('IndexImageFile: warning: sanity check failed for $addedTime; $addedTime = GetTime() = ' . $addedTime);
 			}
 		}
 
