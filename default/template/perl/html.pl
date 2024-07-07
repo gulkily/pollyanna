@@ -214,7 +214,7 @@ sub ExpireHtmlFile { # $file
 		WriteLog('ExpireHtmlFile: warning: $filePath contains space; caller = ' . join(',', caller));
 		return '';
 	}
-	my $command = "touch -t 197001010000 '$filePath'";
+	my $command = "touch -t 197001010000 '$filePath' 2>/dev/null";
 	WriteLog('ExpireHtmlFile: $command = ' . $command);
 	my $touchResult = `$command`;
 	WriteLog('ExpireHtmlFile: $touchResult = ' . $touchResult);
