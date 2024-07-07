@@ -5,7 +5,7 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub ImageMakeThumbnails { # $file
+sub ImageMakeThumbnails { # $file ; returns true for success, false for failure
 	my $file = shift;
 	chomp $file; #todo sanity
 
@@ -44,6 +44,7 @@ sub ImageMakeThumbnails { # $file
 	}
 
 	#imagemagick
+	my $convertErrorSum = 0;
 
 	#my @res = qw(800 512 42);
 	if (!-e "$HTMLDIR/thumb/thumb_800_$fileHash" . $thumbnailExtension) {
@@ -58,10 +59,13 @@ sub ImageMakeThumbnails { # $file
 		}
 
 		my $convertCommandResult = `$convertCommand`;
-		WriteLog('ImageMakeThumbnails: convert result: ' . $convertCommandResult);
+		my $convertExitStatus = $? >> 8;
+
+		$convertErrorSum += $convertExitStatus;
+
+		WriteLog('ImageMakeThumbnails: convert result: ' . $convertCommandResult . '; $convertExitStatus = ' . $convertExitStatus);
 
 		#sub DBAddTask { # $taskType, $taskName, $taskParam, $touchTime # make new task
-
 	}
 	if (!-e "$HTMLDIR/thumb/thumb_512_g_$fileHash" . $thumbnailExtension) {
 		my $convertCommand = "convert \"$fileShellEscaped\" -auto-orient -thumbnail 512x512 -colorspace Gray -blur 0x16 -strip $HTMLDIR/thumb/thumb_512_g_$fileHash" . $thumbnailExtension;
@@ -76,7 +80,11 @@ sub ImageMakeThumbnails { # $file
 		}
 
 		my $convertCommandResult = `$convertCommand`;
-		WriteLog('ImageMakeThumbnails: convert result: ' . $convertCommandResult);
+		my $convertExitStatus = $? >> 8;
+
+		$convertErrorSum += $convertExitStatus;
+
+		WriteLog('ImageMakeThumbnails: convert result: ' . $convertCommandResult . '; $convertExitStatus = ' . $convertExitStatus);
 	}
 	if (!-e "$HTMLDIR/thumb/thumb_512_$fileHash" . $thumbnailExtension) {
 		my $convertCommand = "convert \"$fileShellEscaped\" -auto-orient -thumbnail 512x512 -strip $HTMLDIR/thumb/thumb_512_$fileHash" . $thumbnailExtension;
@@ -90,7 +98,11 @@ sub ImageMakeThumbnails { # $file
 		}
 
 		my $convertCommandResult = `$convertCommand`;
-		WriteLog('ImageMakeThumbnails: convert result: ' . $convertCommandResult);
+		my $convertExitStatus = $? >> 8;
+
+		$convertErrorSum += $convertExitStatus;
+
+		WriteLog('ImageMakeThumbnails: convert result: ' . $convertCommandResult . '; $convertExitStatus = ' . $convertExitStatus);
 	}
 	if (!-e "$HTMLDIR/thumb/thumb_42_$fileHash" . $thumbnailExtension) {
 		my $convertCommand = "convert \"$fileShellEscaped\" -auto-orient -thumbnail 42x42 -strip $HTMLDIR/thumb/thumb_42_$fileHash" . $thumbnailExtension;
@@ -104,7 +116,20 @@ sub ImageMakeThumbnails { # $file
 		}
 
 		my $convertCommandResult = `$convertCommand`;
-		WriteLog('ImageMakeThumbnails: convert result: ' . $convertCommandResult);
+		my $convertExitStatus = $? >> 8;
+
+		$convertErrorSum += $convertExitStatus;
+
+		WriteLog('ImageMakeThumbnails: convert result: ' . $convertCommandResult . '; $convertExitStatus = ' . $convertExitStatus);
+	}
+
+	if ($convertErrorSum) {
+		# errors occurred, return false
+		WriteLog('ImageMakeThumbnails: warning: $convertErrorSum > 0; caller = ' . join(',', caller));
+		return 0;
+	}
+	else {
+		return 1;
 	}
 } # ImageMakeThumbnails()
 
