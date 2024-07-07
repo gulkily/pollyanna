@@ -130,7 +130,10 @@ sub IndexImageFile { # $file ; indexes one image file into database and makes th
 		my $itemName = TrimPath($file);
 
 		require_once('image_thumbnail.pl');
-		ImageMakeThumbnails($file);
+		my $thumbnailResult = ImageMakeThumbnails($file);
+		WriteLog('IndexImageFile: $thumbnailResult = ' . $thumbnailResult);
+
+		#todo mark thumbnail success or failure, so that we don't get broken images if thumbnail gen failed
 
 		DBAddItem($file, $itemName, '', $fileHash, 'image', 0);
 		DBAddItem('flush');
