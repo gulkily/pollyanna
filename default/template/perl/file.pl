@@ -409,4 +409,22 @@ sub is_file {
     return -f $filename;
 } # is_file()
 
+sub GetFileSize { # $file ; return file size
+# sub GetFileSize {
+# sub IsFileEmpty {
+# sub file_empty {
+
+	#todo sanity checks
+
+	my $file = shift;
+
+	WriteLog("GetFileSize($file)");
+
+	my @fileStat = stat($file);
+	my $fileSize =    $fileStat[7];
+	#my $fileModTime = $fileStat[9];
+
+	return $fileSize;
+}
+
 1;
