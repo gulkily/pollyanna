@@ -81,6 +81,11 @@ sub IndexImageFile { # $file ; indexes one image file into database and makes th
 	my $addedTime;          # time added, epoch format
 	my $fileHash;            # git's hash of file blob, used as identifier
 
+	if (GetFileSize($file) == 0) {
+		WriteLog('IndexImageFile: warning GetFileSize($file) is 0; returning');
+		return '';
+	}
+
 	if (IsImageFile($file)) {
 		my $fileHash = GetFileHash($file);
 
