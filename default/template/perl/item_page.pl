@@ -480,6 +480,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 
 		#my $authorKey = $file{'author_key'};
 		my $authorKey = DBGetItemAuthor($file{'file_hash'});
+		my $instructionsDialog;
 
 		if ($authorKey = IsFingerprint($authorKey)) {
 			WriteLog('GetItemPage: verify_instructions: $authorKey = ' . $authorKey);
@@ -505,9 +506,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			$instructions = str_replace('/message.txt', $itemFilePathShort, $instructions);
 			#$instructions = str_replace('a', 'b', $instructions);
 
-			my $instructionsDialog = GetDialogX($instructions, 'Verify');
-
-			$txtIndex .= $instructionsDialog;
+			$instructionsDialog = GetDialogX($instructions, 'Verify');
 		} else {
 			#todo limited verification instructions for items without an author fingerprint
 
@@ -517,9 +516,10 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 			my $itemFilePath = DBGetItemFilePath($file{'file_hash'});
 			my $itemFilePathShort = str_replace($htmlDir, '', $itemFilePath);
 			$instructions = str_replace('/message.txt', $itemFilePathShort, $instructions);
-			my $instructionsDialog = GetDialogX($instructions, 'Verify');
-			$txtIndex .= $instructionsDialog;
+			$instructionsDialog = GetDialogX($instructions, 'Verify');
 		}
+
+		$txtIndex .= '<span class=advanced>' . $instructionsDialog . '</span>';
 	}
 
 	if (GetConfig('setting/html/item_page/gpg_stderr')) {
