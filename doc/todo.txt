@@ -1,3 +1,10 @@
+signal channels workalike
+	channels sidebar
+	encourage username creation
+	users list
+
+===
+
 add dialog and script that explains how to verify an item from scratch
 	should display on item page
 	should have the following commands listed and explained:
