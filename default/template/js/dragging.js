@@ -1070,6 +1070,7 @@ function UpdateDialogList () {
 // dialoglist.js
 // function DialogListDialog () {
 // function UpdateListDialog () {
+// function UpdateDialogDialog () {
 // dialog_list.template
 // page_map.template
 // #todo put this in a separate template that doesn't get injected unless html/page_map is on
