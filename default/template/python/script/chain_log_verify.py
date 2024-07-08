@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import hashlib
+import os
 
 # pollyanna chain.log verifier, mostly written by chatgpt4, minor corrections by ilyag
 #
@@ -20,6 +21,7 @@ def compute_md5_hash(input_string):
 def verify_linked_list(file_path):
 	with open(file_path, 'r') as file:
 		previous_line = ''
+		previous_timestamp = 0
 		for line_number, line in enumerate(file, 1):
 			parts = line.strip().split('|')
 			if len(parts) != 3:
@@ -31,17 +33,17 @@ def verify_linked_list(file_path):
 			hash_input = f"{previous_line}|{item_hash}|{timestamp}"
 			computed_checksum = compute_md5_hash(hash_input)
 
-			if computed_checksum == current_checksum:
+			if (computed_checksum == current_checksum):
 				# check if file exists in if statement
-				#if os.path.isfile('config/debug'):
-					#print(f"Line {line_number}: OK")
+				if os.path.isfile('config/debug'):
+					print(f"Line {line_number}: OK")
 			else:
 				print(f"Line {line_number}: Error (computed hash does not match)")
 				# exit
 				return
 
-			if timestamp > previous_timestamp:
-				#print(f"Line {line_number}: OK")
+			if (float(timestamp) > float(previous_timestamp)):
+				print(f"Line {line_number}: OK")
 			else:
 				print(f"Line {line_number}: Error (timestamp is not greater than previous timestamp)")
 				# exit
