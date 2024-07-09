@@ -800,7 +800,7 @@ sub MakeJsPages {
 	}
 	my $promptForUsername = GetConfig('admin/js/openpgp_keygen_prompt_for_username');
 	if ($promptForUsername) {
-		if (GetConfig('profile_auto_register')) {
+		if (GetConfig('setting/admin/js/profile_auto_register')) {
 			# together, these two features can create a repeating "choose a handle" dialog on every page load
 			# it is bad enough that they should not be user together until it is fixed,
 			# and we refuse to do so here
