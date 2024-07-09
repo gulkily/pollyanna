@@ -1107,6 +1107,10 @@ function UpdateDialogList () {
 					continue;
 				}
 
+				if (!dialogId) {
+					//alert('DEBUG: UpdateDialogList: warning: dialogId is empty');
+				}
+
 				var gt = unescape('%3E');
 
 				if (16 < dialogTitle.length) {
