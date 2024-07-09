@@ -111,6 +111,14 @@ sub GetDialogX2 { # \%paramHash ; returns dialog
 		$windowTemplate = "\n" . $debugComment . "\n" . $windowTemplate;
 	}
 
+	if (!$windowId && $windowTitle) {
+		# fallback for missing $windowId if it is missing and can be copied from title
+		# this shouldn't really happen #todo #bug
+		if ($windowTitle eq 'ItemAttributes') {
+			$windowId = $windowTitle;
+		}
+	}
+
 	if ($windowId) {
 		if ($windowId =~ m/^([0-9a-zA-Z_]+)$/) {
 			$windowId = $1;
