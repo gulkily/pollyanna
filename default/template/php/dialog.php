@@ -137,6 +137,22 @@ function GetDialogX ( # body, title, headings, status, menu
 		#$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onfocus', 'if (window.SetActiveDialog) { SetActiveDialog(this); return true; }'); #SetActiveDialog()
 	}
 
+	if ($windowTitle) {
+		# hack for setting id= from title
+		# this should really be a separate argument
+		# this is mainly needed for modern theme, but is nice to have in classic also
+		# #todo clean up and refactor?
+		if ($windowTitle == 'CookieInfo' || $windowTitle == 'PrintedInfo') {
+			if ($modernMode) {
+				#todo this should be done with js modern-like
+				$windowTemplate = AddAttributeToTag($windowTemplate, 'div class="dialog"', 'id', $windowTitle); #SetActiveDialog() GetDialogX2()
+			}
+			else {
+				$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'id', $windowTitle); #SetActiveDialog() GetDialogX2()
+			}
+		}
+	}
+
 	$windowTemplate = str_replace('$colorWindow', GetThemeColor('window'), $windowTemplate);
 	$windowTemplate = str_replace('$colorTitlebarText', GetThemeColor('titlebar_text'), $windowTemplate);
 	$windowTemplate = str_replace('$colorTitlebar', GetThemeColor('titlebar'), $windowTemplate);
