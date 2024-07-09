@@ -823,13 +823,18 @@ sub SqliteEscape { # Escapes supplied text for use in sqlite query
 	return $text;
 } # SqliteEscape()
 
-sub SqliteGetCount {
+sub SqliteGetCount { # query ; returns COUNT(*) of provided query
 # sub GetCount {
 # sub GetQueryCount {
 
 	my $query = shift;
 	#todo sanity;
 	#todo params
+
+	if ($query =~ m/(LIMIT [0-9]+)$/i) {
+		# detect query which has a limit, this is usually not something we want to do when using SqliteGetCount()
+		WriteLog('SqliteGetCount: warning: $query seems to have LIMIT clause; caller = ' . join(',', caller));
+	}
 
 	my $queryText = SqliteGetNormalizedQueryString($query);
 	WriteLog('SqliteGetCount: $queryText = ' . $queryText . '; caller = ' . join(',', caller));
