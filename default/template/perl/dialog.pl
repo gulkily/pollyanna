@@ -23,7 +23,7 @@ require_once('dialog_builder.pl');
 #	$title
 #	\%paramHash (see above)
 
-sub GetDialogX { # $body, $title, $headings, $status, $menu ; returns html with window/dialog
+sub GetDialogX { # $body, $title, $headings, $status, $menu ; calls GetDialogX2() and returns html with window/dialog
 # renamed from GetWindowTemplate()
 # it's called GetDialogX instead of GetDialog to make it easier to search for
 # calls GetDialogX2()
