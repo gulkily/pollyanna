@@ -92,6 +92,8 @@ function MakeKey (t, callback = '') { //makes key using default settings
 		var username = 'Guest'; //#guest...
 		if (window.location && window.location.href && (window.location.href.indexOf('session.html') != -1 || window.location.href.indexOf('profile.html') != -1)) {
 			//username = prompt('Choose your handle:', username); // ATTENTION: this line is uncommented from pages.pl
+		} else {
+			//auto_reg //username = prompt('Choose your handle:', username); // ATTENTION: this line is uncommented from pages.pl
 		}
 		// #todo make this better architected, like have a flag variable
 		// #todo this needs to not happen if we're auto-registering profile_auto_register
