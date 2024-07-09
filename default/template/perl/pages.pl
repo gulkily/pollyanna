@@ -813,6 +813,9 @@ sub MakeJsPages {
 			if (GetConfig('debug_error')) { #todo
 				#todo
 			}
+			if (GetConfig('setting/admin/js/openpgp_keygen_prompt_for_username_auto_register')) {
+				$crypto2JsTemplate = str_replace('//auto_reg //username = prompt', 'username = prompt', $crypto2JsTemplate);
+			}
 		} else {
 			$crypto2JsTemplate = str_replace('//username = prompt', 'username = prompt', $crypto2JsTemplate);
 		}
