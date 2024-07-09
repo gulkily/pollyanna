@@ -115,6 +115,7 @@ function WriteOnload () { // onload handler for write page
 					lblSignAs.innerHTML = 'Sign as ' + getAvatar();
 					lblSignAs.appendChild(chkSignAs);
 					spanSignAs.appendChild(lblSignAs);
+					// #todo this should probably be advanced layer, as it's not relevant to most users and just introduces confusion
 				} // window.getAvatar
 			} // document.getElementById('spanSignAs')
 		}
