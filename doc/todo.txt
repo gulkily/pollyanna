@@ -5,18 +5,18 @@ signal channels workalike
 
 ===
 
-add dialog and script that explains how to verify an item from scratch
-	should display on item page
-	should have the following commands listed and explained:
-		download /chain.log
-		download /chain_log_verify.txt and save to chain_log_verify.py
-		run chain_log_verify.py
-		download the author's public key
-			verify its hash and that it is in the chain log
-			gpg --import
-		download the item's file
-			verify its hash and that it is in the chain log
-			gpg --verify
+add dialog and script that explains how to verify an item from scratchx
+	should display on item pagex
+	should have the following commands listed and explained:x
+		download /chain.logx
+		download /chain_log_verify.txt and save to chain_log_verify.pyx
+		run chain_log_verify.pyx
+		download the author's public keyx
+			verify its hash and that it is in the chain logx
+			gpg --importx
+		download the item's filex
+			verify its hash and that it is in the chain logx
+			gpg --verifyx
 
 ===
 
