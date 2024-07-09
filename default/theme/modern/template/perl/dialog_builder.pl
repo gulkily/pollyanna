@@ -124,12 +124,19 @@ sub GetDialogX2 { # \%paramHash ; returns dialog
 			$windowId = $1;
 			WriteLog('GetDialogX2: $windowId = ' . $windowId);
 			#$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'id', $windowId);
+			#debug my $lengthBefore = length($windowTemplate);
 			$windowTemplate = AddAttributeToTag($windowTemplate, 'div class="dialog"', 'id', $windowId);
+			#debug my $lengthAfter = length($windowTemplate);
+			#debug if ($lengthBefore == $lengthAfter) {
+			#debug 	WriteLog('GetDialogX2: modern: warning: $lengthBefore == $lengthAfter ; $windowId = ' . $windowId);
+			#debug } else {
+			#debug 	WriteLog('GetDialogX2: modern: $lengthBefore != $lengthAfter ; $windowId = ' . $windowId);
+			#debug }
 		} else {
 			WriteLog('GetDialogX2: warning: sanity check failed: $windowId = ' . $windowId);
 		}
 	} else {
-		WriteLog('GetDialogX2: $windowId is FALSE');
+		WriteLog('GetDialogX2: warning: $windowId is FALSE; $windowTitle = ' . ($windowTitle ? $windowTitle : 'FALSE') . '; caller = ' . join(',', caller));
 	}
 
 	if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
