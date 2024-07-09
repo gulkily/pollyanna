@@ -6,10 +6,16 @@
 </p>
 <pre class=sh contenteditable>
 curl -s -o chain.log http://localhost:2784/chain.log
+    # download chain and save it as chain.log
 curl -s -o chain_log_verify.py http://localhost:2784/chain_log_verify.txt
+    # download chain log verification script and save it as chain_log_verify.py
 python3 chain_log_verify.py chain.log
+    # use python to run the chain log verification script
 curl -s -o message.txt http://localhost:2784/message.txt
+    # download the message file and save it as message.txt
 sha1sum message.txt
+    # print the hash of message.txt
 sha1sum message.txt | cut -d ' ' -f 1 | xargs -I {} grep {} chain.log
+    # verify that the hash is in chain.log
 </pre>
 <!-- / template/html/item/verify_instructions.template -->
