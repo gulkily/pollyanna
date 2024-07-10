@@ -1,6 +1,7 @@
 SELECT
 	author_key,
 	author_key author_id,
+	author_alias,
 	author_seen,
 	item_count,
 	author_score,
@@ -11,4 +12,3 @@ FROM
 ORDER BY
 	author_seen DESC,
 	item_count DESC
-
