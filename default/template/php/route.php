@@ -358,6 +358,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 	$cookie = '';
 	if (GetConfig('setting/admin/php/route_cookie_enable')) {
+		WriteLog('route.php: including cookie.php');
 		include_once('cookie.php');
 	}
 

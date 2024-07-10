@@ -3,6 +3,8 @@
 $cookie = 0;
 include_once('utils.php');
 
+WriteLog('cookie.php: begin');
+
 function GetSessionFingerprint () { # returns logged in user's fingerprint based on cookie
 	if (isset($_COOKIE['test']) && $_COOKIE['test']) {
 		WriteLog('GetSessionFingerprint: test cookie found');
@@ -39,6 +41,7 @@ if (isset($_GET['btnBegin'])) {
 }
 
 if (isset($_GET['btnSignOut']) && $_GET['btnSignOut']) {
+	WriteLog('cookie.php: btnSignOut activated');
 	// user requested to sign out
 
 	// unset relevant cookies
@@ -52,6 +55,7 @@ if (isset($_GET['btnSignOut']) && $_GET['btnSignOut']) {
 	WriteLog('cookie.php: all cookies unset');
 } # btnSignOut handler
 else {
+	WriteLog('cookie.php: btnSignOut not found');
 	if (isset($_COOKIE['test']) && $_COOKIE['test']) {
 		WriteLog('cookie.php: test cookie found');
 
@@ -142,6 +146,7 @@ else {
 		}
 	} // if (isset($_COOKIE['test']) && $_COOKIE['test'])
 	else {
+		WriteLog('cookie.php: test cookie not found');
 		if (isset($_GET['request']) && ($_GET['request'] == 'Begin')) { // ATTENTION: $_GET['request'] may be set by code above
 			setcookie2('test', '1');
 			header('Location: /profile.html?' . time());
