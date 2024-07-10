@@ -88,7 +88,8 @@ else {
 
 			$checksum = md5($cookie . '/' . $secret);
 			setcookie2('checksum', $checksum);
-			setcookie2('test', 1);
+			setcookie2('test', 1); #todo this causes a bug, with cookies being re-initialized after logging out
+			# the bug only seems to happen with lighttpd
 
 			$responseSignedIn = 1;
 		} else {
