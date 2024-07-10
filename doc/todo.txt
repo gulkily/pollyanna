@@ -1,7 +1,18 @@
 signal channels workalike
 	channels sidebar
-	encourage username creation
+	encourage username creationx
 	users list
+
+===
+
+resultset dialogs should link to the full page and list total number of items
+	need to call SELECT COUNT(*) FROM ($query)
+		the challenge here is that GetResultSetAsDialog() doesn't get a copy of the query
+			need to pass it in
+				sometimes it gets a copy as $flags{'query'}
+					we can work with this initially, and then ensure it's passed in elsewhere
+						this query sometimes has a LIMIT
+							we can just remove it
 
 ===
 
@@ -335,10 +346,6 @@ index.sqlite3 should not always be zipped
 		my $sizeSqliteZip = -s "$HTMLDIR/index.sqlite3.zip";
 		<a href="/index.sqlite3.zip">/index.sqlite3.zip</a> (<span id=sizeSqliteZip></span>) <br>
 		{ #without zip
-
-===
-
-resultset dialogs should link to the full page and list total number of items
 
 ===
 
