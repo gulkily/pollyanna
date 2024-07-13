@@ -1243,6 +1243,14 @@ function IsItem ($string) { # $string ; returns hash if parameter is in item has
 function setcookie2 ($key, $value, $updateCurrent = 0) { // sets cookie with ie3 compatibility
 	WriteLog('setcookie2(' . $key . ',' . $value . ')');
 
+	if (index($key, "\n") != -1) {
+		WriteLog('setcookie2: warning: $key contains \n character');
+	}
+
+	if (index($value, "\n") != -1) {
+		WriteLog('setcookie2: warning: $value contains \n character');
+	}
+
 	$cookieDateFormat = "D, d-M-Y H:i:s";
 	$cookieDate = date($cookieDateFormat, time() + 86400*2*365) . ' GMT';
 	// timezone hard-coding is not important here
