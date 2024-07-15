@@ -1,3 +1,11 @@
+allow user to set contact links so that they can be contacted
+	phone umber and tel: link
+	signal
+	telegram
+	twitter
+
+===
+
 signal channels workalike
 	channels sidebar
 	encourage username creationx
