@@ -823,6 +823,9 @@ sub MakeJsPages {
 		# the above issue has been remediated by only prompting if page is "session.html" and not on other pages
 		$crypto2JsTemplate = str_replace('//username = prompt', 'username = prompt', $crypto2JsTemplate);
 	}
+	if (GetConfig('admin/js/openpgp_keygen_prompt_for_username_prefill_empty')) {
+		$crypto2JsTemplate = str_replace("var username = 'Guest';", "var username = '';", $crypto2JsTemplate);
+	}
 	PutHtmlFile("crypto2.js", $crypto2JsTemplate);
 
 	# Write avatar javascript
