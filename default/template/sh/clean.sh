@@ -10,6 +10,7 @@ rm -vrf cache/
 rm -vrf html/*.html html/*/*.html html/*/*/*.html html/*/*/*/*.html
 rm -vrf html/*.php html/*.js
 rm -vrf log/log.log
+rm -vrf log/sqlitequery.*
 find html -type d -empty -delete
 
 echo ===
