@@ -101,7 +101,7 @@ if [ $1 = clean ] # hike clean
         echo "                            ==============="
         echo "                            clean complete!"
     fi
-	  if [ "$2" = html ] # hike clean all
+	  if [ "$2" = html ] # hike clean html
 	    then
         time ./default/template/sh/_dev_clean_html.sh
         echo ""
