@@ -26,6 +26,9 @@ sub UpdateSetting { # $settingKeySanitized, $argumentValueSanitized ; update set
 	`echo "$argumentValueSanitized" > $settingKeySanitized`;
 
 	if ($settingKeySanitized eq 'config/setting/theme') {
+		# need to remove dialog_builder.pl if switching to/from theme which has it defined
+		# this is a hack which needs to be fixed
+		`find config | grep dialog_builder.pl | xargs rm -v`;
 		print "Theme changed, about to rebuild frontend...\n";
 		print `sh hike.sh frontend`;
 	}
