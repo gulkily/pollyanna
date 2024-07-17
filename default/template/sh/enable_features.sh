@@ -72,6 +72,7 @@ echo 1 > config/setting/html/item_page/thread_listing
 echo 1 > config/setting/html/item_page/replies_listing_no_titles
 echo 1 > config/setting/html/item_page/gpg_stderr
 echo 1 > config/setting/html/item_page/toolbox_hashes
+echo 1 > config/setting/html/item_page/verify_instructions
 
 echo 0 > config/setting/admin/http_auth/enable
 echo 0 > config/setting/admin/welcome_install_message
