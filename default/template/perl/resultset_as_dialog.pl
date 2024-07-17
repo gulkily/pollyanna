@@ -240,8 +240,16 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 		#	$statusText .= ' (page ' . $flags{'page_current'} . ' of ' . $flags{'page_item_count'} . ')';
 		#} #todo
 
-		if (0) { #todo link to full results page
-			#$statusText .= '; <a href="';
+		if (0 && $flags{'query'}) {
+			#todo link full results page, display how many results there are
+			my $queryCount = $flags{'query'};
+			if ($queryCount =~ m/(LIMIT [0-9]+)$/i) {
+				$queryCount =~ s/(LIMIT [0-9]+)$//i;
+			}
+			$queryCount = "SELECT COUNT(*) FROM ($queryCount)";
+			my $resultCount = SqliteGetValue($queryCount);
+
+			$statusText = $resultCount;
 		}
 
 		#return GetDialogX($content, $title, $columnsDisplay, $statusText);
