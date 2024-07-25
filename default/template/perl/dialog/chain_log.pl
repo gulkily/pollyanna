@@ -39,6 +39,7 @@ sub GetChainLogAsDialog {
 	$dialogParams{'body'} = $chainRows;
 	$dialogParams{'title'} = 'Notarized';
 	$dialogParams{'headings'} = 'title,item,timestamp,checksum';
+	$dialogParams{'status'} = 'See the <a href="/chain.html">chain page</a> for more information about notarization';
 	$dialogParams{'table_sort'} = 0;
 	my $chainDialog = GetDialogX2(\%dialogParams);
 
