@@ -6,6 +6,7 @@ use 5.010;
 
 sub GetChainLogAsDialog {
 # sub GetVerificationTable {
+# sub GetNotarizedDialog {
 	#my $chainLog = `nl html/chain.log | tail -n 11`;
 	my $chainLog = `tail -n 5 html/chain.log`;
 	my @chainArray = split("\n", $chainLog);
