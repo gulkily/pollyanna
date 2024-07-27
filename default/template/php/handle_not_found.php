@@ -319,7 +319,8 @@ function HandleNotFound ($path, $pathRel, $theme = '') { // handles 404 error by
 					$canPlaceholder = 0;
 				}
 				if (preg_match('/^\/dialog\/label\/([a-zA-Z0-9_-]+)\.html/', $path, $itemLabelMatch)) {
-					# Item URL in the form: /label/nice.html
+					# Item URL in the form: /dialog/label/nice.html
+					# sub GetLabelDialog {
 					WriteLog('HandleNotFound: found dialog / label');
 					$labelName = $itemLabelMatch[1];
 					$pagesPlArgument = '-D \#' . $labelName;

@@ -1972,6 +1972,7 @@ while (my $arg1 = shift @foundArgs) {
 				}
 				elsif (substr($makeDialogArg, 0, 1) eq '#') { #hashtag tag/like.html label/like.html
 					#todo sanity checks here
+					# sub GetLabelDialog {
 					WriteMessage("-D hashtag $makeDialogArg\n");
 					my $hashTag = substr($makeDialogArg, 1);
 
