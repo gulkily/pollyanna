@@ -1986,9 +1986,14 @@ while (my $arg1 = shift @foundArgs) {
 						WriteLog('pages.pl: $query = ' . $query . '; caller = ' . join(',', caller)); #todo removeme
 						my $queryDialogTitle = '#' . $hashTag;
 
+						my %flags;
+						$flags{'results_page'} = 'label/' . $hashTag . '.html';
+
 						my $dialog = GetQueryAsDialog(
 							$query,
-							$queryDialogTitle
+							$queryDialogTitle,
+							'',
+							\%flags
 						); #todo sanity
 
 						$dialog = AddAttributeToTag($dialog, 'table', 'id', 'top_' . $hashTag);

@@ -240,16 +240,32 @@ sub GetResultSetAsDialog {# \@result, $title, $columns, \%flags
 		#	$statusText .= ' (page ' . $flags{'page_current'} . ' of ' . $flags{'page_item_count'} . ')';
 		#} #todo
 
-		if (0 && $flags{'query'}) {
-			#todo link full results page, display how many results there are
-			my $queryCount = $flags{'query'};
-			if ($queryCount =~ m/(LIMIT [0-9]+)$/i) {
-				$queryCount =~ s/(LIMIT [0-9]+)$//i;
-			}
-			$queryCount = "SELECT COUNT(*) FROM ($queryCount)";
-			my $resultCount = SqliteGetValue($queryCount);
+		if (GetConfig('setting/html/resultset_dialog_footer_link')) {
+			if ($flags{'query'}) {
+				#todo link full results page, display how many results there are
+				my $queryCount = $flags{'query'};
+				if ($queryCount =~ m/(LIMIT [0-9]+)$/i) {
+					$queryCount =~ s/(LIMIT [0-9]+)$//i;
+				}
+				$queryCount = "SELECT COUNT(*) FROM ($queryCount)";
+				my $resultCount = SqliteGetValue($queryCount);
 
-			$statusText = $resultCount;
+				if ($resultCount) {
+					$statusText = $resultCount . ' item(s)';
+					if ($flags{'results_page'}) {
+						WriteLog('GetResultSetAsDialog: $flags{results_page} = ' . $flags{'results_page'} . '; caller = ' . join(',', caller));
+						#$statusText .= '<a href="/' . $flags{'results_page'} . '">' . $flags{'results_page'} . '</a>';
+						$statusText = ' <a href="/' . $flags{'results_page'} . '">' . $statusText . '</a>';
+					}
+
+					$statusText = $resultCount . ' item(s)';
+					if ($flags{'results_page'}) {
+						WriteLog('GetResultSetAsDialog: $flags{results_page} = ' . $flags{'results_page'} . '; caller = ' . join(',', caller));
+						#$statusText .= '<a href="/' . $flags{'results_page'} . '">' . $flags{'results_page'} . '</a>';
+						$statusText = ' <a href="/' . $flags{'results_page'} . '">' . $statusText . '</a>';
+					}
+				}
+			}
 		}
 
 		#return GetDialogX($content, $title, $columnsDisplay, $statusText);
