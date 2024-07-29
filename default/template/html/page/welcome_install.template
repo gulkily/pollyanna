@@ -1,5 +1,9 @@
 <!-- html/page/welcome_install.template -->
-<p>Welcome to Pollyanna! Your install was successful!</p>
-<p>You should run `hike setup` to enable the most commonly-used features.</p>
-<p>Thank you for installing Pollyanna!</p>
+<p>
+	Welcome to Pollyanna! Your install was successful! <br>
+	<br>
+	You should run `hike setup` to enable the most commonly-used features. <br>
+	<br>
+	Thank you for installing Pollyanna!
+</p>
 <!-- / html/page/welcome_install.template -->

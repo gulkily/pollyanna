@@ -1002,6 +1002,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						$cookieNotice = '<span class=advanced>' . $cookieNotice . '</span>';
 						$cookieNotice = '<a href="/session.html">You are signed in as ' . $cookieAlias . '</a><br>' . "\n" . $cookieNotice;
 
+						$cookieNotice = '<p>' . $cookieNotice . '</p>';
+
 						$cookieNotice = AddAttributeToTag(GetDialogX($cookieNotice, 'CookieInfo', '', '', ''), 'table', 'id', 'CookieInfo');
 
 						$html = str_ireplace('</body>', $cookieNotice . '</body>', $html);

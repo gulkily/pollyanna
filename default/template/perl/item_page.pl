@@ -182,7 +182,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 
 	if ($file{'item_type'} eq 'image' && GetConfig('setting/html/item_page/image_full_size_link')) { # todo feature flag using GetConfig()
 		my $linkToFullImage = GetFileLink(\%file, 'Image');
-		$txtIndex .= GetDialogX($linkToFullImage, 'Full Image'); # full size image
+		$txtIndex .= GetDialogX('<p>' . $linkToFullImage . '</p>', 'Full Image'); # full size image
 	}
 
 	# if item has label poetry or poem, put an extra linebreak here
