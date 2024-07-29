@@ -5,6 +5,17 @@ body {
 	margin: 0;
 	padding: 20px;
 }
+body {
+	background-image: linear-gradient(
+	  to bottom,
+	  #f2f2f2 0px,
+	  #f2f2f2 1px,
+	  #e6e6e6 1px,
+	  #e6e6e6 2px
+	);
+	background-size: 100% 2px;
+	background-repeat: repeat-y;
+}
 table {
 	width: 100%;
 	border-collapse: collapse;
