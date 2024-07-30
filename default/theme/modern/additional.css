@@ -170,6 +170,17 @@ code.sql i {
 		background-color: #121212;
 		color: #e0e0e0;
 	}
+	body {
+		background-image: linear-gradient(
+				to bottom,
+				#1a1a1a 0px,
+				#1a1a1a 1px,
+				#2a2a2a 1px,
+				#2a2a2a 2px
+		);
+		background-size: 100% 2px;
+		background-repeat: repeat-y;
+	}
 	table {
 		background-color: #242424;
 		box-shadow: 0 2px 10px rgba(255,255,255,0.1);
