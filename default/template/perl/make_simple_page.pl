@@ -104,9 +104,11 @@ sub MakeSimplePage { # given page name, makes page
 		my $pageContent = GetTemplate("html/page/$pageName.template");
 		if (trim($pageContent) eq '') {
 			WriteLog('MakeSimplePage: warning: $pageContent was empty; caller = ' . join(',', caller));
-			$pageContent = 'Coming Soon..';
+			$pageContent = 'Coming Soon..<span class=admin><br>This message is likely caused by out of disk space.<br>To remedy, remove zero-length template file';
 			# hi, friend. if you're here, you may want to look here: @validRoutes
 			# this can be a symptom of out of disk space
+			# #todo check for a zero-length template file here, and try to fix it
+			# #todo report to user/admin that there's a zero-length template here
 		}
 		my $contentWindow = GetDialogX(
 			$pageContent,
