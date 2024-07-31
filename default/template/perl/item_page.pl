@@ -216,7 +216,7 @@ sub GetItemPage { # %file ; returns html for individual item page. %file as para
 
 		my $threadListingDialog = GetThreadListingDialog($fileHash); # 'Thread'
 		if ($threadListingDialog) {
-			$txtIndex .= $threadListingDialog;
+			$txtIndex .= '<span class=advanced>' . $threadListingDialog . '</span>';
 		} else {
 			WriteLog('GetItemPage: thread_listing: warning: tried to find a listing, but failed; $fileHash = ' . $fileHash);
 			#todo warning
