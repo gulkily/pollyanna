@@ -734,6 +734,9 @@ function PingUrl (url, ele) { // loads arbitrary url via image or xhr
 
 // function EscapeUrl () {
 // function UriEscape () {
+// function encode () {
+// function urlencode () {
+// function encodeurl () {
 // USE encodeURIComponent()
 
 //function ChangeInputToTextarea (input) { // called by onpaste
