@@ -993,21 +993,35 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 						$cookieLookup = '';
 						$cookieAlias = 'Guest';
-						if ($cookie) {
+						if ($cookieAlias) {
 							$cookieAlias = GetAlias($cookie);
 							$cookieLookup .= '<br>Alias: ' . $cookieAlias;
 							$cookieLookup .= '<br>Score: ' . GetScore($cookie);
 							$cookieLookup .= '<br>Avatar: ' . GetAvatar($cookie, $cookieAlias);
+
+							$cookieNotice = 'Cookie: ' . $currentCookie . $cookieLookup;
+
+							$cookieNotice = '<span class=advanced>' . $cookieNotice . '</span>';
+							$cookieNotice = '<a href="/session.html">You are signed in as ' . $cookieAlias . '</a><br>' . "\n" . $cookieNotice;
+	
+							$cookieNotice = '<p>' . $cookieNotice . '</p>';
+
+							#todo we shouldn't have to AddAttributeToTag() manually here
+							$cookieNotice = AddAttributeToTag(GetDialogX($cookieNotice, 'CookieInfo', '', '', ''), 'table', 'id', 'CookieInfo');
+						} else {
+							$cookieNotice = '
+								You are not signed in. <br>
+								<br>
+								<a href="/session.html">Sign In</a> <br>
+								<br>
+								<a href="/session.html">Register</a> <br>
+								<br>
+								<a href="/session.html">Log in</a> <br>
+								<br>
+								<a href="/session.html">Create Account <br>
+							';
+							$cookieNotice = AddAttributeToTag(GetDialogX($cookieNotice, 'CookieInfo', '', '', ''), 'table', 'id', 'CookieInfo');
 						}
-
-						$cookieNotice = 'Cookie: ' . $currentCookie . $cookieLookup;
-
-						$cookieNotice = '<span class=advanced>' . $cookieNotice . '</span>';
-						$cookieNotice = '<a href="/session.html">You are signed in as ' . $cookieAlias . '</a><br>' . "\n" . $cookieNotice;
-
-						$cookieNotice = '<p>' . $cookieNotice . '</p>';
-
-						$cookieNotice = AddAttributeToTag(GetDialogX($cookieNotice, 'CookieInfo', '', '', ''), 'table', 'id', 'CookieInfo');
 
 						$html = str_ireplace('</body>', $cookieNotice . '</body>', $html);
 					}
