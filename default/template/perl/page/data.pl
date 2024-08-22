@@ -115,7 +115,7 @@ sub MakeDataZips {
 			rename("$HTMLDIR/txt.tmp.zip", "$HTMLDIR/txt.zip");
 
 			{ #with zip
-				system("zip -qrj $HTMLDIR/index.sqlite3.zip.tmp cache/" . GetMyCacheVersion() . "/index.sqlite3");
+				system("zip -qrj \"$HTMLDIR/index.sqlite3.zip.tmp\" \"$HTMLDIR/index.sqlite3\""); #sqlitezip
 				rename("$HTMLDIR/index.sqlite3.zip.tmp", "$HTMLDIR/index.sqlite3.zip");
 			}
 
