@@ -2790,7 +2790,7 @@ sub ProcessTextFile { # $file ; add new text file to index
 		return 0;
 	}
 	else {
-		WriteLog('ProcessTextFile: ProcessTextFile(' . $file . ') not in cache/indexed, calling IndexFile');
+		WriteLog('ProcessTextFile: IsFileAlreadyIndexed() returned FALSE, calling IndexFile()');
 
 		IndexFile($file);
 		IndexFile('flush');
