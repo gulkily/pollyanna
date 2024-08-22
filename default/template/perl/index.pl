@@ -369,8 +369,9 @@ while (my $arg1 = shift @argsFound) {
 			$flagNoCache = 1;
 		}
 		if ($arg1 eq '--clear-cache') {
-			print "index.pl: --clear-cache\n";
-			print `rm -vrf cache/b/indexed/*`;
+			#print "index.pl: --clear-cache\n";
+			#print `rm -vrf cache/b/indexed/*`;
+			#todo this should use UnlinkCache() instead
 		}
 		if ($arg1 eq '--all') {
 			print "index.pl: --all\n";

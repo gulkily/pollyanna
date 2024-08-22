@@ -12,6 +12,7 @@ use utf8;
 use Digest::MD5 qw(md5_hex);
 
 my $tims = `sqlite3 cache/b/index.sqlite3 "SELECT file_hash, add_timestamp FROM item_flat ORDER BY add_timestamp;"`;
+#todo look up where sqlite file lives instead of hardcoding
 
 require './utils.pl';
 

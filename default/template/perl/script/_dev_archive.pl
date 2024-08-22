@@ -152,6 +152,7 @@ my $IMAGEDIR = $HTMLDIR . '/image';
 	copy("$HTMLDIR/chain.log", "$ARCHIVE_DATE_DIR/html/chain.log");
 	unlink("$HTMLDIR/chain.log");
 
+	#todo this shouldn't use cache dir directly
 	print("copy($CACHEDIR/index.sqlite3, $ARCHIVE_DATE_DIR/index.sqlite3)\n");
 	copy("$CACHEDIR/index.sqlite3", "$ARCHIVE_DATE_DIR/index.sqlite3");
 	#unlink("$HTMLDIR/chain.log");
