@@ -1,5 +1,7 @@
 #!/usr/bin/perl -T
 
+# begin inject_js.pl
+
 use strict;
 use warnings;
 use 5.010;
@@ -634,5 +636,7 @@ sub EnableJsDebug { # $scriptTemplate ; enables javascript debug mode
 
 	return $scriptTemplate;
 } # EnableJsDebug()
+
+# end of inject_js.pl
 
 1;
