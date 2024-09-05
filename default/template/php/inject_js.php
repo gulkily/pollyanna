@@ -20,16 +20,16 @@ function InjectJs ($html, $scriptNames, $injectMode = 'before', $htmlTag = '</bo
 
 	$scriptsDone = array();  // array to keep track of scripts we've already injected, to avoid duplicates
 
-//	if (GetConfig('setting/html/clock')) {
-//		// if clock is enabled, automatically add its js
-//		$scriptNames[] = 'clock';
-//	}
-//
-//	if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/fresh')) {
-//		// if clock is enabled, automatically add it
-//		$scriptNames[] = 'fresh';
-//	}
-//
+	//if (GetConfig('setting/html/clock')) {
+	//	// if clock is enabled, automatically add its js
+	//	$scriptNames[] = 'clock';
+	//}
+	//
+	//if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/fresh')) {
+	//	// if clock is enabled, automatically add it
+	//	$scriptNames[] = 'fresh';
+	//}
+
 	//output list of all the scripts we're about to include
 	$scriptNamesList = implode(' ', $scriptNames);
 
@@ -73,12 +73,12 @@ function InjectJs ($html, $scriptNames, $injectMode = 'before', $htmlTag = '</bo
 			}
 		}
 		// #todo finish porting this when GetRootAdminKey() is available in php
-		//		if ($script == 'profile') {
-		//			# for profile.js we need to fill in current admin id
-		//			my $currentAdminId = GetRootAdminKey() || '-';
+		//	if ($script == 'profile') {
+		//		# for profile.js we need to fill in current admin id
+		//		my $currentAdminId = GetRootAdminKey() || '-';
 		//
-		//			$scriptTemplate =~ s/\$currentAdminId/$currentAdminId/g;
-		//		}
+		//		$scriptTemplate =~ s/\$currentAdminId/$currentAdminId/g;
+		//	}
 
 		if ($script == 'settings') {
 			// for settings.js we also need to fill in some theme colors
