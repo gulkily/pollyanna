@@ -1,4 +1,5 @@
 <!-- welcome.template -->
+<fieldset>
 <p>Flyerian is a revolutionary forum system that brings the power back to the users.</p>
 <!--<p>Flyerian is compatible with Netscape, Internet Explorer, <i>and</i> Opera, not to mention post-modern browsers.</p>-->
 <p>It prioritizes transparency, auditability, and, importantly, consent.</p>
@@ -6,4 +7,5 @@
 <p>Imagine being able to take your entire digital existence on a forum, and seamlessly move or clone it to another platform, if you choose to.</p>
 <p>This is about giving users unprecedented access to choices and control over their online interactions.</p>
 <p>It's not just about chatting online, it's about defining the future of digital social interaction.</p>
+</fieldset>
 <!-- / welcome.template -->
