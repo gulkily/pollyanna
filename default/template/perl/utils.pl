@@ -2110,6 +2110,11 @@ sub IsTextFile { # $file ; returns 1 if txt file, 0 if not
 sub IsSaneFilename {
 # sub IsValidFile {
 # sub IsFile {
+# sub CheckFileName {
+# sub ValidateFileName {
+# sub IsValidFileName {
+# sub EscapeFile {
+# sub EscapeFileName {
 	my $fileName = shift;
 
 	if ($fileName) {
