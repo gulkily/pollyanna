@@ -17,6 +17,8 @@ use strict;
 use warnings;
 use 5.010;
 
+require('./utils.pl');
+
 sub CleanUp {
 	WriteLog('CleanUp()');
 
@@ -29,7 +31,11 @@ sub CleanUp {
 			my $age = -M $file;
 			if ($age > 1) {
 				WriteLog("CleanUp: Removing old response file: $file");
-				unlink($file);
+				if ($file = IsSaneFilename($file)) {
+					unlink($file);
+				} else {
+					WriteLog('CleanUp: Warning: sanity check failed on $file');
+				}
 			}
 		}
 	}
@@ -43,7 +49,11 @@ sub CleanUp {
 			my $age = -M $file;
 			if ($age > 1) {
 				WriteLog("CleanUp: Removing old sqlerr file: $file");
-				unlink($file);
+				if ($file = IsSaneFilename($file)) {
+					unlink($file);
+				} else {
+					WriteLog('CleanUp: Warning: sanity check failed on $file');
+				}
 			}
 		}
 	}
