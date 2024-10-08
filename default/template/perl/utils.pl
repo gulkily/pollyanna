@@ -706,8 +706,9 @@ sub GetFileHash { # $fileName ; returns hash of file contents
 		$fileName = IsSaneFilename($fileName);
 
 		my $fileHash = GetSHA1(GetFile($fileName));
-		if (1) {
-			my $fileHash2 = trim(`sha1sum "$fileName" | cut -d ' ' -f 1`);
+		if (GetConfig('setting/admin/sha1sum_command')) {
+            my $sha1SumCommand = GetConfig('setting/admin/sha1sum_command');
+			my $fileHash2 = trim(`$sha1SumCommand "$fileName" | cut -d ' ' -f 1`);
 
 			if (!$fileHash2) {
 				WriteLog('GetFileHash: warning: $fileHash2 is FALSE');
@@ -2726,6 +2727,7 @@ sub Sha1Test {
 	print "\n";
 	print GetFileHash('utils.pl');
 	print "\n";
+	#todo this should have provisions for when sha1sum is not available in the environment
 	print(`sha1sum utils.pl | cut -f 1 -d ' '`);
 	# print "\n";
 	print(`php -r "print(sha1_file('utils.pl'));"`);
