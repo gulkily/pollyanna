@@ -103,6 +103,13 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 		return ''; # failed sanity check
 	}
 
+	if ($fileHash = IsItem($fileHash)) {
+	    #WriteLog('IndexTextFile: sanity check passed, $fileHash = ' . $fileHash);
+	} else {
+	    WriteLog('IndexTextFile: warning: $fileHash failed sanity check; $fileHash = ' . ($fileHash ? $fileHash : 'FALSE') . '; caller = ' .join(',', caller));
+	    return '';
+	}
+
 	# if the file is present in deleted.log, get rid of it and its page, return
 	if (IsFileDeleted($file, $fileHash)) {
 		# write to log
