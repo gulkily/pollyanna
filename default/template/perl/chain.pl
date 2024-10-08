@@ -216,7 +216,7 @@ sub AddToChainLog { # $fileHash ; add line to log/chain.log
 		}
 		my $chainSequenceNumber = $chainLogLineCount - 1;
 		if ($chainSequenceNumber < 0) {
-			WriteLog('AddToChainLog: warning: $chainSequenceNumber < 0');
+			WriteLog('AddToChainLog: warning: $chainSequenceNumber < 0; $chainSequenceNumber = ' . ($chainSequenceNumber ? $chainSequenceNumber : 'FALSE') . '; caller = ' . join(',', caller));
 			$chainSequenceNumber = 0;
 		}
 
