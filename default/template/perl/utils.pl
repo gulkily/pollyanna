@@ -2644,7 +2644,7 @@ sub GetPathFromHash { # guesses path of text file based on hash
 	chomp $fileHash;
 
 	if (!$fileHash) {
-		WriteLog('GetPathFromHash: warning: $fileHash is false');
+		WriteLog('GetPathFromHash: warning: $fileHash is FALSE');
 		return '';
 	}
 
