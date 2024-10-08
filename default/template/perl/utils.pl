@@ -1056,7 +1056,7 @@ sub RenameFile { # $filePrevious, $fileNew, $hashNew ; renames file with a bit o
 			#todo log and sanity check on $renameResult
 		}
 	} else {
-		WriteLog('RenameFile: warning: $hashPrevious was FALSE');
+		WriteLog('RenameFile: $hashPrevious was FALSE; caller = ' . join(',', caller));
 		#return '';
 	}
 
