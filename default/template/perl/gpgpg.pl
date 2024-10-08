@@ -32,6 +32,22 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETUR
 # RETURNS AUTHOR'S FINGERPRINT
 	#
 
+	#sanity check, gpg command needs to exist
+	state $gpgCheck;
+	if (!$gpgCheck) {
+	    my $gpgCheckResult = `which gpg`;
+	    if ($gpgCheckResult) {
+	        $gpgCheck = 'pass';
+	    }
+	    else {
+	        $gpgCheck = 'fail';
+	    }
+	}
+	if ($gpgCheck ne 'pass') {
+	    WriteLog('GpgParse: warning: $gpgCheck did not pass, gpg command missing; returning');
+	    return '';
+	}
+
 	my $filePath = shift;
 	if (!$filePath || !-e $filePath || -d $filePath) {
 		WriteLog('GpgParse: warning: $filePath missing, non-existent, or a directory');
