@@ -325,6 +325,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			if ($hostRequestLimit) {
 				$hostHash = md5($_SERVER['REMOTE_ADDR']); #my
 				$hostAccessCount = GetCache('access_count/' . $hostHash);
+				$hostAccessCount = intval($hostAccessCount);
 				$hostAccessCount++;
 				PutCache('access_count/' . $hostHash, $hostAccessCount);
 			} # if ($hostRequestLimit)
