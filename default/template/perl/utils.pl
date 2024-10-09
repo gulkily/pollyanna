@@ -706,8 +706,8 @@ sub GetFileHash { # $fileName ; returns hash of file contents
 		$fileName = IsSaneFilename($fileName);
 
 		my $fileHash = GetSHA1(GetFile($fileName));
-		if (GetConfig('setting/admin/sha1sum_command')) {
-            my $sha1SumCommand = GetConfig('setting/admin/sha1sum_command');
+		my $sha1SumCommand = GetConfig('setting/admin/sha1sum_command');
+		if ($sha1SumCommand = IsSaneFilename($sha1SumCommand)) {
 			my $fileHash2 = trim(`$sha1SumCommand "$fileName" | cut -d ' ' -f 1`);
 
 			if (!$fileHash2) {
