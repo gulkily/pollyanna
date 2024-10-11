@@ -16,7 +16,7 @@ Yb,  88      `8b      IP'`Yb IP'`Yb
                                       `8, ,8I
                                        `Y8P"
 
-Pollyanna is a web framework that prioritizes consent and accessibility.
+Pollyanna is a web framework for online social spaces that prioritizes consent and accessibility.
 It is designed to be respectful of user content, empowering to users, provable in its reliability, portable,
 customizable, durable, accessible, secure, and convenient to install.
 
