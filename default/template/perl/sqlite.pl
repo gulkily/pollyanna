@@ -84,7 +84,7 @@ sub SqliteIndexTagsets {
 
 			if (@tag) {
 				for my $t (@tag) {
-					my $query = "insert into label_parent(label, label_parent) values(?, ?)";
+					my $query = "INSERT INTO label_parent(label, label_parent) VALUES(?, ?)";
 					my @queryParams;
 					push @queryParams, $t;
 					push @queryParams, $tagSet;
