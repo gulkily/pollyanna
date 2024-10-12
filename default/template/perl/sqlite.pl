@@ -339,7 +339,7 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 	}
 
 	if ($query =~ m/^(.+)$/s) {
-#	if ($query =~ m/^([[:print:]\n\r\s]+)$/s) {
+	# if ($query =~ m/^([[:print:]\n\r\s]+)$/s) {
 		# this is only a basic sanity check, but it's better than nothing
 		$query = $1;
 		WriteLog('SqliteQuery: ' . $queryId . ' $query passed sanity check');
