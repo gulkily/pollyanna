@@ -27,7 +27,7 @@ sub SetSqliteDbName { # $requestedName ; sets path to sqlite db
 		return '';
 	}
 	return GetSqliteDbName($requestedName);
-}
+} # SetSqliteDbName()
 
 sub GetSqliteDbName { # $requestedName ; returns path to sqlite db
 	# has a default value, but can be overridden with $requestedName
@@ -776,6 +776,6 @@ while (my $arg1 = shift @foundArgs) {
 
 		}
 	}
-}
+} # while (my $arg1 = shift @foundArgs)
 
 1;
