@@ -5,7 +5,7 @@ use warnings;
 use 5.010;
 use utf8;
 
-my $databaseType = 'mysql';
+my $databaseType = GetConfig('setting/admin/database_type');
 if ($databaseType eq 'mysql') {
 	require_once('mysql.pl');
 } elsif ($databaseType eq 'sqlite') {
