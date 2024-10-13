@@ -80,7 +80,7 @@ fi
 
 if [ $1 = build ] # hike build
 	then
-		time ./default/template/sh/build.sh
+		./default/template/sh/build.sh
 		echo
 		echo "                            ==============="
 		echo "                            build complete!"
@@ -94,7 +94,7 @@ if [ $1 = clean ] # hike clean
 	then
 	  if [ "$2" = all ] # hike clean all
 	    then
-        time ./default/template/sh/clean.sh
+        ./default/template/sh/clean.sh
         echo ""
         echo "==============="
         echo "clean complete!"
@@ -103,7 +103,7 @@ if [ $1 = clean ] # hike clean
     fi
 	  if [ "$2" = html ] # hike clean html
 	    then
-        time ./default/template/sh/_dev_clean_html.sh
+        ./default/template/sh/_dev_clean_html.sh
         echo ""
         echo "==============="
         echo "clean html complete!"
@@ -127,7 +127,7 @@ fi
 
 if [ $1 = rebuild ] # hike rebuild
 	then
-		time ./default/template/sh/rebuild.sh
+		./default/template/sh/rebuild.sh
 fi
 
 if [ $1 = reindex ]
@@ -138,8 +138,8 @@ if [ $1 = reindex ]
     sleep 3
     sqlite3 cache/b/index.sqlite3 "delete from item_attribute";
     rm -v cache/b/indexed/*
-    time perl -T ./config/template/perl/index.pl --chain
-    time perl -T ./config/template/perl/index.pl --all
+    perl -T ./config/template/perl/index.pl --chain
+    perl -T ./config/template/perl/index.pl --all
 fi
 
 if [ $1 = index ]
@@ -147,14 +147,14 @@ if [ $1 = index ]
 	then
 		if [ $2 ]
 			then
-				time perl -T ./config/template/perl/index.pl $2
+				perl -T ./config/template/perl/index.pl $2
 		fi
 		if [ ! $2 ]
 		  # if no parameter is specified, it does a full index
 			then
-				time perl -T ./config/template/perl/index.pl --chain
+				perl -T ./config/template/perl/index.pl --chain
 				sleep 1
-				time perl -T ./config/template/perl/index.pl --all
+				perl -T ./config/template/perl/index.pl --all
 		fi
 fi
 
@@ -196,7 +196,7 @@ fi
 if [ $1 = frontend ]
 	then
 		default/template/sh/_dev_clean_html.sh
-		time ./config/template/perl/pages.pl --system
+		./config/template/perl/pages.pl --system
 		#todo every item in the menu should be built here
 fi
 
@@ -208,7 +208,7 @@ fi
 
 if [ $1 = page ] # hike page
 	then
-		time ./config/template/perl/pages.pl -M $2 $3
+		./config/template/perl/pages.pl -M $2 $3
 fi
 
 if [ $1 = info ]
@@ -223,7 +223,7 @@ if [ $1 = start ] # hike start #
 				/bin/sh ./default/template/sh/build.sh
 		fi
 		echo 1 > config/setting/admin/lighttpd/server_started
-		time perl -T config/template/perl/server_local_lighttpd.pl
+		perl -T config/template/perl/server_local_lighttpd.pl
 		rm config/setting/admin/lighttpd/server_started
 fi
 
@@ -239,7 +239,7 @@ if [ $1 = startpython ] # hike startpython
 				/bin/sh ./default/template/sh/build.sh
 		fi
 		#todo echo 1 > config/setting/admin/lighttpd/server_started
-		time perl -T config/template/perl/server_local_python.pl
+		perl -T config/template/perl/server_local_python.pl
 		#todo rm config/setting/admin/lighttpd/server_started
 fi
 
@@ -250,7 +250,7 @@ fi
 
 if [ $1 = alog ]
 	then
-		time ./default/template/perl/script/access_log_read.pl --all
+		./default/template/perl/script/access_log_read.pl --all
 		echo About to index and build pages...
 		sleep 3
 		perl -T ./config/template/perl/index.pl --all
@@ -287,12 +287,12 @@ fi
 
 if [ $1 = sweep ]
 	then
-		time perl -T ./config/template/perl/index.pl --sweep
+		perl -T ./config/template/perl/index.pl --sweep
 fi
 
 if [ $1 = open ]
 	then
-		time ./default/template/perl/browser_open.pl
+		./default/template/perl/browser_open.pl
 		#todo reduce hard-coding
 fi
 
@@ -300,21 +300,21 @@ if [ $1 = 'archive' ]
 	then
 	  if [ "$2" = all ] # archive all
       then
-        time ./default/template/perl/script/_dev_archive.pl
+        ./default/template/perl/script/_dev_archive.pl
         sleep 1
-        time perl -T ./config/template/perl/index.pl --sweep
-        time perl -T ./config/template/perl/index.pl --all
-        time perl -T ./config/template/perl/index.pl --all
+        perl -T ./config/template/perl/index.pl --sweep
+        perl -T ./config/template/perl/index.pl --all
+        perl -T ./config/template/perl/index.pl --all
         ./hike.sh frontend
     fi
 
     if [ "$2" = list ] # archive list
       then
-        time mc ./archive html/txt
+        mc ./archive html/txt
         echo Indexing new items...
         sleep 1
-        time perl -T ./config/template/perl/index.pl --all
-        time perl -T ./config/template/perl/index.pl --all
+        perl -T ./config/template/perl/index.pl --all
+        perl -T ./config/template/perl/index.pl --all
     fi
 
     if [ ! "$2" ]
