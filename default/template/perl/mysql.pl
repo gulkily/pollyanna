@@ -72,14 +72,37 @@ sub SqliteEscape {
     }
 }
 
-sub GetSqliteDbName {
+sub GetMysqlHost {
     if ($USE_MYSQL) {
-        return 'your_mysql_db_name';
+        return 'localhost';
     } else {
         # Existing SQLite logic
     }
 }
 
+sub GetSqliteDbName {
+    if ($USE_MYSQL) {
+        return 'pollyanna';
+    } else {
+        # Existing SQLite logic
+    }
+}
+
+sub GetMysqlUser {
+    if ($USE_MYSQL) {
+        return 'pollyanna';
+    } else {
+        # Existing SQLite logic
+    }
+}
+
+sub GetMysqlPassword {
+    if ($USE_MYSQL) {
+        return 'password';
+    } else {
+        # Existing SQLite logic
+    }
+}
 
 sub MysqlQuery { # $query, @queryParams ; performs mysql query via mysql command
 # returns whatever mysql returns to STDOUT
