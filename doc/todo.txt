@@ -1,3 +1,9 @@
+when there's a new unapproved key
+	all approved users should be notified
+		so that they can approve
+
+===
+
 allow user to set contact links so that they can be contacted
 	phone umber and tel: link
 	signal
