@@ -2100,3 +2100,11 @@ sub DBGetItemLabelTotals2 { # $fileHash ; get label counts for specified item, r
 	return \%labelTotals;
 } # DBGetItemLabelTotals2()
 
+sub DBGetCount {
+	state $databaseType = 'mysql'; #todo this should be a config setting
+	if ($databaseType eq 'mysql') {
+		return MysqlGetCount(@_);
+	} else {
+		return SqliteGetCount(@_);
+	}
+} # DBGetCount()
