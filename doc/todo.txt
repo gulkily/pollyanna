@@ -1,3 +1,7 @@
+perl -MDBD::mysql -e 'print "DBD::mysql is installed\n";'
+
+===
+
 when there's a new unapproved key
 	all approved users should be notified
 		so that they can approve
