@@ -966,10 +966,6 @@ should be a "logged in as" dialog
 
 ===
 
-hypercode theme tables with rounded corners should have table border=0 in the html
-
-===
-
 #hastitle tag should only apply if title was actually applied to item
 	assumed titles e.g. from first line should not result in #hastitle
 
