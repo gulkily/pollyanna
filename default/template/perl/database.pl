@@ -5,6 +5,15 @@ use warnings;
 use 5.010;
 use utf8;
 
+my $databaseType = 'mysql';
+if ($databaseType eq 'mysql') {
+	require_once('mysql.pl');
+} elsif ($databaseType eq 'sqlite') {
+	require_once('sqlite.pl');
+} else {
+	WriteLog('database.pl: warning: $databaseType = ' . $databaseType . ' is not supported');
+}
+
 sub DBMaxQueryLength { # Returns max number of characters to allow in sqlite query
 	return 1024;
 } # DBMaxQueryLength()
