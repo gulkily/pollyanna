@@ -1,3 +1,7 @@
+database test suite
+
+===
+
 perl -MDBD::mysql -e 'print "DBD::mysql is installed\n";'
 
 ===
