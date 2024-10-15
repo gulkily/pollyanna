@@ -5,13 +5,14 @@ use warnings;
 use 5.010;
 use utf8;
 
-my $databaseType = GetConfig('setting/admin/database_type');
-if ($databaseType eq 'mysql') {
-	require_once('mysql.pl');
-} elsif ($databaseType eq 'sqlite') {
+# depending on setting/admin/database_type, require_once() sqlite.pl or mysql.pl
+if (GetConfig('setting/admin/database_type') eq 'sqlite') {
+	WriteLog('database.pl: require_once(sqlite.pl)');
 	require_once('sqlite.pl');
-} else {
-	WriteLog('database.pl: warning: $databaseType = ' . $databaseType . ' is not supported');
+}
+elsif (GetConfig('setting/admin/database_type') eq 'mysql') {
+	WriteLog('database.pl: require_once(mysql.pl)');
+	require_once('mysql.pl');
 }
 
 sub DBMaxQueryLength { # Returns max number of characters to allow in sqlite query
@@ -48,6 +49,28 @@ sub DBGetLabelsForItem { # $fileHash ; Returns all labels (weighed) for item
 
 	return @result;
 } # DBGetLabelsForItem()
+
+sub DBIndexTagsets {
+	my $suggestList = GetTemplate('tagset/suggest');
+	my @suggest = split("\n", $suggestList);
+
+	if (@suggest) {
+		for my $tagSet (@suggest) {
+			my $tagList = GetTemplate('tagset/' . $tagSet);
+			my @tag = split("\n", $tagList);
+
+			if (@tag) {
+				for my $t (@tag) {
+					my $query = "INSERT INTO label_parent(label, label_parent) VALUES(?, ?)";
+					my @queryParams;
+					push @queryParams, $t;
+					push @queryParams, $tagSet;
+					SqliteQuery($query, @queryParams);
+				}
+			}
+		}
+	}
+} # DBIndexTagsets()
 
 sub DBGetAuthorFriends { # Returns list of authors which $authorKey has tagged as friend
 # Looks for label = 'friend' and items that contain 'pubkey' tag
@@ -97,7 +120,7 @@ sub DBGetItemCount { # Returns item count.
 
 	my $itemCount;
 
-	$itemCount = SqliteGetCount('compost');
+	$itemCount = DBGetCount('compost');
 #	}
 	if ($itemCount) {
 		chomp($itemCount);
@@ -2101,10 +2124,5 @@ sub DBGetItemLabelTotals2 { # $fileHash ; get label counts for specified item, r
 } # DBGetItemLabelTotals2()
 
 sub DBGetCount {
-	state $databaseType = 'mysql'; #todo this should be a config setting
-	if ($databaseType eq 'mysql') {
-		return MysqlGetCount(@_);
-	} else {
-		return SqliteGetCount(@_);
-	}
+	return SqliteGetCount(@_);
 } # DBGetCount()
