@@ -157,7 +157,7 @@ sub require_once { # $path ; use require() unless already done
 		return '';
 	}
 
-	WriteLog('require_once(' . $module . ')');
+	WriteLog('require_once(' . $module . '); caller = ' . join(',', caller));
 
 	my $path = GetDir('config') . '/template/perl/' . $module;
 
@@ -963,10 +963,10 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 } # GetTemplate()
 
 sub BakePerlTemplate {
-	WriteLog('BakePerlTemplate()');
-
 	my $template = shift;
 	chomp $template;
+
+	#todo sanity checks
 
 	#$template = str_replace("GetDir('html')", "'" . GetDir('html') . "'", $template);
 	#$template = str_replace('\QGetDir(\'html\')\E', "'" . GetDir('html') . "'", $template);
@@ -975,7 +975,7 @@ sub BakePerlTemplate {
 	#$template =~ s/GetDir\('html'\)/GetDir('html')/e;
 
 	return $template;
-}
+} # BakePerlTemplate()
 
 sub GetList { # $listName ; reads a list from a template and returns it as an array
 # GetTagSet {

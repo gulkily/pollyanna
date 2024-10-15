@@ -1,7 +1,7 @@
 #!/usr/bin/perl -T
 
 sub GetWelcomePage {
-	WriteLog('GetWelcomePage()');
+	WriteLog('GetWelcomePage: caller = ' . join(' ', caller));
 	my $isNewInstall = GetConfig('setting/admin/welcome_install_message') ? 1 : 0;
 	my $newInstallDialog = '';
 	if ($isNewInstall) {
