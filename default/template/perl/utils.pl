@@ -55,7 +55,7 @@ my @modules = qw(
 	cache
 	html
 	file
-	sqlite
+	database
 	gpgpg
 	makepage
 	token_defs

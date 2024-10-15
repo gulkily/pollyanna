@@ -73,28 +73,6 @@ sub SqliteQuery2 {
 	return SqliteQuery($query, @params);
 } # SqliteQuery2()
 
-sub SqliteIndexTagsets {
-	my $suggestList = GetTemplate('tagset/suggest');
-	my @suggest = split("\n", $suggestList);
-
-	if (@suggest) {
-		for my $tagSet (@suggest) {
-			my $tagList = GetTemplate('tagset/' . $tagSet);
-			my @tag = split("\n", $tagList);
-
-			if (@tag) {
-				for my $t (@tag) {
-					my $query = "INSERT INTO label_parent(label, label_parent) VALUES(?, ?)";
-					my @queryParams;
-					push @queryParams, $t;
-					push @queryParams, $tagSet;
-					SqliteQuery($query, @queryParams);
-				}
-			}
-		}
-	}
-} # SqliteIndexTagsets()
-
 sub SqliteMakeTables { # creates sqlite schema
 	# sub SqliteCreateTables {
 	# sub SqliteMakeTables {
@@ -121,7 +99,7 @@ sub SqliteMakeTables { # creates sqlite schema
 
 	SqliteQuery($schemaQueries);
 
-	SqliteIndexTagsets();
+	DBIndexTagsets(); #todo
 
 	my $SqliteDbName = GetSqliteDbName();
 
@@ -610,7 +588,7 @@ sub SqliteQueryCachedShell { # $query, @queryParams ; performs sqlite query via 
 		my $results = SqliteQuery($query);
 		if ($results) {
 			WriteLog('SqliteQueryCachedShell: PutCache: length($results) ' . length($results));
-			PutCache('sqcs/'.$cachePath, $results);
+			PutCache('sqlite_cached/'.$cachePath, $results);
 		} else {
 			WriteLog('SqliteQueryCachedShell: warning: $results was FALSE; $query = ' . $query);
 			WriteLog('SqliteQueryCachedShell: warning: $results was FALSE; caller = ' . join(',', caller));

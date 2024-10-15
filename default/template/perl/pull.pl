@@ -11,7 +11,7 @@ use Digest::SHA qw(sha1_hex);
 use URI::Escape qw(uri_escape);
 
 require('./utils.pl');
-require_once('sqlite.pl');
+require_once('database.pl');
 
 sub PullFeedFromHost { # connects to $host with http and downloads any new items posted
 # downloads /rss.txt first
