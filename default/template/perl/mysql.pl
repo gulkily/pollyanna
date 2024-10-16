@@ -11,20 +11,22 @@ use DBI;
 my $USE_MYSQL = 1; # Set to 1 for MySQL, 0 for SQLite
 
 sub MysqlConnect {
-    if ($USE_MYSQL) {
-        # MySQL connection
-        my $host = GetMysqlHost();
-        my $dbname = GetMysqlDbName();  # Note: This function is used for both MySQL and SQLite
-        my $username = GetMysqlUser();
-        my $password = GetMysqlPassword();
+	if ($USE_MYSQL) {
+		# MySQL connection
+		my $host = GetMysqlHost();
+		my $dbname = GetMysqlDbName();  # Note: This function is used for both MySQL and SQLite
+		my $username = GetMysqlUser();
+		my $password = GetMysqlPassword();
 
-        my $dsn = "DBI:mysql:database=$dbname;host=$host;port=3306";
-        my $dbh = DBI->connect($dsn, $username, $password, { RaiseError => 1 });
-        return $dbh;
-    } else {
-        # SQLite connection (return nothing as it's file-based)
-        return;
-    }
+		my $dsn = "DBI:mysql:database=$dbname;host=$host;port=3306";
+		my $dbh = DBI->connect($dsn, $username, $password, { RaiseError => 1 });
+		WriteLog('MysqlConnect: connected to ' . $dsn);
+		return $dbh;
+	} else {
+		# SQLite connection (return nothing as it's file-based)
+		WriteLog('MysqlConnect: warning: called with $USE_MYSQL = 0');
+		return;
+	}
 }
 
 sub GetMysqlHost {
