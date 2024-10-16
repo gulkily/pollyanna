@@ -290,7 +290,7 @@ sub MysqlMakeTables { # creates mysql schema
 
 	WriteLog('MysqlMakeTables: begin');
 
-	my $existingTables = MysqlQueryCachedShell('.tables');
+	my $existingTables = MysqlQueryCachedShell('SHOW TABLES');
 	if ($existingTables) {
 		WriteLog('MysqlMakeTables: warning: tables already exist');
 
