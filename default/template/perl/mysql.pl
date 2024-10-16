@@ -27,7 +27,7 @@ sub MysqlConnect {
 		WriteLog('MysqlConnect: warning: called with $USE_MYSQL = 0');
 		return;
 	}
-}
+} # MysqlConnect()
 
 sub GetMysqlHost {
 	return 'localhost';
@@ -46,55 +46,58 @@ sub GetMysqlPassword {
 }
 
 sub DBQuery {
-    my ($query, @params) = @_;
-    if ($USE_MYSQL) {
-        my $dbh = MysqlConnect();
-        my $sth = $dbh->prepare($query);
-        $sth->execute(@params);
-        my $result = $sth->fetchall_arrayref({});
-        $sth->finish();
-        $dbh->disconnect();
-        return $result;
-    } else {
-        return SqliteQueryHashRef($query, @params);
-    }
-}
+	WriteLog('DBQuery: mysql version called; caller = ' . join(',', caller));
+	my ($query, @params) = @_;
+	if ($USE_MYSQL) {
+		my $dbh = MysqlConnect();
+		my $sth = $dbh->prepare($query);
+		$sth->execute(@params);
+		my $result = $sth->fetchall_arrayref({});
+		$sth->finish();
+		$dbh->disconnect();
+		return $result;
+	} else {
+		return SqliteQueryHashRef($query, @params);
+	}
+} # DBQuery()
 
 sub MysqlQueryHashRef {
-    return DBQuery(@_);
+	WriteLog('MysqlQueryHashRef: mysql version called; caller = ' . join(',', caller));
+	return DBQuery(@_);
 }
 
 sub SqliteQuery {
-    my ($query, @params) = @_;
-    my $result = DBQuery($query, @params);
-    # Format result to match SQLite output
-    # (You may need to adjust this based on your specific needs)
-    return join("\n", map { join("|", values %$_) } @$result);
-}
+	WriteLog('SqliteQuery: mysql version called; caller = ' . join(',', caller));
+	my ($query, @params) = @_;
+	my $result = DBQuery($query, @params);
+	# Format result to match SQLite output
+	# (You may need to adjust this based on your specific needs)
+	return join("\n", map { join("|", values %$_) } @$result);
+} # SqliteQuery()
 
 sub SqliteGetValue {
-    my ($query, @params) = @_;
-    my $result = DBQuery($query, @params);
-    return $result->[0]->{(keys %{$result->[0]})[0]} if @$result;
-    return '';
-}
+	my ($query, @params) = @_;
+	my $result = DBQuery($query, @params);
+	return $result->[0]->{(keys %{$result->[0]})[0]} if @$result;
+	return '';
+} # SqliteGetValue()
 
 sub SqliteGetColumnArray {
-    my ($query, $columnName) = @_;
-    my $result = DBQuery($query);
-    return map { $_->{$columnName} } @$result;
-}
+	my ($query, $columnName) = @_;
+	my $result = DBQuery($query);
+	return map { $_->{$columnName} } @$result;
+} # SqliteGetColumnArray()
 
 sub SqliteEscape {
-    my $text = shift;
-    if ($USE_MYSQL) {
-        my $dbh = MysqlConnect();
-        return $dbh->quote($text);
-    } else {
-        $text =~ s/'/''/g if defined $text;
-        return defined $text ? $text : '';
-    }
-}
+	my $text = shift;
+	if ($USE_MYSQL) {
+		my $dbh = MysqlConnect();
+		return $dbh->quote($text);
+	} else {
+		$text =~ s/'/''/g if defined $text;
+		return defined $text ? $text : '';
+	}
+} # SqliteEscape()
 
 sub GetMysqlHost {
 	return 'localhost';
