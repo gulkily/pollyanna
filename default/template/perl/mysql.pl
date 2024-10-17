@@ -115,8 +115,8 @@ sub GetMysqlPassword {
 	return 'password';
 }
 
-sub MysqlQuery { # $query, @queryParams ; performs mysql query via mysql command
-# returns whatever mysql returns to STDOUT
+sub MysqlQuery { # $query, @queryParams ; performs mysql query via DBI
+# returns whatever mysql returns as a result set
 	my $query = shift;
 	if (!$query) {
 		WriteLog('MysqlQuery: warning: called without $query');
@@ -168,116 +168,42 @@ sub MysqlQuery { # $query, @queryParams ; performs mysql query via mysql command
 		# this may indicate that a variable placeholder was not filled
 	}
 
-	my $logName = substr(GetRandomHash(), 0, 16) . '.sqlerr';
-	state $logDir = GetDir('log');
-	my $mysqlErrorLog = $logDir . '/' . $logName;
+	my $dsn = "DBI:mysql:database=$MysqlDbName;host=$MysqlHost";
+	my $dbh = DBI->connect($dsn, $MysqlUser, $MysqlPassword, {
+		RaiseError => 1,
+		PrintError => 0,
+		AutoCommit => 1,
+	}) or die "Cannot connect to database: $DBI::errstr";
 
-	$query = str_replace('$', '\\$', $query);
-	$query = str_replace('`', '\`', $query);
-
-	my $shCommand = "mysql -h $MysqlHost -u $MysqlUser -p$MysqlPassword $MysqlDbName -e \"$query\" 2>$mysqlErrorLog";
-	#todo send to /dev/null if debug mode is not enabled?
-
-	WriteLog('MysqlQuery: ' . $queryId . ' $shCommand = ' . $shCommand);
-
-	if ($shCommand =~ m/^(.+)$/s) {
-	# if ($shCommand =~ m/^([[:print:]\n\r\s]+)$/s) {
-		# this is only a basic sanity check, but it's better than nothing
-		WriteLog('MysqlQuery: ' . $queryId . ' $query passed sanity check');
-		$shCommand = $1;
-	} else {
-		my $outLogName = GetSHA1(time().$shCommand).'.shcommand';
-		state $outLogDir = GetDir('log');
-		PutFile("$outLogDir/$outLogName", $shCommand);
-		WriteLog('MysqlQuery: ' . $queryId . ' warning: $shCommand failed sanity check for printable characters only: ' . $outLogName);
-		return '';
-	}
-
-	###########################################################################
-	###########################################################################
-	### RUN QUERY VIA SHELL ###################################################
-	### RUN QUERY VIA SHELL ###################################################
+	my $timeBefore = GetTime();
 
 	my $results = '';
-	if ($shCommand =~ m/^(.+)$/s) {
-		$shCommand = $1;
+	eval {
+		my $sth = $dbh->prepare($query);
+		$sth->execute(@queryParams);
 
-		my $timeBefore = GetTime();
-
-		###########################################################################
-		###########################################################################
-		### RUN QUERY VIA SHELL ###################################################
-		### RUN QUERY VIA SHELL ###################################################
-		$results = `$shCommand`;
-
-		my $timeAfter = GetTime();
-
-		WriteLog('MysqlQuery: ' . $queryId . ' $results = ' . $results);
-
-		WriteLog('MysqlQuery: ' . $queryId . ' $time = ' . ($timeAfter - $timeBefore));
-
-		if (index($results, '90f7c1d87f56afbf1fc18ce49b9031f035e92a95') != -1) {
-			print($results);
-			#die($results);
-		}
-	}
-
-	### RUN QUERY VIA SHELL ###################################################
-	### RUN QUERY VIA SHELL ###################################################
-	###########################################################################
-	###########################################################################
-
-	if (index(trim(lc(GetFile($mysqlErrorLog))), 'locked') != -1) {
-		#sometimes the database is locked for a moment, so we retry 3 times before giving up
-		#hack
-		WriteLog('MysqlQuery: ' . $queryId . ' warning: locked database detected. retrying');
-		my $retryCount = 0;
-		while ($retryCount < 3 && trim(GetFile($mysqlErrorLog))) {
-			WriteLog('MysqlQuery: ' . $queryId . ' locked retrying in 0.25s. Error is: ' . trim(GetFile($mysqlErrorLog)));
-			select(undef, undef, undef, 0.25);
-			$retryCount++;
-			$results = `$shCommand`;
-		}
-		WriteLog('MysqlQuery: ' . $queryId . ' locked: retry loop exited, Error is: ' . trim(GetFile($mysqlErrorLog)));
-		if (trim(GetFile($mysqlErrorLog))) {
-			WriteLog('MysqlQuery: ' . $queryId . ' unable to recover from locked state; $retryCount = ' . $retryCount);
-			unlink($mysqlErrorLog);
+		if ($sth->{NUM_OF_FIELDS}) {
+			$results = $sth->fetchall_arrayref({});
 		} else {
-			WriteLog('MysqlQuery: ' . $queryId . ' recovered from locked state; $retryCount = ' . $retryCount);
+			$results = $sth->rows;
 		}
-	}
+	};
 
-	if ($?) {
-		# this is a special perl thing which contains STDERR from most recent backtick command
-		WriteLog('MysqlQuery: ' . $queryId . ' warning: error returned; log = ' . $mysqlErrorLog . '; caller = ' . join(',', caller));
-		AppendFile($mysqlErrorLog, $query);
-		AppendFile($mysqlErrorLog, 'caller: ' . join(',', caller));
+	my $timeAfter = GetTime();
 
-		my @caller1 = caller(1);
-		my $caller1string = (@caller1 ? ($caller1[0] . ',' . $caller1[1] . ',' . $caller1[2]) : 'undef');
-		AppendFile($mysqlErrorLog, 'caller: ' . $caller1string);
-
-		my @caller2 = caller(2);
-		my $caller2string = (@caller2 ? ($caller2[0] . ',' . $caller2[1] . ',' . $caller2[2]) : 'undef');
-		AppendFile($mysqlErrorLog, 'caller: ' . $caller2string);
-
+	if ($@) {
+		WriteLog('MysqlQuery: ' . $queryId . ' error: ' . $@);
+		my $logName = substr(GetRandomHash(), 0, 16) . '.sqlerr';
+		state $logDir = GetDir('log');
+		my $mysqlErrorLog = $logDir . '/' . $logName;
+		PutFile($mysqlErrorLog, $query . "\n" . $@ . "\n" . join(',', caller));
 		return '';
 	}
 
-	if (GetFile($mysqlErrorLog)) {
-		WriteLog('MysqlQuery: ' . $queryId . ' warning: mysql call wrote to stderr: ' . $mysqlErrorLog . '; caller = ' . join(',', caller));
+	WriteLog('MysqlQuery: ' . $queryId . ' $results = ' . Dumper($results));
+	WriteLog('MysqlQuery: ' . $queryId . ' $time = ' . ($timeAfter - $timeBefore));
 
-		AppendFile('' . $mysqlErrorLog, $query . "\n");
-		AppendFile('' . $mysqlErrorLog, join(',', caller));
-		AppendFile('' . $mysqlErrorLog, GetTime());
-
-	} else {
-		if (-e $mysqlErrorLog) {
-			#output file exists, but is empty
-			#this would be because of a locked database retry, for example
-			unlink($mysqlErrorLog);
-		}
-	}
+	$dbh->disconnect;
 
 	return $results;
 } # MysqlQuery()
