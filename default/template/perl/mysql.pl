@@ -51,6 +51,7 @@ sub DBQuery {
 	if ($USE_MYSQL) {
 		my $dbh = MysqlConnect();
 		my $sth = $dbh->prepare($query);
+		WriteLog('DBQuery: $query = ' . $query);
 		$sth->execute(@params);
 		my $result = $sth->fetchall_arrayref({});
 		$sth->finish();
