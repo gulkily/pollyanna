@@ -506,7 +506,7 @@ sub SqliteGetCount { # query ; returns COUNT(*) of provided query
 	my $queryText = MysqlGetNormalizedQueryString($query);
 	WriteLog('SqliteGetCount: $queryText = ' . $queryText . '; caller = ' . join(',', caller));
 
-	my $queryItemCount = "SELECT COUNT(*) AS item_count FROM ($queryText) LIMIT 1";
+	my $queryItemCount = "SELECT COUNT(*) AS item_count FROM ($queryText) AS query1 LIMIT 1";
 	my $rowCount = MysqlGetValue($queryItemCount);
 
 	return $rowCount;
