@@ -8,7 +8,7 @@ SELECT * FROM (
 	FROM author_flat
 	WHERE author_key IN (SELECT author_key FROM person_author)
 	GROUP BY author_alias
-)
+) AS query1
 WHERE
 	person_name != ''
 	AND author_key_count >= 1
