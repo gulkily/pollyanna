@@ -90,7 +90,9 @@ sub SqliteMakeTables { # creates sqlite schema
 		return '';
 	}
 
-	my $schemaQueries = GetTemplate('sqlite3/schema.sql');
+	my $schemaQueries = '';
+	$schemaQueries .= "\n;\n" . GetTemplate('sqlite3/sane_defaults.sql');
+	$schemaQueries .= "\n;\n" . GetTemplate('sqlite3/schema.sql');
 	$schemaQueries .= "\n;\n" . GetTemplate('sqlite3/label_weight.sql');
 
 	$schemaQueries =~ s/^#.+$//mg; # remove sh-style comments (lines which begin with #)
