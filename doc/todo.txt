@@ -4107,11 +4107,6 @@ i think all item references should add that item as a child.
 
 ===
 
-need to restart server if php flag changes
-	applies to lighttpd local dev
-
-===
-
 Archive dialog should be moved to a separate module out of default/template/perl/get_read_page.pl
 	This is complicated by needing to check the file count,
 		which I guess can be passed in, as it's only true/false
@@ -4120,10 +4115,6 @@ Archive dialog should be moved to a separate module out of default/template/perl
 ===
 
 when running as user, `hike stop` should not try to kill other users' processes (like port 80)
-
-===
-
-`hike page ...` should support dialogs, such as authors
 
 ===
 
