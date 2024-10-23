@@ -1340,7 +1340,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							} else {
 								WriteLog('route.php: cookie_inbox: warning: $html lacks placeholder');
 							}
-						} else {
+						} # if (file_exists($cookieInboxDialogPath))
+						else {
 							# this means there are no messages waiting for the user
 							# shadowme (developed for shadowme project, thanks william)
 							WriteLog('route.php: cookie_inbox: file_exists($cookieInboxDialogPath) is FALSE');
@@ -1348,16 +1349,19 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							$cookieInboxDialog = AddAttributeToTag($cookieInboxDialog, 'table', 'id', 'Inbox');
 							$html = str_ireplace('<span id=messages></span>', '<span id=messages>' . $cookieInboxDialog . '</span>', $html);
 						}
-					} else {
+					} # if (IsFingerprint($_COOKIE['cookie']))
+					else {
 						WriteLog('route.php: cookie_inbox: warning: cookie did not pass fingerprint sanity check');
 					}
-				} else {
+				} # if (isset($_COOKIE['cookie']) && $_COOKIE['cookie'])
+				else {
 					WriteLog('route.php: cookie_inbox: user has no cookie');
 				}
-			} else {
+			} # if (index($html, '</body>') != -1)
+			else {
 				WriteLog('route.php: cookie_inbox: warning: could not find closing body tag');
 			}
-		}
+		} # if (GetConfig('setting/admin/php/cookie_inbox'))
 
 		if ($path == '/bookmark.html') { #bookmarklets replace server name with host name
 			$hostName = 'localhost:2784';
