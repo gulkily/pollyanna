@@ -241,7 +241,6 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			}
 		}
 
-
 		if (isset($_GET['path'])) {
 			WriteLog('route.php: cool: $_GET[path] confirmed!');
 
@@ -945,15 +944,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						} else {
 							$html = str_ireplace('</body>', $printedNotice . '</body>', $html);
 						}
-
-						// if (GetConfig('debug')) {
-						// # for debug mode, print cached page notice at the top
-						// $html = str_ireplace('</body>', $printedNotice . '</body>', $html);
-						// #$html = $htmlCacheNotice . $html; #todo ...
-						// } else {
-						// $html = str_ireplace('</body>', $printedNotice . '</body>', $html);
-						// }
-					} // if (route_notify_printed_time)
+``					} // if (route_notify_printed_time)
 				} # $path
 				else {
 					// no $path
