@@ -843,9 +843,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						}
 
 						$cookieLookup = '';
-						$cookieAlias = 'Guest';
-						if ($cookieAlias) {
-							$cookieAlias = GetAlias($cookie);
+						$cookieAlias = GetAlias($cookie);
+						if ($cookie && $cookieAlias) {
 							$cookieLookup .= '<br>Alias: ' . $cookieAlias;
 							$cookieLookup .= '<br>Score: ' . GetScore($cookie);
 							$cookieLookup .= '<br>Avatar: ' . GetAvatar($cookie, $cookieAlias);
