@@ -162,7 +162,7 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETUR
 
 	my $gpgStderrOutput = GetCache("gpg_stderr/$fileHash.txt");
 	if (!defined($gpgStderrOutput)) {
-		WriteLog('GpgParse: warning: GetCache(gpg_stderr/$fileHash.txt) returned undefined!');
+		WriteLog('GpgParse: warning: GetCache(gpg_stderr/$fileHash.txt) returned undefined; caller: ' . join(',', caller));
 		$gpgStderrOutput = '';
 	}
 
