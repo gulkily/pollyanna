@@ -70,3 +70,7 @@ function CacheExists ($cacheName) { // Check whether specified cache entry exist
 		return 0;
 	}
 } # CacheExists()
+
+function MigrateCache ($cacheName) {
+	return true;
+} # MigrateCache()
