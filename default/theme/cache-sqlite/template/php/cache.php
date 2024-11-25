@@ -188,6 +188,39 @@ function CacheExists($cacheName) { // Check if cache entry exists
 	});
 } // CacheExists()
 
+function MigrateCache($cacheKey) { // Migrate cache from filesystem to SQLite
+	if (!$cacheKey) {
+		WriteLog('MigrateCache: warning: missing cache key');
+		return false;
+	}
+
+	$CACHEPATH = GetDir('cache');
+	$cacheVersion = GetMyCacheVersion();
+	
+	$filePath = "$CACHEPATH/$cacheVersion/$cacheKey";
+	
+	if (!file_exists($filePath)) {
+		WriteLog('MigrateCache: cache file does not exist: ' . $filePath);
+		return false;
+	}
+
+	// Read content and migrate to SQLite
+	$content = GetFile($filePath);
+	if ($content) {
+		if (PutCache($cacheKey, $content)) {
+			unlink($filePath);
+			WriteLog('MigrateCache: migrated ' . $cacheKey . ' from filesystem to SQLite');
+			return true;
+		} else {
+			WriteLog('MigrateCache: failed to write to SQLite cache: ' . $cacheKey);
+			return false;
+		}
+	} else {
+		WriteLog('MigrateCache: failed to read cache file: ' . $filePath);
+		return false;
+	}
+} // MigrateCache()
+
 register_shutdown_function(function() {
 	Cache::closeDb();
 });

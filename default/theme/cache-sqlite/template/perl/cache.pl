@@ -197,6 +197,42 @@ sub ExpireAvatarCache { # $key ; removes avatar caches for key
     return UnlinkCache('avatar%/%/' . $key);
 } # ExpireAvatarCache()
 
+sub MigrateCache { # $cacheKey ; migrates cache from filesystem to SQLite
+    my $cacheKey = shift;
+    chomp($cacheKey);
+
+    if (!$cacheKey) {
+        WriteLog('MigrateCache: warning: missing cache key');
+        return 0;
+    }
+
+    state $CACHEPATH = GetDir('cache');
+    state $cacheVersion = GetMyCacheVersion();
+    
+    my $filePath = "$CACHEPATH/$cacheVersion/$cacheKey";
+    
+    if (!-e $filePath) {
+        WriteLog('MigrateCache: cache file does not exist: ' . $filePath);
+        return 0;
+    }
+
+    # Read content and migrate to SQLite
+    my $content = GetFile($filePath);
+    if ($content) {
+        if (PutCache($cacheKey, $content)) {
+            unlink($filePath);
+            WriteLog('MigrateCache: migrated ' . $cacheKey . ' from filesystem to SQLite');
+            return 1;
+        } else {
+            WriteLog('MigrateCache: failed to write to SQLite cache: ' . $cacheKey); 
+            return 0;
+        }
+    } else {
+        WriteLog('MigrateCache: failed to read cache file: ' . $filePath);
+        return 0;
+    }
+} # MigrateCache()
+
 END {
     $dbh->disconnect if $dbh;
 }

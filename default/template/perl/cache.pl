@@ -201,4 +201,9 @@ sub ExpireAvatarCache { # $fingerprint ; removes all avatar caches
 #	UnlinkCache('avatar_plain/' . $themeName . '/' . $key);
 } # ExpireAvatarCache()
 
+sub MigrateCache { # $cacheKey ; no-op for disk-based cache
+	return;
+} # MigrateCache()
+
+
 1;
