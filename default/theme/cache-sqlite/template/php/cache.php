@@ -34,12 +34,12 @@ class Cache { // SQLite-based caching system with retry mechanism
 						if ($attempts >= self::$maxRetries) {
 							throw $e;
 						}
-						error_log("initializeDb: retry attempt $attempts: " . $e->getMessage());
+						WriteLog("initializeDb: retry attempt $attempts: " . $e->getMessage());
 						usleep(self::$retryDelay);
 					}
 				}
 			} catch (Exception $e) {
-				error_log("initializeDb: error: " . $e->getMessage());
+				WriteLog("initializeDb: error: " . $e->getMessage());
 				die('Cache initialization failed');
 			}
 		}
@@ -68,7 +68,7 @@ class Cache { // SQLite-based caching system with retry mechanism
 				$lastError = $e;
 				$attempts++;
 				if (stripos($e->getMessage(), 'database is locked') !== false) {
-					error_log("retryOperation: database locked, attempt $attempts");
+					WriteLog("retryOperation: database locked, attempt $attempts");
 					usleep(self::$retryDelay);
 					continue;
 				}
@@ -96,22 +96,22 @@ function GetCache($cacheName) { // Retrieve value from cache by key
 
 			$result = $stmt->execute();
 			if ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-				error_log("GetCache: found value for $cacheName");
+				WriteLog("GetCache: found value for $cacheName");
 				return $row['value'];
 			}
 		} catch (Exception $e) {
-			error_log("GetCache: error: " . $e->getMessage());
+			WriteLog("GetCache: error: " . $e->getMessage());
 			throw $e;
 		}
 
-		error_log("GetCache: no value found for $cacheName");
+		WriteLog("GetCache: no value found for $cacheName");
 		return '';
 	});
 } // GetCache()
 
 function PutCache($cacheName, $content) { // Store value in cache with key
 	return Cache::retryOperation(function() use ($cacheName, $content) {
-		error_log("PutCache: storing $cacheName");
+		WriteLog("PutCache: storing $cacheName");
 
 		$db = Cache::getDb();
 		$myVersion = GetMyCacheVersion();
@@ -132,7 +132,7 @@ function PutCache($cacheName, $content) { // Store value in cache with key
 
 			return $stmt->execute() !== false;
 		} catch (Exception $e) {
-			error_log("PutCache: error: " . $e->getMessage());
+			WriteLog("PutCache: error: " . $e->getMessage());
 			throw $e;
 		}
 	});
@@ -141,7 +141,7 @@ function PutCache($cacheName, $content) { // Store value in cache with key
 function UnlinkCache($cacheName) { // Remove cache entries matching key pattern
 	// alternative: DeleteCache(), RemoveCache()
 	return Cache::retryOperation(function() use ($cacheName) {
-		error_log("UnlinkCache: removing $cacheName");
+		WriteLog("UnlinkCache: removing $cacheName");
 
 		$db = Cache::getDb();
 		$myVersion = GetMyCacheVersion();
@@ -159,7 +159,7 @@ function UnlinkCache($cacheName) { // Remove cache entries matching key pattern
 
 			return $stmt->execute() !== false;
 		} catch (Exception $e) {
-			error_log("UnlinkCache: error: " . $e->getMessage());
+			WriteLog("UnlinkCache: error: " . $e->getMessage());
 			throw $e;
 		}
 	});
@@ -182,7 +182,7 @@ function CacheExists($cacheName) { // Check if cache entry exists
 			$result = $stmt->execute();
 			return $result->fetchArray() ? 1 : 0;
 		} catch (Exception $e) {
-			error_log("CacheExists: error: " . $e->getMessage());
+			WriteLog("CacheExists: error: " . $e->getMessage());
 			throw $e;
 		}
 	});
