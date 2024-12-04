@@ -1,3 +1,7 @@
+bug: cookieinfo dialog does not work right with cache-mysql theme
+
+==
+
 in render_field.pl
 	if item_type is image, and field is item_title
 		it should render a thumbnail, but this depends on item_type being one of the columns
