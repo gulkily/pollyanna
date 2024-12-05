@@ -163,6 +163,14 @@ code.sql i {
 .noscript, noscript {
 	color: red;
 }
+.server-response {
+	background-color: #f9edbe;
+	border: 2px solid #9c27b0;
+	border-radius: 4px;
+	box-shadow: 0 0 10px rgba(156, 39, 176, 0.3);
+	margin: 10px 0;
+	transition: box-shadow 0.3s ease;
+}
 
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
@@ -245,4 +253,9 @@ code.sql i {
     	background-color: #242424;
     	border: inset 3px #003366;
     }
+	.server-response {
+		background-color: #2c2c2c;
+		border-color: #b388ff;
+		box-shadow: 0 0 10px rgba(179, 136, 255, 0.3);
+	}
 }

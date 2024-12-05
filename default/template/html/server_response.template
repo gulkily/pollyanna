@@ -3,6 +3,7 @@
 <table
 	width="99%"
 	id=serverResponse
+	class=server-response
 	bgcolor="$colorHighlightAlert"
 	cellpadding=5
 	cellspacing=0
