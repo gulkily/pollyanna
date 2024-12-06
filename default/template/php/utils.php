@@ -157,10 +157,13 @@ function GetAlias ($fingerprint, $noCache = 0) { # ; Returns alias for an identi
 		if ($alias && length($alias) > 24) {
 			$alias = substr($alias, 0, 24);
 		}
+		WriteLog('GetAlias: $alias = ' . $alias);
 
 		return $alias;
 	} else {
+		WriteLog('GetAlias: warning: $alias was false');
 		$alias = GetConfig('prefill_username'); #guest...
+		WriteLog('GetAlias: $alias = ' . $alias);
 		return $alias;
 	}
 } # GetAlias()
