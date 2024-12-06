@@ -204,7 +204,7 @@ if (window.EventLoop) {
 		window.eventLoopEnabled = 1;
 		window.eventLoopFresh = 1;
 	}
-	
+
 	EventLoop();
 } else {
 	CheckIfFresh();
