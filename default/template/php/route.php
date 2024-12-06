@@ -834,7 +834,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						# cookie_notice {
 						$currentCookie = ''; #my
 
-						WriteLog('route.php: route_show_cookie = TRUE');
+						WriteLog('route.php: route_show_cookie = TRUE; $cookie = ' . $cookie);
 
 						if (isset($cookie) && $cookie) {
 							$currentCookie = htmlspecialchars($cookie);
@@ -844,6 +844,9 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 						$cookieLookup = '';
 						$cookieAlias = GetAlias($cookie);
+
+						WriteLog('route.php: $cookieAlias = ' . $cookieAlias);
+
 						if ($cookie && $cookieAlias) {
 							$cookieLookup .= '<br>Alias: ' . $cookieAlias;
 							$cookieLookup .= '<br>Score: ' . GetScore($cookie);
@@ -858,7 +861,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 							#todo we shouldn't have to AddAttributeToTag() manually here
 							$cookieNotice = AddAttributeToTag(GetDialogX($cookieNotice, 'CookieInfo', '', '', ''), 'table', 'id', 'CookieInfo');
-						} else {
+						}
+						else {
 							$cookieNotice = '
 								You are not signed in. <br>
 								<br>
