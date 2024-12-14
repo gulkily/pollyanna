@@ -1,5 +1,19 @@
 #!/usr/bin/perl -T
 
+# cache.pl
+# This is an alternative to the default file-based cache in default/template/perl/cache.pl
+# This module provides SQLite-based caching functionality for the application
+# It handles cache initialization, storage, retrieval, and management
+# The cache is used to store various types of data including avatars and page content
+# Functions:
+#   InitializeCache() - Sets up SQLite database connection and creates cache table
+#   GetCache() - Retrieves cached content by key
+#   PutCache() - Stores content in cache with given key
+#   UnlinkCache() - Removes cached item
+#   ExpireAvatarCache() - Specifically handles expiring avatar caches
+#   MigrateCache() - Migrates cache entries from filesystem to SQLite
+
+
 use strict;
 use 5.010;
 use warnings;
