@@ -158,6 +158,11 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETUR
 		system($gpgCommand);
 		#todo append command user can run to revalidate this
 		#AppendFile("$cachePathStderr/$fileHash.txt", "# " . ??? . "\n");
+
+		my $migrateCacheMessage = 'message/' . $fileHash . '_gpg';
+		my $migrateCacheGpgStderr = 'gpg_stderr/' . $fileHash . '.txt';
+		MigrateCache($migrateCacheMessage);
+		MigrateCache($migrateCacheGpgStderr);
 	}
 
 	my $gpgStderrOutput = GetCache("gpg_stderr/$fileHash.txt");
