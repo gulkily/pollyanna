@@ -150,7 +150,8 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETUR
 		}
 
 		#gpg_command_pipe
-		my $messageCachePath = GetFileMessageCachePath($filePath) . '_gpg';
+		#my $messageCachePath = GetFileMessageCachePath($filePath) . '_gpg';
+		my $messageCachePath = "$CACHEPATH/$cacheVersion/message/$fileHash" . '_gpg';
 		$gpgCommand .= "$filePath "; # file we're parsing
 		$gpgCommand .= ">$messageCachePath "; # capture stdout
 		$gpgCommand .= "2>$cachePathStderr/$fileHash.txt "; # capture stdeerr

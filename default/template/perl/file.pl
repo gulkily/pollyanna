@@ -332,48 +332,40 @@ sub GetFileMessage { # $fileHash ; get file message based on hash
 
 	WriteLog('GetFileMessage(' . $fileHash . ')');
 
-	my $messagePath;
-
 	if (GetConfig('admin/gpg/enable')) {
-		$messagePath = GetFileMessageCachePath($fileHash) . '_gpg';
-		WriteLog('GetFileMessage: $messagePath1: ' . $messagePath);
-
-		if (-e $messagePath) {
-			WriteLog('GetFileMessage: (message_gpg) return GetFile(' . $messagePath . ')');
-			return GetFile($messagePath);
-		} else {
-			WriteLog('GetFileMessage: not returning, no file at $messagePath = '. $messagePath . '; caller = ' . join(',', caller));
+		my $gpgMessage = GetCache('message/' . $fileHash . '_gpg');
+		if ($gpgMessage) {
+			WriteLog('GetFileMessage: returning GPG message from cache');
+			return $gpgMessage;
 		}
 	}
 
-	$messagePath = GetFileMessageCachePath($fileHash); # GetCache() should probably be used here instead #todo
-	WriteLog('GetFileMessage: $messagePath: ' . $messagePath);
-
-	if (-e $messagePath) {
-		WriteLog('GetFileMessage: (message) return GetFile(' . $fileHash . ')');
-		return GetFile($messagePath);
+	my $message = GetCache('message/' . $fileHash);
+	if ($message) {
+		WriteLog('GetFileMessage: returning message from cache');
+		return $message;
 	}
-	else { # file at $messagePath missing,
-		my $filePath = GetPathFromHash($fileHash);
-		WriteLog('GetFileMessage: $filePath = ' . $fileHash);
 
-		if (!(file_exists($filePath))) {
-			WriteLog('GetFileMessage: warning: $filePath was FALSE; caller = ' . join(',', caller));
-			$filePath = SqliteGetValue("SELECT file_name FROM item WHERE file_hash = '$fileHash'");
+	# Message not in cache, try getting from file
+	my $filePath = GetPathFromHash($fileHash);
+	WriteLog('GetFileMessage: $filePath = ' . $fileHash);
 
-			if (!file_exists($filePath)) { # ()
-				WriteLog('GetFileMessage: warning: #2 !-e $filePath = ' . $filePath);
-				return '';
-			} else {
-				WriteLog('GetFileMessage: return GetFile(' . $filePath . ')');
-				return GetFile($filePath);
-			}
+	if (!(file_exists($filePath))) {
+		WriteLog('GetFileMessage: warning: $filePath was FALSE; caller = ' . join(',', caller));
+		$filePath = SqliteGetValue("SELECT file_name FROM item WHERE file_hash = '$fileHash'");
 
+		if (!file_exists($filePath)) {
+			WriteLog('GetFileMessage: warning: #2 !-e $filePath = ' . $filePath);
 			return '';
 		} else {
 			WriteLog('GetFileMessage: return GetFile(' . $filePath . ')');
 			return GetFile($filePath);
 		}
+
+		return '';
+	} else {
+		WriteLog('GetFileMessage: return GetFile(' . $filePath . ')');
+		return GetFile($filePath);
 	}
 } # GetFileMessage()
 
@@ -400,7 +392,7 @@ sub PutFileMessage {
 		return ''; #todo
 	}
 
-	return PutFile(GetFileMessageCachePath($fileHash), $message);
+	return PutCache('message/' . $fileHash, $message);
 } # PutFileMessage()
 
 sub is_file {

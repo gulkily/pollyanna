@@ -239,20 +239,19 @@ sub MigrateCache { # $cacheKey ; migrates cache from filesystem to SQLite
 		WriteLog('MigrateCache: cache file does not exist: ' . $filePath);
 		return 0;
 	}
-
 	# Read content and migrate to SQLite
 	my $content = GetFile($filePath);
-	if ($content) {
-		if (PutCache($cacheKey, $content)) {
-			unlink($filePath);
-			WriteLog('MigrateCache: migrated ' . $cacheKey . ' from filesystem to SQLite');
-			return 1;
-		} else {
-			WriteLog('MigrateCache: failed to write to SQLite cache: ' . $cacheKey);
-			return 0;
-		}
-	} else {
+	if (!defined($content)) {
 		WriteLog('MigrateCache: failed to read cache file: ' . $filePath);
+		return 0;
+	}
+
+	if (PutCache($cacheKey, $content)) {
+		unlink($filePath);
+		WriteLog('MigrateCache: migrated ' . $cacheKey . ' from filesystem to SQLite');
+		return 1;
+	} else {
+		WriteLog('MigrateCache: failed to write to SQLite cache: ' . $cacheKey);
 		return 0;
 	}
 } # MigrateCache()
