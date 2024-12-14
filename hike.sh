@@ -208,7 +208,16 @@ fi
 
 if [ $1 = page ] # hike page
 	then
-		./config/template/perl/pages.pl -M $2 $3
+		shift # remove 'page' from args
+		while [ "$1" ]; do
+			if [ "$1" = "person" ]; then
+				./config/template/perl/pages.pl -M "$1" "$2"
+				shift 2
+			else
+				./config/template/perl/pages.pl -M "$1"
+				shift
+			fi
+		done
 fi
 
 if [ $1 = info ]
