@@ -580,6 +580,7 @@ sub SqliteQueryCachedShell { # $query, @queryParams ; performs sqlite query via 
 	WriteLog('SqliteQueryCachedShell: $cachePath = ' . $cachePath);
 	my $results;
 
+	#todo this should not be used (or should be rewritten) if cache-sqlite is enabled?
 	$results = GetCache("sqlite3_results/$cachePath");
 
 	if ($results) {
