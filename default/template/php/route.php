@@ -1417,7 +1417,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			// light mode #lightmode
 			WriteLog('route.php: $lightMode is true!');
 
-			$html = AddAttributeToTag($html, 'input name=btnLightOn', 'style', 'border: 5pt solid green; border-radius: 5pt;');
+			$activeButtonColor = 'green'; # 5pt solid green
+			$html = AddAttributeToTag($html, 'input name=btnLightOn', 'style', 'border: 5pt solid $activeButtonColor; border-radius: 5pt;');
 
 			// #lightmode options
 			$html = StripComments($html);
@@ -1454,7 +1455,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 			//#todo perhaps strip onclick, onkeypress, etc., and style
 		} else {
-			$html = AddAttributeToTag($html, 'input name=btnLightOff', 'style', 'border: 5pt solid green; border-radius: 5pt;');
+			$activeButtonColor = 'green'; # 5pt solid green
+			$html = AddAttributeToTag($html, 'input name=btnLightOff', 'style', 'border: 5pt solid $activeButtonColor; border-radius: 5pt;');
 		} // light mode
 
 		if (GetConfig('setting/admin/php/assist_show_advanced')) {
