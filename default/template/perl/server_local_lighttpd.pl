@@ -121,6 +121,9 @@ sub FindBinPath { # $binName, $configPath ; tries to figure out local path for a
 } # FindBinPath()
 
 sub StartLighttpd { # run command to start local lighttpd instance
+# sub StartServer {
+# sub StartLighttpdServer {
+# sub StartServerLighttpd {
 # `hike.sh start` `hike start` `hike.sh start` `hike start` `hike.sh start` `hike start` `hike.sh start` `hike start`
 # `hike.sh start`                                                                        `hike.sh start` `hike start`
 # `hike.sh start`              if you're looking for the `hike start command             `hike.sh start` `hike start`
