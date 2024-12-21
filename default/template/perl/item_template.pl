@@ -340,7 +340,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 		#cool
 	}
 	else {
-		WriteLog('GetItemTemplate: warning: -e $file{file_path} was FALSE; caller = ' . join(',', caller));
+		WriteLog('GetItemTemplate: warning: -e $file{file_path} was FALSE; $file{file_path} = "' . $file{'file_path'} . '"; caller = ' . join(',', caller));
 		$sourceFileHasGoneAway = 1;
 	}
 
