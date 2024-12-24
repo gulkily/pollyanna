@@ -2522,7 +2522,7 @@ sub GetItemDetokenedMessage { # $itemHash, $filePath ; retrieves item's message 
 			WriteLog('GetItemDetokenedMessage: $filePath = ' . $filePath);
 
 			if ($filePath && -e $filePath) {
-				WriteLog('GetItemDetokenedMessage = GetFile(' . $filePath . ');');
+				WriteLog('GetItemDetokenedMessage: setting $message = GetFile(' . $filePath . ');');
 				$message = GetFile($filePath);
 			} else {
 				WriteLog('GetItemDetokenedMessage: warning: no $filePath or file is missing');
