@@ -2491,48 +2491,27 @@ sub GetItemDetokenedMessage { # $itemHash, $filePath ; retrieves item's message 
 
 	my $message = '';
 	my $messageCacheName = GetMessageCacheName($itemHash);
+	$message = GetCache($messageCacheName);
 
-	if (!-e $messageCacheName) {
-		WriteLog('GetItemDetokenedMessage: warning: NO FILE: $messageCacheName = ' . $messageCacheName);
+	if (!$message) {
+		WriteLog('GetItemDetokenedMessage: warning: $message is FALSE; caller = ' . join(',', caller));
 
-	} else {
-		WriteLog('GetItemDetokenedMessage: $message = GetFile(' . $messageCacheName . ');');
-		$message = GetFile($messageCacheName);
-		if (!$message) {
-			WriteLog('GetItemDetokenedMessage: cache exists, but $message was missing');
+		my $filePath = shift;
+		if (!$filePath) {
+			$filePath = '';
+		}
 
-			my $filePath = shift;
-			if (!$filePath) {
-				$filePath = '';
-			}
-
-			WriteLog('GetItemDetokenedMessage: $filePath = ' . $filePath);
-
-			if (!$filePath) {
-				$filePath = GetPathFromHash($itemHash);
-				WriteLog('GetItemDetokenedMessage: missing $filePath, using GetPathFromHash(): ' . $filePath);
-			}
-
-			if (!$filePath || !-e $filePath) {
-				$filePath = DBGetItemAttributeValue($itemHash, 'file_path');
-				chomp $filePath;
-				WriteLog('GetItemDetokenedMessage: missing $filePath, using DBGetItemAttributeValue(): ' . $filePath);
-			}
-
-			WriteLog('GetItemDetokenedMessage: $filePath = ' . $filePath);
-
-			if ($filePath && -e $filePath) {
-				WriteLog('GetItemDetokenedMessage: setting $message = GetFile(' . $filePath . ');');
-				$message = GetFile($filePath);
-			} else {
-				WriteLog('GetItemDetokenedMessage: warning: no $filePath or file is missing');
-				$message = '';
-			}
+		if ($filePath && -e $filePath) {
+			WriteLog('GetItemDetokenedMessage: setting $message = GetFile(' . $filePath . ');');
+			$message = GetFile($filePath);
+		} else {
+			WriteLog('GetItemDetokenedMessage: warning: no $filePath or file is missing');
+			$message = '';
 		}
 	}
 
 	if (!$message) {
-		WriteLog('GetItemDetokenedMessage: warning: $message is false');
+		WriteLog('GetItemDetokenedMessage: warning: $message is FALSE');
 	}
 
 	return $message;

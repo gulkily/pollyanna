@@ -149,13 +149,7 @@ sub GetMessageCacheName { # $itemHash ; get name of cache for an item
 		return '';
 	}
 
-	state $myVersion = GetMyCacheVersion();
-	state $cacheDir = GetDir('cache');
-	my $messageCacheName = $cacheDir . '/' . $myVersion . '/message/' . $itemHash;
-
-	#if (!-e $messageCacheName) {
-	#	WriteLog('GetMessageCacheName: warning: NO FILE: $messageCacheName = ' . $messageCacheName . '; caller = ' . join(',', caller));
-	#}
+	my $messageCacheName = 'message/' . $itemHash;
 
 	return $messageCacheName;
 } # GetMessageCacheName()
