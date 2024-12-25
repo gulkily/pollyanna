@@ -55,8 +55,9 @@ sub GetPersonPage { # $personName
 	my $pendingKeyList = '';
 	{
 		#todo templatize query
+		#note: DISTINCT should not be necessary here, but in some cases it is because of duplicate entries in item_title
 		my $queryPendingKeys = "
-					SELECT
+					SELECT DISTINCT
         				file_hash,
         				add_timestamp,
         				author_key AS author_id,
