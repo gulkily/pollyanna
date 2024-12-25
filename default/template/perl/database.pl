@@ -1509,7 +1509,7 @@ sub DBAddItemAttribute { # $fileHash, $attribute, $value, $epoch, $source # add 
 		}
 	}
 
-	WriteLog("DBAddItemAttribute($fileHash, $attribute, $value, $epoch, $source)");
+	WriteLog("DBAddItemAttribute($fileHash, $attribute, $value, $epoch, $source); caller = " . join(',', caller));
 
 	if (!$query) {
 		$query = "REPLACE INTO item_attribute(file_hash, attribute, value, epoch, source) VALUES ";
