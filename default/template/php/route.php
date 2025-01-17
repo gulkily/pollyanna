@@ -9,13 +9,15 @@
 	This should be fixed at some point...
 */
 
-{
+include_once('utils.php');
+
+if (GetConfig('setting/admin/php/route_mosaic_compat')) {
 	// this fixes a crash bug in mosaic. it should not cause a problem anywhere else
 	// <_<     >_>      o_O      -_-     ^_^
 	header('Content-Type: text/html');
+} else {
+	header('Content-Type: text/html; charset=utf-8');
 }
-
-include_once('utils.php');
 
 #`find config/setting -type f | sort | xargs md5sum | md5sum | cut -d ' ' -f 1 > config/hash_setting`;
 
