@@ -227,7 +227,13 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			if (GetConfig('setting/admin/php/root_search_query_redirect')) {
 				# redirects ?q= to search engine of choice
 				$queryString = urlencode($_GET['q']);
-				Header('Location: http://www.google.com/search?q=' . $queryString);
+				$redirectUrl = GetConfig('setting/admin/php/root_search_query_redirect_url');
+				if (! $redirectUrl) {
+					$redirectUrl = 'http://www.google.com/search?q=';
+				}
+				$redirectUrl .= $queryString;
+				Header('Location: ' . $redirectUrl);
+				#Header('Location: http://www.google.com/search?q=' . $queryString);
 				exit;
 			}
 		}
