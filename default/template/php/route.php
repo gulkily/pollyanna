@@ -229,6 +229,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 				$queryString = urlencode($_GET['q']);
 				$redirectUrl = GetConfig('setting/admin/php/root_search_query_redirect_url');
 				if (! $redirectUrl) {
+					# default to google
 					$redirectUrl = 'http://www.google.com/search?q=';
 				}
 				$redirectUrl .= $queryString;
