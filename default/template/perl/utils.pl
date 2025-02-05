@@ -2135,7 +2135,8 @@ sub IsSaneFilename {
 
 	if ($fileName) {
 		if ($fileName =~ m/^([0-9a-zA-Z\/\._:\-]+)$/) {
-			return $1;
+			$fileName = $1;
+			return $fileName;
 		} else {
 			return 0;
 		}
