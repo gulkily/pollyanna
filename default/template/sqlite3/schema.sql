@@ -1,5 +1,3 @@
-PRAGMA journal_mode=WAL;
-
 CREATE TABLE item(
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 file_path UNIQUE,

@@ -27,7 +27,16 @@ sub GetWelcomePage {
 	}
 
 	if (GetConfig('admin/image/enable')) {
-		my $image = SqliteGetValue("SELECT file_hash FROM item_flat WHERE item_type = 'image' AND labels_list LIKE '%,welcome,%' AND item_score > 0 ORDER BY RANDOM() LIMIT 1");
+		my $image = SqliteGetValue("
+			SELECT file_hash
+			FROM item_flat
+			WHERE
+				item_type = 'image' AND
+				labels_list LIKE '%,welcome,%' AND
+				item_score > 0
+			ORDER BY RANDOM()
+			LIMIT 1
+		");
 		# select a random image with a score of greater than 0
 		if ($image) {
 			# add the image to the container

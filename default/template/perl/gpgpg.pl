@@ -150,7 +150,8 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETUR
 		}
 
 		#gpg_command_pipe
-		my $messageCachePath = GetFileMessageCachePath($filePath) . '_gpg';
+		#my $messageCachePath = GetFileMessageCachePath($filePath) . '_gpg';
+		my $messageCachePath = "$CACHEPATH/$cacheVersion/message/$fileHash" . '_gpg';
 		$gpgCommand .= "$filePath "; # file we're parsing
 		$gpgCommand .= ">$messageCachePath "; # capture stdout
 		$gpgCommand .= "2>$cachePathStderr/$fileHash.txt "; # capture stdeerr
@@ -158,11 +159,16 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETUR
 		system($gpgCommand);
 		#todo append command user can run to revalidate this
 		#AppendFile("$cachePathStderr/$fileHash.txt", "# " . ??? . "\n");
+
+		my $migrateCacheMessage = 'message/' . $fileHash . '_gpg';
+		my $migrateCacheGpgStderr = 'gpg_stderr/' . $fileHash . '.txt';
+		MigrateCache($migrateCacheMessage);
+		MigrateCache($migrateCacheGpgStderr);
 	}
 
 	my $gpgStderrOutput = GetCache("gpg_stderr/$fileHash.txt");
 	if (!defined($gpgStderrOutput)) {
-		WriteLog('GpgParse: warning: GetCache(gpg_stderr/$fileHash.txt) returned undefined!');
+		WriteLog('GpgParse: warning: GetCache(gpg_stderr/$fileHash.txt) (' . "gpg_stderr/$fileHash.txt" . ') returned undefined; caller: ' . join(',', caller));
 		$gpgStderrOutput = '';
 	}
 
@@ -199,7 +205,8 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETUR
 
 						DBAddItemAttribute($fileHash, 'gpg_alias', $aliasReturned);
 						#DBAddItemAttribute($fileHash, 'title', "$aliasReturned has registered (public key)"); #todo templatize
-						DBAddItemAttribute($fileHash, 'title', "Public Key for $aliasReturned"); #todo templatize
+						# DBAddItemAttribute($fileHash, 'title', "[Public Key for $aliasReturned]"); #todo templatize
+						# this is commented because it's already done in IndexTextFile()
 						# this is changed because anyone can publish a public key, and this does not necessarily map to "has registered"
 
 						if (GetConfig('admin/index/create_system_tags')) {

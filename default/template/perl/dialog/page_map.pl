@@ -13,7 +13,7 @@ sub GetPageMapDialog {
 	# sub DetDialogList {
 	# sub GetDialogMenu {
 	# sub GetPageMap {
-	WriteLog('GetPageMapDialog()');
+	WriteLog('GetPageMapDialog: caller = ' . join(' ', caller));
 
     if (!GetConfig('setting/admin/js/enable')) {
         #todo make it work without js

@@ -1,4 +1,5 @@
 server.modules += (
+	"mod_auth", # for auth
 	"mod_accesslog", # for access log writing
 	"mod_rewrite",   # for rewriting urls (including for php)
 #	"mod_redirect",   # for redirects (gif images)

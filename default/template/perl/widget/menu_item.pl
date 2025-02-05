@@ -123,7 +123,7 @@ sub GetMenuItem { # $address, $caption, $templateName; returns html snippet for 
 		#Threads(5) Tags(3) People(7) Labels(5)
 		# topics counter
 		#todo this should be a list instead of hard-coded (or automatically look for template/query/foo)
-		my $itemCount = SqliteGetCount($menuName);
+		my $itemCount = DBGetCount($menuName);
 		# my $threadCount = SqliteGetValue('thread_count');
 		if ($itemCount) {
 			$caption .= '(' . $itemCount . ')';

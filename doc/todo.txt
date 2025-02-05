@@ -1,3 +1,28 @@
+bug: cookieinfo dialog does not work right with cache-mysql theme
+
+==
+
+in render_field.pl
+	if item_type is image, and field is item_title
+		it should render a thumbnail, but this depends on item_type being one of the columns
+		need a way to either not require this, or to hide item_type in the listings while still including it in the queries?
+			maybe include it in default item_fields, but hide it in listings by default?
+==
+
+database test suite
+
+===
+
+perl -MDBD::mysql -e 'print "DBD::mysql is installed\n";'
+
+===
+
+when there's a new unapproved key
+	all approved users should be notified
+		so that they can approve
+
+===
+
 allow user to set contact links so that they can be contacted
 	phone umber and tel: link
 	signal
@@ -963,10 +988,6 @@ should be a "logged in as" dialog
 		location: operator_please.pl
 	is there a config/...x/enable ? set to 1, rebuild frontend
 	is there a config/.../x ? set to 1, rebuild frontend
-
-===
-
-hypercode theme tables with rounded corners should have table border=0 in the html
 
 ===
 
@@ -4097,11 +4118,6 @@ i think all item references should add that item as a child.
 
 ===
 
-need to restart server if php flag changes
-	applies to lighttpd local dev
-
-===
-
 Archive dialog should be moved to a separate module out of default/template/perl/get_read_page.pl
 	This is complicated by needing to check the file count,
 		which I guess can be passed in, as it's only true/false
@@ -4110,10 +4126,6 @@ Archive dialog should be moved to a separate module out of default/template/perl
 ===
 
 when running as user, `hike stop` should not try to kill other users' processes (like port 80)
-
-===
-
-`hike page ...` should support dialogs, such as authors
 
 ===
 

@@ -5,6 +5,16 @@ use warnings;
 use 5.010;
 use utf8;
 
+# depending on setting/admin/database_type, require_once() sqlite.pl or mysql.pl
+if (GetConfig('setting/admin/database_type') eq 'sqlite') {
+	WriteLog('database.pl: require_once(sqlite.pl)');
+	require_once('sqlite.pl');
+}
+elsif (GetConfig('setting/admin/database_type') eq 'mysql') {
+	WriteLog('database.pl: require_once(mysql.pl)');
+	require_once('mysql.pl');
+}
+
 sub DBMaxQueryLength { # Returns max number of characters to allow in sqlite query
 	return 1024;
 } # DBMaxQueryLength()
@@ -39,6 +49,28 @@ sub DBGetLabelsForItem { # $fileHash ; Returns all labels (weighed) for item
 
 	return @result;
 } # DBGetLabelsForItem()
+
+sub DBIndexTagsets {
+	my $suggestList = GetTemplate('tagset/suggest');
+	my @suggest = split("\n", $suggestList);
+
+	if (@suggest) {
+		for my $tagSet (@suggest) {
+			my $tagList = GetTemplate('tagset/' . $tagSet);
+			my @tag = split("\n", $tagList);
+
+			if (@tag) {
+				for my $t (@tag) {
+					my $query = "INSERT INTO label_parent(label, label_parent) VALUES(?, ?)";
+					my @queryParams;
+					push @queryParams, $t;
+					push @queryParams, $tagSet;
+					SqliteQuery($query, @queryParams);
+				}
+			}
+		}
+	}
+} # DBIndexTagsets()
 
 sub DBGetAuthorFriends { # Returns list of authors which $authorKey has tagged as friend
 # Looks for label = 'friend' and items that contain 'pubkey' tag
@@ -88,7 +120,7 @@ sub DBGetItemCount { # Returns item count.
 
 	my $itemCount;
 
-	$itemCount = SqliteGetCount('compost');
+	$itemCount = DBGetCount('compost');
 #	}
 	if ($itemCount) {
 		chomp($itemCount);
@@ -352,7 +384,7 @@ sub DBAddConfigValue { # $key, $value, $resetFlag, $sourceItem ; add value to co
 	}
 
 	if (!$query) {
-		$query = "INSERT OR REPLACE INTO config(key, value, reset_flag, file_hash) VALUES ";
+		$query = "REPLACE INTO config(key, value, reset_flag, file_hash) VALUES ";
 	} else {
 		$query .= ",";
 	}
@@ -467,7 +499,7 @@ sub DBAddItemPage { # $itemHash, $pageType, $pageParam ; adds an entry to item_p
 	WriteLog("DBAddItemPage($itemHash, $pageType, $pageParam)");
 
 	if (!$query) {
-		$query = "INSERT OR REPLACE INTO item_page(item_hash, page_name, page_param) VALUES ";
+		$query = "REPLACE INTO item_page(item_hash, page_name, page_param) VALUES ";
 	} else {
 		$query .= ',';
 	}
@@ -640,7 +672,7 @@ sub DBAddTask { # $taskType, $taskName, $taskParam, $touchTime # make new task
 	}
 
 	if (!$query) {
-		$query = "INSERT OR REPLACE INTO task(task_type, task_name, task_param, touch_time) VALUES ";
+		$query = "REPLACE INTO task(task_type, task_name, task_param, touch_time) VALUES ";
 	} else {
 		$query .= ',';
 	}
@@ -766,20 +798,20 @@ sub DBAddPageTouch { # $pageName, $pageParam; Adds or upgrades in priority an en
 	WriteLog("DBAddPageTouch($pageName, $pageParam)");
 
 	if (!$query) {
-		$query = "INSERT OR REPLACE INTO task(task_type, task_name, task_param, touch_time) VALUES ";
+		$query = "REPLACE INTO task(task_type, task_name, task_param, touch_time) VALUES ";
 	} else {
 		$query .= ',';
 	}
 
 	#todo
 	# https://stackoverflow.com/a/34939386/128947
-	# insert or replace into poet (_id,Name, count) values (
+	# REPLACE into poet (_id,Name, count) values (
 	# 	(select _id from poet where Name = "SearchName"),
 	# 	"SearchName",
 	# 	ifnull((select count from poet where Name = "SearchName"), 0) + 1)
 	#
 	# https://stackoverflow.com/a/3661644/128947
-	# INSERT OR REPLACE INTO observations
+	# REPLACE INTO observations
 	# VALUES (:src, :dest, :verb,
 	#   COALESCE(
 	#     (SELECT occurrences FROM observations
@@ -912,7 +944,7 @@ sub DBAddKeyAlias { # adds new author-alias record $key, $alias, $pubkeyFileHash
 	my $pubkeyFileHash = shift;
 
 	if (!$query) {
-		$query = "INSERT OR REPLACE INTO author_alias(key, alias, file_hash) VALUES ";
+		$query = "REPLACE INTO author_alias(key, alias, file_hash) VALUES ";
 	} else {
 		$query .= ",";
 	}
@@ -969,7 +1001,7 @@ sub DBAddItemParent { # $itemHash, $parentItemHash ; Add item parent record.
 	}
 
 	if (!$query) {
-		$query = "INSERT OR REPLACE INTO item_parent(item_hash, parent_hash) VALUES ";
+		$query = "REPLACE INTO item_parent(item_hash, parent_hash) VALUES ";
 	} else {
 		$query .= ",";
 	}
@@ -1089,7 +1121,7 @@ sub DBAddItem { # $filePath, $fileName, $authorKey, $fileHash, $itemType, $verif
 	WriteLog("DBAddItem($filePath, $fileName, $authorKey, $fileHash, $itemType, $verifyError);");
 
 	if (!$query) {
-		$query = "INSERT OR REPLACE INTO item(file_path, file_name, file_hash, item_type) VALUES ";
+		$query = "REPLACE INTO item(file_path, file_name, file_hash, item_type) VALUES ";
 	} else {
 		$query .= ",";
 	}
@@ -1203,7 +1235,7 @@ sub DBAddLocationRecord { # $itemHash, $latitude, $longitude, $signedBy ; Adds n
 	}
 
 	if (!$query) {
-		$query = "INSERT OR REPLACE INTO location(item_hash, latitude, longitude, author_key) VALUES ";
+		$query = "REPLACE INTO location(item_hash, latitude, longitude, author_key) VALUES ";
 	} else {
 		$query .= ",";
 	}
@@ -1290,7 +1322,7 @@ sub DBAddLabel { # $fileHash, $labelTime, $labelValue, $signedBy, $sourceHash ; 
 	WriteLog('DBAddLabel: ' . $fileHash . ', $labelTime=' . $labelTime . ', $labelValue=' . $labelValue . ', $signedBy = ' . $signedBy . ', $sourceHash = ' . $sourceHash . '; caller = ' . join(',', caller));
 
 	if (!$query) {
-		$query = "INSERT OR REPLACE INTO item_label(file_hash, label_time, label, author_key, source_hash) VALUES ";
+		$query = "REPLACE INTO item_label(file_hash, label_time, label, author_key, source_hash) VALUES ";
 	} else {
 		$query .= ",";
 	}
@@ -1477,10 +1509,10 @@ sub DBAddItemAttribute { # $fileHash, $attribute, $value, $epoch, $source # add 
 		}
 	}
 
-	WriteLog("DBAddItemAttribute($fileHash, $attribute, $value, $epoch, $source)");
+	WriteLog("DBAddItemAttribute($fileHash, $attribute, $value, $epoch, $source); caller = " . join(',', caller));
 
 	if (!$query) {
-		$query = "INSERT OR REPLACE INTO item_attribute(file_hash, attribute, value, epoch, source) VALUES ";
+		$query = "REPLACE INTO item_attribute(file_hash, attribute, value, epoch, source) VALUES ";
 	} else {
 		$query .= ",";
 	}
@@ -2091,3 +2123,6 @@ sub DBGetItemLabelTotals2 { # $fileHash ; get label counts for specified item, r
 	return \%labelTotals;
 } # DBGetItemLabelTotals2()
 
+sub DBGetCount {
+	return SqliteGetCount(@_);
+} # DBGetCount()

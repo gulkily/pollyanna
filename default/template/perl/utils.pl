@@ -55,7 +55,7 @@ my @modules = qw(
 	cache
 	html
 	file
-	sqlite
+	database
 	gpgpg
 	makepage
 	token_defs
@@ -157,7 +157,7 @@ sub require_once { # $path ; use require() unless already done
 		return '';
 	}
 
-	WriteLog('require_once(' . $module . ')');
+	WriteLog('require_once(' . $module . '); caller = ' . join(',', caller));
 
 	my $path = GetDir('config') . '/template/perl/' . $module;
 
@@ -978,10 +978,10 @@ sub GetTemplate { # $templateName ; returns specified template from template dir
 } # GetTemplate()
 
 sub BakePerlTemplate {
-	WriteLog('BakePerlTemplate()');
-
 	my $template = shift;
 	chomp $template;
+
+	#todo sanity checks
 
 	#$template = str_replace("GetDir('html')", "'" . GetDir('html') . "'", $template);
 	#$template = str_replace('\QGetDir(\'html\')\E', "'" . GetDir('html') . "'", $template);
@@ -990,7 +990,7 @@ sub BakePerlTemplate {
 	#$template =~ s/GetDir\('html'\)/GetDir('html')/e;
 
 	return $template;
-}
+} # BakePerlTemplate()
 
 sub GetList { # $listName ; reads a list from a template and returns it as an array
 # GetTagSet {
@@ -2506,48 +2506,27 @@ sub GetItemDetokenedMessage { # $itemHash, $filePath ; retrieves item's message 
 
 	my $message = '';
 	my $messageCacheName = GetMessageCacheName($itemHash);
+	$message = GetCache($messageCacheName);
 
-	if (!-e $messageCacheName) {
-		WriteLog('GetItemDetokenedMessage: warning: NO FILE: $messageCacheName = ' . $messageCacheName);
+	if (!$message) {
+		WriteLog('GetItemDetokenedMessage: warning: $message is FALSE; caller = ' . join(',', caller));
 
-	} else {
-		WriteLog('GetItemDetokenedMessage: $message = GetFile(' . $messageCacheName . ');');
-		$message = GetFile($messageCacheName);
-		if (!$message) {
-			WriteLog('GetItemDetokenedMessage: cache exists, but $message was missing');
+		my $filePath = shift;
+		if (!$filePath) {
+			$filePath = '';
+		}
 
-			my $filePath = shift;
-			if (!$filePath) {
-				$filePath = '';
-			}
-
-			WriteLog('GetItemDetokenedMessage: $filePath = ' . $filePath);
-
-			if (!$filePath) {
-				$filePath = GetPathFromHash($itemHash);
-				WriteLog('GetItemDetokenedMessage: missing $filePath, using GetPathFromHash(): ' . $filePath);
-			}
-
-			if (!$filePath || !-e $filePath) {
-				$filePath = DBGetItemAttributeValue($itemHash, 'file_path');
-				chomp $filePath;
-				WriteLog('GetItemDetokenedMessage: missing $filePath, using DBGetItemAttributeValue(): ' . $filePath);
-			}
-
-			WriteLog('GetItemDetokenedMessage: $filePath = ' . $filePath);
-
-			if ($filePath && -e $filePath) {
-				WriteLog('GetItemDetokenedMessage = GetFile(' . $filePath . ');');
-				$message = GetFile($filePath);
-			} else {
-				WriteLog('GetItemDetokenedMessage: warning: no $filePath or file is missing');
-				$message = '';
-			}
+		if ($filePath && -e $filePath) {
+			WriteLog('GetItemDetokenedMessage: setting $message = GetFile(' . $filePath . ');');
+			$message = GetFile($filePath);
+		} else {
+			WriteLog('GetItemDetokenedMessage: warning: no $filePath or file is missing');
+			$message = '';
 		}
 	}
 
 	if (!$message) {
-		WriteLog('GetItemDetokenedMessage: warning: $message is false');
+		WriteLog('GetItemDetokenedMessage: warning: $message is FALSE');
 	}
 
 	return $message;

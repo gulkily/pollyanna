@@ -22,27 +22,27 @@ sub GetStatsTable { # $templateName = 'html/stats.template' ; returns Stats dial
 
 	state $threadsCount;
 	if (!$threadsCount && (!defined($threadsCount))) {
-		$threadsCount = SqliteGetCount('threads');
+		$threadsCount = DBGetCount('threads');
 	}
 
 	state $imagesCount;
 	if (!$imagesCount && (!defined($imagesCount))) {
-		$imagesCount = SqliteGetCount('image');
+		$imagesCount = DBGetCount('image');
 	}
 
 	state $authorCount;
 	if (!$authorCount && (!defined($authorCount))) {
-		$authorCount = SqliteGetCount('authors');
+		$authorCount = DBGetCount('authors');
 	}
 
 	state $peopleCount;
 	if (!$peopleCount && (!defined($peopleCount))) {
-		$peopleCount = SqliteGetCount('people');
+		$peopleCount = DBGetCount('people');
 	}
 
 	state $itemsDeleted;
 	if (!$itemsDeleted && (!defined($itemsDeleted))) {
-		$itemsDeleted = SqliteGetCount('deleted');
+		$itemsDeleted = DBGetCount('deleted');
 	}
 
 	# my $adminId = GetRootAdminKey();
@@ -188,25 +188,25 @@ sub GetStatsTable { # $templateName = 'html/stats.template' ; returns Stats dial
 	}
 
 	#my $tagsTotal = DBGetTagCount();
-	my $tagsTotal = SqliteGetCount('tags');
+	my $tagsTotal = DBGetCount('tags');
 	if (!$tagsTotal) {
 		WriteLog('GetStatsTable: warning: $tagsTotal was FALSE');
 		$tagsTotal = 0;
 	}
 
-	my $labelsTotal = SqliteGetCount('labels');
+	my $labelsTotal = DBGetCount('labels');
 	if (!$labelsTotal) {
 		WriteLog('GetStatsTable: warning: $labelsTotal was FALSE');
 		$labelsTotal = 0;
 	}
 
 	#my $newLength = SqliteGetValue('SELECT COUNT(file_hash) FROM item_flat WHERE item_score >= 0');
-	my $newLength = SqliteGetCount('new');
+	my $newLength = DBGetCount('new');
 	if (!$newLength) {
 		$newLength = 0;
 	}
 
-	my $urlLength = SqliteGetCount('url');
+	my $urlLength = DBGetCount('url');
 
 	#todo optimize
 	#todo config/setting/admin/upload/allow_files

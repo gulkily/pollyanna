@@ -3,7 +3,7 @@
 # for items with urls, fetches linked pages and stores their titles
 
 require './utils.pl';
-require_once('sqlite.pl');
+require_once('database.pl');
 
 my @links = SqliteQueryHashRef("
 	SELECT

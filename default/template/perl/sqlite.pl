@@ -38,7 +38,6 @@ sub GetSqliteDbName { # $requestedName ; returns path to sqlite db
 	# sub GetDbFilename {
 	# sub GetDbPath {
 	# sub GetDbName {
-	# sub GetSqliteDbName {
 
 	my $requestedName = shift;
 
@@ -73,28 +72,6 @@ sub SqliteQuery2 {
 	return SqliteQuery($query, @params);
 } # SqliteQuery2()
 
-sub SqliteIndexTagsets {
-	my $suggestList = GetTemplate('tagset/suggest');
-	my @suggest = split("\n", $suggestList);
-
-	if (@suggest) {
-		for my $tagSet (@suggest) {
-			my $tagList = GetTemplate('tagset/' . $tagSet);
-			my @tag = split("\n", $tagList);
-
-			if (@tag) {
-				for my $t (@tag) {
-					my $query = "insert into label_parent(label, label_parent) values(?, ?)";
-					my @queryParams;
-					push @queryParams, $t;
-					push @queryParams, $tagSet;
-					SqliteQuery($query, @queryParams);
-				}
-			}
-		}
-	}
-} # SqliteIndexTagsets()
-
 sub SqliteMakeTables { # creates sqlite schema
 	# sub SqliteCreateTables {
 	# sub SqliteMakeTables {
@@ -112,7 +89,9 @@ sub SqliteMakeTables { # creates sqlite schema
 		return '';
 	}
 
-	my $schemaQueries = GetTemplate('sqlite3/schema.sql');
+	my $schemaQueries = '';
+	$schemaQueries .= "\n;\n" . GetTemplate('sqlite3/sane_defaults.sql');
+	$schemaQueries .= "\n;\n" . GetTemplate('sqlite3/schema.sql');
 	$schemaQueries .= "\n;\n" . GetTemplate('sqlite3/label_weight.sql');
 
 	$schemaQueries =~ s/^#.+$//mg; # remove sh-style comments (lines which begin with #)
@@ -121,7 +100,7 @@ sub SqliteMakeTables { # creates sqlite schema
 
 	SqliteQuery($schemaQueries);
 
-	SqliteIndexTagsets();
+	DBIndexTagsets(); #todo
 
 	my $SqliteDbName = GetSqliteDbName();
 
@@ -339,7 +318,7 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 	}
 
 	if ($query =~ m/^(.+)$/s) {
-#	if ($query =~ m/^([[:print:]\n\r\s]+)$/s) {
+	# if ($query =~ m/^([[:print:]\n\r\s]+)$/s) {
 		# this is only a basic sanity check, but it's better than nothing
 		$query = $1;
 		WriteLog('SqliteQuery: ' . $queryId . ' $query passed sanity check');
@@ -601,6 +580,7 @@ sub SqliteQueryCachedShell { # $query, @queryParams ; performs sqlite query via 
 	WriteLog('SqliteQueryCachedShell: $cachePath = ' . $cachePath);
 	my $results;
 
+	#todo this should not be used (or should be rewritten) if cache-sqlite is enabled?
 	$results = GetCache("sqlite3_results/$cachePath");
 
 	if ($results) {
@@ -610,7 +590,7 @@ sub SqliteQueryCachedShell { # $query, @queryParams ; performs sqlite query via 
 		my $results = SqliteQuery($query);
 		if ($results) {
 			WriteLog('SqliteQueryCachedShell: PutCache: length($results) ' . length($results));
-			PutCache('sqcs/'.$cachePath, $results);
+			PutCache('sqlite_cached/'.$cachePath, $results);
 		} else {
 			WriteLog('SqliteQueryCachedShell: warning: $results was FALSE; $query = ' . $query);
 			WriteLog('SqliteQueryCachedShell: warning: $results was FALSE; caller = ' . join(',', caller));

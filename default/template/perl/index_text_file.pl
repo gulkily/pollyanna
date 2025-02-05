@@ -1226,8 +1226,8 @@ sub IndexTextFile { # $file, \%flags | 'flush' ; indexes one text file into data
 			#if ($message || (defined($message) && $message == 0)) {
 			# cache the processed message text
 			my $messageCacheName = GetMessageCacheName($fileHash);
-			WriteLog('IndexTextFile: Calling PutFile(), $fileHash = ' . $fileHash . '; $messageCacheName = ' . $messageCacheName);
-			PutFile($messageCacheName, $message);
+			WriteLog('IndexTextFile: Calling PutCache(), $fileHash = ' . $fileHash . '; $messageCacheName = ' . $messageCacheName);
+			PutCache($messageCacheName, $message);
 		} else {
 			WriteLog('IndexTextFile: warning: I was going to save $messageCacheName, but $message is blank! $file = ' . $file . '; caller = ' . join(',', caller));
 			WriteLog('IndexTextFile: warning: I was going to save $messageCacheName, but $message is blank! $fileHash = ' . $fileHash);

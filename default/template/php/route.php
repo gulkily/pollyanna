@@ -9,13 +9,15 @@
 	This should be fixed at some point...
 */
 
-{
+include_once('utils.php');
+
+if (GetConfig('setting/admin/php/route_mosaic_compat')) {
 	// this fixes a crash bug in mosaic. it should not cause a problem anywhere else
 	// <_<     >_>      o_O      -_-     ^_^
 	header('Content-Type: text/html');
+} else {
+	header('Content-Type: text/html; charset=utf-8');
 }
-
-include_once('utils.php');
 
 #`find config/setting -type f | sort | xargs md5sum | md5sum | cut -d ' ' -f 1 > config/hash_setting`;
 
@@ -225,7 +227,13 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			if (GetConfig('setting/admin/php/root_search_query_redirect')) {
 				# redirects ?q= to search engine of choice
 				$queryString = urlencode($_GET['q']);
-				Header('Location: http://www.google.com/search?q=' . $queryString);
+				$redirectUrl = GetConfig('setting/admin/php/root_search_query_redirect_url');
+				if (! $redirectUrl) {
+					$redirectUrl = 'http://www.google.com/search?q=';
+				}
+				$redirectUrl .= $queryString;
+				Header('Location: ' . $redirectUrl);
+				#Header('Location: http://www.google.com/search?q=' . $queryString);
 				exit;
 			}
 		}
@@ -240,7 +248,6 @@ if (GetConfig('setting/admin/php/route_enable')) {
 				# /* my */ $fileName = StoreNewComment($getFp, 0, 1);
 			}
 		}
-
 
 		if (isset($_GET['path'])) {
 			WriteLog('route.php: cool: $_GET[path] confirmed!');
@@ -835,7 +842,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						# cookie_notice {
 						$currentCookie = ''; #my
 
-						WriteLog('route.php: route_show_cookie = TRUE');
+						WriteLog('route.php: route_show_cookie = TRUE; $cookie = ' . $cookie);
 
 						if (isset($cookie) && $cookie) {
 							$currentCookie = htmlspecialchars($cookie);
@@ -844,9 +851,11 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						}
 
 						$cookieLookup = '';
-						$cookieAlias = 'Guest';
-						if ($cookieAlias) {
-							$cookieAlias = GetAlias($cookie);
+						$cookieAlias = GetAlias($cookie);
+
+						WriteLog('route.php: $cookieAlias = ' . $cookieAlias);
+
+						if ($cookie && $cookieAlias) {
 							$cookieLookup .= '<br>Alias: ' . $cookieAlias;
 							$cookieLookup .= '<br>Score: ' . GetScore($cookie);
 							$cookieLookup .= '<br>Avatar: ' . GetAvatar($cookie, $cookieAlias);
@@ -860,7 +869,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 							#todo we shouldn't have to AddAttributeToTag() manually here
 							$cookieNotice = AddAttributeToTag(GetDialogX($cookieNotice, 'CookieInfo', '', '', ''), 'table', 'id', 'CookieInfo');
-						} else {
+						}
+						else {
 							$cookieNotice = '
 								You are not signed in. <br>
 								<br>
@@ -945,14 +955,6 @@ if (GetConfig('setting/admin/php/route_enable')) {
 						} else {
 							$html = str_ireplace('</body>', $printedNotice . '</body>', $html);
 						}
-
-						// if (GetConfig('debug')) {
-						// # for debug mode, print cached page notice at the top
-						// $html = str_ireplace('</body>', $printedNotice . '</body>', $html);
-						// #$html = $htmlCacheNotice . $html; #todo ...
-						// } else {
-						// $html = str_ireplace('</body>', $printedNotice . '</body>', $html);
-						// }
 					} // if (route_notify_printed_time)
 				} # $path
 				else {
@@ -1349,7 +1351,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							} else {
 								WriteLog('route.php: cookie_inbox: warning: $html lacks placeholder');
 							}
-						} else {
+						} # if (file_exists($cookieInboxDialogPath))
+						else {
 							# this means there are no messages waiting for the user
 							# shadowme (developed for shadowme project, thanks william)
 							WriteLog('route.php: cookie_inbox: file_exists($cookieInboxDialogPath) is FALSE');
@@ -1357,16 +1360,19 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							$cookieInboxDialog = AddAttributeToTag($cookieInboxDialog, 'table', 'id', 'Inbox');
 							$html = str_ireplace('<span id=messages></span>', '<span id=messages>' . $cookieInboxDialog . '</span>', $html);
 						}
-					} else {
+					} # if (IsFingerprint($_COOKIE['cookie']))
+					else {
 						WriteLog('route.php: cookie_inbox: warning: cookie did not pass fingerprint sanity check');
 					}
-				} else {
+				} # if (isset($_COOKIE['cookie']) && $_COOKIE['cookie'])
+				else {
 					WriteLog('route.php: cookie_inbox: user has no cookie');
 				}
-			} else {
+			} # if (index($html, '</body>') != -1)
+			else {
 				WriteLog('route.php: cookie_inbox: warning: could not find closing body tag');
 			}
-		}
+		} # if (GetConfig('setting/admin/php/cookie_inbox'))
 
 		if ($path == '/bookmark.html') { #bookmarklets replace server name with host name
 			$hostName = 'localhost:2784';
@@ -1419,7 +1425,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 			// light mode #lightmode
 			WriteLog('route.php: $lightMode is true!');
 
-			$html = AddAttributeToTag($html, 'input name=btnLightOn', 'style', 'border: 5pt solid green; border-radius: 5pt;');
+			$activeButtonColor = 'green'; # 5pt solid green
+			$html = AddAttributeToTag($html, 'input name=btnLightOn', 'style', 'border: 5pt solid $activeButtonColor; border-radius: 5pt;');
 
 			// #lightmode options
 			$html = StripComments($html);
@@ -1456,7 +1463,8 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 			//#todo perhaps strip onclick, onkeypress, etc., and style
 		} else {
-			$html = AddAttributeToTag($html, 'input name=btnLightOff', 'style', 'border: 5pt solid green; border-radius: 5pt;');
+			$activeButtonColor = 'green'; # 5pt solid green
+			$html = AddAttributeToTag($html, 'input name=btnLightOff', 'style', 'border: 5pt solid $activeButtonColor; border-radius: 5pt;');
 		} // light mode
 
 		if (GetConfig('setting/admin/php/assist_show_advanced')) {

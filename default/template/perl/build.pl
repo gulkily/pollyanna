@@ -55,8 +55,18 @@ require('./config/template/perl/utils.pl');
 #	system('rm cache/*/indexed/*');
 #}
 
-BuildMessage "SqliteMakeTables()...";
-SqliteMakeTables();
+require_once('database.pl');
+# depending on the setting/admin/database_type, use ...MakeTables()
+if (GetConfig('setting/admin/database_type') eq 'sqlite') {
+	BuildMessage "SqliteMakeTables()...";
+	SqliteMakeTables();
+} elsif (GetConfig('setting/admin/database_type') eq 'mysql') {
+	BuildMessage "MysqlConnect()...";
+	MysqlConnect();
+
+	BuildMessage "MysqlMakeTables()...";
+	MysqlMakeTables();
+}
 
 my $SCRIPTDIR = cwd();
 my $HTMLDIR = $SCRIPTDIR . '/html';
@@ -106,11 +116,14 @@ if (GetConfig('setting/admin/ssi/enable') && GetConfig('setting/admin/php/enable
 	BuildMessage('build.pl: warning: ssi/enable and php/enable are both true');
 }
 
+# these will be pre-written to config/
 my @modules = qw(
 	string.pl
 	cache.pl
 	html.pl
 	file.pl
+	database.pl
+	mysql.pl
 	sqlite.pl
 	gpgpg.pl
 	makepage.pl

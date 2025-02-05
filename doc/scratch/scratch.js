@@ -1,4 +1,110 @@
+// == begin fresh.js
+var freshClient;
+var pageWasDeleted = false;
 
+function FreshCallback() { // callback for requesting HEAD for current page
+	if (!document.getElementById) return true;
+
+	if (this.readyState === this.HEADERS_RECEIVED || this.status === 200) {
+		var eTag = freshClient.getResponseHeader("ETag") || window.myOwnETag || '';
+
+		if (eTag && window.myOwnETag && eTag !== window.myOwnETag) {
+			if (eTag !== window.lastEtag) {
+				var freshUserWantsReload = 0;  // templated
+
+				if (freshUserWantsReload) {
+					location.reload();
+				} else {
+					window.lastEtag = eTag;
+					updateAriaAlert('Page updated ');
+					if (document.title.substring(0, 2) !== '! ') {
+						document.title = '! ' + document.title;
+					}
+				}
+			}
+		} else if (!window.myOwnETag) {
+			window.myOwnETag = eTag;
+		}
+
+		if (pageWasDeleted) {
+			pageWasDeleted = false;
+			updateAriaAlert('Page is available again');
+			if (document.title.substring(0, 2) === '! ') {
+				document.title = document.title.substring(2);
+			}
+		}
+	} else if (this.status === 404) {
+		pageWasDeleted = true;
+		updateAriaAlert('Page was deleted from server');
+	} else {
+		console.log('Unexpected status:', this.status);
+	}
+
+	if (window.freshTimeoutId) {
+		clearTimeout(window.freshTimeoutId);
+	}
+	window.freshTimeoutId = setTimeout(CheckIfFresh, 15000);
+
+	return true;
+}
+
+function updateAriaAlert(message) {
+	var ariaAlert = document.getElementById('ariaAlert');
+	if (!ariaAlert) {
+		ariaAlert = document.createElement('p');
+		ariaAlert.setAttribute('role', 'alert');
+		ariaAlert.setAttribute('id', 'ariaAlert');
+		ariaAlert.style.zIndex = '1337';
+		document.body.insertBefore(ariaAlert, document.body.firstChild);
+	}
+	ariaAlert.textContent = message + new Date().toLocaleTimeString();
+}
+
+function CheckIfFresh() {
+	var now = new Date().getTime();
+	if (window.freshCheckRecent && now < window.freshCheckRecent + 3000) {
+		return true;
+	}
+	window.freshCheckRecent = now;
+
+	var xhr = new XMLHttpRequest();
+	if (xhr) {
+		var mypath = window.mypath || window.location.toString();
+		if (mypath.indexOf('?message=') !== -1) {
+			mypath = mypath.substr(0, mypath.indexOf('?message='));
+		}
+
+		freshClient = xhr;
+		freshClient.open("HEAD", mypath, true);
+		freshClient.setRequestHeader('Cache-Control', 'no-cache');
+		freshClient.onreadystatechange = FreshCallback;
+		freshClient.onerror = function() {
+			console.error('XHR error');
+		};
+		freshClient.ontimeout = function() {
+			console.error('XHR timeout');
+		};
+		freshClient.timeout = 5000;
+		freshClient.send();
+	}
+
+	return true;
+}
+
+if (window.EventLoop) {
+	if (!window.GetPrefs) {
+		window.eventLoopEnabled = 1;
+		window.eventLoopFresh = 1;
+	}
+	EventLoop();
+} else {
+	CheckIfFresh();
+}
+
+// == end fresh.js
+
+
+===
 		window.injectMouseX = mouseX;
 		window.injectMouseY = mouseY;
 ===

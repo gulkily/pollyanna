@@ -149,13 +149,7 @@ sub GetMessageCacheName { # $itemHash ; get name of cache for an item
 		return '';
 	}
 
-	state $myVersion = GetMyCacheVersion();
-	state $cacheDir = GetDir('cache');
-	my $messageCacheName = $cacheDir . '/' . $myVersion . '/message/' . $itemHash;
-
-	#if (!-e $messageCacheName) {
-	#	WriteLog('GetMessageCacheName: warning: NO FILE: $messageCacheName = ' . $messageCacheName . '; caller = ' . join(',', caller));
-	#}
+	my $messageCacheName = 'message/' . $itemHash;
 
 	return $messageCacheName;
 } # GetMessageCacheName()
@@ -200,5 +194,10 @@ sub ExpireAvatarCache { # $fingerprint ; removes all avatar caches
 #	UnlinkCache('avatar_color/' . $themeName . '/' . $key);
 #	UnlinkCache('avatar_plain/' . $themeName . '/' . $key);
 } # ExpireAvatarCache()
+
+sub MigrateCache { # $cacheKey ; no-op for disk-based cache
+	return;
+} # MigrateCache()
+
 
 1;
