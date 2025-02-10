@@ -396,9 +396,9 @@ sub PutFileMessage {
 } # PutFileMessage()
 
 sub is_file {
-    my ($filename) = @_;
+	my ($filename) = @_;
 
-    return -f $filename;
+	return -f $filename;
 } # is_file()
 
 sub GetFileSize { # $file ; return file size
