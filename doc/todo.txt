@@ -1,13 +1,17 @@
+inbox for should be regenerated in a timely manner, otherwise the no-js timestamps are incorrect
+
+===
+
 bug: cookieinfo dialog does not work right with cache-mysql theme
 
-==
+===
 
 in render_field.pl
 	if item_type is image, and field is item_title
 		it should render a thumbnail, but this depends on item_type being one of the columns
 		need a way to either not require this, or to hide item_type in the listings while still including it in the queries?
 			maybe include it in default item_fields, but hide it in listings by default?
-==
+===
 
 database test suite
 
