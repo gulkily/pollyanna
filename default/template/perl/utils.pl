@@ -2462,10 +2462,10 @@ sub file_exists { # $file ; port of php file_exists()
 	}
 	if (-e $file && -f $file && !-d $file) {
 		WriteLog('file_exists: $file = ' . $file . '; TRUE');
-		return 1;
+		return 1; # TRUE
 	} else {
 		WriteLog('file_exists: $file = ' . $file . '; TRUE');
-		return 0;
+		return 0; # FALSE
 	}
 	WriteLog('file_exists: warning: unreachable reached; caller = ' . join(',', caller));
 	return 0; #unreachable code
