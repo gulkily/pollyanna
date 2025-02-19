@@ -33,10 +33,12 @@ function GetSessionFingerprint () { # returns logged in user's fingerprint based
 $responseSignedIn = 0;
 
 if (isset($_GET['btnSignOut'])) {
+	WriteLog('cookie.php: btnSignOut activated');
 	$_GET['request'] = 'Sign Out';
 }
 
 if (isset($_GET['btnBegin'])) {
+	WriteLog('cookie.php: btnBegin activated');
 	$_GET['request'] = 'Begin';
 }
 
