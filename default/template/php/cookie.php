@@ -152,8 +152,9 @@ else {
 		WriteLog('cookie.php: test cookie not found');
 		if (isset($_GET['request']) && ($_GET['request'] == 'Begin')) { // ATTENTION: $_GET['request'] may be set by code above
 			setcookie2('test', '1');
-			header('Location: /profile.html?' . time());
-			#todo this should use RedirectWithResponse() just like everything else, otherwise it interferes with debug mode
+			#header('Location: /profile.html?' . time()); # this was here before, not sure if using RedirectWithResponse() could cause a bug?
+			RedirectWithResponse('/profile.html', 'Success! You have signed in.');
+			#previously: #todo this should use RedirectWithResponse() just like everything else, otherwise it interferes with debug mode
 		}
 	}
 } # not btnSignout
