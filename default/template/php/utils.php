@@ -1175,7 +1175,11 @@ function IsItem ($string) { # $string ; returns hash if parameter is in item has
 } # IsItem()
 
 function setcookie2 ($key, $value, $updateCurrent = 0) { // sets cookie with ie3 compatibility
-	WriteLog('setcookie2(' . $key . ',' . $value . ')');
+	if (GetConfig('debug')) {
+		$dbt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS,2);
+		$caller = isset($dbt[1]['function']) ? $dbt[1]['function'] : 'caller_missing';
+		WriteLog('setcookie2(' . $key . ',' . $value . '); caller = ' . $caller);
+	}
 
 	if (index($key, "\n") != -1) {
 		WriteLog('setcookie2: warning: $key contains \n character');
