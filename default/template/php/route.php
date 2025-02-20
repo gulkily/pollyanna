@@ -1674,6 +1674,9 @@ if (GetConfig('setting/admin/php/route_enable')) {
 		////////////////////////////
 		////////////////////////////
 		////////////////////////////
+	} # if ($_GET)
+	else {
+		#todo something here if it's not a GET request?
 	}
 } # if (GetConfig('setting/admin/php/route_enable'))
 else {
