@@ -69,11 +69,48 @@ if (GetConfig('setting/admin/database_type') eq 'sqlite') {
 }
 
 my $SCRIPTDIR = cwd();
+# sanity check $SCRIPTDIR for bad characters, then set $SCRIPTDIR to a safe value
+if ($SCRIPTDIR =~ m/^([a-zA-Z0-9\/\.\-])+$/) {
+	$SCRIPTDIR = $1;
+	# sanity check passed
+} else {
+	die "Error: $SCRIPTDIR failed sanity check";
+}
+
 my $HTMLDIR = $SCRIPTDIR . '/html';
+# sanity check $HTMLDIR for bad characters, then set $HTMLDIR to a safe value
+if ($HTMLDIR =~ m/^([a-zA-Z0-9\/\.\-])+$/) {
+	$HTMLDIR = $1;
+	# sanity check passed
+} else {
+	die "Error: $HTMLDIR failed sanity check";
+}
+
 my $TXTDIR = $HTMLDIR . '/txt';
-my $IMAGEDIR = $HTMLDIR . '/txt';
+# sanity check $TXTDIR for bad characters, then set $TXTDIR to a safe value
+if ($TXTDIR =~ m/^([a-zA-Z0-9\/\.\-])+$/) {
+	$TXTDIR = $1;
+	# sanity check passed
+} else {
+	die "Error: $TXTDIR failed sanity check";
+}
+
+my $IMAGEDIR = $HTMLDIR . '/image';
+# sanity check $IMAGEDIR for bad characters, then set $IMAGEDIR to a safe value
+if ($IMAGEDIR =~ m/^([a-zA-Z0-9\/\.\-])+$/) {
+	$IMAGEDIR = $1;
+	# sanity check passed
+} else {
+	die "Error: $IMAGEDIR failed sanity check";
+}
 
 BuildMessage "Ensure there's $HTMLDIR and something inside...";
+if (!-e $HTMLDIR) {
+	# create $HTMLDIR directory if it doesn't exist
+	mkdir($HTMLDIR);
+}
+
+BuildMessage "Ensure there's $TXTDIR and something inside...";
 if (!-e $TXTDIR) {
 	# create $TXTDIR directory if it doesn't exist
 	mkdir($TXTDIR);
