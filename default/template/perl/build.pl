@@ -34,27 +34,6 @@ if (!-e './config/template/perl/config.pl') {
 BuildMessage "Require ./utils.pl...";
 require('./config/template/perl/utils.pl');
 
-#EnsureDirsThatShouldExist();
-
-#CheckForInstalledVersionChange();
-
-#CheckForRootAdminChange();
-
-
-#{ # build the sqlite db if not available
-	# BuildMessage "SqliteUnlinkDB()...";
-	# SqliteUnlinkDb();
-	#
-	#BuildMessage "SqliteConnect()...";
-	#SqliteConnect();
-
-	#BuildMessage "SqliteMakeTables()...";
-	#SqliteMakeTables();
-#
-#	BuildMessage "Remove cache/indexed/*";
-#	system('rm cache/*/indexed/*');
-#}
-
 require_once('database.pl');
 # depending on the setting/admin/database_type, use ...MakeTables()
 if (GetConfig('setting/admin/database_type') eq 'sqlite') {
@@ -126,9 +105,6 @@ if (!-e $IMAGEDIR) {
 }
 
 BuildMessage "Looking for files...";
-
-#BuildMessage "MakeChainIndex()...";
-#MakeChainIndex();
 
 BuildMessage "DBAddPageTouch('summary')...";
 DBAddPageTouch('system');
