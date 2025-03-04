@@ -87,6 +87,14 @@ sub ensure_module { # $path ; ensures module is available under config/
 		WriteLog('ensure_module: warning: module was FALSE, returning; caller = ' . join(',', caller));
 		return 0;
 	}
+	#sanity check $module by matching it against a whitelist and untainting it
+	if ($module =~ m/^([a-zA-Z0-9_\/]+\.pl)$/) {
+		#sanity check passed
+		$module = $1;
+	} else {
+		WriteLog('ensure_module: warning: sanity check failed; $module = ' . $module . '; caller = ' . join(',', caller));
+		return '';
+	}
 
 	WriteLog('ensure_module(' . $module . '); caller = ' . join(',', caller));
 
