@@ -1,6 +1,7 @@
 SELECT
 	author_key,
 	author_key author_id,
+	'' AS cart,
 	author_alias,
 	author_seen,
 	item_count,
