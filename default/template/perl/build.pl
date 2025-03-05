@@ -49,7 +49,7 @@ if (GetConfig('setting/admin/database_type') eq 'sqlite') {
 
 my $SCRIPTDIR = cwd();
 # sanity check $SCRIPTDIR for bad characters, then set $SCRIPTDIR to a safe value
-if ($SCRIPTDIR =~ m/^([a-zA-Z0-9\/\.\-])+$/) {
+if ($SCRIPTDIR =~ m/^([a-zA-Z0-9\/\.\-_])+$/) {
 	$SCRIPTDIR = $1;
 	# sanity check passed
 } else {
