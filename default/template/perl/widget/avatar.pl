@@ -113,7 +113,7 @@ sub GetAvatar { # $authorKey ; returns HTML avatar based on author key, using av
 	WriteLog("GetAvatar($authorKey) ; caller = " . join(',', caller));
 
 	if ($avatarMemo{$authorKey}) {
-		WriteLog('GetAvatar: found in %avatarMemo');
+		WriteLog('GetAvatar: returning, found in %avatarMemo');
 		return $avatarMemo{$authorKey};
 	}
 	my $avCacheFile = GetCache("$avatarCachePrefix/$authorKey");
@@ -252,6 +252,8 @@ sub GetAvatar { # $authorKey ; returns HTML avatar based on author key, using av
 			$avatar = '(' . $authorKey . ')';
 		}
 	}
+
+	WriteLog('GetAvatar: returning $avatar = ' . $avatar);
 
 	return $avatar;
 } # GetAvatar()

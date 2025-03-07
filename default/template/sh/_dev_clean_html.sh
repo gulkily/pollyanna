@@ -13,10 +13,10 @@
 echo _dev_clean_html.sh
 
 echo "touch -t 197001010000 html/*.html html/*/*.html html/*/*/*.html"
-touch -t 197001010000 html/*.html html/*/*.html html/*/*/*.html
+touch -t 197001010000 html/*.html html/*/*.html html/*/*/*.html 2>/dev/null
 
 echo "touch -t 197001010000 html/*.js html/*/*.js html/*/*/*.js"
-touch -t 197001010000 html/*.js html/*/*.js html/*/*/*.js
+touch -t 197001010000 html/*.js html/*/*.js html/*/*/*.js 2>/dev/null
 
 echo find html -iname '*.html' -type f -exec rm {} \;
 find html -iname '*.html' -type f -exec rm {} \;

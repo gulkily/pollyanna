@@ -49,8 +49,17 @@ sub FindBinPath { # $binName, $configPath ; tries to figure out local path for a
 
 	# READ ARGUMENTS #####
 	my $binName = shift;
+	# verify $binName was specified (and not empty)
+	if (!$binName) {
+		WriteLog('FindBinPath: warning: $binName was not specified; caller = ' . join(',', caller));
+		return '';
+	}
 	chomp $binName;
 	my $configPath = shift;
+	# if $configPath is not specified, set to empty string
+	if (!$configPath) {
+		$configPath = '';
+	}
 	chomp $configPath;
 
 	# INITIALIZE RETURN VALUE #####

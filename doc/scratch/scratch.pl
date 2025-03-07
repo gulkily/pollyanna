@@ -1,3 +1,29 @@
+# this should probably go into file.pl, but it already exists in utils.pl?
+sub GetFile { # $file ; returns contents of file
+	my $file = shift;
+	if (!$file) {
+		WriteLog('GetFile: warning: $file is FALSE');
+		return '';
+	}
+
+	WriteLog('GetFile: attempting to open file: ' . $file);
+
+	if (open(my $fh, '<:encoding(UTF-8)', $file)) {
+		binmode($fh, ':encoding(UTF-8)');  # Ensure UTF-8 encoding
+		local $/;
+		my $content = <$fh>;
+		close($fh);
+		WriteLog('GetFile: successfully read file: ' . $file);
+		return $content;
+	} else {
+		WriteLog('GetFile: warning: failed to open file: ' . $file);
+		return '';
+	}
+} # GetFile()
+
+
+
+
 
 #gpg --import someone.asc
 #gpg --list-keys  # Find the KEYID

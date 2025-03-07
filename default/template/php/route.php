@@ -209,12 +209,6 @@ if (GetConfig('setting/admin/php/route_enable')) {
 	$stalePageNotice = 0;
 	#$html = '';
 
-	$cookie = '';
-	if (GetConfig('setting/admin/php/route_cookie_enable')) {
-		WriteLog('route.php: including cookie.php');
-		include_once('cookie.php');
-	}
-
 	if (GetConfig('setting/admin/php/debug_do_not_use_cache')) {
 		$cacheOverrideFlag = 1;
 	}
@@ -229,6 +223,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 				$queryString = urlencode($_GET['q']);
 				$redirectUrl = GetConfig('setting/admin/php/root_search_query_redirect_url');
 				if (! $redirectUrl) {
+					# default to google
 					$redirectUrl = 'http://www.google.com/search?q=';
 				}
 				$redirectUrl .= $queryString;
@@ -298,6 +293,12 @@ if (GetConfig('setting/admin/php/route_enable')) {
 				# SEE EXPLANATION ABOVE
 			} else {
 				WriteLog('route.php: cool: did NOT find question mark in $path');
+			}
+
+			$cookie = '';
+			if (GetConfig('setting/admin/php/route_cookie_enable')) {
+				WriteLog('route.php: including cookie.php');
+				include_once('cookie.php');
 			}
 
 			if (GetConfig('setting/admin/php/url_alias_friendly')) {
@@ -1673,6 +1674,9 @@ if (GetConfig('setting/admin/php/route_enable')) {
 		////////////////////////////
 		////////////////////////////
 		////////////////////////////
+	} # if ($_GET)
+	else {
+		#todo something here if it's not a GET request?
 	}
 } # if (GetConfig('setting/admin/php/route_enable'))
 else {

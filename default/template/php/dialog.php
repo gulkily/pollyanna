@@ -111,14 +111,14 @@ function GetDialogX ( # body, title, headings, status, menu
 		$windowTemplate = str_replace('$contentColumnCount', '', $windowTemplate);
 	}
 
-	if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
-		/* my */ $modernMode = 0;
-		if (in_array('modern', GetActiveThemes())) {
-			#todo this is a hard-coded hack, pls fix #hack #fixme
-			#todo this should be memoized, and the memo clearing should be linked to GetActiveThemes()
-			$modernMode = 1;
-		}
+	/* my */ $modernMode = 0;
+	if (in_array('modern', GetActiveThemes())) {
+		#todo this is a hard-coded hack, pls fix #hack #fixme
+		#todo this should be memoized, and the memo clearing should be linked to GetActiveThemes()
+		$modernMode = 1;
+	}
 
+	if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
 		#todo adapt to modern theme also
 
 		#$windowTemplate = AddAttributeToTag($windowTemplate, 'table', 'onmousedown', 'this.style.zIndex = ++window.draggingZ;');
