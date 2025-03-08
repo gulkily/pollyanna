@@ -714,22 +714,37 @@ sub GetFileHash { # $fileName ; returns hash of file contents
 		$fileName = IsSaneFilename($fileName);
 
 		my $fileHash = GetSHA1(GetFile($fileName));
-		my $sha1SumCommand = GetConfig('setting/admin/sha1sum_command');
-		if ($sha1SumCommand = IsSaneFilename($sha1SumCommand)) {
-			my $fileHash2 = trim(`$sha1SumCommand "$fileName" | cut -d ' ' -f 1`);
+        if (GetConfig('setting/admin/sha1sum_command')) {
+            my $sha1SumCommand = GetConfig('setting/admin/sha1sum_command');
 
-			if (!$fileHash2) {
-				WriteLog('GetFileHash: warning: $fileHash2 is FALSE');
-				$fileHash2 = '';
-			}
+            my $fileHash2;
+            eval {
+                $fileHash2 = trim(`$sha1SumCommand "$fileName" | cut -d ' ' -f 1`);
+            };
 
-			if ($fileHash ne $fileHash2) {
-				WriteLog('GetFileHash: $fileHash = ' . $fileHash);
-				WriteLog('GetFileHash: $fileHash2 = ' . $fileHash2);
-				WriteLog('GetFileHash: warning: $fileHash ne $fileHash2 for $fileName = ' . $fileName);
-				$fileHash = $fileHash2;
-			}
-		}
+            if ($@) {
+                WriteLog("GetFileHash: error executing command '$sha1SumCommand': $@");
+                $fileHash2 = '';  # Set to an empty string or handle as needed
+            }
+
+            if (!$fileHash2) {
+                WriteLog('GetFileHash: warning: $fileHash2 is FALSE');
+                $fileHash2 = '';  # Ensure it is explicitly set
+            }
+
+            if ($fileHash ne $fileHash2) {
+                WriteLog('GetFileHash: $fileHash = ' . ($fileHash ? $fileHash : 'FALSE'));
+                WriteLog('GetFileHash: $fileHash2 = ' . ($fileHash2 ? $fileHash2 : 'FALSE'));
+                WriteLog('GetFileHash: warning: $fileHash ne $fileHash2 for $fileName = ' . $fileName);
+                if ($fileHash && !$fileHash2) {
+                    # leave it alone
+                }
+                if (!$fileHash && $fileHash2) {
+                    # $fileHash is missing, but $fileHash2 is present, so use $fileHash2
+                    $fileHash = $fileHash2;
+                }
+            }
+        }
 
 		$memoFileHash{$fileName} = $fileHash;
 		return $memoFileHash{$fileName};
@@ -1049,7 +1064,7 @@ sub RenameFile { # $filePrevious, $fileNew, $hashNew ; renames file with a bit o
 			#todo log and sanity check on $renameResult
 		}
 	} else {
-		WriteLog('RenameFile: warning: $hashPrevious was FALSE');
+		WriteLog('RenameFile: $hashPrevious was FALSE; caller = ' . join(',', caller));
 		#return '';
 	}
 
