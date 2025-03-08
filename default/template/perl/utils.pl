@@ -2516,6 +2516,8 @@ sub GetItemDetokenedMessage { # $itemHash, $filePath ; retrieves item's message 
 			WriteLog('GetItemDetokenedMessage: warning: no $filePath or file is missing');
 			$message = '';
 		}
+	} else {
+		WriteLog('GetItemDetokenedMessage: $message was found in cache; length($message) = ' . length($message));
 	}
 
 	if (!$message) {
