@@ -29,6 +29,7 @@ use warnings;
 use utf8;
 use DBI;
 use DBD::SQLite;
+use Encode qw(encode_utf8 decode_utf8);
 
 # POTENTIAL BUG: Global $dbh can lead to connection issues in multi-threaded env
 # TODO: Consider making this a package variable or OO implementation
@@ -62,7 +63,8 @@ sub InitializeCache { # connects to SQLite db and creates cache table
 				{
 					RaiseError => 1,
 					AutoCommit => 1,
-					sqlite_busy_timeout => 5000
+					sqlite_busy_timeout => 5000,
+					sqlite_unicode => 1  # Enable proper Unicode support
 				}
 			);
 			$connected = 1;
@@ -130,10 +132,10 @@ sub GetCache { # $cacheName ; retrieves value from cache by key
 	$sth->execute($cacheName, $myVersion);
 	my $row = $sth->fetchrow_arrayref();
 
-	# POTENTIAL BUG: No distinction between "not found" and "empty value"
 	if ($row) {
-		WriteLog('GetCache: found value for key ' . $cacheName . ', length = ' . length($row->[0]));
-		return $row->[0];
+		my $value = decode_utf8($row->[0]);  # Properly decode UTF-8 data from DB
+		WriteLog('GetCache: found value for key ' . $cacheName . ', length = ' . length($value));
+		return $value;
 	} else {
 		WriteLog('GetCache: no value found for key ' . $cacheName);
 		return undef;
@@ -169,12 +171,15 @@ sub PutCache { # $cacheName, $content ; stores value in cache
 	# POTENTIAL BUG: No check if $dbh is defined/connected
 	return 0 unless $dbh;
 
+	# Ensure content is properly UTF-8 encoded before storage
+	my $encoded_content = encode_utf8($content);
+
 	# TODO: Consider using transactions for atomicity
 	$dbh->do(
 		"INSERT OR REPLACE INTO cache (key, value, version) VALUES (?, ?, ?)",
 		undef,
 		$cacheName,
-		$content,
+		$encoded_content,
 		$myVersion
 	) or return 0;
 
