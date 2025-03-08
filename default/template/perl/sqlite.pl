@@ -108,12 +108,12 @@ sub SqliteMakeTables { # creates sqlite schema
 } # SqliteMakeTables()
 
 sub SqliteGetNormalizedQueryString { # $query, @queryParams ; returns normalized query string
-# sub SqliteNormalizeQuery {
-# sub NormalizeQuery {
-# sub NormalizedQuery {
-# sub SqliteGetQueryText {
-# sub GetQueryText {
-# sub SqliteGetFormattedQuery {
+	# sub SqliteNormalizeQuery {
+	# sub NormalizeQuery {
+	# sub NormalizedQuery {
+	# sub SqliteGetQueryText {
+	# sub GetQueryText {
+	# sub SqliteGetFormattedQuery {
 	my $query = shift;
 	chomp $query;
 
@@ -199,28 +199,28 @@ sub SqliteGetRow { # $query, @queryParams ; returns first row of query result as
 } # SqliteGetRow()
 
 sub SqliteQueryHashRef { # $query, @queryParams; calls sqlite with query, and returns result as array of hashrefs
-# NOTE, THIS RETURNS A REFERENCE TO AN ARRAY OF HASHES, NOT A HASH, DESPITE THE NAME
+	# NOTE, THIS RETURNS A REFERENCE TO AN ARRAY OF HASHES, NOT A HASH, DESPITE THE NAME
 
-# ATTENTION: first array element returned is an array of column names!
+	# ATTENTION: first array element returned is an array of column names!
 
-# example uses:
-# 	my $hashRef1 = SqliteQueryHashRef('author_replies', @queryParams);
-# 	my @authorReplies = @{$hashRef};
-# 	my $hashRef2 = SqliteQueryHashRef('SELECT file_hash, item_title FROM item_flat', @queryParams);
-# 	my @allItems = @{$hashRef};
+	# example uses:
+	# 	my $hashRef1 = SqliteQueryHashRef('author_replies', @queryParams);
+	# 	my @authorReplies = @{$hashRef};
+	# 	my $hashRef2 = SqliteQueryHashRef('SELECT file_hash, item_title FROM item_flat', @queryParams);
+	# 	my @allItems = @{$hashRef};
 
-#sub SqliteGetHash {
-#sub SqliteGetResults {
-#sub SqliteGetHashRef {
-#sub SqliteGetQueryHashRef {
-#sub SqliteGetQuery {
-#sub GetQuery {
-#sub GetQueryAsHash {
-#sub DBGetQueryResult {
-#sub GetQueryAsArray {
-#sub GetQueryAsArrayOfHashRefs {
+	#sub SqliteGetHash {
+	#sub SqliteGetResults {
+	#sub SqliteGetHashRef {
+	#sub SqliteGetQueryHashRef {
+	#sub SqliteGetQuery {
+	#sub GetQuery {
+	#sub GetQueryAsHash {
+	#sub DBGetQueryResult {
+	#sub GetQueryAsArray {
+	#sub GetQueryAsArrayOfHashRefs {
 
-#	WriteLog('SqliteQueryGetArrayOfHashRef: begin');
+	#WriteLog('SqliteQueryGetArrayOfHashRef: begin');
 	WriteLog('SqliteQueryHashRef: begin; caller = ' . join(',', caller));
 
 	my $query = shift;
@@ -287,7 +287,7 @@ sub SqliteQueryHashRef { # $query, @queryParams; calls sqlite with query, and re
 } # SqliteQueryHashRef()
 
 sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 command
-# returns whatever sqlite3 returns to STDOUT
+	# returns whatever sqlite3 returns to STDOUT
 	my $query = shift;
 	if (!$query) {
 		WriteLog('SqliteQuery: warning: called without $query');
@@ -496,16 +496,16 @@ sub SqliteQueryWithTime {
 } # SqliteQueryWithTime()
 
 sub SqliteGetQueryTemplate { # $query ; look up query in templates if necessary or just return $query
-# looks up query in template/query/$query or template/query/$query.sql
-# exceptions:
-#   if $query contains one or more spaces
-#   if $query begins with period character (.) the way sqlite utility queries do
-#   if $query does not match /^([a-zA-Z0-9\-_.]+)$/
+	# looks up query in template/query/$query or template/query/$query.sql
+	# exceptions:
+	#   if $query contains one or more spaces
+	#   if $query begins with period character (.) the way sqlite utility queries do
+	#   if $query does not match /^([a-zA-Z0-9\-_.]+)$/
 
-# sub SqliteGetQuery {
-# sub GetQuery {
-# sub ExpandQuery {
-# sub GetQueryTemplate {
+	# sub SqliteGetQuery {
+	# sub GetQuery {
+	# sub ExpandQuery {
+	# sub GetQueryTemplate {
 	my $query = shift;
 	if (!$query) {
 		WriteLog('SqliteGetQueryTemplate: warning: called without $query');
@@ -544,10 +544,10 @@ sub SqliteGetQueryTemplate { # $query ; look up query in templates if necessary 
 } # SqliteGetQueryTemplate()
 
 sub SqliteQueryCachedShell { # $query, @queryParams ; performs sqlite query via sqlite3 command
-# uses cache with query text's hash as key
-# sub CacheSqliteQuery {
-# sub SqliteGetQuery {
-# sub SqliteGetPSV {
+	# uses cache with query text's hash as key
+	# sub CacheSqliteQuery {
+	# sub SqliteGetQuery {
+	# sub SqliteGetPSV {
 	WriteLog('SqliteQueryCachedShell: caller: ' . join(', ', caller));
 
 	my $withHeader = 1;
@@ -603,7 +603,7 @@ sub SqliteQueryCachedShell { # $query, @queryParams ; performs sqlite query via 
 } # SqliteQueryCachedShell()
 
 sub SqliteEscape { # Escapes supplied text for use in sqlite query
-# Just changes ' to ''
+	# Just changes ' to ''
 	my $text = shift;
 
 	if (defined $text) {
@@ -616,8 +616,8 @@ sub SqliteEscape { # Escapes supplied text for use in sqlite query
 } # SqliteEscape()
 
 sub SqliteGetCount { # query ; returns COUNT(*) of provided query
-# sub GetCount {
-# sub GetQueryCount {
+	# sub GetCount {
+	# sub GetQueryCount {
 
 	my $query = shift;
 	#todo sanity;
@@ -638,11 +638,11 @@ sub SqliteGetCount { # query ; returns COUNT(*) of provided query
 } # SqliteGetCount()
 
 sub SqliteGetValue { # $query ; Returns the first column from the first row returned by sqlite $query
-# #todo should allow returning columns other than 0
-# sub SqliteQueryGetValue {
-# sub SqliteQueryValue {
-# sub GetSqliteValue {
-# sub GetQueryValue {
+	# #todo should allow returning columns other than 0
+	# sub SqliteQueryGetValue {
+	# sub SqliteQueryValue {
+	# sub GetSqliteValue {
+	# sub GetQueryValue {
 	my $query = shift;
 	my @queryParams = @_;
 
@@ -683,8 +683,8 @@ sub SqliteGetValue { # $query ; Returns the first column from the first row retu
 } # SqliteGetValue()
 
 sub SqliteGetColumnArray { # $query, $columnName ; gets column as array
-# sub GetColumn {
-# sub SqliteGetArray {
+	# sub GetColumn {
+	# sub SqliteGetArray {
 	my $query = shift;
 	my $columnName = shift;
 
