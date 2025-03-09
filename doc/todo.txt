@@ -1,3 +1,8 @@
+Malformed UTF-8 character: \xda\x00 (unexpected non-continuation byte 0x00, immediately after start byte 0xda; need 2 bytes, got 1) in pattern match (m//) at ./config/template/perl/utils.pl line 1333.
+Malformed UTF-8 character (fatal) at ./config/template/perl/utils.pl line 1333.
+
+===
+
 inbox for should be regenerated in a timely manner, otherwise the no-js timestamps are incorrect
 
 ===
