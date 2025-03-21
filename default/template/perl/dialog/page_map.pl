@@ -15,14 +15,14 @@ sub GetPageMapDialog {
 	# sub GetPageMap {
 	WriteLog('GetPageMapDialog: caller = ' . join(' ', caller));
 
-    if (!GetConfig('setting/admin/js/enable')) {
-        #todo make it work without js
-        WriteLog('GetPageMapDialog: warning: called while setting/admin/js/enable was FALSE; caller = ' . join(' ', caller));
-        return '';
-    }
+	#if (!GetConfig('setting/admin/js/enable')) {
+	#	WriteLog('GetPageMapDialog: warning: called while setting/admin/js/enable was FALSE; caller = ' . join(' ', caller));
+	#	return '';
+	#}
 
 	my $status = GetTemplate('html/widget/layer_controls.template');
-	if (GetConfig('setting/admin/js/dragging')) {
+	if (GetConfig('setting/admin/js/enable') && GetConfig('setting/admin/js/dragging')) {
+		# dialog controls require js
 		$status .= GetTemplate('html/widget/dialog_controls.template');
 	}
 
