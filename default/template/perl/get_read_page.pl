@@ -44,9 +44,17 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	my $queryDisplay = '';
 
 	if (defined($pageType)) {
+		# $pageType sanity check
+		if ($pageType && $pageType =~ m/^([a-zA-Z0-9_]+)$/) {
+			$pageType = $1;
+		} else {
+			WriteLog('GetReadPage: warning: $pageType failed sanity check; caller = ' . join(',', caller));
+			return '';
+		}
+
 		WriteLog('GetReadPage($pageType = ' . $pageType . '); caller = ' . join(',', caller));
 
-		#$pageType can be 'author', 'tag', 'date'
+		#$pageType can be 'author', 'tag', 'date', 'label', 'random'
 
 		if ($pageType eq 'author') {
 			# AUTHOR PAGE ##############################################################
