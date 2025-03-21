@@ -305,7 +305,7 @@ sub MysqlGetNormalizedQueryString { # $query, @queryParams ; returns normalized 
 	if ($query =~ m/^(.+)$/s) { #todo real sanity check
 		$query = $1;
 	} else {
-		WriteLog('MysqlGetNormalizedQueryString: warning: sanity check failed on $query');
+		WriteLog('MysqlGetNormalizedQueryString (mysql): warning: sanity check failed on $query; caller = ' . join(',', caller));
 		return '';
 	}
 

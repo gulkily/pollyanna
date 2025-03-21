@@ -122,7 +122,7 @@ sub SqliteGetNormalizedQueryString { # $query, @queryParams ; returns normalized
 	if ($query =~ m/^(.+)$/s) { #todo real sanity check
 		$query = $1;
 	} else {
-		WriteLog('SqliteGetNormalizedQueryString: warning: sanity check failed on $query');
+		WriteLog('SqliteGetNormalizedQueryString (default): warning: sanity check failed on $query; caller = ' . join(',', caller));
 		return '';
 	}
 
