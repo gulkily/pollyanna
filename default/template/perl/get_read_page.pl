@@ -228,15 +228,7 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 					MakeZipFromItemList($zipName, \@zipFiles);
 				} # if ($zipName)
 			} # if (GetConfig('setting/zip/label'))
-
-
-
-
-
-
-
 		} # if ($pageType eq 'label')
-
 
 		if ($pageType eq 'tag') { #'/tag/tag.html' #'/tag/tag.html' '/tag/' GetTagPage GetTagListing {
 			# TAG PAGE ##############################################################
@@ -635,8 +627,8 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 	# LISTING ITEMS ENDS HERE
 	# LISTING ITEMS ENDS HERE
 
-# sub GetTagPage { # special instructions for particular labels here
-# sub GetLabelPage { # special instructions for particular labels here
+	# sub GetTagPage { # special instructions for particular labels here
+	# sub GetLabelPage { # special instructions for particular labels here
 	if ($pageType eq 'label' && $pageParam eq 'image') { # GetReadPage()
 		# a special case for the #image page
 		# include upload dialog
