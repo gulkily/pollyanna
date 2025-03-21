@@ -27,7 +27,7 @@ sub GetPageMapDialog {
 	}
 
 	#todo it should show up on a page that won't have js required to make it work
-    #todo it should come pre-filled with all the dialogs that are initially on the page
+	#todo it should come pre-filled with all the dialogs that are initially on the page
 
 	require_once('widget/menu.pl');
 
