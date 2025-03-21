@@ -1777,6 +1777,7 @@ sub PutHtmlFile { # $file, $content ; writes content to html file, with special 
 	# this allows adding extra attributes to the body tag
 	my $bodyAttr = GetThemeAttribute('tag/body');
 	if ($bodyAttr) {
+		WriteLog('PutHtmlFile: $bodyAttr = ' . $bodyAttr);
 		if (index($content, '<title>jstest1</title>') == -1) {
 			$bodyAttr = FillThemeColors($bodyAttr);
 			$content =~ s/\<body/<body $bodyAttr/i;
