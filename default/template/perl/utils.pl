@@ -716,6 +716,14 @@ sub GetFileHash { # $fileName ; returns hash of file contents
 		my $fileHash = GetSHA1(GetFile($fileName));
         if (GetConfig('setting/admin/sha1sum_command')) {
             my $sha1SumCommand = GetConfig('setting/admin/sha1sum_command');
+            chomp $sha1SumCommand;
+            if ($sha1SumCommand =~ m/^([a-zA-Z0-9\/\.\-]+)$/) {
+            	WriteLog('GetFileHash: $sha1SumCommand passed sanity check');
+				$sha1SumCommand = $1;
+            } else {
+            	WriteLog('GetFileHash: warning: $sha1SumCommand failed sanity check');
+            	return '';
+            }
 
             my $fileHash2;
             eval {
