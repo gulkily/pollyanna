@@ -655,6 +655,8 @@ sub GetHtmlToolboxes {
 } # GetHtmlToolboxes()
 
 sub GetItemIndexLog { # $itemHash, $logType = index_log
+# sub GetItemIndexLogDialog {
+# sub GetIndexLogDialog {
 	# $logType = gpg_stderr
 	my $itemHash = shift;
 
@@ -698,6 +700,7 @@ sub GetItemIndexLog { # $itemHash, $logType = index_log
 		}
 
 		#my $logWindow = GetDialogX($log, 'Log');
+		$log = '<fieldset>' . $log . '</fieldset>';
 		my $logWindow = GetDialogX($log, $logType);
 		# my $logWindow = GetDialogX($log, 'IndexFile(' . $shortHash . ')');
 		#if ($logType ne 'run_log') {
