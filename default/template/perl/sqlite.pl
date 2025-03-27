@@ -38,6 +38,7 @@ sub GetSqliteDbName { # $requestedName ; returns path to sqlite db
 	# sub GetDbFilename {
 	# sub GetDbPath {
 	# sub GetDbName {
+	# sub SqliteGetDbName {
 
 	my $requestedName = shift;
 
