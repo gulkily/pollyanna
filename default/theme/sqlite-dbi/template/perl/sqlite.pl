@@ -214,25 +214,6 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via DBI
 	return $results;
 } # SqliteQuery()
 
-sub SqliteQueryWithTime {
-	my $timeBegin = GetTime();
-	my $results = SqliteQuery(@_);
-	my $timeFinish = GetTime();
-
-	my %fullReturn;
-	$fullReturn{'results'} = $results;
-	$fullReturn{'duration'} = $timeFinish - $timeBegin;
-
-	state $debugMode = GetConfig('debug');
-	if ($debugMode && 0) {
-		$fullReturn{'query'} = 'SELECT HI';
-		$fullReturn{'time_begin'} = $timeBegin;
-		$fullReturn{'time_finish'} = $timeFinish;
-	}
-
-	return $results;
-} # SqliteQueryWithTime()
-
 sub SqliteGetQueryTemplate { # $query ; look up query in templates if necessary or just return $query
 # looks up query in template/query/$query or template/query/$query.sql
 # exceptions:
