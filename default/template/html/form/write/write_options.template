@@ -1,26 +1,28 @@
 <!-- write_options.template ; additional controls for js-enhanced write form -->
-<hr class=advanced>
-<span id=spanInputOptions>
-	<p>
-		<a href=/upload.html>Upload</a><br>
-		Image, Photo, or File
-	</p>
+<fieldset>
+	<hr class=advanced>
+	<span id=spanInputOptions>
+		<p>
+			<a href=/upload.html>Upload</a><br>
+			Image, Photo, or File
+		</p>
 
-	<p>
-		On-Screen Keyboards: <noscript>*</noscript><br>
-		<a href="/frame.html" target=_top>Keyboard</a><br>
-		<a href="/frame2.html" target=_top>Android</a><br>
-		<a href="/frame2.html" target=_top>iPhone</a><br>
-		<a href="/frame2.html" target=_top>iPad</a><br>
-		<a href="/frame3.html" target=_top>Netscape</a><br>
-	</p>
-</span>
-<span id=spanInputOptionsAdvanced class="advanced">
-	<p>
-		Transliterated Keyboard Layouts: <noscript>*</noscript><br>
-		<a href=#>Russian/Ukrainian/Cyrillic</a>: Ctrl+R, Alt+R, Meta+R<br>
-		<a href=#>Dvorak</a>: Ctrl+D, Alt+D, Meta+D<br>
-		(Press again to switch back to default.)
-	</p>
-</span>
+		<p>
+			On-Screen Keyboards: <noscript>*</noscript><br>
+			<a href="/frame.html" target=_top>Keyboard</a><br>
+			<a href="/frame2.html" target=_top>Android</a><br>
+			<a href="/frame2.html" target=_top>iPhone</a><br>
+			<a href="/frame2.html" target=_top>iPad</a><br>
+			<a href="/frame3.html" target=_top>Netscape</a><br>
+		</p>
+	</span>
+	<span id=spanInputOptionsAdvanced class="advanced">
+		<p>
+			Transliterated Keyboard Layouts: <noscript>*</noscript><br>
+			<a href=#>Russian/Ukrainian/Cyrillic</a>: Ctrl+R, Alt+R, Meta+R<br>
+			<a href=#>Dvorak</a>: Ctrl+D, Alt+D, Meta+D<br>
+			(Press again to switch back to default.)
+		</p>
+	</span>
+</fieldset>
 <!-- / write_options.template -->
