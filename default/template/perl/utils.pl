@@ -298,17 +298,19 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 	}
 	chomp $text;
 
-	my $callerInfo = join(',', ((caller 1)[3]));
-	$callerInfo = (split('::', $callerInfo))[1];
+	{
+		# add calling procedure name to log message if it is not already present
+		my $callerInfo = join(',', ((caller 1)[3]));
+		$callerInfo = (split('::', $callerInfo))[1];
 
-	if ($text && $callerInfo && (substr($text, 0, length($callerInfo)) ne $callerInfo)) {
-		$text = $callerInfo . ': ' . $text;
+		if ($text && $callerInfo && (substr($text, 0, length($callerInfo)) ne $callerInfo)) {
+			$text = $callerInfo . ': ' . $text;
+		}
 	}
 
 	if ($text && index(lc($text), 'warning') != -1) {
 		if (index(lc($text), 'caller') == -1 && caller(1)) {
-			#$text .= '; caller = ' . join(',', caller(1));
-			#todo
+			#todo should do something here?
 		}
 	}
 
@@ -317,11 +319,11 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 	#todo state $debugOn = -e 'config/debug'; #todo this path should not be hardcoded?
 	my $timestamp = '';
 
-	#todo if ($debugOn) {
+	#todo if ($debugOn) { (this should not be checking for config/debug every time)
 	if ($debugOn || -e 'config/debug') {
 		$timestamp = GetTime(); # set timestamp
 
-		# adjust timestamp formatating to always have the same number
+		# adjust timestamp formatting to always have the same number
 		# of digits after the decimal point, if included
 		if ($timestamp =~ m/^[0-9]+\.[0-9]{1}$/) {
 			$timestamp .= '0';
@@ -386,7 +388,7 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 		if ($charPrefix eq '') {
 			$charPrefix = '$';
 		}
-		# DON'T DO THIS, causes endless loop
+		# DON'T DO THIS, causes endless loop:
 		#if (GetConfig('debug_verbose')) {
 		if (0) {
 			#fully verbose
