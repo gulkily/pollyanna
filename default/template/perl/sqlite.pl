@@ -640,7 +640,7 @@ sub SqliteGetValue { # $query ; Returns the first column from the first row retu
 		my %firstRow = %{$result[1]}; # first row
 		my $return = $firstRow{$firstColumn}; # first column's value from first row
 
-		WriteLog('SqliteGetValue: $return = ' . $return);
+		WriteLog('SqliteGetValue: $return = ' . ($return ? $return : 'FALSE') . '; caller = ' . join(',', caller));
 
 		return $return;
 	} else {
