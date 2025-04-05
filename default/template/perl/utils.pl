@@ -338,14 +338,6 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 			$timestamp .= '0';
 		}
 
-		if (0) { # debug use milliseconds #featureflag
-			#deprecated feature which gets differently formatted timestamp
-			my $t = time;
-			my $date = $timestamp;#strftime "%Y%m%d %H:%M:%S", localtime $t;
-			$date .= sprintf ".%03d", ($t-int($t))*1000; # without rounding
-			$timestamp = $date;
-		}
-
 		#AppendFile("log/log.log", $timestamp . " " . $text); # (happens later)
 		$debugOn = 1; #verbose #quiet mode #quietmode #featureflag
 	}
