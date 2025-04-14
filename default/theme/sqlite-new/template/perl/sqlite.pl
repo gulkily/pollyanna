@@ -1,6 +1,8 @@
 #!/usr/bin/perl -T
 #freebsd: #!/usr/local/bin/perl
 
+# sqlite-new / ... / sqlite.pl
+
 use strict;
 use warnings;
 use 5.010;
@@ -81,6 +83,7 @@ sub SqliteMakeTables { # creates sqlite schema
 
 	WriteLog('SqliteMakeTables: begin');
 
+	# Uses shell sqlite3 command #todo
 	my $existingTables = SqliteQueryCachedShell('.tables');
 	if ($existingTables) {
 		WriteLog('SqliteMakeTables: warning: tables already exist');
