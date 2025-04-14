@@ -78,6 +78,7 @@ sub SqliteMakeTables { # creates sqlite schema
 	# sub SqliteMakeTables {
 	# sub SqliteMakeSchema {
 	# sub DBMakeTables {
+	# sub CreateSchema {
 
 	WriteLog('SqliteMakeTables: begin');
 

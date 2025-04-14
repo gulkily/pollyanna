@@ -214,6 +214,7 @@ sub MysqlMakeTables { # creates mysql schema
 	# sub MysqlMakeTables {
 	# sub MysqlMakeSchema {
 	# sub DBMakeTables {
+	# sub CreateSchema {
 
 	WriteLog('MysqlMakeTables: begin');
 
