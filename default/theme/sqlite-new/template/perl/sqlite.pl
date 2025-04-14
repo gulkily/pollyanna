@@ -250,18 +250,19 @@ sub SqliteQueryHashRef { # $query, @queryParams; calls sqlite with query using D
 	return @resultsArray;
 } # SqliteQueryHashRef()
 
-sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 command
-	# returns whatever sqlite3 returns to STDOUT
+sub SqliteQuery { # $query, @queryParams ; performs sqlite query via DBI
+	# Uses DBI interface
+	# returns query results as string with column headers
 	my $query = shift;
 	if (!$query) {
 		WriteLog('SqliteQuery: warning: called without $query');
 		return;
 	}
 	chomp $query;
-	my @queryParams = @_; # shift
+	my @queryParams = @_;
 
 	my $queryId = substr(md5_hex(GetTime() . $query), 0, 5);
-	LogSqliteQuery($queryId, $query);
+	LogSqliteQuery($queryId, $query, join(',', caller));
 
 	$query = SqliteGetNormalizedQueryString($query, @queryParams);
 	my $SqliteDbName = GetSanitizedDbName($queryId);
@@ -270,29 +271,53 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via sqlite3 com
 	$query = SanitizeQueryString($queryId, $query);
 	if (!$query) { return ''; }
 
-	my $shCommand = BuildSqliteCommand($SqliteDbName, $query);
-	my $sqliteErrorLog = GetSqliteErrorLogPath();
+	my $dbh = DBI->connect("dbi:SQLite:dbname=$SqliteDbName", "", "", {
+		RaiseError => 0,
+		PrintError => 0,
+		AutoCommit => 1
+	});
 
-	$shCommand = SanitizeShellCommand($queryId, $shCommand);
-	if (!$shCommand) { return ''; }
-
-	my $results = ExecuteSqliteQuery($queryId, $shCommand, $sqliteErrorLog);
-	if (!$results && -e $sqliteErrorLog) {
-		$results = HandleLockedDatabase($queryId, $shCommand, $sqliteErrorLog);
+	if (!$dbh) {
+		WriteLog('SqliteQuery: ' . $queryId . ' Failed to connect to database');
+		return '';
 	}
 
-	HandleSqliteErrors($queryId, $sqliteErrorLog, $query);
+	my $sth = $dbh->prepare($query);
+	if (!$sth) {
+		WriteLog('SqliteQuery: ' . $queryId . ' Failed to prepare query: ' . $dbh->errstr);
+		$dbh->disconnect();
+		return '';
+	}
+
+	my $success = $sth->execute(@queryParams);
+	if (!$success) {
+		WriteLog('SqliteQuery: ' . $queryId . ' Failed to execute query: ' . $sth->errstr);
+		$sth->finish();
+		$dbh->disconnect();
+		return '';
+	}
+
+	my $results = '';
+	my @columns = @{$sth->{NAME}};
+	$results .= join('|', @columns) . "\n";
+
+	while (my @row = $sth->fetchrow_array()) {
+		$results .= join('|', @row) . "\n";
+	}
+
+	$sth->finish();
+	$dbh->disconnect();
 
 	return $results;
 } # SqliteQuery()
 
-sub LogSqliteQuery { # $queryId, $query
-	my ($queryId, $query) = @_;
+sub LogSqliteQuery { # $queryId, $query, $caller
+	my ($queryId, $query, $caller) = @_;
 	if (GetConfig('debug')) {
 		my $LOGDIR = GetDir('log');
 		PutFile("$LOGDIR/sqlitequery.$queryId", $query);
 	}
-	WriteLog('SqliteQuery: ' . $queryId . ' caller = ' . join(',', caller));
+	WriteLog('SqliteQuery: ' . $queryId . ' caller = ' . $caller);
 } # LogSqliteQuery()
 
 sub GetSanitizedDbName { # $queryId
