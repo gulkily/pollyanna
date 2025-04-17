@@ -98,8 +98,11 @@ sub SqliteMakeTables { # creates sqlite schema
 	$schemaQueries .= "\n;\n" . GetTemplate('sqlite3/schema.sql');
 	$schemaQueries .= "\n;\n" . GetTemplate('sqlite3/label_weight.sql');
 
-	$schemaQueries =~ s/^#.+$//mg; # remove sh-style comments (lines which begin with #)
-
+	# Remove comments from schema
+	$schemaQueries =~ s/^#.+$//mg; # Remove shell-style comments (lines starting with #)
+	$schemaQueries =~ s/--[^\n]*//g; # Remove SQL single-line comments
+	$schemaQueries =~ s!/\*.*?\*/!!gs; # Remove SQL multi-line comments
+	
 	# Split into individual queries and execute each one
 	my @queries = split(/;\s*\n/, $schemaQueries);
 	for my $query (@queries) {
