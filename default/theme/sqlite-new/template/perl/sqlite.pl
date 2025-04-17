@@ -84,13 +84,12 @@ sub SqliteMakeTables { # creates sqlite schema
 
 	WriteLog('SqliteMakeTables: begin');
 
-	# Uses shell sqlite3 command #todo
-	my $existingTables = SqliteQueryCachedShell('.tables');
-	if ($existingTables) {
+	# Check for existing tables using DBI
+	my $existingTablesQuery = "SELECT name FROM sqlite_master WHERE type='table'";
+	my $existingTables = SqliteQuery($existingTablesQuery);
+	if ($existingTables && $existingTables ne "name\n") {
 		WriteLog('SqliteMakeTables: warning: tables already exist');
-
 		#todo verify it is the same schema
-
 		return '';
 	}
 
@@ -101,16 +100,99 @@ sub SqliteMakeTables { # creates sqlite schema
 
 	$schemaQueries =~ s/^#.+$//mg; # remove sh-style comments (lines which begin with #)
 
-	#confess $schemaQueries;
-
-	SqliteQuery($schemaQueries);
+	# Split into individual queries and execute each one
+	my @queries = split(/;\s*\n/, $schemaQueries);
+	for my $query (@queries) {
+		$query =~ s/^\s+|\s+$//g; # Trim whitespace
+		if ($query) {
+			SqliteQuery($query);
+		}
+	}
 
 	DBIndexTagsets(); #todo
 
-	my $SqliteDbName = GetSqliteDbName();
+	# Verify tables were created successfully
+	my $verifyResult = SqliteVerifyTables();
+	if (!$verifyResult) {
+		WriteLog('SqliteMakeTables: warning: table verification failed');
+		return '';
+	}
 
+	WriteLog('SqliteMakeTables: tables verified successfully');
 	#todo cache the result so that this can be skipped if building often
 } # SqliteMakeTables()
+
+sub SqliteVerifyTables { # returns 1 if tables exist, 0 if not
+	my $tablesQuery = "SELECT name FROM sqlite_master WHERE type='table'";
+	my $tables = SqliteQuery($tablesQuery);
+	
+	if (!$tables || $tables eq "name\n") {
+		WriteLog('SqliteVerifyTables: no tables found');
+		return 0;
+	}
+
+	# Check for required tables based on schema.sql
+	my @requiredTables = qw(
+		item 
+		item_attribute
+		item_parent 
+		author_alias
+		item_label
+		item_page
+		location
+		user_agent
+		task
+		config
+		label_weight
+		label_parent
+	);
+
+	foreach my $table (@requiredTables) {
+		if (index($tables, $table) == -1) {
+			WriteLog('SqliteVerifyTables: warning: missing required table: ' . $table);
+			return 0;
+		}
+	}
+
+	# Check for required views
+	my $viewsQuery = "SELECT name FROM sqlite_master WHERE type='view'";
+	my $views = SqliteQuery($viewsQuery);
+
+	my @requiredViews = qw(
+		child_count
+		parent_count 
+		item_labels_list
+		item_label_count
+		item_score
+		item_attribute_latest
+		added_time
+		item_title
+		item_name
+		item_order
+		item_sequence
+		item_author
+		item_client
+		item_flat
+		item_flat_filtered
+		author_score
+		item_score_weighed
+		author
+		author_flat
+		person_flat
+		person_author
+		item_score_relative
+		author_alias_valid
+	);
+
+	foreach my $view (@requiredViews) {
+		if (index($views, $view) == -1) {
+			WriteLog('SqliteVerifyTables: warning: missing required view: ' . $view);
+			return 0;
+		}
+	}
+
+	return 1;
+} # SqliteVerifyTables()
 
 sub SqliteGetNormalizedQueryString { # $query, @queryParams ; returns normalized query string
 	# sub SqliteNormalizeQuery {
@@ -251,8 +333,11 @@ sub SqliteQueryHashRef { # $query, @queryParams; calls sqlite with query using D
 } # SqliteQueryHashRef()
 
 sub SqliteQuery { # $query, @queryParams ; performs sqlite query via DBI
-	# Uses DBI interface
-	# returns query results as string with column headers
+	# Uses DBI interface to execute a SQLite query
+	# Returns query results as a pipe-delimited string with column headers
+	# Parameters:
+	#   $query - SQL query string to execute
+	#   @queryParams - Array of parameters to bind to query placeholders
 	my $query = shift;
 	if (!$query) {
 		WriteLog('SqliteQuery: warning: called without $query');
@@ -261,9 +346,11 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via DBI
 	chomp $query;
 	my @queryParams = @_;
 
+	# Generate a unique ID for this query for logging
 	my $queryId = substr(md5_hex(GetTime() . $query), 0, 5);
 	LogSqliteQuery($queryId, $query, join(',', caller));
 
+	# Normalize and sanitize the query and database name
 	$query = SqliteGetNormalizedQueryString($query, @queryParams);
 	my $SqliteDbName = GetSanitizedDbName($queryId);
 	if (!$SqliteDbName) { return ''; }
@@ -271,10 +358,11 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via DBI
 	$query = SanitizeQueryString($queryId, $query);
 	if (!$query) { return ''; }
 
+	# Connect to the SQLite database
 	my $dbh = DBI->connect("dbi:SQLite:dbname=$SqliteDbName", "", "", {
-		RaiseError => 0,
-		PrintError => 0,
-		AutoCommit => 1
+		RaiseError => 0,  # Don't die on error
+		PrintError => 0,  # Don't print errors to STDERR
+		AutoCommit => 1   # Commit each statement immediately
 	});
 
 	if (!$dbh) {
@@ -282,6 +370,7 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via DBI
 		return '';
 	}
 
+	# Prepare the SQL statement
 	my $sth = $dbh->prepare($query);
 	if (!$sth) {
 		WriteLog('SqliteQuery: ' . $queryId . ' Failed to prepare query: ' . $dbh->errstr);
@@ -289,6 +378,7 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via DBI
 		return '';
 	}
 
+	# Execute the query with any parameters
 	my $success = $sth->execute(@queryParams);
 	if (!$success) {
 		WriteLog('SqliteQuery: ' . $queryId . ' Failed to execute query: ' . $sth->errstr);
@@ -297,14 +387,24 @@ sub SqliteQuery { # $query, @queryParams ; performs sqlite query via DBI
 		return '';
 	}
 
+	# Build the results string starting with column headers
 	my $results = '';
 	my @columns = @{$sth->{NAME}};
 	$results .= join('|', @columns) . "\n";
 
+	# Fetch and format each row of results
 	while (my @row = $sth->fetchrow_array()) {
+		# Replace any undefined/NULL values with empty string
+		for my $value (@row) {
+			if (!defined($value)) {
+				$value = '';
+			}
+		}
+		# Join row values with pipe separator and add newline
 		$results .= join('|', @row) . "\n";
 	}
 
+	# Clean up database resources
 	$sth->finish();
 	$dbh->disconnect();
 
