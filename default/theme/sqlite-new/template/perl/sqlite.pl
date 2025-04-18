@@ -126,8 +126,12 @@ sub SqliteMakeTables { # creates sqlite schema
 } # SqliteMakeTables()
 
 sub SqliteVerifyTables { # returns 1 if tables exist, 0 if not
+	WriteLog('SqliteVerifyTables: begin');
+
 	my $tablesQuery = "SELECT name FROM sqlite_master WHERE type='table'";
 	my $tables = SqliteQuery($tablesQuery);
+
+	my $return = 1;
 	
 	if (!$tables || $tables eq "name\n") {
 		WriteLog('SqliteVerifyTables: no tables found');
@@ -150,10 +154,15 @@ sub SqliteVerifyTables { # returns 1 if tables exist, 0 if not
 		label_parent
 	);
 
+	# if debug mode, add table_test_fail
+	if (GetConfig('debug')) {
+		push @requiredTables, 'table_test_fail';
+	}
+
 	foreach my $table (@requiredTables) {
 		if (index($tables, $table) == -1) {
 			WriteLog('SqliteVerifyTables: warning: missing required table: ' . $table);
-			return 0;
+			$return = 0;
 		}
 	}
 
@@ -187,14 +196,24 @@ sub SqliteVerifyTables { # returns 1 if tables exist, 0 if not
 		author_alias_valid
 	);
 
+	# if debug mode, add view_test_fail
+	if (GetConfig('debug')) {
+		push @requiredViews, 'view_test_fail';
+	}
+
 	foreach my $view (@requiredViews) {
 		if (index($views, $view) == -1) {
 			WriteLog('SqliteVerifyTables: warning: missing required view: ' . $view);
-			return 0;
+			$return = 0;
 		}
 	}
 
-	return 1;
+	# Check for required indexes
+	#todo
+
+	WriteLog('SqliteVerifyTables: all required tables and views found');
+
+	return $return;
 } # SqliteVerifyTables()
 
 sub SqliteGetNormalizedQueryString { # $query, @queryParams ; returns normalized query string
