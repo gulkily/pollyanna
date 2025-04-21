@@ -298,7 +298,7 @@ sub SqliteQueryCachedShell { # $query, @queryParams ; performs sqlite query with
 	WriteLog('SqliteQueryCachedShell: $cachePath = ' . $cachePath);
 	my $results;
 
-	$results = GetCache("sqlite3_results/$cachePath");
+	$results = GetCache("sqlite3_result/$cachePath");
 
 	if ($results) {
 		WriteLog('SqliteQueryCachedShell: $results was populated from cache');
@@ -306,7 +306,7 @@ sub SqliteQueryCachedShell { # $query, @queryParams ; performs sqlite query with
 		my $results = SqliteQuery($query);
 		if ($results) {
 			WriteLog('SqliteQueryCachedShell: PutCache: length($results) ' . length($results));
-			PutCache('sqlite_cached/'.$cachePath, $results);
+			PutCache('sqlite3_result/'.$cachePath, $results);
 		} else {
 			WriteLog('SqliteQueryCachedShell: warning: $results was FALSE; $query = ' . $query);
 			WriteLog('SqliteQueryCachedShell: warning: $results was FALSE; caller = ' . join(',', caller));
