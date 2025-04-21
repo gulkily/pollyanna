@@ -588,7 +588,7 @@ sub SqliteGetQueryTemplate { # $query ; look up query in templates if necessary 
 	# sub GetQueryTemplate {
 	my $query = shift;
 	if (!$query) {
-		WriteLog('SqliteGetQueryTemplate: warning: called without $query');
+		WriteLog('SqliteGetQueryTemplate: warning: called without $query; caller = ' . join(',', caller));
 		return '';
 	}
 	chomp $query;
