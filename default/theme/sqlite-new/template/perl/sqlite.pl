@@ -661,7 +661,7 @@ sub SqliteQueryCachedShell { # $query, @queryParams ; performs sqlite query via 
 	my $results;
 
 	#todo this should not be used (or should be rewritten) if cache-sqlite is enabled?
-	$results = GetCache("sqlite3_results/$cachePath");
+	$results = GetCache("sqlite3_result/$cachePath"); #todo this should match below?
 
 	if ($results) {
 		#cool
@@ -670,7 +670,7 @@ sub SqliteQueryCachedShell { # $query, @queryParams ; performs sqlite query via 
 		my $results = SqliteQuery($query);
 		if ($results) {
 			WriteLog('SqliteQueryCachedShell: PutCache: length($results) ' . length($results));
-			PutCache('sqlite_cached/'.$cachePath, $results);
+			PutCache('sqlite3_result/'.$cachePath, $results); #todo this should match above?
 		} else {
 			WriteLog('SqliteQueryCachedShell: warning: $results was FALSE; $query = ' . $query);
 			WriteLog('SqliteQueryCachedShell: warning: $results was FALSE; caller = ' . join(',', caller));
