@@ -6,6 +6,7 @@ use 5.010;
 use utf8;
 
 require_once('dialog.pl');
+require_once('dialog/archive_dialog.pl');
 
 sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with item listing based on parameters
 	# GetReadPage
@@ -405,15 +406,14 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 
 		if (GetConfig('setting/zip/tag')) {
 			if (scalar(@files) > 0) {
-				my $zipLink = '<a href="/tag/' . $pageParam . '.zip">' . $pageParam . '.zip</a>'; #todo use RenderLink()
-				$zipLink = '<fieldset>' . $zipLink . '</fieldset>';
-				my $zipDialog .= GetDialogX($zipLink, 'Archive'); # tag.zip
-				$zipDialog = '<span class=advanced>' . $zipDialog . '</span>'; # tag.zip
-				$txtIndex .= $zipDialog; # tag.zip
+				my $zipPath = '/tag/' . $pageParam . '.zip';
+				my $archiveDialog = GetArchiveDialog($zipPath, 'tag', scalar(@files));
+				$archiveDialog = '<span class=advanced>' . $archiveDialog . '</span>';
+				$txtIndex .= $archiveDialog;
 			} else {
-				my $noArchiveDialog = GetDialogX('This tag has no items yet, <br>so no archive is available.', 'Archive');
-				$noArchiveDialog = '<span class=advanced>' . $noArchiveDialog . '</span>';
-				$txtIndex .= $noArchiveDialog;
+				#my $archiveDialog = GetArchiveDialog('', 'tag', 0);
+				#$archiveDialog = '<span class=advanced>' . $archiveDialog . '</span>';
+				#$txtIndex .= $archiveDialog;
 			}
 		}
 
@@ -520,22 +520,10 @@ sub GetReadPage { # $pageType, $parameter1, $parameter2 ; generates page with it
 
 		if (GetConfig('setting/zip/author')) {
 			if (scalar(@files) > 0) {
-				my $zipPath = '/author/' . $authorKey . '.zip'; #todo use RenderLink()
-				my $HTMLDIR = GetDir('html');
-				if (file_exists("$HTMLDIR/$zipPath")) {
-					# only advertise the file if it exists
-					my $zipLink = '<a href="' . $zipPath . '">' . $authorKey . '.zip</a>'; #todo use RenderLink()
-					my $zipSize = -s "$HTMLDIR/$zipPath"; #todo GetFileSize()
-					my $zipSizeWidget = GetFileSizeWidget($zipSize);
-					#my $zipSize = GetFileSizeWidget(GetFileSize($zipPath)); #todo
-					$zipLink = '<fieldset>' . $zipLink . ' (' . $zipSizeWidget . ')' . '</fieldset>';
-					$txtIndex .= GetDialogX($zipLink, 'Archive'); # author.zip GetArchiveDialog {}
-				} else {
-					$txtIndex .= GetDialogX('<fieldset><p>There is no archive available.</p></fieldset>', 'Archive');
-					# no source data?
-				}
+				my $zipPath = '/author/' . $authorKey . '.zip';
+				$txtIndex .= GetArchiveDialog($zipPath, 'author', scalar(@files));
 			} else {
-				$txtIndex .= GetDialogX('<fieldset><p>This author has not posted anything yet, <br>so no archive is available.</p></fieldset>', 'Archive');
+				#$txtIndex .= GetArchiveDialog('', 'author', 0);
 			}
 		}
 
