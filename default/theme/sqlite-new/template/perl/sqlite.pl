@@ -603,11 +603,11 @@ sub SqliteGetQueryTemplate { # $query ; look up query in templates if necessary 
 
 			if (GetTemplate('query/' . $querySane . '.sql')) {
 				my $queryTemplate = GetTemplate('query/' . $querySane . '.sql');
-				WriteLog('SqliteGetQueryTemplate: found with added sql: $querySane = ' . $querySane . '; $queryTemplate = ' . length($queryTemplate));
+				WriteLog('SqliteGetQueryTemplate: found with added .sql extension: $querySane = ' . $querySane . '; $queryTemplate = ' . length($queryTemplate));
 				return $queryTemplate;
 			} elsif (GetTemplate('query/' . $querySane)) {
 				my $queryTemplate = GetTemplate('query/' . $querySane);
-				WriteLog('SqliteGetQueryTemplate: found without added sql: $querySane = ' . $querySane . '; $queryTemplate = ' . length($queryTemplate));
+				WriteLog('SqliteGetQueryTemplate: found without added .sql extension: $querySane = ' . $querySane . '; $queryTemplate = ' . length($queryTemplate));
 				return $queryTemplate;
 			} else {
 				WriteLog('SqliteGetQueryTemplate: warning: query has no spaces, and no template found; $query = ' . $query . '; caller = ' . join(',', caller));
