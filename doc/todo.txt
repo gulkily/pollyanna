@@ -1,3 +1,23 @@
+encryption, decryption, and private key exchange
+	for inbox:
+		client should let server know all the fingerprints of keys it possesses
+			anything addressed to these should be included in inbox listing
+	for item page:
+		server should include plaintext original message accessible to js
+		js should check if it can decrypt the text
+			if it's decryptable, decrypt and display decrypted text
+	for indexing:
+		if text has pgp-encrypted message, server should find fingerprint(s) of target keys
+			add them to item attributes
+	there should be a way to share private keys with existing users
+		first idea: put it on the author page
+			let user choose a private key from their own keychain
+				encrypt the private key text for the target author's public key
+	when a private key is detected:
+		add it to local keychain
+
+===
+
 Malformed UTF-8 character: \xda\x00 (unexpected non-continuation byte 0x00, immediately after start byte 0xda; need 2 bytes, got 1) in pattern match (m//) at ./config/template/perl/utils.pl line 1333.
 Malformed UTF-8 character (fatal) at ./config/template/perl/utils.pl line 1333.
 
