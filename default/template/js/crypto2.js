@@ -454,6 +454,11 @@ function SignMessage () { // find the compose textbox and sign whatever is in it
 				return true;
 			}
 
+			if (message.trim().substring(0, 27) == ('-----BEGIN PGP MESSAGE-----')) {
+				//alert('DEBUG: SignMessage: message contains encrypted pgp message, returning true');
+				return true;
+			}
+
 			var replyTo = document.getElementById('replyto');
 			// look for a replyto field
 
