@@ -133,7 +133,8 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETUR
 			#gpg_encrypted
 			#gpg_encrypted
 			WriteLog('GpgParse: found $gpgEncrypted');
-			$gpgCommand .= '-o - --decrypt ';
+			#$gpgCommand .= '-o - --decrypt ';
+			$gpgCommand .= '--list-packets ';
 			$encryptedFlag = 1;
 		} else {
 			WriteLog('GpgParse: did not find any relevant strings, returning');
@@ -153,7 +154,11 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETUR
 		#my $messageCachePath = GetFileMessageCachePath($filePath) . '_gpg';
 		my $messageCachePath = "$CACHEPATH/$cacheVersion/message/$fileHash" . '_gpg';
 		$gpgCommand .= "$filePath "; # file we're parsing
-		$gpgCommand .= ">$messageCachePath "; # capture stdout
+		if ($encryptedFlag) {
+			$gpgCommand .= ">/dev/null ";
+		} else {
+			$gpgCommand .= ">$messageCachePath "; # capture stdout
+		}
 		$gpgCommand .= "2>$cachePathStderr/$fileHash.txt "; # capture stdeerr
 		WriteLog('GpgParse: ' . $fileHash . '; $gpgCommand = ' . $gpgCommand);
 		system($gpgCommand);
