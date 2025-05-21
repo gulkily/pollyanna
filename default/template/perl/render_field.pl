@@ -113,6 +113,18 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 	}
 
 	elsif (
+		$fieldName eq 'gpg_encrypted'
+	) {
+		# item is encrypted
+
+		if ($fieldValue) {
+			$fieldValue = 'Yes';
+		} else {
+			$fieldValue = 'No';
+		}
+	}
+
+	elsif (
 		$fieldName eq 'person_name'
 	) {
 		# author alias, linking to person page
