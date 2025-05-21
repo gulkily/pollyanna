@@ -10,6 +10,8 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 # sub formatfield {
 # sub FieldFormat {
 # sub FormatField {
+# sub GetFormattedAttribute {
+# sub GetAttributeFormatted {
 # outputs $fieldValue after formatting it as needed
 # formatting is based on value of $fieldName
 # if additional datapoint is needed for output, it's read from %rowData
