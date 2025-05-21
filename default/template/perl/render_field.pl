@@ -93,7 +93,8 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fieldName eq 'author_id' ||
 		$fieldName eq 'cookie_id' ||
 		$fieldName eq 'client_id' ||
-		$fieldName eq 'gpg_id'
+		$fieldName eq 'gpg_id' ||
+		$fieldName eq 'gpg_addressee_id'
 	) {
 		# author identifier as 16-character uppercase hexadecimal
 		# example: A0B1C2D3E4F56789

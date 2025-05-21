@@ -320,6 +320,13 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETUR
 			#gpg_naive_regex_encrypted
 			DBAddItemAttribute($fileHash, 'gpg_encrypted', 1);
 			PutFileMessage($fileHash, '(Encrypted message)');
+
+			if ($gpgStderrOutput =~ /([0-9A-F]{16})/) {
+				# get all the fingerprints and add them using DBAddItemAttribute()
+				my $gpgKeyEncrypted = $1;
+				DBAddItemAttribute($fileHash, 'gpg_addressee_id', $gpgKeyEncrypted);
+			}
+
 			WriteLog('GpgParse: $encryptedFlag was true, setting message accordingly');
 			return 1;
 		} else {
