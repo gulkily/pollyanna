@@ -202,6 +202,10 @@ function ShowAll (t, container) { // t = clicked link ; container = document by 
 } // ShowAll()
 
 function ShowAdvanced (force, container) { // show or hide controls based on preferences
+// function ShowLayers () {
+// function UpdateDialogs () {
+// function UpdateWindow () {
+// function UpdateLayers () {
 //handles class=advanced based on 'show_advanced' preference
 //handles class=beginner based on 'beginner' preference
 //force parameter
