@@ -1,7 +1,9 @@
 /* table_sort.js */
 
 function SortTable (t, sortOrder) {
-// TableSort (
+// function TableSort () {
+// function sort_table () {
+// function table_sort () {
 	//alert('DEBUG: SortTable() begins');
 	//caution: bubble sort inside
 
