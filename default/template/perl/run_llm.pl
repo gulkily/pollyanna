@@ -5,7 +5,7 @@ use warnings;
 use 5.010;
 use utf8;
 
-sub RunLlm { # $item ; calls 'run' action on specified item
+sub RunLlm { # $item ; sends item text as prompt to language model and logs a new item with response
 # sub RunGpt {
 	my $item = shift;
 	WriteLog("RunLlm($item)");
