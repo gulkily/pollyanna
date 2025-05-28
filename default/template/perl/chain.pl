@@ -177,8 +177,15 @@ sub AddToChainLog { # $fileHash ; add line to log/chain.log
 	$fileHash = IsItem($fileHash);
 
 	if ($fileHash && $logFilePath) {
-		#look for existin entry, exit if found
-		my $findExistingCommand = "grep ^$fileHash $logFilePath";
+		#look for existing entry, exit if found
+
+		# base command
+		#my $findExistingCommand = "grep ^$fileHash $logFilePath";
+		# ... stop after first match
+		#my $findExistingCommand = "grep -m 1 ^$fileHash $logFilePath";
+		# ... and nullroute stderr to avoid error messages
+		my $findExistingCommand = "grep -m 1 ^$fileHash $logFilePath 2>/dev/null";
+
 		my $findExistingResult = `$findExistingCommand`;
 
 		WriteLog("AddToChainLog: $findExistingCommand returned $findExistingResult");
