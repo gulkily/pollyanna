@@ -1,3 +1,30 @@
+
+sub GetProgressBar {
+	# example use: 				WriteMessage("Verifying Chain: $sequenceNumber/$chainLogLineCount " . GetProgressBar($sequenceNumber, $chainLogLineCount));
+	# todo move this out of utils.pl
+	my $sequenceNumber = shift;
+	my $chainLogLineCount = shift;
+
+	if (!$sequenceNumber || !$chainLogLineCount) {
+		WriteLog('GetProgressBar: warning: $sequenceNumber or $chainLogLineCount is FALSE; caller = ' . join(',', caller));
+		return '';
+	}
+
+	if ($sequenceNumber > $chainLogLineCount) {
+		WriteLog('GetProgressBar: warning: $sequenceNumber > $chainLogLineCount; caller = ' . join(',', caller));
+		return '';
+	}
+
+	my $progress = int(($sequenceNumber / $chainLogLineCount) * 100);
+	my $barLength = 20; # length of the progress bar
+	my $filledLength = int($barLength * ($progress / 100));
+	my $bar = '|' . ('#' x $filledLength) . ('-' x ($barLength - $filledLength)) . '|';
+	return "$bar ($progress%)";
+} # GetProgressBar()
+
+
+
+
 sub GetAvatar { # $authorKey ; returns HTML avatar based on author key, using avatar.template
 	# sub GetAvatarCache {
 	# affected by config/html/avatar_icons
