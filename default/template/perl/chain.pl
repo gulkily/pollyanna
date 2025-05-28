@@ -38,9 +38,20 @@ sub MakeChainIndex { # $import = 1; reads from log/chain.log and puts it into it
 
 			my %return;
 
+			# get the number of lines in the chain log
+			#my $chainLogLineCount = `wc -l html/chain.log | cut -d " " -f 1`;
+			# ... from @addedRecord
+			my $chainLogLineCount = scalar @addedRecord;
+
 			foreach my $currentLine (@addedRecord) {
 				WriteLog("MakeChainIndex: $currentLine");
-				WriteMessage("Verifying Chain: $sequenceNumber");
+
+				# output status message
+				# WriteMessage("Verifying Chain: $sequenceNumber");
+				# ... with expected number of lines
+				WriteMessage("Verifying Chain: $sequenceNumber/$chainLogLineCount");
+				# ... and with progress bar and percentage:
+				#WriteMessage("Verifying Chain: $sequenceNumber/$chainLogLineCount " . GetProgressBar($sequenceNumber, $chainLogLineCount));
 
 				my ($fileHash, $addedTime, $proofHash) = split('\|', $currentLine);
 				my $expectedHash = md5_hex($previousLine . '|' . $fileHash . '|' . $addedTime);
