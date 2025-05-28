@@ -339,7 +339,19 @@ sub WriteLog { # $text; Writes timestamped message to console (stdout) AND log/l
 		}
 
 		#AppendFile("log/log.log", $timestamp . " " . $text); # (happens later)
-		$debugOn = 1; #verbose #quiet mode #quietmode #featureflag
+		$debugOn++; #verbose #quiet mode #quietmode #featureflag
+	}
+
+	# every 1000 calls, re-check if debug mode flag is present
+	if ($debugOn && $debugOn >= 1000) {
+		if (-e 'config/debug') {
+			#WriteLog('WriteLog: re-checking debug mode flag');
+			#$debugOn = -e 'config/debug';
+			$debugOn = 1;
+		} else {
+			#WriteLog('WriteLog: debug mode flag not found, disabling debug mode');
+			$debugOn = 0;
+		}
 	}
 
 	my $charPrefix = '';
