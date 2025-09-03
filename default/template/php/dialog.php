@@ -34,7 +34,7 @@ function GetDialogX ( # body, title, headings, status, menu
 
 			if (GetConfig('setting/admin/js/enable')) {
 				#todo maybe should depend on another setting?
-				$windowTemplate = AddAttributeToTag($windowTemplate, 'a', 'onclick', "if (window.ShowAll && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;");
+				$windowTemplate = AddAttributeToTag($windowTemplate, 'a', 'onclick', "if ((window.ShowAll) && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;");
 			}
 		} else {
 			WriteLog('GetDialogX: $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle . '; dragging = ' . GetConfig('admin/js/dragging'));

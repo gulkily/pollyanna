@@ -159,7 +159,7 @@ sub GetDialogX2 { # \%paramHash ; returns window
 				#$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=skip', 'onclick', "if (window.CollapseWindowFromButton) { return !CollapseWindowFromButton(this); } return false;");
 				#skip button
 
-				$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=expand', 'onclick', "if (window.ShowAll && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;"); #todo add colla
+				$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=expand', 'onclick', "if ((window.ShowAll) && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;"); #todo add colla
 				#expand button
 
 				$windowTitlebar = AddAttributeToTag($windowTitlebar, 'button title=close', 'onclick', "if (window.CloseDialog) { return CloseDialog(this) }");
@@ -229,7 +229,7 @@ sub GetDialogX2 { # \%paramHash ; returns window
 			if (GetConfig('setting/admin/js/enable')) {
 				WriteLog('GetDialogX2: calling AddAttributeToTag; $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle . '; dragging = ' . GetConfig('setting/admin/js/dragging'));
 				#todo maybe should depend on another setting?
-				$windowTemplate = AddAttributeToTag($windowTemplate, 'a', 'onclick', "if (window.ShowAll && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;");
+				$windowTemplate = AddAttributeToTag($windowTemplate, 'a', 'onclick', "if ((window.ShowAll) && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;");
 			}
 			else {
 				WriteLog('GetDialogX2: NOT calling AddAttributeToTag; $showButtons = ' . $showButtons . '; $windowTitle = ' . $windowTitle . '; dragging = ' . GetConfig('setting/admin/js/dragging'));

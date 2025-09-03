@@ -270,7 +270,7 @@ sub GetWidgetExpand { # $parentCount, $url ; gets "More" button widget GetExpand
 		$widgetTemplateHtml = str_replace('/etc.html', $url, $widgetTemplateHtml);
 
 		if (GetConfig('admin/js/enable')) {
-			my $jsTemplate = "if (window.ShowAll && this.removeAttribute) { if (this.style) { this.style.display = 'none'; } return ShowAll(this, this.parentElement); } else { return true; }";
+			my $jsTemplate = "if ((window.ShowAll) && this.removeAttribute) { if (this.style) { this.style.display = 'none'; } return ShowAll(this, this.parentElement); } else { return true; }";
 			if (
 				$parentCount > 10 ||
 				$parentCount < 1 ||

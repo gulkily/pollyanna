@@ -572,7 +572,7 @@ sub GetItemTemplate { # \%file ; returns HTML for outputting one item WITH DIALO
 		# 		# 	$itemTemplate,
 		# 		# 	'a href="/etc.html"', #todo this should link to item itself
 		# 		# 	'onclick',
-		# 		# 	"if (window.ShowAll && this.removeAttribute) { this.removeAttribute('onclick'); return ShowAll(this, this.parentElement.parentElement.parentElement.parentElement.parentElement); } else { return true; }"
+		# 		# 	"if ((window.ShowAll) && this.removeAttribute) { this.removeAttribute('onclick'); return ShowAll(this, this.parentElement.parentElement.parentElement.parentElement.parentElement); } else { return true; }"
 		# 		# );
 		# 	} else {
 		# 		# js off, remove placeholder for widget

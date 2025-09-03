@@ -11,7 +11,7 @@ function CreateDialog (body, title, status) {
 	var newTitlebarText = document.createTextNode(title + ' ');
 	newTitlebar.appendChild(newTitlebarText);
 	var newTitlebarExpandLink = document.createElement('a');
-	newTitlebarExpandLink.setAttribute('onclick', 'onclick="if (window.ShowAll && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;"');
+	newTitlebarExpandLink.setAttribute('onclick', 'onclick="if ((window.ShowAll) && window.GetParentDialog) { return !ShowAll(this, GetParentDialog(this)); } return false;"');
 	newTitlebarExpandLink.setAttribute('href', '#');
 	var newTitlebarExpandLinkText = document.createTextNode('#');
 	newTitlebarExpandLink.appendChild(newTitlebarExpandLinkText);
