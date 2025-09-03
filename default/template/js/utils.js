@@ -732,6 +732,21 @@ function PingUrl (url, ele) { // loads arbitrary url via image or xhr
 	return true;
 } // PingUrl()
 
+function GetParentDialog (el) {
+	if (el) {
+		var parentDialog = el;
+		while (parentDialog && (parentDialog.className != 'dialog') && (parentDialog.className.indexOf('dialog') == -1)) {
+			parentDialog = parentDialog.parentElement;
+		}
+		if (parentDialog) {
+			//alert('DEBUG: GetParentDialog: parentDialog.tagName = ' + parentDialog.tagName);
+			return parentDialog;
+		}
+	}
+	//alert('DEBUG: GetParentDialog: not found');
+	return '';
+} // GetParentDialog()
+
 // function EscapeUrl () {
 // function UriEscape () {
 // function encode () {

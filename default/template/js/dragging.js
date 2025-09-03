@@ -387,21 +387,6 @@ function SetActiveDialog (ths) {
 	return true;
 } // SetActiveDialog()
 
-function GetParentDialog (el) {
-	if (el) {
-		var parentDialog = el;
-		while (parentDialog && (parentDialog.className != 'dialog') && (parentDialog.className.indexOf('dialog') == -1)) {
-			parentDialog = parentDialog.parentElement;
-		}
-		if (parentDialog) {
-			//alert('DEBUG: GetParentDialog: parentDialog.tagName = ' + parentDialog.tagName);
-			return parentDialog;
-		}
-	}
-	//alert('DEBUG: GetParentDialog: not found');
-	return '';
-} // GetParentDialog()
-
 function DialogIsVisible (el) {
 	if (el) {
 		while (el) {
