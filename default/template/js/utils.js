@@ -586,7 +586,9 @@ function GetCookie (cname) { // get cookie value
 
 function GetParentElement (el, parentTagName) {
 // #todo maybe make this more flexible?
+	//alert('DEBUG: GetParentElement() begins');
 	if (el) {
+		//alert('DEBUG: GetParentElement: el.tagName = ' + el.tagName);
 		var parentElement = el;
 		while (parentElement && (parentElement.tagName != parentTagName)) {
 			parentElement = parentElement.parentElement;
@@ -733,9 +735,12 @@ function PingUrl (url, ele) { // loads arbitrary url via image or xhr
 } // PingUrl()
 
 function GetParentDialog (el) {
+	//alert('DEBUG: GetParentDialog() begins');
 	if (el) {
+		//alert('DEBUG: GetParentDialog: el.tagName = ' + el.tagName);
 		var parentDialog = el;
 		while (parentDialog && (parentDialog.className != 'dialog') && (parentDialog.className.indexOf('dialog') == -1 || parentDialog.className.indexOf('dialogAnchor') != -1)) {
+			//alert('DEBUG: GetParentDialog: parentDialog.tagName = ' + parentDialog.tagName + ', className = ' + parentDialog.className);
 			parentDialog = parentDialog.parentElement;
 		}
 		if (parentDialog) {

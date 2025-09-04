@@ -108,11 +108,16 @@ function ShowAll (t, container) { // t = clicked link ; container = document by 
 		return false;
 	}
 
+	//alert('DEBUG: ShowAll()');
+
 	var gt = unescape('%3E');
 
 	if (!container) {
+		//alert('DEBUG: ShowAll: container missing, defaulting to document');
 		container = document;
 	}
+
+	//alert('DEBUG: ShowAll: container = ' + container.nodeName);
 
 	var isMore = 1; // if 0, it is 'Less' link
 
@@ -133,6 +138,8 @@ function ShowAll (t, container) { // t = clicked link ; container = document by 
 		isMore = 0;
 	}
 
+	//alert('DEBUG: ShowAll: isMore = ' + isMore);
+
 	if (isMore && container.getElementsByClassName) {
 		// change link caption, there are different variations
 		if (t.innerHTML == 'More') {
@@ -152,6 +159,7 @@ function ShowAll (t, container) { // t = clicked link ; container = document by 
 		display = 'initial';
 
 		var elements = container.getElementsByClassName('advanced');
+		//alert('DEBUG: ShowAll: found ' + elements.length + ' advanced elements');
 		for (var i = 0; i < elements.length; i++) {
 			SetElementVisible(elements[i], display, '$colorHighlightAdvanced', 0);
 		}
