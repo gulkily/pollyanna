@@ -735,7 +735,7 @@ function PingUrl (url, ele) { // loads arbitrary url via image or xhr
 function GetParentDialog (el) {
 	if (el) {
 		var parentDialog = el;
-		while (parentDialog && (parentDialog.className != 'dialog') && (parentDialog.className.indexOf('dialog') == -1)) {
+		while (parentDialog && (parentDialog.className != 'dialog') && (parentDialog.className.indexOf('dialog') == -1 || parentDialog.className.indexOf('dialogAnchor') != -1)) {
 			parentDialog = parentDialog.parentElement;
 		}
 		if (parentDialog) {
