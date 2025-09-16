@@ -856,20 +856,25 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 						WriteLog('route.php: $cookieAlias = ' . $cookieAlias);
 
-						if ($cookie && $cookieAlias) {
-							$cookieLookup .= '<br>Alias: ' . $cookieAlias;
-							$cookieLookup .= '<br>Score: ' . GetScore($cookie);
-							$cookieLookup .= '<br>Avatar: ' . GetAvatar($cookie, $cookieAlias);
+						if ($cookie) {
+							if ($cookieAlias) {
+								$cookieLookup .= '<br>Alias: ' . $cookieAlias;
+								$cookieLookup .= '<br>Score: ' . GetScore($cookie);
+								$cookieLookup .= '<br>Avatar: ' . GetAvatar($cookie, $cookieAlias);
 
-							$cookieNotice = 'Cookie: ' . $currentCookie . $cookieLookup;
+								$cookieNotice = 'Cookie: ' . $currentCookie . $cookieLookup;
 
-							$cookieNotice = '<span class=advanced>' . $cookieNotice . '</span>';
-							$cookieNotice = '<a href="/session.html">You are signed in as ' . $cookieAlias . '</a><br>' . "\n" . $cookieNotice;
-	
-							$cookieNotice = '<p>' . $cookieNotice . '</p>';
+								$cookieNotice = '<span class=advanced>' . $cookieNotice . '</span>';
+								$cookieNotice = '<a href="/session.html">You are signed in as ' . $cookieAlias . '</a><br>' . "\n" . $cookieNotice;
 
-							#todo we shouldn't have to AddAttributeToTag() manually here
-							$cookieNotice = AddAttributeToTag(GetDialogX($cookieNotice, 'CookieInfo', '', '', ''), 'table', 'id', 'CookieInfo');
+								$cookieNotice = '<p>' . $cookieNotice . '</p>';
+
+								#todo we shouldn't have to AddAttributeToTag() manually here
+								$cookieNotice = AddAttributeToTag(GetDialogX($cookieNotice, 'CookieInfo', '', '', ''), 'table', 'id', 'CookieInfo');
+							} else {
+								# no alias probably means public key has not been published
+								# we should try to trigger publishing the public key #todo
+							}
 						}
 						else {
 							$cookieNotice = '
