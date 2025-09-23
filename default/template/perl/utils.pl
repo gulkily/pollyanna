@@ -1190,6 +1190,80 @@ sub GetFile { # Gets the contents of file $fileName
 	#todo do something for a file which is missing
 } # GetFile()
 
+sub GetFileMimeType { # $fileName ; returns MIME type using the `file` utility when available
+# sub GetMimeType {
+# sub GetFileType {
+	my $fileName = shift;
+	if (!$fileName) {
+		return '';
+	}
+
+	if (!_IsConfigEnabled('setting/admin/index/mime_type_detection')) {
+		return '';
+	}
+
+	chomp $fileName;
+
+	if ($fileName =~ m/^([0-9a-zA-Z\/\._:\-]+)$/) {
+		$fileName = $1;
+	} else {
+		WriteLog('GetFileMimeType: warning: $fileName failed sanity check; $fileName = ' . $fileName);
+		return '';
+	}
+
+	if (!-e $fileName || -d $fileName) {
+		return '';
+	}
+
+	state %mimeCache;
+	if (defined($mimeCache{$fileName})) {
+		return $mimeCache{$fileName};
+	}
+
+	state $fileCommandAvailable;
+	state $fileCommandPath;
+	if (!defined($fileCommandAvailable)) {
+		$fileCommandAvailable = 0;
+		if ($ENV{'PATH'}) {
+			for my $dir (split(/:/, $ENV{'PATH'})) {
+				next if !$dir;
+				my $candidate = $dir . '/file';
+				if (-x $candidate) {
+					$fileCommandPath = $candidate;
+					$fileCommandAvailable = 1;
+					last;
+				}
+			}
+		}
+}
+
+	if (!$fileCommandAvailable) {
+		$mimeCache{$fileName} = '';
+		return '';
+	}
+
+	my $mimeType = '';
+	if ($fileCommandPath && open(my $fh, '-|', $fileCommandPath, '--brief', '--mime-type', '--', $fileName)) {
+		$mimeType = <$fh> // '';
+		chomp $mimeType;
+		close $fh;
+	} else {
+		WriteLog('GetFileMimeType: warning: failed to execute `file`; caching failure');
+		$fileCommandAvailable = 0;
+		$mimeCache{$fileName} = '';
+		return '';
+	}
+
+	if ($mimeType && $mimeType =~ m/^([A-Za-z0-9][A-Za-z0-9.+-]*\/[A-Za-z0-9.+-]+)$/) {
+		$mimeType = lc $1;
+		$mimeCache{$fileName} = $mimeType;
+		return $mimeCache{$fileName};
+	}
+
+	$mimeCache{$fileName} = '';
+	return '';
+} # GetFileMimeType()
+
 sub GetTime () { # Returns time in epoch format.
 	# Just returns time() for now, but allows for converting to 1900-epoch time
 	# instead of Unix epoch
@@ -2144,6 +2218,12 @@ sub IsImageFile { # $file ; returns 1 if image file, 0 if not
 		}
 	}
 
+	my $mimeType = GetFileMimeType($file);
+	if ($mimeType && $mimeType =~ m/^image\//) {
+		WriteLog('IsImageFile: $file = ' . $file . '; TRUE by MIME; $mimeType = ' . $mimeType . '; caller = ' . join(',', caller));
+		return 1;
+	}
+
 	WriteLog('IsImageFile: $file = ' . $file . '; FALSE; caller = ' . join(',', caller));
 
 	return 0;
@@ -2172,6 +2252,63 @@ sub IsTextFile { # $file ; returns 1 if txt file, 0 if not
 	}
 	return 0;
 } # IsTextFile()
+
+sub IsLikelyBinaryFile { # $file ; returns 1 if perl's -B thinks file is binary
+	my $file = shift;
+	if (!$file) {
+		return 0;
+	}
+
+	chomp $file;
+
+	if ($file =~ m/^([0-9a-zA-Z\/\._:\-]+)$/) {
+		$file = $1;
+	} else {
+		WriteLog('IsLikelyBinaryFile: warning: $file failed sanity check; $file = ' . $file);
+		return 0;
+	}
+
+	if (!-e $file || -d $file) {
+		return 0;
+	}
+
+	my $sample;
+	if (open(my $fh, '<:raw', $file)) {
+		read($fh, $sample, 4096);
+		close $fh;
+	} else {
+		WriteLog('IsLikelyBinaryFile: warning: failed to open file for sampling; $file = ' . $file);
+		$sample = '';
+	}
+
+	if (defined $sample && length $sample) {
+		if (index($sample, "\0") != -1) {
+			WriteLog('IsLikelyBinaryFile: detected NUL byte in sample; $file = ' . $file);
+			return 1;
+		}
+
+		my $len = length($sample);
+		my $nonPrintable = 0;
+		for my $char (split(//, $sample)) {
+			my $ord = ord($char);
+			if ($ord < 9 || ($ord > 13 && $ord < 32) || $ord == 127) {
+				$nonPrintable++;
+			}
+		}
+
+		if ($len && ($nonPrintable / $len) > 0.30) {
+			WriteLog('IsLikelyBinaryFile: detected high control-char ratio; $file = ' . $file);
+			return 1;
+		}
+	}
+
+	if (-B $file) {
+		WriteLog('IsLikelyBinaryFile: TRUE; $file = ' . $file . '; caller = ' . join(',', caller));
+		return 1;
+	}
+
+	return 0;
+} # IsLikelyBinaryFile()
 
 sub IsSaneFilename {
 	# sub IsValidFile {
