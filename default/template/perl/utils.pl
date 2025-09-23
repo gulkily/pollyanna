@@ -1198,7 +1198,7 @@ sub GetFileMimeType { # $fileName ; returns MIME type using the `file` utility w
 		return '';
 	}
 
-	if (!_IsConfigEnabled('setting/admin/index/mime_type_detection')) {
+	if (!GetConfig('setting/admin/index/mime_type_detection')) {
 		return '';
 	}
 
