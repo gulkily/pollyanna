@@ -38,8 +38,20 @@ sub trim { # trims whitespace from beginning and end of $string
 	my $s = shift;
 
 	if (defined($s)) {
-		$s =~ s/\s+$//g;
-		$s =~ s/^\s+//g;
+		my $ok = eval {
+			$s =~ s/\s+$//g;
+			$s =~ s/^\s+//g;
+			1;
+		};
+
+		if (!$ok) {
+			my $bytes = $s;
+			Encode::_utf8_off($bytes); # fall back to byte-oriented trimming when invalid utf8 is present
+			$bytes =~ s/\s+$//g;
+			$bytes =~ s/^\s+//g;
+			$s = $bytes;
+		}
+
 		return $s;
 	}
 
