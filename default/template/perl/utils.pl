@@ -1186,7 +1186,7 @@ sub GetFile { # Gets the contents of file $fileName
 		WriteLog('GetFile: warning: open failed! $fileName = ' . $fileName);
 	}
 
-	return;
+	return undef;
 	#todo do something for a file which is missing
 } # GetFile()
 
