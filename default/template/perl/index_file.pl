@@ -113,6 +113,9 @@ sub IndexFile { # $file, \%flags ; calls IndexTextFile() or IndexImageFile() bas
 
 	my $indexSuccess = 0;
 
+	my $mimeType = '';
+	my $handledByMime = 0;
+
 	my $ext = lc(GetFileExtension($file));
 
 	# THREADS MODE IS NOT FINISHED
@@ -121,119 +124,139 @@ sub IndexFile { # $file, \%flags ; calls IndexTextFile() or IndexImageFile() bas
 	# IF TURNING ON, UNCOMMENT 'use' STATEMENT
 	# AT THE TOP OF THIS FILE AS WELL
 
-	if ($ext eq 'txt') {
-		WriteLog('IndexFile: calling IndexTextFile()');
-
-		if ($useThreads) {
-			my $thr = threads->create('IndexTextFile', $file);
-			$indexSuccess = $thr->join();
-			$indexSuccess = 1;
-			#todo this should return file hash
-		} else {
-			$indexSuccess = IndexTextFile($file, \%flags); #IndexFile()
-			if (!$indexSuccess) {
-				WriteLog('IndexFile: warning: IndexTextFile() returned FALSE');
-				$indexSuccess = 0;
+	if (!$handledByMime) {
+		if ($ext eq 'txt') {
+			if (GetConfig('setting/admin/index/text_binary_guard') && IsLikelyBinaryFile($file)) {
+				WriteMessage('IndexFile: skipping text indexing (binary content) ' . $file);
+				WriteLog('IndexFile: skipping text indexing; binary content detected; $file = ' . $file);
+				return '';
 			}
-		}
 
-		if (GetConfig('setting/admin/index/add_dir_as_hashtag')) {
-			# add each subdirectory as an extra hashtag to item
-			# for example txt/foo/bar/abc.txt will add #foo and #bar tags
-			my $fileLocalPath = $file;
-			$fileLocalPath = str_replace(GetDir('txt'), '', $file);
-			$fileLocalPath = substr($fileLocalPath, 0, rindex($fileLocalPath, '/')); #just the path
-			my @dirTags = split('/', $fileLocalPath);
+			$mimeType = GetFileMimeType($file);
+			if ($mimeType && $mimeType =~ m/^image\//) {
+				WriteLog('IndexFile: MIME indicates image content; delegating to IndexImageFile()');
+				$indexSuccess = IndexImageFile($file);
+				$handledByMime = 1;
+				if (!$indexSuccess) {
+					WriteLog('IndexFile: warning: IndexImageFile() via MIME returned FALSE; $mimeType = ' . $mimeType);
+				}
+			}
 
-			WriteLog('IndexFile: add_dir_as_hashtag: $fileLocalPath = ' . $fileLocalPath . '; @dirTags: ' . join(',', @dirTags));
+			if (!$handledByMime) {
+				WriteLog('IndexFile: calling IndexTextFile()');
 
-			if (@dirTags) {
-				foreach my $dirTag (@dirTags) {
-					$dirTag = trim($dirTag);
-					if ($dirTag =~ m/([0-9a-zA-Z_-]+)/ && length($dirTag) > 2) {
-						$dirTag = $1;
-						DBAddLabel($fileHash, 0, $dirTag);
-					} else {
-						WriteLog('IndexFile: warning: $dirTag failed sanity check; $dirTag = ' . $dirTag);
+				if ($useThreads) {
+					my $thr = threads->create('IndexTextFile', $file);
+					$indexSuccess = $thr->join();
+					$indexSuccess = 1;
+					#todo this should return file hash
+				} else {
+					$indexSuccess = IndexTextFile($file, \%flags); #IndexFile()
+					if (!$indexSuccess) {
+						WriteLog('IndexFile: warning: IndexTextFile() returned FALSE');
+						$indexSuccess = 0;
 					}
 				}
 			}
-		} # add_dir_as_hashtag
-	} # ($ext eq 'txt')
 
-	if ($ext eq 'html' && GetConfig('admin/html/enable')) { #todo enable once IndexHtmlFile() is better
-		WriteLog('IndexFile: calling IndexHtmlFile()');
-		$indexSuccess = IndexHtmlFile($file);
+			if (GetConfig('setting/admin/index/add_dir_as_hashtag')) {
+				# add each subdirectory as an extra hashtag to item
+				# for example txt/foo/bar/abc.txt will add #foo and #bar tags
+				my $fileLocalPath = $file;
+				$fileLocalPath = str_replace(GetDir('txt'), '', $file);
+				$fileLocalPath = substr($fileLocalPath, 0, rindex($fileLocalPath, '/')); #just the path
+				my @dirTags = split('/', $fileLocalPath);
 
-		if (!$indexSuccess) {
-			WriteLog('IndexFile: warning: IndexHtmlFile $indexSuccess was FALSE');
-			$indexSuccess = 0;
-		}
-	} # if ($ext eq 'html')
+				WriteLog('IndexFile: add_dir_as_hashtag: $fileLocalPath = ' . $fileLocalPath . '; @dirTags: ' . join(',', @dirTags));
 
-	if ($ext eq 'zip' && GetConfig('admin/zip/enable')) {
-		WriteLog('IndexFile: calling IndexZipFile()');
-		$indexSuccess = IndexZipFile($file);
+				if (@dirTags) {
+					foreach my $dirTag (@dirTags) {
+						$dirTag = trim($dirTag);
+						if ($dirTag =~ m/([0-9a-zA-Z_-]+)/ && length($dirTag) > 2) {
+							$dirTag = $1;
+							DBAddLabel($fileHash, 0, $dirTag);
+						} else {
+							WriteLog('IndexFile: warning: $dirTag failed sanity check; $dirTag = ' . $dirTag);
+						}
+					}
+				}
+			} # add_dir_as_hashtag
+		} # ($ext eq 'txt')
 
-		if (!$indexSuccess) {
-			WriteLog('IndexFile: warning: IndexZipFile() returned FALSE; $indexSuccess was FALSE');
-			$indexSuccess = 0;
-		}
-	} # if ($ext eq 'zip')
+		if ($ext eq 'html' && GetConfig('admin/html/enable')) { #todo enable once IndexHtmlFile() is better
+			WriteLog('IndexFile: calling IndexHtmlFile()');
+			$indexSuccess = IndexHtmlFile($file);
 
-	if ($ext eq 'cpp' && GetConfig('admin/cpp/enable')) {
-		WriteLog('IndexFile: calling IndexCppFile()');
-		$indexSuccess = IndexCppFile($file);
+			if (!$indexSuccess) {
+				WriteLog('IndexFile: warning: IndexHtmlFile $indexSuccess was FALSE');
+				$indexSuccess = 0;
+			}
+		} # if ($ext eq 'html')
 
-		if (!$indexSuccess) {
-			WriteLog('IndexFile: warning: IndexCppFile() returned FALSE; $indexSuccess was FALSE');
-			$indexSuccess = 0;
-		}
-	} # if ($ext eq 'cpp')
-	if ($ext eq 'py' && GetConfig('admin/python3/enable')) {
-		WriteLog('IndexFile: calling IndexPyFile()');
-		$indexSuccess = IndexPyFile($file);
+		if ($ext eq 'zip' && GetConfig('admin/zip/enable')) {
+			WriteLog('IndexFile: calling IndexZipFile()');
+			$indexSuccess = IndexZipFile($file);
 
-		if (!$indexSuccess) {
-			WriteLog('IndexFile: warning: IndexPyFile() returned FALSE; $indexSuccess was FALSE');
-			$indexSuccess = 0;
-		}
-	} # if ($ext eq 'py')
-	if ($ext eq 'pl' && GetConfig('admin/pl/enable')) {
-		WriteLog('IndexFile: calling IndexPerlFile()');
-		$indexSuccess = IndexPerlFile($file);
+			if (!$indexSuccess) {
+				WriteLog('IndexFile: warning: IndexZipFile() returned FALSE; $indexSuccess was FALSE');
+				$indexSuccess = 0;
+			}
+		} # if ($ext eq 'zip')
 
-		if (!$indexSuccess) {
-			WriteLog('IndexFile: warning: IndexPerlFile() returned FALSE; $indexSuccess was FALSE');
-			$indexSuccess = 0;
-		}
-	} # if ($ext eq 'pl')
+		if ($ext eq 'cpp' && GetConfig('admin/cpp/enable')) {
+			WriteLog('IndexFile: calling IndexCppFile()');
+			$indexSuccess = IndexCppFile($file);
 
-	if (GetConfig('admin/image/enable')) {
-		#imagetypes
-		my @allowedImages = GetConfigValueAsArray('setting/admin/image/allow_files');
-		#my @allowedImages = qw(png gif jpg jpeg bmp svg webp jfif tiff tff);
-		for my $allowedImage (@allowedImages) {
-			if ($ext eq $allowedImage) {
-				WriteLog('IndexFile: calling IndexImageFile()');
-				$indexSuccess = IndexImageFile($file);
-				last;
+			if (!$indexSuccess) {
+				WriteLog('IndexFile: warning: IndexCppFile() returned FALSE; $indexSuccess was FALSE');
+				$indexSuccess = 0;
+			}
+		} # if ($ext eq 'cpp')
+		if ($ext eq 'py' && GetConfig('admin/python3/enable')) {
+			WriteLog('IndexFile: calling IndexPyFile()');
+			$indexSuccess = IndexPyFile($file);
+
+			if (!$indexSuccess) {
+				WriteLog('IndexFile: warning: IndexPyFile() returned FALSE; $indexSuccess was FALSE');
+				$indexSuccess = 0;
+			}
+		} # if ($ext eq 'py')
+		if ($ext eq 'pl' && GetConfig('admin/pl/enable')) {
+			WriteLog('IndexFile: calling IndexPerlFile()');
+			$indexSuccess = IndexPerlFile($file);
+
+			if (!$indexSuccess) {
+				WriteLog('IndexFile: warning: IndexPerlFile() returned FALSE; $indexSuccess was FALSE');
+				$indexSuccess = 0;
+			}
+		} # if ($ext eq 'pl')
+
+		if (GetConfig('admin/image/enable')) {
+			#imagetypes
+			my @allowedImages = GetConfigValueAsArray('setting/admin/image/allow_files');
+			#my @allowedImages = qw(png gif jpg jpeg bmp svg webp jfif tiff tff);
+			for my $allowedImage (@allowedImages) {
+				if ($ext eq $allowedImage) {
+					WriteLog('IndexFile: calling IndexImageFile()');
+					$indexSuccess = IndexImageFile($file);
+					last;
+				}
 			}
 		}
-	}
 
-	if (GetConfig('admin/video/enable')) {
-		#videotypes
-		my @allowedVideos = qw(mp4);
+		if (GetConfig('admin/video/enable')) {
+			#videotypes
+			my @allowedVideos = qw(mp4);
 
-		for my $allowedVideo (@allowedVideos) {
-			if ($ext eq $allowedVideo) {
-				WriteLog('IndexFile: calling IndexVideoFile()');
-				$indexSuccess = IndexVideoFile($file);
-				last;
+			for my $allowedVideo (@allowedVideos) {
+				if ($ext eq $allowedVideo) {
+					WriteLog('IndexFile: calling IndexVideoFile()');
+					$indexSuccess = IndexVideoFile($file);
+					last;
+				}
 			}
 		}
-	}
+	} # (!$handledByMime)
 
 	if ($indexSuccess) {
 		WriteLog('IndexFile: $indexSuccess = ' . $indexSuccess);
