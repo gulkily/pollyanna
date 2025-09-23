@@ -1152,21 +1152,36 @@ sub GetFile { # Gets the contents of file $fileName
 	# default to reading a max of 2MB of the file. #scaling #bug #todo
 
 	WriteLog('GetFile: trying to open file...');
-	use open qw(:utf8);
 	if (
 		-e $fileName # file exists
 			&&
 		!-d $fileName # not a directory
 			&&
-		open(my $file, "<", $fileName) # opens successfully
+		open(my $file, '<:raw', $fileName) # opens successfully
 	) {
 		WriteLog('GetFile: opened successfully, trying to read...');
-		my $return;
-		read($file, $return, $length);
-		#WriteLog('GetFile: read success, returning.');
-		#WriteLog('GetFile: read success, returning. $return = ' . $return);
-		#WriteLog('GetFile: read success, returning. length($return) = ' . ($return ? length($return) : 'FALSE'));
-		return $return;
+		my $raw = '';
+		read($file, $raw, $length);
+		close $file;
+
+		if (!length $raw) {
+			return '';
+		}
+
+		my $decoded;
+		my $ok = eval {
+			$decoded = Encode::decode('UTF-8', $raw, Encode::FB_CROAK);
+			1;
+		};
+
+		if ($ok) {
+			return $decoded;
+		}
+
+		WriteLog('GetFile: warning: invalid UTF-8 detected; returning byte buffer instead');
+		my $bytes = $raw;
+		Encode::_utf8_off($bytes);
+		return $bytes;
 	} else {
 		WriteLog('GetFile: warning: open failed! $fileName = ' . $fileName);
 	}
