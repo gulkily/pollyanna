@@ -27,6 +27,49 @@ while (my $argFound = shift) {
 	push @argsFound, $argFound;
 }
 
+sub GetGpgKeyCreationTime { # $fingerprint ; returns epoch timestamp from local keyring
+	my $fingerprint = shift;
+	if (!$fingerprint) {
+		return '';
+	}
+
+	if ($fingerprint =~ m/^([0-9A-Fa-f]{16,40})$/) {
+		$fingerprint = uc $1;
+	} else {
+		WriteLog('GetGpgKeyCreationTime: warning: fingerprint failed sanity check');
+		return '';
+	}
+
+	state $gpgBinary;
+	if (!$gpgBinary) {
+		$gpgBinary = 'gpg';
+		if (GetConfig('admin/gpg/use_gpg2')) {
+			$gpgBinary = 'gpg';
+		}
+	}
+
+	my @command = ($gpgBinary, '--no-default-keyring', '--keyring', 'rs.gpg', '--with-colons', '--list-keys', $fingerprint);
+
+	my $creationTime = '';
+	if (open(my $fh, '-|', @command)) {
+		while (my $line = <$fh>) {
+			chomp $line;
+			next if !$line;
+			next if index($line, 'pub:') != 0;
+			my @fields = split(/:/, $line);
+			if (defined $fields[5] && $fields[5] =~ m/^([0-9]{10,})$/) {
+				$creationTime = $1;
+				last;
+			}
+		}
+		close $fh;
+	} else {
+		WriteLog('GetGpgKeyCreationTime: warning: failed to execute gpg for fingerprint ' . $fingerprint);
+	}
+
+	return $creationTime;
+} # GetGpgKeyCreationTime()
+
 sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETURNS AUTHOR'S FINGERPRINT
 # $filePath = path to file containing the text
 # RETURNS AUTHOR'S FINGERPRINT
@@ -90,7 +133,8 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETUR
 		my $fileContents = GetFile($filePath);
 
 		#gpg_strings
-		my $gpgPubkey = '-----BEGIN PGP PUBLIC KEY BLOCK-----';
+		my $gpgPubkeyBegin = '-----BEGIN PGP PUBLIC KEY BLOCK-----';
+		my $gpgPubkeyEnd   = '-----END PGP PUBLIC KEY BLOCK-----';
 		my $gpgSigned = '-----BEGIN PGP SIGNED MESSAGE-----';
 		my $gpgEncrypted = '-----BEGIN PGP MESSAGE-----';
 
@@ -108,7 +152,7 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETUR
 		}
 
 		# basic message classification covering only three cases, exclusively
-		if (index($fileContents, $gpgPubkey) > -1) {
+		if (index($fileContents, $gpgPubkeyBegin) > -1 && index($fileContents, $gpgPubkeyEnd) > -1) {
 			#gpg_pubkey # public key
 			#gpg_pubkey # public key
 			#gpg_pubkey # public key
@@ -187,11 +231,11 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETUR
 			##########
 			my $gpgKeyPub = '';
 
-			if ($gpgStderrOutput =~ /([0-9A-F]{16})/) { # username allowed characters chars filter is here
-				$gpgKeyPub = $1;
-				DBAddItemAttribute($fileHash, 'gpg_id', $gpgKeyPub);
+		if ($gpgStderrOutput =~ /([0-9A-F]{16})/) { # username allowed characters chars filter is here
+			$gpgKeyPub = $1;
+			DBAddItemAttribute($fileHash, 'gpg_id', $gpgKeyPub);
 
-				if ($gpgStderrOutput =~ m/"([ a-zA-Z0-9<>&\@.()_'"\/\\-]+)"/) {
+			if ($gpgStderrOutput =~ m/"([ a-zA-Z0-9<>&\@.()_'"\/\\-]+)"/) {
 					# we found something which looks like a name
 					my $aliasReturned = $1;
 					$aliasReturned =~ s/\<(.+\@.+?)\>//g; # if has something which looks like an email, remove it
@@ -209,6 +253,18 @@ sub GpgParse { # $filePath ; parses file and stores gpg response in cache, RETUR
 						# sub DBAddLabel() { # $fileHash, $ballotTime, $voteValue, $signedBy, $sourceHash ; Adds a new vote (tag) record to an item based on vote/ token
 
 						DBAddItemAttribute($fileHash, 'gpg_alias', $aliasReturned);
+
+						if (GetConfig('setting/admin/gpg/index_creation_time')) {
+							my $existingCreationTime = SqliteGetValue("SELECT value FROM item_attribute WHERE attribute = 'gpg_creation_timestamp' AND file_hash = '$fileHash' ORDER BY key DESC LIMIT 1");
+							if (!$existingCreationTime) {
+								my $creationTime = GetGpgKeyCreationTime($gpgKeyPub);
+								if ($creationTime) {
+									DBAddItemAttribute($fileHash, 'gpg_creation_timestamp', $creationTime);
+								} else {
+									WriteLog('GpgParse: warning: creation time unavailable for fingerprint ' . $gpgKeyPub);
+								}
+							}
+						}
 						#DBAddItemAttribute($fileHash, 'title', "$aliasReturned has registered (public key)"); #todo templatize
 						# DBAddItemAttribute($fileHash, 'title', "[Public Key for $aliasReturned]"); #todo templatize
 						# this is commented because it's already done in IndexTextFile()

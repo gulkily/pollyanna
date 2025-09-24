@@ -1547,7 +1547,7 @@ sub DBGetAddedTime { # return added time for item specified
 		FROM item_attribute
 		WHERE
 			file_hash = ? AND
-			attribute IN ('chain_timestamp', 'gpg_timestamp', 'puzzle_timestamp', 'self_timestamp')
+			attribute IN ('chain_timestamp', 'gpg_timestamp', 'gpg_creation_timestamp', 'puzzle_timestamp', 'self_timestamp')
 	";
 	my @queryParams;
 	push @queryParams, $fileHash;
