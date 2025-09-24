@@ -9,6 +9,8 @@ Pollyanna is an accessibility-first forum framework; use this guide to stay alig
 - Configuration and state belong in `config/` and `cache/`.
 - There's really no testing framework at this time.
 - Indexing safeguards: `setting/admin/index/text_binary_guard` (default on) skips binary-looking `.txt` files; opt into `setting/admin/index/mime_type_detection` when you want mislabelled files auto-routed via the system `file(1)` utility.
+- Do **not** run destructive filesystem commands (`rm`, `mv`, `rmdir`, etc.) without explicit approval from the user.
+- Do **not** run build, index, or test commands; the user handles all execution and validation. Focus on writing plans and code changes only.
 
 ## Build, Test, and Development Commands
 - `./build.sh` or `hike build` bootstraps the environment, syncs template Perl scripts, and runs the typed build pipeline (`perl -T ...`).
