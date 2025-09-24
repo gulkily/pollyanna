@@ -48,6 +48,8 @@ if (GetConfig('setting/admin/database_type') eq 'sqlite') {
 }
 
 my $SCRIPTDIR = cwd();
+WriteLog("build.pl: cwd() = $SCRIPTDIR");
+
 # sanity check $SCRIPTDIR for bad characters, then set $SCRIPTDIR to a safe value
 if ($SCRIPTDIR =~ m/^([a-zA-Z0-9\/\.\-_])+$/) {
 	$SCRIPTDIR = $1;
@@ -55,8 +57,11 @@ if ($SCRIPTDIR =~ m/^([a-zA-Z0-9\/\.\-_])+$/) {
 } else {
 	die "Error: $SCRIPTDIR failed sanity check";
 }
+WriteLog("build.pl: SCRIPTDIR = $SCRIPTDIR");
 
 my $HTMLDIR = $SCRIPTDIR . '/html';
+WriteLog("build.pl: HTMLDIR = $HTMLDIR");
+
 # sanity check $HTMLDIR for bad characters, then set $HTMLDIR to a safe value
 if ($HTMLDIR =~ m/^([a-zA-Z0-9\/\.\-])+$/) {
 	$HTMLDIR = $1;
@@ -96,6 +101,7 @@ if (!-e $TXTDIR) {
 }
 
 if (!-e $HTMLDIR . '/chain.log') {
+	WriteLog('build.pl: creating ' . $HTMLDIR . '/chain.log');
 	PutFile($HTMLDIR . '/chain.log', '');
 }
 
