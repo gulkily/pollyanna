@@ -51,7 +51,7 @@ my $SCRIPTDIR = cwd();
 WriteLog("build.pl: cwd() = $SCRIPTDIR");
 
 # sanity check $SCRIPTDIR for bad characters, then set $SCRIPTDIR to a safe value
-if ($SCRIPTDIR =~ m/^([a-zA-Z0-9\/\.\-_])+$/) {
+if ($SCRIPTDIR =~ m/^([a-zA-Z0-9\/\.\-_]+)$/) {
 	$SCRIPTDIR = $1;
 	# sanity check passed
 } else {
@@ -63,7 +63,7 @@ my $HTMLDIR = $SCRIPTDIR . '/html';
 WriteLog("build.pl: HTMLDIR = $HTMLDIR");
 
 # sanity check $HTMLDIR for bad characters, then set $HTMLDIR to a safe value
-if ($HTMLDIR =~ m/^([a-zA-Z0-9\/\.\-])+$/) {
+if ($HTMLDIR =~ m/^([a-zA-Z0-9\/\.\-_]+)$/) {
 	$HTMLDIR = $1;
 	# sanity check passed
 } else {
