@@ -1,0 +1,54 @@
+# UTF-8 Bug Fix Prompt
+
+## Step 1: Add Comments for Required Changes
+
+The following changes need to be applied to both:
+- default/theme/sqlite-dbi/template/perl/sqlite.pl
+- default/template/perl/sqlite.pl
+
+Add these comments at the top of each file after the use statements:
+
+```perl
+# UTF-8 Fixes Required:
+# 1. Add 'use utf8' directive
+# 2. Add 'use Encode qw(encode_utf8 decode_utf8)' for UTF-8 encoding/decoding
+# 3. Enable sqlite_unicode in DBI connection
+# 4. Add UTF-8 encoding when storing data in SQLite
+# 5. Add UTF-8 decoding when retrieving data from SQLite
+```
+
+## Step 2: Implement the Changes
+
+1. Add these lines after 'use warnings':
+```perl
+use utf8;
+use Encode qw(encode_utf8 decode_utf8);
+```
+
+2. In the database connection code (usually in InitializeCache or similar function), add sqlite_unicode parameter:
+```perl
+$dbh = DBI->connect(
+    "dbi:SQLite:dbname=$dbFile",
+    "",
+    "",
+    {
+        RaiseError => 1,
+        AutoCommit => 1,
+        sqlite_busy_timeout => 5000,
+        sqlite_unicode => 1  # Enable proper Unicode support
+    }
+);
+```
+
+3. In data retrieval functions (like GetCache), decode the data:
+```perl
+my $value = decode_utf8($row->[0]);  # Properly decode UTF-8 data from DB
+```
+
+4. In data storage functions (like PutCache), encode the data:
+```perl
+my $encoded_content = encode_utf8($content);
+# Use $encoded_content in your INSERT/UPDATE statements
+```
+
+These changes ensure proper handling of UTF-8 text throughout the SQLite storage and retrieval process, preventing character encoding issues.
