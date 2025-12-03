@@ -1193,6 +1193,14 @@ function setcookie2 ($key, $value, $updateCurrent = 0) { // sets cookie with ie3
 	$cookieDate = date($cookieDateFormat, time() + 86400*2*365) . ' GMT';
 	// timezone hard-coding is not important here
 
+	if (strpos($key, "\n") != -1) {
+		WriteLog('setcookie2: warning: $key contained newline character');
+		$key = str_replace("\n", '', $key);
+	}
+	if (strpos($value, "\n") != -1) {
+		WriteLog('setcookie2: warning: $value contained newline character');
+		$value = str_replace("\n", '', $value);
+	}
 	Header('Set-Cookie: ' . $key . '=' . $value . '; expires=' . $cookieDate . '; path=/', false);
 
 	if ($updateCurrent) {
