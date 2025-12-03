@@ -891,7 +891,11 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							$cookieNotice = AddAttributeToTag(GetDialogX($cookieNotice, 'CookieInfo', '', '', ''), 'table', 'id', 'CookieInfo');
 						}
 
-						$html = str_ireplace('</body>', $cookieNotice . '</body>', $html);
+						if ($cookieNotice) {
+							$html = str_ireplace('</body>', $cookieNotice . '</body>', $html);
+						} else {
+							WriteLog('route.php: warning: $cookieNotice is FALSE');
+						}
 					}
 
 					if (GetConfig('setting/admin/php/route_notify_printed_time') && !$skipPrintedNotice) { # route.php -- page printed time notice
