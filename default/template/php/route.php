@@ -891,7 +891,7 @@ if (GetConfig('setting/admin/php/route_enable')) {
 							$cookieNotice = AddAttributeToTag(GetDialogX($cookieNotice, 'CookieInfo', '', '', ''), 'table', 'id', 'CookieInfo');
 						}
 
-						if ($cookieNotice) {
+						if (isset($cookieNotice) && $cookieNotice) {
 							$html = str_ireplace('</body>', $cookieNotice . '</body>', $html);
 						} else {
 							WriteLog('route.php: warning: $cookieNotice is FALSE');
