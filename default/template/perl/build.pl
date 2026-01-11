@@ -72,7 +72,7 @@ if ($HTMLDIR =~ m/^([a-zA-Z0-9\/\.\-_]+)$/) {
 
 my $TXTDIR = $HTMLDIR . '/txt';
 # sanity check $TXTDIR for bad characters, then set $TXTDIR to a safe value
-if ($TXTDIR =~ m/^([a-zA-Z0-9\/\.\-])+$/) {
+if ($TXTDIR =~ m/^([a-zA-Z0-9\/\.\-_])+$/) {
 	$TXTDIR = $1;
 	# sanity check passed
 } else {
@@ -81,7 +81,7 @@ if ($TXTDIR =~ m/^([a-zA-Z0-9\/\.\-])+$/) {
 
 my $IMAGEDIR = $HTMLDIR . '/image';
 # sanity check $IMAGEDIR for bad characters, then set $IMAGEDIR to a safe value
-if ($IMAGEDIR =~ m/^([a-zA-Z0-9\/\.\-])+$/) {
+if ($IMAGEDIR =~ m/^([a-zA-Z0-9\/\.\-_])+$/) {
 	$IMAGEDIR = $1;
 	# sanity check passed
 } else {
