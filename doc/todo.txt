@@ -1,3 +1,7 @@
+probably get rid of anything that adds "\n-- \n" to files, because it messes with hashes and causes bugs
+
+===
+
 encryption, decryption, and private key exchange
 	for inbox:
 		client should let server know all the fingerprints of keys it possesses
