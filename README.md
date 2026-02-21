@@ -131,4 +131,4 @@ The list below is by no means extensive, and is growing often. In no particular 
 
 Example instances:
 
-* [Yavista.com](http://www.yavista.com/)
+* [ilyagulko.com](http://www.ilyagulko.com/)

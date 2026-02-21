@@ -190,8 +190,8 @@ sub RenderField { # $fieldName, $fieldValue, [%rowData] ; outputs formatted data
 		$fieldName eq 'url'
 	) {
 		# url, displayed as hyperlink, and shortened to 60 characters if necessary
-		# example: http://www.yavista.com/
-		# example: https://www.yavista.com/
+		# example: http://www.example.com/
+		# example: https://www.example.com/
 
 		if (length($fieldValue) < 64) {
 			$fieldValue = '<a href="' . HtmlEscape($fieldValue) . '">' . HtmlEscape($fieldValue) . '';
