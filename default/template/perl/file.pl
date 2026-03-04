@@ -145,8 +145,13 @@ sub MergeFiles { # $file1, $file2, ... ; merge files which have same body but di
 	}
 
 	$fileFooter = join("\n", @footerLines);	
+	$fileFooter = trim($fileFooter);
 
-	my $fileOutContent = $fileBody . "\n-- \n" . $fileFooter;
+	my %appendOptions = (
+		'respect_gate' => 0,
+		'skip_if_footer_empty' => 1
+	);
+	my $fileOutContent = AppendFooterSeparator($fileBody, $fileFooter, \%appendOptions);
 	#signatureSeparator
 	state $fileOutPath = GetDir('txt') . '/merged_' . GetSHA1($fileOutContent) . '.txt';
 
