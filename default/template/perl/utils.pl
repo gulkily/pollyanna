@@ -58,6 +58,49 @@ sub trim { # trims whitespace from beginning and end of $string
 	return;
 } # trim()
 
+sub AppendFooterSeparator { # $message, $footerContent, \%options ; appends footer block using one canonical helper
+	my $message = shift;
+	my $footerContent = shift;
+	my $optionsRef = shift;
+
+	if (!defined $message) {
+		$message = '';
+	}
+	if (!defined $footerContent) {
+		$footerContent = '';
+	}
+
+	my %options;
+	if (defined $optionsRef && ref($optionsRef) eq 'HASH') {
+		%options = %{$optionsRef};
+	}
+
+	my $separator = "\n-- \n";
+	if (defined($options{'separator'}) && $options{'separator'} ne '') {
+		$separator = $options{'separator'};
+	}
+
+	my $trimFooter = $options{'trim_footer'} ? 1 : 0;
+	if ($trimFooter) {
+		$footerContent = trim($footerContent);
+	}
+
+	my $skipIfFooterEmpty = 1;
+	if (exists($options{'skip_if_footer_empty'})) {
+		$skipIfFooterEmpty = $options{'skip_if_footer_empty'} ? 1 : 0;
+	}
+	if ($skipIfFooterEmpty && trim($footerContent) eq '') {
+		return $message;
+	}
+
+	my $skipIfPresent = $options{'skip_if_present'} ? 1 : 0;
+	if ($skipIfPresent && index($message, $separator) != -1) {
+		return $message;
+	}
+
+	return $message . $separator . $footerContent;
+} # AppendFooterSeparator()
+
 require('./config/template/perl/config.pl');
 # config.pl is required for looking up the paths using require_once()
 

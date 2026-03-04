@@ -280,6 +280,53 @@ function length ($string) { // emulates perl's length()
 	return strlen($string);
 } # length()
 
+function AppendFooterSeparator ($message, $footerContent, $options = array()) { // appends footer block using one canonical helper
+	if (!isset($message) || $message === null) {
+		$message = '';
+	}
+	if (!is_string($message)) {
+		$message = strval($message);
+	}
+
+	if (!isset($footerContent) || $footerContent === null) {
+		$footerContent = '';
+	}
+	if (!is_string($footerContent)) {
+		$footerContent = strval($footerContent);
+	}
+
+	$separator = "\n-- \n";
+	if (isset($options['separator']) && is_string($options['separator']) && $options['separator']) {
+		$separator = $options['separator'];
+	}
+
+	$trimFooter = 0;
+	if (isset($options['trim_footer'])) {
+		$trimFooter = $options['trim_footer'] ? 1 : 0;
+	}
+	if ($trimFooter) {
+		$footerContent = trim($footerContent);
+	}
+
+	$skipIfFooterEmpty = 1;
+	if (isset($options['skip_if_footer_empty'])) {
+		$skipIfFooterEmpty = $options['skip_if_footer_empty'] ? 1 : 0;
+	}
+	if ($skipIfFooterEmpty && trim($footerContent) === '') {
+		return $message;
+	}
+
+	$skipIfPresent = 0;
+	if (isset($options['skip_if_present'])) {
+		$skipIfPresent = $options['skip_if_present'] ? 1 : 0;
+	}
+	if ($skipIfPresent && index($message, $separator) != -1) {
+		return $message;
+	}
+
+	return $message . $separator . $footerContent;
+} # AppendFooterSeparator()
+
 function GpgParsePubkey ($filePath) { // #todo parse file with gpg public key
 	return array();
 } # GpgParsePubkey()
