@@ -41,3 +41,14 @@
   - Ran `rg -n "AppendFooterSeparator\\(" default/template/perl/script/access_log_read.pl default/template/perl/dialog/toolbox_item_publish.pl` and confirmed helper usage in targeted call sites.
 - Notes:
   - Perl producer paths now share the same append mechanism as PHP paths, reducing behavior drift risk.
+
+## Stage 5 - Introduce global separator feature gate
+- Changes:
+  - Added default setting file [default/setting/admin/footer_separator/enable](/home/wsl/pollyanna/default/setting/admin/footer_separator/enable) with value `1`.
+  - Updated [utils.php](/home/wsl/pollyanna/default/template/php/utils.php) helper to enforce `setting/admin/footer_separator/enable` by default.
+  - Updated [utils.pl](/home/wsl/pollyanna/default/template/perl/utils.pl) helper to enforce the same gate by default.
+- Verification:
+  - Ran `rg -n "footer_separator/enable|respect_gate" default/template/php/utils.php default/template/perl/utils.pl default/setting/admin/footer_separator/enable` and confirmed both runtimes reference the same setting key and the default exists.
+  - Source-checked fallback logic keeps append enabled when setting lookup is missing/blank.
+- Notes:
+  - Gate behavior is centralized in helpers, so producer call sites do not need to implement separate gate checks.

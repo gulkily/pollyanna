@@ -300,6 +300,20 @@ function AppendFooterSeparator ($message, $footerContent, $options = array()) { 
 		$separator = $options['separator'];
 	}
 
+	$respectGate = 1;
+	if (isset($options['respect_gate'])) {
+		$respectGate = $options['respect_gate'] ? 1 : 0;
+	}
+	if ($respectGate) {
+		$footerSeparatorEnable = GetConfig('setting/admin/footer_separator/enable');
+		if ($footerSeparatorEnable === '' || $footerSeparatorEnable === null) {
+			$footerSeparatorEnable = 1;
+		}
+		if (!$footerSeparatorEnable) {
+			return $message;
+		}
+	}
+
 	$trimFooter = 0;
 	if (isset($options['trim_footer'])) {
 		$trimFooter = $options['trim_footer'] ? 1 : 0;

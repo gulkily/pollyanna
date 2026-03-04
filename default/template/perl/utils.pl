@@ -80,6 +80,20 @@ sub AppendFooterSeparator { # $message, $footerContent, \%options ; appends foot
 		$separator = $options{'separator'};
 	}
 
+	my $respectGate = 1;
+	if (exists($options{'respect_gate'})) {
+		$respectGate = $options{'respect_gate'} ? 1 : 0;
+	}
+	if ($respectGate) {
+		my $footerSeparatorEnable = GetConfig('setting/admin/footer_separator/enable');
+		if (!defined($footerSeparatorEnable) || $footerSeparatorEnable eq '') {
+			$footerSeparatorEnable = 1;
+		}
+		if (!$footerSeparatorEnable) {
+			return $message;
+		}
+	}
+
 	my $trimFooter = $options{'trim_footer'} ? 1 : 0;
 	if ($trimFooter) {
 		$footerContent = trim($footerContent);
