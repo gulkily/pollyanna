@@ -52,3 +52,11 @@
   - Source-checked fallback logic keeps append enabled when setting lookup is missing/blank.
 - Notes:
   - Gate behavior is centralized in helpers, so producer call sites do not need to implement separate gate checks.
+
+## Stage 6 - Documentation and rollout notes
+- Changes:
+  - Added `setting/admin/footer_separator/enable` documentation to [settings.md](/home/wsl/pollyanna/doc/settings.md), including purpose, default, source files, and a backward-compatibility note.
+- Verification:
+  - Ran `rg -n "setting/admin/footer_separator/enable|Backward Compatibility" doc/settings.md` and confirmed the new section exists with migration guidance.
+- Notes:
+  - Documentation now explicitly states that disabling separator append affects new writes only; legacy separator content remains supported.
