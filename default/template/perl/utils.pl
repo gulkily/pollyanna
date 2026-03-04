@@ -63,21 +63,31 @@ sub AppendFooterSeparator { # $message, $footerContent, \%options ; appends foot
 	my $footerContent = shift;
 	my $optionsRef = shift;
 
+	WriteLog('AppendFooterSeparator()');
+
 	if (!defined $message) {
+		WriteLog('AppendFooterSeparator: $message was undef, defaulting to empty string');
 		$message = '';
 	}
 	if (!defined $footerContent) {
+		WriteLog('AppendFooterSeparator: $footerContent was undef, defaulting to empty string');
 		$footerContent = '';
 	}
 
 	my %options;
-	if (defined $optionsRef && ref($optionsRef) eq 'HASH') {
-		%options = %{$optionsRef};
+	if (defined $optionsRef) {
+		if (ref($optionsRef) eq 'HASH') {
+			%options = %{$optionsRef};
+		} else {
+			WriteLog('AppendFooterSeparator: warning: $optionsRef was not a HASH reference, ignoring; caller = ' . join(',', caller));
+		}
 	}
 
 	my $separator = "\n-- \n";
 	if (defined($options{'separator'}) && $options{'separator'} ne '') {
 		$separator = $options{'separator'};
+	} elsif (exists($options{'separator'}) && !defined($options{'separator'})) {
+		WriteLog('AppendFooterSeparator: warning: $options{separator} was undef, using default');
 	}
 
 	my $respectGate = 1;
@@ -90,6 +100,7 @@ sub AppendFooterSeparator { # $message, $footerContent, \%options ; appends foot
 			$footerSeparatorEnable = 1;
 		}
 		if (!$footerSeparatorEnable) {
+			WriteLog('AppendFooterSeparator: setting/admin/footer_separator/enable is false, returning original message');
 			return $message;
 		}
 	}
@@ -104,14 +115,17 @@ sub AppendFooterSeparator { # $message, $footerContent, \%options ; appends foot
 		$skipIfFooterEmpty = $options{'skip_if_footer_empty'} ? 1 : 0;
 	}
 	if ($skipIfFooterEmpty && trim($footerContent) eq '') {
+		WriteLog('AppendFooterSeparator: footer content empty and skip_if_footer_empty enabled, returning original message');
 		return $message;
 	}
 
 	my $skipIfPresent = $options{'skip_if_present'} ? 1 : 0;
 	if ($skipIfPresent && index($message, $separator) != -1) {
+		WriteLog('AppendFooterSeparator: separator already present and skip_if_present enabled, returning original message');
 		return $message;
 	}
 
+	WriteLog('AppendFooterSeparator: appending footer; length($message) = ' . length($message) . '; length($footerContent) = ' . length($footerContent));
 	return $message . $separator . $footerContent;
 } # AppendFooterSeparator()
 

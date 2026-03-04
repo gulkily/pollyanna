@@ -281,23 +281,38 @@ function length ($string) { // emulates perl's length()
 } # length()
 
 function AppendFooterSeparator ($message, $footerContent, $options = array()) { // appends footer block using one canonical helper
+	WriteLog('AppendFooterSeparator()');
+
 	if (!isset($message) || $message === null) {
+		WriteLog('AppendFooterSeparator: $message was null, defaulting to empty string');
 		$message = '';
 	}
 	if (!is_string($message)) {
+		WriteLog('AppendFooterSeparator: warning: $message was not a string, coercing');
 		$message = strval($message);
 	}
 
 	if (!isset($footerContent) || $footerContent === null) {
+		WriteLog('AppendFooterSeparator: $footerContent was null, defaulting to empty string');
 		$footerContent = '';
 	}
 	if (!is_string($footerContent)) {
+		WriteLog('AppendFooterSeparator: warning: $footerContent was not a string, coercing');
 		$footerContent = strval($footerContent);
+	}
+
+	if (!is_array($options)) {
+		$dbt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
+		$caller = isset($dbt[1]['function']) ? $dbt[1]['function'] : 'caller_missing';
+		WriteLog('AppendFooterSeparator: warning: $options was not an array, resetting; caller = ' . $caller);
+		$options = array();
 	}
 
 	$separator = "\n-- \n";
 	if (isset($options['separator']) && is_string($options['separator']) && $options['separator']) {
 		$separator = $options['separator'];
+	} elseif (isset($options['separator']) && !is_string($options['separator'])) {
+		WriteLog('AppendFooterSeparator: warning: $options[separator] was not a string, using default');
 	}
 
 	$respectGate = 1;
@@ -310,6 +325,7 @@ function AppendFooterSeparator ($message, $footerContent, $options = array()) { 
 			$footerSeparatorEnable = 1;
 		}
 		if (!$footerSeparatorEnable) {
+			WriteLog('AppendFooterSeparator: setting/admin/footer_separator/enable is false, returning original message');
 			return $message;
 		}
 	}
@@ -327,6 +343,7 @@ function AppendFooterSeparator ($message, $footerContent, $options = array()) { 
 		$skipIfFooterEmpty = $options['skip_if_footer_empty'] ? 1 : 0;
 	}
 	if ($skipIfFooterEmpty && trim($footerContent) === '') {
+		WriteLog('AppendFooterSeparator: footer content empty and skip_if_footer_empty enabled, returning original message');
 		return $message;
 	}
 
@@ -335,9 +352,11 @@ function AppendFooterSeparator ($message, $footerContent, $options = array()) { 
 		$skipIfPresent = $options['skip_if_present'] ? 1 : 0;
 	}
 	if ($skipIfPresent && index($message, $separator) != -1) {
+		WriteLog('AppendFooterSeparator: separator already present and skip_if_present enabled, returning original message');
 		return $message;
 	}
 
+	WriteLog('AppendFooterSeparator: appending footer; length($message) = ' . length($message) . '; length($footerContent) = ' . length($footerContent));
 	return $message . $separator . $footerContent;
 } # AppendFooterSeparator()
 
