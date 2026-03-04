@@ -605,8 +605,14 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 							WriteLog('route.php: refreshFrontendLog = ' . $refreshFrontendLog);
 
-							/* my */ $refreshFrontendLogSaved = ProcessNewComment($refreshFrontendLog, '');
-							ProcessNewComment("Rebuild Frontend log metadata\n-- \n>>$reindexLogSaved\n#textart\ntitle: Rebuild Frontend finished at $refreshFrontendFinishTime", '');
+								/* my */ $refreshFrontendLogSaved = ProcessNewComment($refreshFrontendLog, '');
+								ProcessNewComment(
+									AppendFooterSeparator(
+										"Rebuild Frontend log metadata",
+										">>$reindexLogSaved\n#textart\ntitle: Rebuild Frontend finished at $refreshFrontendFinishTime"
+									),
+									''
+								);
 							RedirectWithResponse(GetHtmlFilename($refreshFrontendLogSaved), "Rebuild Frontend finished! <small>in $refreshFrontendDuration"."s</small>");
 						}
 
@@ -655,8 +661,14 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 								WriteLog('route.php: reindexLog = ' . $reindexLog);
 
-								$reindexLogSaved = ProcessNewComment($reindexLog, ''); # my
-								ProcessNewComment("Reindex log metadata\n-- \n>>$reindexLogSaved\n#textart\ntitle: Reindex log finished at $reindexFinishTime", '');
+									$reindexLogSaved = ProcessNewComment($reindexLog, ''); # my
+									ProcessNewComment(
+										AppendFooterSeparator(
+											"Reindex log metadata",
+											">>$reindexLogSaved\n#textart\ntitle: Reindex log finished at $reindexFinishTime"
+										),
+										''
+									);
 								RedirectWithResponse(GetHtmlFilename($reindexLogSaved), "Reindex finished! <small>in $reindexDuration"."s</small>");
 							} else {
 								RedirectWithResponse('/settings.html', 'You pressed the Reindex button, but did not check the checkbox. Please try again!');
@@ -672,8 +684,14 @@ if (GetConfig('setting/admin/php/route_enable')) {
 
 								WriteLog('route.php: upgradeLog = ' . $upgradeLog);
 
-								$upgradeLogSaved = ProcessNewComment($upgradeLog, ''); # my
-								ProcessNewComment("Upgrade log metadata\n-- \n>>$upgradeLogSaved\n#textart\ntitle: Upgrade log finished at $upgradeFinishTime", '');
+									$upgradeLogSaved = ProcessNewComment($upgradeLog, ''); # my
+									ProcessNewComment(
+										AppendFooterSeparator(
+											"Upgrade log metadata",
+											">>$upgradeLogSaved\n#textart\ntitle: Upgrade log finished at $upgradeFinishTime"
+										),
+										''
+									);
 								RedirectWithResponse(GetHtmlFilename($upgradeLogSaved), "Upgrade finished! <small>in $upgradeDuration"."s</small>");
 							} else {
 								RedirectWithResponse('/settings.html', 'You pressed the Upgrade button, but did not check the checkbox. Please try again!');

@@ -354,8 +354,8 @@ if (is_array($comment)) { # comment[]
 			WriteLog('post.php: batch mode: $hnMode all done. length($c) = ' . length($c));
 		}
 
-		$c = $c . "\n-- \n#$batchTag\n"; #\n--
-		$newFileHash = StoreNewComment($c, '', $recordFingerprint); // batch add
+			$c = AppendFooterSeparator($c, "#$batchTag\n");
+			$newFileHash = StoreNewComment($c, '', $recordFingerprint); // batch add
 		$allAdded .= ">>" . $newFileHash . "\n";
 	}
 
@@ -488,13 +488,21 @@ if (isset($comment) && $comment) {
 			}
 			#todo this could use more sanity and cleanness
 			$footerParameters = trim($footerParameters);
-			if ($footerParameters && index($comment, "\n-- \n") == -1) {
-				WriteLog('post.php: $footerParameters is TRUE, adding to item');
-				$comment = $comment . "\n-- \n";
-				$comment = $comment . $footerParameters;
-			} else {
-				WriteLog('post.php: $footerParameters is FALSE, not adding to item');
-			}
+				if ($footerParameters) {
+					/* my */ $commentBeforeFooter = $comment;
+					$comment = AppendFooterSeparator(
+						$comment,
+						$footerParameters,
+						array('skip_if_present' => 1)
+					);
+					if ($comment !== $commentBeforeFooter) {
+						WriteLog('post.php: $footerParameters is TRUE, adding to item');
+					} else {
+						WriteLog('post.php: $footerParameters is FALSE, not adding to item');
+					}
+				} else {
+					WriteLog('post.php: $footerParameters is FALSE, not adding to item');
+				}
 		}
 
 		$newFileHash = ProcessNewComment($comment, $replyTo); // post.php // PutFile()

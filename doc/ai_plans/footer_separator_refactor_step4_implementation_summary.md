@@ -20,3 +20,14 @@
   - Source-checked that `StoreNewComment` still gathers the same metadata fields before append.
 - Notes:
   - Functional behavior remains the same when separator policy is unchanged; this stage only centralizes append mechanics.
+
+## Stage 3 - Migrate remaining PHP producers
+- Changes:
+  - Replaced batch footer append in [post.php](/home/wsl/pollyanna/default/template/php/post.php) with `AppendFooterSeparator(...)`.
+  - Replaced request-parameter footer append in [post.php](/home/wsl/pollyanna/default/template/php/post.php) with helper call plus `skip_if_present`.
+  - Replaced system metadata separator construction in [route.php](/home/wsl/pollyanna/default/template/php/route.php) with helper-based assembly for refresh/reindex/upgrade metadata items.
+- Verification:
+  - Ran `rg -n --fixed-strings "\\n-- \\n" default/template/php/post.php default/template/php/route.php` and confirmed no active inline separator construction remains in those migrated paths.
+  - Ran `rg -n "AppendFooterSeparator\\(" default/template/php/post.php default/template/php/route.php` and confirmed helper usage is present in all targeted call sites.
+- Notes:
+  - Kept existing metadata message contents intact while centralizing separator append mechanics.
