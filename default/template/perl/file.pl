@@ -247,10 +247,10 @@ sub OrganizeFile { # $file ; renames file based on hash of its contents
 			WriteLog('OrganizeFile: Before: ' . $file);
 			WriteLog('OrganizeFile: After: ' . $fileHashPath);
 
-			if (-e $fileHashPath) {
+				if (-e $fileHashPath) {
 
-				# new file already exists, rename only if not larger
-				WriteLog("OrganizeFile: warning: $fileHashPath already exists!");
+					# new file already exists, rename only if not larger
+					WriteLog("OrganizeFile: warning: $fileHashPath already exists!");
 
 				#todo this should be sanity-checked way before here
 				if ($fileHashPath =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
@@ -263,22 +263,33 @@ sub OrganizeFile { # $file ; renames file based on hash of its contents
 
 				if ($file =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
 					$file = $1;
-				} else {
-					WriteLog('OrganizeFile: warning: $file failed sanity check');
-					return '';
-				}
+					} else {
+						WriteLog('OrganizeFile: warning: $file failed sanity check');
+						return '';
+					}
 
-				my $mergedName = MergeFiles($file, $fileHashPath);
-				
-				if ($mergedName =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
-					$mergedName = $1;
-				} else {
-					WriteLog('OrganizeFile: warning: $mergedName failed sanity check');
-					return '';
-				}
+					my $incomingFileHash = GetFileHash($file);
+					my $existingFileHash = GetFileHash($fileHashPath);
 
-				RenameFile($mergedName, $fileHashPath);
-			} # -e $fileHashPath
+					if ($incomingFileHash && $existingFileHash && $incomingFileHash eq $existingFileHash) {
+						WriteLog('OrganizeFile: destination already has identical content, attempting to remove duplicate source file');
+						if (!unlink($file)) {
+							WriteLog('OrganizeFile: warning: failed to unlink duplicate source file: ' . $file);
+						}
+					} else {
+						WriteLog('OrganizeFile: destination content differs, calling MergeFiles()');
+						my $mergedName = MergeFiles($file, $fileHashPath);
+						
+						if ($mergedName =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {
+							$mergedName = $1;
+						} else {
+							WriteLog('OrganizeFile: warning: $mergedName failed sanity check');
+							return '';
+						}
+
+						RenameFile($mergedName, $fileHashPath);
+					}
+				} # -e $fileHashPath
 			else {
 				# new file does not exist, safe to rename
 				#
