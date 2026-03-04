@@ -35,7 +35,10 @@ sub GetDialogToolboxItemPublish { # $filePath, $fileHash = '' ; returns dialog w
 		# this can happen if we migrated our index database from another server
 		# but without also migrating the source data files, so we have the first
 		# line of the file, but not the whole file
-		$urlParamFullText = DBGetItemTitle($fileHash) . "\n-- \n" . "Hash: " . $fileHash . "\n" . 'Time: ' . GetTime() . "\n";
+		$urlParamFullText = AppendFooterSeparator(
+			DBGetItemTitle($fileHash),
+			'Hash: ' . $fileHash . "\n" . 'Time: ' . GetTime() . "\n"
+		);
 	}
 	$urlParamFullText = uri_escape_utf8($urlParamFullText);
 	# $urlParamFullText = uri_escape_utf8($urlParamFullText); #todo do this if ascii_only

@@ -31,3 +31,13 @@
   - Ran `rg -n "AppendFooterSeparator\\(" default/template/php/post.php default/template/php/route.php` and confirmed helper usage is present in all targeted call sites.
 - Notes:
   - Kept existing metadata message contents intact while centralizing separator append mechanics.
+
+## Stage 4 - Migrate Perl producers
+- Changes:
+  - Replaced host footer append in [access_log_read.pl](/home/wsl/pollyanna/default/template/perl/script/access_log_read.pl) with `AppendFooterSeparator(...)`.
+  - Replaced publish fallback footer construction in [toolbox_item_publish.pl](/home/wsl/pollyanna/default/template/perl/dialog/toolbox_item_publish.pl) with helper-based assembly.
+- Verification:
+  - Ran `rg -n --fixed-strings "\\n-- \\nHost:" default/template/perl/script/access_log_read.pl` and confirmed inline host separator append was removed.
+  - Ran `rg -n "AppendFooterSeparator\\(" default/template/perl/script/access_log_read.pl default/template/perl/dialog/toolbox_item_publish.pl` and confirmed helper usage in targeted call sites.
+- Notes:
+  - Perl producer paths now share the same append mechanism as PHP paths, reducing behavior drift risk.
