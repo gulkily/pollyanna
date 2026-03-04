@@ -55,9 +55,7 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 		$fileName = $txtDir . $hash . '.txt';
 		WriteLog('StoreNewComment: $fileName = ' . $fileName);
 
-		// standard signature separator
-		$signatureSeparator = "\n-- \n"; #\n--
-		$signatureContent = '';
+			$signatureContent = '';
 
 		if (GetConfig('admin/logging/record_http_auth_username')) {
 			if (isset($_SERVER['PHP_AUTH_USER']) && $_SERVER['PHP_AUTH_USER']) {
@@ -148,14 +146,11 @@ function StoreNewComment ($comment, $replyTo, $recordFingerprint = 1) { // retur
 			$signatureContent .= "\n";
 		}
 
-		if (strpos($comment, 'PUBLIC KEY BLOCK') && GetConfig('setting/admin/php/post/skip_footer_when_pubkey')) {
-			// skip adding footer
-		} else {
-			if (trim($signatureContent)) {
-				$comment .= $signatureSeparator;
-				$comment .= $signatureContent;
+			if (strpos($comment, 'PUBLIC KEY BLOCK') && GetConfig('setting/admin/php/post/skip_footer_when_pubkey')) {
+				// skip adding footer
+			} else {
+				$comment = AppendFooterSeparator($comment, $signatureContent);
 			}
-		}
 
 		WriteLog('StoreNewComment: $comment = ' . htmlspecialchars($comment));
 
