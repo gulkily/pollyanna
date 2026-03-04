@@ -146,12 +146,23 @@ sub MergeFiles { # $file1, $file2, ... ; merge files which have same body but di
 
 	$fileFooter = join("\n", @footerLines);	
 	$fileFooter = trim($fileFooter);
+	WriteLog('MergeFiles: normalized lengths; length($fileBody) = ' . length($fileBody) . '; length($fileFooter) = ' . length($fileFooter));
+	if ($fileFooter) {
+		WriteLog('MergeFiles: merged footer content present; helper should append separator');
+	} else {
+		WriteLog('MergeFiles: merged footer content empty; helper should keep body-only output');
+	}
 
 	my %appendOptions = (
 		'respect_gate' => 0,
 		'skip_if_footer_empty' => 1
 	);
 	my $fileOutContent = AppendFooterSeparator($fileBody, $fileFooter, \%appendOptions);
+	if (index($fileOutContent, "\n-- \n") != -1) {
+		WriteLog('MergeFiles: output contains separator');
+	} else {
+		WriteLog('MergeFiles: output has no separator');
+	}
 	#signatureSeparator
 	state $fileOutPath = GetDir('txt') . '/merged_' . GetSHA1($fileOutContent) . '.txt';
 
@@ -270,14 +281,17 @@ sub OrganizeFile { # $file ; renames file based on hash of its contents
 
 					my $incomingFileHash = GetFileHash($file);
 					my $existingFileHash = GetFileHash($fileHashPath);
+					WriteLog('OrganizeFile: collision hash comparison: $incomingFileHash = ' . ($incomingFileHash ? $incomingFileHash : 'FALSE') . '; $existingFileHash = ' . ($existingFileHash ? $existingFileHash : 'FALSE'));
 
 					if ($incomingFileHash && $existingFileHash && $incomingFileHash eq $existingFileHash) {
 						WriteLog('OrganizeFile: destination already has identical content, attempting to remove duplicate source file');
 						if (!unlink($file)) {
 							WriteLog('OrganizeFile: warning: failed to unlink duplicate source file: ' . $file);
+						} else {
+							WriteLog('OrganizeFile: duplicate source file removed: ' . $file);
 						}
 					} else {
-						WriteLog('OrganizeFile: destination content differs, calling MergeFiles()');
+						WriteLog('OrganizeFile: destination content differs, calling MergeFiles(); incoming = ' . ($incomingFileHash ? $incomingFileHash : 'FALSE') . '; existing = ' . ($existingFileHash ? $existingFileHash : 'FALSE'));
 						my $mergedName = MergeFiles($file, $fileHashPath);
 						
 						if ($mergedName =~ m/^([0-9a-zA-Z\/\._\-]+)$/) {

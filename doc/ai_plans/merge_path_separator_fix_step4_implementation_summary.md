@@ -22,3 +22,14 @@
   - Ran `rg -n "if \\(-e \\$fileHashPath\\)|MergeFiles\\(|unlink\\(\\$file\\)" default/template/perl/file.pl` and confirmed collision handling flow now distinguishes dedupe vs merge paths.
 - Notes:
   - This reduces unnecessary merge rewrites for identical-content collisions while preserving merge behavior for true content conflicts.
+
+## Stage 3 - Improve observability of separator/merge decisions
+- Changes:
+  - Added merge-path decision logs in [file.pl](/home/wsl/pollyanna/default/template/perl/file.pl) for normalized body/footer lengths and expected separator behavior before helper call.
+  - Added explicit logs for whether merged output contains a separator after helper application.
+  - Added organize collision logs for incoming/existing hash comparison, duplicate-source unlink success/failure, and merge invocation context.
+- Verification:
+  - Ran `rg -n "normalized lengths|helper should|output contains separator|output has no separator" default/template/perl/file.pl` and confirmed merge decision breadcrumbs are present.
+  - Ran `rg -n "collision hash comparison|duplicate source file removed|calling MergeFiles\\(\\); incoming" default/template/perl/file.pl` and confirmed organize collision observability messages are present.
+- Notes:
+  - Logging remains aligned with existing `WriteLog` style and focuses on decision points needed for hash-divergence triage.
